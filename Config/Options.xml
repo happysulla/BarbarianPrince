@@ -1,0 +1,56 @@
+﻿<Options>
+    <Option value="AutoSetup">
+        <IsEnabled value="True" />
+    </Option>
+    <Option value="AutoWealthRollForUnderFive">
+        <IsEnabled value="True" />
+    </Option>
+    <Option value="EasyMonsters">
+        <IsEnabled value="True" />
+    </Option>
+	<!--===========================-->
+	<Option value="NoLostRoll">
+		<IsEnabled value="False" />
+	</Option>
+	<Option value="ForceNoLostEvent">
+		<IsEnabled value="True" />
+	</Option>
+	<Option value="ForceLostEvent">
+		<IsEnabled value="False" />
+	</Option>
+	<!--===========================-->
+	<Option value="ForceNoEvent">
+    <IsEnabled value="True" />
+    </Option>
+	<Option value="ForceEvent">
+		<IsEnabled value="False" />
+	</Option>
+	<!--===========================-->
+	<Option value="ForceNoRoadEvent">
+		<IsEnabled value="False" />
+	</Option>
+	<!--===========================-->
+	<Option value="ForceNoAirEvent">
+		<IsEnabled value="False" />
+	</Option>
+	<Option value="ForceAirEvent">
+		<IsEnabled value="True" />
+	</Option>
+	<!--===========================-->
+	<Option value="ForceNoCrossEvent">
+		<IsEnabled value="False" />
+	</Option>
+	<Option value="ForceCrossEvent">
+		<IsEnabled value="False" />
+	</Option>
+	<Option value="ForceLostAfterCrossEvent">
+		<IsEnabled value="False" />
+	</Option>
+	<!--===========================-->
+	<Option value="ForceNoRaftEvent">
+		<IsEnabled value="False" />
+	</Option>
+	<Option value="ForceRaftEvent">
+		<IsEnabled value="False" />
+	</Option>
+</Options>

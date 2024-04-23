@@ -1,0 +1,90 @@
+﻿<Window x:Name="myGameViewerCreateWindow" x:Class="BarbarianPrince.GameViewerCreateDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="Set GameViewer Size Attributes" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
+    <StackPanel Name="myStackPanelOutside" Margin="10,10,10,10" >
+        <StackPanel Name="myStackPanelScaleTransform"  Orientation="Horizontal">
+            <Label Name="myLabelScaleTransform" Width="150" Height="30" Content="ScaleTransform:" HorizontalAlignment="Center"  />
+            <TextBox x:Name="myTextBoxScaleTransform" Width="100" Height="20" Text="1.0" TextChanged="TextBoxScaleTransform_TextChanged"/>
+        </StackPanel>
+
+        <Separator Name="mySeparator0" Height="5"/>
+        <StackPanel Name="myStackPanelScreenSizeY"  Orientation="Horizontal">
+            <Label Name="myLabelScreenSizeY" Width="150" Height="30" Content="Screen Height:" HorizontalAlignment="Center"  />
+            <TextBox x:Name="myTextBoxScreenSizeY" Width="100" Height="20" IsEnabled="False" SelectionOpacity="-2" Background="#FFCFCDCD"/>
+        </StackPanel>
+        <StackPanel Name="myStackPanelTopPanelSizeY"  Orientation="Horizontal">
+            <Label Name="myLabelTopPanelSizeY" Width="150" Height="30" Content="TopPanel Height:" HorizontalAlignment="Center"  />
+            <TextBox x:Name="myTextBoxTopPanelSizeY" Width="100" Height="20" Background="#FFCFCDCD" IsEnabled="False"/>
+        </StackPanel>
+        <StackPanel Name="myStackPanelDockPanelSizeY"  Orientation="Horizontal">
+            <Label Name="myLabelDockPanelSizeY" Width="150" Height="30" Content="DockPanel Height:" HorizontalAlignment="Center"  />
+            <TextBox x:Name="myTextBoxDockPanelSizeY" Width="100" Height="20" />
+        </StackPanel>
+        <StackPanel Name="myStackPanelScrollViewerSizeY"  Orientation="Horizontal">
+            <Label Name="myLabelScrollViewerSizeY" Width="150" Height="30" Content="ScrollViewer Height:" HorizontalAlignment="Center"  />
+            <TextBox x:Name="myTextBoxScrollViewerSizeY" Width="100" Height="20" />
+        </StackPanel>
+        <StackPanel Name="myStackPanelCanvasSizeY"  Orientation="Horizontal"   >
+            <Label Name="myLabelCanvasSizeY" Width="150" Height="30" Content="Canvas Height:" HorizontalAlignment="Center"  />
+            <TextBox x:Name="myTextBoxCanvasSizeY" Width="100" Height="20"  />
+        </StackPanel>
+        <StackPanel Name="myStackPanelImageSizeY"  Orientation="Horizontal"  >
+            <Label Name="myLabelImageSizeY" Width="150" Height="30"  Content="Image Height:" HorizontalAlignment="Center" />
+            <TextBox x:Name="myTextBoxImageSizeY" Width="100" Height="20" />
+        </StackPanel>
+        <StackPanel Name="myStackPanelVerticalOffset"  Orientation="Horizontal">
+            <Label Name="myLabelVerticalOffset" Width="150" Height="30" Content="Vertical Offset:" HorizontalAlignment="Center"  />
+            <TextBox x:Name="myTextBoxVerticalOffset" Width="100" Height="20" Background="#FFCFCDCD" IsEnabled="False" />
+        </StackPanel>
+        <StackPanel Name="myStackPanelVerticalThumbSizeY"  Orientation="Horizontal">
+            <Label Name="myLabelVerticalThumbSizeY" Width="150" Height="30" Content="Vert Thumb Height:" HorizontalAlignment="Center"  />
+            <TextBox x:Name="myTextBoxVerticalThumbSizeY" Width="100" Height="20" Background="#FFCFCDCD" IsEnabled="False" />
+        </StackPanel>
+
+        <Separator Name="mySeparator1" Height="5"/>
+        <StackPanel Name="myStackPanelScreenSizeX" Orientation="Horizontal" >
+            <Label Name="myLabelScreenSizeX" Width="150" Height="30" Content="Screen Size Width:" HorizontalAlignment="Center" />
+            <TextBox x:Name="myTextBoxScreenSizeX" Width="100" Height="20" Background="#FFCFCDCD" IsEnabled="False"/>
+        </StackPanel>
+        <StackPanel Name="myStackPanelTopPanelSizeX" Orientation="Horizontal" >
+            <Label Name="myLabelTopPanelSizeX" Width="150" Height="30" Content="TopPanel Width:" HorizontalAlignment="Center" />
+            <TextBox x:Name="myTextBoxTopPanelSizeX" Width="100" Height="20" Background="#FFCFCDCD" IsEnabled="False"/>
+        </StackPanel>
+        <StackPanel Name="myStackPanelDockPanelSizeX" Orientation="Horizontal" >
+            <Label Name="myLabelDockPanelSizeX" Width="150" Height="30" Content="DockPanel Width:" HorizontalAlignment="Center" />
+            <TextBox x:Name="myTextBoxDockPanelSizeX" Width="100" Height="20" />
+        </StackPanel>
+        <StackPanel Name="myStackPanelDockPanelControlsSizeX" Orientation="Horizontal" >
+            <Label Name="myLabelDockPanelControlsSizeX" Width="150" Height="30" Content="Controls Width:" HorizontalAlignment="Center" />
+            <TextBox x:Name="myTextBoxDockPanelControlsSizeX" Width="100" Height="20" />
+        </StackPanel>
+        <StackPanel Name="myStackPanelScrollViewerSizeX" Orientation="Horizontal" >
+            <Label Name="myLabelScrollViewerSizeX" Width="150" Height="30" Content="ScrollViewer Width:" HorizontalAlignment="Center" />
+            <TextBox x:Name="myTextBoxScrollViewerSizeX" Width="100" Height="20" />
+        </StackPanel>
+        <StackPanel Name="myStackPanelCanvasSizeX" Orientation="Horizontal" >
+            <Label Name="myLabelCanvasSizeX" Width="150" Height="30" Content="Canvas Width:" HorizontalAlignment="Center" />
+            <TextBox x:Name="myTextBoxCanvasSizeX" Width="100" Height="20" />
+        </StackPanel>
+        <StackPanel Name="myStackPanelImageSizeX" Orientation="Horizontal">
+            <Label Name="myLabelImageSizeX" Width="150" Height="30" Content="Image Width:" HorizontalAlignment="Center" />
+            <TextBox x:Name="myTextBoxImageSizeX" Width="100" Height="20"/>
+        </StackPanel>
+        <StackPanel Name="myStackPanelHorizontalOffset" Orientation="Horizontal" >
+            <Label Name="myLabelHorizontalOffset" Width="150" Height="30" Content="HorizontalOffset:" HorizontalAlignment="Center" />
+            <TextBox x:Name="myTextBoxHorizontalOffset" Width="100" Height="20" Background="#FFCFCDCD" IsEnabled="False"/>
+        </StackPanel>
+        <StackPanel Name="myStackPanelVerticalThumbSizeX" Orientation="Horizontal" >
+            <Label Name="myLabelVerticalThumbSizeX" Width="150" Height="30" Content="Vert Thumb Width:" HorizontalAlignment="Center" />
+            <TextBox x:Name="myTextBoxVerticalThumbSizeX" Width="100" Height="20" Background="#FFCFCDCD" IsEnabled="False"/>
+        </StackPanel>
+        <Separator Name="mySeparator2" Height="5"/>
+        <StackPanel Name="myStackPanelButtons" Orientation="Horizontal" HorizontalAlignment="Center" >
+            <Button x:Name="myButtonApply" HorizontalAlignment="Center" Width="70" Height="20" VerticalAlignment="Top" Margin="0,10,50,0" Click="ButtonApply_Click">Apply</Button>
+            <Button x:Name="myButtonCancel" HorizontalAlignment="Center" Width="70" Height="20" VerticalAlignment="Top" Margin="0,10,0,0" Click="ButtonCancel_Click">Close</Button>
+        </StackPanel>
+    </StackPanel>
+</Window>

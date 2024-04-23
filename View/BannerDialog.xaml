@@ -1,0 +1,35 @@
+﻿<Window x:Name="myBannerDialog" x:Class="BarbarianPrince.BannerDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Banner" 
+        Top="0" 
+        MinWidth="650" MaxWidth="650" 
+        MinHeight="800" MaxHeight="800" 
+        ResizeMode="NoResize"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Top" 
+        WindowStartupLocation="CenterScreen" 
+        ShowInTaskbar="False" 
+        Topmost="True" 
+        Loaded="BannerLoaded"
+        MouseMove="Window_MouseMove" 
+        MouseUp="Window_MouseUp" 
+        MouseLeftButtonDown="Window_MouseLeftButtonDown" 
+        MouseRightButtonDown="Window_MouseRightButtonDown" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" WindowStyle="None" SizeToContent="Manual" AllowsTransparency="True" Foreground="Black">
+    <Window.Background>
+        <ImageBrush ImageSource="/Images/Parchment.gif"/>
+    </Window.Background>
+    <DockPanel Name="myDockPanel" MinWidth="612" MaxWidth="612" MinHeight="790" MaxHeight="790" Margin="15,0,0,0" >
+        <Button Name="myButtonClose" Width="50" Height="50" DockPanel.Dock="Top" Click="ButtonClose_Click" HorizontalAlignment="Right" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
+            <Image Name="myImageClose" Source="/images/CrossedAxes.gif" />
+        </Button>
+        <ScrollViewer Name="myScrollViewerTextBlock" MinWidth="600" MaxWidth="600" Height="640" VerticalScrollBarVisibility="Auto">
+            <TextBlock Name='myTextBlockDisplay' FontFamily='Old English Text MT' FontSize='20' TextWrapping='WrapWithOverflow' IsHyphenationEnabled='true' Width="555" Height="695" HorizontalAlignment="Left" VerticalAlignment="Top">
+               This is a test
+            </TextBlock>
+        </ScrollViewer>
+    </DockPanel>
+</Window>

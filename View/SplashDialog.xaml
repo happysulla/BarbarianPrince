@@ -1,0 +1,12 @@
+﻿<Window x:Class="BarbarianPrince.SplashDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BarbarianPrince"
+        mc:Ignorable="d"
+        MinWidth="400" MinHeight="620" MaxWidth="400" MaxHeight="620" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="Manual" Cursor="Wait" IsEnabled="False" Topmost="True" ShowInTaskbar="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False">
+    <Viewbox Name="myViewBoxSplash" Stretch="UniformToFill" Cursor="Wait">
+        <Image Name="myImageGameBox" Source="/Images/GameBox.gif" Stretch="Uniform" IsEnabled="False" IsHitTestVisible="False" />
+    </Viewbox>
+</Window>
