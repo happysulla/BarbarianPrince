@@ -3917,6 +3917,9 @@ namespace BarbarianPrince
                   foreach (IMapItem mi in lostInStormMembers)
                      gi.RemoveAbandonedInParty(mi);
                   //--------------------------------------------------------
+                  Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateEncounter.PerformAction(): gi.MapItemMoves.Clear() for a=" + action.ToString());
+                  gi.MapItemMoves.Clear();
+                  //--------------------------------------------------------
                   ITerritory blowToTerritory = FindClueHex(gi, directionvw, rangevw);// Find a random hex at random direction and range 1
                   if (null == blowToTerritory)
                   {
@@ -3924,6 +3927,7 @@ namespace BarbarianPrince
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
                   //--------------------------------------------------------
+                  gi.Prince.MovementUsed = 0; // must have movement left to be blown off course
                   gi.Prince.TerritoryStarting = gi.NewHex;
                   if (false == AddMapItemMove(gi, blowToTerritory))
                   {
@@ -3933,7 +3937,7 @@ namespace BarbarianPrince
                   //--------------------------------------------------------
                   gi.IsAirborne = false;
                   Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateEncounter.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
-                  gi.Prince.MovementUsed = gi.Prince.Movement; // End of the day
+                  gi.Prince.MovementUsed = gi.Prince.Movement; // end movement after being blown off course
                   if (false == EncounterEnd(gi, ref action))
                   {
                      returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
@@ -6776,7 +6780,7 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e105":
-               dieRoll = 4; // <cgs> TEST
+               dieRoll = 6; // <cgs> TEST
                gi.DieResults[key][0] = dieRoll;
                break;
             case "e105a":
@@ -9892,7 +9896,7 @@ namespace BarbarianPrince
                         return false;
                      }
                      break;
-                  case 6: gi.EventDisplayed = gi.EventActive = "e105a"; break;
+                  case 6: gi.EventDisplayed = gi.EventActive = "e105a"; gi.DieRollAction = GameAction.EncounterStart; break;
                   default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
                }
                gi.DieResults[key][0] = Utilities.NO_RESULT;

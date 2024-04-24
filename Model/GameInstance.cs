@@ -659,7 +659,8 @@ namespace BarbarianPrince
          }
          if (count < 0)
             Logger.Log(LogEnum.LE_ERROR, "AddFoods(): invalid state count<0 fs=" + foodStore.ToString());
-         myPrince.Food += foodStore; // remaining is given to Prince
+         if ((false == myPrince.IsUnconscious) && (false == myPrince.IsKilled))
+            myPrince.Food += foodStore; // remaining is given to Prince
          return true;
       }
       public void ReduceFoods(int foodStore)
@@ -1143,10 +1144,10 @@ namespace BarbarianPrince
             if (null == firstConsciousMapItem)
                firstConsciousMapItem = partyMember;
          }
-         if (null == firstConsciousMapItem)
+         if (null == firstConsciousMapItem) // if there is no conscious member to assign mounts, mount disappears
          {
             Logger.Log(LogEnum.LE_ERROR, "TransferMounts(): assigning mounts to unconscious Prince");
-            firstConsciousMapItem = Prince;
+            return; 
          }
          //---------------------------------------
          int assignedGriffonCount = 0;
@@ -1237,16 +1238,11 @@ namespace BarbarianPrince
          }
          //--------------------------------
          // Adding to Share list instead of Keep List
-         if (null == myPrince)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddSpecialItem(): myPrince=null");
-            return;
-         }
-         if ((false == IsRoyalHelmHeldStart) && (SpecialEnum.RoyalHelmOfNorthlands == possession))
-            WitAndWile += 1;
-         if ((false == myPrince.IsSpecialItemHeld(possession)) && (false == myPrince.IsUnconscious) )
+         if ((false == myPrince.IsSpecialItemHeld(possession)) && (false == myPrince.IsUnconscious) && (false == myPrince.IsKilled))
          {
             myPrince.AddSpecialItemToShare(possession);
+            if ((false == IsRoyalHelmHeldStart) && (SpecialEnum.RoyalHelmOfNorthlands == possession))
+               WitAndWile += 1;
             return;
          }
          foreach (IMapItem member in PartyMembers)
@@ -1256,9 +1252,17 @@ namespace BarbarianPrince
             if (true == member.IsSpecialItemHeld(possession))
                continue;
             member.AddSpecialItemToShare(possession);
+            if ((false == IsRoyalHelmHeldStart) && (SpecialEnum.RoyalHelmOfNorthlands == possession))
+               WitAndWile += 1;
             return;
          }
-         myPrince.AddSpecialItemToShare(possession); // If nobody adds it, add to prince
+         if((false == myPrince.IsUnconscious) && (false == myPrince.IsKilled))
+         {
+            myPrince.AddSpecialItemToShare(possession); // If nobody adds it, add to prince
+            if ((false == IsRoyalHelmHeldStart) && (SpecialEnum.RoyalHelmOfNorthlands == possession))
+               WitAndWile += 1;
+            return;
+         }
       }
       public void AddSpecialItems(List<SpecialEnum> possessions)
       {
