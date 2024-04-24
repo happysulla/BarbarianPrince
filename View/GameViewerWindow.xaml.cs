@@ -1294,7 +1294,7 @@ namespace BarbarianPrince
             // Add the last line segment
             double xEnd = mim.NewTerritory.CenterPoint.X - Utilities.theMapItemOffset;
             double yEnd = mim.NewTerritory.CenterPoint.Y - Utilities.theMapItemOffset;
-            if ( (Math.Abs(xEnd - xStart) < 2) || (Math.Abs(yEnd - yStart) < 2) ) // if already at final location, skip animation or get runtime exception
+            if ( (Math.Abs(xEnd - xStart) < 2) && (Math.Abs(yEnd - yStart) < 2) ) // if already at final location, skip animation or get runtime exception
                return true;
             Point newPoint2 = new Point(xEnd, yEnd);
             LineSegment lineSegment2 = new LineSegment(newPoint2, false);

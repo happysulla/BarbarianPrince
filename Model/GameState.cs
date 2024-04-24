@@ -6776,7 +6776,7 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e105":
-               dieRoll = 3; // <cgs> TEST
+               dieRoll = 4; // <cgs> TEST
                gi.DieResults[key][0] = dieRoll;
                break;
             case "e105a":
@@ -9594,7 +9594,6 @@ namespace BarbarianPrince
                gi.IsHeavyRainNextDay = false;  // rain is today - need EncounterEnd() to be called to end the day in ShowE079ColdCheckResult->ShowE079ColdCheckResult()
                gi.DieRollAction = GameAction.DieRollActionNone;
                gi.GamePhase = GamePhase.SunriseChoice;      // e079a - Finish Heavy Rains
-               dieRoll = 4; // <cgs> TEST
                gi.DieResults[key][0] = dieRoll;
                if( 3 < dieRoll )
                {

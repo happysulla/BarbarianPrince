@@ -422,6 +422,7 @@ namespace BarbarianPrince
          if (true == myGameInstance.IsAirborne)
          {
             myIsTravelingAir = true;
+            myMapItemMove.RiverCross = RiverCrossEnum.TC_CROSS_YES_SHOWN; // assume accross the river
          }
          else
          {
