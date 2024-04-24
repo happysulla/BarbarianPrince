@@ -42,7 +42,7 @@ namespace BarbarianPrince
             CtorError = true;
             return;
          }
-         BestPath = GetBestPath(territories, OldTerritory, newTerritory, 4);
+         BestPath = GetBestPath(territories, OldTerritory, newTerritory, 100);
          if (null == BestPath)
          {
             String msg = "MapItemMove():BestPath=null for";

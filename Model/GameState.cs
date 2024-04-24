@@ -3909,7 +3909,7 @@ namespace BarbarianPrince
                      returnStatus = " invalid direction=" + rangevw.ToString() + " for  action =" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
-                  rangevw = (int)Math.Ceiling((double)rangevw); // half rounded up
+                  rangevw = (int)Math.Ceiling((double)rangevw*0.5); // half rounded up
                   //--------------------------------------------------------
                   IMapItems lostInStormMembers = new MapItems();
                   foreach (IMapItem mi in gi.PartyMembers)
@@ -6780,7 +6780,6 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e105":
-               dieRoll = 6; // <cgs> TEST
                gi.DieResults[key][0] = dieRoll;
                break;
             case "e105a":

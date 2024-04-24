@@ -1285,8 +1285,8 @@ namespace BarbarianPrince
             for (int i = 0; i < lastItemIndex; i++) // add intermediate movement points - not really used in Barbarian Prince as only move one hex at a time
             {
                ITerritory t = mim.BestPath.Territories[i];
-               double x = mim.MapItem.Location.X - Utilities.theMapItemOffset;
-               double y = mim.MapItem.Location.Y - Utilities.theMapItemOffset;
+               double x = t.CenterPoint.X - Utilities.theMapItemOffset;
+               double y = t.CenterPoint.Y - Utilities.theMapItemOffset;
                Point newPoint = new Point(x , y);
                LineSegment lineSegment = new LineSegment(newPoint, false);
                aPathFigure.Segments.Add(lineSegment);
