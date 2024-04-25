@@ -281,6 +281,8 @@ namespace BarbarianPrince
       E104TailWinds,
       E105StormCloudLand,
       E105ViolentWeather,
+      E107FalconAdd,
+      E107FalconNoFeed,
       E106OvercastLost,
       E106OvercastLostEnd,
       E120Exhausted,

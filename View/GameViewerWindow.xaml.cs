@@ -493,7 +493,7 @@ namespace BarbarianPrince
             Label labelDailyActions = new Label() { FontSize = 12, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = "DAILY ACTIONS" };
             myStackPanelDailyActions.Children.Add(labelDailyActions);
             //------------------------------------------------------------------
-            if (0 <  gi.Prince.Mounts.Count)
+            if ((0 <  gi.Prince.Mounts.Count) && (false == gi.IsHeavyRainDismount) )
             {
                IMapItem mount = gi.Prince.Mounts[0];
                if( (true == mount.Name.Contains("Pegasus")) || (true == mount.Name.Contains("Griffon")) )
@@ -1458,7 +1458,7 @@ namespace BarbarianPrince
          }
          else if (s1 == myButtonDailyContents[12])
          {
-            if (true == myGameInstance.IsHeavyRainContinue)
+            if (true == myGameInstance.IsHeavyRainContinue) 
                outAction = GameAction.E079HeavyRainsStartDayCheckInAir;
             else
                outAction = GameAction.TravelAir;

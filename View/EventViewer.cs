@@ -822,7 +822,7 @@ namespace BarbarianPrince
                bool isAnyPartyMemberMounted = false;
                foreach(IMapItem mi in myGameInstance.PartyMembers)
                {
-                  if (true == mi.IsRiding)
+                  if ( (true == mi.IsRiding) && (false == mi.Name.Contains("Griffon")) && (false == mi.Name.Contains("Eagle")) )
                      isAnyPartyMemberMounted = true;
                }
                if( false == isAnyPartyMemberMounted)
@@ -842,6 +842,12 @@ namespace BarbarianPrince
                break;
             case "e098": // dragon
                if ((Utilities.NO_RESULT == gi.DieResults[key][0]) && (("Evade" == content) || ("Fight" == content)))
+                  b.IsEnabled = false;
+               else
+                  b.IsEnabled = true;
+               break;
+            case "e107": // falcon
+               if ( (0 == gi.GetFoods()) && ("Feed" == content) )
                   b.IsEnabled = false;
                else
                   b.IsEnabled = true;
@@ -4300,6 +4306,10 @@ namespace BarbarianPrince
                               action = GameAction.E335Escapee;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
+                           case "FalconNoFeed":
+                              action = GameAction.E107FalconNoFeed;
+                              myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              return;
                            case "FallingRocks":
                               action = GameAction.E088FallingRocks;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
@@ -5370,6 +5380,10 @@ namespace BarbarianPrince
                break;
             case "Dismount":
                action = GameAction.E079HeavyRainsDismount;
+               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
+            case "Feed":
+               action = GameAction.E107FalconAdd;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
             case "Fly":

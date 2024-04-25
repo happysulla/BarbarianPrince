@@ -372,6 +372,7 @@ namespace BarbarianPrince
          Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "Wakeup():  gi.MapItemMoves.Clear()  a=" + action.ToString());
          gi.MapItemMoves.Clear();
          gi.IsNewDayChoiceMade = false;
+         gi.IsHeavyRainDismount = false;  // reset to indicate user needs to choose dismount if e079 heavy rains shown at beginning of day
          gi.ForbiddenAudiences.RemoveTimeConstraints(gi.Days);
          if (true == PerformEndCheck(gi, ref action))
             return true;
@@ -1125,11 +1126,11 @@ namespace BarbarianPrince
       public override string PerformAction(ref IGameInstance gi, ref GameAction action, int dieRoll)
       {
          String returnStatus = "OK";
-         if( false == gi.IsNewDayChoiceMade)
+         if(false == gi.IsNewDayChoiceMade)
          {
-            if (false == ResetDay(gi))
+            if (false == ResetDayAfterChoice(gi))
             {
-               returnStatus = "ResetDay() returned error";
+               returnStatus = "ResetDayAfterChoice() returned error";
                Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
                return returnStatus;
             }
@@ -1167,6 +1168,8 @@ namespace BarbarianPrince
                gi.IsHeavyRainNextDay = true;
                break;
             case GameAction.E079HeavyRainsDismount:
+               gi.IsAirborne = false;
+               gi.IsHeavyRainDismount = true;
                foreach (IMapItem mi in gi.PartyMembers)
                {
                   if (null != mi.Rider) // mi = griffon
@@ -1432,15 +1435,15 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, sb12.ToString());
          return returnStatus;
       }
-      protected bool ResetDay(IGameInstance gi)
+      protected bool ResetDayAfterChoice(IGameInstance gi)
       {
          gi.IsNewDayChoiceMade = true;
          theCombatModifer = 0;
          theConstableRollModifier = 0;
          //----------------------------------------------
-         Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "ResetDay(): gi.MapItemMoves.Clear()");
+         Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "ResetDayAfterChoice(): gi.MapItemMoves.Clear()");
          gi.MapItemMoves.Clear();
-         Logger.Log(LogEnum.LE_MOVE_COUNT, "ResetDay(): MovementUsed=0");
+         Logger.Log(LogEnum.LE_MOVE_COUNT, "ResetDayAfterChoice(): MovementUsed=0");
          foreach (IMapItem mi in gi.PartyMembers)
             mi.MovementUsed = 0;
          //----------------------------------------------
@@ -1498,7 +1501,7 @@ namespace BarbarianPrince
          gi.IsGridActive = false;  // Can show active event button in status bar
          try
          {
-            Logger.Log(LogEnum.LE_RESET_ROLL_STATE, "ResetDay(): resetting die rolls");
+            Logger.Log(LogEnum.LE_RESET_ROLL_STATE, "ResetDayAfterChoice(): resetting die rolls");
             foreach (KeyValuePair<string, int[]> kvp in gi.DieResults)
             {
                for (int i = 0; i < 3; ++i)
@@ -1507,11 +1510,11 @@ namespace BarbarianPrince
          }
          catch (Exception)
          {
-            Logger.Log(LogEnum.LE_ERROR, "ResetDay(): reset rolls");
+            Logger.Log(LogEnum.LE_ERROR, "ResetDayAfterChoice(): reset rolls");
             return false;
          }
          return true;
-      }
+      } // Reset all variables after user chooses the acton for today
       protected void ResetDayForNonTravelChoice(IGameInstance gi)
       {
          gi.NumMembersBeingFollowed = 0;
@@ -3676,6 +3679,8 @@ namespace BarbarianPrince
                   gi.GamePhase = GamePhase.Travel;
                   action = GameAction.Travel;
                   bool isPartyRiding = gi.IsPartyRiding();
+                  if (true == gi.IsHeavyRainDismount)
+                     isPartyRiding = false;
                   if (true == gi.IsAirborne)
                   {
                      if (true == gi.PartyReadyToFly()) // mount to fly returns false if anybody is left or possessions are left
@@ -3968,6 +3973,29 @@ namespace BarbarianPrince
                gi.IsAirborne = false;
                Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateEncounter.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
                gi.Prince.MovementUsed = gi.Prince.Movement; // no more travel today
+               if (false == EncounterEnd(gi, ref action))
+               {
+                  returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+               }
+               break;
+            case GameAction.E107FalconAdd:
+               gi.IsFalconFed = true;
+               string falconName = "Falcon" + Utilities.MapItemNum.ToString();
+               ++Utilities.MapItemNum;
+               IMapItem falcon = new MapItem(falconName, 1.0, false, false, false, "c82Falcon", "c82Falcon", princeTerritory, 0, 0, 0);
+               falcon.IsRiding = true;
+               falcon.IsFlying = true;
+               falcon.IsGuide = true;
+               falcon.GuideTerritories = gi.Territories;
+               gi.PartyMembers.Add(falcon);
+               if (false == EncounterEnd(gi, ref action))
+               {
+                  returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+               }
+               break;
+            case GameAction.E107FalconNoFeed:
                if (false == EncounterEnd(gi, ref action))
                {
                   returnStatus = "EncounterEnd() returned false for action=" + action.ToString();

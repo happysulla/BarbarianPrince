@@ -122,6 +122,7 @@ namespace BarbarianPrince
       bool IsHeavyRain { set; get; } // e079 - Heavy rains requires a check for colds
       bool IsHeavyRainNextDay { set; get; } // e079 - May last into tomorrow
       bool IsHeavyRainContinue { set; get; } // e079 - Rain continues into tomorrow
+      bool IsHeavyRainDismount { set; get; } // e079 - Dismounted from mounts due to rain
       bool IsBearAttack { set; get; } // e084 - Bear attack at campfire
       bool IsHighPass { set; get; } // e086 - High Pass may affect travels
       string EventAfterRedistribute { set; get; } // e086 - After performing the high pass event, there may be another event lighted up
@@ -131,6 +132,7 @@ namespace BarbarianPrince
       bool IsPoisonPlant { set; get; } // e093 - Poison Plants prevent hunting at end of day
       bool IsMountsAtRisk { set; get; } // e095 - Set to true if any mounts die
       bool IsMountsSick { set; get; } // e096 - Check for mounts dieing at end of day
+      bool IsFalconFed { set; get; } // e107 - Falcon fed
       bool IsEagleHunt { set; get; } // e114 - Eagles help to hunt
       bool IsExhausted { set; get; } // e120 - Party is exhausted
       RaftEnum RaftState { set; get; } // e122 - Party can be rafting for the day

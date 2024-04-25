@@ -170,6 +170,7 @@ namespace BarbarianPrince
       public bool IsPoisonPlant { set; get; } = false;
       public bool IsMountsAtRisk { set; get; } = false;
       public bool IsMountsSick { set; get; } = false;
+      public bool IsFalconFed { set; get; } = false;
       public bool IsEagleHunt { set; get; } = false;
       public bool IsExhausted { set; get; } = false;
       public RaftEnum RaftState { set; get; } = RaftEnum.RE_NO_RAFT; // e122 - Party can be rafting for the day
@@ -180,6 +181,7 @@ namespace BarbarianPrince
       public bool IsHeavyRain { set; get; } = false;
       public bool IsHeavyRainNextDay { set; get; } = false;
       public bool IsHeavyRainContinue { set; get; } = false;
+      public bool IsHeavyRainDismount { set; get; } = false;
       public bool IsEvadeActive { set; get; } = true;
       public int PurchasedPotionCure { set; get; } = 0;
       public int PurchasedPotionHeal { set; get; } = 0;

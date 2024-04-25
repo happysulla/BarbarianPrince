@@ -1102,12 +1102,12 @@ namespace BarbarianPrince
                myState = GetEventResult(myGameInstance.MapItemMoves[0], dieRoll);
                break;
             case EnumR204.TC_EVENT_ROLL_REFERENCE:
-               dieRoll = 3;  // <cgs> TEST 
+               dieRoll = 4;  // <cgs> TEST 
                myRollReference = dieRoll; // column number in travel table r207 - reference row
                myState = EnumR204.TC_EVENT_ROLL_EVENT;
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT:
-               dieRoll = 3;  // <cgs> TEST 
+               dieRoll = 1;  // <cgs> TEST 
                myRollEvent = dieRoll; // column number in traveling event reference - event row
                myState = EnumR204.TC_EVENT_SHOW_RESULTS;
                break;
