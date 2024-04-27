@@ -150,14 +150,16 @@ namespace BarbarianPrince
             if ("Prince" == mi.Name)
                myGridRows[i].myIsReleased = true;
             //-----------------------------------
-            mi.IsRiding = false; // dismount all party members
+            if (false == mi.IsFlyer())
+            {
+               mi.IsRiding = false; // dismount all party members
+               mi.IsFlying = false;
+            }
             if ( null != mi.Rider )
             {
                mi.Rider.Mounts.Remove(mi);
                mi.Rider = null;
             }
-            if( (false == mi.Name.Contains("Eagle")) && (false == mi.Name.Contains("Griffon")) )
-              mi.IsFlying = false;
             //-----------------------------------
             myGridRows[i].myMountRows = new List<MountRow>();
             foreach (IMapItem mount in mi.Mounts)

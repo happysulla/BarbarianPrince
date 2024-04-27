@@ -135,6 +135,9 @@
     <Compile Include="View\EventViewerE106OvercastMgr.xaml.cs">
       <DependentUpon>EventViewerE106OvercastMgr.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EventViewerE107FalconMgr.xaml.cs">
+      <DependentUpon>EventViewerE107FalconMgr.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EventViewerE121SunStrokeMgr.xaml.cs">
       <DependentUpon>EventViewerE121SunStrokeMgr.xaml</DependentUpon>
     </Compile>
@@ -318,6 +321,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EventViewerE106OvercastMgr.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EventViewerE107FalconMgr.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1690,6 +1697,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\c82Falcon.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Config\Options.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

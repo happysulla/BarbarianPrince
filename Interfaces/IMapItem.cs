@@ -96,6 +96,9 @@ namespace BarbarianPrince
       int GetFreeLoad();
       int GetFlyLoad();
       bool RemoveVictimMountAndLoad(); // Remove what is carried by person and mount if riding
+      bool IsFlyer();
+      bool IsFlyingMount();
+      bool IsFlyingMountCarrier();
       void Reset();
       void ResetPartial();
       void Flip();

@@ -407,8 +407,11 @@ namespace BarbarianPrince
                }
             }
          }
-         //--------------------------------------------------
          myState = EnumR204.TC_LOST_ROLL;
+         //--------------------------------------------------
+         if (true == myGameInstance.IsFalconFed) // do not get lost if falcon with party
+            myState = EnumR204.TC_EVENT_ROLL;
+         //--------------------------------------------------
          myIsTravelingRoad = CheckRoadTravel(myMapItemMove.OldTerritory, myMapItemMove.NewTerritory);
          if (true == myIsTravelingRoad) // PerformTravel() - cannot get lost if on road
             myState = EnumR204.TC_EVENT_ROLL;

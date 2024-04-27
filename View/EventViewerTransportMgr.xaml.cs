@@ -166,7 +166,7 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "TransportLoad(): RemoveUnwingedMounts() returned false");
                   return false;
                }
-               if ((true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Griffon")))
+               if (true == mi.IsFlyer())
                {
                   mi.IsFlying = true;
                   mi.IsRiding = true;
@@ -187,7 +187,7 @@ namespace BarbarianPrince
                   mi.Rider.Mounts.Remove(mi);
                   mi.Rider = null;
                }
-               if ((false == mi.Name.Contains("Eagle")) && (false == mi.Name.Contains("Griffon")))
+               if (false == mi.IsFlyer())
                {
                   mi.IsRiding = false; // dismount all party members
                   mi.IsFlying = false;
@@ -229,7 +229,7 @@ namespace BarbarianPrince
             else
             {
                myConsciousMembers.Add(mi);
-               if ( (true == mi.Name.Contains("Griffon")) && (false == mi.IsExhausted) )// if this is griffon, add to AssignablePanel if can carry enough
+               if ( (true == mi.IsFlyingMountCarrier()) && (false == mi.IsExhausted) )// if this is griffon, add to AssignablePanel if can carry enough
                {
                   int loadCanCarry = Utilities.MaxMountLoad >> mi.StarveDayNum;
                   if (null == mi.Rider)
@@ -260,7 +260,7 @@ namespace BarbarianPrince
                   int maxLoad = Utilities.MaxLoad;
                   if (true == mi.IsExhausted)
                      maxLoad = Utilities.MaxLoad >> 1; // e120 - half the mount load if exhausted 
-                  if (false == mi.Name.Contains("Eagle"))
+                  if ( (false == mi.Name.Contains("Eagle")) || (false == mi.Name.Contains("Falcon")) )
                      myMaxFreeLoad += (maxLoad >> mi.StarveDayNum);
                   foreach (IMapItem mount in mi.Mounts)
                   {
@@ -802,7 +802,7 @@ namespace BarbarianPrince
             {
                if (0 < myPartyMountCount) // If mounts exists in party to be assigned
                {
-                  if ((false == partyMember.Name.Contains("Eagle")) && (false == partyMember.Name.Contains("Griffon")))
+                  if (false == partyMember.IsFlyer())
                   {
                      Rectangle r = new Rectangle()
                      {
@@ -830,7 +830,7 @@ namespace BarbarianPrince
             //------------------------------------------------
             int loads = GetLoadCanCarry(partyMember);
             CheckBox cb = new CheckBox() { FontSize = 12, IsChecked = true, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
-            if ( (true == partyMember.Name.Contains("Eagle")) || (true == partyMember.Name.Contains("Griffon")) )
+            if (true == partyMember.IsFlyer())
             {
                cb.IsEnabled = false;
                cb.IsChecked = true;
@@ -866,7 +866,7 @@ namespace BarbarianPrince
             if (0 < partyMember.Mounts.Count)
             {
                IMapItem mount = partyMember.Mounts[0];
-               if ((true == IsFlyingMount(mount)) && (true == partyMember.IsRiding) && (0 == mount.StarveDayNum)) // Cannot fly if mount has any starvation days
+               if ((true == mount.IsFlyingMount()) && (true == partyMember.IsRiding) && (0 == mount.StarveDayNum)) // Cannot fly if mount has any starvation days
                {
                   if (true == partyMember.IsFlying)
                      cb2.IsChecked = true;
@@ -891,7 +891,7 @@ namespace BarbarianPrince
             else
             {
                cb2.IsEnabled = false;
-               if (true == partyMember.Name.Contains("Griffon"))
+               if ( (true == partyMember.Name.Contains("Griffon")) || (true == partyMember.Name.Contains("Harpy")) )
                {
                   if ((null != partyMember.Rider) && (true == partyMember.Rider.IsFlying))
                      cb2.IsChecked = true;
@@ -902,7 +902,7 @@ namespace BarbarianPrince
                }
                else
                {
-                  if (true == partyMember.Name.Contains("Eagle"))
+                  if ((true == partyMember.Name.Contains("Eagle")) || (true == partyMember.Name.Contains("Falcon")) )
                      cb2.IsChecked = true;
                   else
                      cb2.IsChecked = false;
@@ -1139,13 +1139,13 @@ namespace BarbarianPrince
       }
       private int GetLoadCanCarry(IMapItem partyMember)
       {
-         if (true == partyMember.Name.Contains("Eagle"))
+         if ( (true == partyMember.Name.Contains("Eagle")) || (true == partyMember.Name.Contains("Falcon")) )
             return 0;
          int loadCanCarry = 0;
          int mountLoad = 0;
          int personLoad = 0;
          bool isRidingPossible = false;
-         if (true == partyMember.Name.Contains("Griffon"))
+         if ( (true == partyMember.Name.Contains("Griffon")) || (true == partyMember.Name.Contains("Harpy")) )
          {
             int maxMountLoad = Utilities.MaxMountLoad;
             if (true == partyMember.IsExhausted)
@@ -1214,7 +1214,7 @@ namespace BarbarianPrince
             return loadCanCarry;
          }
          //------------------------------------------
-         if ((true == partyMember.IsRiding) && (false == partyMember.Name.Contains("Griffon")) && (false == partyMember.Name.Contains("Eagle")) )
+         if ( (true == partyMember.IsRiding) && (false == partyMember.IsFlyer()) )
             loadCanCarry -= Utilities.PersonBurden; // 20 for man riding and  what he can carry
          Logger.Log(LogEnum.LE_VIEW_SHOW_LOADS, "GetLoadCanCarry(): 4=> lc=" + loadCanCarry.ToString() + " ml=" + mountLoad.ToString() + " pl=" + personLoad.ToString() + " r?=" + isRidingPossible.ToString() + " after riding burden");
          //------------------------------------------
@@ -1365,21 +1365,9 @@ namespace BarbarianPrince
          }
          return isInRow;
       }
-      private bool IsFlyingMount(IMapItem mi)
-      {
-         if (0 < mi.StarveDayNum)
-            return false;
-         if (true == mi.Name.Contains("Griffon"))
-            return true;
-         if (true == mi.Name.Contains("Pegasus"))
-            return true;
-         if (true == mi.Name.Contains("Unicorn"))
-            return true;
-         return false;
-      }
       private bool IsRidingPossible(IMapItem partyMember)
       {
-         if ((true == partyMember.Name.Contains("Giant")) || (true == partyMember.Name.Contains("Eagle")) || (true == partyMember.Name.Contains("Griffon"))) // mounts cannot carry giants
+         if ( (true == partyMember.Name.Contains("Giant")) || (true == partyMember.IsFlyer()) ) // mounts cannot carry giants - Flyers do not ride
             return false;
          foreach (IMapItem mount in partyMember.Mounts)
          {
@@ -1424,7 +1412,7 @@ namespace BarbarianPrince
          {
             foreach(IMapItem mi in myConsciousMembers)
             {
-               if ((false == mi.Name.Contains("Eagle")) && (false == mi.Name.Contains("Griffon")))
+               if (false == mi.IsFlyer())
                {
                   mi.IsRiding = false; // dismount 
                   mi.IsFlying = false;
@@ -1827,8 +1815,9 @@ namespace BarbarianPrince
             return;
          }
          int i = rowNum - STARTING_ASSIGNED_ROW;
-         if ((false == Name.Contains("Eagle")) && (false == Name.Contains("Griffon")))
-            myGridRows[i].myMapItem.IsRiding = false;
+         IMapItem mi = myGridRows[i].myMapItem;
+         if ( false == mi.IsFlyer() )
+            mi.IsRiding = false;
          if (false == UpdateGrid())
             Logger.Log(LogEnum.LE_ERROR, "CheckBoxRiding_Unchecked(): UpdateGrid() return false");
       }

@@ -367,12 +367,32 @@ namespace BarbarianPrince
          //monk.AddNewMount();
          //AddCompanion(monk);
          //---------------------
-         //string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
-         //++Utilities.MapItemNum;
-         //IMapItem eagle = new MapItem(eagleName, 1.0, false, false, false, "c62Eagle", "c62Eagle", Prince.Territory, 3, 4, 1);
-         //eagle.IsFlying = true;
-         //eagle.IsRiding = true;
-         //AddCompanion(eagle);
+         string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
+         ++Utilities.MapItemNum;
+         IMapItem eagle = new MapItem(eagleName, 1.0, false, false, false, "c62Eagle", "c62Eagle", Prince.Territory, 3, 4, 1);
+         eagle.IsFlying = true;
+         eagle.IsRiding = true;
+         AddCompanion(eagle);
+         //---------------------
+         string falconName1 = "Falcon" + Utilities.MapItemNum.ToString();
+         ++Utilities.MapItemNum;
+         IMapItem falcon1 = new MapItem(falconName1, 1.0, false, false, false, "c82Falcon", "c82Falcon", Prince.Territory, 0, 0, 0);
+         falcon1.IsFlying = true;
+         falcon1.IsRiding = true;
+         falcon1.IsGuide = true;
+         falcon1.GuideTerritories = Territories;
+         AddCompanion(falcon1);
+         IsFalconFed = true;
+         //---------------------
+         string falconName2 = "Falcon" + Utilities.MapItemNum.ToString();
+         ++Utilities.MapItemNum;
+         IMapItem falcon2 = new MapItem(falconName2, 1.0, false, false, false, "c82Falcon", "c82Falcon", Prince.Territory, 0, 0, 0);
+         falcon2.IsFlying = true;
+         falcon2.IsRiding = true;
+         falcon2.IsGuide = true;
+         falcon2.GuideTerritories = Territories;
+         AddCompanion(falcon2);
+         IsFalconFed = true;
          //---------------------
          //string dwarfName = "Dwarf" + Utilities.MapItemNum.ToString();
          //++Utilities.MapItemNum;
@@ -979,7 +999,7 @@ namespace BarbarianPrince
          sortedMapItems.Reverse();
          foreach (IMapItem partyMember in sortedMapItems) // add to partymember without a mount
          {
-            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (0 < partyMember.Mounts.Count) || (true == partyMember.Name.Contains("Eagle")) || (true == partyMember.Name.Contains("Griffon")))
+            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (0 < partyMember.Mounts.Count) || (true == partyMember.IsFlyer()) )
                continue;
             partyMember.AddNewMount(mt);
             return;
@@ -989,7 +1009,7 @@ namespace BarbarianPrince
          {
             foreach (IMapItem partyMember in sortedMapItems) // If this is a pegasus, add to partymember that has no pegasus
             {
-               if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || ("Prince" == partyMember.Name) || (true == partyMember.Name.Contains("Eagle")) || (true == partyMember.Name.Contains("Griffon")))
+               if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || ("Prince" == partyMember.Name) || (true == partyMember.IsFlyer()) )
                   continue;
                isGriffonOwned = false;
                IsPegasusOwned = false;
@@ -1015,7 +1035,7 @@ namespace BarbarianPrince
          {
             foreach (IMapItem partyMember in sortedMapItems)
             {
-               if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || ("Prince" == partyMember.Name) || (true == partyMember.Name.Contains("Eagle")) || (true == partyMember.Name.Contains("Griffon")))
+               if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || ("Prince" == partyMember.Name) || (true == partyMember.IsFlyer()) )
                   continue;
                isGriffonOwned = false;
                IsPegasusOwned = false;
@@ -1038,7 +1058,7 @@ namespace BarbarianPrince
             PartyMembers.Rotate(1);
          foreach (IMapItem partyMember in PartyMembers) // add to first conscious person which is hopefully the prince
          {
-            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || ("Prince" == partyMember.Name) || (true == partyMember.Name.Contains("Eagle")) || (true == partyMember.Name.Contains("Griffon")))
+            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || ("Prince" == partyMember.Name) || (true == partyMember.IsFlyer()) )
             {
                partyMember.AddNewMount(mt);
                return;
@@ -1141,7 +1161,7 @@ namespace BarbarianPrince
          IMapItem firstConsciousMapItem = null;
          foreach (IMapItem partyMember in PartyMembers) // Find the first conscious party member that can get mounts. Hopefully this is Prince
          {
-            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.Name.Contains("Giant")) || (true == partyMember.Name.Contains("Eagle")) || (true == partyMember.Name.Contains("Griffon")))
+            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.Name.Contains("Giant")) || (true == partyMember.IsFlyer()))
                continue;
             if (null == firstConsciousMapItem)
                firstConsciousMapItem = partyMember;
@@ -1158,7 +1178,7 @@ namespace BarbarianPrince
          {
             if (assignedGriffonCount == maxGriffonCount)
                break;
-            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.Name.Contains("Giant")) || (true == partyMember.Name.Contains("Eagle")) || (true == partyMember.Name.Contains("Griffon")))
+            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.Name.Contains("Giant")) || (true == partyMember.IsFlyer()) )
                continue;
             partyMember.AddMount(griffons[assignedGriffonCount]); // Griffon gets assigned a rider
             assignedGriffonCount++;
@@ -1173,7 +1193,7 @@ namespace BarbarianPrince
          {
             if (assignedPegasusCount == maxPegasusCount)
                break;
-            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.Name.Contains("Giant")) || (true == partyMember.Name.Contains("Eagle")) || (true == partyMember.Name.Contains("Griffon")) || (0 < partyMember.Mounts.Count))
+            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.Name.Contains("Giant")) || (true == partyMember.IsFlyer()) || (0 < partyMember.Mounts.Count))
                continue;
             partyMember.AddMount(pegasuses[assignedPegasusCount]);
             assignedPegasusCount++;
@@ -1188,7 +1208,7 @@ namespace BarbarianPrince
          {
             if (assignedHorseCount == maxHorseCount)
                break;
-            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.Name.Contains("Giant")) || (true == partyMember.Name.Contains("Eagle")) || (true == partyMember.Name.Contains("Griffon")) || (0 < partyMember.Mounts.Count))
+            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.Name.Contains("Giant")) || (true == partyMember.IsFlyer()) || (0 < partyMember.Mounts.Count))
                continue;
             partyMember.AddMount(horses[assignedHorseCount]);
             assignedHorseCount++;
@@ -1368,7 +1388,7 @@ namespace BarbarianPrince
       {
          foreach (IMapItem mi in PartyMembers)
          {
-            if ((false == mi.Name.Contains("Eagle")) && (false == mi.IsFlying) && (false == mi.IsRiding))
+            if ( (false == mi.IsRiding) && (false == mi.IsFlyer()) )
                return false;
          }
          return true;
@@ -1396,7 +1416,7 @@ namespace BarbarianPrince
          }
          foreach (IMapItem mi in EncounteredMembers)
          {
-            if ((false == mi.Name.Contains("Eagle")) && (false == mi.IsFlying) && (false == mi.IsRiding))
+            if ( (false == mi.IsRiding) && (false == mi.IsFlyer()) )
                return false;
          }
          return true;
@@ -1747,7 +1767,7 @@ namespace BarbarianPrince
          {
             foreach (IMapItem mi in PartyMembers)
             {
-               if ((false == mi.Name.Contains("Eagle")) && (false == mi.Name.Contains("Griffon")))
+               if (false == mi.IsFlyer())
                {
                   mi.IsRiding = false;
                   mi.IsFlying = false;

@@ -144,7 +144,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "RaftInCurrentCheck(): mi=null");
                return false;
             }
-            if (true == mi.Name.Contains("Griffon"))  // if the griffon has rider, remove rider
+            if (true == mi.IsFlyingMount())  // if the mount has rider, remove rider
             {
                if (null != mi.Rider)
                {
@@ -158,7 +158,7 @@ namespace BarbarianPrince
          int k = 0;
          foreach (IMapItem member in myGameInstance.PartyMembers)
          {
-            if ((true == member.Name.Contains("Griffon")) || (true == member.Name.Contains("Eagle")))
+            if (true == member.IsFlyer()) // Skip Flyers 
                continue;
             myGridRowMembers[i] = new GridRow(member);
             ++i;

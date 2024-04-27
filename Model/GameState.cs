@@ -121,6 +121,8 @@ namespace BarbarianPrince
       protected bool SetHuntState(IGameInstance gi, ref GameAction action)
       {
          ITerritory t = gi.NewHex;
+         if (null == t)
+            t = gi.Prince.Territory;
          bool isStructure = gi.IsInTownOrCastle(t);
          bool isHunting = (false == isStructure) && (("Countryside" == t.Type) || ("Hills" == t.Type) || ("Forest" == t.Type) || ("Farmland" == t.Type) || ("Swamp" == t.Type)) || (true == gi.IsEagleHunt); // no hunting in mountain or desert w/o eagle
          bool isBuyingFood = ((true == isStructure) && (0 < gi.GetCoins()));
@@ -299,6 +301,26 @@ namespace BarbarianPrince
          }
          else
          {
+            if (false == SetCampfireFalconCheckState(gi, ref action))
+            {
+               Logger.Log(LogEnum.LE_ERROR, "SetCampfireEncounterState(): SetCampfireFinalConditionState() returned false");
+               return false;
+            }
+         }
+         return true;
+      }
+      protected bool SetCampfireFalconCheckState(IGameInstance gi, ref GameAction action)
+      {
+         if (true == gi.IsFalconFed) // If there is a fed falcon in the party, see if can feed with food
+         {
+            gi.IsFalconFed = false;
+            gi.IsGridActive = true;
+            action = GameAction.CampfireFalconCheck;
+            gi.GamePhase = GamePhase.Campfire;
+            gi.DieRollAction = GameAction.DieRollActionNone;
+         }
+         else
+         {
             if (false == SetCampfireFinalConditionState(gi, ref action))
             {
                Logger.Log(LogEnum.LE_ERROR, "SetCampfireEncounterState(): SetCampfireFinalConditionState() returned false");
@@ -328,7 +350,7 @@ namespace BarbarianPrince
          }
          else
          {
-            gi.IsGridActive = true;   // SetCampfireFinalConditionState()
+            gi.IsGridActive = true;  
             gi.GamePhase = GamePhase.Campfire;
             action = GameAction.CampfireStarvationCheck;
             gi.DieRollAction = GameAction.DieRollActionNone;
@@ -1177,7 +1199,7 @@ namespace BarbarianPrince
                      mi.Rider.Mounts.Remove(mi);  // Griffon Rider removes griffon as mount
                      mi.Rider = null;             // Griffon removes its rider
                   }
-                  if ((true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Griffon")))
+                  if (true == mi.IsFlyer()) // flyers do not need to dismount
                      continue;
                   mi.IsRiding = false;
                   mi.IsFlying = false;
@@ -1765,6 +1787,13 @@ namespace BarbarianPrince
                if (false == SetHuntState(gi, ref action)) // Escape from Prison
                {
                   returnStatus = "SetHuntState() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateCampfire.PerformAction(): " + returnStatus);
+               }
+               break;
+            case GameAction.CampfireFalconCheckEnd:
+               if (false == SetCampfireFinalConditionState(gi, ref action))
+               {
+                  returnStatus = "SetCampfireFinalConditionState() return false";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateCampfire.PerformAction(): " + returnStatus);
                }
                break;
@@ -2935,7 +2964,7 @@ namespace BarbarianPrince
                   else
                   {
                      gi.DwarfAdviceLocations.Add(tRamdom);
-                     if (false == SetCampfireFinalConditionState(gi, ref action))
+                     if (false == SetCampfireFalconCheckState(gi, ref action))
                      {
                         returnStatus = "SetCampfireFinalConditionState() returned false for a=" + action.ToString();
                         Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
@@ -3180,7 +3209,7 @@ namespace BarbarianPrince
                   else
                   {
                      gi.WizardAdviceLocations.Add(tRamdom);
-                     if (false == SetCampfireFinalConditionState(gi, ref action))
+                     if (false == SetCampfireFalconCheckState(gi, ref action))
                      {
                         returnStatus = "SetCampfireFinalConditionState() returned false for a=" + action.ToString();
                         Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
@@ -3989,6 +4018,7 @@ namespace BarbarianPrince
                falcon.IsGuide = true;
                falcon.GuideTerritories = gi.Territories;
                gi.PartyMembers.Add(falcon);
+               gi.ReduceFoods(1);
                if (false == EncounterEnd(gi, ref action))
                {
                   returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
@@ -4018,7 +4048,7 @@ namespace BarbarianPrince
                   mi.SetWounds(1, 0); // each party member suffers one wound
                   foreach(IMapItem mount in mi.Mounts)
                      mount.IsExhausted = true;
-                  if ((false == mi.Name.Contains("Griffon")) && (false == mi.Name.Contains("Eagle")))
+                  if (false == mi.IsFlyer()) // Exhausted must dismount -- flyers are always riding
                      mi.IsRiding = false;
                   mi.IsFlying = false;
                }
@@ -7060,7 +7090,7 @@ namespace BarbarianPrince
             default: // do nothing
                foreach (IMapItem mi in gi.PartyMembers)
                {
-                  if ((false == mi.Name.Contains("Eagle")) && (false == mi.IsFlying) && (false == mi.IsRiding))
+                  if ((false == mi.IsRiding) && (false == mi.IsFlyer())) // flyers cannot be abandoned due to riding away since they are always riding 
                      adbandonedMembers.Add(mi);
                }
                break;
@@ -7340,7 +7370,7 @@ namespace BarbarianPrince
                break;
             case "e074": break;// defeated spiders
             case "e075b":  // defeated wolves
-               if (false == SetCampfireFinalConditionState(gi, ref action))
+               if (false == SetCampfireFalconCheckState(gi, ref action))
                {
                   Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.StripCoins()() returned false w/ es=" + gi.EventStart);
                   return false;
@@ -7363,7 +7393,7 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.EncounterRoll;
                return true; //<<<<<<<<<<<<<<<<<<<<<
             case "e084b":  // defeated bear
-               if (false == SetCampfireFinalConditionState(gi, ref action))
+               if (false == SetCampfireFalconCheckState(gi, ref action))
                {
                   Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.StripCoins()() returned false w/ es=" + gi.EventStart);
                   return false;
@@ -7651,7 +7681,7 @@ namespace BarbarianPrince
          {
             foreach (IMapItem mi in gi.PartyMembers)
             {
-               if ((true == mi.IsRiding) || (true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Griffon")) )
+               if ((true == mi.IsRiding) || (true == mi.IsFlyer()))
                   ++numRiding;
             }
          }

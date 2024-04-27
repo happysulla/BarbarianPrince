@@ -149,7 +149,11 @@ namespace BarbarianPrince
                myIsUnmountedMount = true;
             if ((true == mi.Name.Contains("Griffon")) || (null != mi.Rider)) // if the griffon has rider, do not show. Griffon is tied with rider
                continue;
-            if (true == mi.Name.Contains("Eagle"))
+            if ((true == mi.Name.Contains("Harpy")) || (null != mi.Rider)) // if the harpy has rider, do not show. Harpy is tied with rider
+               continue;
+            if (true == mi.Name.Contains("Falcon")) // skip falcons
+               continue;
+            if ( true == mi.Name.Contains("Eagle") )
             {
                myIsAnybodySafe = true;
                continue;
@@ -362,7 +366,7 @@ namespace BarbarianPrince
                   myGrid.Children.Add(img);
                   Grid.SetRow(img, rowNum);
                   Grid.SetColumn(img, 1);
-                  if( (true == mi.IsRiding) && (false == mi.Name.Contains("Griffon")) && (false == mi.Name.Contains("Eagle")))
+                  if( (true == mi.IsRiding) && (false == mi.IsFlyer()) ) // if riding and not a flyer, show the jump icon - Member is jumping off their mount
                   {
                      Image imgJump = new Image { Name = "Jump", Source = MapItem.theMapImages.GetBitmapImage("QuicksandJump"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                      myGrid.Children.Add(imgJump);
@@ -505,7 +509,7 @@ namespace BarbarianPrince
                   break;
                case 5:
                   myIsAnybodySafe = true;
-                  if ((true == partyMember.IsRiding) && (false == partyMember.Name.Contains("Griffon")) && (false == partyMember.Name.Contains("Eagle")))
+                  if ( (true == partyMember.IsRiding) && (false == partyMember.IsFlyer()) )
                      myGridRowMembers[i].myIsMountDead = true;
                   break;
                case 6:

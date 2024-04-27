@@ -56,11 +56,11 @@ namespace BarbarianPrince
       };
       //---------------------------------------------
       public bool CtorError { get; } = false;
+      private int myMaxRowCount = 0;
       private GridRow[] myGridRows = new GridRow[Utilities.MAX_GRID_ROW];
       //---------------------------------------------
       private StarveEnum myState = StarveEnum.SE_STARVE;
       private IMapItems myPartyMembers = null;
-      private int myMaxRowCount = 0;
       private int myNumMountsCount = 0;
       private bool myIsMoreThanOneMountToMapItem = false;
       private int myFoodOriginal = 0;
@@ -176,6 +176,9 @@ namespace BarbarianPrince
          myDragStateColNum = 0;
          myNumTrueLove = 0;
          //--------------------------------------------------
+         if( true == myGameInstance.IsFalconFed ) // If a falcon is with the party, show the rule for it, i.e. e107
+            myButtonFalconRule.Visibility = Visibility.Visible;
+         //--------------------------------------------------
          int i = 0;
          foreach (IMapItem mi in myPartyMembers)
          {
@@ -193,7 +196,7 @@ namespace BarbarianPrince
                myTerritory = mi.Territory;
             if (true == mi.Name.Contains("TrueLove")) // if there is more than one true love, all but one may leave
               ++myNumTrueLove;
-            if ((true == myGameInstance.IsPartyFed) || (true == mi.Name.Contains("Eagle"))) // Party if Fed if they are in a town and money was paid to feed them during the hunting phase
+            if ((true == myGameInstance.IsPartyFed) || (true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")) ) // Party if Fed if they are in a town and money was paid to feed them during the hunting phase
                mi.StarveDayNumOld = mi.StarveDayNum;
             else
                mi.StarveDayNumOld = mi.StarveDayNum + 1;
@@ -1353,13 +1356,13 @@ namespace BarbarianPrince
                int minFoodNeeded = 1;
                if (true == follower.Name.Contains("Giant"))
                   minFoodNeeded += 1;
-               else if (true == follower.Name.Contains("Eagle"))
+               else if ((true == follower.Name.Contains("Eagle")) || ((true == follower.Name.Contains("Falcon"))) )
                   minFoodNeeded = 0;
                if (("Desert" == myTerritory.Type) && (false == myTerritory.IsOasis)) // Double food needs if in desert
                {
                   if (true == follower.Name.Contains("Giant"))
                      minFoodNeeded += 2;
-                  else if (true == follower.Name.Contains("Eagle"))
+                  else if ( (true == follower.Name.Contains("Eagle")) || (true == follower.Name.Contains("Falcon")) )
                      minFoodNeeded += 0;
                   else
                      minFoodNeeded += 1;
@@ -1437,7 +1440,7 @@ namespace BarbarianPrince
          if (true == follower.IsExhausted)
             maxLoad = Utilities.MaxLoad >> 1; // e120 - half the load if exhausted 
          int load = maxLoad >> follower.StarveDayNum; // divide by half for each starve day
-         if (true == follower.Name.Contains("Eagle"))
+         if ( (true == follower.Name.Contains("Eagle")) || (true == follower.Name.Contains("Falcon")) )
             load = 0;
          foreach (IMapItem mount in follower.Mounts)
          {
@@ -1451,6 +1454,8 @@ namespace BarbarianPrince
          Grid.SetRow(labelforLoads, rowNum);
          Grid.SetColumn(labelforLoads, 5);
          //--------------------------------
+         bool isFalcon = follower.Name.Contains("Falcon");
+         //--------------------------------
          if (false == myIsHeaderCheckBoxChecked)
          {
             if (Utilities.NO_RESULT < myGridRows[i].myResult)
@@ -1458,7 +1463,7 @@ namespace BarbarianPrince
                string result = myGridRows[i].myResult.ToString();
                if (LEAVE_AUTO == myGridRows[i].myResult) // hirelings automatically run away if not paid
                   result = "NA";
-               if (DO_NOT_LEAVE == myGridRows[i].myResult) // eagles, porters, & true love do not leave
+               else if (DO_NOT_LEAVE == myGridRows[i].myResult) // eagles, porters, & true love do not leave
                   result = "NA";
                Label labelforResult = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = result };
                myGrid.Children.Add(labelforResult);
@@ -1494,9 +1499,9 @@ namespace BarbarianPrince
             string resultStatus = "no";
             if (3 < myGridRows[i].myResult)
                resultStatus = "yes";
-            if ((true == follower.Name.Contains("Slave")) && (5 < follower.StarveDayNum) ) // slave girls and porters die when starve to death
+            if ((true == follower.Name.Contains("Slave")) && (5 < follower.StarveDayNum)) // slave girls and porters die when starve to death
                resultStatus = "dies";
-            else if(DO_NOT_LEAVE == myGridRows[i].myResult)
+            if (DO_NOT_LEAVE == myGridRows[i].myResult)
                resultStatus = "NA";
             Label labelforDesertion = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = resultStatus };
             myGrid.Children.Add(labelforDesertion);
@@ -1656,7 +1661,7 @@ namespace BarbarianPrince
             }
             if (true == mi.Name.Contains("Prince"))
                myGridRows[i].myResult = DO_NOT_LEAVE;
-            else if (true == mi.Name.Contains("Eagle"))
+            else if ((true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")) )
                myGridRows[i].myResult = DO_NOT_LEAVE;
             else if ( true == mi.Name.Contains("PorterSlave") )
                myGridRows[i].myResult = DO_NOT_LEAVE;
@@ -1673,7 +1678,7 @@ namespace BarbarianPrince
             {
                if (true == mi.Name.Contains("Giant"))
                   foodNeededForPeople += 2;
-               else if (true == mi.Name.Contains("Eagle"))
+               else if ( (true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")) ) 
                   foodNeededForPeople += 0;
                else
                   foodNeededForPeople += 1;
@@ -1687,7 +1692,7 @@ namespace BarbarianPrince
             {
                if (true == mi.Name.Contains("Giant"))
                   foodNeededWithExtra += 2;
-               else if (true == mi.Name.Contains("Eagle"))
+               else if ( (true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")) )
                   foodNeededForPeople += 0;
                else
                   foodNeededWithExtra += 1;
@@ -1711,6 +1716,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "SetStateStarvation(): set state=" + myState.ToString());
             myIsHeaderCheckBoxChecked = true;
             myFoodCurrent -= foodNeededTotalWithExtra;
+            myGameInstance.IsFalconFed = true;
             for (int i = 0; i < myMaxRowCount; ++i)
             {
                IMapItem mi = myGridRows[i].myMapItem;
@@ -1733,6 +1739,7 @@ namespace BarbarianPrince
             myState = StarveEnum.SE_FEED_ALL;
             myIsHeaderCheckBoxChecked = true;
             myFoodCurrent -= foodNeededTotal;
+            myGameInstance.IsFalconFed = true;
             for (int i = 0; i < myMaxRowCount; ++i)
             {
                IMapItem mi = myGridRows[i].myMapItem;
@@ -1750,6 +1757,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "SetStateStarvation(): set state=" + myState.ToString());
             myIsHeaderCheckBoxChecked = true;
             myFoodCurrent -= foodNeededForPeople;
+            myGameInstance.IsFalconFed = true;
             foreach (IMapItem mi in myPartyMembers)
             {
                if (0 < mi.StarveDayNum) // feeding today removes one starve day if it exists
@@ -1770,6 +1778,7 @@ namespace BarbarianPrince
             myState = StarveEnum.SE_STARVE_PARTIAL;
             myIsHeaderCheckBoxChecked = true;
             myFoodCurrent = 0;
+            myGameInstance.IsFalconFed = true;
             foreach (IMapItem mi in myPartyMembers)
             {
                foreach (IMapItem mount in mi.Mounts)
@@ -1786,6 +1795,7 @@ namespace BarbarianPrince
          myState = StarveEnum.SE_STARVE;
          Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "SetStateStarvation(): set state=" + myState.ToString());
          myIsHeaderCheckBoxChecked = false;
+         myGameInstance.IsFalconFed = false;
          foreach (IMapItem mi in myPartyMembers)
          {
             if ((false == myGameInstance.IsPartyFed) && ( false == mi.Name.Contains("Ealge")) ) // Party if Fed if they are in a town and money was paid to feed them during the hunting phase
@@ -1843,24 +1853,30 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): 0 > i=" + i.ToString());
                return;
             }
-            int result = dieRoll - myGameInstance.WitAndWile;
             IMapItem mi = myGridRows[i].myMapItem;
-            if (true == mi.Name.Contains("TrueLove"))
+            if (true == mi.Name.Contains("Falcon"))
             {
-               dieRoll += myGameInstance.WitAndWile;
-               ++dieRoll; // normalize so that a roll of < 3 causes true love to depart - normally departs when die is greater than 3. For true loves, it is when greater than 2
-               if (3 < dieRoll)
-                  --myNumTrueLove;
+               myGridRows[i].myResult = dieRoll;
             }
-            myGridRows[i].myResult = result;
-            //----------------------------------------------
-            if (1 == myNumTrueLove)  // If down to one true love, she does not leave
+            else
             {
-               for (int k = 0; k < myMaxRowCount; ++k)
+               if (true == mi.Name.Contains("TrueLove"))
                {
-                  IMapItem trueLove = myGridRows[k].myMapItem;
-                  if ( (true == trueLove.Name.Contains("TrueLove")) && (Utilities.NO_RESULT == myGridRows[k].myResult) )
-                     myGridRows[k].myResult = DO_NOT_LEAVE;
+                  dieRoll += myGameInstance.WitAndWile;
+                  ++dieRoll; // normalize so that a roll of < 3 causes true love to depart - normally departs when die is greater than 3. For true loves, it is when greater than 2
+                  if (3 < dieRoll)
+                     --myNumTrueLove;
+               }
+               myGridRows[i].myResult = dieRoll - myGameInstance.WitAndWile;
+               //----------------------------------------------
+               if (1 == myNumTrueLove)  // If down to one true love, she does not leave
+               {
+                  for (int k = 0; k < myMaxRowCount; ++k)
+                  {
+                     IMapItem trueLove = myGridRows[k].myMapItem;
+                     if ((true == trueLove.Name.Contains("TrueLove")) && (Utilities.NO_RESULT == myGridRows[k].myResult))
+                        myGridRows[k].myResult = DO_NOT_LEAVE;
+                  }
                }
             }
             //----------------------------------------------
@@ -2053,18 +2069,16 @@ namespace BarbarianPrince
                   {
                      if (StarveEnum.SE_MAGICIAN_GIFT != myState)
                      {
-                        if(StarveEnum.SE_ROLL_DESERTERS != myState )
+                        if (StarveEnum.SE_ROLL_DESERTERS != myState)
                         {
+                           Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "Grid_MouseDown(): set state=" + myState.ToString() + "->SE_ROLL_DESERTERS");
                            myState = StarveEnum.SE_ROLL_DESERTERS;
-                           //if (false == UpdateGrid())
-                           //   Logger.Log(LogEnum.LE_ERROR, "Grid_MouseDown(): UpdateGrid() return false");
                         }
-                        Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "Grid_MouseDown(): set state=" + myState.ToString());
                         if (false == myIsRollInProgress)
                         {
-                           myRollResulltRowNum = Grid.GetRow(img1);
                            myIsRollInProgress = true;
-                           int dieRoll = myDieRoller.RollMovingDice(myCanvas, ShowDieResults);
+                           myRollResulltRowNum = Grid.GetRow(img1);
+                           myDieRoller.RollMovingDice(myCanvas, ShowDieResults);
                            img1.Visibility = Visibility.Hidden;
                            return;
                         }
@@ -2210,7 +2224,7 @@ namespace BarbarianPrince
             {
                if (true == mi.Name.Contains("Giant"))
                   foodNeededForPeople += 2;
-               else if (true == mi.Name.Contains("Eagle"))
+               else if ((true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")) )
                   foodNeededForPeople += 0;
                else
                   foodNeededForPeople += 1;
@@ -2223,7 +2237,7 @@ namespace BarbarianPrince
             {
                if (true == mi.Name.Contains("Giant"))
                   foodNeededForPeople += 2;
-               else if (true == mi.Name.Contains("Eagle"))
+               else if ( (true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")) )
                   foodNeededForPeople += 0;
                else
                   foodNeededForPeople += 1;
@@ -2246,6 +2260,7 @@ namespace BarbarianPrince
          {
             case StarveEnum.SE_FEED_ALL_WITH_EXTRA:
                myFoodCurrent -= foodNeededTotalWithExtra;
+               myGameInstance.IsFalconFed = true;
                for (int i = 0; i < myMaxRowCount; ++i)
                {
                   IMapItem mi = myGridRows[i].myMapItem;
@@ -2256,7 +2271,7 @@ namespace BarbarianPrince
                   }
                   if (1 < mi.StarveDayNum)
                      --mi.StarveDayNum;
-                  if( false == mi.Name.Contains("Eagle"))
+                  if( (false == mi.Name.Contains("Eagle")) && (false == mi.Name.Contains("Falcon")) )
                      --mi.StarveDayNum;
                   foreach (IMapItem mount in mi.Mounts)
                      mount.StarveDayNum = 0;
@@ -2264,12 +2279,13 @@ namespace BarbarianPrince
                break;
             case StarveEnum.SE_FEED_ALL:
                myFoodCurrent -= foodNeededTotal;
+               myGameInstance.IsFalconFed = true;
                for (int i = 0; i < myMaxRowCount; ++i)
                {
                   IMapItem mi = myGridRows[i].myMapItem;
                   if (1 < mi.StarveDayNum)
                      --mi.StarveDayNum;
-                  if (false == mi.Name.Contains("Eagle"))
+                  if ((false == mi.Name.Contains("Eagle")) && (false == mi.Name.Contains("Falcon")))
                      --mi.StarveDayNum;
                   foreach (IMapItem mount in mi.Mounts)
                      mount.StarveDayNum = 0;
@@ -2277,12 +2293,13 @@ namespace BarbarianPrince
                break;
             case StarveEnum.SE_FEED_PEOPLE:
                myFoodCurrent -= foodNeededForPeople;
+               myGameInstance.IsFalconFed = true;
                for (int i = 0; i < myMaxRowCount; ++i)
                {
                   IMapItem mi = myGridRows[i].myMapItem;
                   if (1 < mi.StarveDayNum)
                      --mi.StarveDayNum;
-                  if (false == mi.Name.Contains("Eagle"))
+                  if ((false == mi.Name.Contains("Eagle")) && (false == mi.Name.Contains("Falcon")))
                      --mi.StarveDayNum;
                   foreach (IMapItem mount in mi.Mounts)
                      mount.StarveDayNum = mount.StarveDayNumOld;
@@ -2290,12 +2307,13 @@ namespace BarbarianPrince
                break;
             case StarveEnum.SE_STARVE_PARTIAL:
                myFoodCurrent = 0;
+               myGameInstance.IsFalconFed = true;
                for (int i = 0; i < myMaxRowCount; ++i)
                {
                   IMapItem mi = myGridRows[i].myMapItem;
                   if (1 < mi.StarveDayNum)
                      --mi.StarveDayNum;
-                  if (false == mi.Name.Contains("Eagle"))
+                  if ((false == mi.Name.Contains("Eagle")) && (false == mi.Name.Contains("Falcon")))
                      --mi.StarveDayNum;
                   foreach (IMapItem mount in mi.Mounts)
                      mount.StarveDayNum = mount.StarveDayNumOld;
@@ -2334,6 +2352,7 @@ namespace BarbarianPrince
             case StarveEnum.SE_FEED_PEOPLE:
             case StarveEnum.SE_STARVE_PARTIAL:
                myFoodCurrent = myFoodOriginal;
+               myGameInstance.IsFalconFed = false;
                for (int i = 0; i < myMaxRowCount; ++i)
                {
                   myGridRows[i].myIsDoubleMeal = false;
@@ -2364,7 +2383,7 @@ namespace BarbarianPrince
          --mi.StarveDayNum;
          if (true == mi.Name.Contains("Giant"))
             myFoodCurrent -= 2;
-         else if (true == mi.Name.Contains("Eagle"))
+         else if ( (true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")) )
             myFoodCurrent -= 0;
          else
             myFoodCurrent -= 1;
@@ -2372,7 +2391,7 @@ namespace BarbarianPrince
          {
             if (true == mi.Name.Contains("Giant"))
                myFoodCurrent -= 2;
-            else if (true == mi.Name.Contains("Eagle"))
+            else if ((true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")) )
                myFoodCurrent -= 0;
             else
                myFoodCurrent -= 1;
@@ -2394,7 +2413,7 @@ namespace BarbarianPrince
          ++mi.StarveDayNum;
          if (true == mi.Name.Contains("Giant"))
             myFoodCurrent += 2;
-         else if (true == mi.Name.Contains("Eagle"))
+         else if ((true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")) )
             myFoodCurrent += 0;
          else
             myFoodCurrent += 1;
@@ -2402,7 +2421,7 @@ namespace BarbarianPrince
          {
             if (true == mi.Name.Contains("Giant"))
                myFoodCurrent += 2;
-            else if (true == mi.Name.Contains("Eagle"))
+            else if ( (true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")) )
                myFoodCurrent += 0;
             else
                myFoodCurrent += 1;

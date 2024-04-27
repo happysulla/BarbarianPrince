@@ -261,7 +261,7 @@ namespace BarbarianPrince
       }
       public bool AddNewMount(MountEnum mt = MountEnum.Horse)
       {
-         if ( (true == this.Name.Contains("Eagle")) || (true == this.Name.Contains("Griffon")) ) // cannot add mount to Eagle or Griffon
+         if (true == this.IsFlyer())
          {
             Logger.Log(LogEnum.LE_ERROR, "AddNewMount(): name=" + Name + " cannot have mounts" );
             return false;
@@ -328,7 +328,7 @@ namespace BarbarianPrince
       }
       public bool AddMount(IMapItem mount)
       {
-         if ( (true == this.Name.Contains("Eagle")) || (true == this.Name.Contains("Griffon")) )
+         if (true == this.IsFlyer())
          {
             Logger.Log(LogEnum.LE_ERROR, "AddMount(): name=" + this.Name + " cannot have mounts");
             return false;
@@ -511,11 +511,11 @@ namespace BarbarianPrince
          // This function assume that the victim is carrying its maximum amount
          // which is 10 if riding a horse or not riding
          int loadCanCarry = 0;
-         if (true == Name.Contains("Eagle"))
+         if ( (true == Name.Contains("Eagle")) || (true == Name.Contains("Falcon")) )
          {
             return true;
          }
-         else if (true == Name.Contains("Griffon"))
+         else if ( (true == Name.Contains("Griffon")) || (true == Name.Contains("Harpy")) )
          {
             int maxLoad1 = Utilities.MaxMountLoad;
             if (true == this.IsExhausted)
@@ -994,10 +994,10 @@ namespace BarbarianPrince
       //----------------------------------------------------------------------------
       public int GetMaxFreeLoad()
       {
-         if ((true == this.Name.Contains("Eagle")) || (true == this.IsSunStroke) || (true == this.IsUnconscious))
+         if ((true == this.Name.Contains("Eagle")) || (true == this.Name.Contains("Falcon")) || (true == this.IsSunStroke) || (true == this.IsUnconscious))
             return 0;
          int freeLoad = 0;
-         if (true == this.Name.Contains("Griffon"))
+         if ( (true == this.Name.Contains("Griffon")) || (true == this.Name.Contains("Harpy")) )
          {
             int maxMountLoad = Utilities.MaxMountLoad;
             if (true == this.IsExhausted)
@@ -1026,7 +1026,7 @@ namespace BarbarianPrince
       }
       public int GetFreeLoad()
       {
-         if ( (true == IsKilled) || (true == IsUnconscious) || (true == Name.Contains("Eagle")) || (true == Name.Contains("Griffon")))
+         if ( (true == IsKilled) || (true == IsUnconscious) || (true == this.IsFlyer()) ) // Griffon & Harpy free load counted with rider
             return 0;
          //------------------------------------------
          bool isPreviouslyRiding = this.IsRiding;
@@ -1107,8 +1107,7 @@ namespace BarbarianPrince
       {
          int loadCanCarry = 0;
          //------------------------------------------
-
-         if ((false == this.Name.Contains("Eagle")) && (false == this.Name.Contains("Griffon")))
+         if ( false == this.IsFlyer() )
          {
             if (0 == this.Mounts.Count) // if no mounts, the only way to fly if being carried
             {
@@ -1141,9 +1140,9 @@ namespace BarbarianPrince
          }
          //------------------------------------------
          int maxLoad = 0;
-         if (true == this.Name.Contains("Eagle"))
+         if ( (true == this.Name.Contains("Eagle")) || (true == this.Name.Contains("Falcon")) )
             maxLoad = 0;
-         else if(true == this.Name.Contains("Griffon"))
+         else if ( (true == this.Name.Contains("Griffon")) || (true == this.Name.Contains("Harpy")))
             maxLoad = Utilities.MaxMountLoad;
          else
             maxLoad = Utilities.MaxLoad;
@@ -1171,13 +1170,31 @@ namespace BarbarianPrince
          }
          return loadCanCarry;
       }   // get what load can be carried if flying...this function can return negative which indication something needs to be dropped
+      public bool IsFlyer()
+      {
+         if ( (true == Name.Contains("Eagle")) || (true == Name.Contains("Falcon")) || (true == Name.Contains("Griffon")) || (true == Name.Contains("Harpy")) )
+            return true;
+         return false;
+      }
+      public bool IsFlyingMount()
+      {
+         if ( (true == Name.Contains("Pegasus")) || (true == this.IsFlyingMountCarrier()) )
+            return true;
+         return false;
+      }
+      public bool IsFlyingMountCarrier()
+      {
+         if ( (true == Name.Contains("Griffon")) || (true == Name.Contains("Harpy")) )
+            return true;
+         return false;
+      }
       public void Reset()
       {
          IsKilled = false;
          IsUnconscious = false;
          IsRunAway = false;
          IsMoved = false;
-         if ((false == Name.Contains("Eagle")) && (false == Name.Contains("Griffon")))
+         if ( false == this.IsFlyer() )
          {
             IsFlying = false;
             IsRiding = false;
@@ -1207,7 +1224,7 @@ namespace BarbarianPrince
       {
          IsRunAway = false;
          IsMoved = false;
-         if ((false == Name.Contains("Eagle")) && (false == Name.Contains("Griffon")))
+         if ( false == this.IsFlyer() )
          {
             IsFlying = false;
             IsRiding = false;

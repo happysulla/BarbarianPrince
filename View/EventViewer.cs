@@ -362,6 +362,14 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): OvercastLostCheck() returned false");
                break;
             //-------------------------------------
+            case GameAction.CampfireFalconCheck:
+               EventViewerE107FalconMgr aE107MgrViewer = new EventViewerE107FalconMgr(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);
+               if (true == aE107MgrViewer.CtorError)
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): aE107MgrViewer.CtorError=true");
+               else if (false == aE107MgrViewer.FalconLeaveCheck(ShowE107FalconCheckResult))
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): OvercastLostCheck() returned false");
+               break;
+            //-------------------------------------
             case GameAction.E121SunStroke:
                EventViewerE121SunStrokeMgr aE121SunStrokeMgr = new EventViewerE121SunStrokeMgr(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);
                if (true == aE121SunStrokeMgr.CtorError)
@@ -822,7 +830,7 @@ namespace BarbarianPrince
                bool isAnyPartyMemberMounted = false;
                foreach(IMapItem mi in myGameInstance.PartyMembers)
                {
-                  if ( (true == mi.IsRiding) && (false == mi.Name.Contains("Griffon")) && (false == mi.Name.Contains("Eagle")) )
+                  if ( (true == mi.IsRiding) && (false == mi.IsFlyer()) )
                      isAnyPartyMemberMounted = true;
                }
                if( false == isAnyPartyMemberMounted)
@@ -3788,6 +3796,12 @@ namespace BarbarianPrince
       public bool ShowE106OvercastLostResult()
       {
          GameAction outAction = GameAction.E106OvercastLostEnd;
+         myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
+         return true;
+      }
+      public bool ShowE107FalconCheckResult()
+      {
+         GameAction outAction = GameAction.CampfireFalconCheckEnd;
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }

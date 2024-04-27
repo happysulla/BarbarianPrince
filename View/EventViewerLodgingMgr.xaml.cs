@@ -230,14 +230,16 @@ namespace BarbarianPrince
                return false;
             }
             //-----------------------------------
-            mi.IsRiding = false; // dismount all party members
+            if( false == mi.IsFlyer() )
+            {
+               mi.IsRiding = false; // dismount all party members
+               mi.IsFlying = false;
+            }
             if (null != mi.Rider)
             {
                mi.Rider.Mounts.Remove(mi);
                mi.Rider = null;
             }
-            if ((false == mi.Name.Contains("Eagle")) && (false == mi.Name.Contains("Griffon")))
-               mi.IsFlying = false;
             //-----------------------------------
             if ("Prince" == mi.Name)
                t = mi.Territory;
@@ -1372,7 +1374,7 @@ namespace BarbarianPrince
                myGridRows[i].myResult = DO_NOT_LEAVE;
             else if ((true == mi.Name.Contains("TrueLove")) && (1 == myNumTrueLove)) // If there is only one true love, she will not leave
                myGridRows[i].myResult = DO_NOT_LEAVE;
-            else if (true == mi.Name.Contains("Eagle"))
+            else if ( (true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")) )
                myGridRows[i].myResult = DO_NOT_LEAVE;
             else if (true == myGameInstance.IsMinstrelPlaying)
                myGridRows[i].myResult = DO_NOT_LEAVE;
@@ -1389,7 +1391,7 @@ namespace BarbarianPrince
                IMapItem mi = myGridRows[i].myMapItem;
                if ((true == mi.Name.Contains("Prince")) || (true == mi.IsSpecialist()))
                   roomCost += 1.0;
-               else if (true == mi.Name.Contains("Eagle"))
+               else if ((true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")))
                   roomCost += 0.0;
                else
                   roomCost += 0.5;
@@ -1457,7 +1459,7 @@ namespace BarbarianPrince
                IMapItem mi = myGridRows[i].myMapItem;
                if ((true == mi.Name.Contains("Prince")) || (true == mi.IsSpecialist()))
                   roomCost += 1.0;
-               else if (true == mi.Name.Contains("Eagle"))
+               else if ((true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")))
                   roomCost += 0.0;
                else
                   roomCost += 0.5;
@@ -1465,7 +1467,7 @@ namespace BarbarianPrince
                {
                   if ((true == mi.Name.Contains("Prince")) || (true == mi.IsSpecialist()))
                      roomCostSpent += 1.0;
-                  else if (true == mi.Name.Contains("Eagle"))
+                  else if ( (true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")) )
                      roomCostSpent += 0.0;
                   else
                      roomCostSpent += 0.5;
@@ -1777,7 +1779,7 @@ namespace BarbarianPrince
                {
                   if ((true == mi.Name.Contains("Prince")) || (true == mi.IsSpecialist()))
                      roomCostSpent += 1.0;
-                  else if (true == mi.Name.Contains("Eagle"))
+                  else if ((true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")))
                      roomCostSpent += 0.0;
                   else
                      roomCostSpent += 0.5;

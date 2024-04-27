@@ -174,15 +174,15 @@ namespace BarbarianPrince
             ++i;
          }
          //--------------------------------------------------
-         for( int k=0; k<myMaxRowMemberCount; ++k ) // If this is a Griffon or Eagle, or the mount is a griffon or pegasus, considered flying
+         for( int k=0; k<myMaxRowMemberCount; ++k ) // If this is a Flyer, or the mount is a griffon or pegasus, considered flying
          {
             IMapItem member = myGridRowsMembers[k].myMapItem;
-            if ((true == member.Name.Contains("Griffon")) || (true == member.Name.Contains("Eagle")))
+            if (true == member.IsFlyer())
                myGridRowsMembers[k].myDieRoll = IS_FLYING;
             if( null != myGridRowsMembers[k].myMount )
             {
                IMapItem mount = myGridRowsMembers[k].myMount;
-               if ((true == mount.Name.Contains("Griffon")) || (true == mount.Name.Contains("Pegasus")))
+               if (true == mount.IsFlyingMount())
                   myGridRowsMembers[k].myDieRoll = IS_FLYING;
             }
          }

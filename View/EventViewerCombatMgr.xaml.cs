@@ -449,6 +449,8 @@ namespace BarbarianPrince
                myNonCombatants.Add(mi);
             else if ((true == mi.Name.Contains("Minstrel")) && (false == myIsBoarFight) && (null == myCatVictim) && (false == myIsBearFight)) // minstrel do not fight in combat
                myNonCombatants.Add(mi);
+            else if ((true == mi.Name.Contains("Falcon")) && (false == myIsBoarFight) && (null == myCatVictim) && (false == myIsBearFight)) // minstrel do not fight in combat
+               myNonCombatants.Add(mi);
             else if ( (true == myGameInstance.IsAssassination) && (false == mi.Name.Contains("Prince")) ) // only the Prince fights in assassination attempt
                myNonCombatants.Add(mi);
             else if ((true == myIsKnightOnBridge) && (false == mi.Name.Contains("Prince"))) // only the Prince fights in knight on bridge fight
@@ -3533,7 +3535,7 @@ namespace BarbarianPrince
                   break;
                if ((true == attacker.IsKilled) || (true == attacker.IsUnconscious)) // do not assign direction if attacker is MIA or KIA
                   break;
-               if ((true == attacker.Name.Contains("Slave")) || ((true == attacker.Name.Contains("TrueLove")) && (0 == attacker.Combat)) || (true == attacker.Name.Contains("Porter"))) // do not assign direction if non-combatant
+               if ((true == attacker.Name.Contains("Slave")) || ((true == attacker.Name.Contains("TrueLove")) && (0 == attacker.Combat)) || (true == attacker.Name.Contains("Porter")) || (true == attacker.Name.Contains("Falcon"))) // do not assign direction if non-combatant
                   break;
                if ((true == attacker.Name.Contains("Minstrel")) && (false == myIsMinstelFight) ) // do not assign direction if non-combatant
                   break;
@@ -3566,7 +3568,7 @@ namespace BarbarianPrince
                }
                if ((true == attacker.IsKilled) || (true == attacker.IsUnconscious))
                   break;
-               if ((true == attacker.Name.Contains("Slave")) || ((true == attacker.Name.Contains("TrueLove")) && (0 == attacker.Combat)) || (true == attacker.Name.Contains("Porter"))) // do not assign direction if non-combatant
+               if ((true == attacker.Name.Contains("Slave")) || ((true == attacker.Name.Contains("TrueLove")) && (0 == attacker.Combat)) || (true == attacker.Name.Contains("Porter")) || (true == attacker.Name.Contains("Falcon"))) // do not assign direction if non-combatant
                   break;
                if ((true == attacker.Name.Contains("Minstrel")) && (false == myIsMinstelFight)) // do not assign direction if non-combatant
                   break;
