@@ -161,9 +161,9 @@ namespace BarbarianPrince
          {
             foreach (IMapItem mi in myGameInstance.PartyMembers)
             {
-               if( false == mi.RemoveUnwingedMounts())
+               if( false == mi.RemoveNonFlyingMounts())
                {
-                  Logger.Log(LogEnum.LE_ERROR, "TransportLoad(): RemoveUnwingedMounts() returned false");
+                  Logger.Log(LogEnum.LE_ERROR, "TransportLoad(): RemoveNonFlyingMounts() returned false");
                   return false;
                }
                if (true == mi.IsFlyer())

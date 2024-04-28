@@ -4078,6 +4078,8 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                }
                break;
+            case GameAction.E109PegasusCapture:
+               break;
             case GameAction.E121SunStroke:
             case GameAction.E121SunStrokeEnd:
                break;

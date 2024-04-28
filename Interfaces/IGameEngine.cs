@@ -285,6 +285,7 @@ namespace BarbarianPrince
       E105ViolentWeather,
       E107FalconAdd,
       E107FalconNoFeed,
+      E109PegasusCapture,
       E106OvercastLost,
       E106OvercastLostEnd,
       E120Exhausted,

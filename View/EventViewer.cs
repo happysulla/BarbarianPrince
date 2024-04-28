@@ -362,12 +362,12 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): OvercastLostCheck() returned false");
                break;
             //-------------------------------------
-            case GameAction.CampfireFalconCheck:
-               EventViewerE107FalconMgr aE107MgrViewer = new EventViewerE107FalconMgr(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);
-               if (true == aE107MgrViewer.CtorError)
-                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): aE107MgrViewer.CtorError=true");
-               else if (false == aE107MgrViewer.FalconLeaveCheck(ShowE107FalconCheckResult))
-                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): OvercastLostCheck() returned false");
+            case GameAction.E109PegasusCapture:
+               EventViewerE109PegasusMgr aE109MgrViewer = new EventViewerE109PegasusMgr(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);
+               if (true == aE109MgrViewer.CtorError)
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): aE109MgrViewer.CtorError=true");
+               else if (false == aE109MgrViewer.PegasusCaptureCheck(ShowE109PegasusCapture))
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): PegasusCaptureCheck() returned false");
                break;
             //-------------------------------------
             case GameAction.E121SunStroke:
@@ -418,6 +418,14 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): CheckPrisonBreak() returned false");
                break;
             //-------------------------------------
+            case GameAction.E212TempleCurse:
+               EventViewerE212CurseMgr aE212TempleCurse = new EventViewerE212CurseMgr(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);
+               if (true == aE212TempleCurse.CtorError)
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): aE212TempleCurse.CtorError=true");
+               else if (false == aE212TempleCurse.CurseCheck(ShowE212TempleCurse))
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): DisgustCheck() returned false");
+               break;
+            //-------------------------------------
             case GameAction.Hunt:
                EventViewerHuntMgr aHuntMgrViewer = new EventViewerHuntMgr(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);
                if (true == aHuntMgrViewer.CtorError)
@@ -450,6 +458,14 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): MountDieCheck() returned false");
                break;
             //-------------------------------------
+            case GameAction.CampfireFalconCheck:
+               EventViewerE107FalconMgr aE107MgrViewer = new EventViewerE107FalconMgr(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);
+               if (true == aE107MgrViewer.CtorError)
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): aE107MgrViewer.CtorError=true");
+               else if (false == aE107MgrViewer.FalconLeaveCheck(ShowE107FalconCheckResult))
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): OvercastLostCheck() returned false");
+               break;
+            //-------------------------------------
             case GameAction.CampfireStarvationCheck:
                EventViewerStarvationMgr aStarvationMgrViewer = new EventViewerStarvationMgr(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);
                if (true == aStarvationMgrViewer.CtorError)
@@ -457,6 +473,7 @@ namespace BarbarianPrince
                else if (false == aStarvationMgrViewer.FeedParty(ShowResultsFeeding))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): FeedParty() returned false");
                break;
+            //-------------------------------------
             case GameAction.CampfireLodgingCheck:
                EventViewerLodgingMgr aLodgingMgrViewer = new EventViewerLodgingMgr(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);
                if (true == aLodgingMgrViewer.CtorError)
@@ -464,6 +481,7 @@ namespace BarbarianPrince
                else if (false == aLodgingMgrViewer.LodgeParty(ShowResultsLodging))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): LodgeParty() returned false");
                break;
+            //-------------------------------------
             case GameAction.CampfireTrueLoveCheck:
                EventViewerE228Mgr aE228MgrViewer = new EventViewerE228Mgr(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);
                if (true == aE228MgrViewer.CtorError)
@@ -471,6 +489,7 @@ namespace BarbarianPrince
                if (false == aE228MgrViewer.CheckTrueLoveReturn(ShowTrueLoveCheck))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): CheckTrueLoveReturn() returned false");
                break;
+            //-------------------------------------
             case GameAction.CampfireLoadTransport:
                EventViewerTransportMgr aTransportMgrViewer = new EventViewerTransportMgr(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr);
                if (true == aTransportMgrViewer.CtorError)
@@ -478,18 +497,12 @@ namespace BarbarianPrince
                else if (false == aTransportMgrViewer.TransportLoad(ShowTransport))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): TransportLoad() returned false");
                break;
+            //-------------------------------------
             case GameAction.CampfireDisgustCheck:
                EventViewerE010Mgr aE010MgrViewer = new EventViewerE010Mgr(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);
                if (true == aE010MgrViewer.CtorError)
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): aE010MgrViewer.CtorError=true");
                else if (false == aE010MgrViewer.DisgustCheck(ShowE010DisgustCheck))
-                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): DisgustCheck() returned false");
-               break;
-            case GameAction.E212TempleCurse:
-               EventViewerE212CurseMgr aE212TempleCurse = new EventViewerE212CurseMgr(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);
-               if (true == aE212TempleCurse.CtorError)
-                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): aE212TempleCurse.CtorError=true");
-               else if (false == aE212TempleCurse.CurseCheck(ShowE212TempleCurse))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): DisgustCheck() returned false");
                break;
             //-------------------------------------
@@ -3805,6 +3818,12 @@ namespace BarbarianPrince
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
+      public bool ShowE109PegasusCapture()
+      {
+         GameAction outAction = GameAction.EncounterEnd;
+         myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
+         return true;
+      }
       public bool ShowE121SunStrokeCheckResult(bool isSunStroke, bool isMountDeath)
       {
          GameAction outAction = GameAction.Error;
@@ -4717,6 +4736,10 @@ namespace BarbarianPrince
                               action = GameAction.EncounterEnd;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
+                           case "PegasusCapture":
+                              action = GameAction.E109PegasusCapture;
+                              myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              break;
                            case "Pixie":
                               action = GameAction.EncounterStart;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);

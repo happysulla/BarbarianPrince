@@ -754,12 +754,12 @@ namespace BarbarianPrince
          foreach (IMapItem mount in adbandonedMounts)
             this.Mounts.Remove(mount.Name);
       }
-      public bool RemoveUnwingedMounts()
+      public bool RemoveNonFlyingMounts()
       {
          IMapItems adbandonedMounts = new MapItems();
          foreach (IMapItem mount in this.Mounts)
          {
-            if (true == mount.Name.Contains("Horse"))
+            if ( (true == mount.Name.Contains("Horse")) || (true == mount.IsExhausted) || (0 < mount.StarveDayNum) )
                adbandonedMounts.Add(mount);
          }
          foreach (IMapItem mount in adbandonedMounts)
@@ -784,7 +784,7 @@ namespace BarbarianPrince
             }
             else
             {
-               Logger.Log(LogEnum.LE_ERROR, "RemoveUnwingedMounts(): unknown mount=" + mount.Name);
+               Logger.Log(LogEnum.LE_ERROR, "RemoveNonFlyingMounts(): unknown mount=" + mount.Name);
                return false;
             }
          }

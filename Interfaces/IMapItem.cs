@@ -82,7 +82,7 @@ namespace BarbarianPrince
       void SetMountState(IMapItem mount);
       void RemoveMountedMount();
       void RemoveUnmountedMounts();
-      bool RemoveUnwingedMounts();
+      bool RemoveNonFlyingMounts();
       bool RemoveMountWithLoad(IMapItem deadMount);
       void SetWounds(int wounds, int poisonWounds);
       void HealWounds(int wounds, int poisonWound);

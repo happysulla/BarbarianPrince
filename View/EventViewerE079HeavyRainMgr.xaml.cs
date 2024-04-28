@@ -61,11 +61,8 @@ namespace BarbarianPrince
       private int myRollResultColNum = -1;
       private bool myIsRollInProgress = false;
       private bool myIsAnyLost = false;
-      private bool myIsFirstLost = false;
       //---------------------------------------------
-      private readonly SolidColorBrush mySolidColorBrushBlack = new SolidColorBrush() { Color = Colors.Black };
       private readonly FontFamily myFontFam = new FontFamily("Tahoma");
-      private readonly FontFamily myFontFam1 = new FontFamily("Courier New");
       //-----------------------------------------------------------------------------------------
       public EventViewerE079HeavyRainMgr(IGameInstance gi, Canvas c, ScrollViewer sv, RuleDialogViewer rdv, IDieRoller dr)
       {
@@ -115,7 +112,6 @@ namespace BarbarianPrince
       }
       public bool ColdCheck(EndCatchColdCheck callback)
       {
-         myIsFirstLost = false;
          //--------------------------------------------------
          if (null == myGameInstance.PartyMembers)
          {
@@ -439,15 +435,6 @@ namespace BarbarianPrince
          }
          else if (4 == myRollResultColNum) // mount may die
          {
-            if( false == myIsFirstLost )
-            {
-               dieRoll = 5; // <cgs> TEST
-               myIsFirstLost = true;
-            }
-            else
-            {
-               dieRoll = 2; // <cgs> TEST
-            }
             myGridRows[i].myDieRollMount = dieRoll;
             if (4 < dieRoll)
             {

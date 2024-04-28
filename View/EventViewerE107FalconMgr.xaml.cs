@@ -36,7 +36,7 @@ namespace BarbarianPrince
             myDieRoll = Utilities.NO_RESULT;
          }
       };
-      public enum E073Enum
+      public enum E107Enum
       {
          FALCON_CHECK,
          SHOW_RESULTS,
@@ -45,7 +45,7 @@ namespace BarbarianPrince
       //---------------------------------------------
       public bool CtorError { get; } = false;
       //---------------------------------------------
-      private E073Enum myState = E073Enum.FALCON_CHECK;
+      private E107Enum myState = E107Enum.FALCON_CHECK;
       private EndFalconCheck myCallback = null;
       private int myMaxRowCount = 0;
       private GridRow[] myGridRows = null;
@@ -124,7 +124,7 @@ namespace BarbarianPrince
          }
          //--------------------------------------------------
          myGridRows = new GridRow[Utilities.MAX_GRID_ROW];
-         myState = E073Enum.FALCON_CHECK;
+         myState = E107Enum.FALCON_CHECK;
          myIsRollInProgress = false;
          myDieRollRowNum = 0;
          myCallback = callback;
@@ -172,7 +172,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "UpdateGrid(): UpdateEndState() returned false");
             return false;
          }
-         if (E073Enum.END == myState)
+         if (E107Enum.END == myState)
             return true;
          if (false == UpdateUserInstructions())
          {
@@ -193,7 +193,7 @@ namespace BarbarianPrince
       }
       private bool UpdateEndState()
       {
-         if (E073Enum.END == myState)
+         if (E107Enum.END == myState)
          {
             if (null == myCallback)
             {
@@ -232,7 +232,7 @@ namespace BarbarianPrince
          //---------------------------------
          switch (myState)
          {
-            case E073Enum.FALCON_CHECK:
+            case E107Enum.FALCON_CHECK:
                if( true == isAnyDieRollNeeded )
                {
                   if (1 < myMaxRowCount)
@@ -245,7 +245,7 @@ namespace BarbarianPrince
                   myTextBlockInstructions.Inlines.Add(new Run(" Click campfire to continue or check box to feed"));
                }
                break;
-            case E073Enum.SHOW_RESULTS:
+            case E107Enum.SHOW_RESULTS:
                myTextBlockInstructions.Inlines.Add(new Run("Click campfire to continue."));
                break;
             default:
@@ -274,13 +274,13 @@ namespace BarbarianPrince
          //---------------------------------
          switch (myState)
          {
-            case E073Enum.FALCON_CHECK:
+            case E107Enum.FALCON_CHECK:
                if( true == isAnyDieRollNeeded )
                   myStackPanelAssignable.Children.Add(r0); // do not show campfire if need to make a roll
                else
                   myStackPanelAssignable.Children.Add(img7);
                break;
-            case E073Enum.SHOW_RESULTS:
+            case E107Enum.SHOW_RESULTS:
                myStackPanelAssignable.Children.Add(img7);
                break;
             default:
@@ -399,12 +399,12 @@ namespace BarbarianPrince
             return;
          }
          myGridRows[i].myDieRoll = dieRoll;
-         myState = E073Enum.SHOW_RESULTS;
+         myState = E107Enum.SHOW_RESULTS;
          for (int j = 0; j < myMaxRowCount; ++j)
          {
             IMapItem mi1 = myGridRows[j].myMapItem;
             if (Utilities.NO_RESULT == myGridRows[j].myDieRoll)
-               myState = E073Enum.FALCON_CHECK;
+               myState = E107Enum.FALCON_CHECK;
          }
          //-----------------------------------------------------------------
          if (false == UpdateGrid())
@@ -414,9 +414,9 @@ namespace BarbarianPrince
       //-----------------------------------------------------------------------------------------
       private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
       {
-         if (E073Enum.SHOW_RESULTS == myState)
+         if (E107Enum.SHOW_RESULTS == myState)
          {
-            myState = E073Enum.END;
+            myState = E107Enum.END;
             if (false == UpdateGrid())
                Logger.Log(LogEnum.LE_ERROR, "Grid_MouseDown(): UpdateGrid() return false");
             return;
@@ -435,7 +435,7 @@ namespace BarbarianPrince
                      {
                         if ("Campfire" == img0.Name)
                         {
-                           myState = E073Enum.END;
+                           myState = E107Enum.END;
                            if (false == UpdateGrid())
                               Logger.Log(LogEnum.LE_ERROR, "Grid_MouseDown(): UpdateGrid() return false");
                            return;
@@ -485,12 +485,12 @@ namespace BarbarianPrince
          myFoodCurrent -= 1;
          //------------------------------------
          myGridRows[i].myDieRoll = Utilities.NO_RESULT;
-         myState = E073Enum.SHOW_RESULTS;
+         myState = E107Enum.SHOW_RESULTS;
          for (int j = 0; j < myMaxRowCount; ++j)
          {
             IMapItem mi1 = myGridRows[j].myMapItem;
             if (Utilities.NO_RESULT == myGridRows[j].myDieRoll)
-               myState = E073Enum.FALCON_CHECK;
+               myState = E107Enum.FALCON_CHECK;
          }
          //------------------------------------
          if (false == UpdateGrid())
@@ -511,12 +511,12 @@ namespace BarbarianPrince
          myFoodCurrent += 1;
          //------------------------------------
          myGridRows[i].myDieRoll = FALCON_NOT_FED;
-         myState = E073Enum.SHOW_RESULTS;
+         myState = E107Enum.SHOW_RESULTS;
          for (int j = 0; j < myMaxRowCount; ++j)
          {
             IMapItem mi1 = myGridRows[j].myMapItem;
             if (Utilities.NO_RESULT == myGridRows[j].myDieRoll)
-               myState = E073Enum.FALCON_CHECK;
+               myState = E107Enum.FALCON_CHECK;
          }
          //------------------------------------
          if (false == UpdateGrid())

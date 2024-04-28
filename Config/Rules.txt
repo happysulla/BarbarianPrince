@@ -137,6 +137,11 @@ r107	"<Bold>r107 Falcon Scout</Bold>
 <LineBreak/><LineBreak/>At the evening meal each day, if you offer the falcon a food unit, roll the die. If you roll anyhing other than a six, the falcon will remain throughout tomorrow with your party as a guide.
 <LineBreak/><LineBreak/>
                                         <InlineUIContainer><Image Source='../../Images/Falcon.gif' Height='188' Width='250'></Image></InlineUIContainer>"
+r109	"<Bold>r109 Wild Pegasus</Bold>
+<LineBreak/><LineBreak/>You encounter a wild Pegasus. Each character in your party is allowed one attempt to capture it.
+<LineBreak/><LineBreak/>Roll one die. If the result is 5 plus, the character captures the Pegasus. You may add it as a winged mount to your party.
+<LineBreak/><LineBreak/>
+                                 <InlineUIContainer><Image Source='../../Images/Pegasus.gif' Height='300' Width='300'></Image></InlineUIContainer>"
 r121	"<Bold>r121 Sunstroke</Bold>
 <LineBreak/><LineBreak/>The heat of the sun is unexpected. Roll one die for each character and mount in your party. A six means he or it collapses from the sunstroke. Mounts that collapse must be left to die.
 <LineBreak/><LineBreak/>Characters that collapse must be carried if possible even if that means other loads must be abandoned per

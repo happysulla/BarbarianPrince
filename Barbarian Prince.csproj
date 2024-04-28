@@ -138,6 +138,9 @@
     <Compile Include="View\EventViewerE107FalconMgr.xaml.cs">
       <DependentUpon>EventViewerE107FalconMgr.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EventViewerE109PegasusMgr.xaml.cs">
+      <DependentUpon>EventViewerE109PegasusMgr.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EventViewerE121SunStrokeMgr.xaml.cs">
       <DependentUpon>EventViewerE121SunStrokeMgr.xaml</DependentUpon>
     </Compile>
@@ -325,6 +328,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EventViewerE107FalconMgr.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EventViewerE109PegasusMgr.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

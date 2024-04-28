@@ -34,7 +34,7 @@
 		<IsEnabled value="False" />
 	</Option>
 	<Option value="ForceAirEvent">
-		<IsEnabled value="False" />
+		<IsEnabled value="True" />
 	</Option>
 	<!--===========================-->
 	<Option value="ForceNoCrossEvent">
