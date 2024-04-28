@@ -1118,24 +1118,17 @@ namespace BarbarianPrince
             }
          }
          //------------------------------------------
-
          int i = 0;
          IMapItem mountedAnimal = null;
          foreach (IMapItem mount in this.Mounts)
          {
-            if ( (0 != mount.StarveDayNum) || (true == mount.IsExhausted) || (true == mount.Name.Contains("Horse")) ) // any non-flying mounts or horses means cannot fly
+            if ( (0 != mount.StarveDayNum) || (true == mount.IsExhausted) || (false == mount.IsFlyingMount()) ) // any non-flying mounts or horses means cannot fly
                return NOT_FLYING;
-            if ( (true == mount.Name.Contains("Pegasus")) || (true == mount.Name.Contains("Griffon")) ) 
+            loadCanCarry += Utilities.MaxMountLoad;
+            if ( 0 == i )
             {
-               if( 0 == i )
-               {
-                  mountedAnimal = mount;
-                  loadCanCarry += (Utilities.MaxMountLoad - Utilities.PersonBurden);
-               }
-               else
-               {
-                  loadCanCarry += Utilities.MaxMountLoad;
-               }
+               mountedAnimal = mount;
+               loadCanCarry -= - Utilities.PersonBurden;
             }
          }
          //------------------------------------------

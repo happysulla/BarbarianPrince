@@ -493,13 +493,16 @@ namespace BarbarianPrince
             Label labelDailyActions = new Label() { FontSize = 12, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = "DAILY ACTIONS" };
             myStackPanelDailyActions.Children.Add(labelDailyActions);
             //------------------------------------------------------------------
-            if ((0 <  gi.Prince.Mounts.Count) && (false == gi.IsHeavyRainDismount) )
+            if ((0 <  gi.Prince.Mounts.Count) && (false == gi.IsHeavyRainDismount) ) // if choose to dismount due to heavy rains, do not fly
             {
                IMapItem mount = gi.Prince.Mounts[0];
-               if( (true == mount.Name.Contains("Pegasus")) || (true == mount.Name.Contains("Griffon")) )
+               if( (0 == mount.StarveDayNum ) && ( false == mount.IsExhausted ) ) // mount cannot fly if starving or exhausted
                {
-                  myStackPanelDailyActions.Children.Add(myButtonDailyAcions[12]);    // air travel
-                  myStackPanelDailyActions.Visibility = Visibility.Visible;
+                  if ((true == mount.Name.Contains("Pegasus")) || (true == mount.Name.Contains("Griffon")))
+                  {
+                     myStackPanelDailyActions.Children.Add(myButtonDailyAcions[12]);    // air travel
+                     myStackPanelDailyActions.Visibility = Visibility.Visible;
+                  }
                }
             }
             if (RaftEnum.RE_RAFT_SHOWN == gi.RaftState) 

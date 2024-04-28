@@ -311,7 +311,26 @@ namespace BarbarianPrince
       }
       protected bool SetCampfireFalconCheckState(IGameInstance gi, ref GameAction action)
       {
-         if (true == gi.IsFalconFed) // If there is a fed falcon in the party, see if can feed with food
+         if( true == gi.IsFalconInParty())
+         {
+            if( 0 == gi.GetFoods()) // if no food to feed falcon(s), remove from party
+            {
+               gi.IsFalconFed = false;
+               IMapItems toRemoveFalcons = new MapItems();
+               foreach(IMapItem mi in gi.PartyMembers)
+               {
+                  if( true == mi.Name.Contains("Falcon"))
+                     toRemoveFalcons.Add(mi);
+               }
+               foreach (IMapItem mi in toRemoveFalcons)
+                  gi.RemoveAbandonerInParty(mi);
+            }
+         }
+         else
+         {
+            gi.IsFalconFed = false;
+         }
+         if (true == gi.IsFalconFed)  // If there is a fed falcon in the party, see if can feed with food
          {
             gi.IsFalconFed = false;
             gi.IsGridActive = true;

@@ -384,15 +384,15 @@ namespace BarbarianPrince
          AddCompanion(falcon1);
          IsFalconFed = true;
          //---------------------
-         string falconName2 = "Falcon" + Utilities.MapItemNum.ToString();
-         ++Utilities.MapItemNum;
-         IMapItem falcon2 = new MapItem(falconName2, 1.0, false, false, false, "c82Falcon", "c82Falcon", Prince.Territory, 0, 0, 0);
-         falcon2.IsFlying = true;
-         falcon2.IsRiding = true;
-         falcon2.IsGuide = true;
-         falcon2.GuideTerritories = Territories;
-         AddCompanion(falcon2);
-         IsFalconFed = true;
+         //string falconName2 = "Falcon" + Utilities.MapItemNum.ToString(); // add second falcon
+         //++Utilities.MapItemNum;
+         //IMapItem falcon2 = new MapItem(falconName2, 1.0, false, false, false, "c82Falcon", "c82Falcon", Prince.Territory, 0, 0, 0);
+         //falcon2.IsFlying = true;
+         //falcon2.IsRiding = true;
+         //falcon2.IsGuide = true;
+         //falcon2.GuideTerritories = Territories;
+         //AddCompanion(falcon2);
+         //IsFalconFed = true;
          //---------------------
          //string dwarfName = "Dwarf" + Utilities.MapItemNum.ToString();
          //++Utilities.MapItemNum;
@@ -444,17 +444,17 @@ namespace BarbarianPrince
          //string merchantName = "Merchant" + Utilities.MapItemNum.ToString();
          //++Utilities.MapItemNum;
          //IMapItem merchant = new MapItem(merchantName, 1.0, false, false, false, "Negotiator1", "Negotiator1", Prince.Territory, 10, 2, 0);
-         ////merchant.IsFugitive = true;
+         //merchant.IsFugitive = true;
          //merchant.Food = 5;
-         ////merchant.AddNewMount();
+         //merchant.AddNewMount();
          //merchant.AddNewMount(MountEnum.Pegasus); // flying
          //merchant.AddNewMount(MountEnum.Pegasus);
-         ////merchant.IsGuide = true;
-         ////foreach (string adj in startingT.Adjacents)
-         ////{
-         ////   ITerritory t = Territories.Find(adj);
-         ////   merchant.GuideTerritories.Add(t);
-         ////}
+         //merchant.IsGuide = true;
+         //foreach (string adj in startingT.Adjacents)
+         //{
+         //   ITerritory t = Territories.Find(adj);
+         //   merchant.GuideTerritories.Add(t);
+         //}
          //AddCompanion(merchant);
          //IsMerchantWithParty = true;
          //---------------------
@@ -1462,6 +1462,15 @@ namespace BarbarianPrince
             if ((true == mi.Name.Contains("Monk")) && (false == mi.IsUnconscious))
                return true;
             if ((true == mi.Name.Contains("Priest")) && (false == mi.IsUnconscious))
+               return true;
+         }
+         return false;
+      }
+      public bool IsFalconInParty()
+      {
+         foreach (IMapItem mi in PartyMembers)
+         {
+            if ( true == mi.Name.Contains("Falcon") )
                return true;
          }
          return false;

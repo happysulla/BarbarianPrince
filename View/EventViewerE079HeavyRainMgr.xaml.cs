@@ -446,7 +446,7 @@ namespace BarbarianPrince
             }
             else
             {
-               dieRoll = 1; // <cgs> TEST
+               dieRoll = 2; // <cgs> TEST
             }
             myGridRows[i].myDieRollMount = dieRoll;
             if (4 < dieRoll)

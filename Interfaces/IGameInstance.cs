@@ -222,6 +222,7 @@ namespace BarbarianPrince
       bool IsSpecialistInParty();
       bool IsMagicInParty(IMapItems mapItems = null);
       bool IsReligionInParty(IMapItems mapItems = null);
+      bool IsFalconInParty();
       bool IsMonkInParty();
       bool IsLooterInParty();
       bool IsPixieLoverInParty();
