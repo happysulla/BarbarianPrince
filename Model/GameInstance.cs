@@ -355,10 +355,11 @@ namespace BarbarianPrince
          //AddCompanion(wizard);
          //IsWizardJoiningParty = false;
          //---------------------
-         //string magicianName = "Magician" + Utilities.MapItemNum.ToString();
-         //++Utilities.MapItemNum;
-         //IMapItem magician = new MapItem(magicianName, 1.0, false, false, false, "c16Magician", "c16Magician", Prince.Territory, 5, 5, 0);
-         //AddCompanion(magician);
+         string magicianName = "Magician" + Utilities.MapItemNum.ToString();
+         ++Utilities.MapItemNum;
+         IMapItem magician = new MapItem(magicianName, 1.0, false, false, false, "c16Magician", "c16Magician", Prince.Territory, 5, 5, 0);
+         magician.AddNewMount(MountEnum.Pegasus); // flying
+         AddCompanion(magician);
          ////---------------------
          //string monkName = "Monk" + Utilities.MapItemNum.ToString();
          //++Utilities.MapItemNum;

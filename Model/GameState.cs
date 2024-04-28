@@ -3623,13 +3623,22 @@ namespace BarbarianPrince
                gi.EncounteredMembers.Add(huntingCat);
                break;
             case GameAction.E077HerdCapture: // herd of wild horses
+               if (true == gi.IsAirborne) // if this is encountered when airborne, need to drop to ground to train horses
+                  gi.IsAirborne = false;
                foreach (IMapItem e077Mi in gi.PartyMembers)
-                  e077Mi.AddNewMount();
+               {
+                  if (true == e077Mi.Name.Contains("Falcon"))
+                     continue;
+                  if (true == e077Mi.IsFlyer())
+                     gi.Prince.AddNewMount();
+                  else
+                     e077Mi.AddNewMount();
+               }
                if (false == gi.IsMagicInParty())
                {
                   gi.IsTrainHorse = true;
-                  if (GamePhase.Travel == gi.SunriseChoice)
-                     gi.SunriseChoice = GamePhase.Encounter;  // must spend next day training horses
+                  Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateEncounter.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
+                  gi.Prince.MovementUsed = gi.Prince.Movement; // need to stop to train horses
                }
                if (false == EncounterEnd(gi, ref action))
                {
@@ -6858,6 +6867,21 @@ namespace BarbarianPrince
                gi.EncounteredMembers.Add(griffon);
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
+            case "e101a": // harpy
+            case "e101b": // harpy
+            case "e101c": // harpy
+               gi.EventStart = "e101";  // assign for loot purposes
+               gi.EncounteredMembers.Clear();
+               string harpyName = "Harpy" + Utilities.MapItemNum.ToString();
+               ++Utilities.MapItemNum;
+               IMapItem harpy = new MapItem(harpyName, 1.0, false, false, false, "c83Harpy", "c83Harpy", princeTerritory, 4, 5, 4);
+               if (true == isEasyMonstersOption.IsEnabled)
+                  harpy = new MapItem(harpyName, 1.0, false, false, false, "c83Harpy", "c83Harpy", princeTerritory, 1, 1, 4);
+               harpy.IsFlying = true;
+               harpy.IsRiding = true;
+               gi.EncounteredMembers.Add(harpy);
+               gi.DieRollAction = GameAction.EncounterRoll;
+               break;
             case "e105":
                gi.DieResults[key][0] = dieRoll;
                break;
@@ -7439,6 +7463,7 @@ namespace BarbarianPrince
                gi.AddSpecialItem(SpecialEnum.RocBeak); // helps in Count Drogat
                break;
             case "e100": break; // griffon
+            case "e101": break; // harpy 
             case "e108": break; // hawkmen 
             case "e112": // defeated eagles
                if (true == autoWealthOption.IsEnabled)  // automatically perform wealth code rolls if enabled.
@@ -9957,6 +9982,51 @@ namespace BarbarianPrince
                   case 4: gi.EventDisplayed = gi.EventActive = "e306"; break;
                   case 5: gi.EventDisplayed = gi.EventActive = "e306"; break;
                   case 6: gi.EventDisplayed = gi.EventActive = "e308"; break;
+                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+               }
+               break;
+            case "e101a": // talk to harpy
+               switch (dieRoll) // Based on the die roll, implement the correct screen
+               {
+                  case 1: gi.EventDisplayed = gi.EventActive = "e342"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e342"][0] = Utilities.NO_RESULT; break; // inquiry  
+                  case 2: gi.EventDisplayed = gi.EventActive = "e329"; gi.DieRollAction = GameAction.EncounterRoll; break; // pass charm
+                  case 3: case 4: gi.EventDisplayed = gi.EventActive = "e340"; gi.DieRollAction = GameAction.EncounterRoll; break;  // looters
+                  case 5: gi.EventDisplayed = gi.EventActive = "e308"; break;         // possible surprised
+                  case 6: gi.EventDisplayed = gi.EventActive = "e310"; break;         // surprised
+                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+               }
+               for (int i = 0; i < 3; ++i)
+                  gi.DieResults[key][i] = Utilities.NO_RESULT;
+               break;
+            case "e101b": // evade to harpy
+               switch (dieRoll) // Based on the die roll, implement the correct screen
+               {
+                  case 1:
+                     if (0 == numFlying)                                 // no escape
+                        gi.EventDisplayed = gi.EventActive = "e313b";
+                     else if (numFlying < gi.PartyMembers.Count)         // partial escape
+                        gi.EventDisplayed = gi.EventActive = "e313a";
+                     else                                                // full escape
+                        gi.EventDisplayed = gi.EventActive = "e313c";
+                     break;
+                  case 2: gi.EventDisplayed = gi.EventActive = "e325"; break;                                               // pass with dignity
+                  case 3: gi.EventDisplayed = gi.EventActive = "e326"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass suspiciously
+                  case 4: gi.EventDisplayed = gi.EventActive = "e327"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass dummies
+                  case 5: gi.EventDisplayed = gi.EventActive = "e328"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass rough
+                  case 6: gi.EventDisplayed = gi.EventActive = "e329"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass charm
+                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+               }
+               break;
+            case "e101c": // fight harpy
+               action = GameAction.UpdateEventViewerActive;
+               switch (dieRoll) // Based on the die roll, implement the attack case
+               {
+                  case 1: gi.EventDisplayed = gi.EventActive = "e302"; break;
+                  case 2: gi.EventDisplayed = gi.EventActive = "e304"; break;
+                  case 3: gi.EventDisplayed = gi.EventActive = "e305"; break;
+                  case 4: gi.EventDisplayed = gi.EventActive = "e305"; break;
+                  case 5: gi.EventDisplayed = gi.EventActive = "e306"; break;
+                  case 6: gi.EventDisplayed = gi.EventActive = "e309"; break;
                   default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
                }
                break;

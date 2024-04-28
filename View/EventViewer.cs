@@ -1931,6 +1931,7 @@ namespace BarbarianPrince
                }
                break;
             case "e100a": // e100a
+            case "e101a": // e100a
                ReplaceTextForLuckyCharm(gi); // e100a
                break;
             case "e105a":  // storm clouds
@@ -5388,6 +5389,7 @@ namespace BarbarianPrince
                   case "e071b":
                   case "e099a":
                   case "e100b":
+                  case "e101b":
                   case "e112b":
                   case "e118b":
                      action = GameAction.EncounterStart;
@@ -5444,6 +5446,7 @@ namespace BarbarianPrince
                   case "e071":
                   case "e099":
                   case "e100":
+                  case "e101":
                   case "e112":
                   case "e118":
                      myGameInstance.EventDisplayed = myGameInstance.EventActive = name;
@@ -5603,6 +5606,7 @@ namespace BarbarianPrince
                   case "e071a":
                   case "e081a":
                   case "e100a":
+                  case "e101a":
                   case "e118a":
                      action = GameAction.EncounterStart;
                      break;
