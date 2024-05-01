@@ -317,7 +317,11 @@ namespace BarbarianPrince
          myState = E109Enum.SHOW_RESULTS;
          if (  4 < dieRoll ) // if die roll less than five, continue to roll until everybody gets a chance
          {
-            myGameInstance.AddNewMountToParty(MountEnum.Pegasus);
+            if (false == myGameInstance.AddNewMountToParty(MountEnum.Pegasus))
+            {
+               Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): AddNewMountToParty() return false for dr=" + dieRoll);
+               return;
+            }
             myIsPegasusCaptured = true;
          }
          else

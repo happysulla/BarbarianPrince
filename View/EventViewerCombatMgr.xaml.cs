@@ -1343,7 +1343,7 @@ namespace BarbarianPrince
                      myCapturedPossessions.Add(SpecialEnum.TrollSkin);
                   if (true == mi.Name.Contains("Roc"))  // e099 - Roc Beaks worth money
                      myCapturedPossessions.Add(SpecialEnum.RocBeak);
-                  if (true == mi.Name.Contains("Griffon"))  // e100 - Roc Beaks worth money
+                  if (true == mi.Name.Contains("Griffon"))  // e100 - Griffon Claws worth money
                      myCapturedPossessions.Add(SpecialEnum.GriffonClaws);
                }
                //-------------------------------
@@ -4340,7 +4340,7 @@ namespace BarbarianPrince
                      myCapturedPossessions.Add(SpecialEnum.TrollSkin);
                   if (true == mi.Name.Contains("Roc"))  // e099 - Roc Beaks worth money
                      myCapturedPossessions.Add(SpecialEnum.RocBeak);
-                  if (true == mi.Name.Contains("Griffon"))  // e100 - Roc Beaks worth money
+                  if (true == mi.Name.Contains("Griffon"))  // e100 - Griffon Claws help with Lady Aeravir
                      myCapturedPossessions.Add(SpecialEnum.GriffonClaws);
                   myGameInstance.KilledLocations.Add(myGameInstance.Prince.Territory);
                }
@@ -4400,7 +4400,7 @@ namespace BarbarianPrince
                      myCapturedPossessions.Add(SpecialEnum.TrollSkin);
                   if (true == mi.Name.Contains("Roc"))  // e099 - Roc Beaks worth money
                      myCapturedPossessions.Add(SpecialEnum.RocBeak);
-                  if (true == mi.Name.Contains("Griffon"))  // e099 - Roc Beaks worth money
+                  if (true == mi.Name.Contains("Griffon"))  // e099 - griffon claws help with Lady Aeravir
                      myCapturedPossessions.Add(SpecialEnum.GriffonClaws);
                   myGameInstance.KilledLocations.Add(myGameInstance.Prince.Territory);
                }

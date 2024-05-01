@@ -256,9 +256,18 @@ namespace BarbarianPrince
             if (SpecialEnum.None != myItem)
             {
                if (SpecialEnum.PegasusMount == myItem)
-                  myGameInstance.AddNewMountToParty(MountEnum.Pegasus);
+               {
+                  if (false == myGameInstance.AddNewMountToParty(MountEnum.Pegasus))
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "UpdateEndState(): AddNewMountToParty() return false");
+                     return false;
+                  }
+               }
                else
+               {
                   myGameInstance.AddSpecialItem(myItem, myMapItem);
+               }
+
             }
             //------------------------------------------
             if (null == myCallback)

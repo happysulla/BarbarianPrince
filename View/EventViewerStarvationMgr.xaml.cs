@@ -2174,7 +2174,7 @@ namespace BarbarianPrince
          if (1 < mi.Mounts.Count)
          {
             IMapItem mountBeingRotated = mi.Mounts[0];
-            if (true == mountBeingRotated.Name.Contains("Griffon"))
+            if (true == mountBeingRotated.IsFlyingMountCarrier())
             {
                mountBeingRotated.Rider.Mounts.Remove(mountBeingRotated);
                mountBeingRotated.Rider = null;

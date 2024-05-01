@@ -498,7 +498,7 @@ namespace BarbarianPrince
                IMapItem mount = gi.Prince.Mounts[0];
                if( (0 == mount.StarveDayNum ) && ( false == mount.IsExhausted ) ) // mount cannot fly if starving or exhausted
                {
-                  if ((true == mount.Name.Contains("Pegasus")) || (true == mount.Name.Contains("Griffon")))
+                  if ( true == mount.IsFlyingMount() )
                   {
                      myStackPanelDailyActions.Children.Add(myButtonDailyAcions[12]);    // air travel
                      myStackPanelDailyActions.Visibility = Visibility.Visible;

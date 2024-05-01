@@ -143,7 +143,7 @@ namespace BarbarianPrince
             }
             if (false == mi.Name.Contains("Prince")) // prince and prince mount do not get lost
             {
-               if  ((false == mi.Name.Contains("Griffon")) || (null == mi.Rider)) // Griffon on separate row if no rider
+               if  ((false == mi.IsFlyingMountCarrier()) || (null == mi.Rider)) // Griffon/Harpy on separate row if no rider
                {
                   myGridRowMembers[i] = new GridRow(mi);
                   ++i;

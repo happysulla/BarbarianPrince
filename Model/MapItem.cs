@@ -296,30 +296,42 @@ namespace BarbarianPrince
          }
          //--------------------------------------------- Rotate the griffon or pegasus to the top
          bool isGriffonOwned = false;
-         bool IsPegasusOwned = false;
-         foreach (IMapItem m in this.Mounts) 
+         bool isHarpyOwned = false;
+         bool isPegasusOwned = false;
+         foreach (IMapItem mount in this.Mounts) 
          {
-            if ((true == m.Name.Contains("Griffon")) && (false == m.Name.Contains("Giant")) )
+            if ((true == mount.Name.Contains("Griffon")) && (false == mount.Name.Contains("Giant")) )
             {
                isGriffonOwned = true;
                IsFlying = true;
                IsRiding = true;
-               m.Rider = this;
+               mount.Rider = this;
             }
-            else if ((true == m.Name.Contains("Pegasus")) && (false == m.Name.Contains("Giant")) )
+            else if ((true == mount.Name.Contains("Harpy")) && (false == mount.Name.Contains("Giant")))
             {
-               IsPegasusOwned = true;
+               isHarpyOwned = true;
+               IsFlying = true;
+               IsRiding = true;
+               mount.Rider = this;
+            }
+            else if ((true == mount.Name.Contains("Pegasus")) && (false == mount.Name.Contains("Giant")) )
+            {
+               isPegasusOwned = true;
                IsFlying = true;
                IsRiding = true;
             }
-
          }
          if (true == isGriffonOwned)
          {
             while (false == this.Mounts[0].Name.Contains("Griffon")) // get to top
                this.Mounts.Rotate(1);
          }
-         else if (true == IsPegasusOwned)
+         else if (true == isHarpyOwned)
+         {
+            while (false == this.Mounts[0].Name.Contains("Harpy")) // get to top
+               this.Mounts.Rotate(1);
+         }
+         else if (true == isPegasusOwned)
          {
             while (false == this.Mounts[0].Name.Contains("Pegasus")) // get to top
                this.Mounts.Rotate(1);
@@ -336,7 +348,7 @@ namespace BarbarianPrince
          this.Mounts.Add(mount);                    // add the mount to the list
          if (false == this.Name.Contains("Giant"))  // mounts cannot carry giants
          {
-            if(true == mount.Name.Contains("Griffon"))
+            if(true == mount.IsFlyingMountCarrier())
             {
                this.IsRiding = true;                   // assume to be riding until the first night regardless of load
                this.IsFlying = true;
@@ -358,20 +370,28 @@ namespace BarbarianPrince
          }
          //--------------------------------------------- Rotate the griffon or pegasus to the top
          bool isGriffonOwned = false;
-         bool IsPegasusOwned = false;
+         bool isHarpyOwned = false;
+         bool isPegasusOwned = false;
          foreach (IMapItem m in this.Mounts) 
          {
             if (true == m.Name.Contains("Griffon"))
                isGriffonOwned = true;
+            else if (true == m.Name.Contains("Harpy"))
+               isHarpyOwned = true;
             else if (true == m.Name.Contains("Pegasus"))
-               IsPegasusOwned = true;
+               isPegasusOwned = true;
          }
          if (true == isGriffonOwned)
          {
             while (false == this.Mounts[0].Name.Contains("Griffon")) // get to top
                this.Mounts.Rotate(1);
          }
-         else if (true == IsPegasusOwned)
+         else if (true == isHarpyOwned)
+         {
+            while (false == this.Mounts[0].Name.Contains("Harpy")) // get to top
+               this.Mounts.Rotate(1);
+         }
+         else if (true == isPegasusOwned)
          {
             while (false == this.Mounts[0].Name.Contains("Pegasus")) // get to top
                this.Mounts.Rotate(1);
@@ -387,7 +407,7 @@ namespace BarbarianPrince
             if( false == mount.IsExhausted )
             {
                this.IsRiding = true;
-               if ((0 == mount.StarveDayNum) && ( (true == mount.Name.Contains("Pegasus")) || (true == mount.Name.Contains("Griffon")) ) ) // flying mount and no starve days
+               if ((0 == mount.StarveDayNum) && ( (true == mount.IsFlyingMount()) ) ) // flying mount and no starve days
                   this.IsFlying = true;
             }
          }
@@ -515,7 +535,7 @@ namespace BarbarianPrince
          {
             return true;
          }
-         else if ( (true == Name.Contains("Griffon")) || (true == Name.Contains("Harpy")) )
+         else if ( true == IsFlyingMountCarrier() )
          {
             int maxLoad1 = Utilities.MaxMountLoad;
             if (true == this.IsExhausted)
@@ -549,7 +569,7 @@ namespace BarbarianPrince
                   maxLoad1 = Utilities.MaxLoad >> 1; // e120 - half the load if exhausted 
                loadCanCarry = (maxLoad1 >> StarveDayNum);
             }
-            if (true == mount.Name.Contains("Griffon"))
+            if (true == mount.IsFlyingMountCarrier())
             {
                mount.IsKilled = true;
                mount.Rider = null;
@@ -624,11 +644,11 @@ namespace BarbarianPrince
             return false;
          }
          //----------------------------------------
-         if (true == deadMount.Name.Contains("Griffon")) // The only time a mount can be a griffon is if it is ridden
+         if (true == deadMount.IsFlyingMountCarrier()) // The only time a mount can be a griffon is if it is ridden
          {
             if (null == deadMount.Rider) // must hav a rider... need to remove the rider
             {
-               Logger.Log(LogEnum.LE_ERROR, "RemoveMountWithLoad(): Inavlid state mi=" + Name + " deadMount.Rider=null for Griffon");
+               Logger.Log(LogEnum.LE_ERROR, "RemoveMountWithLoad(): Inavlid state mi=" + Name + " deadMount.Rider=null for deadMount=" + deadMount.Name);
                return false;
             }
             deadMount.Rider.Mounts.Remove(deadMount);
@@ -699,14 +719,14 @@ namespace BarbarianPrince
          IMapItem mount = Mounts[0];
          if (null != mount.Rider)
             mount.Rider = null;
-         if (false == mount.Name.Contains("Griffon")) // do not remove Griffons from party
+         if (false == mount.IsFlyingMountCarrier()) // do not remove Griffons from party
             Mounts.Remove(mount);
          //-------------------------
          // Switch rider to next mount
          if( 0 < Mounts.Count )
          {
             IMapItem newMount = Mounts[0];   
-            if( true == newMount.Name.Contains("Griffon"))
+            if( true == newMount.IsFlyingMountCarrier())
                newMount.Rider = this;
             IsRiding = true;
          }
@@ -727,20 +747,15 @@ namespace BarbarianPrince
          else
          {
             string mountName = "";
-            foreach (IMapItem mount in this.Mounts)  // logic to always be riding the Pegasus if one is owned, next Griffon, and finally, choose the first horse
+            foreach (IMapItem mount in this.Mounts)  // logic to always remove flying mount, and finally, choose the first horse
             {
-               if (true == mount.Name.Contains("Griffon"))
-               {
-                  mountName = mount.Name;
-                  break;
-               }
-               if (true == mount.Name.Contains("Pegasus"))
+               if (true == mount.IsFlyingMount())
                {
                   mountName = mount.Name;
                   break;
                }
             }
-            if( "" == mountName ) // if no Griffon or Pegasus, choose first mount
+            if( "" == mountName )
             {
                if( 0 < this.Mounts.Count )
                   mountName = this.Mounts[0].Name;
@@ -766,7 +781,7 @@ namespace BarbarianPrince
             this.Mounts.Remove(mount.Name);
          this.IsFlying = false;
          this.IsRiding = false;
-         if ( 0 < this.Mounts.Count )  // logic to always be riding the Pegasus if one is owned, next Griffon, and finally, choose the first horse
+         if ( 0 < this.Mounts.Count )  
          {
             IMapItem mount = this.Mounts[0];
             if (true == mount.Name.Contains("Pegasus"))
@@ -775,7 +790,7 @@ namespace BarbarianPrince
                this.IsRiding = true;
                return true;
             }
-            else if (true == mount.Name.Contains("Griffon"))
+            else if (true == mount.IsFlyingMountCarrier())
             {
                this.IsFlying = true;
                this.IsRiding = true;
@@ -997,7 +1012,7 @@ namespace BarbarianPrince
          if ((true == this.Name.Contains("Eagle")) || (true == this.Name.Contains("Falcon")) || (true == this.IsSunStroke) || (true == this.IsUnconscious))
             return 0;
          int freeLoad = 0;
-         if ( (true == this.Name.Contains("Griffon")) || (true == this.Name.Contains("Harpy")) )
+         if ( true == this.IsFlyingMountCarrier() )
          {
             int maxMountLoad = Utilities.MaxMountLoad;
             if (true == this.IsExhausted)
@@ -1135,7 +1150,7 @@ namespace BarbarianPrince
          int maxLoad = 0;
          if ( (true == this.Name.Contains("Eagle")) || (true == this.Name.Contains("Falcon")) )
             maxLoad = 0;
-         else if ( (true == this.Name.Contains("Griffon")) || (true == this.Name.Contains("Harpy")))
+         else if ( true == this.IsFlyingMountCarrier() )
             maxLoad = Utilities.MaxMountLoad;
          else
             maxLoad = Utilities.MaxLoad;
@@ -1165,7 +1180,7 @@ namespace BarbarianPrince
       }   // get what load can be carried if flying...this function can return negative which indication something needs to be dropped
       public bool IsFlyer()
       {
-         if ( (true == Name.Contains("Eagle")) || (true == Name.Contains("Falcon")) || (true == Name.Contains("Griffon")) || (true == Name.Contains("Harpy")) )
+         if ( (true == Name.Contains("Eagle")) || (true == Name.Contains("Falcon")) || (true == IsFlyingMountCarrier() ) )
             return true;
          return false;
       }

@@ -10,6 +10,7 @@ namespace BarbarianPrince
       Horse,
       Pegasus,
       Griffon,
+      Harpy,
       Any
    };
    public interface IMapItem
@@ -68,7 +69,7 @@ namespace BarbarianPrince
       int Food { get; set; }
       int MovementUsed { get; set; }
       //----------------------------------------
-      IMapItem Rider { get; set; } // griffon can have a rider
+      IMapItem Rider { get; set; } // griffon/harpy can have a rider
       IMapItems Mounts { get; set; }
       Dictionary<IMapItem, int> CarriedMembers { get; set; } // This mapitem carries this much load (CarriedMembers.Value) of this MapItem (CaarriedMembers.Key)
       //----------------------------------------

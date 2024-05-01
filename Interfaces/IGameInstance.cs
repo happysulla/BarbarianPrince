@@ -200,8 +200,8 @@ namespace BarbarianPrince
       bool AddCoins(int coins, bool isLooterShareIncluded = true);
       void ReduceCoins(int coins);
       bool StripCoins();
-      int GetMountCount(bool isHorseOnly = false);
-      void AddNewMountToParty(MountEnum mount = MountEnum.Horse);
+      int GetNonSpecialMountCount(bool isHorseOnly = false);
+      bool AddNewMountToParty(MountEnum mount = MountEnum.Horse);
       void ReduceMount(MountEnum mountType);
       void TransferMounts(IMapItems mounts);
       //----------------------------------------------

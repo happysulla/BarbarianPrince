@@ -23,7 +23,7 @@ namespace BarbarianPrince
       private const int COLD_ALREADY = 10;
       private const int NO_MOUNT = 11;
       private const int NOT_RIDING = 12;
-      private const int GRIFFON_MOUNT = 13; // Griffon mounts do not die
+      private const int FLYING_MOUNT_CARRIER = 13; // Griffon mounts do not die
       //---------------------------------------------
       public struct GridRow
       {
@@ -152,8 +152,8 @@ namespace BarbarianPrince
             else
             {
                IMapItem mount = mi.Mounts[0];
-               if( true == mount.Name.Contains("Griffon") ) 
-                  myGridRows[i].myDieRollMount = GRIFFON_MOUNT;
+               if( true == mount.IsFlyingMountCarrier() ) 
+                  myGridRows[i].myDieRollMount = FLYING_MOUNT_CARRIER;
             }
 
             ++i;
@@ -369,7 +369,7 @@ namespace BarbarianPrince
                   Grid.SetRow(img, rowNum);
                   Grid.SetColumn(img, 4);
                }
-               else if( (NOT_RIDING == myGridRows[i].myDieRollMount) || (NO_MOUNT == myGridRows[i].myDieRollMount) || (GRIFFON_MOUNT == myGridRows[i].myDieRollMount) )
+               else if( (NOT_RIDING == myGridRows[i].myDieRollMount) || (NO_MOUNT == myGridRows[i].myDieRollMount) || (FLYING_MOUNT_CARRIER == myGridRows[i].myDieRollMount) )
                {
                   Label labelResult = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content="NA" };
                   myGrid.Children.Add(labelResult);

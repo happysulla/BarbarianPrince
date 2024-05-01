@@ -229,7 +229,7 @@ namespace BarbarianPrince
             else
             {
                myConsciousMembers.Add(mi);
-               if ( (true == mi.IsFlyingMountCarrier()) && (false == mi.IsExhausted) )// if this is griffon, add to AssignablePanel if can carry enough
+               if ( (true == mi.IsFlyingMountCarrier()) && (false == mi.IsExhausted) )// if this is griffon/harpy, add to AssignablePanel if can carry enough
                {
                   int loadCanCarry = Utilities.MaxMountLoad >> mi.StarveDayNum;
                   if (null == mi.Rider)
@@ -519,13 +519,13 @@ namespace BarbarianPrince
          switch (myState)
          {
             case LoadEnum.LE_ASSIGN_MOUNTS:
-               bool isAllGriffons = true;
+               bool isAllFlyingCarriers = true;
                foreach (IMapItem mount in myUnassignedMounts)
                {
-                  if (false == mount.Name.Contains("Griffon"))
-                     isAllGriffons = false;
+                  if (false == mount.IsFlyingMountCarrier())
+                     isAllFlyingCarriers = false;
                }
-               if ((0 == myUnassignedMounts.Count) || (true == isAllGriffons))
+               if ((0 == myUnassignedMounts.Count) || (true == isAllFlyingCarriers))
                {
                   if (0 < myUnconsciousMembers.Count)
                   {
@@ -839,7 +839,7 @@ namespace BarbarianPrince
             {
                if (null != ownerMount)
                {
-                  if ( ((true == ownerMount.Name.Contains("Griffon"))) || (true == myGameInstance.IsAirborne) )
+                  if ( (true == ownerMount.IsFlyingMountCarrier()) || (true == myGameInstance.IsAirborne) )
                   {
                      cb.IsEnabled = false;
                      cb.IsChecked = true;
@@ -891,7 +891,7 @@ namespace BarbarianPrince
             else
             {
                cb2.IsEnabled = false;
-               if ( (true == partyMember.Name.Contains("Griffon")) || (true == partyMember.Name.Contains("Harpy")) )
+               if ( true == partyMember.IsFlyingMountCarrier() )
                {
                   if ((null != partyMember.Rider) && (true == partyMember.Rider.IsFlying))
                      cb2.IsChecked = true;
@@ -1145,7 +1145,7 @@ namespace BarbarianPrince
          int mountLoad = 0;
          int personLoad = 0;
          bool isRidingPossible = false;
-         if ( (true == partyMember.Name.Contains("Griffon")) || (true == partyMember.Name.Contains("Harpy")) )
+         if ( (true == partyMember.IsFlyingMountCarrier()) )
          {
             int maxMountLoad = Utilities.MaxMountLoad;
             if (true == partyMember.IsExhausted)
@@ -1538,7 +1538,7 @@ namespace BarbarianPrince
                               if (LoadEnum.LE_ASSIGN_MOUNTS == myState) // Dragging Button to Assignable Panel - add to unassigned mounts
                               {
                                  myUnassignedMounts.Add(myMapItemDragged);
-                                 if (true == myMapItemDragged.Name.Contains("Griffon")) 
+                                 if (true == myMapItemDragged.IsFlyingMountCarrier()) 
                                  {
 
                                     IMapItem rider = myMapItemDragged.Rider;
@@ -1582,12 +1582,12 @@ namespace BarbarianPrince
                      if (LoadEnum.LE_ASSIGN_MOUNTS == myState)
                      {
                         IMapItem owner = myGridRows[i].myMapItem;
-                        if (true == myMapItemDragged.Name.Contains("Griffon")) 
+                        if (true == myMapItemDragged.IsFlyingMountCarrier())
                            myMapItemDragged.Rider = owner;
                         if( 0 < owner.Mounts.Count )
                         {
                            IMapItem mountBeingReplaced = owner.Mounts[0];
-                           if (true == mountBeingReplaced.Name.Contains("Griffon")) // return Griffon back to unassigned pool
+                           if (true == mountBeingReplaced.IsFlyingMountCarrier()) // return Griffon back to unassigned pool
                            {
                               myUnassignedMounts.Add(mountBeingReplaced);
                               mountBeingReplaced.Rider.Mounts.Remove(mountBeingReplaced);
@@ -1648,7 +1648,7 @@ namespace BarbarianPrince
                   if (LoadEnum.LE_ASSIGN_MOUNTS == myState)
                   {
                      IMapItem owner = myGridRows[i].myMapItem;
-                     if (true == myMapItemDragged.Name.Contains("Griffon"))
+                     if (true == myMapItemDragged.IsFlyingMountCarrier())
                      {
                         myMapItemDragged.Rider = owner; // replace the rider
                         owner.IsRiding = true;
@@ -1657,7 +1657,7 @@ namespace BarbarianPrince
                      if (0 < owner.Mounts.Count)
                      {
                         IMapItem mountBeingReplaced = owner.Mounts[0];
-                        if (true == mountBeingReplaced.Name.Contains("Griffon"))
+                        if (true == mountBeingReplaced.IsFlyingMountCarrier())
                         {
                            mountBeingReplaced.Rider.Mounts.Remove(mountBeingReplaced);
                            mountBeingReplaced.Rider = null;
@@ -1698,7 +1698,7 @@ namespace BarbarianPrince
                   if (LoadEnum.LE_ASSIGN_MOUNTS == myState)
                   {
                      myUnassignedMounts.Add(myMapItemDragged);
-                     if (true == myMapItemDragged.Name.Contains("Griffon"))
+                     if (true == myMapItemDragged.IsFlyingMountCarrier())
                      {
                         IMapItem rider = myMapItemDragged.Rider;
                         if (null == rider)
@@ -1726,7 +1726,7 @@ namespace BarbarianPrince
                   if (0 < owner.Mounts.Count)
                   {
                      IMapItem mountBeingRotated = myGridRows[i].myMapItem.Mounts[0];
-                     if (true == mountBeingRotated.Name.Contains("Griffon"))
+                     if (true == mountBeingRotated.IsFlyingMountCarrier())
                         mountBeingRotated.Rider = myGridRows[i].myMapItem;
                      if (Utilities.PersonBurden <= owner.GetFreeLoad())
                      {
@@ -1838,7 +1838,7 @@ namespace BarbarianPrince
             return;
          }
          IMapItem mount = partyMember.Mounts[0];
-         if (true == mount.Name.Contains("Griffon"))
+         if (true == mount.IsFlyingMountCarrier())
          {
             for (int j = 0; j < myConsciousMembers.Count; ++j)
             {
@@ -1867,7 +1867,7 @@ namespace BarbarianPrince
             return;
          }
          IMapItem mount = partyMember.Mounts[0];
-         if (true == mount.Name.Contains("Griffon"))
+         if (true == mount.IsFlyingMountCarrier())
          {
             for (int j = 0; j < myConsciousMembers.Count; ++j)
             {

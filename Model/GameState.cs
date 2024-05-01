@@ -892,15 +892,15 @@ namespace BarbarianPrince
             gi.EventDisplayed = gi.EventActive = "e077a";
          else if (("e085" == gi.EventActive) && (true == gi.IsInStructure(princeTerritory))) // bear encounter does not happen in structure
             gi.EventDisplayed = gi.EventActive = "e085a";
-         else if (("e095" == gi.EventActive) && (0 == gi.GetMountCount())) // Lost mounts do not happen if have none
+         else if (("e095" == gi.EventActive) && (0 == gi.GetNonSpecialMountCount())) // Mounts at risk - Lost mounts do not happen if have none - Griffons/Harpy do not count
             gi.EventDisplayed = gi.EventActive = "e095a";
-         else if (("e096" == gi.EventActive) && (0 == gi.GetMountCount())) // Lost mounts do not happen if have none
+         else if (("e096" == gi.EventActive) && (0 == gi.GetNonSpecialMountCount())) // Mounts die - Lost mounts do not happen if have none - Griffons/Harpy do not count
             gi.EventDisplayed = gi.EventActive = "e096a";
          else if ("e078" == gi.EventActive)
          {
             if ((true == gi.IsInStructure(princeTerritory)) || (0 < princeTerritory.Roads.Count))
                gi.EventDisplayed = gi.EventActive = "e078a"; // majestic view from road
-            else if (0 == gi.GetMountCount(true))
+            else if (0 == gi.GetNonSpecialMountCount(true))
                gi.EventDisplayed = gi.EventActive = "e078b"; // majestic view with no horses
             else if (gi.Prince.MovementUsed == gi.Prince.Movement)
                gi.EventDisplayed = gi.EventActive = "e078c"; // bad going for horses
@@ -1038,7 +1038,7 @@ namespace BarbarianPrince
             case GameAction.SetupManualWitsWiles:
                if (0 == gi.WitAndWile) // Die Roll for random wits and wiles handled here
                {
-                  if (1 == dieRoll)
+                  if (dieRoll < 2)
                      gi.WitAndWile = 2; // cannot be less than two
                   else
                      gi.WitAndWile = dieRoll;
@@ -1096,6 +1096,8 @@ namespace BarbarianPrince
       }
       private bool SetStartingLocation(ref IGameInstance gi, int dieRoll)
       {
+         ITerritory t1 = gi.Territories.Find("0101"); // set so that on first turn, there is not an error - mostly used for setting up special test conditions during unit testing
+         gi.EnteredTerritories.Add(t1);
          ITerritory starting = null;
          switch (dieRoll)
          {
@@ -1213,10 +1215,10 @@ namespace BarbarianPrince
                gi.IsHeavyRainDismount = true;
                foreach (IMapItem mi in gi.PartyMembers)
                {
-                  if (null != mi.Rider) // mi = griffon
+                  if (null != mi.Rider) // mi = griffon/harpy
                   {
-                     mi.Rider.Mounts.Remove(mi);  // Griffon Rider removes griffon as mount
-                     mi.Rider = null;             // Griffon removes its rider
+                     mi.Rider.Mounts.Remove(mi);  // Griffon/Harpy Rider removed as mount
+                     mi.Rider = null;          
                   }
                   if (true == mi.IsFlyer()) // flyers do not need to dismount
                      continue;
@@ -3164,7 +3166,11 @@ namespace BarbarianPrince
                }
                else
                {
-                  gi.AddNewMountToParty();
+                  if( false == gi.AddNewMountToParty() )
+                  {
+                     returnStatus = "AddNewMountToParty() returned false for a=" + action.ToString();
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
                   ++gi.PurchasedMount;
                   if (("e015b" == gi.EventActive) || ("e128f" == gi.EventActive))
                   {
@@ -3859,7 +3865,7 @@ namespace BarbarianPrince
                {
                   foreach( IMapItem mount in mi.Mounts )
                   {
-                     if (true == mount.Name.Contains("Griffon"))
+                     if ( true == mount.IsFlyingMountCarrier() ) // Griffons and Harpies not considered mounts in this case
                         continue;
                      mount.IsMountSick = true;
                   }
@@ -4066,7 +4072,7 @@ namespace BarbarianPrince
                {
                   if (null != mi.Rider)
                   {
-                     mi.Rider.Mounts.Remove(mi);  // Griffon removes its rider
+                     mi.Rider.Mounts.Remove(mi);  // Griffon/Harpy removes its rider
                      mi.Rider = null;
                   }
                }
@@ -4244,7 +4250,11 @@ namespace BarbarianPrince
                gi.EnteredTerritories.Add(gi.NewHex);
                break;
             case GameAction.E128aBuyPegasus:
-               gi.AddNewMountToParty(MountEnum.Pegasus);
+               if( false == gi.AddNewMountToParty(MountEnum.Pegasus) )
+               {
+                  returnStatus = " AddNewMountToParty() returned false for a=" + action.ToString();
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+               }
                int pegasusCost = 50;
                if (true == gi.IsMerchantWithParty)
                   pegasusCost = (int)Math.Ceiling((double)pegasusCost * 0.5);
@@ -4810,8 +4820,16 @@ namespace BarbarianPrince
                            Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                         }
                         gi.CapturedWealthCodes.Add(110);
-                        gi.AddNewMountToParty(MountEnum.Pegasus);
-                        gi.AddNewMountToParty(MountEnum.Pegasus);
+                        if( false == gi.AddNewMountToParty(MountEnum.Pegasus) )
+                        {
+                           returnStatus = "AddNewMountToParty() returned false for action=" + action.ToString();
+                           Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                        }
+                        if (false == gi.AddNewMountToParty(MountEnum.Pegasus))
+                        {
+                           returnStatus = "AddNewMountToParty() returned false for action=" + action.ToString();
+                           Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                        }
                         gi.ForbiddenAudiences.AddTimeConstraint(t161, Utilities.FOREVER);
                         action = GameAction.EncounterLootStart;
                      }
@@ -9727,10 +9745,17 @@ namespace BarbarianPrince
                            return false;
                         }
                         break;
-                     case 2: gi.EventDisplayed = gi.EventActive = "e025b"; gi.DieRollAction = GameAction.E080PixieAdvice; break; // pixie advice
-                     case 3: gi.EventDisplayed = gi.EventActive = "e038"; gi.DieRollAction = GameAction.EncounterRoll; break;  // stone slabe
+                     case 2: gi.EventDisplayed = gi.EventActive = "e025b"; gi.DieRollAction = GameAction.E080PixieAdvice; break;      // pixie advice
+                     case 3: gi.EventDisplayed = gi.EventActive = "e038"; gi.DieRollAction = GameAction.EncounterRoll; break;         // stone slabe
                      case 4: case 5: gi.EventDisplayed = gi.EventActive = "e195"; gi.DieRollAction = GameAction.EncounterRoll; break; // roll for possessions
-                     case 6: gi.EventDisplayed = gi.EventActive = "e188"; gi.AddNewMountToParty(MountEnum.Pegasus); break; // pegasus mount
+                     case 6:                                                                                                          // pegasus mount
+                        gi.EventDisplayed = gi.EventActive = "e188"; 
+                        if( false == gi.AddNewMountToParty(MountEnum.Pegasus))
+                        {
+                           Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddNewMountToParty() return false for ae=" + gi.EventActive);
+                           return false;
+                        }
+                        break; 
                      default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
                   }
                }
@@ -10748,7 +10773,11 @@ namespace BarbarianPrince
                         e160Mi.AddNewMount();
                   }
                   //-----------------------------------------------
-                  gi.AddNewMountToParty(); // add a spare pack horse
+                  if( false == gi.AddNewMountToParty() ) // add a spare pack horse
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddNewMountToParty() return false for ae=" + gi.EventActive);
+                     return false;
+                  }
                   for (int k = 0; k < 3; ++k) // add three knights
                   {
                      string knightName = "Knight" + Utilities.MapItemNum.ToString();
@@ -11445,7 +11474,7 @@ namespace BarbarianPrince
                      case 2: gi.EventDisplayed = gi.EventActive = "e060"; gi.DieRollAction = GameAction.EncounterRoll; break;                      // arrested
                      case 3: gi.EventDisplayed = gi.EventActive = "e159"; gi.ForbiddenAudiences.AddPurifyConstaint(princeTerritory); break;        // purify self
                      case 4: gi.EventDisplayed = gi.EventActive = "e158"; break;                                                                   // hostile guards
-                     case 5: gi.EventDisplayed = gi.EventActive = "e149"; gi.ForbiddenAudiences.AddClothesConstraint(princeTerritory); break;  // learn court manners
+                     case 5: gi.EventDisplayed = gi.EventActive = "e149"; gi.ForbiddenAudiences.AddClothesConstraint(princeTerritory); break;      // learn court manners
                      case 6: gi.EventDisplayed = gi.EventActive = "e153"; break;                                                                   // master of household
                      case 7:                                                                                                                       // audience if have griffon claw   
                         if (true == gi.IsSpecialItemHeld(SpecialEnum.GriffonClaws))

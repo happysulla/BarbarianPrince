@@ -137,7 +137,7 @@ namespace BarbarianPrince
             }
             foreach(IMapItem mount in mi.Mounts)
             {
-               if (true == mount.Name.Contains("Griffon"))
+               if (true == mount.IsFlyingMountCarrier())
                   continue;
                myGridRows[i] = new GridRow(mount, mi);
                ++i;

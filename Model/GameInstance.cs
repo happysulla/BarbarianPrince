@@ -311,12 +311,261 @@ namespace BarbarianPrince
          }
          myPrince = new MapItem(prince);
          PartyMembers.Add(myPrince);
-#if UT1
-         AddUnitTests();
-#endif
+         if( false == AddStartingPartyMembers())
+         {
+            Logger.Log(LogEnum.LE_ERROR, "GameInstance(): AddStartingPartyMembers() returned false");
+            CtorError = true;
+            return;
+         }
+         #if UT1
+                  AddUnitTests();
+         #endif
+         Logger.Log(LogEnum.LE_GAME_PARTYMEMBER_COUNT, "GameInstance() c=" + PartyMembers.Count.ToString());
+      }
+      private bool AddStartingPartyMembers()
+      {
+         IOption option = null;
+         String memberToAdd = "";
+         //---------------------------------------------------------
+         memberToAdd = "Dwarf";
+         option = myOptions.Find(memberToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", Prince.Territory, 5, 5, 0);
+            member.IsFlying = true;
+            member.IsRiding = true;
+            member.Food = 25;
+            member.Coin = 301;
+            member.IsFickle = true;
+            member.AddNewMount(); // riding
+            AddCompanion(member);
+         }
+         //---------------------------------------------------------
+         memberToAdd = "Eagle";
+         option = myOptions.Find(memberToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c62Eagle", "c62Eagle", Prince.Territory, 3, 4, 1);
+            member.IsFlying = true;
+            member.IsRiding = true;
+            AddCompanion(member);
+         }
+         //---------------------------------------------------------
+         memberToAdd = "Elf";
+         option = myOptions.Find(memberToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c56Elf", "c56Elf", Prince.Territory, 5, 5, 0);
+            member.Food = 5;
+            member.Coin = 201;
+            member.AddNewMount(MountEnum.Horse);
+            AddCompanion(member);
+         }
+         //---------------------------------------------------------
+         memberToAdd = "Falcon";
+         option = myOptions.Find(memberToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c82Falcon", "c82Falcon", Prince.Territory, 0, 0, 0);
+            member.IsFlying = true;
+            member.IsRiding = true;
+            member.IsGuide = true;
+            member.GuideTerritories = Territories;
+            AddCompanion(member);
+            IsFalconFed = true;
+         }
+         //---------------------------------------------------------
+         memberToAdd = "Griffon";
+         option = myOptions.Find(memberToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c63Griffon", "c63Griffon", Prince.Territory, 3, 4, 1);
+            member.IsFlying = true;
+            member.IsRiding = true;
+            AddCompanion(member);
+            //---------------------
+            memberName = memberToAdd + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem rider = new MapItem(memberName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", Prince.Territory, 5, 5, 0);
+            member.Rider = member;
+            rider.Mounts.Insert(0, member);
+            rider.IsRiding = true;
+            rider.IsFlying = true;
+            AddCompanion(rider);
+         }
+         //---------------------------------------------------------
+         memberToAdd = "Magician";
+         option = myOptions.Find(memberToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
+            return false;
+         }
+         if( true == option.IsEnabled )
+         {
+            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c16Magician", "c16Magician", Prince.Territory, 5, 5, 0);
+            AddCompanion(member);
+         }
+         //---------------------------------------------------------
+         memberToAdd = "Mercenary";
+         option = myOptions.Find(memberToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", Prince.Territory, 5, 5, 0);
+            member.Food = 5;
+            member.Coin = 98;
+            member.AddNewMount();  // riding
+            member.AddNewMount(MountEnum.Pegasus); // flying
+            member.SetWounds(4, 0); // make unconscious
+            member.IsGuide = true;
+            foreach (string adj in Prince.TerritoryStarting.Adjacents)
+            {
+               ITerritory t = Territories.Find(adj);
+               member.GuideTerritories.Add(t);
+            }
+            AddCompanion(member);
+         }
+         //---------------------------------------------------------
+         memberToAdd = "Merchant";
+         option = myOptions.Find(memberToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c16Magician", "c16Magician", Prince.Territory, 5, 5, 0);
+            AddCompanion(member);
+            IsMerchantWithParty = true;
+         }
+         //---------------------------------------------------------
+         memberToAdd = "Minstrel";
+         option = myOptions.Find(memberToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", Prince.Territory, 0, 0, 0);
+            AddCompanion(member);
+            IsMinstrelPlaying = true; // e049 - minstrel
+         }
+         //---------------------------------------------------------
+         memberToAdd = "Monk";
+         option = myOptions.Find(memberToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c19Monk", "c19Monk", Prince.Territory, 5, 5, 0);
+            AddCompanion(member);
+         }
+         //---------------------------------------------------------
+         memberToAdd = "PorterSlave";
+         option = myOptions.Find(memberToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", Prince.Territory, 0, 0, 0);
+            AddCompanion(member);
+         }
+         //---------------------------------------------------------
+         memberToAdd = "TrueLove";
+         option = myOptions.Find(memberToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", Prince.Territory, 0, 0, 0);
+            AddCompanion(member);
+         }
+         //---------------------------------------------------------
+         memberToAdd = "Wizard";
+         option = myOptions.Find(memberToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c12Wizard", "c12Wizard", Prince.Territory, 4, 4, 0);
+            AddCompanion(member);
+         }
+         return true;
       }
       void AddUnitTests()
       {
+         Days = 40;
          myPrince.Food = 5;
          myPrince.Coin = 30;
          //myPrince.SetWounds(7, 0);
@@ -345,193 +594,56 @@ namespace BarbarianPrince
          //AddSpecialItem(SpecialEnum.ResurrectionNecklace);
          //AddSpecialItem(SpecialEnum.ShieldOfLight);
          //AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
-         //---------------------
          //myPrince.AddSpecialItemToShare(SpecialEnum.HydraTeeth);
          //this.HydraTeethCount = 5;
          //---------------------
-         //string wizardName = "Wizard" + Utilities.MapItemNum.ToString(); // this causes IsWizardJoiningParty=true
-         //++Utilities.MapItemNum;
-         //IMapItem wizard = new MapItem(wizardName, 1.0, false, false, false, "c12Wizard", "c12Wizard", Prince.Territory, 5, 5, 0);
-         //AddCompanion(wizard);
-         //IsWizardJoiningParty = false;
+         //ITerritory visited = Territories.Find("0109");
+         //this.myVisitedLoctions.Add(visited);
          //---------------------
-         string magicianName = "Magician" + Utilities.MapItemNum.ToString();
-         ++Utilities.MapItemNum;
-         IMapItem magician = new MapItem(magicianName, 1.0, false, false, false, "c16Magician", "c16Magician", Prince.Territory, 5, 5, 0);
-         magician.AddNewMount(MountEnum.Pegasus); // flying
-         AddCompanion(magician);
-         ////---------------------
-         //string monkName = "Monk" + Utilities.MapItemNum.ToString();
-         //++Utilities.MapItemNum;
-         //IMapItem monk = new MapItem(monkName, 1.0, false, false, false, "c19Monk", "c19Monk", Prince.Territory, 5, 5, 0);
-         //monk.Food = 5;
-         //monk.AddNewMount();
-         //AddCompanion(monk);
+         //ITerritory escapeLocation = Territories.Find("0605");
+         //EscapedLocations.Add(escapeLocation);
          //---------------------
-         string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
-         ++Utilities.MapItemNum;
-         IMapItem eagle = new MapItem(eagleName, 1.0, false, false, false, "c62Eagle", "c62Eagle", Prince.Territory, 3, 4, 1);
-         eagle.IsFlying = true;
-         eagle.IsRiding = true;
-         AddCompanion(eagle);
+         //ITerritory cacheHex = Territories.Find("0504");
+         //Caches.Add(cacheHex, 66);
+         //cacheHex = Territories.Find("0505");
+         //Caches.Add(cacheHex, 333);
+         //Caches.Add(cacheHex, 100);
+         //Caches.Add(cacheHex, 500);
+         //Caches.Add(cacheHex, 33);
          //---------------------
-         string falconName1 = "Falcon" + Utilities.MapItemNum.ToString();
-         ++Utilities.MapItemNum;
-         IMapItem falcon1 = new MapItem(falconName1, 1.0, false, false, false, "c82Falcon", "c82Falcon", Prince.Territory, 0, 0, 0);
-         falcon1.IsFlying = true;
-         falcon1.IsRiding = true;
-         falcon1.IsGuide = true;
-         falcon1.GuideTerritories = Territories;
-         AddCompanion(falcon1);
-         IsFalconFed = true;
+         //ITerritory secretClueHex = Territories.Find("0504");
+         //SecretClues.Add(secretClueHex);
          //---------------------
-         //string falconName2 = "Falcon" + Utilities.MapItemNum.ToString(); // add second falcon
-         //++Utilities.MapItemNum;
-         //IMapItem falcon2 = new MapItem(falconName2, 1.0, false, false, false, "c82Falcon", "c82Falcon", Prince.Territory, 0, 0, 0);
-         //falcon2.IsFlying = true;
-         //falcon2.IsRiding = true;
-         //falcon2.IsGuide = true;
-         //falcon2.GuideTerritories = Territories;
-         //AddCompanion(falcon2);
-         //IsFalconFed = true;
+         //ITerritory secretClueHex2 = Territories.Find("0706");
+         //SecretClues.Add(secretClueHex2);
          //---------------------
-         //string dwarfName = "Dwarf" + Utilities.MapItemNum.ToString();
-         //++Utilities.MapItemNum;
-         //IMapItem dwarf = new MapItem(dwarfName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", Prince.Territory, 5, 5, 0);
-         //dwarf.Food = 25;
-         //dwarf.Coin = 301;
-         //dwarf.AddNewMount(); // riding
-         //dwarf.IsRiding = false;
-         //dwarf.IsFickle = true;
-         //dwarf.AddNewMount();
-         //AddCompanion(dwarf);
+         //ITerritory hiddenTemple = Territories.Find("0605");
+         //HiddenTemples.Add(hiddenTemple);
          //---------------------
-         string mercenaryName = "Mercenary" + Utilities.MapItemNum.ToString();
-         ++Utilities.MapItemNum;
-         IMapItem mercenary = new MapItem(mercenaryName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", Prince.Territory, 5, 5, 0);
-         mercenary.Food = 5;
-         mercenary.Coin = 98;
-         //mercenary.AddNewMount();  // riding
-         mercenary.AddNewMount(MountEnum.Pegasus); // flying
-         //mercenary.SetWounds(4, 0); // make unconscious
-         //mercenary.IsGuide = true;
-         //ITerritory startingT = Territories.Find("0707");
-         //foreach (string adj in startingT.Adjacents)
-         //{
-         //   ITerritory t = Territories.Find(adj);
-         //   mercenary.GuideTerritories.Add(t);
-         //}
-         AddCompanion(mercenary);
+         //ITerritory hiddenRuin = Territories.Find("0606");
+         //HiddenRuins.Add(hiddenRuin);
          //---------------------
-         string griffonName = "Griffon" + Utilities.MapItemNum.ToString();
-         ++Utilities.MapItemNum;
-         IMapItem griffon = new MapItem(griffonName, 1.0, false, false, false, "c63Griffon", "c63Griffon", Prince.Territory, 3, 4, 1);
-         griffon.IsFlying = true;
-         griffon.IsRiding = true;
-         AddCompanion(griffon);
+         //ITerritory elfTown = Territories.Find("0607");
+         //ElfTowns.Add(elfTown);
          //---------------------
-         griffon.Rider = mercenary;
-         mercenary.Mounts.Insert(0, griffon);
-         mercenary.IsRiding = true;
-         mercenary.IsFlying = true;
+         //ITerritory eagleLair = Territories.Find("0407");
+         //EagleLairs.Add(eagleLair);
          //---------------------
-         //string griffonName2 = "Griffon" + Utilities.MapItemNum.ToString();
-         //++Utilities.MapItemNum;
-         //IMapItem griffon2 = new MapItem(griffonName2, 1.0, false, false, false, "c63Griffon", "c63Griffon", Prince.Territory, 3, 4, 1);
-         //griffon2.IsFlying = true;
-         //griffon2.IsRiding = true;
-         //AddCompanion(griffon2);
+         //ITerritory dwarvenMine = Territories.Find("0408");  
+         //DwarvenMines.Add(dwarvenMine);
          //---------------------
-         //string merchantName = "Merchant" + Utilities.MapItemNum.ToString();
-         //++Utilities.MapItemNum;
-         //IMapItem merchant = new MapItem(merchantName, 1.0, false, false, false, "Negotiator1", "Negotiator1", Prince.Territory, 10, 2, 0);
-         //merchant.IsFugitive = true;
-         //merchant.Food = 5;
-         //merchant.AddNewMount();
-         //merchant.AddNewMount(MountEnum.Pegasus); // flying
-         //merchant.AddNewMount(MountEnum.Pegasus);
-         //merchant.IsGuide = true;
-         //foreach (string adj in startingT.Adjacents)
-         //{
-         //   ITerritory t = Territories.Find(adj);
-         //   merchant.GuideTerritories.Add(t);
-         //}
-         //AddCompanion(merchant);
-         //IsMerchantWithParty = true;
-         //---------------------
-         //string elfName = "Elf" + Utilities.MapItemNum.ToString();
-         //++Utilities.MapItemNum;
-         //IMapItem elf = new MapItem(elfName, 1.0, false, false, false, "c56Elf", "c56Elf", Prince.Territory, 5, 5, 0);
-         //elf.Food = 5;
-         //elf.Coin = 201;
-         //elf.AddNewMount(MountEnum.Horse);
-         //AddCompanion(elf);
-         //---------------------
-         //string porterName2 = "PorterSlave" + Utilities.MapItemNum.ToString();
-         //++Utilities.MapItemNum;
-         //IMapItem porter2 = new MapItem(porterName2, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", Prince.Territory, 0, 0, 0);
-         //AddCompanion(porter2);
-         //porterName2 = "PorterSlave" + Utilities.MapItemNum.ToString();
-         //++Utilities.MapItemNum;
-         //porter2 = new MapItem(porterName2, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", Prince.Territory, 0, 0, 0);
-         //AddCompanion(porter2);
-         //---------------------
-         //string trueLoveName = "TrueLove" + Utilities.MapItemNum.ToString();
-         //++Utilities.MapItemNum;
-         //IMapItem trueLove = new MapItem(trueLoveName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", Prince.Territory, 0, 0, 0);
-         //AddCompanion(trueLove);
-         //trueLoveName = "TrueLove" + Utilities.MapItemNum.ToString();
-         //++Utilities.MapItemNum;
-         //trueLove = new MapItem(trueLoveName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", Prince.Territory, 0, 0, 0);
-         //AddCompanion(trueLove);
-         //---------------------
-         //string minstrelName = "Minstrel" + Utilities.MapItemNum.ToString();
-         //++Utilities.MapItemNum;
-         //IMapItem minstrel = new MapItem(minstrelName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", Prince.Territory, 0, 0, 0);
-         //AddCompanion(minstrel);
-         //IsMinstrelPlaying = true; // e049 - minstrel
-         //---------------------
-         //ITerritory t1 = Territories.Find("0504");
-         //Caches.Add(t1, 66);
-         //t1 = Territories.Find("0505");
-         //Caches.Add(t1, 333);
-         //Caches.Add(t1, 100);
-         //Caches.Add(t1, 500);
-         //Caches.Add(t1, 33);
-         //---------------------
-         ITerritory t1 = Territories.Find("0406");
-         EnteredTerritories.Add(t1);
-         //---------------------
-         //SecretClues.Add(t1);
-         //ITerritory t2 = Territories.Find("0706");
-         //SecretClues.Add(t2);
-         //---------------------
-         //t1 = Territories.Find("0605");
-         //HiddenTemples.Add(t1);
-         //EscapedLocations.Add(t1); // not welcome in hidden temples if escaped from that location
-         //---------------------
-         //t1 = Territories.Find("0606");
-         //HiddenRuins.Add(t1);
-         //---------------------
-         //t1 = Territories.Find("0607");
-         //ElfTowns.Add(t1);
-         //---------------------
-         //ITerritory t13 = Territories.Find("0407");
-         //EagleLairs.Add(t13);
-         //---------------------
-         //ITerritory t32 = Territories.Find("0408");  
-         //DwarvenMines.Add(t32);
          //ITerritory dwarfAdviceHex = Territories.Find("0319");
          //DwarfAdviceLocations.Add(dwarfAdviceHex);
          //---------------------
          //ITerritory halflingTown = Territories.Find("0303");
          //HalflingTowns.Add(halflingTown);
          //---------------------
-         //t1 = Territories.Find("0608");
-         //ElfCastles.Add(t1);
+         //ITerritory elfCastle  = Territories.Find("0608");
+         //ElfCastles.Add(elfCastle);
          //---------------------
-         //ITerritory t33 = Territories.Find("0404");  //mountain
-         //WizardTowers.Add(t33);
+         //ITerritory wizarTower = Territories.Find("0404");  //mountain
+         //WizardTowers.Add(wizarTower);
+         //---------------------
          //ITerritory wizardAdviceHex = Territories.Find("1005");
          //WizardAdviceLocations.Add(wizardAdviceHex);
          //---------------------
@@ -553,31 +665,24 @@ namespace BarbarianPrince
          //ITerritory forbiddenHex = Territories.Find("0705");
          //ForbiddenHexes.Add(forbiddenHex);
          //---------------------
-         //ITerritory fat0101 = Territories.Find("0101");
+         //ITerritory forbiddenAudience = Territories.Find("0101");
          //ITerritory lt1 = Territories.Find("0109");
          //ITerritory lt2 = Territories.Find("0711");
          //ITerritory lt3 = Territories.Find("1212");
          //LetterOfRecommendations.Add(lt1);
          //LetterOfRecommendations.Add(lt1);
-         //ForbiddenAudiences.AddLetterConstraint(fat0101, lt1);
+         //ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt1);
          //LetterOfRecommendations.Add(lt2);
-         //ForbiddenAudiences.AddLetterConstraint(fat0101, lt2);
+         //ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt2);
          //LetterOfRecommendations.Add(lt3);
-         //ForbiddenAudiences.AddLetterConstraint(fat0101, lt3);
+         //ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt3);
          //---------------------
-         //ITerritory visited = Territories.Find("0109");
-         //this.myVisitedLoctions.Add(visited);
-         //---------------------
-         Days = 40;
-         DayOfLastOffering = Days + 4;
-         //---------------------
+         //DayOfLastOffering = Days + 4;
          //IsSecretTempleKnown = true;
          //IsMarkOfCain = true; // e018
          //NumMonsterKill = 5; // e161e - kill 5 monsters
-         ChagaDrugCount = 2;
-         //---------------------
+         //ChagaDrugCount = 2;
          //RaftState = RaftEnum.RE_RAFT_SHOWN;
-         Logger.Log(LogEnum.LE_GAME_PARTYMEMBER_COUNT, "GameInstance() c=" + PartyMembers.Count.ToString());
       }
       //----------------------------------------------
       public bool IsInTown(ITerritory t)
@@ -943,14 +1048,14 @@ namespace BarbarianPrince
          CapturedWealthCodes = wealthCodes;
          return true;
       }
-      public int GetMountCount(bool isHorseOnly = false)
+      public int GetNonSpecialMountCount(bool isHorseOnly = false)
       {
          int mountCount = 0;
          foreach (IMapItem mi in PartyMembers)
          {
             foreach (IMapItem mount in mi.Mounts)
             {
-               if (true == mount.Name.Contains("Griffon"))
+               if (true == mount.IsFlyingMountCarrier())
                   continue;
                if ( true == isHorseOnly )
                {
@@ -965,45 +1070,75 @@ namespace BarbarianPrince
          }
          return mountCount;
       }
-      public void AddNewMountToParty(MountEnum mt = MountEnum.Horse)
+      public bool AddNewMountToParty(MountEnum mt = MountEnum.Horse)
       {
          //--------------------------------
+         // Add to Prince first if he does not have one
          bool isGriffonOwned = false;
-         bool IsPegasusOwned = false;
+         bool isHarpyOwned = false;
+         bool isPegasusOwned = false;
          bool isHorseOwned = false;
          foreach (IMapItem mount in myPrince.Mounts) // If not owned, Add to Prince first
          {
             if (true == mount.Name.Contains("Griffon"))
                isGriffonOwned = true;
+            if (true == mount.Name.Contains("Harpy"))
+               isHarpyOwned = true;
             else if (true == mount.Name.Contains("Pegasus"))
-               IsPegasusOwned = true;
+               isPegasusOwned = true;
             else
                isHorseOwned = true;
          }
          if ((MountEnum.Griffon == mt) && (false == isGriffonOwned))
          {
-            myPrince.AddNewMount(mt);
-            return;
+            if( false == myPrince.AddNewMount(mt) )
+            {
+               Logger.Log(LogEnum.LE_ERROR, "AddNewMountToParty(): AddNewMount() returned false for mi=" + myPrince.Name + " for mount=" + mt.ToString());
+               return false;
+            }
+            return true;
          }
-         if ((MountEnum.Pegasus == mt) && (false == isGriffonOwned) && (false == IsPegasusOwned))
+         if ((MountEnum.Harpy == mt) && (false == isHarpyOwned))
          {
-            myPrince.AddNewMount(mt);
-            return;
+            if (false == myPrince.AddNewMount(mt))
+            {
+               Logger.Log(LogEnum.LE_ERROR, "AddNewMountToParty(): AddNewMount() returned false for mi=" + myPrince.Name + " for mount=" + mt.ToString());
+               return false;
+            }
+            return true;
          }
-         if ((MountEnum.Pegasus == mt) && (false == isGriffonOwned) && (false == IsPegasusOwned) && (false == isHorseOwned))
+         if ((MountEnum.Pegasus == mt) && (false == isGriffonOwned) && (false == isHarpyOwned) && (false == isPegasusOwned))
          {
-            myPrince.AddNewMount(mt);
-            return;
+            if (false == myPrince.AddNewMount(mt))
+            {
+               Logger.Log(LogEnum.LE_ERROR, "AddNewMountToParty(): AddNewMount() returned false for mi=" + myPrince.Name + " for mount=" + mt.ToString());
+               return false;
+            }
+            return true;
+         }
+         if ((false == isGriffonOwned) && (false == isHarpyOwned)  && (false == isPegasusOwned) && (false == isHorseOwned))
+         {
+            if (false == myPrince.AddNewMount(mt))
+            {
+               Logger.Log(LogEnum.LE_ERROR, "AddNewMountToParty(): AddNewMount() returned false for mi=" + myPrince.Name + " for mount=" + mt.ToString());
+               return false;
+            }
+            return true;
          }
          //--------------------------------
+         // Add to member with least number of mounts
          IMapItems sortedMapItems = PartyMembers.SortOnMount();
          sortedMapItems.Reverse();
          foreach (IMapItem partyMember in sortedMapItems) // add to partymember without a mount
          {
             if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (0 < partyMember.Mounts.Count) || (true == partyMember.IsFlyer()) )
                continue;
-            partyMember.AddNewMount(mt);
-            return;
+            if (false == partyMember.AddNewMount(mt))
+            {
+               Logger.Log(LogEnum.LE_ERROR, "AddNewMountToParty(): AddNewMount() returned false for mi=" + partyMember.Name + " for mount=" + mt.ToString());
+               return false;
+            }
+            return true;
          }
          //--------------------------------
          if (MountEnum.Griffon == mt)
@@ -1013,44 +1148,69 @@ namespace BarbarianPrince
                if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || ("Prince" == partyMember.Name) || (true == partyMember.IsFlyer()) )
                   continue;
                isGriffonOwned = false;
-               IsPegasusOwned = false;
                foreach (IMapItem mount in partyMember.Mounts)
                {
                   if (true == mount.Name.Contains("Griffon"))
                      isGriffonOwned = true;
                }
-               if ((MountEnum.Griffon == mt) && (false == isGriffonOwned))
+               if (false == isGriffonOwned)
                {
-                  partyMember.AddNewMount(mt);
-                  return;
-               }
-               if ((MountEnum.Pegasus == mt) && (false == isGriffonOwned) && (false == IsPegasusOwned))
-               {
-                  partyMember.AddNewMount(mt);
-                  return;
+                  if (false == partyMember.AddNewMount(mt))
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "AddNewMountToParty(): AddNewMount() returned false for mi=" + partyMember.Name + " for mount=" + mt.ToString());
+                     return false;
+                  }
+                  return true;
                }
             }
+            return true; // Cannot be added since every character already riding griffon
          }
          //--------------------------------
-         if ((MountEnum.Pegasus == mt) || (MountEnum.Pegasus == mt)) // If this is a pegasus/griffon, add to partymember that has none
+         if (MountEnum.Harpy == mt)
+         {
+            foreach (IMapItem partyMember in sortedMapItems) // If this is a pegasus, add to partymember that has no pegasus
+            {
+               if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || ("Prince" == partyMember.Name) || (true == partyMember.IsFlyer()))
+                  continue;
+               isHarpyOwned = false;
+               foreach (IMapItem mount in partyMember.Mounts)
+               {
+                  if (true == mount.Name.Contains("Harpy"))
+                     isHarpyOwned = true;
+               }
+               if (false == isHarpyOwned)
+               {
+                  if (false == partyMember.AddNewMount(mt))
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "AddNewMountToParty(): AddNewMount() returned false for mi=" + partyMember.Name + " for mount=" + mt.ToString());
+                     return false;
+                  }
+                  return true;
+               }
+            }
+            return true; // Harpy cannot be added since every character already riding harpy
+         }
+         //--------------------------------
+         if (MountEnum.Pegasus == mt) // If this is a pegasus, add to partymember that has none
          {
             foreach (IMapItem partyMember in sortedMapItems)
             {
                if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || ("Prince" == partyMember.Name) || (true == partyMember.IsFlyer()) )
                   continue;
-               isGriffonOwned = false;
-               IsPegasusOwned = false;
+               isPegasusOwned = false;
                foreach (IMapItem mount in partyMember.Mounts)
                {
-                  if (true == mount.Name.Contains("Griffon"))
-                     isGriffonOwned = true;
-                  else if (true == mount.Name.Contains("Pegasus"))
-                     IsPegasusOwned = true;
+                  if (true == mount.Name.Contains("Pegasus"))
+                     isPegasusOwned = true;
                }
-               if ((false == isGriffonOwned) && (false == IsPegasusOwned))
+               if (false == isPegasusOwned)
                {
-                  partyMember.AddNewMount(mt);
-                  return;
+                  if (false == partyMember.AddNewMount(mt))
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "AddNewMountToParty(): AddNewMount() returned false for mi=" + partyMember.Name + " for mount=" + mt.ToString());
+                     return false;
+                  }
+                  return true;
                }
             }
          }
@@ -1059,12 +1219,17 @@ namespace BarbarianPrince
             PartyMembers.Rotate(1);
          foreach (IMapItem partyMember in PartyMembers) // add to first conscious person which is hopefully the prince
          {
-            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || ("Prince" == partyMember.Name) || (true == partyMember.IsFlyer()) )
+            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.IsFlyer()))
+               continue;
+            if (false == partyMember.AddNewMount(mt))
             {
-               partyMember.AddNewMount(mt);
-               return;
+               Logger.Log(LogEnum.LE_ERROR, "AddNewMountToParty(): AddNewMount() returned false for mi=" + partyMember.Name + " for mount=" + mt.ToString());
+               return false;
             }
+            return true;
          }
+         Logger.Log(LogEnum.LE_ERROR, "AddNewMountToParty(): reached default for mount=" + mt.ToString());
+         return true;
       }
       public void ReduceMount(MountEnum mt)
       {
@@ -1074,7 +1239,7 @@ namespace BarbarianPrince
             int mountCount = 0;
             foreach (IMapItem mount in mi.Mounts) // First remove from MapItem that has multiple mounts
             {
-               if ( (MountEnum.Any == mt) && (false == mount.Name.Contains("Griffon")) )
+               if ( (MountEnum.Any == mt) && ((false == mount.Name.Contains("Griffon")) && (false == mount.Name.Contains("Harpy"))) )
                   ++mountCount;
                else if ((MountEnum.Horse == mt) && (true == mount.Name.Contains("Horse")))
                   ++mountCount;
@@ -1092,7 +1257,7 @@ namespace BarbarianPrince
             {
                if ("Prince" == mi.Name)
                   continue;
-               if ((MountEnum.Any == mt) && (false == mount.Name.Contains("Griffon")))
+               if ((MountEnum.Any == mt) && ((false == mount.Name.Contains("Griffon")) && (false == mount.Name.Contains("Harpy"))) )
                {
                   Logger.Log(LogEnum.LE_MOUNT_CHANGE, "ReduceMount(): remove=" + mount.Name + " from mi=" + mi.Name);
                   mount.Rider = null;
@@ -1116,7 +1281,7 @@ namespace BarbarianPrince
          //----------------------------
          foreach (IMapItem mount in myPrince.Mounts) // Finally, remove from Prince last
          {
-            if ((MountEnum.Any == mt) && (false == mount.Name.Contains("Griffon")))
+            if ((MountEnum.Any == mt) && ((false == mount.Name.Contains("Griffon")) && (false == mount.Name.Contains("Harpy"))))
             {
                Logger.Log(LogEnum.LE_MOUNT_CHANGE, "ReduceMount(): remove=" + mount.Name + " from mi=Prince");
                mount.Rider = null;
@@ -1141,12 +1306,15 @@ namespace BarbarianPrince
       public void TransferMounts(IMapItems mounts)
       {
          List<IMapItem> griffons = new List<IMapItem>();
+         List<IMapItem> harpies = new List<IMapItem>();
          List<IMapItem> pegasuses = new List<IMapItem>();
          List<IMapItem> horses = new List<IMapItem>();
          foreach (IMapItem mount in mounts)
          {
             if (true == mount.Name.Contains("Griffon"))
                griffons.Add(mount);
+            else if (true == mount.Name.Contains("Harpy"))
+               harpies.Add(mount);
             else if (true == mount.Name.Contains("Pegasus"))
                pegasuses.Add(mount);
             else if (true == mount.Name.Contains("Horse"))
@@ -1162,7 +1330,7 @@ namespace BarbarianPrince
          IMapItem firstConsciousMapItem = null;
          foreach (IMapItem partyMember in PartyMembers) // Find the first conscious party member that can get mounts. Hopefully this is Prince
          {
-            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.Name.Contains("Giant")) || (true == partyMember.IsFlyer()))
+            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.IsFlyer()))
                continue;
             if (null == firstConsciousMapItem)
                firstConsciousMapItem = partyMember;
@@ -1175,11 +1343,11 @@ namespace BarbarianPrince
          //---------------------------------------
          int assignedGriffonCount = 0;
          int maxGriffonCount = griffons.Count;
-         foreach (IMapItem partyMember in PartyMembers) // Assign any griffons to party members until count is reached
+         foreach (IMapItem partyMember in PartyMembers) 
          {
             if (assignedGriffonCount == maxGriffonCount)
                break;
-            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.Name.Contains("Giant")) || (true == partyMember.IsFlyer()) )
+            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.IsFlyer()) )
                continue;
             partyMember.AddMount(griffons[assignedGriffonCount]); // Griffon gets assigned a rider
             assignedGriffonCount++;
@@ -1188,13 +1356,28 @@ namespace BarbarianPrince
          for (int i = 0; i < unassignedCount; i++)
             firstConsciousMapItem.AddMount(griffons[i]);
          //---------------------------------------
+         int assignedHarpyCount = 0;
+         int maxHarpyCount = harpies.Count;
+         foreach (IMapItem partyMember in PartyMembers) 
+         {
+            if (assignedHarpyCount == maxHarpyCount)
+               break;
+            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.IsFlyer()))
+               continue;
+            partyMember.AddMount(harpies[assignedHarpyCount]); // Griffon gets assigned a rider
+            assignedHarpyCount++;
+         }
+         unassignedCount = maxHarpyCount - assignedHarpyCount; // Any unassigned got to first conscious member which is hopefully Prince
+         for (int i = 0; i < unassignedCount; i++)
+            firstConsciousMapItem.AddMount(harpies[i]);
+         //---------------------------------------
          int assignedPegasusCount = 0;
          int maxPegasusCount = pegasuses.Count;
-         foreach (IMapItem partyMember in PartyMembers) // Assign any griffons to party members until count is reached
+         foreach (IMapItem partyMember in PartyMembers) 
          {
             if (assignedPegasusCount == maxPegasusCount)
                break;
-            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.Name.Contains("Giant")) || (true == partyMember.IsFlyer()) || (0 < partyMember.Mounts.Count))
+            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.IsFlyer()) || (0 < partyMember.Mounts.Count))
                continue;
             partyMember.AddMount(pegasuses[assignedPegasusCount]);
             assignedPegasusCount++;
@@ -1209,7 +1392,7 @@ namespace BarbarianPrince
          {
             if (assignedHorseCount == maxHorseCount)
                break;
-            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.Name.Contains("Giant")) || (true == partyMember.IsFlyer()) || (0 < partyMember.Mounts.Count))
+            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.IsFlyer()) || (0 < partyMember.Mounts.Count))
                continue;
             partyMember.AddMount(horses[assignedHorseCount]);
             assignedHorseCount++;
@@ -1567,11 +1750,11 @@ namespace BarbarianPrince
          int numTrueLovesBefore = 0;
          bool isMemberKilled = false;
          //--------------------------------
-         foreach (IMapItem member in PartyMembers) // If Griffon rider is killed, remove it from Griffon
+         foreach (IMapItem member in PartyMembers) // If Griffon/Harpy rider is killed, remove it from Griffon/Harpy
          {
             if (null != member.Rider)
             {
-               if (true == member.Rider.IsKilled) // If killed, remove from griffon
+               if (true == member.Rider.IsKilled) // If killed, remove from griffon/harpy
                {
                   member.Rider.Mounts.Remove(member);
                   member.Rider = null;
@@ -1589,7 +1772,7 @@ namespace BarbarianPrince
                if (true == member.Name.Contains("ElfWarrior"))
                   --this.WitAndWile;
             }
-            if( null != member.Rider ) // If Griffon is killed, and it has a rider, must remove
+            if( null != member.Rider ) // If Griffon/Harpy is killed, and it has a rider, must remove
             {
                member.Rider.IsFlying = false;
                member.Rider.IsRiding = false;
@@ -1721,6 +1904,14 @@ namespace BarbarianPrince
                victim = griffon.Rider;
             griffon.Rider = null;
          }
+         //--------------------------------
+         if (true == victim.Name.Contains("Harpy"))
+         {
+            IMapItem harpy = victim;
+            if (null != harpy.Rider) // If Harpy has a rider, it is the victim that is being removed
+               victim = harpy.Rider;
+            harpy.Rider = null;
+         }
          //---------------------------------------------
          if (false == victim.RemoveVictimMountAndLoad()) // remove mount, coin, food that victim is carrying
          {
@@ -1767,10 +1958,10 @@ namespace BarbarianPrince
             mi.Food = 0;
             mi.Coin = 0;
             mi.WealthCode = 0;
-            if (null != mi.Rider) // mi = griffon
+            if (null != mi.Rider) // mi = griffon/harpy
             {
-               mi.Rider.Mounts.Remove(mi);  // Griffon Rider removes griffon as mount
-               mi.Rider = null;             // Griffon removes its rider
+               mi.Rider.Mounts.Remove(mi);  // Griffon/Harpy Rider removes griffon/harpy as mount
+               mi.Rider = null;            
             }
          }
          if (true == isMountsLost)
@@ -1875,7 +2066,7 @@ namespace BarbarianPrince
                --this.WitAndWile;
          }
          //--------------------------------
-         if (true == mi.Name.Contains("Griffon"))
+         if ( true == mi.IsFlyingMountCarrier() )
          {
             if( null != mi.Rider )
                mi.Rider.Mounts.Remove(mi);
@@ -1884,7 +2075,7 @@ namespace BarbarianPrince
          if( 0 < mi.Mounts.Count )
          {
             IMapItem mount = mi.Mounts[0];
-            if( true == mount.Name.Contains("Griffon"))
+            if( true == mount.IsFlyingMountCarrier() )
             {
                if (null != mi.Rider)
                   mi.Mounts.Remove(mount);
@@ -1938,7 +2129,7 @@ namespace BarbarianPrince
                --this.WitAndWile;
          }
          //--------------------------------
-         if (true == mi.Name.Contains("Griffon"))
+         if ( true == mi.IsFlyingMountCarrier() )
          {
             if (null != mi.Rider)
                mi.Rider.Mounts.Remove(mi);
@@ -1947,7 +2138,7 @@ namespace BarbarianPrince
          if (0 < mi.Mounts.Count)
          {
             IMapItem mount = mi.Mounts[0];
-            if (true == mount.Name.Contains("Griffon"))
+            if ( true == mount.IsFlyingMountCarrier() )
             {
                if (null != mi.Rider)
                   mi.Mounts.Remove(mount);

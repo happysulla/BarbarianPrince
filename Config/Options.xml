@@ -6,7 +6,7 @@
         <IsEnabled value="True" />
     </Option>
     <Option value="EasyMonsters">
-        <IsEnabled value="True" />
+        <IsEnabled value="False" />
     </Option>
 	<!--===========================-->
 	<Option value="NoLostRoll">
@@ -20,7 +20,7 @@
 	</Option>
 	<!--===========================-->
 	<Option value="ForceNoEvent">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
     </Option>
 	<Option value="ForceEvent">
 		<IsEnabled value="False" />
@@ -53,4 +53,44 @@
 	<Option value="ForceRaftEvent">
 		<IsEnabled value="False" />
 	</Option>
+   <!--===========================-->
+   <Option value="Dwarf">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="Eagle">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="Elf">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="Falcon">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="Griffon">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="Magician">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="Mercenary">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="Merchant">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="Minstrel">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="Monk">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="PorterSlave">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="TrueLove">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="Wizard">
+      <IsEnabled value="False" />
+   </Option>
 </Options>

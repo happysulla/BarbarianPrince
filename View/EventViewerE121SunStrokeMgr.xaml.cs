@@ -371,7 +371,7 @@ namespace BarbarianPrince
             }
             for (int k = 0; k < mi.Mounts.Count; ++k)
             {
-               if (true == mi.Mounts[k].Name.Contains("Griffon"))
+               if (true == mi.Mounts[k].IsFlyingMountCarrier())
                   continue;
                myGridRows[i] = new GridRow(mi.Mounts[k]);
                ++i;

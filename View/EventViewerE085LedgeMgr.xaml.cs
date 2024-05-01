@@ -174,7 +174,7 @@ namespace BarbarianPrince
             ++i;
          }
          //--------------------------------------------------
-         for( int k=0; k<myMaxRowMemberCount; ++k ) // If this is a Flyer, or the mount is a griffon or pegasus, considered flying
+         for( int k=0; k<myMaxRowMemberCount; ++k ) // If this is a Flyer, or the mount is a griffon/harpy or pegasus, considered flying
          {
             IMapItem member = myGridRowsMembers[k].myMapItem;
             if (true == member.IsFlyer())

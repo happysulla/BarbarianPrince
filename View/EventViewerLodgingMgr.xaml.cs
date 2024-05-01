@@ -361,7 +361,13 @@ namespace BarbarianPrince
             //--------------------------------------------
             myGameInstance.AddFoods(myFoodPurchasedAtFarm);
             for (int i = 0; i < myHorsePurchasedAtFarm; ++i)
-               myGameInstance.AddNewMountToParty();
+            {
+               if (false == myGameInstance.AddNewMountToParty())
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateEndState(): AddNewMountToParty() return false");
+                  return false;
+               }
+            }
             //--------------------------------------------
             if (null == myCallback)
             {

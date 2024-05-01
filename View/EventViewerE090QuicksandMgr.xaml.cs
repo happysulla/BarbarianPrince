@@ -147,9 +147,7 @@ namespace BarbarianPrince
             }
             if ((1 < mi.Mounts.Count) || ((1 == mi.Mounts.Count) && (false == mi.IsRiding))) // if more than one mount or one mount but not riding
                myIsUnmountedMount = true;
-            if ((true == mi.Name.Contains("Griffon")) || (null != mi.Rider)) // if the griffon has rider, do not show. Griffon is tied with rider
-               continue;
-            if ((true == mi.Name.Contains("Harpy")) || (null != mi.Rider)) // if the harpy has rider, do not show. Harpy is tied with rider
+            if ((true == mi.IsFlyingMountCarrier()) || (null != mi.Rider)) // if the griffon/harpy has rider, do not show. Griffon/Harpy is tied with rider
                continue;
             if (true == mi.Name.Contains("Falcon")) // skip falcons
                continue;
@@ -219,12 +217,12 @@ namespace BarbarianPrince
                      return false;
                   }
                   IMapItem deadMount = member.Mounts[0];
-                  if ( false == member.RemoveMountWithLoad(deadMount))
+                  if ( false == member.RemoveMountWithLoad(deadMount)) // removes the rider from mount
                   {
                      Logger.Log(LogEnum.LE_ERROR, "UpdateEndState(): RemoveMountWithLoad() returned false");
                      return false;
                   }
-                  if( true == deadMount.Name.Contains("Griffon"))
+                  if( true == deadMount.IsFlyingMountCarrier()) // remove the mount
                   {
                      deadMount.IsKilled = true;
                      deadMount.SetWounds(deadMount.Endurance, 0);
