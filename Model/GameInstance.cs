@@ -414,16 +414,44 @@ namespace BarbarianPrince
          {
             string memberName = memberToAdd + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c63Griffon", "c63Griffon", Prince.Territory, 3, 4, 1);
-            member.IsFlying = true;
-            member.IsRiding = true;
-            AddCompanion(member);
+            IMapItem griffon = new MapItem(memberName, 1.0, false, false, false, "c63Griffon", "c63Griffon", Prince.Territory, 3, 4, 1);
+            griffon.IsFlying = true;
+            griffon.IsRiding = true;
+            AddCompanion(griffon);
             //---------------------
+            memberToAdd = "Mercenary";
             memberName = memberToAdd + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
             IMapItem rider = new MapItem(memberName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", Prince.Territory, 5, 5, 0);
-            member.Rider = member;
-            rider.Mounts.Insert(0, member);
+            griffon.Rider = rider;
+            rider.Mounts.Insert(0, griffon);
+            rider.IsRiding = true;
+            rider.IsFlying = true;
+            AddCompanion(rider);
+         }
+         //---------------------------------------------------------
+         memberToAdd = "Harpy";
+         option = myOptions.Find(memberToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem harpy = new MapItem(memberName, 1.0, false, false, false, "c83Harpy", "c83Harpy", Prince.Territory, 4, 5, 4);
+            harpy.IsFlying = true;
+            harpy.IsRiding = true;
+            AddCompanion(harpy);
+            //---------------------
+            memberToAdd = "Runaway";
+            memberName = memberToAdd + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem rider = new MapItem(memberName, 1.0, false, false, false, "c09Runaway", "c09Runaway", Prince.Territory, 4, 4, 0);
+            harpy.Rider = rider;
+            rider.Mounts.Insert(0, harpy);
             rider.IsRiding = true;
             rider.IsFlying = true;
             AddCompanion(rider);

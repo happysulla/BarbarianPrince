@@ -64,10 +64,13 @@
       <IsEnabled value="False" />
    </Option>
    <Option value="Falcon">
-      <IsEnabled value="False" />
+      <IsEnabled value="True" />
    </Option>
    <Option value="Griffon">
-      <IsEnabled value="False" />
+      <IsEnabled value="True" />
+   </Option>
+   <Option value="Harpy">
+      <IsEnabled value="True" />
    </Option>
    <Option value="Magician">
       <IsEnabled value="False" />
