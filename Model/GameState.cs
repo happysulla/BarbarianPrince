@@ -1039,6 +1039,13 @@ namespace BarbarianPrince
             case "MercenaryLead": character = new MapItem(miName, 1.0, false, false, false, "c65MercLead", "c65MercLead", princeTerritory, 6, 6, 50); break;
             case "Merchant": character = new MapItem(miName, 1.0, false, false, false, "c77Merchant", "c77Merchant", princeTerritory, 3, 2, 0); break;
             case "Minstrel": character = new MapItem(miName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", princeTerritory, 0, 0, 0); break;
+            case "Mirror":
+               character = new MapItem(gi.Prince);
+               character.Name = "Mirror";
+               character.TopImageName = "c34PrinceMirror";
+               character.BottomImageName = "c34PrinceMirror";
+               character.OverlayImageName = "";
+               break;
             case "Monk": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 5, 4, 4); break;
             case "MonkGuide": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 3, 2, 0); break;
             case "MonkHermit": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 6, 3, 0); break;
@@ -1126,7 +1133,6 @@ namespace BarbarianPrince
          //------------------------------------------------------------
          if (-1 < wealthCode)
             character.WealthCode = wealthCode;
-         gi.EncounteredMembers.Add(character);
          return character;
       }
    }
@@ -1580,12 +1586,6 @@ namespace BarbarianPrince
                gi.EventStart = gi.EventDisplayed = gi.EventActive = "e072d"; // follow elven band
                gi.DieRollAction = GameAction.EncounterRoll;
                //-------------------------------------------
-               IOption isEasyMonstersOption = gi.Options.Find("EasyMonsters");
-               if (null == isEasyMonstersOption)
-               {
-                  returnStatus = "Reached Default ERROR with a=" + action.ToString();
-                  Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-               }
                gi.EncounteredMembers.Clear();
                for (int i = 0; i < gi.NumMembersBeingFollowed; ++i) // if following elves, repopulate EncounterMembers container
                {
@@ -2924,12 +2924,6 @@ namespace BarbarianPrince
          String returnStatus = "OK";
          if (true == PerformEndCheck(gi, ref action))
             return returnStatus;
-         IOption isEasyMonstersOption = gi.Options.Find("EasyMonsters");
-         if (null == isEasyMonstersOption)
-         {
-            returnStatus = "isEasyMonstersOption=null";
-            Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-         }
          GamePhase previousPhase = gi.GamePhase;
          GameAction previousAction = action;
          GameAction previousDieAction = gi.DieRollAction;
@@ -5706,12 +5700,6 @@ namespace BarbarianPrince
       }
       protected bool EncounterStart(IGameInstance gi, ref GameAction action, int dieRoll)
       {
-         IOption isEasyMonstersOption = gi.Options.Find("EasyMonsters");
-         if (null == isEasyMonstersOption)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): returned option=null");
-            return false;
-         }
          //--------------------------------------
          ITerritory princeTerritory = gi.Prince.Territory;
          string key = gi.EventStart = gi.EventActive;
@@ -5741,8 +5729,6 @@ namespace BarbarianPrince
                IMapItem mercenaryLead = CreateCharacter(gi, "MercenaryLead", 50);
                mercenaryLead.AddNewMount();
                gi.EncounteredMembers.Add(mercenaryLead);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  dieRoll = 1;
                for (int i = 0; i < dieRoll; ++i)
                {
                   IMapItem mercenary = CreateCharacter(gi, "Mercenary", 4);
@@ -6186,17 +6172,8 @@ namespace BarbarianPrince
                break;
             case "e047":  // mirror of reversal
                gi.EncounteredMembers.Clear();
-               IMapItem mirror = new MapItem(gi.Prince);
-               mirror.Name = "Mirror";
-               mirror.TopImageName = "c34PrinceMirror";
-               mirror.BottomImageName = "c34PrinceMirror";
-               mirror.OverlayImageName = "";
-               if (true == isEasyMonstersOption.IsEnabled)
-               {
-                  mirror.Endurance = 1;
-                  mirror.Combat = 1;
-               }
-               theNumHydraTeeth = gi.HydraTeethCount;
+               IMapItem mirror = CreateCharacter(gi, "Mirror", 0);
+               theNumHydraTeeth = gi.HydraTeethCount; // save off number of teeth b/c cannot use in this battle - return to this value if defeat mirror
                gi.EncounteredMembers.Add(mirror);
                gi.EventDisplayed = gi.EventActive = "e307";
                break;
@@ -6326,8 +6303,6 @@ namespace BarbarianPrince
                IMapItem banditLeader = CreateCharacter(gi, "BanditLeader", 15);
                gi.EncounteredMembers.Add(banditLeader);
                int numBandits = gi.PartyMembers.Count + 1; // leader plus one extra exceeds party count by two
-               if (true == isEasyMonstersOption.IsEnabled)
-                  numBandits = 1;
                for (int i = 0; i < numBandits; ++i)
                {
                   IMapItem bandit1 = CreateCharacter(gi, "Bandit", 1);
@@ -6529,8 +6504,6 @@ namespace BarbarianPrince
                {
                   gi.EncounteredMembers.Clear();
                   ++dieRoll;
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     dieRoll = 1;
                   gi.DieResults["e071"][0] = dieRoll;
                   gi.NumMembersBeingFollowed = dieRoll;
                   for (int i = 0; i < dieRoll; ++i)
@@ -6602,8 +6575,6 @@ namespace BarbarianPrince
                {
                   gi.EncounteredMembers.Clear();
                   int numWolves = gi.DieResults[key][0];
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     numWolves = 1;
                   for (int i = 0; i < numWolves; ++i)
                   {
                      IMapItem wolf = CreateCharacter(gi, "Wolf", 0);
@@ -6663,8 +6634,6 @@ namespace BarbarianPrince
                IMapItem patrolLead = CreateCharacter(gi, "PatrolMountedLead", 10);
                patrolLead.AddNewMount();
                gi.EncounteredMembers.Add(patrolLead);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  dieRoll = 1;
                for (int i = 0; i < dieRoll; ++i)
                {
                   IMapItem patrol = CreateCharacter(gi, "PatrolMounted", 4);
@@ -6711,8 +6680,6 @@ namespace BarbarianPrince
             case "e094": // crocodiles in swamp
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     dieRoll = 1;
                   gi.DieResults[key][0] = dieRoll;
                }
                else
@@ -6730,8 +6697,6 @@ namespace BarbarianPrince
             case "e094a": // crocodiles in river
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     dieRoll = 1;
                   gi.DieResults[key][0] = dieRoll;
                }
                else
@@ -6896,10 +6861,7 @@ namespace BarbarianPrince
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
                   gi.EncounteredMembers.Clear();
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     gi.DieResults[key][0] = 2;
-                  else
-                     gi.DieResults[key][0] = dieRoll;
+                  gi.DieResults[key][0] = dieRoll;
                }
                else
                {
@@ -7231,7 +7193,7 @@ namespace BarbarianPrince
                return true; //<<<<<<<<<<<<<<<<<<<<<
             case "e047": // defeated mirror
                gi.AddCoins(gi.Prince.Coin); // double coins - possesions and mounts are already doubled
-               gi.HydraTeethCount = theNumHydraTeeth;
+               gi.HydraTeethCount = theNumHydraTeeth; // return number of Hydrateeth to proper number
                theNumHydraTeeth = 0;
                gi.CapturedWealthCodes.Clear();
                break;
@@ -7567,12 +7529,6 @@ namespace BarbarianPrince
       }
       protected bool EncounterRoll(IGameInstance gi, ref GameAction action, int dieRoll)
       {
-         IOption isEasyMonstersOption = gi.Options.Find("EasyMonsters");
-         if (null == isEasyMonstersOption)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): returned option=null");
-            return false;
-         }
          //--------------------------------------------------------
          int partyCoin = gi.GetCoins();
          int numFlying = 0; // nobody is considered flying if prince is not
