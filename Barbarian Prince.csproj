@@ -501,7 +501,6 @@
     <Resource Include="Images\c17Farmer.gif" />
     <Resource Include="Images\c09Runaway.gif" />
     <Resource Include="Images\GameBox.gif" />
-    <Resource Include="Config\Rules.txt" />
     <Resource Include="Images\c01dieRoll2.gif" />
     <Resource Include="Images\c02dieRoll2.gif" />
     <Resource Include="Images\c03dieRoll2.gif" />
@@ -795,9 +794,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Spectre.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\c26Magician.gif" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\c27Golem.gif" />
@@ -1714,6 +1710,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Harpy.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\C84Rat.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

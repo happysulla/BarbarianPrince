@@ -5,9 +5,15 @@
     <Option value="AutoWealthRollForUnderFive">
         <IsEnabled value="True" />
     </Option>
+   <Option value="EasiestMonsters">
+      <IsEnabled value="False" />
+   </Option>
     <Option value="EasyMonsters">
         <IsEnabled value="False" />
     </Option>
+   <Option value="LessHardMonsters">
+      <IsEnabled value="False" />
+   </Option>
 	<!--===========================-->
 	<Option value="NoLostRoll">
 		<IsEnabled value="False" />
