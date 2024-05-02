@@ -5,6 +5,7 @@
     <Option value="AutoWealthRollForUnderFive">
         <IsEnabled value="True" />
     </Option>
+   <!--===========================-->
    <Option value="EasiestMonsters">
       <IsEnabled value="False" />
    </Option>
@@ -59,7 +60,7 @@
 	<Option value="ForceRaftEvent">
 		<IsEnabled value="False" />
 	</Option>
-   <!--===========================-->
+   <!--========Add Extra PartyMembers==============-->
    <Option value="Dwarf">
       <IsEnabled value="False" />
    </Option>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Security.Policy;
 using System.Text;
@@ -979,7 +980,7 @@ namespace BarbarianPrince
          gi.MapItemMoves.Add(mim);
          return true;
       }
-      protected IMapItem CreatCharacter(IGameInstance gi, string cName)
+      protected IMapItem CreateCharacter(IGameInstance gi, string cName, int wealthCode=-1)
       {
          ITerritory princeTerritory = gi.Prince.Territory;
          string miName = cName + Utilities.MapItemNum.ToString();
@@ -1039,9 +1040,10 @@ namespace BarbarianPrince
             case "Merchant": character = new MapItem(miName, 1.0, false, false, false, "c77Merchant", "c77Merchant", princeTerritory, 3, 2, 0); break;
             case "Minstrel": character = new MapItem(miName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", princeTerritory, 0, 0, 0); break;
             case "Monk": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 5, 4, 4); break;
+            case "MonkGuide": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 3, 2, 0); break;
             case "MonkHermit": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 6, 3, 0); break;
             case "MonkTraveling": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 3, 2, 0); break;
-            case "MonkWarrior": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 4, 5, 10); break;
+            case "MonkWarrior": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 6, 6, 10); break;
             case "Orc": character = new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 5, 5, 2); break;
             case "OrcWeak": character = new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 5, 4, 1); break;
             case "OrcChief": character = new MapItem(miName, 1.0, false, false, false, "c64OrcChief", "c64OrcChief", princeTerritory, 6, 5, 7); break;
@@ -1122,6 +1124,8 @@ namespace BarbarianPrince
             character.Combat -= Math.Max(newCombat, 1);
          }
          //------------------------------------------------------------
+         if (-1 < wealthCode)
+            character.WealthCode = wealthCode;
          gi.EncounteredMembers.Add(character);
          return character;
       }
@@ -3034,11 +3038,9 @@ namespace BarbarianPrince
                {
                   gi.EncounteredMembers.Clear();
                   gi.EventStart = gi.EventActive;
-                  gi.IsMagicianProvideGift = true;
-                  string magicianName = "Magician" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem magician = new MapItem(magicianName, 1.0, false, false, false, "c26Magician", "c26Magician", princeTerritory, 5, 3, 0);
+                  IMapItem magician = CreateCharacter(gi, "Magician");
                   gi.EncounteredMembers.Add(magician);
+                  gi.IsMagicianProvideGift = true;
                }
                else
                {
@@ -3684,9 +3686,7 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.E069WoundedWarriorCarry:
-               string woundedWarriorName = "Warrior" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem warriorWounded = new MapItem(woundedWarriorName, 1.0, false, false, false, "c79Warrior", "c79Warrior", princeTerritory, 6, 7, 0);
+               IMapItem warriorWounded = CreateCharacter(gi, "Warrior", 0);
                warriorWounded.SetWounds(5, 0);
                warriorWounded.IsAlly = true;
                gi.PartyMembers.Add(warriorWounded);
@@ -3697,9 +3697,7 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.E069WoundedWarriorRemain:
-               string woundedWarriorName1 = "Warrior" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem warriorWounded1 = new MapItem(woundedWarriorName1, 1.0, false, false, false, "c79Warrior", "c79Warrior", princeTerritory, 6, 7, 0);
+               IMapItem warriorWounded1 = CreateCharacter(gi, "Warrior", 0);
                warriorWounded1.SetWounds(5, 0);
                warriorWounded1.IsAlly = true;
                gi.PartyMembers.Add(warriorWounded1);
@@ -3769,11 +3767,7 @@ namespace BarbarianPrince
             case GameAction.E076HuntingCat:
                gi.EventStart = "e076";
                gi.EventDisplayed = gi.EventActive = "e310";
-               string huntingCatName = "Cat" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem huntingCat = new MapItem(huntingCatName, 1.0, false, false, false, "c59HuntingCat", "c59HuntingCat", princeTerritory, 3, 6, 0);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  huntingCat = new MapItem(huntingCatName, 1.0, false, false, false, "c59HuntingCat", "c59HuntingCat", princeTerritory, 1, 1, 0);
+               IMapItem huntingCat = CreateCharacter(gi, "Cat", 0);
                gi.EncounteredMembers.Add(huntingCat);
                break;
             case GameAction.E077HerdCapture: // herd of wild horses
@@ -3957,11 +3951,7 @@ namespace BarbarianPrince
             case GameAction.E083WildBoar:
                gi.EventStart = "e083";
                gi.EventDisplayed = gi.EventActive = "e310";
-               string boarName = "Boar" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem boar = new MapItem(boarName, 1.0, false, false, false, "c58Boar", "c58Boar", princeTerritory, 5, 8, 0);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  boar = new MapItem(boarName, 1.0, false, false, false, "c58Boar", "c58Boar", princeTerritory, 1, 1, 0);
+               IMapItem boar = CreateCharacter(gi, "Boar", 0);
                gi.EncounteredMembers.Add(boar);
                break;
             case GameAction.E084BearEncounter:
@@ -4192,9 +4182,7 @@ namespace BarbarianPrince
                break;
             case GameAction.E107FalconAdd:
                gi.IsFalconFed = true;
-               string falconName = "Falcon" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem falcon = new MapItem(falconName, 1.0, false, false, false, "c82Falcon", "c82Falcon", princeTerritory, 0, 0, 0);
+               IMapItem falcon = CreateCharacter(gi, "Falcon", 0);
                falcon.IsRiding = true;
                falcon.IsFlying = true;
                falcon.IsGuide = true;
@@ -4253,9 +4241,7 @@ namespace BarbarianPrince
                gi.RaftState = RaftEnum.RE_RAFT_ENDS_TODAY;
                break;
             case GameAction.E123WoundedBlackKnightRemain:
-               string woundedBlackKnightName1 = "Warrior" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem blackKnight = new MapItem(woundedBlackKnightName1, 1.0, false, false, false, "c80BlackKnight", "c80BlackKnight", princeTerritory, 8, 8, 0);
+               IMapItem blackKnight = CreateCharacter(gi, "KnightBlack", 0);
                blackKnight.SetWounds(7, 0);
                blackKnight.IsAlly = true;
                gi.PartyMembers.Add(blackKnight);
@@ -5170,16 +5156,17 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.E210HireFreeman:
+               IMapItem freeman = CreateCharacter(gi, "Freeman", 0);
                string freemanName = "Freeman";
                if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                   freemanName += "Elf";
-               if (true == gi.DwarvenMines.Contains(princeTerritory)) 
+               if (true == gi.DwarvenMines.Contains(princeTerritory))
                   freemanName += "Dwarf";
                if (true == gi.HalflingTowns.Contains(princeTerritory))
                   freemanName += "Halfling";
-               freemanName += Utilities.MapItemNum.ToString();
+               freeman.Name = freemanName;
+               freeman.Name += Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               IMapItem freeman = new MapItem(freemanName, 1.0, false, false, false, "c46Freeman", "c46Freeman", princeTerritory, 4, 4, 0);
                gi.AddCompanion(freeman);
                if (false == EncounterEnd(gi, ref action))
                {
@@ -5188,6 +5175,7 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.E210HireLancer:
+               IMapItem lancer = CreateCharacter(gi, "Lancer", 0);
                string lancerName = "Lancer";
                if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                   lancerName += "Elf";
@@ -5195,9 +5183,9 @@ namespace BarbarianPrince
                   lancerName += "Dwarf";
                if (true == gi.HalflingTowns.Contains(princeTerritory))
                   lancerName += "Halfling";
-               lancerName += Utilities.MapItemNum.ToString();
+               lancer.Name = lancerName;
+               lancer.Name += Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               IMapItem lancer = new MapItem(lancerName, 1.0, false, false, false, "c47Lancer", "c47Lancer", princeTerritory, 5, 5, 0);
                lancer.Wages = 3;
                lancer.AddNewMount();
                gi.AddCompanion(lancer);
@@ -5208,6 +5196,7 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.E210HireMerc1:
+               IMapItem merc0 = CreateCharacter(gi, "Mercenary", 0);
                string merc0Name = "Mercenary";
                if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                   merc0Name += "Elf";
@@ -5215,9 +5204,9 @@ namespace BarbarianPrince
                   merc0Name += "Dwarf";
                if (true == gi.HalflingTowns.Contains(princeTerritory))
                   merc0Name += "Halfling";
-               merc0Name += Utilities.MapItemNum.ToString();
+               merc0.Name = merc0Name;
+               merc0.Name += Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               IMapItem merc0 = new MapItem(merc0Name, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", princeTerritory, 4, 4, 0);
                merc0.Wages = 2;
                gi.AddCompanion(merc0);
                if (false == EncounterEnd(gi, ref action))
@@ -5227,6 +5216,7 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.E210HireMerc2:
+               IMapItem merc1 = CreateCharacter(gi, "Mercenary", 0);
                string merc1Name = "Mercenary";
                if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                   merc1Name += "Elf";
@@ -5234,11 +5224,12 @@ namespace BarbarianPrince
                   merc1Name += "Dwarf";
                if (true == gi.HalflingTowns.Contains(princeTerritory))
                   merc1Name += "Halfling";
-               merc1Name += Utilities.MapItemNum.ToString();
+               merc1.Name = merc1Name;
+               merc1.Name += Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               IMapItem merc1 = new MapItem(merc1Name, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", princeTerritory, 4, 4, 0);
                merc1.Wages = 2;
                gi.AddCompanion(merc1);
+               IMapItem merc2 = CreateCharacter(gi, "Mercenary", 0);
                string merc2Name = "Mercenary";
                if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                   merc2Name += "Elf";
@@ -5246,9 +5237,9 @@ namespace BarbarianPrince
                   merc2Name += "Dwarf";
                if (true == gi.HalflingTowns.Contains(princeTerritory))
                   merc2Name += "Halfling";
-               merc2Name += Utilities.MapItemNum.ToString();
+               merc2.Name = merc2Name;
+               merc2.Name += Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               IMapItem merc2 = new MapItem(merc2Name, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", princeTerritory, 4, 4, 0);
                merc2.Wages = 2;
                gi.AddCompanion(merc2);
                if (false == EncounterEnd(gi, ref action))
@@ -5266,6 +5257,7 @@ namespace BarbarianPrince
                {
                   for (int i = 0; i < gi.PurchasedHenchman; ++i)
                   {
+                     IMapItem henchman = CreateCharacter(gi, "Henchman", 0);
                      string henchmanName = "Henchman";
                      if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                         henchmanName += "Elf";
@@ -5273,9 +5265,9 @@ namespace BarbarianPrince
                         henchmanName += "Dwarf";
                      if (true == gi.HalflingTowns.Contains(princeTerritory))
                         henchmanName += "Halfling";
-                     henchmanName += Utilities.MapItemNum.ToString();
+                     henchman.Name = henchmanName;
+                     henchman.Name += Utilities.MapItemNum.ToString();
                      ++Utilities.MapItemNum;
-                     IMapItem henchman = new MapItem(henchmanName, 1.0, false, false, false, "c49Henchman", "c49Henchman", princeTerritory, 3, 2, 0);
                      henchman.Wages = 1;
                      gi.AddCompanion(henchman);
                   }
@@ -5287,6 +5279,7 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.E210HireLocalGuide:
+               IMapItem hiredLocalGuide = CreateCharacter(gi, "Guide", 0);
                string localGuideName = "Guide";
                if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                   localGuideName += "Elf";
@@ -5294,9 +5287,9 @@ namespace BarbarianPrince
                   localGuideName += "Dwarf";
                if (true == gi.HalflingTowns.Contains(princeTerritory))
                   localGuideName += "Halfling";
-               localGuideName += Utilities.MapItemNum.ToString();
+               hiredLocalGuide.Name = localGuideName;
+               hiredLocalGuide.Name += Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               IMapItem hiredLocalGuide = new MapItem(localGuideName, 1.0, false, false, false, "c48Guide", "c48Guide", princeTerritory, 3, 2, 0);
                hiredLocalGuide.Wages = 2;
                hiredLocalGuide.IsGuide = true;
                if (false == AddGuideTerritories(gi, hiredLocalGuide, 2))
@@ -5312,6 +5305,7 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.E210HireRunaway:
+               IMapItem runaway = CreateCharacter(gi, "Runaway", 0);
                string runawayName = "Runaway";
                if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                   runawayName += "Elf";
@@ -5319,9 +5313,9 @@ namespace BarbarianPrince
                   runawayName += "Dwarf";
                if (true == gi.HalflingTowns.Contains(princeTerritory))
                   runawayName += "Halfling";
-               runawayName += Utilities.MapItemNum.ToString();
+               runaway.Name = runawayName;
+               runaway.Name += Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               IMapItem runaway = new MapItem(runawayName, 1.0, false, false, false, "c09Runaway", "c09Runaway", princeTerritory, 4, 4, 0);
                gi.AddCompanion(runaway);
                if (false == EncounterEnd(gi, ref action))
                {
@@ -5332,6 +5326,7 @@ namespace BarbarianPrince
             case GameAction.E210HirePorter:
                for (int i = 0; i < gi.PurchasedPorter; ++i)
                {
+                  IMapItem porter = CreateCharacter(gi, "Porter", 0);
                   string porterName = "Porter";
                   if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                      porterName += "Elf";
@@ -5339,12 +5334,14 @@ namespace BarbarianPrince
                      porterName += "Dwarf";
                   if (true == gi.HalflingTowns.Contains(princeTerritory))
                      porterName += "Halfling";
-                  porterName += Utilities.MapItemNum.ToString();
+                  porter.Name = porterName;
+                  porter.Name += Utilities.MapItemNum.ToString();
                   ++Utilities.MapItemNum;
-                  IMapItem porter = new MapItem(porterName, 1.0, false, false, false, "c11Porter", "c11Porter", princeTerritory, 0, 0, 0);
                   porter.GroupNum = --Utilities.PorterNum;  // porter group must be zero or lower
                   porter.Wages = 1;
                   gi.AddCompanion(porter);
+                  //----------------------------  add second porter
+                  porter = CreateCharacter(gi, "Porter", 0);
                   porterName = "Porter";
                   if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                      porterName += "Elf";
@@ -5352,15 +5349,16 @@ namespace BarbarianPrince
                      porterName += "Dwarf";
                   if (true == gi.HalflingTowns.Contains(princeTerritory))
                      porterName += "Halfling";
-                  porterName += Utilities.MapItemNum.ToString();
+                  porter.Name = porterName;
+                  porter.Name += Utilities.MapItemNum.ToString();
                   ++Utilities.MapItemNum;
-                  porter = new MapItem(porterName, 1.0, false, false, false, "c11Porter", "c11Porter", princeTerritory, 0, 0, 0);
                   porter.GroupNum = Utilities.PorterNum; // belong to the same group num
                   porter.Wages = 0;  // a pair cost 1 gp
                   gi.AddCompanion(porter);
                }
                if (0 < gi.PurchasedGuide)
                {
+                  IMapItem hiredLocalGuideWithPorter = CreateCharacter(gi, "Guide", 0);
                   string hiredGuideName1 = "Guide";
                   if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                      hiredGuideName1 += "Elf";
@@ -5368,9 +5366,9 @@ namespace BarbarianPrince
                      hiredGuideName1 += "Dwarf";
                   if (true == gi.HalflingTowns.Contains(princeTerritory))
                      hiredGuideName1 += "Halfling";
-                  hiredGuideName1 += Utilities.MapItemNum.ToString();
+                  hiredGuideName1.Name = porterName;
+                  hiredGuideName1.Name += Utilities.MapItemNum.ToString();
                   ++Utilities.MapItemNum;
-                  IMapItem hiredLocalGuideWithPorter = new MapItem(hiredGuideName1, 1.0, false, false, false, "c48Guide", "c48Guide", princeTerritory, 3, 2, 0);
                   hiredLocalGuideWithPorter.Wages = 2;
                   hiredLocalGuideWithPorter.IsGuide = true;
                   if (false == AddGuideTerritories(gi, hiredLocalGuideWithPorter, 2))
@@ -5429,9 +5427,7 @@ namespace BarbarianPrince
                   case 8:
                      if (false == gi.IsMarkOfCain)
                      {
-                        string monkGuideName = "Monk" + Utilities.MapItemNum.ToString();
-                        ++Utilities.MapItemNum;
-                        IMapItem monkGuide = new MapItem(monkGuideName, 1.0, false, false, false, "c19Monk", "c19Monk", t212, 3, 2, 0);
+                        IMapItem monkGuide = CreateCharacter(gi, "Monk", 0);
                         monkGuide.IsGuide = true;
                         if (false == AddGuideTerritories(gi, monkGuide, 1))
                         {
@@ -5465,14 +5461,11 @@ namespace BarbarianPrince
                      gi.AddSpecialItem(SpecialEnum.StaffOfCommand);
                      if (false == gi.IsMarkOfCain)
                      {
-                        string monkName1 = "WarriorMonk" + Utilities.MapItemNum.ToString();
-                        ++Utilities.MapItemNum;
-                        IMapItem warriorMonk1 = new MapItem(monkName1, 1.0, false, false, false, "c19Monk", "c19Monk", t212, 6, 5, 0);
+                        IMapItem warriorMonk1 = CreateCharacter(gi, "MonkWarrior", 0);
                         warriorMonk1.AddNewMount();
                         gi.AddCompanion(warriorMonk1);
-                        string monkName2 = "WarriorMonk" + Utilities.MapItemNum.ToString();
-                        ++Utilities.MapItemNum;
-                        IMapItem warriorMonk2 = new MapItem(monkName2, 1.0, false, false, false, "c19Monk", "c19Monk", t212, 6, 5, 0);
+
+                        IMapItem warriorMonk2 = CreateCharacter(gi, "MonkWarrior", 0);
                         warriorMonk2.AddNewMount();
                         gi.AddCompanion(warriorMonk2);
                      }
@@ -6163,19 +6156,11 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e020": // Traveling Monk
-               string monkName1 = "TravelingMonk" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem travelingMonk1 = new MapItem(monkName1, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 5, 4, 4);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  travelingMonk1 = new MapItem(monkName1, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 1, 1, 4);
+               IMapItem travelingMonk1 = CreateCharacter(gi, "MonkTraveling", 4);
                gi.EncounteredMembers.Add(travelingMonk1);
                if (4 < dieRoll) // add a second one on die of 5 or 6
                {
-                  string monkName2 = "TravelingMonk" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem travelingMonk2 = new MapItem(monkName2, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 5, 4, 4);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     travelingMonk2 = new MapItem(monkName2, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 1, 1, 4);
+                  IMapItem travelingMonk2 = CreateCharacter(gi, "MonkTraveling", 4);
                   gi.EncounteredMembers.Add(travelingMonk2);
                }
                gi.DieResults["e020"][0] = dieRoll;
@@ -6185,11 +6170,7 @@ namespace BarbarianPrince
                int numMonkWarriors = (int)Math.Ceiling((double)dieRoll * 0.5);
                for (int i = 0; i < numMonkWarriors; ++i)
                {
-                  string miName = "WarriorMonk" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem warriorMonk = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 4, 5, 10);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     warriorMonk = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 1, 1, 10);
+                  IMapItem warriorMonk = CreateCharacter(gi, "MonkWarrior", 10);
                   gi.EncounteredMembers.Add(warriorMonk);
                }
                gi.DieResults["e021"][0] = dieRoll;
@@ -6204,11 +6185,7 @@ namespace BarbarianPrince
                   case 2:                                              // hermit monk
                      gi.EventStart = gi.EventDisplayed = gi.EventActive = "e019";
                      gi.DieRollAction = GameAction.DieRollActionNone;
-                     string monkName = "HermitMonk" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem hermitMonk = new MapItem(monkName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 6, 3, 0);
-                     if (true == isEasyMonstersOption.IsEnabled)
-                        hermitMonk = new MapItem(monkName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 1, 1, 0);
+                     IMapItem hermitMonk = CreateCharacter(gi, "MonkHermit", 0);
                      gi.EncounteredMembers.Add(hermitMonk);
                      break;
                   case 3:
@@ -6227,22 +6204,16 @@ namespace BarbarianPrince
             case "e023":
                gi.DieResults[key][0] = dieRoll;
                gi.EncounteredMembers.Clear();
-               string wizardName = "Wizard" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem wizard = new MapItem(wizardName, 1.0, false, false, false, "c12Wizard", "c12Wizard", princeTerritory, 4, 4, 60);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  wizard = new MapItem(wizardName, 1.0, false, false, false, "c12Wizard", "c12Wizard", princeTerritory, 1, 1, 60);
+               IMapItem wizard = CreateCharacter(gi, "Wizard", 60);
                if (3 < dieRoll)
                   wizard.AddNewMount();
                gi.EncounteredMembers.Add(wizard);
+               //--------------------------------
+               IMapItem wizardHenchman = CreateCharacter(gi, "WizardHenchman", 4);
                string henchmanName = "Henchman" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem henchman = new MapItem(henchmanName, 1.0, false, false, false, "c49Henchman", "c49Henchman", princeTerritory, 4, 5, 4);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  henchman = new MapItem(henchmanName, 1.0, false, false, false, "c49Henchman", "c49Henchman", princeTerritory, 1, 1, 4);
                if (3 < dieRoll)
-                  henchman.AddNewMount();
-               gi.EncounteredMembers.Add(henchman);
+                  wizardHenchman.AddNewMount();
+               gi.EncounteredMembers.Add(wizardHenchman);
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e023a": // Wizard
@@ -6255,13 +6226,9 @@ namespace BarbarianPrince
             case "e032":  // ghosts
                gi.EncounteredMembers.Clear();
                int numGhosts = dieRoll + 1;
-               if (true == isEasyMonstersOption.IsEnabled)
-                  numGhosts = 2;
                for (int i = 0; i < numGhosts; ++i)
                {
-                  string miName = "Ghost" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem ghost = new MapItem(miName, 1.0, false, false, false, "c20Ghost", "c20Ghost", princeTerritory, 2, 4, 0);
+                  IMapItem ghost = CreateCharacter(gi, "Ghost", 0);
                   gi.EncounteredMembers.Add(ghost);
                }
                gi.EventDisplayed = gi.EventActive = "e310";  // party is surprised
@@ -6273,28 +6240,20 @@ namespace BarbarianPrince
                   ++numWraiths;
                for (int i = 0; i < numWraiths; ++i)
                {
-                  string miName = "Wraith" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem wraith = new MapItem(miName, 1.0, false, false, false, "c24Wraith", "c24Wraith", princeTerritory, 9, 6, 0);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     wraith = new MapItem(miName, 1.0, false, false, false, "c24Wraith", "c24Wraith", princeTerritory, 1, 1, 0);
+                  IMapItem wraith = CreateCharacter(gi, "Wraith", 0);
                   gi.EncounteredMembers.Add(wraith);
                }
                gi.EventDisplayed = gi.EventActive = "e307"; // wraiths attack first
                break;
             case "e034":  // Spectre of Inner Tomb
                gi.EncounteredMembers.Clear();
-               IMapItem spectre = new MapItem("Spectre", 1.0, false, false, false, "c25Spectre", "c25Spectre", princeTerritory, 3, 7, 0);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  spectre = new MapItem("Spectre", 1.0, false, false, false, "c25Spectre", "c25Spectre", princeTerritory, 1, 1, 0);
+               IMapItem spectre = CreateCharacter(gi, "Spectre", 0);
                gi.EncounteredMembers.Add(spectre);
                gi.EventDisplayed = gi.EventActive = "e034a";
                break;
             case "e036":  // golem at the gate
                gi.EncounteredMembers.Clear();
-               IMapItem golem = new MapItem("Golem", 1.0, false, false, false, "c27Golem", "c27Golem", princeTerritory, 8, 6, 0);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  golem = new MapItem("Golem", 1.0, false, false, false, "c27Golem", "c27Golem", princeTerritory, 1, 1, 0);
+               IMapItem golem = CreateCharacter(gi, "Golem", 0);
                gi.EncounteredMembers.Add(golem);
                foreach (IMapItem mi in gi.PartyMembers)  // Prince fights golem alone
                {
@@ -6315,9 +6274,7 @@ namespace BarbarianPrince
             case "e046":  // gateway to darkness
                gi.EncounteredMembers.Clear();
                ++gi.GuardianCount;
-               IMapItem guardian = new MapItem("Guardian", 1.0, false, false, false, "c28Guardian", "c28Guardian", princeTerritory, 7, 7, 0);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  guardian = new MapItem("Guardian", 1.0, false, false, false, "c28Guardian", "c28Guardian", princeTerritory, 1, 1, 0);
+               IMapItem guardian = CreateCharacter(gi, "Guardian", 0);
                gi.EncounteredMembers.Add(guardian);
                IMapItems membersLeaving = new MapItems(); // make a copy b/c changing container when member departs
                foreach (IMapItem mi in gi.PartyMembers)
@@ -6334,9 +6291,7 @@ namespace BarbarianPrince
                ++gi.GuardianCount;
                for (int i = 0; i < gi.GuardianCount; ++i)
                {
-                  IMapItem guardian1 = new MapItem("Guardian", 1.0, false, false, false, "c28Guardian", "c28Guardian", princeTerritory, 7, 7, 0);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     guardian1 = new MapItem("Guardian", 1.0, false, false, false, "c28Guardian", "c28Guardian", princeTerritory, 1, 1, 0);
+                  IMapItem guardian1 = CreateCharacter(gi, "Guardian", 0);
                   gi.EncounteredMembers.Add(guardian1);
                }
                gi.EventDisplayed = gi.EventActive = "e307";
@@ -6363,15 +6318,13 @@ namespace BarbarianPrince
                switch (gi.DieResults["e048"][0])
                {
                   case 1:
-                     string miName1 = "Swordswoman" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem swordswoman = new MapItem(miName1, 1.0, false, false, false, "c76Swordswoman", "c76Swordswoman", princeTerritory, 7, 7, 4);
+                     IMapItem swordswoman = CreateCharacter(gi, "Swordswoman", 4);
+                     swordswoman.IsFugitive = true;
                      gi.EncounteredMembers.Add(swordswoman);
                      break;
                   case 2:
-                     string miName2 = "Runaway" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem runaway = new MapItem(miName2, 1.0, false, false, false, "c09Runaway", "c09Runaway", princeTerritory, 4, 2, 0);
+                     IMapItem runaway = CreateCharacter(gi, "Runaway", 0);
+                     runaway.IsFugitive = true;
                      gi.EncounteredMembers.Add(runaway);
                      break;
                   case 3:
@@ -6381,29 +6334,23 @@ namespace BarbarianPrince
                      }
                      else
                      {
-                        string miName31 = "Priest" + Utilities.MapItemNum.ToString();
-                        ++Utilities.MapItemNum;
-                        IMapItem priest3 = new MapItem(miName31, 1.0, false, false, false, "c14Priest", "c14Priest", princeTerritory, 3, 3, 10);
+                        IMapItem priest3 = CreateCharacter(gi, "Priest", 10);
+                        priest3.IsFugitive = true;
                         gi.EncounteredMembers.Add(priest3);
                      }
                      break;
                   case 4:
-                     string miName3 = "Magician" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem magician4 = new MapItem(miName3, 1.0, false, false, false, "c16Magician", "c16Magician", princeTerritory, 2, 3, 5);
+                     IMapItem magician4 = CreateCharacter(gi, "MagicianWeak", 5);
+                     magician4.IsFugitive = true;
                      gi.EncounteredMembers.Add(magician4);
                      break;
                   case 5:
-                     string miName5 = "Merchant" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem merchant5 = new MapItem(miName5, 1.0, false, false, false, "c77Merchant", "c77Merchant", princeTerritory, 3, 2, 0);
+                     IMapItem merchant5 = CreateCharacter(gi, "Merchant", 5);
                      merchant5.IsFugitive = true;
                      gi.EncounteredMembers.Add(merchant5);
                      break;
                   case 6:
-                     string miName6 = "Deserter" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem deserter = new MapItem(miName6, 1.0, false, false, false, "c78Deserter", "c78Deserter", princeTerritory, 4, 4, 2);
+                     IMapItem deserter = CreateCharacter(gi, "Deserter", 2);
                      deserter.IsFugitive = true;
                      gi.EncounteredMembers.Add(deserter);
                      break;
@@ -6420,9 +6367,7 @@ namespace BarbarianPrince
                }
                gi.ReduceFoods(1);
                gi.IsMinstrelPlaying = true;
-               string minstrelName = "Minstrel" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem minstrel = new MapItem(minstrelName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", princeTerritory, 0, 0, 0);
+               IMapItem minstrel = CreateCharacter(gi, "Minstrel", 0);
                gi.EncounteredMinstrels.Add(minstrel);
                if (false == EncounterEnd(gi, ref action))
                {
@@ -6455,11 +6400,7 @@ namespace BarbarianPrince
                      numOfConstabulary += 3; // on foot
                   for (int i = 0; i < numOfConstabulary; ++i)
                   {
-                     string constabularyName = "Constabulary" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem constabulary = new MapItem(constabularyName, 1.0, false, false, false, "c45Constabulary", "c45Constabulary", princeTerritory, 4, 5, 4);
-                     if (true == isEasyMonstersOption.IsEnabled)
-                        constabulary = new MapItem(constabularyName, 1.0, false, false, false, "c45Constabulary", "c45Constabulary", princeTerritory, 1, 1, 4);
+                     IMapItem constabulary = CreateCharacter(gi, "Constabulary", 4);
                      if (4 < gi.DieResults[key][0])
                         constabulary.AddNewMount();
                      gi.EncounteredMembers.Add(constabulary);
@@ -6494,37 +6435,26 @@ namespace BarbarianPrince
                break;
             case "e051":  // Bandits
                gi.EncounteredMembers.Clear();
-               string miName0 = "BanditLeader";
-               IMapItem banditLeader = new MapItem(miName0, 1.0, false, false, false, "c21Bandit", "c21Bandit", princeTerritory, 6, 6, 15);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  banditLeader = new MapItem(miName0, 1.0, false, false, false, "c21Bandit", "c21Bandit", princeTerritory, 1, 1, 15);
+               IMapItem banditLeader = CreateCharacter(gi, "BanditLeader", 15);
                gi.EncounteredMembers.Add(banditLeader);
                int numBandits = gi.PartyMembers.Count + 1; // leader plus one extra exceeds party count by two
                if (true == isEasyMonstersOption.IsEnabled)
                   numBandits = 1;
                for (int i = 0; i < numBandits; ++i)
                {
-                  string miName1 = "Bandit" + i.ToString();
-                  IMapItem bandit1 = new MapItem(miName1, 1.0, false, false, false, "c21Bandit", "c21Bandit", princeTerritory, 4, 5, 1);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     bandit1 = new MapItem(miName1, 1.0, false, false, false, "c21Bandit", "c21Bandit", princeTerritory, 1, 1, 1);
+                  IMapItem bandit1 = CreateCharacter(gi, "Bandit", 1);
                   gi.EncounteredMembers.Add(bandit1);
                }
                gi.EventDisplayed = gi.EventActive = "e310"; // party is surprised
                break;
             case "e052": // Goblins
-               IMapItem hobgoblin = new MapItem("Hobgoblin", 1.0, false, false, false, "c23Hobgoblin", "c23Hobgoblin", princeTerritory, 5, 6, 5);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  hobgoblin = new MapItem("Hobgoblin", 1.0, false, false, false, "c23Hobgoblin", "c23Hobgoblin", princeTerritory, 1, 1, 5);
+               IMapItem hobgoblin = CreateCharacter(gi, "Hobgoblin", 5);
                gi.EncounteredMembers.Add(hobgoblin);
                gi.DieResults["e052"][0] = dieRoll;
                int numGoblins = dieRoll - 1;
                for (int i = 0; i < numGoblins; ++i)
                {
-                  string miName = "Goblin" + i.ToString();
-                  IMapItem goblin = new MapItem(miName, 1.0, false, false, false, "c22Goblin", "c22Goblin", princeTerritory, 3, 3, 1);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     goblin = new MapItem(miName, 1.0, false, false, false, "c22Goblin", "c22Goblin", princeTerritory, 1, 1, 1);
+                  IMapItem goblin = CreateCharacter(gi, "Goblin", 1);
                   gi.EncounteredMembers.Add(goblin);
                }
                break;
@@ -6532,38 +6462,25 @@ namespace BarbarianPrince
                if (null == gi.GoblinKeeps.Find(princeTerritory.Name))
                   gi.GoblinKeeps.Add(princeTerritory);
                gi.EncounteredMembers.Clear();
-               IMapItem hobgoblin1 = new MapItem("Hobgoblin", 1.0, false, false, false, "c23Hobgoblin", "c23Hobgoblin", princeTerritory, 5, 6, 4);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  hobgoblin1 = new MapItem("Hobgoblin", 1.0, false, false, false, "c23Hobgoblin", "c23Hobgoblin", princeTerritory, 1, 1, 5);
+               IMapItem hobgoblin1 = CreateCharacter(gi, "Hobgoblin", 4);
                gi.EncounteredMembers.Add(hobgoblin1);
                gi.DieResults["e054b"][0] = dieRoll;
                int numGoblins1 = dieRoll - 1;
                for (int i = 0; i < numGoblins1; ++i)
                {
-                  string miName = "Goblin" + i.ToString();
-                  IMapItem goblin = new MapItem(miName, 1.0, false, false, false, "c22Goblin", "c22Goblin", princeTerritory, 3, 3, 1);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     goblin = new MapItem(miName, 1.0, false, false, false, "c22Goblin", "c22Goblin", princeTerritory, 1, 1, 1);
+                  IMapItem goblin = CreateCharacter(gi, "Goblin", 1);
                   gi.EncounteredMembers.Add(goblin);
                }
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e055": // Orcs
                gi.EncounteredMembers.Clear();
-               IMapItem chieftain = new MapItem("Orc", 1.0, false, false, false, "c64OrcChief", "c64OrcChief", princeTerritory, 6, 5, 7);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  chieftain = new MapItem("Orc", 1.0, false, false, false, "c64OrcChief", "c64OrcChief", princeTerritory, 1, 1, 7);
-               gi.EncounteredMembers.Add(chieftain);
+               IMapItem orcChief = CreateCharacter(gi, "OrcChief", 7);
                gi.DieResults["e055"][0] = dieRoll;
                int numOrcsInBand = dieRoll - 1;
-               if (true == isEasyMonstersOption.IsEnabled)
-                  numOrcsInBand = 1;
                for (int i = 0; i < numOrcsInBand; ++i)
                {
-                  string miName = "Orc" + i.ToString();
-                  IMapItem orc = new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 5, 4, 1);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     orc = new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 1, 1, 1);
+                  IMapItem orc = CreateCharacter(gi, "Orc", 1);
                   gi.EncounteredMembers.Add(orc);
                }
                break;
@@ -6571,29 +6488,20 @@ namespace BarbarianPrince
                if (null == gi.OrcTowers.Find(princeTerritory.Name))
                   gi.OrcTowers.Add(princeTerritory);
                gi.EncounteredMembers.Clear();
-               IMapItem demiTroll = new MapItem("DemiTroll", 1.0, false, false, false, "c29DemiTroll", "c29DemiTroll", princeTerritory, 7, 8, 10);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  demiTroll = new MapItem("DemiTroll", 1.0, false, false, false, "c29DemiTroll", "c29DemiTroll", princeTerritory, 1, 1, 10);
+               IMapItem demiTroll = CreateCharacter(gi, "TrollDemi", 10);
                gi.EncounteredMembers.Add(demiTroll);
                gi.DieResults["e056a"][0] = dieRoll;
                int numOrcs = dieRoll + 1;
-               if (true == isEasyMonstersOption.IsEnabled)
-                  numOrcs = 1;
                for (int i = 0; i < numOrcs; ++i)
                {
-                  string miName = "Orc" + i.ToString();
-                  IMapItem orc = new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 5, 5, 2);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     orc = new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 1, 1, 2);
+                  IMapItem orc = CreateCharacter(gi, "Orc", 2);
                   gi.EncounteredMembers.Add(orc);
                }
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e057": // troll
                gi.EncounteredMembers.Clear();
-               IMapItem troll = new MapItem("Troll", 1.0, false, false, false, "c31Troll", "c31Troll", princeTerritory, 8, 8, 15);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  troll = new MapItem("Troll", 1.0, false, false, false, "c31Troll", "c31Troll", princeTerritory, 5, 5, 15);
+               IMapItem troll = CreateCharacter(gi, "Troll", 15);
                gi.EncounteredMembers.Add(troll);
                gi.DieRollAction = GameAction.DieRollActionNone;
                if (gi.WitAndWile < dieRoll)
@@ -6612,11 +6520,7 @@ namespace BarbarianPrince
                   int numDwarves = gi.DieResults[key][0] + 1;
                   for (int i = 0; i < numDwarves; ++i)
                   {
-                     string dwarfName = "Dwarf" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem dwarf = new MapItem(dwarfName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 6, 5, 10);
-                     if (true == isEasyMonstersOption.IsEnabled)
-                        dwarf = new MapItem(dwarfName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 1, 1, 10);
+                     IMapItem dwarf = CreateCharacter(gi, "Dwarf", 10);
                      gi.EncounteredMembers.Add(dwarf);
                   }
                   if (gi.PartyMembers.Count < numDwarves)
@@ -6699,11 +6603,7 @@ namespace BarbarianPrince
                {
                   gi.DieResults[key][0] = dieRoll;
                   gi.EncounteredMembers.Clear();
-                  string wizardName2 = "Wizard" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem wizard2 = new MapItem(wizardName2, 1.0, false, false, false, "c12Wizard", "c12Wizard", princeTerritory, 4, 4, 60);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     wizard2 = new MapItem(wizardName2, 1.0, false, false, false, "c12Wizard", "c12Wizard", princeTerritory, 1, 1, 60);
+                  IMapItem wizard2 = CreateCharacter(gi, "Wizard", 60);
                   gi.EncounteredMembers.Add(wizard2);
                }
                else
@@ -6747,11 +6647,7 @@ namespace BarbarianPrince
                   gi.NumMembersBeingFollowed = dieRoll;
                   for (int i = 0; i < dieRoll; ++i)
                   {
-                     string elfName = "Elf" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem elf = new MapItem(elfName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 4, 5, 7);
-                     if (true == isEasyMonstersOption.IsEnabled)
-                        elf = new MapItem(elfName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 1, 1, 7);
+                     IMapItem elf = CreateCharacter(gi, "Elf", 7);
                      gi.EncounteredMembers.Add(elf);
                   }
                }
