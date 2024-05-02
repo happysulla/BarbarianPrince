@@ -1589,11 +1589,7 @@ namespace BarbarianPrince
                gi.EncounteredMembers.Clear();
                for (int i = 0; i < gi.NumMembersBeingFollowed; ++i) // if following elves, repopulate EncounterMembers container
                {
-                  string elfName = "Elf" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem elf = new MapItem(elfName, 1.0, false, false, false, "c56Elf", "c56Elf", gi.Prince.Territory, 4, 5, 7);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     elf = new MapItem(elfName, 1.0, false, false, false, "c56Elf", "c56Elf", gi.Prince.Territory, 1, 1, 7);
+                  IMapItem elf = CreateCharacter(gi, "Elf", 7);
                   gi.EncounteredMembers.Add(elf);
                }
                break;
@@ -5366,8 +5362,8 @@ namespace BarbarianPrince
                      hiredGuideName1 += "Dwarf";
                   if (true == gi.HalflingTowns.Contains(princeTerritory))
                      hiredGuideName1 += "Halfling";
-                  hiredGuideName1.Name = porterName;
-                  hiredGuideName1.Name += Utilities.MapItemNum.ToString();
+                  hiredLocalGuideWithPorter.Name = hiredGuideName1;
+                  hiredLocalGuideWithPorter.Name += Utilities.MapItemNum.ToString();
                   ++Utilities.MapItemNum;
                   hiredLocalGuideWithPorter.Wages = 2;
                   hiredLocalGuideWithPorter.IsGuide = true;
@@ -5724,11 +5720,7 @@ namespace BarbarianPrince
             case "e002a": // Mercenaries
                for (int i = 0; i < dieRoll; ++i)
                {
-                  string miName = "Mercenary" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem mercenanary11 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", princeTerritory, 4, 5, 4);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     mercenanary11 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", princeTerritory, 1, 1, 4);
+                  IMapItem mercenanary11 = CreateCharacter(gi, "Mercenary", 4);
                   gi.EncounteredMembers.Add(mercenanary11);
                }
                gi.DieResults[key][0] = dieRoll;
@@ -5739,31 +5731,21 @@ namespace BarbarianPrince
             case "e003c": // Swordsman
                gi.EventStart = "e003";
                gi.EncounteredMembers.Clear();
-               string swordsmanName = "Swordsman" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem swordsman = new MapItem(swordsmanName, 1.0, false, false, false, "c53Swordsman", "c53Swordsman", princeTerritory, 6, 6, 7);
+               IMapItem swordsman = CreateCharacter(gi, "Swordsman", 7);
                swordsman.AddNewMount();
                gi.EncounteredMembers.Add(swordsman);
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e004": // Mercenaries
                gi.EncounteredMembers.Clear();
-               string mercenaryLeadName = "Mercenary" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem mercenaryLead = new MapItem(mercenaryLeadName, 1.0, false, false, false, "c65MercLead", "c65MercLead", princeTerritory, 6, 6, 50);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  mercenaryLead = new MapItem(mercenaryLeadName, 1.0, false, false, false, "c65MercLead", "c65MercLead", princeTerritory, 1, 1, 50);
+               IMapItem mercenaryLead = CreateCharacter(gi, "MercenaryLead", 50);
                mercenaryLead.AddNewMount();
                gi.EncounteredMembers.Add(mercenaryLead);
                if (true == isEasyMonstersOption.IsEnabled)
                   dieRoll = 1;
                for (int i = 0; i < dieRoll; ++i)
                {
-                  string mercenaryName = "Mercenary" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem mercenary = new MapItem(mercenaryName, 1.0, false, false, false, "c18Mercenary", "c18Mercenary", princeTerritory, 4, 5, 4);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     mercenary = new MapItem(mercenaryName, 1.0, false, false, false, "c18Mercenary", "c18Mercenary", princeTerritory, 1, 1, 4);
+                  IMapItem mercenary = CreateCharacter(gi, "Mercenary", 4);
                   if (dieRoll < 3)
                      mercenary.AddNewMount();
                   gi.EncounteredMembers.Add(mercenary);
@@ -5773,17 +5755,11 @@ namespace BarbarianPrince
                break;
             case "e005": // Amazons
                gi.EncounteredMembers.Clear();
-               if (true == isEasyMonstersOption.IsEnabled)
-                  dieRoll = 2;
                int amazonGroupNum = Utilities.GroupNum;
                ++Utilities.GroupNum;
                for (int i = 0; i < dieRoll + 1; ++i)
                {
-                  string amazonName = "Amazon" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem amazon = new MapItem(amazonName, 1.0, false, false, false, "c57Amazon", "c57Amazon", princeTerritory, 5, 6, 4);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     amazon = new MapItem(amazonName, 1.0, false, false, false, "c57Amazon", "c57Amazon", princeTerritory, 1, 1, 4);
+                  IMapItem amazon = CreateCharacter(gi, "Amazon", 4);
                   amazon.GroupNum = amazonGroupNum;
                   gi.EncounteredMembers.Add(amazon);
                }
@@ -5795,11 +5771,7 @@ namespace BarbarianPrince
                {
                   gi.DieResults[key][0] = dieRoll;
                   gi.EncounteredMembers.Clear();
-                  string dwarfLeaderName = "DwarfWarrior" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem dwarfLeader = new MapItem(dwarfLeaderName, 1.0, false, false, false, "c68DwarfLead", "c68DwarfLead", princeTerritory, 7, 6, 21);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     dwarfLeader = new MapItem(dwarfLeaderName, 1.0, false, false, false, "c68DwarfLead", "c68DwarfLead", princeTerritory, 1, 1, 21);
+                  IMapItem dwarfLeader = CreateCharacter(gi, "DwarfLead", 21);
                   gi.EncounteredMembers.Add(dwarfLeader);
                }
                else
@@ -5818,11 +5790,7 @@ namespace BarbarianPrince
                      case 4:
                         if( false == gi.IsDwarvenBandSizeSet)
                         {
-                           string dwarfFriendName = "Dwarf" + Utilities.MapItemNum.ToString();
-                           ++Utilities.MapItemNum;
-                           IMapItem dwarfFriend = new MapItem(dwarfFriendName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 6, 5, 12);
-                           if (true == isEasyMonstersOption.IsEnabled)
-                              dwarfFriend = new MapItem(dwarfFriendName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 1, 1, 12);
+                           IMapItem dwarfFriend = CreateCharacter(gi, "Dwarf", 12);
                            gi.EncounteredMembers.Add(dwarfFriend);
                         }
                         switch (gi.DwarvenChoice)
@@ -5862,12 +5830,8 @@ namespace BarbarianPrince
                   gi.DieResults[key][0] = dieRoll;
                   gi.IsElfWitAndWileActive = true;
                   gi.EncounteredMembers.Clear();
-                  string elfLeaderName = "ElfWarrior" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem elfLeader = new MapItem(elfLeaderName, 1.0, false, false, false, "c69ElfLead", "c69ElfLead", princeTerritory, 7, 6, 21);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     elfLeader = new MapItem(elfLeaderName, 1.0, false, false, false, "c69ElfLead", "c69ElfLead", princeTerritory, 1, 1, 21);
-                  gi.EncounteredMembers.Add(elfLeader);
+                  IMapItem elfLead = CreateCharacter(gi, "ElfLead", 21);
+                  gi.EncounteredMembers.Add(elfLead);
                }
                else
                {
@@ -5910,11 +5874,7 @@ namespace BarbarianPrince
                               return false;
                            }
                            gi.EncounteredMembers[0].AddSpecialItemToShare(SpecialEnum.CurePoisonVial);
-                           string elfAssistantName = "Elf" + Utilities.MapItemNum.ToString();
-                           ++Utilities.MapItemNum;
-                           IMapItem elfAssistant= new MapItem(elfAssistantName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 3, 3, 2);
-                           if (true == isEasyMonstersOption.IsEnabled)
-                              elfAssistant = new MapItem(elfAssistantName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 1, 1, 2);
+                           IMapItem elfAssistant = CreateCharacter(gi, "ElfAssistant", 2);
                            gi.EncounteredMembers.Add(elfAssistant);
                         }
                         switch (gi.ElvenChoice)
@@ -5946,11 +5906,7 @@ namespace BarbarianPrince
                      case 6:
                         if (false == gi.IsElvenBandSizeSet)
                         {
-                           string elfFriendName = "Elf" + Utilities.MapItemNum.ToString();
-                           ++Utilities.MapItemNum;
-                           IMapItem elfFriend = new MapItem(elfFriendName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 4, 4, 7);
-                           if (true == isEasyMonstersOption.IsEnabled)
-                              elfFriend = new MapItem(elfFriendName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 1, 1, 7);
+                           IMapItem elfFriend = CreateCharacter(gi, "ElfFriend", 7);
                            gi.EncounteredMembers.Add(elfFriend);
                         }
                         switch (gi.ElvenChoice)
@@ -5968,52 +5924,34 @@ namespace BarbarianPrince
                break;
             case "e008": // Halfling
                gi.EncounteredMembers.Clear();
-               string halflingWarriorName = "HalflingWarrior" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem halflingWarrior = new MapItem(halflingWarriorName, 1.0, false, false, false, "c70HalflingLead", "c70HalflingLead", princeTerritory, 6, 3, 4);
+               IMapItem halflingWarrior = CreateCharacter(gi, "HalflingLead", 4);
                gi.EncounteredMembers.Add(halflingWarrior);
                gi.EventDisplayed = gi.EventActive = "e304";
                break;
             case "e008a": // Halfling
                gi.EventStart = "e008";
                gi.EncounteredMembers.Clear();
-               string halflingWarriorName1 = "HalflingWarrior" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem halflingWarrior1 = new MapItem(halflingWarriorName1, 1.0, false, false, false, "c70HalflingLead", "c70HalflingLead", princeTerritory, 6, 3, 4);
+               IMapItem halflingWarrior1 = CreateCharacter(gi, "HalflingLead", 4);
                gi.EncounteredMembers.Add(halflingWarrior1);
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e011b": // peaceful farmer - raid 
-               string farmerPeacefulName = "Farmer" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem farmePeaceful = new MapItem(farmerPeacefulName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 7, 4, 1);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  farmePeaceful = new MapItem(farmerPeacefulName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 1, 1, 1);
-               gi.EncounteredMembers.Add(farmePeaceful);
+               IMapItem farmerPeaceful = CreateCharacter(gi, "Farmer", 1);
+               gi.EncounteredMembers.Add(farmerPeaceful);
                gi.EventDisplayed = gi.EventActive = "e330";
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e012b": // farmer with protector - raid 
-               string farmerWithProtectorName = "Farmer" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem farmerWithProtector = new MapItem(farmerWithProtectorName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 7, 4, 2);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  farmerWithProtector = new MapItem(farmerWithProtectorName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 1, 1, 2);
+               IMapItem farmerWithProtector = CreateCharacter(gi, "Farmer", 2);
                gi.EncounteredMembers.Add(farmerWithProtector);
                gi.EventDisplayed = gi.EventActive = "e330";
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e013b": // rich farmer retainer - raid 
                int numRetainers = 4;
-               if (true == isEasyMonstersOption.IsEnabled)
-                  numRetainers = 1;
                for (int i = 0; i < numRetainers; ++i)
                {
-                  string farmerRetainerhName = "Farmer" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem farmerRetainer = new MapItem(farmerRetainerhName, 1.0, false, false, false, "c40Retainer", "c40Retainer", princeTerritory, 4, 4, 1);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     farmerRetainer = new MapItem(farmerRetainerhName, 1.0, false, false, false, "c40Retainer", "c40Retainer", princeTerritory, 1, 1, 1);
+                  IMapItem farmerRetainer = CreateCharacter(gi, "FarmerRetainer", 1);
                   gi.EncounteredMembers.Add(farmerRetainer);
                }
                gi.EventDisplayed = gi.EventActive = "e330";
@@ -6021,90 +5959,54 @@ namespace BarbarianPrince
                break;
             case "e013c": // rich farmer - raid 
                gi.EncounteredMembers.Clear();
-               string farmerRichName = "Farmer" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem farmerRich = new MapItem(farmerRichName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 6, 5, 30);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  farmerRich = new MapItem(farmerRichName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 1, 1, 30);
+               IMapItem farmerRich = CreateCharacter(gi, "FarmerRich", 30);
                gi.EncounteredMembers.Add(farmerRich);
                gi.EventDisplayed = gi.EventActive = "e330";
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e014a": // hostile reapers - freadly approach
-               string reaverHostileBossName0 = "ReaverBoss" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem reaverHostileBoss0 = new MapItem(reaverHostileBossName0, 1.0, false, false, false, "C37ReaverBoss", "C37ReaverBoss", princeTerritory, 5, 5, 10);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  reaverHostileBoss0 = new MapItem(reaverHostileBossName0, 1.0, false, false, false, "C37ReaverBoss", "C37ReaverBoss", princeTerritory, 1, 1, 10);
+               IMapItem reaverHostileBoss0 = CreateCharacter(gi, "ReaverBoss", 10);
                gi.EncounteredMembers.Add(reaverHostileBoss0);
                int numReapers0 = dieRoll + 1;
                for (int i = 0; i < numReapers0; ++i)
                {
-                  string miName = "Reaver" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem reaver = new MapItem(miName, 1.0, false, false, false, "C36Reaver", "C36Reaver", princeTerritory, 4, 4, 4);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     reaver = new MapItem(miName, 1.0, false, false, false, "C36Reaver", "C36Reaver", princeTerritory, 1, 1, 4);
+                  IMapItem reaver = CreateCharacter(gi, "Reaver", 4);
                   gi.EncounteredMembers.Add(reaver);
                }
                gi.DieResults["e014a"][0] = dieRoll;
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e014c": // hostile reapers
-               string reaverHostileBossName1 = "ReaverBoss" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem reaverHostlieBoss1 = new MapItem(reaverHostileBossName1, 1.0, false, false, false, "C37ReaverBoss", "C37ReaverBoss", princeTerritory, 4, 5, 7);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  reaverHostlieBoss1 = new MapItem(reaverHostileBossName1, 1.0, false, false, false, "C37ReaverBoss", "C37ReaverBoss", princeTerritory, 1, 1, 7);
-               gi.EncounteredMembers.Add(reaverHostlieBoss1);
+               IMapItem reaverLead = CreateCharacter(gi, "ReaverLead", 7);
+               gi.EncounteredMembers.Add(reaverLead);
                int numReapers1 = dieRoll + 1;
                for (int i = 0; i < numReapers1; ++i)
                {
-                  string miName = "Reaver" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem reaver = new MapItem(miName, 1.0, false, false, false, "C36Reaver", "C36Reaver", princeTerritory, 4, 4, 4);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     reaver = new MapItem(miName, 1.0, false, false, false, "C36Reaver", "C36Reaver", princeTerritory, 1, 1, 4);
+                  IMapItem reaver = CreateCharacter(gi, "Reaver", 4);
                   gi.EncounteredMembers.Add(reaver);
                }
                gi.DieResults["e014c"][0] = dieRoll;
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e015a": // Friendly reapers
-               string reaverRriendlyBossName0 = "ReaverBoss" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem reaverFriendlyBoss0 = new MapItem(reaverRriendlyBossName0, 1.0, false, false, false, "C37ReaverBoss", "C37ReaverBoss", princeTerritory, 4, 5, 7);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  reaverFriendlyBoss0 = new MapItem(reaverRriendlyBossName0, 1.0, false, false, false, "C37ReaverBoss", "C37ReaverBoss", princeTerritory, 1, 1, 7);
-               gi.EncounteredMembers.Add(reaverFriendlyBoss0);
+               IMapItem reaverLeadFriendly = CreateCharacter(gi, "ReaverLead", 7);
+               gi.EncounteredMembers.Add(reaverLeadFriendly);
                for (int i = 0; i < dieRoll; ++i)
                {
-                  string miName = "Reaver" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem reaver = new MapItem(miName, 1.0, false, false, false, "C36Reaver", "C36Reaver", princeTerritory, 4, 4, 4);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     reaver = new MapItem(miName, 1.0, false, false, false, "C36Reaver", "C36Reaver", princeTerritory, 1, 1, 4);
+                  IMapItem reaver = CreateCharacter(gi, "Reaver", 4);
                   gi.EncounteredMembers.Add(reaver);
                }
                gi.IsReaverClanTrade = true;
                gi.DieResults["e015a"][0] = dieRoll;
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
-            case "e015c": // frien reapers raid
-               string reaverFriendlyBossName1 = "ReaverBoss" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem reaverFriendlyBoss1 = new MapItem(reaverFriendlyBossName1, 1.0, false, false, false, "C37ReaverBoss", "C37ReaverBoss", princeTerritory, 4, 5, 7);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  reaverFriendlyBoss1 = new MapItem(reaverFriendlyBossName1, 1.0, false, false, false, "C37ReaverBoss", "C37ReaverBoss", princeTerritory, 1, 1, 7);
-               gi.EncounteredMembers.Add(reaverFriendlyBoss1);
+            case "e015c": // friendly reapers raid
+               IMapItem reaverLeadFriendlyRaid = CreateCharacter(gi, "ReaverLead", 7);
+               gi.EncounteredMembers.Add(reaverLeadFriendlyRaid);
                int numReapers11 = dieRoll + 1;
                for (int i = 0; i < numReapers11; ++i)
                {
-                  string miName = "Reaver" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem reaver = new MapItem(miName, 1.0, false, false, false, "C36Reaver", "C36Reaver", princeTerritory, 4, 4, 4);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     reaver = new MapItem(miName, 1.0, false, false, false, "C36Reaver", "C36Reaver", princeTerritory, 1, 1, 4);
+                  IMapItem reaver = CreateCharacter(gi, "Reaver", 4);
                   gi.EncounteredMembers.Add(reaver);
                }
                gi.DieResults["e015c"][0] = dieRoll;
@@ -6112,9 +6014,7 @@ namespace BarbarianPrince
                break;
             case "e016a": // Friendly magician
                gi.IsMagicianProvideGift = true;
-               string magicianName = "Magician" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem magician = new MapItem(magicianName, 1.0, false, false, false, "c26Magician", "c26Magician", princeTerritory, 5, 3, 0);
+               IMapItem magician = CreateCharacter(gi, "Magician", 0);
                gi.EncounteredMembers.Add(magician);
                if (false == EncounterEnd(gi, ref action))
                {
@@ -6123,21 +6023,13 @@ namespace BarbarianPrince
                }
                break;
             case "e017": // Peasant Mob
-               IMapItem leader = new MapItem("FarmerLeader", 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 3, 2, 2);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  leader = new MapItem("FarmerLeader", 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 1, 1, 2);
-               gi.EncounteredMembers.Add(leader);
+               IMapItem farmLeader = CreateCharacter(gi, "FarmerLeader", 0);
+               gi.EncounteredMembers.Add(farmLeader);
                int numFarmers = 2 * dieRoll - 1;
-               if (true == isEasyMonstersOption.IsEnabled)
-                  numFarmers = 3;
                for (int i = 0; i < numFarmers; ++i)
                {
-                  string miName = "Farmer" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem farmer = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 2, 2, 0);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     farmer = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 1, 1, 0);
-                  gi.EncounteredMembers.Add(farmer);
+                  IMapItem farmerMob = CreateCharacter(gi, "FarmerMob", 0);
+                  gi.EncounteredMembers.Add(farmerMob);
                }
                gi.EventDisplayed = gi.EventActive = "e017";
                gi.DieResults["e017"][0] = dieRoll;
@@ -6146,11 +6038,7 @@ namespace BarbarianPrince
             case "e018a": // priest
             case "e018b": // priest
                gi.EventStart = "e018";
-               string priestName = "Priest" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem priest = new MapItem(priestName, 1.0, false, false, false, "c14Priest", "c14Priest", princeTerritory, 3, 3, 25);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  priest = new MapItem(priestName, 1.0, false, false, false, "c14Priest", "c14Priest", princeTerritory, 1, 1, 25);
+               IMapItem priest = CreateCharacter(gi, "Priest", 25);
                priest.AddNewMount();
                gi.EncounteredMembers.Add(priest);
                gi.DieRollAction = GameAction.EncounterRoll;
@@ -6669,17 +6557,11 @@ namespace BarbarianPrince
                {
                   gi.EncounteredMembers.Clear();
                   ++dieRoll;
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     dieRoll = 1;
                   gi.DieResults["e072a"][0] = dieRoll;
                   gi.NumMembersBeingFollowed = dieRoll;
                   for (int i = 0; i < dieRoll; ++i)
                   {
-                     string elfName = "Elf" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem elf = new MapItem(elfName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 4, 5, 7);
-                     if (true == isEasyMonstersOption.IsEnabled)
-                        elf = new MapItem(elfName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 1, 1, 7);
+                     IMapItem elf = CreateCharacter(gi, "Elf", 7);
                      gi.EncounteredMembers.Add(elf);
                   }
                }
@@ -6687,9 +6569,7 @@ namespace BarbarianPrince
                break;
             case "e073":  // witch
                gi.EncounteredMembers.Clear();
-               string witchName = "Witch" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem witch = new MapItem(witchName, 1.0, false, false, false, "c13Witch", "c13Witch", princeTerritory, 3, 1, 5);
+               IMapItem witch = CreateCharacter(gi, "Witch", 5);
                gi.EncounteredMembers.Add(witch);
                if (gi.WitAndWile < dieRoll)
                   gi.EventStart = gi.EventDisplayed = gi.EventActive = "e073a";
@@ -6704,15 +6584,9 @@ namespace BarbarianPrince
                {
                   gi.EncounteredMembers.Clear();
                   int numSpiders = gi.DieResults[key][0];
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     numSpiders = 1;
                   for (int i = 0; i < numSpiders; ++i)
                   {
-                     string miName = "Spider" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem spider = new MapItem(miName, 1.0, false, false, false, "c54Spider", "c54Spider", princeTerritory, 3, 4, 0);
-                     if (true == isEasyMonstersOption.IsEnabled)
-                        spider = new MapItem(miName, 1.0, false, false, false, "c54Spider", "c54Spider", princeTerritory, 1, 1, 0);
+                     IMapItem spider = CreateCharacter(gi, "Spider", 0);
                      gi.EncounteredMembers.Add(spider);
                   }
                   gi.EventDisplayed = gi.EventActive = "e309";  // party may be surprised
@@ -6732,11 +6606,7 @@ namespace BarbarianPrince
                      numWolves = 1;
                   for (int i = 0; i < numWolves; ++i)
                   {
-                     string miName = "Wolf" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem wolf = new MapItem(miName, 1.0, false, false, false, "c71Wolf", "c71Wolf", princeTerritory, 3, 3, 0);
-                     if (true == isEasyMonstersOption.IsEnabled)
-                        wolf = new MapItem(miName, 1.0, false, false, false, "c71Wolf", "c71Wolf", princeTerritory, 1, 1, 0);
+                     IMapItem wolf = CreateCharacter(gi, "Wolf", 0);
                      gi.EncounteredMembers.Add(wolf);
                   }
                   gi.EventDisplayed = gi.EventActive = "e309";  // party may be surprised
@@ -6790,22 +6660,14 @@ namespace BarbarianPrince
             case "e081":  // mounted patrol
                gi.EventStart = "e081";
                gi.EncounteredMembers.Clear();
-               string patrolLeadName = "PatrolMountedLead" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem patrolLead = new MapItem(patrolLeadName, 1.0, false, false, false, "c75MountedPatrolLead", "c75MountedPatrolLead", princeTerritory, 5, 6, 10);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  patrolLead = new MapItem(patrolLeadName, 1.0, false, false, false, "c75MountedPatrolLead", "c75MountedPatrolLead", princeTerritory, 1, 1, 10);
+               IMapItem patrolLead = CreateCharacter(gi, "PatrolMountedLead", 10);
                patrolLead.AddNewMount();
                gi.EncounteredMembers.Add(patrolLead);
                if (true == isEasyMonstersOption.IsEnabled)
                   dieRoll = 1;
                for (int i = 0; i < dieRoll; ++i)
                {
-                  string patrolName = "PatrolMounted" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem patrol = new MapItem(patrolName, 1.0, false, false, false, "c74MountedPatrol", "c74MountedPatrol", princeTerritory, 5, 6, 4);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     patrol = new MapItem(patrolName, 1.0, false, false, false, "c74MountedPatrol", "c74MountedPatrol", princeTerritory, 1, 1, 4);
+                  IMapItem patrol = CreateCharacter(gi, "PatrolMounted", 4);
                   patrol.AddNewMount();
                   gi.EncounteredMembers.Add(patrol);
                }
@@ -6814,11 +6676,7 @@ namespace BarbarianPrince
                break;
             case "e084b":  // bear
                gi.EncounteredMembers.Clear();
-               string bearName = "Bear" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem bear = new MapItem(bearName, 1.0, false, false, false, "c72Bear", "c72Bear", princeTerritory, 5, 5, 0);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  bear = new MapItem(bearName, 1.0, false, false, false, "c72Bear", "c72Bear", princeTerritory, 1, 1, 0);
+               IMapItem bear = CreateCharacter(gi, "Bear", 0);
                gi.EncounteredMembers.Add(bear);
                gi.EventDisplayed = gi.EventActive = "e307";  // bear strikes first
                break;
@@ -6862,11 +6720,7 @@ namespace BarbarianPrince
                   gi.EncounteredMembers.Clear();
                   for (int i = 0; i < gi.DieResults[key][0]; ++i)
                   {
-                     string crocName = "CrocSwamp" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem crocodile = new MapItem(crocName, 1.0, false, false, false, "c73Crocodile", "c73Crocodile", princeTerritory, 6, 4, 0);
-                     if (true == isEasyMonstersOption.IsEnabled)
-                        crocodile = new MapItem(crocName, 1.0, false, false, false, "c73Crocodile", "c73Crocodile", princeTerritory, 1, 1, 0);
+                     IMapItem crocodile = CreateCharacter(gi, "Croc", 0);
                      gi.EncounteredMembers.Add(crocodile);
                   }
                   gi.EventDisplayed = gi.EventActive = "e310";
@@ -6885,11 +6739,7 @@ namespace BarbarianPrince
                   gi.EncounteredMembers.Clear();
                   for (int i = 0; i < gi.DieResults[key][0]; ++i)
                   {
-                     string crocName = "Croc" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem crocodile = new MapItem(crocName, 1.0, false, false, false, "c73Crocodile", "c73Crocodile", princeTerritory, 6, 4, 0);
-                     if (true == isEasyMonstersOption.IsEnabled)
-                        crocodile = new MapItem(crocName, 1.0, false, false, false, "c73Crocodile", "c73Crocodile", princeTerritory, 1, 1, 0);
+                     IMapItem crocodile = CreateCharacter(gi, "Croc", 0);
                      gi.EncounteredMembers.Add(crocodile);
                   }
                   gi.EventDisplayed = gi.EventActive = "e307";
@@ -6897,20 +6747,16 @@ namespace BarbarianPrince
                }
                break;
             case "e098": // Dragon
-               IMapItem dragon = new MapItem("Dragon", 1.0, false, false, false, "c33Dragon", "c33Dragon", princeTerritory, 11, 10, 0);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  dragon = new MapItem("Dragon", 1.0, false, false, false, "c33Dragon", "c33Dragon", princeTerritory, 1, 1, 0);
+               IMapItem dragon = CreateCharacter(gi, "Dragon", 0);
                gi.EncounteredMembers.Add(dragon);
                gi.DieResults[key][0] = dieRoll;
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e099a": // Roc
             case "e099b": // Roc
-               gi.EncounteredMembers.Clear();
                gi.EventStart = "e099";
-               IMapItem roc = new MapItem("Roc", 1.0, false, false, false, "c55Roc", "c55Roc", princeTerritory, 8, 9, 10);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  roc = new MapItem("Roc", 1.0, false, false, false, "c55Roc", "c55Roc", princeTerritory, 1, 1, 10);
+               gi.EncounteredMembers.Clear();
+               IMapItem roc = CreateCharacter(gi, "Roc", 10);
                gi.EncounteredMembers.Add(roc);
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
@@ -6919,11 +6765,7 @@ namespace BarbarianPrince
             case "e100c": // griffon
                gi.EventStart = "e100"; // assign for loot purposes
                gi.EncounteredMembers.Clear();
-               string griffonName = "GriffonMount" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem griffon = new MapItem(griffonName, 1.0, false, false, false, "c63Griffon", "c63Griffon", princeTerritory, 6, 7, 12);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  griffon = new MapItem(griffonName, 1.0, false, false, false, "c63Griffon", "c63Griffon", princeTerritory, 1, 1, 12);
+               IMapItem griffon = CreateCharacter(gi, "Griffon", 12);
                griffon.IsFlying = true;
                griffon.IsRiding = true;
                gi.EncounteredMembers.Add(griffon);
@@ -6934,11 +6776,7 @@ namespace BarbarianPrince
             case "e101c": // harpy
                gi.EventStart = "e101";  // assign for loot purposes
                gi.EncounteredMembers.Clear();
-               string harpyName = "Harpy" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem harpy = new MapItem(harpyName, 1.0, false, false, false, "c83Harpy", "c83Harpy", princeTerritory, 4, 5, 4);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  harpy = new MapItem(harpyName, 1.0, false, false, false, "c83Harpy", "c83Harpy", princeTerritory, 1, 1, 4);
+               IMapItem harpy = CreateCharacter(gi, "Harpy", 4);
                harpy.IsFlying = true;
                harpy.IsRiding = true;
                gi.EncounteredMembers.Add(harpy);
@@ -6967,15 +6805,9 @@ namespace BarbarianPrince
                }
                else
                {
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     dieRoll = 1;
                   for (int i = 0; i < dieRoll; ++i)
                   {
-                     string hawkManName = "Hawkman" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem hawkman = new MapItem(hawkManName, 1.0, false, false, false, "c81Hawkman", "c81Hawkman", princeTerritory, 5, 7, 7);
-                     if (true == isEasyMonstersOption.IsEnabled)
-                        hawkman = new MapItem(hawkManName, 1.0, false, false, false, "c81Hawkman", "c81Hawkman", princeTerritory, 1, 1, 7);
+                     IMapItem hawkman = CreateCharacter(gi, "Hawkman", 7);
                      hawkman.IsFlying = true;
                      hawkman.IsRiding = true;
                      gi.EncounteredMembers.Add(hawkman);
@@ -6987,16 +6819,10 @@ namespace BarbarianPrince
             case "e112": // eagles - EncounterStart()
                gi.EncounteredMembers.Clear();
                ++dieRoll;
-               if (true == isEasyMonstersOption.IsEnabled)
-                  dieRoll = 1;
                gi.DieResults["e112"][0] = dieRoll;
                for (int i = 0; i < dieRoll; ++i)
                {
-                  string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem eagle = new MapItem(eagleName, 1.0, false, false, false, "c62Eagle", "c62Eagle", princeTerritory, 3, 4, 1);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     eagle = new MapItem(eagleName, 1.0, false, false, false, "c62Eagle", "c62Eagle", princeTerritory, 1, 1, 1);
+                  IMapItem eagle = CreateCharacter(gi, "Eagle", 1);
                   eagle.IsFlying = true;
                   eagle.IsRiding = true;
                   gi.EncounteredMembers.Add(eagle);
@@ -7015,21 +6841,13 @@ namespace BarbarianPrince
                gi.DieResults["e118"][0] = Utilities.NO_RESULT; // avoid problem if two encounters in the same day
                gi.EventStart = "e118";
                gi.EncounteredMembers.Clear();
-               string giantName = "Giant" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem giant = new MapItem(giantName, 1.0, false, false, false, "c61Giant", "c61Giant", princeTerritory, 8, 9, 10);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  giant = new MapItem(giantName, 1.0, false, false, false, "c61Giant", "c61Giant", princeTerritory, 1, 1, 10);
+               IMapItem giant = CreateCharacter(gi, "Giant", 10);
                gi.EncounteredMembers.Add(giant);
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e123b": // Black Knight
                gi.EncounteredMembers.Clear();
-               string blackKnightName = "BlackKnight" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem blackKnight = new MapItem(blackKnightName, 1.0, false, false, false, "c80BlackKnight", "c80BlackKnight", princeTerritory, 8, 8, 30);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  blackKnight = new MapItem(blackKnightName, 1.0, false, false, false, "c80BlackKnight", "c80BlackKnight", princeTerritory, 2, 8, 30);
+               IMapItem blackKnight = CreateCharacter(gi, "KnightBlack", 30);
                gi.EncounteredMembers.Add(blackKnight);
                gi.EventDisplayed = gi.EventActive = "e304";
                break;
@@ -7089,11 +6907,7 @@ namespace BarbarianPrince
                   int highLordGuardNum = gi.DieResults[key][0] + 1;
                   for (int i = 0; i < highLordGuardNum; ++i)
                   {
-                     string highLordGuardName = "Guard" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem guard = new MapItem(highLordGuardName, 1.0, false, false, false, "c66Guard", "c66Guard", princeTerritory, 5, 6, 4);
-                     if (true == isEasyMonstersOption.IsEnabled)
-                        guard = new MapItem(highLordGuardName, 1.0, false, false, false, "c66Guard", "c66Guard", princeTerritory, 1, 1, 4);
+                     IMapItem guard = CreateCharacter(gi, "Guard", 4);
                      gi.EncounteredMembers.Add(guard);
                   }
                   gi.DieRollAction = GameAction.EncounterRoll;
@@ -7101,15 +6915,10 @@ namespace BarbarianPrince
                break;
             case "e158": // hostile guards
                gi.EncounteredMembers.Clear();
-               IMapItem hostileGuard1 = new MapItem("HostileGuard1", 1.0, false, false, false, "c50GuardHostile", "c50GuardHostile", princeTerritory, 6, 5, 7);
-               IMapItem hostileGuard2 = new MapItem("HostileGuard2", 1.0, false, false, false, "c50GuardHostile", "c50GuardHostile", princeTerritory, 6, 5, 7);
-               if (true == isEasyMonstersOption.IsEnabled)
-               {
-                  hostileGuard1 = new MapItem("HostileGuard1", 1.0, false, false, false, "c50GuardHostile", "c50GuardHostile", princeTerritory, 1, 1, 7);
-                  hostileGuard2 = new MapItem("HostileGuard2", 1.0, false, false, false, "c50GuardHostile", "c50GuardHostile", princeTerritory, 1, 1, 7);
-               }
-               gi.EncounteredMembers.Add(hostileGuard1);
-               gi.EncounteredMembers.Add(hostileGuard2);
+               IMapItem guardHostile1 = CreateCharacter(gi, "GuardHostile", 7);
+               IMapItem guardHostile2 = CreateCharacter(gi, "GuardHostile", 7);
+               gi.EncounteredMembers.Add(guardHostile1);
+               gi.EncounteredMembers.Add(guardHostile2);
                gi.EventDisplayed = gi.EventActive = "e307";
                //-----------------------------------------
                foreach (IMapItem mi in gi.PartyMembers) // Prince in Atrium fighting hostile guards alone
@@ -7122,11 +6931,7 @@ namespace BarbarianPrince
                break;
             case "e164": // giant lizard
                gi.EncounteredMembers.Clear();
-               string lizardName = "Lizard" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem lizard = new MapItem(lizardName, 1.0, false, false, false, "c67Lizard", "c67Lizard", princeTerritory, 12, 10, 0);
-               if (true == isEasyMonstersOption.IsEnabled)
-                  lizard = new MapItem(lizardName, 1.0, false, false, false, "c67Lizard", "c67Lizard", princeTerritory, 1, 1, 0);
+               IMapItem lizard = CreateCharacter(gi, "Lizard", 0);
                gi.EncounteredMembers.Add(lizard);
                gi.EventDisplayed = gi.EventActive = "e304";
                break;
@@ -7575,9 +7380,7 @@ namespace BarbarianPrince
                   action = GameAction.UpdateEventViewerActive;
                   for (int i = 0; i < gi.PurchasedSlavePorter; ++i)
                   {
-                     string porterName = "PorterSlave" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem porter = new MapItem(porterName, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", princeTerritory, 0, 0, 0);
+                     IMapItem porter = CreateCharacter(gi, "PorterSlave", 0);
                      gi.AddCompanion(porter);
                   }
                   gi.PurchasedSlavePorter = 0;
@@ -7726,11 +7529,8 @@ namespace BarbarianPrince
                }
                break;
             case "e154e": // lords daughter 
-               action = GameAction.UpdateEventViewerActive;
-               string trueLoveName = "TrueLove" + Utilities.MapItemNum.ToString();
-               ++Utilities.MapItemNum;
-               IMapItem trueLove = new MapItem(trueLoveName, 1.0, false, false, false, "c44TrueLove", "LordsDaughter", princeTerritory, 0, 0, 0);
-               gi.AddCompanion(trueLove);
+               IMapItem trueLoveLordsDaughter = CreateCharacter(gi, "TrueLoveLordsDaughter", 0);
+               gi.AddCompanion(trueLoveLordsDaughter);
                foreach (IMapItem e154Mi in gi.PartyMembers) // if no mount, add a mount
                {
                   if (0 == e154Mi.Mounts.Count)
@@ -8018,11 +7818,7 @@ namespace BarbarianPrince
             case "e006b": // number of dwarf friends
                for (int i = 0; i < dieRoll; ++i)
                {
-                  string dwarfFriendName = "Dwarf" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem dwarfFriend = new MapItem(dwarfFriendName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 6, 5, 12);
-                  if (true == isEasyMonstersOption.IsEnabled)
-                     dwarfFriend = new MapItem(dwarfFriendName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 1, 1, 12);
+                  IMapItem dwarfFriend = CreateCharacter(gi, "Dwarf", 12);
                   gi.EncounteredMembers.Add(dwarfFriend);
                }
                switch (gi.DwarvenChoice)
@@ -8286,9 +8082,8 @@ namespace BarbarianPrince
                {
                   if (6 == gi.DieResults[key][0])
                   {
-                     string miName = "FarmerBoy" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem farmBoy = new MapItem(miName, 1.0, false, false, false, "c35FarmerBoy", "c35FarmerBoy", princeTerritory, 4, 3, 0);
+                     IMapItem farmBoy = CreateCharacter(gi, "FarmerBoy", 0);
+                     farmBoy.IsGuide = true;
                      if (false == AddGuideTerritories(gi, farmBoy, 2))
                      {
                         Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddGuideTerritories() returned false ae=" + action.ToString() + " dr=" + dieRoll.ToString());
@@ -8515,12 +8310,7 @@ namespace BarbarianPrince
                   if (3 < dieRoll) // if above 3, add mounts to each warrior monk
                   {
                      foreach (IMapItem mi in gi.EncounteredMembers)
-                     {
-                        string name = "Mount" + Utilities.MapItemNum.ToString();
-                        ++Utilities.MapItemNum;
-                        MapItem horse = new MapItem(name, 1.0, false, false, false, "MHorse", "", princeTerritory, 0, 0, 0);
-                        mi.Mounts.Add(horse);
-                     }
+                        mi.AddNewMount();
                   }
                }
                break;
@@ -8926,12 +8716,10 @@ namespace BarbarianPrince
                {
                   gi.EncounteredMembers.Clear();
                   gi.EventDisplayed = gi.EventActive = "e048i";
-                  string trueLoveName = "TrueLove" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem trueLove = new MapItem(trueLoveName, 1.0, false, false, false, "c44TrueLove", "Swordswoman", princeTerritory, 7, 7, 4);
-                  trueLove.IsFugitive = true;
-                  trueLove.IsTownCastleTempleLeave = true;
-                  gi.AddCompanion(trueLove);
+                  IMapItem trueLoveSwordswoman = CreateCharacter(gi, "TrueLoveSwordwoman", 4);
+                  trueLoveSwordswoman.IsFugitive = true;
+                  trueLoveSwordswoman.IsTownCastleTempleLeave = true;
+                  gi.AddCompanion(trueLoveSwordswoman);
                   action = GameAction.E228ShowTrueLove;
                }
                else
@@ -8957,18 +8745,16 @@ namespace BarbarianPrince
                {
                   gi.EncounteredMembers.Clear();
                   gi.EventDisplayed = gi.EventActive = "e048j";
-                  string trueLoveName = "TrueLove" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem trueLove = new MapItem(trueLoveName, 1.0, false, false, false, "c44TrueLove", "SlaveWoman", princeTerritory, 4, 2, 0);
-                  trueLove.IsFugitive = true;
-                  trueLove.IsTownCastleTempleLeave = true;
-                  trueLove.IsGuide = true;
-                  if (false == AddGuideTerritories(gi, trueLove, 5))
+                  IMapItem trueLoveSlave = CreateCharacter(gi, "TrueLoveSlave", 0);
+                  trueLoveSlave.IsFugitive = true;
+                  trueLoveSlave.IsTownCastleTempleLeave = true;
+                  trueLoveSlave.IsGuide = true;
+                  if (false == AddGuideTerritories(gi, trueLoveSlave, 5))
                   {
                      Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddGuideTerritories() returned false for ae=" + gi.EventActive);
                      return false;
                   }
-                  gi.AddCompanion(trueLove);
+                  gi.AddCompanion(trueLoveSlave);
                   action = GameAction.E228ShowTrueLove;
                }
                else
@@ -9200,10 +8986,7 @@ namespace BarbarianPrince
                            int maxCount1 = Math.Min(Utilities.MAX_GRID_ROW - 8, end1); // cannot grow over number that can be shown
                            for (int i = start1; i < maxCount1; ++i) // double the number of elves
                            {
-                              string elfName = "Elf" + i.ToString();
-                              IMapItem elf = new MapItem(elfName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 4, 5, 7);
-                              if (true == isEasyMonstersOption.IsEnabled)
-                                 elf = new MapItem(elfName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 1, 1, 7);
+                              IMapItem elf = CreateCharacter(gi, "Elf", 7);
                               gi.EncounteredMembers.Add(elf);
                            }
                         }
@@ -9250,26 +9033,17 @@ namespace BarbarianPrince
                {
                   if ("e052" == gi.EventStart)
                   {
-                     string miName = "Goblin" + i.ToString();
-                     IMapItem goblin = new MapItem(miName, 1.0, false, false, false, "c22Goblin", "c22Goblin", princeTerritory, 3, 3, 1);
-                     if (true == isEasyMonstersOption.IsEnabled)
-                        goblin = new MapItem(miName, 1.0, false, false, false, "c22Goblin", "c22Goblin", princeTerritory, 1, 1, 1);
+                     IMapItem goblin = CreateCharacter(gi, "Goblin", 1);
                      gi.EncounteredMembers.Add(goblin);
                   }
                   else if ("e055" == gi.EventStart)
                   {
-                     string miName = "Orc" + i.ToString();
-                     IMapItem orc = new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 5, 4, 1);
-                     if (true == isEasyMonstersOption.IsEnabled)
-                        orc = new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 1, 1, 1);
+                     IMapItem orc = CreateCharacter(gi, "Orc", 1);
                      gi.EncounteredMembers.Add(orc);
                   }
                   else if ("e058a" == gi.EventStart)
                   {
-                     string miName = "Dwarf" + i.ToString();
-                     IMapItem dwarf = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 6, 5, 10);
-                     if (true == isEasyMonstersOption.IsEnabled)
-                        dwarf = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 1, 1, 10);
+                     IMapItem dwarf = CreateCharacter(gi, "Dwarf", 10);
                      gi.EncounteredMembers.Add(dwarf);
                   }
                   else
@@ -9532,11 +9306,7 @@ namespace BarbarianPrince
                   int numDwarves = gi.DieResults[key][0] + 1;
                   for (int i = 0; i < numDwarves; ++i)
                   {
-                     string dwarfName = "Dwarf" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem dwarf = new MapItem(dwarfName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 6, 5, 10);
-                     if (true == isEasyMonstersOption.IsEnabled)
-                        dwarf = new MapItem(dwarfName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 1, 1, 10);
+                     IMapItem dwarf = CreateCharacter(gi, "Dwarf", 10);
                      gi.EncounteredMembers.Add(dwarf);
                   }
                   gi.EventStart = "e058i"; // show this screen if evade is not a possible option.
@@ -9724,11 +9494,7 @@ namespace BarbarianPrince
                   int numElves = gi.DieResults[key][0] + 1;
                   for (int i = 0; i < numElves; ++i)
                   {
-                     string elfName = "Elf" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem elf = new MapItem(elfName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 4, 5, 7);
-                     if (true == isEasyMonstersOption.IsEnabled)
-                        elf = new MapItem(elfName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 1, 1, 7);
+                     IMapItem elf = CreateCharacter(gi, "Elf", 7);
                      gi.EncounteredMembers.Add(elf);
                   }
                   gi.EventStart = "e071e"; // show this screen if evade is not a possible option.
@@ -10146,9 +9912,7 @@ namespace BarbarianPrince
                         gi.EagleLairs.Add(princeTerritory);
                      gi.IsPartyFed = true;
                      gi.IsMountsFed = true;
-                     string eagleHelpName = "EagleHelp" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem eagleHelp = new MapItem(eagleHelpName, 1.0, false, false, false, "c62Eagle", "c62Eagle", princeTerritory, 3, 4, 1);
+                     IMapItem eagleHelp = CreateCharacter(gi, "Eagle", 1);
                      eagleHelp.IsGuide = true;
                      eagleHelp.GuideTerritories = gi.Territories;
                      eagleHelp.IsTownCastleTempleLeave = true;
@@ -10187,11 +9951,7 @@ namespace BarbarianPrince
                {
                   for (int i = 0; i < gi.DieResults[key][0]; ++i) // additional eagles arrive
                   {
-                     string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem eagle = new MapItem(eagleName, 1.0, false, false, false, "c62Eagle", "c62Eagle", princeTerritory, 3, 4, 1);
-                     if (true == isEasyMonstersOption.IsEnabled)
-                        eagle = new MapItem(eagleName, 1.0, false, false, false, "c62Eagle", "c62Eagle", princeTerritory, 1, 1, 1);
+                     IMapItem eagle = CreateCharacter(gi, "Eagle", 1);
                      eagle.IsFlying = true;
                      eagle.IsRiding = true;
                      gi.EncounteredMembers.Add(eagle);
@@ -10215,9 +9975,7 @@ namespace BarbarianPrince
                   }
                   for (int i = 0; i < gi.DieResults[key][0]; ++i) // additional eagles arrive
                   {
-                     string eagleAllyName = "EagleAlly" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem eagleAlly = new MapItem(eagleAllyName, 1.0, false, false, false, "c62Eagle", "c62Eagle", princeTerritory, 3, 4, 1);
+                     IMapItem eagleAlly = CreateCharacter(gi, "Eagle", 1);
                      eagleAlly.IsGuide = true;
                      eagleAlly.GuideTerritories = gi.Territories;
                      eagleAlly.IsFlying = true;
@@ -10687,9 +10445,7 @@ namespace BarbarianPrince
                }
                if (false == isCavalryAlreadyInParty)
                {
-                  string cavalryName = "Cavalry" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem cavalry = new MapItem(cavalryName, 1.0, false, false, false, "Cavalry", "Cavalry", princeTerritory, 0, 0, 0);
+                  IMapItem cavalry = CreateCharacter(gi, "Cavalry", 0);
                   cavalry.IsGuide = true;
                   if (false == AddGuideTerritories(gi, cavalry, 3))
                   {
@@ -10755,9 +10511,7 @@ namespace BarbarianPrince
                         {
                            action = GameAction.E156MayorTerritorySelection;
                            gi.EventDisplayed = gi.EventActive = "e156e";
-                           string trustedAssistantName = "TrustedAssistant" + Utilities.MapItemNum.ToString();
-                           ++Utilities.MapItemNum;
-                           IMapItem trustedAssistant = new MapItem(trustedAssistantName, 1.0, false, false, false, "c51TrustedAssistant", "c51TrustedAssistant", princeTerritory, 4, 4, 0);
+                           IMapItem trustedAssistant = CreateCharacter(gi, "TrustedAssistant", 0);
                            gi.AddCompanion(trustedAssistant);
                            ITerritory t156a = FindClosestTown(gi);
                            gi.ForbiddenAudiences.AddAssistantConstraint(t156a, trustedAssistant);
@@ -10824,9 +10578,7 @@ namespace BarbarianPrince
                   }
                   for (int k = 0; k < 3; ++k) // add three knights
                   {
-                     string knightName = "Knight" + Utilities.MapItemNum.ToString();
-                     ++Utilities.MapItemNum;
-                     IMapItem knight = new MapItem(knightName, 1.0, false, false, false, "c52Knight", "c52Knight", princeTerritory, 6, 7, 0);
+                     IMapItem knight = CreateCharacter(gi, "Knight", 0);
                      knight.AddNewMount();
                      gi.AddCompanion(knight);
                   }
@@ -10913,18 +10665,14 @@ namespace BarbarianPrince
                gi.DieResults[key][0] = dieRoll;
                if (12 == dieRoll)
                {
-                  string trueLoveName = "TrueLove" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  string imageSource = "SlaveGirlFace" + gi.SlaveGirlIndex.ToString();
-                  IMapItem trueLove = new MapItem(trueLoveName, 1.0, false, false, false, "c44TrueLove", imageSource, princeTerritory, 0, 0, 0);
-                  gi.AddCompanion(trueLove);
+                  IMapItem slaveGirl = CreateCharacter(gi, "TrueLoveSlave", 0);
+                  slaveGirl.BottomImageName = "SlaveGirlFace" + gi.SlaveGirlIndex.ToString();
+                  gi.AddCompanion(slaveGirl);
                   action = GameAction.E228ShowTrueLove;
                }
                else
                {
-                  string slaveGirlName = "SlaveGirl" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem slaveGirl = new MapItem(slaveGirlName, 1.0, false, false, false, "c41SlaveGirl", "c41SlaveGirl", princeTerritory, 0, 0, 0);
+                  IMapItem slaveGirl = CreateCharacter(gi, "SlaveGirl", 0);
                   gi.AddCompanion(slaveGirl);
                }
                --gi.PurchasedSlaveGirl;
@@ -10938,10 +10686,9 @@ namespace BarbarianPrince
                else if (Utilities.NO_RESULT == gi.DieResults[key][1])
                {
                   gi.DieResults[key][1] = dieRoll;
-                  string warriorName = "WarriorOld" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  int endurance = gi.DieResults[key][0];
-                  IMapItem oldWarrior = new MapItem(warriorName, 1.0, false, false, false, "c43OldWarrior", "c43OldWarrior", princeTerritory, endurance, dieRoll, 0);
+                  IMapItem oldWarrior = CreateCharacter(gi, "WarriorOld", 0);
+                  oldWarrior.Endurance = gi.DieResults[key][0]; ;
+                  oldWarrior.Combat = dieRoll;
                   gi.AddCompanion(oldWarrior);
                }
                else
@@ -11614,9 +11361,7 @@ namespace BarbarianPrince
                         gi.EventStart = gi.EventDisplayed = gi.EventActive = "e212i";
                         gi.CapturedWealthCodes.Add(100);
                         gi.ForbiddenHexes.Add(princeTerritory);
-                        string trueLoveName = "TrueLove" + Utilities.MapItemNum.ToString();
-                        ++Utilities.MapItemNum;
-                        IMapItem trueLove = new MapItem(trueLoveName, 1.0, false, false, false, "c44TrueLove", "LordsDaughter", princeTerritory, 4, 2, 0);
+                        IMapItem trueLove = CreateCharacter(gi, "TrueLovePriestDaughter", 0);
                         gi.AddCompanion(trueLove);
                         break;
                      case 11: gi.EventDisplayed = gi.EventActive = "e212j"; break;
