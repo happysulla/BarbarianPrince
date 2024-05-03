@@ -546,6 +546,7 @@ namespace BarbarianPrince
       }
       protected bool EncounterEscape(IGameInstance gi, ref GameAction action)
       {
+         gi.IsAirborne = false;  // do not have event when landing
          //---------------------------------------------
          IMapItems abandonedPartyMembers = new MapItems();
          if (GameAction.EncounterEscapeFly == action) // remove all party members that are not flying
@@ -640,6 +641,7 @@ namespace BarbarianPrince
       }
       protected bool EncounterFollow(IGameInstance gi, ref GameAction action)
       {
+         gi.IsAirborne = false; // do not have event when landing
          //---------------------------------------------
          Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "EncounterFollow(): gi.MapItemMoves.Clear()");
          gi.MapItemMoves.Clear();
@@ -980,7 +982,7 @@ namespace BarbarianPrince
          gi.MapItemMoves.Add(mim);
          return true;
       }
-      protected IMapItem CreateCharacter(IGameInstance gi, string cName, int wealthCode=-1)
+      protected IMapItem CreateCharacter(IGameInstance gi, string cName, int wealthCode)
       {
          ITerritory princeTerritory = gi.Prince.Territory;
          string miName = cName + Utilities.MapItemNum.ToString();
@@ -3028,7 +3030,7 @@ namespace BarbarianPrince
                {
                   gi.EncounteredMembers.Clear();
                   gi.EventStart = gi.EventActive;
-                  IMapItem magician = CreateCharacter(gi, "Magician");
+                  IMapItem magician = CreateCharacter(gi, "Magician", 0);
                   gi.EncounteredMembers.Add(magician);
                   gi.IsMagicianProvideGift = true;
                }
@@ -6948,9 +6950,10 @@ namespace BarbarianPrince
          }
          return true;
       }
-      //--------------------------------------------
+      //---------------------I-----------------------
       protected bool EncounterAbandon(IGameInstance gi, ref GameAction action)
       {
+         gi.IsAirborne = false;
          IMapItems adbandonedMembers = new MapItems();
          switch (gi.EventActive)
          {

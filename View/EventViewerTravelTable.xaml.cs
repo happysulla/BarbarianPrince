@@ -1110,7 +1110,7 @@ namespace BarbarianPrince
                myState = EnumR204.TC_EVENT_ROLL_EVENT;
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT:
-               dieRoll = 4;  // <cgs> TEST 
+               dieRoll = 5;  // <cgs> TEST 
                myRollEvent = dieRoll; // column number in traveling event reference - event row
                myState = EnumR204.TC_EVENT_SHOW_RESULTS;
                break;

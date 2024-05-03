@@ -7,7 +7,7 @@
     </Option>
    <!--===========================-->
    <Option value="EasiestMonsters">
-      <IsEnabled value="False" />
+      <IsEnabled value="True" />
    </Option>
     <Option value="EasyMonsters">
         <IsEnabled value="False" />
@@ -73,10 +73,10 @@
    <Option value="Falcon">
       <IsEnabled value="True" />
    </Option>
-   <Option value="Griffon">
+   <Option value="Griffon"> 
       <IsEnabled value="True" />
    </Option>
-   <Option value="Harpy">
+   <Option value="Harpy">   
       <IsEnabled value="True" />
    </Option>
    <Option value="Magician">

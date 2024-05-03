@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Forms.VisualStyles;
 using System.Xml;
 using System.Xml.Linq;
@@ -318,7 +319,7 @@ namespace BarbarianPrince
             return;
          }
          #if UT1
-                  AddUnitTests();
+            AddUnitTests();
          #endif
          Logger.Log(LogEnum.LE_GAME_PARTYMEMBER_COUNT, "GameInstance() c=" + PartyMembers.Count.ToString());
       }
@@ -740,6 +741,7 @@ namespace BarbarianPrince
       //---------------------------------------------------------------
       public void AddCompanion(IMapItem companion)
       {
+         RestoreMapItemAttribute(companion); // if this is transfer of monster to party member, return attributes to proper values 
          companion.Territory = Prince.Territory;
          companion.IsSecretGatewayToDarknessKnown = true;  // e046 
          foreach (string s in Utilities.theNorthOfTragothHexes) // if added south of river, secret of gateway known
@@ -772,6 +774,279 @@ namespace BarbarianPrince
          //--------------------------------
          if (true == companion.Name.Contains("ElfWarrior"))
             WitAndWile += 1;
+      }
+      private void RestoreMapItemAttribute(IMapItem mi)
+      {
+         if (true == mi.Name.Contains("Amazon"))
+         {
+            mi.Endurance = 5;
+            mi.Combat = 6;
+            return;
+         }
+         if (true == mi.Name.Contains("Deserter"))
+         {
+            mi.Endurance = 4;
+            mi.Combat = 4;
+            return;
+         }
+         if (true == mi.Name.Contains("DwarfLead"))
+         {
+            mi.Endurance = 7;
+            mi.Combat = 6;
+            return;
+         }
+         if (true == mi.Name.Contains("Dwarf"))
+         {
+            mi.Endurance = 6;
+            mi.Combat = 5;
+            return;
+         }
+         if (true == mi.Name.Contains("Eagle"))
+         {
+            mi.Endurance = 3;
+            mi.Combat = 4;
+            return;
+         }
+         if (true == mi.Name.Contains("ElfAssistant"))
+         {
+            mi.Endurance = 3;
+            mi.Combat = 3;
+            return;
+         }
+         if (true == mi.Name.Contains("ElfFriend"))
+         {
+            mi.Endurance = 4;
+            mi.Combat = 4;
+            return;
+         }
+         if (true == mi.Name.Contains("ElfLead"))
+         {
+            mi.Endurance = 7;
+            mi.Combat = 6;
+            return;
+         }
+         if (true == mi.Name.Contains("Elf"))
+         {
+            mi.Endurance = 4;
+            mi.Combat = 5;
+            return;
+         }
+         if (true == mi.Name.Contains("FarmerBoy"))
+         {
+            mi.Endurance = 4;
+            mi.Combat = 3;
+            return;
+         }
+         if (true == mi.Name.Contains("Freeman"))
+         {
+            mi.Endurance = 4;
+            mi.Combat = 4;
+            return;
+         }
+         if (true == mi.Name.Contains("Giant"))
+         {
+            mi.Endurance = 8;
+            mi.Combat = 9;
+            return;
+         }
+         if (true == mi.Name.Contains("Griffon"))
+         {
+            mi.Endurance = 6;
+            mi.Combat = 7;
+            return;
+         }
+         if (true == mi.Name.Contains("Guide"))
+         {
+            mi.Endurance = 3;
+            mi.Combat = 2;
+            return;
+         }
+         if (true == mi.Name.Contains("HalflingLead"))
+         {
+            mi.Endurance = 6;
+            mi.Combat = 3;
+            return;
+         }
+         if (true == mi.Name.Contains("Harpy"))
+         {
+            mi.Endurance = 4;
+            mi.Combat = 5;
+            return;
+         }
+         if (true == mi.Name.Contains("Henchman"))
+         {
+            mi.Endurance = 3;
+            mi.Combat = 2;
+            return;
+         }
+         if (true == mi.Name.Contains("Knight"))
+         {
+            mi.Endurance = 6;
+            mi.Combat = 7;
+            return;
+         }
+         if (true == mi.Name.Contains("KnightBlack"))
+         {
+            mi.Endurance = 8;
+            mi.Combat = 8;
+            return;
+         }
+         if (true == mi.Name.Contains("Lancer"))
+         {
+            mi.Endurance = 5;
+            mi.Combat = 5;
+            return;
+         }
+         if (true == mi.Name.Contains("MagicianWeak"))
+         {
+            mi.Endurance = 2;
+            mi.Combat = 3;
+            return;
+         }
+         if (true == mi.Name.Contains("Lancer"))
+         {
+            mi.Endurance = 5;
+            mi.Combat = 3;
+            return;
+         }
+         if (true == mi.Name.Contains("MercenaryLead"))
+         {
+            mi.Endurance = 6;
+            mi.Combat = 6;
+            return;
+         }
+         if (true == mi.Name.Contains("Mercenary"))
+         {
+            mi.Endurance = 4;
+            mi.Combat = 5;
+            return;
+         }
+         if (true == mi.Name.Contains("Merchant"))
+         {
+            mi.Endurance = 3;
+            mi.Combat = 2;
+            return;
+         }
+         if (true == mi.Name.Contains("MonkWarrior"))
+         {
+            mi.Endurance = 6;
+            mi.Combat = 6;
+            return;
+         }
+         if (true == mi.Name.Contains("MonkTraveling"))
+         {
+            mi.Endurance = 3;
+            mi.Combat = 2;
+            return;
+         }
+         if (true == mi.Name.Contains("MonkHermit"))
+         {
+            mi.Endurance = 6;
+            mi.Combat = 3;
+            return;
+         }
+         if (true == mi.Name.Contains("MonkGuide"))
+         {
+            mi.Endurance = 3;
+            mi.Combat = 2;
+            return;
+         }
+         if (true == mi.Name.Contains("Monk"))
+         {
+            mi.Endurance = 5;
+            mi.Combat = 4;
+            return;
+         }
+         if (true == mi.Name.Contains("Patrol"))
+         {
+            mi.Endurance = 5;
+            mi.Combat = 6;
+            return;
+         }
+         if (true == mi.Name.Contains("Priest"))
+         {
+            mi.Endurance = 3;
+            mi.Combat = 3;
+            return;
+         }
+         if (true == mi.Name.Contains("ReaverBoss"))
+         {
+            mi.Endurance = 5;
+            mi.Combat = 5;
+            return;
+         }
+         if (true == mi.Name.Contains("ReaverLead"))
+         {
+            mi.Endurance = 4;
+            mi.Combat = 5;
+            return;
+         }
+         if (true == mi.Name.Contains("Reaver"))
+         {
+            mi.Endurance = 4;
+            mi.Combat = 4;
+            return;
+         }
+         if (true == mi.Name.Contains("Runaway"))
+         {
+            mi.Endurance = 4;
+            mi.Combat = 4;
+            return;
+         }
+         if (true == mi.Name.Contains("Swordsman"))
+         {
+            mi.Endurance = 6;
+            mi.Combat = 6;
+            return;
+         }
+         if (true == mi.Name.Contains("Swordswoman"))
+         {
+            mi.Endurance = 7;
+            mi.Combat = 7;
+            return;
+         }
+         if (true == mi.Name.Contains("TrueLovePriestDaughter"))
+         {
+            mi.Endurance = 4;
+            mi.Combat = 2;
+            return;
+         }
+         if (true == mi.Name.Contains("TrueLoveSlave"))
+         {
+            mi.Endurance = 4;
+            mi.Combat = 2;
+            return;
+         }
+         if (true == mi.Name.Contains("TrustedAssistant"))
+         {
+            mi.Endurance = 4;
+            mi.Combat = 4;
+            return;
+         }
+         if (true == mi.Name.Contains("Warrior"))
+         {
+            mi.Endurance = 6;
+            mi.Combat = 7;
+            return;
+         }
+         if (true == mi.Name.Contains("Witch"))
+         {
+            mi.Endurance = 3;
+            mi.Combat = 1;
+            return;
+         }
+         if (true == mi.Name.Contains("Wizard"))
+         {
+            mi.Endurance = 4;
+            mi.Combat = 4;
+            return;
+         }
+         if (true == mi.Name.Contains("WizardHenchman"))
+         {
+            mi.Endurance = 4;
+            mi.Combat = 5;
+            return;
+         }
       }
       public int GetFoods()
       {
