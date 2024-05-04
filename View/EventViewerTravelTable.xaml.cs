@@ -1042,6 +1042,10 @@ namespace BarbarianPrince
                         myGameInstance.EventDisplayed = myGameInstance.EventActive = "e044a";
                      else if (("e094" == myEvents[key][i]) && ("Cross River" == myKeyReference)) // crocs in river instead of swamp
                         myGameInstance.EventDisplayed = myGameInstance.EventActive = "e094a";
+                     else if (("e110" == myEvents[key][i]) && (true == myGameInstance.IsSpecialistInParty())) // encounter air spirit
+                        myGameInstance.EventDisplayed = myGameInstance.EventActive = "e110a";
+                     else if (("e111" == myEvents[key][i]) && (true == myGameInstance.IsSpecialistInParty())) // encounter storm demon
+                        myGameInstance.EventDisplayed = myGameInstance.EventActive = "e111a";
                   }
                }
                catch (Exception e)
@@ -1110,7 +1114,7 @@ namespace BarbarianPrince
                myState = EnumR204.TC_EVENT_ROLL_EVENT;
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT:
-               dieRoll = 5;  // <cgs> TEST 
+               dieRoll = 6;  // <cgs> TEST 
                myRollEvent = dieRoll; // column number in traveling event reference - event row
                myState = EnumR204.TC_EVENT_SHOW_RESULTS;
                break;

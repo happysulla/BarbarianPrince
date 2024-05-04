@@ -141,6 +141,9 @@
     <Compile Include="View\EventViewerE109PegasusMgr.xaml.cs">
       <DependentUpon>EventViewerE109PegasusMgr.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EventViewerE111DemonMgr.xaml.cs">
+      <DependentUpon>EventViewerE111DemonMgr.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EventViewerE121SunStrokeMgr.xaml.cs">
       <DependentUpon>EventViewerE121SunStrokeMgr.xaml</DependentUpon>
     </Compile>
@@ -332,6 +335,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EventViewerE109PegasusMgr.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EventViewerE111DemonMgr.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1716,6 +1723,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\AirSpirit.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\StormDemon.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\StormDemonDeny.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

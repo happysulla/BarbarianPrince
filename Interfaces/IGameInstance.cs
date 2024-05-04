@@ -133,6 +133,7 @@ namespace BarbarianPrince
       bool IsMountsAtRisk { set; get; } // e095 - Set to true if any mounts die
       bool IsMountsSick { set; get; } // e096 - Check for mounts dieing at end of day
       bool IsFalconFed { set; get; } // e107 - Falcon fed
+      List<String> AirSpiritLocations { set;  get; }  // e110c - air spirit travel locations
       bool IsEagleHunt { set; get; } // e114 - Eagles help to hunt
       bool IsExhausted { set; get; } // e120 - Party is exhausted
       RaftEnum RaftState { set; get; } // e122 - Party can be rafting for the day

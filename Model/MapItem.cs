@@ -719,7 +719,7 @@ namespace BarbarianPrince
          IMapItem mount = Mounts[0];
          if (null != mount.Rider)
             mount.Rider = null;
-         if (false == mount.IsFlyingMountCarrier()) // do not remove Griffons from party
+         if (false == mount.IsFlyingMountCarrier()) // do not remove Griffon/Harpy from party
             Mounts.Remove(mount);
          //-------------------------
          // Switch rider to next mount
@@ -1116,6 +1116,48 @@ namespace BarbarianPrince
          {
             loadCanCarry -= this.Food;
          }
+         return loadCanCarry;
+      }   // get free load - dismount if load does not support - but do not mount 
+      public int GetFreeLoadWithoutModify()
+      {
+         int mountCarry = 0;
+         foreach (IMapItem mount in this.Mounts)
+         {
+            int maxMountLoad = Utilities.MaxMountLoad;
+            if (true == mount.IsExhausted)
+               maxMountLoad = Utilities.MaxMountLoad >> 1; // e120 - half the mount load if exhausted 
+            int load = (maxMountLoad >> mount.StarveDayNum);
+            mountCarry += load;
+         }
+         int loadCanCarry = mountCarry;
+         //------------------------------------------
+         int maxLoad = Utilities.MaxLoad;
+         if ((true == IsKilled) || (true == IsUnconscious) || (true == this.IsFlyer())) // Griffon & Harpy free load counted with rider
+         {
+            maxLoad = 0;
+         }
+         if (true == this.IsExhausted)
+            maxLoad = Utilities.MaxLoad >> 1; // e120 - half the load if exhausted 
+         if( 0 < maxLoad)
+         {
+            int personCarry = maxLoad >> this.StarveDayNum;
+            if (true == this.IsRiding)
+               loadCanCarry -= Utilities.PersonBurden; // 20 for man riding and what he can carry
+            else
+               loadCanCarry += personCarry;
+         }
+         //------------------------------------------
+         int coinLoads = 0;
+         if (0 < this.Coin)
+         {
+            int remainder = this.Coin % 100;
+            int hundreds = this.Coin - remainder;
+            coinLoads = hundreds / 100;
+            if (0 < remainder)
+               ++coinLoads;
+             loadCanCarry -= coinLoads;
+         }
+         loadCanCarry -= this.Food;
          return loadCanCarry;
       }   // get free load - dismount if load does not support - but do not mount 
       public int GetFlyLoad()
@@ -1742,16 +1784,11 @@ namespace BarbarianPrince
             bool isMapItemInserted = false;
             if ((false == mi1.IsUnconscious) && (false == mi1.IsKilled))
             {
-               int metric1 = mi1.GetFreeLoad();
-               if (metric1 < 0)
-               {
-                  Logger.Log(LogEnum.LE_ERROR, "SortOnFreeLoad(): returned 0 > metric11=" + metric1.ToString() + " for mi=" + mi1.Name);
-                  continue;
-               }
+               int metric1 = mi1.GetFreeLoadWithoutModify();
                int index = 0;
                foreach (IMapItem mi2 in sortedMapItems)
                {
-                  int metric2 = mi2.GetFreeLoad();
+                  int metric2 = mi2.GetFreeLoadWithoutModify();
                   if (metric2 < 0)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "SortOnFreeLoad(): returned 0 > metric12=" + metric1.ToString() + " for mi=" + mi1.Name);

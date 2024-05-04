@@ -947,7 +947,7 @@ namespace BarbarianPrince
                   }
                   if (null != myTerritorySelected)
                   {
-                     if("e213a" == myGameInstance.EventActive )
+                     if( ("e213a" == myGameInstance.EventActive ) || ("e401" == myGameInstance.EventActive) )
                         UpdateCanvasHexToShowPolygon(myGameInstance.NewHex); // e126 - if raft moved downriver, show the polygon in the nex hex
                      else
                         UpdateCanvasHexToShowPolygon(myTerritorySelected);
@@ -1048,6 +1048,8 @@ namespace BarbarianPrince
                   break;
                //-------------------------------------------
                case GameAction.E079HeavyRainsContinueTravel:
+               case GameAction.E110AirSpiritConfusedEnd:
+               case GameAction.E110AirSpiritTravelEnd:
                case GameAction.Travel:
                   if (0 < gi.MapItemMoves.Count)
                   {
@@ -1076,6 +1078,13 @@ namespace BarbarianPrince
                   else
                   {
                      myRectangleSelected.Visibility = Visibility.Hidden;
+                  }
+                  break;
+               case GameAction.E110AirSpiritTravel:
+                  if (false == UpdateCanvasHexTravelToShowPolygons(gi))
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "UpdateCanvas():  UpdateCanvasHexTravelToShowPolygons() returned false");
+                     return false;
                   }
                   break;
                default:
@@ -1179,6 +1188,8 @@ namespace BarbarianPrince
          List<String> sTerritories = null;
          if (RaftEnum.RE_RAFT_CHOSEN == myGameInstance.RaftState)
             sTerritories = gi.Prince.Territory.Rafts;
+         else if ("e110c" == myGameInstance.EventActive)
+            sTerritories = myGameInstance.AirSpiritLocations;
          else
             sTerritories = gi.Prince.Territory.Adjacents;
          foreach (string s in sTerritories)
@@ -1500,6 +1511,12 @@ namespace BarbarianPrince
             return;
          }
          GameAction outAction = GameAction.TravelLostCheck;
+         if ( null != myGameInstance.AirSpiritLocations ) // e110c - air spirit moves party
+         {
+            myGameInstance.GamePhase = GamePhase.Encounter;
+            outAction = GameAction.E110AirSpiritTravelEnd;
+            myGameInstance.NewHex = myTerritorySelected;
+         }
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
       }
       private void MouseDownPolygonArchOfTravel(object sender, MouseButtonEventArgs e) // e045
@@ -1766,24 +1783,20 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "CreateMapItemMove(): newTerritory=null");
             return false;
          }
-         int movementLeftToUse = gi.Prince.Movement - gi.Prince.MovementUsed;
-         if (movementLeftToUse < 1)
+         gi.Prince.TerritoryStarting = gi.Prince.Territory;
+         MapItemMove mim = new MapItemMove(territories, gi.Prince, newTerritory);
+         if (null == mim.NewTerritory)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateMapItemMove(): movementLeftToUse=" + movementLeftToUse.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "CreateMapItemMove(): Invalid State mim.NewTerritory=" + newTerritory.Name);
             return false;
          }
-         else
+         if (0 == mim.BestPath.Territories.Count)
          {
-            gi.Prince.TerritoryStarting = gi.Prince.Territory;
-            MapItemMove mim = new MapItemMove(territories, gi.Prince, newTerritory);
-            if ((0 == mim.BestPath.Territories.Count) || (null == mim.NewTerritory))
-            {
-               Logger.Log(LogEnum.LE_ERROR, "CreateMapItemMove(): Invalid State bestpath.Count=" + mim.BestPath.Territories.Count.ToString() + "  mim.NewTerritory=" + mim.NewTerritory.Name);
-               return false;
-            }
-            Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "CreateMapItemMove(): oT=" + gi.Prince.Territory.Name + " nT=" + mim.NewTerritory.Name);
-            gi.MapItemMoves.Add(mim);
+            Logger.Log(LogEnum.LE_ERROR, "CreateMapItemMove(): Invalid State bestpath.Count=" + mim.BestPath.Territories.Count.ToString() + "  mim.NewTerritory=" + mim.NewTerritory.Name);
+            return false;
          }
+         Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "CreateMapItemMove(): oT=" + gi.Prince.Territory.Name + " nT=" + mim.NewTerritory.Name);
+         gi.MapItemMoves.Add(mim);
          return true;
       }
       private void CreateButtonContextMenu()

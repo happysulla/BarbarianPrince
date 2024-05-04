@@ -697,17 +697,7 @@ namespace BarbarianPrince
          gi.DieResults[gi.EventActive][0] = Utilities.NO_RESULT;
          return true;
       }
-      protected ITerritory FindRandomHexAdjacent(IGameInstance gi)
-      {
-
-         if (0 == gi.Prince.Territory.Adjacents.Count)
-            return gi.Prince.Territory;
-         int randomNum = Utilities.RandomGenerator.Next(gi.Prince.Territory.Adjacents.Count); // get a random index into the masterList
-         string tName = gi.Prince.Territory.Adjacents[randomNum];
-         ITerritory adjacent = gi.Territories.Find(tName);
-         return adjacent;
-      }
-      protected ITerritory FindRandomHex(IGameInstance gi, int range)
+      protected List<String> GetHexesWithinRange(IGameInstance gi, int range)
       {
          //------------------------------------------------------
          List<string> masterList = new List<string>();
@@ -730,7 +720,7 @@ namespace BarbarianPrince
             ITerritory t = gi.Territories.Find(name);
             if (null == t)
             {
-               Logger.Log(LogEnum.LE_ERROR, "FindRandomHex(): t=null for " + name);
+               Logger.Log(LogEnum.LE_ERROR, "FindRandomHexRange(): t=null for " + name);
                return null;
             }
             foreach (string adj in t.Adjacents)
@@ -738,7 +728,52 @@ namespace BarbarianPrince
                ITerritory adjacent = gi.Territories.Find(adj);
                if (null == adjacent)
                {
-                  Logger.Log(LogEnum.LE_ERROR, "FindRandomHex(): adjacent=null for " + adj);
+                  Logger.Log(LogEnum.LE_ERROR, "FindRandomHexRange(): adjacent=null for " + adj);
+                  return null;
+               }
+               tStack.Enqueue(adjacent.Name);
+               depthStack.Enqueue(depth + 1);
+               if (false == masterList.Contains(adj))
+               {
+                  masterList.Add(adj);
+                  visited[adj] = false;
+               }
+            }
+         }
+         return masterList;
+      }
+      protected ITerritory FindRandomHexRange(IGameInstance gi, int range)
+      {
+         //------------------------------------------------------
+         List<string> masterList = new List<string>();
+         Queue<string> tStack = new Queue<string>();
+         Queue<int> depthStack = new Queue<int>();
+         Dictionary<string, bool> visited = new Dictionary<string, bool>();
+         tStack.Enqueue(gi.Prince.Territory.Name);
+         depthStack.Enqueue(0);
+         visited[gi.Prince.Territory.Name] = false;
+         masterList.Add(gi.Prince.Territory.Name);
+         while (0 < tStack.Count)
+         {
+            String name = tStack.Dequeue();
+            int depth = depthStack.Dequeue();
+            if (true == visited[name])
+               continue;
+            if (range <= depth)
+               continue;
+            visited[name] = true;
+            ITerritory t = gi.Territories.Find(name);
+            if (null == t)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "FindRandomHexRange(): t=null for " + name);
+               return null;
+            }
+            foreach (string adj in t.Adjacents)
+            {
+               ITerritory adjacent = gi.Territories.Find(adj);
+               if (null == adjacent)
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "FindRandomHexRange(): adjacent=null for " + adj);
                   return adjacent;
                }
                tStack.Enqueue(adjacent.Name);
@@ -756,12 +791,22 @@ namespace BarbarianPrince
          ITerritory selected = gi.Territories.Find(masterList[randomNum]); // Find the territory of this random index
          if (null == selected)
          {
-            Logger.Log(LogEnum.LE_ERROR, "FindRandomHex(): selected=null for " + masterList[randomNum]);
+            Logger.Log(LogEnum.LE_ERROR, "FindRandomHexRange(): selected=null for " + masterList[randomNum]);
             return null;
          }
          return selected;
       }
-      protected ITerritory FindClueHex(IGameInstance gi, int direction, int range)
+      protected ITerritory FindRandomHexRangeAdjacent(IGameInstance gi)
+      {
+
+         if (0 == gi.Prince.Territory.Adjacents.Count)
+            return gi.Prince.Territory;
+         int randomNum = Utilities.RandomGenerator.Next(gi.Prince.Territory.Adjacents.Count); // get a random index into the masterList
+         string tName = gi.Prince.Territory.Adjacents[randomNum];
+         ITerritory adjacent = gi.Territories.Find(tName);
+         return adjacent;
+      }
+      protected ITerritory FindRandomHexRangeDirectionAndRange(IGameInstance gi, int direction, int range)
       {
          // Stop at the hex just prior to going off the board
          bool isColNumEven = false;
@@ -840,14 +885,14 @@ namespace BarbarianPrince
                }
                break;
             default:
-               Logger.Log(LogEnum.LE_ERROR, "FindClueHex(): Reached default direction=" + direction.ToString());
+               Logger.Log(LogEnum.LE_ERROR, "FindRandomHexRangeDirectionAndRange(): Reached default direction=" + direction.ToString());
                return null;
          }
          string hex = colNum.ToString("D2") + rowNum.ToString("D2");
          ITerritory selected = gi.Territories.Find(hex); // Find the territory of this random index
          if (null == selected)
          {
-            Logger.Log(LogEnum.LE_ERROR, "FindClueHex(): selected=null for " + hex);
+            Logger.Log(LogEnum.LE_ERROR, "FindRandomHexRangeDirectionAndRange(): selected=null for " + hex);
             return null;
          }
          return selected;
@@ -979,7 +1024,7 @@ namespace BarbarianPrince
             return false;
          }
          Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "AddMapItemMove(): gi.MapItemMoves.Add() mim=" + mim.ToString());
-         gi.MapItemMoves.Add(mim);
+         gi.MapItemMoves.Insert(0,mim); // add at front
          return true;
       }
       protected IMapItem CreateCharacter(IGameInstance gi, string cName, int wealthCode)
@@ -1269,11 +1314,11 @@ namespace BarbarianPrince
          }
          #if UT1
             // <cgs> TEST
-            //starting = gi.Territories.Find("0711"); //Town=0109 Ruins=0206 Temple=0711 Castle=1212 Castle=0323 Castle=1923 Cache=0505   
+            starting = gi.Territories.Find("0711"); //Town=0109 Ruins=0206 Temple=0711 Castle=1212 Castle=0323 Castle=1923 Cache=0505   
             //starting = gi.Territories.Find("0409"); //Farmland=0418 CountrySide=0410 Forest=0409 Hills=0406 Mountains=0405 Swamp=0411 Desert=0407 
             //starting = gi.Territories.Find("0411"); //ForestTemple=1021 HillsTemple=2009 MountainTemple=1021 
             //starting = gi.Territories.Find("0207"); //Road Travel=0207->0208
-            starting = gi.Territories.Find("0707"); //Cross River=0707->0708
+            //starting = gi.Territories.Find("0707"); //Cross River=0707->0708
             if (null == starting)
             {
                Logger.Log(LogEnum.LE_ERROR, "SetStartingLocation() starting territory=null");
@@ -3118,7 +3163,7 @@ namespace BarbarianPrince
                else
                {
                   int directionLost = gi.DieResults["e006f"][0];
-                  ITerritory tRamdom = FindClueHex(gi, directionLost, dieRoll);// Find a random hex at the range set by die roll
+                  ITerritory tRamdom = FindRandomHexRangeDirectionAndRange(gi, directionLost, dieRoll);// Find a random hex at the range set by die roll
                   if (null == tRamdom)
                   {
                      returnStatus = "tRamdom=null for a=" + action.ToString();
@@ -3367,7 +3412,7 @@ namespace BarbarianPrince
                else
                {
                   int directionAdvice = gi.DieResults["e025"][0];
-                  ITerritory tRamdom = FindClueHex(gi, directionAdvice, dieRoll);// Find a random hex at the range set by die roll
+                  ITerritory tRamdom = FindRandomHexRangeDirectionAndRange(gi, directionAdvice, dieRoll);// Find a random hex at the range set by die roll
                   if (null == tRamdom)
                   {
                      returnStatus = "tRamdom=null for a=" + action.ToString();
@@ -3839,7 +3884,7 @@ namespace BarbarianPrince
                else
                {
                   int directionPixie = gi.DieResults["e025b"][0];
-                  ITerritory tRamdom = FindClueHex(gi, directionPixie, dieRoll);// Find a random hex at the range set by die roll
+                  ITerritory tRamdom = FindRandomHexRangeDirectionAndRange(gi, directionPixie, dieRoll);// Find a random hex at the range set by die roll
                   if (null == tRamdom)
                   {
                      returnStatus = "tRamdom=null for a=" + action.ToString();
@@ -4118,7 +4163,7 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateEncounter.PerformAction(): gi.MapItemMoves.Clear() for a=" + action.ToString());
                   gi.MapItemMoves.Clear();
                   //--------------------------------------------------------
-                  ITerritory blowToTerritory = FindClueHex(gi, directionvw, rangevw);// Find a random hex at random direction and range 1
+                  ITerritory blowToTerritory = FindRandomHexRangeDirectionAndRange(gi, directionvw, rangevw);// Find a random hex at random direction and range 1
                   if (null == blowToTerritory)
                   {
                      returnStatus = " blowToTerritory=null action=" + action.ToString();
@@ -4148,7 +4193,7 @@ namespace BarbarianPrince
                break;
             case GameAction.E106OvercastLost:
                   int direction = gi.DieResults["e106"][0];
-                  ITerritory adjacentTerritory = FindClueHex(gi, direction, 1);// Find a random hex at random direction and range 1
+                  ITerritory adjacentTerritory = FindRandomHexRangeDirectionAndRange(gi, direction, 1);// Find a random hex at random direction and range 1
                   if (null == adjacentTerritory)
                   {
                      returnStatus = " adjacentTerritory=null action=" + action.ToString();
@@ -4192,6 +4237,53 @@ namespace BarbarianPrince
                {
                   returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
                   Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+               }
+               break;
+            case GameAction.E110AirSpiritConfusedEnd:
+               gi.DieResults["e110b"][0] = Utilities.NO_RESULT; // setup if event occurs again in same day
+               gi.DieResults["e110b"][1] = Utilities.NO_RESULT;
+               if ( gi.Prince.MovementUsed < gi.Prince.Movement )
+               {
+                  if (false == EncounterEnd(gi, ref action))
+                  {
+                     returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
+               }
+               else
+               {
+                  gi.EventDisplayed = gi.EventActive = "e401";
+               }
+               break;
+            case GameAction.E111StormDemonEnd:
+               if (false == EncounterEnd(gi, ref action))
+               {
+                  returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+               }
+               break;
+            case GameAction.E111StormDemonRepel:
+               break;
+            case GameAction.E111StormDemonRepelFail:
+               gi.DieResults["e111"][1] = Utilities.NO_RESULT;
+               gi.EventDisplayed = gi.EventActive = "e111";
+               gi.DieRollAction = GameAction.EncounterStart;
+               break;
+            case GameAction.E110AirSpiritTravelEnd:
+               gi.DieResults["e110c"][0] = Utilities.NO_RESULT; // setup if event occurs again in same day
+               gi.AirSpiritLocations = null;
+               gi.EnteredTerritories.Add(gi.NewHex); // NexHex changed to proper hex in GameViewerWindow->MouseDownPolygonTravel()
+               if (gi.Prince.MovementUsed < gi.Prince.Movement)
+               {
+                  if (false == EncounterEnd(gi, ref action))
+                  {
+                     returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
+               }
+               else
+               {
+                  gi.EventDisplayed = gi.EventActive = "e401";
                }
                break;
             case GameAction.E120Exhausted:
@@ -4589,7 +4681,7 @@ namespace BarbarianPrince
                else
                {
                   int directionClue = gi.DieResults["e147"][0];
-                  ITerritory tRamdom = FindClueHex(gi, directionClue, dieRoll);// Find a random hex at the range set by die roll
+                  ITerritory tRamdom = FindRandomHexRangeDirectionAndRange(gi, directionClue, dieRoll);// Find a random hex at the range set by die roll
                   if (null == tRamdom)
                   {
                      returnStatus = "tRamdom=null for a=" + action.ToString();
@@ -6783,6 +6875,45 @@ namespace BarbarianPrince
                   gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
+            case "e110a": // air spirit
+               gi.EncounteredMembers.Clear();
+               gi.DieRollAction = GameAction.EncounterRoll;
+               if (dieRoll < gi.WitAndWile)
+                  gi.EventDisplayed = gi.EventActive = "e110c"; // succeed
+               else
+                  gi.EventDisplayed = gi.EventActive = "e110b"; // fail
+               break;
+            case "e111": // storm demon attack
+               gi.IsAirborne = false;
+               gi.DieResults[key][0] = dieRoll;
+               gi.Prince.SetWounds(dieRoll, 0);
+               IMapItems lostInStormMembers = new MapItems();
+               foreach (IMapItem mi in gi.PartyMembers)
+                  lostInStormMembers.Add(mi);
+               foreach (IMapItem mi in lostInStormMembers)
+                  gi.RemoveAbandonedInParty(mi);
+               gi.Prince.RemoveUnmountedMounts();
+               gi.Prince.RemoveMountedMount();
+               if (false == EncounterEscape(gi, ref action)) // move to random hex
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): EncounterEscape() returned false ae=" + action.ToString() );
+                  return false;
+               }
+               if (false == EncounterEnd(gi, ref action))
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): EncounterEnd() returned false ae=" + gi.EventActive);
+                  return false;
+               }
+               break;
+            case "e111a": // storm demon
+               gi.EncounteredMembers.Clear();
+               gi.DieRollAction = GameAction.EncounterRoll;
+
+               if (dieRoll < gi.WitAndWile)
+                  gi.EventDisplayed = gi.EventActive = "e110c"; // succeed
+               else
+                  gi.EventDisplayed = gi.EventActive = "e110b"; // fail
+               break;
             case "e112": // eagles - EncounterStart()
                gi.EncounteredMembers.Clear();
                ++dieRoll;
@@ -7932,7 +8063,7 @@ namespace BarbarianPrince
                      }
                      break;
                   case 2:
-                     ITerritory adjacent = FindRandomHexAdjacent(gi);
+                     ITerritory adjacent = FindRandomHexRangeAdjacent(gi);
                      if( false == gi.HalflingTowns.Contains(adjacent) )
                         gi.HalflingTowns.Add(adjacent);
                      if (false == EncounterEnd(gi, ref action))
@@ -8467,7 +8598,7 @@ namespace BarbarianPrince
                      case 3: gi.EventDisplayed = gi.EventActive = "e029"; gi.DieRollAction = GameAction.EncounterRoll; break;  // danger and treasure 
                      case 4: case 5: gi.EventDisplayed = gi.EventActive = "e401"; break;          // nothing to see
                      case 6:
-                        ITerritory adjacent = FindRandomHexAdjacent(gi);
+                        ITerritory adjacent = FindRandomHexRangeAdjacent(gi);
                         gi.WizardAdviceLocations.Add(adjacent);
                         if (false == EncounterEnd(gi, ref action))
                         {
@@ -9843,6 +9974,49 @@ namespace BarbarianPrince
                }
                gi.DieResults[key][0] = Utilities.NO_RESULT;
                break;
+            case "e110b": // air spirit - fail - blown off course
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
+               {
+                  gi.DieResults[key][0] = dieRoll;
+                  gi.DieRollAction = GameAction.EncounterRoll;
+               }
+               else
+               {
+                  int directionLost = gi.DieResults[key][0];
+                  int range = gi.DieResults[key][1] = dieRoll;
+                  ITerritory blowToTerritory = FindRandomHexRangeDirectionAndRange(gi, directionLost, range);
+                  if (null == blowToTerritory)
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): blowToTerritory=null for a=" + action.ToString());
+                     return false;
+                  }
+                  //--------------------------------------------------------
+                  int movementUsed = gi.Prince.MovementUsed;
+                  gi.Prince.MovementUsed = 0; // must have movement left to be blown off course
+                  gi.Prince.TerritoryStarting = gi.NewHex;
+                  if (false == AddMapItemMove(gi, blowToTerritory))
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddMapItemMove() return false for a=" + action.ToString());
+                     return false;
+                  }
+                  gi.Prince.MovementUsed = movementUsed; // return back to original value
+                  gi.NewHex = blowToTerritory;
+                  gi.EnteredTerritories.Add(gi.NewHex);
+               }
+               break;
+            case "e110c": // air spirit - succeed - choose hex
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
+               {
+                  action = GameAction.E110AirSpiritTravel;
+                  gi.DieResults[key][0] = dieRoll;
+                  gi.AirSpiritLocations = GetHexesWithinRange(gi, dieRoll);
+                  if( null == gi.AirSpiritLocations )
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): GetHexesWithinRange() return null for a=" + action.ToString());
+                     return false;
+                  }
+               }
+               break;
             case "e112a": // follow eagles
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
@@ -10088,10 +10262,10 @@ namespace BarbarianPrince
                      case 10: gi.EventDisplayed = gi.EventActive = "e163"; gi.DieRollAction = GameAction.EncounterRoll; break; // coffle
                      case 11: gi.EventDisplayed = gi.EventActive = "e147"; gi.DieRollAction = GameAction.E147ClueToTreasure; break; // clue to treasure
                      case 12:
-                        ITerritory t = FindRandomHexAdjacent(gi);
+                        ITerritory t = FindRandomHexRangeAdjacent(gi);
                         if (null == t)
                         {
-                           Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): FindRandomHexAdjacent() returned null");
+                           Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): FindRandomHexRangeAdjacent() returned null");
                            return false;
                         }
                         else if (null == gi.HiddenRuins.Find(t.Name))  // if this is hidden ruins, save it for future reference
@@ -10242,7 +10416,14 @@ namespace BarbarianPrince
                      else
                         gi.EventDisplayed = gi.EventActive = "e044a";
                      break;
-                  case 5: gi.EventDisplayed = gi.EventActive = "e500"; break;  // Horde of 500 gp
+                  case 5: 
+                     gi.EventDisplayed = gi.EventActive = "e500";              // Horde of 500 gp
+                     if (false == EncounterEnd(gi, ref action))            
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false for ae=e136 dr=5");
+                        return false;
+                     }
+                     break;  
                   case 6:
                      if (false == EncounterEnd(gi, ref action))                // nothing found
                      {

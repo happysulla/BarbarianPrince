@@ -370,6 +370,14 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): PegasusCaptureCheck() returned false");
                break;
             //-------------------------------------
+            case GameAction.E111StormDemonRepel:
+               EventViewerE111DemonMgr aE111MgrViewer = new EventViewerE111DemonMgr(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);
+               if (true == aE111MgrViewer.CtorError)
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): aE111MgrViewer.CtorError=true");
+               else if (false == aE111MgrViewer.StormDemonRepelCheck(ShowE111StormDemonRepelResults))
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): StormDemonRepelCheck() returned false");
+               break;
+            //-------------------------------------
             case GameAction.E121SunStroke:
                EventViewerE121SunStrokeMgr aE121SunStrokeMgr = new EventViewerE121SunStrokeMgr(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);
                if (true == aE121SunStrokeMgr.CtorError)
@@ -1241,6 +1249,18 @@ namespace BarbarianPrince
                   }
                }
                break;
+            case "e212": // offering at temple
+               if ("Spend" == content)
+               {
+                  cost = 10;
+                  if (true == gi.IsMerchantWithParty)
+                     cost = (int)Math.Ceiling((double)cost * 0.5);
+                  if (cost <= gi.GetCoins()) // can only sell two horses
+                     b.IsEnabled = true;
+                  else
+                     b.IsEnabled = false;
+               }
+               break;
             default:
                break;
          }
@@ -1945,6 +1965,22 @@ namespace BarbarianPrince
             case "e105":  // storm clouds
             case "e106":  // overcast
             case "e108":  // hawkmen
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
+               break;
+            case "e110b":
+            case "e111":
+               if (Utilities.NO_RESULT < gi.DieResults[key][1])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
+               break;
             case "e113":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
@@ -2954,7 +2990,10 @@ namespace BarbarianPrince
                      Button b1 = new Button() { Content = "Spend", FontFamily = myFontFam1, FontSize = 12 };
                      b1.Click += Button_Click;
                      myTextBlock.Inlines.Add(new InlineUIContainer(b1));
-                     myTextBlock.Inlines.Add(new Run(" 10gp, add one to your die result."));
+                     if( true == myGameInstance.IsMerchantWithParty )
+                        myTextBlock.Inlines.Add(new Run(" 5gp, add one to your die result."));
+                     else
+                        myTextBlock.Inlines.Add(new Run(" 10gp, add one to your die result."));
                   }
                   else
                   {
@@ -3825,6 +3864,14 @@ namespace BarbarianPrince
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
+      public bool ShowE111StormDemonRepelResults(bool isAttackRepelled)
+      {
+         GameAction outAction = GameAction.EncounterEnd;
+         if( false == isAttackRepelled )
+            outAction = GameAction.E111StormDemonRepelFail;
+         myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
+         return true;
+      }
       public bool ShowE121SunStrokeCheckResult(bool isSunStroke, bool isMountDeath)
       {
          GameAction outAction = GameAction.Error;
@@ -3999,12 +4046,30 @@ namespace BarbarianPrince
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               }
                               break;
+                           case "AirSpiritConfused":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e110b"][1])
+                              {
+                                 action = GameAction.E110AirSpiritConfusedEnd;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              break;
                            case "AirStormCloud":
                               if (Utilities.NO_RESULT < myGameInstance.DieResults["e105"][0])
                               {
                                  action = GameAction.EncounterRoll;
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               }
+                              break;
+                           case "StormDemonAttack":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e111"][0])
+                              {
+                                 action = GameAction.E111StormDemonEnd;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              break;
+                           case "StormDemonRepel":
+                              action = GameAction.E111StormDemonRepel;
+                              myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               break;
                            case "AirTailWinds":
                               action = GameAction.E104TailWinds;

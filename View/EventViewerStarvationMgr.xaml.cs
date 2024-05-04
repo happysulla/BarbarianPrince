@@ -353,17 +353,15 @@ namespace BarbarianPrince
             int diffFood = myFoodOriginal - myFoodCurrent;
             myGameInstance.ReduceFoods(diffFood);
             //---------------------------------------------
+            int diffCoin = myCoinOriginal - myCoinCurrent;
+            myGameInstance.ReduceCoins(diffCoin);
+            //---------------------------------------------
             for (int i = 0; i < myMaxRowCount; ++i) // check for run aways
             {
                IMapItem mi = myGridRows[i].myMapItem;
-               if (3 < myGridRows[i].myResult)
+               if ((3 < myGridRows[i].myResult) || ((0 < myGridRows[i].myWages) && (false == myGridRows[i].myIsHired)) )
                   myGameInstance.RemoveAbandonerInParty(mi, true);
-               if ((0 < myGridRows[i].myWages) && (false == myGridRows[i].myIsHired))
-                  myGameInstance.RemoveAbandonerInParty(mi);
             }
-            //---------------------------------------------
-            int diffCoin = myCoinOriginal - myCoinCurrent;
-            myGameInstance.ReduceCoins(diffCoin);
             //---------------------------------------------
             if (null == myCallback)
             {

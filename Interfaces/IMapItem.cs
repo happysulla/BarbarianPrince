@@ -95,6 +95,7 @@ namespace BarbarianPrince
       bool RemoveSpecialItem(SpecialEnum item);
       int GetMaxFreeLoad();
       int GetFreeLoad();
+      int GetFreeLoadWithoutModify();
       int GetFlyLoad();
       bool RemoveVictimMountAndLoad(); // Remove what is carried by person and mount if riding
       bool IsFlyer();

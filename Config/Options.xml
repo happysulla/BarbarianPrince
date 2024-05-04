@@ -80,7 +80,7 @@
       <IsEnabled value="True" />
    </Option>
    <Option value="Magician">
-      <IsEnabled value="False" />
+      <IsEnabled value="True" />
    </Option>
    <Option value="Mercenary">
       <IsEnabled value="False" />

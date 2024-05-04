@@ -172,6 +172,7 @@ namespace BarbarianPrince
       public bool IsMountsAtRisk { set; get; } = false;
       public bool IsMountsSick { set; get; } = false;
       public bool IsFalconFed { set; get; } = false;
+      public List<String> AirSpiritLocations { get; set; } = null;
       public bool IsEagleHunt { set; get; } = false;
       public bool IsExhausted { set; get; } = false;
       public RaftEnum RaftState { set; get; } = RaftEnum.RE_NO_RAFT; // e122 - Party can be rafting for the day
@@ -1065,7 +1066,7 @@ namespace BarbarianPrince
          if (0 == foodStore)
             return true;
          int count = 1000;
-         IMapItems sortedMapItems = PartyMembers.SortOnFreeLoad();
+         IMapItems sortedMapItems = PartyMembers.SortOnFreeLoad(); 
          while (0 < --count)
          {
             foreach (IMapItem mi in sortedMapItems)

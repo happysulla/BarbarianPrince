@@ -34,14 +34,6 @@ namespace BarbarianPrince
       {
          MapItem = movingMapItem;
          OldTerritory = movingMapItem.Territory;
-         int movementLeftToUse = MapItem.Movement - MapItem.MovementUsed;
-         if (movementLeftToUse < 1)
-         {
-            BestPath = new MapPath(OldTerritory.ToString());
-            Logger.Log(LogEnum.LE_ERROR, "MapItemMove(): less than one movement left");
-            CtorError = true;
-            return;
-         }
          BestPath = GetBestPath(territories, OldTerritory, newTerritory, 100);
          if (null == BestPath)
          {

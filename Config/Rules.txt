@@ -142,6 +142,12 @@ r109	"<Bold>r109 Wild Pegasus</Bold>
 <LineBreak/><LineBreak/>Roll one die. If the result is 5 plus, the character captures the Pegasus. You may add it as a winged mount to your party.
 <LineBreak/><LineBreak/>
                                  <InlineUIContainer><Image Source='../../Images/Pegasus.gif' Height='300' Width='300'></Image></InlineUIContainer>"
+r111	"<Bold>r111 Storm Demon Attacks</Bold>
+<LineBreak/><LineBreak/>You encounter a powerful demon of storms which attacks your party. Since you have no magicians, wizards, witches, priests, or monks in your party, it cannot be repeled. 
+<LineBreak/><LineBreak/>You are unable to block the attack, and your entire party is blown away to be lost or killed. Your winged mount is killed, but your carried wealth and possessions are intact. The rest of your party is lost.
+<LineBreak/><LineBreak/>You crash in an adjacent hex. Roll one die for the number of wounds suffered.
+<LineBreak/><LineBreak/>
+                              <InlineUIContainer><Image Source='../../Images/StormDemon.gif' Height='300' Width='300'></Image></InlineUIContainer>"
 r121	"<Bold>r121 Sunstroke</Bold>
 <LineBreak/><LineBreak/>The heat of the sun is unexpected. Roll one die for each character and mount in your party. A six means he or it collapses from the sunstroke. Mounts that collapse must be left to die.
 <LineBreak/><LineBreak/>Characters that collapse must be carried if possible even if that means other loads must be abandoned per
