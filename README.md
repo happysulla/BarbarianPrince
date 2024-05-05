@@ -12,7 +12,7 @@ The Dwarfstar games BARBARIAN PRINCE, DEMONLORD, GOBLIN, GRAV ARMOR, OUTPOST GAM
 All other company names, game names, artwork, publications and other products are copyrighted, trademarked and/or registered as applicable by their rightful owners.
 All other contents of the Dwarfstar Games site are copyright © 2004-2006 by Joseph Scoleri III.
 
-NOTE: This game is a digital version of the boardgame from 1981. It replicates the original release. If any images used have license restrictions, please inform me with email (happysulla@gmail.com) and I will remove.
+NOTE: This game is a digital version of the boardgame from 1981. It replicates the original release. If any images used have license restrictions, please inform me with email (happysulla@gmail.com), and I will remove.
 
 If a developer, I have placed design documentation in the Document folder that explains architecutre. It is written in C# using WPF. 
 
