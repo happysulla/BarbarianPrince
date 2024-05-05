@@ -16,3 +16,5 @@ NOTE: This game is a digital version of the boardgame from 1981. It replicates t
 
 If a developer, I have placed design documentation in the Document folder that explains architecutre. It is written in C# using WPF. 
 
+I have completed all but five events. I have all mechanics working, but I need to playtest to remove bugs. I also need to add startup tutorial, menus, store/recover, feats, and end game user displays.
+
