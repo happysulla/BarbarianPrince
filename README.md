@@ -12,7 +12,7 @@ Reaper Miniatures purchased the rights to several Heritage USA properties, inclu
 
 NOTE: This game is a digital version of the boardgame from 1981. It replicates the original release. If any images used have license restrictions, please inform me with email (happysulla@gmail.com), and I will remove.
 
-If a developer, I have placed design documentation in the Document folder that explains architecutre. It is written in C# using WPF. If you download and compile, you will need to obtain the NuGet package: WpfAnimiatedGif per the design documentation.
+If a developer, I have placed design documentation in the Document folder that explains architecture. It is written in C# using WPF. If you download and compile, you will need to obtain the NuGet package: WpfAnimiatedGif per the design documentation.
 
 CURRENT STATE: I have completed all but five events. I have all mechanics working, but I need to playtest to remove bugs. I also need to add startup tutorial, menus, store/recover, feats, and end game user displays.
 
