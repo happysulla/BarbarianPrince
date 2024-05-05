@@ -1,4 +1,4 @@
-# BarbarianPrince circa 1981
+# Barbarian Prince circa 1981
 
 1981 Charles S. Roberts Best Fantasy Board Game Winner
 
