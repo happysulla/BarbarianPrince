@@ -269,7 +269,7 @@ namespace BarbarianPrince
          {
             myStatusBar.Items.Add(new Separator());
             StringBuilder sbGriffonClaws = new StringBuilder(" Claws=");
-            sbGriffonClaws.Append(gi.GetCountSpecialItem(SpecialEnum.RocBeak));
+            sbGriffonClaws.Append(gi.GetCountSpecialItem(SpecialEnum.GriffonClaws));
             Label labelBeak = new Label() { FontFamily = myFontFam, FontSize = 12, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, Content = sbGriffonClaws.ToString() };
             Image imgBeak = new Image { Source = MapItem.theMapImages.GetBitmapImage("GriffonClaw"), Width = 30, Height = 30 };
             myStatusBar.Items.Add(labelBeak);

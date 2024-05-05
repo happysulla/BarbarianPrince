@@ -1742,8 +1742,7 @@ r281	"<Bold>r281 Special Travel Reference</Bold>
 <LineBreak/><LineBreak/>Refer to the Travel Table
  <InlineUIContainer><Button Content='t207' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  and roll one die.
-<LineBreak/><LineBreak/>Using the appropriate line for the terrain type you occupy, read across to the Event References column and use the column listed for that die roll. This will produce a Travel Event Reference
-specified in the table."
+<LineBreak/><LineBreak/>Using the appropriate line for the terrain type you occupy, read across to the Event References column and use the column listed for that die roll. This will produce a Travel Event Reference specified in the table."
 r300	"<Bold>r300 Surprise</Bold>
 <LineBreak/><LineBreak/>Your party surprises the characters encountered in the combat. See
  <InlineUIContainer><Button Name='myButtonR220' Content='r220' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>."

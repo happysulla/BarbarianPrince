@@ -1,13 +1,13 @@
 ﻿<Options>
     <Option value="AutoSetup">
-        <IsEnabled value="True" />
+        <IsEnabled value="False" />
     </Option>
     <Option value="AutoWealthRollForUnderFive">
         <IsEnabled value="True" />
     </Option>
    <!--===========================-->
    <Option value="EasiestMonsters">
-      <IsEnabled value="True" />
+      <IsEnabled value="False" />
    </Option>
     <Option value="EasyMonsters">
         <IsEnabled value="False" />
@@ -20,7 +20,7 @@
 		<IsEnabled value="False" />
 	</Option>
 	<Option value="ForceNoLostEvent">
-		<IsEnabled value="True" />
+		<IsEnabled value="False" />
 	</Option>
 	<Option value="ForceLostEvent">
 		<IsEnabled value="False" />
@@ -41,7 +41,7 @@
 		<IsEnabled value="False" />
 	</Option>
 	<Option value="ForceAirEvent">
-		<IsEnabled value="True" />
+		<IsEnabled value="False" />
 	</Option>
 	<!--===========================-->
 	<Option value="ForceNoCrossEvent">
@@ -71,16 +71,16 @@
       <IsEnabled value="False" />
    </Option>
    <Option value="Falcon">
-      <IsEnabled value="True" />
+      <IsEnabled value="False" />
    </Option>
    <Option value="Griffon"> 
-      <IsEnabled value="True" />
+      <IsEnabled value="False" />
    </Option>
    <Option value="Harpy">   
-      <IsEnabled value="True" />
+      <IsEnabled value="False" />
    </Option>
    <Option value="Magician">
-      <IsEnabled value="True" />
+      <IsEnabled value="False" />
    </Option>
    <Option value="Mercenary">
       <IsEnabled value="False" />

@@ -1714,7 +1714,8 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "SetStateStarvation(): set state=" + myState.ToString());
             myIsHeaderCheckBoxChecked = true;
             myFoodCurrent -= foodNeededTotalWithExtra;
-            myGameInstance.IsFalconFed = true;
+            if( true == myGameInstance.IsFalconInParty())
+               myGameInstance.IsFalconFed = true;
             for (int i = 0; i < myMaxRowCount; ++i)
             {
                IMapItem mi = myGridRows[i].myMapItem;
@@ -1737,7 +1738,8 @@ namespace BarbarianPrince
             myState = StarveEnum.SE_FEED_ALL;
             myIsHeaderCheckBoxChecked = true;
             myFoodCurrent -= foodNeededTotal;
-            myGameInstance.IsFalconFed = true;
+            if (true == myGameInstance.IsFalconInParty())
+               myGameInstance.IsFalconFed = true;
             for (int i = 0; i < myMaxRowCount; ++i)
             {
                IMapItem mi = myGridRows[i].myMapItem;
@@ -1755,7 +1757,8 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "SetStateStarvation(): set state=" + myState.ToString());
             myIsHeaderCheckBoxChecked = true;
             myFoodCurrent -= foodNeededForPeople;
-            myGameInstance.IsFalconFed = true;
+            if (true == myGameInstance.IsFalconInParty())
+               myGameInstance.IsFalconFed = true;
             foreach (IMapItem mi in myPartyMembers)
             {
                if (0 < mi.StarveDayNum) // feeding today removes one starve day if it exists
@@ -1776,7 +1779,8 @@ namespace BarbarianPrince
             myState = StarveEnum.SE_STARVE_PARTIAL;
             myIsHeaderCheckBoxChecked = true;
             myFoodCurrent = 0;
-            myGameInstance.IsFalconFed = true;
+            if (true == myGameInstance.IsFalconInParty())
+               myGameInstance.IsFalconFed = true;
             foreach (IMapItem mi in myPartyMembers)
             {
                foreach (IMapItem mount in mi.Mounts)
@@ -2258,7 +2262,8 @@ namespace BarbarianPrince
          {
             case StarveEnum.SE_FEED_ALL_WITH_EXTRA:
                myFoodCurrent -= foodNeededTotalWithExtra;
-               myGameInstance.IsFalconFed = true;
+               if (true == myGameInstance.IsFalconInParty())
+                  myGameInstance.IsFalconFed = true;
                for (int i = 0; i < myMaxRowCount; ++i)
                {
                   IMapItem mi = myGridRows[i].myMapItem;
@@ -2277,7 +2282,8 @@ namespace BarbarianPrince
                break;
             case StarveEnum.SE_FEED_ALL:
                myFoodCurrent -= foodNeededTotal;
-               myGameInstance.IsFalconFed = true;
+               if (true == myGameInstance.IsFalconInParty())
+                  myGameInstance.IsFalconFed = true;
                for (int i = 0; i < myMaxRowCount; ++i)
                {
                   IMapItem mi = myGridRows[i].myMapItem;
@@ -2291,7 +2297,8 @@ namespace BarbarianPrince
                break;
             case StarveEnum.SE_FEED_PEOPLE:
                myFoodCurrent -= foodNeededForPeople;
-               myGameInstance.IsFalconFed = true;
+               if (true == myGameInstance.IsFalconInParty())
+                  myGameInstance.IsFalconFed = true;
                for (int i = 0; i < myMaxRowCount; ++i)
                {
                   IMapItem mi = myGridRows[i].myMapItem;
@@ -2305,7 +2312,8 @@ namespace BarbarianPrince
                break;
             case StarveEnum.SE_STARVE_PARTIAL:
                myFoodCurrent = 0;
-               myGameInstance.IsFalconFed = true;
+               if (true == myGameInstance.IsFalconInParty())
+                  myGameInstance.IsFalconFed = true;
                for (int i = 0; i < myMaxRowCount; ++i)
                {
                   IMapItem mi = myGridRows[i].myMapItem;

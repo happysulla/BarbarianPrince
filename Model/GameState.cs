@@ -1314,17 +1314,17 @@ namespace BarbarianPrince
          }
          #if UT1
             // <cgs> TEST
-            starting = gi.Territories.Find("0711"); //Town=0109 Ruins=0206 Temple=0711 Castle=1212 Castle=0323 Castle=1923 Cache=0505   
+            //starting = gi.Territories.Find("0711"); //Town=0109 Ruins=0206 Temple=0711 Castle=1212 Castle=0323 Castle=1923 Cache=0505   
             //starting = gi.Territories.Find("0409"); //Farmland=0418 CountrySide=0410 Forest=0409 Hills=0406 Mountains=0405 Swamp=0411 Desert=0407 
             //starting = gi.Territories.Find("0411"); //ForestTemple=1021 HillsTemple=2009 MountainTemple=1021 
             //starting = gi.Territories.Find("0207"); //Road Travel=0207->0208
             //starting = gi.Territories.Find("0707"); //Cross River=0707->0708
-            if (null == starting)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "SetStartingLocation() starting territory=null");
-               return false;
-            }
          #endif
+         if (null == starting)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocation() starting territory=null");
+            return false;
+         }
          gi.EnteredTerritories.Add(starting);
          int counterCount = 0;
          foreach (IMapItem mi in gi.PartyMembers)
@@ -7422,9 +7422,7 @@ namespace BarbarianPrince
                   gi.CapturedWealthCodes.Add(110);
                }
                break;
-            case "e099": // defeated roc
-               gi.AddSpecialItem(SpecialEnum.RocBeak); // helps in Count Drogat
-               break;
+            case "e099": break; // defeated roc
             case "e100": break; // griffon
             case "e101": break; // harpy 
             case "e108": break; // hawkmen 

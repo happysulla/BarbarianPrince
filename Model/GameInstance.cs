@@ -448,10 +448,11 @@ namespace BarbarianPrince
             harpy.IsRiding = true;
             AddCompanion(harpy);
             //---------------------
-            memberToAdd = "Runaway";
+
+            memberToAdd = "Monk";
             memberName = memberToAdd + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem rider = new MapItem(memberName, 1.0, false, false, false, "c09Runaway", "c09Runaway", Prince.Territory, 4, 4, 0);
+            IMapItem rider = new MapItem(memberName, 1.0, false, false, false, "c19Monk", "c19Monk", Prince.Territory, 5, 4, 4);
             harpy.Rider = rider;
             rider.Mounts.Insert(0, harpy);
             rider.IsRiding = true;

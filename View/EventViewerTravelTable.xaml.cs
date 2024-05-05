@@ -37,6 +37,9 @@ namespace BarbarianPrince
          TC_EVENT_ROLL_EVENT_R230,      // If rafting event happens, need to look up on rafting table R230
          TC_EVENT_ROLL_EVENT_R232,      // If rafting event happens, followed by roll of 8, need to look up on R232 table
          TC_EVENT_ROLL_EVENT_R232_SHOW, // Show Results
+         TC_EVENT_ROLL_REFERENCE_R281,  // If airborne event happens, followed by roll of 6, need to look up on R281 table - which is reroll reference using terrain type
+         TC_EVENT_ROLL_EVENT_R281,      // If airborne event happens, followed by roll of 6, need to look up on R281 table - which is reroll event using terrain type
+         TC_EVENT_ROLL_EVENT_R281_SHOW, // Show Results
          TC_EVENT_SHOW_RESULTS,
          TC_END,
          TC_ERROR
@@ -329,6 +332,7 @@ namespace BarbarianPrince
          myEvents["r278"]  = new String[6] { "e106", "e106", "e105", "e105", "e079", "e079" };
          myEvents["r279"]  = new String[6] { "e107", "e109", "e077", "e101", "e110", "e111" };
          myEvents["r280"]  = new String[6] { "e099", "e098", "e100", "e101", "e064", "e065" };
+         myEvents["r281"]  = new String[6] { "r281", "r281", "r281", "r281", "r281", "r281" };
       }
       public bool PerformTravel(EndTravelEventCallback callback)
       {
@@ -585,6 +589,17 @@ namespace BarbarianPrince
                myTextBlockHeader.Inlines.Add(new InlineUIContainer(b1));
                myTextBlockHeader.Inlines.Add(new InlineUIContainer(b2));
                break;
+            case EnumR204.TC_EVENT_ROLL_REFERENCE_R281:
+            case EnumR204.TC_EVENT_ROLL_EVENT_R281:
+            case EnumR204.TC_EVENT_ROLL_EVENT_R281_SHOW:
+               myTextBlockHeader.Inlines.Add(new Run("e204 Travel"));
+               b1.Content = "r204d";
+               myTextBlockHeader.Inlines.Add(new InlineUIContainer(b1));
+               myTextBlockHeader.Inlines.Add(new InlineUIContainer(b2));
+               Button b3 = new Button() { Content = "r281", FontFamily = myFontFam1, FontSize = 12, Margin = new Thickness(5, 0, 0, 0), Height = 14 };
+               b3.Click += ButtonRule_Click;
+               myTextBlockHeader.Inlines.Add(new InlineUIContainer(b3));
+               break;
             case EnumR204.TC_EVENT_ROLL_REFERENCE:
             case EnumR204.TC_EVENT_ROLL_EVENT:
             case EnumR204.TC_EVENT_SHOW_RESULTS:
@@ -676,6 +691,9 @@ namespace BarbarianPrince
             case EnumR204.TC_EVENT_ROLL_EVENT_R232:
                myTextBlockInstructions.Inlines.Add(new Run("Roll for rafting travel event:"));
                break;
+            case EnumR204.TC_EVENT_ROLL_REFERENCE_R281:
+               myTextBlockInstructions.Inlines.Add(new Run("Encounter on Ground! Roll for encounter in " + myMapItemMove.NewTerritory.Type + ":"));
+               break;
             case EnumR204.TC_EVENT_ROLL_REFERENCE:
                if (true == myIsTravelingAir)
                   myTextBlockInstructions.Inlines.Add(new Run("Encounter! Roll for air travel reference:"));
@@ -712,8 +730,12 @@ namespace BarbarianPrince
                else
                   myTextBlockInstructions.Inlines.Add(new Run("Roll for travel event in " + myMapItemMove.NewTerritory.Type + ":"));
                break;
+            case EnumR204.TC_EVENT_ROLL_EVENT_R281:
+               myTextBlockInstructions.Inlines.Add(new Run("Roll for travel event in " + myMapItemMove.NewTerritory.Type + ":"));
+               break;
             case EnumR204.TC_EVENT_SHOW_RESULTS:
             case EnumR204.TC_EVENT_ROLL_EVENT_R232_SHOW:
+            case EnumR204.TC_EVENT_ROLL_EVENT_R281_SHOW:
                myTextBlockInstructions.Inlines.Add(new Run("Click anywhere to continue."));
                break;
             case EnumR204.TC_END:
@@ -773,6 +795,8 @@ namespace BarbarianPrince
             case EnumR204.TC_EVENT_ROLL_EVENT:
             case EnumR204.TC_EVENT_ROLL_EVENT_R230:
             case EnumR204.TC_EVENT_ROLL_EVENT_R232:
+            case EnumR204.TC_EVENT_ROLL_REFERENCE_R281:
+            case EnumR204.TC_EVENT_ROLL_EVENT_R281:
                myStackPanelAssignable.Children.Add(img1);
                myStackPanelAssignable.Children.Add(r);
                break;
@@ -786,6 +810,7 @@ namespace BarbarianPrince
             case EnumR204.TC_LOST_SHOW_RESULTS:
             case EnumR204.TC_EVENT_SHOW_RESULTS:
             case EnumR204.TC_EVENT_ROLL_EVENT_R232_SHOW:
+            case EnumR204.TC_EVENT_ROLL_EVENT_R281_SHOW:
                myStackPanelAssignable.Children.Add(r);
                break;
             case EnumR204.TC_LOST_SHOW_CROSS_RESULT:
@@ -818,7 +843,7 @@ namespace BarbarianPrince
             case EnumR204.TC_DESERTION_ROLL:
             case EnumR204.TC_DESERTION_SHOW:
                for (int i = 0; i < myLocalGuides.Count; ++i)
-                  UpdateGridRow(i);
+                  UpdateGridRowForDesertion(i);
                break;
             case EnumR204.TC_LOST_ROLL:
             case EnumR204.TC_EVENT_ROLL:
@@ -828,6 +853,7 @@ namespace BarbarianPrince
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT:
             case EnumR204.TC_EVENT_ROLL_EVENT_R230:
+            case EnumR204.TC_EVENT_ROLL_EVENT_R281:
                if (false == UpdateReferenceRow(myGameInstance.MapItemMoves[0]))
                {
                   Logger.Log(LogEnum.LE_ERROR, "UpdateGridRows(): UpdateReferenceRow() returned false");
@@ -837,6 +863,8 @@ namespace BarbarianPrince
             case EnumR204.TC_LOST_SHOW_RESULTS:
             case EnumR204.TC_EVENT_SHOW_RESULTS:
             case EnumR204.TC_EVENT_ROLL_EVENT_R232_SHOW:
+            case EnumR204.TC_EVENT_ROLL_REFERENCE_R281:
+            case EnumR204.TC_EVENT_ROLL_EVENT_R281_SHOW:
                if (false == UpdateReferenceRow(myGameInstance.MapItemMoves[0]))
                {
                   Logger.Log(LogEnum.LE_ERROR, "UpdateGridRows(): UpdateReferenceRow() returned false");
@@ -855,7 +883,7 @@ namespace BarbarianPrince
          }
          return true;
       }
-      private void UpdateGridRow(int i)
+      private void UpdateGridRowForDesertion(int i)
       {
          int rowNum = i + STARTING_ASSIGNED_ROW;
          Button b = CreateButton(myGridRows[i].myAssignable);
@@ -927,6 +955,8 @@ namespace BarbarianPrince
          if (true == myIsTravelingAir) // Check for airborne
          {
             myKeyReference = "Airborne";
+            if ( (EnumR204.TC_EVENT_ROLL_EVENT_R281 == myState) || ( EnumR204.TC_EVENT_ROLL_EVENT_R281_SHOW == myState ) )
+               myKeyReference = mim.NewTerritory.Type;
          }
          else if (true == myIsRaftEncounter)
          {
@@ -1017,7 +1047,10 @@ namespace BarbarianPrince
             Grid.SetColumn(b, 1);
             Grid.SetColumnSpan(b, 6);
             myGameInstance.EventDisplayed = myGameInstance.EventActive = "e009";
-            myState = EnumR204.TC_EVENT_SHOW_RESULTS;
+            if(EnumR204.TC_EVENT_ROLL_EVENT_R281 == myState)
+               myState = myState = EnumR204.TC_EVENT_SHOW_RESULTS;
+            else
+               myState = EnumR204.TC_EVENT_SHOW_RESULTS;
          }
          else
          {
@@ -1034,7 +1067,11 @@ namespace BarbarianPrince
             {
                try
                {
-                  if (i + 1 == myRollEvent)
+                  if(EnumR204.TC_EVENT_ROLL_REFERENCE_R281 == myState)  // enable the entire row of r281 buttons
+                  {
+                     buttons[i].IsEnabled = true;
+                  }
+                  else if (i + 1 == myRollEvent)
                   {
                      buttons[i].IsEnabled = true;
                      myGameInstance.EventDisplayed = myGameInstance.EventActive = myEvents[key][i];
@@ -1108,13 +1145,14 @@ namespace BarbarianPrince
                   dieRoll = 13;
                myState = GetEventResult(myGameInstance.MapItemMoves[0], dieRoll);
                break;
-            case EnumR204.TC_EVENT_ROLL_REFERENCE:
-               dieRoll = 4;  // <cgs> TEST 
+            case EnumR204.TC_EVENT_ROLL_REFERENCE: 
                myRollReference = dieRoll; // column number in travel table r207 - reference row
-               myState = EnumR204.TC_EVENT_ROLL_EVENT;
+               if ((6 == myRollReference) && (true == myIsTravelingAir) ) // if traveling by air and roll reference 6, need to look  at Table r281
+                  myState = EnumR204.TC_EVENT_ROLL_REFERENCE_R281;
+               else
+                  myState = EnumR204.TC_EVENT_ROLL_EVENT;
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT:
-               dieRoll = 6;  // <cgs> TEST 
                myRollEvent = dieRoll; // column number in traveling event reference - event row
                myState = EnumR204.TC_EVENT_SHOW_RESULTS;
                break;
@@ -1146,6 +1184,14 @@ namespace BarbarianPrince
                myRollReference = dieRoll;
                myRollEvent     = dieRoll; 
                myState = EnumR204.TC_EVENT_ROLL_EVENT_R232_SHOW;
+               break;
+            case EnumR204.TC_EVENT_ROLL_REFERENCE_R281:
+               myRollReference = dieRoll; // column number in travel table r207 - reference row
+               myState = EnumR204.TC_EVENT_ROLL_EVENT_R281;
+               break;
+            case EnumR204.TC_EVENT_ROLL_EVENT_R281:
+               myRollEvent = dieRoll; // column number in traveling event reference - event row
+               myState = EnumR204.TC_EVENT_ROLL_EVENT_R281_SHOW;
                break;
             default:
                break;
@@ -1578,7 +1624,7 @@ namespace BarbarianPrince
       //-----------------------------------------------------------------------------------------
       private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
       {
-         if(EnumR204.TC_EVENT_ROLL_EVENT_R232_SHOW == myState)
+         if( (EnumR204.TC_EVENT_ROLL_EVENT_R232_SHOW == myState) || (EnumR204.TC_EVENT_ROLL_EVENT_R281_SHOW == myState) )
          {
             myState = EnumR204.TC_END; // If there is an active event, encounter that event in UpdateGrid()
             if (false == UpdateGrid())
@@ -1646,6 +1692,8 @@ namespace BarbarianPrince
                               case EnumR204.TC_EVENT_ROLL_REFERENCE:
                               case EnumR204.TC_EVENT_ROLL_EVENT:
                               case EnumR204.TC_EVENT_ROLL_EVENT_R232:
+                              case EnumR204.TC_EVENT_ROLL_REFERENCE_R281:
+                              case EnumR204.TC_EVENT_ROLL_EVENT_R281:
                                  myDieRoller.RollMovingDie(myCanvas, callback);
                                  break;
                               case EnumR204.TC_EVENT_ROLL:
