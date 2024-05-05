@@ -1,0 +1,54 @@
+﻿<Window x:Class="BarbarianPrince.MapItemCreateDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Create MapItem Dialog" Height="400" Width="551" >
+    <StackPanel Name="myStackPanelOutside" >
+        <StackPanel  HorizontalAlignment="Left" Orientation="Horizontal" Width="549" Margin="0,0,0,2">
+            <Label Name="myLabelName" Width="156" Content="Choose a name:" HorizontalAlignment="Center" Height="30"/>
+            <TextBox x:Name="myTextBoxName" Margin="0,4,-1,0" Width="394" Height="20"/>
+        </StackPanel>
+        <StackPanel  HorizontalAlignment="Left" Orientation="Horizontal" Margin="0,2,0,2" Width="548" >
+            <Label Name="myLabelTop" Width="156" Content="Choose Top image:" HorizontalAlignment="Center" Height="30" />
+            <TextBox x:Name="myTextBoxTopImageName" Width="393" Height="20" Margin="0,0,-1,0"/>
+        </StackPanel>
+        <StackPanel  HorizontalAlignment="Left" Orientation="Horizontal" Margin="0,2,0,2" Width="548" >
+            <Label Name="myLabelBottom"  Width="156" Content="Choose Bottom image:"  Height="28" />
+            <TextBox x:Name="myTextBoxBottomImageName" Width="392" Height="20" HorizontalAlignment="Right" />
+        </StackPanel>
+        <StackPanel  HorizontalAlignment="Left" Orientation="Horizontal"  Width="547" Margin="0,1,0,1">
+            <Label Name="myLabelOverlay"  Width="156" Content="Choose Overlay image:" Height="30" />
+            <TextBox x:Name="myTextBoxOverlapImageName" Width="391" Height="20" VerticalAlignment="Stretch" />
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Width="547" Margin="0,1,0,2" >
+            <Label Name="myLabelEndurance" Content="Endurance:"  Width="156" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox x:Name="myTextBoxEndurance" Width="61" Height="19" VerticalAlignment="Center" HorizontalAlignment="Center" Text="4"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Width="547" Margin="0,1,0,2">
+            <Label Name="myLabelCombat" Content="Combat:"  Width="156" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <TextBox x:Name="myTextBoxCombat" Width="61" Height="20" VerticalAlignment="Center" Text="4"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Width="547" Margin="0,1,0,2">
+            <Label Name="myLabelCoin" Content="Coin:"  Width="156" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <TextBox x:Name="myTextBoxCoin" Width="61" Height="20" VerticalAlignment="Center" Text="4"/>
+        </StackPanel>
+        <StackPanel  HorizontalAlignment="Left" Orientation="Horizontal" Width="549" Margin="0,0,0,2">
+            <Label  Name="myLabelZoom" Width="156" Content="Choose size:" HorizontalAlignment="Center" Height="30"/>
+            <TextBox x:Name="myTextBoxZoom" Margin="0,4,-1,0" Width="394" Height="20" Text="1.0"/>
+        </StackPanel>
+        <StackPanel  HorizontalAlignment="Left" Orientation="Horizontal" Width="549" Margin="0,0,0,2">
+            <Label  Name="myLabelHidden" Content="Hidden?:" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="30"/>
+            <CheckBox x:Name="myCheckBoxHidden" Height="21" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="23" />
+            <Label  Name="myLabelAnimated" Content="Animated?:" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="30"/>
+            <CheckBox x:Name="myCheckBoxAnimated" Height="21" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="23" />
+            <Label  Name="myLabelGuide" Content="Guide?:" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="30"/>
+            <CheckBox x:Name="myCheckBoxGuide" Height="21" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="23" />
+        </StackPanel>
+        <StackPanel Name="myStackPanelButtons" Orientation="Horizontal" HorizontalAlignment="Center" >
+            <Button x:Name="myButtonOk" HorizontalAlignment="Center" Width="70" Height="20" VerticalAlignment="Top" Margin="0,0,50,0" Click="OkButton_Click">Apply</Button>
+            <Button x:Name="myButtonCancel" HorizontalAlignment="Center" Width="70" Height="20" VerticalAlignment="Top" Margin="0,0,0,0" IsCancel="True" >Close</Button>
+        </StackPanel>
+    </StackPanel>
+</Window>

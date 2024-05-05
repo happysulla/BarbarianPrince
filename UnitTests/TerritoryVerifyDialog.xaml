@@ -1,0 +1,52 @@
+﻿<Window x:Class="BarbarianPrince.TerritoryVerifyDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Verify Territory Dialog" Height="199" Width="576">
+    <Grid RenderTransformOrigin="0.499,0.526" HorizontalAlignment="Center" Width="556" Margin="0,0,0,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Label Width="120" Content="Name:"/>
+            <TextBox x:Name="myTextBoxName" Margin="0,4,-1,0" VerticalAlignment="Top" Width="412"/>
+        </StackPanel>
+        <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Width="94" VerticalAlignment="Center" Height="26" Margin="12,0,0,0" Content="Chosen Type:"/>
+        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Orientation="Horizontal">
+            <RadioButton x:Name="myRadioButtonCountryside" GroupName="A" Padding="0,0,0,0" Width="87" Height="26" Content="Countryside" IsChecked="True" Checked="RadioButton_Checked"/>
+            <RadioButton x:Name="myRadioButtonFarmland" GroupName="A" Padding="0,0,0,0" Width="81" Height="26" Content="Farmland" Checked="RadioButton_Checked"/>
+            <RadioButton x:Name="myRadioButtonForest" GroupName="A" Padding="0,0,0,0" Width="73" Height="26" Content="Forest" Checked="RadioButton_Checked"/>
+            <RadioButton x:Name="myRadioButtonHill" GroupName="A" Padding="0,0,0,0" Width="65" Height="26" Content="Hills" Checked="RadioButton_Checked"/>
+            <RadioButton x:Name="myRadioButtonMountain" GroupName="A" Padding="0,0,0,0" Width="82" Height="26" Content="Mountains" Checked="RadioButton_Checked"/>
+            <RadioButton x:Name="myRadioButtonDesert" GroupName="A" Padding="0,0,0,0" Width="66" Height="26" Content="Desert" Checked="RadioButton_Checked"/>
+            <RadioButton x:Name="myRadioButtonSwamp" GroupName="A" Padding="0,0,0,0" Width="73" Height="26" Content="Swamp" Checked="RadioButton_Checked"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Orientation="Horizontal" Width="357">
+            <CheckBox x:Name="myCheckBoxTown" Width="64" Height="26" Content="Town?" Checked="CheckBox_Checked_IsTown" Unchecked="CheckBox_UnChecked_IsTown" IsChecked="False" />
+            <CheckBox x:Name="myCheckBoxCastle" Width="64" Height="26" Content="Castle?" Checked="CheckBox_Checked_IsCastle" Unchecked="CheckBox_UnChecked_IsCastle"/>
+            <CheckBox x:Name="myCheckBoxRuin" Width="64" Height="26" Content="Ruin?" Checked="CheckBox_Checked_IsRuin" Unchecked="CheckBox_UnChecked_IsRuin"/>
+            <CheckBox x:Name="myCheckBoxTemple" Width="64" Height="26" Content="Temple?" Checked="CheckBox_Checked_IsTemple" Unchecked="CheckBox_UnChecked_IsTemple" Margin="0,0,5,0" />
+            <CheckBox x:Name="myCheckBoxOasis" Width="64" Height="26" Content="Oasis?" Checked="CheckBox_Checked_IsOasis" Unchecked="CheckBox_UnChecked_IsOasis"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Orientation="Horizontal" Width="356" Margin="0,26,0,29" Grid.RowSpan="3">
+            <Label Width="21" Content="X:"/>
+            <TextBox x:Name="myTextBoxCenterPointX" Width="64" Text="0" Height="22" TextChanged="TextBoxCenterPointX_TextChanged"/>
+            <Label Width="23" Content=" Y:"/>
+            <TextBox x:Name="myTextBoxCenterPointY" Width="67" Height="22" Text="0" TextChanged="TextBoxCenterPointY_TextChanged"/>
+        </StackPanel>
+        <Button Grid.Row="6" x:Name="myButtonOk" HorizontalAlignment="Center" Margin="0,13,0,0" Click="OkButton_Click" Width="70" Height="20" VerticalAlignment="Top">OK</Button>
+        <Button Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" Margin="0,13,0,0" IsCancel="True" Width="70" Height="20" VerticalAlignment="Top">Cancel</Button>
+    </Grid>
+</Window>

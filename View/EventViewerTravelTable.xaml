@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="BarbarianPrince.EventViewerTravelTable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BarbarianPrince"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Name="myGridTravelTable" MinWidth="600" MaxWidth="600" Background="#FFB9EA9E" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="7" Orientation="Horizontal">
+            <TextBlock Name="myTextBlockHeader" Text="e207 Travel Table" FontWeight="Bold" FontFamily='Georgia' FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+        </StackPanel>
+        <Rectangle Grid.Row="1" Grid.ColumnSpan="7" Margin="5" Height="1" Fill="Black"/>
+        <TextBlock Grid.Row="2" Grid.ColumnSpan="7" Name="myTextBlockInstructions" FontFamily='Georgia' FontSize="16" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Margin="2,0,0,5">
+           Roll for Travel Event.
+        </TextBlock>
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="7" Name="myStackPanelAssignable" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5,0,0,0">
+            <Rectangle  Height="42" Width="42" Stroke="Black" />
+        </StackPanel>
+        <Rectangle Grid.Row="4" Grid.ColumnSpan="7" Margin="5" Height="1" Fill="Black"/>
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="7" Name="myStackPanelCheckMarks" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5,0,0,0">
+            <CheckBox Name="myCheckBoxEvent" IsChecked="False" IsEnabled="false" Content="Event Encountered" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </StackPanel>
+        <Rectangle Grid.Row="6" Grid.ColumnSpan="7" Margin="5" Height="1" Fill="Black"/>
+        <!--Table Header Row-->
+        <TextBlock Grid.Row="7" Grid.Column="0" Name="myTextBlockCol0" FontFamily='Tahoma' FontSize="16" VerticalAlignment="Center"  HorizontalAlignment="Left">Row Description</TextBlock>
+        <TextBlock Grid.Row="7" Grid.Column="1" Name="myTextBlockCol1" FontFamily='Tahoma' FontSize="16" VerticalAlignment="Center"  HorizontalAlignment="Center">1</TextBlock>
+        <TextBlock Grid.Row="7" Grid.Column="2" Name="myTextBlockCol2" FontFamily='Tahoma' FontSize="16" VerticalAlignment="Center"  HorizontalAlignment="Center">2</TextBlock>
+        <TextBlock Grid.Row="7" Grid.Column="3" Name="myTextBlockCol3" FontFamily='Tahoma' FontSize="16" VerticalAlignment="Center"  HorizontalAlignment="Center">3</TextBlock>
+        <TextBlock Grid.Row="7" Grid.Column="4" Name="myTextBlockCol4" FontFamily='Tahoma' FontSize="16" VerticalAlignment="Center"  HorizontalAlignment="Center">4</TextBlock>
+        <TextBlock Grid.Row="7" Grid.Column="5" Name="myTextBlockCol5" FontFamily='Tahoma' FontSize="16" VerticalAlignment="Center"  HorizontalAlignment="Center">5</TextBlock>
+        <TextBlock Grid.Row="7" Grid.Column="6" Name="myTextBlockCol6" FontFamily='Tahoma' FontSize="16" VerticalAlignment="Center"  HorizontalAlignment="Center">6</TextBlock>
+    </Grid>
+</UserControl>

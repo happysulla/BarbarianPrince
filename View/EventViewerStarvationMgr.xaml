@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="BarbarianPrince.EventViewerStarvationMgr"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BarbarianPrince"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Name="myGrid" MinWidth="600" MaxWidth="600" Background="#FFB9EA9E" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="8" Orientation="Horizontal">
+            <TextBlock Name="myTextBlockHeader" Text="e216 Evening Meal" FontWeight="Bold" FontFamily='Georgia' FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+            <Button Content='r215' FontFamily='Courier New' FontSize='12' Margin="5,0,0,0" Height="14" Click="ButtonRule_Click" />
+            <Button Content='r216' FontFamily='Courier New' FontSize='12' Margin="5,0,0,0" Height="14" Click="ButtonRule_Click" />
+            <Button Content='r107' FontFamily='Courier New' FontSize='12' Margin="5,0,0,0" Height="14" Click="ButtonRule_Click" Name="myButtonFalconRule" Visibility="Hidden" />
+        </StackPanel>
+        <Rectangle Grid.Row="1" Grid.ColumnSpan="8" Margin="5" Height="1" Fill="Black"/>
+        <TextBlock Grid.Row="2" Grid.ColumnSpan="8" Name="myTextBlockInstructions" FontFamily='Georgia' FontSize="16" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Margin="2,0,0,5">
+           If party is not fed, roll die for possible desertions.
+        </TextBlock>
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="8" Name="myStackPanelAssignable" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5,0,0,0">
+            <Button Height="42" Width="42" Content="A1"/>
+            <Button Height="42" Width="42" Content="A2"/>
+            <Rectangle  Height="42" Width="42" Stroke="Black" />
+        </StackPanel>
+        <Rectangle Grid.Row="4" Grid.ColumnSpan="8" Margin="5" Height="1" Fill="Black"/>
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="8" Name="myStackPanelCheckMarks" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+        <Rectangle Grid.Row="6" Grid.ColumnSpan="8" Margin="5" Height="1" Fill="Black"/>
+        <!--Table Header Row-->
+        <TextBlock Grid.Row="7" Grid.Column="0" FontFamily='Georgia' FontSize="12" VerticalAlignment="Center"  HorizontalAlignment="Center" Name="myTextBlockCol0">Members</TextBlock>
+        <TextBlock Grid.Row="7" Grid.Column="1" FontFamily='Georgia' FontSize="12" VerticalAlignment="Center"  HorizontalAlignment="Center" Name="myTextBlockCol1">Double?</TextBlock>
+        <TextBlock Grid.Row="7" Grid.Column="2" FontFamily='Georgia' FontSize="12" VerticalAlignment="Center"  HorizontalAlignment="Center" Name="myTextBlockCol2">Starve Days</TextBlock>
+        <TextBlock Grid.Row="7" Grid.Column="3" FontFamily='Georgia' FontSize="12" VerticalAlignment="Center"  HorizontalAlignment="Center" Name="myTextBlockCol3">Mount</TextBlock>
+        <TextBlock Grid.Row="7" Grid.Column="4" FontFamily='Georgia' FontSize="12" VerticalAlignment="Center"  HorizontalAlignment="Center" Name="myTextBlockCol4">Feed Mount?</TextBlock>
+        <TextBlock Grid.Row="7" Grid.Column="5" FontFamily='Georgia' FontSize="12" VerticalAlignment="Center"  HorizontalAlignment="Center" Name="myTextBlockCol5">Max Loads</TextBlock>
+        <TextBlock Grid.Row="7" Grid.Column="6" FontFamily='Georgia' FontSize="12" VerticalAlignment="Center"  HorizontalAlignment="Center" Name="myTextBlockCol6">Result</TextBlock>
+        <TextBlock Grid.Row="7" Grid.Column="7" FontFamily='Georgia' FontSize="12" VerticalAlignment="Center"  HorizontalAlignment="Center" Name="myTextBlockCol7">Desertion?</TextBlock>
+    </Grid>
+</UserControl>
