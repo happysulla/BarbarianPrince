@@ -1,0 +1,74 @@
+﻿<DiceRolls>
+    <DiceRoll value="Die1">
+        <Zoom value="1.707" />
+        <TopImageName value="c01dieRoll" />
+    </DiceRoll>
+    <DiceRoll value="Die2">
+        <Zoom value="1.707" />
+        <TopImageName value="c02dieRoll" />
+    </DiceRoll>
+    <DiceRoll value="Die3">
+        <Zoom value="1.707" />
+        <TopImageName value="c03dieRoll" />
+    </DiceRoll>
+    <DiceRoll value="Die4">
+        <Zoom value="1.707" />
+        <TopImageName value="c04dieRoll" />
+    </DiceRoll>
+    <DiceRoll value="Die5">
+        <Zoom value="1.707" />
+        <TopImageName value="c05dieRoll" />
+    </DiceRoll>
+    <DiceRoll value="Die6">
+        <Zoom value="1.707" />
+        <TopImageName value="c06dieRoll" />
+    </DiceRoll>
+    <DiceRoll value="Die7">
+        <Zoom value="1.707" />
+        <TopImageName value="c01dieRoll2" />
+    </DiceRoll>
+    <DiceRoll value="Die8">
+        <Zoom value="1.707" />
+        <TopImageName value="c02dieRoll2" />
+    </DiceRoll>
+    <DiceRoll value="Die9">
+        <Zoom value="1.707" />
+        <TopImageName value="c03dieRoll2" />
+    </DiceRoll>
+    <DiceRoll value="Die10">
+        <Zoom value="1.707" />
+        <TopImageName value="c04dieRoll2" />
+    </DiceRoll>
+    <DiceRoll value="Die11">
+        <Zoom value="1.707" />
+        <TopImageName value="c05dieRoll2" />
+    </DiceRoll>
+    <DiceRoll value="Die12">
+        <Zoom value="1.707" />
+        <TopImageName value="c06dieRoll2" />
+    </DiceRoll>
+    <DiceRoll value="Die13">
+        <Zoom value="1.707" />
+        <TopImageName value="c01dieRoll3" />
+    </DiceRoll>
+    <DiceRoll value="Die14">
+        <Zoom value="1.707" />
+        <TopImageName value="c02dieRoll3" />
+    </DiceRoll>
+    <DiceRoll value="Die15">
+        <Zoom value="1.707" />
+        <TopImageName value="c03dieRoll3" />
+    </DiceRoll>
+    <DiceRoll value="Die16">
+        <Zoom value="1.707" />
+        <TopImageName value="c04dieRoll3" />
+    </DiceRoll>
+    <DiceRoll value="Die17">
+        <Zoom value="1.707" />
+        <TopImageName value="c05dieRoll3" />
+    </DiceRoll>
+    <DiceRoll value="Die18">
+        <Zoom value="1.707" />
+        <TopImageName value="c06dieRoll3" />
+    </DiceRoll>
+</DiceRolls>
