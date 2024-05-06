@@ -122,7 +122,7 @@ namespace BarbarianPrince
       {
          try
          {
-            ConfigFileReader cfr = new ConfigFileReader("../../Config/Events.txt");
+            ConfigFileReader cfr = new ConfigFileReader("../Config/Events.txt");
             if (true == cfr.CtorError)
             {
                Logger.Log(LogEnum.LE_ERROR, "CreateEvents(): cfr.CtorError=true");
@@ -5666,6 +5666,7 @@ namespace BarbarianPrince
                switch (myGameInstance.EventActive)
                {
                   case "e003a":
+                  case "e008a":
                   case "e018a":
                   case "e023a":
                   case "e071a":

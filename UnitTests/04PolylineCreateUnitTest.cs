@@ -165,9 +165,9 @@ namespace BarbarianPrince
       {
          try
          {
-            System.IO.File.Delete("../../Config/Rivers.xml");  // delete old file
+            System.IO.File.Delete("../Config/Rivers.xml");  // delete old file
             XmlDocument aXmlDocument = CreateXml(); // create a new XML document based on Territories
-            using (FileStream writer = new FileStream("../../Config/Rivers.xml", FileMode.OpenOrCreate, FileAccess.Write))
+            using (FileStream writer = new FileStream("../Config/Rivers.xml", FileMode.OpenOrCreate, FileAccess.Write))
             {
                XmlWriterSettings settings = new XmlWriterSettings { Indent = true, OmitXmlDeclaration = true, NewLineOnAttributes = false };
                using (XmlWriter xmlWriter = XmlWriter.Create(writer, settings)) // For XmlWriter, it uses the stream that was created: writer.
@@ -206,7 +206,7 @@ namespace BarbarianPrince
          string name = null;
          try
          {
-            reader = new XmlTextReader("../../Config/Rivers.xml") { WhitespaceHandling = WhitespaceHandling.None }; // Load the reader with the data file and ignore all white space nodes.    
+            reader = new XmlTextReader("../Config/Rivers.xml") { WhitespaceHandling = WhitespaceHandling.None }; // Load the reader with the data file and ignore all white space nodes.    
             while (reader.Read())
             {
                if (reader.Name == "River")

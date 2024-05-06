@@ -313,7 +313,7 @@ namespace BarbarianPrince
          }
          myPrince = new MapItem(prince);
          PartyMembers.Add(myPrince);
-         if( false == AddStartingPartyMembers())
+         if( false == AddStartingPartyMemberOption())
          {
             Logger.Log(LogEnum.LE_ERROR, "GameInstance(): AddStartingPartyMembers() returned false");
             CtorError = true;
@@ -324,7 +324,7 @@ namespace BarbarianPrince
          #endif
          Logger.Log(LogEnum.LE_GAME_PARTYMEMBER_COUNT, "GameInstance() c=" + PartyMembers.Count.ToString());
       }
-      private bool AddStartingPartyMembers()
+      private bool AddStartingPartyMemberOption()
       {
          IOption option = null;
          String memberToAdd = "";
@@ -596,20 +596,20 @@ namespace BarbarianPrince
       }
       void AddUnitTests()
       {
-         Days = 40;
-         myPrince.Food = 5;
+         //Days = 40;
+         //myPrince.Food = 5;
          myPrince.Coin = 30;
          //myPrince.SetWounds(7, 0);
          //myPrince.PlagueDustWound = 1; 
          //myPrince.AddNewMount();
-         myPrince.AddNewMount(MountEnum.Pegasus);
+         //myPrince.AddNewMount(MountEnum.Pegasus);
          //this.AddUnitTestTiredMount(myPrince);
          //myPrince.AddNewMount();
          //myPrince.AddNewMount();
          //---------------------
-         AddSpecialItem(SpecialEnum.GiftOfCharm);
-         AddSpecialItem(SpecialEnum.ResistanceTalisman);
-         AddSpecialItem(SpecialEnum.CharismaTalisman);
+         //AddSpecialItem(SpecialEnum.GiftOfCharm);
+         //AddSpecialItem(SpecialEnum.ResistanceTalisman);
+         //AddSpecialItem(SpecialEnum.CharismaTalisman);
          //AddSpecialItem(SpecialEnum.DragonEye);
          //AddSpecialItem(SpecialEnum.RocBeak);
          //AddSpecialItem(SpecialEnum.GriffonClaws);
@@ -1057,7 +1057,7 @@ namespace BarbarianPrince
             foods += mi.Food;
          return foods;
       }
-      public bool AddFoods(int foodStore)
+      public bool AddFoods(int foodStore, bool isHunt=false)
       {
          if (foodStore < 0)
          {
@@ -1070,16 +1070,22 @@ namespace BarbarianPrince
          IMapItems sortedMapItems = PartyMembers.SortOnFreeLoad(); 
          while (0 < --count)
          {
+            int totalFreeLoad = 0;
             foreach (IMapItem mi in sortedMapItems)
             {
                if ((true == mi.IsUnconscious) || (true == mi.IsKilled))
                   continue;
-               int freeLoad = mi.GetFreeLoad();
+               int freeLoad = 0;
+               if (false == isHunt)
+                  freeLoad = mi.GetFreeLoad();
+               else
+                  freeLoad = 1000; // keep adding without regard to limit
                if (freeLoad < 0)
                {
                   Logger.Log(LogEnum.LE_ERROR, "AddFoods(): GetFreeLoad() returned fl=" + freeLoad.ToString());
                   return false;
                }
+               totalFreeLoad += freeLoad;
                if (0 < freeLoad)
                {
                   ++mi.Food;
@@ -1089,6 +1095,8 @@ namespace BarbarianPrince
                      return true;
                }
             }
+            if (0 == totalFreeLoad)
+               return true;
          }
          if (count < 0)
             Logger.Log(LogEnum.LE_ERROR, "AddFoods(): invalid state count<0 fs=" + foodStore.ToString());
@@ -1171,6 +1179,7 @@ namespace BarbarianPrince
          //---------------------------------
          IMapItems sortedMapItems = PartyMembers.SortOnCoin();
          sortedMapItems.Reverse();
+         int totalFreeLoad = 0;
          foreach (IMapItem mi in sortedMapItems) // add to party members to get to 100 increment
          {
             if ((true == mi.IsUnconscious) || (true == mi.IsKilled))
@@ -1184,6 +1193,7 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "AddCoins(): GetFreeLoad() returned fl=" + freeLoad.ToString());
                   return false;
                }
+               totalFreeLoad += freeLoad;
                if (0 < freeLoad)
                {
                   int diff1 = 100 - remainder1;
@@ -1200,6 +1210,8 @@ namespace BarbarianPrince
                   remainingCoins -= diff1;
                }
             }
+            if (0 == totalFreeLoad)
+               return true;
          }
          //---------------------------------
          int count = 100;
@@ -1207,6 +1219,7 @@ namespace BarbarianPrince
          {
             IMapItems sortedMapItems1 = PartyMembers.SortOnCoin();
             sortedMapItems1.Reverse();
+            int totalFreeLoad1 = 0;
             foreach (IMapItem mi in sortedMapItems1)
             {
                if ((true == mi.IsUnconscious) || (true == mi.IsKilled))
@@ -1217,6 +1230,7 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "AddCoins(): GetFreeLoad() returned fl=" + freeLoad.ToString());
                   return false;
                }
+               totalFreeLoad1 += freeLoad;
                if (0 < freeLoad)
                {
                   int remainder3 = mi.Coin % 100;
@@ -1234,6 +1248,8 @@ namespace BarbarianPrince
                   remainingCoins -= diff3;
                }
             }
+            if (0 == totalFreeLoad1)
+               return true;
          }
          if (count < 0)
          {
@@ -2471,7 +2487,7 @@ namespace BarbarianPrince
          try
          {
             // Load the reader with the data file and ignore all white space nodes.         
-            reader = new XmlTextReader("../../Config/Territories.xml") { WhitespaceHandling = WhitespaceHandling.None };
+            reader = new XmlTextReader("../Config/Territories.xml") { WhitespaceHandling = WhitespaceHandling.None };
             while (reader.Read())
             {
                if (reader.Name == "Territory")
@@ -2569,7 +2585,7 @@ namespace BarbarianPrince
          try
          {
             // Load the reader with the data file and ignore all white space nodes.         
-            reader = new XmlTextReader("../../Config/MapItems.xml") { WhitespaceHandling = WhitespaceHandling.None };
+            reader = new XmlTextReader("../Config/MapItems.xml") { WhitespaceHandling = WhitespaceHandling.None };
             while (reader.Read())
             {
                if (reader.Name == "MapItem")
@@ -2694,7 +2710,7 @@ namespace BarbarianPrince
          try
          {
             // Load the reader with the data file and ignore all white space nodes.         
-            reader = new XmlTextReader("../../Config/Options.xml") { WhitespaceHandling = WhitespaceHandling.None };
+            reader = new XmlTextReader("../Config/Options.xml") { WhitespaceHandling = WhitespaceHandling.None };
             while (reader.Read())
             {
                if (reader.Name == "Option")

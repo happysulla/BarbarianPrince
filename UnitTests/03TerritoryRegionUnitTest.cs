@@ -151,9 +151,9 @@ namespace BarbarianPrince
          // Delete Existing Territories.xml file and create a new one based on myGameEngine.Territories container
          try
          {
-            System.IO.File.Delete("../../Config/Territories.xml");  // delete old file
+            System.IO.File.Delete("../Config/Territories.xml");  // delete old file
             XmlDocument aXmlDocument = CreateXml(myGameInstance.Territories); // create a new XML document based on Territories
-            using (FileStream writer = new FileStream("../../Config/Territories.xml", FileMode.OpenOrCreate, FileAccess.Write))
+            using (FileStream writer = new FileStream("../Config/Territories.xml", FileMode.OpenOrCreate, FileAccess.Write))
             {
                XmlWriterSettings settings = new XmlWriterSettings { Indent = true, OmitXmlDeclaration = true, NewLineOnAttributes = false };
                using (XmlWriter xmlWriter = XmlWriter.Create(writer, settings)) // For XmlWriter, it uses the stream that was created: writer.
@@ -161,7 +161,7 @@ namespace BarbarianPrince
                   aXmlDocument.Save(xmlWriter);
                }
             }
-            using (FileStream writer = new FileStream("../../Config/TerritoriesBackup.xml", FileMode.OpenOrCreate, FileAccess.Write))
+            using (FileStream writer = new FileStream("../Config/TerritoriesBackup.xml", FileMode.OpenOrCreate, FileAccess.Write))
             {
                XmlWriterSettings settings = new XmlWriterSettings { Indent = true, OmitXmlDeclaration = true, NewLineOnAttributes = false };
                using (XmlWriter xmlWriter = XmlWriter.Create(writer, settings)) // For XmlWriter, it uses the stream that was created: writer.

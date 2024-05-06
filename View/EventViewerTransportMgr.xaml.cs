@@ -1218,35 +1218,19 @@ namespace BarbarianPrince
             loadCanCarry -= Utilities.PersonBurden; // 20 for man riding and  what he can carry
          Logger.Log(LogEnum.LE_VIEW_SHOW_LOADS, "GetLoadCanCarry(): 4=> lc=" + loadCanCarry.ToString() + " ml=" + mountLoad.ToString() + " pl=" + personLoad.ToString() + " r?=" + isRidingPossible.ToString() + " after riding burden");
          //------------------------------------------
-         if (0 < partyMember.Food)
-         {
-            if (loadCanCarry < partyMember.Food)
-            {
-               int diffFood = partyMember.Food - loadCanCarry;
-               partyMember.Food = loadCanCarry;
-               myUnassignedFood += diffFood;
-               myUnassignedCoin += partyMember.Coin;
-               partyMember.Coin = 0;
-               Logger.Log(LogEnum.LE_VIEW_SHOW_LOADS, "GetLoadCanCarry(): 5=> lc=" + loadCanCarry.ToString() + " f=" + partyMember.Food.ToString() + " df=" + diffFood.ToString() + " after food burden");
-               return 0;
-            }
-            else
-            {
-               loadCanCarry -= partyMember.Food;
-            }
-         }
-         Logger.Log(LogEnum.LE_VIEW_SHOW_LOADS, "GetLoadCanCarry(): 6=> lc=" + loadCanCarry.ToString() + " ml=" + mountLoad.ToString() + " pl=" + personLoad.ToString() + " r?=" + isRidingPossible.ToString() + " f=" + partyMember.Food.ToString() + " c=" + partyMember.Coin.ToString() + " after food burden");
-         //------------------------------------------
          if (0 < partyMember.Coin)
          {
             int remainder = partyMember.Coin % 100;
             int hundreds = partyMember.Coin - remainder;
-            hundreds = hundreds / 100;
+            int coinLoad = hundreds / 100;
             if (0 < remainder)
-               ++hundreds;
-            if (loadCanCarry == hundreds)
+               ++coinLoad;
+            if (loadCanCarry == coinLoad)
+            {
+               myUnassignedFood += partyMember.Food;
                return 0;
-            if (loadCanCarry < hundreds)
+            }
+            else if (loadCanCarry < coinLoad)
             {
                if (0 < remainder)
                {
@@ -1258,13 +1242,32 @@ namespace BarbarianPrince
                int coinRemaining = diffInHundreds * 100;
                myUnassignedCoin += coinRemaining;
                partyMember.Coin -= coinRemaining;
+               myUnassignedFood += partyMember.Food;
                return 0;
             }
             else
             {
-               loadCanCarry -= hundreds;
+               loadCanCarry -= coinLoad;
             }
          }
+         Logger.Log(LogEnum.LE_VIEW_SHOW_LOADS, "GetLoadCanCarry(): 6=> lc=" + loadCanCarry.ToString() + " ml=" + mountLoad.ToString() + " pl=" + personLoad.ToString() + " r?=" + isRidingPossible.ToString() + " f=" + partyMember.Food.ToString() + " c=" + partyMember.Coin.ToString() + " after food burden");
+         //------------------------------------------
+         if (0 < partyMember.Food)
+         {
+            if (loadCanCarry < partyMember.Food)
+            {
+               int diffFood = partyMember.Food - loadCanCarry;
+               partyMember.Food = loadCanCarry;
+               myUnassignedFood += diffFood;
+               Logger.Log(LogEnum.LE_VIEW_SHOW_LOADS, "GetLoadCanCarry(): 5=> lc=" + loadCanCarry.ToString() + " f=" + partyMember.Food.ToString() + " df=" + diffFood.ToString() + " after food burden");
+               return 0;
+            }
+            else
+            {
+               loadCanCarry -= partyMember.Food;
+            }
+         }        
+         //------------------------------------------
          Logger.Log(LogEnum.LE_VIEW_SHOW_LOADS, "GetLoadCanCarry(): 7=> lc=" + loadCanCarry.ToString() + " ml=" + mountLoad.ToString() + " pl=" + personLoad.ToString() + " r?=" + isRidingPossible.ToString() + " f=" + partyMember.Food.ToString() + " c=" + partyMember.Coin.ToString() + " after coin burden");
          return loadCanCarry;
       }

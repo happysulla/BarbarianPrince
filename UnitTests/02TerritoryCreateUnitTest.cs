@@ -88,7 +88,7 @@ namespace BarbarianPrince
       {
          if (CommandName == myCommandNames[0])
          {
-            System.IO.File.Delete("../../Config/Territories.xml");  // delete old file
+            System.IO.File.Delete("../Config/Territories.xml");  // delete old file
             if (false == NextTest(ref gi)) // automatically move next test
             {
                Console.WriteLine("TerritoryCreateUnitTest.Command(): NextTest() returned false");
@@ -337,9 +337,9 @@ namespace BarbarianPrince
          // Delete Existing Territories.xml file and create a new one based on myGameEngine.Territories container
          try
          {
-            System.IO.File.Delete("../../Config/Territories.xml");  // delete old file
+            System.IO.File.Delete("../Config/Territories.xml");  // delete old file
             XmlDocument aXmlDocument = CreateXml(myGameInstance.Territories); // create a new XML document based on Territories
-            using (FileStream writer = new FileStream("../../Config/Territories.xml", FileMode.OpenOrCreate, FileAccess.Write))
+            using (FileStream writer = new FileStream("../Config/Territories.xml", FileMode.OpenOrCreate, FileAccess.Write))
             {
                XmlWriterSettings settings = new XmlWriterSettings { Indent = true, OmitXmlDeclaration = true, NewLineOnAttributes = false };
                using (XmlWriter xmlWriter = XmlWriter.Create(writer, settings)) // For XmlWriter, it uses the stream that was created: writer.
@@ -998,7 +998,7 @@ namespace BarbarianPrince
          string name = null;
          try
          {
-            reader = new XmlTextReader("../../Config/Rivers.xml") { WhitespaceHandling = WhitespaceHandling.None }; // Load the reader with the data file and ignore all white space nodes.    
+            reader = new XmlTextReader("../Config/Rivers.xml") { WhitespaceHandling = WhitespaceHandling.None }; // Load the reader with the data file and ignore all white space nodes.    
             while (reader.Read())
             {
                if (reader.Name == "River")

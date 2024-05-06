@@ -119,7 +119,7 @@ namespace BarbarianPrince
         {
             if (CommandName == myCommandNames[0])
             {
-                //System.IO.File.Delete("../../Config/MapItems.xml");  // delete old file
+                //System.IO.File.Delete("../Config/MapItems.xml");  // delete old file
                 if (false == NextTest(ref gi)) // automatically move next test
                 {
                     Console.WriteLine("MapItems.Command(): NextTest() Returned false");
@@ -250,14 +250,14 @@ namespace BarbarianPrince
             {
                 if (null != gi.MapItems) // do not delete if nothing added
                 {
-                    System.IO.File.Delete("../../Config/MapItems.xml");  // delete old file
+                    System.IO.File.Delete("../Config/MapItems.xml");  // delete old file
                     XmlDocument aXmlDocument = CreateMapItemsXml(myGameInstance.MapItems); // create a new XML document based on Territories
                     if (null == aXmlDocument)
                     {
                         Logger.Log(LogEnum.LE_ERROR, "MapItemSetupUnitTest.Cleanup(): CreateMapItemsXml() returned null");
                         return false;
                     }
-                    using (FileStream writer = new FileStream("../../Config/MapItems.xml", FileMode.OpenOrCreate, FileAccess.Write))
+                    using (FileStream writer = new FileStream("../Config/MapItems.xml", FileMode.OpenOrCreate, FileAccess.Write))
                     {
                         XmlWriterSettings settings = new XmlWriterSettings { Indent = true, OmitXmlDeclaration = true, NewLineOnAttributes = false };
                         using (XmlWriter xmlWriter = XmlWriter.Create(writer, settings)) // For XmlWriter, it uses the stream that was created: writer.

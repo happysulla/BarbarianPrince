@@ -1,18 +1,42 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29519.87
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barbarian Prince", "Barbarian Prince.csproj", "{BF013D26-C0AA-4995-A178-A4C2D739B1A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF013D26-C0AA-4995-A178-A4C2D739B1A1}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{BF013D26-C0AA-4995-A178-A4C2D739B1A1}.Debug|Any CPU.Build.0 = Debug|x86
+		{BF013D26-C0AA-4995-A178-A4C2D739B1A1}.Debug|ARM.ActiveCfg = Debug|x86
+		{BF013D26-C0AA-4995-A178-A4C2D739B1A1}.Debug|ARM.Build.0 = Debug|x86
+		{BF013D26-C0AA-4995-A178-A4C2D739B1A1}.Debug|ARM64.ActiveCfg = Debug|x86
+		{BF013D26-C0AA-4995-A178-A4C2D739B1A1}.Debug|ARM64.Build.0 = Debug|x86
+		{BF013D26-C0AA-4995-A178-A4C2D739B1A1}.Debug|x64.ActiveCfg = Debug|x86
+		{BF013D26-C0AA-4995-A178-A4C2D739B1A1}.Debug|x64.Build.0 = Debug|x86
 		{BF013D26-C0AA-4995-A178-A4C2D739B1A1}.Debug|x86.ActiveCfg = Debug|x86
 		{BF013D26-C0AA-4995-A178-A4C2D739B1A1}.Debug|x86.Build.0 = Debug|x86
+		{BF013D26-C0AA-4995-A178-A4C2D739B1A1}.Release|Any CPU.ActiveCfg = Release|x86
+		{BF013D26-C0AA-4995-A178-A4C2D739B1A1}.Release|Any CPU.Build.0 = Release|x86
+		{BF013D26-C0AA-4995-A178-A4C2D739B1A1}.Release|ARM.ActiveCfg = Release|x86
+		{BF013D26-C0AA-4995-A178-A4C2D739B1A1}.Release|ARM.Build.0 = Release|x86
+		{BF013D26-C0AA-4995-A178-A4C2D739B1A1}.Release|ARM64.ActiveCfg = Release|x86
+		{BF013D26-C0AA-4995-A178-A4C2D739B1A1}.Release|ARM64.Build.0 = Release|x86
+		{BF013D26-C0AA-4995-A178-A4C2D739B1A1}.Release|x64.ActiveCfg = Release|x86
+		{BF013D26-C0AA-4995-A178-A4C2D739B1A1}.Release|x64.Build.0 = Release|x86
 		{BF013D26-C0AA-4995-A178-A4C2D739B1A1}.Release|x86.ActiveCfg = Release|x86
 		{BF013D26-C0AA-4995-A178-A4C2D739B1A1}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection

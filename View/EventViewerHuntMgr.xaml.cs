@@ -356,7 +356,7 @@ namespace BarbarianPrince
          {
             myGameInstance.RemoveKilledInParty("Hunter's Death");
             int diffFood = myFoodCurrent - myFoodOriginal;  // allocate new food to party members
-            myGameInstance.AddFoods(diffFood);
+            myGameInstance.AddFoods(diffFood, true);
             int diffCoin = myCoinOriginal - myCoinCurrent;  // decrease coin from party members evenly
             myGameInstance.ReduceCoins(diffCoin);
             myGameInstance.Prince.OverlayImageName = "";
@@ -500,13 +500,12 @@ namespace BarbarianPrince
                //--------------------------------------------
                if (false == myIsHeaderCheckBoxChecked)
                {
-                  //BitmapImage bmi0 = new BitmapImage();
-                  //bmi0.BeginInit();
-                  //bmi0.UriSource = new Uri("../../Images/CampFire2.gif", UriKind.Relative);
-                  //bmi0.EndInit();
-                  //Image img0 = new Image { Tag = "Campfire", Source = bmi0, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-                  //ImageBehavior.SetAnimatedSource(img0, bmi0);
-                  Image img0 = new Image { Tag="Campfire", Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+                  BitmapImage bmi0 = new BitmapImage();
+                  bmi0.BeginInit();
+                  bmi0.UriSource = new Uri("../../Images/CampFire2.gif", UriKind.Relative);
+                  bmi0.EndInit();
+                  Image img0 = new Image { Tag = "Campfire", Source = bmi0, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+                  ImageBehavior.SetAnimatedSource(img0, bmi0);
                   myStackPanelAssignable.Children.Add(img0);
                }
                else
@@ -1115,6 +1114,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): hunter=null");
                return;
             }
+            myHunterWound = dieRoll;
             hunter.SetWounds(dieRoll, 0);
             if ((true == hunter.IsKilled) || (true == hunter.IsUnconscious))
             {

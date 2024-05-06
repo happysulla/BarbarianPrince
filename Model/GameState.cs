@@ -1312,14 +1312,11 @@ namespace BarbarianPrince
             case 6: starting = gi.Territories.Find("1801"); break;
             default: Logger.Log(LogEnum.LE_ERROR, "SetStartingLocation() reached default dr=" + dieRoll.ToString()); return false;
          }
-         #if UT1
-            // <cgs> TEST
-            //starting = gi.Territories.Find("0711"); //Town=0109 Ruins=0206 Temple=0711 Castle=1212 Castle=0323 Castle=1923 Cache=0505   
-            //starting = gi.Territories.Find("0409"); //Farmland=0418 CountrySide=0410 Forest=0409 Hills=0406 Mountains=0405 Swamp=0411 Desert=0407 
-            //starting = gi.Territories.Find("0411"); //ForestTemple=1021 HillsTemple=2009 MountainTemple=1021 
-            //starting = gi.Territories.Find("0207"); //Road Travel=0207->0208
-            //starting = gi.Territories.Find("0707"); //Cross River=0707->0708
-         #endif
+         if( false == SetStartingLocationOption(gi, ref starting) )
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocation()  SetStartingLocationOption() returned false");
+            return false;
+         }
          if (null == starting)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetStartingLocation() starting territory=null");
@@ -1335,6 +1332,86 @@ namespace BarbarianPrince
             mi.IsHidden = false;
             ++counterCount;
          }
+         return true;
+      }
+      private bool SetStartingLocationOption(IGameInstance gi, ref ITerritory starting)
+      {
+         IOption option = null;
+         string hex = "";
+         //---------------------------------------------------------
+         hex = "0109";  // Town
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            starting = gi.Territories.Find(hex);
+         //---------------------------------------------------------
+         hex = "0206";  // Ruins
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            starting = gi.Territories.Find(hex);
+         //---------------------------------------------------------
+         hex = "0711";  // Temple
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            starting = gi.Territories.Find(hex);
+         //---------------------------------------------------------
+         hex = "1212";  // Castle
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            starting = gi.Territories.Find(hex);
+         //---------------------------------------------------------
+         hex = "0323"; // Castle
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            starting = gi.Territories.Find(hex);
+         //---------------------------------------------------------
+         hex = "1923"; // Castle
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            starting = gi.Territories.Find(hex);
+         //---------------------------------------------------------
+         hex = "0505";
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            starting = gi.Territories.Find(hex);
+         //Farmland=0418 CountrySide=0410 Forest=0409 Hills=0406 Mountains=0405 Swamp=0411 Desert=0407 
+         //starting = gi.Territories.Find("0411"); //ForestTemple=1021 HillsTemple=2009 MountainTemple=1021 
+         //starting = gi.Territories.Find("0207"); //Road Travel=0207->0208
+         //starting = gi.Territories.Find("0707"); //Cross River=0707->0708
          return true;
       }
       private bool PerformAutoSetup(ref IGameInstance gi, ref GameAction action)
@@ -1768,6 +1845,7 @@ namespace BarbarianPrince
          foreach (IMapItem mi in gi.PartyMembers)
             mi.IsCatchCold = false;
       }
+
    }
    //-----------------------------------------------------
    class GameStateHunt : GameState
@@ -2316,8 +2394,15 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.TravelShowLostEncounter:
-               Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateTravel.PerformAction():  a=TravelShowLostEncounter gi.MapItemMoves.Clear() a=TravelShowLostEncounter");
-               gi.MapItemMoves.Clear();
+               if (0 == gi.MapItemMoves.Count)
+               {
+                  returnStatus = "gi.MapItemMoves.Count=0 for a=" + action.ToString();
+                  Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateTravel.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  gi.MapItemMoves[0].NewTerritory = gi.MapItemMoves[0].OldTerritory; // no longer moving to new territory
+               }
                gi.IsGridActive = false;   // GameAction.TravelShowLostEncounter
                gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterStart;
@@ -2393,6 +2478,15 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.EncounterStart;
                break;
             case GameAction.TravelShowMovementEncounter:
+               if (0 == gi.MapItemMoves.Count)
+               {
+                  returnStatus = "gi.MapItemMoves.Count=0 for a=" + action.ToString();
+                  Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateTravel.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  gi.MapItemMoves[0].NewTerritory = gi.MapItemMoves[0].OldTerritory; // no longer moving to new territory
+               }
                gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterStart;
                gi.IsGridActive = false; // GameAction.TravelShowMovementEncounter
@@ -2412,6 +2506,15 @@ namespace BarbarianPrince
                gi.EnteredTerritories.Add(gi.NewHex);
                break;
             case GameAction.TravelEndMovement: // Prince clicked when still movement left ends movement phase
+               --gi.Prince.MovementUsed;
+               gi.Prince.TerritoryStarting = gi.Prince.Territory;
+               if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex
+               {
+                  returnStatus = " AddMapItemMove() return false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+               }
+               ++gi.Prince.MovementUsed;
+               //--------------------------------------------------------
                Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateTravel.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
                gi.Prince.MovementUsed = gi.Prince.Movement;
                gi.GamePhase = GamePhase.Encounter;
@@ -8051,6 +8154,12 @@ namespace BarbarianPrince
                gi.DieResults["e007a"][0] = Utilities.NO_RESULT;
                break;
             case "e008a": // talk to halfling
+               gi.EventStart = "e008";
+               if( 0 == gi.EncounteredMembers.Count )
+               {
+                  IMapItem halflingWarrior1 = CreateCharacter(gi, "HalflingLead", 4);
+                  gi.EncounteredMembers.Add(halflingWarrior1);
+               }
                switch (dieRoll)
                {
                   case 1:
@@ -8649,7 +8758,12 @@ namespace BarbarianPrince
                   case 1: gi.EventDisplayed = gi.EventActive = "e037"; gi.DieRollAction = GameAction.EncounterRoll; break; // broken chest
                   case 2: gi.EventStart = gi.EventDisplayed = gi.EventActive = "e039"; break;                              // Small Treasure Chest
                   case 3: gi.EventDisplayed = gi.EventActive = "e041"; gi.DieRollAction = GameAction.EncounterRoll; break; // Vision Gem
-                  case 4: gi.EventDisplayed = gi.EventActive = "e042"; break; // Alcove of Sending
+                  case 4:                                                                                                  // Alcove of Sending
+                     if (true == gi.IsMagicInParty())
+                        gi.EventDisplayed = gi.EventActive = "e042";
+                     else
+                        gi.EventDisplayed = gi.EventActive = "e042a"; 
+                     break; 
                   case 5:                                                     // High Altar
                      if (true == gi.IsReligionInParty())
                         gi.EventDisplayed = gi.EventActive = "e044";
@@ -9178,7 +9292,12 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll)
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e042"; break; // alcove of sending
+                  case 1:                                                                                                  // alcove of sending
+                     if (true == gi.IsMagicInParty())
+                        gi.EventDisplayed = gi.EventActive = "e042";
+                     else
+                        gi.EventDisplayed = gi.EventActive = "e042a";
+                     break;
                   case 2: gi.EventDisplayed = gi.EventActive = "e037"; gi.DieRollAction = GameAction.EncounterRoll; break; // broken chest
                   case 3: gi.EventDisplayed = gi.EventActive = "e038"; gi.DieRollAction = GameAction.EncounterRoll; break; // cache under stone
                   case 4: gi.EventStart = gi.EventDisplayed = gi.EventActive = "e039"; break;                              // treasure chest

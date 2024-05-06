@@ -23,7 +23,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;UT1</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
@@ -536,9 +536,9 @@
     <Folder Include="bin\Debug\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Config\DiceRolls.xml" />
-    <Resource Include="Config\MapItems.xml" />
-    <Resource Include="Config\Territories.xml" />
+    <Resource Include="bin\Config\DiceRolls.xml" />
+    <Resource Include="bin\Config\MapItems.xml" />
+    <Resource Include="bin\Config\Territories.xml" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Coin.gif" />
@@ -1641,7 +1641,7 @@
     <Resource Include="Images\FleshRot.gif" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Config\Rivers.xml" />
+    <Resource Include="bin\Config\Rivers.xml" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Raft.gif" />
@@ -1710,7 +1710,7 @@
     <Resource Include="Images\c82Falcon.gif" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Config\Options.xml" />
+    <Resource Include="bin\Config\Options.xml" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\c83Harpy.gif" />
@@ -1729,6 +1729,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\StormDemonDeny.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Tutorial1.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
