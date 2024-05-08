@@ -653,13 +653,12 @@ namespace BarbarianPrince
                myStackPanelAssignable.Children.Add(r6);
                break;
             case HuntEnum.LE_SHOW_RESULTS:
-               //BitmapImage bmi4 = new BitmapImage();
-               //bmi4.BeginInit();
-               //bmi4.UriSource = new Uri("../../Images/CampFire2.gif", UriKind.Relative);
-               //bmi4.EndInit();
-               //Image img4 = new Image { Tag = "Campfire", Source = bmi4, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-               //ImageBehavior.SetAnimatedSource(img4, bmi4);
-               Image img4 = new Image { Tag = "Campfire", Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+               BitmapImage bmi4 = new BitmapImage();
+               bmi4.BeginInit();
+               bmi4.UriSource = new Uri("../../Images/CampFire2.gif", UriKind.Relative);
+               bmi4.EndInit();
+               Image img4 = new Image { Tag = "Campfire", Source = bmi4, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+               ImageBehavior.SetAnimatedSource(img4, bmi4);
                myStackPanelAssignable.Children.Add(img4);
                //-----------------------------------------------
                Rectangle r7 = new Rectangle()

@@ -11,7 +11,7 @@
       <IsEnabled value="False" />
    </Option>
     <Option value="EasyMonsters">
-        <IsEnabled value="False" />
+        <IsEnabled value="True" />
     </Option>
    <Option value="LessHardMonsters">
       <IsEnabled value="False" />

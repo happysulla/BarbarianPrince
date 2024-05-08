@@ -2383,7 +2383,7 @@ namespace BarbarianPrince
                }
                else
                {
-                  Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateTravel.PerformAction(): gi.MapItemMoves.Clear() a=TravelShowLost");88888888
+                  Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateTravel.PerformAction(): gi.MapItemMoves.Clear() a=TravelShowLost");
                   gi.MapItemMoves.Clear();
                   --gi.Prince.MovementUsed;
                   if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex

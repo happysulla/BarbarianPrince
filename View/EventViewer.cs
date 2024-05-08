@@ -1287,6 +1287,9 @@ namespace BarbarianPrince
          int modifiedWitAndWile = 0;
          switch (key)
          {
+            case "e002a":
+               AppendEscapeMethods(gi, true);
+               break;
             case "e002b":
             case "e003a":
             case "e004a":
