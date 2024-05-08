@@ -1917,6 +1917,7 @@ namespace BarbarianPrince
                break;
             case GameAction.HuntE002aEncounterRoll:
                int encounterResult = dieRoll - 3;
+               encounterResult = 10; // <cgs> TEST
                if ("0101" == gi.Prince.Territory.Name)
                   ++encounterResult;
                if ("1501" == gi.Prince.Territory.Name)

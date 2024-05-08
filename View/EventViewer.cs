@@ -5260,7 +5260,7 @@ namespace BarbarianPrince
             int numHirelings = Int32.Parse(key);
             myGameEngine.PerformAction(ref myGameInstance, ref action, numHirelings);
          }
-         else if ("Read" == b.Name) // if this button is a number, it indictes hiring Hirelings
+         else if ("Read_Rules" == b.Name) // if this button is a number, it indictes hiring Hirelings
          {
             if (false == ShowRule("r200"))
             {
@@ -5440,7 +5440,7 @@ namespace BarbarianPrince
                action = GameAction.EncounterEnd;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
-            case "Begin":
+            case "Begin Game":
                action = GameAction.SetupShowCalArath;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
