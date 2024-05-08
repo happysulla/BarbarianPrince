@@ -101,6 +101,8 @@ namespace BarbarianPrince
       EndGameLost,
       EndGameExit,
 
+      SetupShowCalArath,
+      SetupShowStartingWealth,
       SetupRollWitsWiles,
       SetupManualWitsWiles,
       SetupStartingLocation,

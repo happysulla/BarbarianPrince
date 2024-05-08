@@ -369,11 +369,11 @@ r200	"<Bold>r200 How to Play</Bold>
 r201	"<Bold>r201 Characters</Bold>
 <LineBreak/><LineBreak/>Each character in the game has a combat skill, an endurance value, and a wealth code. Each is rated numerically, with higher numbers being better. If no wealth code is given, it is presumed to be zero.
 <LineBreak/><LineBreak/>Your party includes yourself
- <InlineUIContainer><Button Name='myButtonR202' Content='r202' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+ <InlineUIContainer><Button Content='r202' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 ;  any followers who join your 'party'; and finally any men, women, creatures, and animals encountered in the course of the game. Characters can be friendly or hostile, intelligent or unintelligent.
 <LineBreak/><LineBreak/>When a character joins your party, their vital statistics are noted. You can voluntarily dismiss or abandon members of your party if you wish (sometimes expedient when making an escape or when food/money is short). Any characters encountered simply go on thier way and disappear from the game unless they join your party.
 <LineBreak/><LineBreak/>To determine your own personal characteristics at the start of the game, see
- <InlineUIContainer><Button Name='myButtonR202a' Content='r202' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>"
+ <InlineUIContainer><Button Content='r202' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>"
 r202	"<Bold>r202 The Barbarian Prince</Bold>
 <LineBreak/><LineBreak/>You begin play as Cal Arath, rightful hier to the throne of the Northlands Kingdom. 
 <LineBreak/><LineBreak/> - Few humans can match your skill with trusty Bonebitter, your broadsword -- you have a combat skill of eight. 

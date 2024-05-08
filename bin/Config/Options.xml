@@ -1,13 +1,11 @@
 ﻿<Options>
+   <!--===========================-->
     <Option value="AutoSetup">
-        <IsEnabled value="True" />
+        <IsEnabled value="False" />
     </Option>
     <Option value="AutoWealthRollForUnderFive">
         <IsEnabled value="True" />
     </Option> 
-   <Option value="ShowTutorial1">
-      <IsEnabled value="True" />
-   </Option>
    <!--===========================-->
    <Option value="EasiestMonsters">
       <IsEnabled value="False" />
@@ -74,7 +72,7 @@
       <IsEnabled value="False" />
    </Option>
    <Option value="Falcon">
-      <IsEnabled value="True" />
+      <IsEnabled value="False" />
    </Option>
    <Option value="Griffon"> 
       <IsEnabled value="False" />
@@ -126,6 +124,6 @@
       <IsEnabled value="False" />
    </Option>
    <Option value="0505">
-      <IsEnabled value="True" />
+      <IsEnabled value="False" />
    </Option>
 </Options>

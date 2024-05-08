@@ -4937,6 +4937,10 @@ namespace BarbarianPrince
                               myGameInstance.GamePhase = GamePhase.SeekNews;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
+                           case "SetupShowStartingWealth":
+                              action = GameAction.SetupShowStartingWealth;
+                              myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              return;
                            case "ShakyWalls":
                               action = GameAction.E134ShakyWalls;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
@@ -5253,6 +5257,14 @@ namespace BarbarianPrince
             int numHirelings = Int32.Parse(key);
             myGameEngine.PerformAction(ref myGameInstance, ref action, numHirelings);
          }
+         else if ("Read" == b.Name) // if this button is a number, it indictes hiring Hirelings
+         {
+            if (false == ShowRule("r200"))
+            {
+               Logger.Log(LogEnum.LE_ERROR, "Button_Click(): ShowRule() returned false");
+               return;
+            }
+         }
          else if (true == key.StartsWith("r")) // rules based click
          {
             if (false == ShowRule(key))
@@ -5302,7 +5314,7 @@ namespace BarbarianPrince
             case "  -  ":
                switch (myGameInstance.EventActive)
                {
-                  case "e000c":
+                  case "e000d":
                      action = GameAction.SetupManualWitsWiles;
                      break;
                   case "e011a":
@@ -5361,7 +5373,7 @@ namespace BarbarianPrince
             case "  +  ":
                switch (myGameInstance.EventActive)
                {
-                  case "e000c":
+                  case "e000d":
                      action = GameAction.SetupManualWitsWiles;
                      break;
                   case "e011a":
@@ -5423,6 +5435,10 @@ namespace BarbarianPrince
                break;
             case "Avoid":
                action = GameAction.EncounterEnd;
+               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
+            case "Begin":
+               action = GameAction.SetupShowCalArath;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
             case "Bribe":

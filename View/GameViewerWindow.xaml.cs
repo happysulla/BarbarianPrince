@@ -131,9 +131,9 @@ namespace BarbarianPrince
          // Implement the Model View Controller (MVC) pattern by registering views with
          // the game engine such that when the model data is changed, the views are updated.
          ge.RegisterForUpdates(civ);
-         ge.RegisterForUpdates(sbv);
          ge.RegisterForUpdates(mmv);
          ge.RegisterForUpdates(myEventViewer);
+         ge.RegisterForUpdates(sbv);
          ge.RegisterForUpdates(this); // needs to be last so that canvas updates after all actions taken
 #if UT2
             if (false == ge.CreateUnitTests(gi, myDockPanelTop, myEventViewer, myDieRoller))
@@ -1776,8 +1776,6 @@ namespace BarbarianPrince
       }
       private bool CreateMapItemMove(List<ITerritory> territories, IGameInstance gi, ITerritory newTerritory)
       {
-         Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "CreateMapItemMove(): gi.MapItemMoves.Clear()");
-         gi.MapItemMoves.Clear();
          if (null == newTerritory)
          {
             Logger.Log(LogEnum.LE_ERROR, "CreateMapItemMove(): newTerritory=null");

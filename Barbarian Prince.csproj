@@ -1733,6 +1733,14 @@
   <ItemGroup>
     <Resource Include="Images\Tutorial1.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bin\Config\Events.txt" />
+    <Resource Include="bin\Config\Rules.txt" />
+    <Resource Include="bin\Config\Tables.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Tutorial0.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

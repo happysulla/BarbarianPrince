@@ -1199,8 +1199,6 @@ namespace BarbarianPrince
                gi.EventDisplayed = gi.EventActive; // next screen to show
                break;
             case GameAction.UpdateEventViewerDisplay: // Only change active event
-               if ("e000a" == gi.EventDisplayed)
-                  gi.EventActive = gi.EventDisplayed; // next screen to show
                break;
             case GameAction.RemoveSplashScreen:
                IOption option = gi.Options.Find("AutoSetup");
@@ -1221,22 +1219,28 @@ namespace BarbarianPrince
                   }
                   else
                   {
-                     gi.DieRollAction = GameAction.EncounterLootStart;
+                     gi.EventDisplayed = gi.EventActive = "e000";
                   }
                }
+               break;
+            case GameAction.SetupShowCalArath:
+               gi.EventDisplayed = gi.EventActive = "e000a";
+               break;
+            case GameAction.SetupShowStartingWealth:
+               gi.EventDisplayed = gi.EventActive = "e000b";
+               gi.DieRollAction = GameAction.EncounterLootStart;
                break;
             case GameAction.EncounterLootStart:
                gi.CapturedWealthCodes.Add(2);
                gi.ActiveMember = gi.Prince;
                break;
             case GameAction.EncounterLootStartEnd:
-               gi.EventDisplayed = gi.EventActive = "e000b"; // next screen to show
+               gi.EventDisplayed = gi.EventActive = "e000c"; // next screen to show
                gi.DieRollAction = GameAction.SetupRollWitsWiles;
                break;
             case GameAction.SetupRollWitsWiles:
                gi.WitAndWile = dieRoll;
-               gi.EventDisplayed = gi.EventActive = "e000c"; // next screen to show
-               gi.DieRollAction = GameAction.SetupManualWitsWiles;
+               gi.EventDisplayed = gi.EventActive = "e000d"; // next screen to show
                break;
             case GameAction.SetupManualWitsWiles:
                if (0 == gi.WitAndWile) // Die Roll for random wits and wiles handled here
@@ -1254,7 +1258,6 @@ namespace BarbarianPrince
                   else if (6 < gi.WitAndWile)
                      gi.WitAndWile = 6;
                }
-               gi.EventDisplayed = gi.EventActive = "e000c"; // next screen to show
                gi.DieRollAction = GameAction.DieRollActionNone;
                break;
             case GameAction.SetupStartingLocation:
@@ -2380,8 +2383,15 @@ namespace BarbarianPrince
                }
                else
                {
-                  Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateTravel.PerformAction(): gi.MapItemMoves.Clear() a=TravelShowLost");
+                  Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateTravel.PerformAction(): gi.MapItemMoves.Clear() a=TravelShowLost");88888888
                   gi.MapItemMoves.Clear();
+                  --gi.Prince.MovementUsed;
+                  if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex
+                  {
+                     returnStatus = " AddMapItemMove() return false";
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
+                  ++gi.Prince.MovementUsed;
                   gi.IsGridActive = false; // GameAction.TravelShowLost
                   Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateTravel.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
                   gi.Prince.MovementUsed = gi.Prince.Movement; // End of the day
