@@ -3,7 +3,7 @@ e000	"<LineBreak/><Bold>Game Events Shown Here</Bold>
 <LineBreak/><LineBreak/>
                      <InlineUIContainer><Image Source='../../Images/Tutorial0.gif' Height='70'  Width='370'> </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
-<InlineUIContainer><Button Name='Read_Rules' Content='Read Rules' FontFamily='Courier New'  FontSize='12'> </Button></InlineUIContainer> or <InlineUIContainer><Button Content='Begin Game' FontFamily='Courier New'  FontSize='12'> </Button></InlineUIContainer>"
+<InlineUIContainer><Button Name='Read_Rules' Content='Read Rules' FontFamily='Courier New'  FontSize='12'> </Button></InlineUIContainer> or <InlineUIContainer><Button Name='Begin' Content='Begin Game' FontFamily='Courier New'  FontSize='12'> </Button></InlineUIContainer>"
 e000a	"<Bold>e000a Cal Arath - Barbarian Prince</Bold>
 <LineBreak/><LineBreak/>Each character in the game has a endurance value, combat value, wounds, and starvation days. If endurance reaches zero, the character is dead. If the endurance reaches one, the character is unconscious. Wounds decrease endurance, and starvation days decrease the ability to carry loads. 
 <LineBreak/><LineBreak/>You are Cal Arath, rightful heir to the throne of the Northlands Kingdom. 
@@ -85,16 +85,13 @@ e002a	"<Bold>e002a Encounter Mercenary Royal Guardsmen</Bold>
 Mercenary thugs, dressed by the usurpers as their royal guardsmen, are riding toward you! Roll one die for the number of men:
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>Each has a combat skill 5, endurance 4, wealth 4. Your options are:
-<LineBreak/>
+<LineBreak/><LineBreak/>
  <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e002b'></Button></InlineUIContainer>   ->  
  <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e002b'></Button></InlineUIContainer><LineBreak/>
  <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='Evade' Name='e002c'></Button></InlineUIContainer>   ->  
  <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e002c'></Button></InlineUIContainer>*<LineBreak/>
  <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='Fight' Name='e002d'></Button></InlineUIContainer>   ->  
- <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e002d'></Button></InlineUIContainer>
-<LineBreak/><LineBreak/>
-*If your entire party has some kind of mount, you can attempt the evade option and add one to the die roll. Additionally, if you want to evade using the plus 1 modifier, you must adbandon unmounted members of the party
- <InlineUIContainer><Button Content='Abandon' Visibility='Hidden' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>"
+ <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e002d'></Button></InlineUIContainer>"
 e002b	"<Bold>e002b Talk to Mercenary Royal Guardsmen</Bold>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e327' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1: Pass Dummies<LineBreak/>
@@ -4366,7 +4363,7 @@ e214	"<Bold>e214 Cache</Bold>
 <LineBreak/><LineBreak/>
                                   <InlineUIContainer><Image Source='../../Images/Cache.gif' Name='CacheEnd' Height='300' Width='300'></Image></InlineUIContainer>"
 e218	"<Bold>e218 Escape</Bold> <InlineUIContainer><Button Content='r218a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
-<LineBreak/><LineBreak/> Manage to find an escape path. Move along. Click image to continue.
+<LineBreak/><LineBreak/> Managed to find an escape path. Click image to continue.
 <LineBreak/> <LineBreak/> 
                         <InlineUIContainer><Image Name='EncounterEnd' Source='../../Images/Escape.gif' Height='400' Width='400'></Image></InlineUIContainer>"
 e228	"<Bold>e228 True Love</Bold>

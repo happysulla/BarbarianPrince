@@ -601,7 +601,7 @@ namespace BarbarianPrince
          myPrince.Coin = 30;
          //myPrince.SetWounds(7, 0);
          //myPrince.PlagueDustWound = 1; 
-         //myPrince.AddNewMount();
+         myPrince.AddNewMount();
          //myPrince.AddNewMount(MountEnum.Pegasus);
          //this.AddUnitTestTiredMount(myPrince);
          //myPrince.AddNewMount();

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
@@ -15,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
 using WpfAnimatedGif;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace BarbarianPrince
 {
@@ -1288,13 +1290,38 @@ namespace BarbarianPrince
          switch (key)
          {
             case "e002a":
-               AppendEscapeMethods(gi, true);
+               AppendEscapeMethods(gi, false); // false = cannot make riding escape
+               myTextBlock.Inlines.Add(new LineBreak());
+               myTextBlock.Inlines.Add(new LineBreak());
+               if (true == gi.Prince.IsRiding)
+               {
+                  myTextBlock.Inlines.Add(new Run("Since you are riding, you can attempt the evade option and add one to the die roll."));
+                  if( false == gi.IsPartyRiding())
+                  {
+                     Button b1 = new Button() { Content = "Abandon", Name = "Abandon", FontFamily = myFontFam1, FontSize = 12 };
+                     b1.Click += Button_Click;
+                     myTextBlock.Inlines.Add(new LineBreak());
+                     myTextBlock.Inlines.Add(new LineBreak());
+                     myTextBlock.Inlines.Add(new InlineUIContainer(b1));
+                     myTextBlock.Inlines.Add(new Run(" party members without a mount or are not riding"));
+                  }
+               }
                break;
             case "e002b":
+               ReplaceTextForLuckyCharm(gi);  // e002b
+               break;
+            case "e002c":
+               if (true == gi.IsPartyRiding())
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Add one to die since party is riding."));
+               }
+               break;
             case "e003a":
             case "e004a":
             case "e005a":
-               ReplaceTextForLuckyCharm(gi);  // e002b, e003a, e004a, e005a
+               ReplaceTextForLuckyCharm(gi);  //e003a, e004a, e005a
                break;
             case "e003": // swordsman has a fast horse
                AppendEscapeMethods(gi, false); // ridning escape not possible

@@ -1034,7 +1034,7 @@ namespace BarbarianPrince
                case GameAction.CampfireLoadTransport:
                case GameAction.CampfireTrueLoveCheck:
                case GameAction.CampfireLodgingCheck:
-               case GameAction.CampfireStarvationCheck: // ?????? causing runtime error b/c button was changing while it was moving
+               case GameAction.CampfireStarvationCheck: // ?????? causing runtime error b/c button was changing while it was moving ?????
                case GameAction.TravelShowLost:
                   if (0 < gi.MapItemMoves.Count)
                   {

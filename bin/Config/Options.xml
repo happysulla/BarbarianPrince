@@ -1,7 +1,7 @@
 ﻿<Options>
    <!--===========================-->
     <Option value="AutoSetup">
-        <IsEnabled value="False" />
+        <IsEnabled value="True" />
     </Option>
     <Option value="AutoWealthRollForUnderFive">
         <IsEnabled value="True" />
