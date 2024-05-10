@@ -624,7 +624,7 @@ namespace BarbarianPrince
          //AddSpecialItem(SpecialEnum.ResistanceRing);
          //AddSpecialItem(SpecialEnum.ResurrectionNecklace);
          //AddSpecialItem(SpecialEnum.ShieldOfLight);
-         //AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
+         AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
          //myPrince.AddSpecialItemToShare(SpecialEnum.HydraTeeth);
          //this.HydraTeethCount = 5;
          //---------------------

@@ -3961,18 +3961,15 @@ e203e	"<Bold>e203e Wizard's Campfire</Bold>
 <LineBreak/><LineBreak/>Roll one die to determine your fate:
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e204u	"<Bold>e204u Unmounted Travel</Bold> <InlineUIContainer><Button Content='r204a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
-<LineBreak/><LineBreak/>Click one of the adjacent hexes highlighted blue to move.  
-<LineBreak/><LineBreak/> Alternatively, click the red bordered Prince to end movement."
+<LineBreak/><LineBreak/>Click one of the adjacent hexes highlighted blue to move.  "
 e204m	"<Bold>e204m Mounted Travel</Bold> <InlineUIContainer><Button Content='r204a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
-<LineBreak/><LineBreak/>Click one of the adjacent hexes highlighted blue to move.  
-<LineBreak/><LineBreak/> Alternatively, click the red bordered Prince to end movement."
+<LineBreak/><LineBreak/>Click one of the adjacent hexes highlighted blue to move.  "
 e204s	"<Bold>e204s Short Hop Travel</Bold> <InlineUIContainer><Button Content='r204d' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
-<LineBreak/><LineBreak/>Hopping in the air using limited travels. Each hex entered is same as mounted travel.  Click one of the adjacent hexes highlighted blue to move.  
-<LineBreak/><LineBreak/> Alternatively, click the red bordered Prince to end movement."
+<LineBreak/><LineBreak/>Hopping in the air using limited travels. Each hex entered is same as mounted travel.  Click one of the adjacent hexes highlighted blue to move. "
 e204a	"<Bold>e204a Air Travel</Bold> <InlineUIContainer><Button Content='r204d' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>Since your party has flying mounts or can fly, you can elect to perform short hops moving up to two hexes but entering each hex
  <InlineUIContainer><Button Content='Short Hop' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. Short hops must be started on the first movement of the day.
-<LineBreak/><LineBreak/>If you do not short hop, click one of the adjacent hexes highlighted blue. Alternatively, click the red bordered Prince to end movement."
+<LineBreak/><LineBreak/>If you do not short hop, click one of the adjacent hexes highlighted blue."
 e205c	"<Bold>e205c Lost in Air Travel</Bold> <InlineUIContainer><Button Content='r205c' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>Lost traveling in air. May have drifted one hex in a random direction. If die roll > 3, drift one hex in random direction: <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21'> </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>

@@ -1128,6 +1128,8 @@ namespace BarbarianPrince
       }
       private bool UpdateMapItemRectangle(IGameInstance gi)
       {
+         if (0 == myGameInstance.Prince.MovementUsed) // if this is the first movement, do not show rectangle
+            return true;
          if (null == myRectangleSelected)
          {
             Console.WriteLine("UpdateMapItemRectangle(): myRectangleSelection=null");
@@ -1485,10 +1487,11 @@ namespace BarbarianPrince
       }
       private void ClickButtonMapItem(object sender, RoutedEventArgs e)
       {
-         if (GamePhase.Travel != myGameInstance.GamePhase)
-            return;
-         GameAction outAction = GameAction.TravelEndMovement;
-         myGameEngine.PerformAction(ref myGameInstance, ref outAction);
+         if ( (GamePhase.Travel == myGameInstance.GamePhase) && (0 < myGameInstance.Prince.MovementUsed) )
+         {
+            GameAction outAction = GameAction.TravelEndMovement;
+            myGameEngine.PerformAction(ref myGameInstance, ref outAction);
+         }
       }
       private void MouseDownPolygonTravel(object sender, MouseButtonEventArgs e)
       {

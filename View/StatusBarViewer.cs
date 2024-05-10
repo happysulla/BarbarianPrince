@@ -275,6 +275,17 @@ namespace BarbarianPrince
             myStatusBar.Items.Add(labelBeak);
             myStatusBar.Items.Add(imgBeak);
          }
+         //--------------------------------------------
+         if (true == gi.IsSpecialItemHeld(SpecialEnum.RoyalHelmOfNorthlands))
+         {
+            myStatusBar.Items.Add(new Separator());
+            StringBuilder sbRoyalHelmOfNorthland = new StringBuilder(" Helm=");
+            sbRoyalHelmOfNorthland.Append(gi.GetCountSpecialItem(SpecialEnum.RoyalHelmOfNorthlands));
+            Label labelHelm = new Label() { FontFamily = myFontFam, FontSize = 12, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, Content = sbRoyalHelmOfNorthland.ToString() };
+            Image imgHelm = new Image { Source = MapItem.theMapImages.GetBitmapImage("Helmet"), Width = 30, Height = 30 };
+            myStatusBar.Items.Add(labelHelm);
+            myStatusBar.Items.Add(imgHelm);
+         }
       }
       //-----------------------------------------------------------------
       private void ButtonEventActive_Click(object sender, RoutedEventArgs e)

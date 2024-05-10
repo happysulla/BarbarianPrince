@@ -1292,7 +1292,6 @@ namespace BarbarianPrince
             case "e002a":
                AppendEscapeMethods(gi, false); // false = cannot make riding escape
                myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new LineBreak());
                if (true == gi.Prince.IsRiding)
                {
                   myTextBlock.Inlines.Add(new Run("Since you are riding, you can attempt the evade option and add one to the die roll."));
@@ -2691,6 +2690,17 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new Run("                                          "));
                   Image e203a1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("WizardWander"), Name = "WizardWander", Width = 160, Height = 225 };
                   myTextBlock.Inlines.Add(new InlineUIContainer(e203a1));
+               }
+               break;
+            case "e204u":
+            case "e204m":
+            case "e204s":
+            case "e204a":
+               if( 0 < myGameInstance.Prince.MovementUsed )
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Alternatively, click the red bordered Prince to end movement."));
                }
                break;
             case "e205c":
