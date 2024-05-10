@@ -238,8 +238,10 @@ namespace BarbarianPrince
       {
          Logger.SetOn(LogEnum.LE_ERROR);
          //Logger.SetOn(LogEnum.LE_GAME_INIT);
+         Logger.SetOn(LogEnum.LE_USER_ACTION);
          Logger.SetOn(LogEnum.LE_NEXT_ACTION);
          //Logger.SetOn(LogEnum.LE_GAME_PARTYMEMBER_COUNT);
+         Logger.SetOn(LogEnum.LE_PARTYMEMBER_ADD);
          Logger.SetOn(LogEnum.LE_REMOVE_KILLED);
          //Logger.SetOn(LogEnum.LE_MOVE_STACKING);
          Logger.SetOn(LogEnum.LE_MOVE_COUNT);
@@ -264,10 +266,11 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_VIEW_DICE_MOVING);
          //Logger.SetOn(LogEnum.LE_VIEW_RESET_BATTLE_GRID);
          //Logger.SetOn(LogEnum.LE_VIEW_DEC_COUNT_GRID);
-         //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER);
+         Logger.SetOn(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_DAILY_ACTIONS);
-         //Logger.SetOn(LogEnum.LE_VIEW_MIM);
-         //Logger.SetOn(LogEnum.LE_VIEW_MIM_ADD);
+         Logger.SetOn(LogEnum.LE_VIEW_TRAVEL_CHECK);
+         Logger.SetOn(LogEnum.LE_VIEW_MIM);
+         Logger.SetOn(LogEnum.LE_VIEW_MIM_ADD);
          Logger.SetOn(LogEnum.LE_VIEW_MIM_CLEAR);
          Logger.SetOn(LogEnum.LE_VIEW_SHOW_LOADS);
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_HUNT);
@@ -313,7 +316,13 @@ namespace BarbarianPrince
          }
          myPrince = new MapItem(prince);
          PartyMembers.Add(myPrince);
-         if( false == AddStartingPartyMemberOption())
+         if (false == AddStartingPrinceOption())
+         {
+            Logger.Log(LogEnum.LE_ERROR, "GameInstance(): AddStartingPrinceOption() returned false");
+            CtorError = true;
+            return;
+         }
+         if ( false == AddStartingPartyMemberOption())
          {
             Logger.Log(LogEnum.LE_ERROR, "GameInstance(): AddStartingPartyMembers() returned false");
             CtorError = true;
@@ -324,12 +333,58 @@ namespace BarbarianPrince
          #endif
          Logger.Log(LogEnum.LE_GAME_PARTYMEMBER_COUNT, "GameInstance() c=" + PartyMembers.Count.ToString());
       }
-      private bool AddStartingPartyMemberOption()
+      private bool AddStartingPrinceOption()
       {
          IOption option = null;
-         String memberToAdd = "";
+         String itemToAdd = "";
          //---------------------------------------------------------
-         memberToAdd = "Dwarf";
+         itemToAdd = "PrinceHorse";
+         option = myOptions.Find(itemToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            this.Prince.AddNewMount();
+         //---------------------------------------------------------
+         itemToAdd = "PrincePegasus";
+         option = myOptions.Find(itemToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            this.Prince.AddNewMount(MountEnum.Pegasus);
+         //---------------------------------------------------------
+         itemToAdd = "PrinceCoin";
+         option = myOptions.Find(itemToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            this.Prince.Coin += 30;
+         //---------------------------------------------------------
+         itemToAdd = "PrinceFood";
+         option = myOptions.Find(itemToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            this.Prince.Food += 5;
+         return true;
+      }
+      private bool AddStartingPartyMemberOption()
+      {
+
+         IOption option = null;
+         //---------------------------------------------------------
+         String memberToAdd = "Dwarf";
          option = myOptions.Find(memberToAdd);
          if (null == option)
          {
@@ -467,7 +522,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
             return false;
          }
-         if( true == option.IsEnabled )
+         if (true == option.IsEnabled)
          {
             string memberName = memberToAdd + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
@@ -592,16 +647,37 @@ namespace BarbarianPrince
             IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c12Wizard", "c12Wizard", Prince.Territory, 4, 4, 0);
             AddCompanion(member);
          }
+         //---------------------------------------------------------
+         option = myOptions.Find("PartyMounted");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(PartyMounted) returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            foreach (IMapItem mi in PartyMembers)
+               mi.AddNewMount();
+         }
+         //---------------------------------------------------------
+         option = myOptions.Find("PartyAirborne");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(PartyMounted) returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            foreach (IMapItem mi in PartyMembers)
+               mi.AddNewMount(MountEnum.Pegasus);
+         }
          return true;
       }
       void AddUnitTests()
       {
          //Days = 40;
-         //myPrince.Food = 5;
-         myPrince.Coin = 30;
          //myPrince.SetWounds(7, 0);
          //myPrince.PlagueDustWound = 1; 
-         myPrince.AddNewMount();
          //myPrince.AddNewMount(MountEnum.Pegasus);
          //this.AddUnitTestTiredMount(myPrince);
          //myPrince.AddNewMount();
@@ -624,7 +700,7 @@ namespace BarbarianPrince
          //AddSpecialItem(SpecialEnum.ResistanceRing);
          //AddSpecialItem(SpecialEnum.ResurrectionNecklace);
          //AddSpecialItem(SpecialEnum.ShieldOfLight);
-         AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
+         //AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
          //myPrince.AddSpecialItemToShare(SpecialEnum.HydraTeeth);
          //this.HydraTeethCount = 5;
          //---------------------
@@ -1090,7 +1166,7 @@ namespace BarbarianPrince
                {
                   ++mi.Food;
                   --foodStore;
-                  Logger.Log(LogEnum.LE_REMOVE_KILLED, "AddFoods(): " + mi.Name + " ++++>>> f=" + mi.Food.ToString() + " foodStore=" + foodStore.ToString() + " fl=" + freeLoad.ToString());
+                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddFoods(): " + mi.Name + " ++++>>> f=" + mi.Food.ToString() + " foodStore=" + foodStore.ToString() + " fl=" + freeLoad.ToString());
                   if (0 == foodStore)
                      return true;
                }

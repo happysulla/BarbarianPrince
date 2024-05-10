@@ -1131,7 +1131,7 @@ namespace BarbarianPrince
             case "Wolf": character = new MapItem(miName, 1.0, false, false, false, "c71Wolf", "c71Wolf", princeTerritory, 3, 3, 0); break;
             case "Wraith": character = new MapItem(miName, 1.0, false, false, false, "c24Wraith", "c24Wraith", princeTerritory, 9, 6, 0); break;
             default:
-               Logger.Log(LogEnum.LE_ERROR, "CreateMonster(): Reached default character=" + cName);
+               Logger.Log(LogEnum.LE_ERROR, "CreateCharacter(): Reached default character=" + cName);
                gi.EncounteredMembers.Add(character);
                return character;
          }
@@ -1139,21 +1139,21 @@ namespace BarbarianPrince
          IOption isEasiestMonstersOption = gi.Options.Find("EasiestMonsters");
          if (null == isEasiestMonstersOption)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateMonster(): unknwon option=EasiestMonsters");
+            Logger.Log(LogEnum.LE_ERROR, "CreateCharacter(): unknwon option=EasiestMonsters");
             gi.EncounteredMembers.Add(character);
             return character;
          }
          IOption isEasyMonstersOption = gi.Options.Find("EasyMonsters");
          if (null == isEasyMonstersOption)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateMonster(): unknwon option=EasyMonsters");
+            Logger.Log(LogEnum.LE_ERROR, "CreateCharacter(): unknwon option=EasyMonsters");
             gi.EncounteredMembers.Add(character);
             return character;
          }
          IOption isLessHardMonstersOption = gi.Options.Find("LessHardMonsters");
          if (null == isLessHardMonstersOption)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateMonster(): unknwon option=LessHardMonsters");
+            Logger.Log(LogEnum.LE_ERROR, "CreateCharacter(): unknwon option=LessHardMonsters");
             gi.EncounteredMembers.Add(character);
             return character;
          }
@@ -1166,20 +1166,22 @@ namespace BarbarianPrince
          else if (true == isEasyMonstersOption.IsEnabled)
          {
             int newEndurance = character.Endurance - 3;
-            character.Endurance -= Math.Max(newEndurance, 1 );
+            character.Endurance = Math.Max(newEndurance, 1 );
             int newCombat = character.Combat - 3;
-            character.Combat -= Math.Max(newCombat, 1);
+            character.Combat = Math.Max(newCombat, 1);
          }
          else if (true == isLessHardMonstersOption.IsEnabled)
          {
             int newEndurance = character.Endurance - 1;
-            character.Endurance -= Math.Max(newEndurance, 1);
+            character.Endurance = Math.Max(newEndurance, 1);
             int newCombat = character.Combat - 1;
-            character.Combat -= Math.Max(newCombat, 1);
+            character.Combat = Math.Max(newCombat, 1);
          }
          //------------------------------------------------------------
          if (-1 < wealthCode)
             character.WealthCode = wealthCode;
+         //------------------------------------------------------------
+         Logger.Log(LogEnum.LE_PARTYMEMBER_ADD, "CreateCharacter(): mi=" + character.ToString());
          return character;
       }
    }
@@ -1917,7 +1919,7 @@ namespace BarbarianPrince
                break;
             case GameAction.HuntE002aEncounterRoll:
                int encounterResult = dieRoll - 3;
-               encounterResult = 10; // <cgs> TEST
+               encounterResult = 0; // <cgs> TEST
                if ("0101" == gi.Prince.Territory.Name)
                   ++encounterResult;
                if ("1501" == gi.Prince.Territory.Name)
@@ -2412,7 +2414,9 @@ namespace BarbarianPrince
                }
                else
                {
-                  gi.MapItemMoves[0].NewTerritory = gi.MapItemMoves[0].OldTerritory; // no longer moving to new territory
+                  IMapItemMove mim = gi.MapItemMoves[0];
+                  if (RiverCrossEnum.TC_CROSS_YES_SHOWN != mim.RiverCross)
+                     mim.NewTerritory = mim.OldTerritory; // no longer moving to new territory unless this is check after river crossing
                }
                gi.IsGridActive = false;   // GameAction.TravelShowLostEncounter
                gi.GamePhase = GamePhase.Encounter;
@@ -2496,7 +2500,9 @@ namespace BarbarianPrince
                }
                else
                {
-                  gi.MapItemMoves[0].NewTerritory = gi.MapItemMoves[0].OldTerritory; // no longer moving to new territory
+                  IMapItemMove mim = gi.MapItemMoves[0];
+                  if (RiverCrossEnum.TC_CROSS_YES_SHOWN != mim.RiverCross)
+                     mim.NewTerritory = mim.OldTerritory; // no longer moving to new territory unless this is check after river crossing
                }
                gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterStart;
@@ -12635,7 +12641,6 @@ namespace BarbarianPrince
                   action = GameAction.TravelLostCheck;
                   gi.GamePhase = GamePhase.Travel;
                   gi.DieRollAction = GameAction.DieRollActionNone;
-
                }
                else if (RiverCrossEnum.TC_CROSS_YES == gi.MapItemMoves[0].RiverCross)
                {

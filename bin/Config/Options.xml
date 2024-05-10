@@ -42,17 +42,17 @@
 		<IsEnabled value="False" />
 	</Option>
 	<Option value="ForceAirEvent">
-		<IsEnabled value="False" />
+		<IsEnabled value="True" />
 	</Option>
 	<!--===========================-->
 	<Option value="ForceNoCrossEvent">
-		<IsEnabled value="False" />
+		<IsEnabled value="True" />
 	</Option>
 	<Option value="ForceCrossEvent">
 		<IsEnabled value="False" />
 	</Option>
 	<Option value="ForceLostAfterCrossEvent">
-		<IsEnabled value="False" />
+		<IsEnabled value="True" />
 	</Option>
 	<!--===========================-->
 	<Option value="ForceNoRaftEvent">
@@ -61,7 +61,26 @@
 	<Option value="ForceRaftEvent">
 		<IsEnabled value="False" />
 	</Option>
+   <!--========Add Prince Bonus==============-->
+   <Option value="PrinceHorse">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="PrincePegasus">
+      <IsEnabled value="True" />
+   </Option>
+   <Option value="PrinceCoin">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="PrinceFood">
+      <IsEnabled value="False" />
+   </Option>
    <!--========Add Extra PartyMembers==============-->
+   <Option value="PartyMounted">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="PartyAirborne">
+      <IsEnabled value="False" />
+   </Option>
    <Option value="Dwarf">
       <IsEnabled value="False" />
    </Option>
@@ -124,6 +143,6 @@
       <IsEnabled value="False" />
    </Option>
    <Option value="0505">
-      <IsEnabled value="True" />
+      <IsEnabled value="False" />
    </Option>
 </Options>

@@ -2700,7 +2700,7 @@ namespace BarbarianPrince
                {
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run("Alternatively, click the red bordered Prince to end movement."));
+                  myTextBlock.Inlines.Add(new Run("Alternatively, click the Prince to end movement for today without additional events."));
                }
                break;
             case "e205c":

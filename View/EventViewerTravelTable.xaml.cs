@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Documents.DocumentStructures;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -412,6 +413,8 @@ namespace BarbarianPrince
             }
          }
          myState = EnumR204.TC_LOST_ROLL;
+         bool isRiverCrossing = false;
+         bool isStructure = myGameInstance.IsInStructure(myMapItemMove.OldTerritory);
          //--------------------------------------------------
          if (true == myGameInstance.IsFalconFed) // do not get lost if falcon with party
             myState = EnumR204.TC_EVENT_ROLL;
@@ -436,10 +439,10 @@ namespace BarbarianPrince
             if (true == myGameInstance.IsAirborneEnd) // cannot get lost when landing from air
                myState = EnumR204.TC_EVENT_ROLL;
             //--------------------------------------------------
-            if (true == myGameInstance.IsInStructure(myMapItemMove.OldTerritory))
+            if (true == isStructure)
                myState = EnumR204.TC_EVENT_ROLL;
             //--------------------------------------------------
-            bool isRiverCrossing = false;
+
             foreach (String river in myMapItemMove.OldTerritory.Rivers) // Check for crossing rivers
             {
                if (river == myMapItemMove.NewTerritory.Name)
@@ -473,6 +476,7 @@ namespace BarbarianPrince
                myState = EnumR204.TC_EVENT_ROLL;
             }
          }
+         Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "PerformTravel(): s=" + myState.ToString() + " mim=" + myMapItemMove.ToString() + " river?=" + isRiverCrossing.ToString()  + " road?=" + myIsTravelingRoad.ToString() + " s?=" + isStructure.ToString() + " raft?=" + myGameInstance.RaftState.ToString() + " a?=" + myIsTravelingAir.ToString() + " f?=" + myGameInstance.IsFalconFed.ToString());
          //--------------------------------------------------
          // Update the grid and continue
          if (false == UpdateGrid())
@@ -662,7 +666,7 @@ namespace BarbarianPrince
                break;
             case EnumR204.TC_EVENT_ROLL:
                if ((true == myIsTravelingAir) && (true == myIsLost) )
-                  myTextBlockInstructions.Inlines.Add(new Run("Roll for lost in air:"));
+                  myTextBlockInstructions.Inlines.Add(new Run("Lost in Air - Roll for possible lost encounter:"));
                else if (true == myIsTravelingAir)
                   myTextBlockInstructions.Inlines.Add(new Run("Not lost. Roll for possible air encounter:"));
                else if (true == myGameInstance.IsAirborneEnd)
@@ -670,15 +674,15 @@ namespace BarbarianPrince
                else if (true == myIsRaftEncounter)
                   myTextBlockInstructions.Inlines.Add(new Run("Roll for possible rafting travel encounter:")); 
                else if (RiverCrossEnum.TC_CROSS_FAIL == myMapItemMove.RiverCross)
-                  myTextBlockInstructions.Inlines.Add(new Run("River crossing failed. Roll for travel encounter on river:"));
+                  myTextBlockInstructions.Inlines.Add(new Run("River crossing failed! Roll for travel encounter on river:"));
                else if (RiverCrossEnum.TC_ATTEMPTING_TO_CROSS == myMapItemMove.RiverCross)
-                  myTextBlockInstructions.Inlines.Add(new Run("Crossing river. Roll for possible travel encounter for river:"));
+                  myTextBlockInstructions.Inlines.Add(new Run("Crossing river - Roll for possible travel encounter on river:"));
                else if (((RiverCrossEnum.TC_CROSS_YES == myMapItemMove.RiverCross) || (RiverCrossEnum.TC_CROSS_YES == myMapItemMove.RiverCross)) && (true == myIsLost))
-                  myTextBlockInstructions.Inlines.Add(new Run("River crossed but lost on other side. Roll for possible lost encounter in " + myMapItemMove.NewTerritory.Type + ":"));
+                  myTextBlockInstructions.Inlines.Add(new Run("River crossed but lost! Roll for possible lost encounter in " + myMapItemMove.NewTerritory.Type + ":"));
                else if (((RiverCrossEnum.TC_CROSS_YES == myMapItemMove.RiverCross) || (RiverCrossEnum.TC_CROSS_YES == myMapItemMove.RiverCross)) && (false == myIsLost))
                   myTextBlockInstructions.Inlines.Add(new Run("River crossed and not lost. Roll for possible travel encounter in " + myMapItemMove.NewTerritory.Type + ":"));
                else if ( true == myIsLost )
-                  myTextBlockInstructions.Inlines.Add(new Run("Roll for possible lost encounter in " + myMapItemMove.NewTerritory.Type + ":"));
+                  myTextBlockInstructions.Inlines.Add(new Run("Lost - Movement Ends! Roll for possible lost encounter in " + myMapItemMove.NewTerritory.Type + ":"));
                else if (true == myIsTravelingRoad)
                   myTextBlockInstructions.Inlines.Add(new Run("Roll for possible road encounter:"));
                else
@@ -706,7 +710,7 @@ namespace BarbarianPrince
                else if (RiverCrossEnum.TC_ATTEMPTING_TO_CROSS == myMapItemMove.RiverCross)
                   myTextBlockInstructions.Inlines.Add(new Run("Crossing river causes a river encounter:"));
                else if (true == myIsLost)
-                  myTextBlockInstructions.Inlines.Add(new Run("Lost! Roll for lost event reference in " + myMapItemMove.NewTerritory.Type + ":"));
+                  myTextBlockInstructions.Inlines.Add(new Run("Roll for lost event reference in " + myMapItemMove.NewTerritory.Type + ":"));
                else if (true == myIsTravelingRoad)
                   myTextBlockInstructions.Inlines.Add(new Run("Encounter! Roll for travel event reference for road:"));
                else
@@ -722,9 +726,9 @@ namespace BarbarianPrince
                else if (RiverCrossEnum.TC_ATTEMPTING_TO_CROSS == myMapItemMove.RiverCross)
                   myTextBlockInstructions.Inlines.Add(new Run("Roll for travel event for river:"));
                else if ((true == myIsLost) && (RiverCrossEnum.TC_CROSS_YES_SHOWN == myMapItemMove.RiverCross))
-                  myTextBlockInstructions.Inlines.Add(new Run("Roll for lost event in " + myMapItemMove.NewTerritory.Type + ":"));
+                  myTextBlockInstructions.Inlines.Add(new Run("Lost After River Crossing! Roll for lost event in " + myMapItemMove.NewTerritory.Type + ":"));
                else if (true == myIsLost)
-                  myTextBlockInstructions.Inlines.Add(new Run("Roll for lost event in " + myMapItemMove.OldTerritory.Type + ":"));
+                  myTextBlockInstructions.Inlines.Add(new Run("Lost - Movement Ends! Roll for lost event in " + myMapItemMove.OldTerritory.Type + ":"));
                else if (true == myIsTravelingRoad)
                   myTextBlockInstructions.Inlines.Add(new Run("Roll for travel event for road:"));
                else
@@ -1052,6 +1056,14 @@ namespace BarbarianPrince
             else
                myState = EnumR204.TC_EVENT_SHOW_RESULTS;
          }
+         else if (EnumR204.TC_EVENT_ROLL_REFERENCE_R281 == myState)
+         {
+            Button b = new Button() { Content = "r281", IsEnabled = true, FontFamily = myFontFam1, FontSize = 16, Height = 20, Background = Utilities.theBrushControlButton };
+            myGridTravelTable.Children.Add(b);
+            Grid.SetRow(b, STARTING_ASSIGNED_ROW + 1);
+            Grid.SetColumn(b, 1);
+            Grid.SetColumnSpan(b, 6);
+         }
          else
          {
             string content = ""; // Want to show all buttons. However, only the selected button should be highlighted
@@ -1067,11 +1079,7 @@ namespace BarbarianPrince
             {
                try
                {
-                  if(EnumR204.TC_EVENT_ROLL_REFERENCE_R281 == myState)  // enable the entire row of r281 buttons
-                  {
-                     buttons[i].IsEnabled = true;
-                  }
-                  else if (i + 1 == myRollEvent)
+                  if (i + 1 == myRollEvent)
                   {
                      buttons[i].IsEnabled = true;
                      myGameInstance.EventDisplayed = myGameInstance.EventActive = myEvents[key][i];
@@ -1109,6 +1117,7 @@ namespace BarbarianPrince
                else if (true == myOptionForceLostEvent) 
                   dieRoll = 13;
                myState = GetLostResult(myGameInstance.MapItemMoves[0], dieRoll);
+               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_LOST_ROLL s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_DESERTION_ROLL:
                myState = EnumR204.TC_DESERTION_SHOW;
@@ -1136,6 +1145,7 @@ namespace BarbarianPrince
                      dieRoll = 13;
                }
                myState = GetEventResult(myGameInstance.MapItemMoves[0], dieRoll);
+               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_ROAD:
                myIsTravelingRoad = false;  // Road event already checked. Switch to non-road check
@@ -1144,17 +1154,21 @@ namespace BarbarianPrince
                else if (true == myOptionForceEvent)
                   dieRoll = 13;
                myState = GetEventResult(myGameInstance.MapItemMoves[0], dieRoll);
+               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL_ROAD s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
-            case EnumR204.TC_EVENT_ROLL_REFERENCE: 
+            case EnumR204.TC_EVENT_ROLL_REFERENCE:
+               dieRoll = 6; // <cgs> TEST
                myRollReference = dieRoll; // column number in travel table r207 - reference row
                if ((6 == myRollReference) && (true == myIsTravelingAir) ) // if traveling by air and roll reference 6, need to look  at Table r281
                   myState = EnumR204.TC_EVENT_ROLL_REFERENCE_R281;
                else
                   myState = EnumR204.TC_EVENT_ROLL_EVENT;
+               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL_REFERENCE s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT:
                myRollEvent = dieRoll; // column number in traveling event reference - event row
                myState = EnumR204.TC_EVENT_SHOW_RESULTS;
+               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL_EVENT s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT_R230:
                myState = EnumR204.TC_EVENT_SHOW_RESULTS;
@@ -1179,19 +1193,23 @@ namespace BarbarianPrince
                   dieRoll -= 6;
                }
                myRollEvent = dieRoll;
+               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL_EVENT_R230 s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT_R232:
                myRollReference = dieRoll;
                myRollEvent     = dieRoll; 
                myState = EnumR204.TC_EVENT_ROLL_EVENT_R232_SHOW;
+               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL_EVENT_R232 s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_REFERENCE_R281:
                myRollReference = dieRoll; // column number in travel table r207 - reference row
                myState = EnumR204.TC_EVENT_ROLL_EVENT_R281;
+               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL_REFERENCE_R281 s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT_R281:
                myRollEvent = dieRoll; // column number in traveling event reference - event row
                myState = EnumR204.TC_EVENT_ROLL_EVENT_R281_SHOW;
+               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL_EVENT_R281 s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             default:
                break;

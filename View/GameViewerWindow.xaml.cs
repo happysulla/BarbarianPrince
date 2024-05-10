@@ -1102,11 +1102,11 @@ namespace BarbarianPrince
       {
          try
          {
-            Logger.Log(LogEnum.LE_VIEW_MIM, "UpdateCanvasMovement(): ------------------------------------------");
             if( 0 < gi.MapItemMoves.Count)
             {
                IMapItemMove mim2 = gi.MapItemMoves[0];
                IMapItem mi = mim2.MapItem;
+               Logger.Log(LogEnum.LE_VIEW_MIM, "UpdateCanvasMovement():<<<<<<<< oT=" + mim2.OldTerritory.ToString() + "-->nT=" + mim2.NewTerritory.ToString() + " ae=" + myGameInstance.EventActive + " c=" + myGameInstance.SunriseChoice.ToString() + " m=" + myGameInstance.Prince.MovementUsed + "/" + myGameInstance.Prince.Movement);
                if (false == MovePathAnimate(mim2))
                {
                   Logger.Log(LogEnum.LE_ERROR, "UpdateCanvasMovement(): MovePathAnimate() returned false t=" + mim2.OldTerritory.ToString());
@@ -1116,7 +1116,6 @@ namespace BarbarianPrince
                }
                mi.Territory = mim2.NewTerritory;
                mi.TerritoryStarting = mim2.NewTerritory;
-               Logger.Log(LogEnum.LE_VIEW_MIM, "UpdateCanvasMovement(): mim=" + mi.Name + " moveto t=" + mi.Territory.Name);
             }
          }
          catch (Exception e)
@@ -1419,6 +1418,7 @@ namespace BarbarianPrince
          }
          GameAction outAction = GameAction.Error;
          myGameInstance.IsPartyRested = false; // party is not rested unless rest action is taken
+         Logger.Log(LogEnum.LE_USER_ACTION, "ClickButtonDailyAction(): >>>>>>>>>>>>>>>>>>>>>>>>>" + s1 + " for ae=" + myGameInstance.EventActive + " c=" + myGameInstance.SunriseChoice.ToString() + " m=" + myGameInstance.Prince.MovementUsed + "/" + myGameInstance.Prince.Movement);
          if (s1 == myButtonDailyContents[0])
          {
             if( true == myGameInstance.IsHeavyRainContinue )
@@ -1489,6 +1489,7 @@ namespace BarbarianPrince
       {
          if ( (GamePhase.Travel == myGameInstance.GamePhase) && (0 < myGameInstance.Prince.MovementUsed) )
          {
+            Logger.Log(LogEnum.LE_USER_ACTION, "ClickButtonMapItem(): >>>>>>>>>>>>>>>>>>>>>>>>>ae=" + myGameInstance.EventActive + " c=" + myGameInstance.SunriseChoice.ToString() + " m=" + myGameInstance.Prince.MovementUsed + "/" + myGameInstance.Prince.Movement);
             GameAction outAction = GameAction.TravelEndMovement;
             myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          }
@@ -1514,13 +1515,14 @@ namespace BarbarianPrince
             return;
          }
          GameAction outAction = GameAction.TravelLostCheck;
-         if ( null != myGameInstance.AirSpiritLocations ) // e110c - air spirit moves party
+         if (null != myGameInstance.AirSpiritLocations ) // e110c - air spirit moves party
          {
             myGameInstance.GamePhase = GamePhase.Encounter;
             outAction = GameAction.E110AirSpiritTravelEnd;
             myGameInstance.NewHex = myTerritorySelected;
          }
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
+         Logger.Log(LogEnum.LE_USER_ACTION, "MouseDownPolygonTravel(): >>>>>>>>>>>>>>>>>>>>>>>>>ae=" + myGameInstance.EventActive + " c=" + myGameInstance.SunriseChoice.ToString() + " m=" + myGameInstance.Prince.MovementUsed + "/" + myGameInstance.Prince.Movement + " mim=" + myGameInstance.MapItemMoves[0].ToString());
       }
       private void MouseDownPolygonArchOfTravel(object sender, MouseButtonEventArgs e) // e045
       {
@@ -1797,7 +1799,7 @@ namespace BarbarianPrince
             return false;
          }
          Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "CreateMapItemMove(): oT=" + gi.Prince.Territory.Name + " nT=" + mim.NewTerritory.Name);
-         gi.MapItemMoves.Add(mim);
+         gi.MapItemMoves.Insert(0, mim); // insert at front of line
          return true;
       }
       private void CreateButtonContextMenu()

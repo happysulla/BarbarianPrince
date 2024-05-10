@@ -1320,13 +1320,15 @@ namespace BarbarianPrince
       {
          StringBuilder sb = new StringBuilder("Name=<");
          sb.Append(this.Name);
-         sb.Append("> Zoom=<");
-         sb.Append(this.Zoom.ToString());
-         sb.Append("> Location=<");
-         sb.Append(this.Location.ToString());
          sb.Append("> Territory=<");
          sb.Append(this.Territory.Name);
-         sb.Append(">\n");
+         sb.Append("> E=<");
+         sb.Append(this.Endurance.ToString());
+         sb.Append("> C=<");
+         sb.Append(this.Combat.ToString());
+         sb.Append("> WC=<");
+         sb.Append(this.WealthCode.ToString());
+         sb.Append(">");
          return sb.ToString();
       }
       //---------------------------------------------------------------------------- static functions
