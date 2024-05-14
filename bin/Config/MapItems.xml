@@ -11,7 +11,7 @@
     <TopImageName value="c07Prince" />
     <BottomImageName value="c07Prince" />
     <OverlayImageName value="" />
-    <Location X="236.25" Y="276.52" />
+    <Location X="90.5714285714286" Y="20.5942857142857" />
     <Wound value="0" />
     <MovementUsed value="0" />
     <TerritoryName value="0101" />
@@ -140,7 +140,7 @@
     <Endurance value="6" />
     <Movement value="4" />
     <Combat value="1" />
-    <Coin value="100" />
+    <Coin value="0" />
     <TopImageName value="c12Wizard" />
     <BottomImageName value="c12Wizard" />
     <OverlayImageName value="" />
@@ -178,7 +178,7 @@
     <Endurance value="4" />
     <Movement value="4" />
     <Combat value="1" />
-    <Coin value="18" />
+    <Coin value="0" />
     <TopImageName value="c19Monk" />
     <BottomImageName value="c19Monk" />
     <OverlayImageName value="" />

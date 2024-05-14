@@ -1106,7 +1106,7 @@ namespace BarbarianPrince
             {
                IMapItemMove mim2 = gi.MapItemMoves[0];
                IMapItem mi = mim2.MapItem;
-               Logger.Log(LogEnum.LE_VIEW_MIM, "UpdateCanvasMovement():<<<<<<<< oT=" + mim2.OldTerritory.ToString() + "-->nT=" + mim2.NewTerritory.ToString() + " ae=" + myGameInstance.EventActive + " c=" + myGameInstance.SunriseChoice.ToString() + " m=" + myGameInstance.Prince.MovementUsed + "/" + myGameInstance.Prince.Movement);
+               Logger.Log(LogEnum.LE_VIEW_MIM, "UpdateCanvasMovement():<<<<<<<< oT=" + mim2.OldTerritory.ToString() + "-->" + mim2.NewTerritory.ToString() + " ae=" + myGameInstance.EventActive + " c=" + myGameInstance.SunriseChoice.ToString() + " m=" + myGameInstance.Prince.MovementUsed + "/" + myGameInstance.Prince.Movement);
                if (false == MovePathAnimate(mim2))
                {
                   Logger.Log(LogEnum.LE_ERROR, "UpdateCanvasMovement(): MovePathAnimate() returned false t=" + mim2.OldTerritory.ToString());

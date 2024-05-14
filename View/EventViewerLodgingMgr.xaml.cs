@@ -69,6 +69,7 @@ namespace BarbarianPrince
       private int myRocBeaksInPartyOriginal = 0;
       private int myRocBeaksInPartyCurrent = 0;
       private bool myIsPurchasedCloth = false; // e149 - need to purchase fine clothes 
+      private bool myIsPurchasedClothShown = false;
       private int myFoodPurchasedAtFarm = 0;  // only applies to e013a when farmer sells food
       private int myHorsePurchasedAtFarm = 0;  // only applies to e013a when farmer sells food
       private int myNumTrueLove = 0; // if number of true loves is greater than one, it is a triangle. True Loves can leave.
@@ -92,7 +93,6 @@ namespace BarbarianPrince
       //---------------------------------------------
       private string myCheckBoxContent = "";
       private readonly DoubleCollection myDashArray = new DoubleCollection();
-      private readonly SolidColorBrush mySolidColorBrushBlack = new SolidColorBrush() { Color = Colors.Black };
       private readonly FontFamily myFontFam = new FontFamily("Tahoma");
       private readonly FontFamily myFontFam1 = new FontFamily("Courier New");
       //-----------------------------------------------------------------------------------------
@@ -171,6 +171,7 @@ namespace BarbarianPrince
          myIsHeaderCheckBoxChecked = false;
          myIsMoreThanOneMountToMapItem = false;
          myIsPurchasedCloth = false;
+         myIsPurchasedClothShown = false;
          myFoodPurchasedAtFarm = 0;
          myHorsePurchasedAtFarm = 0;
          myRollForMount = Utilities.NO_RESULT;
@@ -187,6 +188,8 @@ namespace BarbarianPrince
             myFoodCost = 0.5*myFoodCost;
             myChagaCost = (int)Math.Ceiling((double)myChagaCost * 0.5);
          }
+         if ((true == myGameInstance.ForbiddenAudiences.IsClothesConstraint()) && (mySuitCost <= myCoinCurrent))
+            myIsPurchasedClothShown = true;
          //--------------------------------------------------
          myTrollSkinsInPartyOriginal = 0;
          foreach (IMapItem mi in myGameInstance.PartyMembers)
@@ -342,9 +345,6 @@ namespace BarbarianPrince
                   deserters.Add(partyMember);
             }
             //--------------------------------------------
-            if (true == myIsPurchasedCloth)
-               myGameInstance.ForbiddenAudiences.RemoveClothesConstraints();
-            //--------------------------------------------
             foreach (IMapItem deserter in deserters)
                myGameInstance.RemoveAbandonerInParty(deserter, true);
             //--------------------------------------------
@@ -368,6 +368,29 @@ namespace BarbarianPrince
                   return false;
                }
             }
+            //--------------------------------------------
+            int diffRocBeaks = myRocBeaksInPartyOriginal - myRocBeaksInPartyCurrent;
+            for (int k = 0; k < diffRocBeaks; ++k)
+            {
+               if (false == myGameInstance.RemoveSpecialItem(SpecialEnum.RocBeak))
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateEndState(): RemoveSpecialItem(SpecialEnum.RocBeak) return false");
+                  return false;
+               }
+            }
+            //--------------------------------------------
+            int diffTrollSkins = myTrollSkinsInPartyOriginal - myTrollSkinsInPartyCurrent;
+            for (int k = 0; k < diffTrollSkins; ++k )
+            {
+               if( false == myGameInstance.RemoveSpecialItem(SpecialEnum.TrollSkin) )
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateEndState(): RemoveSpecialItem(SpecialEnum.TrollSkin) return false");
+                  return false;
+               }
+            }
+            //--------------------------------------------
+            if (true == myIsPurchasedCloth)
+               myGameInstance.ForbiddenAudiences.RemoveClothesConstraints();
             //--------------------------------------------
             if (null == myCallback)
             {
@@ -397,82 +420,34 @@ namespace BarbarianPrince
                   {
                      if (0 < myNumMountsCount)
                      {
-                        if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince & Mounts lodged. Sell/Buy drug/skins, unlodge, or click " + finish));
-                        }
-                        else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince & Mounts lodged. Sell/Buy skins, unlodge, or click " + finish));
-                        }
-                        else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince & Mounts lodged. Sell/Buy drug, unlodge, or click " + finish));
-                        }
+                        if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent ) || (true == myIsPurchasedClothShown))
+                           myTextBlockInstructions.Inlines.Add(new Run("Prince & mounts lodged. Sell/Buy items, unlodge, or click " + finish));
                         else
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince & Mounts lodged. Unlodge or click " + finish));
-                        }
+                           myTextBlockInstructions.Inlines.Add(new Run("Prince & mounts lodged. Unlodge or click " + finish));
                      }
                      else
                      {
-                        if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince lodged. Sell/Buy drug/skins, unlodge, or click " + finish));
-                        }
-                        else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince lodged. Sell/Buy skins, unlodge, or click " + finish));
-                        }
-                        else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince lodged. Sell/Buy drug or click " + finish));
-                        }
+                        if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                           myTextBlockInstructions.Inlines.Add(new Run("Prince lodged. Sell/Buy items, unlodge, or click " + finish));
                         else
-                        {
                            myTextBlockInstructions.Inlines.Add(new Run("Prince lodged. Click " + finish));
-                        }
                      }
                   }
                   else
                   {
                      if (0 < myNumMountsCount)
                      {
-                        if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Party & mounts lodged. Sell/Buy drug/skins, unlodge, or click " + finish));
-                        }
-                        else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Party & mounts lodged. Sell/Buy skins, unlodge, or click " + finish));
-                        }
-                        else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Party & mounts lodged. Sell/Buy drug, unlodge, or click " + finish));
-                        }
+                        if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                           myTextBlockInstructions.Inlines.Add(new Run("Party/mounts lodged. Sell/Buy items, unlodge, or click " + finish));
                         else
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Party & mounts lodged. Unlodge or click " + finish));
-                        }
+                           myTextBlockInstructions.Inlines.Add(new Run("Party/mounts lodged. Unlodge or click " + finish));
                      }
                      else
                      {
-                        if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Party lodged. Sell/Buy drug/skins, unlodge, or click " + finish));
-                        }
-                        else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Party lodged. Sell/Buy skins, unlodge, or click " + finish));
-                        }
-                        else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Party lodged. Sell/Buy drug, unlodge, or click " + finish));
-                        }
-                        else
-                        {
+                        if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                           myTextBlockInstructions.Inlines.Add(new Run("Party lodged. Sell/Buy items, unlodge, or click " + finish));
+                         else
                            myTextBlockInstructions.Inlines.Add(new Run("Party lodged. Unlodge or click " + finish));
-                        }
                      }
                   }
                }
@@ -482,82 +457,34 @@ namespace BarbarianPrince
                   {
                      if (0 < myNumMountsCount)
                      {
-                        if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince & Mounts not lodged. Sell/Buy drug/skins, lodge, or roll for stolen mounts."));
-                        }
-                        else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince & Mounts not lodged. Sell/Buy skins, lodge, or roll for stolen mounts."));
-                        }
-                        else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince & Mounts not lodged. Sell/Buy drug, lodge, or roll for stolen mounts."));
-                        }
+                        if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                           myTextBlockInstructions.Inlines.Add(new Run("Prince/Mounts not lodged. Sell/Buy items, lodge, or roll for stolen mounts."));
                         else
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince & Mounts not lodged. Lodge or roll for stolen mounts."));
-                        }
+                           myTextBlockInstructions.Inlines.Add(new Run("Prince/Mounts not lodged. Lodge or roll for stolen mounts."));
                      }
                      else
                      {
-                        if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince not lodged. Sell/Buy drug/skins, lodge, or click " + finish));
-                        }
-                        else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince not lodged. Sell/Buy skins, lodge, or click " + finish));
-                        }
-                        else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince not lodged. Sell/Buy drug or click " + finish));
-                        }
+                        if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                           myTextBlockInstructions.Inlines.Add(new Run("Prince not lodged. Sell/Buy items, lodge, or click " + finish));
                         else
-                        {
                            myTextBlockInstructions.Inlines.Add(new Run("Prince not lodged. Click " + finish));
-                        }
                      }
                   }
                   else
                   {
                      if (0 < myNumMountsCount)
                      {
-                        if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Party & mounts not lodged. Sell/Buy drug/skins,lodge, or roll for deserters/stolen mounts."));
-                        }
-                        else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Party & mounts not lodged. Sell/Buy skins, lodge, or roll for deserters/stolen mounts."));
-                        }
-                        else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Party & mounts not lodged. Sell/Buy drug, lodge, or roll for deserters/stolen mounts."));
-                        }
+                        if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                           myTextBlockInstructions.Inlines.Add(new Run("Party/Mounts not lodged. Sell/Buy items,lodge, or roll for deserters/stolen mounts."));
                         else
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Party & mounts not lodged. Lodge or roll for deserters/stolen mounts."));
-                        }
+                           myTextBlockInstructions.Inlines.Add(new Run("Party/Mounts not lodged. Lodge or roll for deserters/stolen mounts."));
                      }
                      else
                      {
-                        if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Party not lodged. Sell/Buy drug/skins, lodge, or roll for deserters."));
-                        }
-                        else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Party not lodged. Sell/Buy skins, lodge, or roll for deserters."));
-                        }
-                        else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Party not lodged. Sell/Buy drug, lodge, or roll for deserters."));
-                        }
+                        if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                           myTextBlockInstructions.Inlines.Add(new Run("Party not lodged. Sell/Buy items, lodge, or roll for deserters."));
                         else
-                        {
                            myTextBlockInstructions.Inlines.Add(new Run("Party not lodged. Lodge or roll for deserters."));
-                        }
                      }
                   }
                }
@@ -565,68 +492,36 @@ namespace BarbarianPrince
             case LodgingEnum.LE_LODGE_PEOPLE:
                if (true == myIsHeaderCheckBoxChecked)
                {
-                  if (1 == myMaxRowCount)
+                  if (1 == myMaxRowCount) // Only Prince in party
                   {
                      if (0 < myNumMountsCount)
                      {
-                        if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince & mounts lodged. Sell/Buy drug/skins, unlodge, or roll for stolen mounts."));
-                        }
-                        else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince & mounts lodged. Sell/Buy skins, unlodge, or roll for stolen mounts."));
-                        }
-                        else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince & mounts lodged. Sell/Buy drug, unlodge, or roll for stolen mounts."));
-                        }
+                        if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                           myTextBlockInstructions.Inlines.Add(new Run("Mounts not stabled. Sell/Buy items, unlodge, or roll for stolen mounts."));
                         else
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince & mounts lodged. Unlodge or roll for stolen mounts."));
-                        }
+                           myTextBlockInstructions.Inlines.Add(new Run("Mounts not stabled. Unlodge or roll for stolen mounts."));
                      }
                      else
                      {
-                        if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince lodged. Sell/Buy drug/skins, unlodge, or click " + finish));
-                        }
-                        else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince lodged. Sell/Buy skins, unlodge, or click " + finish));
-                        }
-                        else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                        {
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince lodged. Sell/Buy drug or click " + finish));
-                        }
+                        if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                           myTextBlockInstructions.Inlines.Add(new Run("Prince lodged. Sell/Buy items, unlodge, or click " + finish));
                         else
-                        {
                            myTextBlockInstructions.Inlines.Add(new Run("Prince lodged. Click " + finish));
-                        }
                      }
                   }
-                  else
+                  else // Prince has other party members
                   {
                      if (0 < myNumMountsCount)
                      {
-                        if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                           myTextBlockInstructions.Inlines.Add(new Run("Party lodged but mounts not lodged. Sell/Buy drug/skins, unlodge, or roll for stolen mounts."));
-                        else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                           myTextBlockInstructions.Inlines.Add(new Run("Party lodged but mounts not lodged. Sell/Buy skins, unlodge, or roll for stolen mounts."));
-                        else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                           myTextBlockInstructions.Inlines.Add(new Run("Party lodged but mounts not lodged. Buy drug, unlodge, or roll for stolen mounts."));
+                        if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                           myTextBlockInstructions.Inlines.Add(new Run("Mounts not stabled. Sell/Buy items, unlodge, or roll for stolen mounts."));
                         else
-                           myTextBlockInstructions.Inlines.Add(new Run("Party lodged but mounts not lodged. Unlodge or roll for stolen mounts."));
+                           myTextBlockInstructions.Inlines.Add(new Run("Mounts not stabled. Unlodge or roll for stolen mounts."));
                      }
                      else
                      {
-                        if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                           myTextBlockInstructions.Inlines.Add(new Run("Party lodged. Sell/Buy drug/skins, unlodge, or click " + finish));
-                        else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                           myTextBlockInstructions.Inlines.Add(new Run("Party lodged. Sell/Buy skins, unlodge, or click " + finish));
-                        else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                           myTextBlockInstructions.Inlines.Add(new Run("Party lodged. Buy drug, unlodge, or click " + finish));
+                        if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                           myTextBlockInstructions.Inlines.Add(new Run("Party lodged. Sell/Buy items, unlodge, or click " + finish));
                         else
                            myTextBlockInstructions.Inlines.Add(new Run("Party lodged. Unlodge or click " + finish));
                      }
@@ -638,25 +533,17 @@ namespace BarbarianPrince
                   {
                      if (0 < myNumMountsCount)
                      {
-                        if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince & mounts not lodged. Sell/Buy drug/skins, lodge, or roll for stolen mounts."));
-                        else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince & mounts not lodged. Sell/Buy skins, lodge, or roll for stolen mounts."));
-                        else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince & mounts not lodged. Sell/Buy drug, lodge, or roll for stolen mounts."));
+                        if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                           myTextBlockInstructions.Inlines.Add(new Run("Mounts not stabled. Sell/Buy items, lodge, or roll for stolen mounts."));
                         else
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince & mounts not lodged.Lodge or roll for stolen mounts."));
+                           myTextBlockInstructions.Inlines.Add(new Run("Mounts not stabled. Lodge or roll for stolen mounts."));
                      }
                      else
                      {
                         if (true == myGameInstance.IsFarmerLodging)
                            finish = "click farmer to continue.";
-                        if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince not lodged. Sell/Buy drug, Sell/Buy skins, lodge, or click " + finish));
-                        else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince not lodged. Sell/Buy skins, lodge, or click " + finish));
-                        else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                           myTextBlockInstructions.Inlines.Add(new Run("Prince not lodged. Sell/Buy drug, lodge, or click " + finish));
+                        if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                           myTextBlockInstructions.Inlines.Add(new Run("Prince not lodged. Sell/Buy items, lodge, or click " + finish));
                         else
                            myTextBlockInstructions.Inlines.Add(new Run("Prince not lodged. Lodge or click " + finish));
                      }
@@ -665,23 +552,15 @@ namespace BarbarianPrince
                   {
                      if (0 < myNumMountsCount)
                      {
-                        if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                           myTextBlockInstructions.Inlines.Add(new Run("Party & mounts not lodged. Sell/Buy drug/skins, lodge, or roll for deserters/stolen mounts."));
-                        else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                           myTextBlockInstructions.Inlines.Add(new Run("Party & mounts not lodged. Sell/Buy skins, lodge, or roll for deserters/stolen mounts."));
-                        else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                           myTextBlockInstructions.Inlines.Add(new Run("Party & mounts not lodged. Sell/Buy drug, lodge, or roll for deserters/stolen mounts."));
+                        if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                           myTextBlockInstructions.Inlines.Add(new Run("Mounts not stabled. Sell/Buy items, lodge, or roll for deserters/stolen mounts."));
                         else
-                           myTextBlockInstructions.Inlines.Add(new Run("Party & mounts not lodged. Lodge or roll for deserters/stolen mounts."));
+                           myTextBlockInstructions.Inlines.Add(new Run("Mounts not stabled. Lodge or roll for deserters/stolen mounts."));
                      }
                      else
                      {
-                        if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                           myTextBlockInstructions.Inlines.Add(new Run("Party not lodged. Sell/Buy drug/skins, lodge, or roll for deserters."));
-                        else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                           myTextBlockInstructions.Inlines.Add(new Run("Party not lodged. Sell/Buy skins, lodge, or roll for deserters."));
-                        else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                           myTextBlockInstructions.Inlines.Add(new Run("Party not lodged. Sell/Buy drug, lodge, or roll for deserters."));
+                        if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                           myTextBlockInstructions.Inlines.Add(new Run("Party not lodged. Sell/Buy items, lodge, or roll for deserters."));
                         else
                            myTextBlockInstructions.Inlines.Add(new Run("Party not lodged. Lodge or roll for deserters."));
                      }
@@ -691,23 +570,15 @@ namespace BarbarianPrince
             case LodgingEnum.LE_LODGE_NOBODY:
                if (0 < myNumMountsCount)
                {
-                  if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                     myTextBlockInstructions.Inlines.Add(new Run("Party & Mounts not lodged. Sell/Buy drug/skins, or roll for deserters/stolen mounts."));
-                  else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                     myTextBlockInstructions.Inlines.Add(new Run("Party & Mounts not lodged. Sell/Buy skins or roll for deserters/stolen mounts."));
-                  else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                     myTextBlockInstructions.Inlines.Add(new Run("Party & mounts not lodged. Sell/Buy drug or roll for deserters/stolen mounts."));
+                  if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                     myTextBlockInstructions.Inlines.Add(new Run("Party/mounts not lodged. Sell/Buy items, or roll for deserters/stolen mounts."));
                   else
-                     myTextBlockInstructions.Inlines.Add(new Run("Party & mounts not lodged. Roll for deserters or stolen mounts."));
+                     myTextBlockInstructions.Inlines.Add(new Run("Party/mounts not lodged. Roll for deserters or stolen mounts."));
                }
                else
                {
-                  if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                     myTextBlockInstructions.Inlines.Add(new Run("Party not lodged. Sell/Buy drug/skins, or roll for deserters."));
-                  else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                     myTextBlockInstructions.Inlines.Add(new Run("Party not lodged. Sell/Buy skins or roll for deserters."));
-                  else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                     myTextBlockInstructions.Inlines.Add(new Run("Party not lodged. Sell/Buy drug or roll for deserters."));
+                  if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                     myTextBlockInstructions.Inlines.Add(new Run("Party not lodged. Sell/Buy items, or roll for deserters."));
                   else
                      myTextBlockInstructions.Inlines.Add(new Run("Party not lodged. Roll for deserters."));
                }
@@ -715,23 +586,15 @@ namespace BarbarianPrince
             case LodgingEnum.LE_SHOW_DESERTERS:
                if (0 < myNumMountsCount)
                {
-                  if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                     myTextBlockInstructions.Inlines.Add(new Run("Party & mounts not lodged. Sell/Buy drug/skins, or roll for deserters/stolen mounts."));
-                  else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                     myTextBlockInstructions.Inlines.Add(new Run("Party & mounts not lodged. Sell /Buy skins or roll for deserters/stolen mounts."));
-                  else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                     myTextBlockInstructions.Inlines.Add(new Run("Party & mounts not lodged. Sell/Buy drug or roll for deserters/stolen mounts."));
+                  if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                     myTextBlockInstructions.Inlines.Add(new Run("Not lodged. Sell/Buy items, or roll for deserters/stolen mounts."));
                   else
-                     myTextBlockInstructions.Inlines.Add(new Run("Party & mounts not lodged. Roll for deserters or stolen mounts."));
+                     myTextBlockInstructions.Inlines.Add(new Run("Not lodged. Roll for deserters or stolen mounts."));
                }
                else
                {
-                  if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                     myTextBlockInstructions.Inlines.Add(new Run("Party not lodged. Sell/Buy drug/skins, or roll for deserters."));
-                  else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                     myTextBlockInstructions.Inlines.Add(new Run("Party not lodged. Sell/Buy skins, or roll for deserters."));
-                  else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                     myTextBlockInstructions.Inlines.Add(new Run("Party not lodged. Sell/Buy drug or roll for deserters."));
+                  if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                     myTextBlockInstructions.Inlines.Add(new Run("Party not lodged. Sell/Buy items, or roll for deserters."));
                   else
                      myTextBlockInstructions.Inlines.Add(new Run("Party not lodged. Roll for deserters."));
                }
@@ -739,22 +602,14 @@ namespace BarbarianPrince
             case LodgingEnum.LE_SHOW_RESULTS:
                if (true == myGameInstance.IsFarmerLodging)
                   finish = "click farmer to continue.";
-               if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                  myTextBlockInstructions.Inlines.Add(new Run("Sell/Buy drug, Sell/Buy skins, or click " + finish));
-               else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                  myTextBlockInstructions.Inlines.Add(new Run("Sell/Buy troll skins, or click " + finish));
-               else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                  myTextBlockInstructions.Inlines.Add(new Run("Sell/Buy drug or click " + finish));
+               if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                  myTextBlockInstructions.Inlines.Add(new Run("Sell/Buy items, or click " + finish));
                else
                   myTextBlockInstructions.Inlines.Add(new Run("Click " + finish));
                break;
             case LodgingEnum.LE_SELL_GOODS:
-               if ((true == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                  myTextBlockInstructions.Inlines.Add(new Run("Sell/Buy drug, Sell/Buy skins, or click inn to continue."));
-               else if ((false == myGameInstance.IsSecretTempleKnown) && (0 < myTrollSkinsInPartyOriginal))
-                  myTextBlockInstructions.Inlines.Add(new Run("Sell/Buy troll skins, or click inn to continue."));
-               else if ((true == myGameInstance.IsSecretTempleKnown) && (0 == myTrollSkinsInPartyOriginal))
-                  myTextBlockInstructions.Inlines.Add(new Run("Sell/Buy drug or click inn to continue."));
+               if ((true == myGameInstance.IsSecretTempleKnown) || (0 < myTrollSkinsInPartyOriginal) || (0 < myRocBeaksInPartyCurrent) || (true == myIsPurchasedClothShown))
+                  myTextBlockInstructions.Inlines.Add(new Run("Sell/Buy items, or click inn to continue."));
                else
                   myTextBlockInstructions.Inlines.Add(new Run("Click inn to continue."));
                break;
@@ -906,7 +761,7 @@ namespace BarbarianPrince
          //--------------------------------------------
          if (true == myGameInstance.IsSecretTempleKnown)
             UpdateAssignablePanelChagaDrug();
-         if (true == myGameInstance.ForbiddenAudiences.IsClothesConstraint())
+         if (true == myIsPurchasedClothShown)
             UpdateAssignablePanelFineClothes();
          if (true == myGameInstance.IsSpecialItemHeld(SpecialEnum.TrollSkin))
             UpdateAssignablePanelTrollSkin();

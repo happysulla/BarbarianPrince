@@ -272,7 +272,7 @@ namespace BarbarianPrince
          Logger.SetOn(LogEnum.LE_VIEW_MIM);
          Logger.SetOn(LogEnum.LE_VIEW_MIM_ADD);
          Logger.SetOn(LogEnum.LE_VIEW_MIM_CLEAR);
-         Logger.SetOn(LogEnum.LE_VIEW_SHOW_LOADS);
+         //Logger.SetOn(LogEnum.LE_VIEW_SHOW_LOADS);
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_HUNT);
          try
          {
@@ -346,7 +346,11 @@ namespace BarbarianPrince
             return false;
          }
          if (true == option.IsEnabled)
+         {
             this.Prince.AddNewMount();
+            this.Prince.AddNewMount();
+            this.Prince.AddNewMount();
+         }
          //---------------------------------------------------------
          itemToAdd = "PrincePegasus";
          option = myOptions.Find(itemToAdd);

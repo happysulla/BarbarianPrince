@@ -48,14 +48,6 @@ namespace BarbarianPrince
       {
          gi.UnitTests = new List<IUnitTest>();
          //-----------------------------------------------------------------------------
-         IUnitTest ut13 = new TransportMgrUnitTest(ev);
-         if (true == ut13.CtorError)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): LoadMgrUnitTest() Ctor Error");
-            return false;
-         }
-         gi.UnitTests.Add(ut13);
-         //-----------------------------------------------------------------------------
          IUnitTest ut1 = new GameViewerCreateUnitTest(dp);
          if (true == ut1.CtorError)
          {
@@ -151,6 +143,14 @@ namespace BarbarianPrince
             return false;
          }
          gi.UnitTests.Add(ut12);
+         //-----------------------------------------------------------------------------
+         IUnitTest ut13 = new TransportMgrUnitTest(ev);
+         if (true == ut13.CtorError)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): LoadMgrUnitTest() Ctor Error");
+            return false;
+         }
+         gi.UnitTests.Add(ut13);
          //-----------------------------------------------------------------------------
          IUnitTest ut14 = new CombatUnitTest(dp, gi, ev, dr);
          if (true == ut14.CtorError)

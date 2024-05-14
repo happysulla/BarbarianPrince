@@ -161,9 +161,12 @@ namespace BarbarianPrince
          myIsTownCastleTemple = false;
          myIsRollInProgress = false;
          myRollResulltRowNum = 0;
-         myIsHeaderCheckBoxChecked = true;
          myCallback = callback;
          myTextBlockHeader.Text = "e215b Hunting";
+         if (true == myIsFarmland) // only automatically check box if not farmland and suffer populated hunting
+            myIsHeaderCheckBoxChecked = false;
+         else
+            myIsHeaderCheckBoxChecked = true;
          //--------------------------------------------------
          myCurrentTerritory = myGameInstance.Prince.Territory;
          if (0 < myGameInstance.MapItemMoves.Count)
@@ -295,6 +298,10 @@ namespace BarbarianPrince
             myGridRows[0].myAssignmentCount = GetAssignedCount();
             string miName = Utilities.RemoveSpaces(myGameInstance.Prince.Name);
             myMapItems.Remove(myGameInstance.Prince);
+            if ( (6 < myGameInstance.Prince.Food) || (true == myIsFarmland) )// if prince is by himself - force user to select hunt checkbox
+               myIsHeaderCheckBoxChecked = false;
+            else
+               myIsHeaderCheckBoxChecked = true;
          }
          //--------------------------------------------------
          Point hotPoint = new Point(Utilities.theMapItemOffset, Utilities.theMapItemOffset); // set the center of the MapItem as the hot point for the cursor
@@ -309,7 +316,6 @@ namespace BarbarianPrince
             myCursors[mount.Name] = Utilities.ConvertToCursor(b, hotPoint);
          }
          //--------------------------------------------------
-         // Add the unassignable mapitems that never move or change to the Grid Rows
          if (false == UpdateGrid())
          {
             Logger.Log(LogEnum.LE_ERROR, "PerformHunt(): UpdateGrid() return false");

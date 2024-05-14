@@ -643,7 +643,7 @@ namespace BarbarianPrince
                else if (RiverCrossEnum.TC_ATTEMPTING_TO_CROSS == myMapItemMove.RiverCross)
                   myTextBlockInstructions.Inlines.Add(new Run("Roll to see if can cross river:"));
                else if (RiverCrossEnum.TC_CROSS_YES == myMapItemMove.RiverCross)
-                  myTextBlockInstructions.Inlines.Add(new Run("River Crossed. Roll again for getting lost on other side of river in " + myMapItemMove.NewTerritory.Type + ":"));
+                  myTextBlockInstructions.Inlines.Add(new Run("River Crossed! Roll again for getting lost on other side of river in " + myMapItemMove.NewTerritory.Type + ":"));
                else
                   myTextBlockInstructions.Inlines.Add(new Run("Roll for getting lost trying to exit " + myMapItemMove.OldTerritory.Type + ":"));
                break;
@@ -676,7 +676,7 @@ namespace BarbarianPrince
                else if (RiverCrossEnum.TC_CROSS_FAIL == myMapItemMove.RiverCross)
                   myTextBlockInstructions.Inlines.Add(new Run("River crossing failed! Roll for travel encounter on river:"));
                else if (RiverCrossEnum.TC_ATTEMPTING_TO_CROSS == myMapItemMove.RiverCross)
-                  myTextBlockInstructions.Inlines.Add(new Run("Crossing river - Roll for possible travel encounter on river:"));
+                  myTextBlockInstructions.Inlines.Add(new Run("Crossing River! Roll for possible travel encounter on river:"));
                else if (((RiverCrossEnum.TC_CROSS_YES == myMapItemMove.RiverCross) || (RiverCrossEnum.TC_CROSS_YES == myMapItemMove.RiverCross)) && (true == myIsLost))
                   myTextBlockInstructions.Inlines.Add(new Run("River crossed but lost! Roll for possible lost encounter in " + myMapItemMove.NewTerritory.Type + ":"));
                else if (((RiverCrossEnum.TC_CROSS_YES == myMapItemMove.RiverCross) || (RiverCrossEnum.TC_CROSS_YES == myMapItemMove.RiverCross)) && (false == myIsLost))
@@ -684,12 +684,12 @@ namespace BarbarianPrince
                else if ( true == myIsLost )
                   myTextBlockInstructions.Inlines.Add(new Run("Lost - Movement Ends! Roll for possible lost encounter in " + myMapItemMove.NewTerritory.Type + ":"));
                else if (true == myIsTravelingRoad)
-                  myTextBlockInstructions.Inlines.Add(new Run("Roll for possible road encounter:"));
+                  myTextBlockInstructions.Inlines.Add(new Run("Not Lost! Roll for possible road encounter:"));
                else
-                  myTextBlockInstructions.Inlines.Add(new Run("Roll for possible travel encounter in " + myMapItemMove.NewTerritory.Type + ":"));
+                  myTextBlockInstructions.Inlines.Add(new Run("Not Lost! Roll for possible travel encounter in " + myMapItemMove.NewTerritory.Type + ":"));
                break;
             case EnumR204.TC_EVENT_ROLL_ROAD:
-               myTextBlockInstructions.Inlines.Add(new Run("Roll for travel encounter off road in " + myMapItemMove.NewTerritory.Type + ":"));
+               myTextBlockInstructions.Inlines.Add(new Run("Not Lost! Roll for travel encounter off road in " + myMapItemMove.NewTerritory.Type + ":"));
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT_R230:
             case EnumR204.TC_EVENT_ROLL_EVENT_R232:
@@ -706,11 +706,11 @@ namespace BarbarianPrince
                else if (true == myIsRaftEncounter)
                   myTextBlockInstructions.Inlines.Add(new Run("Encounter! Roll for rafting travel reference:"));
                else if (RiverCrossEnum.TC_CROSS_FAIL == myMapItemMove.RiverCross)
-                  myTextBlockInstructions.Inlines.Add(new Run("Crossing river getting lost causing a lost encounter:"));
+                  myTextBlockInstructions.Inlines.Add(new Run("Encounter! Crossing river encounter:"));
                else if (RiverCrossEnum.TC_ATTEMPTING_TO_CROSS == myMapItemMove.RiverCross)
-                  myTextBlockInstructions.Inlines.Add(new Run("Crossing river causes a river encounter:"));
+                  myTextBlockInstructions.Inlines.Add(new Run("River Encounter! Roll for encounter:"));
                else if (true == myIsLost)
-                  myTextBlockInstructions.Inlines.Add(new Run("Roll for lost event reference in " + myMapItemMove.NewTerritory.Type + ":"));
+                  myTextBlockInstructions.Inlines.Add(new Run("Lost Encounter! Roll for event reference in " + myMapItemMove.NewTerritory.Type + ":"));
                else if (true == myIsTravelingRoad)
                   myTextBlockInstructions.Inlines.Add(new Run("Encounter! Roll for travel event reference for road:"));
                else
@@ -726,9 +726,9 @@ namespace BarbarianPrince
                else if (RiverCrossEnum.TC_ATTEMPTING_TO_CROSS == myMapItemMove.RiverCross)
                   myTextBlockInstructions.Inlines.Add(new Run("Roll for travel event for river:"));
                else if ((true == myIsLost) && (RiverCrossEnum.TC_CROSS_YES_SHOWN == myMapItemMove.RiverCross))
-                  myTextBlockInstructions.Inlines.Add(new Run("Lost After River Crossing! Roll for lost event in " + myMapItemMove.NewTerritory.Type + ":"));
+                  myTextBlockInstructions.Inlines.Add(new Run("Lost Encounter! Roll for event in " + myMapItemMove.NewTerritory.Type + ":"));
                else if (true == myIsLost)
-                  myTextBlockInstructions.Inlines.Add(new Run("Lost - Movement Ends! Roll for lost event in " + myMapItemMove.OldTerritory.Type + ":"));
+                  myTextBlockInstructions.Inlines.Add(new Run("Lost Encounter! Roll for event in " + myMapItemMove.OldTerritory.Type + ":"));
                else if (true == myIsTravelingRoad)
                   myTextBlockInstructions.Inlines.Add(new Run("Roll for travel event for road:"));
                else
@@ -1157,7 +1157,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL_ROAD s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_REFERENCE:
-               dieRoll = 6; // <cgs> TEST
+               //dieRoll = 3; // <cgs> TEST
                myRollReference = dieRoll; // column number in travel table r207 - reference row
                if ((6 == myRollReference) && (true == myIsTravelingAir) ) // if traveling by air and roll reference 6, need to look  at Table r281
                   myState = EnumR204.TC_EVENT_ROLL_REFERENCE_R281;
@@ -1166,6 +1166,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL_REFERENCE s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT:
+               //dieRoll = 1; // <cgs> TEST
                myRollEvent = dieRoll; // column number in traveling event reference - event row
                myState = EnumR204.TC_EVENT_SHOW_RESULTS;
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL_EVENT s=" + myState.ToString() + " dr=" + dieRoll.ToString());
@@ -1246,10 +1247,7 @@ namespace BarbarianPrince
             String rtn = " " + dieRollNeeded.ToString() + " < ";
             return rtn;
          }
-         ITerritory tLost = mim.OldTerritory;
-         if (RiverCrossEnum.TC_CROSS_YES == myMapItemMove.RiverCross)
-            tLost = mim.NewTerritory;
-         switch (tLost.Type)
+         switch (mim.NewTerritory.Type)
          {
             case "Farmland":
                dieRollNeeded = 9;

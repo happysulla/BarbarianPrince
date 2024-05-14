@@ -470,7 +470,7 @@ namespace BarbarianPrince
                      if (0 < myPartyMountCount)
                         myTextBlockInstructions.Inlines.Add(new Run("Click mount to adjust or click image to continue:"));
                      else
-                        myTextBlockInstructions.Inlines.Add(new Run("click image to continue:"));
+                        myTextBlockInstructions.Inlines.Add(new Run("Click image to continue:"));
                   }
                   else
                   {
@@ -1178,7 +1178,7 @@ namespace BarbarianPrince
             if (true == partyMember.IsExhausted)
                maxPersonLoad = Utilities.MaxLoad >> 1; // e120 - half the load if exhausted 
             personLoad = maxPersonLoad >> partyMember.StarveDayNum; // divide by half for each starve day
-            if ( (false == partyMember.IsUnconscious) && (false == partyMember.IsRiding) ) // only add person load if not riding
+            if ( false == partyMember.IsUnconscious ) // only add person load if not riding
                loadCanCarry += personLoad;
             Logger.Log(LogEnum.LE_VIEW_SHOW_LOADS, "GetLoadCanCarry(): 2=> lc=" + loadCanCarry.ToString() + " ml=" + mountLoad.ToString() + " pl=" + personLoad.ToString() + " r?=" + isRidingPossible.ToString() + " after person load add");
          }

@@ -184,11 +184,7 @@ e004	"<Bold>e004 Mercenary Band</Bold>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='Evade' Name='e004b'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e004b'></Button></InlineUIContainer>*<LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='Fight' Name='e004c'></Button></InlineUIContainer>   ->  
-<InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e004c'></Button></InlineUIContainer>
-<LineBreak/><LineBreak/>
-*If your party has any mounts, add one to your die roll for evading. Results higher than 6 are considered 6. If your party has all have winged mounts or flying abilities, you can use escape flying
- <InlineUIContainer><Button Content='r313' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
- instead of rolling the die for the evade option."
+<InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e004c'></Button></InlineUIContainer>"
 e004a	"<Bold>e004a Talk to Mercenary Band</Bold>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1: Converse<LineBreak/>
@@ -1959,8 +1955,7 @@ e071	"<Bold>e071 Elven Band</Bold>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e071b'></Button></InlineUIContainer><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='Fight' Name='e071c'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e071c'></Button></InlineUIContainer>
-<LineBreak/><LineBreak/>
-<Italic>Note:</Italic> If your party includes an elf, subtract one from your die roll. If your party includes a dwarf, add one to the die roll."
+<LineBreak/><LineBreak/>"
 e071a	"<Bold>e071a Talk Elven Band</Bold>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e072' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 0 Follow<LineBreak/>
@@ -2157,7 +2152,7 @@ e078b	"<Bold>e078b Majestic Peaks With No Horses</Bold>
 <LineBreak/><LineBreak/>
                           <InlineUIContainer><Image Name='EncounterEnd' Source='../../Images/MountainsView.gif' Height='350' Width='350'></Image></InlineUIContainer>"
 e078c	"<Bold>e078c Bad Going For Horses</Bold>
-<LineBreak/><LineBreak/>Terrain is difficult on horses.  If you choose Travel for the daily action tomorrow, you will risk losing horses. Any other activity will nullify this event. Click Image to continue.
+<LineBreak/><LineBreak/>Terrain is difficult on horses.  If you choose Travel for the daily action tomorrow, you will risk losing horses. Any other activity will nullify this event. Click image to continue.
 <LineBreak/><LineBreak/>
                           <InlineUIContainer><Image Name='MountainPath' Source='../../Images/MountainPath.gif' Height='258' Width='280'></Image></InlineUIContainer>"
 e079	"<Bold>e079 Heavy Rains</Bold>
@@ -3965,11 +3960,11 @@ e204u	"<Bold>e204u Unmounted Travel</Bold> <InlineUIContainer><Button Content='r
 e204m	"<Bold>e204m Mounted Travel</Bold> <InlineUIContainer><Button Content='r204a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>Click one of the adjacent hexes highlighted blue to move.  "
 e204s	"<Bold>e204s Short Hop Travel</Bold> <InlineUIContainer><Button Content='r204d' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
-<LineBreak/><LineBreak/>Hopping in the air using limited travels. Each hex entered is same as mounted travel.  Click one of the adjacent hexes highlighted blue to move. "
+<LineBreak/><LineBreak/>Hopping in the air using limited travels. Each hex entered is same as mounted travel.  Click one of the adjacent hexes highlighted blue to move.  "
 e204a	"<Bold>e204a Air Travel</Bold> <InlineUIContainer><Button Content='r204d' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>Since your party has flying mounts or can fly, you can elect to perform short hops moving up to two hexes but entering each hex
  <InlineUIContainer><Button Content='Short Hop' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. Short hops must be started on the first movement of the day.
-<LineBreak/><LineBreak/>If you do not short hop, click one of the adjacent hexes highlighted blue."
+<LineBreak/><LineBreak/>If you do not short hop, click one of the adjacent hexes highlighted blue. "
 e205c	"<Bold>e205c Lost in Air Travel</Bold> <InlineUIContainer><Button Content='r205c' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>Lost traveling in air. May have drifted one hex in a random direction. If die roll > 3, drift one hex in random direction: <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21'> </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>

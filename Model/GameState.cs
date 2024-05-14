@@ -98,6 +98,7 @@ namespace BarbarianPrince
          }
          else if (true == gi.IsBadGoing)
          {
+            gi.IsBadGoing = false;                 // e078
             gi.GamePhase = GamePhase.Encounter;
             gi.EventDisplayed = gi.EventActive = "e078";
             gi.DieRollAction = GameAction.EncounterStart;
@@ -1413,6 +1414,16 @@ namespace BarbarianPrince
          }
          if (true == option.IsEnabled)
             starting = gi.Territories.Find(hex);
+         //---------------------------------------------------------
+         hex = "0418";  // farmland
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            starting = gi.Territories.Find(hex);
          //Farmland=0418 CountrySide=0410 Forest=0409 Hills=0406 Mountains=0405 Swamp=0411 Desert=0407 
          //starting = gi.Territories.Find("0411"); //ForestTemple=1021 HillsTemple=2009 MountainTemple=1021 
          //starting = gi.Territories.Find("0207"); //Road Travel=0207->0208
@@ -1919,7 +1930,6 @@ namespace BarbarianPrince
                break;
             case GameAction.HuntE002aEncounterRoll:
                int encounterResult = dieRoll - 3;
-               encounterResult = 0; // <cgs> TEST
                if ("0101" == gi.Prince.Territory.Name)
                   ++encounterResult;
                if ("1501" == gi.Prince.Territory.Name)
@@ -2416,7 +2426,10 @@ namespace BarbarianPrince
                {
                   IMapItemMove mim = gi.MapItemMoves[0];
                   if (RiverCrossEnum.TC_CROSS_YES_SHOWN != mim.RiverCross)
+                  {
+                     Logger.Log(LogEnum.LE_VIEW_MIM, "GameStateTravel.PerformAction(): a=" + action.ToString() + " RESET mim=(" + mim.ToString() + " m=" + gi.Prince.MovementUsed + "/" + gi.Prince.Movement);
                      mim.NewTerritory = mim.OldTerritory; // no longer moving to new territory unless this is check after river crossing
+                  }
                }
                gi.IsGridActive = false;   // GameAction.TravelShowLostEncounter
                gi.GamePhase = GamePhase.Encounter;
@@ -2493,17 +2506,6 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.EncounterStart;
                break;
             case GameAction.TravelShowMovementEncounter:
-               if (0 == gi.MapItemMoves.Count)
-               {
-                  returnStatus = "gi.MapItemMoves.Count=0 for a=" + action.ToString();
-                  Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateTravel.PerformAction(): " + returnStatus);
-               }
-               else
-               {
-                  IMapItemMove mim = gi.MapItemMoves[0];
-                  if (RiverCrossEnum.TC_CROSS_YES_SHOWN != mim.RiverCross)
-                     mim.NewTerritory = mim.OldTerritory; // no longer moving to new territory unless this is check after river crossing
-               }
                gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterStart;
                gi.IsGridActive = false; // GameAction.TravelShowMovementEncounter
@@ -4079,8 +4081,15 @@ namespace BarbarianPrince
                      }
                   }
                }
-               else if( "" == gi.EventAfterRedistribute )
+               else if( "e078" == gi.EventAfterRedistribute )
                {
+                  --gi.Prince.MovementUsed;
+                  if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex
+                  {
+                     returnStatus = "AddMapItemMove() returned false for action=" + action.ToString();
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
+                  ++gi.Prince.MovementUsed;
                   if (false == EncounterEnd(gi, ref action))
                   {
                      returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
@@ -6810,16 +6819,27 @@ namespace BarbarianPrince
                {
                   int numLostMounts = gi.DieResults[key][0] - 3;
                   for (int i = 0; i < numLostMounts; ++i)
-                     gi.ReduceMount(MountEnum.Horse);
+                     gi.ReduceMount(MountEnum.Horse); // only horses are lost
                   gi.DieResults[key][0] = Utilities.NO_RESULT;
-                  if( 0 < numLostMounts )
+                  if (0 < numLostMounts)
                   {
                      action = GameAction.E078BadGoingRedistribute;
+                     gi.EventAfterRedistribute = "e078";
                   }
-                  else if (false == EncounterEnd(gi, ref action))
+                  else
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): EncounterEnd() returned false ae=" + gi.EventStart);
-                     return false;
+                     --gi.Prince.MovementUsed;
+                     if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): AddMapItemMove() returned false ae=" + gi.EventStart);
+                        return false;
+                     }
+                     ++gi.Prince.MovementUsed;
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): EncounterEnd() returned false ae=" + gi.EventStart);
+                        return false;
+                     }
                   }
                }
                break;
@@ -7944,7 +7964,7 @@ namespace BarbarianPrince
             case "e004b": // evade mercenaries
                foreach( IMapItem mi in gi.PartyMembers ) // if there is at least one mount in party, add one to evade
                {
-                  if( 0 < mi.Mounts.Count)
+                  if ((0 < mi.Mounts.Count) || (true == mi.IsFlyingMountCarrier()))
                   {
                      dieRoll += 1;
                      break;
@@ -7952,7 +7972,7 @@ namespace BarbarianPrince
                }
                switch (dieRoll)
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e319"; gi.DieRollAction = GameAction.EncounterRoll; break;  // hide party size                                        // escape
+                  case 1: gi.EventDisplayed = gi.EventActive = "e319"; gi.DieRollAction = GameAction.EncounterRoll; break;  // hide party size 
                   case 2: gi.EventDisplayed = gi.EventActive = "e328"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass rough
                   case 3: gi.EventDisplayed = gi.EventActive = "e329"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass charm
                   case 4: gi.EventDisplayed = gi.EventActive = "e317"; gi.DieRollAction = GameAction.EncounterRoll; break;  // hide quickly

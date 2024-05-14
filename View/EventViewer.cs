@@ -1317,16 +1317,26 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new Run("Add one to die since party is riding."));
                }
                break;
-            case "e003a":
-            case "e004a":
-            case "e005a":
-               ReplaceTextForLuckyCharm(gi);  //e003a, e004a, e005a
-               break;
             case "e003": // swordsman has a fast horse
                AppendEscapeMethods(gi, false); // ridning escape not possible
                break;
             case "e004": // Mercenaries
                AppendEscapeMethods(gi, false); // riding escape not possible
+               foreach (IMapItem mi in gi.PartyMembers) // if there is at least one mount in party, add one to evade
+               {
+                  if ((0 < mi.Mounts.Count) || (true == mi.IsFlyingMountCarrier()) )
+                  {
+                     myTextBlock.Inlines.Add(new LineBreak());
+                     myTextBlock.Inlines.Add(new LineBreak());
+                     myTextBlock.Inlines.Add(new Run("Add one to die since party since have at least one mount."));
+                     break;
+                  }
+               }
+               break;
+            case "e003a":
+            case "e004a":
+            case "e005a":
+               ReplaceTextForLuckyCharm(gi);  //e003a, e004a, e005a
                break;
             case "e005": // Amazon with no horses
             case "e006": // Dwarf Warrior
@@ -1887,6 +1897,40 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new Run("                                       "));
                   Image imge060 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Magician"), Width = 150, Height = 300, Name = "MagicianHome" };
                   myTextBlock.Inlines.Add(new InlineUIContainer(imge060));
+               }
+               break;
+            case "e071":
+               bool isElfInParty = gi.IsInMapItems("Elf");
+               bool isDwarfInParty = gi.IsInMapItems("Dwarf");
+               if ((true == isElfInParty) && (true == isDwarfInParty)) 
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Subtract one for Elf in party, and add one for Dwarf in party."));
+               }
+               else if (true == isDwarfInParty)
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Add one for Drawf in party."));
+               }
+               else if (true == isElfInParty)
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Subtract one for Elf in party."));
+               }
+               //----------------------------------------------
+               if ((false == myGameInstance.IsTalkActive) && (Utilities.NO_RESULT < myGameInstance.DieResults[key][0]) )
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Note:") {FontStyle = FontStyles.Italic} );
+                  myTextBlock.Inlines.Add(new Run(" Talk is inactive because selected to engage in "));
+                  Button b1 = new Button() { Content = "e072", FontFamily = myFontFam1, FontSize = 12 };
+                  b1.Click += Button_Click;
+                  myTextBlock.Inlines.Add(new InlineUIContainer(b1));
+                  myTextBlock.Inlines.Add(new Run("."));
                }
                break;
             case "e071a": // e071a
@@ -3757,11 +3801,22 @@ namespace BarbarianPrince
       {
          GameAction outAction = GameAction.CampfireWakeup;
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
+         StringBuilder sb11 = new StringBuilder("     ######ShowTransport() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          return true;
       }
       public bool ShowTransportAfterRedistribute()
       {
          GameAction outAction = GameAction.TransportRedistributeEnd;
+         myGameEngine.PerformAction(ref myGameInstance, ref outAction);
+         StringBuilder sb11 = new StringBuilder("     ######ShowTransportAfterRedistribute() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          return true;
       }

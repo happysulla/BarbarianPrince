@@ -8,10 +8,10 @@
     </Option> 
    <!--===========================-->
    <Option value="EasiestMonsters">
-      <IsEnabled value="False" />
+      <IsEnabled value="True" />
    </Option>
     <Option value="EasyMonsters">
-        <IsEnabled value="True" />
+        <IsEnabled value="False" />
     </Option>
    <Option value="LessHardMonsters">
       <IsEnabled value="False" />
@@ -42,17 +42,17 @@
 		<IsEnabled value="False" />
 	</Option>
 	<Option value="ForceAirEvent">
-		<IsEnabled value="True" />
+		<IsEnabled value="False" />
 	</Option>
 	<!--===========================-->
 	<Option value="ForceNoCrossEvent">
-		<IsEnabled value="True" />
+		<IsEnabled value="False" />
 	</Option>
 	<Option value="ForceCrossEvent">
 		<IsEnabled value="False" />
 	</Option>
 	<Option value="ForceLostAfterCrossEvent">
-		<IsEnabled value="True" />
+		<IsEnabled value="False" />
 	</Option>
 	<!--===========================-->
 	<Option value="ForceNoRaftEvent">
@@ -66,7 +66,7 @@
       <IsEnabled value="False" />
    </Option>
    <Option value="PrincePegasus">
-      <IsEnabled value="True" />
+      <IsEnabled value="False" />
    </Option>
    <Option value="PrinceCoin">
       <IsEnabled value="False" />
@@ -143,6 +143,9 @@
       <IsEnabled value="False" />
    </Option>
    <Option value="0505">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="0418">
       <IsEnabled value="False" />
    </Option>
 </Options>

@@ -379,6 +379,10 @@ namespace BarbarianPrince
             AddPrinceMounts(ref gi, 2);
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLodgingCheck);
          }
+         else if (CommandName == myCommandNames[14])
+         { 
+            // cleanup
+         }
          else
          {
             Logger.Log(LogEnum.LE_ERROR, "Command(): reached default c=" + CommandName);
