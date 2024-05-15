@@ -20,6 +20,7 @@ namespace BarbarianPrince
       {
          myIndexName = 0;
          //------------------------------------------
+         myHeaderNames.Add("10-Henchmen no food or coin");
          myHeaderNames.Add("10-Henchmen w/ Giant & Eagles");
          myHeaderNames.Add("10-Party w/ Slaves & True Love");
          myHeaderNames.Add("10-Henchmen");
@@ -73,6 +74,7 @@ namespace BarbarianPrince
          myCommandNames.Add("22-Feed");
          myCommandNames.Add("23-Feed");
          myCommandNames.Add("24-Feed");
+         myCommandNames.Add("25-Feed");
          myCommandNames.Add("Finish");
          //------------------------------------------
          if (null == ev)
@@ -95,7 +97,28 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "Command(): t=null");
             return false;
          }
-         if (CommandName == myCommandNames[0]) //Giant
+         if (CommandName == myCommandNames[0])
+         {
+            IMapItems partyMembers = gi.PartyMembers;
+            partyMembers.Clear();
+            IMapItem prince = gi.MapItems.Find("Prince");
+            if (null == prince)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "AddPrince(): mi=null");
+               return false;
+            }
+            prince.Reset();
+            prince.Territory = t;
+            gi.Prince = prince;
+            prince.Food = 0;
+            prince.Coin = 0;
+            partyMembers.Add(prince);
+            IMapItem companion1 = AddHireling(ref gi, "Mercenary");
+            if (null == companion1)
+               return false;
+            myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
+         }
+         else if (CommandName == myCommandNames[1]) 
          {
             IMapItem prince = AddPrince(ref gi, t);
             if (null == prince)
@@ -134,7 +157,7 @@ namespace BarbarianPrince
             gi.PartyMembers.Reverse();
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         if (CommandName == myCommandNames[1])
+         if (CommandName == myCommandNames[2])
          {
             IMapItem prince = AddPrince(ref gi, t);
             if (null == prince)
@@ -189,7 +212,7 @@ namespace BarbarianPrince
             //gi.AddCompanion(trueLove);
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[2]) //Henchmen
+         else if (CommandName == myCommandNames[3]) //Henchmen
          {
             IMapItem prince = AddPrince(ref gi, t);
             if (null == prince)
@@ -211,7 +234,7 @@ namespace BarbarianPrince
             gi.IsMagicianProvideGift = true; // <<<<<<<<<<<<<<<<<<<<=================================
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[3]) //Henchmen Group
+         else if (CommandName == myCommandNames[4]) //Henchmen Group
          {
             IMapItem prince = AddPrince(ref gi, t);
             if (null == prince)
@@ -242,7 +265,7 @@ namespace BarbarianPrince
             gi.PartyMembers.Reverse();
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[4]) //Henchmen Group w/ Minstrel Playing
+         else if (CommandName == myCommandNames[5]) //Henchmen Group w/ Minstrel Playing
          {
             IMapItem prince = AddPrince(ref gi, t);
             if (null == prince)
@@ -279,7 +302,7 @@ namespace BarbarianPrince
             gi.PartyMembers.Reverse();
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[5]) //Henchmen Group w/ Minstrel
+         else if (CommandName == myCommandNames[6]) //Henchmen Group w/ Minstrel
          {
             IMapItem prince = AddPrince(ref gi, t);
             if (null == prince)
@@ -315,7 +338,7 @@ namespace BarbarianPrince
             gi.IsMagicianProvideGift = true; // <<<<<<<<<<<<<<<<<<<<=================================
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[6]) 
+         else if (CommandName == myCommandNames[7]) 
          {
             IMapItem prince = AddPrince(ref gi, t);
             if (null == prince)
@@ -334,7 +357,7 @@ namespace BarbarianPrince
             gi.PartyMembers.Reverse();
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[7])
+         else if (CommandName == myCommandNames[8])
          {
             IMapItem prince = AddPrince(ref gi, t);
             if (null == prince)
@@ -358,7 +381,7 @@ namespace BarbarianPrince
             companion3.StarveDayNum = 3;
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[8])
+         else if (CommandName == myCommandNames[9])
          {
             IMapItem prince = AddPrince(ref gi, t);
             if (null == prince)
@@ -381,34 +404,6 @@ namespace BarbarianPrince
             if (null == companion3)
                return false;
             companion3.Food = 2;
-            companion3.StarveDayNum = 3;
-            companion3.AddNewMount();
-            myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
-         }
-         else if (CommandName == myCommandNames[9])
-         {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 3;
-            prince.StarveDayNum = 0;
-            AddPrinceMounts(ref gi, 1);
-            IMapItem companion1 = AddCompanion(ref gi, "Mercenary");
-            if (null == companion1)
-               return false;
-            companion1.Food = 0;
-            companion1.StarveDayNum = 1;
-            companion1.AddNewMount();
-            IMapItem companion2 = AddCompanion(ref gi, "Porter");
-            if (null == companion2)
-               return false;
-            companion2.Food = 0;
-            companion2.StarveDayNum = 2;
-            companion2.AddNewMount();
-            IMapItem companion3 = AddCompanion(ref gi, "Witch");
-            if (null == companion3)
-               return false;
-            companion3.Food = 0;
             companion3.StarveDayNum = 3;
             companion3.AddNewMount();
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
@@ -438,12 +433,40 @@ namespace BarbarianPrince
                return false;
             companion3.Food = 0;
             companion3.StarveDayNum = 3;
+            companion3.AddNewMount();
+            myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
+         }
+         else if (CommandName == myCommandNames[11])
+         {
+            IMapItem prince = AddPrince(ref gi, t);
+            if (null == prince)
+               return false;
+            prince.Food = 3;
+            prince.StarveDayNum = 0;
+            AddPrinceMounts(ref gi, 1);
+            IMapItem companion1 = AddCompanion(ref gi, "Mercenary");
+            if (null == companion1)
+               return false;
+            companion1.Food = 0;
+            companion1.StarveDayNum = 1;
+            companion1.AddNewMount();
+            IMapItem companion2 = AddCompanion(ref gi, "Porter");
+            if (null == companion2)
+               return false;
+            companion2.Food = 0;
+            companion2.StarveDayNum = 2;
+            companion2.AddNewMount();
+            IMapItem companion3 = AddCompanion(ref gi, "Witch");
+            if (null == companion3)
+               return false;
+            companion3.Food = 0;
+            companion3.StarveDayNum = 3;
             companion3.SetWounds(1, 2);
             companion3.AddNewMount();
             gi.IsPartyFed = true; // <<<<<<<<<<<<<<<<<<<<=================================
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[11])
+         else if (CommandName == myCommandNames[12])
          {
             IMapItem prince = AddPrince(ref gi, t);
             if (null == prince)
@@ -472,7 +495,7 @@ namespace BarbarianPrince
             gi.IsMountsFed = true; // <<<<<<<<<<<<<<<<<<<<=================================
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[12])
+         else if (CommandName == myCommandNames[13])
          {
             t = gi.Territories.Find("0306"); // Mountains
             if (null == t)
@@ -506,17 +529,7 @@ namespace BarbarianPrince
             companion3.AddNewMount();
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[13]) //<<<<<<<<<<<<<<<<<<<<<<<<<<<========================== PRINCE ONLY
-         {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 2;
-            prince.StarveDayNum = 0;
-            AddPrinceMounts(ref gi, 1);
-            myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
-         }
-         else if (CommandName == myCommandNames[14])
+         else if (CommandName == myCommandNames[14]) //<<<<<<<<<<<<<<<<<<<<<<<<<<<========================== PRINCE ONLY
          {
             IMapItem prince = AddPrince(ref gi, t);
             if (null == prince)
@@ -531,8 +544,9 @@ namespace BarbarianPrince
             IMapItem prince = AddPrince(ref gi, t);
             if (null == prince)
                return false;
-            prince.Food = 5;
-            prince.StarveDayNum = 1;
+            prince.Food = 2;
+            prince.StarveDayNum = 0;
+            AddPrinceMounts(ref gi, 1);
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[16])
@@ -541,10 +555,19 @@ namespace BarbarianPrince
             if (null == prince)
                return false;
             prince.Food = 5;
-            prince.StarveDayNum = 3;
+            prince.StarveDayNum = 1;
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[17])
+         {
+            IMapItem prince = AddPrince(ref gi, t);
+            if (null == prince)
+               return false;
+            prince.Food = 5;
+            prince.StarveDayNum = 3;
+            myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
+         }
+         else if (CommandName == myCommandNames[18])
          {
             IMapItem prince = AddPrince(ref gi, t);
             if (null == prince)
@@ -553,23 +576,13 @@ namespace BarbarianPrince
             prince.StarveDayNum = 1;
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[18])
+         else if (CommandName == myCommandNames[19])
          {
             IMapItem prince = AddPrince(ref gi, t);
             if (null == prince)
                return false;
             prince.Food = 0;
             prince.StarveDayNum = 1;
-            myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
-         }
-         else if (CommandName == myCommandNames[19])
-         {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 2;
-            prince.StarveDayNum = 0;
-            AddPrinceMounts(ref gi, 1); // 1 mount
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[20])
@@ -599,12 +612,22 @@ namespace BarbarianPrince
                return false;
             prince.Food = 2;
             prince.StarveDayNum = 0;
+            AddPrinceMounts(ref gi, 1); // 1 mount
+            myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
+         }
+         else if (CommandName == myCommandNames[23])
+         {
+            IMapItem prince = AddPrince(ref gi, t);
+            if (null == prince)
+               return false;
+            prince.Food = 2;
+            prince.StarveDayNum = 0;
             AddPrinceMounts(ref gi, 1);
             gi.IsPartyFed = true;
             gi.IsMountsFed = true;
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[23])
+         else if (CommandName == myCommandNames[24])
          {
             IMapItem prince = AddPrince(ref gi, t);
             if (null == prince)
@@ -614,7 +637,7 @@ namespace BarbarianPrince
             AddPrinceMounts(ref gi, 2);
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[24])
+         else if (CommandName == myCommandNames[25])
          {
             IMapItem prince = AddPrince(ref gi, t);
             if (null == prince)
@@ -726,6 +749,10 @@ namespace BarbarianPrince
             ++myIndexName;
          }
          else if (HeaderName == myHeaderNames[23])
+         {
+            ++myIndexName;
+         }
+         else if (HeaderName == myHeaderNames[24])
          {
             ++myIndexName;
          }

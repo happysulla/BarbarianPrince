@@ -1706,6 +1706,7 @@ namespace BarbarianPrince
             foodNeededForMounts = foodNeededForMounts << 1;
          }
          int foodNeededTotalWithExtra = foodNeededWithExtra + foodNeededForMounts + foodNeededForPeople;
+         int foodNeededTotal = foodNeededForPeople + foodNeededForMounts;
          //*************************************************
          // Set State based on food needs
          if (foodNeededTotalWithExtra <= myFoodCurrent) // Feed all and eliminate extra starve days
@@ -1729,11 +1730,9 @@ namespace BarbarianPrince
                foreach (IMapItem mount in mi.Mounts)
                   mount.StarveDayNum = 0;
             }
-            return;
          }
          //-------------------------------------------------
-         int foodNeededTotal = foodNeededForPeople + foodNeededForMounts;
-         if (foodNeededTotal <= myFoodCurrent) // no extra feeding for people
+         else if (foodNeededTotal <= myFoodCurrent) // no extra feeding for people
          {
             myState = StarveEnum.SE_FEED_ALL;
             myIsHeaderCheckBoxChecked = true;
@@ -1748,10 +1747,9 @@ namespace BarbarianPrince
                foreach (IMapItem mount in mi.Mounts)
                   mount.StarveDayNum = 0;
             }
-            return;
          }
          //-------------------------------------------------
-         if (foodNeededForPeople <= myFoodCurrent) // Feed people but do not feed mounts
+         else if (foodNeededForPeople <= myFoodCurrent) // Feed people but do not feed mounts
          {
             myState = StarveEnum.SE_FEED_PEOPLE;
             Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "SetStateStarvation(): set state=" + myState.ToString());
@@ -1771,10 +1769,9 @@ namespace BarbarianPrince
                      ++mount.StarveDayNum;
                }
             }
-            return;
          }
          //-------------------------------------------------
-         if (0 < myFoodCurrent) // Partial Feed
+         else if (0 < myFoodCurrent) // Partial Feed
          {
             myState = StarveEnum.SE_STARVE_PARTIAL;
             myIsHeaderCheckBoxChecked = true;
@@ -1791,26 +1788,40 @@ namespace BarbarianPrince
                      ++mount.StarveDayNum;
                }
             }
-            return;
          }
          //-------------------------------------------------
-         myState = StarveEnum.SE_STARVE;
-         Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "SetStateStarvation(): set state=" + myState.ToString());
-         myIsHeaderCheckBoxChecked = false;
-         myGameInstance.IsFalconFed = false;
-         foreach (IMapItem mi in myPartyMembers)
+         else
          {
-            if ((false == myGameInstance.IsPartyFed) && ( false == mi.Name.Contains("Ealge")) ) // Party if Fed if they are in a town and money was paid to feed them during the hunting phase
-               ++mi.StarveDayNum;
-            foreach (IMapItem mount in mi.Mounts)
+            myState = StarveEnum.SE_STARVE;
+            Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "SetStateStarvation(): set state=" + myState.ToString());
+            myIsHeaderCheckBoxChecked = false;
+            myGameInstance.IsFalconFed = false;
+            foreach (IMapItem mi in myPartyMembers)
             {
-               if (true == myGameInstance.IsMountsFed)
-                  mount.StarveDayNum = 0;
-               else
-                  ++mount.StarveDayNum;
+               if ((false == myGameInstance.IsPartyFed) && (false == mi.Name.Contains("Ealge")) && (false == mi.Name.Contains("Falcon"))) // Party is Fed if they are in a town and money was paid to feed them during the hunting phase
+                  ++mi.StarveDayNum;
+               foreach (IMapItem mount in mi.Mounts)
+               {
+                  if (true == myGameInstance.IsMountsFed)
+                     mount.StarveDayNum = 0;
+                  else
+                     ++mount.StarveDayNum;
+               }
             }
          }
-         return;
+         //-------------------------------------------------
+         bool isAnyDieRollNeeded = false;
+         for (int k = 0; k < myMaxRowCount; ++k)
+         {
+            IMapItem mi1 = myGridRows[k].myMapItem;
+            if (Utilities.NO_RESULT == myGridRows[k].myResult) // die roll not needed for Prince, Hirelings not paired, True Love, etc
+               isAnyDieRollNeeded = true;
+         }
+         if( false == isAnyDieRollNeeded ) // if no die is needed, it will end with mouse click 
+         {
+            Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "SetStateStarvation(): change state=" + myState.ToString() + " to SE_SHOW_FEED_RESULTS");
+            myState = StarveEnum.SE_SHOW_FEED_RESULTS;  // Assume all rolls performed unless one row shows no results
+         }
       }
       private Button CreateButton(IMapItem mi, bool isAdornmentsShown)
       {

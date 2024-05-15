@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -9,6 +10,13 @@ namespace BarbarianPrince
 {
    public class Utilities
    {
+      private enum TaskBarLocation
+      {
+         TOP,
+         BOTTOM,
+         LEFT,
+         RIGHT
+      }
       public const int NO_RESULT = -100;
       public const int FOREVER = 100000;
       public const int STACK = 1;
@@ -99,7 +107,7 @@ namespace BarbarianPrince
          }
          return false;
       }
-      public static Cursor ConvertToCursor(UIElement control, Point hotSpot)
+      public static System.Windows.Input.Cursor ConvertToCursor(UIElement control, Point hotSpot)
       {
          //--------------------------------------------
          // convert FrameworkElement to PNG stream
@@ -144,7 +152,28 @@ namespace BarbarianPrince
 
          // return cursor stream
          cursorStream.Seek(0, SeekOrigin.Begin);
-         return new Cursor(cursorStream);
+         return new System.Windows.Input.Cursor(cursorStream);
       }
+      private TaskBarLocation GetTaskBarLocation()
+      {
+         TaskBarLocation taskBarLocation = TaskBarLocation.BOTTOM;
+         foreach (Screen screen in Screen.AllScreens)
+         {
+            if (screen.WorkingArea.Width == screen.Bounds.Width)
+            {
+               if (screen.WorkingArea.Top > 0)
+                  taskBarLocation = TaskBarLocation.TOP;
+            }
+            else
+            {
+               if (screen.WorkingArea.Left > 0)
+                  taskBarLocation = TaskBarLocation.LEFT;
+               else
+                  taskBarLocation = TaskBarLocation.RIGHT;
+            }
+         }
+         return taskBarLocation;
+      }
+
    }
 }
