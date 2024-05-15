@@ -4,7 +4,7 @@
         <IsEnabled value="True" />
     </Option>
     <Option value="AutoWealthRollForUnderFive">
-        <IsEnabled value="True" />
+        <IsEnabled value="False" />
     </Option> 
    <!--===========================-->
    <Option value="EasiestMonsters">
