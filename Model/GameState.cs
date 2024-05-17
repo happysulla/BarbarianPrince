@@ -3901,6 +3901,11 @@ namespace BarbarianPrince
                gi.AddCompanion(warriorWounded);
                int woundsToAdd = warriorWounded.Endurance - 1;
                warriorWounded.SetWounds(woundsToAdd, 0);
+               int freeLoad = 0;
+               foreach (IMapItem mi in gi.PartyMembers)
+                  freeLoad += mi.GetFreeLoadWithoutModify();
+               if (freeLoad < Utilities.PersonBurden) // if unable to carry without dropping food, need to redistribute
+                  action = GameAction.E069WoundedWarriorRedistribute;
                if (false == EncounterEnd(gi, ref action))
                {
                   returnStatus = "EncounterEnd() returned false a=" + action.ToString();

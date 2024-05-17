@@ -547,6 +547,8 @@ namespace BarbarianPrince
                      myStackPanelAssignable.Children.Add(r0);
                      foreach (IMapItem mi in myMapItems) // Add a button for each assignable that has not reached max
                      {
+                        if (true == mi.IsUnconscious) // unconscious people cannot hunt
+                           continue;
                         bool isRectangleBorderAdded = false;
                         if (null != myMapItemDragged && mi.Name == myMapItemDragged.Name) // If dragging a map item, show rectangle around that MapItem
                            isRectangleBorderAdded = true;

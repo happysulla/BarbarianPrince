@@ -405,6 +405,12 @@ namespace BarbarianPrince
                }
             }
             //---------------------------------------------
+            foreach (IMapItem mi in myGameInstance.PartyMembers) // e69 - Remve the overlay for all party members who are resting but unconscious
+            {
+               if(true == mi.IsUnconscious)
+                  mi.OverlayImageName = "";
+            }
+            //---------------------------------------------
             if (null == myCallback)
             {
                Logger.Log(LogEnum.LE_ERROR, "UpdateGrid(): myCallback=null");
@@ -438,7 +444,9 @@ namespace BarbarianPrince
                }
                break;
             case LoadEnum.LE_ASSIGN_CARRIERS:
-               if (myMaxFreeLoad < Utilities.PersonBurden)
+               if ((true == myGameInstance.IsWoundedWarriorRest) || (true == myGameInstance.IsWoundedBlackKnightRest))
+                  myTextBlockInstructions.Inlines.Add(new Run("Resting to heal! Click backpack to continue."));
+               else if (myMaxFreeLoad < Utilities.PersonBurden)
                   myTextBlockInstructions.Inlines.Add(new Run("Unable to carry your friend. Click backpack to continue."));
                else if(( true == myIsSunStrokeInParty ) && (true == myGameInstance.Prince.IsSunStroke) )
                      myTextBlockInstructions.Inlines.Add(new Run("Must assigned carriers for sunstroke victims with Prince being first carried."));
@@ -946,6 +954,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  unconscious.IsKilled = true;
                   if (true == unconscious.IsSunStroke)
                      unconscious.OverlayImageName = "Sun5";
                   else

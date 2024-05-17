@@ -302,6 +302,7 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): ShowFindVictimResults() returned false");
                break;
             //-------------------------------------
+            case GameAction.E069WoundedWarriorRedistribute:
             case GameAction.E078BadGoingRedistribute:
             case GameAction.E079HeavyRainsRedistribute:
             case GameAction.E086HighPassRedistribute:

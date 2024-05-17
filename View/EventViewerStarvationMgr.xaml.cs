@@ -1434,20 +1434,8 @@ namespace BarbarianPrince
          Grid.SetRow(cb2, rowNum);
          Grid.SetColumn(cb2, 4);
          //--------------------------------
-         int maxLoad = Utilities.MaxLoad;
-         if (true == follower.IsExhausted)
-            maxLoad = Utilities.MaxLoad >> 1; // e120 - half the load if exhausted 
-         int load = maxLoad >> follower.StarveDayNum; // divide by half for each starve day
-         if ( (true == follower.Name.Contains("Eagle")) || (true == follower.Name.Contains("Falcon")) )
-            load = 0;
-         foreach (IMapItem mount in follower.Mounts)
-         {
-            int maxMountLoad = Utilities.MaxMountLoad;
-            if (true == mount.IsExhausted)
-               maxMountLoad = Utilities.MaxMountLoad >> 1; // e120 - half the mount load if exhausted 
-            load += maxMountLoad >> mount.StarveDayNum;
-         }
-         Label labelforLoads = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = load.ToString() };
+         int maxLoad = follower.GetMaxFreeLoad();
+         Label labelforLoads = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = maxLoad.ToString() };
          myGrid.Children.Add(labelforLoads);
          Grid.SetRow(labelforLoads, rowNum);
          Grid.SetColumn(labelforLoads, 5);

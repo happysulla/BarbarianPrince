@@ -239,6 +239,7 @@ namespace BarbarianPrince
       E064HiddenRuins,
       E068WizardTower,
       E069WoundedWarriorCarry,
+      E069WoundedWarriorRedistribute,
       E069WoundedWarriorRemain,
       E070HalflingTown,
       E072DoubleElves,

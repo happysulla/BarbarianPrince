@@ -531,6 +531,7 @@ namespace BarbarianPrince
             string memberName = memberToAdd + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
             IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c16Magician", "c16Magician", Prince.Territory, 5, 5, 0);
+            member.Food = 10;
             AddCompanion(member);
          }
          //---------------------------------------------------------

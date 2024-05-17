@@ -76,7 +76,7 @@
    </Option>
    <!--========Add Extra PartyMembers==============-->
    <Option value="PartyMounted">
-      <IsEnabled value="False" />
+      <IsEnabled value="True" />
    </Option>
    <Option value="PartyAirborne">
       <IsEnabled value="False" />
@@ -100,7 +100,7 @@
       <IsEnabled value="False" />
    </Option>
    <Option value="Magician">
-      <IsEnabled value="False" />
+      <IsEnabled value="True" />
    </Option>
    <Option value="Mercenary">
       <IsEnabled value="False" />

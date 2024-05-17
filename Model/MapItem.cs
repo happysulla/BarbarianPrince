@@ -1523,7 +1523,7 @@ namespace BarbarianPrince
                kia.Source = MapItem.theMapImages.GetBitmapImage("OKIA");
                g.Children.Add(kia);
             }
-            else if (true == mi.IsUnconscious)
+            else if ((true == mi.IsUnconscious) && ("ORest" != mi.OverlayImageName) ) // if unconscous person is resting, do not show UNC image on counter
             {
                Image mia = new Image() { Stretch = Stretch.Fill };
                mia.Source = MapItem.theMapImages.GetBitmapImage("OUNC");
