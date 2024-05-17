@@ -4,7 +4,7 @@
         <IsEnabled value="True" />
     </Option>
     <Option value="AutoWealthRollForUnderFive">
-        <IsEnabled value="False" />
+        <IsEnabled value="True" />
     </Option> 
    <!--===========================-->
    <Option value="EasiestMonsters">
@@ -21,7 +21,7 @@
 		<IsEnabled value="False" />
 	</Option>
 	<Option value="ForceNoLostEvent">
-		<IsEnabled value="False" />
+		<IsEnabled value="True" />
 	</Option>
 	<Option value="ForceLostEvent">
 		<IsEnabled value="False" />
@@ -31,7 +31,7 @@
     <IsEnabled value="False" />
     </Option>
 	<Option value="ForceEvent">
-		<IsEnabled value="False" />
+		<IsEnabled value="True" />
 	</Option>
 	<!--===========================-->
 	<Option value="ForceNoRoadEvent">
@@ -124,28 +124,43 @@
       <IsEnabled value="False" />
    </Option>
    <!--========Set Starting Location==============-->
-   <Option value="0109">
+   <Option value="0109" name="Town">
       <IsEnabled value="False" />
    </Option>
-   <Option value="0206">
+   <Option value="0206" name="Ruins">
       <IsEnabled value="False" />
    </Option>
-   <Option value="0711">
+   <Option value="0711" name="Temple">
       <IsEnabled value="False" />
    </Option>
-   <Option value="1212">
+   <Option value="1212" name="Castle">
       <IsEnabled value="False" />
    </Option>
-   <Option value="0323">
+   <Option value="0323" name="Castle">
       <IsEnabled value="False" />
    </Option>
-   <Option value="1923">
+   <Option value="1923" name="Castle">
       <IsEnabled value="False" />
    </Option>
-   <Option value="0505">
+   <Option value="0418" name="Farmland">
       <IsEnabled value="False" />
    </Option>
-   <Option value="0418">
+   <Option value="0410" name="CountrySide">
+      <IsEnabled value="True" />
+   </Option>
+   <Option value="0409" name="Forest">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="0406" name="Hills">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="0405" name="Mountains">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="0411" name="Swamp">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="0407" name="Desert">
       <IsEnabled value="False" />
    </Option>
 </Options>

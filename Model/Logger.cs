@@ -20,6 +20,7 @@ namespace BarbarianPrince
       LE_NEXT_ACTION,
       LE_RESET_ROLL_STATE,
       LE_GET_COIN,
+      LE_ADD_COIN_AUTO,
       LE_ADD_FOOD,
       LE_MOUNT_CHANGE,
       LE_END_ENCOUNTER,

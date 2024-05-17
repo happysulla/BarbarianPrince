@@ -1405,16 +1405,6 @@ namespace BarbarianPrince
          if (true == option.IsEnabled)
             starting = gi.Territories.Find(hex);
          //---------------------------------------------------------
-         hex = "0505";
-         option = gi.Options.Find(hex);
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
-            return false;
-         }
-         if (true == option.IsEnabled)
-            starting = gi.Territories.Find(hex);
-         //---------------------------------------------------------
          hex = "0418";  // farmland
          option = gi.Options.Find(hex);
          if (null == option)
@@ -1424,6 +1414,67 @@ namespace BarbarianPrince
          }
          if (true == option.IsEnabled)
             starting = gi.Territories.Find(hex);
+         //---------------------------------------------------------
+         hex = "0410";  // CountrySide
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            starting = gi.Territories.Find(hex);
+         //---------------------------------------------------------
+         hex = "0409";  // Forrest
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            starting = gi.Territories.Find(hex);
+         //---------------------------------------------------------
+         hex = "0406";  // hills
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            starting = gi.Territories.Find(hex);
+         //---------------------------------------------------------
+         hex = "0405";  // Mountains
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            starting = gi.Territories.Find(hex);
+         //---------------------------------------------------------
+         hex = "0411";  // Swamp
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            starting = gi.Territories.Find(hex);
+         //---------------------------------------------------------
+         hex = "0407";  // Desert
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            starting = gi.Territories.Find(hex);
+         //---------------------------------------------------------
          //Farmland=0418 CountrySide=0410 Forest=0409 Hills=0406 Mountains=0405 Swamp=0411 Desert=0407 
          //starting = gi.Territories.Find("0411"); //ForestTemple=1021 HillsTemple=2009 MountainTemple=1021 
          //starting = gi.Territories.Find("0207"); //Road Travel=0207->0208
@@ -3846,9 +3897,10 @@ namespace BarbarianPrince
                break;
             case GameAction.E069WoundedWarriorCarry:
                IMapItem warriorWounded = CreateCharacter(gi, "Warrior", 0);
-               warriorWounded.SetWounds(5, 0);
                warriorWounded.IsAlly = true;
-               gi.PartyMembers.Add(warriorWounded);
+               gi.AddCompanion(warriorWounded);
+               int woundsToAdd = warriorWounded.Endurance - 1;
+               warriorWounded.SetWounds(woundsToAdd, 0);
                if (false == EncounterEnd(gi, ref action))
                {
                   returnStatus = "EncounterEnd() returned false a=" + action.ToString();
@@ -3857,9 +3909,10 @@ namespace BarbarianPrince
                break;
             case GameAction.E069WoundedWarriorRemain:
                IMapItem warriorWounded1 = CreateCharacter(gi, "Warrior", 0);
-               warriorWounded1.SetWounds(5, 0);
                warriorWounded1.IsAlly = true;
-               gi.PartyMembers.Add(warriorWounded1);
+               gi.AddCompanion(warriorWounded1);
+               int woundsToAdd1 = warriorWounded1.Endurance - 1;
+               warriorWounded1.SetWounds(woundsToAdd1, 0);
                Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateEncounter.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
                gi.Prince.MovementUsed = gi.Prince.Movement; // no more travel today
                gi.IsWoundedWarriorRest = true;
@@ -7284,9 +7337,9 @@ namespace BarbarianPrince
             case "e002a": // defeated mercenaries 
                if (true == autoWealthOption.IsEnabled)  // automatically perform wealth code rolls if enabled.
                {
-                  if (false == gi.StripCoins())
+                  if (false == gi.AddCoinsAuto())
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.StripCoins()() returned false w/ es=" + gi.EventStart);
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.AddCoinsAuto()() returned false w/ es=" + gi.EventStart);
                      return false;
                   }
                }
@@ -7296,9 +7349,9 @@ namespace BarbarianPrince
             case "e005": // Amazons
                if (true == autoWealthOption.IsEnabled)  // automatically perform wealth code rolls if enabled.
                {
-                  if (false == gi.StripCoins())
+                  if (false == gi.AddCoinsAuto())
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.StripCoins()() returned false w/ es=" + gi.EventStart);
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.AddCoinsAuto()() returned false w/ es=" + gi.EventStart);
                      return false;
                   }
                }
@@ -7318,9 +7371,9 @@ namespace BarbarianPrince
             case "e008": // halfing warrior
                if (true == autoWealthOption.IsEnabled)  // automatically perform wealth code rolls if enabled.
                {
-                  if (false == gi.StripCoins())
+                  if (false == gi.AddCoinsAuto())
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.StripCoins()() returned false w/ es=" + gi.EventStart);
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.AddCoinsAuto()() returned false w/ es=" + gi.EventStart);
                      return false;
                   }
                }
@@ -7328,9 +7381,9 @@ namespace BarbarianPrince
             case "e011b": // farmer with protector
                if (true == autoWealthOption.IsEnabled)  // automatically perform wealth code rolls if enabled.
                {
-                  if (false == gi.StripCoins())
+                  if (false == gi.AddCoinsAuto())
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.StripCoins()() returned false w/ es=" + gi.EventStart);
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.AddCoinsAuto()() returned false w/ es=" + gi.EventStart);
                      return false;
                   }
                }
@@ -7346,9 +7399,9 @@ namespace BarbarianPrince
             case "e013b": // defeated farm retainers
                if (true == autoWealthOption.IsEnabled)  // automatically perform wealth code rolls if enabled.
                {
-                  if (false == gi.StripCoins())
+                  if (false == gi.AddCoinsAuto())
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.StripCoins()() returned false w/ es=" + gi.EventStart);
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.AddCoinsAuto()() returned false w/ es=" + gi.EventStart);
                      return false;
                   }
                }
@@ -7362,9 +7415,9 @@ namespace BarbarianPrince
             case "e015c": // defeated reavers
                if (true == autoWealthOption.IsEnabled)  // automatically perform wealth code rolls if enabled.
                {
-                  if (false == gi.StripCoins())
+                  if (false == gi.AddCoinsAuto())
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.StripCoins()() returned false w/ es=" + gi.EventStart);
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.AddCoinsAuto()() returned false w/ es=" + gi.EventStart);
                      return false;
                   }
                }
@@ -7386,9 +7439,9 @@ namespace BarbarianPrince
             case "e017": // defeat peasant mob
                if (true == autoWealthOption.IsEnabled)  // automatically perform wealth code rolls if enabled.
                {
-                  if (false == gi.StripCoins())
+                  if (false == gi.AddCoinsAuto())
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.StripCoins()() returned false w/ es=" + gi.EventStart);
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.AddCoinsAuto()() returned false w/ es=" + gi.EventStart);
                      return false;
                   }
                }
@@ -7402,9 +7455,9 @@ namespace BarbarianPrince
             case "e024c": // defeated wizard
                if (true == autoWealthOption.IsEnabled)  // automatically perform wealth code rolls if enabled.
                {
-                  if (false == gi.StripCoins())
+                  if (false == gi.AddCoinsAuto())
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.StripCoins()() returned false w/ es=" + gi.EventStart);
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.AddCoinsAuto()() returned false w/ es=" + gi.EventStart);
                      return false;
                   }
                }
@@ -7440,9 +7493,9 @@ namespace BarbarianPrince
             case "e040": //  treasure chest opening
                if (true == autoWealthOption.IsEnabled)  // famer with protector might have reached this point without stripping out protector money
                {
-                  if (false == gi.StripCoins())
+                  if (false == gi.AddCoinsAuto())
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.StripCoins()() returned false w/ es=" + gi.EventStart);
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.AddCoinsAuto()() returned false w/ es=" + gi.EventStart);
                      return false;
                   }
                }
@@ -7474,9 +7527,9 @@ namespace BarbarianPrince
             case "e048": // fugitive 
                if (true == autoWealthOption.IsEnabled)  // automatically perform wealth code rolls if enabled.
                {
-                  if (false == gi.StripCoins())
+                  if (false == gi.AddCoinsAuto())
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.StripCoins()() returned false w/ es=" + gi.EventStart);
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.AddCoinsAuto()() returned false w/ es=" + gi.EventStart);
                      return false;
                   }
                }
@@ -7490,9 +7543,9 @@ namespace BarbarianPrince
             case "e056a": // defeated orc tower
                if (true == autoWealthOption.IsEnabled)  // automatically perform wealth code rolls if enabled.
                {
-                  if (false == gi.StripCoins())
+                  if (false == gi.AddCoinsAuto())
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.StripCoins()() returned false w/ es=" + gi.EventStart);
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.AddCoinsAuto()() returned false w/ es=" + gi.EventStart);
                      return false;
                   }
                }
@@ -7509,9 +7562,9 @@ namespace BarbarianPrince
             case "e073": // witch 
                if (true == autoWealthOption.IsEnabled)  // automatically perform wealth code rolls if enabled.
                {
-                  if (false == gi.StripCoins())
+                  if (false == gi.AddCoinsAuto())
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.StripCoins()() returned false w/ es=" + gi.EventStart);
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.AddCoinsAuto()() returned false w/ es=" + gi.EventStart);
                      return false;
                   }
                }
@@ -7520,7 +7573,7 @@ namespace BarbarianPrince
             case "e075b":  // defeated wolves
                if (false == SetCampfireFalconCheckState(gi, ref action))
                {
-                  Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.StripCoins()() returned false w/ es=" + gi.EventStart);
+                  Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.AddCoinsAuto()() returned false w/ es=" + gi.EventStart);
                   return false;
                }
                return true; //<<<<<<<<<<<<<<<<<<<<<
@@ -7528,9 +7581,9 @@ namespace BarbarianPrince
             case "e081": // mounted patrol
                if (true == autoWealthOption.IsEnabled)
                {
-                  if (false == gi.StripCoins())
+                  if (false == gi.AddCoinsAuto())
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.StripCoins()() returned false w/ es=" + gi.EventStart);
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.AddCoinsAuto()() returned false w/ es=" + gi.EventStart);
                      return false;
                   }
                }
@@ -7543,7 +7596,7 @@ namespace BarbarianPrince
             case "e084b":  // defeated bear
                if (false == SetCampfireFalconCheckState(gi, ref action))
                {
-                  Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.StripCoins()() returned false w/ es=" + gi.EventStart);
+                  Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.AddCoinsAuto()() returned false w/ es=" + gi.EventStart);
                   return false;
                }
                return true;
@@ -7569,9 +7622,9 @@ namespace BarbarianPrince
             case "e112": // defeated eagles
                if (true == autoWealthOption.IsEnabled)  // automatically perform wealth code rolls if enabled.
                {
-                  if (false == gi.StripCoins())
+                  if (false == gi.AddCoinsAuto())
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.StripCoins()() returned false w/ es=" + gi.EventStart);
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.AddCoinsAuto()() returned false w/ es=" + gi.EventStart);
                      return false;
                   }
                }
@@ -7583,9 +7636,9 @@ namespace BarbarianPrince
             case "e130": // defeated lord's guards
                if (true == autoWealthOption.IsEnabled)  // automatically perform wealth code rolls if enabled.
                {
-                  if (false == gi.StripCoins())
+                  if (false == gi.AddCoinsAuto())
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.StripCoins()() returned false w/ es=" + gi.EventStart);
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): gi.AddCoinsAuto()() returned false w/ es=" + gi.EventStart);
                      return false;
                   }
                }

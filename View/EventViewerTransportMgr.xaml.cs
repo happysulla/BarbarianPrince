@@ -939,11 +939,18 @@ namespace BarbarianPrince
             int remainingLoad = GetRemainingLoad(unconscious);
             if (0 < remainingLoad)
             {
-               unconscious.IsKilled = true;
-               if (true == unconscious.IsSunStroke)
-                  unconscious.OverlayImageName = "Sun5";
+               if ((true == myGameInstance.IsWoundedWarriorRest) || (true == myGameInstance.IsWoundedBlackKnightRest))
+               {
+                  unconscious.IsKilled = false;
+                  unconscious.OverlayImageName = "ORest";
+               }
                else
-                  unconscious.OverlayImageName = "OKIA";
+               {
+                  if (true == unconscious.IsSunStroke)
+                     unconscious.OverlayImageName = "Sun5";
+                  else
+                     unconscious.OverlayImageName = "OKIA";
+               }
             }
             else
             {

@@ -841,6 +841,16 @@ namespace BarbarianPrince
                   b.Click += Button_Click;
                }
                break;
+            case "e069":
+               int maxLoad = 0;
+               foreach (IMapItem mi in gi.PartyMembers)
+                  maxLoad += mi.GetMaxFreeLoad();
+               if (maxLoad < Utilities.PersonBurden)
+               {
+                  if ("Carry" == content)
+                     b.IsEnabled = false;
+               }
+               break;
             case "e071":
                if (Utilities.NO_RESULT == myGameInstance.DieResults[key][0])
                {

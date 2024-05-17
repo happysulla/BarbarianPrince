@@ -222,7 +222,6 @@ namespace BarbarianPrince
       public bool IsAssassination { set; get; } = false;
       public bool IsDayEnd { set; get; } = false;
       //---------------------------------------------------------------
-      public bool IsSecretGatewayToDarknessKnown { set; get; } = false;  // e046
       public bool IsSecretTempleKnown { set; get; } = false;   // e143 
       public bool IsSecretBaronHuldra { set; get; } = false;   // e144 
       public bool IsSecretLadyAeravir { set; get; } = false;   // e145 
@@ -247,6 +246,7 @@ namespace BarbarianPrince
          Logger.SetOn(LogEnum.LE_MOVE_COUNT);
          //Logger.SetOn(LogEnum.LE_RESET_ROLL_STATE);
          //Logger.SetOn(LogEnum.LE_GET_COIN);
+         Logger.SetOn(LogEnum.LE_ADD_COIN_AUTO);
          //Logger.SetOn(LogEnum.LE_MOUNT_CHANGE);
          Logger.SetOn(LogEnum.LE_COMBAT_STATE);
          //Logger.SetOn(LogEnum.LE_COMBAT_STATE_ESCAPE);
@@ -829,7 +829,7 @@ namespace BarbarianPrince
          foreach (string s in Utilities.theNorthOfTragothHexes) // if added south of river, secret of gateway known
          {
             if (s == Prince.Territory.Name)
-               IsSecretGatewayToDarknessKnown = false;
+               companion.IsSecretGatewayToDarknessKnown = false;
          }
          //--------------------------------
          PartyMembers.Add(companion);
@@ -1338,6 +1338,36 @@ namespace BarbarianPrince
          }
          return true;
       }
+      public bool AddCoinsAuto()
+      {
+         int capturedCoins = 0;
+         List<int> wealthCodes = new List<int>();
+         foreach (int wc in this.CapturedWealthCodes)
+         {
+            if (4 < wc)
+            {
+               wealthCodes.Add(wc);
+            }
+            else
+            {
+               int coin = GameEngine.theTreasureMgr.GetCoin(wc);
+               if (coin < 0)
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "AddCoinsAuto(): GetCoin()=" + coin.ToString() + " wc=" + wc.ToString());
+                  return false;
+               }
+               capturedCoins += coin;
+            }
+         }
+         if (false == AddCoins(capturedCoins))
+         {
+
+            return false;
+         }
+         CapturedWealthCodes = wealthCodes;
+         Logger.Log(LogEnum.LE_ADD_COIN_AUTO, "AddCoinsAuto(): capturedCoins=" + capturedCoins.ToString());
+         return true;
+      }
       public void ReduceCoins(int coins)
       {
          if (coins < 0)
@@ -1419,35 +1449,6 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "ReduceCoins(): 2 - invalid state count<0 coins=" + coins.ToString());
          if (0 != coins)
             Logger.Log(LogEnum.LE_ERROR, "ReduceCoins(): not reduced to zero coins=" + coins.ToString());
-      }
-      public bool StripCoins()
-      {
-         int capturedCoins = 0;
-         List<int> wealthCodes = new List<int>();
-         foreach (int wc in this.CapturedWealthCodes)
-         {
-            if (4 < wc)
-            {
-               wealthCodes.Add(wc);
-            }
-            else
-            {
-               int coin = GameEngine.theTreasureMgr.GetCoin(wc);
-               if (coin < 0)
-               {
-                  Logger.Log(LogEnum.LE_ERROR, "StripCoins(): GetCoin()=" + coin.ToString() + " wc=" + wc.ToString());
-                  return false;
-               }
-               capturedCoins += coin;
-            }
-         }
-         if( false == AddCoins(capturedCoins) )
-         {
-            Logger.Log(LogEnum.LE_ERROR, "StripCoins(): AddCoins() returned false");
-            return false;
-         }
-         CapturedWealthCodes = wealthCodes;
-         return true;
       }
       public int GetNonSpecialMountCount(bool isHorseOnly = false)
       {
