@@ -1157,7 +1157,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL_ROAD s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_REFERENCE:
-               dieRoll = 5; // <cgs> TEST
+               //dieRoll = 5; // <cgs> TEST
                myRollReference = dieRoll; // column number in travel table r207 - reference row
                if ((6 == myRollReference) && (true == myIsTravelingAir) ) // if traveling by air and roll reference 6, need to look  at Table r281
                   myState = EnumR204.TC_EVENT_ROLL_REFERENCE_R281;
@@ -1166,7 +1166,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL_REFERENCE s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT:
-               dieRoll = 6; // <cgs> TEST
+               //dieRoll = 6; // <cgs> TEST
                myRollEvent = dieRoll; // column number in traveling event reference - event row
                myState = EnumR204.TC_EVENT_SHOW_RESULTS;
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL_EVENT s=" + myState.ToString() + " dr=" + dieRoll.ToString());

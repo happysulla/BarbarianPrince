@@ -12,7 +12,7 @@ namespace BarbarianPrince
 {
    public class Utilities
    {
-      private enum TaskBarLocation
+      public enum TaskBarLocation
       {
          TOP,
          BOTTOM,
@@ -156,7 +156,7 @@ namespace BarbarianPrince
          cursorStream.Seek(0, SeekOrigin.Begin);
          return new System.Windows.Input.Cursor(cursorStream);
       }
-      private TaskBarLocation GetTaskBarLocation()
+      public static TaskBarLocation GetTaskBarLocation()
       {
          TaskBarLocation taskBarLocation = TaskBarLocation.BOTTOM;
          foreach (Screen screen in Screen.AllScreens)
@@ -185,7 +185,6 @@ namespace BarbarianPrince
             return sw.GetStringBuilder().ToString();
          }
       }
-
       public static T Deserialize<T>(String s_xml)
       {
          using (XmlReader xw = XmlReader.Create(new StringReader(s_xml)))

@@ -1837,9 +1837,11 @@ namespace BarbarianPrince
             var hwnd = new WindowInteropHelper(this).Handle;
             if (false == SetWindowPlacement(hwnd, ref wp))
                Logger.Log(LogEnum.LE_ERROR, "SetWindowPlacement() returned false");
-            // set zoom level
+            //-------------------------------------------
+            Utilities.ZoomCanvas = Settings.Default.ZoomCanvas;
+            myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas);
          }
-         catch( Exception ex ) 
+         catch ( Exception ex ) 
          {
             Logger.Log(LogEnum.LE_ERROR, "OnSourceInitialized() e=" + ex.ToString());
          }
@@ -1853,6 +1855,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "GetWindowPlacement() returned false");
          string sWinPlace = Utilities.Serialize<WindowPlacement>(wp);
          Settings.Default.WindowPlacement = sWinPlace;
+         //-------------------------------------------
+         Settings.Default.ZoomCanvas = Utilities.ZoomCanvas;
+         //-------------------------------------------
          Settings.Default.Save();
       }
       //-------------CONTROLLER HELPER FUNCTIONS---------------------------------

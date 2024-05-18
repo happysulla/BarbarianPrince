@@ -357,7 +357,8 @@ namespace BarbarianPrince
          // Path Distance += sqrt(x^2 + y^2)
          try
          {
-            const int ANIMATE_TIME_MS = 2200;
+            //const int ANIMATE_TIME_MS = 2200;
+            const int ANIMATE_TIME_MS = 1800;
             const double PATH_DISTANCE = 1000;  // limits the animation path - distance & time correlate to speed of dice
             const double BUTTON_BOARDER = 15; // add 10 for the button border
             double dieSize = ZOOM_DICE * Utilities.theMapItemSize / Utilities.ZoomCanvas;
