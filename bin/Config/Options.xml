@@ -21,7 +21,7 @@
 		<IsEnabled value="False" />
 	</Option>
 	<Option value="ForceNoLostEvent">
-		<IsEnabled value="True" />
+		<IsEnabled value="False" />
 	</Option>
 	<Option value="ForceLostEvent">
 		<IsEnabled value="False" />
@@ -31,7 +31,7 @@
     <IsEnabled value="False" />
     </Option>
 	<Option value="ForceEvent">
-		<IsEnabled value="True" />
+		<IsEnabled value="False" />
 	</Option>
 	<!--===========================-->
 	<Option value="ForceNoRoadEvent">
@@ -76,7 +76,7 @@
    </Option>
    <!--========Add Extra PartyMembers==============-->
    <Option value="PartyMounted">
-      <IsEnabled value="True" />
+      <IsEnabled value="False" />
    </Option>
    <Option value="PartyAirborne">
       <IsEnabled value="False" />
@@ -100,7 +100,7 @@
       <IsEnabled value="False" />
    </Option>
    <Option value="Magician">
-      <IsEnabled value="True" />
+      <IsEnabled value="False" />
    </Option>
    <Option value="Mercenary">
       <IsEnabled value="False" />
@@ -146,7 +146,7 @@
       <IsEnabled value="False" />
    </Option>
    <Option value="0410" name="CountrySide">
-      <IsEnabled value="True" />
+      <IsEnabled value="False" />
    </Option>
    <Option value="0409" name="Forest">
       <IsEnabled value="False" />

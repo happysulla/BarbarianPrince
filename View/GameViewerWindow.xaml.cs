@@ -26,30 +26,26 @@ namespace BarbarianPrince
       private const int MAX_DAILY_ACTIONS = 13;
       public bool CtorError { get; } = false;
       //---------------------------------------------------------------------
-      [Serializable]
-      [StructLayout(LayoutKind.Sequential)]
-      public struct Point
+      [Serializable] [StructLayout(LayoutKind.Sequential)]
+      public struct POINT  // used in WindowPlacement structure
       {
          public int X;
          public int Y;
-
-         public Point(int x, int y)
+         public POINT(int x, int y)
          {
             X = x;
             Y = y;
          }
       }
       //-------------------------------------------
-      [Serializable]
-      [StructLayout(LayoutKind.Sequential)]
-      public struct Rect
+      [Serializable] [StructLayout(LayoutKind.Sequential)]
+      public struct RECT // used in WindowPlacement structure
       {
          public int Left;
          public int Top;
          public int Right;
          public int Bottom;
-
-         public Rect(int left, int top, int right, int bottom)
+         public RECT(int left, int top, int right, int bottom)
          {
             Left = left;
             Top = top;
@@ -58,16 +54,15 @@ namespace BarbarianPrince
          }
       }
       //-------------------------------------------
-      [Serializable]
-      [StructLayout(LayoutKind.Sequential)]
-      public struct WindowPlacement
+      [Serializable] [StructLayout(LayoutKind.Sequential)]
+      public struct WindowPlacement // used to save window position between sessions
       {
          public int length;
          public int flags;
          public int showCmd;
-         public Point minPosition;
-         public Point maxPosition;
-         public Rect normalPosition;
+         public POINT minPosition;
+         public POINT maxPosition;
+         public RECT normalPosition;
       }
       //---------------------------------------------------------------------
       private readonly IGameEngine myGameEngine = null;
@@ -196,7 +191,7 @@ namespace BarbarianPrince
             gi.GamePhase = GamePhase.UnitTest;
 #endif
    }
-   public void UpdateView(ref IGameInstance gi, GameAction action)
+      public void UpdateView(ref IGameInstance gi, GameAction action)
       {
          if (GameAction.RemoveSplashScreen == action)
             mySplashScreen.Close();
@@ -1842,6 +1837,7 @@ namespace BarbarianPrince
             var hwnd = new WindowInteropHelper(this).Handle;
             if (false == SetWindowPlacement(hwnd, ref wp))
                Logger.Log(LogEnum.LE_ERROR, "SetWindowPlacement() returned false");
+            // set zoom level
          }
          catch( Exception ex ) 
          {
@@ -1905,12 +1901,12 @@ namespace BarbarianPrince
       }
       //-----------------------------------------------------------------------
       #region Win32 API declarations to set and get window placement
-      [DllImport("user32.dll")]
-      private static extern bool SetWindowPlacement(IntPtr hWnd, [In] ref WindowPlacement lpwndpl);
-      [DllImport("user32.dll")]
-      private static extern bool GetWindowPlacement(IntPtr hWnd, out WindowPlacement lpwndpl);
-      private const int SwShownormal = 1;
-      private const int SwShowminimized = 2;
+         [DllImport("user32.dll")]
+         private static extern bool SetWindowPlacement(IntPtr hWnd, [In] ref WindowPlacement lpwndpl);
+         [DllImport("user32.dll")]
+         private static extern bool GetWindowPlacement(IntPtr hWnd, out WindowPlacement lpwndpl);
+         private const int SwShownormal = 1;
+         private const int SwShowminimized = 2;
       #endregion
    }
    public static class MyGameViewerWindowExtensions
