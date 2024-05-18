@@ -195,7 +195,7 @@ namespace BarbarianPrince
             }
          }
          //--------------------------------------------------
-         Point hotPoint = new Point(Utilities.theMapItemOffset, Utilities.theMapItemOffset); // set the center of the MapItem as the hot point for the cursor
+         System.Windows.Point hotPoint = new System.Windows.Point(Utilities.theMapItemOffset, Utilities.theMapItemOffset); // set the center of the MapItem as the hot point for the cursor
          foreach (IMapItem mi in myGameInstance.PartyMembers) 
          {
             if ((0 < mi.Food) || (0 < mi.Coin) || (0 < myUnassignedCoin) || (0 < myUnassignedFood) )
@@ -1472,7 +1472,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "Grid_MouseDown(): UpdateGrid() return false");
             return;
          }
-         Point p = e.GetPosition((UIElement)sender);
+         System.Windows.Point p = e.GetPosition((UIElement)sender);
          HitTestResult result = VisualTreeHelper.HitTest(myGrid, p);  // Get the Point where the hit test occurrs
          foreach (UIElement ui in myGrid.Children)
          {

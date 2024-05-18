@@ -18,9 +18,14 @@ using System.Net.Sockets;
 using System.Threading;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Window = System.Windows.Window;
+using BarbarianPrince.Properties;
+using System.Runtime.InteropServices;
+using System.Windows.Interop;
+using System.ComponentModel;
 
 namespace BarbarianPrince
 {
+   //-----------------------------------------------------------------------------------
    public partial class MainWindow : Window
    {
       private IGameEngine myGameEngine = null;

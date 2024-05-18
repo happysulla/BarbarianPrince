@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfAnimatedGif;
+using Point = System.Windows.Point;
 
 namespace BarbarianPrince
 {
@@ -261,7 +262,7 @@ namespace BarbarianPrince
             SetStateStarvation();
          }
          //--------------------------------------------------
-         Point hotPoint = new Point(Utilities.theMapItemOffset, Utilities.theMapItemOffset); // set the center of the MapItem as the hot point for the cursor
+         System.Windows.Point hotPoint = new System.Windows.Point(Utilities.theMapItemOffset, Utilities.theMapItemOffset); // set the center of the MapItem as the hot point for the cursor
          if (true == IsPotionHealShown())
          {
             BitmapImage bmi2 = new BitmapImage();
@@ -1913,7 +1914,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "Grid_MouseDown(): UpdateGrid() return false");
             return;
          }
-         Point p = e.GetPosition((UIElement)sender);
+         System.Windows.Point p = e.GetPosition((UIElement)sender);
          HitTestResult result = VisualTreeHelper.HitTest(myGrid, p);  // Get the Point where the hit test occurrs
          foreach (UIElement ui in myGrid.Children)
          {

@@ -12,9 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static System.Windows.Forms.AxHost;
 using WpfAnimatedGif;
-using System.Data.SqlTypes;
+using Point = System.Windows.Point;
 
 namespace BarbarianPrince
 {
@@ -521,7 +520,7 @@ namespace BarbarianPrince
       //-----------------------------------------------------------------------------------------
       private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
       {
-         Point p = e.GetPosition((UIElement)sender);
+         System.Windows.Point p = e.GetPosition((UIElement)sender);
          HitTestResult result = VisualTreeHelper.HitTest(myGrid, p);  // Get the Point where the hit test occurrs
          foreach (UIElement ui in myGrid.Children)
          {

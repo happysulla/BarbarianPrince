@@ -1,10 +1,14 @@
-﻿using System;
+﻿using BarbarianPrince.Properties;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
@@ -12,13 +16,59 @@ using System.Xml;
 using System.Xml.Linq;
 using Button = System.Windows.Controls.Button;
 using MenuItem = System.Windows.Controls.MenuItem;
+using Point = System.Windows.Point;
 
 namespace BarbarianPrince
 {
+
    public partial class GameViewerWindow : Window, IView
    {
       private const int MAX_DAILY_ACTIONS = 13;
       public bool CtorError { get; } = false;
+      //---------------------------------------------------------------------
+      [Serializable]
+      [StructLayout(LayoutKind.Sequential)]
+      public struct Point
+      {
+         public int X;
+         public int Y;
+
+         public Point(int x, int y)
+         {
+            X = x;
+            Y = y;
+         }
+      }
+      //-------------------------------------------
+      [Serializable]
+      [StructLayout(LayoutKind.Sequential)]
+      public struct Rect
+      {
+         public int Left;
+         public int Top;
+         public int Right;
+         public int Bottom;
+
+         public Rect(int left, int top, int right, int bottom)
+         {
+            Left = left;
+            Top = top;
+            Right = right;
+            Bottom = bottom;
+         }
+      }
+      //-------------------------------------------
+      [Serializable]
+      [StructLayout(LayoutKind.Sequential)]
+      public struct WindowPlacement
+      {
+         public int length;
+         public int flags;
+         public int showCmd;
+         public Point minPosition;
+         public Point maxPosition;
+         public Rect normalPosition;
+      }
       //---------------------------------------------------------------------
       private readonly IGameEngine myGameEngine = null;
       private IGameInstance myGameInstance = null;
@@ -67,6 +117,7 @@ namespace BarbarianPrince
          mySplashScreen = new SplashDialog(); // show splash screen waiting for finish initializing
          mySplashScreen.Show();
          InitializeComponent();
+
          //-----------------------------------------------------------------
          myGameEngine = ge;
          myGameInstance = gi;
@@ -144,8 +195,8 @@ namespace BarbarianPrince
             }
             gi.GamePhase = GamePhase.UnitTest;
 #endif
-      }
-      public void UpdateView(ref IGameInstance gi, GameAction action)
+   }
+   public void UpdateView(ref IGameInstance gi, GameAction action)
       {
          if (GameAction.RemoveSplashScreen == action)
             mySplashScreen.Close();
@@ -154,7 +205,7 @@ namespace BarbarianPrince
          {
             myTargetCursor.Dispose();
             double sizeCursor = Utilities.ZoomCanvas * Utilities.ZOOM * Utilities.theMapItemSize;
-            Point hotPoint = new Point(Utilities.theMapItemOffset, sizeCursor * 0.5); // set the center of the MapItem as the hot point for the cursor
+            System.Windows.Point hotPoint = new System.Windows.Point(Utilities.theMapItemOffset, sizeCursor * 0.5); // set the center of the MapItem as the hot point for the cursor
             Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Target"), Width = sizeCursor, Height = sizeCursor };
             myTargetCursor = Utilities.ConvertToCursor(img1, hotPoint);
             this.myCanvas.Cursor = myTargetCursor;
@@ -338,7 +389,7 @@ namespace BarbarianPrince
                            Double X1 = Double.Parse(value);
                            value = reader.GetAttribute("Y");
                            Double Y1 = Double.Parse(value);
-                           points.Add(new Point(X1, Y1));
+                           points.Add(new System.Windows.Point(X1, Y1));
                         }
                         else
                         {
@@ -585,7 +636,7 @@ namespace BarbarianPrince
             int i = 0;
             double X1 = 0.0;
             double Y1 = 0.0;
-            foreach (Point p in polyline.Points)
+            foreach (System.Windows.Point p in polyline.Points)
             {
                if (0 == i)
                {
@@ -597,9 +648,9 @@ namespace BarbarianPrince
                   double Xcenter = X1 + (p.X - X1) / 2.0;
                   double Ycenter = Y1 + (p.Y - Y1) / 2.0;
                   PointCollection points = new PointCollection();
-                  Point one = new Point(Xcenter - SIZE, Ycenter - SIZE);
-                  Point two = new Point(Xcenter + SIZE, Ycenter);
-                  Point three = new Point(Xcenter - SIZE, Ycenter + SIZE);
+                  System.Windows.Point one = new System.Windows.Point(Xcenter - SIZE, Ycenter - SIZE);
+                  System.Windows.Point two = new System.Windows.Point(Xcenter + SIZE, Ycenter);
+                  System.Windows.Point three = new System.Windows.Point(Xcenter - SIZE, Ycenter + SIZE);
                   points.Add(one);
                   points.Add(two);
                   points.Add(three);
@@ -992,7 +1043,7 @@ namespace BarbarianPrince
                   {
                      PointCollection points = new PointCollection();
                      foreach (IMapPoint mp1 in t.Points)
-                        points.Add(new Point(mp1.X, mp1.Y));
+                        points.Add(new System.Windows.Point(mp1.X, mp1.Y));
                      Polygon aPolygon = new Polygon { Fill = Utilities.theBrushRegion, Points = points, Tag = t.ToString() };
                      myCanvas.Children.Add(aPolygon);
                   }
@@ -1155,7 +1206,7 @@ namespace BarbarianPrince
       {
          PointCollection points = new PointCollection();
          foreach (IMapPoint mp1 in t.Points)
-            points.Add(new Point(mp1.X, mp1.Y));
+            points.Add(new System.Windows.Point(mp1.X, mp1.Y));
          Polygon aPolygon = new Polygon { Fill = Utilities.theBrushRegion, Points = points, Tag = t.ToString() };
          myPolygons.Add(aPolygon);
          myCanvas.Children.Add(aPolygon);
@@ -1179,7 +1230,7 @@ namespace BarbarianPrince
             ITerritory t = gi.EnteredTerritories[tCount - 2];
             PointCollection points = new PointCollection();
             foreach (IMapPoint mp1 in t.Points)
-               points.Add(new Point(mp1.X, mp1.Y));
+               points.Add(new System.Windows.Point(mp1.X, mp1.Y));
             Polygon aPolygon = new Polygon { Fill = Utilities.theBrushRegion, Points = points, Tag = t.ToString() };
             aPolygon.MouseDown += MouseDownPolygonTravel;
             myPolygons.Add(aPolygon);
@@ -1205,7 +1256,7 @@ namespace BarbarianPrince
                continue;
             PointCollection points = new PointCollection();
             foreach (IMapPoint mp1 in t.Points)
-               points.Add(new Point(mp1.X, mp1.Y));
+               points.Add(new System.Windows.Point(mp1.X, mp1.Y));
             Polygon aPolygon = new Polygon { Fill = Utilities.theBrushRegion, Points = points, Tag = t.ToString() };
             aPolygon.MouseDown += MouseDownPolygonTravel;
             myPolygons.Add(aPolygon);
@@ -1220,7 +1271,7 @@ namespace BarbarianPrince
          {
             PointCollection points = new PointCollection();
             foreach (IMapPoint mp1 in t.Points)
-               points.Add(new Point(mp1.X, mp1.Y));
+               points.Add(new System.Windows.Point(mp1.X, mp1.Y));
             Polygon aPolygon = new Polygon { Fill = Utilities.theBrushRegionClear, Points = points, Tag = t.ToString() };
             aPolygon.MouseDown += MouseDownPolygonArchOfTravel;
             myPolygons.Add(aPolygon);
@@ -1235,7 +1286,7 @@ namespace BarbarianPrince
          {
             PointCollection points = new PointCollection();
             foreach (IMapPoint mp1 in t.Points)
-               points.Add(new Point(mp1.X, mp1.Y));
+               points.Add(new System.Windows.Point(mp1.X, mp1.Y));
             Polygon aPolygon = new Polygon { Fill = Utilities.theBrushRegionClear, Points = points, Tag = t.ToString() };
             aPolygon.MouseDown += MouseDownPolygonLetterChoice;
             myPolygons.Add(aPolygon);
@@ -1295,14 +1346,14 @@ namespace BarbarianPrince
             Canvas.SetZIndex(b, 100); // Move the button to the top of the Canvas
             double xStart = mim.MapItem.Location.X;
             double yStart = mim.MapItem.Location.Y;
-            PathFigure aPathFigure = new PathFigure() { StartPoint = new Point(xStart, yStart) };
+            PathFigure aPathFigure = new PathFigure() { StartPoint = new System.Windows.Point(xStart, yStart) };
             int lastItemIndex = mim.BestPath.Territories.Count - 1;
             for (int i = 0; i < lastItemIndex; i++) // add intermediate movement points - not really used in Barbarian Prince as only move one hex at a time
             {
                ITerritory t = mim.BestPath.Territories[i];
                double x = t.CenterPoint.X - Utilities.theMapItemOffset;
                double y = t.CenterPoint.Y - Utilities.theMapItemOffset;
-               Point newPoint = new Point(x , y);
+               System.Windows.Point newPoint = new System.Windows.Point(x , y);
                LineSegment lineSegment = new LineSegment(newPoint, false);
                aPathFigure.Segments.Add(lineSegment);
             }
@@ -1311,7 +1362,7 @@ namespace BarbarianPrince
             double yEnd = mim.NewTerritory.CenterPoint.Y - Utilities.theMapItemOffset;
             if ( (Math.Abs(xEnd - xStart) < 2) && (Math.Abs(yEnd - yStart) < 2) ) // if already at final location, skip animation or get runtime exception
                return true;
-            Point newPoint2 = new Point(xEnd, yEnd);
+            System.Windows.Point newPoint2 = new System.Windows.Point(xEnd, yEnd);
             LineSegment lineSegment2 = new LineSegment(newPoint2, false);
             aPathFigure.Segments.Add(lineSegment2);
             // Animiate the map item along the line segment
@@ -1367,13 +1418,13 @@ namespace BarbarianPrince
          offset *= 3.0;
          double xPostion = mim.OldTerritory.CenterPoint.X + offset;
          double yPostion = mim.OldTerritory.CenterPoint.Y + offset;
-         Point newPoint = new Point(xPostion, yPostion);
+         System.Windows.Point newPoint = new System.Windows.Point(xPostion, yPostion);
          aPointCollection.Add(newPoint);
          foreach (ITerritory t in mim.BestPath.Territories)
          {
             xPostion = t.CenterPoint.X + offset;
             yPostion = t.CenterPoint.Y + offset;
-            newPoint = new Point(xPostion, yPostion);
+            newPoint = new System.Windows.Point(xPostion, yPostion);
             aPointCollection.Add(newPoint);
          }
          //-----------------------------------------
@@ -1496,7 +1547,7 @@ namespace BarbarianPrince
       }
       private void MouseDownPolygonTravel(object sender, MouseButtonEventArgs e)
       {
-         Point canvasPoint = e.GetPosition(myCanvas);
+         System.Windows.Point canvasPoint = e.GetPosition(myCanvas);
          Polygon clickedPolygon = (Polygon)sender;
          if (null == clickedPolygon)
          {
@@ -1530,7 +1581,7 @@ namespace BarbarianPrince
             return;
          myIsTravelThroughGateActive = false;  // only allow one time per mouse click
          //-------------------------------------
-         Point canvasPoint = e.GetPosition(myCanvas);
+         System.Windows.Point canvasPoint = e.GetPosition(myCanvas);
          Polygon clickedPolygon = (Polygon)sender;
          if (null == clickedPolygon)
          {
@@ -1573,7 +1624,7 @@ namespace BarbarianPrince
       private void MouseDownPolygonLetterChoice(object sender, MouseButtonEventArgs e) // e045
       {
          //-------------------------------------
-         Point canvasPoint = e.GetPosition(myCanvas);
+         System.Windows.Point canvasPoint = e.GetPosition(myCanvas);
          Polygon clickedPolygon = (Polygon)sender;
          if (null == clickedPolygon)
          {
@@ -1775,6 +1826,39 @@ namespace BarbarianPrince
          Application app = Application.Current;
          app.Shutdown();
       }
+      protected override void OnSourceInitialized(EventArgs e)
+      {
+         base.OnSourceInitialized(e);
+         try
+         {
+            // Load window placement details for previous application session from application settings
+            // Note - if window was closed on a monitor that is now disconnected from the computer,
+            //        SetWindowPlacement places the window onto a visible monitor.
+            string placeString = Settings.Default.WindowPlacement;
+            WindowPlacement wp = Utilities.Deserialize<WindowPlacement>(placeString);
+            wp.length = Marshal.SizeOf(typeof(WindowPlacement));
+            wp.flags = 0;
+            wp.showCmd = (wp.showCmd == SwShowminimized ? SwShownormal : wp.showCmd);
+            var hwnd = new WindowInteropHelper(this).Handle;
+            if (false == SetWindowPlacement(hwnd, ref wp))
+               Logger.Log(LogEnum.LE_ERROR, "SetWindowPlacement() returned false");
+         }
+         catch( Exception ex ) 
+         {
+            Logger.Log(LogEnum.LE_ERROR, "OnSourceInitialized() e=" + ex.ToString());
+         }
+      }
+      protected override void OnClosing(CancelEventArgs e) //  // WARNING - Not fired when Application.SessionEnding is fired
+      {
+         base.OnClosing(e);
+         WindowPlacement wp; // Persist window placement details to application settings
+         var hwnd = new WindowInteropHelper(this).Handle;
+         if (false == GetWindowPlacement(hwnd, out wp))
+            Logger.Log(LogEnum.LE_ERROR, "GetWindowPlacement() returned false");
+         string sWinPlace = Utilities.Serialize<WindowPlacement>(wp);
+         Settings.Default.WindowPlacement = sWinPlace;
+         Settings.Default.Save();
+      }
       //-------------CONTROLLER HELPER FUNCTIONS---------------------------------
       private void RotateStack(ITerritory selectedTerritory)
       {
@@ -1819,6 +1903,15 @@ namespace BarbarianPrince
          mi4.Click += this.ContextMenuButtonUnflip;
          myContextMenuButton.Items.Add(mi4);
       }
+      //-----------------------------------------------------------------------
+      #region Win32 API declarations to set and get window placement
+      [DllImport("user32.dll")]
+      private static extern bool SetWindowPlacement(IntPtr hWnd, [In] ref WindowPlacement lpwndpl);
+      [DllImport("user32.dll")]
+      private static extern bool GetWindowPlacement(IntPtr hWnd, out WindowPlacement lpwndpl);
+      private const int SwShownormal = 1;
+      private const int SwShowminimized = 2;
+      #endregion
    }
    public static class MyGameViewerWindowExtensions
    {

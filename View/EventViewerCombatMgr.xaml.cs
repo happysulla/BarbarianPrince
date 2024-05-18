@@ -17,6 +17,7 @@ using Button = System.Windows.Controls.Button;
 using Cursor = System.Windows.Input.Cursor;
 using Cursors = System.Windows.Input.Cursors;
 using Label = System.Windows.Controls.Label;
+using Point = System.Windows.Point;
 
 namespace BarbarianPrince
 {
@@ -368,7 +369,7 @@ namespace BarbarianPrince
             return false;
          }
          //--------------------------------------------------
-         Point hotPoint = new Point(Utilities.theMapItemOffset, Utilities.theMapItemOffset); // set the center of the MapItem as the hot point for the cursor
+         System.Windows.Point hotPoint = new System.Windows.Point(Utilities.theMapItemOffset, Utilities.theMapItemOffset); // set the center of the MapItem as the hot point for the cursor
          Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("PoisonDrug"), Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
          myCursors["PoisonDrug"] = Utilities.ConvertToCursor(img1, hotPoint);
          Image img2 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Shield"), Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
@@ -940,7 +941,7 @@ namespace BarbarianPrince
       }
       private bool ResetGridForCombat(IMapItems partyMembers, IMapItems encounteredMembers)
       {
-         Point hotPoint = new Point(Utilities.theMapItemOffset, Utilities.theMapItemOffset); // set the center of the MapItem as the hot point for the cursor
+         System.Windows.Point hotPoint = new System.Windows.Point(Utilities.theMapItemOffset, Utilities.theMapItemOffset); // set the center of the MapItem as the hot point for the cursor
          //------------------------------------
          if (true == myGameInstance.IsCavalryEscort)
          {
@@ -5503,7 +5504,7 @@ namespace BarbarianPrince
             return;
          }
          //------------------------------------------------------------------------------
-         Point p = e.GetPosition((UIElement)sender);
+         System.Windows.Point p = e.GetPosition((UIElement)sender);
          HitTestResult result = VisualTreeHelper.HitTest(myGrid, p);  // Get the Point where the hit test occurs
          foreach (UIElement ui in myGrid.Children)
          {
@@ -5923,7 +5924,7 @@ namespace BarbarianPrince
       }
       private void Header_MouseDown(object sender, MouseButtonEventArgs e)
       {
-         Point p = e.GetPosition((UIElement)sender);
+         System.Windows.Point p = e.GetPosition((UIElement)sender);
          HitTestResult result = VisualTreeHelper.HitTest(myStackPanelCheckMarks, p);  // Get the Point where the hit test occurrs
          foreach (UIElement ui in myStackPanelCheckMarks.Children)
          {

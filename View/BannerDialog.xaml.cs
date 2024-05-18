@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Xml;
+using Point = System.Windows.Point;
 
 namespace BarbarianPrince
 {
@@ -13,7 +14,7 @@ namespace BarbarianPrince
     {
         public bool CtorError { get; } = false;
         private bool myIsDragging = false;
-        private Point myPreviousLocation;
+        private System.Windows.Point myPreviousLocation;
         private string myKey = "";
         public string Key { get => myKey; }
         //private TextBlock myTextBlockDisplay = null;
@@ -71,7 +72,7 @@ namespace BarbarianPrince
         {
             if (true == myIsDragging)
             {
-                Point newPoint = this.PointToScreen(e.GetPosition(this));  // Find the current mouse position in screen coordinates.
+                System.Windows.Point newPoint = this.PointToScreen(e.GetPosition(this));  // Find the current mouse position in screen coordinates.
                 newPoint.Offset(-myPreviousLocation.X, -myPreviousLocation.Y); // Compensate for the position the control was clicked.
                 this.Left = newPoint.X; // Move the window.
                 this.Top = newPoint.Y;

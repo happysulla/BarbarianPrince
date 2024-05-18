@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfAnimatedGif;
+using Point = System.Windows.Point;
 
 namespace BarbarianPrince
 {
@@ -304,7 +305,7 @@ namespace BarbarianPrince
                myIsHeaderCheckBoxChecked = true;
          }
          //--------------------------------------------------
-         Point hotPoint = new Point(Utilities.theMapItemOffset, Utilities.theMapItemOffset); // set the center of the MapItem as the hot point for the cursor
+         System.Windows.Point hotPoint = new System.Windows.Point(Utilities.theMapItemOffset, Utilities.theMapItemOffset); // set the center of the MapItem as the hot point for the cursor
          foreach (IMapItem mi in myMapItems) // create the cursors for the party member buttons
          {
             Button b = CreateButton(mi, false, true, false);
@@ -1180,7 +1181,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "Grid_MouseDown(): UpdateGrid() return false");
             return;
          }
-         Point p = e.GetPosition((UIElement)sender);
+         System.Windows.Point p = e.GetPosition((UIElement)sender);
          HitTestResult result = VisualTreeHelper.HitTest(myGridHunt, p);  // Get the Point where the hit test occurrs
          foreach (UIElement ui in myGridHunt.Children)
          {

@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Xml;
 using WpfAnimatedGif;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using Point = System.Windows.Point;
 
 namespace BarbarianPrince
 {
@@ -639,7 +640,7 @@ namespace BarbarianPrince
                      {
                         img.Visibility = Visibility.Hidden;
                         double sizeCursor = Utilities.ZoomCanvas * Utilities.ZOOM * Utilities.theMapItemSize;
-                        Point hotPoint = new Point(Utilities.theMapItemOffset, sizeCursor * 0.5); // set the center of the MapItem as the hot point for the cursor
+                        System.Windows.Point hotPoint = new System.Windows.Point(Utilities.theMapItemOffset, sizeCursor * 0.5); // set the center of the MapItem as the hot point for the cursor
                         Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Target"), Width = sizeCursor, Height = sizeCursor };
                         myScrollViewerTextBlock.Cursor = Utilities.ConvertToCursor(img1, hotPoint);
                      }
@@ -702,7 +703,7 @@ namespace BarbarianPrince
                }
                PointCollection points1 = new PointCollection();
                foreach (IMapPoint mp2 in t1.Points)
-                  points1.Add(new Point(mp2.X, mp2.Y));
+                  points1.Add(new System.Windows.Point(mp2.X, mp2.Y));
                Polygon aPolygon1 = new Polygon { Fill = Utilities.theBrushRegion, Points = points1, Tag = t1.ToString() };
                myCanvas.Children.Add(aPolygon1);
             }
@@ -717,7 +718,7 @@ namespace BarbarianPrince
          }
          PointCollection points = new PointCollection();
          foreach (IMapPoint mp1 in t.Points)
-            points.Add(new Point(mp1.X, mp1.Y));
+            points.Add(new System.Windows.Point(mp1.X, mp1.Y));
          Polygon aPolygon = new Polygon { Fill = Utilities.theBrushRegion, Points = points, Tag = t.ToString() };
          myCanvas.Children.Add(aPolygon);
          return true;
@@ -4105,7 +4106,7 @@ namespace BarbarianPrince
       private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
       {
          GameAction action = GameAction.Error;
-         Point p = e.GetPosition((UIElement)sender);
+         System.Windows.Point p = e.GetPosition((UIElement)sender);
          HitTestResult result = VisualTreeHelper.HitTest(myTextBlock, p);  // Get the Point where the hit test occurrs
          foreach (Inline item in myTextBlock.Inlines)
          {

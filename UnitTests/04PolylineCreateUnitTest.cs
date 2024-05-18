@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Xml;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
+using Point = System.Windows.Point;
 
 namespace BarbarianPrince
 {
@@ -223,7 +224,7 @@ namespace BarbarianPrince
                            Double X1 = Double.Parse(value);
                            value = reader.GetAttribute("Y");
                            Double Y1 = Double.Parse(value);
-                           points.Add(new Point(X1, Y1));
+                           points.Add(new System.Windows.Point(X1, Y1));
                         }
                         else
                         {
@@ -282,7 +283,7 @@ namespace BarbarianPrince
             int i = 0;
             double X1 = 0.0;
             double Y1 = 0.0;
-            foreach (Point p in kvp.Value.Points)
+            foreach (System.Windows.Point p in kvp.Value.Points)
             {
                if (0 == i)
                {
@@ -294,9 +295,9 @@ namespace BarbarianPrince
                   double Xcenter = X1 + (p.X - X1) / 2.0;
                   double Ycenter = Y1 + (p.Y - Y1) / 2.0;
                   PointCollection points = new PointCollection();
-                  Point one = new Point(Xcenter - SIZE, Ycenter - SIZE);
-                  Point two = new Point(Xcenter + SIZE, Ycenter);
-                  Point three = new Point(Xcenter - SIZE, Ycenter + SIZE);
+                  System.Windows.Point one = new System.Windows.Point(Xcenter - SIZE, Ycenter - SIZE);
+                  System.Windows.Point two = new System.Windows.Point(Xcenter + SIZE, Ycenter);
+                  System.Windows.Point three = new System.Windows.Point(Xcenter - SIZE, Ycenter + SIZE);
                   points.Add(one);
                   points.Add(two);
                   points.Add(three);
@@ -348,7 +349,7 @@ namespace BarbarianPrince
          aEllipseStart.Stroke = Brushes.Red;
          aEllipseStart.Width = 50;
          aEllipseStart.Height = 50;
-         Point pStart = new Point(50, 50);
+         System.Windows.Point pStart = new System.Windows.Point(50, 50);
          pStart.X -= theEllipseOffset;
          pStart.Y -= theEllipseOffset;
          Canvas.SetLeft(aEllipseStart, pStart.X);
@@ -364,7 +365,7 @@ namespace BarbarianPrince
          aEllipseEnd.Stroke = Brushes.Red;
          aEllipseEnd.Width = 50;
          aEllipseEnd.Height = 50;
-         Point pEnd = new Point(50, 150);
+         System.Windows.Point pEnd = new System.Windows.Point(50, 150);
          pEnd.X -= theEllipseOffset;
          pEnd.Y -= theEllipseOffset;
          Canvas.SetLeft(aEllipseEnd, pEnd.X);
@@ -382,7 +383,7 @@ namespace BarbarianPrince
             XmlElement nameElem = aXmlDocument.CreateElement("River");  // name of river
             nameElem.SetAttribute("value", kvp.Key);
             aXmlDocument.DocumentElement.AppendChild(nameElem);
-            foreach( Point p in kvp.Value.Points)
+            foreach(System.Windows.Point p in kvp.Value.Points)
             {
                XmlElement pointElem = aXmlDocument.CreateElement("point");
                pointElem.SetAttribute("X", p.X.ToString());
@@ -395,7 +396,7 @@ namespace BarbarianPrince
       //----------------------------------------------------------
       void MouseDownEllipse(object sender, MouseButtonEventArgs e)
       {
-         Point canvasPoint = e.GetPosition(myCanvas);
+         System.Windows.Point canvasPoint = e.GetPosition(myCanvas);
          IMapPoint mp = new MapPoint(canvasPoint.X, canvasPoint.Y);
          Ellipse mousedEllipse = (Ellipse)sender;
          //----------------------------------------
@@ -425,7 +426,7 @@ namespace BarbarianPrince
          {
             PointCollection points = new PointCollection();
             foreach (IMapPoint mp1 in myPoints)
-               points.Add(new Point(mp1.X, mp1.Y));
+               points.Add(new System.Windows.Point(mp1.X, mp1.Y));
             Polyline polyline = new Polyline { Points = points, Stroke = mySolidColorBrush3, StrokeThickness = 4, Visibility = Visibility.Visible };
             myRivers[name] = polyline;
             Canvas.SetZIndex(polyline, 0);
@@ -440,7 +441,7 @@ namespace BarbarianPrince
       }
       void MouseDownCanvas(object sender, MouseButtonEventArgs e)
       {
-         Point canvasPoint = e.GetPosition(myCanvas);
+         System.Windows.Point canvasPoint = e.GetPosition(myCanvas);
          IMapPoint mp = new MapPoint(canvasPoint.X, canvasPoint.Y);
          if (false == CreatePoint(mp))
             Logger.Log(LogEnum.LE_ERROR, "MouseDownCanvas->CreatePoint()");

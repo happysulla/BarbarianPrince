@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using Point = System.Windows.Point;
 
 namespace BarbarianPrince
 {
@@ -48,7 +49,7 @@ namespace BarbarianPrince
          {
             myTargetCursor.Dispose();
             double sizeCursor = Utilities.ZoomCanvas * Utilities.ZOOM * Utilities.theMapItemSize;
-            Point hotPoint = new Point(Utilities.theMapItemOffset, sizeCursor * 0.5); // set the center of the MapItem as the hot point for the cursor
+            System.Windows.Point hotPoint = new System.Windows.Point(Utilities.theMapItemOffset, sizeCursor * 0.5); // set the center of the MapItem as the hot point for the cursor
             Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Target"), Width = sizeCursor, Height = sizeCursor };
             myTargetCursor = Utilities.ConvertToCursor(img1, hotPoint);
             this.myCanvas.Cursor = myTargetCursor;
@@ -66,7 +67,7 @@ namespace BarbarianPrince
             case GameAction.E045ArchOfTravel:
             case GameAction.E156MayorTerritorySelection:
                double sizeCursor = Utilities.ZoomCanvas * Utilities.ZOOM * Utilities.theMapItemSize;
-               Point hotPoint = new Point(Utilities.theMapItemOffset, sizeCursor * 0.5); // set the center of the MapItem as the hot point for the cursor
+               System.Windows.Point hotPoint = new System.Windows.Point(Utilities.theMapItemOffset, sizeCursor * 0.5); // set the center of the MapItem as the hot point for the cursor
                Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Target"), Width = sizeCursor, Height = sizeCursor };
                myTargetCursor = Utilities.ConvertToCursor(img1, hotPoint);
                this.myCanvas.Cursor = myTargetCursor; // set the cursor in the canvas

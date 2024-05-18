@@ -10,6 +10,7 @@ using System.Windows.Shapes;
 using System.Xml;
 using ContextMenu = System.Windows.Controls.ContextMenu;
 using MenuItem = System.Windows.Controls.MenuItem;
+using Point = System.Windows.Point;
 
 namespace BarbarianPrince
 {
@@ -457,7 +458,7 @@ namespace BarbarianPrince
             {
                 PointCollection points = new PointCollection();
                 foreach (IMapPoint mp1 in t.Points)
-                    points.Add(new Point(mp1.X, mp1.Y));
+                    points.Add(new System.Windows.Point(mp1.X, mp1.Y));
                 Polygon aPolygon = new Polygon { Fill = aSolidColorBrush0, Points = points, Tag = t.ToString() };
                 Canvas.SetZIndex(aPolygon, 0);
                 aPolygon.MouseDown += this.MouseDownPolygon;
@@ -584,13 +585,13 @@ namespace BarbarianPrince
             offset *= 3.0;
             double xPostion = mim.OldTerritory.CenterPoint.X + offset;
             double yPostion = mim.OldTerritory.CenterPoint.Y + offset;
-            Point newPoint = new Point(xPostion, yPostion);
+            System.Windows.Point newPoint = new System.Windows.Point(xPostion, yPostion);
             aPointCollection.Add(newPoint);
             foreach (ITerritory t in mim.BestPath.Territories)
             {
                 xPostion = t.CenterPoint.X + offset;
                 yPostion = t.CenterPoint.Y + offset;
-                newPoint = new Point(xPostion, yPostion);
+                newPoint = new System.Windows.Point(xPostion, yPostion);
                 aPointCollection.Add(newPoint);
             }
             return true;
@@ -612,17 +613,17 @@ namespace BarbarianPrince
             try
             {
                 Canvas.SetZIndex(b, 100 + 3 * newStackCount); // Move the button to the top of the Canvas
-                PathFigure aPathFigure = new PathFigure() { StartPoint = new Point(mim.MapItem.Location.X, mim.MapItem.Location.Y) };
+                PathFigure aPathFigure = new PathFigure() { StartPoint = new System.Windows.Point(mim.MapItem.Location.X, mim.MapItem.Location.Y) };
                 int lastItemIndex = mim.BestPath.Territories.Count - 1;
                 for (int i = 0; i < lastItemIndex; i++)
                 {
                     ITerritory t = mim.BestPath.Territories[i];
-                    Point newPoint = new Point(t.CenterPoint.X - Utilities.theMapItemOffset, t.CenterPoint.Y - Utilities.theMapItemOffset);
+               System.Windows.Point newPoint = new System.Windows.Point(t.CenterPoint.X - Utilities.theMapItemOffset, t.CenterPoint.Y - Utilities.theMapItemOffset);
                     LineSegment lineSegment = new LineSegment(newPoint, false);
                     aPathFigure.Segments.Add(lineSegment);
                 }
-                // Add the last line segment
-                Point newPoint2 = new Point(mim.NewTerritory.CenterPoint.X + (3 * newStackCount) - Utilities.theMapItemOffset, mim.NewTerritory.CenterPoint.Y + (3 * newStackCount) - Utilities.theMapItemOffset);
+            // Add the last line segment
+            System.Windows.Point newPoint2 = new System.Windows.Point(mim.NewTerritory.CenterPoint.X + (3 * newStackCount) - Utilities.theMapItemOffset, mim.NewTerritory.CenterPoint.Y + (3 * newStackCount) - Utilities.theMapItemOffset);
                 LineSegment lineSegment2 = new LineSegment(newPoint2, false);
                 aPathFigure.Segments.Add(lineSegment2);
                 // Animiate the map item along the line segment
@@ -976,7 +977,7 @@ namespace BarbarianPrince
         {
             if (null != myButtonSelected)
             {
-                Point newPoint = e.GetPosition(myCanvas);
+                System.Windows.Point newPoint = e.GetPosition(myCanvas);
                 Canvas.SetTop(myButtonSelected, newPoint.Y + 5);
                 Canvas.SetLeft(myButtonSelected, newPoint.X + 5);
                 Canvas.SetTop(myRectangleSelected, newPoint.Y + 5);
@@ -1048,7 +1049,7 @@ namespace BarbarianPrince
             Button clickedButton = (Button)sender;
             double x = Canvas.GetLeft(clickedButton);
             double y = Canvas.GetTop(clickedButton);
-            Point p = new Point(x, y);
+            System.Windows.Point p = new System.Windows.Point(x, y);
             if (null == myButtonSelected)
             {
                 myButtonSelected = clickedButton;
@@ -1090,7 +1091,7 @@ namespace BarbarianPrince
         }
         private void MouseDownPolygon(object sender, MouseButtonEventArgs e)
         {
-            Point canvasPoint = e.GetPosition(myCanvas);
+         System.Windows.Point canvasPoint = e.GetPosition(myCanvas);
             IMapPoint mp = new MapPoint(canvasPoint.X, canvasPoint.Y);
             Console.WriteLine("MouseDownPolygon(): {0}", mp.ToString());
             Polygon clickedPolygon = (Polygon)sender;

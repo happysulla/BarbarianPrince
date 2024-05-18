@@ -6,6 +6,8 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Xml.Serialization;
+using System.Xml;
 namespace BarbarianPrince
 {
    public class Utilities
@@ -107,13 +109,13 @@ namespace BarbarianPrince
          }
          return false;
       }
-      public static System.Windows.Input.Cursor ConvertToCursor(UIElement control, Point hotSpot)
+      public static System.Windows.Input.Cursor ConvertToCursor(UIElement control, System.Windows.Point hotSpot)
       {
          //--------------------------------------------
          // convert FrameworkElement to PNG stream
          var pngStream = new MemoryStream();
          control.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-         Rect rect = new Rect(0, 0, control.DesiredSize.Width, control.DesiredSize.Height);
+         System.Windows.Rect rect = new System.Windows.Rect(0, 0, control.DesiredSize.Width, control.DesiredSize.Height);
          RenderTargetBitmap rtb = new RenderTargetBitmap((int)control.DesiredSize.Width, (int)control.DesiredSize.Height, 96, 96, PixelFormats.Pbgra32);
          control.Arrange(rect);
          rtb.Render(control);
@@ -174,6 +176,20 @@ namespace BarbarianPrince
          }
          return taskBarLocation;
       }
+      public static String Serialize<T>(T t)
+      {
+         using (StringWriter sw = new StringWriter())
+         using (XmlWriter xw = XmlWriter.Create(sw))
+         {
+            new XmlSerializer(typeof(T)).Serialize(xw, t);
+            return sw.GetStringBuilder().ToString();
+         }
+      }
 
+      public static T Deserialize<T>(String s_xml)
+      {
+         using (XmlReader xw = XmlReader.Create(new StringReader(s_xml)))
+            return (T)new XmlSerializer(typeof(T)).Deserialize(xw);
+      }
    }
 }

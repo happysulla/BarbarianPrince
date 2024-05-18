@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Xml;
+using Point = System.Windows.Point;
 
 namespace BarbarianPrince
 {
@@ -234,7 +235,7 @@ namespace BarbarianPrince
             aEllipse.Stroke = Brushes.Red;
             aEllipse.Width = 15;
             aEllipse.Height = 15;
-            Point p = new Point(t.CenterPoint.X, t.CenterPoint.Y);
+            System.Windows.Point p = new System.Windows.Point(t.CenterPoint.X, t.CenterPoint.Y);
             p.X -= theEllipseOffset;
             p.Y -= theEllipseOffset;
             Canvas.SetLeft(aEllipse, p.X);
@@ -252,7 +253,7 @@ namespace BarbarianPrince
             {
                PointCollection points = new PointCollection();
                foreach (IMapPoint mp1 in t.Points)
-                  points.Add(new Point(mp1.X, mp1.Y));
+                  points.Add(new System.Windows.Point(mp1.X, mp1.Y));
                Polygon aPolygon = new Polygon { Fill= Utilities.theBrushRegion, Points = points, Tag = t.ToString(), Visibility= Visibility.Visible };
                aPolygon.MouseDown += this.MouseDownPolygon;
                Canvas.SetZIndex(aPolygon, 0);
@@ -324,7 +325,7 @@ namespace BarbarianPrince
             }
             foreach (IMapPoint p in t.Points) // Points that make up the polygon of this territory
             {
-               Point point = new Point(p.X, p.Y);
+               System.Windows.Point point = new System.Windows.Point(p.X, p.Y);
                XmlElement regionPointElem = aXmlDocument.CreateElement("regionPoint");
                regionPointElem.SetAttribute("X", p.X.ToString());
                regionPointElem.SetAttribute("Y", p.Y.ToString());
@@ -336,7 +337,7 @@ namespace BarbarianPrince
       //--------------------------------------------------------
       void MouseDownEllipse(object sender, MouseButtonEventArgs e)
       {
-         Point canvasPoint = e.GetPosition(myCanvas);
+         System.Windows.Point canvasPoint = e.GetPosition(myCanvas);
          IMapPoint mp = new MapPoint(canvasPoint.X, canvasPoint.Y);
          Console.WriteLine("MouseDownEllipse.MouseDown(): {0}", mp.ToString());
          ITerritory matchingTerritory = null; // Find the corresponding Territory
@@ -370,7 +371,7 @@ namespace BarbarianPrince
             MessageBox.Show("Saving " + mousedEllipse.Tag.ToString());
             PointCollection points = new PointCollection();
             foreach (IMapPoint mp1 in myPoints)
-               points.Add(new Point(mp1.X, mp1.Y));
+               points.Add(new System.Windows.Point(mp1.X, mp1.Y));
             Polygon aPolygon = new Polygon { Fill = mySolidColorBrush3, Points = points, Tag = matchingTerritory.ToString() };
             aPolygon.MouseDown += this.MouseDownPolygon;
             aPolygon.Fill = mySolidColorBrush2;
@@ -387,7 +388,7 @@ namespace BarbarianPrince
       {
          // This function adds points to the myPoints collection when an anchor territory is active.
          // The points to add are either new ones or ones that exist from adjacent territories.
-         Point canvasPoint = e.GetPosition(myCanvas);
+         System.Windows.Point canvasPoint = e.GetPosition(myCanvas);
          IMapPoint mp = new MapPoint(canvasPoint.X, canvasPoint.Y);
          if (false == CreatePoint(mp))
             Logger.Log(LogEnum.LE_ERROR, "MouseDownCanvas->CreatePoint()");
@@ -395,7 +396,7 @@ namespace BarbarianPrince
       }
       void MouseDownPolygon(object sender, MouseButtonEventArgs e)
       {
-         Point canvasPoint = e.GetPosition(myCanvas);
+         System.Windows.Point canvasPoint = e.GetPosition(myCanvas);
          IMapPoint mp = new MapPoint(canvasPoint.X, canvasPoint.Y);
          Console.WriteLine("TerritoryRegionUnitTest.MouseDownPolygon(): {0}", mp.ToString());
          if (null == myAnchorTerritory)

@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Xml;
+using Point = System.Windows.Point;
 
 namespace BarbarianPrince
 {
@@ -19,7 +20,7 @@ namespace BarbarianPrince
       Canvas myCanvas = null;
       public bool isDragging = false;
       UIElement myItem = null;
-      private Point myPreviousLocation;
+      private System.Windows.Point myPreviousLocation;
       Territory myAnchorTerritory = null;
       private double myXColumn = 0;
       private Dictionary<string, Polyline> myRivers = new Dictionary<string, Polyline>();
@@ -373,7 +374,7 @@ namespace BarbarianPrince
             Width = theEllipseDiameter,
             Height = theEllipseDiameter
          };
-         Point p = new Point(territory.CenterPoint.X, territory.CenterPoint.Y);
+         System.Windows.Point p = new System.Windows.Point(territory.CenterPoint.X, territory.CenterPoint.Y);
          Canvas.SetLeft(aEllipse, p.X);
          Canvas.SetTop(aEllipse, p.Y);
          p.X -= theEllipseOffset;
@@ -392,7 +393,7 @@ namespace BarbarianPrince
             aEllipse.Stroke = Brushes.Red;
             aEllipse.Width = theEllipseDiameter;
             aEllipse.Height = theEllipseDiameter;
-            Point p = new Point(t.CenterPoint.X, t.CenterPoint.Y);
+            System.Windows.Point p = new System.Windows.Point(t.CenterPoint.X, t.CenterPoint.Y);
             p.X -= theEllipseOffset;
             p.Y -= theEllipseOffset;
             Canvas.SetLeft(aEllipse, p.X);
@@ -464,7 +465,7 @@ namespace BarbarianPrince
             }
             foreach (IMapPoint p in t.Points) // Points that make up the polygon of this territory
             {
-               Point point = new Point(p.X, p.Y);
+               System.Windows.Point point = new System.Windows.Point(p.X, p.Y);
                XmlElement regionPointElem = aXmlDocument.CreateElement("regionPoint");
                regionPointElem.SetAttribute("X", p.X.ToString());
                regionPointElem.SetAttribute("Y", p.Y.ToString());
@@ -1015,7 +1016,7 @@ namespace BarbarianPrince
                            Double X1 = Double.Parse(value);
                            value = reader.GetAttribute("Y");
                            Double Y1 = Double.Parse(value);
-                           points.Add(new Point(X1, Y1));
+                           points.Add(new System.Windows.Point(X1, Y1));
                         }
                         else
                         {
@@ -1049,7 +1050,7 @@ namespace BarbarianPrince
             int i = 0;
             double X1 = 0.0;
             double Y1 = 0.0;
-            foreach (Point p in polyline.Points)
+            foreach (System.Windows.Point p in polyline.Points)
             {
                if (0 == i)
                {
@@ -1061,9 +1062,9 @@ namespace BarbarianPrince
                   double Xcenter = X1 + (p.X - X1) / 2.0;
                   double Ycenter = Y1 + (p.Y - Y1) / 2.0;
                   PointCollection points = new PointCollection();
-                  Point one = new Point(Xcenter - SIZE, Ycenter - SIZE);
-                  Point two = new Point(Xcenter + SIZE, Ycenter);
-                  Point three = new Point(Xcenter - SIZE, Ycenter + SIZE);
+                  System.Windows.Point one = new System.Windows.Point(Xcenter - SIZE, Ycenter - SIZE);
+                  System.Windows.Point two = new System.Windows.Point(Xcenter + SIZE, Ycenter);
+                  System.Windows.Point three = new System.Windows.Point(Xcenter - SIZE, Ycenter + SIZE);
                   points.Add(one);
                   points.Add(two);
                   points.Add(three);
@@ -1108,7 +1109,7 @@ namespace BarbarianPrince
       void MouseLeftButtonDownCreateTerritory(object sender, MouseButtonEventArgs e)
       {
          SolidColorBrush aSolidColorBrush = new SolidColorBrush { Color = Color.FromArgb(100, 100, 100, 0) };
-         Point p = e.GetPosition(myCanvas);
+         System.Windows.Point p = e.GetPosition(myCanvas);
          TerritoryCreateDialog dialog = new TerritoryCreateDialog(); // Get the name from user
          dialog.myTextBoxName.Focus();
          if (true == dialog.ShowDialog())
@@ -1126,7 +1127,7 @@ namespace BarbarianPrince
       }
       void MouseDownSetCenterPoint(object sender, MouseButtonEventArgs e)
       {
-         Point p = e.GetPosition(myCanvas);
+         System.Windows.Point p = e.GetPosition(myCanvas);
          Console.WriteLine("TerritoryUnitTest.MouseDown(): {0}", p.ToString());
          foreach (UIElement ui in myCanvas.Children)
          {
@@ -1152,7 +1153,7 @@ namespace BarbarianPrince
          {
             if (null != myItem)
             {
-               Point newPoint = e.GetPosition(myCanvas);
+               System.Windows.Point newPoint = e.GetPosition(myCanvas);
                Canvas.SetTop(myItem, newPoint.Y - theEllipseOffset);
                Canvas.SetLeft(myItem, newPoint.X - theEllipseOffset);
             }
@@ -1160,7 +1161,7 @@ namespace BarbarianPrince
       }
       void MouseUp(object sender, MouseButtonEventArgs e)
       {
-         Point newPoint = e.GetPosition(myCanvas);
+         System.Windows.Point newPoint = e.GetPosition(myCanvas);
          this.isDragging = false;
          if (this.myItem != null)
          {
@@ -1188,7 +1189,7 @@ namespace BarbarianPrince
       }
       void MouseLeftButtonDownVerifyTerritory(object sender, MouseButtonEventArgs e)
       {
-         Point p = e.GetPosition(myCanvas);
+         System.Windows.Point p = e.GetPosition(myCanvas);
          Console.WriteLine("TerritoryCreateUnitTest.MouseLeftButtonDownVerifyTerritory(): {0}", p.ToString());
          ITerritory selectedTerritory = null;
          foreach (UIElement ui in myCanvas.Children)
@@ -1239,7 +1240,7 @@ namespace BarbarianPrince
          SolidColorBrush aSolidColorBrush1 = new SolidColorBrush { Color = Color.FromArgb(010, 255, 100, 0) };
          SolidColorBrush aSolidColorBrush2 = new SolidColorBrush { Color = Color.FromArgb(255, 0, 0, 0) };     // black fill
          SolidColorBrush aSolidColorBrush3 = new SolidColorBrush { Color = Colors.Red };                       // red fill
-         Point p = e.GetPosition(myCanvas);
+         System.Windows.Point p = e.GetPosition(myCanvas);
          foreach (UIElement ui in myCanvas.Children) // find the selected Ellipse that was clicked
          {
             if (ui is Ellipse)
@@ -1319,7 +1320,7 @@ namespace BarbarianPrince
          SolidColorBrush aSolidColorBrush1 = new SolidColorBrush { Color = Color.FromArgb(010, 255, 100, 0) };
          SolidColorBrush aSolidColorBrush2 = new SolidColorBrush { Color = Color.FromArgb(255, 0, 0, 0) };     // black fill
          SolidColorBrush aSolidColorBrush3 = new SolidColorBrush { Color = Colors.Red };                       // red fill
-         Point p = e.GetPosition(myCanvas);
+         System.Windows.Point p = e.GetPosition(myCanvas);
          foreach (UIElement ui in myCanvas.Children) // find the selected Ellipse that was clicked
          {
             if (ui is Ellipse)
@@ -1399,7 +1400,7 @@ namespace BarbarianPrince
          SolidColorBrush aSolidColorBrush1 = new SolidColorBrush { Color = Color.FromArgb(010, 255, 100, 0) };
          SolidColorBrush aSolidColorBrush2 = new SolidColorBrush { Color = Color.FromArgb(255, 0, 0, 0) };
          SolidColorBrush aSolidColorBrush3 = new SolidColorBrush { Color = Colors.Red };
-         Point p = e.GetPosition(myCanvas);
+         System.Windows.Point p = e.GetPosition(myCanvas);
          foreach (UIElement ui in myCanvas.Children)
          {
             if (ui is Ellipse)
@@ -1486,7 +1487,7 @@ namespace BarbarianPrince
          SolidColorBrush aSolidColorBrush1 = new SolidColorBrush { Color = Color.FromArgb(010, 255, 100, 0) };
          SolidColorBrush aSolidColorBrush2 = new SolidColorBrush { Color = Color.FromArgb(255, 0, 0, 0) };
          SolidColorBrush aSolidColorBrush3 = new SolidColorBrush { Color = Colors.Red };
-         Point p = e.GetPosition(myCanvas);
+         System.Windows.Point p = e.GetPosition(myCanvas);
          foreach (UIElement ui in myCanvas.Children)
          {
             if (ui is Ellipse)
@@ -1582,7 +1583,7 @@ namespace BarbarianPrince
          SolidColorBrush aSolidColorBrush1 = new SolidColorBrush { Color = Color.FromArgb(010, 255, 100, 0) };
          SolidColorBrush aSolidColorBrush2 = new SolidColorBrush { Color = Color.FromArgb(255, 0, 0, 0) };
          SolidColorBrush aSolidColorBrush3 = new SolidColorBrush { Color = Colors.Red };
-         Point p = e.GetPosition(myCanvas);
+         System.Windows.Point p = e.GetPosition(myCanvas);
          foreach (UIElement ui in myCanvas.Children)
          {
             if (ui is Ellipse)

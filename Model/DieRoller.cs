@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
 using WpfAnimatedGif;
+using Point = System.Windows.Point;
 
 namespace BarbarianPrince
 {
@@ -360,7 +361,7 @@ namespace BarbarianPrince
             const double PATH_DISTANCE = 1000;  // limits the animation path - distance & time correlate to speed of dice
             const double BUTTON_BOARDER = 15; // add 10 for the button border
             double dieSize = ZOOM_DICE * Utilities.theMapItemSize / Utilities.ZoomCanvas;
-            PathFigure aPathFigure = new PathFigure() { StartPoint = new Point(startPoint.X, startPoint.Y) };
+            PathFigure aPathFigure = new PathFigure() { StartPoint = new System.Windows.Point(startPoint.X, startPoint.Y) };
             double angle1InDegrees = Utilities.RandomGenerator.Next(20, 60);
             double angle1InRadians = angle1InDegrees * Math.PI / 180;
             double tangetOfAngle = Math.Tan(angle1InRadians);
@@ -484,7 +485,7 @@ namespace BarbarianPrince
                      break;
                   default: Logger.Log(LogEnum.LE_ERROR, "DiceAnimate(): Reached default"); return false;
                }
-               Point newPoint = new Point(x2, y2);
+               System.Windows.Point newPoint = new System.Windows.Point(x2, y2);
                LineSegment lineSegment = new LineSegment(newPoint, false);
                aPathFigure.Segments.Add(lineSegment);
                pathDistance += Math.Sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));

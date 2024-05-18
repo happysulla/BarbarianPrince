@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Forms;
+using Point = System.Windows.Point;
 
 namespace BarbarianPrince
 {
@@ -68,8 +69,8 @@ namespace BarbarianPrince
       //------------------------------------------------------------------------------
       static public double GetDistance(ITerritory startT, ITerritory endT)
       {
-         Point startPoint = new Point(startT.CenterPoint.X, startT.CenterPoint.Y);
-         Point endPoint = new Point(endT.CenterPoint.X, endT.CenterPoint.Y);
+         System.Windows.Point startPoint = new System.Windows.Point(startT.CenterPoint.X, startT.CenterPoint.Y);
+         System.Windows.Point endPoint = new System.Windows.Point(endT.CenterPoint.X, endT.CenterPoint.Y);
          double xDelta = endPoint.X - startPoint.X;
          double yDelta = endPoint.Y - startPoint.Y;
          double distance = Math.Sqrt(xDelta * xDelta + yDelta * yDelta);
