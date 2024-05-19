@@ -149,7 +149,7 @@ namespace BarbarianPrince
       protected bool SetEndOfDayState(IGameInstance gi, ref GameAction action)
       {
          ITerritory princeTerritory = gi.Prince.Territory;
-         if ((true == IsNorthofTragothRiver(princeTerritory)) && (false == gi.IsGuardEncounteredThisTurn) && ("e061" != gi.EventStart) && ("e062" != gi.EventStart) && ("e063" != gi.EventStart) && ("e024" != gi.EventStart))
+         if ((true == IsNorthofTragothRiver(princeTerritory)) && (false == gi.IsEnslaved) && (false == gi.IsGuardEncounteredThisTurn) && ("e061" != gi.EventStart) && ("e062" != gi.EventStart) && ("e063" != gi.EventStart) && ("e024" != gi.EventStart))
          {
             gi.IsGuardEncounteredThisTurn = true;
             gi.GamePhase = GamePhase.Hunt;
@@ -1980,6 +1980,7 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.HuntE002aEncounterRoll:
+               //dieRoll = 12; // <cgs> TEST
                int encounterResult = dieRoll - 3;
                if ("0101" == gi.Prince.Territory.Name)
                   ++encounterResult;
@@ -5987,6 +5988,7 @@ namespace BarbarianPrince
          switch (key)
          {
             case "e002a": // Mercenaries
+               gi.EncounteredMembers.Clear();
                for (int i = 0; i < dieRoll; ++i)
                {
                   IMapItem mercenanary11 = CreateCharacter(gi, "Mercenary", 4);
@@ -12646,24 +12648,28 @@ namespace BarbarianPrince
             return true;
          }
          //---------------------------------------------------
-         int capturedCoin = 0;
-         foreach (int wc in gi.CapturedWealthCodes) // All wealth should be moved to party
+         if( 0 < gi.CapturedWealthCodes.Count)
          {
-            int coin = GameEngine.theTreasureMgr.GetCoin(wc);
-            if (coin < 0)
+            Logger.Log(LogEnum.LE_ERROR, "EncounterEnd(): WC WC WC WC WC WC WC WC WC WC WC WC WC WC.Count=" + gi.CapturedWealthCodes.Count.ToString() + " for es=" + gi.EventStart + " ae=" + gi.EventActive + " a=" + action.ToString());
+            int capturedCoin = 0;
+            foreach (int wc in gi.CapturedWealthCodes) // All wealth should be moved to party
             {
-               Logger.Log(LogEnum.LE_ERROR, "EncounterEnd(): GetCoin()=" + coin.ToString() + " es=" + gi.EventStart);
+               int coin = GameEngine.theTreasureMgr.GetCoin(wc);
+               if (coin < 0)
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "EncounterEnd(): GetCoin()=" + coin.ToString() + " es=" + gi.EventStart);
+                  return false;
+               }
+               capturedCoin += coin;
+            }
+            gi.AddCoins(capturedCoin);
+            if (false == gi.AddCoins(capturedCoin))
+            {
+               Logger.Log(LogEnum.LE_ERROR, "EncounterEnd(): AddCoins() returned false for es=" + gi.EventStart);
                return false;
             }
-            capturedCoin += coin;
+            gi.CapturedWealthCodes.Clear();
          }
-         gi.AddCoins(capturedCoin);
-         if (false == gi.AddCoins(capturedCoin))
-         {
-            Logger.Log(LogEnum.LE_ERROR, "EncounterEnd(): AddCoins() returned false for es=" + gi.EventStart);
-            return false;
-         }
-         gi.CapturedWealthCodes.Clear();
          //---------------------------------------------------
          if (0 < gi.FickleCoin)
          {

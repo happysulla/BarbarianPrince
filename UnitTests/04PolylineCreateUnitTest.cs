@@ -37,7 +37,7 @@ namespace BarbarianPrince
       public PolylineCreateUnitTest(DockPanel dp, IGameInstance gi)
       {
          myIndexName = 0;
-         myHeaderNames.Add("04-Start");
+         myHeaderNames.Add("04-Start Polyline Test");
          myHeaderNames.Add("04-Dienstal Branch");
          myHeaderNames.Add("04-Largos River");
          myHeaderNames.Add("04-Nesser River");

@@ -268,7 +268,6 @@ namespace BarbarianPrince
                {
                   myGameInstance.AddSpecialItem(myItem, myMapItem);
                }
-
             }
             //------------------------------------------
             if (null == myCallback)

@@ -1287,7 +1287,7 @@ namespace BarbarianPrince
                foreach (IMapItem mi in myNonCombatants) // UpdateCombatEnd() - return noncombatants to party
                   myGameInstance.PartyMembers.Add(mi);
                myIsEscape = true;
-               if (false == SetFinalState()) // UpdateGrid() performed in caller routine
+               if (false == SetStateIfItemUsed()) // UpdateGrid() performed in caller routine
                {
                   if (false == myCallback(myIsRoute, true)) // UpdateCombatEnd() - Prince lost combat against Black Knight
                   {
@@ -1333,28 +1333,13 @@ namespace BarbarianPrince
                      ++mi.Combat;
                }
                //-------------------------------
-               IMapItems remainingEnemies = null;
-               if (true == myIsPartyMembersAssignable)
-                  remainingEnemies = myUnassignables;
-               else
-                  remainingEnemies = myAssignables;
-               foreach (IMapItem mi in remainingEnemies)
-               {
-                  if (true == mi.Name.Contains("Troll"))  // e057 - Trolls skins are worth money
-                     myCapturedPossessions.Add(SpecialEnum.TrollSkin);
-                  if (true == mi.Name.Contains("Roc"))  // e099 - Roc Beaks worth money
-                     myCapturedPossessions.Add(SpecialEnum.RocBeak);
-                  if (true == mi.Name.Contains("Griffon"))  // e100 - Griffon Claws worth money
-                     myCapturedPossessions.Add(SpecialEnum.GriffonClaws);
-               }
-               //-------------------------------
                foreach (IMapItem mi in myNonCombatants) // UpdateCombatEnd() - return non combatants to party 
                   myGameInstance.PartyMembers.Add(mi);
                foreach (IMapItem mi in myEncounteredSlaveGirls) // return slave girls to party - ones given in negotiation
                   myGameInstance.PartyMembers.Add(mi);
                DistributeDeadWealth();
                //-------------------------------
-               if (false == SetFinalState()) // UpdateGrid() performed in caller routine
+               if (false == SetStateIfItemUsed()) // UpdateGrid() performed in caller routine
                {
                   isEnd = true;
                   if (false == myCallback(myIsRoute, myIsEscape)) // UpdateCombatEnd() - Players won combat
@@ -4044,7 +4029,7 @@ namespace BarbarianPrince
          }
          return true;
       }
-      private bool SetFinalState()
+      private bool SetStateIfItemUsed()
       {
          bool isDrugApplied = false;
          bool isShieldApplied = false;
@@ -4057,24 +4042,24 @@ namespace BarbarianPrince
          }
          if (true == isDrugApplied)
          {
-            Logger.Log(LogEnum.LE_COMBAT_STATE, "SetFinalState(): " + myState.ToString() + "-->END_POISON");
+            Logger.Log(LogEnum.LE_COMBAT_STATE, "SetStateIfItemUsed(): " + myState.ToString() + "-->END_POISON");
             myState = CombatEnum.END_POISON;
             return true;
          }
          if (true == isShieldApplied)
          {
-            Logger.Log(LogEnum.LE_COMBAT_STATE, "SetFinalState(): " + myState.ToString() + "-->END_SHIELD");
+            Logger.Log(LogEnum.LE_COMBAT_STATE, "SetStateIfItemUsed(): " + myState.ToString() + "-->END_SHIELD");
             myState = CombatEnum.END_SHIELD;
             return true;
          }
          //-------------------------------
          if (true == myIsTalismanActivated)
          {
-            Logger.Log(LogEnum.LE_COMBAT_STATE, "SetFinalState(): " + myState.ToString() + "-->END_TALISMAN");
+            Logger.Log(LogEnum.LE_COMBAT_STATE, "SetStateIfItemUsed(): " + myState.ToString() + "-->END_TALISMAN");
             myState = CombatEnum.END_TALISMAN;
             return true;
          }
-         return false;
+         return false; // return false if state not set
       }
       private void DistributeDeadWealth()
       {
@@ -4083,6 +4068,7 @@ namespace BarbarianPrince
          {
             if ((true == mi.IsKilled) || (true == mi.IsUnconscious))
             {
+               Logger.Log(LogEnum.LE_ADD_WEALTH_CODE, "DistributeDeadWealth(): mi=" + mi.Name + " coffs up wc=" +  mi.WealthCode.ToString());
                if (0 < mi.WealthCode)
                   myCapturedWealthCodes.Add(mi.WealthCode);
                foreach (SpecialEnum possession in mi.SpecialKeeps)
@@ -4091,6 +4077,12 @@ namespace BarbarianPrince
                   myCapturedPossessions.Add(possession);
                foreach (IMapItem mount in mi.Mounts)
                   myCapturedMounts.Add(mount);
+               if (true == mi.Name.Contains("Troll"))  // e057 - Trolls skins are worth money
+                  myCapturedPossessions.Add(SpecialEnum.TrollSkin);
+               if (true == mi.Name.Contains("Roc"))  // e099 - Roc Beaks worth money
+                  myCapturedPossessions.Add(SpecialEnum.RocBeak);
+               if (true == mi.Name.Contains("Griffon"))  // e100 - Griffon Claws worth money
+                  myCapturedPossessions.Add(SpecialEnum.GriffonClaws);
             }
          }
          //---------------------------------------------
@@ -4119,6 +4111,200 @@ namespace BarbarianPrince
          myGameInstance.AddCoins(myDeadPartyMemberCoin, false); // looters do not get share of this pile
          myGameInstance.TransferMounts(myCapturedMounts);
          myGameInstance.AddSpecialItems(myCapturedPossessions);
+         Logger.Log(LogEnum.LE_ADD_WEALTH_CODE, "DistributeDeadWealth(): CapturedWealthCodes.Count=" + myGameInstance.CapturedWealthCodes.Count.ToString());
+      }
+      private bool RemoveCasualties()
+      {
+         if (true == myIsMirrorFight)
+         {
+            for (int i = 0; i < myMaxRowCount; ++i)
+               myGridRows[i].myAssignable = myAssignables[0];  // assign every row to mirror image
+         }
+         bool isPartyMemberDied = false;  // e331 - fickle party members leave if anybody dies
+         IMapItems results1 = new MapItems();
+         IMapItems results2 = new MapItems();
+         if (true == myIsPartyMembersAssignable)
+         {
+            foreach (IMapItem mi in myAssignables)
+            {
+               if (true == mi.IsKilled)
+               {
+                  isPartyMemberDied = true;
+                  results1.Add(mi);
+                  foreach (IMapItem mount in mi.Mounts)
+                     myCapturedMounts.Add(mount);
+                  foreach (SpecialEnum possession in mi.SpecialKeeps)
+                     myCapturedPossessions.Add(possession);
+                  foreach (SpecialEnum possession in mi.SpecialShares)
+                     myCapturedPossessions.Add(possession);
+                  myDeadPartyMemberCoin += mi.Coin;
+                  if (true == mi.Name.Contains("Griffon"))  // e100 - griffon claws helps with Lady Aeravir
+                     myCapturedPossessions.Add(SpecialEnum.GriffonClaws);
+               }
+               else if ((true == mi.IsRunAway) && (false == myGameInstance.Prince.IsRunAway)) // e007 - runaways are caused by nerve gas
+               {
+                  results1.Add(mi);
+               }
+            }
+            foreach (IMapItem mi in myUnassignables)
+            {
+               if ((true == myIsWizardEscape) && (true == mi.Name.Contains("Wizard"))) // e023 - wizard escapes if damaged and sent fireball
+               {
+                  results2.Add(mi);
+                  continue;
+               }
+               if (true == mi.IsKilled)
+               {
+                  results2.Add(mi);
+                  foreach (IMapItem mount in mi.Mounts)
+                     myCapturedMounts.Add(mount);
+                  foreach (SpecialEnum possession in mi.SpecialKeeps)
+                     myCapturedPossessions.Add(possession);
+                  foreach (SpecialEnum possession in mi.SpecialShares)
+                     myCapturedPossessions.Add(possession);
+                  Logger.Log(LogEnum.LE_ADD_WEALTH_CODE, "RemoveCasualties(): mi=" + mi.Name + " coffs up wc=" + mi.WealthCode.ToString());
+                  if (0 < mi.WealthCode)
+                     myCapturedWealthCodes.Add(mi.WealthCode);
+                  if ((mi.Endurance < 9) && (mi.Combat < 9) && ("e054b" != myGameInstance.EventStart) && ("e033" != myGameInstance.EventStart)) // Endurance/Combat of enemy must be less than nine to route
+                  {
+                     myIsRouteOfEnemyPossible = true;
+                     Logger.Log(LogEnum.LE_COMBAT_STATE_ROUTE, "RemoveCasualties(): s=" + myState.ToString() + " route?=" + myIsRouteOfEnemyPossible.ToString());
+                  }
+                  if (true == mi.Name.Contains("Troll"))  // e057 - Trolls skins are worth money
+                     myCapturedPossessions.Add(SpecialEnum.TrollSkin);
+                  if (true == mi.Name.Contains("Roc"))  // e099 - Roc Beaks worth money
+                     myCapturedPossessions.Add(SpecialEnum.RocBeak);
+                  if (true == mi.Name.Contains("Griffon"))  // e100 - Griffon Claws help with Lady Aeravir
+                     myCapturedPossessions.Add(SpecialEnum.GriffonClaws);
+                  myGameInstance.KilledLocations.Add(myGameInstance.Prince.Territory);
+               }
+               else if (true == mi.IsRunAway) // runaways are caused by nerve gas
+               {
+                  results2.Add(mi);
+               }
+            }
+         }
+         else
+         {
+            foreach (IMapItem mi in myUnassignables) // party members are unassignable
+            {
+               if (true == mi.IsKilled)
+               {
+                  isPartyMemberDied = true;
+                  results2.Add(mi);
+                  foreach (IMapItem mount in mi.Mounts)
+                     myCapturedMounts.Add(mount);
+                  foreach (SpecialEnum possession in mi.SpecialKeeps)
+                     myCapturedPossessions.Add(possession);
+                  foreach (SpecialEnum possession in mi.SpecialShares)
+                     myCapturedPossessions.Add(possession);
+                  myDeadPartyMemberCoin += mi.Coin;
+                  if (true == mi.Name.Contains("Griffon"))  // e100 - griffon claws helps with Lady Aeravir
+                     myCapturedPossessions.Add(SpecialEnum.GriffonClaws);
+               }
+               else if ((true == mi.IsRunAway) && (false == myGameInstance.Prince.IsRunAway)) // e007 - runaways are caused by nerve gas
+               {
+                  results2.Add(mi);
+               }
+            }
+            foreach (IMapItem mi in myAssignables)
+            {
+               if ((true == myIsWizardEscape) && (true == mi.Name.Contains("Wizard"))) // e023 - wizard escapes if damaged and sent fireball
+               {
+                  results1.Add(mi);
+                  continue;
+               }
+               if (true == mi.IsKilled)
+               {
+                  results1.Add(mi);
+                  foreach (IMapItem mount in mi.Mounts)
+                     myCapturedMounts.Add(mount);
+                  foreach (SpecialEnum possession in mi.SpecialKeeps)
+                     myCapturedPossessions.Add(possession);
+                  foreach (SpecialEnum possession in mi.SpecialShares)
+                     myCapturedPossessions.Add(possession);
+                  Logger.Log(LogEnum.LE_ADD_WEALTH_CODE, "RemoveCasualties(): mi=" + mi.Name + " coffs up wc=" + mi.WealthCode.ToString());
+                  if (0 < mi.WealthCode)
+                     myCapturedWealthCodes.Add(mi.WealthCode);
+                  if ((mi.Endurance < 9) && (mi.Combat < 9) && ("e054b" != myGameInstance.EventStart) && ("e033" != myGameInstance.EventStart)) // Endurance/Combat of enemy must be less than nine to route
+                  {
+                     myIsRouteOfEnemyPossible = true;
+                     Logger.Log(LogEnum.LE_COMBAT_STATE_ROUTE, "RemoveCasualties(): s=" + myState.ToString() + " route?=" + myIsRouteOfEnemyPossible.ToString());
+                  }
+                  if (true == mi.Name.Contains("Troll"))  // e057 - Trolls skins are worth money
+                     myCapturedPossessions.Add(SpecialEnum.TrollSkin);
+                  if (true == mi.Name.Contains("Roc"))  // e099 - Roc Beaks worth money
+                     myCapturedPossessions.Add(SpecialEnum.RocBeak);
+                  if (true == mi.Name.Contains("Griffon"))  // e099 - griffon claws help with Lady Aeravir
+                     myCapturedPossessions.Add(SpecialEnum.GriffonClaws);
+                  myGameInstance.KilledLocations.Add(myGameInstance.Prince.Territory);
+               }
+               else if (true == mi.IsRunAway) // runaways are caused by nerve gas
+               {
+                  results1.Add(mi);
+               }
+            }
+         }
+         //-------------------------------------
+         for (int i = 0; i < myMaxRowCount; ++i)
+         {
+            IMapItem mi0 = myGridRows[i].myAssignable;
+            if (null == mi0)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "RemoveCasualties(): 1-mi0=null for i=" + i.ToString());
+               return false;
+            }
+            if (true == mi0.IsKilled)
+            {
+               if (false == DecrementAssignmentCounts(i))
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "RemoveCasualties(): 1-DecrementAssignmentCounts() returned false");
+                  return false;
+               }
+            }
+         }
+         //-------------------------------------
+         if (true == isPartyMemberDied) // e331 - fickle member depart if anybody dies
+         {
+            for (int i = 0; i < myMaxRowCount; ++i)
+            {
+               if (null == myGridRows[i].myAssignable)
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "RemoveCasualties(): 2-myGridRows[i].myAssignable=null for i=" + i.ToString());
+                  return false;
+               }
+               if (null == myGridRows[i].myUnassignable) // Next check the unassignable mapitems
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "RemoveCasualties(): 2-myGridRows[i].myUnassignable=null for i=" + i.ToString());
+                  return false;
+               }
+               IMapItem mi0 = myGridRows[i].myAssignable;
+               IMapItem mi1 = myGridRows[i].myUnassignable;
+               if (true == myIsPartyMembersAssignable)
+               {
+                  if (true == mi0.IsFickle)
+                  {
+                     results1.Add(mi0);
+                     if (false == DecrementAssignmentCounts(i))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "RemoveCasualties(): 2-DecrementAssignmentCounts() returned false");
+                        return false;
+                     }
+                  }
+               }
+               else
+               {
+                  if (true == mi1.IsFickle)
+                     results2.Add(mi1);
+               }
+            }
+         }
+         //-------------------------------------
+         foreach (IMapItem mi in results1)
+            myAssignables.Remove(mi);
+         foreach (IMapItem mi in results2)
+            myUnassignables.Remove(mi);
+         return true;
       }
       private bool SetWounds(int i, int dieRoll)
       {
@@ -4279,197 +4465,6 @@ namespace BarbarianPrince
                ++myGameInstance.NumMonsterKill; // e161e - need to kill 5 monsters to seek audience with count
             }
          }
-         return true;
-      }
-      private bool RemoveCasualties()
-      {
-         if (true == myIsMirrorFight)
-         {
-            for (int i = 0; i < myMaxRowCount; ++i)
-               myGridRows[i].myAssignable = myAssignables[0];  // assign every row to mirror image
-         }
-         bool isPartyMemberDied = false;  // e331 - fickle party members leave if anybody dies
-         IMapItems results1 = new MapItems();
-         IMapItems results2 = new MapItems();
-         if (true == myIsPartyMembersAssignable)
-         {
-            foreach (IMapItem mi in myAssignables)
-            {
-               if (true == mi.IsKilled)
-               {
-                  isPartyMemberDied = true;
-                  results1.Add(mi);
-                  foreach (IMapItem mount in mi.Mounts)
-                     myCapturedMounts.Add(mount);
-                  foreach (SpecialEnum possession in mi.SpecialKeeps)
-                     myCapturedPossessions.Add(possession);
-                  foreach (SpecialEnum possession in mi.SpecialShares)
-                     myCapturedPossessions.Add(possession);
-                  myDeadPartyMemberCoin += mi.Coin;
-                  if (true == mi.Name.Contains("Griffon"))  // e100 - griffon claws helps with Lady Aeravir
-                     myCapturedPossessions.Add(SpecialEnum.GriffonClaws);
-               }
-               else if( (true == mi.IsRunAway) && (false == myGameInstance.Prince.IsRunAway) ) // e007 - runaways are caused by nerve gas
-               {
-                  results1.Add(mi);
-               }
-            }
-            foreach (IMapItem mi in myUnassignables)
-            {
-               if ((true == myIsWizardEscape) && (true == mi.Name.Contains("Wizard"))) // e023 - wizard escapes if damaged and sent fireball
-               {
-                  results2.Add(mi);
-                  continue;
-               }
-               if (true == mi.IsKilled)
-               {
-                  results2.Add(mi);
-                  foreach (IMapItem mount in mi.Mounts)
-                     myCapturedMounts.Add(mount);
-                  foreach (SpecialEnum possession in mi.SpecialKeeps)
-                     myCapturedPossessions.Add(possession);
-                  foreach (SpecialEnum possession in mi.SpecialShares)
-                     myCapturedPossessions.Add(possession);
-                  if (0 < mi.WealthCode)
-                     myCapturedWealthCodes.Add(mi.WealthCode);
-                  if ((mi.Endurance < 9) && (mi.Combat < 9) && ("e054b" != myGameInstance.EventStart) && ("e033" != myGameInstance.EventStart)) // Endurance/Combat of enemy must be less than nine to route
-                  {
-                     myIsRouteOfEnemyPossible = true;
-                     Logger.Log(LogEnum.LE_COMBAT_STATE_ROUTE, "RemoveCasualties(): s=" + myState.ToString() + " route?=" + myIsRouteOfEnemyPossible.ToString());
-                  }
-                  if (true == mi.Name.Contains("Troll"))  // e057 - Trolls skins are worth money
-                     myCapturedPossessions.Add(SpecialEnum.TrollSkin);
-                  if (true == mi.Name.Contains("Roc"))  // e099 - Roc Beaks worth money
-                     myCapturedPossessions.Add(SpecialEnum.RocBeak);
-                  if (true == mi.Name.Contains("Griffon"))  // e100 - Griffon Claws help with Lady Aeravir
-                     myCapturedPossessions.Add(SpecialEnum.GriffonClaws);
-                  myGameInstance.KilledLocations.Add(myGameInstance.Prince.Territory);
-               }
-               else if( true == mi.IsRunAway) // runaways are caused by nerve gas
-               {
-                  results2.Add(mi);
-               }
-            }
-         }
-         else
-         {
-            foreach (IMapItem mi in myUnassignables) // party members are unassignable
-            {
-               if (true == mi.IsKilled)
-               {
-                  isPartyMemberDied = true;
-                  results2.Add(mi);
-                  foreach (IMapItem mount in mi.Mounts)
-                     myCapturedMounts.Add(mount);
-                  foreach (SpecialEnum possession in mi.SpecialKeeps)
-                     myCapturedPossessions.Add(possession);
-                  foreach (SpecialEnum possession in mi.SpecialShares)
-                     myCapturedPossessions.Add(possession);
-                  myDeadPartyMemberCoin += mi.Coin;
-                  if (true == mi.Name.Contains("Griffon"))  // e100 - griffon claws helps with Lady Aeravir
-                     myCapturedPossessions.Add(SpecialEnum.GriffonClaws);
-               }
-               else if ((true == mi.IsRunAway) && (false == myGameInstance.Prince.IsRunAway)) // e007 - runaways are caused by nerve gas
-               {
-                  results2.Add(mi);
-               }
-            }
-            foreach (IMapItem mi in myAssignables)
-            {
-               if ((true == myIsWizardEscape) && (true == mi.Name.Contains("Wizard"))) // e023 - wizard escapes if damaged and sent fireball
-               {
-                  results1.Add(mi);
-                  continue;
-               }
-               if (true == mi.IsKilled)
-               {
-                  results1.Add(mi);
-                  foreach (IMapItem mount in mi.Mounts)
-                     myCapturedMounts.Add(mount);
-                  foreach (SpecialEnum possession in mi.SpecialKeeps)
-                     myCapturedPossessions.Add(possession);
-                  foreach (SpecialEnum possession in mi.SpecialShares)
-                     myCapturedPossessions.Add(possession);
-                  if (0 < mi.WealthCode)
-                     myCapturedWealthCodes.Add(mi.WealthCode);
-                  if ((mi.Endurance < 9) && (mi.Combat < 9) && ("e054b" != myGameInstance.EventStart) && ("e033" != myGameInstance.EventStart)) // Endurance/Combat of enemy must be less than nine to route
-                  {
-                     myIsRouteOfEnemyPossible = true;
-                     Logger.Log(LogEnum.LE_COMBAT_STATE_ROUTE, "RemoveCasualties(): s=" + myState.ToString() + " route?=" + myIsRouteOfEnemyPossible.ToString());
-                  }
-                  if (true == mi.Name.Contains("Troll"))  // e057 - Trolls skins are worth money
-                     myCapturedPossessions.Add(SpecialEnum.TrollSkin);
-                  if (true == mi.Name.Contains("Roc"))  // e099 - Roc Beaks worth money
-                     myCapturedPossessions.Add(SpecialEnum.RocBeak);
-                  if (true == mi.Name.Contains("Griffon"))  // e099 - griffon claws help with Lady Aeravir
-                     myCapturedPossessions.Add(SpecialEnum.GriffonClaws);
-                  myGameInstance.KilledLocations.Add(myGameInstance.Prince.Territory);
-               }
-               else if (true == mi.IsRunAway) // runaways are caused by nerve gas
-               {
-                  results1.Add(mi);
-               }
-            }
-         }
-         //-------------------------------------
-         for (int i = 0; i < myMaxRowCount; ++i)
-         {
-            IMapItem mi0 = myGridRows[i].myAssignable;
-            if (null == mi0)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "RemoveCasualties(): 1-mi0=null for i=" + i.ToString());
-               return false;
-            }
-            if (true == mi0.IsKilled)
-            {
-               if (false == DecrementAssignmentCounts(i))
-               {
-                  Logger.Log(LogEnum.LE_ERROR, "RemoveCasualties(): 1-DecrementAssignmentCounts() returned false");
-                  return false;
-               }
-            }
-         }
-         //-------------------------------------
-         if (true == isPartyMemberDied) // e331 - fickle member depart if anybody dies
-         {
-            for (int i = 0; i < myMaxRowCount; ++i)
-            {
-               if (null == myGridRows[i].myAssignable)
-               {
-                  Logger.Log(LogEnum.LE_ERROR, "RemoveCasualties(): 2-myGridRows[i].myAssignable=null for i=" + i.ToString());
-                  return false;
-               }
-               if (null == myGridRows[i].myUnassignable) // Next check the unassignable mapitems
-               {
-                  Logger.Log(LogEnum.LE_ERROR, "RemoveCasualties(): 2-myGridRows[i].myUnassignable=null for i=" + i.ToString());
-                  return false;
-               }
-               IMapItem mi0 = myGridRows[i].myAssignable;
-               IMapItem mi1 = myGridRows[i].myUnassignable;
-               if (true == myIsPartyMembersAssignable)
-               {
-                  if (true == mi0.IsFickle)
-                  {
-                     results1.Add(mi0);
-                     if (false == DecrementAssignmentCounts(i))
-                     {
-                        Logger.Log(LogEnum.LE_ERROR, "RemoveCasualties(): 2-DecrementAssignmentCounts() returned false");
-                        return false;
-                     }
-                  }
-               }
-               else
-               {
-                  if (true == mi1.IsFickle)
-                     results2.Add(mi1);
-               }
-            }
-         }
-         //-------------------------------------
-         foreach (IMapItem mi in results1)
-            myAssignables.Remove(mi);
-         foreach (IMapItem mi in results2)
-            myUnassignables.Remove(mi);
          return true;
       }
       private bool UpdatePrinceEndurance()
@@ -4775,7 +4770,7 @@ namespace BarbarianPrince
             //-------------------------------
             myIsEscape = true;
             myIsRoute = false;
-            if (false == SetFinalState())
+            if (false == SetStateIfItemUsed())
             {
                if (null == myCallback)
                {
@@ -4833,26 +4828,30 @@ namespace BarbarianPrince
       {
          myIsRouteOfEnemyPossible = false;   // ShowRouteResults()
          Logger.Log(LogEnum.LE_COMBAT_STATE_ROUTE, "ShowRouteResults(): s=" + myState.ToString() + " route?=" + myIsRouteOfEnemyPossible.ToString());
+         dieRoll = 6; // <cgs> TEST
          if (6 == dieRoll) // if 6, route enemy
          {
+            myIsEscape = false;
+            myIsRoute = true;
+            //-------------------------------
+            if (true == myIsSpiderFight) // ShowRouteResults()
+            {
+               foreach (IMapItem mi in myGameInstance.PartyMembers)   // spiders reduce combat by one due to webs - need to reset
+                  ++mi.Combat;
+            }
+            //-------------------------------
             foreach (IMapItem mi in myNonCombatants) // ShowRouteResults() - return noncombatants to party
                myGameInstance.PartyMembers.Add(mi);
             foreach (IMapItem mi in myEncounteredSlaveGirls) // return slave girls to party
                myGameInstance.PartyMembers.Add(mi);
+            DistributeDeadWealth(); // all wealth of dead encounter members or dead party members goes to party
             //-------------------------------
-            myIsEscape = false;
-            myIsRoute = true;
-            if (false == SetFinalState()) // hunting cat, boar are not routed so no need to check
+            if (false == SetStateIfItemUsed()) // hunting cat, boar are not routed so no need to check
             {
                if (null == myCallback)
                {
                   Logger.Log(LogEnum.LE_ERROR, "ShowRouteResults(): myCallback=null");
                   return;
-               }
-               if (true == myIsSpiderFight) // ShowRouteResults()
-               {
-                  foreach (IMapItem mi in myGameInstance.PartyMembers)   // spiders reduce combat by one due to webs - need to reset
-                     ++mi.Combat;
                }
                if (false == myCallback(myIsRoute, myIsEscape)) // ShowRouteResults()
                   Logger.Log(LogEnum.LE_ERROR, "ShowRouteResults(): myCallback=null");
@@ -5268,7 +5267,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "ShowHalflingEscape(): UpdateGrid() return false");
          myIsRollInProgress = false;
       }
-      //-----------------------------------------------------------------------------------------
+      // -----------------CONTROLLER FUNCTIONS---------------------------------------------------
       private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
       {
          if( CombatEnum.ROLL_FOR_HALFLING_SHOW == myState )
@@ -6020,7 +6019,7 @@ namespace BarbarianPrince
          //-------------------------------
          myIsEscape = true;
          myIsRoute = false;
-         if (false == SetFinalState())
+         if (false == SetStateIfItemUsed())
          {
             if (null == myCallback)
             {

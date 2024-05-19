@@ -23,17 +23,17 @@ namespace BarbarianPrince
       {
          //------------------------------------------
          myIndexName = 0;
-         myHeaderNames.Add("08-River->Farmland");
-         myHeaderNames.Add("08-CountrySide->Farmland");
-         myHeaderNames.Add("08-CountrySide->CountrySide");
-         myHeaderNames.Add("08-CountrySide->Forest");
-         myHeaderNames.Add("08-Mtn->Hills");
-         myHeaderNames.Add("08-Mtn->Mtn");
-         myHeaderNames.Add("08-Countryside->Swamp");
-         myHeaderNames.Add("08-Hills->Desert");
-         myHeaderNames.Add("08-Forest->Swamp");
-         myHeaderNames.Add("08-Forest->Swamp");
-         myHeaderNames.Add("08-Forest->Swamp");
+         myHeaderNames.Add("09-River->Farmland");
+         myHeaderNames.Add("09-CountrySide->Farmland");
+         myHeaderNames.Add("09-CountrySide->CountrySide");
+         myHeaderNames.Add("09-CountrySide->Forest");
+         myHeaderNames.Add("09-Mtn->Hills");
+         myHeaderNames.Add("09-Mtn->Mtn");
+         myHeaderNames.Add("09-Countryside->Swamp");
+         myHeaderNames.Add("09-Hills->Desert");
+         myHeaderNames.Add("09-Forest->Swamp");
+         myHeaderNames.Add("09-Forest->Swamp");
+         myHeaderNames.Add("09-Forest->Swamp");
          //------------------------------------------
          myCommandNames.Add("Cross River");
          myCommandNames.Add("Farmland");

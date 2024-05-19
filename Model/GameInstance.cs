@@ -12,7 +12,110 @@ namespace BarbarianPrince
 {
    public class GameInstance : IGameInstance
    {
+      [NonSerialized] static public Logger Logger = new Logger();
       public bool CtorError { get; } = false;
+      public GameInstance() // Constructor - set log levels
+      {
+         Logger.SetOn(LogEnum.LE_ERROR);
+         //Logger.SetOn(LogEnum.LE_GAME_INIT);
+         Logger.SetOn(LogEnum.LE_USER_ACTION);
+         Logger.SetOn(LogEnum.LE_NEXT_ACTION);
+         //Logger.SetOn(LogEnum.LE_GAME_PARTYMEMBER_COUNT);
+         Logger.SetOn(LogEnum.LE_PARTYMEMBER_ADD);
+         Logger.SetOn(LogEnum.LE_REMOVE_KILLED);
+         //Logger.SetOn(LogEnum.LE_MOVE_STACKING);
+         Logger.SetOn(LogEnum.LE_MOVE_COUNT);
+         //Logger.SetOn(LogEnum.LE_RESET_ROLL_STATE);
+         //Logger.SetOn(LogEnum.LE_GET_COIN);
+         Logger.SetOn(LogEnum.LE_ADD_WEALTH_CODE);
+         Logger.SetOn(LogEnum.LE_ADD_COIN);
+         Logger.SetOn(LogEnum.LE_ADD_COIN_AUTO);
+         //Logger.SetOn(LogEnum.LE_MOUNT_CHANGE);
+         Logger.SetOn(LogEnum.LE_COMBAT_STATE);
+         //Logger.SetOn(LogEnum.LE_COMBAT_STATE_ESCAPE);
+         //Logger.SetOn(LogEnum.LE_COMBAT_STATE_ROUTE);
+         Logger.SetOn(LogEnum.LE_COMBAT_RESULT);
+         //Logger.SetOn(LogEnum.LE_COMBAT_TROLL_HEAL);
+         //Logger.SetOn(LogEnum.LE_MAPITEM_WOUND);
+         //Logger.SetOn(LogEnum.LE_MAPITEM_POISION);
+         Logger.SetOn(LogEnum.LE_END_ENCOUNTER);
+         //Logger.SetOn(LogEnum.LE_STARVATION_STATE_CHANGE);
+         //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_WINDOW);
+         //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_MENU);
+         //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_STATUS_BAR);
+         //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_ACTION_PANEL);
+         //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_ACTION_PANEL_CLEAR);
+         //Logger.SetOn(LogEnum.LE_RETURN_TO_START);
+         //Logger.SetOn(LogEnum.LE_VIEW_DICE_MOVING);
+         //Logger.SetOn(LogEnum.LE_VIEW_RESET_BATTLE_GRID);
+         //Logger.SetOn(LogEnum.LE_VIEW_DEC_COUNT_GRID);
+         Logger.SetOn(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER);
+         //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_DAILY_ACTIONS);
+         Logger.SetOn(LogEnum.LE_VIEW_TRAVEL_CHECK);
+         Logger.SetOn(LogEnum.LE_VIEW_MIM);
+         Logger.SetOn(LogEnum.LE_VIEW_MIM_ADD);
+         Logger.SetOn(LogEnum.LE_VIEW_MIM_CLEAR);
+         //Logger.SetOn(LogEnum.LE_VIEW_SHOW_LOADS);
+         //Logger.SetOn(LogEnum.LE_VIEW_SHOW_HUNT);
+         try
+         {
+            // Create the territories and the regions marking the territories.
+            // Keep a list of Territories used in the game.  All the information 
+            // of Territories is static and does not change.
+            myTerritories = ReadTerritoriesXml();
+            if (null == myTerritories)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "GameInstance(): ReadTerritoriesXml() returned null");
+               CtorError = true;
+               return;
+            }
+            //---------------------------------------------------------
+            myMapItems = ReadMapItemsXml(myTerritories);
+            if (null == myMapItems)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "GameInstance(): ReadMapItemsXml() returned null");
+               CtorError = true;
+               return;
+            }
+            //---------------------------------------------------------
+            myOptions = ReadOptionsXml();
+            if (null == myOptions)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "GameInstance(): ReadOptionsXml() returned null");
+               CtorError = true;
+               return;
+            }
+         }
+         catch (Exception e)
+         {
+            MessageBox.Show("Exception in GameEngine() e=" + e.ToString());
+         }
+         IMapItem prince = MapItems.Find("Prince");
+         if (null == prince)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "GameInstance(): prince=null");
+            CtorError = true;
+            return;
+         }
+         myPrince = new MapItem(prince);
+         PartyMembers.Add(myPrince);
+         if (false == AddStartingPrinceOption())
+         {
+            Logger.Log(LogEnum.LE_ERROR, "GameInstance(): AddStartingPrinceOption() returned false");
+            CtorError = true;
+            return;
+         }
+         if (false == AddStartingPartyMemberOption())
+         {
+            Logger.Log(LogEnum.LE_ERROR, "GameInstance(): AddStartingPartyMembers() returned false");
+            CtorError = true;
+            return;
+         }
+#if UT1
+            AddUnitTests();
+#endif
+         Logger.Log(LogEnum.LE_GAME_PARTYMEMBER_COUNT, "GameInstance() c=" + PartyMembers.Count.ToString());
+      }
       //----------------------------------------------
       private readonly IOptions myOptions = null;
       public IOptions Options { get => myOptions; }
@@ -232,107 +335,6 @@ namespace BarbarianPrince
       public IStacks Stacks { get; set; } = new Stacks();
       public List<IUnitTest> UnitTests { set; get; } = null;
       //---------------------------------------------------------------
-      [NonSerialized] static public Logger Logger = new Logger();
-      public GameInstance() // Constructor - set log levels
-      {
-         Logger.SetOn(LogEnum.LE_ERROR);
-         //Logger.SetOn(LogEnum.LE_GAME_INIT);
-         Logger.SetOn(LogEnum.LE_USER_ACTION);
-         Logger.SetOn(LogEnum.LE_NEXT_ACTION);
-         //Logger.SetOn(LogEnum.LE_GAME_PARTYMEMBER_COUNT);
-         Logger.SetOn(LogEnum.LE_PARTYMEMBER_ADD);
-         Logger.SetOn(LogEnum.LE_REMOVE_KILLED);
-         //Logger.SetOn(LogEnum.LE_MOVE_STACKING);
-         Logger.SetOn(LogEnum.LE_MOVE_COUNT);
-         //Logger.SetOn(LogEnum.LE_RESET_ROLL_STATE);
-         //Logger.SetOn(LogEnum.LE_GET_COIN);
-         Logger.SetOn(LogEnum.LE_ADD_COIN_AUTO);
-         //Logger.SetOn(LogEnum.LE_MOUNT_CHANGE);
-         Logger.SetOn(LogEnum.LE_COMBAT_STATE);
-         //Logger.SetOn(LogEnum.LE_COMBAT_STATE_ESCAPE);
-         //Logger.SetOn(LogEnum.LE_COMBAT_STATE_ROUTE);
-         Logger.SetOn(LogEnum.LE_COMBAT_RESULT);
-         //Logger.SetOn(LogEnum.LE_COMBAT_TROLL_HEAL);
-         //Logger.SetOn(LogEnum.LE_MAPITEM_WOUND);
-         //Logger.SetOn(LogEnum.LE_MAPITEM_POISION);
-         Logger.SetOn(LogEnum.LE_END_ENCOUNTER);
-         //Logger.SetOn(LogEnum.LE_STARVATION_STATE_CHANGE);
-         //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_WINDOW);
-         //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_MENU);
-         //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_STATUS_BAR);
-         //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_ACTION_PANEL);
-         //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_ACTION_PANEL_CLEAR);
-         //Logger.SetOn(LogEnum.LE_RETURN_TO_START);
-         //Logger.SetOn(LogEnum.LE_VIEW_DICE_MOVING);
-         //Logger.SetOn(LogEnum.LE_VIEW_RESET_BATTLE_GRID);
-         //Logger.SetOn(LogEnum.LE_VIEW_DEC_COUNT_GRID);
-         Logger.SetOn(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER);
-         //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_DAILY_ACTIONS);
-         Logger.SetOn(LogEnum.LE_VIEW_TRAVEL_CHECK);
-         Logger.SetOn(LogEnum.LE_VIEW_MIM);
-         Logger.SetOn(LogEnum.LE_VIEW_MIM_ADD);
-         Logger.SetOn(LogEnum.LE_VIEW_MIM_CLEAR);
-         //Logger.SetOn(LogEnum.LE_VIEW_SHOW_LOADS);
-         //Logger.SetOn(LogEnum.LE_VIEW_SHOW_HUNT);
-         try
-         {
-            // Create the territories and the regions marking the territories.
-            // Keep a list of Territories used in the game.  All the information 
-            // of Territories is static and does not change.
-            myTerritories = ReadTerritoriesXml();
-            if (null == myTerritories)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "GameInstance(): ReadTerritoriesXml() returned null");
-               CtorError = true;
-               return;
-            }
-            //---------------------------------------------------------
-            myMapItems = ReadMapItemsXml(myTerritories);
-            if (null == myMapItems)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "GameInstance(): ReadMapItemsXml() returned null");
-               CtorError = true;
-               return;
-            }
-            //---------------------------------------------------------
-            myOptions = ReadOptionsXml();
-            if (null == myOptions)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "GameInstance(): ReadOptionsXml() returned null");
-               CtorError = true;
-               return;
-            }
-         }
-         catch (Exception e)
-         {
-            MessageBox.Show("Exception in GameEngine() e=" + e.ToString());
-         }
-         IMapItem prince = MapItems.Find("Prince");
-         if (null == prince)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "GameInstance(): prince=null");
-            CtorError = true;
-            return;
-         }
-         myPrince = new MapItem(prince);
-         PartyMembers.Add(myPrince);
-         if (false == AddStartingPrinceOption())
-         {
-            Logger.Log(LogEnum.LE_ERROR, "GameInstance(): AddStartingPrinceOption() returned false");
-            CtorError = true;
-            return;
-         }
-         if ( false == AddStartingPartyMemberOption())
-         {
-            Logger.Log(LogEnum.LE_ERROR, "GameInstance(): AddStartingPartyMembers() returned false");
-            CtorError = true;
-            return;
-         }
-         #if UT1
-            AddUnitTests();
-         #endif
-         Logger.Log(LogEnum.LE_GAME_PARTYMEMBER_COUNT, "GameInstance() c=" + PartyMembers.Count.ToString());
-      }
       private bool AddStartingPrinceOption()
       {
          IOption option = null;
@@ -1229,7 +1231,10 @@ namespace BarbarianPrince
       public bool AddCoins(int coins, bool isCoinsShared = true)
       {
          if (0 == coins)
+         {
+            Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): coins=" + coins.ToString() );
             return true;
+         }
          //---------------------------------
          int looterShare = 1;
          if (true == isCoinsShared) // need to give equal share for each looter
@@ -1257,85 +1262,93 @@ namespace BarbarianPrince
          }
          remainingCoins = (int)Math.Ceiling((decimal)coins / (decimal)fickleShare); // fickle get equal share as Prince
          this.FickleCoin += (coins - remainingCoins);
+         Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): remainingCoins=" + remainingCoins.ToString());
          //---------------------------------
          IMapItems sortedMapItems = PartyMembers.SortOnCoin();
          sortedMapItems.Reverse();
-         int totalFreeLoad = 0;
          foreach (IMapItem mi in sortedMapItems) // add to party members to get to 100 increment
+         {
+            int miRemainder = mi.Coin % 100;
+            if ( (0 != miRemainder) && (false == mi.IsUnconscious) && (false == mi.IsKilled) )
+            {
+               int diffToGetTo100 = 100 - miRemainder;
+               if (remainingCoins <= diffToGetTo100)
+               {
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 1" + mi.Name + " ++++>>> " + mi.Coin.ToString() + " + " + remainingCoins.ToString());
+                  mi.Coin += remainingCoins;
+                  return true;
+               }
+               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 2" + mi.Name + " ++++>>> " + mi.Coin.ToString() + " + " + diffToGetTo100.ToString());
+               mi.Coin += diffToGetTo100;
+               remainingCoins -= diffToGetTo100;  // remainingCoins reduced by how much added to this MapItem
+            }
+         }
+         //--------------------------------- 
+         int remainder = remainingCoins % 100;
+         int hundreds = (int)((remainingCoins - remainder)/100.0);
+         foreach (IMapItem mi in sortedMapItems) // take care of remainder first
          {
             if ((true == mi.IsUnconscious) || (true == mi.IsKilled))
                continue;
-            int remainder1 = mi.Coin % 100;
-            if (0 != remainder1)
+            int freeLoad = mi.GetFreeLoadWithoutModify();
+            if (0 < freeLoad)
             {
-               int freeLoad = mi.GetFreeLoad();
-               if (freeLoad < 0)
-               {
-                  Logger.Log(LogEnum.LE_ERROR, "AddCoins(): GetFreeLoad() returned fl=" + freeLoad.ToString());
-                  return false;
-               }
-               totalFreeLoad += freeLoad;
-               if (0 < freeLoad)
-               {
-                  int diff1 = 100 - remainder1;
-                  if (remainingCoins <= diff1)
-                  {
-                     int total0 = remainingCoins + mi.Coin;
-                     Logger.Log(LogEnum.LE_REMOVE_KILLED, "AddCoins(): " + mi.Name + " ++++>>> " + mi.Coin.ToString() + " + " + remainingCoins.ToString() + " = " + total0.ToString() + " fl=" + freeLoad.ToString());
-                     mi.Coin += remainingCoins;
-                     return true;
-                  }
-                  int total = diff1 + mi.Coin;
-                  Logger.Log(LogEnum.LE_REMOVE_KILLED, "AddCoins(): " + mi.Name + " ++++>>> " + mi.Coin.ToString() + " + " + diff1.ToString() + " = " + total.ToString() + " fl=" + freeLoad.ToString());
-                  mi.Coin += diff1;
-                  remainingCoins -= diff1;
-               }
+               mi.Coin += remainder;
+               remainingCoins -= remainder;
+               remainder = 0;
             }
-            if (0 == totalFreeLoad)
-               return true;
-         }
-         //---------------------------------
-         int count = 100;
-         while (0 < --count) // repeat adding in 100 increments
-         {
-            IMapItems sortedMapItems1 = PartyMembers.SortOnCoin();
-            sortedMapItems1.Reverse();
-            int totalFreeLoad1 = 0;
-            foreach (IMapItem mi in sortedMapItems1)
+            else if( 0 < mi.Food )
             {
-               if ((true == mi.IsUnconscious) || (true == mi.IsKilled))
-                  continue;
-               int freeLoad = mi.GetFreeLoad();
-               if (freeLoad < 0)
-               {
-                  Logger.Log(LogEnum.LE_ERROR, "AddCoins(): GetFreeLoad() returned fl=" + freeLoad.ToString());
-                  return false;
-               }
-               totalFreeLoad1 += freeLoad;
-               if (0 < freeLoad)
-               {
-                  int remainder3 = mi.Coin % 100;
-                  int diff3 = 100 - remainder3;
-                  if (remainingCoins <= diff3)
-                  {
-                     int total0 = remainingCoins + mi.Coin;
-                     Logger.Log(LogEnum.LE_REMOVE_KILLED, "AddCoins(): " + mi.Name + " ++++>>> " + mi.Coin.ToString() + " + " + remainingCoins.ToString() + " = " + total0.ToString());
-                     mi.Coin += remainingCoins;
-                     return true;
-                  }
-                  int total = diff3 + mi.Coin;
-                  Logger.Log(LogEnum.LE_REMOVE_KILLED, "AddCoins(): " + mi.Name + " ++++>>> " + mi.Coin.ToString() + " + " + diff3.ToString() + " = " + total.ToString());
-                  mi.Coin += diff3;
-                  remainingCoins -= diff3;
-               }
+               mi.Food -= 1; // remove one food to add one coin
+               mi.Coin += remainder;
+               remainingCoins -= remainder;
+               remainder = 0;
             }
-            if (0 == totalFreeLoad1)
-               return true;
          }
-         if (count < 0)
+         if (0 == hundreds)
+            return true;
+         //--------------------------------- 
+         int princeFreeLoad = Prince.GetFreeLoadWithoutModify();
+         if ((0 < princeFreeLoad) && (false == Prince.IsUnconscious) && (false == Prince.IsKilled))
          {
-            Logger.Log(LogEnum.LE_ERROR, "AddCoins(): invalid state count<0 coins=" + remainingCoins.ToString());
-            return false;
+            if (hundreds <= princeFreeLoad)
+            {
+               Prince.Coin += (hundreds * 100);
+               return true;
+            }
+            int diff = hundreds - princeFreeLoad;
+            if (diff <= Prince.Food)
+            {
+               Prince.Coin += (hundreds * 100);
+               Prince.Food -= diff;
+               return true;
+            }
+            Prince.Food = 0;
+            Prince.Coin += (diff * 100); // prince removes all food and gets a portion of the remaining coins
+            hundreds -= diff;
+         }
+         //--------------------------------- 
+         foreach (IMapItem mi in sortedMapItems) // take care of remainder first
+         {
+            int freeLoad = mi.GetFreeLoadWithoutModify();
+            if ((0 < freeLoad) && (false == mi.IsUnconscious) && (false == mi.IsKilled))
+            {
+               if (hundreds <= freeLoad)
+               {
+                  mi.Coin += (hundreds * 100);
+                  return true;
+               }
+               int diff = hundreds - freeLoad;
+               if (diff <= mi.Food)
+               {
+                  mi.Coin += (hundreds * 100);
+                  mi.Food -= diff;
+                  return true;
+               }
+               mi.Food = 0;
+               mi.Coin += (diff * 100); // mi removes all food and gets a portion of the remaining coins
+               hundreds -= diff;
+            }
          }
          return true;
       }
@@ -1358,15 +1371,15 @@ namespace BarbarianPrince
                   return false;
                }
                capturedCoins += coin;
+               Logger.Log(LogEnum.LE_ADD_COIN_AUTO, "AddCoinsAuto(): coin=" + coin.ToString() +  " capturedCoins=" + capturedCoins.ToString());
             }
          }
          if (false == AddCoins(capturedCoins))
          {
-
+            Logger.Log(LogEnum.LE_ERROR, "AddCoinsAuto(): AddCoins()=" + capturedCoins.ToString());
             return false;
          }
          CapturedWealthCodes = wealthCodes;
-         Logger.Log(LogEnum.LE_ADD_COIN_AUTO, "AddCoinsAuto(): capturedCoins=" + capturedCoins.ToString());
          return true;
       }
       public void ReduceCoins(int coins)

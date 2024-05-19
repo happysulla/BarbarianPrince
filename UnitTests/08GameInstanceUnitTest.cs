@@ -17,49 +17,51 @@ namespace BarbarianPrince
       {
          //------------------------------------------
          myIndexName = 0;
-         myHeaderNames.Add("00-Show Dialog");
-         myHeaderNames.Add("01-Trasnfer Mounts");
-         myHeaderNames.Add("02-Add Mounts");
-         myHeaderNames.Add("03-True Love Add");
-         myHeaderNames.Add("04-True Love Remove");
-         myHeaderNames.Add("05-True Love Triangle");
-         myHeaderNames.Add("06-Add Food 11");
-         myHeaderNames.Add("07-Reduce Food 5");
+         myHeaderNames.Add("08-Show Dialog");
+         myHeaderNames.Add("08-Transfer Mounts");
+         myHeaderNames.Add("08-Add Mounts");
+         myHeaderNames.Add("08-Add Mounts2");
+         myHeaderNames.Add("08-True Love Add");
+         myHeaderNames.Add("08-True Love Remove");
+         myHeaderNames.Add("08-True Love Triangle");
+         myHeaderNames.Add("08-Add Food 11");
+         myHeaderNames.Add("08-Reduce Food 5");
          myHeaderNames.Add("08-Add Coin 55");
-         myHeaderNames.Add("09-Reduce Coin 25");
-         myHeaderNames.Add("10-Add Coin 110");
-         myHeaderNames.Add("11-Add Food 3");
-         myHeaderNames.Add("12-Reduce Coin 166");
-         myHeaderNames.Add("13-Add Coin 152 w/ Looter");
-         myHeaderNames.Add("14-Add Coin 500 w/ 2 Looters");
-         myHeaderNames.Add("15-Kill PartyMembers");
-         myHeaderNames.Add("16-Add Food 12");
-         myHeaderNames.Add("17-Remove Leaderless Party");
-         myHeaderNames.Add("18-Add Food 12");
-         myHeaderNames.Add("19-Remove Abandoner-14");
-         myHeaderNames.Add("20-Finish");
+         myHeaderNames.Add("08-Reduce Coin 25");
+         myHeaderNames.Add("08-Add Coin 110");
+         myHeaderNames.Add("08-Add Food 3");
+         myHeaderNames.Add("08-Reduce Coin 166");
+         myHeaderNames.Add("08-Add Coin 152 w/ Looter");
+         myHeaderNames.Add("08-Add Coin 500 w/ 2 Looters");
+         myHeaderNames.Add("08-Kill PartyMembers");
+         myHeaderNames.Add("08-Add Food 12");
+         myHeaderNames.Add("08-Remove Leaderless Party");
+         myHeaderNames.Add("08-Add Food 12");
+         myHeaderNames.Add("08-Remove Abandoner-14");
+         myHeaderNames.Add("08-Finish");
          //------------------------------------------
-         myCommandNames.Add("Show Dialog");
-         myCommandNames.Add("Trasnfer Mounts");
-         myCommandNames.Add("Add Mounts");
-         myCommandNames.Add("Add True Love");
-         myCommandNames.Add("Remove True Love");
-         myCommandNames.Add("True Love Traingle");
-         myCommandNames.Add("Change Food-1");
-         myCommandNames.Add("Change Food-2");
-         myCommandNames.Add("Change Coin-3");
-         myCommandNames.Add("Change Coin-4");
-         myCommandNames.Add("Change Coin-5");
-         myCommandNames.Add("Change Food-6");
-         myCommandNames.Add("Change Coin-7");
-         myCommandNames.Add("Change Coin-8");
-         myCommandNames.Add("Change Coin-9");
-         myCommandNames.Add("Kill Party Members");
-         myCommandNames.Add("Add Food");
-         myCommandNames.Add("Remove Leaderless");
-         myCommandNames.Add("Add Food-2");
-         myCommandNames.Add("Remove Abandoner");
-         myCommandNames.Add("Finish");
+         myCommandNames.Add("00-Show Dialog");
+         myCommandNames.Add("01-Trasnfer Mounts");
+         myCommandNames.Add("02-Add Mounts");
+         myCommandNames.Add("03-Add Mounts2");
+         myCommandNames.Add("04-Add True Love");
+         myCommandNames.Add("05-Remove True Love");
+         myCommandNames.Add("06-True Love Traingle");
+         myCommandNames.Add("07-Change Food-1");
+         myCommandNames.Add("08-Change Food-2");
+         myCommandNames.Add("09-Change Coin-3");
+         myCommandNames.Add("10-Change Coin-4");
+         myCommandNames.Add("11-Change Coin-5");
+         myCommandNames.Add("12-Change Food-6");
+         myCommandNames.Add("13-Change Coin-7");
+         myCommandNames.Add("14-Change Coin-8");
+         myCommandNames.Add("15-Change Coin-9");
+         myCommandNames.Add("16-Kill Party Members");
+         myCommandNames.Add("17-Add Food");
+         myCommandNames.Add("18-Remove Leaderless");
+         myCommandNames.Add("19-Add Food-2");
+         myCommandNames.Add("20-Remove Abandoner");
+         myCommandNames.Add("21-Finish");
          //------------------------------------------
          gi.PartyMembers.Clear();
          gi.Prince.Reset();
@@ -105,12 +107,12 @@ namespace BarbarianPrince
       public bool Command(ref IGameInstance gi)
       {
          gi.WitAndWile = 3;
-         if (CommandName == myCommandNames[0])
+         if (CommandName == myCommandNames[0]) // Show Dialog
          {
             myDialog.Show();
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[1])
+         else if (CommandName == myCommandNames[1]) // Transfer Mounts
          {
             gi.PartyMembers.Clear();
             gi.PartyMembers.Add(gi.Prince);
@@ -148,7 +150,7 @@ namespace BarbarianPrince
             gi.TransferMounts(mounts);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[2])
+         else if (CommandName == myCommandNames[2]) // Add Mounts
          {
             gi.PartyMembers.Clear();
             gi.Prince.Reset();
@@ -195,7 +197,7 @@ namespace BarbarianPrince
             gi.AddNewMountToParty(MountEnum.Pegasus);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[3])
+         else if (CommandName == myCommandNames[3]) // 
          {
             gi.PartyMembers.Clear();
             gi.PartyMembers.Add(gi.Prince);
@@ -215,6 +217,7 @@ namespace BarbarianPrince
             IMapItem eagle = new MapItem(eagleName, 1.0, false, false, false, "c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
             eagle.IsFlying = true;
             gi.AddCompanion(eagle);
+            //------------------------------------------
             IMapItems mounts = new MapItems();
             for (int i = 0; i < 12; i++)
             {
@@ -233,7 +236,7 @@ namespace BarbarianPrince
             gi.TransferMounts(mounts);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[4])
+         else if (CommandName == myCommandNames[4]) // Add True Love
          {
             gi.PartyMembers.Clear();
             gi.PartyMembers.Add(gi.Prince);
@@ -254,7 +257,7 @@ namespace BarbarianPrince
             gi.AddCompanion(trueLove);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[5])
+         else if (CommandName == myCommandNames[5]) // Remove True Love
          {
             gi.PartyMembers.Clear();
             gi.PartyMembers.Add(gi.Prince);
@@ -276,7 +279,7 @@ namespace BarbarianPrince
             gi.RemoveAbandonedInParty(trueLove);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[6])
+         else if (CommandName == myCommandNames[6]) // Remove True Love Triangle
          {
             gi.PartyMembers.Clear();
             gi.PartyMembers.Add(gi.Prince);
@@ -307,19 +310,19 @@ namespace BarbarianPrince
             gi.RemoveAbandonedInParty(trueLove);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[7])
+         else if (CommandName == myCommandNames[7]) // Add Foods 
          {
             gi.AddFoods(11);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[8])
+         else if (CommandName == myCommandNames[8]) // Reduce Foods
          {
             gi.ReduceFoods(5);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[9])
+         else if (CommandName == myCommandNames[9])  // Add Coin
          {
-            gi.AddCoins(55);
+            gi.AddCoins(355);
             myDialog.UpdateGridRows(gi);
          }
          else if (CommandName == myCommandNames[10])
@@ -352,7 +355,7 @@ namespace BarbarianPrince
             gi.AddCoins(500);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[1164]) // kill party members
+         else if (CommandName == myCommandNames[16]) // kill party members
          {
             foreach (IMapItem mi in gi.PartyMembers)
             {
