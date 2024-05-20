@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Xml.Linq;
 
 namespace BarbarianPrince
 {
@@ -222,13 +223,15 @@ namespace BarbarianPrince
                return false;
             gi.PartyMembers.Add(companion2);
             //---------------------
-            IMapItem encountered1 = AddEncounteredMember(ref gi, "Wizard");
+            string miName = "Wizard" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem character = new MapItem(miName, 1.0, false, false, false, "c12Wizard", "c12Wizard", gi.Prince.Territory, 1, 1, 60);
             //encountered1.SetWounds(1, 0);
-            if (null == encountered1)
-               return false;
-            IMapItem encountered2 = AddEncounteredMember(ref gi, "Mercenary");
-            if (null == encountered2)
-               return false;
+            gi.EncounteredMembers.Add(character);
+            miName = "Mercenary" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            character = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            gi.EncounteredMembers.Add(character);
             myEventViewer.UpdateView(ref gi, GameAction.EncounterCombat);
          }
          else if (CommandName == myCommandNames[5]) // Poison Drug

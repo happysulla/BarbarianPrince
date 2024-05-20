@@ -46,5 +46,29 @@ namespace BarbarianPrince.Properties {
                 this["ZoomCanvas"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public double ScrollViewerHeight {
+            get {
+                return ((double)(this["ScrollViewerHeight"]));
+            }
+            set {
+                this["ScrollViewerHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("827")]
+        public double ScrollViewerWidth {
+            get {
+                return ((double)(this["ScrollViewerWidth"]));
+            }
+            set {
+                this["ScrollViewerWidth"] = value;
+            }
+        }
     }
 }

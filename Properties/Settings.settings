@@ -8,5 +8,11 @@
     <Setting Name="ZoomCanvas" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
+    <Setting Name="ScrollViewerHeight" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="ScrollViewerWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">827</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

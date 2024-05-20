@@ -1247,7 +1247,10 @@ namespace BarbarianPrince
             String rtn = " " + dieRollNeeded.ToString() + " < ";
             return rtn;
          }
-         switch (mim.NewTerritory.Type)
+         ITerritory tLost = mim.OldTerritory; // Roll check performed on territory being left
+         if (RiverCrossEnum.TC_CROSS_YES_SHOWN == myMapItemMove.RiverCross)
+            tLost = mim.NewTerritory;
+         switch (tLost.Type)
          {
             case "Farmland":
                dieRollNeeded = 9;

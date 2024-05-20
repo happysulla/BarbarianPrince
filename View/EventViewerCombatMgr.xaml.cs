@@ -4657,10 +4657,12 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "IsEnemyWizardAttacking(): attacker=null");
             return false;
          }
-         if ((true == myIsTalismanActivated) || (false == myIsWizardFight) || (myWizardFireballRoundNum == myRoundNum) || (true == attacker.IsUnconscious) || (true == attacker.IsKilled))
-            return false;
-         else if (true == attacker.Name.Contains("Wizard"))
-            return true;
+         if ((true == attacker.Name.Contains("Wizard")) && (false == attacker.IsUnconscious) && (false == attacker.IsKilled)) // only return
+         {
+            Logger.Log(LogEnum.LE_COMBAT_WIZARD, "IsEnemyWizardAttacking(): myIsWizardFight=" + myIsWizardFight.ToString() + " attacker=" + attacker.Name + " myWizardFireballRoundNum=" + myWizardFireballRoundNum.ToString() + " myRoundNum=" + myRoundNum.ToString());
+            if ((false == myIsTalismanActivated) && (true == myIsWizardFight) && (myWizardFireballRoundNum != myRoundNum))
+               return true;
+         }
          return false;
       }
       private bool ApplyWizardFireballAttack()
@@ -4828,8 +4830,8 @@ namespace BarbarianPrince
       {
          myIsRouteOfEnemyPossible = false;   // ShowRouteResults()
          Logger.Log(LogEnum.LE_COMBAT_STATE_ROUTE, "ShowRouteResults(): s=" + myState.ToString() + " route?=" + myIsRouteOfEnemyPossible.ToString());
-         dieRoll = 6; // <cgs> TEST
-         if (6 == dieRoll) // if 6, route enemy
+         //dieRoll = 6; // <cgs> TEST
+         if (5 < dieRoll) // if 6+, route enemy
          {
             myIsEscape = false;
             myIsRoute = true;

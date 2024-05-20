@@ -17,6 +17,7 @@ namespace BarbarianPrince
       LE_COMBAT_STATE_ROUTE,
       LE_COMBAT_THREAD,
       LE_COMBAT_TROLL_HEAL,
+      LE_COMBAT_WIZARD,
       LE_NEXT_ACTION,
       LE_RESET_ROLL_STATE,
       LE_GET_COIN,

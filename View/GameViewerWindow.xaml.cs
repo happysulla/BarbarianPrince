@@ -1840,6 +1840,9 @@ namespace BarbarianPrince
             //-------------------------------------------
             Utilities.ZoomCanvas = Settings.Default.ZoomCanvas;
             myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas);
+            //-------------------------------------------
+            myScollViewerInside.Height = Settings.Default.ScrollViewerHeight;
+            myScollViewerInside.Width = Settings.Default.ScrollViewerWidth;
          }
          catch ( Exception ex ) 
          {
@@ -1857,6 +1860,9 @@ namespace BarbarianPrince
          Settings.Default.WindowPlacement = sWinPlace;
          //-------------------------------------------
          Settings.Default.ZoomCanvas = Utilities.ZoomCanvas;
+         //-------------------------------------------
+         Settings.Default.ScrollViewerHeight = myScollViewerInside.Height;
+         Settings.Default.ScrollViewerWidth = myScollViewerInside.Width;
          //-------------------------------------------
          Settings.Default.Save();
       }

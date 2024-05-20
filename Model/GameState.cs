@@ -11221,7 +11221,7 @@ namespace BarbarianPrince
                         }
                         break;
                      case 8:
-                        gi.Prince.Coin /= 2;
+                        gi.Prince.Coin = (int)( (double)gi.Prince.Coin * 0.5 );
                         if (false == EncounterEnd(gi, ref action))
                         {
                            Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false w/ ae=" + gi.EventActive);
