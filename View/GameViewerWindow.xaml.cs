@@ -70,7 +70,8 @@ namespace BarbarianPrince
       //---------------------------------------------------------------------
       private IDieRoller myDieRoller = null;
       private EventViewer myEventViewer = null;
-      private Cursor myTargetCursor = null;
+      private PartyDisplayDialog myPartyDisplayDialog = null;
+      private System.Windows.Input.Cursor myTargetCursor = null;
       private Dictionary<string, Polyline> myRivers = new Dictionary<string, Polyline>();
       //---------------------------------------------------------------------
       private readonly SolidColorBrush mySolidColorBrushClear = new SolidColorBrush();
@@ -106,6 +107,7 @@ namespace BarbarianPrince
       private ITerritory myTerritorySelected = null;
       private bool myIsTravelThroughGateActive = false;  // e045
       private bool myIsContentRendered = false;  // Is the initial content rendered - do not resize frames unless already rendered - used during startup
+      //-----------------------CONSTRUCTOR--------------------
       public GameViewerWindow(IGameEngine ge, IGameInstance gi)
       {
          //-----------------------------------------------------------------
@@ -347,6 +349,8 @@ namespace BarbarianPrince
          myCanvas.Children.Add(b);
          Canvas.SetZIndex(b, counterCount);
          b.Click += ClickButtonMapItem;
+         b.MouseEnter += MouseEnterMapItem;
+         b.MouseLeave += MouseLeaveMapItem;
          return true;
       }
       private bool CreateButtonDailyAction()
@@ -1539,6 +1543,18 @@ namespace BarbarianPrince
             GameAction outAction = GameAction.TravelEndMovement;
             myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          }
+      }
+      private void MouseEnterMapItem(object sender, System.Windows.Input.MouseEventArgs e)
+      {
+         Console.WriteLine("MouseEnterMapItem");
+         Button b = (Button)sender;
+         myPartyDisplayDialog = new PartyDisplayDialog(myGameInstance, myCanvas, b);
+         myPartyDisplayDialog.Show();
+      }
+      private void MouseLeaveMapItem(object sender, System.Windows.Input.MouseEventArgs e)
+      {
+         Console.WriteLine("MouseLeaveMapItem");
+         myPartyDisplayDialog.Close();
       }
       private void MouseDownPolygonTravel(object sender, MouseButtonEventArgs e)
       {

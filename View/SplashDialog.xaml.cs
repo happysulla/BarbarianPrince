@@ -2,9 +2,6 @@
 
 namespace BarbarianPrince
 {
-    /// <summary>
-    /// Interaction logic for SpashScreen.xaml
-    /// </summary>
     public partial class SplashDialog : Window
     {
         public SplashDialog()

@@ -114,27 +114,27 @@
             <ScrollViewer Name="myScollViewerInside" Height="1000" Width="827" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0" >
                 <Canvas Name="myCanvas" Height="985" Width="810">
                     <Image Name="myMap" Source="/Images/Map.gif" Height="985" Width="810" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" />
-                    <!--<Button Name="myButtonDieRoll1" Height="80" Width="80" Canvas.Left="15" Canvas.Top="15" BorderThickness="0,0,0,0">
-                        <Button.Template>
-                            <ControlTemplate>
-                                <Image Name="myImageDieRoll1" Stretch="Fill" gif:ImageBehavior.AnimatedSource="/Images/c01die.gif"/>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="myImageDieRoll1" Property="gif:ImageBehavior.AnimatedSource" Value="/Images/DieRoll.gif" />
-                                        <Setter Property="RenderTransform">
-                                            <Setter.Value>
-                                                <TransformGroup>
-                                                    <ScaleTransform ScaleX="1.707" ScaleY="1.707" />
-                                                    <TranslateTransform X="-25.6" Y="-25.6" />
-                                                </TransformGroup>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>-->
-                </Canvas>
+               <!--<Button Name="myButtonDieRoll1" Height="80" Width="80" Canvas.Left="15" Canvas.Top="15" BorderThickness="0,0,0,0" >
+                  <Button.Template>
+                     <ControlTemplate>
+                        <Image Name="myImageDieRoll1" Stretch="Fill" gif:ImageBehavior.AnimatedSource="/Images/c01die.gif"/>
+                        <ControlTemplate.Triggers>
+                           <Trigger Property="IsMouseOver" Value="True">
+                              <Setter TargetName="myImageDieRoll1" Property="gif:ImageBehavior.AnimatedSource" Value="/Images/DieRoll.gif" />
+                              <Setter Property="RenderTransform">
+                                 <Setter.Value>
+                                    <TransformGroup>
+                                       <ScaleTransform ScaleX="1.707" ScaleY="1.707" />
+                                       <TranslateTransform X="-25.6" Y="-25.6" />
+                                    </TransformGroup>
+                                 </Setter.Value>
+                              </Setter>
+                           </Trigger>
+                        </ControlTemplate.Triggers>
+                     </ControlTemplate>
+                  </Button.Template>
+               </Button> -->
+            </Canvas>
             </ScrollViewer>
         </DockPanel>
     </DockPanel>
