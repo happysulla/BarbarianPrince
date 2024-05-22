@@ -549,12 +549,12 @@ namespace BarbarianPrince
          {
             string memberName = memberToAdd + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", Prince.Territory, 5, 5, 0);
+            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", Prince.Territory, 4, 5, 0);
             member.Food = 5;
             member.Coin = 98;
             member.AddNewMount();  // riding
             member.AddNewMount(MountEnum.Pegasus); // flying
-            member.SetWounds(4, 0); // make unconscious
+            member.SetWounds(3, 0); // make unconscious
             member.IsGuide = true;
             foreach (string adj in Prince.TerritoryStarting.Adjacents)
             {

@@ -1352,7 +1352,7 @@ namespace BarbarianPrince
             mapItems = newOrder;
          }
       }
-      public static void SetButtonContent(Button b, IMapItem mi, bool isStatsShown, bool isAdornmentsShown, bool isCombat = false)
+      public static void SetButtonContent(Button b, IMapItem mi, bool isStatsShown, bool isAdornmentsShown, bool isSwordOrShieldShown = false, bool isBloodSpotsShown = true)
       {
          Grid g = new Grid() { };
          if (false == mi.IsAnimated)
@@ -1446,7 +1446,6 @@ namespace BarbarianPrince
                   else
                      Canvas.SetLeft(labelForCombat, 42);
                   Canvas.SetTop(labelForCombat, 0);
-                  Canvas.SetTop(labelForCombat, 0);
                   Canvas.SetLeft(labelForWounds, 0);
                   Canvas.SetTop(labelForWounds, 38);
                   if (true == mi.Name.Contains("Mirror"))
@@ -1467,33 +1466,36 @@ namespace BarbarianPrince
                   labelForStarveDayNum.Foreground = Brushes.White;
             }
             //----------------------------------------------------
-            foreach (UIElement ui in mi.Overlay.Children) // copy over blood from old canvas to new canvas
+            if( true == isBloodSpotsShown )
             {
-               Image img1 = (Image)ui;
-               Image spot = null;
-               if ("Blood" == (string)img1.Tag)
-                  spot = new Image() { Stretch = Stretch.Fill, Height = img1.Height, Width = img1.Width, Source = MapItem.theMapImages.GetBitmapImage("OBlood1") };
-               else
-                  spot = new Image() { Stretch = Stretch.Fill, Height = img1.Height, Width = img1.Width, Source = MapItem.theMapImages.GetBitmapImage("OPoison") };
-               c.Children.Add(spot);
-               double left = Canvas.GetLeft(img1);
-               double top = Canvas.GetTop(img1);
-               Canvas.SetLeft(spot, left);
-               Canvas.SetTop(spot, top);
+               foreach (UIElement ui in mi.Overlay.Children) // copy over blood from old canvas to new canvas
+               {
+                  Image img1 = (Image)ui;
+                  Image spot = null;
+                  if ("Blood" == (string)img1.Tag)
+                     spot = new Image() { Stretch = Stretch.Fill, Height = img1.Height, Width = img1.Width, Source = MapItem.theMapImages.GetBitmapImage("OBlood1") };
+                  else
+                     spot = new Image() { Stretch = Stretch.Fill, Height = img1.Height, Width = img1.Width, Source = MapItem.theMapImages.GetBitmapImage("OPoison") };
+                  c.Children.Add(spot);
+                  double left = Canvas.GetLeft(img1);
+                  double top = Canvas.GetTop(img1);
+                  Canvas.SetLeft(spot, left);
+                  Canvas.SetTop(spot, top);
+               }
             }
             if (true == isAdornmentsShown)
             {
-               if ((true == isCombat) && (true == mi.IsShieldApplied)) // Show shield if in combat and activated
+               if ((true == isSwordOrShieldShown) && (true == mi.IsShieldApplied)) // Show shield if in combat and activated
                   SetButtonContentAdornments(mi, c, SpecialEnum.ShieldOfLight);
                foreach (SpecialEnum possession in mi.SpecialKeeps)
                {
-                  if ((true == isCombat) && (SpecialEnum.ShieldOfLight == possession)) // do not show shield if in combat 
+                  if ((true == isSwordOrShieldShown) && (SpecialEnum.ShieldOfLight == possession)) // do not show shield if in combat 
                      continue;
                   SetButtonContentAdornments(mi, c, possession);
                }
                foreach (SpecialEnum possession in mi.SpecialShares)
                {
-                  if ((true == isCombat) && (SpecialEnum.ShieldOfLight == possession)) // do not show shield if in combat 
+                  if ((true == isSwordOrShieldShown) && (SpecialEnum.ShieldOfLight == possession)) // do not show shield if in combat 
                      continue;
                   SetButtonContentAdornments(mi, c, possession);
                }

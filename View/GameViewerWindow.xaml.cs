@@ -1859,6 +1859,7 @@ namespace BarbarianPrince
             //-------------------------------------------
             myScollViewerInside.Height = Settings.Default.ScrollViewerHeight;
             myScollViewerInside.Width = Settings.Default.ScrollViewerWidth;
+
          }
          catch ( Exception ex ) 
          {

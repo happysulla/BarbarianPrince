@@ -5,6 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BarbarianPrince"
         mc:Ignorable="d"
-        Title="PartyDisplayDialog" Height="100" Width="100" IsEnabled="False" Topmost="True" ShowInTaskbar="False" ResizeMode="NoResize" WindowStyle="None" Background="{x:Null}">
-   <DockPanel x:Name="myDockPanel" IsEnabled="False"/>
+        Title="PartyDisplayDialog" IsEnabled="False" Topmost="True" ShowInTaskbar="False" ResizeMode="NoResize" WindowStyle="None" Background="{x:Null}">
+   <WrapPanel x:Name="myWrapPanel" Orientation="Horizontal"/>
 </Window>
