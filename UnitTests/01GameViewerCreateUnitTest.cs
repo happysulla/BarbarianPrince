@@ -127,7 +127,7 @@ namespace BarbarianPrince
             else
                 x = scrollViewer.ActualWidth / (2 * Utilities.ZoomCanvas) + scrollViewer.HorizontalOffset / Utilities.ZoomCanvas;
             double y = 0.0;
-            if (canvas.ActualHeight < myScrollViewerCanvas.ActualHeight / Utilities.ZoomCanvas)
+            if (canvas.ActualHeight < scrollViewer.ActualHeight / Utilities.ZoomCanvas)
                 y = canvas.ActualHeight / 2 + scrollViewer.VerticalOffset;
             else
                 y = scrollViewer.ActualHeight / (2 * Utilities.ZoomCanvas) + scrollViewer.VerticalOffset / Utilities.ZoomCanvas;
@@ -159,39 +159,6 @@ namespace BarbarianPrince
             Canvas.SetTop(aEllipse, y);
             myCanvas.Children.Add(aEllipse);
         }
-        private Button CreateButton(IMapItem mi)
-        {
-            System.Windows.Controls.Button b = new Button { };
-            double totalZoom = mi.Zoom * Utilities.ZoomCanvas;
-            Canvas.SetLeft(b, mi.Territory.CenterPoint.X - totalZoom * Utilities.theMapItemOffset);
-            Canvas.SetTop(b, mi.Territory.CenterPoint.Y - totalZoom * Utilities.theMapItemOffset);
-            b.Name = Utilities.RemoveSpaces(mi.Name);
-            b.Width = totalZoom * Utilities.theMapItemSize;
-            b.Height = totalZoom * Utilities.theMapItemSize;
-            b.IsEnabled = true;
-            b.BorderThickness = new Thickness(0);
-            b.Background = new SolidColorBrush(Colors.Transparent);
-            b.Foreground = new SolidColorBrush(Colors.Transparent);
-            MapItem.SetButtonContent(b, mi, false, true);
-            myCanvas.Children.Add(b);
-            Canvas.SetZIndex(b, 100);
-            return b;
-        }
-        //private static void ApplyControlTemplateWithTrigger(Button b, IMapItem mi)
-        //{
-        //   BitmapImage topBitmapImage = MapItem.theMapImages.GetBitmapImage(mi.TopImageName);
-        //   BitmapImage bottomBitmapImage = MapItem.theMapImages.GetBitmapImage(mi.BottomImageName);
-        //   ControlTemplate controlTemplate = new ControlTemplate(typeof(Button));
-        //   FrameworkElementFactory factory1 = new FrameworkElementFactory(typeof(Image), "imageShown");
-        //   factory1.SetValue(Image.StretchProperty, Stretch.Fill);
-        //   factory1.SetValue(ImageBehavior.AnimatedSourceProperty, topBitmapImage);
-        //   controlTemplate.VisualTree = factory1;
-        //   Trigger t = new Trigger() { Property = Image.IsMouseOverProperty, Value = true };
-        //   Setter s = new Setter(ImageBehavior.AnimatedSourceProperty, bottomBitmapImage, "imageShown");
-        //   t.Setters.Add(s);
-        //   controlTemplate.Triggers.Add(t);
-        //   b.Template = controlTemplate;
-        //}
     }
 }
 

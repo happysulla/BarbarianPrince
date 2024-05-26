@@ -1546,14 +1546,12 @@ namespace BarbarianPrince
       }
       private void MouseEnterMapItem(object sender, System.Windows.Input.MouseEventArgs e)
       {
-         Console.WriteLine("MouseEnterMapItem");
          Button b = (Button)sender;
          myPartyDisplayDialog = new PartyDisplayDialog(myGameInstance, myCanvas, b);
          myPartyDisplayDialog.Show();
       }
       private void MouseLeaveMapItem(object sender, System.Windows.Input.MouseEventArgs e)
       {
-         Console.WriteLine("MouseLeaveMapItem");
          myPartyDisplayDialog.Close();
       }
       private void MouseDownPolygonTravel(object sender, MouseButtonEventArgs e)

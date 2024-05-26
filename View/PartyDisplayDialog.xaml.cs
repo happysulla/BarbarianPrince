@@ -17,26 +17,57 @@ namespace BarbarianPrince
 {
    public partial class PartyDisplayDialog : Window
    {
+      private ScrollViewer myScrollViewer = null;
       public PartyDisplayDialog(IGameInstance gi, Canvas c, Button b)
       {
          InitializeComponent();
-         double size = Utilities.ZOOM * Utilities.theMapItemSize;
          double princeSize = gi.Prince.Zoom * Utilities.theMapItemSize;
-         System.Windows.Point location = b.PointToScreen(new Point(princeSize, princeSize));
-         this.Left = location.X;
-         this.Top = location.Y;
+         double partyMemberSize = Utilities.ZOOM * Utilities.theMapItemSize;
          //-----------------------------
-         this.Height = size + 2;
-         this.Width = size * (gi.PartyMembers.Count - 1) + 2; // not showing prince
-          //-----------------------------
-         foreach (IMapItem mi in gi.PartyMembers)
+         foreach (IMapItem mi in gi.PartyMembers) // set contents of WrapPanel
          {
             if (true == mi.Name.Contains("Prince"))
                continue;
-            System.Windows.Controls.Button newButton = new Button { Name = Utilities.RemoveSpaces(mi.Name), Width = size, Height = size, BorderThickness = new Thickness(0), Background = new SolidColorBrush(Colors.Transparent), Foreground = new SolidColorBrush(Colors.Transparent) };
+            System.Windows.Controls.Button newButton = new Button { Name = Utilities.RemoveSpaces(mi.Name), Width = partyMemberSize, Height = partyMemberSize, BorderThickness = new Thickness(0), Background = new SolidColorBrush(Colors.Transparent), Foreground = new SolidColorBrush(Colors.Transparent) };
             MapItem.SetButtonContent(newButton, mi, true, false, true, false); // This sets the image as the button's content
-            this.myWrapPanel.Children.Add(newButton);   
+            this.myWrapPanel.Children.Add(newButton);
          }
+         //-----------------------------
+         this.Width = partyMemberSize * (gi.PartyMembers.Count - 1) + 2; // not showing prince
+         this.Height = partyMemberSize + 2;
+         //-----------------------------
+         myScrollViewer = (ScrollViewer)c.Parent;
+         double aw = myScrollViewer.ActualWidth;
+         double ho = myScrollViewer.HorizontalOffset;
+         double cw = c.ActualWidth;
+         double delta = 0;
+         if (cw < aw)
+            delta = (aw - cw - System.Windows.SystemParameters.VerticalScrollBarWidth) / (2*Utilities.ZoomCanvas);
+         //-----------------------------
+         System.Windows.Point bottomRight = b.PointToScreen(new Point(princeSize, princeSize)); // bottom left of button
+         double rw = (Canvas.GetLeft(b) + princeSize) * Utilities.ZoomCanvas + this.Width;
+         double awho = (aw + ho);
+         if ( rw < awho-delta )
+         {
+            this.Left = bottomRight.X;
+         }
+         else
+         {
+            double d1 = rw - (awho-delta);
+            this.Left = bottomRight.X - d1;
+         }
+         //-----------------------------
+         double bw = (Canvas.GetTop(b) + princeSize) * Utilities.ZoomCanvas + this.Height;
+         if (bw < c.ActualHeight)
+         {
+            this.Top = bottomRight.Y;
+         }
+         else
+         {
+            System.Windows.Point topLeft = b.PointToScreen(new Point(0, 0)); // bottom left of button
+            this.Top = topLeft.Y - this.Height;
+         }
+
       }
    }
 }

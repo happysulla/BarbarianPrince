@@ -22,9 +22,9 @@ namespace BarbarianPrince
             ScrollViewer scrollViewer = null;
             Canvas canvas = null;
             Image image = null;
-            foreach (UIElement ui0 in TopPanel.Children)
+            foreach (UIElement ui0 in TopPanel.Children) // top panel holds myMainMenu, myDockePanelInside, and myStatusBar
             {
-                if (ui0 is DockPanel)
+                if (ui0 is DockPanel) // myDockPanelInside holds myScrollViewerInside (which holds canvas) and myDockPanelControls
                 {
                     dockPanelInside = (DockPanel)ui0;
                     foreach (UIElement ui1 in dockPanelInside.Children)

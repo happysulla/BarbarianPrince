@@ -103,38 +103,13 @@
                 <Separator Name="mySeparator4" DockPanel.Dock="Top" Height="5"/>
                 <ScrollViewer Name="myScrollViewerTextBlock" MaxWidth="617" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0" Background="#FFB9EA9E">
                     <TextBlock Name="myTextBlockDisplay" MinWidth="590" MaxWidth="590" FontFamily="Georgia" FontSize="24" TextWrapping="WrapWithOverflow" IsHyphenationEnabled="true" LineStackingStrategy="BlockLineHeight" Margin="0,0,0,0"  Background="#FFB9EA9E" Height="654" Width="610">
-                    <!--<LineBreak/><Bold>Game Events Shown Here</Bold>
-                    <LineBreak/><LineBreak/> If you need to know how to play, click here: 
-                    <InlineUIContainer><Button Name='myButtonR200' Content='r200' FontFamily='Courier New'  FontSize='16'> </Button></InlineUIContainer>
-                    <LineBreak/><LineBreak/>Otherwise, begin your adventure by clicking here: 
-                    <InlineUIContainer><Button Name='myButtonE001' Content='e001' FontFamily='Courier New'  FontSize='16'> </Button></InlineUIContainer>-->
                     </TextBlock>
                 </ScrollViewer>
             </DockPanel>
-            <ScrollViewer Name="myScollViewerInside" Height="1000" Width="827" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0" >
+            <ScrollViewer Name="myScollViewerInside" Height="1000" Width="827" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
                 <Canvas Name="myCanvas" Height="985" Width="810">
                     <Image Name="myMap" Source="/Images/Map.gif" Height="985" Width="810" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" />
-               <!--<Button Name="myButtonDieRoll1" Height="80" Width="80" Canvas.Left="15" Canvas.Top="15" BorderThickness="0,0,0,0" >
-                  <Button.Template>
-                     <ControlTemplate>
-                        <Image Name="myImageDieRoll1" Stretch="Fill" gif:ImageBehavior.AnimatedSource="/Images/c01die.gif"/>
-                        <ControlTemplate.Triggers>
-                           <Trigger Property="IsMouseOver" Value="True">
-                              <Setter TargetName="myImageDieRoll1" Property="gif:ImageBehavior.AnimatedSource" Value="/Images/DieRoll.gif" />
-                              <Setter Property="RenderTransform">
-                                 <Setter.Value>
-                                    <TransformGroup>
-                                       <ScaleTransform ScaleX="1.707" ScaleY="1.707" />
-                                       <TranslateTransform X="-25.6" Y="-25.6" />
-                                    </TransformGroup>
-                                 </Setter.Value>
-                              </Setter>
-                           </Trigger>
-                        </ControlTemplate.Triggers>
-                     </ControlTemplate>
-                  </Button.Template>
-               </Button> -->
-            </Canvas>
+                </Canvas>
             </ScrollViewer>
         </DockPanel>
     </DockPanel>

@@ -1475,6 +1475,26 @@ namespace BarbarianPrince
          if (true == option.IsEnabled)
             starting = gi.Territories.Find(hex);
          //---------------------------------------------------------
+         hex = "1905";  // Road
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            starting = gi.Territories.Find(hex);
+         //---------------------------------------------------------
+         hex = "1723"; // Bottom Board
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            starting = gi.Territories.Find(hex);
+         //---------------------------------------------------------
          //Farmland=0418 CountrySide=0410 Forest=0409 Hills=0406 Mountains=0405 Swamp=0411 Desert=0407 
          //starting = gi.Territories.Find("0411"); //ForestTemple=1021 HillsTemple=2009 MountainTemple=1021 
          //starting = gi.Territories.Find("0207"); //Road Travel=0207->0208

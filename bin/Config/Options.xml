@@ -163,4 +163,10 @@
    <Option value="0407" name="Desert">
       <IsEnabled value="False" />
    </Option>
+   <Option value="1905" name="Road">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="1723" name="BottomBoard">
+      <IsEnabled value="False" />
+   </Option>
 </Options>
