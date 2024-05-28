@@ -14,17 +14,43 @@ using Label = System.Windows.Controls.Label;
 
 namespace BarbarianPrince
 {
+   [Serializable]
+   public struct BloodSpot
+   {
+      public int mySize;  // diameter  of blood spot
+      public bool myIsPoison; // either normal blood or poison splatter
+      public double myLeft;   // left of where blood spot exists on canvas
+      public double myTop;    // top of where blood spot exists on canvas
+      public BloodSpot(bool isPoison)
+      {
+         myIsPoison = isPoison;  
+         mySize = Utilities.RandomGenerator.Next(8) + 5;
+         int range = (int)(Utilities.theMapItemSize);
+         myLeft = Utilities.RandomGenerator.Next(range);
+         myTop = Utilities.RandomGenerator.Next(range);
+      }
+      public BloodSpot(int size, bool isPoison, double left, double top)
+      {
+         mySize = size;
+         myIsPoison = isPoison;
+         myLeft = left;
+         myTop = top;
+      }
+   }
+   [Serializable]
    public class MapItem : IMapItem
    {
       private const double PERCENT_MAPITEM_COVERED = 40.0;
       private const int NOT_FLYING = -1000;
       [NonSerialized] public static IMapImages theMapImages = new MapImages();
+      [NonSerialized] private Canvas myCanvas = new Canvas();
       // Static Properties
       public string Name { get; set; } = "";
       public string TopImageName { get; set; } = "";
       public string BottomImageName { get; set; } = "";
       public string OverlayImageName { get; set; } = "";
-      public Canvas Overlay { get; } = new Canvas();
+      public List<BloodSpot> myBloodSpots = new List<BloodSpot>();
+      public List<BloodSpot> BloodSpots { get => myBloodSpots; }
       public double Zoom { get; set; } = 1.0;
       public bool IsHidden { get; set; } = false;
       //--------------------------------------------------
@@ -438,29 +464,24 @@ namespace BarbarianPrince
          Logger.Log(LogEnum.LE_MAPITEM_WOUND, "SetWounds(): Name=" + this.Name + " woundBefore=" + woundBefore.ToString() + " this.Wound =" + this.Wound.ToString() + " ++++++spotDelta=" + spotDelta.ToString());
          for (int spots = 0; spots < spotDelta; ++spots) // splatter the MapItem with random blood spots
          {
-            int randomNum = Utilities.RandomGenerator.Next(8) + 5;
-            Image bloodSpot = new Image() { Stretch = Stretch.Fill, Tag = "Blood", Source = MapItem.theMapImages.GetBitmapImage("OBlood1"), Height = randomNum, Width = randomNum };
-            this.Overlay.Children.Add(bloodSpot);
-            int range = (int)(Utilities.theMapItemSize);
-            double posY = Utilities.RandomGenerator.Next(range);
-            Canvas.SetTop(bloodSpot, posY);
-            double posX = Utilities.RandomGenerator.Next(range);
-            Canvas.SetLeft(bloodSpot, posX);
+            BloodSpot spot = new BloodSpot(false);
+            myBloodSpots.Add(spot);
+            Image bloodSpotImg = new Image() { Stretch = Stretch.Fill, Tag = "Blood", Source = MapItem.theMapImages.GetBitmapImage("OBlood1"), Height = spot.mySize, Width = spot.mySize };
+            myCanvas.Children.Add(bloodSpotImg);
+            Canvas.SetLeft(bloodSpotImg, spot.myLeft);
+            Canvas.SetTop(bloodSpotImg, spot.myTop);
          }
          //------------------------------------------------
          spotDelta = (int)Math.Round(PERCENT_MAPITEM_COVERED * (this.Poison - poisonBefore) / this.Endurance);
          Logger.Log(LogEnum.LE_MAPITEM_POISION, "SetWounds(): Name=" + this.Name + " poisonBefore=" + poisonBefore.ToString() + " this.Poison=" + this.Poison.ToString() + " ++++++spotDelta=" + spotDelta.ToString());
          for (int spots = 0; spots < spotDelta; ++spots) // splatter the MapItem with random blood spots
          {
-            int randomNum = Utilities.RandomGenerator.Next(8) + 5;
-            Image poisonSpot = new Image() { Stretch = Stretch.Fill, Tag = "Poison", Source = MapItem.theMapImages.GetBitmapImage("OPoison"), Height = randomNum, Width = randomNum };
-            poisonSpot.Source = MapItem.theMapImages.GetBitmapImage("OPoison");
-            this.Overlay.Children.Add(poisonSpot);
-            int range = (int)(Utilities.theMapItemSize);
-            double posY = Utilities.RandomGenerator.Next(range);
-            Canvas.SetTop(poisonSpot, posY);
-            double posX = Utilities.RandomGenerator.Next(range);
-            Canvas.SetLeft(poisonSpot, posX);
+            BloodSpot spot = new BloodSpot(true);
+            myBloodSpots.Add(spot);
+            Image poisonSpot = new Image() { Stretch = Stretch.Fill, Tag = "Poison", Source = MapItem.theMapImages.GetBitmapImage("OPoison"), Height = spot.mySize, Width = spot.mySize };
+            myCanvas.Children.Add(poisonSpot);
+            Canvas.SetLeft(poisonSpot, spot.myLeft);
+            Canvas.SetTop(poisonSpot, spot.myTop);
          }
          //------------------------------------------------
          int healthRemaining = this.Endurance - this.Wound - this.Poison;
@@ -487,16 +508,20 @@ namespace BarbarianPrince
          //------------------------------------------------
          int spotDelta = (int)Math.Round(PERCENT_MAPITEM_COVERED * (woundBefore - this.Wound) / this.Endurance);
          Logger.Log(LogEnum.LE_MAPITEM_WOUND, "SetWounds(): Name=" + this.Name + " woundBefore=" + woundBefore.ToString() + " this.Wound=" + this.Wound.ToString() + "---------spotDelta=" + spotDelta.ToString());
-         for (int spots = 0; spots < spotDelta; ++spots) // splatter the MapItem with random blood spots
+         for (int spots = 0; spots < spotDelta; ++spots) // remove a random blood splatter
          {
-            foreach (UIElement ui in this.Overlay.Children)
+            foreach (UIElement ui in myCanvas.Children)
             {
                if (ui is Image img)
                {
                   string tag = (string)img.Tag;
                   if ("Blood" == tag)
                   {
-                     this.Overlay.Children.Remove(ui);
+                     double left = Canvas.GetLeft(img);
+                     double top = Canvas.GetTop(img);
+                     myCanvas.Children.Remove(ui);
+                     BloodSpot spotToRemove = myBloodSpots.SingleOrDefault(bs => bs.myLeft == left && bs.myTop == top);
+                     myBloodSpots.Remove(spotToRemove);
                      break;
                   }
                }
@@ -505,16 +530,20 @@ namespace BarbarianPrince
          //------------------------------------------------
          spotDelta = (int)Math.Round(PERCENT_MAPITEM_COVERED * (poisonBefore - this.Poison) / this.Endurance);
          Logger.Log(LogEnum.LE_MAPITEM_POISION, "HealWounds(): Name=" + this.Name + " poisonBefore=" + poisonBefore.ToString() + " poisonCurrent=" + this.Poison.ToString() + "---------spotDelta=" + spotDelta.ToString());
-         for (int spots = 0; spots < spotDelta; ++spots) // splatter the MapItem with random blood spots
+         for (int spots = 0; spots < spotDelta; ++spots) // remove a random blood splatter
          {
-            foreach (UIElement ui in this.Overlay.Children)
+            foreach (UIElement ui in myCanvas.Children)
             {
                if (ui is Image img)
                {
                   string tag = (string)img.Tag;
                   if ("Poison" == tag)
                   {
-                     this.Overlay.Children.Remove(ui);
+                     double left = Canvas.GetLeft(img);
+                     double top = Canvas.GetTop(img);
+                     myCanvas.Children.Remove(ui);
+                     BloodSpot spotToRemove = myBloodSpots.SingleOrDefault(bs => bs.myLeft == left && bs.myTop == top);
+                     myBloodSpots.Remove(spotToRemove);
                      break;
                   }
                }
@@ -1267,7 +1296,7 @@ namespace BarbarianPrince
          CarriedMembers.Clear();
          SpecialKeeps.Clear();
          mySpecialShares.Clear();
-         Overlay.Children.Clear();
+         myCanvas.Children.Clear();
          OverlayImageName = "";
       }
       public void ResetPartial()
@@ -1468,19 +1497,16 @@ namespace BarbarianPrince
             //----------------------------------------------------
             if( true == isBloodSpotsShown )
             {
-               foreach (UIElement ui in mi.Overlay.Children) // copy over blood from old canvas to new canvas
+               foreach (BloodSpot bs in mi.BloodSpots) // copy over blood from old canvas to new canvas
                {
-                  Image img1 = (Image)ui;
-                  Image spot = null;
-                  if ("Blood" == (string)img1.Tag)
-                     spot = new Image() { Stretch = Stretch.Fill, Height = img1.Height, Width = img1.Width, Source = MapItem.theMapImages.GetBitmapImage("OBlood1") };
+                  Image spotImg = null;
+                  if (false == bs.myIsPoison)
+                     spotImg = new Image() { Stretch = Stretch.Fill, Height = bs.mySize, Width = bs.mySize, Source = MapItem.theMapImages.GetBitmapImage("OBlood1") };
                   else
-                     spot = new Image() { Stretch = Stretch.Fill, Height = img1.Height, Width = img1.Width, Source = MapItem.theMapImages.GetBitmapImage("OPoison") };
-                  c.Children.Add(spot);
-                  double left = Canvas.GetLeft(img1);
-                  double top = Canvas.GetTop(img1);
-                  Canvas.SetLeft(spot, left);
-                  Canvas.SetTop(spot, top);
+                     spotImg = new Image() { Stretch = Stretch.Fill, Height = bs.mySize, Width = bs.mySize, Source = MapItem.theMapImages.GetBitmapImage("OPoison") };
+                  c.Children.Add(spotImg);
+                  Canvas.SetLeft(spotImg, bs.myLeft);
+                  Canvas.SetTop(spotImg, bs.myTop);
                }
             }
             if (true == isAdornmentsShown)
@@ -1713,6 +1739,7 @@ namespace BarbarianPrince
       }
    }
    //--------------------------------------------------------------------------
+   [Serializable]
    public class MapItems : IEnumerable, IMapItems
    {
       private readonly ArrayList myList;

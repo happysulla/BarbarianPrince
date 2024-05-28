@@ -4,9 +4,10 @@ using System.Linq;
 
 namespace BarbarianPrince
 {
+   [Serializable]
    public class Territory : ITerritory
    {
-      static public List<ITerritory> theTerritories = new List<ITerritory>();
+      [NonSerialized] static public List<ITerritory> theTerritories = new List<ITerritory>();
       public string Name { get; set; } = "";
       public int Coin { get; set; } = 0;
       public string Type { get; set; } = "";

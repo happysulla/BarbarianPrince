@@ -1117,7 +1117,7 @@ namespace BarbarianPrince
                else if (true == myOptionForceLostEvent) 
                   dieRoll = 13;
                myState = GetLostResult(myGameInstance.MapItemMoves[0], dieRoll);
-               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_LOST_ROLL s=" + myState.ToString() + " dr=" + dieRoll.ToString());
+               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_LOST_ROLL-->" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_DESERTION_ROLL:
                myState = EnumR204.TC_DESERTION_SHOW;
@@ -1145,7 +1145,7 @@ namespace BarbarianPrince
                      dieRoll = 13;
                }
                myState = GetEventResult(myGameInstance.MapItemMoves[0], dieRoll);
-               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL s=" + myState.ToString() + " dr=" + dieRoll.ToString());
+               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL-->" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_ROAD:
                myIsTravelingRoad = false;  // Road event already checked. Switch to non-road check
@@ -1154,7 +1154,7 @@ namespace BarbarianPrince
                else if (true == myOptionForceEvent)
                   dieRoll = 13;
                myState = GetEventResult(myGameInstance.MapItemMoves[0], dieRoll);
-               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL_ROAD s=" + myState.ToString() + " dr=" + dieRoll.ToString());
+               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL_ROAD-->" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_REFERENCE:
                //dieRoll = 5; // <cgs> TEST
@@ -1163,13 +1163,13 @@ namespace BarbarianPrince
                   myState = EnumR204.TC_EVENT_ROLL_REFERENCE_R281;
                else
                   myState = EnumR204.TC_EVENT_ROLL_EVENT;
-               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL_REFERENCE s=" + myState.ToString() + " dr=" + dieRoll.ToString());
+               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL_REFERENCE-->" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT:
                //dieRoll = 6; // <cgs> TEST
                myRollEvent = dieRoll; // column number in traveling event reference - event row
                myState = EnumR204.TC_EVENT_SHOW_RESULTS;
-               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL_EVENT s=" + myState.ToString() + " dr=" + dieRoll.ToString());
+               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL_EVENT-->" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT_R230:
                myState = EnumR204.TC_EVENT_SHOW_RESULTS;
@@ -1194,23 +1194,23 @@ namespace BarbarianPrince
                   dieRoll -= 6;
                }
                myRollEvent = dieRoll;
-               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL_EVENT_R230 s=" + myState.ToString() + " dr=" + dieRoll.ToString());
+               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL_EVENT_R230-->" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT_R232:
                myRollReference = dieRoll;
                myRollEvent     = dieRoll; 
                myState = EnumR204.TC_EVENT_ROLL_EVENT_R232_SHOW;
-               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL_EVENT_R232 s=" + myState.ToString() + " dr=" + dieRoll.ToString());
+               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL_EVENT_R232-->" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_REFERENCE_R281:
                myRollReference = dieRoll; // column number in travel table r207 - reference row
                myState = EnumR204.TC_EVENT_ROLL_EVENT_R281;
-               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL_REFERENCE_R281 s=" + myState.ToString() + " dr=" + dieRoll.ToString());
+               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL_REFERENCE_R281-->" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT_R281:
                myRollEvent = dieRoll; // column number in traveling event reference - event row
                myState = EnumR204.TC_EVENT_ROLL_EVENT_R281_SHOW;
-               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): previous=TC_EVENT_ROLL_EVENT_R281 s=" + myState.ToString() + " dr=" + dieRoll.ToString());
+               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL_EVENT_R281-->" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             default:
                break;
@@ -1289,6 +1289,7 @@ namespace BarbarianPrince
          {
             if (11 < dieRoll)
             {
+               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "GetLostResult(): myLost=true for t=air s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                myIsLost = true;
                if (0 < myLocalGuides.Count)
                {
@@ -1313,6 +1314,7 @@ namespace BarbarianPrince
          {
             if (7 < dieRoll)
             {
+               Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "GetLostResult(): myLost=true for t=river cross s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                myIsLost = true;
                myMapItemMove.RiverCross = RiverCrossEnum.TC_CROSS_FAIL;
                if (0 < myLocalGuides.Count)
@@ -1339,6 +1341,7 @@ namespace BarbarianPrince
             case "Farmland":
                if (9 < dieRoll)
                {
+                  Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "GetLostResult(): myLost=true for t=farmland s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                   myIsLost = true;
                   if (0 < myLocalGuides.Count)
                      state = EnumR204.TC_DESERTION_ROLL;
@@ -1349,6 +1352,7 @@ namespace BarbarianPrince
             case "Countryside":
                if (8 < dieRoll)
                {
+                  Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "GetLostResult(): myLost=true for t=countryside s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                   myIsLost = true;
                   if (0 < myLocalGuides.Count)
                      state = EnumR204.TC_DESERTION_ROLL;
@@ -1359,6 +1363,7 @@ namespace BarbarianPrince
             case "Forest":
                if (7 < dieRoll)
                {
+                  Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "GetLostResult(): myLost=true for t=forest s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                   myIsLost = true;
                   if (0 < myLocalGuides.Count)
                      state = EnumR204.TC_DESERTION_ROLL;
@@ -1369,6 +1374,7 @@ namespace BarbarianPrince
             case "Hills":
                if (7 < dieRoll)
                {
+                  Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "GetLostResult(): myLost=true for t=hills s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                   myIsLost = true;
                   if (0 < myLocalGuides.Count)
                      state = EnumR204.TC_DESERTION_ROLL;
@@ -1379,6 +1385,7 @@ namespace BarbarianPrince
             case "Mountains":
                if (6 < dieRoll)
                {
+                  Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "GetLostResult(): myLost=true for t=mountains s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                   myIsLost = true;
                   if (0 < myLocalGuides.Count)
                      state = EnumR204.TC_DESERTION_ROLL;
@@ -1389,6 +1396,7 @@ namespace BarbarianPrince
             case "Swamp":
                if (4 < dieRoll)
                {
+                  Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "GetLostResult(): myLost=true for t=swamp s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                   myIsLost = true;
                   if (0 < myLocalGuides.Count)
                      state = EnumR204.TC_DESERTION_ROLL;
@@ -1399,6 +1407,7 @@ namespace BarbarianPrince
             case "Desert":
                if (5 < dieRoll)
                {
+                  Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "GetLostResult(): myLost=true for t=desert s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                   myIsLost = true;
                   if (0 < myLocalGuides.Count)
                      state = EnumR204.TC_DESERTION_ROLL;

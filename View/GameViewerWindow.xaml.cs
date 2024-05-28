@@ -183,7 +183,7 @@ namespace BarbarianPrince
          ge.RegisterForUpdates(myEventViewer);
          ge.RegisterForUpdates(sbv);
          ge.RegisterForUpdates(this); // needs to be last so that canvas updates after all actions taken
-#if UT2
+         #if UT2
             if (false == ge.CreateUnitTests(gi, myDockPanelTop, myEventViewer, myDieRoller))
             {
                Logger.Log(LogEnum.LE_ERROR, "GameViewerWindow(): CreateUnitTests() returned false");
@@ -191,7 +191,7 @@ namespace BarbarianPrince
                return;
             }
             gi.GamePhase = GamePhase.UnitTest;
-#endif
+         #endif
    }
       public void UpdateView(ref IGameInstance gi, GameAction action)
       {
@@ -236,6 +236,19 @@ namespace BarbarianPrince
                UpdateCanvasRiver("Trogoth River");
                if (false == UpdateCanvasHexTravelToShowPolygons(gi))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvasHexTravelToShowPolygons() returned error ");
+               break;
+            case GameAction.UpdateGameViewer: // happens when a game is loaded
+               myButtonMapItems.Clear();
+               List<UIElement> elements = new List<UIElement>();
+               foreach (UIElement ui in myCanvas.Children) // remove all buttons on map
+               {
+                  if (ui is Button b)
+                     elements.Add(ui);
+               }
+               foreach (UIElement ui1 in elements)
+                  myCanvas.Children.Remove(ui1);
+               if (false == UpdateCanvas(gi, action))
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvas() returned error ");
                break;
             default:
                if( false == UpdateCanvas(gi, action) )
@@ -1547,12 +1560,17 @@ namespace BarbarianPrince
       private void MouseEnterMapItem(object sender, System.Windows.Input.MouseEventArgs e)
       {
          Button b = (Button)sender;
-         myPartyDisplayDialog = new PartyDisplayDialog(myGameInstance, myCanvas, b);
-         myPartyDisplayDialog.Show();
+         if( 1 < myGameInstance.PartyMembers.Count )
+         {
+            myPartyDisplayDialog = new PartyDisplayDialog(myGameInstance, myCanvas, b);
+            myPartyDisplayDialog.Show();
+         }
       }
       private void MouseLeaveMapItem(object sender, System.Windows.Input.MouseEventArgs e)
       {
-         myPartyDisplayDialog.Close();
+         if(null != myPartyDisplayDialog)
+            myPartyDisplayDialog.Close();
+         myPartyDisplayDialog = null;
       }
       private void MouseDownPolygonTravel(object sender, MouseButtonEventArgs e)
       {

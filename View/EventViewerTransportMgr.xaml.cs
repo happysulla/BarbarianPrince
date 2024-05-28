@@ -138,6 +138,18 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "TransportLoad(): mi=null");
                   return false;
                }
+               //------------------------------------
+               if (mi.Food < 0)
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "1-TransportLoad(): mi=" + mi.Name + " food=" + mi.Food.ToString() + " < 0 ");
+                  return false;
+               }
+               if (mi.Coin < 0)
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "2-TransportLoad(): mi=" + mi.Name + " coin=" + mi.Coin.ToString() + " < 0 ");
+                  return false;
+               }
+               //------------------------------------
                if ( ( (true== isMountsKilled) && (0 < mi.Mounts.Count)) || (true == mi.IsKilled) || (true == mi.IsUnconscious)) // transfer belongings to unassigned
                {
                   myUnassignedFood += mi.Food;
@@ -198,6 +210,17 @@ namespace BarbarianPrince
          System.Windows.Point hotPoint = new System.Windows.Point(Utilities.theMapItemOffset, Utilities.theMapItemOffset); // set the center of the MapItem as the hot point for the cursor
          foreach (IMapItem mi in myGameInstance.PartyMembers) 
          {
+            if (mi.Food < 0)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "3-TransportLoad(): mi=" + mi.Name + " food=" + mi.Food.ToString() + " < 0 ");
+               return false;
+            }
+            if (mi.Coin < 0)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "4-TransportLoad(): mi=" + mi.Name + " coin=" + mi.Coin.ToString() + " < 0 ");
+               return false;
+            }
+            //------------------------------------
             if ((0 < mi.Food) || (0 < mi.Coin) || (0 < myUnassignedCoin) || (0 < myUnassignedFood) )
                myIsSomeCoinOrFood = true;
             //------------------------------------

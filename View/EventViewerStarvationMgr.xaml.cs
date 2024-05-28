@@ -201,6 +201,16 @@ namespace BarbarianPrince
                mi.StarveDayNumOld = mi.StarveDayNum;
             else
                mi.StarveDayNumOld = mi.StarveDayNum + 1;
+            if (mi.Food < 0)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "FeedParty(): mi=" + mi.Name + " food=" + mi.Food.ToString() + " < 0 ");
+               return false;
+            }
+            if (mi.Coin < 0)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "FeedParty(): mi=" + mi.Name + " coin=" + mi.Coin.ToString() + " < 0 ");
+               return false;
+            }
             myFoodOriginal += mi.Food;
             myCoinOriginal += mi.Coin;
             myNumMountsCount += mi.Mounts.Count;
@@ -371,6 +381,16 @@ namespace BarbarianPrince
             }
             foreach (IMapItem mi in myPartyMembers)
             {
+               if (mi.Food < 0)
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "EventViewerStarvationMgr.UpdateEndState(): mi=" + mi.Name + " food=" + mi.Food.ToString() + " < 0 ");
+                  return false;
+               }
+               if (mi.Coin < 0)
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "EventViewerStarvationMgr.UpdateEndState(): mi=" + mi.Name + " coin=" + mi.Coin.ToString() + " < 0 ");
+                  return false;
+               }
                if ((true == mi.Name.Contains("Slave")) && (5 < mi.StarveDayNum))
                   mi.IsKilled = true;
             }

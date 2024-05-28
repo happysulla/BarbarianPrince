@@ -916,7 +916,7 @@ namespace BarbarianPrince
                            isHorseInParty = true;
                      }
                   }
-                  if ((" Fly " == content) && ((true == isNonHumanElfInParty) || (true == isHorseInParty)))
+                  if ( (" Fly " == content) && ( (true == isNonHumanElfInParty) || (true == isHorseInParty) || (false == gi.PartyReadyToFly()) ) ) // if unable to fly, do not show button
                      b.IsEnabled = false;
                   else
                      b.Click += Button_Click;
@@ -2170,11 +2170,8 @@ namespace BarbarianPrince
                   cost = (int)Math.Ceiling((double)cost * 0.5);
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
-               if (cost <= gi.GetCoins())
-               {
-                  string costToPayS = "Each potion costs " + cost.ToString() + "gp. ";
-                  myTextBlock.Inlines.Add(new Run(costToPayS));
-               }
+               string costToPayPotionS = "Each potion costs " + cost.ToString() + "gp. ";
+               myTextBlock.Inlines.Add(new Run(costToPayPotionS));
                myTextBlock.Inlines.Add(new Run("Click merchant image to stop buying."));
                break;
             case "e128f":
@@ -2183,11 +2180,8 @@ namespace BarbarianPrince
                   cost = (int)Math.Ceiling((double)cost * 0.5);
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
-               if (cost <= gi.GetCoins())
-               {
-                  string costToPayS = "Each horse costs " + cost.ToString() + "gp. ";
-                  myTextBlock.Inlines.Add(new Run(costToPayS));
-               }
+               string costToPayHorseS = "Each horse costs " + cost.ToString() + "gp. ";
+               myTextBlock.Inlines.Add(new Run(costToPayHorseS));
                myTextBlock.Inlines.Add(new Run("Click merchant image to stop buying."));
                break;
             case "e129":
@@ -2238,11 +2232,8 @@ namespace BarbarianPrince
                   cost = (int)Math.Ceiling((double)cost * 0.5);
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
-               if (cost <= gi.GetCoins())
-               {
-                  string costToPayS = "Each horse costs " + cost.ToString() + "gp. ";
-                  myTextBlock.Inlines.Add(new Run(costToPayS));
-               }
+               string costToPayH1S = "Each horse costs " + cost.ToString() + "gp. ";
+               myTextBlock.Inlines.Add(new Run(costToPayH1S));
                myTextBlock.Inlines.Add(new Run("Click merchant image to stop buying."));
                break;
             case "e130a":

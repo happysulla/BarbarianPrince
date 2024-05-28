@@ -184,7 +184,11 @@ e004	"<Bold>e004 Mercenary Band</Bold>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='Evade' Name='e004b'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e004b'></Button></InlineUIContainer>*<LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='Fight' Name='e004c'></Button></InlineUIContainer>   ->  
-<InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e004c'></Button></InlineUIContainer>"
+<InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e004c'></Button></InlineUIContainer>
+<LineBreak/><LineBreak/>
+*If your party has any mounts, add one to your die roll for evading. Results higher than 6 are considered 6. If your party has all have winged mounts or flying abilities, you can use escape flying
+ <InlineUIContainer><Button Content='r313' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+ instead of rolling the die for the evade option."
 e004a	"<Bold>e004a Talk to Mercenary Band</Bold>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1: Converse<LineBreak/>
@@ -1955,7 +1959,8 @@ e071	"<Bold>e071 Elven Band</Bold>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e071b'></Button></InlineUIContainer><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='Fight' Name='e071c'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e071c'></Button></InlineUIContainer>
-<LineBreak/><LineBreak/>"
+<LineBreak/><LineBreak/>
+<Italic>Note:</Italic> If your party includes an elf, subtract one from your die roll. If your party includes a dwarf, add one to the die roll."
 e071a	"<Bold>e071a Talk Elven Band</Bold>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e072' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 0 Follow<LineBreak/>
@@ -2152,7 +2157,7 @@ e078b	"<Bold>e078b Majestic Peaks With No Horses</Bold>
 <LineBreak/><LineBreak/>
                           <InlineUIContainer><Image Name='EncounterEnd' Source='../../Images/MountainsView.gif' Height='350' Width='350'></Image></InlineUIContainer>"
 e078c	"<Bold>e078c Bad Going For Horses</Bold>
-<LineBreak/><LineBreak/>Terrain is difficult on horses.  If you choose Travel for the daily action tomorrow, you will risk losing horses. Any other activity will nullify this event. Click image to continue.
+<LineBreak/><LineBreak/>Terrain is difficult on horses.  If you choose Travel for the daily action tomorrow, you will risk losing horses. Any other activity will nullify this event. Click Image to continue.
 <LineBreak/><LineBreak/>
                           <InlineUIContainer><Image Name='MountainPath' Source='../../Images/MountainPath.gif' Height='258' Width='280'></Image></InlineUIContainer>"
 e079	"<Bold>e079 Heavy Rains</Bold>
@@ -2985,7 +2990,7 @@ e128c	"<Bold>e128c Merchant with Food for Sale</Bold>
 <LineBreak/><LineBreak/>
                                           <InlineUIContainer><Image Source='../../Images/Merchant.gif' Name='EncounterEnd' Height='200'  Width='125'></Image></InlineUIContainer>"
 e128d	"<Bold>e128d Merchant OutWits You in Game of Chance</Bold>
-<LineBreak/><LineBreak/>If the roll exceeds wit and wiles, you spend 10gp needlessly. 'Have you ever heard of Plato, Aristotle, Socrates? Morons!'
+<LineBreak/><LineBreak/>If the roll exceeds wit and wiles, you spend up to 10gp needlessly. 'Have you ever heard of Plato, Aristotle, Socrates? Morons!'
 <LineBreak/><LineBreak/> Roll one die:  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e128e	"<Bold>e128e Merchant Selling Healing Potion Sale</Bold>
 <LineBreak/><LineBreak/>Merchant has healing potions for sale. See
@@ -3004,6 +3009,10 @@ e128f	"<Bold>e128f Merchant Selling Horses</Bold>
 <InlineUIContainer><Button Content='  +  ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>
                                           <InlineUIContainer><Image Source='../../Images/Merchant.gif' Name='EncounterEnd' Height='200'  Width='125'> </Image></InlineUIContainer>"
+e128g	"<Bold>e128d Merchant Ignores you</Bold>
+<LineBreak/><LineBreak/>Since you have no gold, the merchant ignores you. Click image to continue.
+<LineBreak/><LineBreak/>
+               <InlineUIContainer><Image Source='../../Images/MerchantOutwit.gif' Name='EncounterEnd' Height='200'  Width='400'> </Image></InlineUIContainer>"
 e129	"<Bold>e129 Merchant Caravan</Bold>
 <LineBreak/><LineBreak/>You meet a merchant caravan camp for the night. You can either <InlineUIContainer><Button Content='Ignore' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> them and continue your travels. Alternatively, you can halt for the day to talk and trade. If you stop, roll two die:  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DiceRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
@@ -3753,8 +3762,7 @@ e166	"<Bold>e166 Elven Fortress</Bold>
 .
 <LineBreak/><LineBreak/>Any followers hired in the castle
  <InlineUIContainer><Button Content='r210' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
- will be elves.
-If you return to the hex later in the game, you must roll again to see if the elves will give you permission to visit or arrest you.
+ will be elves. If you return to the hex later in the game, you must roll again to see if the elves will give you permission to visit or arrest you.
 <LineBreak/><LineBreak/>Die Roll = <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e180	"<Bold>e180 Healing Potion</Bold>
 <LineBreak/><LineBreak/>This potion can be applied once to any character including yourself at the end of the day after the evening meal
@@ -3923,7 +3931,7 @@ e203	"<Bold>e203 Daily Actions</Bold>
 <LineBreak/><LineBreak/>                <InlineUIContainer><Image Source='../../Images/Sun3.gif' Height='220'  Width='440'> </Image></InlineUIContainer>"
 e203a	"<Bold>e203a Prison Escape Attempt</Bold>
  <InlineUIContainer> <Button Content='e061' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
-<LineBreak/><LineBreak/><Italic>Escape:</Italic> Attempt to escape. If you do escape from prison, roll one die for each character in your party who was imprisoned with you. They are part of the escape on 3 plus. Otherwise, they are unable to join the escape or have already been executed.
+<LineBreak/><LineBreak/><Italic>Escape:</Italic> Attempt to escape by rolling one. If you do escape from prison, roll one die for each character in your party who was imprisoned with you. They are part of the escape on 3 plus. Otherwise, they are unable to join the escape or have already been executed.
 <LineBreak/><LineBreak/>If an escape occurs, use the escape rules
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  to determine where you end up. The escape takes the entire day and after you must prepare for the evening meals
@@ -3960,11 +3968,11 @@ e204u	"<Bold>e204u Unmounted Travel</Bold> <InlineUIContainer><Button Content='r
 e204m	"<Bold>e204m Mounted Travel</Bold> <InlineUIContainer><Button Content='r204a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>Click one of the adjacent hexes highlighted blue to move.  "
 e204s	"<Bold>e204s Short Hop Travel</Bold> <InlineUIContainer><Button Content='r204d' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
-<LineBreak/><LineBreak/>Hopping in the air using limited travels. Each hex entered is same as mounted travel.  Click one of the adjacent hexes highlighted blue to move.  "
+<LineBreak/><LineBreak/>Hopping in the air using limited travels. Each hex entered is same as mounted travel.  Click one of the adjacent hexes highlighted blue to move. "
 e204a	"<Bold>e204a Air Travel</Bold> <InlineUIContainer><Button Content='r204d' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>Since your party has flying mounts or can fly, you can elect to perform short hops moving up to two hexes but entering each hex
  <InlineUIContainer><Button Content='Short Hop' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. Short hops must be started on the first movement of the day.
-<LineBreak/><LineBreak/>If you do not short hop, click one of the adjacent hexes highlighted blue. "
+<LineBreak/><LineBreak/>If you do not short hop, click one of the adjacent hexes highlighted blue."
 e205c	"<Bold>e205c Lost in Air Travel</Bold> <InlineUIContainer><Button Content='r205c' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>Lost traveling in air. May have drifted one hex in a random direction. If die roll > 3, drift one hex in random direction: <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21'> </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>

@@ -10,10 +10,7 @@ using Point = System.Windows.Point;
 
 namespace BarbarianPrince
 {
-   /// <summary>
-   /// A MopItemMover object moves a map item
-   /// from one location to another.   
-   /// </summary>
+   [Serializable]
    public class MapItemMove : IMapItemMove
    {
       public bool CtorError { get; } = false;
@@ -246,12 +243,7 @@ namespace BarbarianPrince
          return sb.ToString();
       }
    }
-   /// <summary>
-   /// Summary description for MapItemMoves. Wrapper class around the 
-   /// ArrayList of MapItemMove objects.  The wrapper class provides
-   /// type casting on objects in the ArrayList.  All objects in the
-   /// ArrayList are of type "IMapItemMove".
-   /// </summary>
+   //-------------------------------------------------------
    [Serializable]
    public class MapItemMoves : IMapItemMoves
    {

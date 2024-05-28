@@ -8,7 +8,7 @@
     </Option> 
    <!--===========================-->
    <Option value="EasiestMonsters">
-      <IsEnabled value="True" />
+      <IsEnabled value="False" />
    </Option>
     <Option value="EasyMonsters">
         <IsEnabled value="False" />
@@ -82,7 +82,7 @@
       <IsEnabled value="False" />
    </Option>
    <Option value="Dwarf">
-      <IsEnabled value="True" />
+      <IsEnabled value="False" />
    </Option>
    <Option value="Eagle">
       <IsEnabled value="False" />
@@ -100,16 +100,16 @@
       <IsEnabled value="False" />
    </Option>
    <Option value="Magician">
-      <IsEnabled value="True" />
+      <IsEnabled value="False" />
    </Option>
    <Option value="Mercenary">
-      <IsEnabled value="True" />
+      <IsEnabled value="False" />
    </Option>
    <Option value="Merchant">
-      <IsEnabled value="True" />
+      <IsEnabled value="False" />
    </Option>
    <Option value="Minstrel">
-      <IsEnabled value="True" />
+      <IsEnabled value="False" />
    </Option>
    <Option value="Monk">
       <IsEnabled value="False" />
@@ -118,7 +118,7 @@
       <IsEnabled value="False" />
    </Option>
    <Option value="TrueLove">
-      <IsEnabled value="True" />
+      <IsEnabled value="False" />
    </Option>
    <Option value="Wizard">
       <IsEnabled value="False" />

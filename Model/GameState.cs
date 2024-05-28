@@ -1559,6 +1559,8 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
+            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+               break;
             case GameAction.E079HeavyRainsStartDayCheck:
                gi.IsAirborne = false;
                gi.IsAirborneEnd = false;
@@ -1953,6 +1955,8 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerDisplay:
                break;
+            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+               break;
             case GameAction.Hunt:
                break;
             case GameAction.HuntPeasantMobPursuit:
@@ -2069,6 +2073,8 @@ namespace BarbarianPrince
                gi.EventDisplayed = gi.EventActive;
                break;
             case GameAction.UpdateEventViewerDisplay:
+               break;
+            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
                break;
             case GameAction.CampfirePlagueDustEnd:
                gi.RemoveKilledInParty("Plague Dust");
@@ -2353,6 +2359,8 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
+            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+               break;
             case GameAction.RestHealingEncounter:
                gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterStart;
@@ -2426,6 +2434,8 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
+               break;
+            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
                break;
             case GameAction.TravelLostCheck:
                gi.IsGridActive = false; // GameAction.TravelLostCheck
@@ -2736,6 +2746,8 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
+            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+               break;
             case GameAction.SeekNewsNoPay:
                gi.IsSeekNewModifier = false;
                gi.EventStart = gi.EventDisplayed = gi.EventActive = "e209a";
@@ -2803,6 +2815,8 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
+            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+               break;
             case GameAction.SeekHire:
                gi.EventStart = gi.EventDisplayed = gi.EventActive = "e210";
                gi.SunriseChoice = GamePhase.SeekHire;
@@ -2860,6 +2874,8 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
+            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+               break;
             default:
                returnStatus = "Reached Default ERROR";
                break;
@@ -2904,6 +2920,8 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
+               break;
+            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
                break;
             default:
                returnStatus = "Reached Default ERROR";
@@ -2950,6 +2968,8 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
+               break;
+            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
                break;
             case GameAction.SearchEncounter:
                gi.GamePhase = GamePhase.Encounter;
@@ -3022,6 +3042,8 @@ namespace BarbarianPrince
                break;
             case GameAction.EndGameWin:
                break;
+            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+               break;
             case GameAction.EndGameExit:
                if (null != System.Windows.Application.Current)
                   System.Windows.Application.Current.Shutdown();
@@ -3065,7 +3087,6 @@ namespace BarbarianPrince
          GameAction previousDieAction = gi.DieRollAction;
          string previousEvent = gi.EventActive;
          string previousStartEvent = gi.EventStart;
-         IUnitTest ut = gi.UnitTests[gi.GameTurn];
          switch (action)
          {
             case GameAction.RemoveSplashScreen: // do nothing...the unit test is updated in GameViewerWindow:updateView()
@@ -3101,6 +3122,7 @@ namespace BarbarianPrince
             case GameAction.UnitTestStart: // do nothing...the unit test is updated in GameViewerWindow:updateView()
                break;
             case GameAction.UnitTestCommand: // call the unit test's Command() function
+               IUnitTest ut = gi.UnitTests[gi.GameTurn];
                if (false == ut.Command(ref gi))
                {
                   returnStatus = "Command() returned false";
@@ -3108,14 +3130,16 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.UnitTestNext: // call the unit test's NextTest() function
-               if (false == ut.NextTest(ref gi))
+               IUnitTest ut1 = gi.UnitTests[gi.GameTurn];
+               if (false == ut1.NextTest(ref gi))
                {
                   returnStatus = "NextTest() returned false";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateUnitTest.PerformAction(): " + returnStatus);
                }
                break;
             case GameAction.UnitTestCleanup: // Call the unit test's NextTest() function
-               if (false == ut.Cleanup(ref gi))
+               IUnitTest ut2 = gi.UnitTests[gi.GameTurn];
+               if (false == ut2.Cleanup(ref gi))
                {
                   returnStatus = "Cleanup() returned false";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateUnitTest.PerformAction(): " + returnStatus);
@@ -3177,6 +3201,8 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
+               break;
+            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
                break;
             case GameAction.ShowDienstalBranch:
             case GameAction.ShowLargosRiver:
@@ -10445,7 +10471,17 @@ namespace BarbarianPrince
                      case 4: gi.EventDisplayed = gi.EventActive = "e128b"; break; // cure-poison sale
                      case 5: gi.EventDisplayed = gi.EventActive = "e009"; gi.DieRollAction = GameAction.EncounterRoll; break;  // farms
                      case 6: gi.EventDisplayed = gi.EventActive = "e128c"; break; // food for sale
-                     case 7: gi.EventDisplayed = gi.EventActive = "e128d"; gi.DieRollAction = GameAction.EncounterRoll; break;  // merchant outwits you
+                     case 7:                                                      // merchant outwits you
+                        if( 0 < gi.GetCoins() )
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e128d";
+                           gi.DieRollAction = GameAction.EncounterRoll;
+                        }
+                        else
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e128g";
+                        }
+                        break;  
                      case 8: gi.EventDisplayed = gi.EventActive = "e128e"; break; // healing potion sale
                      case 9: gi.EventDisplayed = gi.EventActive = "e128f"; break; // two horses for sale
                      case 10: gi.EventDisplayed = gi.EventActive = "e163"; gi.DieRollAction = GameAction.EncounterRoll; break; // coffle

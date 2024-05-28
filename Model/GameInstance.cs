@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace BarbarianPrince
 {
-   public class GameInstance : IGameInstance
+   [Serializable] public class GameInstance : IGameInstance
    {
       [NonSerialized] static public Logger Logger = new Logger();
       public bool CtorError { get; } = false;
@@ -113,7 +113,7 @@ namespace BarbarianPrince
             return;
          }
 #if UT1
-            AddUnitTests();
+            AddSpecialConditionsForUnitTest();
 #endif
          Logger.Log(LogEnum.LE_GAME_PARTYMEMBER_COUNT, "GameInstance() c=" + PartyMembers.Count.ToString());
       }
@@ -334,7 +334,8 @@ namespace BarbarianPrince
       public bool IsChagaDrugProvided { set; get; } = false;   // e211b
       //---------------------------------------------------------------
       public IStacks Stacks { get; set; } = new Stacks();
-      public List<IUnitTest> UnitTests { set; get; } = null;
+      [NonSerialized] private List<IUnitTest> myUnitTests = new List<IUnitTest>();
+      public List<IUnitTest> UnitTests { get => myUnitTests; }
       //---------------------------------------------------------------
       private bool AddStartingPrinceOption()
       {
@@ -388,7 +389,6 @@ namespace BarbarianPrince
       }
       private bool AddStartingPartyMemberOption()
       {
-
          IOption option = null;
          //---------------------------------------------------------
          String memberToAdd = "Dwarf";
@@ -681,7 +681,7 @@ namespace BarbarianPrince
          }
          return true;
       }
-      void AddUnitTests()
+      private void AddSpecialConditionsForUnitTest()
       {
          //Days = 40;
          //myPrince.SetWounds(7, 0);

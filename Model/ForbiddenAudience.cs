@@ -10,6 +10,7 @@ namespace BarbarianPrince
    // If there is a forbidden audience, there is a marker indicating it on the map.
    // When the constraint is removed, the audience can be had.
    // Constraints include number of days, letter of recommendation, and need to make offering.
+   [Serializable]
    public class ForbiddenAudience : IForbiddenAudience
    {
       public AudienceConstraintEnum Constraint { get; set; } = AudienceConstraintEnum.ERROR;
@@ -57,6 +58,7 @@ namespace BarbarianPrince
       }
    }
    //---------------------------------------------------------
+   [Serializable]
    public class ForbiddenAudiences : IEnumerable, IForbiddenAudiences
    {
       private readonly ArrayList myList;

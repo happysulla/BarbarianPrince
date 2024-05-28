@@ -185,7 +185,7 @@ namespace BarbarianPrince
       bool IsSecretCountDrogat { set; get; }  // e146 
       bool IsChagaDrugProvided { set; get; }   // e211b - delivered drug to temple
       //----------------------------------------------
-      List<IUnitTest> UnitTests { set; get; }
+      List<IUnitTest> UnitTests { get; }
       //----------------------------------------------
       bool IsInTown(ITerritory t);
       bool IsInTemple(ITerritory t);

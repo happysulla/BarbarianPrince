@@ -6,6 +6,7 @@ using System.Text;
 
 namespace BarbarianPrince
 {
+   [Serializable]
    public class Cache : ICache
    {
       public ITerritory TargetTerritory { get; set; } = null;
@@ -17,6 +18,7 @@ namespace BarbarianPrince
       }
    }
    //---------------------------------------------------------
+   [Serializable]
    public class Caches : IEnumerable, ICaches
    {
       private readonly ArrayList myList;

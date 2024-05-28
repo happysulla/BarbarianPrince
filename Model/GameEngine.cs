@@ -46,7 +46,6 @@ namespace BarbarianPrince
       }
       public bool CreateUnitTests(IGameInstance gi, DockPanel dp, EventViewer ev, IDieRoller dr)
       {
-         gi.UnitTests = new List<IUnitTest>();
          //-----------------------------------------------------------------------------
          IUnitTest ut14 = new CombatUnitTest(dp, gi, ev, dr);
          if (true == ut14.CtorError)

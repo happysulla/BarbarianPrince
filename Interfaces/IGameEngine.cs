@@ -11,6 +11,7 @@ namespace BarbarianPrince
       Talisman,
       Reroll
    };
+   [Serializable]
    public enum RiverCrossEnum
    {
       TC_NO_RIVER,                 // no river crossing
@@ -19,6 +20,7 @@ namespace BarbarianPrince
       TC_CROSS_YES_SHOWN,          // movement on canvas shown across river
       TC_CROSS_FAIL                // failed to cross river
    };
+   [Serializable]
    public enum RaftEnum
    {
       RE_NO_RAFT,                  // Party does not have raft
@@ -27,6 +29,7 @@ namespace BarbarianPrince
       RE_RAFT_ENCOUNTER,           // pass checked to cross
       RE_RAFT_ENDS_TODAY                 // Finished rafting for today
    };
+   [Serializable]
    public enum SpecialEnum
    {
       None,
@@ -54,6 +57,7 @@ namespace BarbarianPrince
       HydraTeeth,
       StaffOfCommand
    };
+   [Serializable]
    public enum GamePhase
    {
       UnitTest,

@@ -44,7 +44,7 @@ namespace BarbarianPrince
          if (cw < aw)
             delta = (aw - cw - System.Windows.SystemParameters.VerticalScrollBarWidth) / (2*Utilities.ZoomCanvas);
          //-----------------------------
-         System.Windows.Point bottomRight = b.PointToScreen(new Point(princeSize, princeSize)); // bottom left of button
+         System.Windows.Point bottomRight = b.PointToScreen(new Point(princeSize, princeSize)); // bottom right of button
          double rw = (Canvas.GetLeft(b) + princeSize) * Utilities.ZoomCanvas + this.Width;
          double awho = (aw + ho);
          if ( rw < awho-delta )
@@ -64,7 +64,7 @@ namespace BarbarianPrince
          }
          else
          {
-            System.Windows.Point topLeft = b.PointToScreen(new Point(0, 0)); // bottom left of button
+            System.Windows.Point topLeft = b.PointToScreen(new Point(0, 0)); // top left of button
             this.Top = topLeft.Y - this.Height;
          }
 

@@ -3,7 +3,8 @@ using System.Collections;
 
 namespace BarbarianPrince
 {
-    public class Option : IOption
+   [Serializable]
+   public class Option : IOption
     {
         public string Name { get; set; }
         public bool IsEnabled { get; set; }
@@ -13,7 +14,8 @@ namespace BarbarianPrince
             IsEnabled = isEnabled;
         }
     }
-    public class Options : IEnumerable, IOptions
+   [Serializable]
+   public class Options : IEnumerable, IOptions
     {
         private readonly ArrayList myList;
         public Options() { myList = new ArrayList(); }
