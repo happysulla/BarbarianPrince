@@ -44,7 +44,7 @@ namespace BarbarianPrince
       private const int NOT_FLYING = -1000;
       [NonSerialized] public static IMapImages theMapImages = new MapImages();
       [NonSerialized] private Canvas myCanvas = new Canvas();
-      // Static Properties
+      //--------------------------------------------------
       public string Name { get; set; } = "";
       public string TopImageName { get; set; } = "";
       public string BottomImageName { get; set; } = "";

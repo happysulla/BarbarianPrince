@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace BarbarianPrince
 {
@@ -64,22 +65,24 @@ namespace BarbarianPrince
          gi.IsMinstrelPlaying = false;
          gi.CheapLodgings.Clear();
          gi.ForbiddenAudiences.Clear();
-         ITerritory t = gi.Territories.Find("0101"); 
+         //-----------------------------------------------------------
+         gi.PartyMembers.Clear();
+         gi.Prince.Reset();
+         gi.PartyMembers.Add(gi.Prince);
+         ITerritory t = gi.Territories.Find("0101");
          if (null == t)
          {
             Logger.Log(LogEnum.LE_ERROR, "Command(): t=null");
             return false;
          }
+         gi.Prince.Territory = t;
          //-----------------------------------------------------------
          if (CommandName == myCommandNames[0])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.AddSpecialItemToKeep(SpecialEnum.TrollSkin);
-            prince.AddSpecialItemToShare(SpecialEnum.TrollSkin);
+            gi.Prince.AddSpecialItemToKeep(SpecialEnum.TrollSkin);
+            gi.Prince.AddSpecialItemToShare(SpecialEnum.TrollSkin);
             AddPrinceMounts(ref gi, 1);
-            prince.Coin = 10;
+            gi.Prince.Coin = 10;
             for (int i = 0; i < 3; ++i)
             {
                string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
@@ -122,11 +125,8 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[1])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
             AddPrinceMounts(ref gi, 2);
-            prince.Coin = 10;
+            gi.Prince.Coin = 10;
             string porterName = "PorterSlave" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
             IMapItem porter = new MapItem(porterName, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
@@ -158,68 +158,84 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[2]) // Minstrel Playing
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
             AddPrinceMounts(ref gi, 1);
-            prince.Coin = 6;
-            IMapItem companion1 = AddCompanion(ref gi, "Mercenary");
-            if (null == companion1)
-               return false;
+            gi.Prince.Coin = 6;
+            //----------------------------------------------------------------
+            string miName = "Mercenary" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 5, 5, 0);
+            companion1.Food = 10;
+            companion1.Coin = 5;
+            companion1.IsSunStroke = true;
             AddCompanionMount(companion1, true);
-            IMapItem companion2 = AddCompanion(ref gi, "Porter");
-            if (null == companion2)
-               return false;
+            gi.AddCompanion(companion1);
+            //----------------------------------------------------------------
+            miName = "Porter" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
             AddCompanionMount(companion2, true);
-            IMapItem companion3 = AddCompanion(ref gi, "Witch");
-            if (null == companion3)
-               return false;
+            gi.AddCompanion(companion2);
+            //----------------------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion3 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            gi.AddCompanion(companion3);
+            //----------------------------------------------------------------
             string minstrelName = "Minstrel" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem minstrel = new MapItem(minstrelName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", prince.Territory, 0, 0, 0);
+            IMapItem minstrel = new MapItem(minstrelName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", gi.Prince.Territory, 0, 0, 0);
             gi.AddCompanion(minstrel);
+            //----------------------------------------------------------------
             gi.IsMinstrelPlaying = true;  // <<<<<<<<<<<<<<<<<<<<<<<<=========================
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLodgingCheck);
          }
          else if (CommandName == myCommandNames[3]) // Minstrel Not Playing
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
             AddPrinceMounts(ref gi, 1);
-            prince.Coin = 6;
-            IMapItem companion1 = AddCompanion(ref gi, "Mercenary");
-            if (null == companion1)
-               return false;
+            gi.Prince.Coin = 6;
+            //----------------------------------------------------------------
+            string miName = "Mercenary" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 5, 5, 0);
             AddCompanionMount(companion1, true);
-            IMapItem companion2 = AddCompanion(ref gi, "Porter");
-            if (null == companion2)
-               return false;
+            gi.AddCompanion(companion1);
+            //----------------------------------------------------------------
+            miName = "Porter" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
             AddCompanionMount(companion2, true);
-            IMapItem companion3 = AddCompanion(ref gi, "Witch");
-            if (null == companion3)
-               return false;
+            gi.AddCompanion(companion2);
+            //----------------------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion3 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            gi.AddCompanion(companion3);
+            //----------------------------------------------------------------
             string minstrelName = "Minstrel" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem minstrel = new MapItem(minstrelName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", prince.Territory, 0, 0, 0);
+            IMapItem minstrel = new MapItem(minstrelName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", gi.Prince.Territory, 0, 0, 0);
             gi.AddCompanion(minstrel);
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLodgingCheck);
          }
          else if (CommandName == myCommandNames[4]) //11-Lodge Party w/ 10 coin and eagles
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Coin = 10;
-            IMapItem companion1 = AddCompanion(ref gi, "Mercenary");
-            if (null == companion1)
-               return false;
-            IMapItem companion2 = AddCompanion(ref gi, "Porter");
-            if (null == companion2)
-               return false;
-            IMapItem companion3 = AddCompanion(ref gi, "Witch");
-            if (null == companion3)
-               return false;
+            gi.Prince.Coin = 10;
+            //----------------------------------------------------------------
+            string miName = "Mercenary" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 5, 5, 0);
+            gi.AddCompanion(companion1);
+            //----------------------------------------------------------------
+            miName = "Porter" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
+            gi.AddCompanion(companion2);
+            //----------------------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion3 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            gi.AddCompanion(companion3);
+            //----------------------------------------------------------------
             for (int i = 0; i < 3; ++i)
             {
                string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
@@ -233,149 +249,157 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[5])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
             AddPrinceMounts(ref gi, 1);
-            prince.Coin = 10;
-            IMapItem companion1 = AddCompanion(ref gi, "Mercenary");
-            if (null == companion1)
-               return false;
+            gi.Prince.Coin = 10;
+            //----------------------------------------------------------------
+            string miName = "Mercenary" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 5, 5, 0);
+            gi.AddCompanion(companion1);
             AddCompanionMount(companion1, true);
-            IMapItem companion2 = AddCompanion(ref gi, "Porter");
-            if (null == companion2)
-               return false;
+            //----------------------------------------------------------------
+            miName = "Porter" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
+            gi.AddCompanion(companion2);
             AddCompanionMount(companion2, true);
-            IMapItem companion3 = AddCompanion(ref gi, "Witch");
-            if (null == companion3)
-               return false;
+            //----------------------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion3 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            gi.AddCompanion(companion3);
             AddCompanionMount(companion3, true);
+            //----------------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLodgingCheck);
          }
          else if (CommandName == myCommandNames[6])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
             AddPrinceMounts(ref gi, 1);
-            prince.Coin = 5;
-            IMapItem companion1 = AddCompanion(ref gi, "Mercenary");
-            if (null == companion1)
-               return false;
+            gi.Prince.Coin = 5;
+            //----------------------------------------------------------------
+            string miName = "Mercenary" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 5, 5, 0);
+            gi.AddCompanion(companion1);
             AddCompanionMount(companion1, true);
-            IMapItem companion2 = AddCompanion(ref gi, "Porter");
-            if (null == companion2)
-               return false;
+            //----------------------------------------------------------------
+            miName = "Porter" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
+            gi.AddCompanion(companion2);
             AddCompanionMount(companion2, true);
-            IMapItem companion3 = AddCompanion(ref gi, "Witch");
-            if (null == companion3)
-               return false;
+            //----------------------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion3 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            gi.AddCompanion(companion3);
             AddCompanionMount(companion3, true);
+            //----------------------------------------------------------------
             gi.IsSecretTempleKnown = true; // <<<<<<<<<<<<<<<<<<<<<<<<=========================
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLodgingCheck);
          }
          else if (CommandName == myCommandNames[7])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
             AddPrinceMounts(ref gi, 1);
-            prince.Coin = 11;
-            IMapItem companion1 = AddCompanion(ref gi, "Mercenary");
-            if (null == companion1)
-               return false;
+            gi.Prince.Coin = 11;
+            //----------------------------------------------------------------
+            string miName = "Mercenary" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 5, 5, 0);
+            gi.AddCompanion(companion1);
             AddCompanionMount(companion1, true);
-            IMapItem companion2 = AddCompanion(ref gi, "Porter");
-            if (null == companion2)
-               return false;
+            //----------------------------------------------------------------
+            miName = "Porter" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
+            gi.AddCompanion(companion2);
             AddCompanionMount(companion2, true);
-            IMapItem companion3 = AddCompanion(ref gi, "Witch");
-            if (null == companion3)
-               return false;
+            //----------------------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion3 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            gi.AddCompanion(companion3);
             AddCompanionMount(companion3, true);
             AddCompanionMount(companion3, false);
             AddCompanionMount(companion3, false);
+            //----------------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLodgingCheck);
          }
          else if (CommandName == myCommandNames[8])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
             AddPrinceMounts(ref gi, 3);
-            prince.Coin = 8;
-            IMapItem companion1 = AddCompanion(ref gi, "Mercenary");
-            if (null == companion1)
-               return false;
+            gi.Prince.Coin = 8;
+            //----------------------------------------------------------------
+            string miName = "Mercenary" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 5, 5, 0);
+            gi.AddCompanion(companion1);
             AddCompanionMount(companion1, true);
-            IMapItem companion2 = AddCompanion(ref gi, "Porter");
-            if (null == companion2)
-               return false;
+            //----------------------------------------------------------------
+            miName = "Porter" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
+            gi.AddCompanion(companion2);
             AddCompanionMount(companion2, true);
-            IMapItem companion3 = AddCompanion(ref gi, "Witch");
-            if (null == companion3)
-               return false;
+            //----------------------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion3 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            gi.AddCompanion(companion3);
             AddCompanionMount(companion3, true);
+            //----------------------------------------------------------------
             gi.IsSecretTempleKnown = true; // <<<<<<<<<<<<<<<<<<<<<<<<=========================
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLodgingCheck);
          }
          else if (CommandName == myCommandNames[9])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
             AddPrinceMounts(ref gi, 1);
-            prince.Coin = 3;
-            IMapItem companion1 = AddCompanion(ref gi, "Mercenary");
-            if (null == companion1)
-               return false;
+            gi.Prince.Coin = 3;
+            //----------------------------------------------------------------
+            string miName = "Mercenary" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 5, 5, 0);
+            gi.AddCompanion(companion1);
             AddCompanionMount(companion1, true);
-            IMapItem companion2 = AddCompanion(ref gi, "Porter");
-            if (null == companion2)
-               return false;
+            //----------------------------------------------------------------
+            miName = "Porter" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
+            gi.AddCompanion(companion2);
             AddCompanionMount(companion2, true);
-            IMapItem companion3 = AddCompanion(ref gi, "Witch");
-            if (null == companion3)
-               return false;
+            //----------------------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem companion3 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            gi.AddCompanion(companion3);
             AddCompanionMount(companion3, true);
             AddCompanionMount(companion3, false);
             AddCompanionMount(companion3, false);
+            //----------------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLodgingCheck);
          }
          else if (CommandName == myCommandNames[10]) //<<<<<<<<<<<<<<<<<<<<<<<<<================================ PRINCE ONLY
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Coin = 5;
+            gi.Prince.Coin = 5;
             gi.IsSecretTempleKnown = true;
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLodgingCheck);
          }
          else if (CommandName == myCommandNames[11]) 
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Coin = 5;
+            gi.Prince.Coin = 5;
             AddPrinceMounts(ref gi, 1);
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLodgingCheck);
          }
          else if (CommandName == myCommandNames[12])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Coin = 5;
+            gi.Prince.Coin = 5;
             AddPrinceMounts(ref gi, 3);
             gi.IsSecretTempleKnown = true; // <<<<<<<<<<<<<<<<<<<<<<<<=========================
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLodgingCheck);
          }
          else if (CommandName == myCommandNames[13])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Coin = 2;
+            gi.Prince.Coin = 2;
             AddPrinceMounts(ref gi, 2);
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLodgingCheck);
          }
@@ -462,24 +486,9 @@ namespace BarbarianPrince
          return true;
       }
       //------------------------------------------------------------------
-      private IMapItem AddPrince(ref IGameInstance gi, ITerritory t)
-      {
-         IMapItems partyMembers = gi.PartyMembers;
-         partyMembers.Clear();
-         IMapItem prince = gi.MapItems.Find("Prince");
-         if (null == prince)
-            Logger.Log(LogEnum.LE_ERROR, "AddPrince(): mi=null");
-         prince.Territory = t;
-         prince.Reset();
-         partyMembers.Add(prince);
-         gi.Prince = prince;
-         return prince;
-      }
       private void AddPrinceMounts(ref IGameInstance gi, int numMounts)
       {
-         IMapItem prince = gi.MapItems.Find("Prince");
-         if (null == prince)
-            Logger.Log(LogEnum.LE_ERROR, "AddPrince(): mi=null");
+         IMapItem prince = gi.Prince;
          prince.Mounts.Clear();
          if (0 < numMounts)
          {
@@ -502,20 +511,6 @@ namespace BarbarianPrince
             MapItem horse = new MapItem(name, 1.0, false, false, false, "MUnicorn", "", prince.Territory, 0, 0, 0);
             prince.Mounts.Add(horse);
          }
-      }
-      private IMapItem AddCompanion(ref IGameInstance gi, string name)
-      {
-         IMapItems partyMembers = gi.PartyMembers;
-         IMapItem companion1 = gi.MapItems.Find(name);
-         if (null == companion1)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddCompanions(): mi=null for name=" + name);
-            return null;
-         }
-         companion1.Reset();
-         companion1.Mounts.Clear();
-         partyMembers.Add(companion1);
-         return companion1;
       }
       private void AddCompanionMount(IMapItem companion, bool isFreshMount)
       {

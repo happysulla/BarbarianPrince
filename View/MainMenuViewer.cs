@@ -114,7 +114,7 @@ namespace BarbarianPrince
             myMenuItemTopLevel1.Items.Add(subItem3);
          #else
             MenuItem subItem1 = new MenuItem();
-            subItem1.Header = "_Ooen...";
+            subItem1.Header = "_Open...";
             subItem1.Click += MenuItemFileOpen_Click;
             myMenuItemTopLevel1.Items.Add(subItem1);
             MenuItem subItem2 = new MenuItem();
@@ -157,16 +157,17 @@ namespace BarbarianPrince
          FileStream fileStream = null;
          try
          {
-
             OpenFileDialog dlg = new OpenFileDialog();
             if (true == dlg.ShowDialog())
             {
                filename = dlg.FileName;
                fileStream = File.OpenRead(filename);
                BinaryFormatter formatter = new BinaryFormatter();
-               myGameInstance = (GameInstance)formatter.Deserialize(fileStream);
+               IGameInstance gi = (GameInstance)formatter.Deserialize(fileStream);
+               Logger.Log(LogEnum.LE_GAME_INIT, "MenuItemFileOpen_Click(): gi=" + myGameInstance.ToString());
                fileStream.Close();
-               GameAction action = GameAction.UpdateGameViewer;
+               myGameInstance.Clone(gi);
+               GameAction action = GameAction.UpdateLoadingGame;
                myGameEngine.PerformAction(ref myGameInstance, ref action);
             }
          }

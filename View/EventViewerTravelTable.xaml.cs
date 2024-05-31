@@ -1109,6 +1109,7 @@ namespace BarbarianPrince
       //-----------------------------------------------------------------------------------------
       public void ShowDieResults(int dieRoll)
       {
+         Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): s=" + myState.ToString() + " dr=" + dieRoll.ToString());
          switch (myState)
          {
             case EnumR204.TC_LOST_ROLL:

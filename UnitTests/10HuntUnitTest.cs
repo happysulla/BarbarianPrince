@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace BarbarianPrince
 {
@@ -56,34 +57,21 @@ namespace BarbarianPrince
          }
          IMapItems partyMembers = gi.PartyMembers;
          partyMembers.Clear();
-         IMapItem mi = gi.MapItems.Find("Prince");
-         if (null == mi)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "Command(): mi=null");
-            return false;
-         }
-         mi.Reset();
-         IMapItem clone = new MapItem(mi);
-         gi.Prince = clone;
-         partyMembers.Add(clone);
+         IMapItem prince = gi.Prince;
+         prince.Reset();
+         partyMembers.Add(prince);
          gi.IsPartyRested = false;
-         //-------------------------------------------------
          //-------------------------------------------------
          if (CommandName == myCommandNames[0])  // Town
          {
-            AddMounts(ref gi, clone, 3); // <<<<== mounts
-            clone.Territory = t;
-            clone.Coin = 30;
+            AddMounts(ref gi, prince, 3); // <<<<== mounts
+            prince.Territory = t;
+            prince.Coin = 30;
             //-------------------------------
-            mi = gi.MapItems.Find("Dwarf");
-            if (null == mi)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "Command(): mi=null");
-               return false;
-            }
-            mi.Reset();
-            clone = new MapItem(mi);
-            partyMembers.Add(clone);
+            string miName = "Dwarf" + Utilities.MapItemNum.ToString();
+            Utilities.MapItemNum++;
+            IMapItem mi =  new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
+            partyMembers.Add(mi);
             //-------------------------------
             string giantName = "Giant" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
@@ -95,20 +83,15 @@ namespace BarbarianPrince
          }
          if (CommandName == myCommandNames[1])  // Town
          {
-            AddMounts(ref gi, clone, 3); // <<<<== mounts
-            clone.Territory = t;
-            clone.Coin = 3;
+            AddMounts(ref gi, prince, 3); // <<<<== mounts
+            prince.Territory = t;
+            prince.Coin = 3;
             //-------------------------------
-            mi = gi.MapItems.Find("Dwarf");
-            if (null == mi)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "Command(): mi=null");
-               return false;
-            }
-            mi.Reset();
-            clone = new MapItem(mi);
-            clone.Coin = 5;
-            partyMembers.Add(clone);
+            string miName = "Dwarf" + Utilities.MapItemNum.ToString();
+            Utilities.MapItemNum++; 
+            IMapItem mi = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
+            mi.Coin = 5;
+            partyMembers.Add(mi);
             //-------------------------------
             gi.CheapLodgings.Add(t); // <<<<<===== cheap lodgings
             myEventViewer.UpdateView(ref gi, GameAction.Hunt);
@@ -121,81 +104,61 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "Command(): t1=null");
                return false;
             }
-            clone.Territory = t1;
+            prince.Territory = t1;
             myEventViewer.UpdateView(ref gi, GameAction.Hunt);
          }
          else if (CommandName == myCommandNames[3])  // Town and rested
          {
-            clone.Territory = t;
-            clone.Coin = 3;
+            prince.Territory = t;
+            prince.Coin = 3;
             //-------------------------------
-            mi = gi.MapItems.Find("Dwarf");
-            if (null == mi)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "Command(): mi=null");
-               return false;
-            }
-            mi.Reset();
-            clone = new MapItem(mi);
-            clone.Coin = 5;
-            partyMembers.Add(clone);
+            string miName = "Dwarf" + Utilities.MapItemNum.ToString();
+            Utilities.MapItemNum++;
+            IMapItem mi = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
+            mi.Coin = 5;
+            partyMembers.Add(mi);
             //-------------------------------
             gi.IsPartyRested = true; // <<<<== reseted
             myEventViewer.UpdateView(ref gi, GameAction.Hunt);
          }
          else if (CommandName == myCommandNames[4])  // Town and rested w/ mounts
          {
-            clone.Territory = t;
-            clone.Coin = 3;
-            AddMounts(ref gi, clone, 2); // <<<<== mounts
+            prince.Territory = t;
+            prince.Coin = 3;
+            AddMounts(ref gi, prince, 2); // <<<<== mounts
             //-------------------------------
-            mi = gi.MapItems.Find("Dwarf");
-            if (null == mi)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "Command(): mi=null");
-               return false;
-            }
-            mi.Reset();
-            clone = new MapItem(mi);
-            clone.Coin = 5;
-            partyMembers.Add(clone);
+            string miName = "Dwarf" + Utilities.MapItemNum.ToString();
+            Utilities.MapItemNum++;
+            IMapItem mi = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
+            mi.Coin = 5;
+            partyMembers.Add(mi);
             //-------------------------------
             gi.IsPartyRested = true; // <<<<== reseted
             myEventViewer.UpdateView(ref gi, GameAction.Hunt);
          }
          else if (CommandName == myCommandNames[5])  // Town and rested w/ mounts, not enough coin
          {
-            clone.Territory = t;
-            clone.Coin = 3;
-            AddMounts(ref gi, clone, 2); // <<<<== 2 mounts
+            prince.Territory = t;
+            prince.Coin = 3;
+            AddMounts(ref gi, prince, 2); // <<<<== 2 mounts
             //-------------------------------
-            mi = gi.MapItems.Find("Dwarf");
-            if (null == mi)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "Command(): mi=null");
-               return false;
-            }
-            mi.Reset();
-            clone = new MapItem(mi);
-            clone.Coin = 0;
-            partyMembers.Add(clone);
+            //-------------------------------
+            string miName = "Dwarf" + Utilities.MapItemNum.ToString();
+            Utilities.MapItemNum++;
+            IMapItem mi = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
+            mi.Coin = 0;
+            partyMembers.Add(mi);
             //-------------------------------
             gi.IsPartyRested = true; // <<<<== reseted
             myEventViewer.UpdateView(ref gi, GameAction.Hunt);
          }
          else if (CommandName == myCommandNames[6]) // Farmland - NOT RESTED SO NOT HELPING HUNTERS
          {
-            clone.Territory = t;
-            //-------------------------------
-            mi = gi.MapItems.Find("Dwarf");
-            if (null == mi)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "Command(): mi=null");
-               return false;
-            }
-            mi.Reset();
-            clone = new MapItem(mi);
-            partyMembers.Add(clone);
+            prince.Territory = t;
+            string miName = "Dwarf" + Utilities.MapItemNum.ToString();
+            Utilities.MapItemNum++;
+            IMapItem mi = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
+            partyMembers.Add(mi);
             myEventViewer.UpdateView(ref gi, GameAction.Hunt);
          }
          else if (CommandName == myCommandNames[7]) // Countryside & Rested Party - OTHERS CAN HELP IN HUNT
@@ -206,37 +169,25 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "Command(): t2=null");
                return false;
             }
-            clone.Territory = t2;
+            prince.Territory = t2;
             //-------------------------------
-            mi = gi.MapItems.Find("Dwarf");
-            if (null == mi)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "Command(): mi=null");
-               return false;
-            }
-            mi.Reset();
-            clone = new MapItem(mi);
-            clone.IsGuide = true;
-            clone.GuideTerritories.Add(t);
-            partyMembers.Add(clone);
+            string miName = "Dwarf" + Utilities.MapItemNum.ToString();
+            Utilities.MapItemNum++;
+            IMapItem mi = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
+            mi.IsGuide = true;
+            mi.GuideTerritories.Add(t);
+            partyMembers.Add(mi);
             //-------------------------------
-            mi = gi.MapItems.Find("Witch");
-            if (null == mi)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "Command(): mi=null");
-               return false;
-            }
-            mi.Reset();
-            clone = new MapItem(mi);
-            clone.IsGuide = true;
+            mi = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", prince.Territory, 3, 1, 5);
+            mi.IsGuide = true;
             ITerritory t1 = gi.Territories.Find("1011");// act in guide long ways away mans this is not a guide for this hex
             if (null == t1)
             {
                Logger.Log(LogEnum.LE_ERROR, "Command(): t1=null");
                return false;
             }
-            clone.GuideTerritories.Add(t1);
-            partyMembers.Add(clone);
+            mi.GuideTerritories.Add(t1);
+            partyMembers.Add(mi);
             //-------------------------------
             gi.IsPartyRested = true; // <<<<== reseted
             myEventViewer.UpdateView(ref gi, GameAction.Hunt);

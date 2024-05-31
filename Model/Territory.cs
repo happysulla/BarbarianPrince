@@ -9,7 +9,6 @@ namespace BarbarianPrince
    {
       [NonSerialized] static public List<ITerritory> theTerritories = new List<ITerritory>();
       public string Name { get; set; } = "";
-      public int Coin { get; set; } = 0;
       public string Type { get; set; } = "";
       public bool IsTown { get; set; } = false;
       public bool IsCastle { get; set; } = false;
@@ -19,9 +18,9 @@ namespace BarbarianPrince
       public string DownRiver { get; set; } = "";
       public List<String> Roads { get; set; } = new List<String>();
       public List<String> Rivers { get; set; } = new List<String>();
-      public IMapPoint CenterPoint { get; set; } = new MapPoint();
       public List<String> Adjacents { get; set; } = new List<String>();
       public List<String> Rafts { get; set; } = new List<String>();
+      public IMapPoint CenterPoint { get; set; } = new MapPoint();
       public List<IMapPoint> Points { get; set; } = new List<IMapPoint>();
       //---------------------------------------------------------------
       public Territory(string name) { Name = name; }

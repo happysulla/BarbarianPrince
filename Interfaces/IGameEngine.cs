@@ -91,7 +91,7 @@ namespace BarbarianPrince
       UpdateStatusBar,
       UpdateEventViewerDisplay,
       UpdateEventViewerActive,
-      UpdateGameViewer,
+      UpdateLoadingGame,
       DieRollActionNone, // The field in IGameInstance indicates what the roll apply. If none expected, it is set to this value.
       TransportRedistributeEnd,
 

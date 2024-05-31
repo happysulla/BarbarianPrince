@@ -1185,6 +1185,16 @@ namespace BarbarianPrince
          Logger.Log(LogEnum.LE_PARTYMEMBER_ADD, "CreateCharacter(): mi=" + character.ToString());
          return character;
       }
+      protected bool LoadGame(IGameInstance gi)
+      {
+         gi.Stacks.Clear();
+         gi.SunriseChoice = GamePhase.Error;
+         gi.GamePhase = GamePhase.SunriseChoice;      // GameStateSetup.PerformAction()
+         gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
+         gi.DieRollAction = GameAction.DieRollActionNone;
+         Logger.Log(LogEnum.LE_GAME_INIT, "LoadGame(): gi=" + gi.ToString());
+         return true;
+      }
    }
    //-----------------------------------------------------
    class GameStateSetup : GameState
@@ -1559,7 +1569,8 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
-            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+            case GameAction.UpdateLoadingGame:
+               LoadGame(gi);
                break;
             case GameAction.E079HeavyRainsStartDayCheck:
                gi.IsAirborne = false;
@@ -1934,7 +1945,6 @@ namespace BarbarianPrince
          foreach (IMapItem mi in gi.PartyMembers)
             mi.IsCatchCold = false;
       }
-
    }
    //-----------------------------------------------------
    class GameStateHunt : GameState
@@ -1955,7 +1965,8 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerDisplay:
                break;
-            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+            case GameAction.UpdateLoadingGame:
+               LoadGame(gi);
                break;
             case GameAction.Hunt:
                break;
@@ -2074,7 +2085,8 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerDisplay:
                break;
-            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+            case GameAction.UpdateLoadingGame:
+               LoadGame(gi);
                break;
             case GameAction.CampfirePlagueDustEnd:
                gi.RemoveKilledInParty("Plague Dust");
@@ -2359,7 +2371,8 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
-            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+            case GameAction.UpdateLoadingGame:
+               LoadGame(gi);
                break;
             case GameAction.RestHealingEncounter:
                gi.GamePhase = GamePhase.Encounter;
@@ -2435,7 +2448,8 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
-            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+            case GameAction.UpdateLoadingGame:
+               LoadGame(gi);
                break;
             case GameAction.TravelLostCheck:
                gi.IsGridActive = false; // GameAction.TravelLostCheck
@@ -2746,7 +2760,8 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
-            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+            case GameAction.UpdateLoadingGame:
+               LoadGame(gi);
                break;
             case GameAction.SeekNewsNoPay:
                gi.IsSeekNewModifier = false;
@@ -2815,7 +2830,8 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
-            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+            case GameAction.UpdateLoadingGame:
+               LoadGame(gi);
                break;
             case GameAction.SeekHire:
                gi.EventStart = gi.EventDisplayed = gi.EventActive = "e210";
@@ -2874,7 +2890,8 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
-            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+            case GameAction.UpdateLoadingGame:
+               LoadGame(gi);
                break;
             default:
                returnStatus = "Reached Default ERROR";
@@ -2921,7 +2938,8 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
-            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+            case GameAction.UpdateLoadingGame:
+               LoadGame(gi);
                break;
             default:
                returnStatus = "Reached Default ERROR";
@@ -2969,7 +2987,8 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
-            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+            case GameAction.UpdateLoadingGame:
+               LoadGame(gi);
                break;
             case GameAction.SearchEncounter:
                gi.GamePhase = GamePhase.Encounter;
@@ -3042,7 +3061,8 @@ namespace BarbarianPrince
                break;
             case GameAction.EndGameWin:
                break;
-            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+            case GameAction.UpdateLoadingGame:
+               LoadGame(gi);
                break;
             case GameAction.EndGameExit:
                if (null != System.Windows.Application.Current)
@@ -3091,7 +3111,8 @@ namespace BarbarianPrince
          {
             case GameAction.RemoveSplashScreen: // do nothing...the unit test is updated in GameViewerWindow:updateView()
                break;
-            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+            case GameAction.UpdateLoadingGame:
+               LoadGame(gi);
                break;
             case GameAction.E123BlackKnightCombatEnd:
                action = GameAction.UpdateEventViewerActive;
@@ -3202,7 +3223,8 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
-            case GameAction.UpdateGameViewer: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+            case GameAction.UpdateLoadingGame:
+               LoadGame(gi);
                break;
             case GameAction.ShowDienstalBranch:
             case GameAction.ShowLargosRiver:

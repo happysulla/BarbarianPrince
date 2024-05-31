@@ -275,10 +275,6 @@ namespace BarbarianPrince
             typeElem.SetAttribute("value", t.Type.ToString());
             aXmlDocument.DocumentElement.LastChild.AppendChild(typeElem);
             //----------------------------------------------------
-            XmlElement coinElem = aXmlDocument.CreateElement("sector"); // sector of territory
-            coinElem.SetAttribute("value", t.Coin.ToString());
-            aXmlDocument.DocumentElement.LastChild.AppendChild(coinElem);
-            //----------------------------------------------------
             XmlElement pointElem = aXmlDocument.CreateElement("point"); // center point for this territory
             pointElem.SetAttribute("X", t.CenterPoint.X.ToString());
             pointElem.SetAttribute("Y", t.CenterPoint.Y.ToString());

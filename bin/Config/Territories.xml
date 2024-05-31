@@ -1,7 +1,6 @@
 ﻿<Territories>
   <Territory value="offboard">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="-200" Y="-200" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -12,7 +11,6 @@
   </Territory>
   <Territory value="0101">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="90.5714285714286" Y="20.5942857142857" />
     <isTown value="True" />
     <isCastle value="False" />
@@ -34,7 +32,6 @@
   </Territory>
   <Territory value="0102">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="90.2" Y="63.216" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -60,7 +57,6 @@
   </Territory>
   <Territory value="0103">
     <type value="Mountains" />
-    <coin value="0" />
     <point X="89.8" Y="105.616" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -80,7 +76,6 @@
   </Territory>
   <Territory value="0104">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="89.4" Y="148.416" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -100,7 +95,6 @@
   </Territory>
   <Territory value="0105">
     <type value="Hills" />
-    <coin value="0" />
     <point X="89.4" Y="190.816" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -120,7 +114,6 @@
   </Territory>
   <Territory value="0106">
     <type value="Desert" />
-    <coin value="0" />
     <point X="89" Y="232.816" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -140,7 +133,6 @@
   </Territory>
   <Territory value="0107">
     <type value="Hills" />
-    <coin value="0" />
     <point X="88.6" Y="277.216" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -160,7 +152,6 @@
   </Territory>
   <Territory value="0108">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="89.8" Y="319.216" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -180,7 +171,6 @@
   </Territory>
   <Territory value="0109">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="90.2" Y="362.416" />
     <isTown value="True" />
     <isCastle value="False" />
@@ -201,7 +191,6 @@
   </Territory>
   <Territory value="0110">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="90.2" Y="405.216" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -221,7 +210,6 @@
   </Territory>
   <Territory value="0111">
     <type value="Forest" />
-    <coin value="0" />
     <point X="90.2" Y="448.016" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -241,7 +229,6 @@
   </Territory>
   <Territory value="0112">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="89.8" Y="488.816" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -261,7 +248,6 @@
   </Territory>
   <Territory value="0113">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="90.6" Y="530.016" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -288,7 +274,6 @@
   </Territory>
   <Territory value="0114">
     <type value="Swamp" />
-    <coin value="0" />
     <point X="90.2" Y="572.816" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -316,7 +301,6 @@
   </Territory>
   <Territory value="0115">
     <type value="Swamp" />
-    <coin value="0" />
     <point X="91" Y="616.416" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -340,7 +324,6 @@
   </Territory>
   <Territory value="0116">
     <type value="Forest" />
-    <coin value="0" />
     <point X="89.8" Y="658.416" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -360,7 +343,6 @@
   </Territory>
   <Territory value="0117">
     <type value="Forest" />
-    <coin value="0" />
     <point X="89.4" Y="702.016" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -380,7 +362,6 @@
   </Territory>
   <Territory value="0118">
     <type value="Forest" />
-    <coin value="0" />
     <point X="90.2" Y="744.016" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -400,7 +381,6 @@
   </Territory>
   <Territory value="0119">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="89.4" Y="787.616" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -420,7 +400,6 @@
   </Territory>
   <Territory value="0120">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="89.8" Y="829.616" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -440,7 +419,6 @@
   </Territory>
   <Territory value="0121">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="90.2" Y="872.816" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -460,7 +438,6 @@
   </Territory>
   <Territory value="0122">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="89.8" Y="915.816" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -480,7 +457,6 @@
   </Territory>
   <Territory value="0201">
     <type value="Mountains" />
-    <coin value="0" />
     <point X="126.6" Y="42.816" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -509,7 +485,6 @@
   </Territory>
   <Territory value="0202">
     <type value="Forest" />
-    <coin value="0" />
     <point X="126.6" Y="84.816" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -540,7 +515,6 @@
   </Territory>
   <Territory value="0203">
     <type value="Forest" />
-    <coin value="0" />
     <point X="126.6" Y="127.616" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -563,7 +537,6 @@
   </Territory>
   <Territory value="0204">
     <type value="Hills" />
-    <coin value="0" />
     <point X="125.8" Y="170.016" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -586,7 +559,6 @@
   </Territory>
   <Territory value="0205">
     <type value="Hills" />
-    <coin value="0" />
     <point X="126.2" Y="212.016" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -609,7 +581,6 @@
   </Territory>
   <Territory value="0206">
     <type value="Desert" />
-    <coin value="0" />
     <point X="125.8" Y="254.216" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -632,7 +603,6 @@
   </Territory>
   <Territory value="0207">
     <type value="Hills" />
-    <coin value="0" />
     <point X="125" Y="297.416" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -656,7 +626,6 @@
   </Territory>
   <Territory value="0208">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="126.2" Y="340.616" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -681,7 +650,6 @@
   </Territory>
   <Territory value="0209">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="126.2" Y="383.016" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -704,7 +672,6 @@
   </Territory>
   <Territory value="0210">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="125.8" Y="426.216" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -727,7 +694,6 @@
   </Territory>
   <Territory value="0211">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="126.6" Y="468.216" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -750,7 +716,6 @@
   </Territory>
   <Territory value="0212">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="126.6" Y="509.016" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -782,7 +747,7 @@
   </Territory>
   <Territory value="0213">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="126.2" Y="551.416" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -814,7 +779,6 @@
   </Territory>
   <Territory value="0214">
     <type value="Swamp" />
-    <coin value="0" />
     <point X="126.6" Y="594.616" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -842,7 +806,7 @@
   </Territory>
   <Territory value="0215">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="126.6" Y="637.416" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -865,7 +829,7 @@
   </Territory>
   <Territory value="0216">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="126.727272727273" Y="680.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -889,7 +853,6 @@
   </Territory>
   <Territory value="0217">
     <type value="Farmland" />
-    <coin value="0" />
     <point X="127" Y="722.616" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -912,7 +875,7 @@
   </Territory>
   <Territory value="0218">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="126.2" Y="764.616" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -935,7 +898,7 @@
   </Territory>
   <Territory value="0219">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="127.4" Y="807.416" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -958,7 +921,6 @@
   </Territory>
   <Territory value="0220">
     <type value="Forest" />
-    <coin value="0" />
     <point X="126.6" Y="851.016" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -981,7 +943,6 @@
   </Territory>
   <Territory value="0221">
     <type value="Forest" />
-    <coin value="0" />
     <point X="126.6" Y="894.216" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1004,7 +965,6 @@
   </Territory>
   <Territory value="0301">
     <type value="Mountains" />
-    <coin value="0" />
     <point X="162.75" Y="21.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1024,7 +984,6 @@
   </Territory>
   <Territory value="0302">
     <type value="Forest" />
-    <coin value="0" />
     <point X="163.75" Y="63.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1058,7 +1017,6 @@
   </Territory>
   <Territory value="0303">
     <type value="Forest" />
-    <coin value="0" />
     <point X="163.25" Y="105.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1088,7 +1046,6 @@
   </Territory>
   <Territory value="0304">
     <type value="Mountains" />
-    <coin value="0" />
     <point X="162.25" Y="149.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1111,7 +1068,6 @@
   </Territory>
   <Territory value="0305">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="162.75" Y="191.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1134,7 +1090,6 @@
   </Territory>
   <Territory value="0306">
     <type value="Desert" />
-    <coin value="0" />
     <point X="163.75" Y="233.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1157,7 +1112,6 @@
   </Territory>
   <Territory value="0307">
     <type value="Hills" />
-    <coin value="0" />
     <point X="161.75" Y="275.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1180,7 +1134,6 @@
   </Territory>
   <Territory value="0308">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="162.75" Y="318.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1203,7 +1156,6 @@
   </Territory>
   <Territory value="0309">
     <type value="Forest" />
-    <coin value="0" />
     <point X="162.75" Y="361.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1226,7 +1178,6 @@
   </Territory>
   <Territory value="0310">
     <type value="Forest" />
-    <coin value="0" />
     <point X="162.75" Y="404.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1249,7 +1200,6 @@
   </Territory>
   <Territory value="0311">
     <type value="Countryside" />
-    <coin value="0" />
     <point X="162.75" Y="446.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1279,7 +1229,6 @@
   </Territory>
   <Territory value="0312">
     <type value="Swamp" />
-    <coin value="0" />
     <point X="162.75" Y="488.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1313,7 +1262,7 @@
   </Territory>
   <Territory value="0313">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="162.75" Y="530.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1345,7 +1294,7 @@
   </Territory>
   <Territory value="0314">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="163.25" Y="573.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1368,7 +1317,7 @@
   </Territory>
   <Territory value="0315">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="163.75" Y="616.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1391,7 +1340,7 @@
   </Territory>
   <Territory value="0316">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="163.25" Y="658.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1414,7 +1363,7 @@
   </Territory>
   <Territory value="0317">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="162.75" Y="701.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1439,7 +1388,7 @@
   </Territory>
   <Territory value="0318">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="163.25" Y="744" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1464,7 +1413,7 @@
   </Territory>
   <Territory value="0319">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="163.25" Y="787" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1489,7 +1438,7 @@
   </Territory>
   <Territory value="0320">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="162.75" Y="829.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1512,7 +1461,7 @@
   </Territory>
   <Territory value="0321">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="163.25" Y="873" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1535,7 +1484,7 @@
   </Territory>
   <Territory value="0322">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="162.75" Y="915" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1560,7 +1509,7 @@
   </Territory>
   <Territory value="0401">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="199.75" Y="43.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1589,7 +1538,7 @@
   </Territory>
   <Territory value="0402">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="199.75" Y="84.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1623,7 +1572,7 @@
   </Territory>
   <Territory value="0403">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="199.25" Y="128.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1646,7 +1595,7 @@
   </Territory>
   <Territory value="0404">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="198.25" Y="170.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1669,7 +1618,7 @@
   </Territory>
   <Territory value="0405">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="198.75" Y="212" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1692,7 +1641,7 @@
   </Territory>
   <Territory value="0406">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="199.25" Y="254.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1715,7 +1664,7 @@
   </Territory>
   <Territory value="0407">
     <type value="Desert" />
-    <coin value="0" />
+
     <point X="198.75" Y="297" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1738,7 +1687,7 @@
   </Territory>
   <Territory value="0408">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="199.75" Y="339.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1761,7 +1710,7 @@
   </Territory>
   <Territory value="0409">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="199.25" Y="382.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1784,7 +1733,7 @@
   </Territory>
   <Territory value="0410">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="198.25" Y="426" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1816,7 +1765,7 @@
   </Territory>
   <Territory value="0411">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="199.25" Y="467.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1850,7 +1799,7 @@
   </Territory>
   <Territory value="0412">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="199.75" Y="508.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1880,7 +1829,7 @@
   </Territory>
   <Territory value="0413">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="199.75" Y="552" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1903,7 +1852,7 @@
   </Territory>
   <Territory value="0414">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="199.25" Y="594" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1926,7 +1875,7 @@
   </Territory>
   <Territory value="0415">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="199.75" Y="638" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1949,7 +1898,7 @@
   </Territory>
   <Territory value="0416">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="200.25" Y="680" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1972,7 +1921,7 @@
   </Territory>
   <Territory value="0417">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="199.25" Y="723" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1995,7 +1944,7 @@
   </Territory>
   <Territory value="0418">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="198.75" Y="764.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2018,7 +1967,7 @@
   </Territory>
   <Territory value="0419">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="199.75" Y="808.5" />
     <isTown value="True" />
     <isCastle value="False" />
@@ -2044,7 +1993,7 @@
   </Territory>
   <Territory value="0420">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="198.75" Y="851" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2069,7 +2018,7 @@
   </Territory>
   <Territory value="0421">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="199.75" Y="893" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2094,7 +2043,7 @@
   </Territory>
   <Territory value="0422">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="199.25" Y="936" />
     <isTown value="True" />
     <isCastle value="False" />
@@ -2117,7 +2066,7 @@
   </Territory>
   <Territory value="0323">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="162.75" Y="958.5" />
     <isTown value="False" />
     <isCastle value="True" />
@@ -2139,7 +2088,7 @@
   </Territory>
   <Territory value="0123">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="90.6" Y="957.416" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2157,7 +2106,7 @@
   </Territory>
   <Territory value="0501">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="236.75" Y="22.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2177,7 +2126,7 @@
   </Territory>
   <Territory value="0502">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="236.25" Y="63.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2211,7 +2160,7 @@
   </Territory>
   <Territory value="0503">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="236.25" Y="106.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2241,7 +2190,7 @@
   </Territory>
   <Territory value="0505">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="236.75" Y="191.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2264,7 +2213,7 @@
   </Territory>
   <Territory value="0506">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="235.25" Y="233.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2287,7 +2236,7 @@
   </Territory>
   <Territory value="0507">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="236.25" Y="276.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2310,7 +2259,7 @@
   </Territory>
   <Territory value="0504">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="235.25" Y="149.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2333,7 +2282,7 @@
   </Territory>
   <Territory value="0508">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="236.25" Y="318.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2356,7 +2305,7 @@
   </Territory>
   <Territory value="0509">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="235.25" Y="361.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2379,7 +2328,7 @@
   </Territory>
   <Territory value="0510">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="235.75" Y="403.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2411,7 +2360,7 @@
   </Territory>
   <Territory value="0511">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="236.25" Y="447.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2443,7 +2392,7 @@
   </Territory>
   <Territory value="0512">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="235.75" Y="488.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2466,7 +2415,7 @@
   </Territory>
   <Territory value="0513">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="236.75" Y="530.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2489,7 +2438,7 @@
   </Territory>
   <Territory value="0514">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="235.75" Y="572.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2512,7 +2461,7 @@
   </Territory>
   <Territory value="0515">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="236.75" Y="615.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2535,7 +2484,7 @@
   </Territory>
   <Territory value="0516">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="236.25" Y="659.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2558,7 +2507,7 @@
   </Territory>
   <Territory value="0517">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="236.75" Y="700.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2581,7 +2530,7 @@
   </Territory>
   <Territory value="0518">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="236.25" Y="743.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2604,7 +2553,7 @@
   </Territory>
   <Territory value="0519">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="236.25" Y="785.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2627,7 +2576,7 @@
   </Territory>
   <Territory value="0520">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="236.75" Y="829.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2652,7 +2601,7 @@
   </Territory>
   <Territory value="0521">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="237.25" Y="872" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2675,7 +2624,7 @@
   </Territory>
   <Territory value="0522">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="236.75" Y="915" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2698,7 +2647,7 @@
   </Territory>
   <Territory value="0523">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="236.25" Y="956.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2718,7 +2667,7 @@
   </Territory>
   <Territory value="0601">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="272.25" Y="42.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2749,7 +2698,7 @@
   </Territory>
   <Territory value="0602">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="272.25" Y="84.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2781,7 +2730,7 @@
   </Territory>
   <Territory value="0603">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="271.75" Y="126.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2804,7 +2753,7 @@
   </Territory>
   <Territory value="0604">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="272.181818181818" Y="169.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2827,7 +2776,7 @@
   </Territory>
   <Territory value="0605">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="271.818181818182" Y="212.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2850,7 +2799,7 @@
   </Territory>
   <Territory value="0606">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="271.818181818182" Y="254.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2873,7 +2822,7 @@
   </Territory>
   <Territory value="0607">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="272.181818181818" Y="296.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2903,7 +2852,7 @@
   </Territory>
   <Territory value="0608">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="271.818181818182" Y="339.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2936,7 +2885,7 @@
   </Territory>
   <Territory value="0609">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="272.181818181818" Y="382.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2972,7 +2921,7 @@
   </Territory>
   <Territory value="0610">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="271.818181818182" Y="425.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3004,7 +2953,7 @@
   </Territory>
   <Territory value="0611">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="271.818181818182" Y="468.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3027,7 +2976,7 @@
   </Territory>
   <Territory value="0612">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="271.090909090909" Y="508.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3050,7 +2999,7 @@
   </Territory>
   <Territory value="0613">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="272.181818181818" Y="550.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3073,7 +3022,7 @@
   </Territory>
   <Territory value="0614">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="272.181818181818" Y="593.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3096,7 +3045,7 @@
   </Territory>
   <Territory value="0615">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="271.818181818182" Y="635.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3119,7 +3068,7 @@
   </Territory>
   <Territory value="0616">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="272.181818181818" Y="679.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3142,7 +3091,7 @@
   </Territory>
   <Territory value="0617">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="272.181818181818" Y="722.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3165,7 +3114,7 @@
   </Territory>
   <Territory value="0618">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="271.818181818182" Y="765.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3188,7 +3137,7 @@
   </Territory>
   <Territory value="0619">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="271.454545454545" Y="807.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3213,7 +3162,7 @@
   </Territory>
   <Territory value="0620">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="271.818181818182" Y="850.818181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3236,7 +3185,7 @@
   </Territory>
   <Territory value="0621">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="272.181818181818" Y="893.363636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3259,7 +3208,7 @@
   </Territory>
   <Territory value="0622">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="272.545454545455" Y="936.272727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3281,7 +3230,7 @@
   </Territory>
   <Territory value="0701">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="307.818181818182" Y="20.0145454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3308,7 +3257,7 @@
   </Territory>
   <Territory value="0702">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="308.545454545455" Y="62.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3342,7 +3291,7 @@
   </Territory>
   <Territory value="0703">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="307.818181818182" Y="104.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3365,7 +3314,7 @@
   </Territory>
   <Territory value="0704">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="307.454545454545" Y="146.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3388,7 +3337,7 @@
   </Territory>
   <Territory value="0705">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="307.818181818182" Y="189.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3411,7 +3360,7 @@
   </Territory>
   <Territory value="0706">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="307.454545454545" Y="233.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3434,7 +3383,7 @@
   </Territory>
   <Territory value="0708">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="308.181818181818" Y="318.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3468,7 +3417,7 @@
   </Territory>
   <Territory value="0709">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="307.454545454545" Y="360.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3504,7 +3453,7 @@
   </Territory>
   <Territory value="0710">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="307.818181818182" Y="404.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3541,7 +3490,7 @@
   </Territory>
   <Territory value="0711">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="307.090909090909" Y="448.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3573,7 +3522,7 @@
   </Territory>
   <Territory value="0712">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="307.090909090909" Y="487.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3603,7 +3552,7 @@
   </Territory>
   <Territory value="0713">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="307.090909090909" Y="528.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3626,7 +3575,7 @@
   </Territory>
   <Territory value="0714">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="307.454545454545" Y="572.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3649,7 +3598,7 @@
   </Territory>
   <Territory value="0715">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="307.454545454545" Y="615.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3672,7 +3621,7 @@
   </Territory>
   <Territory value="0716">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="307.818181818182" Y="658.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3695,7 +3644,7 @@
   </Territory>
   <Territory value="0717">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="307.818181818182" Y="700.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3718,7 +3667,7 @@
   </Territory>
   <Territory value="0718">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="308.181818181818" Y="743.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3741,7 +3690,7 @@
   </Territory>
   <Territory value="0719">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="307.818181818182" Y="786.923636363636" />
     <isTown value="True" />
     <isCastle value="False" />
@@ -3767,7 +3716,7 @@
   </Territory>
   <Territory value="0720">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="308.181818181818" Y="829.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3790,7 +3739,7 @@
   </Territory>
   <Territory value="0721">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="308.181818181818" Y="872.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3813,7 +3762,7 @@
   </Territory>
   <Territory value="0722">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="308.181818181818" Y="914.818181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3836,7 +3785,7 @@
   </Territory>
   <Territory value="0723">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="308.545454545455" Y="957.363636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3856,7 +3805,7 @@
   </Territory>
   <Territory value="0801">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="344.181818181818" Y="39.6509090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3889,7 +3838,7 @@
   </Territory>
   <Territory value="0802">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="343.818181818182" Y="81.8327272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3919,7 +3868,7 @@
   </Territory>
   <Territory value="0803">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="343.454545454545" Y="125.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3942,7 +3891,7 @@
   </Territory>
   <Territory value="0222">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="125.8" Y="937.016" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3964,7 +3913,7 @@
   </Territory>
   <Territory value="0707">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="307.454545454545" Y="276.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3996,7 +3945,7 @@
   </Territory>
   <Territory value="0805">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="343.818181818182" Y="211.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4019,7 +3968,7 @@
   </Territory>
   <Territory value="0806">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="343.454545454545" Y="254.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4051,7 +4000,7 @@
   </Territory>
   <Territory value="0807">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="343.090909090909" Y="296.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4083,7 +4032,7 @@
   </Territory>
   <Territory value="0808">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="344.181818181818" Y="340.014545454546" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4106,7 +4055,7 @@
   </Territory>
   <Territory value="0809">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="344.181818181818" Y="382.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4136,7 +4085,7 @@
   </Territory>
   <Territory value="0810">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="344.545454545455" Y="425.832727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4168,7 +4117,7 @@
   </Territory>
   <Territory value="0811">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="344.545454545455" Y="468.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4202,7 +4151,7 @@
   </Territory>
   <Territory value="0812">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="343.818181818182" Y="508.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4234,7 +4183,7 @@
   </Territory>
   <Territory value="0804">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="343.090909090909" Y="168.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4257,7 +4206,7 @@
   </Territory>
   <Territory value="0813">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="343.454545454545" Y="549.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4280,7 +4229,7 @@
   </Territory>
   <Territory value="0814">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="343.454545454545" Y="593.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4303,7 +4252,7 @@
   </Territory>
   <Territory value="0815">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="343.818181818182" Y="636.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4326,7 +4275,7 @@
   </Territory>
   <Territory value="0816">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="344.181818181818" Y="679.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4351,7 +4300,7 @@
   </Territory>
   <Territory value="0817">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="344.545454545455" Y="722.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4376,7 +4325,7 @@
   </Territory>
   <Territory value="0818">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="344.181818181818" Y="764.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4401,7 +4350,7 @@
   </Territory>
   <Territory value="0819">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="344.545454545455" Y="806.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4426,7 +4375,7 @@
   </Territory>
   <Territory value="0820">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="344.545454545455" Y="850.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4451,7 +4400,7 @@
   </Territory>
   <Territory value="0821">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="344.545454545455" Y="892.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4474,7 +4423,7 @@
   </Territory>
   <Territory value="0822">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="344.909090909091" Y="935.545454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4496,7 +4445,7 @@
   </Territory>
   <Territory value="0901">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="379.793693982074" Y="18.9236363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4523,7 +4472,7 @@
   </Territory>
   <Territory value="0902">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="379.818181818182" Y="61.1054545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4557,7 +4506,7 @@
   </Territory>
   <Territory value="0903">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="380.909090909091" Y="102.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4580,7 +4529,7 @@
   </Territory>
   <Territory value="0904">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="380.545454545455" Y="146.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4603,7 +4552,7 @@
   </Territory>
   <Territory value="0905">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="380.909090909091" Y="189.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4626,7 +4575,7 @@
   </Territory>
   <Territory value="0906">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="380.909090909091" Y="232.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4658,7 +4607,7 @@
   </Territory>
   <Territory value="0907">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="380.909090909091" Y="275.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4690,7 +4639,7 @@
   </Territory>
   <Territory value="0910">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="380.909090909091" Y="404.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4713,7 +4662,7 @@
   </Territory>
   <Territory value="0908">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="380.909090909091" Y="317.832727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4736,7 +4685,7 @@
   </Territory>
   <Territory value="0909">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="380.909090909091" Y="361.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4759,7 +4708,7 @@
   </Territory>
   <Territory value="0911">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="380.545454545455" Y="447.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4782,7 +4731,7 @@
   </Territory>
   <Territory value="0912">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="380.181818181818" Y="488.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4814,7 +4763,7 @@
   </Territory>
   <Territory value="0913">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="380.545454545455" Y="528.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4848,7 +4797,7 @@
   </Territory>
   <Territory value="0914">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="379.818181818182" Y="571.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4880,7 +4829,7 @@
   </Territory>
   <Territory value="0915">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="380.545454545455" Y="614.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4912,7 +4861,7 @@
   </Territory>
   <Territory value="0916">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="379.818181818182" Y="657.105454545455" />
     <isTown value="True" />
     <isCastle value="False" />
@@ -4945,7 +4894,7 @@
   </Territory>
   <Territory value="0917">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="380.545454545455" Y="700.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4975,7 +4924,7 @@
   </Territory>
   <Territory value="0918">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="380.181818181818" Y="743.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4998,7 +4947,7 @@
   </Territory>
   <Territory value="0919">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="380.909090909091" Y="786.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5021,7 +4970,7 @@
   </Territory>
   <Territory value="0920">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="381.636363636364" Y="828.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5044,7 +4993,7 @@
   </Territory>
   <Territory value="0921">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="380.909090909091" Y="871.181818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5069,7 +5018,7 @@
   </Territory>
   <Territory value="0922">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="380.181818181818" Y="914.454545454546" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5092,7 +5041,7 @@
   </Territory>
   <Territory value="0923">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="380.909090909091" Y="957" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5112,7 +5061,7 @@
   </Territory>
   <Territory value="1001">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="416.520966709347" Y="38.9236363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5145,7 +5094,7 @@
   </Territory>
   <Territory value="1002">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="417.24823943662" Y="81.8327272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5175,7 +5124,7 @@
   </Territory>
   <Territory value="1003">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="416.884603072983" Y="125.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5205,7 +5154,7 @@
   </Territory>
   <Territory value="1004">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="417.24823943662" Y="167.650909090909" />
     <isTown value="True" />
     <isCastle value="False" />
@@ -5237,7 +5186,7 @@
   </Territory>
   <Territory value="1006">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="417.24823943662" Y="253.832727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5269,7 +5218,7 @@
   </Territory>
   <Territory value="1005">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="417.611875800256" Y="210.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5303,7 +5252,7 @@
   </Territory>
   <Territory value="1007">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="417.24823943662" Y="296.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5326,7 +5275,7 @@
   </Territory>
   <Territory value="1008">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="416.884603072983" Y="340.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5349,7 +5298,7 @@
   </Territory>
   <Territory value="1009">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="416.884603072983" Y="382.56" />
     <isTown value="True" />
     <isCastle value="False" />
@@ -5374,7 +5323,7 @@
   </Territory>
   <Territory value="1010">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="416.884603072983" Y="425.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5399,7 +5348,7 @@
   </Territory>
   <Territory value="1011">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="416.884603072983" Y="467.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5424,7 +5373,7 @@
   </Territory>
   <Territory value="1012">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="417.24823943662" Y="507.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5454,7 +5403,7 @@
   </Territory>
   <Territory value="1013">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="417.24823943662" Y="549.832727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5486,7 +5435,7 @@
   </Territory>
   <Territory value="1014">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="417.24823943662" Y="593.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5518,7 +5467,7 @@
   </Territory>
   <Territory value="1015">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="417.24823943662" Y="636.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5550,7 +5499,7 @@
   </Territory>
   <Territory value="1016">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="417.24823943662" Y="678.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5584,7 +5533,7 @@
   </Territory>
   <Territory value="1017">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="417.24823943662" Y="721.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5618,7 +5567,7 @@
   </Territory>
   <Territory value="1018">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="417.24823943662" Y="764.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5648,7 +5597,7 @@
   </Territory>
   <Territory value="18">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="417.24823943662" Y="807.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5671,7 +5620,7 @@
   </Territory>
   <Territory value="1020">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="417.24823943662" Y="850.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5694,7 +5643,7 @@
   </Territory>
   <Territory value="1021">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="416.884603072983" Y="893.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5718,7 +5667,7 @@
   </Territory>
   <Territory value="1022">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="416.884603072983" Y="934.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5740,7 +5689,7 @@
   </Territory>
   <Territory value="1101">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="453.454545454545" Y="17.8327272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5767,7 +5716,7 @@
   </Territory>
   <Territory value="1102">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="453.818181818182" Y="60.3781818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5801,7 +5750,7 @@
   </Territory>
   <Territory value="1103">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="454.181818181818" Y="103.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5833,7 +5782,7 @@
   </Territory>
   <Territory value="1104">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="454.181818181818" Y="146.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5867,7 +5816,7 @@
   </Territory>
   <Territory value="1105">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="454.545454545455" Y="189.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5899,7 +5848,7 @@
   </Territory>
   <Territory value="1106">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="453.818181818182" Y="232.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5929,7 +5878,7 @@
   </Territory>
   <Territory value="1107">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="454.181818181818" Y="274.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5952,7 +5901,7 @@
   </Territory>
   <Territory value="1108">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="453.454545454545" Y="318.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5975,7 +5924,7 @@
   </Territory>
   <Territory value="1109">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="453.090909090909" Y="361.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6000,7 +5949,7 @@
   </Territory>
   <Territory value="1110">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="453.818181818182" Y="404.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6023,7 +5972,7 @@
   </Territory>
   <Territory value="1111">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="452.727272727273" Y="447.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6046,7 +5995,7 @@
   </Territory>
   <Territory value="1112">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="453.454545454545" Y="487.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6071,7 +6020,7 @@
   </Territory>
   <Territory value="1113">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="453.090909090909" Y="528.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6096,7 +6045,7 @@
   </Territory>
   <Territory value="1114">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="454.181818181818" Y="570.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6119,7 +6068,7 @@
   </Territory>
   <Territory value="1115">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="454.181818181818" Y="614.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6142,7 +6091,7 @@
   </Territory>
   <Territory value="1116">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="454.181818181818" Y="657.832727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6165,7 +6114,7 @@
   </Territory>
   <Territory value="1117">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="454.181818181818" Y="700.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6195,7 +6144,7 @@
   </Territory>
   <Territory value="1118">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="454.545454545455" Y="742.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6229,7 +6178,7 @@
   </Territory>
   <Territory value="1119">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="454.545454545455" Y="785.832727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6264,7 +6213,7 @@
   </Territory>
   <Territory value="1120">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="454.181818181818" Y="828.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6294,7 +6243,7 @@
   </Territory>
   <Territory value="1125">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="454.181818181818" Y="871.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6317,7 +6266,7 @@
   </Territory>
   <Territory value="1126">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="453.818181818182" Y="914.454545454546" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6340,7 +6289,7 @@
   </Territory>
   <Territory value="1123">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="454.181818181818" Y="957.363636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6360,7 +6309,7 @@
   </Territory>
   <Territory value="1201">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="490.909090909091" Y="38.9236363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6393,7 +6342,7 @@
   </Territory>
   <Territory value="1202">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="491.272727272727" Y="80.7418181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6430,7 +6379,7 @@
   </Territory>
   <Territory value="1203">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="490.909090909091" Y="125.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6462,7 +6411,7 @@
   </Territory>
   <Territory value="1204">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="490.545454545455" Y="168.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6485,7 +6434,7 @@
   </Territory>
   <Territory value="1205">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="490.181818181818" Y="210.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6508,7 +6457,7 @@
   </Territory>
   <Territory value="1206">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="490.181818181818" Y="253.832727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6531,7 +6480,7 @@
   </Territory>
   <Territory value="1207">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="489.818181818182" Y="296.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6554,7 +6503,7 @@
   </Territory>
   <Territory value="1208">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="489.818181818182" Y="340.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6578,7 +6527,7 @@
   </Territory>
   <Territory value="1209">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="489.454545454545" Y="382.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6601,7 +6550,7 @@
   </Territory>
   <Territory value="1210">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="490.181818181818" Y="426.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6624,7 +6573,7 @@
   </Territory>
   <Territory value="1211">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="490.545454545455" Y="469.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6647,7 +6596,7 @@
   </Territory>
   <Territory value="1212">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="489.454545454545" Y="508.741818181818" />
     <isTown value="False" />
     <isCastle value="True" />
@@ -6670,7 +6619,7 @@
   </Territory>
   <Territory value="1213">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="489.818181818182" Y="549.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6695,7 +6644,7 @@
   </Territory>
   <Territory value="1214">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="490.181818181818" Y="592.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6718,7 +6667,7 @@
   </Territory>
   <Territory value="1215">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="490.545454545455" Y="636.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6741,7 +6690,7 @@
   </Territory>
   <Territory value="1216">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="490.545454545455" Y="678.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6764,7 +6713,7 @@
   </Territory>
   <Territory value="1217">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="490.545454545455" Y="721.832727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6787,7 +6736,7 @@
   </Territory>
   <Territory value="1218">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="490.909090909091" Y="764.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6822,7 +6771,7 @@
   </Territory>
   <Territory value="1219">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="490.909090909091" Y="806.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6859,7 +6808,7 @@
   </Territory>
   <Territory value="1221">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="490.909090909091" Y="892.636363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6882,7 +6831,7 @@
   </Territory>
   <Territory value="1222">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="491.272727272727" Y="935.545454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6904,7 +6853,7 @@
   </Territory>
   <Territory value="1220">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="490.909090909091" Y="849.727272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6936,7 +6885,7 @@
   </Territory>
   <Territory value="1301">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="526.181818181818" Y="18.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -6964,7 +6913,7 @@
   </Territory>
   <Territory value="1302">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="526.545454545455" Y="60.0145454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7001,7 +6950,7 @@
   </Territory>
   <Territory value="1303">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="526.181818181818" Y="103.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7033,7 +6982,7 @@
   </Territory>
   <Territory value="1304">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="526.181818181818" Y="146.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7056,7 +7005,7 @@
   </Territory>
   <Territory value="1305">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="525.818181818182" Y="189.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7079,7 +7028,7 @@
   </Territory>
   <Territory value="1306">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="525.454545454546" Y="232.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7102,7 +7051,7 @@
   </Territory>
   <Territory value="1307">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="524.727272727273" Y="274.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7125,7 +7074,7 @@
   </Territory>
   <Territory value="1308">
     <type value="Desert" />
-    <coin value="0" />
+
     <point X="525.818181818182" Y="318.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7148,7 +7097,7 @@
   </Territory>
   <Territory value="1309">
     <type value="Desert" />
-    <coin value="0" />
+
     <point X="525.090909090909" Y="360.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7171,7 +7120,7 @@
   </Territory>
   <Territory value="1310">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="525.454545454546" Y="403.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7194,7 +7143,7 @@
   </Territory>
   <Territory value="1311">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="526.181818181818" Y="447.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7217,7 +7166,7 @@
   </Territory>
   <Territory value="1312">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="526.545454545455" Y="486.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7240,7 +7189,7 @@
   </Territory>
   <Territory value="1313">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="525.454545454546" Y="527.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7263,7 +7212,7 @@
   </Territory>
   <Territory value="1314">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="526.181818181818" Y="571.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7288,7 +7237,7 @@
   </Territory>
   <Territory value="1315">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="525.454545454546" Y="613.832727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7311,7 +7260,7 @@
   </Territory>
   <Territory value="1316">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="525.818181818182" Y="657.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7336,7 +7285,7 @@
   </Territory>
   <Territory value="1317">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="526.181818181818" Y="700.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7361,7 +7310,7 @@
   </Territory>
   <Territory value="1318">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="526.181818181818" Y="742.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7394,7 +7343,7 @@
   </Territory>
   <Territory value="1319">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="526.181818181818" Y="785.727272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7428,7 +7377,7 @@
   </Territory>
   <Territory value="1320">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="526.909090909091" Y="828.272727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7462,7 +7411,7 @@
   </Territory>
   <Territory value="1321">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="526.181818181818" Y="871.181818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7494,7 +7443,7 @@
   </Territory>
   <Territory value="1322">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="526.545454545455" Y="914.090909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7517,7 +7466,7 @@
   </Territory>
   <Territory value="1323">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="526.181818181818" Y="956.272727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7537,7 +7486,7 @@
   </Territory>
   <Territory value="1401">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="561.454545454546" Y="39.6509090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7572,7 +7521,7 @@
   </Territory>
   <Territory value="1402">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="561.818181818182" Y="82.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7604,7 +7553,7 @@
   </Territory>
   <Territory value="1403">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="561.454545454546" Y="125.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7627,7 +7576,7 @@
   </Territory>
   <Territory value="1404">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="561.090909090909" Y="168.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7650,7 +7599,7 @@
   </Territory>
   <Territory value="1405">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="561.090909090909" Y="210.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7673,7 +7622,7 @@
   </Territory>
   <Territory value="1406">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="560.727272727273" Y="253.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7696,7 +7645,7 @@
   </Territory>
   <Territory value="1407">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="560.363636363636" Y="296.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7719,7 +7668,7 @@
   </Territory>
   <Territory value="1408">
     <type value="Desert" />
-    <coin value="0" />
+
     <point X="560.363636363636" Y="338.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7742,7 +7691,7 @@
   </Territory>
   <Territory value="1409">
     <type value="Desert" />
-    <coin value="0" />
+
     <point X="560.363636363636" Y="380.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7765,7 +7714,7 @@
   </Territory>
   <Territory value="1410">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="560" Y="424.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7788,7 +7737,7 @@
   </Territory>
   <Territory value="1411">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="560.727272727273" Y="467.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7811,7 +7760,7 @@
   </Territory>
   <Territory value="1412">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="561.454545454546" Y="508.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7834,7 +7783,7 @@
   </Territory>
   <Territory value="1413">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="561.090909090909" Y="549.832727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7857,7 +7806,7 @@
   </Territory>
   <Territory value="1414">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="561.090909090909" Y="592.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7882,7 +7831,7 @@
   </Territory>
   <Territory value="1415">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="560.727272727273" Y="636.014545454545" />
     <isTown value="True" />
     <isCastle value="False" />
@@ -7908,7 +7857,7 @@
   </Territory>
   <Territory value="1416">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="561.090909090909" Y="677.832727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7931,7 +7880,7 @@
   </Territory>
   <Territory value="1417">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="561.454545454546" Y="720.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7962,7 +7911,7 @@
   </Territory>
   <Territory value="1418">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="561.454545454546" Y="763.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7994,7 +7943,7 @@
   </Territory>
   <Territory value="1419">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="561.454545454546" Y="805.832727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8017,7 +7966,7 @@
   </Territory>
   <Territory value="1420">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="561.818181818182" Y="848.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8051,7 +8000,7 @@
   </Territory>
   <Territory value="1421">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="561.818181818182" Y="890.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8085,7 +8034,7 @@
   </Territory>
   <Territory value="1422">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="562.181818181818" Y="933.727272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8114,7 +8063,7 @@
   </Territory>
   <Territory value="1501">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="596.727272727273" Y="19.6509090909091" />
     <isTown value="True" />
     <isCastle value="False" />
@@ -8143,7 +8092,7 @@
   </Territory>
   <Territory value="1502">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="597.090909090909" Y="61.8327272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8178,7 +8127,7 @@
   </Territory>
   <Territory value="1503">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="597.090909090909" Y="104.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8201,7 +8150,7 @@
   </Territory>
   <Territory value="1504">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="597.090909090909" Y="147.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8224,7 +8173,7 @@
   </Territory>
   <Territory value="1505">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="596.727272727273" Y="189.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8247,7 +8196,7 @@
   </Territory>
   <Territory value="1506">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="596.363636363636" Y="232.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8270,7 +8219,7 @@
   </Territory>
   <Territory value="1507">
     <type value="Desert" />
-    <coin value="0" />
+
     <point X="596.363636363636" Y="274.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8293,7 +8242,7 @@
   </Territory>
   <Territory value="1508">
     <type value="Desert" />
-    <coin value="0" />
+
     <point X="597.090909090909" Y="317.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8316,7 +8265,7 @@
   </Territory>
   <Territory value="1509">
     <type value="Desert" />
-    <coin value="0" />
+
     <point X="596.727272727273" Y="359.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8339,7 +8288,7 @@
   </Territory>
   <Territory value="1510">
     <type value="Desert" />
-    <coin value="0" />
+
     <point X="597.454545454546" Y="401.832727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8362,7 +8311,7 @@
   </Territory>
   <Territory value="1511">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="596.363636363636" Y="445.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8385,7 +8334,7 @@
   </Territory>
   <Territory value="1512">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="596.727272727273" Y="487.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8408,7 +8357,7 @@
   </Territory>
   <Territory value="1513">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="597.454545454546" Y="528.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8431,7 +8380,7 @@
   </Territory>
   <Territory value="1514">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="597.090909090909" Y="571.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8454,7 +8403,7 @@
   </Territory>
   <Territory value="1516">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="597.818181818182" Y="656.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8477,7 +8426,7 @@
   </Territory>
   <Territory value="1517">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="597.454545454546" Y="699.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8505,7 +8454,7 @@
   </Territory>
   <Territory value="1518">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="598.181818181818" Y="741.832727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8535,7 +8484,7 @@
   </Territory>
   <Territory value="1519">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="597.818181818182" Y="784.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8558,7 +8507,7 @@
   </Territory>
   <Territory value="1521">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="598.181818181818" Y="869" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8588,7 +8537,7 @@
   </Territory>
   <Territory value="1522">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="597.454545454546" Y="911.545454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8621,7 +8570,7 @@
   </Territory>
   <Territory value="1523">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="597.818181818182" Y="955.181818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8650,7 +8599,7 @@
   </Territory>
   <Territory value="1601">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="633.818181818182" Y="40.7418181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8683,7 +8632,7 @@
   </Territory>
   <Territory value="1602">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="634.181818181818" Y="82.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8713,7 +8662,7 @@
   </Territory>
   <Territory value="1603">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="633.090909090909" Y="125.832727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8736,7 +8685,7 @@
   </Territory>
   <Territory value="1604">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="633.090909090909" Y="168.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8759,7 +8708,7 @@
   </Territory>
   <Territory value="1605">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="632.727272727273" Y="210.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8782,7 +8731,7 @@
   </Territory>
   <Territory value="1606">
     <type value="Desert" />
-    <coin value="0" />
+
     <point X="632.727272727273" Y="252.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8805,7 +8754,7 @@
   </Territory>
   <Territory value="1607">
     <type value="Desert" />
-    <coin value="0" />
+
     <point X="633.090909090909" Y="295.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8828,7 +8777,7 @@
   </Territory>
   <Territory value="1608">
     <type value="Desert" />
-    <coin value="0" />
+
     <point X="632.363636363636" Y="337.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8851,7 +8800,7 @@
   </Territory>
   <Territory value="1609">
     <type value="Desert" />
-    <coin value="0" />
+
     <point X="633.090909090909" Y="380.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8874,7 +8823,7 @@
   </Territory>
   <Territory value="1610">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="633.454545454546" Y="423.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8897,7 +8846,7 @@
   </Territory>
   <Territory value="1611">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="633.454545454546" Y="466.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8920,7 +8869,7 @@
   </Territory>
   <Territory value="1515">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="597.454545454546" Y="614.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8945,7 +8894,7 @@
   </Territory>
   <Territory value="1520">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="597.818181818182" Y="826.818181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8970,7 +8919,7 @@
   </Territory>
   <Territory value="1612">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="633.454545454546" Y="508.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -8993,7 +8942,7 @@
   </Territory>
   <Territory value="1613">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="634.181818181818" Y="550.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9016,7 +8965,7 @@
   </Territory>
   <Territory value="1614">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="634.181818181818" Y="593.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9041,7 +8990,7 @@
   </Territory>
   <Territory value="1615">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="634.181818181818" Y="635.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9064,7 +9013,7 @@
   </Territory>
   <Territory value="1616">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="634.181818181818" Y="678.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9087,7 +9036,7 @@
   </Territory>
   <Territory value="1617">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="634.545454545455" Y="720.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9110,7 +9059,7 @@
   </Territory>
   <Territory value="1618">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="634.909090909091" Y="762.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9133,7 +9082,7 @@
   </Territory>
   <Territory value="1619">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="634.545454545455" Y="805.832727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9158,7 +9107,7 @@
   </Territory>
   <Territory value="1620">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="634.181818181818" Y="848.272727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9181,7 +9130,7 @@
   </Territory>
   <Territory value="1621">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="634.545454545455" Y="890.454545454546" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9204,7 +9153,7 @@
   </Territory>
   <Territory value="1622">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="634.909090909091" Y="933.727272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9234,7 +9183,7 @@
   </Territory>
   <Territory value="1701">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="670.545454545455" Y="19.6509090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9261,7 +9210,7 @@
   </Territory>
   <Territory value="1702">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="670.181818181818" Y="61.1054545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9295,7 +9244,7 @@
   </Territory>
   <Territory value="1703">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="669.818181818182" Y="104.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9318,7 +9267,7 @@
   </Territory>
   <Territory value="1704">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="670.909090909091" Y="146.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9341,7 +9290,7 @@
   </Territory>
   <Territory value="1705">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="670.181818181818" Y="189.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9364,7 +9313,7 @@
   </Territory>
   <Territory value="1706">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="670.181818181818" Y="232.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9387,7 +9336,7 @@
   </Territory>
   <Territory value="1707">
     <type value="Desert" />
-    <coin value="0" />
+
     <point X="669.818181818182" Y="274.454545454546" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9410,7 +9359,7 @@
   </Territory>
   <Territory value="1708">
     <type value="Desert" />
-    <coin value="0" />
+
     <point X="670.181818181818" Y="316.636363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9433,7 +9382,7 @@
   </Territory>
   <Territory value="1709">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="669.818181818182" Y="359.909090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9456,7 +9405,7 @@
   </Territory>
   <Territory value="1710">
     <type value="Desert" />
-    <coin value="0" />
+
     <point X="670.181818181818" Y="401.727272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9479,7 +9428,7 @@
   </Territory>
   <Territory value="1711">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="670.181818181818" Y="444.636363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9502,7 +9451,7 @@
   </Territory>
   <Territory value="1712">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="670.181818181818" Y="487.181818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9525,7 +9474,7 @@
   </Territory>
   <Territory value="1713">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="670.181818181818" Y="529" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9548,7 +9497,7 @@
   </Territory>
   <Territory value="1714">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="670.181818181818" Y="571.181818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9573,7 +9522,7 @@
   </Territory>
   <Territory value="1715">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="670.545454545455" Y="614.090909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9601,7 +9550,7 @@
   </Territory>
   <Territory value="1716">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="671.272727272727" Y="657" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9628,7 +9577,7 @@
   </Territory>
   <Territory value="1717">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="670.909090909091" Y="699.181818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9651,7 +9600,7 @@
   </Territory>
   <Territory value="1718">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="670.909090909091" Y="741.727272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9674,7 +9623,7 @@
   </Territory>
   <Territory value="1719">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="670.909090909091" Y="784.272727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9697,7 +9646,7 @@
   </Territory>
   <Territory value="1720">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="671.636363636364" Y="827.181818181818" />
     <isTown value="True" />
     <isCastle value="False" />
@@ -9723,7 +9672,7 @@
   </Territory>
   <Territory value="1721">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="671.272727272727" Y="869.363636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9746,7 +9695,7 @@
   </Territory>
   <Territory value="1722">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="670.545454545455" Y="911.909090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9774,7 +9723,7 @@
   </Territory>
   <Territory value="1723">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="671.272727272727" Y="955.181818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9802,7 +9751,7 @@
   </Territory>
   <Territory value="1801">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="706.909090909091" Y="39.2872727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9835,7 +9784,7 @@
   </Territory>
   <Territory value="1802">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="706.909090909091" Y="81.8327272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9865,7 +9814,7 @@
   </Territory>
   <Territory value="1803">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="706.545454545455" Y="124.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9889,7 +9838,7 @@
   </Territory>
   <Territory value="1804">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="706.545454545455" Y="168.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9912,7 +9861,7 @@
   </Territory>
   <Territory value="1805">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="706.545454545455" Y="209.727272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9937,7 +9886,7 @@
   </Territory>
   <Territory value="1806">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="707.272727272727" Y="252.636363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9960,7 +9909,7 @@
   </Territory>
   <Territory value="1807">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="706.181818181818" Y="295.181818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -9983,7 +9932,7 @@
   </Territory>
   <Territory value="1808">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="705.818181818182" Y="338.090909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10006,7 +9955,7 @@
   </Territory>
   <Territory value="1809">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="706.181818181818" Y="381" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10029,7 +9978,7 @@
   </Territory>
   <Territory value="1810">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="706.909090909091" Y="424.272727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10052,7 +10001,7 @@
   </Territory>
   <Territory value="1811">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="706.909090909091" Y="466.090909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10075,7 +10024,7 @@
   </Territory>
   <Territory value="1812">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="706.545454545455" Y="507.909090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10100,7 +10049,7 @@
   </Territory>
   <Territory value="1813">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="706.909090909091" Y="549.363636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10131,7 +10080,7 @@
   </Territory>
   <Territory value="1814">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="706.909090909091" Y="591.909090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10162,7 +10111,7 @@
   </Territory>
   <Territory value="1815">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="706.909090909091" Y="634.818181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10191,7 +10140,7 @@
   </Territory>
   <Territory value="1816">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="707.636363636364" Y="677.727272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10214,7 +10163,7 @@
   </Territory>
   <Territory value="1817">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="707.636363636364" Y="719.909090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10237,7 +10186,7 @@
   </Territory>
   <Territory value="1818">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="707.272727272727" Y="763.181818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10260,7 +10209,7 @@
   </Territory>
   <Territory value="1819">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="707.272727272727" Y="805.363636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10285,7 +10234,7 @@
   </Territory>
   <Territory value="1820">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="707.636363636364" Y="847.909090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10310,7 +10259,7 @@
   </Territory>
   <Territory value="1821">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="707.636363636364" Y="890.818181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10333,7 +10282,7 @@
   </Territory>
   <Territory value="1822">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="706.909090909091" Y="934.090909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10360,7 +10309,7 @@
   </Territory>
   <Territory value="1901">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="742.909090909091" Y="18.1963636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10387,7 +10336,7 @@
   </Territory>
   <Territory value="1902">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="743.636363636364" Y="60.3781818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10420,7 +10369,7 @@
   </Territory>
   <Territory value="1903">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="742.909090909091" Y="102.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10443,7 +10392,7 @@
   </Territory>
   <Territory value="1904">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="742.909090909091" Y="146.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10468,7 +10417,7 @@
   </Territory>
   <Territory value="1905">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="742.909090909091" Y="188.636363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10494,7 +10443,7 @@
   </Territory>
   <Territory value="1906">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="743.636363636364" Y="231.181818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10519,7 +10468,7 @@
   </Territory>
   <Territory value="1907">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="742.909090909091" Y="273.727272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10542,7 +10491,7 @@
   </Territory>
   <Territory value="1908">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="742.545454545455" Y="316.636363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10565,7 +10514,7 @@
   </Territory>
   <Territory value="1909">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="743.272727272727" Y="359.545454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10588,7 +10537,7 @@
   </Territory>
   <Territory value="1910">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="743.272727272727" Y="402.090909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10611,7 +10560,7 @@
   </Territory>
   <Territory value="1911">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="744" Y="445.363636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10636,7 +10585,7 @@
   </Territory>
   <Territory value="1912">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="743.636363636364" Y="486.454545454546" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10665,7 +10614,7 @@
   </Territory>
   <Territory value="1913">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="743.272727272727" Y="527.909090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10695,7 +10644,7 @@
   </Territory>
   <Territory value="1914">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="743.636363636364" Y="570.090909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10726,7 +10675,7 @@
   </Territory>
   <Territory value="1915">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="744" Y="613.363636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10755,7 +10704,7 @@
   </Territory>
   <Territory value="1916">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="743.272727272727" Y="656.272727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10778,7 +10727,7 @@
   </Territory>
   <Territory value="1917">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="743.636363636364" Y="698.454545454546" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10801,7 +10750,7 @@
   </Territory>
   <Territory value="1918">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="744.363636363636" Y="741.363636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10824,7 +10773,7 @@
   </Territory>
   <Territory value="1919">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="744" Y="784.272727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10849,7 +10798,7 @@
   </Territory>
   <Territory value="1920">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="744" Y="827.545454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10872,7 +10821,7 @@
   </Territory>
   <Territory value="1921">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="743.636363636364" Y="869.727272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10897,7 +10846,7 @@
   </Territory>
   <Territory value="1922">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="743.272727272727" Y="913" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10920,7 +10869,7 @@
   </Territory>
   <Territory value="1923">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="743.272727272727" Y="955.909090909091" />
     <isTown value="False" />
     <isCastle value="True" />
@@ -10943,7 +10892,7 @@
   </Territory>
   <Territory value="2001">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="780.363636363636" Y="36.7418181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10971,7 +10920,7 @@
   </Territory>
   <Territory value="2002">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="780.363636363636" Y="81.4690909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -10998,7 +10947,7 @@
   </Territory>
   <Territory value="2003">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="780" Y="123.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -11020,7 +10969,7 @@
   </Territory>
   <Territory value="2004">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="780.363636363636" Y="167.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -11042,7 +10991,7 @@
   </Territory>
   <Territory value="2005">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="780" Y="208.636363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -11064,7 +11013,7 @@
   </Territory>
   <Territory value="2006">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="780" Y="252.272727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -11086,7 +11035,7 @@
   </Territory>
   <Territory value="2007">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="778.545454545455" Y="295.545454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -11108,7 +11057,7 @@
   </Territory>
   <Territory value="2008">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="779.636363636364" Y="338.090909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -11130,7 +11079,7 @@
   </Territory>
   <Territory value="2009">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="778.909090909091" Y="380.636363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -11152,7 +11101,7 @@
   </Territory>
   <Territory value="2010">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="779.272727272727" Y="423.909090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -11175,7 +11124,7 @@
   </Territory>
   <Territory value="2011">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="780.363636363636" Y="466.454545454546" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -11200,7 +11149,7 @@
   </Territory>
   <Territory value="2012">
     <type value="Mountains" />
-    <coin value="0" />
+
     <point X="779.272727272727" Y="507.181818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -11227,7 +11176,7 @@
   </Territory>
   <Territory value="2013">
     <type value="Hills" />
-    <coin value="0" />
+
     <point X="779.636363636364" Y="548.272727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -11255,7 +11204,7 @@
   </Territory>
   <Territory value="2014">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="780" Y="591.181818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -11277,7 +11226,7 @@
   </Territory>
   <Territory value="2015">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="780" Y="634.454545454546" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -11299,7 +11248,7 @@
   </Territory>
   <Territory value="2016">
     <type value="Swamp" />
-    <coin value="0" />
+
     <point X="780.727272727273" Y="677" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -11321,7 +11270,7 @@
   </Territory>
   <Territory value="2017">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="780.363636363636" Y="719.545454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -11343,7 +11292,7 @@
   </Territory>
   <Territory value="2018">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="780.727272727273" Y="762.818181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -11366,7 +11315,7 @@
   </Territory>
   <Territory value="2019">
     <type value="Countryside" />
-    <coin value="0" />
+
     <point X="780.727272727273" Y="805.363636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -11388,7 +11337,7 @@
   </Territory>
   <Territory value="2020">
     <type value="Forest" />
-    <coin value="0" />
+
     <point X="780.727272727273" Y="848.636363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -11410,7 +11359,7 @@
   </Territory>
   <Territory value="2021">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="780.5" Y="891.666666666667" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -11434,7 +11383,7 @@
   </Territory>
   <Territory value="2022">
     <type value="Farmland" />
-    <coin value="0" />
+
     <point X="779.833333333333" Y="934" />
     <isTown value="False" />
     <isCastle value="False" />

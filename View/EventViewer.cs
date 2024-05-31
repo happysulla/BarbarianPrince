@@ -159,6 +159,15 @@ namespace BarbarianPrince
             case GameAction.UnitTestCommand:
             case GameAction.UnitTestNext:
                break;
+            case GameAction.UpdateLoadingGame:
+               myGameInstance.Clone(gi);
+               myRulesMgr = new RuleDialogViewer(myGameInstance, myGameEngine);
+               if(true == myRulesMgr.CtorError)
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): RuleDialogViewer() ctor error ae=" + myGameInstance.EventActive + " a=" + action.ToString());
+               gi.IsGridActive = false;
+               if (false == OpenEvent(gi, gi.EventActive))
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): OpenEvent() returned false ae=" + myGameInstance.EventActive + " a=" + action.ToString());
+               break;
             //-------------------------------------
             case GameAction.TravelLostCheck:
                EventViewerTravelTable aTravelTableViewer = new EventViewerTravelTable(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);

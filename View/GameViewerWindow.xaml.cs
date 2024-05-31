@@ -158,8 +158,7 @@ namespace BarbarianPrince
          myCanvas.Children.Add(myRectangleSelected);
          Canvas.SetZIndex(myRectangleSelected, 1000);
          //-----------------------------------------------------------------
-         LoadEndCallback callback = RemoveSplashScreen;
-         myDieRoller = new DieRoller(myCanvas, callback);
+         myDieRoller = new DieRoller(myCanvas, RemoveSplashScreen);
          if (true == myDieRoller.CtorError)
          {
             Logger.Log(LogEnum.LE_ERROR, "GameViewerWindow(): myDieRoller.CtorError=true");
@@ -237,7 +236,8 @@ namespace BarbarianPrince
                if (false == UpdateCanvasHexTravelToShowPolygons(gi))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvasHexTravelToShowPolygons() returned error ");
                break;
-            case GameAction.UpdateGameViewer: // happens when a game is loaded
+            case GameAction.UpdateLoadingGame: // happens when a game is loaded
+               myGameInstance.Clone(gi);
                myButtonMapItems.Clear();
                List<UIElement> elements = new List<UIElement>();
                foreach (UIElement ui in myCanvas.Children) // remove all buttons on map
@@ -247,6 +247,8 @@ namespace BarbarianPrince
                }
                foreach (UIElement ui1 in elements)
                   myCanvas.Children.Remove(ui1);
+               Logger.Log(LogEnum.LE_GAME_INIT, "GameViewerWindow.UpdateView(): a=" + action.ToString() + " gi=" + gi.ToString());
+               Logger.Log(LogEnum.LE_GAME_INIT, "GameViewerWindow.UpdateView(): a=" + action.ToString() + " myGameInstance=" + myGameInstance.ToString());
                if (false == UpdateCanvas(gi, action))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvas() returned error ");
                break;
@@ -357,7 +359,7 @@ namespace BarbarianPrince
          System.Windows.Controls.Button b = new Button { ContextMenu = myContextMenuButton, Name = Utilities.RemoveSpaces(mi.Name), Width = mi.Zoom * Utilities.theMapItemSize, Height = mi.Zoom * Utilities.theMapItemSize, BorderThickness = new Thickness(0), Background = new SolidColorBrush(Colors.Transparent), Foreground = new SolidColorBrush(Colors.Transparent) };
          Canvas.SetLeft(b, territory.CenterPoint.X - mi.Zoom * Utilities.theMapItemOffset + (counterCount * Utilities.STACK));
          Canvas.SetTop(b, territory.CenterPoint.Y - mi.Zoom * Utilities.theMapItemOffset + (counterCount * Utilities.STACK));
-         MapItem.SetButtonContent(b, mi, false, false); // This sets the image as the button's content
+         MapItem.SetButtonContent(b, mi, false, false, false, false); // This sets the image as the button's content
          myButtonMapItems.Add(b);
          myCanvas.Children.Add(b);
          Canvas.SetZIndex(b, counterCount);
@@ -1755,7 +1757,7 @@ namespace BarbarianPrince
             }
             if (cm.PlacementTarget is Button b)
             {
-               IMapItem mi = myGameInstance.MapItems.Find(b.Name);
+               IMapItem mi = myGameInstance.PartyMembers.Find(b.Name);
                if (1 < cm.Items.Count) // Gray out the "Rotate Stack" menu item
                {
                   if (cm.Items[1] is MenuItem menuItem)
@@ -1782,7 +1784,7 @@ namespace BarbarianPrince
             {
                if (cm.PlacementTarget is Button b)
                {
-                  IMapItem mi = myGameInstance.MapItems.Find(b.Name);
+                  IMapItem mi = myGameInstance.PartyMembers.Find(b.Name);
                   ITerritory t = mi.Territory;
                   IStack stack = myGameInstance.Stacks.Find(t);
                   if (null == stack)
@@ -1804,10 +1806,9 @@ namespace BarbarianPrince
             {
                if (cm.PlacementTarget is Button b)
                {
-                  IMapItem mi = myGameInstance.MapItems.Find(b.Name);
+                  IMapItem mi = myGameInstance.PartyMembers.Find(b.Name);
                   mi.Flip();
                   MapItem.SetButtonContent(b, mi, false, true);
-
                }
             }
          }
@@ -1820,7 +1821,7 @@ namespace BarbarianPrince
             {
                if (cm.PlacementTarget is Button b)
                {
-                  IMapItem mi = myGameInstance.MapItems.Find(b.Name);
+                  IMapItem mi = myGameInstance.PartyMembers.Find(b.Name);
                   mi.Unflip();
                   MapItem.SetButtonContent(b, mi, false, true);
 

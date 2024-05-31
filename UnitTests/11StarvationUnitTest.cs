@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using System.Xml.Linq;
 
 namespace BarbarianPrince
 {
@@ -87,6 +89,7 @@ namespace BarbarianPrince
       }
       public bool Command(ref IGameInstance gi)
       {
+         gi.PartyMembers.Clear();
          gi.IsMinstrelPlaying = false; // e049 - minstrel & eagles
          gi.IsPartyFed = false;
          gi.IsMountsFed = false;
@@ -97,49 +100,51 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "Command(): t=null");
             return false;
          }
+         gi.Prince.Territory = t;
+         gi.Prince.Reset();
+         gi.Prince.Food = 0;
+         gi.Prince.Coin = 0;
+         gi.Prince.SetWounds(1, 1);
+         gi.Prince.AddSpecialItemToShare(SpecialEnum.HealingPoition);
+         gi.Prince.AddSpecialItemToShare(SpecialEnum.CurePoisonVial);
+         gi.PartyMembers.Add(gi.Prince);
          if (CommandName == myCommandNames[0])
          {
-            IMapItems partyMembers = gi.PartyMembers;
-            partyMembers.Clear();
-            IMapItem prince = gi.MapItems.Find("Prince");
-            if (null == prince)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "AddPrince(): mi=null");
-               return false;
-            }
-            prince.Reset();
-            prince.Territory = t;
-            gi.Prince = prince;
-            prince.Food = 0;
-            prince.Coin = 0;
-            partyMembers.Add(prince);
-            IMapItem companion1 = AddHireling(ref gi, "Mercenary");
-            if (null == companion1)
-               return false;
+            string miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            companion1.Wages = 2;
+            gi.PartyMembers.Add(companion1);
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[1]) 
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 30;
-            prince.Coin = 30;
-            IMapItem companion1 = AddHireling(ref gi, "Mercenary");
-            if (null == companion1)
-               return false;
-            IMapItem companion2 = AddCompanion(ref gi, "Porter");
-            if (null == companion2)
-               return false;
-            IMapItem companion3 = AddHireling(ref gi, "Witch");
-            if (null == companion3)
-               return false;
-            companion3.Wages = 1;
+            gi.Prince.Food = 30;
+            gi.Prince.Coin = 30;
+            //-----------------------------
+            string miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            companion1.Wages = 2;
+            gi.PartyMembers.Add(companion1);
+            //-----------------------------
+            miName = "Porter" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
+            gi.PartyMembers.Add(companion2);
+            //-----------------------------
+            miName = "Witch" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion5 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            companion5.Wages = 1;
+            gi.PartyMembers.Add(companion5);
+            //-----------------------------
             string giantName = "Giant" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
             IMapItem giant = new MapItem(giantName, 1.0, false, false, false, "c61Giant", "c61Giant", t, 8, 9, 10);
             giant.StarveDayNum = 2;
             gi.AddCompanion(giant);
+            //-----------------------------
             for (int i = 0; i < 3; ++i)
             {
                string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
@@ -159,51 +164,58 @@ namespace BarbarianPrince
          }
          if (CommandName == myCommandNames[2])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 6;
-            prince.StarveDayNum = 0;
-            IMapItem companion1 = AddCompanion(ref gi, "Mercenary");
-            if (null == companion1)
-               return false;
+            gi.Prince.Food = 6;
+            gi.Prince.StarveDayNum = 0;
+            //---------------------------------------------------
+            string miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             companion1.Food = 0;
             companion1.StarveDayNum = 1;
-            IMapItem companion2 = AddCompanion(ref gi, "Porter");
-            if (null == companion2)
-               return false;
+            gi.PartyMembers.Add(companion1);
+            //---------------------------------------------------
+            miName = "Porter" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
             companion2.Food = 0;
             companion2.StarveDayNum = 2;
+            gi.PartyMembers.Add(companion2);
+            //---------------------------------------------------
             string porterName = "PorterSlave" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
             IMapItem porter = new MapItem(porterName, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", t, 0, 0, 0);
             porter.Food = 0;
             porter.StarveDayNum = 4;
             gi.AddCompanion(porter);
+            //---------------------------------------------------
             porterName = "PorterSlave" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
             porter = new MapItem(porterName, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", t, 0, 0, 0);
             porter.Food = 0;
             porter.StarveDayNum = 5;
             gi.AddCompanion(porter);
+            //---------------------------------------------------
             //string slaveGirlName = "SlaveGirl" + Utilities.MapItemNum.ToString();
             //++Utilities.MapItemNum;
             //IMapItem slaveGirl = new MapItem(slaveGirlName, 1.0, false, false, false, "c41SlaveGirl", "c41SlaveGirl", t, 0, 0, 0);
             //slaveGirl.Food = 0;
             //slaveGirl.StarveDayNum = 5;
             //gi.AddCompanion(slaveGirl);
+            //---------------------------------------------------
             //slaveGirlName = "SlaveGirl" + Utilities.MapItemNum.ToString();
             //++Utilities.MapItemNum;
             //slaveGirl = new MapItem(slaveGirlName, 1.0, false, false, false, "c41SlaveGirl", "c41SlaveGirl", t, 0, 0, 0);
             //slaveGirl.Food = 0;
             //slaveGirl.StarveDayNum = 2;
             //gi.AddCompanion(slaveGirl);
+            //---------------------------------------------------
             string trueLoveName = "TrueLove" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
             IMapItem trueLove = new MapItem(trueLoveName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", t, 0, 0, 0);
             trueLove.Food = 0;
             trueLove.StarveDayNum = 0;
             gi.AddCompanion(trueLove);
+            //---------------------------------------------------
             //trueLoveName = "TrueLove" + Utilities.MapItemNum.ToString();
             //++Utilities.MapItemNum;
             //trueLove = new MapItem(trueLoveName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", t, 0, 0, 0);
@@ -214,284 +226,385 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[3]) //Henchmen
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Coin = 10;
-            prince.Food = 10;
-            prince.StarveDayNum = 0;
-            IMapItem companion1 = AddHireling(ref gi, "Mercenary");
-            if (null == companion1)
-               return false;
-            IMapItem companion2 = AddCompanion(ref gi, "Porter");
-            if (null == companion2)
-               return false;
-            IMapItem companion3 = AddHireling(ref gi, "Witch");
-            companion3.Wages = 1;
-            if (null == companion3)
-               return false;
+            gi.Prince.Coin = 10;
+            gi.Prince.Food = 10;
+            gi.Prince.StarveDayNum = 0;
+            //---------------------------------------------------
+            string miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            companion1.Wages = 2;
+            gi.PartyMembers.Add(companion1);
+            //---------------------------------------------------
+            miName = "Porter" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
+            gi.PartyMembers.Add(companion2);
+            //---------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion5 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            companion5.Wages = 1;
+            gi.PartyMembers.Add(companion5);
+            //---------------------------------------------------
             gi.PartyMembers.Reverse();
             gi.IsMagicianProvideGift = true; // <<<<<<<<<<<<<<<<<<<<=================================
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[4]) //Henchmen Group
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Coin = 10;
-            prince.Food = 10;
-            prince.StarveDayNum = 0;
-            IMapItem companion1 = AddHirelingGroup(ref gi, "Mercenary", 1, gi.Days - 1);
-            if (null == companion1)
-               return false;
-            IMapItem companion1a = AddHirelingGroup(ref gi, "Mercenary", 1, gi.Days - 1);
-            if (null == companion1a)
-               return false;
-            IMapItem companion1b = AddHirelingGroup(ref gi, "Mercenary", 1, gi.Days - 1);
-            if (null == companion1b)
-               return false;
-            IMapItem companion2 = AddHireling(ref gi, "Porter");
-            if (null == companion2)
-               return false;
-            IMapItem companion3 = AddHirelingGroup(ref gi, "Witch", 2, gi.Days - 1); // already paid for today
-            companion3.Wages = 1;
-            if (null == companion3)
-               return false;
-            IMapItem companion3a = AddHirelingGroup(ref gi, "Witch", 2, gi.Days - 1); // already paid for today
-            companion3a.Wages = 1;
-            if (null == companion3a)
-               return false;
+            gi.Prince.Coin = 10;
+            gi.Prince.Food = 10;
+            gi.Prince.StarveDayNum = 0;
+            //---------------------------------------------------
+            string miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            companion1.Wages = 2;
+            companion1.GroupNum = 1;
+            companion1.PayDay = gi.Days - 1;
+            gi.PartyMembers.Add(companion1);
+            //---------------------------------------------------
+            miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            companion2.Wages = 2;
+            companion2.GroupNum = 1;
+            companion2.PayDay = gi.Days - 1;
+            gi.PartyMembers.Add(companion2);
+            //---------------------------------------------------
+            miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion3 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            companion3.Wages = 2;
+            companion3.GroupNum = 1;
+            companion3.PayDay = gi.Days - 1;
+            gi.PartyMembers.Add(companion3);
+            //---------------------------------------------------
+            miName = "Porter" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion4 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
+            gi.PartyMembers.Add(companion4);
+            //---------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion5 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            companion5.Wages = 1;
+            companion5.GroupNum = 2;
+            companion5.PayDay = gi.Days - 1;
+            gi.PartyMembers.Add(companion5);
+            //---------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion6 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            companion6.Wages = 1;
+            companion6.GroupNum = 2;
+            companion6.PayDay = gi.Days - 1;
+            gi.PartyMembers.Add(companion6);
+            //---------------------------------------------------
             gi.PartyMembers.Reverse();
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[5]) //Henchmen Group w/ Minstrel Playing
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Coin = 10;
-            prince.Food = 10;
-            prince.StarveDayNum = 0;
-            IMapItem companion1 = AddHirelingGroup(ref gi, "Mercenary", 1, gi.Days - 1);
-            if (null == companion1)
-               return false;
-            IMapItem companion1a = AddHirelingGroup(ref gi, "Mercenary", 1, gi.Days - 1);
-            if (null == companion1a)
-               return false;
-            IMapItem companion1b = AddHirelingGroup(ref gi, "Mercenary", 1, gi.Days - 1);
-            if (null == companion1b)
-               return false;
-            IMapItem companion2 = AddHireling(ref gi, "Porter");
-            if (null == companion2)
-               return false;
-            IMapItem companion3 = AddHirelingGroup(ref gi, "Witch", 2, gi.Days + 1);
-            companion3.Wages = 1;
-            if (null == companion3)
-               return false;
-            IMapItem companion3a = AddHirelingGroup(ref gi, "Witch", 2, gi.Days + 1);
-            companion3a.Wages = 1;
-            if (null == companion3a)
-               return false;
+            gi.Prince.Coin = 10;
+            gi.Prince.Food = 10;
+            gi.Prince.StarveDayNum = 0;
+            //---------------------------------------------------
+            string miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            companion1.Wages = 2;
+            companion1.GroupNum = 1;
+            companion1.PayDay = gi.Days - 1;
+            gi.PartyMembers.Add(companion1);
+            //---------------------------------------------------
+            miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            companion2.Wages = 2;
+            companion2.GroupNum = 1;
+            companion2.PayDay = gi.Days - 1;
+            gi.PartyMembers.Add(companion2);
+            //---------------------------------------------------
+            miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion3 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            companion3.Wages = 2;
+            companion3.GroupNum = 1;
+            companion3.PayDay = gi.Days - 1;
+            gi.PartyMembers.Add(companion3);
+            //---------------------------------------------------
+            miName = "Porter" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion4 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
+            companion4.Wages = 2; 
+            gi.PartyMembers.Add(companion4);
+            //---------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion5 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            companion5.Wages = 1;
+            companion5.GroupNum = 2;
+            companion5.PayDay = gi.Days + 1;
+            gi.PartyMembers.Add(companion5);
+            //---------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion6 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            companion6.Wages = 1;
+            companion6.GroupNum = 2;
+            companion6.PayDay = gi.Days + 1;
+            gi.PartyMembers.Add(companion6);
+            //--------------------------------------------------
             string minstrelName = "Minstrel" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
             IMapItem minstrel = new MapItem(minstrelName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", t, 0, 0, 0);
             gi.AddCompanion(minstrel);
             gi.IsMinstrelPlaying = true; // <<<<<<<<<<<<<<<<<<<<=================================
             gi.IsMagicianProvideGift = true; // <<<<<<<<<<<<<<<<<<<<=================================
+            //--------------------------------------------------
             gi.PartyMembers.Reverse();
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[6]) //Henchmen Group w/ Minstrel
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Coin = 10;
-            prince.Food = 10;
-            prince.StarveDayNum = 0;
-            IMapItem companion1 = AddHirelingGroup(ref gi, "Mercenary", 1, gi.Days - 1);
-            if (null == companion1)
-               return false;
-            IMapItem companion1a = AddHirelingGroup(ref gi, "Mercenary", 1, gi.Days - 1);
-            if (null == companion1a)
-               return false;
-            IMapItem companion1b = AddHirelingGroup(ref gi, "Mercenary", 1, gi.Days - 1);
-            if (null == companion1b)
-               return false;
-            IMapItem companion2 = AddHireling(ref gi, "Porter");
-            if (null == companion2)
-               return false;
-            IMapItem companion3 = AddHirelingGroup(ref gi, "Witch", 2, gi.Days + 1);
-            companion3.Wages = 1;
-            if (null == companion3)
-               return false;
-            IMapItem companion3a = AddHirelingGroup(ref gi, "Witch", 2, gi.Days + 1);
-            companion3a.Wages = 1;
-            if (null == companion3a)
-               return false;
+            gi.Prince.Coin = 10;
+            gi.Prince.Food = 10;
+            gi.Prince.StarveDayNum = 0;
+            //---------------------------------------------------
+            string miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            companion1.Wages = 2;
+            companion1.GroupNum = 1;
+            companion1.PayDay = gi.Days - 1;
+            gi.PartyMembers.Add(companion1);
+            //---------------------------------------------------
+            miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            companion2.Wages = 2;
+            companion2.GroupNum = 1;
+            companion2.PayDay = gi.Days - 1;
+            gi.PartyMembers.Add(companion1);
+            //---------------------------------------------------
+            miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion3 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            companion3.Wages = 2;
+            companion3.GroupNum = 1;
+            companion3.PayDay = gi.Days - 1;
+            gi.PartyMembers.Add(companion1);
+            //---------------------------------------------------
+            miName = "Porter" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion4 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
+            companion4.Wages = 2;
+            gi.PartyMembers.Add(companion4);
+            //---------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion5 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            companion5.Wages = 1;
+            companion5.GroupNum = 2;
+            companion5.PayDay = gi.Days + 1;
+            gi.PartyMembers.Add(companion5);
+            //---------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion6 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            companion6.Wages = 1;
+            companion6.GroupNum = 2;
+            companion6.PayDay = gi.Days + 1;
+            gi.PartyMembers.Add(companion6);
+            //--------------------------------------------------
             string minstrelName = "Minstrel" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
             IMapItem minstrel = new MapItem(minstrelName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", t, 0, 0, 0);
             gi.AddCompanion(minstrel);
+            //--------------------------------------------------
             gi.PartyMembers.Reverse();
             gi.IsMagicianProvideGift = true; // <<<<<<<<<<<<<<<<<<<<=================================
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[7]) 
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 10;
-            prince.StarveDayNum = 0;
-            IMapItem companion1 = AddCompanion(ref gi, "Mercenary");
-            if (null == companion1)
-               return false;
-            IMapItem companion2 = AddCompanion(ref gi, "Porter");
-            if (null == companion2)
-               return false;
-            IMapItem companion3 = AddCompanion(ref gi, "Witch");
-            if (null == companion3)
-               return false;
+            gi.Prince.Food = 10;
+            gi.Prince.StarveDayNum = 0;
+            //---------------------------------------------------
+            string miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            gi.PartyMembers.Add(companion1);
+            //---------------------------------------------------
+            miName = "Porter" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
+            gi.PartyMembers.Add(companion2);
+            //---------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion3 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            gi.PartyMembers.Add(companion3);
+            //---------------------------------------------------
             gi.PartyMembers.Reverse();
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[8])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 2;
-            prince.StarveDayNum = 0;
-            IMapItem companion1 = AddCompanion(ref gi, "Mercenary");
-            if (null == companion1)
-               return false;
+            gi.Prince.Food = 2;
+            gi.Prince.StarveDayNum = 0;
+            string miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             companion1.Food = 2;
             companion1.StarveDayNum = 1;
-            IMapItem companion2 = AddCompanion(ref gi, "Porter");
-            if (null == companion2)
-               return false;
+            gi.PartyMembers.Add(companion1);
+            //---------------------------------------------------
+            miName = "Porter" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
             companion2.Food = 2;
             companion2.StarveDayNum = 2;
-            IMapItem companion3 = AddCompanion(ref gi, "Witch");
-            if (null == companion3)
-               return false;
+            gi.PartyMembers.Add(companion2);
+            //---------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion3 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
             companion3.Food = 2;
             companion3.StarveDayNum = 3;
+            gi.PartyMembers.Add(companion3);
+            //--------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[9])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 4;
-            prince.StarveDayNum = 0;
-            IMapItem companion1 = AddCompanion(ref gi, "Mercenary");
-            if (null == companion1)
-               return false;
+            gi.Prince.Food = 4;
+            gi.Prince.StarveDayNum = 0;
+            //---------------------------------------------------
+            string miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             companion1.Food = 2;
             companion1.StarveDayNum = 1;
             companion1.AddNewMount();
-            IMapItem companion2 = AddCompanion(ref gi, "Porter");
-            if (null == companion2)
-               return false;
+            gi.PartyMembers.Add(companion1);
+            //---------------------------------------------------
+            miName = "Porter" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
             companion2.Food = 2;
             companion2.StarveDayNum = 2;
             companion2.AddNewMount();
-            IMapItem companion3 = AddCompanion(ref gi, "Witch");
-            if (null == companion3)
-               return false;
+            gi.PartyMembers.Add(companion2);
+            //---------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion3 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
             companion3.Food = 2;
             companion3.StarveDayNum = 3;
             companion3.AddNewMount();
+            gi.PartyMembers.Add(companion3);
+            //---------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[10])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 3;
-            prince.StarveDayNum = 0;
+            gi.Prince.Food = 3;
+            gi.Prince.StarveDayNum = 0;
             AddPrinceMounts(ref gi, 1);
-            IMapItem companion1 = AddCompanion(ref gi, "Mercenary");
-            if (null == companion1)
-               return false;
+            //---------------------------------------------------
+            string miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             companion1.Food = 0;
             companion1.StarveDayNum = 1;
             companion1.AddNewMount();
-            IMapItem companion2 = AddCompanion(ref gi, "Porter");
-            if (null == companion2)
-               return false;
+            gi.PartyMembers.Add(companion1);
+            //---------------------------------------------------
+            miName = "Porter" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
             companion2.Food = 0;
             companion2.StarveDayNum = 2;
             companion2.AddNewMount();
-            IMapItem companion3 = AddCompanion(ref gi, "Witch");
-            if (null == companion3)
-               return false;
+            gi.PartyMembers.Add(companion2);
+            //---------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion3 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
             companion3.Food = 0;
             companion3.StarveDayNum = 3;
             companion3.AddNewMount();
+            gi.PartyMembers.Add(companion3);
+            //--------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[11])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 3;
-            prince.StarveDayNum = 0;
+            gi.Prince.Food = 3;
+            gi.Prince.StarveDayNum = 0;
             AddPrinceMounts(ref gi, 1);
-            IMapItem companion1 = AddCompanion(ref gi, "Mercenary");
-            if (null == companion1)
-               return false;
+            //---------------------------------------------------
+            string miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             companion1.Food = 0;
             companion1.StarveDayNum = 1;
             companion1.AddNewMount();
-            IMapItem companion2 = AddCompanion(ref gi, "Porter");
-            if (null == companion2)
-               return false;
+            gi.PartyMembers.Add(companion1);
+            //---------------------------------------------------
+            miName = "Porter" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
             companion2.Food = 0;
             companion2.StarveDayNum = 2;
             companion2.AddNewMount();
-            IMapItem companion3 = AddCompanion(ref gi, "Witch");
-            if (null == companion3)
-               return false;
+            gi.PartyMembers.Add(companion2);
+            //---------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion3 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
             companion3.Food = 0;
             companion3.StarveDayNum = 3;
             companion3.SetWounds(1, 2);
             companion3.AddNewMount();
+            gi.PartyMembers.Add(companion3);
+            //--------------------------------------------------
             gi.IsPartyFed = true; // <<<<<<<<<<<<<<<<<<<<=================================
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[12])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 3;
-            prince.StarveDayNum = 0;
+            gi.Prince.Food = 3;
+            gi.Prince.StarveDayNum = 0;
             AddPrinceMounts(ref gi, 1);
-            IMapItem companion1 = AddCompanion(ref gi, "Mercenary");
-            if (null == companion1)
-               return false;
+            //---------------------------------------------------
+            string miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             companion1.Food = 0;
             companion1.StarveDayNum = 1;
             companion1.AddNewMount();
-            IMapItem companion2 = AddCompanion(ref gi, "Porter");
-            if (null == companion2)
-               return false;
+            gi.PartyMembers.Add(companion1);
+            //---------------------------------------------------
+            miName = "Porter" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
             companion2.Food = 0;
             companion2.StarveDayNum = 2;
             companion2.AddNewMount();
-            IMapItem companion3 = AddCompanion(ref gi, "Witch");
-            if (null == companion3)
-               return false;
-            companion3.Food = 0;
-            companion3.StarveDayNum = 3;
-            companion3.AddNewMount();
+            gi.PartyMembers.Add(companion2);
+            //---------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion6 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            companion6.Food = 0;
+            companion6.StarveDayNum = 3;
+            companion6.AddNewMount();
+            gi.PartyMembers.Add(companion6);
+            //---------------------------------------------------
             gi.IsMountsFed = true; // <<<<<<<<<<<<<<<<<<<<=================================
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
@@ -503,125 +616,100 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "Command(): t=null");
                return false;
             }
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 6;
-            prince.StarveDayNum = 0;
+            gi.Prince.Territory = t;
+            gi.Prince.Food = 6;
+            gi.Prince.StarveDayNum = 0;
             AddPrinceMounts(ref gi, 1);
-            IMapItem companion1 = AddCompanion(ref gi, "Mercenary");
-            if (null == companion1)
-               return false;
+            //---------------------------------------------------
+            string miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             companion1.Food = 8;
             companion1.StarveDayNum = 1;
             companion1.AddNewMount();
-            IMapItem companion2 = AddCompanion(ref gi, "Porter");
-            if (null == companion2)
-               return false;
+            gi.PartyMembers.Add(companion1);
+            //---------------------------------------------------
+            miName = "Porter" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
             companion2.Food = 8;
             companion2.StarveDayNum = 2;
             companion2.AddNewMount();
-            IMapItem companion3 = AddCompanion(ref gi, "Witch");
-            if (null == companion3)
-               return false;
-            companion3.Food = 8;
-            companion3.StarveDayNum = 3;
-            companion3.AddNewMount();
+            gi.PartyMembers.Add(companion2);
+            //---------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion6 = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            companion6.Food = 8;
+            companion6.StarveDayNum = 3;
+            companion6.AddNewMount();
+            gi.PartyMembers.Add(companion6);
+            //---------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[14]) //<<<<<<<<<<<<<<<<<<<<<<<<<<<========================== PRINCE ONLY
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 2;
-            prince.StarveDayNum = 0;
+            gi.Prince.Food = 2;
+            gi.Prince.StarveDayNum = 0;
             AddPrinceMounts(ref gi, 1);
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[15])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 2;
-            prince.StarveDayNum = 0;
+            gi.Prince.Food = 2;
+            gi.Prince.StarveDayNum = 0;
             AddPrinceMounts(ref gi, 1);
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[16])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 5;
-            prince.StarveDayNum = 1;
+            gi.Prince.Food = 5;
+            gi.Prince.StarveDayNum = 1;
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[17])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 5;
-            prince.StarveDayNum = 3;
+            gi.Prince.Food = 5;
+            gi.Prince.StarveDayNum = 3;
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[18])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 1;
-            prince.StarveDayNum = 1;
+            gi.Prince.Food = 1;
+            gi.Prince.StarveDayNum = 1;
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[19])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 0;
-            prince.StarveDayNum = 1;
+            gi.Prince.Food = 0;
+            gi.Prince.StarveDayNum = 1;
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[20])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 2;
-            prince.StarveDayNum = 0;
+            gi.Prince.Food = 2;
+            gi.Prince.StarveDayNum = 0;
             AddPrinceMounts(ref gi, 1); // 1 mount
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[21])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 2;
-            prince.StarveDayNum = 0;
+            gi.Prince.Food = 2;
+            gi.Prince.StarveDayNum = 0;
             AddPrinceMounts(ref gi, 1); // 1 mount
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[22])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 2;
-            prince.StarveDayNum = 0;
+            gi.Prince.Food = 2;
+            gi.Prince.StarveDayNum = 0;
             AddPrinceMounts(ref gi, 1); // 1 mount
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[23])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 2;
-            prince.StarveDayNum = 0;
+            gi.Prince.Food = 2;
+            gi.Prince.StarveDayNum = 0;
             AddPrinceMounts(ref gi, 1);
             gi.IsPartyFed = true;
             gi.IsMountsFed = true;
@@ -629,21 +717,15 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[24])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 5;
-            prince.StarveDayNum = 0;
+            gi.Prince.Food = 5;
+            gi.Prince.StarveDayNum = 0;
             AddPrinceMounts(ref gi, 2);
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[25])
          {
-            IMapItem prince = AddPrince(ref gi, t);
-            if (null == prince)
-               return false;
-            prince.Food = 2;
-            prince.StarveDayNum = 0;
+            gi.Prince.Food = 2;
+            gi.Prince.StarveDayNum = 0;
             AddPrinceMounts(ref gi, 2);
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
@@ -769,27 +851,9 @@ namespace BarbarianPrince
          return true;
       }
       //-----------------------------------------------------------
-      private IMapItem AddPrince(ref IGameInstance gi, ITerritory t )
-      {
-         IMapItems partyMembers = gi.PartyMembers;
-         partyMembers.Clear();
-         IMapItem prince = gi.MapItems.Find("Prince");
-         if (null == prince)
-            Logger.Log(LogEnum.LE_ERROR, "AddPrince(): mi=null");
-         prince.Territory = t;
-         prince.Reset();
-         prince.SetWounds(1, 1);
-         prince.AddSpecialItemToShare(SpecialEnum.HealingPoition);
-         prince.AddSpecialItemToShare(SpecialEnum.CurePoisonVial);
-         partyMembers.Add(prince);
-         gi.Prince = prince;
-         return prince;
-      }
       private void AddPrinceMounts(ref IGameInstance gi, int numMounts)
       {
-         IMapItem prince = gi.MapItems.Find("Prince");
-         if (null == prince)
-            Logger.Log(LogEnum.LE_ERROR, "AddPrince(): mi=null");
+         IMapItem prince = gi.Prince;
          prince.Mounts.Clear();
          if (0 < numMounts)
          {
@@ -813,52 +877,6 @@ namespace BarbarianPrince
             MapItem unicorn = new MapItem(name, 1.0, false, false, false, "MUnicorn", "", prince.Territory, 0, 0, 0);
             prince.Mounts.Add(unicorn);
          }
-      }
-      private IMapItem AddCompanion(ref IGameInstance gi, string name)
-      {
-         IMapItems partyMembers = gi.PartyMembers;
-         IMapItem companion1 = gi.MapItems.Find(name);
-         if (null == companion1)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddCompanions(): mi=null for name=" + name);
-            return null;
-         }
-         IMapItem clone = new MapItem(companion1);
-         //clone.SetWounds(2, 1);
-         //clone.AddSpecialItemToKeep(SpecialEnum.HealingPoition);
-         //clone.AddSpecialItemToKeep(SpecialEnum.CurePoisonVial);
-         partyMembers.Add(clone);
-         return companion1;
-      }
-      private IMapItem AddHireling(ref IGameInstance gi, string name)
-      {
-         IMapItems partyMembers = gi.PartyMembers;
-         IMapItem companion1 = gi.MapItems.Find(name);
-         if (null == companion1)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddCompanions(): mi=null for name=" + name);
-            return null;
-         }
-         IMapItem clone = new MapItem(companion1);
-         clone.Wages = 2;
-         partyMembers.Add(clone);
-         return clone;
-      }
-      private IMapItem AddHirelingGroup(ref IGameInstance gi, string name, int groupNum, int days)
-      {
-         IMapItems partyMembers = gi.PartyMembers;
-         IMapItem companion1 = gi.MapItems.Find(name);
-         if (null == companion1)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddHirelingGroup(): mi=null for name=" + name);
-            return null;
-         }
-         IMapItem clone = new MapItem(companion1);
-         clone.Wages = 2;
-         clone.GroupNum = groupNum;
-         clone.PayDay = days;
-         partyMembers.Add(clone);
-         return clone;
       }
    }
 }

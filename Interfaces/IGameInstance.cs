@@ -57,7 +57,6 @@ namespace BarbarianPrince
       List<ITerritory> AbandonedTemples { get; } // e212
       List<ITerritory> ForbiddenHires { get; }
       //----------------------------------------------
-      IMapItems MapItems { get; }
       IMapItems PartyMembers { set; get; }
       IMapItems LostPartyMembers { set; get; }
       IMapItems LostTrueLoves { set; get; }
@@ -187,6 +186,7 @@ namespace BarbarianPrince
       //----------------------------------------------
       List<IUnitTest> UnitTests { get; }
       //----------------------------------------------
+      void Clone(IGameInstance gi);
       bool IsInTown(ITerritory t);
       bool IsInTemple(ITerritory t);
       bool IsInCastle(ITerritory t);

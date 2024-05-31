@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms.VisualStyles;
 using System.Windows.Media;
+using System.Xml.Linq;
 
 namespace BarbarianPrince
 {
@@ -75,12 +76,21 @@ namespace BarbarianPrince
       }
       public bool Command(ref IGameInstance gi)
       {
+         gi.PartyMembers.Clear();
+         gi.Prince.Reset();
+         ITerritory t = gi.Territories.Find("1005"); // Mountains
+         if (null == t)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "Command(): t=null");
+            return false;
+         }
+         gi.Prince.Territory = t;
+         gi.Prince.Food = 1;
+         gi.Prince.Coin = 1;
          if (CommandName == myCommandNames[0]) // Party with Sunstroke - e121
          {
-            IMapItem prince = AddPrince(ref gi);
-            if (null == prince)
-               return false;
-            prince.IsSunStroke = true;
+            gi.Prince.IsSunStroke = true;
+            //----------------------------------------------------------------
             string mercenaryName = "Mercenary" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
             IMapItem mercenary = new MapItem(mercenaryName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 5, 5, 0);
@@ -88,6 +98,7 @@ namespace BarbarianPrince
             mercenary.Coin = 5;
             mercenary.IsSunStroke = true;
             gi.AddCompanion(mercenary);
+            //----------------------------------------------------------------
             string dwarfName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
             IMapItem dwarf = new MapItem(dwarfName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
@@ -96,21 +107,29 @@ namespace BarbarianPrince
             //dwarf.IsRiding = true;  
             dwarf.AddNewMount();
             gi.AddCompanion(dwarf);
+            //----------------------------------------------------------------
             string monkName = "Monk" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
             IMapItem monk = new MapItem(monkName, 1.0, false, false, false, "c19Monk", "c19Monk", gi.Prince.Territory, 5, 5, 0);
             monk.Food = 5;
             gi.AddCompanion(monk);
+            //----------------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLoadTransport);
          }
          else if (CommandName == myCommandNames[1]) // Party w/ Unc, 2 Mounts, 1 Griffon, and Exhausted
          {
-            IMapItem prince = AddPrince(ref gi);
-            if (null == prince)
-               return false;
             AddPrinceMounts(ref gi, 2);
             AddCompanions(ref gi);
-            AddUnconscious(ref gi, "Dwarf");
+            //----------------------------------------------------------------
+            string miName = "Dwarf" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem dwarf = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            dwarf.IsUnconscious = true;
+            dwarf.Wound = dwarf.Endurance - 1;
+            dwarf.Food = 0;
+            dwarf.Coin = 0;
+            gi.PartyMembers.Add(dwarf);
+            //---------------------------------------------------------------
             string griffonName = "Griffon" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
             IMapItem griffon = new MapItem(griffonName, 1.0, false, false, false, "c63Griffon", "c63Griffon", gi.Prince.Territory, 3, 4, 1);
@@ -141,82 +160,90 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[2]) //13-Prince w/ 3 Mounts
          {
-            IMapItem prince = AddPrince(ref gi);
-            if (null == prince)
-               return false;
             AddPrinceMounts(ref gi, 3);
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLoadTransport);
          }
          else if (CommandName == myCommandNames[3]) //Prince w/ 1 Mounts, 1 Starve Day
          {
-            IMapItem prince = AddPrince(ref gi);
-            if (null == prince)
-               return false;
             AddPrinceMounts(ref gi, 1);
-            prince.StarveDayNum = 1;
+            gi.Prince.StarveDayNum = 1;
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLoadTransport);
          }
          //-----------------------------------------------------------
          else if (CommandName == myCommandNames[4]) //Prince w/ Unc Dwarf
          {
-            IMapItem prince = AddPrince(ref gi);
-            if (null == prince)
-               return false;
-            AddUnconscious(ref gi, "Dwarf"); // Prince does not have enough free load to carry the dwarf - one man can only carry half of a person
+            // Prince does not have enough free load to carry the dwarf - one man can only carry half of a person
+            //----------------------------------------------------------------
+            string miName = "Dwarf" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem dwarf = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            dwarf.IsUnconscious = true;
+            dwarf.Wound = dwarf.Endurance - 1;
+            dwarf.Food = 0;
+            dwarf.Coin = 0;
+            gi.PartyMembers.Add(dwarf);
+            //---------------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLoadTransport);
          }
          else if (CommandName == myCommandNames[5]) // Prince w/ 1 Unc, 1 Mount
          {
-            IMapItem prince = AddPrince(ref gi);
-            if (null == prince)
-               return false;
             AddPrinceMounts(ref gi, 1);
-            AddUnconscious(ref gi, "Dwarf");
+            //----------------------------------------------------------------
+            string miName = "Dwarf" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem dwarf = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            dwarf.IsUnconscious = true;
+            dwarf.Wound = dwarf.Endurance - 1;
+            dwarf.Food = 0;
+            dwarf.Coin = 0;
+            gi.PartyMembers.Add(dwarf);
+            //---------------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLoadTransport);
          }
          else if (CommandName == myCommandNames[6]) //Prince w/ 1 Unc, 2 Mount
          {
-            IMapItem prince = AddPrince(ref gi);
-            if (null == prince)
-               return false;
             AddPrinceMounts(ref gi, 2);
-            AddUnconscious(ref gi, "Dwarf");
+            //----------------------------------------------------------------
+            string miName = "Dwarf" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem dwarf = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            dwarf.IsUnconscious = true;
+            dwarf.Wound = dwarf.Endurance - 1;
+            dwarf.Food = 0;
+            dwarf.Coin = 0;
+            gi.PartyMembers.Add(dwarf);
+            //---------------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLoadTransport);
          }
          //-----------------------------------------------------------
          else if (CommandName == myCommandNames[7]) // Prince w/ Griffon 
-         {
-            IMapItem prince = AddPrince(ref gi);
-            if (null == prince)
-               return false;
-            prince.Food = 5;
+         {;
+            gi.Prince.Food = 5;
+            //----------------------------------------------------------------
             string griffonName = "Griffon" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
             IMapItem griffon = new MapItem(griffonName, 1.0, false, false, false, "c63Griffon", "c63Griffon", gi.Prince.Territory, 3, 4, 1);
             griffon.IsFlying = true;
             gi.AddCompanion(griffon);
+            //----------------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLoadTransport);
          }
          else if (CommandName == myCommandNames[8]) // Party w/ 2 Mounts & Griffon
          {
-            IMapItem prince = AddPrince(ref gi);
-            if (null == prince)
-               return false;
-            prince.Food = 10;
+            gi.Prince.Food = 10;
             AddCompanions(ref gi);
             AddPrinceMounts(ref gi, 2);
+            //----------------------------------------------------------------
             string griffonName = "Griffon" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
             IMapItem griffon = new MapItem(griffonName, 1.0, false, false, false, "c63Griffon", "c63Griffon", gi.Prince.Territory, 3, 4, 1);
             griffon.IsFlying = true;
             gi.AddCompanion(griffon);
+            //----------------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLoadTransport);
          }
          else if (CommandName == myCommandNames[9]) // Prince w/ Eagles
-         {
-            IMapItem prince = AddPrince(ref gi);
-            if (null == prince)
-               return false;
+         {;
             for (int i = 0; i < 3; ++i)
             {
                string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
@@ -229,9 +256,6 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[10])  // Party w/ Eagles
          {
-            IMapItem prince = AddPrince(ref gi);
-            if (null == prince)
-               return false;
             AddCompanions(ref gi);
             for (int i = 0; i < 3; ++i)
             {
@@ -245,9 +269,6 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[11]) // Party w/ 2 Mounts & Eagles
          {
-            IMapItem prince = AddPrince(ref gi);
-            if (null == prince)
-               return false;
             AddPrinceMounts(ref gi, 2);
             AddCompanions(ref gi);
             for (int i = 0; i < 3; ++i)
@@ -263,21 +284,34 @@ namespace BarbarianPrince
          //-----------------------------------------------------------
          else if (CommandName == myCommandNames[12]) //Party w/ Unc
          {
-            IMapItem prince = AddPrince(ref gi);
-            if (null == prince)
-               return false;
             AddCompanions(ref gi);
-            AddUnconscious(ref gi, "Dwarf");
+            //----------------------------------------------------------------
+            string miName = "Dwarf" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem dwarf = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            dwarf.IsUnconscious = true;
+            dwarf.Wound = dwarf.Endurance - 1;
+            dwarf.Food = 0;
+            dwarf.Coin = 0;
+            gi.PartyMembers.Add(dwarf);
+            //---------------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLoadTransport);
          }
          else if (CommandName == myCommandNames[13]) //Party w/ Unc, 3 Mounts, Eagles
          {
-            IMapItem prince = AddPrince(ref gi);
-            if (null == prince)
-               return false;
             AddPrinceMounts(ref gi, 3);
+            //----------------------------------------------------------------
             AddCompanions(ref gi);
-            AddUnconscious(ref gi, "Dwarf");
+            //----------------------------------------------------------------
+            string miName = "Dwarf" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem dwarf = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            dwarf.IsUnconscious = true;
+            dwarf.Wound = dwarf.Endurance - 1;
+            dwarf.Food = 0;
+            dwarf.Coin = 0;
+            gi.PartyMembers.Add(dwarf);
+            //----------------------------------------------------------------
             for (int i = 0; i < 3; ++i)
             {
                string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
@@ -290,12 +324,18 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[14]) // Party w/ Unc, 2 Mounts, 2 Griffon
          {
-            IMapItem prince = AddPrince(ref gi);
-            if (null == prince)
-               return false;
             AddPrinceMounts(ref gi, 2);
             AddCompanions(ref gi);
-            AddUnconscious(ref gi, "Dwarf");
+            //----------------------------------------------------------------
+            string miName = "Dwarf" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem dwarf = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            dwarf.IsUnconscious = true;
+            dwarf.Wound = dwarf.Endurance - 1;
+            dwarf.Food = 0;
+            dwarf.Coin = 0;
+            gi.PartyMembers.Add(dwarf);
+            //----------------------------------------------------------------
             for (int i = 0; i < 2; ++i)
             {
                string griffonName = "Griffon" + Utilities.MapItemNum.ToString();
@@ -308,13 +348,36 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[15])
          {
-            IMapItem prince = AddPrince(ref gi);
-            if (null == prince)
-               return false;
+            //----------------------------------------------------------------
             AddCompanions(ref gi);
-            AddUnconscious(ref gi, "Dwarf");
-            AddUnconscious(ref gi, "Witch");
-            AddUnconscious(ref gi, "Runaway");
+            //----------------------------------------------------------------
+            string miName = "Dwarf" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem dwarf = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            dwarf.IsUnconscious = true;
+            dwarf.Wound = dwarf.Endurance - 1;
+            dwarf.Food = 0;
+            dwarf.Coin = 0;
+            gi.PartyMembers.Add(dwarf);
+            //----------------------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem witch = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            witch.IsUnconscious = true;
+            witch.Wound = witch.Endurance - 1;
+            witch.Food = 0;
+            witch.Coin = 0;
+            gi.PartyMembers.Add(witch);
+            //----------------------------------------------------------------
+            miName = "Runaway" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem runaway = new MapItem(miName, 1.0, false, false, false, "c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 4, 0);
+            runaway.IsUnconscious = true;
+            runaway.Wound = witch.Endurance - 1;
+            runaway.Food = 0;
+            runaway.Coin = 0;
+            gi.PartyMembers.Add(runaway);
+            //----------------------------------------------------------------
             for (int i = 0; i < 3; ++i)
             {
                string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
@@ -327,39 +390,107 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[16])
          {
-            IMapItem prince = AddPrince(ref gi);
-            if (null == prince)
-               return false;
             AddPrinceMounts(ref gi, 1);
+            //----------------------------------------------------------------
             AddCompanions(ref gi);
-            AddUnconscious(ref gi, "Dwarf");
-            AddUnconscious(ref gi, "Witch");
-            AddUnconscious(ref gi, "Runaway");
+            //----------------------------------------------------------------
+            string miName = "Dwarf" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem dwarf = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            dwarf.IsUnconscious = true;
+            dwarf.Wound = dwarf.Endurance - 1;
+            dwarf.Food = 0;
+            dwarf.Coin = 0;
+            gi.PartyMembers.Add(dwarf);
+            //----------------------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem witch = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            witch.IsUnconscious = true;
+            witch.Wound = witch.Endurance - 1;
+            witch.Food = 0;
+            witch.Coin = 0;
+            gi.PartyMembers.Add(witch);
+            //----------------------------------------------------------------
+            miName = "Runaway" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem runaway = new MapItem(miName, 1.0, false, false, false, "c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 4, 0);
+            runaway.IsUnconscious = true;
+            runaway.Wound = witch.Endurance - 1;
+            runaway.Food = 0;
+            runaway.Coin = 0;
+            gi.PartyMembers.Add(runaway);
+            //----------------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLoadTransport);
          }
          else if (CommandName == myCommandNames[17])
          {
-            IMapItem prince = AddPrince(ref gi);
-            if (null == prince)
-               return false;
             AddPrinceMounts(ref gi, 2);
+            //----------------------------------------------------------------
             AddCompanions(ref gi);
-            AddUnconscious(ref gi, "Dwarf");
-            AddUnconscious(ref gi, "Witch");
-            AddUnconscious(ref gi, "Runaway");
-
+            //----------------------------------------------------------------
+            string miName = "Dwarf" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem dwarf = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            dwarf.IsUnconscious = true;
+            dwarf.Wound = dwarf.Endurance - 1;
+            dwarf.Food = 0;
+            dwarf.Coin = 0;
+            gi.PartyMembers.Add(dwarf);
+            //----------------------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem witch = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            witch.IsUnconscious = true;
+            witch.Wound = witch.Endurance - 1;
+            witch.Food = 0;
+            witch.Coin = 0;
+            gi.PartyMembers.Add(witch);
+            //----------------------------------------------------------------
+            miName = "Runaway" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem runaway = new MapItem(miName, 1.0, false, false, false, "c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 4, 0);
+            runaway.IsUnconscious = true;
+            runaway.Wound = witch.Endurance - 1;
+            runaway.Food = 0;
+            runaway.Coin = 0;
+            gi.PartyMembers.Add(runaway);
+            //----------------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLoadTransport);
          }
          else if (CommandName == myCommandNames[18])
          {
-            IMapItem prince = AddPrince(ref gi);
-            if (null == prince)
-               return false;
             AddPrinceMounts(ref gi, 3);
+            //----------------------------------------------------------------
             AddCompanions(ref gi);
-            AddUnconscious(ref gi, "Dwarf");
-            AddUnconscious(ref gi, "Witch");
-            AddUnconscious(ref gi, "Runaway");
+            //----------------------------------------------------------------
+            string miName = "Dwarf" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem dwarf = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            dwarf.IsUnconscious = true;
+            dwarf.Wound = dwarf.Endurance - 1;
+            dwarf.Food = 0;
+            dwarf.Coin = 0;
+            gi.PartyMembers.Add(dwarf);
+            //----------------------------------------------------------------
+            miName = "Witch" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem witch = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            witch.IsUnconscious = true;
+            witch.Wound = witch.Endurance - 1;
+            witch.Food = 0;
+            witch.Coin = 0;
+            gi.PartyMembers.Add(witch);
+            //----------------------------------------------------------------
+            miName = "Runaway" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem runaway = new MapItem(miName, 1.0, false, false, false, "c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 4, 0);
+            runaway.IsUnconscious = true;
+            runaway.Wound = witch.Endurance - 1;
+            runaway.Food = 0;
+            runaway.Coin = 0;
+            gi.PartyMembers.Add(runaway);
+            //----------------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLoadTransport);
          }
          else
@@ -455,84 +586,36 @@ namespace BarbarianPrince
          ++gi.GameTurn;
          return true;
       }
-      //-----------------------------------------------------------
-      private IMapItem AddPrince(ref IGameInstance gi)
-      {
-         IMapItems partyMembers = gi.PartyMembers;
-         partyMembers.Clear();
-         IMapItem prince = gi.MapItems.Find("Prince");
-         if (null == prince)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddPrince(): mi=null");
-            return null;
-         }
-         ITerritory t = gi.Territories.Find("1005"); // Mountains
-         if (null == t)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "Command(): t=null");
-            return null;
-         }
-         prince.Territory = t;
-         prince.Reset();
-         prince.Food = 1;
-         prince.Coin = 1;
-         partyMembers.Add(prince);
-         gi.Prince = prince;
-         return prince;
-      }
+      //-------------------------------------------------------------
       private void AddCompanions(ref IGameInstance gi)
       {
          IMapItems partyMembers = gi.PartyMembers;
-         IMapItem companion = gi.MapItems.Find("Mercenary");
-         if (null == companion)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddCompanions(): mi=null");
-            return;
-         }
-         companion.Reset();
+         string miName = "Mercenary" + Utilities.MapItemNum.ToString();
+         Utilities.MapItemNum++;
+         IMapItem companion = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
          companion.Food = 2;
          companion.Coin = 2;
          partyMembers.Add(companion);
          //---------------------------------------
-         IMapItem companion2 = gi.MapItems.Find("Porter");
-         if (null == companion2)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddCompanions(): mi=null");
-            return;
-         }
-         companion2.Reset();
+         miName = "Porter" + Utilities.MapItemNum;
+         Utilities.MapItemNum++;
+         IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
          companion2.Food = 3;
          companion2.Coin = 3;
          partyMembers.Add(companion2);
          //---------------------------------------
-         IMapItem companion3 = gi.MapItems.Find("Wizard");
-         if (null == companion3)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddCompanions(): mi=null");
-            return;
-         }
+         miName = "Wizard" + Utilities.MapItemNum;
+         Utilities.MapItemNum++;
+         IMapItem companion3 = new MapItem(miName, 1.0, false, false, false, "c12Wizard", "c12Wizard", gi.Prince.Territory, 4, 4, 60);
          companion3.Reset();
          companion3.Food = 4;
          companion3.Coin = 4;
          partyMembers.Add(companion3);
          //---------------------------------------
       }
-      private void AddUnconscious(ref IGameInstance gi, string name)
-      {
-         IMapItems partyMembers = gi.PartyMembers;
-         IMapItem companion = gi.MapItems.Find(name);
-         if (null == companion)
-            Logger.Log(LogEnum.LE_ERROR, "AddUnconscious(): mi=null name=" + name);
-         companion.Reset();
-         companion.IsUnconscious = true;
-         companion.Wound = companion.Endurance - 1;
-         companion.Food = 0;
-         companion.Coin = 0;
-         partyMembers.Add(companion);
-      }
       private void AddPrinceMounts(ref IGameInstance gi, int numMounts)
       {
-         IMapItem prince = gi.MapItems.Find("Prince");
+         IMapItem prince = gi.Prince;
          if (null == prince)
             Logger.Log(LogEnum.LE_ERROR, "AddPrince(): mi=null");
          if (0 < numMounts)
@@ -558,5 +641,4 @@ namespace BarbarianPrince
          }
       }
    }
-
 }

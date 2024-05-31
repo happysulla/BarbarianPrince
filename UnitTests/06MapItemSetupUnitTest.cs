@@ -18,6 +18,7 @@ namespace BarbarianPrince
     {
         private IGameEngine myGameEngine = null;
         private IGameInstance myGameInstance = null;
+        private IMapItems myMapItems = new MapItems();
         //-----------------------------------------------------------
         private DockPanel myDockPanel = null;
         private Canvas myCanvas = null;
@@ -138,7 +139,7 @@ namespace BarbarianPrince
             if (HeaderName == myHeaderNames[0])
             {
                 CreateEllipses(gi.Territories);
-                if (false == CreateButtons(gi.MapItems))
+                if (false == CreateButtons(this.myMapItems))
                 {
                     Logger.Log(LogEnum.LE_ERROR, "NextTest(): CreateButtons returned false");
                     return false;
@@ -249,10 +250,10 @@ namespace BarbarianPrince
             // Delete Existing MapItems.xml file and create a new one
             try
             {
-                if (null != gi.MapItems) // do not delete if nothing added
+                if (null != this.myMapItems) // do not delete if nothing added
                 {
                     System.IO.File.Delete("../Config/MapItems.xml");  // delete old file
-                    XmlDocument aXmlDocument = CreateMapItemsXml(myGameInstance.MapItems); // create a new XML document based on Territories
+                    XmlDocument aXmlDocument = CreateMapItemsXml(this.myMapItems); // create a new XML document based on Territories
                     if (null == aXmlDocument)
                     {
                         Logger.Log(LogEnum.LE_ERROR, "MapItemSetupUnitTest.Cleanup(): CreateMapItemsXml() returned null");
@@ -736,7 +737,7 @@ namespace BarbarianPrince
                 }
                 if (cm.PlacementTarget is Button b)
                 {
-                    IMapItem mi = myGameInstance.MapItems.Find(b.Name);
+                    IMapItem mi = myGameInstance.PartyMembers.Find(b.Name);
                     if (1 < cm.Items.Count) // Gray out the "Rotate Stack" menu item
                     {
                         if (cm.Items[1] is MenuItem menuItem)
@@ -770,7 +771,7 @@ namespace BarbarianPrince
                 {
                     if (cm.PlacementTarget is Button b)
                     {
-                        IMapItem mi = myGameInstance.MapItems.Find(b.Name);
+                        IMapItem mi = this.myMapItems.Find(b.Name);
                         ITerritory t = mi.Territory;
                         IStack stack = myGameInstance.Stacks.Find(t);
                         if (null == stack)
@@ -792,10 +793,9 @@ namespace BarbarianPrince
                 {
                     if (cm.PlacementTarget is Button b)
                     {
-                        IMapItem mi = myGameInstance.MapItems.Find(b.Name);
+                        IMapItem mi = myGameInstance.PartyMembers.Find(b.Name);
                         mi.Flip();
                         MapItem.SetButtonContent(b, mi, false, true);
-
                     }
                 }
             }
@@ -808,7 +808,7 @@ namespace BarbarianPrince
                 {
                     if (cm.PlacementTarget is Button b)
                     {
-                        IMapItem mi = myGameInstance.MapItems.Find(b.Name);
+                        IMapItem mi = myGameInstance.PartyMembers.Find(b.Name);
                         mi.Unflip();
                         MapItem.SetButtonContent(b, mi, false, true);
 
@@ -848,7 +848,7 @@ namespace BarbarianPrince
                     Logger.Log(LogEnum.LE_ERROR, "MouseDownEllipse(): unable to new mapItem");
                     return;
                 }
-                myGameInstance.MapItems.Add(mapItem);
+                myGameInstance.PartyMembers.Add(mapItem);
                 //--------------------------------------------------
                 ITerritory territory = TerritoryExtensions.Find(myGameInstance.Territories, matchingTerritoryName);
                 IStack stack = myGameInstance.Stacks.Find(matchingTerritory);
@@ -870,7 +870,7 @@ namespace BarbarianPrince
         private void ClickedButtonCreate(object sender, RoutedEventArgs e)
         {
             Button clickedButton = (Button)sender;
-            IMapItem mousedMapItem = myGameInstance.MapItems.Find(clickedButton.Name);
+            IMapItem mousedMapItem = myGameInstance.PartyMembers.Find(clickedButton.Name);
             if (null == mousedMapItem)
             {
                 Logger.Log(LogEnum.LE_ERROR, "ClickedButtonCreate(): mapItem=null for name=" + clickedButton.Name);
@@ -888,7 +888,7 @@ namespace BarbarianPrince
                     Logger.Log(LogEnum.LE_ERROR, "clickedButton(): unable to new mapItem");
                     return;
                 }
-                myGameInstance.MapItems.Add(mapItem);
+                myGameInstance.PartyMembers.Add(mapItem);
                 //--------------------------------------------------
                 IStack stack = myGameInstance.Stacks.Find(t);
                 if (null == stack)
@@ -923,7 +923,7 @@ namespace BarbarianPrince
             }
             else
             {
-                IMapItem movingMapItem = myGameInstance.MapItems.Find(Utilities.RemoveSpaces(myButtonSelected.Name)); // Find the corresponding MapItem
+                IMapItem movingMapItem = myGameInstance.PartyMembers.Find(Utilities.RemoveSpaces(myButtonSelected.Name)); // Find the corresponding MapItem
                 if (null == movingMapItem)
                 {
                     myButtonSelected = null; // stop dragging
@@ -931,7 +931,7 @@ namespace BarbarianPrince
                     MessageBox.Show("ClickedSelectMapItem(): Unable to find " + Utilities.RemoveSpaces(myButtonSelected.Name));
                     return;
                 }
-                IMapItem clickedMapItem = myGameInstance.MapItems.Find(Utilities.RemoveSpaces(clickedButton.Name)); // Find the corresponding MapItem
+                IMapItem clickedMapItem = myGameInstance.PartyMembers.Find(Utilities.RemoveSpaces(clickedButton.Name)); // Find the corresponding MapItem
                 if (null == clickedMapItem)
                 {
                     myButtonSelected = null; // stop dragging
@@ -988,7 +988,7 @@ namespace BarbarianPrince
         {
             if (null == myButtonSelected) // do nothing if nothing is being dragged
                 return;
-            IMapItem movingMapItem = myGameInstance.MapItems.Find(myButtonSelected.Name); // Find the corresponding MapItem
+            IMapItem movingMapItem = myGameInstance.PartyMembers.Find(myButtonSelected.Name); // Find the corresponding MapItem
             if (null == movingMapItem)
             {
                 MessageBox.Show("MouseDownCanvas(): Unable to find " + Utilities.RemoveSpaces(myButtonSelected.Name));
@@ -1063,13 +1063,13 @@ namespace BarbarianPrince
             else
             {
                 // Set the destination to the clicked button's territory
-                IMapItem selectedMapItem = myGameInstance.MapItems.Find(myButtonSelected.Name); // Find the corresponding MapItem
+                IMapItem selectedMapItem = myGameInstance.PartyMembers.Find(myButtonSelected.Name); // Find the corresponding MapItem
                 if (null == selectedMapItem)
                 {
                     Logger.Log(LogEnum.LE_ERROR, "ClickedSelectMapItem2(): selectedMapItem=null");
                     return;
                 }
-                IMapItem targetedMapItem = myGameInstance.MapItems.Find(clickedButton.Name); // Find the corresponding MapItem
+                IMapItem targetedMapItem = myGameInstance.PartyMembers.Find(clickedButton.Name); // Find the corresponding MapItem
                 if (null == targetedMapItem)
                 {
                     Logger.Log(LogEnum.LE_ERROR, "ClickedSelectMapItem2(): targetedMapItem=null");
@@ -1108,7 +1108,7 @@ namespace BarbarianPrince
             }
             if (null != myButtonSelected)
             {
-                IMapItem selectedMapItem = myGameInstance.MapItems.Find(myButtonSelected.Name); // Find the corresponding MapItem
+                IMapItem selectedMapItem = myGameInstance.PartyMembers.Find(myButtonSelected.Name); // Find the corresponding MapItem
                 if (null == selectedMapItem)
                 {
                     Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygon(): selectedMapItem=null");

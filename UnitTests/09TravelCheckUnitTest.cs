@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Xml.Linq;
 
 namespace BarbarianPrince
 {
@@ -86,9 +87,9 @@ namespace BarbarianPrince
       }
       public bool Command(ref IGameInstance gi)
       {
+         gi.Prince.Reset();
          if (CommandName == myCommandNames[0]) // Cross River
          {
-            AddPrince(ref gi);
             //AddGuide(ref gi, "1822");
             gi.MapItemMoves.Clear();
             ITerritory t1 = gi.Territories.Find("1723");
@@ -101,7 +102,6 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[1]) // farmland
          {
-            AddPrince(ref gi);
             gi.MapItemMoves.Clear();
             ITerritory t1 = gi.Territories.Find("0417");
             ITerritory t2 = gi.Territories.Find("0418");
@@ -112,7 +112,6 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[2])  // countryside
          {
-            AddPrince(ref gi);
             gi.MapItemMoves.Clear();
             ITerritory t1 = gi.Territories.Find("0415");
             ITerritory t2 = gi.Territories.Find("0416");
@@ -123,7 +122,6 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[3]) // Forest
          {
-            AddPrince(ref gi);
             gi.MapItemMoves.Clear();
             ITerritory t1 = gi.Territories.Find("0413");
             ITerritory t2 = gi.Territories.Find("0414");
@@ -134,7 +132,6 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[4]) // Hills
          {
-            AddPrince(ref gi);
             gi.MapItemMoves.Clear();
             ITerritory t1 = gi.Territories.Find("0405");
             ITerritory t2 = gi.Territories.Find("0406");
@@ -145,7 +142,6 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[5]) // Mountains
          {
-            AddPrince(ref gi);
             gi.MapItemMoves.Clear();
             ITerritory t1 = gi.Territories.Find("0404");
             ITerritory t2 = gi.Territories.Find("0405");
@@ -156,7 +152,6 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[6]) // Swamp
          {
-            AddPrince(ref gi);
             gi.MapItemMoves.Clear();
             ITerritory t1 = gi.Territories.Find("0412");
             ITerritory t2 = gi.Territories.Find("0411");
@@ -167,7 +162,6 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[7]) // Desert
          {
-            AddPrince(ref gi);
             gi.MapItemMoves.Clear();
             ITerritory t1 = gi.Territories.Find("0406");
             ITerritory t2 = gi.Territories.Find("0407");
@@ -178,7 +172,6 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[8]) // Airborne
          {
-            AddPrince(ref gi);
             gi.MapItemMoves.Clear();
             ITerritory t1 = gi.Territories.Find("0314");
             ITerritory t2 = gi.Territories.Find("0313");
@@ -190,7 +183,6 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[9]) // One Guide
          {
-            AddPrince(ref gi);
             AddGuide(ref gi, "0313");
             gi.MapItemMoves.Clear();
             ITerritory t1 = gi.Territories.Find("0314");
@@ -203,7 +195,6 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[10]) // Three Guide
          {
-            AddPrince(ref gi);
             AddGuides(ref gi);
             gi.MapItemMoves.Clear();
             ITerritory t1 = gi.Territories.Find("0314");
@@ -278,24 +269,12 @@ namespace BarbarianPrince
          ++gi.GameTurn;
          return true;
       }
-      //-----------------------------------------------------------
-      private void AddPrince(ref IGameInstance gi)
-      {
-         IMapItems partyMembers = gi.PartyMembers;
-         partyMembers.Clear();
-         IMapItem prince = gi.MapItems.Find("Prince");
-         if (null == prince)
-            Logger.Log(LogEnum.LE_ERROR, "AddPrince(): mi=null");
-         prince.Reset();
-         partyMembers.Add(prince);
-      }
       private void AddGuide(ref IGameInstance gi, string territoryName)
       {
          IMapItems partyMembers = gi.PartyMembers;
-         IMapItem guide = gi.MapItems.Find("Dwarf");
-         if (null == guide)
-            Logger.Log(LogEnum.LE_ERROR, "AddGuide(): mi=null");
-         guide.Reset();
+         string miName = "Dwarf" + Utilities.MapItemNum;
+         Utilities.MapItemNum++;
+         IMapItem guide = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);;
          ITerritory t2 = gi.Territories.Find(territoryName);
          if (null == t2)
             Logger.Log(LogEnum.LE_ERROR, "AddGuide(): t2=null");
@@ -305,25 +284,22 @@ namespace BarbarianPrince
       private void AddGuides(ref IGameInstance gi)
       {
          IMapItems partyMembers = gi.PartyMembers;
-         IMapItem guide1 = gi.MapItems.Find("Dwarf");
-         if (null == guide1)
-            Logger.Log(LogEnum.LE_ERROR, "AddGuides(): mi=null");
-         guide1.Reset();
+         string miName = "Dwarf" + Utilities.MapItemNum.ToString();
+         Utilities.MapItemNum++;
+         IMapItem guide1 = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12); ;
          ITerritory t2 = gi.Territories.Find("0313");
          guide1.GuideTerritories.Add(t2);
          partyMembers.Add(guide1);
          //---------------------------------------
-         IMapItem guide2 = gi.MapItems.Find("Runaway");
-         if (null == guide2)
-            Logger.Log(LogEnum.LE_ERROR, "AddGuides(): mi=null");
-         guide2.Reset();
+         miName = "RunAway" + Utilities.MapItemNum.ToString();
+         Utilities.MapItemNum++;
+         IMapItem guide2 = new MapItem(miName, 1.0, false, false, false, "c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 4, 0);
          guide2.GuideTerritories.Add(t2);
          partyMembers.Add(guide2);
          //---------------------------------------
-         IMapItem guide3 = gi.MapItems.Find("Mercenary");
-         if (null == guide3)
-            Logger.Log(LogEnum.LE_ERROR, "AddGuides(): mi=null");
-         guide3.Reset();
+         miName = "Mercenary" + Utilities.MapItemNum.ToString();
+         Utilities.MapItemNum++;
+         IMapItem guide3 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
          guide3.GuideTerritories.Add(t2);
          partyMembers.Add(guide3);
          //---------------------------------------

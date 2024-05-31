@@ -48,7 +48,7 @@ namespace BarbarianPrince
          int countOfTerritories = BestPath.Territories.Count;
          NewTerritory = BestPath.Territories[countOfTerritories - 1];
       }
-      public MapItemMove(IMapItemMove mim)
+      public MapItemMove(IMapItemMove mim) // Copy Contructor
       {
          MapItem = mim.MapItem;
          OldTerritory = mim.OldTerritory;
@@ -56,7 +56,7 @@ namespace BarbarianPrince
          BestPath = new MapPath(mim.BestPath);
          RiverCross = mim.RiverCross;
       }
-      public MapItemMove(IMapItem movingMapItem, ITerritory oldTerritory, ITerritory newTerritory, IMapPath bestPath) // Copy Contructor
+      public MapItemMove(IMapItem movingMapItem, ITerritory oldTerritory, ITerritory newTerritory, IMapPath bestPath) 
       {
          MapItem = movingMapItem;
          OldTerritory = oldTerritory;
