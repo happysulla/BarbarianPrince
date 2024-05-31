@@ -6,12 +6,13 @@ namespace BarbarianPrince
    public interface IGameInstance
    {
       bool CtorError { get; }
+      IOptions Options { get; }
       //----------------------------------------------
       IMapItem Prince { set; get; }
+      IMapItem ActiveMember { set; get; } // active member is one that springs the trap
       int WitAndWile { set; get; }
       int Days { set; get; }
       //----------------------------------------------
-      IOptions Options { get; }
       bool IsGridActive { set; get; } // True if there is some EventViewer manager active
       string EventActive { set; get; }
       string EventDisplayed { set; get; }
@@ -21,57 +22,14 @@ namespace BarbarianPrince
       GamePhase GamePhase { set; get; }
       GamePhase SunriseChoice { set; get; } // This is the action chosen by the user for the day
       GameAction DieRollAction { set; get; } // Used in EventViewerPanel when die roll happens to indicate next event for die roll
-      Dictionary<string, int[]> DieResults { get; }
       //----------------------------------------------
-      List<ITerritory> Territories { get; }
-      IStacks Stacks { set; get; }
       ITerritory ActiveHex { set; get; }
       ITerritory NewHex { set; get; } // this is hex moved to if not lost
-      List<ITerritory> EnteredTerritories { get; }
-      List<ITerritory> DwarfAdviceLocations { get; } // e006
-      List<ITerritory> WizardAdviceLocations { get; } // e025
-      List<ITerritory> AlcoveOfSendings { get; }  // e042
-      List<ITerritory> Arches { get; } // e045
-      List<ITerritory> VisitedLocations { get; } // e050
-      List<ITerritory> EscapedLocations { get; } // e050
-      List<ITerritory> GoblinKeeps { get; }  // e054
-      List<ITerritory> OrcTowers { get; }  // e056
-      List<ITerritory> DwarvenMines { get; }  // e058
-      List<ITerritory> RuinsUnstable { get; }
-      List<ITerritory> HiddenRuins { get; } // e064
-      List<ITerritory> HiddenTowns { get; } // e065
-      List<ITerritory> HiddenTemples { get; } // e066
-      List<ITerritory> KilledLocations { get; } // e066
-      List<ITerritory> WizardTowers { get; }  // e068b
-      List<ITerritory> HalflingTowns { get; }  // e165
-      List<ITerritory> EagleLairs { get; } // e115
-      List<ITerritory> SecretClues { get; } // e147
-      List<ITerritory> LetterOfRecommendations { get; } // e157
-      List<ITerritory> Purifications { get; } // e159
-      List<ITerritory> ElfTowns { get; }  // e165
-      List<ITerritory> ElfCastles { get; }  // e165
-      List<ITerritory> FeelAtHomes { get; }   // e209
-      List<ITerritory> SecretRites { get; }   // e209
-      List<ITerritory> CheapLodgings { get; } // e209
-      List<ITerritory> ForbiddenHexes { get; } // e209
-      List<ITerritory> AbandonedTemples { get; } // e212
-      List<ITerritory> ForbiddenHires { get; }
       //----------------------------------------------
-      IMapItems PartyMembers { set; get; }
-      IMapItems LostPartyMembers { set; get; }
-      IMapItems LostTrueLoves { set; get; }
-      IMapItems EncounteredMembers { set; get; }
-      IMapItems EncounteredMinstrels { set; get; } // e049
-      IMapItems AtRiskMounts { set; get; } // e095 - at risk mounts are killed if decide to travel
-      //----------------------------------------------
-      IMapItem ActiveMember { set; get; }
       List<int> CapturedWealthCodes { set; get; }
       PegasusTreasureEnum PegasusTreasure { set; get; }
       int FickleCoin { set; get; }
       int LooterCoin { set; get; }
-      //----------------------------------------------
-      IMapItemMove PreviousMapItemMove { set; get; }
-      IMapItemMoves MapItemMoves { set; get; }
       //----------------------------------------------
       List<string> Events { set; get; }
       String EndGameReason { set; get; }
@@ -184,6 +142,49 @@ namespace BarbarianPrince
       bool IsSecretCountDrogat { set; get; }  // e146 
       bool IsChagaDrugProvided { set; get; }   // e211b - delivered drug to temple
       //----------------------------------------------
+      IMapItems PartyMembers { set; get; }
+      IMapItems LostPartyMembers { set; get; }
+      IMapItems LostTrueLoves { set; get; }
+      IMapItems EncounteredMembers { set; get; }
+      IMapItems EncounteredMinstrels { set; get; } // e049
+      IMapItems AtRiskMounts { set; get; } // e095 - at risk mounts are killed if decide to travel
+      //----------------------------------------------
+      IMapItemMove PreviousMapItemMove { set; get; }
+      IMapItemMoves MapItemMoves { set; get; }
+      //----------------------------------------------
+      List<ITerritory> Territories { get; }
+      List<ITerritory> EnteredTerritories { get; }
+      List<ITerritory> DwarfAdviceLocations { get; } // e006
+      List<ITerritory> WizardAdviceLocations { get; } // e025
+      List<ITerritory> AlcoveOfSendings { get; }  // e042
+      List<ITerritory> Arches { get; } // e045
+      List<ITerritory> VisitedLocations { get; } // e050
+      List<ITerritory> EscapedLocations { get; } // e050
+      List<ITerritory> GoblinKeeps { get; }  // e054
+      List<ITerritory> OrcTowers { get; }  // e056
+      List<ITerritory> DwarvenMines { get; }  // e058
+      List<ITerritory> RuinsUnstable { get; }
+      List<ITerritory> HiddenRuins { get; } // e064
+      List<ITerritory> HiddenTowns { get; } // e065
+      List<ITerritory> HiddenTemples { get; } // e066
+      List<ITerritory> KilledLocations { get; } // e066
+      List<ITerritory> WizardTowers { get; }  // e068b
+      List<ITerritory> HalflingTowns { get; }  // e165
+      List<ITerritory> EagleLairs { get; } // e115
+      List<ITerritory> SecretClues { get; } // e147
+      List<ITerritory> LetterOfRecommendations { get; } // e157
+      List<ITerritory> Purifications { get; } // e159
+      List<ITerritory> ElfTowns { get; }  // e165
+      List<ITerritory> ElfCastles { get; }  // e165
+      List<ITerritory> FeelAtHomes { get; }   // e209
+      List<ITerritory> SecretRites { get; }   // e209
+      List<ITerritory> CheapLodgings { get; } // e209
+      List<ITerritory> ForbiddenHexes { get; } // e209
+      List<ITerritory> AbandonedTemples { get; } // e212
+      List<ITerritory> ForbiddenHires { get; }
+      //----------------------------------------------
+      Dictionary<string, int[]> DieResults { get; }
+      IStacks Stacks { set; get; }
       List<IUnitTest> UnitTests { get; }
       //----------------------------------------------
       void Clone(IGameInstance gi);

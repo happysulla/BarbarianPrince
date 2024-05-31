@@ -137,14 +137,12 @@ namespace BarbarianPrince
          this.PegasusTreasure = gi.PegasusTreasure;
          this.FickleCoin = gi.FickleCoin;
          this.LooterCoin = gi.LooterCoin;
+         //------------------------------------------------
          foreach (string e in gi.Events)
             this.Events.Add(e);
          this.EndGameReason = gi.EndGameReason;
          //----------------------------------------------
          this.IsPartyRested = gi.IsPartyRested;
-         this.IsAirborne = gi.IsAirborne;
-         this.IsAirborneEnd = gi.IsAirborneEnd;
-         this.IsShortHop = gi.IsShortHop;
          this.IsMountsFed = gi.IsMountsFed;
          this.IsMountsStabled = gi.IsMountsStabled;
          this.Bribe = gi.Bribe;
@@ -161,10 +159,10 @@ namespace BarbarianPrince
          this.IsFarmerLodging = gi.IsFarmerLodging;
          this.IsReaverClanFight = gi.IsReaverClanFight;
          this.IsReaverClanTrade = gi.IsReaverClanTrade;
+         this.PurchasedMount = gi.PurchasedMount;
          this.IsMagicianProvideGift = gi.IsMagicianProvideGift;
          this.IsHuntedToday = gi.IsHuntedToday;
          this.IsMarkOfCain = gi.IsMarkOfCain;
-         this.PurchasedMount = gi.PurchasedMount;
          this.MonkPleadModifier = gi.MonkPleadModifier;
          this.IsWizardJoiningParty = gi.IsWizardJoiningParty;
          this.IsEnslaved = gi.IsEnslaved;
@@ -184,6 +182,12 @@ namespace BarbarianPrince
          this.NumMembersBeingFollowed = gi.NumMembersBeingFollowed;
          this.IsTalkActive = gi.IsTalkActive;
          this.IsWolvesAttack = gi.IsWolvesAttack;
+         this.IsTrainHorse = gi.IsTrainHorse;
+         this.IsBadGoing = gi.IsBadGoing;
+         this.IsHeavyRain = gi.IsHeavyRain;
+         this.IsHeavyRainNextDay = gi.IsHeavyRainNextDay;
+         this.IsHeavyRainContinue = gi.IsHeavyRainContinue;
+         this.IsHeavyRainDismount = gi.IsHeavyRainDismount;
          this.IsBearAttack = gi.IsBearAttack;
          this.IsHighPass = gi.IsHighPass;
          this.EventAfterRedistribute = gi.EventAfterRedistribute;
@@ -201,19 +205,13 @@ namespace BarbarianPrince
          this.RaftState = gi.RaftState;
          this.IsRaftDestroyed = gi.IsRaftDestroyed;
          this.IsWoundedBlackKnightRest = gi.IsWoundedBlackKnightRest;
-         this.IsTrainHorse = gi.IsTrainHorse;
-         this.IsBadGoing = gi.IsBadGoing;
-         this.IsHeavyRain = gi.IsHeavyRain;
-         this.IsHeavyRainNextDay = gi.IsHeavyRainNextDay;
-         this.IsHeavyRainContinue = gi.IsHeavyRainContinue;
-         this.IsHeavyRainDismount = gi.IsHeavyRainDismount;
-         this.IsEvadeActive = gi.IsEvadeActive;
          this.PurchasedPotionCure = gi.PurchasedPotionCure;
          this.PurchasedPotionHeal = gi.PurchasedPotionHeal;
          this.HydraTeethCount = gi.HydraTeethCount;
+         this.ChagaDrugCount = gi.ChagaDrugCount;
+         this.SeneschalRollModifier = gi.SeneschalRollModifier;
          this.IsCavalryEscort = gi.IsCavalryEscort;
          this.IsNobleAlly = gi.IsNobleAlly;
-         this.SeneschalRollModifier = gi.SeneschalRollModifier;
          foreach(IForbiddenAudience fa in gi.ForbiddenAudiences)
             this.ForbiddenAudiences.Add(fa);
          this.DaughterRollModifier = gi.DaughterRollModifier;
@@ -233,6 +231,9 @@ namespace BarbarianPrince
          this.IsGiftCharmActive = gi.IsGiftCharmActive;
          this.IsPegasusSkip = gi.IsPegasusSkip;
          this.IsCharismaTalismanActive = gi.IsCharismaTalismanActive;
+         this.IsAirborne = gi.IsAirborne;
+         this.IsAirborneEnd = gi.IsAirborneEnd;
+         this.IsShortHop = gi.IsShortHop;
          this.IsSeekNewModifier = gi.IsSeekNewModifier;
          this.PurchasedHenchman = gi.PurchasedHenchman;
          this.PurchasedPorter = gi.PurchasedPorter;
@@ -242,6 +243,7 @@ namespace BarbarianPrince
          this.IsInfluenceModifier = gi.IsInfluenceModifier;
          foreach (ICache c in gi.Caches)
             this.Caches.Add(c);
+         this.IsEvadeActive = gi.IsEvadeActive;
          this.IsAssassination = gi.IsAssassination; 
          this.IsDayEnd = gi.IsDayEnd;
          //---------------------------------------------------------------
@@ -249,7 +251,6 @@ namespace BarbarianPrince
          this.IsSecretBaronHuldra = gi.IsSecretBaronHuldra;
          this.IsSecretLadyAeravir = gi.IsSecretLadyAeravir;
          this.IsSecretCountDrogat = gi.IsSecretCountDrogat;
-         this.ChagaDrugCount = gi.ChagaDrugCount;
          this.IsChagaDrugProvided = gi.IsChagaDrugProvided;
          //---------------------------------------------------------------
          foreach (IMapItem mi in gi.PartyMembers)
@@ -317,25 +318,15 @@ namespace BarbarianPrince
             ITerritory territory = gi.Territories.Find(t.Name);
             GoblinKeeps.Add(territory);
          }
-         foreach (ITerritory t in gi.DwarvenMines)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            DwarvenMines.Add(territory);
-         };
          foreach (ITerritory t in gi.OrcTowers)
          {
             ITerritory territory = gi.Territories.Find(t.Name);
             OrcTowers.Add(territory);
          }
-         foreach (ITerritory t in gi.WizardTowers)
+         foreach (ITerritory t in gi.DwarvenMines)
          {
             ITerritory territory = gi.Territories.Find(t.Name);
-            WizardTowers.Add(territory);
-         }
-         foreach (ITerritory t in gi.HalflingTowns)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            HalflingTowns.Add(territory);
+            DwarvenMines.Add(territory);
          }
          foreach (ITerritory t in gi.RuinsUnstable)
          {
@@ -361,6 +352,16 @@ namespace BarbarianPrince
          {
             ITerritory territory = gi.Territories.Find(t.Name);
             KilledLocations.Add(territory);
+         }
+         foreach (ITerritory t in gi.WizardTowers)
+         {
+            ITerritory territory = gi.Territories.Find(t.Name);
+            WizardTowers.Add(territory);
+         }
+         foreach (ITerritory t in gi.HalflingTowns)
+         {
+            ITerritory territory = gi.Territories.Find(t.Name);
+            HalflingTowns.Add(territory);
          }
          foreach (ITerritory t in gi.EagleLairs)
          {
