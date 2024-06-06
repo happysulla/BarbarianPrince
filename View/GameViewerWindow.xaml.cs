@@ -209,6 +209,7 @@ namespace BarbarianPrince
          //-------------------------------------------------------
          if( GameAction.UpdateLoadingGame == action)
          {
+            myGameInstance = gi;
             myButtonMapItems.Clear();
             foreach (UIElement ui in myCanvas.Children) // remove all buttons on map
             {

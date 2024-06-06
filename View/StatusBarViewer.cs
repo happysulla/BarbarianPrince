@@ -32,6 +32,11 @@ namespace BarbarianPrince
       //-----------------------------------------------------------------
       public void UpdateView(ref IGameInstance gi, GameAction action)
       {
+         if(GameAction.UpdateLoadingGame == action )
+         {
+            myGameInstance = gi;
+         }
+
          if (false == myIsCoinShown) // If autostart option is selected, show the party's coin and Wits and Wiles images
          {
             IOption option = gi.Options.Find("AutoSetup");
@@ -63,8 +68,6 @@ namespace BarbarianPrince
                break;
             case GameAction.SetupRollWitsWiles:
                myIsWitAndWilesShown = true;
-               break;
-            case GameAction.UpdateLoadingGame:
                break;
             case GameAction.E045ArchOfTravel:
             case GameAction.E156MayorTerritorySelection:

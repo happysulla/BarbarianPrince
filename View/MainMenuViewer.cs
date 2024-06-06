@@ -183,7 +183,7 @@ namespace BarbarianPrince
          gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
          gi.DieRollAction = GameAction.DieRollActionNone;
          gi.Options = options;
-         myGameInstance.Clone(gi);
+         myGameInstance = gi;
          //-------------------------------------------------
          GameAction action = GameAction.UpdateLoadingGame;
          myGameEngine.PerformAction(ref gi, ref action);
@@ -198,8 +198,6 @@ namespace BarbarianPrince
             BinaryFormatter formatter = new BinaryFormatter();
             formatter.Serialize(fileStream, myGameInstance);
             fileStream.Close();
-            GameAction action = GameAction.UpdateEventViewerActive;
-            myGameEngine.PerformAction(ref myGameInstance, ref action);
          }
          catch (Exception ex)
          {
