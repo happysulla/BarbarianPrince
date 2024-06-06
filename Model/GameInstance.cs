@@ -13,8 +13,8 @@ namespace BarbarianPrince
    [Serializable] public class GameInstance : IGameInstance
    {
       [NonSerialized] static public Logger Logger = new Logger();
-      [NonSerialized] private readonly IOptions myOptions = null;
-      public IOptions Options { get => myOptions; }
+      [NonSerialized] private IOptions myOptions = new Options();
+      public IOptions Options { get => myOptions; set => myOptions = value; }
       //------------------------------------------------
       public bool CtorError { get; } = false;
       public GameInstance() // Constructor - set log levels
@@ -74,10 +74,9 @@ namespace BarbarianPrince
                return;
             }
             //---------------------------------------------------------
-            myOptions = ReadOptionsXml();
-            if (null == myOptions)
+            if (false == ReadOptionsXml(myOptions))
             {
-               Logger.Log(LogEnum.LE_ERROR, "GameInstance(): ReadOptionsXml() returned null");
+               Logger.Log(LogEnum.LE_ERROR, "GameInstance(): ReadOptionsXml() returned false");
                CtorError = true;
                return;
             }
@@ -198,8 +197,11 @@ namespace BarbarianPrince
          this.IsMountsAtRisk = gi.IsMountsAtRisk;
          this.IsMountsSick = gi.IsMountsSick;
          this.IsFalconFed = gi.IsFalconFed;
-         foreach (String s in gi.AirSpiritLocations)
-            this.AirSpiritLocations.Add(s);
+         if( null != gi.AirSpiritLocations )
+         {
+            foreach (String s in gi.AirSpiritLocations)
+               this.AirSpiritLocations.Add(s);
+         }
          this.IsEagleHunt = gi.IsEagleHunt;
          this.IsExhausted = gi.IsExhausted;
          this.RaftState = gi.RaftState;
@@ -254,17 +256,17 @@ namespace BarbarianPrince
          this.IsChagaDrugProvided = gi.IsChagaDrugProvided;
          //---------------------------------------------------------------
          foreach (IMapItem mi in gi.PartyMembers)
-            gi.PartyMembers.Add(mi);
+            this.PartyMembers.Add(mi);
          foreach (IMapItem mi in gi.LostPartyMembers)
-            gi.LostPartyMembers.Add(mi);
+            this.LostPartyMembers.Add(mi);
          foreach (IMapItem mi in gi.LostTrueLoves)
-            gi.LostTrueLoves.Add(mi);
+            this.LostTrueLoves.Add(mi);
          foreach (IMapItem mi in gi.EncounteredMembers)
-            gi.EncounteredMembers.Add(mi);
+            this.EncounteredMembers.Add(mi);
          foreach (IMapItem mi in gi.EncounteredMinstrels)
-            gi.EncounteredMinstrels.Add(mi);
+            this.EncounteredMinstrels.Add(mi);
          foreach (IMapItem mi in gi.AtRiskMounts)
-            gi.AtRiskMounts.Add(mi);
+            this.AtRiskMounts.Add(mi);
          //-----------------------------------------------
          foreach (IMapItemMove mim in gi.MapItemMoves)
          {
@@ -273,156 +275,66 @@ namespace BarbarianPrince
          }
          this.PreviousMapItemMove = gi.PreviousMapItemMove; 
          //------------------------------------------------
-         foreach(ITerritory t in gi.Territories)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            myTerritories.Add(territory);
-         }
-         foreach (ITerritory t in gi.EnteredTerritories)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            EnteredTerritories.Add(territory);
-         }
-         foreach (ITerritory t in gi.DwarfAdviceLocations)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            DwarfAdviceLocations.Add(territory);
-         }
-         foreach (ITerritory t in gi.WizardAdviceLocations)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            WizardAdviceLocations.Add(territory);
-         }
-         foreach (ITerritory t in gi.AlcoveOfSendings)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            AlcoveOfSendings.Add(territory);
-         }
-         foreach (ITerritory t in gi.Arches)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            Arches.Add(territory);
-         }
-         foreach (ITerritory t in gi.VisitedLocations)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            VisitedLocations.Add(territory);
-         }
-         foreach (ITerritory t in gi.EscapedLocations)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            EscapedLocations.Add(territory);
-         }
-         foreach (ITerritory t in gi.GoblinKeeps)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            GoblinKeeps.Add(territory);
-         }
-         foreach (ITerritory t in gi.OrcTowers)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            OrcTowers.Add(territory);
-         }
-         foreach (ITerritory t in gi.DwarvenMines)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            DwarvenMines.Add(territory);
-         }
-         foreach (ITerritory t in gi.RuinsUnstable)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            RuinsUnstable.Add(territory);
-         }
-         foreach (ITerritory t in gi.HiddenRuins)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            HiddenRuins.Add(territory);
-         }
-         foreach (ITerritory t in gi.HiddenTowns)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            HiddenTowns.Add(territory);
-         }
-         foreach (ITerritory t in gi.HiddenTemples)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            HiddenTemples.Add(territory);
-         }
-         foreach (ITerritory t in gi.KilledLocations)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            KilledLocations.Add(territory);
-         }
-         foreach (ITerritory t in gi.WizardTowers)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            WizardTowers.Add(territory);
-         }
-         foreach (ITerritory t in gi.HalflingTowns)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            HalflingTowns.Add(territory);
-         }
-         foreach (ITerritory t in gi.EagleLairs)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            EagleLairs.Add(territory);
-         }
-         foreach (ITerritory t in gi.SecretClues)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            SecretClues.Add(territory);
-         }
-         foreach (ITerritory t in gi.LetterOfRecommendations)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            LetterOfRecommendations.Add(territory);
-         }
-         foreach (ITerritory t in gi.Purifications)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            Purifications.Add(territory);
-         }
-         foreach (ITerritory t in gi.ElfTowns)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            ElfTowns.Add(territory);
-         }
-         foreach (ITerritory t in gi.ElfCastles)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            ElfCastles.Add(territory);
-         }
-         foreach (ITerritory t in gi.FeelAtHomes)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            FeelAtHomes.Add(territory);
-         }
-         foreach (ITerritory t in gi.SecretRites)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            SecretRites.Add(territory);
-         }
-         foreach (ITerritory t in gi.CheapLodgings)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            CheapLodgings.Add(territory);
-         }
-         foreach (ITerritory t in gi.ForbiddenHexes)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            this.ForbiddenHexes.Add(territory);
-         }
-         foreach (ITerritory t in gi.AbandonedTemples)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            AbandonedTemples.Add(territory);
-         }
-         foreach (ITerritory t in gi.ForbiddenHires)
-         {
-            ITerritory territory = gi.Territories.Find(t.Name);
-            ForbiddenHires.Add(territory);
-         }
+         //foreach(ITerritory t in gi.Territories)
+         //   this.myTerritories.Add(t);
+         //foreach (ITerritory t in gi.EnteredTerritories)
+         //   this.EnteredTerritories.Add(t);
+         //foreach (ITerritory t in gi.DwarfAdviceLocations)
+         //   this.DwarfAdviceLocations.Add(t);
+         //foreach (ITerritory t in gi.WizardAdviceLocations)
+         //   this.WizardAdviceLocations.Add(t);
+         //foreach (ITerritory t in gi.AlcoveOfSendings)
+         //   this.AlcoveOfSendings.Add(t);
+         //foreach (ITerritory t in gi.Arches)
+         //   this.Arches.Add(t);
+         //foreach (ITerritory t in gi.VisitedLocations)
+         //   this.VisitedLocations.Add(t);
+         //foreach (ITerritory t in gi.EscapedLocations)
+         //   this.EscapedLocations.Add(t);
+         //foreach (ITerritory t in gi.GoblinKeeps)
+         //   this.GoblinKeeps.Add(t);
+         //foreach (ITerritory t in gi.OrcTowers)
+         //   this.OrcTowers.Add(t);
+         //foreach (ITerritory t in gi.DwarvenMines)
+         //   this.DwarvenMines.Add(t);
+         //foreach (ITerritory t in gi.RuinsUnstable)
+         //   this.RuinsUnstable.Add(t);
+         //foreach (ITerritory t in gi.HiddenRuins)
+         //   this.HiddenRuins.Add(t);
+         //foreach (ITerritory t in gi.HiddenTowns)
+         //   this.HiddenTowns.Add(t);
+         //foreach (ITerritory t in gi.HiddenTemples)
+         //   this.HiddenTemples.Add(t);
+         //foreach (ITerritory t in gi.KilledLocations)
+         //   this.KilledLocations.Add(t);
+         //foreach (ITerritory t in gi.WizardTowers)
+         //   this.WizardTowers.Add(t);
+         //foreach (ITerritory t in gi.HalflingTowns)
+         //   this.HalflingTowns.Add(t);
+         //foreach (ITerritory t in gi.EagleLairs)
+         //   this.EagleLairs.Add(t);
+         //foreach (ITerritory t in gi.SecretClues)
+         //   this.SecretClues.Add(t);
+         //foreach (ITerritory t in gi.LetterOfRecommendations)
+         //   this.LetterOfRecommendations.Add(t);
+         //foreach (ITerritory t in gi.Purifications)
+         //   this.Purifications.Add(t);
+         //foreach (ITerritory t in gi.ElfTowns)
+         //   this.ElfTowns.Add(t);
+         //foreach (ITerritory t in gi.ElfCastles)
+         //   this.ElfCastles.Add(t);
+         //foreach (ITerritory t in gi.FeelAtHomes)
+         //   this.FeelAtHomes.Add(t);
+         //foreach (ITerritory t in gi.SecretRites)
+         //   this.SecretRites.Add(t);
+         //foreach (ITerritory t in gi.CheapLodgings)
+         //   this.CheapLodgings.Add(t);
+         //foreach (ITerritory t in gi.ForbiddenHexes)
+         //   this.ForbiddenHexes.Add(t);
+         //foreach (ITerritory t in gi.AbandonedTemples)
+         //   this.AbandonedTemples.Add(t);
+         //foreach (ITerritory t in gi.ForbiddenHires)
+         //   this.ForbiddenHires.Add(t);
       }
       //----------------------------------------------
       private IMapItem myPrince = null;
@@ -3101,9 +3013,8 @@ namespace BarbarianPrince
                reader.Close();
          }
       }
-      public IOptions ReadOptionsXml()
+      public bool ReadOptionsXml(IOptions options)
       {
-         IOptions options = new Options();
          XmlTextReader reader = null;
          try
          {
@@ -3126,18 +3037,18 @@ namespace BarbarianPrince
                   } // end if
                } // end if
             } // end while
-            return options;
          } // try
          catch (Exception e)
          {
             Console.WriteLine("ReadOptionsXml(): Exception:  e.Message={0} while reading reader.Name={1}", e.Message, reader.Name);
-            return null;
+            return false;
          }
          finally
          {
             if (reader != null)
                reader.Close();
          }
+         return true;
       }
       public override String ToString()
       {

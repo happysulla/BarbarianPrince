@@ -206,6 +206,25 @@ namespace BarbarianPrince
             myTargetCursor = Utilities.ConvertToCursor(img1, hotPoint);
             this.myCanvas.Cursor = myTargetCursor;
          }
+         //-------------------------------------------------------
+         if( GameAction.UpdateLoadingGame == action)
+         {
+            myButtonMapItems.Clear();
+            foreach (UIElement ui in myCanvas.Children) // remove all buttons on map
+            {
+               if (ui is Button b)
+               {
+                  if(true == b.Name.Contains("Prince"))
+                  {
+                     myCanvas.Children.Remove(ui);
+                     break;
+                  }
+
+               }
+            }
+            Logger.Log(LogEnum.LE_GAME_INIT, "GameViewerWindow.UpdateView(): a=" + action.ToString() + " gi=" + gi.ToString());
+         }
+         //-------------------------------------------------------
          UpdateStackPanelDailyActions(gi);
          UpdateTimeTrack(gi);
          UpdateFoodSupply(gi);
@@ -235,22 +254,6 @@ namespace BarbarianPrince
                UpdateCanvasRiver("Trogoth River");
                if (false == UpdateCanvasHexTravelToShowPolygons(gi))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvasHexTravelToShowPolygons() returned error ");
-               break;
-            case GameAction.UpdateLoadingGame: // happens when a game is loaded
-               myGameInstance.Clone(gi);
-               myButtonMapItems.Clear();
-               List<UIElement> elements = new List<UIElement>();
-               foreach (UIElement ui in myCanvas.Children) // remove all buttons on map
-               {
-                  if (ui is Button b)
-                     elements.Add(ui);
-               }
-               foreach (UIElement ui1 in elements)
-                  myCanvas.Children.Remove(ui1);
-               Logger.Log(LogEnum.LE_GAME_INIT, "GameViewerWindow.UpdateView(): a=" + action.ToString() + " gi=" + gi.ToString());
-               Logger.Log(LogEnum.LE_GAME_INIT, "GameViewerWindow.UpdateView(): a=" + action.ToString() + " myGameInstance=" + myGameInstance.ToString());
-               if (false == UpdateCanvas(gi, action))
-                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvas() returned error ");
                break;
             default:
                if( false == UpdateCanvas(gi, action) )

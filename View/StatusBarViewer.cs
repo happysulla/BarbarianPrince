@@ -64,6 +64,8 @@ namespace BarbarianPrince
             case GameAction.SetupRollWitsWiles:
                myIsWitAndWilesShown = true;
                break;
+            case GameAction.UpdateLoadingGame:
+               break;
             case GameAction.E045ArchOfTravel:
             case GameAction.E156MayorTerritorySelection:
                double sizeCursor = Utilities.ZoomCanvas * Utilities.ZOOM * Utilities.theMapItemSize;

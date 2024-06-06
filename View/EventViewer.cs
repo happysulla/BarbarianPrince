@@ -160,7 +160,6 @@ namespace BarbarianPrince
             case GameAction.UnitTestNext:
                break;
             case GameAction.UpdateLoadingGame:
-               myGameInstance.Clone(gi);
                myRulesMgr = new RuleDialogViewer(myGameInstance, myGameEngine);
                if(true == myRulesMgr.CtorError)
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): RuleDialogViewer() ctor error ae=" + myGameInstance.EventActive + " a=" + action.ToString());

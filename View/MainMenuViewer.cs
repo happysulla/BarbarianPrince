@@ -153,7 +153,9 @@ namespace BarbarianPrince
       //------------------------------CONTROLLER-------------------------------
       public void MenuItemFileOpen_Click(object sender, RoutedEventArgs e)
       {
+         IOptions options = myGameInstance.Options;
          string filename = "test.bpb";
+         IGameInstance gi = null;
          FileStream fileStream = null;
          try
          {
@@ -163,12 +165,9 @@ namespace BarbarianPrince
                filename = dlg.FileName;
                fileStream = File.OpenRead(filename);
                BinaryFormatter formatter = new BinaryFormatter();
-               IGameInstance gi = (GameInstance)formatter.Deserialize(fileStream);
-               Logger.Log(LogEnum.LE_GAME_INIT, "MenuItemFileOpen_Click(): gi=" + myGameInstance.ToString());
+               gi = (GameInstance)formatter.Deserialize(fileStream);
+               Logger.Log(LogEnum.LE_GAME_INIT, "MenuItemFileOpen_Click(): gi=" + gi.ToString());
                fileStream.Close();
-               myGameInstance.Clone(gi);
-               GameAction action = GameAction.UpdateLoadingGame;
-               myGameEngine.PerformAction(ref myGameInstance, ref action);
             }
          }
          catch (Exception ex)
@@ -176,7 +175,18 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "MenuItemFileOpen_Click(): e=" + ex.ToString());
             if (null != fileStream)
                fileStream.Close();
+            return;
          }
+         gi.Stacks.Clear();
+         gi.SunriseChoice = GamePhase.Error;
+         gi.GamePhase = GamePhase.SunriseChoice;      // GameStateSetup.PerformAction()
+         gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
+         gi.DieRollAction = GameAction.DieRollActionNone;
+         gi.Options = options;
+         myGameInstance.Clone(gi);
+         //-------------------------------------------------
+         GameAction action = GameAction.UpdateLoadingGame;
+         myGameEngine.PerformAction(ref gi, ref action);
       }
       public void MenuItemSave_Click(object sender, RoutedEventArgs e)
       {
