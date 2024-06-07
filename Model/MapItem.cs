@@ -519,9 +519,16 @@ namespace BarbarianPrince
                   {
                      double left = Canvas.GetLeft(img);
                      double top = Canvas.GetTop(img);
-                     myCanvas.Children.Remove(ui);
-                     BloodSpot spotToRemove = myBloodSpots.SingleOrDefault(bs => bs.myLeft == left && bs.myTop == top);
-                     myBloodSpots.Remove(spotToRemove);
+                     // BloodSpot spotToRemove = myBloodSpots.SingleOrDefault(bs => bs.myLeft == left && bs.myTop == top); Causes exeption if blood spots have same left/top
+                     foreach (BloodSpot bs in myBloodSpots)
+                     {
+                        if( left == bs.myLeft && top == bs.myTop )
+                        {
+                           myCanvas.Children.Remove(ui);
+                           myBloodSpots.Remove(bs);
+                           break;
+                        }
+                     }
                      break;
                   }
                }
@@ -541,9 +548,15 @@ namespace BarbarianPrince
                   {
                      double left = Canvas.GetLeft(img);
                      double top = Canvas.GetTop(img);
-                     myCanvas.Children.Remove(ui);
-                     BloodSpot spotToRemove = myBloodSpots.SingleOrDefault(bs => bs.myLeft == left && bs.myTop == top);
-                     myBloodSpots.Remove(spotToRemove);
+                     foreach (BloodSpot bs in myBloodSpots)
+                     {
+                        if (left == bs.myLeft && top == bs.myTop)
+                        {
+                           myCanvas.Children.Remove(ui);
+                           myBloodSpots.Remove(bs);
+                           break;
+                        }
+                     }
                      break;
                   }
                }

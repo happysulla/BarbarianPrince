@@ -153,7 +153,7 @@ namespace BarbarianPrince
       //------------------------------CONTROLLER-------------------------------
       public void MenuItemFileOpen_Click(object sender, RoutedEventArgs e)
       {
-         IOptions options = myGameInstance.Options;
+         IOptions options = myGameInstance.Options; // options remain the same based on current user selections
          string filename = "test.bpb";
          IGameInstance gi = null;
          FileStream fileStream = null;
@@ -169,6 +169,10 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_GAME_INIT, "MenuItemFileOpen_Click(): gi=" + gi.ToString());
                fileStream.Close();
             }
+            else
+            {
+               return; // user selected cancel button
+            }
          }
          catch (Exception ex)
          {
@@ -177,14 +181,8 @@ namespace BarbarianPrince
                fileStream.Close();
             return;
          }
-         gi.Stacks.Clear();
-         gi.SunriseChoice = GamePhase.Error;
-         gi.GamePhase = GamePhase.SunriseChoice;      // GameStateSetup.PerformAction()
-         gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
-         gi.DieRollAction = GameAction.DieRollActionNone;
          gi.Options = options;
          myGameInstance = gi;
-         //-------------------------------------------------
          GameAction action = GameAction.UpdateLoadingGame;
          myGameEngine.PerformAction(ref gi, ref action);
       }

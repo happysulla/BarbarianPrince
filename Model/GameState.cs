@@ -1185,6 +1185,15 @@ namespace BarbarianPrince
          Logger.Log(LogEnum.LE_PARTYMEMBER_ADD, "CreateCharacter(): mi=" + character.ToString());
          return character;
       }
+      protected bool LoadGame(ref IGameInstance gi, ref GameAction action)
+      {
+         gi.Stacks.Clear();
+         gi.SunriseChoice = GamePhase.Error;
+         gi.GamePhase = GamePhase.SunriseChoice;      // GameStateSetup.PerformAction()
+         gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
+         gi.DieRollAction = GameAction.DieRollActionNone;
+         return true;
+      }
    }
    //-----------------------------------------------------
    class GameStateSetup : GameState
@@ -1560,6 +1569,11 @@ namespace BarbarianPrince
                gi.EventDisplayed = gi.EventActive;
                break;
             case GameAction.UpdateLoadingGame:
+               if( false == LoadGame(ref gi, ref action))
+               {
+                  returnStatus = "LoadGame() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateRest.PerformAction(): " + returnStatus);
+               }
                break;
             case GameAction.E079HeavyRainsStartDayCheck:
                gi.IsAirborne = false;
@@ -1955,6 +1969,11 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateLoadingGame:
+               if (false == LoadGame(ref gi, ref action))
+               {
+                  returnStatus = "LoadGame() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateHunt.PerformAction(): " + returnStatus);
+               }
                break;
             case GameAction.Hunt:
                break;
@@ -2074,6 +2093,11 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateLoadingGame:
+               if (false == LoadGame(ref gi, ref action))
+               {
+                  returnStatus = "LoadGame() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateCampfire.PerformAction(): " + returnStatus);
+               }
                break;
             case GameAction.CampfirePlagueDustEnd:
                gi.RemoveKilledInParty("Plague Dust");
@@ -2359,6 +2383,11 @@ namespace BarbarianPrince
                gi.EventDisplayed = gi.EventActive;
                break;
             case GameAction.UpdateLoadingGame:
+               if (false == LoadGame(ref gi, ref action))
+               {
+                  returnStatus = "LoadGame() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateRest.PerformAction(): " + returnStatus);
+               }
                break;
             case GameAction.RestHealingEncounter:
                gi.GamePhase = GamePhase.Encounter;
@@ -2435,6 +2464,11 @@ namespace BarbarianPrince
                gi.EventDisplayed = gi.EventActive;
                break;
             case GameAction.UpdateLoadingGame:
+               if (false == LoadGame(ref gi, ref action))
+               {
+                  returnStatus = "LoadGame() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+               }
                break;
             case GameAction.TravelLostCheck:
                gi.IsGridActive = false; // GameAction.TravelLostCheck
@@ -2746,6 +2780,11 @@ namespace BarbarianPrince
                gi.EventDisplayed = gi.EventActive;
                break;
             case GameAction.UpdateLoadingGame:
+               if (false == LoadGame(ref gi, ref action))
+               {
+                  returnStatus = "LoadGame() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSeekNews.PerformAction(): " + returnStatus);
+               }
                break;
             case GameAction.SeekNewsNoPay:
                gi.IsSeekNewModifier = false;
@@ -2815,6 +2854,11 @@ namespace BarbarianPrince
                gi.EventDisplayed = gi.EventActive;
                break;
             case GameAction.UpdateLoadingGame:
+               if (false == LoadGame(ref gi, ref action))
+               {
+                  returnStatus = "LoadGame() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSeekHire.PerformAction(): " + returnStatus);
+               }
                break;
             case GameAction.SeekHire:
                gi.EventStart = gi.EventDisplayed = gi.EventActive = "e210";
@@ -2874,6 +2918,11 @@ namespace BarbarianPrince
                gi.EventDisplayed = gi.EventActive;
                break;
             case GameAction.UpdateLoadingGame:
+               if (false == LoadGame(ref gi, ref action))
+               {
+                  returnStatus = "LoadGame() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSeekOffering.PerformAction(): " + returnStatus);
+               }
                break;
             default:
                returnStatus = "Reached Default ERROR";
@@ -2921,6 +2970,11 @@ namespace BarbarianPrince
                gi.EventDisplayed = gi.EventActive;
                break;
             case GameAction.UpdateLoadingGame:
+               if (false == LoadGame(ref gi, ref action))
+               {
+                  returnStatus = "LoadGame() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSearchRuins.PerformAction(): " + returnStatus);
+               }
                break;
             default:
                returnStatus = "Reached Default ERROR";
@@ -2969,6 +3023,11 @@ namespace BarbarianPrince
                gi.EventDisplayed = gi.EventActive;
                break;
             case GameAction.UpdateLoadingGame:
+               if (false == LoadGame(ref gi, ref action))
+               {
+                  returnStatus = "LoadGame() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSearch.PerformAction(): " + returnStatus);
+               }
                break;
             case GameAction.SearchEncounter:
                gi.GamePhase = GamePhase.Encounter;
@@ -3042,6 +3101,11 @@ namespace BarbarianPrince
             case GameAction.EndGameWin:
                break;
             case GameAction.UpdateLoadingGame:
+               if (false == LoadGame(ref gi, ref action))
+               {
+                  returnStatus = "LoadGame() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateEnded.PerformAction(): " + returnStatus);
+               }
                break;
             case GameAction.EndGameExit:
                if (null != System.Windows.Application.Current)
@@ -3202,6 +3266,11 @@ namespace BarbarianPrince
                gi.EventDisplayed = gi.EventActive;
                break;
             case GameAction.UpdateLoadingGame:
+               if (false == LoadGame(ref gi, ref action))
+               {
+                  returnStatus = "LoadGame() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+               }
                break;
             case GameAction.ShowDienstalBranch:
             case GameAction.ShowLargosRiver:
