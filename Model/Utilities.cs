@@ -25,12 +25,14 @@ namespace BarbarianPrince
       public const double ZOOM = 1.25;
       public const int MAX_GRID_ROW = 40;
       public const int MAX_SLAVE_GIRLS = 7;
+      //--------------------------------------------
       public static SolidColorBrush theBrushBlood = new SolidColorBrush();
       public static SolidColorBrush theBrushRegion = new SolidColorBrush();
       public static SolidColorBrush theBrushRegionClear = new SolidColorBrush();
       public static SolidColorBrush theBrushControlButton = new SolidColorBrush();
       public static SolidColorBrush theBrushScrollViewerActive = new SolidColorBrush();
       public static SolidColorBrush theBrushScrollViewerInActive = new SolidColorBrush();
+      //--------------------------------------------
       public static int MapItemNum { set; get; } = 0;
       public static int GroupNum { set; get; } = 1;
       public static int PorterNum { set; get; } = 0; // used to identify porters in e210 that are paired togetther
@@ -38,11 +40,13 @@ namespace BarbarianPrince
       public static int MaxMountLoad { get; } = 30;
       public static int PersonBurden { get; } = 20; // how much a person measures in loads
       public static int MaxDays = 70; // 10 weeks
+      //--------------------------------------------
       public static Double ZoomCanvas { get; set; } = 1.0;
       public static Double theMapItemOffset = 20;
       public static Double theMapItemSize = 40;  // size of a MapItem black
       public static int theStackSize = 1000;
       public static string[] theNorthOfTragothHexes = new string[21] { "0101", "0201", "0301", "0302", "0401", "0501", "0502", "0601", "0701", "0801", "0901", "1001", "1101", "1201", "1301", "1501", "1601", "1701", "1801", "1901", "2001" };
+      //--------------------------------------------
       private static readonly Random theRandom = new Random(); // default seed is System time
       static public Random RandomGenerator
       {
@@ -74,6 +78,8 @@ namespace BarbarianPrince
             return theRandom;
          }
       }
+      //--------------------------------------------
+      // Utilities Functions
       public static string RemoveSpaces(string aLine)
       {
          string[] aStringArray1 = aLine.Split(new char[] { '"' });

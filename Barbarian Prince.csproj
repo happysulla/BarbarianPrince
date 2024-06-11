@@ -78,6 +78,7 @@
     <Compile Include="Model\Cache.cs" />
     <Compile Include="Model\ConfigFileReader.cs" />
     <Compile Include="Model\DieRoller.cs" />
+    <Compile Include="Model\GameLoadMgr.cs" />
     <Compile Include="Model\ForbiddenAudience.cs" />
     <Compile Include="Model\MapImage.cs" />
     <Compile Include="Model\Option.cs" />

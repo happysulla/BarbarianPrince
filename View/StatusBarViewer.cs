@@ -36,7 +36,6 @@ namespace BarbarianPrince
          {
             myGameInstance = gi;
          }
-
          if (false == myIsCoinShown) // If autostart option is selected, show the party's coin and Wits and Wiles images
          {
             IOption option = gi.Options.Find("AutoSetup");

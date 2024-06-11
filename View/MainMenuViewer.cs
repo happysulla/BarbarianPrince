@@ -153,73 +153,24 @@ namespace BarbarianPrince
       //------------------------------CONTROLLER-------------------------------
       public void MenuItemFileOpen_Click(object sender, RoutedEventArgs e)
       {
-         IOptions options = myGameInstance.Options; // options remain the same based on current user selections
-         string filename = "test.bpb";
-         IGameInstance gi = null;
-         FileStream fileStream = null;
-         try
+         IGameInstance gi = GameLoadMgr.OpenGame();
+         if( null != gi )
          {
-            OpenFileDialog dlg = new OpenFileDialog();
-            if (true == dlg.ShowDialog())
-            {
-               filename = dlg.FileName;
-               fileStream = File.OpenRead(filename);
-               BinaryFormatter formatter = new BinaryFormatter();
-               gi = (GameInstance)formatter.Deserialize(fileStream);
-               Logger.Log(LogEnum.LE_GAME_INIT, "MenuItemFileOpen_Click(): gi=" + gi.ToString());
-               fileStream.Close();
-            }
-            else
-            {
-               return; // user selected cancel button
-            }
+            gi.Options = myGameInstance.Options;// options remain the same based on current user selections
+            myGameInstance = gi;
+            GameAction action = GameAction.UpdateLoadingGame;
+            myGameEngine.PerformAction(ref gi, ref action);
          }
-         catch (Exception ex)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "MenuItemFileOpen_Click(): e=" + ex.ToString());
-            if (null != fileStream)
-               fileStream.Close();
-            return;
-         }
-         gi.Options = options;
-         myGameInstance = gi;
-         GameAction action = GameAction.UpdateLoadingGame;
-         myGameEngine.PerformAction(ref gi, ref action);
       }
       public void MenuItemSave_Click(object sender, RoutedEventArgs e)
       {
-         string filename = "test.bpb";
-         FileStream fileStream = null;
-         try
-         {
-            fileStream = File.OpenWrite(filename);
-            BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(fileStream, myGameInstance);
-            fileStream.Close();
-         }
-         catch (Exception ex)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "MenuItemSave_Click(): e=" + ex.ToString());
-            if (null != fileStream)
-               fileStream.Close();
-         }
+         if (false == GameLoadMgr.SaveGame(myGameInstance))
+            Logger.Log(LogEnum.LE_ERROR, "MenuItemSave_Click(): GameLoadMgr.SaveGame() returned false");
       }
       public void MenuItemSaveAs_Click(object sender, RoutedEventArgs e)
       {
-         try
-         {
-            string filename = "test.bpb";
-            FileStream fileStream = File.OpenWrite(filename);
-            BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(fileStream, myGameInstance);
-            fileStream.Close();
-            GameAction action = GameAction.UpdateEventViewerActive;
-            myGameEngine.PerformAction(ref myGameInstance, ref action);
-         }
-         catch (Exception ex)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "MenuItemSave_Click(): e=" + ex.ToString());
-         }
+         if (false == GameLoadMgr.SaveGameAs(myGameInstance))
+            Logger.Log(LogEnum.LE_ERROR, "MenuItemSave_Click(): GameLoadMgr.SaveGameAs() returned false");
       }
       public void MenuItemEditUndo_Click(object sender, RoutedEventArgs e)
       {
