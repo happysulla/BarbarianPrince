@@ -220,7 +220,6 @@ namespace BarbarianPrince
                      myCanvas.Children.Remove(ui);
                      break;
                   }
-
                }
             }
             Logger.Log(LogEnum.LE_GAME_INIT, "GameViewerWindow.UpdateView(): a=" + action.ToString() + " gi=" + gi.ToString());

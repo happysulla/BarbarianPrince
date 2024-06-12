@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -66,11 +67,11 @@ namespace BarbarianPrince
          try
          {
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.FileName = getCurrentTimeDate();
+            dlg.FileName = getCurrentTimeDate(gi);
             if (true == dlg.ShowDialog())
             {
                theCurrentFilename = dlg.FileName;
-               fileStream = File.OpenRead(dlg.FileName);
+               fileStream = File.OpenWrite(dlg.FileName);
                BinaryFormatter formatter = new BinaryFormatter();
                formatter.Serialize(fileStream, gi);
                fileStream.Close();
@@ -86,10 +87,27 @@ namespace BarbarianPrince
          return true;
       }
       //--------------------------------------------------
-      private static string getCurrentTimeDate()
+      private static string getCurrentTimeDate(IGameInstance gi)
       {
-         string fileName = "";
-         return fileName;
+         StringBuilder sb = new StringBuilder();
+         sb.Append(DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+         sb.Append("-D");
+         int days = gi.Days + 1;
+         if( days < 10 )
+            sb.Append("0");
+         sb.Append(days.ToString());
+         sb.Append("-F");
+         int food = gi.GetFoods();
+         if ( food < 10 )
+            sb.Append("0");
+         sb.Append(food.ToString());
+         sb.Append("-C");
+         int coin = gi.GetCoins();
+         if (coin < 10)
+            sb.Append("0");
+         sb.Append(coin.ToString());
+         sb.Append(".bpg");
+         return sb.ToString();
       }
    }
 }

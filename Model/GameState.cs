@@ -1188,10 +1188,19 @@ namespace BarbarianPrince
       protected bool LoadGame(ref IGameInstance gi, ref GameAction action)
       {
          gi.Stacks.Clear();
-         gi.SunriseChoice = GamePhase.Error;
-         gi.GamePhase = GamePhase.SunriseChoice;      // GameStateSetup.PerformAction()
-         gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
+         gi.GamePhase = GamePhase.Encounter;      // GameStateSetup.PerformAction()
+         gi.EventDisplayed = gi.EventActive = "e401"; // next screen to show
          gi.DieRollAction = GameAction.DieRollActionNone;
+         if( 0 == gi.MapItemMoves.Count )
+         {
+            --gi.Prince.MovementUsed;
+            if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex
+            {
+               Logger.Log(LogEnum.LE_ERROR, "LoadGame(): AddMapItemMove() return false");
+               return false;
+            }
+            ++gi.Prince.MovementUsed;
+         }
          return true;
       }
    }
@@ -1762,7 +1771,7 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.DieRollActionNone;
                Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateSunriseChoice.PerformAction(SearchCacheCheck): gi.MapItemMoves.Clear()");
                gi.MapItemMoves.Clear();
-               MapItemMove mimSearch = new MapItemMove(gi.Territories, gi.Prince, princeTerritory);   // Travel to same hex if rest encounter
+               MapItemMove mimSearch = new MapItemMove(gi.Territories, gi.Prince, princeTerritory);   // Travel to same hex if search cache encounter
                if ((0 == mimSearch.BestPath.Territories.Count) || (null == mimSearch.NewTerritory))
                {
                   returnStatus = "Unable to Find Path";
@@ -1779,7 +1788,7 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.DieRollActionNone;
                Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateSunriseChoice.PerformAction(SearchTreasure): gi.MapItemMoves.Clear()");
                gi.MapItemMoves.Clear();
-               MapItemMove mimSearch1 = new MapItemMove(gi.Territories, gi.Prince, princeTerritory);   // Travel to same hex if rest encounter
+               MapItemMove mimSearch1 = new MapItemMove(gi.Territories, gi.Prince, princeTerritory);   // Travel to same hex if search treasure
                if ((0 == mimSearch1.BestPath.Territories.Count) || (null == mimSearch1.NewTerritory))
                {
                   returnStatus = "Unable to Find Path";
@@ -4753,7 +4762,6 @@ namespace BarbarianPrince
             case GameAction.E126RaftInCurrentRedistribute:
                Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateEncounter.PerformAction(): gi.MapItemMoves.Clear() for a=" + action.ToString());
                gi.MapItemMoves.Clear();
-
                ITerritory downRiverT = gi.Territories.Find(gi.Prince.Territory.DownRiver);
                if (null == downRiverT)
                {
