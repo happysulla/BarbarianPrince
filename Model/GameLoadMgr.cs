@@ -13,6 +13,7 @@ namespace BarbarianPrince
    internal class GameLoadMgr
    {
       public static string theCurrentFilename = "*.bpg";
+      public static string theLastSavedFilename = "*.bpg";
       //--------------------------------------------------
       public static IGameInstance OpenGame()
       {
