@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
 using System.IO;
-using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Win32;
 
 namespace BarbarianPrince
@@ -14,14 +11,40 @@ namespace BarbarianPrince
    {
       public static string theCurrentFilename = "*.bpg";
       public static string theLastSavedFilename = "*.bpg";
+      public static string theDirectoryName = "";
+      //--------------------------------------------------
+      public static string AssemblyDirectory
+      {
+         get
+         {
+            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+            UriBuilder uri = new UriBuilder(codeBase);
+            string path = Uri.UnescapeDataString(uri.Path);
+            return System.IO.Path.GetDirectoryName(path);
+         }
+      }
       //--------------------------------------------------
       public static IGameInstance OpenGame()
       {
+         try
+         {
+            if (true == string.IsNullOrEmpty(theDirectoryName)) // use the directory name as the place to load games. If none exists, create directory name
+               theDirectoryName = AssemblyDirectory + @"\Games";
+            if (false == Directory.Exists(theDirectoryName)) // create directory if does not exists
+               Directory.CreateDirectory(theDirectoryName);
+            Directory.SetCurrentDirectory(theDirectoryName);
+         }
+         catch(Exception e)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "OpenGame(): path=" + theDirectoryName + " e=" + e.ToString());
+            return null;
+         }
          FileStream fileStream = null;
          try
          {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.FileName = theCurrentFilename;
+            dlg.InitialDirectory = theDirectoryName;
+            dlg.Filter = "Barbarin Prince Games|*.bpg";
             if (true == dlg.ShowDialog())
             {
                theCurrentFilename = dlg.FileName;
@@ -30,40 +53,34 @@ namespace BarbarianPrince
                IGameInstance gi = (GameInstance)formatter.Deserialize(fileStream);
                Logger.Log(LogEnum.LE_GAME_INIT, "OpenGame(): gi=" + gi.ToString());
                fileStream.Close();
+               theDirectoryName = Path.GetDirectoryName(theCurrentFilename); // save off the directory user chosen
                return gi;
             }
          }
-         catch (Exception ex)
+         catch (Exception e)
          {
-            Logger.Log(LogEnum.LE_ERROR, "OpenGame(): e=" + ex.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "OpenGame(): path=" + theDirectoryName+ " fn=" + theCurrentFilename + " e =" + e.ToString());
             if (null != fileStream)
                fileStream.Close();
          }
          return null;
       }
       //--------------------------------------------------
-      public static bool SaveGame(IGameInstance gi)
-      {
-         FileStream fileStream = null;
-         try
-         {
-            fileStream = File.OpenWrite(theCurrentFilename);
-            BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(fileStream, gi);
-            fileStream.Close();
-         }
-         catch (Exception ex)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "MenuItemSave_Click(): e=" + ex.ToString());
-            if (null != fileStream)
-               fileStream.Close();
-            return false;
-         }
-         return true;
-      }
-      //--------------------------------------------------
       public static bool SaveGameAs(IGameInstance gi)
       {
+         try
+         {
+            if (true == string.IsNullOrEmpty(theDirectoryName)) // use the directory name as the place to load games. If none exists, create directory name
+               theDirectoryName = AssemblyDirectory + @"\Games";
+            if (false == Directory.Exists(theDirectoryName)) // create directory if does not exists
+               Directory.CreateDirectory(theDirectoryName);
+            Directory.SetCurrentDirectory(theDirectoryName);
+         }
+         catch (Exception e)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SaveGameAs(): path=" + theDirectoryName + " e=" + e.ToString());
+            return false;
+         }
          FileStream fileStream = null;
          try
          {
@@ -76,11 +93,12 @@ namespace BarbarianPrince
                BinaryFormatter formatter = new BinaryFormatter();
                formatter.Serialize(fileStream, gi);
                fileStream.Close();
+               theDirectoryName = Path.GetDirectoryName(theCurrentFilename); // save off the directory user chosen
             }
          }
          catch (Exception ex)
          {
-            Logger.Log(LogEnum.LE_ERROR, "SaveGameAs(): e=" + ex.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "SaveGameAs(): path=" + theDirectoryName + " fn=" + theCurrentFilename + " e =" + ex.ToString());
             if (null != fileStream)
                fileStream.Close();
             return false;

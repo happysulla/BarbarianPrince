@@ -20,6 +20,7 @@ namespace BarbarianPrince
       private Dictionary<string, BannerDialog> myBannerDialogs = new Dictionary<string, BannerDialog>();
       private IGameEngine myGameEngine = null;
       private IGameInstance myGameInstance = null;
+      public IGameInstance GameInstance{ set => myGameInstance = value; } // the game instance changes when a Game is loaded
       //--------------------------------------------------------------------
       public RuleDialogViewer(IGameInstance gi, IGameEngine ge)
       {

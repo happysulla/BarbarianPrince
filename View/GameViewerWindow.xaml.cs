@@ -1879,7 +1879,8 @@ namespace BarbarianPrince
             //-------------------------------------------
             myScollViewerInside.Height = Settings.Default.ScrollViewerHeight;
             myScollViewerInside.Width = Settings.Default.ScrollViewerWidth;
-
+            //-------------------------------------------
+            GameLoadMgr.theDirectoryName = Settings.Default.GameDirectoryName; // remember the game directory name
          }
          catch ( Exception ex ) 
          {
@@ -1900,6 +1901,8 @@ namespace BarbarianPrince
          //-------------------------------------------
          Settings.Default.ScrollViewerHeight = myScollViewerInside.Height;
          Settings.Default.ScrollViewerWidth = myScollViewerInside.Width;
+         //-------------------------------------------
+         Settings.Default.GameDirectoryName = Settings.Default.GameDirectoryName;   
          //-------------------------------------------
          Settings.Default.Save();
       }

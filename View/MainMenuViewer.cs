@@ -118,13 +118,9 @@ namespace BarbarianPrince
             subItem1.Click += MenuItemFileOpen_Click;
             myMenuItemTopLevel1.Items.Add(subItem1);
             MenuItem subItem2 = new MenuItem();
-            subItem2.Header = "_Save";
-            subItem2.Click += MenuItemSave_Click;
+            subItem2.Header = "_Save As...";
+            subItem2.Click += MenuItemSaveAs_Click;
             myMenuItemTopLevel1.Items.Add(subItem2);
-            MenuItem subItem3 = new MenuItem();
-            subItem3.Header = "_Save As...";
-            subItem3.Click += MenuItemSaveAs_Click;
-            myMenuItemTopLevel1.Items.Add(subItem3);
          #endif
       } // end MainMenuViewer()
       //-----------------------------------------------------------------------
@@ -161,11 +157,6 @@ namespace BarbarianPrince
             GameAction action = GameAction.UpdateLoadingGame;
             myGameEngine.PerformAction(ref gi, ref action);
          }
-      }
-      public void MenuItemSave_Click(object sender, RoutedEventArgs e)
-      {
-         if (false == GameLoadMgr.SaveGame(myGameInstance))
-            Logger.Log(LogEnum.LE_ERROR, "MenuItemSave_Click(): GameLoadMgr.SaveGame() returned false");
       }
       public void MenuItemSaveAs_Click(object sender, RoutedEventArgs e)
       {

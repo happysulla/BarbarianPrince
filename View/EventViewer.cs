@@ -161,9 +161,7 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateLoadingGame:
                myGameInstance = gi;
-               myRulesMgr = new RuleDialogViewer(myGameInstance, myGameEngine);
-               if(true == myRulesMgr.CtorError)
-                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): RuleDialogViewer() ctor error ae=" + myGameInstance.EventActive + " a=" + action.ToString());
+               myRulesMgr.GameInstance = gi;
                gi.IsGridActive = false;
                if (false == OpenEvent(gi, gi.EventActive))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): OpenEvent() returned false ae=" + myGameInstance.EventActive + " a=" + action.ToString());

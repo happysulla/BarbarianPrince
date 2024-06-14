@@ -70,5 +70,17 @@ namespace BarbarianPrince.Properties {
                 this["ScrollViewerWidth"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string GameDirectoryName {
+            get {
+                return ((string)(this["GameDirectoryName"]));
+            }
+            set {
+                this["GameDirectoryName"] = value;
+            }
+        }
     }
 }
