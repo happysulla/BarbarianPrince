@@ -13,6 +13,7 @@ namespace BarbarianPrince
       private readonly Menu myMainMenu;                     // Top level menu items: File | View | Options | Help
       private readonly MenuItem myMenuItemTopLevel1 = null;
       private readonly MenuItem myMenuItemTopLevel2 = null;
+      private readonly MenuItem myMenuItemTopLevel22 = null;
       private readonly MenuItem myMenuItemTopLevel3 = null;
       private readonly MenuItem myMenuItemTopLevel4 = null;
       private readonly IGameEngine myGameEngine = null;
@@ -44,10 +45,11 @@ namespace BarbarianPrince
                   subItem21.Header = "_Undo";
                   subItem21.Click += MenuItemEditUndo_Click;
                   myMenuItemTopLevel2.Items.Add(subItem21);
-                  MenuItem subItem22 = new MenuItem();
-                  subItem22.Header = "_Revert To Daybreak";
-                  subItem22.Click += MenuItemEditRecover_Click;
-                  myMenuItemTopLevel2.Items.Add(subItem22);
+                  myMenuItemTopLevel22 = new MenuItem();
+                  myMenuItemTopLevel22.Header = "_Revert To Daybreak";
+                  myMenuItemTopLevel22.Click += MenuItemEditRecover_Click;
+                  myMenuItemTopLevel22.IsEnabled = false;
+                  myMenuItemTopLevel2.Items.Add(myMenuItemTopLevel22);
                   MenuItem subItem23 = new MenuItem();
                   subItem23.Header = "_Options...";
                   subItem23.Click += MenuItemEditOptions_Click;
@@ -143,16 +145,17 @@ namespace BarbarianPrince
                }
                break;
             default:
+               if (true ==  GameLoadMgr.theIsCheckFileExist) 
+                  myMenuItemTopLevel22.IsEnabled = true;
                return;
          }
       }
       //------------------------------CONTROLLER-------------------------------
       public void MenuItemFileOpen_Click(object sender, RoutedEventArgs e)
       {
-         IGameInstance gi = GameLoadMgr.OpenGame();
+         IGameInstance gi = GameLoadMgr.OpenGameFromFile();
          if( null != gi )
          {
-            gi.Options = myGameInstance.Options;// options remain the same based on current user selections
             myGameInstance = gi;
             GameAction action = GameAction.UpdateLoadingGame;
             myGameEngine.PerformAction(ref gi, ref action);
@@ -160,7 +163,7 @@ namespace BarbarianPrince
       }
       public void MenuItemSaveAs_Click(object sender, RoutedEventArgs e)
       {
-         if (false == GameLoadMgr.SaveGameAs(myGameInstance))
+         if (false == GameLoadMgr.SaveGameAsToFile(myGameInstance))
             Logger.Log(LogEnum.LE_ERROR, "MenuItemSave_Click(): GameLoadMgr.SaveGameAs() returned false");
       }
       public void MenuItemEditUndo_Click(object sender, RoutedEventArgs e)
@@ -170,8 +173,13 @@ namespace BarbarianPrince
       }
       public void MenuItemEditRecover_Click(object sender, RoutedEventArgs e)
       {
-         GameAction action = GameAction.UpdateEventViewerActive;
-         myGameEngine.PerformAction(ref myGameInstance, ref action);
+         IGameInstance gi = GameLoadMgr.OpenGame();
+         if (null != gi)
+         {
+            myGameInstance = gi;
+            GameAction action = GameAction.UpdateLoadingGame;
+            myGameEngine.PerformAction(ref gi, ref action);
+         }
       }
       public void MenuItemEditOptions_Click(object sender, RoutedEventArgs e)
       {

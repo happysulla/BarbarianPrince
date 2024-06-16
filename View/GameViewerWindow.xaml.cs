@@ -1893,7 +1893,7 @@ namespace BarbarianPrince
          WindowPlacement wp; // Persist window placement details to application settings
          var hwnd = new WindowInteropHelper(this).Handle;
          if (false == GetWindowPlacement(hwnd, out wp))
-            Logger.Log(LogEnum.LE_ERROR, "GetWindowPlacement() returned false");
+            Logger.Log(LogEnum.LE_ERROR, "OnClosing(): GetWindowPlacement() returned false");
          string sWinPlace = Utilities.Serialize<WindowPlacement>(wp);
          Settings.Default.WindowPlacement = sWinPlace;
          //-------------------------------------------
@@ -1902,9 +1902,12 @@ namespace BarbarianPrince
          Settings.Default.ScrollViewerHeight = myScollViewerInside.Height;
          Settings.Default.ScrollViewerWidth = myScollViewerInside.Width;
          //-------------------------------------------
-         Settings.Default.GameDirectoryName = Settings.Default.GameDirectoryName;   
+         Settings.Default.GameDirectoryName = Settings.Default.GameDirectoryName;
          //-------------------------------------------
          Settings.Default.Save();
+         //-------------------------------------------
+         if( false == GameLoadMgr.SaveGameToFile(myGameInstance) )
+            Logger.Log(LogEnum.LE_ERROR, "OnClosing(): SaveGameToFile() returned false");
       }
       //-------------CONTROLLER HELPER FUNCTIONS---------------------------------
       private void RotateStack(ITerritory selectedTerritory)

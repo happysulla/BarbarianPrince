@@ -184,17 +184,31 @@ namespace BarbarianPrince
       }
       public static String Serialize<T>(T t)
       {
-         using (StringWriter sw = new StringWriter())
-         using (XmlWriter xw = XmlWriter.Create(sw))
+         try // XML serializer does not work for Interfaces
          {
+            StringWriter sw = new StringWriter();
+            XmlWriter xw = XmlWriter.Create(sw);
             new XmlSerializer(typeof(T)).Serialize(xw, t);
             return sw.GetStringBuilder().ToString();
+         }
+         catch (Exception e)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "Serialize(): e=" + e.ToString());
+            return "";
          }
       }
       public static T Deserialize<T>(String s_xml)
       {
-         using (XmlReader xw = XmlReader.Create(new StringReader(s_xml)))
+         try // XML serializer does not work for Interfaces
+         {
+            XmlReader xw = XmlReader.Create(new StringReader(s_xml));
             return (T)new XmlSerializer(typeof(T)).Deserialize(xw);
+         }
+         catch (Exception e)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "Deserialize(): e=" + e.ToString());
+            return default(T);
+         }
       }
    }
 }

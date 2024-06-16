@@ -1,17 +1,18 @@
 ﻿using System;
 using System.IO;
+using System.IO.Pipes;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Xml.Serialization;
 using Microsoft.Win32;
 
 namespace BarbarianPrince
 {
    internal class GameLoadMgr
    {
-      public static string theCurrentFilename = "*.bpg";
-      public static string theLastSavedFilename = "*.bpg";
       public static string theDirectoryName = "";
+      public static bool theIsCheckFileExist = false;
       //--------------------------------------------------
       public static string AssemblyDirectory
       {
@@ -34,7 +35,7 @@ namespace BarbarianPrince
                Directory.CreateDirectory(theDirectoryName);
             Directory.SetCurrentDirectory(theDirectoryName);
          }
-         catch(Exception e)
+         catch (Exception e)
          {
             Logger.Log(LogEnum.LE_ERROR, "OpenGame(): path=" + theDirectoryName + " e=" + e.ToString());
             return null;
@@ -42,31 +43,27 @@ namespace BarbarianPrince
          FileStream fileStream = null;
          try
          {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.InitialDirectory = theDirectoryName;
-            dlg.Filter = "Barbarin Prince Games|*.bpg";
-            if (true == dlg.ShowDialog())
-            {
-               theCurrentFilename = dlg.FileName;
-               fileStream = File.OpenRead(dlg.FileName);
-               BinaryFormatter formatter = new BinaryFormatter();
-               IGameInstance gi = (GameInstance)formatter.Deserialize(fileStream);
-               Logger.Log(LogEnum.LE_GAME_INIT, "OpenGame(): gi=" + gi.ToString());
-               fileStream.Close();
-               theDirectoryName = Path.GetDirectoryName(theCurrentFilename); // save off the directory user chosen
-               return gi;
-            }
+            string filename = theDirectoryName + @"\Checkpoint.bpg";
+            fileStream = new FileStream(filename, FileMode.Open);
+            BinaryFormatter formatter = new BinaryFormatter();
+            IGameInstance gi = (GameInstance)formatter.Deserialize(fileStream);
+            Logger.Log(LogEnum.LE_GAME_INIT, "OpenGame(): gi=" + gi.ToString());
+            fileStream.Close();
+            Directory.SetCurrentDirectory(AssemblyDirectory);
+            return gi;
          }
          catch (Exception e)
          {
-            Logger.Log(LogEnum.LE_ERROR, "OpenGame(): path=" + theDirectoryName+ " fn=" + theCurrentFilename + " e =" + e.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "OpenGame(): path=" + theDirectoryName + " e =" + e.ToString());
             if (null != fileStream)
                fileStream.Close();
+            Directory.SetCurrentDirectory(AssemblyDirectory);
+            return null;
          }
-         return null;
+
       }
       //--------------------------------------------------
-      public static bool SaveGameAs(IGameInstance gi)
+      public static bool SaveGameToFile(IGameInstance gi)
       {
          try
          {
@@ -78,7 +75,90 @@ namespace BarbarianPrince
          }
          catch (Exception e)
          {
-            Logger.Log(LogEnum.LE_ERROR, "SaveGameAs(): path=" + theDirectoryName + " e=" + e.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "SaveGameToFile(): path=" + theDirectoryName + " e=" + e.ToString());
+            Directory.SetCurrentDirectory(AssemblyDirectory);
+            return false;
+         }
+         FileStream fileStream = null;
+         try
+         {
+            string filename = theDirectoryName + @"\Checkpoint.bpg";
+            fileStream = File.OpenWrite(filename);
+            BinaryFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(fileStream, gi);
+            fileStream.Close();
+            Directory.SetCurrentDirectory(AssemblyDirectory);
+            theIsCheckFileExist = true;
+            return true;
+         }
+         catch (Exception ex)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SaveGameToFile(): path=" + theDirectoryName + " e =" + ex.ToString());
+            if (null != fileStream)
+               fileStream.Close();
+            Directory.SetCurrentDirectory(AssemblyDirectory);
+            return false;
+         }
+      }
+      //--------------------------------------------------
+      public static IGameInstance OpenGameFromFile()
+      {
+         try
+         {
+            if (true == string.IsNullOrEmpty(theDirectoryName)) // use the directory name as the place to load games. If none exists, create directory name
+               theDirectoryName = AssemblyDirectory + @"\Games";
+            if (false == Directory.Exists(theDirectoryName)) // create directory if does not exists
+               Directory.CreateDirectory(theDirectoryName);
+            Directory.SetCurrentDirectory(theDirectoryName);
+         }
+         catch(Exception e)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "OpenGameFromFile(): path=" + theDirectoryName + " e=" + e.ToString());
+            Directory.SetCurrentDirectory(AssemblyDirectory);
+            return null;
+         }
+         FileStream fileStream = null;
+         try
+         {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.InitialDirectory = theDirectoryName;
+            dlg.Filter = "Barbarin Prince Games|*.bpg";
+            if (true == dlg.ShowDialog())
+            {
+               fileStream = new FileStream(dlg.FileName, FileMode.Open);
+               BinaryFormatter formatter = new BinaryFormatter();
+               IGameInstance gi = (GameInstance)formatter.Deserialize(fileStream);
+               Logger.Log(LogEnum.LE_GAME_INIT, "OpenGameFromFile(): gi=" + gi.ToString());
+               fileStream.Close();
+               theDirectoryName = Path.GetDirectoryName(dlg.FileName); // save off the directory user chosen
+               Directory.SetCurrentDirectory(AssemblyDirectory);
+               return gi;
+            }
+         }
+         catch (Exception e)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "OpenGameFromFile(): path=" + theDirectoryName + " e =" + e.ToString());
+            if (null != fileStream)
+               fileStream.Close();
+         }
+         Directory.SetCurrentDirectory(AssemblyDirectory);
+         return null;
+      }
+      //--------------------------------------------------
+      public static bool SaveGameAsToFile(IGameInstance gi)
+      {
+         try
+         {
+            if (true == string.IsNullOrEmpty(theDirectoryName)) // use the directory name as the place to load games. If none exists, create directory name
+               theDirectoryName = AssemblyDirectory + @"\Games";
+            if (false == Directory.Exists(theDirectoryName)) // create directory if does not exists
+               Directory.CreateDirectory(theDirectoryName);
+            Directory.SetCurrentDirectory(theDirectoryName);
+         }
+         catch (Exception e)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SaveGameAsToFile(): path=" + theDirectoryName + " e=" + e.ToString());
+            Directory.SetCurrentDirectory(AssemblyDirectory);
             return false;
          }
          FileStream fileStream = null;
@@ -88,21 +168,22 @@ namespace BarbarianPrince
             dlg.FileName = getCurrentTimeDate(gi);
             if (true == dlg.ShowDialog())
             {
-               theCurrentFilename = dlg.FileName;
                fileStream = File.OpenWrite(dlg.FileName);
                BinaryFormatter formatter = new BinaryFormatter();
                formatter.Serialize(fileStream, gi);
                fileStream.Close();
-               theDirectoryName = Path.GetDirectoryName(theCurrentFilename); // save off the directory user chosen
+               theDirectoryName = Path.GetDirectoryName(dlg.FileName); // save off the directory user chosen
             }
          }
          catch (Exception ex)
          {
-            Logger.Log(LogEnum.LE_ERROR, "SaveGameAs(): path=" + theDirectoryName + " fn=" + theCurrentFilename + " e =" + ex.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "SaveGameAsToFile(): path=" + theDirectoryName + " e =" + ex.ToString());
             if (null != fileStream)
                fileStream.Close();
+            Directory.SetCurrentDirectory(AssemblyDirectory);
             return false;
          }
+         Directory.SetCurrentDirectory(AssemblyDirectory);
          return true;
       }
       //--------------------------------------------------

@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
+using System.IO.Pipes;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Policy;
 using System.Text;
 using System.Windows;
@@ -462,6 +465,11 @@ namespace BarbarianPrince
             gi.GamePhase = GamePhase.SunriseChoice;      // Nominal - Wakeup()
             gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
             gi.DieRollAction = GameAction.DieRollActionNone;
+         }
+         if (false == GameLoadMgr.SaveGameToFile(gi))
+         {
+            Logger.Log(LogEnum.LE_ERROR, "MenuItemSave_Click(): SaveGameToMemory() returned false");
+            return false;
          }
          return true;
       }

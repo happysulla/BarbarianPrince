@@ -7,14 +7,16 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace BarbarianPrince
 {
-   [Serializable] public class GameInstance : IGameInstance
+   [XmlRootAttribute("GameInstance",IsNullable = false)]
+   [Serializable]
+   public class GameInstance : IGameInstance
    {
       [NonSerialized] static public Logger Logger = new Logger();
-      [NonSerialized] private IOptions myOptions = new Options();
-      public IOptions Options { get => myOptions; set => myOptions = value; }
+      public IOptions Options { get; set; } = new Options();
       //------------------------------------------------
       public bool CtorError { get; } = false;
       public GameInstance() // Constructor - set log levels
@@ -74,7 +76,7 @@ namespace BarbarianPrince
                return;
             }
             //---------------------------------------------------------
-            if (false == ReadOptionsXml(myOptions))
+            if (false == ReadOptionsXml(this.Options))
             {
                Logger.Log(LogEnum.LE_ERROR, "GameInstance(): ReadOptionsXml() returned false");
                CtorError = true;
@@ -120,6 +122,9 @@ namespace BarbarianPrince
          this.GamePhase = gi.GamePhase;
          this.SunriseChoice = gi.SunriseChoice;
          this.DieRollAction = gi.DieRollAction;
+         //------------------------------------------------
+         foreach (IOption o in gi.Options)
+            this.Options.Add(o);
          //------------------------------------------------
          if (null == gi.ActiveHex)
             this.ActiveHex = null;
@@ -273,68 +278,68 @@ namespace BarbarianPrince
             IMapItemMove mapItemMove = mim;
             this.MapItemMoves.Add(mapItemMove);
          }
-         this.PreviousMapItemMove = gi.PreviousMapItemMove; 
+         this.PreviousMapItemMove = gi.PreviousMapItemMove;
          //------------------------------------------------
-         //foreach(ITerritory t in gi.Territories)
-         //   this.myTerritories.Add(t);
-         //foreach (ITerritory t in gi.EnteredTerritories)
-         //   this.EnteredTerritories.Add(t);
-         //foreach (ITerritory t in gi.DwarfAdviceLocations)
-         //   this.DwarfAdviceLocations.Add(t);
-         //foreach (ITerritory t in gi.WizardAdviceLocations)
-         //   this.WizardAdviceLocations.Add(t);
-         //foreach (ITerritory t in gi.AlcoveOfSendings)
-         //   this.AlcoveOfSendings.Add(t);
-         //foreach (ITerritory t in gi.Arches)
-         //   this.Arches.Add(t);
-         //foreach (ITerritory t in gi.VisitedLocations)
-         //   this.VisitedLocations.Add(t);
-         //foreach (ITerritory t in gi.EscapedLocations)
-         //   this.EscapedLocations.Add(t);
-         //foreach (ITerritory t in gi.GoblinKeeps)
-         //   this.GoblinKeeps.Add(t);
-         //foreach (ITerritory t in gi.OrcTowers)
-         //   this.OrcTowers.Add(t);
-         //foreach (ITerritory t in gi.DwarvenMines)
-         //   this.DwarvenMines.Add(t);
-         //foreach (ITerritory t in gi.RuinsUnstable)
-         //   this.RuinsUnstable.Add(t);
-         //foreach (ITerritory t in gi.HiddenRuins)
-         //   this.HiddenRuins.Add(t);
-         //foreach (ITerritory t in gi.HiddenTowns)
-         //   this.HiddenTowns.Add(t);
-         //foreach (ITerritory t in gi.HiddenTemples)
-         //   this.HiddenTemples.Add(t);
-         //foreach (ITerritory t in gi.KilledLocations)
-         //   this.KilledLocations.Add(t);
-         //foreach (ITerritory t in gi.WizardTowers)
-         //   this.WizardTowers.Add(t);
-         //foreach (ITerritory t in gi.HalflingTowns)
-         //   this.HalflingTowns.Add(t);
-         //foreach (ITerritory t in gi.EagleLairs)
-         //   this.EagleLairs.Add(t);
-         //foreach (ITerritory t in gi.SecretClues)
-         //   this.SecretClues.Add(t);
-         //foreach (ITerritory t in gi.LetterOfRecommendations)
-         //   this.LetterOfRecommendations.Add(t);
-         //foreach (ITerritory t in gi.Purifications)
-         //   this.Purifications.Add(t);
-         //foreach (ITerritory t in gi.ElfTowns)
-         //   this.ElfTowns.Add(t);
-         //foreach (ITerritory t in gi.ElfCastles)
-         //   this.ElfCastles.Add(t);
-         //foreach (ITerritory t in gi.FeelAtHomes)
-         //   this.FeelAtHomes.Add(t);
-         //foreach (ITerritory t in gi.SecretRites)
-         //   this.SecretRites.Add(t);
-         //foreach (ITerritory t in gi.CheapLodgings)
-         //   this.CheapLodgings.Add(t);
-         //foreach (ITerritory t in gi.ForbiddenHexes)
-         //   this.ForbiddenHexes.Add(t);
-         //foreach (ITerritory t in gi.AbandonedTemples)
-         //   this.AbandonedTemples.Add(t);
-         //foreach (ITerritory t in gi.ForbiddenHires)
-         //   this.ForbiddenHires.Add(t);
+         foreach (ITerritory t in gi.Territories)
+            this.myTerritories.Add(t);
+         foreach (ITerritory t in gi.EnteredTerritories)
+            this.EnteredTerritories.Add(t);
+         foreach (ITerritory t in gi.DwarfAdviceLocations)
+            this.DwarfAdviceLocations.Add(t);
+         foreach (ITerritory t in gi.WizardAdviceLocations)
+            this.WizardAdviceLocations.Add(t);
+         foreach (ITerritory t in gi.AlcoveOfSendings)
+            this.AlcoveOfSendings.Add(t);
+         foreach (ITerritory t in gi.Arches)
+            this.Arches.Add(t);
+         foreach (ITerritory t in gi.VisitedLocations)
+            this.VisitedLocations.Add(t);
+         foreach (ITerritory t in gi.EscapedLocations)
+            this.EscapedLocations.Add(t);
+         foreach (ITerritory t in gi.GoblinKeeps)
+            this.GoblinKeeps.Add(t);
+         foreach (ITerritory t in gi.OrcTowers)
+            this.OrcTowers.Add(t);
+         foreach (ITerritory t in gi.DwarvenMines)
+            this.DwarvenMines.Add(t);
+         foreach (ITerritory t in gi.RuinsUnstable)
+            this.RuinsUnstable.Add(t);
+         foreach (ITerritory t in gi.HiddenRuins)
+            this.HiddenRuins.Add(t);
+         foreach (ITerritory t in gi.HiddenTowns)
+            this.HiddenTowns.Add(t);
+         foreach (ITerritory t in gi.HiddenTemples)
+            this.HiddenTemples.Add(t);
+         foreach (ITerritory t in gi.KilledLocations)
+            this.KilledLocations.Add(t);
+         foreach (ITerritory t in gi.WizardTowers)
+            this.WizardTowers.Add(t);
+         foreach (ITerritory t in gi.HalflingTowns)
+            this.HalflingTowns.Add(t);
+         foreach (ITerritory t in gi.EagleLairs)
+            this.EagleLairs.Add(t);
+         foreach (ITerritory t in gi.SecretClues)
+            this.SecretClues.Add(t);
+         foreach (ITerritory t in gi.LetterOfRecommendations)
+            this.LetterOfRecommendations.Add(t);
+         foreach (ITerritory t in gi.Purifications)
+            this.Purifications.Add(t);
+         foreach (ITerritory t in gi.ElfTowns)
+            this.ElfTowns.Add(t);
+         foreach (ITerritory t in gi.ElfCastles)
+            this.ElfCastles.Add(t);
+         foreach (ITerritory t in gi.FeelAtHomes)
+            this.FeelAtHomes.Add(t);
+         foreach (ITerritory t in gi.SecretRites)
+            this.SecretRites.Add(t);
+         foreach (ITerritory t in gi.CheapLodgings)
+            this.CheapLodgings.Add(t);
+         foreach (ITerritory t in gi.ForbiddenHexes)
+            this.ForbiddenHexes.Add(t);
+         foreach (ITerritory t in gi.AbandonedTemples)
+            this.AbandonedTemples.Add(t);
+         foreach (ITerritory t in gi.ForbiddenHires)
+            this.ForbiddenHires.Add(t);
       }
       //----------------------------------------------
       private IMapItem myPrince = null;
@@ -560,7 +565,7 @@ namespace BarbarianPrince
          String itemToAdd = "";
          //---------------------------------------------------------
          itemToAdd = "PrinceHorse";
-         option = myOptions.Find(itemToAdd);
+         option = this.Options.Find(itemToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
@@ -574,7 +579,7 @@ namespace BarbarianPrince
          }
          //---------------------------------------------------------
          itemToAdd = "PrincePegasus";
-         option = myOptions.Find(itemToAdd);
+         option = this.Options.Find(itemToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
@@ -584,7 +589,7 @@ namespace BarbarianPrince
             this.Prince.AddNewMount(MountEnum.Pegasus);
          //---------------------------------------------------------
          itemToAdd = "PrinceCoin";
-         option = myOptions.Find(itemToAdd);
+         option = this.Options.Find(itemToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
@@ -594,7 +599,7 @@ namespace BarbarianPrince
             this.Prince.Coin += 30;
          //---------------------------------------------------------
          itemToAdd = "PrinceFood";
-         option = myOptions.Find(itemToAdd);
+         option = this.Options.Find(itemToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
@@ -609,7 +614,7 @@ namespace BarbarianPrince
          IOption option = null;
          //---------------------------------------------------------
          String memberToAdd = "Dwarf";
-         option = myOptions.Find(memberToAdd);
+         option = this.Options.Find(memberToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
@@ -630,7 +635,7 @@ namespace BarbarianPrince
          }
          //---------------------------------------------------------
          memberToAdd = "Eagle";
-         option = myOptions.Find(memberToAdd);
+         option = this.Options.Find(memberToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
@@ -647,7 +652,7 @@ namespace BarbarianPrince
          }
          //---------------------------------------------------------
          memberToAdd = "Elf";
-         option = myOptions.Find(memberToAdd);
+         option = this.Options.Find(memberToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
@@ -665,7 +670,7 @@ namespace BarbarianPrince
          }
          //---------------------------------------------------------
          memberToAdd = "Falcon";
-         option = myOptions.Find(memberToAdd);
+         option = this.Options.Find(memberToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
@@ -685,7 +690,7 @@ namespace BarbarianPrince
          }
          //---------------------------------------------------------
          memberToAdd = "Griffon";
-         option = myOptions.Find(memberToAdd);
+         option = this.Options.Find(memberToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
@@ -712,7 +717,7 @@ namespace BarbarianPrince
          }
          //---------------------------------------------------------
          memberToAdd = "Harpy";
-         option = myOptions.Find(memberToAdd);
+         option = this.Options.Find(memberToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
@@ -740,7 +745,7 @@ namespace BarbarianPrince
          }
          //---------------------------------------------------------
          memberToAdd = "Magician";
-         option = myOptions.Find(memberToAdd);
+         option = this.Options.Find(memberToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
@@ -756,7 +761,7 @@ namespace BarbarianPrince
          }
          //---------------------------------------------------------
          memberToAdd = "Mercenary";
-         option = myOptions.Find(memberToAdd);
+         option = this.Options.Find(memberToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
@@ -782,7 +787,7 @@ namespace BarbarianPrince
          }
          //---------------------------------------------------------
          memberToAdd = "Merchant";
-         option = myOptions.Find(memberToAdd);
+         option = this.Options.Find(memberToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
@@ -798,7 +803,7 @@ namespace BarbarianPrince
          }
          //---------------------------------------------------------
          memberToAdd = "Minstrel";
-         option = myOptions.Find(memberToAdd);
+         option = this.Options.Find(memberToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
@@ -814,7 +819,7 @@ namespace BarbarianPrince
          }
          //---------------------------------------------------------
          memberToAdd = "Monk";
-         option = myOptions.Find(memberToAdd);
+         option = this.Options.Find(memberToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
@@ -829,7 +834,7 @@ namespace BarbarianPrince
          }
          //---------------------------------------------------------
          memberToAdd = "PorterSlave";
-         option = myOptions.Find(memberToAdd);
+         option = this.Options.Find(memberToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
@@ -844,7 +849,7 @@ namespace BarbarianPrince
          }
          //---------------------------------------------------------
          memberToAdd = "TrueLove";
-         option = myOptions.Find(memberToAdd);
+         option = this.Options.Find(memberToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
@@ -859,7 +864,7 @@ namespace BarbarianPrince
          }
          //---------------------------------------------------------
          memberToAdd = "Wizard";
-         option = myOptions.Find(memberToAdd);
+         option = this.Options.Find(memberToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
@@ -873,7 +878,7 @@ namespace BarbarianPrince
             AddCompanion(member);
          }
          //---------------------------------------------------------
-         option = myOptions.Find("PartyMounted");
+         option = this.Options.Find("PartyMounted");
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(PartyMounted) returned null");
@@ -885,7 +890,7 @@ namespace BarbarianPrince
                mi.AddNewMount();
          }
          //---------------------------------------------------------
-         option = myOptions.Find("PartyAirborne");
+         option = this.Options.Find("PartyAirborne");
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(PartyMounted) returned null");

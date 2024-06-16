@@ -82,5 +82,17 @@ namespace BarbarianPrince.Properties {
                 this["GameDirectoryName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string GameRestorePoint {
+            get {
+                return ((string)(this["GameRestorePoint"]));
+            }
+            set {
+                this["GameRestorePoint"] = value;
+            }
+        }
     }
 }
