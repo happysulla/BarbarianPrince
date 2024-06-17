@@ -97,7 +97,7 @@ namespace BarbarianPrince
                }
             } // end foreach (Control item in myMainMenu.Items)
          } // end foreach (Control item in myMainMenu.Items)
-         #if UT2
+#if UT2
             myMenuItemTopLevel1.Width = 300;
             myMenuItemTopLevel1.Click += MenuItemStart_Click;
             myMenuItemTopLevel2.Visibility = Visibility.Hidden;
@@ -114,15 +114,19 @@ namespace BarbarianPrince
             subItem3.Header = "_Cleanup";
             subItem3.Click += MenuItemCleanup_Click;
             myMenuItemTopLevel1.Items.Add(subItem3);
-         #else
+#else
             MenuItem subItem1 = new MenuItem();
-            subItem1.Header = "_Open...";
-            subItem1.Click += MenuItemFileOpen_Click;
+            subItem1.Header = "_New...";
+            subItem1.Click += MenuItemNew_Click;
             myMenuItemTopLevel1.Items.Add(subItem1);
             MenuItem subItem2 = new MenuItem();
-            subItem2.Header = "_Save As...";
-            subItem2.Click += MenuItemSaveAs_Click;
+            subItem2.Header = "_Open...";
+            subItem2.Click += MenuItemFileOpen_Click;
             myMenuItemTopLevel1.Items.Add(subItem2);
+            MenuItem subItem3 = new MenuItem();
+            subItem3.Header = "_Save As...";
+            subItem3.Click += MenuItemSaveAs_Click;
+            myMenuItemTopLevel1.Items.Add(subItem3);
          #endif
       } // end MainMenuViewer()
       //-----------------------------------------------------------------------
@@ -151,6 +155,17 @@ namespace BarbarianPrince
          }
       }
       //------------------------------CONTROLLER-------------------------------
+      public void MenuItemNew_Click(object sender, RoutedEventArgs e)
+      {
+         myGameInstance = new GameInstance();
+         if( true == myGameInstance.CtorError )
+         {
+            Logger.Log(LogEnum.LE_ERROR, "MenuItemNew_Click(): myGameInstance.CtorError = true");
+            return;
+         }
+         GameAction action = GameAction.SetupNewGame;
+         myGameEngine.PerformAction(ref myGameInstance, ref action);
+      }
       public void MenuItemFileOpen_Click(object sender, RoutedEventArgs e)
       {
          IGameInstance gi = GameLoadMgr.OpenGameFromFile();

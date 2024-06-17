@@ -63,6 +63,7 @@ namespace BarbarianPrince
          Logger.SetOn(LogEnum.LE_VIEW_MIM_CLEAR);
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_LOADS);
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_HUNT);
+         //------------------------------------------------------------------------------------
          try
          {
             // Create the territories and the regions marking the territories.
@@ -87,6 +88,7 @@ namespace BarbarianPrince
          {
             MessageBox.Show("Exception in GameEngine() e=" + e.ToString());
          }
+         //------------------------------------------------------------------------------------
          ITerritory territory = myTerritories.Find("0101");
          myPrince = new MapItem("Prince", 1.0, false, false, false, "c07Prince", "c07Prince", territory, 9, 8, 0);
          PartyMembers.Add(myPrince);
@@ -96,15 +98,13 @@ namespace BarbarianPrince
             CtorError = true;
             return;
          }
-         if (false == AddStartingPartyMemberOption())
+         if (false == AddStartingOptions())
          {
-            Logger.Log(LogEnum.LE_ERROR, "GameInstance(): AddStartingPartyMembers() returned false");
+            Logger.Log(LogEnum.LE_ERROR, "GameInstance(): AddStartingOptions() returned false");
             CtorError = true;
             return;
          }
-#if UT1
-            AddSpecialConditionsForUnitTest();
-#endif
+         AddSpecialConditionsForUnitTest();
          Logger.Log(LogEnum.LE_GAME_PARTYMEMBER_COUNT, "GameInstance() c=" + PartyMembers.Count.ToString());
       }
       public void Clone(IGameInstance gi) 
@@ -356,7 +356,7 @@ namespace BarbarianPrince
       //----------------------------------------------
       public int GameTurn { get; set; } = 0;
       public bool IsNewDayChoiceMade { set; get; } = false;
-      public GamePhase GamePhase { get; set; } = GamePhase.Error;
+      public GamePhase GamePhase { get; set; } = GamePhase.GameSetup;
       public GamePhase SunriseChoice { set; get; } = GamePhase.Error;
       public GameAction DieRollAction { get; set; } = GameAction.DieRollActionNone;
       //----------------------------------------------
@@ -609,273 +609,48 @@ namespace BarbarianPrince
             this.Prince.Food += 5;
          return true;
       }
-      private bool AddStartingPartyMemberOption()
+      private bool AddStartingOptions()
       {
          IOption option = null;
-         //---------------------------------------------------------
-         String memberToAdd = "Dwarf";
-         option = this.Options.Find(memberToAdd);
+         option = this.Options.Find("RandomParty");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty) returned null");
             return false;
          }
-         if (true == option.IsEnabled)
+         if( true == option.IsEnabled)
          {
-            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
-            ++Utilities.MapItemNum;
-            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", Prince.Territory, 5, 5, 0);
-            member.IsFlying = true;
-            member.IsRiding = true;
-            member.Food = 25;
-            member.Coin = 301;
-            member.IsFickle = true;
-            member.AddNewMount(); // riding
-            AddCompanion(member);
-         }
-         //---------------------------------------------------------
-         memberToAdd = "Eagle";
-         option = this.Options.Find(memberToAdd);
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
-            return false;
-         }
-         if (true == option.IsEnabled)
-         {
-            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
-            ++Utilities.MapItemNum;
-            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c62Eagle", "c62Eagle", Prince.Territory, 3, 4, 1);
-            member.IsFlying = true;
-            member.IsRiding = true;
-            AddCompanion(member);
-         }
-         //---------------------------------------------------------
-         memberToAdd = "Elf";
-         option = this.Options.Find(memberToAdd);
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
-            return false;
-         }
-         if (true == option.IsEnabled)
-         {
-            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
-            ++Utilities.MapItemNum;
-            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c56Elf", "c56Elf", Prince.Territory, 5, 5, 0);
-            member.Food = 5;
-            member.Coin = 201;
-            member.AddNewMount(MountEnum.Horse);
-            AddCompanion(member);
-         }
-         //---------------------------------------------------------
-         memberToAdd = "Falcon";
-         option = this.Options.Find(memberToAdd);
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
-            return false;
-         }
-         if (true == option.IsEnabled)
-         {
-            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
-            ++Utilities.MapItemNum;
-            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c82Falcon", "c82Falcon", Prince.Territory, 0, 0, 0);
-            member.IsFlying = true;
-            member.IsRiding = true;
-            member.IsGuide = true;
-            member.GuideTerritories = Territories;
-            AddCompanion(member);
-            IsFalconFed = true;
-         }
-         //---------------------------------------------------------
-         memberToAdd = "Griffon";
-         option = this.Options.Find(memberToAdd);
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
-            return false;
-         }
-         if (true == option.IsEnabled)
-         {
-            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
-            ++Utilities.MapItemNum;
-            IMapItem griffon = new MapItem(memberName, 1.0, false, false, false, "c63Griffon", "c63Griffon", Prince.Territory, 3, 4, 1);
-            griffon.IsFlying = true;
-            griffon.IsRiding = true;
-            AddCompanion(griffon);
-            //---------------------
-            memberToAdd = "Mercenary";
-            memberName = memberToAdd + Utilities.MapItemNum.ToString();
-            ++Utilities.MapItemNum;
-            IMapItem rider = new MapItem(memberName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", Prince.Territory, 5, 5, 0);
-            griffon.Rider = rider;
-            rider.Mounts.Insert(0, griffon);
-            rider.IsRiding = true;
-            rider.IsFlying = true;
-            AddCompanion(rider);
-         }
-         //---------------------------------------------------------
-         memberToAdd = "Harpy";
-         option = this.Options.Find(memberToAdd);
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
-            return false;
-         }
-         if (true == option.IsEnabled)
-         {
-            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
-            ++Utilities.MapItemNum;
-            IMapItem harpy = new MapItem(memberName, 1.0, false, false, false, "c83Harpy", "c83Harpy", Prince.Territory, 4, 5, 4);
-            harpy.IsFlying = true;
-            harpy.IsRiding = true;
-            AddCompanion(harpy);
-            //---------------------
-
-            memberToAdd = "Monk";
-            memberName = memberToAdd + Utilities.MapItemNum.ToString();
-            ++Utilities.MapItemNum;
-            IMapItem rider = new MapItem(memberName, 1.0, false, false, false, "c19Monk", "c19Monk", Prince.Territory, 5, 4, 4);
-            harpy.Rider = rider;
-            rider.Mounts.Insert(0, harpy);
-            rider.IsRiding = true;
-            rider.IsFlying = true;
-            AddCompanion(rider);
-         }
-         //---------------------------------------------------------
-         memberToAdd = "Magician";
-         option = this.Options.Find(memberToAdd);
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
-            return false;
-         }
-         if (true == option.IsEnabled)
-         {
-            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
-            ++Utilities.MapItemNum;
-            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c16Magician", "c16Magician", Prince.Territory, 5, 5, 0);
-            member.Food = 10;
-            AddCompanion(member);
-         }
-         //---------------------------------------------------------
-         memberToAdd = "Mercenary";
-         option = this.Options.Find(memberToAdd);
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
-            return false;
-         }
-         if (true == option.IsEnabled)
-         {
-            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
-            ++Utilities.MapItemNum;
-            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", Prince.Territory, 4, 5, 0);
-            member.Food = 5;
-            member.Coin = 98;
-            member.AddNewMount();  // riding
-            member.AddNewMount(MountEnum.Pegasus); // flying
-            member.SetWounds(3, 0); // make unconscious
-            member.IsGuide = true;
-            foreach (string adj in Prince.TerritoryStarting.Adjacents)
+            int numPartyMembers = Utilities.RandomGenerator.Next(8);
+            for ( int i=0; i< numPartyMembers; ++i)
             {
-               ITerritory t = Territories.Find(adj);
-               member.GuideTerritories.Add(t);
+               int index = Utilities.RandomGenerator.Next(Option.MEMBER_COUNT);
+               string memberToAdd = Option.theStartingMembers[index];
+               if (false == AddStartingPartyMemberOption(memberToAdd))
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): AddStartingPartyMemberOption(" + memberToAdd + ") returned false");
+                  return false;
+               }
             }
-            AddCompanion(member);
          }
-         //---------------------------------------------------------
-         memberToAdd = "Merchant";
-         option = this.Options.Find(memberToAdd);
-         if (null == option)
+         else
          {
-            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
-            return false;
-         }
-         if (true == option.IsEnabled)
-         {
-            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
-            ++Utilities.MapItemNum;
-            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c16Magician", "c16Magician", Prince.Territory, 5, 5, 0);
-            AddCompanion(member);
-            IsMerchantWithParty = true;
-         }
-         //---------------------------------------------------------
-         memberToAdd = "Minstrel";
-         option = this.Options.Find(memberToAdd);
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
-            return false;
-         }
-         if (true == option.IsEnabled)
-         {
-            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
-            ++Utilities.MapItemNum;
-            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", Prince.Territory, 0, 0, 0);
-            AddCompanion(member);
-            IsMinstrelPlaying = true; // e049 - minstrel
-         }
-         //---------------------------------------------------------
-         memberToAdd = "Monk";
-         option = this.Options.Find(memberToAdd);
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
-            return false;
-         }
-         if (true == option.IsEnabled)
-         {
-            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
-            ++Utilities.MapItemNum;
-            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c19Monk", "c19Monk", Prince.Territory, 5, 5, 0);
-            AddCompanion(member);
-         }
-         //---------------------------------------------------------
-         memberToAdd = "PorterSlave";
-         option = this.Options.Find(memberToAdd);
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
-            return false;
-         }
-         if (true == option.IsEnabled)
-         {
-            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
-            ++Utilities.MapItemNum;
-            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", Prince.Territory, 0, 0, 0);
-            AddCompanion(member);
-         }
-         //---------------------------------------------------------
-         memberToAdd = "TrueLove";
-         option = this.Options.Find(memberToAdd);
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
-            return false;
-         }
-         if (true == option.IsEnabled)
-         {
-            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
-            ++Utilities.MapItemNum;
-            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", Prince.Territory, 0, 0, 0);
-            AddCompanion(member);
-         }
-         //---------------------------------------------------------
-         memberToAdd = "Wizard";
-         option = this.Options.Find(memberToAdd);
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + memberToAdd + ") returned null");
-            return false;
-         }
-         if (true == option.IsEnabled)
-         {
-            string memberName = memberToAdd + Utilities.MapItemNum.ToString();
-            ++Utilities.MapItemNum;
-            IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c12Wizard", "c12Wizard", Prince.Territory, 4, 4, 0);
-            AddCompanion(member);
+            foreach (string memberToAdd in Option.theStartingMembers)
+            {
+               option = this.Options.Find(memberToAdd);
+               if (null == option)
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(" + memberToAdd + ") returned null");
+                  return false;
+               }
+               if (true == option.IsEnabled)
+               {
+                  if (false == AddStartingPartyMemberOption(memberToAdd))
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): AddStartingPartyMemberOption() returned false");
+                     return false;
+                  }
+               }
+            }
          }
          //---------------------------------------------------------
          option = this.Options.Find("PartyMounted");
@@ -887,7 +662,10 @@ namespace BarbarianPrince
          if (true == option.IsEnabled)
          {
             foreach (IMapItem mi in PartyMembers)
-               mi.AddNewMount();
+            {
+               if (false == mi.IsFlyer())
+                  mi.AddNewMount();
+            }
          }
          //---------------------------------------------------------
          option = this.Options.Find("PartyAirborne");
@@ -899,7 +677,203 @@ namespace BarbarianPrince
          if (true == option.IsEnabled)
          {
             foreach (IMapItem mi in PartyMembers)
-               mi.AddNewMount(MountEnum.Pegasus);
+            {
+               if( false == mi.IsFlyer() )
+                  mi.AddNewMount(MountEnum.Pegasus);
+            }
+         }
+         return true;
+      }
+      private bool AddStartingPartyMemberOption(string partyMemberName)
+      {
+         switch( partyMemberName )
+         {
+            case "Dwarf":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", Prince.Territory, 5, 5, 0);
+                  member.IsFlying = true;
+                  member.IsRiding = true;
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  member.IsFickle = true;
+                  member.AddNewMount(); // riding
+                  AddCompanion(member);
+               }
+               break;
+            case "Eagle":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c62Eagle", "c62Eagle", Prince.Territory, 3, 4, 1);
+                  member.IsFlying = true;
+                  member.IsRiding = true;
+                  AddCompanion(member);
+               }
+               break;
+            case "Elf":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c56Elf", "c56Elf", Prince.Territory, 5, 5, 0);
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  member.AddNewMount(MountEnum.Horse);
+                  AddCompanion(member);
+               }
+               break;
+            case "Falcon":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c82Falcon", "c82Falcon", Prince.Territory, 0, 0, 0);
+                  member.IsFlying = true;
+                  member.IsRiding = true;
+                  member.IsGuide = true;
+                  member.GuideTerritories = Territories;
+                  AddCompanion(member);
+                  IsFalconFed = true;
+               }
+               break;
+            case "Griffon":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem griffon = new MapItem(memberName, 1.0, false, false, false, "c63Griffon", "c63Griffon", Prince.Territory, 3, 4, 1);
+                  griffon.IsFlying = true;
+                  griffon.IsRiding = true;
+                  AddCompanion(griffon);
+                  //---------------------
+                  memberName = "Mercenary" + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem rider = new MapItem(memberName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", Prince.Territory, 5, 5, 0);
+                  griffon.Rider = rider;
+                  rider.Mounts.Insert(0, griffon);
+                  rider.Food = Utilities.RandomGenerator.Next(5);
+                  rider.Coin = Utilities.RandomGenerator.Next(20);
+                  rider.IsRiding = true;
+                  rider.IsFlying = true;
+                  AddCompanion(rider);
+               }
+               break;
+            case "Harpy":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem harpy = new MapItem(memberName, 1.0, false, false, false, "c83Harpy", "c83Harpy", Prince.Territory, 4, 5, 4);
+                  harpy.IsFlying = true;
+                  harpy.IsRiding = true;
+                  AddCompanion(harpy);
+                  //---------------------
+                  memberName = "Monk" + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem rider = new MapItem(memberName, 1.0, false, false, false, "c19Monk", "c19Monk", Prince.Territory, 5, 4, 4);
+                  harpy.Rider = rider;
+                  rider.Mounts.Insert(0, harpy);
+                  rider.Food = Utilities.RandomGenerator.Next(5);
+                  rider.Coin = Utilities.RandomGenerator.Next(20);
+                  rider.IsRiding = true;
+                  rider.IsFlying = true;
+                  AddCompanion(rider);
+               }
+               break;
+            case "Magician":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c16Magician", "c16Magician", Prince.Territory, 5, 5, 0);
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  AddCompanion(member);
+               }
+               break;
+            case "Mercenary":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", Prince.Territory, 4, 5, 0);
+                  member.Food = 5;
+                  member.Coin = 98;
+                  member.AddNewMount();  // riding
+                  member.AddNewMount(MountEnum.Pegasus); // flying
+                  member.SetWounds(3, 0); // make unconscious
+                  member.IsGuide = true;
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  foreach (string adj in Prince.TerritoryStarting.Adjacents)
+                  {
+                     ITerritory t = Territories.Find(adj);
+                     member.GuideTerritories.Add(t);
+                  }
+                  AddCompanion(member);
+               }
+               break;
+            case "Merchant":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c16Magician", "c16Magician", Prince.Territory, 5, 5, 0);
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  AddCompanion(member);
+                  IsMerchantWithParty = true;
+               }
+               break;
+            case "Minstrel":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", Prince.Territory, 0, 0, 0);
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  AddCompanion(member);
+                  IsMinstrelPlaying = true; // e049 - minstrel
+               }
+               break;
+            case "Monk":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c19Monk", "c19Monk", Prince.Territory, 5, 5, 0);
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  AddCompanion(member);
+               }
+               break;
+            case "PorterSlave":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", Prince.Territory, 0, 0, 0);
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  AddCompanion(member);
+               }
+               break;
+            case "TrueLove":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", Prince.Territory, 0, 0, 0);
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  AddCompanion(member);
+               }
+               break;
+            case "Wizard":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c12Wizard", "c12Wizard", Prince.Territory, 4, 4, 0);
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  AddCompanion(member);
+               }
+               break;
+            default:
+               Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMemberOption(): reached default name=" + partyMemberName);
+               return false;
          }
          return true;
       }

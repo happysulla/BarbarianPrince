@@ -75,6 +75,9 @@
       <IsEnabled value="False" />
    </Option>
    <!--========Add Extra PartyMembers==============-->
+   <Option value="RandomParty">
+      <IsEnabled value="True" />
+   </Option>
    <Option value="PartyMounted">
       <IsEnabled value="False" />
    </Option>
@@ -124,6 +127,9 @@
       <IsEnabled value="False" />
    </Option>
    <!--========Set Starting Location==============-->
+   <Option value="RandomHex">
+      <IsEnabled value="True" />
+   </Option>
    <Option value="0109" name="Town">
       <IsEnabled value="False" />
    </Option>

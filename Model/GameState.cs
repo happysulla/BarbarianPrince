@@ -1303,6 +1303,21 @@ namespace BarbarianPrince
                gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
                gi.DieRollAction = GameAction.DieRollActionNone;
                break;
+            case GameAction.SetupNewGame:
+               try
+               {
+               }
+               catch(Exception e)
+               {
+
+               }
+               if (false == PerformAutoSetup(ref gi, ref action))
+               {
+                  returnStatus = "PerformAutoSetup() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
+               }
+               action = GameAction.UpdateLoadingGame;
+               break;
             default:
                break;
          }
@@ -1370,6 +1385,20 @@ namespace BarbarianPrince
       {
          IOption option = null;
          string hex = "";
+         //---------------------------------------------------------
+         hex = "RandomHex"; 
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            int index = Utilities.RandomGenerator.Next(gi.Territories.Count); // returns [0,count)
+            starting = gi.Territories[index];
+            return true;
+         }
          //---------------------------------------------------------
          hex = "0109";  // Town
          option = gi.Options.Find(hex);

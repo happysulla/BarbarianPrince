@@ -34,7 +34,7 @@ namespace BarbarianPrince
       public int DieRoll { set; get; } = 0;
       //--------------------------------------------------------------------
       private Dictionary<string, string> myEvents = null;
-      public Dictionary<string, string> Events { get => myEvents; }
+      public Dictionary<string, string> Events { get => myEvents; } // this property is used for unit testing - 05COnfigFileMgrUnitTesting
       public RuleDialogViewer myRulesMgr = null;
       //--------------------------------------------------------------------
       private ScrollViewer myScrollViewerTextBlock = null;
@@ -163,6 +163,16 @@ namespace BarbarianPrince
                myGameInstance = gi;
                myRulesMgr.GameInstance = gi;
                gi.IsGridActive = false;
+               try // resync the gi.DieResults[] to initial conditions
+               {
+                  foreach (string key in myEvents.Keys)
+                     gi.DieResults[key] = new int[3] { Utilities.NO_RESULT, Utilities.NO_RESULT, Utilities.NO_RESULT };
+               }
+               catch (Exception e)
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "CreateEvents(): e=" + e.ToString());
+                  return;
+               }
                if (false == OpenEvent(gi, gi.EventActive))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): OpenEvent() returned false ae=" + myGameInstance.EventActive + " a=" + action.ToString());
                break;
@@ -590,7 +600,16 @@ namespace BarbarianPrince
          int dieNumIndex = 0;
          bool isModified = true;
          bool[] isDieShown = new bool[4] { true, false, false, false };
-         int[] eventDieRolls = gi.DieResults[key];
+         int[] eventDieRolls = null;
+         try
+         {
+            eventDieRolls = gi.DieResults[key];
+         }
+         catch (Exception e)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "OpenEvent(): for key=" + key + " e=" + e.ToString());
+            return false;
+         }
          while (dieNumIndex < 3 && true == isModified) // substitute die rolls that have occurred when multiple die rolls are in myTextBlock
          {
             int dieCount = 0;

@@ -114,7 +114,6 @@ namespace BarbarianPrince
          mySplashScreen = new SplashDialog(); // show splash screen waiting for finish initializing
          mySplashScreen.Show();
          InitializeComponent();
-
          //-----------------------------------------------------------------
          myGameEngine = ge;
          myGameInstance = gi;

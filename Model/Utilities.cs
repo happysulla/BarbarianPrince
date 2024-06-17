@@ -47,7 +47,7 @@ namespace BarbarianPrince
       public static int theStackSize = 1000;
       public static string[] theNorthOfTragothHexes = new string[21] { "0101", "0201", "0301", "0302", "0401", "0501", "0502", "0601", "0701", "0801", "0901", "1001", "1101", "1201", "1301", "1501", "1601", "1701", "1801", "1901", "2001" };
       //--------------------------------------------
-      private static readonly Random theRandom = new Random(); // default seed is System time
+      private static readonly Random theRandom = new Random(); // default seed is System time 
       static public Random RandomGenerator
       {
          get

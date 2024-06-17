@@ -111,6 +111,7 @@ namespace BarbarianPrince
       SetupManualWitsWiles,
       SetupStartingLocation,
       SetupFinalize,
+      SetupNewGame,
 
       Hunt,                            // Hunt for Food
       HuntPeasantMobPursuit,           // If hunting in populated area and roll 5
