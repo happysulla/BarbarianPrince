@@ -65,5 +65,6 @@ namespace BarbarianPrince
          foreach (IView v in myGameEngine.Views)
             v.UpdateView(ref gi, action);
       }
+      //-----------------------------------------------------------------------
    } // end class
 }

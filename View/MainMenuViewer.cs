@@ -1,13 +1,19 @@
 ﻿using System;
 using System.IO;
 using System.IO.Pipes;
+using System.Linq.Expressions;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Microsoft.Win32;
 namespace BarbarianPrince
 {
+   public static class CustomCommands
+   {
+      public static readonly RoutedUICommand NewCommand = new RoutedUICommand("New","New", typeof(CustomCommands), new InputGestureCollection(){ new KeyGesture(Key.N, ModifierKeys.Control)} );
+   }
    class MainMenuViewer : IView
    {
       private readonly Menu myMainMenu;                     // Top level menu items: File | View | Options | Help
@@ -32,14 +38,12 @@ namespace BarbarianPrince
                {
                   myMenuItemTopLevel1 = menuItem;
                   myMenuItemTopLevel1.Header = "_File";
-                  myMenuItemTopLevel1.InputGestureText = "Ctrl+F";
                }
                //------------------------------------------------
                if (menuItem.Name == "myMenuItemTopLevel2")
                {
                   myMenuItemTopLevel2 = menuItem;
                   myMenuItemTopLevel2.Header = "_Edit";
-                  myMenuItemTopLevel2.InputGestureText = "Ctrl+E";
                   myMenuItemTopLevel2.Visibility = Visibility.Visible;
                   MenuItem subItem21 = new MenuItem();
                   subItem21.Header = "_Undo";
@@ -47,11 +51,13 @@ namespace BarbarianPrince
                   myMenuItemTopLevel2.Items.Add(subItem21);
                   myMenuItemTopLevel22 = new MenuItem();
                   myMenuItemTopLevel22.Header = "_Revert To Daybreak";
+                  myMenuItemTopLevel22.InputGestureText = "Ctrl+R";
                   myMenuItemTopLevel22.Click += MenuItemEditRecover_Click;
                   myMenuItemTopLevel22.IsEnabled = false;
                   myMenuItemTopLevel2.Items.Add(myMenuItemTopLevel22);
                   MenuItem subItem23 = new MenuItem();
                   subItem23.Header = "_Options...";
+                  subItem23.InputGestureText = "Ctrl+Shift+O";
                   subItem23.Click += MenuItemEditOptions_Click;
                   myMenuItemTopLevel2.Items.Add(subItem23);
                }
@@ -60,18 +66,20 @@ namespace BarbarianPrince
                {
                   myMenuItemTopLevel3 = menuItem;
                   myMenuItemTopLevel3.Header = "_View";
-                  myMenuItemTopLevel3.InputGestureText = "Ctrl+O";
                   myMenuItemTopLevel3.Visibility = Visibility.Visible;
                   MenuItem subItem31 = new MenuItem();
                   subItem31.Header = "_Path";
+                  subItem31.InputGestureText = "Ctrl+P";
                   subItem31.Click += MenuItemViewPath_Click;
                   myMenuItemTopLevel3.Items.Add(subItem31);
                   MenuItem subItem32 = new MenuItem();
                   subItem32.Header = "_Rivers";
+                  subItem32.InputGestureText = "Ctrl+Shift+R";
                   subItem32.Click += MenuItemViewRivers_Click;
                   myMenuItemTopLevel3.Items.Add(subItem32);
                   MenuItem subItem33 = new MenuItem();
                   subItem33.Header = "_Inventory";
+                  subItem33.InputGestureText = "Ctrl+I";
                   subItem33.Click += MenuItemViewInventory_Click;
                   myMenuItemTopLevel3.Items.Add(subItem33);
                }
@@ -80,24 +88,26 @@ namespace BarbarianPrince
                {
                   myMenuItemTopLevel4 = menuItem;
                   myMenuItemTopLevel4.Header = "_Help";
-                  myMenuItemTopLevel4.InputGestureText = "Ctrl+H";
                   myMenuItemTopLevel4.Visibility = Visibility.Visible;
                   MenuItem subItem41 = new MenuItem();
                   subItem41.Header = "_Rules...";
+                  subItem41.InputGestureText = "F1";
                   subItem41.Click += MenuItemHelpRules_Click;
                   myMenuItemTopLevel4.Items.Add(subItem41);
                   MenuItem subItem42 = new MenuItem();
                   subItem42.Header = "_Icons...";
+                  subItem42.InputGestureText = "F2";
                   subItem42.Click += MenuItemHelpIcons_Click;
                   myMenuItemTopLevel4.Items.Add(subItem42);
                   MenuItem subItem43 = new MenuItem();
                   subItem43.Header = "_About...";
+                  subItem43.InputGestureText = "Ctrl+A";
                   subItem43.Click += MenuItemHelpAbout_Click;
                   myMenuItemTopLevel4.Items.Add(subItem43);
                }
             } // end foreach (Control item in myMainMenu.Items)
          } // end foreach (Control item in myMainMenu.Items)
-#if UT2
+         #if UT2
             myMenuItemTopLevel1.Width = 300;
             myMenuItemTopLevel1.Click += MenuItemStart_Click;
             myMenuItemTopLevel2.Visibility = Visibility.Hidden;
@@ -114,17 +124,20 @@ namespace BarbarianPrince
             subItem3.Header = "_Cleanup";
             subItem3.Click += MenuItemCleanup_Click;
             myMenuItemTopLevel1.Items.Add(subItem3);
-#else
+         #else
             MenuItem subItem1 = new MenuItem();
             subItem1.Header = "_New...";
+            subItem1.InputGestureText = "Ctrl+N";
             subItem1.Click += MenuItemNew_Click;
             myMenuItemTopLevel1.Items.Add(subItem1);
             MenuItem subItem2 = new MenuItem();
             subItem2.Header = "_Open...";
+            subItem2.InputGestureText = "Ctrl+O";
             subItem2.Click += MenuItemFileOpen_Click;
             myMenuItemTopLevel1.Items.Add(subItem2);
             MenuItem subItem3 = new MenuItem();
             subItem3.Header = "_Save As...";
+            subItem3.InputGestureText = "Ctrl+S";
             subItem3.Click += MenuItemSaveAs_Click;
             myMenuItemTopLevel1.Items.Add(subItem3);
          #endif
