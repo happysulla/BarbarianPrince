@@ -209,6 +209,13 @@ namespace BarbarianPrince
             myGameEngine.PerformAction(ref gi, ref action);
          }
       }
+      public void MenuItemEditRecover_ClickCanExecute(object sender, CanExecuteRoutedEventArgs e)
+      {
+         if (true == GameLoadMgr.theIsCheckFileExist)
+            e.CanExecute = true;
+         else
+            e.CanExecute = false;   
+      }
       public void MenuItemEditOptions_Click(object sender, RoutedEventArgs e)
       {
          GameAction action = GameAction.UpdateEventViewerActive;

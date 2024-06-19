@@ -1985,7 +1985,8 @@ namespace BarbarianPrince
             command = new RoutedCommand();
             keyGesture = new KeyGesture(Key.R, ModifierKeys.Control);
             InputBindings.Add(new KeyBinding(command, keyGesture));
-            CommandBindings.Add(new CommandBinding(command, mmv.MenuItemEditRecover_Click));
+            CommandBinding recoverCmdBinding = new CommandBinding(command, mmv.MenuItemEditRecover_Click, mmv.MenuItemEditRecover_ClickCanExecute);
+            CommandBindings.Add(recoverCmdBinding);
             //------------------------------------------------
             command = new RoutedCommand();
             keyGesture = new KeyGesture(Key.O, ModifierKeys.Control | ModifierKeys.Shift);
