@@ -5,62 +5,10 @@
     </Option>
     <Option value="AutoWealthRollForUnderFive">
         <IsEnabled value="True" />
-    </Option> 
-   <!--===========================-->
-   <Option value="EasiestMonsters">
-      <IsEnabled value="False" />
-   </Option>
-    <Option value="EasyMonsters">
-        <IsEnabled value="False" />
     </Option>
-   <Option value="LessHardMonsters">
-      <IsEnabled value="False" />
+   <Option value="AutoLostDecrease">
+      <IsEnabled value="True" />
    </Option>
-	<!--===========================-->
-	<Option value="NoLostRoll">
-		<IsEnabled value="False" />
-	</Option>
-	<Option value="ForceNoLostEvent">
-		<IsEnabled value="False" />
-	</Option>
-	<Option value="ForceLostEvent">
-		<IsEnabled value="False" />
-	</Option>
-	<!--===========================-->
-	<Option value="ForceNoEvent">
-    <IsEnabled value="False" />
-    </Option>
-	<Option value="ForceEvent">
-		<IsEnabled value="False" />
-	</Option>
-	<!--===========================-->
-	<Option value="ForceNoRoadEvent">
-		<IsEnabled value="False" />
-	</Option>
-	<!--===========================-->
-	<Option value="ForceNoAirEvent">
-		<IsEnabled value="False" />
-	</Option>
-	<Option value="ForceAirEvent">
-		<IsEnabled value="False" />
-	</Option>
-	<!--===========================-->
-	<Option value="ForceNoCrossEvent">
-		<IsEnabled value="False" />
-	</Option>
-	<Option value="ForceCrossEvent">
-		<IsEnabled value="False" />
-	</Option>
-	<Option value="ForceLostAfterCrossEvent">
-		<IsEnabled value="False" />
-	</Option>
-	<!--===========================-->
-	<Option value="ForceNoRaftEvent">
-		<IsEnabled value="False" />
-	</Option>
-	<Option value="ForceRaftEvent">
-		<IsEnabled value="False" />
-	</Option>
    <!--========Add Prince Bonus==============-->
    <Option value="PrinceHorse">
       <IsEnabled value="False" />
@@ -96,10 +44,10 @@
    <Option value="Falcon">
       <IsEnabled value="False" />
    </Option>
-   <Option value="Griffon"> 
+   <Option value="Griffon">
       <IsEnabled value="False" />
    </Option>
-   <Option value="Harpy">   
+   <Option value="Harpy">
       <IsEnabled value="False" />
    </Option>
    <Option value="Magician">
@@ -175,4 +123,59 @@
    <Option value="1723" name="BottomBoard">
       <IsEnabled value="False" />
    </Option>
+   <!--===========================-->
+   <Option value="EasiestMonsters">
+      <IsEnabled value="False" />
+   </Option>
+    <Option value="EasyMonsters">
+        <IsEnabled value="False" />
+    </Option>
+   <Option value="LessHardMonsters">
+      <IsEnabled value="False" />
+   </Option>
+	<!--===========================-->
+	<Option value="NoLostRoll">
+		<IsEnabled value="False" />
+	</Option>
+	<Option value="ForceNoLostEvent">
+		<IsEnabled value="False" />
+	</Option>
+	<Option value="ForceLostEvent">
+		<IsEnabled value="False" />
+	</Option>
+	<!--===========================-->
+	<Option value="ForceNoEvent">
+    <IsEnabled value="False" />
+    </Option>
+	<Option value="ForceEvent">
+		<IsEnabled value="False" />
+	</Option>
+	<!--===========================-->
+	<Option value="ForceNoRoadEvent">
+		<IsEnabled value="False" />
+	</Option>
+	<!--===========================-->
+	<Option value="ForceNoAirEvent">
+		<IsEnabled value="False" />
+	</Option>
+	<Option value="ForceAirEvent">
+		<IsEnabled value="False" />
+	</Option>
+	<!--===========================-->
+	<Option value="ForceNoCrossEvent">
+		<IsEnabled value="False" />
+	</Option>
+	<Option value="ForceCrossEvent">
+		<IsEnabled value="False" />
+	</Option>
+	<Option value="ForceLostAfterCrossEvent">
+		<IsEnabled value="False" />
+	</Option>
+	<!--===========================-->
+	<Option value="ForceNoRaftEvent">
+		<IsEnabled value="False" />
+	</Option>
+	<Option value="ForceRaftEvent">
+		<IsEnabled value="False" />
+	</Option>
 </Options>

@@ -218,8 +218,11 @@ namespace BarbarianPrince
       }
       public void MenuItemEditOptions_Click(object sender, RoutedEventArgs e)
       {
-         GameAction action = GameAction.UpdateEventViewerActive;
-         myGameEngine.PerformAction(ref myGameInstance, ref action);
+         OptionSelectionDialog dialog = new OptionSelectionDialog(myGameInstance.Options); // Set Options in Game
+         if (true == dialog.ShowDialog())
+         {
+
+         }
       }
       public void MenuItemViewPath_Click(object sender, RoutedEventArgs e)
       {

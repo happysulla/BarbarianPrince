@@ -196,6 +196,9 @@
     <Compile Include="View\EventViewerTreasureTable.xaml.cs">
       <DependentUpon>EventViewerTreasureTable.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\OptionSelectionDialog.xaml.cs">
+      <DependentUpon>OptionSelectionDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PartyDisplayDialog.xaml.cs">
       <DependentUpon>PartyDisplayDialog.xaml</DependentUpon>
     </Compile>
@@ -451,6 +454,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EventViewerCombatMgr.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OptionSelectionDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
