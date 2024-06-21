@@ -5172,7 +5172,7 @@ namespace BarbarianPrince
          if (2 < dieRoll) // on 3+, the protector crew arrives to help out in battle
          {
             myIsProtectorArriving = false; // do not want to check for protector crew if it already came 
-            IOption isEasyMonstersOption = myGameInstance.Options.Find("EasyMonsters");
+            Option isEasyMonstersOption = myGameInstance.Options.Find("EasyMonsters");
             if (null == isEasyMonstersOption)
                Logger.Log(LogEnum.LE_ERROR, "ShowProtectorResults(): returned option=null");
             string miName = "ProtectorBoss" + Utilities.MapItemNum.ToString();

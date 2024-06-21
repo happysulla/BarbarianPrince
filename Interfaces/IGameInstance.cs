@@ -6,7 +6,7 @@ namespace BarbarianPrince
    public interface IGameInstance
    {
       bool CtorError { get; }
-      IOptions Options { get; set; }
+      Options Options { get; set; }
       //----------------------------------------------
       IMapItem Prince { set; get; }
       IMapItem ActiveMember { set; get; } // active member is one that springs the trap

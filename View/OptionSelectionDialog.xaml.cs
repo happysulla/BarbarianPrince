@@ -17,23 +17,37 @@ namespace BarbarianPrince
 {
    public partial class OptionSelectionDialog : Window
    {
-      public OptionSelectionDialog(IOptions options)
+      public bool CtorError { get; }
+      public IGameInstance myGameInstance = null;
+      private Options myOptions = null;
+      public Options NewOptions { get => myOptions; set => myOptions = value; }
+      public OptionSelectionDialog(Options options)
       {
          InitializeComponent();
-         SetOptions(options);
+         myOptions = options;
+         if ( false == UpdateDisplay(myOptions))
+         {
+            Logger.Log(LogEnum.LE_ERROR, "OptionSelectionDialog(): SetOptionsInDialog() returned false");
+            CtorError = true;
+         }
       }
       //----------------------------------------------------------------
-      private bool SetOptions(IOptions options)
+      private bool UpdateDisplay(Options options)
       {
          bool isCustomConfig = false;
+         bool isRandomPartyConfig = false;
+         bool isCustomPartyConfig = false;
+         bool isRandomHexConfig = false;
+         bool isCustomHexConfig = false;
          //++++++++++++++++++++++++++++++++++++++++++++++++
-         IOption option = options.Find("AutoSetup");
+         // Auto Rolls
+         Option option = options.Find("AutoSetup");
          if( null == option ) 
          {
             Logger.Log(LogEnum.LE_ERROR, "AutoSetup");
             return false;
          }
-         myCheckboxAutoSetup.IsChecked = option.IsEnabled;
+         myCheckBoxAutoSetup.IsChecked = option.IsEnabled;
          //-------------------------
          option = options.Find("AutoWealthRollForUnderFive");
          if (null == option)
@@ -41,7 +55,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "AutoWealthRollForUnderFive");
             return false;
          }
-         myCheckboxAutoWealth.IsChecked = option.IsEnabled;
+         myCheckBoxAutoWealth.IsChecked = option.IsEnabled;
          //-------------------------
          option = options.Find("AutoLostDecrease");
          if (null == option)
@@ -49,15 +63,18 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "AutoLostDecrease");
             return false;
          }
-         myCheckboxAutoLost.IsChecked = option.IsEnabled;
+         myCheckBoxAutoLostIncrement.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isCustomConfig = true;
          //++++++++++++++++++++++++++++++++++++++++++++++++
+         // Prince 
          option = options.Find("PrinceHorse");
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "PrinceHorse");
             return false;
          }
-         myCheckboxPrinceHorse.IsChecked = option.IsEnabled;
+         myCheckBoxPrinceHorse.IsChecked = option.IsEnabled;
          if( true == option.IsEnabled)
             isCustomConfig = true;
          //-------------------------
@@ -67,7 +84,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "PrincePegasus");
             return false;
          }
-         myCheckboxPrincePegasus.IsChecked = option.IsEnabled;
+         myCheckBoxPrincePegasus.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
             isCustomConfig = true;
          //-------------------------
@@ -77,7 +94,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "PrinceCoin");
             return false;
          }
-         myCheckboxPrinceCoin.IsChecked = option.IsEnabled;
+         myCheckBoxPrinceCoin.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
             isCustomConfig = true;
          //-------------------------
@@ -87,193 +104,298 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "PrinceFood");
             return false;
          }
-         myCheckboxPrinceFood.IsChecked = option.IsEnabled;
+         myCheckBoxPrinceFood.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
             isCustomConfig = true;
          //++++++++++++++++++++++++++++++++++++++++++++++++
-         IOption optionSummaryRandomParty = options.Find("RandomParty");
-         if (null == optionSummaryRandomParty)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "RandomParty");
-            return false;
-         }
-         //-------------------------
-         option = options.Find("Dwarf");
+         // Party Members
+         option = options.Find("RandomParty10");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "Dwarf");
+            Logger.Log(LogEnum.LE_ERROR, "RandomParty10");
             return false;
          }
-         myCheckboxDwarf.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
-            isCustomConfig = true;
-         //-------------------------
-         option = options.Find("Dwarf");
-         if (null == option)
+         myRadioButtonPartyRandom10.IsChecked = option.IsEnabled;
+         isRandomPartyConfig = option.IsEnabled;
+         if ( false == option.IsEnabled)
          {
-            Logger.Log(LogEnum.LE_ERROR, "Dwarf");
-            return false;
+            option = options.Find("RandomParty08");
+            if (null == option)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "RandomParty08");
+               return false;
+            }
+            myRadioButtonPartyRandom8.IsChecked = option.IsEnabled;
+            isRandomPartyConfig = option.IsEnabled;
+            if (false == option.IsEnabled)
+            {
+               option = options.Find("RandomParty05");
+               if (null == option)
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "RandomParty05");
+                  return false;
+               }
+               myRadioButtonPartyRandom5.IsChecked = option.IsEnabled;
+               isRandomPartyConfig = option.IsEnabled;
+               if (false == option.IsEnabled)
+               {
+                  option = options.Find("RandomParty03");
+                  if (null == option)
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "RandomParty03");
+                     return false;
+                  }
+                  myRadioButtonPartyRandom3.IsChecked = option.IsEnabled;
+                  isRandomPartyConfig = option.IsEnabled;
+                  if (false == option.IsEnabled)
+                  {
+                     option = options.Find("RandomParty01");
+                     if (null == option)
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "RandomParty01");
+                        return false;
+                     }
+                     myRadioButtonPartyRandom1.IsChecked = option.IsEnabled;
+                     isRandomPartyConfig = option.IsEnabled;
+                     if (false == option.IsEnabled)
+                     {
+                        option = options.Find("PartyCustom");
+                        if (null == option)
+                        {
+                           Logger.Log(LogEnum.LE_ERROR, "PartyCustom");
+                           return false;
+                        }
+                        if (true == option.IsEnabled)
+                        {
+                           myCheckBoxDwarf.IsEnabled = true;
+                           myCheckBoxEagle.IsEnabled = true;
+                           myCheckBoxElf.IsEnabled = true;
+                           myCheckBoxFalcon.IsEnabled = true;
+                           myCheckBoxGriffon.IsEnabled = true;
+                           myCheckBoxHarpy.IsEnabled = true;
+                           myCheckBoxMagician.IsEnabled = true;
+                           myCheckBoxMercenary.IsEnabled = true;
+                           myCheckBoxMerchant.IsEnabled = true;
+                           myCheckBoxMinstrel.IsEnabled = true;
+                           myCheckBoxMonk.IsEnabled = true;
+                           myCheckBoxPorterSlave.IsEnabled = true;
+                           myCheckBoxTrueLove.IsEnabled = true;
+                           myCheckBoxWizard.IsEnabled = true;
+                           //-------------------------
+                           option = options.Find("Dwarf");
+                           if (null == option)
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "Dwarf");
+                              return false;
+                           }
+                           myCheckBoxDwarf.IsChecked = option.IsEnabled;
+                           if (true == option.IsEnabled)
+                              isCustomPartyConfig = true;
+                           //-------------------------
+                           option = options.Find("Eagle");
+                           if (null == option)
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "Eagle");
+                              return false;
+                           }
+                           myCheckBoxEagle.IsChecked = option.IsEnabled;
+                           if (true == option.IsEnabled)
+                              isCustomPartyConfig = true;
+                           //-------------------------
+                           option = options.Find("Elf");
+                           if (null == option)
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "Elf");
+                              return false;
+                           }
+                           myCheckBoxElf.IsChecked = option.IsEnabled;
+                           if (true == option.IsEnabled)
+                              isCustomPartyConfig = true;
+                           //-------------------------
+                           option = options.Find("Falcon");
+                           if (null == option)
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "Falcon");
+                              return false;
+                           }
+                           myCheckBoxFalcon.IsChecked = option.IsEnabled;
+                           if (true == option.IsEnabled)
+                              isCustomPartyConfig = true;
+                           //-------------------------
+                           option = options.Find("Griffon");
+                           if (null == option)
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "Griffon");
+                              return false;
+                           }
+                           myCheckBoxGriffon.IsChecked = option.IsEnabled;
+                           if (true == option.IsEnabled)
+                              isCustomPartyConfig = true;
+                           //-------------------------
+                           option = options.Find("Harpy");
+                           if (null == option)
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "Harpy");
+                              return false;
+                           }
+                           myCheckBoxHarpy.IsChecked = option.IsEnabled;
+                           if (true == option.IsEnabled)
+                              isCustomPartyConfig = true;
+                           //-------------------------
+                           option = options.Find("Magician");
+                           if (null == option)
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "Magician");
+                              return false;
+                           }
+                           myCheckBoxMagician.IsChecked = option.IsEnabled;
+                           if (true == option.IsEnabled)
+                              isCustomPartyConfig = true;
+                           //-------------------------
+                           option = options.Find("Mercenary");
+                           if (null == option)
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "Mercenary");
+                              return false;
+                           }
+                           myCheckBoxMercenary.IsChecked = option.IsEnabled;
+                           if (true == option.IsEnabled)
+                              isCustomPartyConfig = true;
+                           //-------------------------
+                           option = options.Find("Merchant");
+                           if (null == option)
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "Merchant");
+                              return false;
+                           }
+                           myCheckBoxMerchant.IsChecked = option.IsEnabled;
+                           if (true == option.IsEnabled)
+                              isCustomPartyConfig = true;
+                           //-------------------------
+                           option = options.Find("Minstrel");
+                           if (null == option)
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "Minstrel");
+                              return false;
+                           }
+                           myCheckBoxMinstrel.IsChecked = option.IsEnabled;
+                           if (true == option.IsEnabled)
+                              isCustomPartyConfig = true;
+                           //-------------------------
+                           option = options.Find("Monk");
+                           if (null == option)
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "Monk");
+                              return false;
+                           }
+                           myCheckBoxMonk.IsChecked = option.IsEnabled;
+                           if (true == option.IsEnabled)
+                              isCustomPartyConfig = true;
+                           //-------------------------
+                           option = options.Find("PorterSlave");
+                           if (null == option)
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "PorterSlave");
+                              return false;
+                           }
+                           myCheckBoxPorterSlave.IsChecked = option.IsEnabled;
+                           if (true == option.IsEnabled)
+                              isCustomPartyConfig = true;
+                           //-------------------------
+                           option = options.Find("TrueLove");
+                           if (null == option)
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "TrueLove");
+                              return false;
+                           }
+                           myCheckBoxTrueLove.IsChecked = option.IsEnabled;
+                           if (true == option.IsEnabled)
+                              isCustomPartyConfig = true;
+                           //-------------------------
+                           option = options.Find("Wizard");
+                           if (null == option)
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "Wizard");
+                              return false;
+                           }
+                           myCheckBoxWizard.IsChecked = option.IsEnabled;
+                           if (true == option.IsEnabled)
+                              isCustomPartyConfig = true;
+                        }
+                        else
+                        {
+                           myCheckBoxDwarf.IsEnabled = false;
+                           myCheckBoxEagle.IsEnabled = false;
+                           myCheckBoxElf.IsEnabled = false;
+                           myCheckBoxFalcon.IsEnabled = false;
+                           myCheckBoxGriffon.IsEnabled = false;
+                           myCheckBoxHarpy.IsEnabled = false;
+                           myCheckBoxMagician.IsEnabled = false;
+                           myCheckBoxMercenary.IsEnabled = false;
+                           myCheckBoxMerchant.IsEnabled = false;
+                           myCheckBoxMinstrel.IsEnabled = false;
+                           myCheckBoxMonk.IsEnabled = false;
+                           myCheckBoxPorterSlave.IsEnabled = false;
+                           myCheckBoxTrueLove.IsEnabled = false;
+                           myCheckBoxWizard.IsEnabled = false;
+                        }
+                     }
+                  }
+               }
+            }
          }
-         myCheckboxDwarf.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
-            isCustomConfig = true;
-         //-------------------------
-         option = options.Find("Eagle");
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "Eagle");
-            return false;
-         }
-         myCheckboxEagle.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
-            isCustomConfig = true;
-         //-------------------------
-         option = options.Find("Elf");
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "Elf");
-            return false;
-         }
-         myCheckboxElf.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
-            isCustomConfig = true;
-         //-------------------------
-         option = options.Find("Falcon");
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "Falcon");
-            return false;
-         }
-         myCheckboxFalcon.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
-            isCustomConfig = true;
-         //-------------------------
-         option = options.Find("Griffon");
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "Griffon");
-            return false;
-         }
-         myCheckboxGriffon.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
-            isCustomConfig = true;
-         //-------------------------
-         option = options.Find("Harpy");
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "Harpy");
-            return false;
-         }
-         myCheckboxHarpy.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
-            isCustomConfig = true;
-         //-------------------------
-         option = options.Find("Magician");
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "Magician");
-            return false;
-         }
-         myCheckboxMagician.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
-            isCustomConfig = true;
-         //-------------------------
-         option = options.Find("Mercenary");
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "Mercenary");
-            return false;
-         }
-         myCheckboxMercenary.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
-            isCustomConfig = true;
-         //-------------------------
-         option = options.Find("Mercenary");
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "Mercenary");
-            return false;
-         }
-         myCheckboxMerchant.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
-            isCustomConfig = true;
-         //-------------------------
-         option = options.Find("Merchant");
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "Merchant");
-            return false;
-         }
-         myCheckboxDwarf.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
-            isCustomConfig = true;
-         //-------------------------
-         option = options.Find("Mercenary");
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "Mercenary");
-            return false;
-         }
-         myCheckboxDwarf.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
-            isCustomConfig = true;
-         //-------------------------
-         option = options.Find("Minstrel");
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "Minstrel");
-            return false;
-         }
-         myCheckboxMinstrel.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
-            isCustomConfig = true;
-         //-------------------------
-         option = options.Find("Monk");
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "Monk");
-            return false;
-         }
-         myCheckboxMonk.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
-            isCustomConfig = true;
-         //-------------------------
-         option = options.Find("PorterSlave");
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "PorterSlave");
-            return false;
-         }
-         myCheckboxPorterSlave.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
-            isCustomConfig = true;
-         //-------------------------
-         option = options.Find("TrueLove");
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "TrueLove");
-            return false;
-         }
-         myCheckboxTrueLove.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
-            isCustomConfig = true;
-         //-------------------------
-         option = options.Find("Wizard");
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "Wizard");
-            return false;
-         }
-         myCheckboxWizard.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
-            isCustomConfig = true;
+         if( false == isRandomPartyConfig )
+            myRadioButtonPartyOriginal.IsChecked = true;
          //++++++++++++++++++++++++++++++++++++++++++++++++
-         IOption optionSummaryRandomHex = options.Find("RandomHex");
-         if (null == optionSummaryRandomHex)
+         option = options.Find("RandomHex");
+         if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "RandomParty");
+            Logger.Log(LogEnum.LE_ERROR, "RandomHex");
             return false;
          }
+         myRadioButtonHexRandom.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isRandomHexConfig = true;
+         //-------------------------
+         option = options.Find("RandomTown");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "RandomTown");
+            return false;
+         }
+         myRadioButtonHexRandomTown.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isRandomHexConfig = true;
+         //-------------------------
+         option = options.Find("RandomLeft");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "RandomLeft");
+            return false;
+         }
+         myRadioButtonHexRandomLeft.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isRandomHexConfig = true;
+         //-------------------------
+         option = options.Find("RandomRight");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "RandomRight");
+            return false;
+         }
+         myRadioButtonHexRandomRight.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isRandomHexConfig = true;
+         //-------------------------
+         option = options.Find("RandomBottom");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "RandomBottom");
+            return false;
+         }
+         myRadioButtonHexRandomBottom.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isRandomHexConfig = true;
          //-------------------------
          option = options.Find("0109");
          if (null == option)
@@ -281,9 +403,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "0109");
             return false;
          }
-         myCheckboxDwarf.IsChecked = option.IsEnabled;
+         myRadioButtonHexTown.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
-            isCustomConfig = true;
+            isCustomHexConfig = true;
          //-------------------------
          option = options.Find("0206");
          if (null == option)
@@ -291,9 +413,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "0206");
             return false;
          }
-         myRadiobuttonHexRuin.IsChecked = option.IsEnabled;
+         myRadioButtonHexRuin.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
-            isCustomConfig = true;
+            isCustomHexConfig = true;
          //-------------------------
          option = options.Find("0711");
          if (null == option)
@@ -301,9 +423,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "0711");
             return false;
          }
-         myRadiobuttonHexTemple.IsChecked = option.IsEnabled;
+         myRadioButtonHexTemple.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
-            isCustomConfig = true;
+            isCustomHexConfig = true;
          //-------------------------
          option = options.Find("1212");
          if (null == option)
@@ -311,9 +433,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "1212");
             return false;
          }
-         myRadiobuttonHexHuldra.IsChecked = option.IsEnabled;
+         myRadioButtonHexHuldra.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
-            isCustomConfig = true;
+            isCustomHexConfig = true;
          //-------------------------
          option = options.Find("0323");
          if (null == option)
@@ -321,9 +443,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "0323");
             return false;
          }
-         myRadiobuttonHexDrogat.IsChecked = option.IsEnabled;
+         myRadioButtonHexDrogat.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
-            isCustomConfig = true;
+            isCustomHexConfig = true;
          //-------------------------
          option = options.Find("1923");
          if (null == option)
@@ -331,9 +453,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "1923");
             return false;
          }
-         myRadiobuttonHexLadyAeravir.IsChecked = option.IsEnabled;
+         myRadioButtonHexLadyAeravir.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
-            isCustomConfig = true;
+            isCustomHexConfig = true;
          //-------------------------
          option = options.Find("0418");
          if (null == option)
@@ -341,9 +463,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "0418");
             return false;
          }
-         myRadiobuttonHexFarmland.IsChecked = option.IsEnabled;
+         myRadioButtonHexFarmland.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
-            isCustomConfig = true;
+            isCustomHexConfig = true;
          //-------------------------
          option = options.Find("0410");
          if (null == option)
@@ -351,9 +473,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "0410");
             return false;
          }
-         myRadiobuttonHexFarmland.IsChecked = option.IsEnabled;
+         myRadioButtonHexCountryside.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
-            isCustomConfig = true;
+            isCustomHexConfig = true;
          //-------------------------
          option = options.Find("0409");
          if (null == option)
@@ -361,9 +483,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "0409");
             return false;
          }
-         myRadiobuttonHexForest.IsChecked = option.IsEnabled;
+         myRadioButtonHexForest.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
-            isCustomConfig = true;
+            isCustomHexConfig = true;
          //-------------------------
          option = options.Find("0406");
          if (null == option)
@@ -371,9 +493,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "0406");
             return false;
          }
-         myRadiobuttonHexHill.IsChecked = option.IsEnabled;
+         myRadioButtonHexHill.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
-            isCustomConfig = true;
+            isCustomHexConfig = true;
          //-------------------------
          option = options.Find("0405");
          if (null == option)
@@ -381,9 +503,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "0405");
             return false;
          }
-         myRadiobuttonHexMountain.IsChecked = option.IsEnabled;
+         myRadioButtonHexMountain.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
-            isCustomConfig = true;
+            isCustomHexConfig = true;
          //-------------------------
          option = options.Find("0411");
          if (null == option)
@@ -391,9 +513,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "0411");
             return false;
          }
-         myRadiobuttonHexSwamp.IsChecked = option.IsEnabled;
+         myRadioButtonHexSwamp.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
-            isCustomConfig = true;
+            isCustomHexConfig = true;
          //-------------------------
          option = options.Find("0407");
          if (null == option)
@@ -401,9 +523,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "0407");
             return false;
          }
-         myRadiobuttonHexDesert.IsChecked = option.IsEnabled;
+         myRadioButtonHexDesert.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
-            isCustomConfig = true;
+            isCustomHexConfig = true;
          //-------------------------
          option = options.Find("1905");
          if (null == option)
@@ -411,9 +533,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "1905");
             return false;
          }
-         myRadiobuttonHexRoad.IsChecked = option.IsEnabled;
+         myRadioButtonHexRoad.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
-            isCustomConfig = true;
+            isCustomHexConfig = true;
          //-------------------------
          option = options.Find("1723");
          if (null == option)
@@ -421,10 +543,13 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "1723");
             return false;
          }
-         myRadiobuttonHexBottom.IsChecked = option.IsEnabled;
+         myRadioButtonHexBottom.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
-            isCustomConfig = true;
+            isCustomHexConfig = true;
+         if ((false == isRandomHexConfig) && (false == isCustomHexConfig))
+            myRadioButtonHexOriginal.IsChecked = true;
          //++++++++++++++++++++++++++++++++++++++++++++++++
+         // Monsters
          option = options.Find("EasiestMonsters");
          if (null == option)
          {
@@ -433,27 +558,55 @@ namespace BarbarianPrince
          }
          myRadioButtonMonsterEasiest.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
-            isCustomConfig = true;
-         //-------------------------
-         option = options.Find("EasyMonsters");
-         if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "EasyMonsters");
-            return false;
-         }
-         myRadioButtonMonsterEasy.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
             isCustomConfig = true;
-         //-------------------------
-         option = options.Find("LessHardMonsters");
-         if (null == option)
+         }
+         else
          {
-            Logger.Log(LogEnum.LE_ERROR, "LessHardMonsters");
-            return false;
+            option = options.Find("EasyMonsters");
+            if (null == option)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "EasyMonsters");
+               return false;
+            }
+            myRadioButtonMonsterEasy.IsChecked = option.IsEnabled;
+            if (true == option.IsEnabled)
+            {
+               isCustomConfig = true;
+            }
+            else
+            {
+               option = options.Find("EasyMonsters");
+               if (null == option)
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "EasyMonsters");
+                  return false;
+               }
+               myRadioButtonMonsterEasy.IsChecked = option.IsEnabled;
+               if (true == option.IsEnabled)
+               {
+                  isCustomConfig = true;
+               }
+               else
+               {
+                  option = options.Find("LessHardMonsters");
+                  if (null == option)
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "LessHardMonsters");
+                     return false;
+                  }
+                  myRadioButtonMonsterLessEasy.IsChecked = option.IsEnabled;
+                  if (true == option.IsEnabled)
+                  {
+                     isCustomConfig = true;
+                  }
+                  else
+                  {
+                     myRadioButtonMonsterNormal.IsChecked = true;
+                  }
+               }
+            }
          }
-         myRadioButtonMonsterLessEasy.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
-            isCustomConfig = true;
          //++++++++++++++++++++++++++++++++++++++++++++++++
          option = options.Find("NoLostRoll");
          if (null == option)
@@ -461,7 +614,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "NoLostRoll");
             return false;
          }
-         myCheckboxNoLostRoll.IsChecked = option.IsEnabled;
+         myCheckBoxNoLostRoll.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isCustomConfig = true;
          //-------------------------
          option = options.Find("ForceNoLostEvent");
          if (null == option)
@@ -469,7 +624,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "ForceNoLostEvent");
             return false;
          }
-         myCheckboxNoLostEvent.IsChecked = option.IsEnabled;
+         myCheckBoxNoLostEvent.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isCustomConfig = true;
          //-------------------------
          option = options.Find("ForceLostEvent");
          if (null == option)
@@ -477,7 +634,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "ForceLostEvent");
             return false;
          }
-         myCheckboxForceLostEvent.IsChecked = option.IsEnabled;
+         myCheckBoxForceLostEvent.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isCustomConfig = true;
          //-------------------------
          option = options.Find("ForceNoEvent");
          if (null == option)
@@ -485,7 +644,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "ForceNoEvent");
             return false;
          }
-         myCheckboxNoEvent.IsChecked = option.IsEnabled;
+         myCheckBoxNoEvent.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isCustomConfig = true;
          //-------------------------
          option = options.Find("ForceEvent");
          if (null == option)
@@ -493,7 +654,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "ForceEvent");
             return false;
          }
-         myCheckboxForceEvent.IsChecked = option.IsEnabled;
+         myCheckBoxForceEvent.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isCustomConfig = true;
          //-------------------------
          option = options.Find("ForceNoRoadEvent");
          if (null == option)
@@ -501,7 +664,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "ForceNoRoadEvent");
             return false;
          }
-         myCheckboxNoRoadEvent.IsChecked = option.IsEnabled;
+         myCheckBoxNoRoadEvent.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isCustomConfig = true;
          //-------------------------
          option = options.Find("ForceNoAirEvent");
          if (null == option)
@@ -509,7 +674,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "ForceNoAirEvent");
             return false;
          }
-         myCheckboxNoAirEvent.IsChecked = option.IsEnabled;
+         myCheckBoxNoAirEvent.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isCustomConfig = true;
          //-------------------------
          option = options.Find("ForceAirEvent");
          if (null == option)
@@ -517,7 +684,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "ForceAirEvent");
             return false;
          }
-         myCheckboxForceAirEvent.IsChecked = option.IsEnabled;
+         myCheckBoxForceAirEvent.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isCustomConfig = true;
          //-------------------------
          option = options.Find("ForceNoCrossEvent");
          if (null == option)
@@ -525,7 +694,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "ForceNoCrossEvent");
             return false;
          }
-         myCheckboxNoCrossEvent.IsChecked = option.IsEnabled;
+         myCheckBoxNoCrossEvent.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isCustomConfig = true;
          //-------------------------
          option = options.Find("ForceCrossEvent");
          if (null == option)
@@ -533,7 +704,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "ForceCrossEvent");
             return false;
          }
-         myCheckboxForceCrossEvent.IsChecked = option.IsEnabled;
+         myCheckBoxForceCrossEvent.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isCustomConfig = true;
          //-------------------------
          option = options.Find("ForceLostAfterCrossEvent");
          if (null == option)
@@ -541,7 +714,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "ForceLostAfterCrossEvent");
             return false;
          }
-         myCheckboxForceLostAfterCross.IsChecked = option.IsEnabled;
+         myCheckBoxForceLostAfterCross.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isCustomConfig = true;
          //-------------------------
          option = options.Find("ForceNoRaftEvent");
          if (null == option)
@@ -549,7 +724,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "ForceNoRaftEvent");
             return false;
          }
-         myCheckboxNoRaftEvent.IsChecked = option.IsEnabled;
+         myCheckBoxNoRaftEvent.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isCustomConfig = true;
          //-------------------------
          option = options.Find("ForceRaftEvent");
          if (null == option)
@@ -557,9 +734,52 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "ForceRaftEvent");
             return false;
          }
-         myCheckboxForceRaftEvent.IsChecked = option.IsEnabled;
+         myCheckBoxForceRaftEvent.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isCustomConfig = true;
          //++++++++++++++++++++++++++++++++++++++++++++++++
-
+         // Summary Selection
+         if ((true == isCustomConfig) || (true == isCustomPartyConfig) || (true == isCustomHexConfig))
+         {
+            myRadioButtonOriginal.IsChecked = false;
+            myRadioButtonRandomParty.IsChecked = false;
+            myRadioButtonRandomStart.IsChecked = false;
+            myRadioButtonAllRandom.IsChecked = false;
+            myRadioButtonCustom.IsChecked = true;
+         }
+         else if ((true == isRandomPartyConfig) && (true == isRandomHexConfig))
+         {
+            myRadioButtonOriginal.IsChecked = false;
+            myRadioButtonRandomParty.IsChecked = false;
+            myRadioButtonRandomStart.IsChecked = false;
+            myRadioButtonAllRandom.IsChecked = true;
+            myRadioButtonCustom.IsChecked = false;
+         }
+         else if (true == isRandomPartyConfig)
+         {
+            myRadioButtonOriginal.IsChecked = false;
+            myRadioButtonRandomParty.IsChecked = true;
+            myRadioButtonRandomStart.IsChecked = false;
+            myRadioButtonAllRandom.IsChecked = false;
+            myRadioButtonCustom.IsChecked = false;
+         }
+         else if (true == isRandomHexConfig)
+         {
+            myRadioButtonOriginal.IsChecked = false;
+            myRadioButtonRandomParty.IsChecked = false;
+            myRadioButtonRandomStart.IsChecked = true;
+            myRadioButtonAllRandom.IsChecked = false;
+            myRadioButtonCustom.IsChecked = false;
+         }
+         else if (true == isRandomHexConfig)
+         {
+            myRadioButtonOriginal.IsChecked = true;
+            myRadioButtonRandomParty.IsChecked = false;
+            myRadioButtonRandomStart.IsChecked = false;
+            myRadioButtonAllRandom.IsChecked = false;
+            myRadioButtonCustom.IsChecked = false;
+         }
+         //++++++++++++++++++++++++++++++++++++++++++++++++
          return true;
       }
       //----------------------------------------------------------------
@@ -569,6 +789,27 @@ namespace BarbarianPrince
       private void ButtonCancel_Click(object sender, RoutedEventArgs e)
       {
          Close();
+      }
+
+      private void StackPanelSummary_Click(object sender, RoutedEventArgs e)
+      {
+         RadioButton rb = (RadioButton)sender;  
+         switch(rb.Name) 
+         {
+            case "myRadioButtonOriginal":
+               break;
+            case "myRadioButtonRandomParty":
+               break;
+            case "myRadioButtonRandomStart":
+               break;
+            case "myRadioButtonAllRandom":
+               break;
+            case "myRadioButtonCustom":
+               break;
+            default:
+               Logger.Log(LogEnum.LE_ERROR, "StackPanelSummary_Click(): reached default rb.Name=" + rb.Name);
+               return;
+         }
       }
    }
 }

@@ -219,10 +219,13 @@ namespace BarbarianPrince
       public void MenuItemEditOptions_Click(object sender, RoutedEventArgs e)
       {
          OptionSelectionDialog dialog = new OptionSelectionDialog(myGameInstance.Options); // Set Options in Game
-         if (true == dialog.ShowDialog())
+         if( true == dialog.CtorError)
          {
-
+            Logger.Log(LogEnum.LE_ERROR, "MenuItemEditOptions_Click(): OptionSelectionDialog CtorError=true");
+            return;
          }
+         if (true == dialog.ShowDialog())
+            myGameInstance.Options = dialog.NewOptions;
       }
       public void MenuItemViewPath_Click(object sender, RoutedEventArgs e)
       {

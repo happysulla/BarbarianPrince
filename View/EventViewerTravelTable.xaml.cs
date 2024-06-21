@@ -150,7 +150,7 @@ namespace BarbarianPrince
          myDashArray.Add(2);  // used for dotted lines
          myGridTravelTable.MouseDown += Grid_MouseDown;
          //--------------------------------------------------
-         IOption optionNoLostRoll= myGameInstance.Options.Find("NoLostRoll");
+         Option optionNoLostRoll= myGameInstance.Options.Find("NoLostRoll");
          if (null == optionNoLostRoll)
          {
             Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceNoLostEvent) returned null");
@@ -159,7 +159,7 @@ namespace BarbarianPrince
          }
          myOptionNoLostRoll = optionNoLostRoll.IsEnabled;
          //--------------------------------------------------
-         IOption optionNoLostEvent = myGameInstance.Options.Find("ForceNoLostEvent");
+         Option optionNoLostEvent = myGameInstance.Options.Find("ForceNoLostEvent");
          if (null == optionNoLostEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceNoLostEvent) returned null");
@@ -168,7 +168,7 @@ namespace BarbarianPrince
          }
          myOptionNoLostEvent = optionNoLostEvent.IsEnabled;
          //--------------------------------------------------
-         IOption optionForceLostEvent = myGameInstance.Options.Find("ForceLostEvent");
+         Option optionForceLostEvent = myGameInstance.Options.Find("ForceLostEvent");
          if (null == optionForceLostEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceLostResult) returned null");
@@ -177,7 +177,7 @@ namespace BarbarianPrince
          }
          myOptionForceLostEvent = optionForceLostEvent.IsEnabled;
          //--------------------------------------------------
-         IOption optionForceNoCrossEvent = myGameInstance.Options.Find("ForceNoCrossEvent");
+         Option optionForceNoCrossEvent = myGameInstance.Options.Find("ForceNoCrossEvent");
          if (null == optionForceNoCrossEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceNoCrossEvent) returned null");
@@ -186,7 +186,7 @@ namespace BarbarianPrince
          }
          myOptionForceNoCrossEvent = optionForceNoCrossEvent.IsEnabled;
          //--------------------------------------------------
-         IOption optionForceLostAfterCrossEvent = myGameInstance.Options.Find("ForceLostAfterCrossEvent");
+         Option optionForceLostAfterCrossEvent = myGameInstance.Options.Find("ForceLostAfterCrossEvent");
          if (null == optionForceLostAfterCrossEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceLostAfterCrossEvent) returned null");
@@ -195,7 +195,7 @@ namespace BarbarianPrince
          }
          myOptionForceLostAfterCrossEvent = optionForceLostAfterCrossEvent.IsEnabled;
          //--------------------------------------------------
-         IOption optionForceCrossEvent = myGameInstance.Options.Find("ForceCrossEvent");
+         Option optionForceCrossEvent = myGameInstance.Options.Find("ForceCrossEvent");
          if (null == optionForceCrossEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceCrossEvent) returned null");
@@ -204,7 +204,7 @@ namespace BarbarianPrince
          }
          myOptionForceCrossEvent = optionForceCrossEvent.IsEnabled;
          //--------------------------------------------------
-         IOption optionForceNoEvent = myGameInstance.Options.Find("ForceNoEvent");
+         Option optionForceNoEvent = myGameInstance.Options.Find("ForceNoEvent");
          if (null == optionForceNoEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceNoEvent) returned null");
@@ -213,7 +213,7 @@ namespace BarbarianPrince
          }
          myOptionForceNoEvent = optionForceNoEvent.IsEnabled;
          //--------------------------------------------------
-         IOption optionForceEvent = myGameInstance.Options.Find("ForceEvent");
+         Option optionForceEvent = myGameInstance.Options.Find("ForceEvent");
          if (null == optionForceEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceEvent) returned null");
@@ -222,7 +222,7 @@ namespace BarbarianPrince
          }
          myOptionForceEvent = optionForceEvent.IsEnabled;
          //--------------------------------------------------
-         IOption optionForceNoRoadEvent = myGameInstance.Options.Find("ForceNoRoadEvent");
+         Option optionForceNoRoadEvent = myGameInstance.Options.Find("ForceNoRoadEvent");
          if (null == optionForceNoRoadEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceNoRoadEvent) returned null");
@@ -231,7 +231,7 @@ namespace BarbarianPrince
          }
          myOptionForceNoRoadEvent = optionForceNoRoadEvent.IsEnabled;
          //--------------------------------------------------
-         IOption optionForceNoAirEvent = myGameInstance.Options.Find("ForceNoAirEvent");
+         Option optionForceNoAirEvent = myGameInstance.Options.Find("ForceNoAirEvent");
          if (null == optionForceNoAirEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceNoAirEvent) returned null");
@@ -240,7 +240,7 @@ namespace BarbarianPrince
          }
          myOptionForceNoAirEvent = optionForceNoAirEvent.IsEnabled;
          //--------------------------------------------------
-         IOption optionForceAirEvent = myGameInstance.Options.Find("ForceAirEvent");
+         Option optionForceAirEvent = myGameInstance.Options.Find("ForceAirEvent");
          if (null == optionForceAirEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceAirEvent) returned null");
@@ -249,7 +249,7 @@ namespace BarbarianPrince
          }
          myOptionForceAirEvent = optionForceAirEvent.IsEnabled;
          //--------------------------------------------------
-         IOption optionForceNoRaftEvent = myGameInstance.Options.Find("ForceNoRaftEvent");
+         Option optionForceNoRaftEvent = myGameInstance.Options.Find("ForceNoRaftEvent");
          if (null == optionForceNoRaftEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceNoRaftEvent) returned null");
@@ -258,7 +258,7 @@ namespace BarbarianPrince
          }
          myOptionForceNoRaftEvent = optionForceNoRaftEvent.IsEnabled;
          //--------------------------------------------------
-         IOption optionForceRaftEvent = myGameInstance.Options.Find("ForceRaftEvent");
+         Option optionForceRaftEvent = myGameInstance.Options.Find("ForceRaftEvent");
          if (null == optionForceRaftEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceRaftEvent) returned null");

@@ -966,7 +966,7 @@ namespace BarbarianPrince
       } // Before showing Encounter Event, show another event based on hex contents
       protected bool SetEncounterOptions(IGameInstance gi, bool isNoLost, bool isForceLost, bool isForceLostEvent, bool isNoEvent, bool isForceEvent)
       {
-         IOption optionNoLost = gi.Options.Find("NoLost");
+         Option optionNoLost = gi.Options.Find("NoLost");
          if (null == optionNoLost)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetEncounterOptions(): gi.Options.Find(NoLost) returned null");
@@ -974,7 +974,7 @@ namespace BarbarianPrince
          }
          optionNoLost.IsEnabled = isNoLost;
          //-------------------------------------------
-         IOption optionForceLost = gi.Options.Find("ForceLost");
+         Option optionForceLost = gi.Options.Find("ForceLost");
          if (null == optionForceLost)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetEncounterOptions(): gi.Options.Find(ForceLost) returned null");
@@ -982,7 +982,7 @@ namespace BarbarianPrince
          }
          optionForceLost.IsEnabled = isForceLost;
          //-------------------------------------------
-         IOption optionForceLostEvent = gi.Options.Find("ForceLostEvent");
+         Option optionForceLostEvent = gi.Options.Find("ForceLostEvent");
          if (null == optionForceLostEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetEncounterOptions(): gi.Options.Find(ForceLostEvent) returned null");
@@ -990,7 +990,7 @@ namespace BarbarianPrince
          }
          optionForceLostEvent.IsEnabled = isForceLostEvent;
          //-------------------------------------------
-         IOption optionNoEvent = gi.Options.Find("NoEvent");
+         Option optionNoEvent = gi.Options.Find("NoEvent");
          if (null == optionNoEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetEncounterOptions(): gi.Options.Find(NoEvent) returned null");
@@ -998,7 +998,7 @@ namespace BarbarianPrince
          }
          optionNoEvent.IsEnabled = isNoEvent;
          //-------------------------------------------
-         IOption optionForceEvent = gi.Options.Find("ForceEvent");
+         Option optionForceEvent = gi.Options.Find("ForceEvent");
          if (null == optionForceEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetEncounterOptions(): gi.Options.Find(ForceEvent) returned null");
@@ -1145,21 +1145,21 @@ namespace BarbarianPrince
                return character;
          }
          //------------------------------------------------------------
-         IOption isEasiestMonstersOption = gi.Options.Find("EasiestMonsters");
+         Option isEasiestMonstersOption = gi.Options.Find("EasiestMonsters");
          if (null == isEasiestMonstersOption)
          {
             Logger.Log(LogEnum.LE_ERROR, "CreateCharacter(): unknwon option=EasiestMonsters");
             gi.EncounteredMembers.Add(character);
             return character;
          }
-         IOption isEasyMonstersOption = gi.Options.Find("EasyMonsters");
+         Option isEasyMonstersOption = gi.Options.Find("EasyMonsters");
          if (null == isEasyMonstersOption)
          {
             Logger.Log(LogEnum.LE_ERROR, "CreateCharacter(): unknwon option=EasyMonsters");
             gi.EncounteredMembers.Add(character);
             return character;
          }
-         IOption isLessHardMonstersOption = gi.Options.Find("LessHardMonsters");
+         Option isLessHardMonstersOption = gi.Options.Find("LessHardMonsters");
          if (null == isLessHardMonstersOption)
          {
             Logger.Log(LogEnum.LE_ERROR, "CreateCharacter(): unknwon option=LessHardMonsters");
@@ -1230,7 +1230,7 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerDisplay: // Only change active event
                break;
             case GameAction.RemoveSplashScreen:
-               IOption option = gi.Options.Find("AutoSetup");
+               Option option = gi.Options.Find("AutoSetup");
                if (null == option)
                {
                   returnStatus = "gi.Options.Find(AutoSetup) returned null";
@@ -1383,7 +1383,7 @@ namespace BarbarianPrince
       }
       private bool SetStartingLocationOption(IGameInstance gi, ref ITerritory starting)
       {
-         IOption option = null;
+         Option option = null;
          string hex = "";
          //---------------------------------------------------------
          hex = "RandomHex"; 
@@ -7488,7 +7488,7 @@ namespace BarbarianPrince
       }
       protected bool EncounterLootStart(IGameInstance gi, ref GameAction action, int dieRoll)
       {
-         IOption autoWealthOption = gi.Options.Find("AutoWealthRollForUnderFive");
+         Option autoWealthOption = gi.Options.Find("AutoWealthRollForUnderFive");
          if (null == autoWealthOption)
          {
             Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): returned option=null");

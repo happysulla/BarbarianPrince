@@ -16,7 +16,7 @@ namespace BarbarianPrince
    public class GameInstance : IGameInstance
    {
       [NonSerialized] static public Logger Logger = new Logger();
-      public IOptions Options { get; set; } = new Options();
+      public Options Options { get; set; } = new Options();
       //------------------------------------------------
       public bool CtorError { get; } = false;
       public GameInstance() // Constructor - set log levels
@@ -123,7 +123,7 @@ namespace BarbarianPrince
          this.SunriseChoice = gi.SunriseChoice;
          this.DieRollAction = gi.DieRollAction;
          //------------------------------------------------
-         foreach (IOption o in gi.Options)
+         foreach (Option o in gi.Options)
             this.Options.Add(o);
          //------------------------------------------------
          if (null == gi.ActiveHex)
@@ -561,7 +561,7 @@ namespace BarbarianPrince
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       private bool AddStartingPrinceOption()
       {
-         IOption option = null;
+         Option option = null;
          String itemToAdd = "";
          //---------------------------------------------------------
          itemToAdd = "PrinceHorse";
@@ -611,7 +611,7 @@ namespace BarbarianPrince
       }
       private bool AddStartingOptions()
       {
-         IOption option = null;
+         Option option = null;
          option = this.Options.Find("RandomParty");
          if (null == option)
          {
@@ -2992,7 +2992,7 @@ namespace BarbarianPrince
                reader.Close();
          }
       }
-      public bool ReadOptionsXml(IOptions options)
+      public bool ReadOptionsXml(Options options)
       {
          XmlTextReader reader = null;
          try
@@ -3011,7 +3011,7 @@ namespace BarbarianPrince
                      string isEnabledStr = reader.GetAttribute("value");
                      bool isEnabled = Boolean.Parse(isEnabledStr);
                      //---------------------------------------------------------
-                     IOption option = new Option(name, isEnabled);
+                     Option option = new Option(name, isEnabled);
                      options.Add(option);
                   } // end if
                } // end if

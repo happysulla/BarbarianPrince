@@ -23,15 +23,35 @@
       <IsEnabled value="False" />
    </Option>
    <!--========Add Extra PartyMembers==============-->
-   <Option value="RandomParty">
-      <IsEnabled value="True" />
-   </Option>
    <Option value="PartyMounted">
       <IsEnabled value="False" />
    </Option>
    <Option value="PartyAirborne">
       <IsEnabled value="False" />
    </Option>
+   <!--========Random PartyMembers==============-->
+   <Option value="RandomParty">
+      <IsEnabled value="True" />
+   </Option>
+   <Option value="RandomParty10">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="RandomParty08">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="RandomParty05">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="RandomParty03">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="RandomParty01">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="PartyCustom">
+      <IsEnabled value="False" />
+   </Option>
+   <!--========Cutom PartyMembers==============-->
    <Option value="Dwarf">
       <IsEnabled value="False" />
    </Option>
@@ -75,6 +95,21 @@
       <IsEnabled value="False" />
    </Option>
    <!--========Set Starting Location==============-->
+   <Option value="RandomHex">
+      <IsEnabled value="True" />
+   </Option>
+   <Option value="RandomTown">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="RandomLeft">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="RandomRight">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="RandomBottom">
+      <IsEnabled value="False" />
+   </Option>
    <Option value="RandomHex">
       <IsEnabled value="True" />
    </Option>
