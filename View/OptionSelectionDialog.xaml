@@ -39,92 +39,91 @@
          </GroupBox>
          <GroupBox x:Name="myGroupBoxPrince" Grid.Row="2" Grid.Column="0" Header="Prince" FontSize="14"  Margin="10,0,10,0">
             <StackPanel Name="myStackPanelPrince" Orientation="Vertical" VerticalAlignment="Top" Margin="5,5,5,5" >
-               <CheckBox x:Name="myCheckBoxPrinceHorse"  Content="Add Mount" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxPrincePegasus"  Content="Add Pegasus" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxPrinceCoin"  Content="Add Coin" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxPrinceFood"  Content="Add Food" Margin="5,0,5,0" Padding="4,-4,0,0" />
+                    <CheckBox x:Name="myCheckBoxPrinceHorse"  Content="Add Mount" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPrince_Click"/>
+                    <CheckBox x:Name="myCheckBoxPrincePegasus"  Content="Add Pegasus" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPrince_Click"/>
+                    <CheckBox x:Name="myCheckBoxPrinceCoin"  Content="Add Coin" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPrince_Click"/>
+                    <CheckBox x:Name="myCheckBoxPrinceFood"  Content="Add Food" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPrince_Click"/>
             </StackPanel>
          </GroupBox>
          <GroupBox x:Name="myGroupBoxParty" Grid.Row="2" Grid.Column="1" Header="Party Members" FontSize="14"  Margin="10,0,10,0">
             <StackPanel Name="myStackPanelParty" Orientation="Vertical" VerticalAlignment="Top" Margin="5,5,5,5" >
-               <RadioButton x:Name="myRadioButtonPartyOriginal" GroupName="Party" Content="Only Prince" Margin="5,0,5,0"  Padding="4,-4,0,0"/>
-               <RadioButton x:Name="myRadioButtonPartyRandom10" GroupName="Party" Content="10 Random Members" Margin="5,0,5,0"  Padding="4,-4,0,0"/>
-               <RadioButton x:Name="myRadioButtonPartyRandom8" GroupName="Party" Content="8 Random Members" Margin="5,0,5,0"  Padding="4,-4,0,0"/>
-               <RadioButton x:Name="myRadioButtonPartyRandom5" GroupName="Party" Content="5 Random Members"  Margin="5,0,5,0"  Padding="4,-4,0,0"/>
-               <RadioButton x:Name="myRadioButtonPartyRandom3" GroupName="Party" Content="3 Random Members" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <RadioButton x:Name="myRadioButtonPartyRandom1" GroupName="Party" Content="1 Random Member" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <RadioButton x:Name="myRadioButtonPartyCustom" GroupName="Party" Content="Custom Members" Margin="5,0,5,0" Padding="4,-4,0,0" />
+                    <RadioButton x:Name="myRadioButtonPartyOriginal" GroupName="Party" Content="Only Prince" Margin="5,0,5,0"  Padding="4,-4,0,0"  Click="StackPanelParty_Click"/>
+                    <RadioButton x:Name="myRadioButtonPartyRandom10" GroupName="Party" Content="10 Random Members" Margin="5,0,5,0"  Padding="4,-4,0,0" Click="StackPanelParty_Click"/>
+                    <RadioButton x:Name="myRadioButtonPartyRandom8" GroupName="Party" Content="8 Random Members" Margin="5,0,5,0"  Padding="4,-4,0,0" Click="StackPanelParty_Click"/>
+                    <RadioButton x:Name="myRadioButtonPartyRandom5" GroupName="Party" Content="5 Random Members"  Margin="5,0,5,0"  Padding="4,-4,0,0" Click="StackPanelParty_Click"/>
+                    <RadioButton x:Name="myRadioButtonPartyRandom3" GroupName="Party" Content="3 Random Members" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelParty_Click"/>
+                    <RadioButton x:Name="myRadioButtonPartyRandom1" GroupName="Party" Content="1 Random Member" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelParty_Click"/>
+                    <RadioButton x:Name="myRadioButtonPartyCustom" GroupName="Party" Content="Custom Members" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelParty_Click"/>
                <Separator/>
-               <CheckBox x:Name="myCheckBoxDwarf"  Content="Dwarf" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxEagle" Content="Eagle" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxElf" Content="Elf" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxFalcon" Content="Falcon" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxGriffon" Content="Griffon" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxHarpy" Content="Harpy" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxMagician" Content="Magician" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxMercenary" Content="Mercenary" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxMerchant" Content="Merchant" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxMinstrel" Content="Minstrel" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxMonk" Content="Monk" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxPorterSlave" Content="PorterSlave" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxTrueLove" Content="TrueLove" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxWizard" Content="Wizard" Margin="5,0,5,0" Padding="4,-4,0,0" />
+                    <CheckBox x:Name="myCheckBoxDwarf"  Content="Dwarf" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
+                    <CheckBox x:Name="myCheckBoxEagle" Content="Eagle" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
+                    <CheckBox x:Name="myCheckBoxElf" Content="Elf" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
+                    <CheckBox x:Name="myCheckBoxFalcon" Content="Falcon" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
+                    <CheckBox x:Name="myCheckBoxGriffon" Content="Griffon" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
+                    <CheckBox x:Name="myCheckBoxHarpy" Content="Harpy" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
+                    <CheckBox x:Name="myCheckBoxMagician" Content="Magician" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
+                    <CheckBox x:Name="myCheckBoxMercenary" Content="Mercenary" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
+                    <CheckBox x:Name="myCheckBoxMerchant" Content="Merchant" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
+                    <CheckBox x:Name="myCheckBoxMinstrel" Content="Minstrel" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
+                    <CheckBox x:Name="myCheckBoxMonk" Content="Monk" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
+                    <CheckBox x:Name="myCheckBoxPorterSlave" Content="PorterSlave" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
+                    <CheckBox x:Name="myCheckBoxTrueLove" Content="TrueLove" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
+                    <CheckBox x:Name="myCheckBoxWizard" Content="Wizard" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
                <Separator/>
-               <CheckBox x:Name="myCheckBoxPartyMounted"  Content="Party Mounted" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxPartyAirborne"  Content="Party Airborne" Margin="5,0,5,0" Padding="4,-4,0,0" />
+                    <CheckBox x:Name="myCheckBoxPartyMounted"  Content="Party Mounted" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyOption_Click"/>
+                    <CheckBox x:Name="myCheckBoxPartyAirborne"  Content="Party Airborne" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyOption_Click"/>
             </StackPanel>
          </GroupBox>
          <GroupBox x:Name="myGroupBoxHex" Grid.Row="2" Grid.Column="2" Header="Starting Locations" FontSize="14"  Margin="10,0,10,0">
             <StackPanel Name="myStackPanelHex" Orientation="Vertical" VerticalAlignment="Top" Margin="5,5,5,5" >
-               <RadioButton x:Name="myRadioButtonHexOriginal" GroupName="Hex" Content="Original Game" Margin="5,0,5,0"  Padding="4,-4,0,0"/>
-               <RadioButton x:Name="myRadioButtonHexRandom" GroupName="Hex" Content="Random Hex" Margin="5,0,5,0"  Padding="4,-4,0,0"/>
-               <RadioButton x:Name="myRadioButtonHexRandomTown" GroupName="Hex" Content="Random Town" Margin="5,0,5,0"  Padding="4,-4,0,0"/>
-               <RadioButton x:Name="myRadioButtonHexRandomLeft" GroupName="Hex" Content="Random Left Edge"  Margin="5,0,5,0"  Padding="4,-4,0,0"/>
-               <RadioButton x:Name="myRadioButtonHexRandomRight" GroupName="Hex" Content="Random Right Edge"  Margin="5,0,5,0"  Padding="4,-4,0,0"/>
-               <RadioButton x:Name="myRadioButtonHexRandomBottom" GroupName="Hex" Content="Random Bottom Edge"  Margin="5,0,5,0"  Padding="4,-4,0,0"/>
+                    <RadioButton x:Name="myRadioButtonHexOriginal" GroupName="Hex" Content="Original Game" Margin="5,0,5,0"  Padding="4,-4,0,0" Click="StackPanelHex_Click"/>
+                    <RadioButton x:Name="myRadioButtonHexRandom" GroupName="Hex" Content="Random Hex" Margin="5,0,5,0"  Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
+                    <RadioButton x:Name="myRadioButtonHexRandomTown" GroupName="Hex" Content="Random Town" Margin="5,0,5,0"  Padding="4,-4,0,0" Click="StackPanelHex_Click"/>
+                    <RadioButton x:Name="myRadioButtonHexRandomLeft" GroupName="Hex" Content="Random Left Edge"  Margin="5,0,5,0"  Padding="4,-4,0,0" Click="StackPanelHex_Click"/>
+                    <RadioButton x:Name="myRadioButtonHexRandomRight" GroupName="Hex" Content="Random Right Edge"  Margin="5,0,5,0"  Padding="4,-4,0,0" Click="StackPanelHex_Click"/>
+                    <RadioButton x:Name="myRadioButtonHexRandomBottom" GroupName="Hex" Content="Random Bottom Edge"  Margin="5,0,5,0"  Padding="4,-4,0,0" Click="StackPanelHex_Click"/>
                <Separator/>
-               <RadioButton x:Name="myRadioButtonHexTown" GroupName="Hex" Content="0109 - Town" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <RadioButton x:Name="myRadioButtonHexRuin" GroupName="Hex" Content="0206 - Ruin" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <RadioButton x:Name="myRadioButtonHexTemple" GroupName="Hex" Content="0711 - Temple" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <RadioButton x:Name="myRadioButtonHexHuldra" GroupName="Hex" Content="1212 - Castle" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <RadioButton x:Name="myRadioButtonHexDrogat" GroupName="Hex" Content="0323 - Castle" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <RadioButton x:Name="myRadioButtonHexLadyAeravir" GroupName="Hex" Content="1923 - Castle" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <RadioButton x:Name="myRadioButtonHexFarmland" GroupName="Hex" Content="0418 - Farmland" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <RadioButton x:Name="myRadioButtonHexCountryside" GroupName="Hex" Content="0410 - Countryside" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <RadioButton x:Name="myRadioButtonHexForest" GroupName="Hex" Content="0409 - Forest" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <RadioButton x:Name="myRadioButtonHexHill" GroupName="Hex" Content="0406 - Hill" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <RadioButton x:Name="myRadioButtonHexMountain" GroupName="Hex" Content="0405 - Mountain" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <RadioButton x:Name="myRadioButtonHexSwamp" GroupName="Hex" Content="0411 - Swamp" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <RadioButton x:Name="myRadioButtonHexDesert" GroupName="Hex" Content="0407 - Desert" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <RadioButton x:Name="myRadioButtonHexRoad" GroupName="Hex" Content="1905 - Road" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <RadioButton x:Name="myRadioButtonHexBottom" GroupName="Hex" Content="1723 - Bottom Board" Margin="5,0,5,0" Padding="4,-4,0,0" />
+                    <RadioButton x:Name="myRadioButtonHexTown" GroupName="Hex" Content="0109 - Town" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
+                    <RadioButton x:Name="myRadioButtonHexRuin" GroupName="Hex" Content="0206 - Ruin" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
+                    <RadioButton x:Name="myRadioButtonHexTemple" GroupName="Hex" Content="0711 - Temple" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
+                    <RadioButton x:Name="myRadioButtonHexHuldra" GroupName="Hex" Content="1212 - Castle" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
+                    <RadioButton x:Name="myRadioButtonHexDrogat" GroupName="Hex" Content="0323 - Castle" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
+                    <RadioButton x:Name="myRadioButtonHexLadyAeravir" GroupName="Hex" Content="1923 - Castle" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
+                    <RadioButton x:Name="myRadioButtonHexFarmland" GroupName="Hex" Content="0418 - Farmland" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
+                    <RadioButton x:Name="myRadioButtonHexCountryside" GroupName="Hex" Content="0410 - Countryside" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
+                    <RadioButton x:Name="myRadioButtonHexForest" GroupName="Hex" Content="0409 - Forest" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
+                    <RadioButton x:Name="myRadioButtonHexHill" GroupName="Hex" Content="0406 - Hill" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
+                    <RadioButton x:Name="myRadioButtonHexMountain" GroupName="Hex" Content="0405 - Mountain" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
+                    <RadioButton x:Name="myRadioButtonHexSwamp" GroupName="Hex" Content="0411 - Swamp" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
+                    <RadioButton x:Name="myRadioButtonHexDesert" GroupName="Hex" Content="0407 - Desert" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
+                    <RadioButton x:Name="myRadioButtonHexRoad" GroupName="Hex" Content="1905 - Road" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
+                    <RadioButton x:Name="myRadioButtonHexBottom" GroupName="Hex" Content="1723 - Bottom Board" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
             </StackPanel>
          </GroupBox>
          <GroupBox x:Name="myGroupBoxMonster" Grid.Row="2" Grid.Column="3" Header="Monsters" FontSize="14"  Margin="10,0,10,0">
             <StackPanel Name="myStackPanelMonster" Orientation="Vertical" VerticalAlignment="Top" Margin="5,5,5,5" >
-               <RadioButton x:Name="myRadioButtonMonsterNormal" GroupName="Monster" Content="Normal Monsters" Margin="5,0,5,0"  Padding="4,-4,0,0"/>
-               <RadioButton x:Name="myRadioButtonMonsterLessEasy" GroupName="Monster" Content="Less Easy Monsters" Margin="5,0,5,0"  Padding="4,-4,0,0"/>
-               <RadioButton x:Name="myRadioButtonMonsterEasy" GroupName="Monster" Content="Easy Monsters" Margin="5,0,5,0"  Padding="4,-4,0,0"/>
-               <RadioButton x:Name="myRadioButtonMonsterEasiest" GroupName="Monster" Content="Easiest Monsters" Margin="5,0,5,0"  Padding="4,-4,0,0"/>
-
-            </StackPanel>
+                    <RadioButton x:Name="myRadioButtonMonsterNormal" GroupName="Monster" Content="Normal Monsters" Margin="5,0,5,0"  Padding="4,-4,0,0" Click="StackPanelMonster_Click"/>
+                    <RadioButton x:Name="myRadioButtonMonsterLessEasy" GroupName="Monster" Content="Less Easy Monsters" Margin="5,0,5,0"  Padding="4,-4,0,0" Click="StackPanelMonster_Click"/>
+                    <RadioButton x:Name="myRadioButtonMonsterEasy" GroupName="Monster" Content="Easy Monsters" Margin="5,0,5,0"  Padding="4,-4,0,0" Click="StackPanelMonster_Click"/>
+                    <RadioButton x:Name="myRadioButtonMonsterEasiest" GroupName="Monster" Content="Easiest Monsters" Margin="5,0,5,0"  Padding="4,-4,0,0" Click="StackPanelMonster_Click"/>
+                </StackPanel>
          </GroupBox>
          <GroupBox x:Name="myGroupBoxDebug" Grid.Row="2" Grid.Column="4" Header="Event Settings" FontSize="14"  Margin="10,0,10,0" >
             <StackPanel Name="myStackPanelDebug" Orientation="Vertical" VerticalAlignment="Top" Margin="5,5,5,5" >
-               <CheckBox x:Name="myCheckBoxNoLostRoll"  Content="No Lost Rolls" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxNoLostEvent" Content="No Lost Events" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxNoEvent" Content="No Events" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxNoRoadEvent" Content="No Road Events" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxNoCrossEvent" Content="No Cross Events" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxNoRaftEvent" Content="No Raft Events" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxNoAirEvent" Content="No Air Events" Margin="5,0,5,0" Padding="4,-4,0,0" />
+                    <CheckBox x:Name="myCheckBoxNoLostRoll"  Content="No Lost Rolls" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelEvent_Click"/>
+                    <CheckBox x:Name="myCheckBoxNoLostEvent" Content="No Lost Events" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelEvent_Click"/>
+                    <CheckBox x:Name="myCheckBoxNoEvent" Content="No Events" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelEvent_Click"/>
+                    <CheckBox x:Name="myCheckBoxNoRoadEvent" Content="No Road Events" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelEvent_Click"/>
+                    <CheckBox x:Name="myCheckBoxNoCrossEvent" Content="No Cross Events" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelEvent_Click"/>
+                    <CheckBox x:Name="myCheckBoxNoRaftEvent" Content="No Raft Events" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelEvent_Click"/>
+                    <CheckBox x:Name="myCheckBoxNoAirEvent" Content="No Air Events" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelEvent_Click"/>
                <Separator/>
-               <CheckBox x:Name="myCheckBoxForceLostEvent" Content="Force Lost Events" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxForceLostAfterCross" Content="Force Lost After Cross" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxForceEvent" Content="Force Travel Events" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxForceCrossEvent" Content="Force Cross Events" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxForceRaftEvent" Content="Force Raft Events" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxForceAirEvent" Content="Force Air Events" Margin="5,0,5,0" Padding="4,-4,0,0" />
+                    <CheckBox x:Name="myCheckBoxForceLostEvent" Content="Force Lost Events" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelEvent_Click"/>
+                    <CheckBox x:Name="myCheckBoxForceLostAfterCross" Content="Force Lost After Cross" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelEvent_Click"/>
+                    <CheckBox x:Name="myCheckBoxForceEvent" Content="Force Travel Events" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelEvent_Click"/>
+                    <CheckBox x:Name="myCheckBoxForceCrossEvent" Content="Force Cross Events" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelEvent_Click"/>
+                    <CheckBox x:Name="myCheckBoxForceRaftEvent" Content="Force Raft Events" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelEvent_Click"/>
+                    <CheckBox x:Name="myCheckBoxForceAirEvent" Content="Force Air Events" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelEvent_Click"/>
             </StackPanel>
          </GroupBox>
          <StackPanel Name="myStackPanelButtons" Grid.Row="3" Grid.ColumnSpan="5"  Orientation="Horizontal" VerticalAlignment="Center"  HorizontalAlignment="Center" Margin="5,5,5,5" >

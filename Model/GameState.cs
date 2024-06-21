@@ -1304,13 +1304,6 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.DieRollActionNone;
                break;
             case GameAction.SetupNewGame:
-               try
-               {
-               }
-               catch(Exception e)
-               {
-
-               }
                if (false == PerformAutoSetup(ref gi, ref action))
                {
                   returnStatus = "PerformAutoSetup() returned false";

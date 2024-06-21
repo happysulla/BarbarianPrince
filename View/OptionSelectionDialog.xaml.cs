@@ -782,7 +782,7 @@ namespace BarbarianPrince
          //++++++++++++++++++++++++++++++++++++++++++++++++
          return true;
       }
-      //----------------------------------------------------------------
+      //----------------------CONTROLLER FUNCTIONS----------------------
       private void ButtonOk_Click(object sender, RoutedEventArgs e)
       {
       }
@@ -790,7 +790,6 @@ namespace BarbarianPrince
       {
          Close();
       }
-
       private void StackPanelSummary_Click(object sender, RoutedEventArgs e)
       {
          RadioButton rb = (RadioButton)sender;  
@@ -808,6 +807,208 @@ namespace BarbarianPrince
                break;
             default:
                Logger.Log(LogEnum.LE_ERROR, "StackPanelSummary_Click(): reached default rb.Name=" + rb.Name);
+               return;
+         }
+      }
+      private void StackPanelPrince_Click(object sender, RoutedEventArgs e)
+      {
+         CheckBox cb = (CheckBox)sender;
+         switch (cb.Name)
+         {
+            case "myCheckBoxPrinceHorse":
+               break;
+            case "myCheckBoxPrincePegasus":
+               break;
+            case "myCheckBoxPrinceCoin":
+               break;
+            case "myCheckBoxPrinceFood":
+               break;
+            default:
+               Logger.Log(LogEnum.LE_ERROR, "StackPanelPrince_Click(): reached default rb.Name=" + cb.Name);
+               return;
+         }
+      }
+      private void StackPanelParty_Click(object sender, RoutedEventArgs e)
+      {
+         RadioButton rb = (RadioButton)sender;
+         switch (rb.Name)
+         {
+            case "myRadioButtonPartyOriginal":
+               break;
+            case "myRadioButtonPartyRandom10":
+               break;
+            case "myRadioButtonPartyRandom8":
+               break;
+            case "myRadioButtonPartyRandom5":
+               break;
+            case "myRadioButtonPartyRandom3":
+               break;
+            case "myRadioButtonPartyRandom1":
+               break;
+            case "myRadioButtonPartyCustom":
+               break;
+            default:
+               Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): reached default rb.Name=" + rb.Name);
+               return;
+         }
+      }
+      private void StackPanelPartyMember_Click(object sender, RoutedEventArgs e)
+      {
+         CheckBox cb = (CheckBox)sender;
+         switch (cb.Name)
+         {
+            case "myCheckBoxDwarf":
+               break;
+            case "myCheckBoxEagle":
+               break;
+            case "myCheckBoxElf":
+               break;
+            case "myCheckBoxFalcon":
+               break;
+            case "myCheckBoxPrinceFood":
+               break;
+            case "myCheckBoxGriffon":
+               break;
+            case "myCheckBoxHarpy":
+               break;
+            case "myCheckBoxMagician":
+               break;
+            case "myCheckBoxMercenary":
+               break;
+            case "myCheckBoxMerchant":
+               break;
+            case "myCheckBoxMinstrel":
+               break;
+            case "myCheckBoxMonk":
+               break;
+            case "myCheckBoxPorterSlave":
+               break;
+            case "myCheckBoxTrueLove":
+               break;
+            case "myCheckBoxWizard":
+               break;
+            default:
+               Logger.Log(LogEnum.LE_ERROR, "StackPanelPartyMember_Click(): reached default rb.Name=" + cb.Name);
+               return;
+         }
+      }
+      private void StackPanelPartyOption_Click(object sender, RoutedEventArgs e)
+      {
+         CheckBox cb = (CheckBox)sender;
+         switch (cb.Name)
+         {
+            case "myCheckBoxPartyMounted":
+               break;
+            case "myCheckBoxPartyAirborne":
+               break;
+            default:
+               Logger.Log(LogEnum.LE_ERROR, "StackPanelPartyOption_Click(): reached default rb.Name=" + cb.Name);
+               return;
+         }
+      }
+      private void StackPanelHex_Click(object sender, RoutedEventArgs e)
+      {
+         RadioButton rb = (RadioButton)sender;
+         switch (rb.Name)
+         {
+            case "myRadioButtonHexOriginal":
+               break;
+            case "myRadioButtonHexRandom":
+               break;
+            case "myRadioButtonHexRandomTown":
+               break;
+            case "myRadioButtonHexRandomLeft":
+               break;
+            case "myRadioButtonHexRandomRight":
+               break;
+            case "myRadioButtonHexRandomBottom":
+               break;
+            case "myRadioButtonHexTown":
+               break;
+            case "myRadioButtonHexRuin":
+               break;
+            case "myRadioButtonHexTemple":
+               break;
+            case "myRadioButtonHexHuldra":
+               break;
+            case "myRadioButtonHexDrogat":
+               break;
+            case "myRadioButtonHexLadyAeravir":
+               break;
+            case "myRadioButtonHexFarmland":
+               break;
+            case "myRadioButtonHexCountryside":
+               break;
+            case "myRadioButtonHexForest":
+               break;
+            case "myRadioButtonHexHill":
+               break;
+            case "myRadioButtonHexMountain":
+               break;
+            case "myRadioButtonHexSwamp":
+               break;
+            case "myRadioButtonHexDesert":
+               break;
+            case "myRadioButtonHexRoad":
+               break;
+            case "myRadioButtonHexBottom":
+               break;
+            default:
+               Logger.Log(LogEnum.LE_ERROR, "StackPanelHex_Click(): reached default rb.Name=" + rb.Name);
+               return;
+         }
+      }
+      private void StackPanelMonster_Click(object sender, RoutedEventArgs e)
+      {
+         RadioButton rb = (RadioButton)sender;
+         switch (rb.Name)
+         {
+            case "myRadioButtonMonsterNormal":
+               break;
+            case "myRadioButtonMonsterLessEasy":
+               break;
+            case "myRadioButtonMonsterEasy":
+               break;
+            case "myRadioButtonMonsterEasiest":
+               break;
+            default:
+               Logger.Log(LogEnum.LE_ERROR, "StackPanelMonster_Click(): reached default rb.Name=" + rb.Name);
+               return;
+         }
+      }
+      private void StackPanelEvent_Click(object sender, RoutedEventArgs e)
+      {
+         CheckBox cb = (CheckBox)sender;
+         switch (cb.Name)
+         {
+            case "myCheckBoxNoLostRoll":
+               break;
+            case "myCheckBoxNoLostEvent":
+               break;
+            case "myCheckBoxNoEvent":
+               break;
+            case "myCheckBoxNoRoadEvent":
+               break;
+            case "myCheckBoxNoCrossEvent":
+               break;
+            case "myCheckBoxNoRaftEvent":
+               break;
+            case "myCheckBoxNoAirEvent":
+               break;
+            case "myCheckBoxForceLostEvent":
+               break;
+            case "myCheckBoxForceLostAfterCross":
+               break;
+            case "myCheckBoxForceEvent":
+               break;
+            case "myCheckBoxForceCrossEvent":
+               break;
+            case "myCheckBoxForceRaftEvent":
+               break;
+            case "myCheckBoxForceAirEvent":
+               break;
+            default:
+               Logger.Log(LogEnum.LE_ERROR, "StackPanelEvent_Click(): reached default cb.Name=" + cb.Name);
                return;
          }
       }
