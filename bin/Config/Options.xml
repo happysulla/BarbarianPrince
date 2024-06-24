@@ -22,17 +22,7 @@
    <Option value="PrinceFood">
       <IsEnabled value="False" />
    </Option>
-   <!--========Add Extra PartyMembers==============-->
-   <Option value="PartyMounted">
-      <IsEnabled value="False" />
-   </Option>
-   <Option value="PartyAirborne">
-      <IsEnabled value="False" />
-   </Option>
    <!--========Random PartyMembers==============-->
-   <Option value="RandomParty">
-      <IsEnabled value="True" />
-   </Option>
    <Option value="RandomParty10">
       <IsEnabled value="False" />
    </Option>
@@ -94,6 +84,13 @@
    <Option value="Wizard">
       <IsEnabled value="False" />
    </Option>
+   <!--========Add Extra PartyMembers==============-->
+   <Option value="PartyMounted">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="PartyAirborne">
+      <IsEnabled value="False" />
+   </Option>
    <!--========Set Starting Location==============-->
    <Option value="RandomHex">
       <IsEnabled value="True" />
@@ -109,9 +106,6 @@
    </Option>
    <Option value="RandomBottom">
       <IsEnabled value="False" />
-   </Option>
-   <Option value="RandomHex">
-      <IsEnabled value="True" />
    </Option>
    <Option value="0109" name="Town">
       <IsEnabled value="False" />
@@ -159,13 +153,13 @@
       <IsEnabled value="False" />
    </Option>
    <!--===========================-->
-   <Option value="EasiestMonsters">
+   <Option value="LessHardMonsters">
       <IsEnabled value="False" />
    </Option>
-    <Option value="EasyMonsters">
-        <IsEnabled value="False" />
-    </Option>
-   <Option value="LessHardMonsters">
+   <Option value="EasyMonsters">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="EasiestMonsters">
       <IsEnabled value="False" />
    </Option>
 	<!--===========================-->
@@ -175,42 +169,38 @@
 	<Option value="ForceNoLostEvent">
 		<IsEnabled value="False" />
 	</Option>
-	<Option value="ForceLostEvent">
-		<IsEnabled value="False" />
-	</Option>
-	<!--===========================-->
-	<Option value="ForceNoEvent">
-    <IsEnabled value="False" />
-    </Option>
-	<Option value="ForceEvent">
-		<IsEnabled value="False" />
-	</Option>
-	<!--===========================-->
-	<Option value="ForceNoRoadEvent">
-		<IsEnabled value="False" />
-	</Option>
-	<!--===========================-->
-	<Option value="ForceNoAirEvent">
-		<IsEnabled value="False" />
-	</Option>
-	<Option value="ForceAirEvent">
-		<IsEnabled value="False" />
-	</Option>
-	<!--===========================-->
-	<Option value="ForceNoCrossEvent">
-		<IsEnabled value="False" />
-	</Option>
-	<Option value="ForceCrossEvent">
-		<IsEnabled value="False" />
-	</Option>
-	<Option value="ForceLostAfterCrossEvent">
-		<IsEnabled value="False" />
-	</Option>
-	<!--===========================-->
-	<Option value="ForceNoRaftEvent">
-		<IsEnabled value="False" />
-	</Option>
+   <Option value="ForceNoEvent">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="ForceNoRoadEvent">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="ForceNoCrossEvent">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="ForceNoRaftEvent">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="ForceNoAirEvent">
+      <IsEnabled value="False" />
+   </Option>
+   <!--===========================-->
+   <Option value="ForceLostEvent">
+      <IsEnabled value="False" />
+   </Option>   
+   <Option value="ForceLostAfterCrossEvent">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="ForceEvent">
+      <IsEnabled value="False" />
+   </Option>
+   <Option value="ForceCrossEvent">
+      <IsEnabled value="False" />
+   </Option>
 	<Option value="ForceRaftEvent">
 		<IsEnabled value="False" />
 	</Option>
+   <Option value="ForceAirEvent">
+      <IsEnabled value="False" />
+   </Option>
 </Options>

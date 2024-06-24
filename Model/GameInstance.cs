@@ -612,27 +612,27 @@ namespace BarbarianPrince
       private bool AddStartingOptions()
       {
          Option option = null;
-         option = this.Options.Find("RandomParty");
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty) returned null");
-            return false;
-         }
-         if( true == option.IsEnabled)
-         {
-            int numPartyMembers = Utilities.RandomGenerator.Next(8);
-            for ( int i=0; i< numPartyMembers; ++i)
-            {
-               int index = Utilities.RandomGenerator.Next(Option.MEMBER_COUNT);
-               string memberToAdd = Option.theStartingMembers[index];
-               if (false == AddStartingPartyMemberOption(memberToAdd))
-               {
-                  Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): AddStartingPartyMemberOption(" + memberToAdd + ") returned false");
-                  return false;
-               }
-            }
-         }
-         else
+         //option = this.Options.Find("RandomParty");
+         //if (null == option)
+         //{
+         //   Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty) returned null");
+         //   return false;
+         //}
+         //if( true == option.IsEnabled)
+         //{
+         //   int numPartyMembers = Utilities.RandomGenerator.Next(8);
+         //   for ( int i=0; i< numPartyMembers; ++i)
+         //   {
+         //      int index = Utilities.RandomGenerator.Next(Option.MEMBER_COUNT);
+         //      string memberToAdd = Option.theStartingMembers[index];
+         //      if (false == AddStartingPartyMemberOption(memberToAdd))
+         //      {
+         //         Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): AddStartingPartyMemberOption(" + memberToAdd + ") returned false");
+         //         return false;
+         //      }
+         //   }
+         //}
+         //else
          {
             foreach (string memberToAdd in Option.theStartingMembers)
             {

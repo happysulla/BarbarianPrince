@@ -39,7 +39,7 @@
          </GroupBox>
          <GroupBox x:Name="myGroupBoxPrince" Grid.Row="2" Grid.Column="0" Header="Prince" FontSize="14"  Margin="10,0,10,0">
             <StackPanel Name="myStackPanelPrince" Orientation="Vertical" VerticalAlignment="Top" Margin="5,5,5,5" >
-                    <CheckBox x:Name="myCheckBoxPrinceHorse"  Content="Add Mount" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPrince_Click"/>
+                    <CheckBox x:Name="myCheckBoxPrinceHorse"  Content="Add Horse" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPrince_Click"/>
                     <CheckBox x:Name="myCheckBoxPrincePegasus"  Content="Add Pegasus" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPrince_Click"/>
                     <CheckBox x:Name="myCheckBoxPrinceCoin"  Content="Add Coin" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPrince_Click"/>
                     <CheckBox x:Name="myCheckBoxPrinceFood"  Content="Add Food" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPrince_Click"/>

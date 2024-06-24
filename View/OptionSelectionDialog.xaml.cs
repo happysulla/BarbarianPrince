@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace BarbarianPrince
 {
@@ -771,7 +772,7 @@ namespace BarbarianPrince
             myRadioButtonAllRandom.IsChecked = false;
             myRadioButtonCustom.IsChecked = false;
          }
-         else if (true == isRandomHexConfig)
+         else
          {
             myRadioButtonOriginal.IsChecked = true;
             myRadioButtonRandomParty.IsChecked = false;
@@ -781,6 +782,360 @@ namespace BarbarianPrince
          }
          //++++++++++++++++++++++++++++++++++++++++++++++++
          return true;
+      }
+      private void ResetSummary()
+      {
+         myRadioButtonOriginal.IsChecked = false;
+         myRadioButtonRandomParty.IsChecked = false;
+         myRadioButtonRandomStart.IsChecked = false;
+         myRadioButtonAllRandom.IsChecked = false;
+         myRadioButtonCustom.IsChecked = false;
+      }
+      private void ResetPrince()
+      {
+         Option option = null;
+         myCheckBoxPrinceHorse.IsChecked = false;
+         option = myOptions.Find("PrinceHorse");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPrince(): not found AutoLostDecrease");
+         myCheckBoxPrincePegasus.IsChecked = false;
+         option = myOptions.Find("PrincePegasus");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPrince(): not found AutoLostDecrease");
+         myCheckBoxPrinceCoin.IsChecked = false;
+         option = myOptions.Find("PrinceCoin");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPrince(): not found AutoLostDecrease");
+         myCheckBoxPrinceFood.IsChecked = false;
+         option = myOptions.Find("PrinceFood");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPrince(): not found AutoLostDecrease");
+      }
+      private void ResetParty()
+      {
+         Option option = null;
+         myRadioButtonPartyOriginal.IsChecked = false;
+         myRadioButtonPartyRandom10.IsChecked = false;
+         option = myOptions.Find("RandomParty10");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetParty(): not found RandomParty10");
+         myRadioButtonPartyRandom8.IsChecked = false;
+         option = myOptions.Find("RandomParty08");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetParty(): not found RandomParty08");
+         myRadioButtonPartyRandom5.IsChecked = false;
+         option = myOptions.Find("RandomParty05");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetParty(): not found RandomParty05");
+         myRadioButtonPartyRandom3.IsChecked = false;
+         option = myOptions.Find("RandomParty03");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetParty(): not found RandomParty03");
+         myRadioButtonPartyRandom1.IsChecked = false;
+         option = myOptions.Find("RandomParty01");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetParty(): not found RandomParty01");
+         myRadioButtonPartyCustom.IsChecked = false;
+         option = myOptions.Find("PartyCustom");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetParty(): not found PartyCustom");
+         myRadioButtonPartyCustom.IsChecked = false;
+      }
+      private void ResetPartyMembers()
+      {
+         Option option = null;
+         myCheckBoxDwarf.IsChecked = false;
+         myCheckBoxEagle.IsChecked = false;
+         myCheckBoxElf.IsChecked = false;
+         myCheckBoxFalcon.IsChecked = false;
+         myCheckBoxGriffon.IsChecked = false;
+         myCheckBoxHarpy.IsChecked = false;
+         myCheckBoxMagician.IsChecked = false;
+         myCheckBoxMercenary.IsChecked = false;
+         myCheckBoxMerchant.IsChecked = false;
+         myCheckBoxMinstrel.IsChecked = false;
+         myCheckBoxMonk.IsChecked = false;
+         myCheckBoxPorterSlave.IsChecked = false;
+         myCheckBoxTrueLove.IsChecked = false;
+         myCheckBoxWizard.IsChecked = false;
+         myCheckBoxDwarf.IsEnabled = false;
+         myCheckBoxEagle.IsEnabled = false;
+         myCheckBoxElf.IsEnabled = false;
+         myCheckBoxFalcon.IsEnabled = false;
+         myCheckBoxGriffon.IsEnabled = false;
+         myCheckBoxHarpy.IsEnabled = false;
+         myCheckBoxMagician.IsEnabled = false;
+         myCheckBoxMercenary.IsEnabled = false;
+         myCheckBoxMerchant.IsEnabled = false;
+         myCheckBoxMinstrel.IsEnabled = false;
+         myCheckBoxMonk.IsEnabled = false;
+         myCheckBoxPorterSlave.IsEnabled = false;
+         myCheckBoxTrueLove.IsEnabled = false;
+         myCheckBoxWizard.IsEnabled = false;
+      }
+      private void ResetPartyOptions()
+      {
+         Option option = null;
+         myCheckBoxPartyMounted.IsChecked = false;
+         option = myOptions.Find("PartyMounted");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPartyOptions(): not found PartyMounted");
+         myCheckBoxPartyAirborne.IsChecked = false;
+         option = myOptions.Find("PartyAirborne");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPartyOptions(): not found PartyAirborne");
+      }
+      private void ResetHex()
+      {
+         Option option = null;
+         myRadioButtonHexRandom.IsChecked = false;
+         option = myOptions.Find("RandomHex");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found RandomHex");
+         myRadioButtonHexRandomTown.IsChecked = false;
+         option = myOptions.Find("RandomHex");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found RandomHex");
+         myRadioButtonHexRandomLeft.IsChecked = false;
+         option = myOptions.Find("RandomLeft");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found RandomLeft");
+         myRadioButtonHexRandomRight.IsChecked = false;
+         option = myOptions.Find("RandomRight");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found RandomRight");
+         myRadioButtonHexRandomBottom.IsChecked = false;
+         option = myOptions.Find("RandomBottom");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found RandomBottom");
+         myRadioButtonHexTown.IsChecked = false;
+         option = myOptions.Find("0109");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 0109");
+         myRadioButtonHexRuin.IsChecked = false;
+         option = myOptions.Find("0206");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 0206");
+         myRadioButtonHexTemple.IsChecked = false;
+         option = myOptions.Find("0711");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 0711");
+         myRadioButtonHexHuldra.IsChecked = false;
+         option = myOptions.Find("1212");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 1212");
+         myRadioButtonHexDrogat.IsChecked = false;
+         option = myOptions.Find("0323");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 0323");
+         myRadioButtonHexLadyAeravir.IsChecked = false;
+         option = myOptions.Find("1923");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 1923");
+         myRadioButtonHexFarmland.IsChecked = false;
+         option = myOptions.Find("0418");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 0418");
+         option = myOptions.Find("0410");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 0410");
+         myRadioButtonHexForest.IsChecked = false;
+         option = myOptions.Find("0409");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 0409");
+         myRadioButtonHexHill.IsChecked = false;
+         option = myOptions.Find("0406");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 0406");
+         myRadioButtonHexMountain.IsChecked = false;
+         option = myOptions.Find("0405");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 0405");
+         myRadioButtonHexSwamp.IsChecked = false;
+         option = myOptions.Find("0411");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 0411");
+         myRadioButtonHexDesert.IsChecked = false;
+         option = myOptions.Find("0407");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 0407");
+         myRadioButtonHexRoad.IsChecked = false;
+         option = myOptions.Find("1905");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 1905");
+         myRadioButtonHexBottom.IsChecked = false;
+         option = myOptions.Find("1723");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 1723");
+      }
+      private void ResetMonsters()
+      {
+         Option option = null;
+         myRadioButtonMonsterNormal.IsChecked = false;
+         myRadioButtonMonsterLessEasy.IsChecked = false;
+         option = myOptions.Find("LessHardMonsters");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found LessHardMonsters");
+         myRadioButtonMonsterEasy.IsChecked = false;
+         option = myOptions.Find("EasyMonsters");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found EasyMonsters");
+         myRadioButtonMonsterEasiest.IsChecked = false;
+         option = myOptions.Find("EasiestMonsters");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found EasiestMonsters");
+      }
+      private void ResetEvents()
+      {
+         Option option = null;
+         myCheckBoxNoLostRoll.IsChecked = false;
+         option = myOptions.Find("NoLostRoll");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found NoLostRoll");
+         myCheckBoxNoLostEvent.IsChecked = false;
+         option = myOptions.Find("ForceNoLostEvent");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found ForceNoLostEvent");
+         myCheckBoxNoEvent.IsChecked = false;
+         option = myOptions.Find("ForceNoEvent");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found ForceNoEvent");
+         myCheckBoxNoRoadEvent.IsChecked = false;
+         option = myOptions.Find("ForceNoRoadEvent");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found ForceNoRoadEvent");
+         myCheckBoxNoCrossEvent.IsChecked = false;
+         option = myOptions.Find("ForceNoCrossEvent");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found ForceNoCrossEvent");
+         myCheckBoxNoRaftEvent.IsChecked = false;
+         option = myOptions.Find("ForceNoRaftEvent");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found ForceNoRaftEvent");
+         myCheckBoxNoAirEvent.IsChecked = false;
+         option = myOptions.Find("ForceNoAirEvent");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found ForceNoAirEvent");
+         myCheckBoxForceLostEvent.IsChecked = false;
+         option = myOptions.Find("ForceLostEvent");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found ForceLostEvent");
+         myCheckBoxForceLostAfterCross.IsChecked = false;
+         option = myOptions.Find("ForceLostAfterCrossEvent");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found ForceLostAfterCrossEvent");
+         myCheckBoxForceEvent.IsChecked = false;
+         option = myOptions.Find("ForceLostEvent");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found ForceLostEvent");
+         myCheckBoxForceCrossEvent.IsChecked = false;
+         option = myOptions.Find("ForceCrossEvent");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found ForceCrossEvent");
+         myCheckBoxForceRaftEvent.IsChecked = false;
+         option = myOptions.Find("ForceRaftEvent");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found ForceRaftEvent");
+         myCheckBoxForceAirEvent.IsChecked = false;
+         option = myOptions.Find("ForceNoAirEvent");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found ForceNoAirEvent");
       }
       //----------------------CONTROLLER FUNCTIONS----------------------
       private void ButtonOk_Click(object sender, RoutedEventArgs e)
@@ -792,225 +1147,231 @@ namespace BarbarianPrince
       }
       private void StackPanelSummary_Click(object sender, RoutedEventArgs e)
       {
-         RadioButton rb = (RadioButton)sender;  
-         switch(rb.Name) 
+         ResetPrince();
+         ResetParty();
+         ResetPartyMembers();
+         ResetHex();
+         ResetMonsters();
+         ResetEvents();
+         RadioButton rb = (RadioButton)sender;
+         Option option = null;
+         switch (rb.Name)
          {
             case "myRadioButtonOriginal":
+               myCheckBoxAutoLostIncrement.IsChecked = false;
+               option = myOptions.Find("AutoLostDecrease");
+               if (null == option)
+                  Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): myOptions.Find() for name=" + rb.Name);
+               else
+                  option.IsEnabled = false;
                break;
             case "myRadioButtonRandomParty":
+               option = myOptions.Find("RandomParty");
+               if (null == option)
+                  Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): myOptions.Find() for name=" + rb.Name);
+               else
+                  option.IsEnabled = true;
                break;
             case "myRadioButtonRandomStart":
+               option = myOptions.Find("RandomHex");
+               if (null == option)
+                  Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): myOptions.Find() for name=" + rb.Name);
+               else
+                  option.IsEnabled = true;
                break;
             case "myRadioButtonAllRandom":
+               option = myOptions.Find("PartyCustom");
+               if (null == option)
+                  Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): myOptions.Find() for name=" + rb.Name);
+               else
+                  option.IsEnabled = true;
+               option = myOptions.Find("RandomHex");
+               if (null == option)
+                  Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): myOptions.Find() for name=" + rb.Name);
+               else
+                  option.IsEnabled = true;
                break;
-            case "myRadioButtonCustom":
-               break;
-            default:
-               Logger.Log(LogEnum.LE_ERROR, "StackPanelSummary_Click(): reached default rb.Name=" + rb.Name);
-               return;
+            default: Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): reached default name=" + rb.Name); return;
          }
+         if (false == UpdateDisplay(myOptions))
+            Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): UpdateDisplay() returned false for name=" + rb.Name);
       }
       private void StackPanelPrince_Click(object sender, RoutedEventArgs e)
       {
          CheckBox cb = (CheckBox)sender;
+         Option option = null;
          switch (cb.Name)
          {
-            case "myCheckBoxPrinceHorse":
-               break;
-            case "myCheckBoxPrincePegasus":
-               break;
-            case "myCheckBoxPrinceCoin":
-               break;
-            case "myCheckBoxPrinceFood":
-               break;
-            default:
-               Logger.Log(LogEnum.LE_ERROR, "StackPanelPrince_Click(): reached default rb.Name=" + cb.Name);
-               return;
+            case "myCheckBoxPrinceHorse": option = myOptions.Find("PrinceHorse"); break;
+            case "myCheckBoxPrincePegasus": option = myOptions.Find("PrincePegasus"); break;
+            case "myCheckBoxPrinceCoin": option = myOptions.Find("PrinceCoin"); break;
+            case "myCheckBoxPrinceFood": option = myOptions.Find("PrinceFood"); break;
+            default: Logger.Log(LogEnum.LE_ERROR, "StackPanelPrince_Click(): reached default name=" + cb.Name); return;
          }
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "StackPanelPrince_Click(): myOptions.Find() for name=" + cb.Name);
+         else 
+            option.IsEnabled = !option.IsEnabled;
+         if ( false == UpdateDisplay(myOptions) )
+            Logger.Log(LogEnum.LE_ERROR, "StackPanelPrince_Click(): UpdateDisplay() returned false for name=" + cb.Name);
       }
       private void StackPanelParty_Click(object sender, RoutedEventArgs e)
       {
          RadioButton rb = (RadioButton)sender;
+         Option option = null;
+         ResetParty();
          switch (rb.Name)
          {
-            case "myRadioButtonPartyOriginal":
-               break;
-            case "myRadioButtonPartyRandom10":
-               break;
-            case "myRadioButtonPartyRandom8":
-               break;
-            case "myRadioButtonPartyRandom5":
-               break;
-            case "myRadioButtonPartyRandom3":
-               break;
-            case "myRadioButtonPartyRandom1":
-               break;
-            case "myRadioButtonPartyCustom":
-               break;
-            default:
-               Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): reached default rb.Name=" + rb.Name);
-               return;
+            case "myRadioButtonPartyOriginal": ResetPartyMembers(); break;
+            case "myRadioButtonPartyRandom10": ResetPartyMembers(); option = myOptions.Find("RandomParty10"); break;
+            case "myRadioButtonPartyRandom8": ResetPartyMembers(); option = myOptions.Find("RandomParty08"); break;
+            case "myRadioButtonPartyRandom5": ResetPartyMembers(); option = myOptions.Find("RandomParty05"); break;
+            case "myRadioButtonPartyRandom3": ResetPartyMembers(); option = myOptions.Find("RandomParty03"); break;
+            case "myRadioButtonPartyRandom1": ResetPartyMembers(); option = myOptions.Find("RandomParty01"); break;
+            case "myRadioButtonPartyCustom": option = myOptions.Find("PartyCustom"); break;
+            default: Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): reached default name=" + rb.Name); return;
          }
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): myOptions.Find() for name=" + rb.Name);
+         else
+            option.IsEnabled = true;
+         if (false == UpdateDisplay(myOptions))
+            Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): UpdateDisplay() returned false for name=" + rb.Name);
       }
       private void StackPanelPartyMember_Click(object sender, RoutedEventArgs e)
       {
          CheckBox cb = (CheckBox)sender;
+         Option option = null;
          switch (cb.Name)
          {
-            case "myCheckBoxDwarf":
-               break;
-            case "myCheckBoxEagle":
-               break;
-            case "myCheckBoxElf":
-               break;
-            case "myCheckBoxFalcon":
-               break;
-            case "myCheckBoxPrinceFood":
-               break;
-            case "myCheckBoxGriffon":
-               break;
-            case "myCheckBoxHarpy":
-               break;
-            case "myCheckBoxMagician":
-               break;
-            case "myCheckBoxMercenary":
-               break;
-            case "myCheckBoxMerchant":
-               break;
-            case "myCheckBoxMinstrel":
-               break;
-            case "myCheckBoxMonk":
-               break;
-            case "myCheckBoxPorterSlave":
-               break;
-            case "myCheckBoxTrueLove":
-               break;
-            case "myCheckBoxWizard":
-               break;
-            default:
-               Logger.Log(LogEnum.LE_ERROR, "StackPanelPartyMember_Click(): reached default rb.Name=" + cb.Name);
-               return;
+            case "myCheckBoxDwarf": option = myOptions.Find("Dwarf"); break;
+            case "myCheckBoxEagle": option = myOptions.Find("Eagle"); break;
+            case "myCheckBoxElf": option = myOptions.Find("Elf"); break;
+            case "myCheckBoxFalcon": option = myOptions.Find("Falcon"); break;
+            case "myCheckBoxGriffon": option = myOptions.Find("Griffon"); break;
+            case "myCheckBoxHarpy": option = myOptions.Find("Harpy"); break;
+            case "myCheckBoxMagician": option = myOptions.Find("Magician"); break;
+            case "myCheckBoxMercenary": option = myOptions.Find("Mercenary"); break;
+            case "myCheckBoxMerchant": option = myOptions.Find("Merchant"); break;
+            case "myCheckBoxMinstrel": option = myOptions.Find("Minstrel"); break;
+            case "myCheckBoxMonk": option = myOptions.Find("Monk"); break;
+            case "myCheckBoxPorterSlave": option = myOptions.Find("PorterSlave"); break;
+            case "myCheckBoxTrueLove": option = myOptions.Find("TrueLove"); break;
+            case "myCheckBoxWizard": option = myOptions.Find("Wizard"); break;
+            default: Logger.Log(LogEnum.LE_ERROR, "StackPanelPartyMember_Click(): reached default name=" + cb.Name); return;
          }
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "StackPanelPartyMember_Click(): myOptions.Find() for name=" + cb.Name);
+         else
+            option.IsEnabled = true;
+         if (false == UpdateDisplay(myOptions))
+            Logger.Log(LogEnum.LE_ERROR, "StackPanelPartyMember_Click(): UpdateDisplay() returned false for name=" + cb.Name);
       }
       private void StackPanelPartyOption_Click(object sender, RoutedEventArgs e)
       {
          CheckBox cb = (CheckBox)sender;
+         Option option = null;
+         ResetPartyOptions();
          switch (cb.Name)
          {
-            case "myCheckBoxPartyMounted":
-               break;
-            case "myCheckBoxPartyAirborne":
-               break;
-            default:
-               Logger.Log(LogEnum.LE_ERROR, "StackPanelPartyOption_Click(): reached default rb.Name=" + cb.Name);
-               return;
+            case "myCheckBoxPartyMounted": option = myOptions.Find("PartyMounted"); break;
+            case "myCheckBoxPartyAirborne": option = myOptions.Find("PartyAirborne"); break;
+            default: Logger.Log(LogEnum.LE_ERROR, "StackPanelPartyOption_Click(): reached default name=" + cb.Name); return;
          }
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "StackPanelPartyOption_Click(): myOptions.Find() for name=" + cb.Name);
+         else
+            option.IsEnabled = true;
+         if (false == UpdateDisplay(myOptions))
+            Logger.Log(LogEnum.LE_ERROR, "StackPanelPartyOption_Click(): UpdateDisplay() returned false for name=" + cb.Name);
       }
       private void StackPanelHex_Click(object sender, RoutedEventArgs e)
       {
          RadioButton rb = (RadioButton)sender;
+         Option option = null;
+         ResetHex();
          switch (rb.Name)
          {
-            case "myRadioButtonHexOriginal":
-               break;
-            case "myRadioButtonHexRandom":
-               break;
-            case "myRadioButtonHexRandomTown":
-               break;
-            case "myRadioButtonHexRandomLeft":
-               break;
-            case "myRadioButtonHexRandomRight":
-               break;
-            case "myRadioButtonHexRandomBottom":
-               break;
-            case "myRadioButtonHexTown":
-               break;
-            case "myRadioButtonHexRuin":
-               break;
-            case "myRadioButtonHexTemple":
-               break;
-            case "myRadioButtonHexHuldra":
-               break;
-            case "myRadioButtonHexDrogat":
-               break;
-            case "myRadioButtonHexLadyAeravir":
-               break;
-            case "myRadioButtonHexFarmland":
-               break;
-            case "myRadioButtonHexCountryside":
-               break;
-            case "myRadioButtonHexForest":
-               break;
-            case "myRadioButtonHexHill":
-               break;
-            case "myRadioButtonHexMountain":
-               break;
-            case "myRadioButtonHexSwamp":
-               break;
-            case "myRadioButtonHexDesert":
-               break;
-            case "myRadioButtonHexRoad":
-               break;
-            case "myRadioButtonHexBottom":
-               break;
-            default:
-               Logger.Log(LogEnum.LE_ERROR, "StackPanelHex_Click(): reached default rb.Name=" + rb.Name);
-               return;
+            case "myRadioButtonHexOriginal": option = myOptions.Find("RandomParty10"); break;
+            case "myRadioButtonHexRandom": option = myOptions.Find("RandomHex"); break;
+            case "myRadioButtonHexRandomTown": option = myOptions.Find("RandomTown"); break;
+            case "myRadioButtonHexRandomLeft": option = myOptions.Find("RandomLeft"); break;
+            case "myRadioButtonHexRandomRight": option = myOptions.Find("RandomRight"); break;
+            case "myRadioButtonHexRandomBottom": option = myOptions.Find("RandomBottom"); break;
+            case "myRadioButtonHexTown": option = myOptions.Find("0109"); break;
+            case "myRadioButtonHexRuin": option = myOptions.Find("0206"); break;
+            case "myRadioButtonHexTemple": option = myOptions.Find("0711"); break;
+            case "myRadioButtonHexHuldra": option = myOptions.Find("1212"); break;
+            case "myRadioButtonHexDrogat": option = myOptions.Find("0323"); break;
+            case "myRadioButtonHexLadyAeravir": option = myOptions.Find("1923"); break;
+            case "myRadioButtonHexFarmland": option = myOptions.Find("0418"); break;
+            case "myRadioButtonHexCountryside": option = myOptions.Find("0410"); break;
+            case "myRadioButtonHexForest": option = myOptions.Find("0409"); break;
+            case "myRadioButtonHexHill": option = myOptions.Find("0406"); break;
+            case "myRadioButtonHexMountain": option = myOptions.Find("0405"); break;
+            case "myRadioButtonHexSwamp": option = myOptions.Find("0411"); break;
+            case "myRadioButtonHexDesert": option = myOptions.Find("0407"); break;
+            case "myRadioButtonHexRoad": option = myOptions.Find("1905"); break;
+            case "myRadioButtonHexBottom": option = myOptions.Find("1723"); break;
+            default: Logger.Log(LogEnum.LE_ERROR, "StackPanelHex_Click(): reached default name=" + rb.Name); return;
          }
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "StackPanelHex_Click(): myOptions.Find() for name=" + rb.Name);
+         else
+            option.IsEnabled = true;
+         if (false == UpdateDisplay(myOptions))
+            Logger.Log(LogEnum.LE_ERROR, "StackPanelHex_Click(): UpdateDisplay() returned false for name=" + rb.Name);
       }
       private void StackPanelMonster_Click(object sender, RoutedEventArgs e)
       {
          RadioButton rb = (RadioButton)sender;
+         Option option = null;
+         ResetMonsters();
          switch (rb.Name)
          {
             case "myRadioButtonMonsterNormal":
-               break;
-            case "myRadioButtonMonsterLessEasy":
-               break;
-            case "myRadioButtonMonsterEasy":
-               break;
-            case "myRadioButtonMonsterEasiest":
-               break;
-            default:
-               Logger.Log(LogEnum.LE_ERROR, "StackPanelMonster_Click(): reached default rb.Name=" + rb.Name);
+               if (false == UpdateDisplay(myOptions))
+                  Logger.Log(LogEnum.LE_ERROR, "StackPanelMonster_Click(): UpdateDisplay() returned false for name=" + rb.Name); 
                return;
+            case "myRadioButtonMonsterLessEasy": option = myOptions.Find("LessHardMonsters"); break;
+            case "myRadioButtonMonsterEasy": option = myOptions.Find("EasyMonsters"); break;
+            case "myRadioButtonMonsterEasiest": option = myOptions.Find("EasiestMonsters"); break;
+            default: Logger.Log(LogEnum.LE_ERROR, "StackPanelMonster_Click(): reached default name=" + rb.Name); return;
          }
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "StackPanelMonster_Click(): myOptions.Find() for name=" + rb.Name);
+         else
+            option.IsEnabled = true;
+         if (false == UpdateDisplay(myOptions))
+            Logger.Log(LogEnum.LE_ERROR, "StackPanelMonster_Click(): UpdateDisplay() returned false for name=" + rb.Name);
       }
       private void StackPanelEvent_Click(object sender, RoutedEventArgs e)
       {
          CheckBox cb = (CheckBox)sender;
+         Option option = null;
          switch (cb.Name)
          {
-            case "myCheckBoxNoLostRoll":
-               break;
-            case "myCheckBoxNoLostEvent":
-               break;
-            case "myCheckBoxNoEvent":
-               break;
-            case "myCheckBoxNoRoadEvent":
-               break;
-            case "myCheckBoxNoCrossEvent":
-               break;
-            case "myCheckBoxNoRaftEvent":
-               break;
-            case "myCheckBoxNoAirEvent":
-               break;
-            case "myCheckBoxForceLostEvent":
-               break;
-            case "myCheckBoxForceLostAfterCross":
-               break;
-            case "myCheckBoxForceEvent":
-               break;
-            case "myCheckBoxForceCrossEvent":
-               break;
-            case "myCheckBoxForceRaftEvent":
-               break;
-            case "myCheckBoxForceAirEvent":
-               break;
-            default:
-               Logger.Log(LogEnum.LE_ERROR, "StackPanelEvent_Click(): reached default cb.Name=" + cb.Name);
-               return;
+            case "myCheckBoxNoLostRoll": option = myOptions.Find("NoLostRoll"); break;
+            case "myCheckBoxNoLostEvent": option = myOptions.Find("ForceNoLostEvent"); break;
+            case "myCheckBoxNoEvent": option = myOptions.Find("ForceNoEvent"); break;
+            case "myCheckBoxNoRoadEvent": option = myOptions.Find("ForceNoRoadEvent"); break;
+            case "myCheckBoxNoCrossEvent": option = myOptions.Find("ForceNoCrossEvent"); break;
+            case "myCheckBoxNoRaftEvent": option = myOptions.Find("ForceNoRaftEvent"); break;
+            case "myCheckBoxNoAirEvent": option = myOptions.Find("ForceNoAirEvent"); break;
+            case "myCheckBoxForceLostEvent": option = myOptions.Find("ForceLostEvent"); break;
+            case "myCheckBoxForceLostAfterCross": option = myOptions.Find("ForceLostAfterCrossEvent"); break;
+            case "myCheckBoxForceEvent": option = myOptions.Find("ForceEvent"); break;
+            case "myCheckBoxForceCrossEvent": option = myOptions.Find("ForceCrossEvent"); break;
+            case "myCheckBoxForceRaftEvent": option = myOptions.Find("ForceRaftEvent"); break;
+            case "myCheckBoxForceAirEvent": option = myOptions.Find("ForceAirEvent"); break;
+            default: Logger.Log(LogEnum.LE_ERROR, "StackPanelEvent_Click(): reached default name=" + cb.Name); return;
          }
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "StackPanelEvent_Click(): myOptions.Find() for name=" + cb.Name);
+         else
+            option.IsEnabled = !option.IsEnabled;
+         if (false == UpdateDisplay(myOptions))
+            Logger.Log(LogEnum.LE_ERROR, "StackPanelEvent_Click(): UpdateDisplay() returned false for name=" + cb.Name);
       }
    }
 }
