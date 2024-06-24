@@ -32,9 +32,9 @@
          </GroupBox>
          <GroupBox x:Name="myGroupBoxGameOptions" Grid.Row="1" Grid.ColumnSpan="5" Header="Game Options" FontSize="14"  Margin="10,0,10,0">
             <StackPanel Name="myStackGameOptions" Orientation="Horizontal" VerticalAlignment="Center" Margin="5,5,5,5" >
-               <CheckBox x:Name="myCheckBoxAutoSetup"  Content="Auto Setup" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxAutoWealth"  Content="Auto Roll for Wealth Code under 5" Margin="5,0,5,0" Padding="4,-4,0,0" />
-               <CheckBox x:Name="myCheckBoxAutoLostIncrement"  Content="Consecutive Lost Roll Modifier" Margin="5,0,5,0" Padding="4,-4,0,0" />
+               <CheckBox x:Name="myCheckBoxAutoSetup"  Content="Auto Setup" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelOptions_Click"/>
+               <CheckBox x:Name="myCheckBoxAutoWealth"  Content="Auto Roll for Wealth Code under 5" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelOptions_Click"/>
+               <CheckBox x:Name="myCheckBoxAutoLostIncrement"  Content="Consecutive Lost Roll Modifier" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelOptions_Click"/>
             </StackPanel>
          </GroupBox>
          <GroupBox x:Name="myGroupBoxPrince" Grid.Row="2" Grid.Column="0" Header="Prince" FontSize="14"  Margin="10,0,10,0">
