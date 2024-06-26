@@ -51,5 +51,16 @@ namespace BarbarianPrince
          get { return (Option)(myList[index]); }
          set { myList[index] = value; }
       }
+      public Options GetDeepCopy()
+      {
+         Options copy = new Options();
+         foreach (Object o in myList)
+         {
+            Option option = (Option)o;
+            Option copyO = new Option(option.Name, option.IsEnabled);
+            copy.Add(copyO);
+         }
+         return copy;
+      }
    }
 }

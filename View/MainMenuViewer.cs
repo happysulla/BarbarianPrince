@@ -24,6 +24,7 @@ namespace BarbarianPrince
       private readonly MenuItem myMenuItemTopLevel4 = null;
       private readonly IGameEngine myGameEngine = null;
       private IGameInstance myGameInstance = null;
+      public Options NewGameOptions { get; set; } = null;
       //-----------------------------------------------------------------------
       public MainMenuViewer(Menu mi, IGameEngine ge, IGameInstance gi) // Constructor creates default top level menus that get changed with UpdateView() based on GamePhase and GameAction
       {
@@ -170,8 +171,11 @@ namespace BarbarianPrince
       //------------------------------CONTROLLER-------------------------------
       public void MenuItemNew_Click(object sender, RoutedEventArgs e)
       {
-         myGameInstance = new GameInstance();
-         if( true == myGameInstance.CtorError )
+         if( null == NewGameOptions )
+            myGameInstance = new GameInstance();
+         else
+            myGameInstance = new GameInstance(NewGameOptions);
+         if ( true == myGameInstance.CtorError )
          {
             Logger.Log(LogEnum.LE_ERROR, "MenuItemNew_Click(): myGameInstance.CtorError = true");
             return;

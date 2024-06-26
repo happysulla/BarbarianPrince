@@ -70,6 +70,7 @@ namespace BarbarianPrince
       //---------------------------------------------------------------------
       private IDieRoller myDieRoller = null;
       private EventViewer myEventViewer = null;
+      private MainMenuViewer myMainMenuViewer = null;
       private PartyDisplayDialog myPartyDisplayDialog = null;
       private System.Windows.Input.Cursor myTargetCursor = null;
       private Dictionary<string, Polyline> myRivers = new Dictionary<string, Polyline>();
@@ -118,8 +119,8 @@ namespace BarbarianPrince
          myGameEngine = ge;
          myGameInstance = gi;
          gi.GamePhase = GamePhase.GameSetup;
-         MainMenuViewer mmv = new MainMenuViewer(myMainMenu, ge, gi);
-         if( false == AddHotKeys(mmv) )
+         myMainMenuViewer = new MainMenuViewer(myMainMenu, ge, gi);
+         if( false == AddHotKeys(myMainMenuViewer) )
          {
             Logger.Log(LogEnum.LE_ERROR, "GameViewerWindow(): AddHotKeys() returned false");
             CtorError = true;
@@ -183,7 +184,7 @@ namespace BarbarianPrince
          // Implement the Model View Controller (MVC) pattern by registering views with
          // the game engine such that when the model data is changed, the views are updated.
          ge.RegisterForUpdates(civ);
-         ge.RegisterForUpdates(mmv);
+         ge.RegisterForUpdates(myMainMenuViewer);
          ge.RegisterForUpdates(myEventViewer);
          ge.RegisterForUpdates(sbv);
          ge.RegisterForUpdates(this); // needs to be last so that canvas updates after all actions taken
@@ -1885,6 +1886,9 @@ namespace BarbarianPrince
             myScollViewerInside.Height = Settings.Default.ScrollViewerHeight;
             myScollViewerInside.Width = Settings.Default.ScrollViewerWidth;
             //-------------------------------------------
+            //string sNewGameOptions = Settings.Default.NewGameOptions;
+            //myMainMenuViewer.NewGameOptions = Utilities.Deserialize<Options>(sNewGameOptions);
+            //-------------------------------------------
             GameLoadMgr.theDirectoryName = Settings.Default.GameDirectoryName; // remember the game directory name
          }
          catch ( Exception ex ) 
@@ -1908,6 +1912,9 @@ namespace BarbarianPrince
          Settings.Default.ScrollViewerWidth = myScollViewerInside.Width;
          //-------------------------------------------
          Settings.Default.GameDirectoryName = Settings.Default.GameDirectoryName;
+         //-------------------------------------------
+         string sOptions = Utilities.Serialize<Options>(myMainMenuViewer.NewGameOptions);
+         Settings.Default.NewGameOptions = sOptions;
          //-------------------------------------------
          Settings.Default.Save();
          //-------------------------------------------

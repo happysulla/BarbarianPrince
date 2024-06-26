@@ -20,16 +20,16 @@ namespace BarbarianPrince
    {
       public bool CtorError { get; }
       public IGameInstance myGameInstance = null;
-      private Options myOptions = null;
+      private Options myOptions { get; set; } = null;
+      public Options NewOptions { get => myOptions; }
       private bool myIsRandomGame = false;
-      public Options NewOptions { get => myOptions; set => myOptions = value; }
       public OptionSelectionDialog(Options options)
       {
          InitializeComponent();
-         myOptions = options;
-         if ( false == UpdateDisplay(myOptions))
+         myOptions = options.GetDeepCopy(); // make copy b/c do not want to change unless OK button selected by user
+         if (false == UpdateDisplay(myOptions))
          {
-            Logger.Log(LogEnum.LE_ERROR, "OptionSelectionDialog(): SetOptionsInDialog() returned false");
+            Logger.Log(LogEnum.LE_ERROR, "OptionSelectionDialog(): UpdateDisplay() returned false");
             CtorError = true;
          }
       }
@@ -54,7 +54,7 @@ namespace BarbarianPrince
          option = options.Find("AutoWealthRollForUnderFive");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "AutoWealthRollForUnderFive");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-AutoWealthRollForUnderFive");
             return false;
          }
          myCheckBoxAutoWealth.IsChecked = option.IsEnabled;
@@ -62,7 +62,7 @@ namespace BarbarianPrince
          option = options.Find("AutoLostDecrease");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "AutoLostDecrease");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-AutoLostDecrease");
             return false;
          }
          myCheckBoxAutoLostIncrement.IsChecked = option.IsEnabled;
@@ -73,7 +73,7 @@ namespace BarbarianPrince
          option = options.Find("PrinceHorse");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "PrinceHorse");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-PrinceHorse");
             return false;
          }
          myCheckBoxPrinceHorse.IsChecked = option.IsEnabled;
@@ -83,7 +83,7 @@ namespace BarbarianPrince
          option = options.Find("PrincePegasus");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "PrincePegasus");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-PrincePegasus");
             return false;
          }
          myCheckBoxPrincePegasus.IsChecked = option.IsEnabled;
@@ -93,7 +93,7 @@ namespace BarbarianPrince
          option = options.Find("PrinceCoin");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "PrinceCoin");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-PrinceCoin");
             return false;
          }
          myCheckBoxPrinceCoin.IsChecked = option.IsEnabled;
@@ -103,7 +103,7 @@ namespace BarbarianPrince
          option = options.Find("PrinceFood");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "PrinceFood");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-PrinceFood");
             return false;
          }
          myCheckBoxPrinceFood.IsChecked = option.IsEnabled;
@@ -114,7 +114,7 @@ namespace BarbarianPrince
          option = options.Find("RandomParty10");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "RandomParty10");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-RandomParty10");
             return false;
          }
          if( true == option.IsEnabled )
@@ -127,7 +127,7 @@ namespace BarbarianPrince
             option = options.Find("RandomParty08");
             if (null == option)
             {
-               Logger.Log(LogEnum.LE_ERROR, "RandomParty08");
+               Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-RandomParty08");
                return false;
             }
             if (true == option.IsEnabled)
@@ -140,7 +140,7 @@ namespace BarbarianPrince
                option = options.Find("RandomParty05");
                if (null == option)
                {
-                  Logger.Log(LogEnum.LE_ERROR, "RandomParty05");
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-RandomParty05");
                   return false;
                }
                if (true == option.IsEnabled)
@@ -153,7 +153,7 @@ namespace BarbarianPrince
                   option = options.Find("RandomParty03");
                   if (null == option)
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "RandomParty03");
+                     Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-RandomParty03");
                      return false;
                   }
                   if (true == option.IsEnabled)
@@ -166,7 +166,7 @@ namespace BarbarianPrince
                      option = options.Find("RandomParty01");
                      if (null == option)
                      {
-                        Logger.Log(LogEnum.LE_ERROR, "RandomParty01");
+                        Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-RandomParty01");
                         return false;
                      }
                      if (true == option.IsEnabled)
@@ -179,7 +179,7 @@ namespace BarbarianPrince
                         option = options.Find("PartyCustom");
                         if (null == option)
                         {
-                           Logger.Log(LogEnum.LE_ERROR, "PartyCustom");
+                           Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-PartyCustom");
                            return false;
                         }
                         if (true == option.IsEnabled)
@@ -203,7 +203,7 @@ namespace BarbarianPrince
                            option = options.Find("Dwarf");
                            if (null == option)
                            {
-                              Logger.Log(LogEnum.LE_ERROR, "Dwarf");
+                              Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-Dwarf");
                               return false;
                            }
                            myCheckBoxDwarf.IsChecked = option.IsEnabled;
@@ -213,7 +213,7 @@ namespace BarbarianPrince
                            option = options.Find("Eagle");
                            if (null == option)
                            {
-                              Logger.Log(LogEnum.LE_ERROR, "Eagle");
+                              Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-Eagle");
                               return false;
                            }
                            myCheckBoxEagle.IsChecked = option.IsEnabled;
@@ -223,7 +223,7 @@ namespace BarbarianPrince
                            option = options.Find("Elf");
                            if (null == option)
                            {
-                              Logger.Log(LogEnum.LE_ERROR, "Elf");
+                              Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-Elf");
                               return false;
                            }
                            myCheckBoxElf.IsChecked = option.IsEnabled;
@@ -233,7 +233,7 @@ namespace BarbarianPrince
                            option = options.Find("Falcon");
                            if (null == option)
                            {
-                              Logger.Log(LogEnum.LE_ERROR, "Falcon");
+                              Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-Falcon");
                               return false;
                            }
                            myCheckBoxFalcon.IsChecked = option.IsEnabled;
@@ -243,7 +243,7 @@ namespace BarbarianPrince
                            option = options.Find("Griffon");
                            if (null == option)
                            {
-                              Logger.Log(LogEnum.LE_ERROR, "Griffon");
+                              Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-Griffon");
                               return false;
                            }
                            myCheckBoxGriffon.IsChecked = option.IsEnabled;
@@ -253,7 +253,7 @@ namespace BarbarianPrince
                            option = options.Find("Harpy");
                            if (null == option)
                            {
-                              Logger.Log(LogEnum.LE_ERROR, "Harpy");
+                              Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-Harpy");
                               return false;
                            }
                            myCheckBoxHarpy.IsChecked = option.IsEnabled;
@@ -263,7 +263,7 @@ namespace BarbarianPrince
                            option = options.Find("Magician");
                            if (null == option)
                            {
-                              Logger.Log(LogEnum.LE_ERROR, "Magician");
+                              Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-Magician");
                               return false;
                            }
                            myCheckBoxMagician.IsChecked = option.IsEnabled;
@@ -273,7 +273,7 @@ namespace BarbarianPrince
                            option = options.Find("Mercenary");
                            if (null == option)
                            {
-                              Logger.Log(LogEnum.LE_ERROR, "Mercenary");
+                              Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-Mercenary");
                               return false;
                            }
                            myCheckBoxMercenary.IsChecked = option.IsEnabled;
@@ -283,7 +283,7 @@ namespace BarbarianPrince
                            option = options.Find("Merchant");
                            if (null == option)
                            {
-                              Logger.Log(LogEnum.LE_ERROR, "Merchant");
+                              Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-Merchant");
                               return false;
                            }
                            myCheckBoxMerchant.IsChecked = option.IsEnabled;
@@ -293,7 +293,7 @@ namespace BarbarianPrince
                            option = options.Find("Minstrel");
                            if (null == option)
                            {
-                              Logger.Log(LogEnum.LE_ERROR, "Minstrel");
+                              Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-Minstrel");
                               return false;
                            }
                            myCheckBoxMinstrel.IsChecked = option.IsEnabled;
@@ -303,7 +303,7 @@ namespace BarbarianPrince
                            option = options.Find("Monk");
                            if (null == option)
                            {
-                              Logger.Log(LogEnum.LE_ERROR, "Monk");
+                              Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-Monk");
                               return false;
                            }
                            myCheckBoxMonk.IsChecked = option.IsEnabled;
@@ -313,7 +313,7 @@ namespace BarbarianPrince
                            option = options.Find("PorterSlave");
                            if (null == option)
                            {
-                              Logger.Log(LogEnum.LE_ERROR, "PorterSlave");
+                              Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-PorterSlave");
                               return false;
                            }
                            myCheckBoxPorterSlave.IsChecked = option.IsEnabled;
@@ -323,7 +323,7 @@ namespace BarbarianPrince
                            option = options.Find("TrueLove");
                            if (null == option)
                            {
-                              Logger.Log(LogEnum.LE_ERROR, "TrueLove");
+                              Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-TrueLove");
                               return false;
                            }
                            myCheckBoxTrueLove.IsChecked = option.IsEnabled;
@@ -333,7 +333,7 @@ namespace BarbarianPrince
                            option = options.Find("Wizard");
                            if (null == option)
                            {
-                              Logger.Log(LogEnum.LE_ERROR, "Wizard");
+                              Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-Wizard");
                               return false;
                            }
                            myCheckBoxWizard.IsChecked = option.IsEnabled;
@@ -368,7 +368,7 @@ namespace BarbarianPrince
          option = options.Find("PartyMounted");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "PartyMounted");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-PartyMounted");
             return false;
          }
          myCheckBoxPartyMounted.IsChecked = option.IsEnabled;
@@ -377,7 +377,7 @@ namespace BarbarianPrince
          option = options.Find("PartyAirborne");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "PartyAirborne");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-PartyAirborne");
             return false;
          }
          myCheckBoxPartyAirborne.IsChecked = option.IsEnabled;
@@ -387,7 +387,7 @@ namespace BarbarianPrince
          option = options.Find("RandomHex");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "RandomHex");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-RandomHex");
             return false;
          }
          myRadioButtonHexRandom.IsChecked = option.IsEnabled;
@@ -397,7 +397,7 @@ namespace BarbarianPrince
          option = options.Find("RandomTown");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "RandomTown");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-RandomTown");
             return false;
          }
          myRadioButtonHexRandomTown.IsChecked = option.IsEnabled;
@@ -407,7 +407,7 @@ namespace BarbarianPrince
          option = options.Find("RandomLeft");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "RandomLeft");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-RandomLeft");
             return false;
          }
          myRadioButtonHexRandomLeft.IsChecked = option.IsEnabled;
@@ -417,7 +417,7 @@ namespace BarbarianPrince
          option = options.Find("RandomRight");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "RandomRight");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-RandomRight");
             return false;
          }
          myRadioButtonHexRandomRight.IsChecked = option.IsEnabled;
@@ -427,7 +427,7 @@ namespace BarbarianPrince
          option = options.Find("RandomBottom");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "RandomBottom");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-RandomBottom");
             return false;
          }
          myRadioButtonHexRandomBottom.IsChecked = option.IsEnabled;
@@ -437,7 +437,7 @@ namespace BarbarianPrince
          option = options.Find("0109");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "0109");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-0109");
             return false;
          }
          myRadioButtonHexTown.IsChecked = option.IsEnabled;
@@ -447,7 +447,7 @@ namespace BarbarianPrince
          option = options.Find("0206");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "0206");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-0206");
             return false;
          }
          myRadioButtonHexRuin.IsChecked = option.IsEnabled;
@@ -457,7 +457,7 @@ namespace BarbarianPrince
          option = options.Find("0711");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "0711");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-0711");
             return false;
          }
          myRadioButtonHexTemple.IsChecked = option.IsEnabled;
@@ -467,7 +467,7 @@ namespace BarbarianPrince
          option = options.Find("1212");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "1212");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-1212");
             return false;
          }
          myRadioButtonHexHuldra.IsChecked = option.IsEnabled;
@@ -477,7 +477,7 @@ namespace BarbarianPrince
          option = options.Find("0323");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "0323");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-0323");
             return false;
          }
          myRadioButtonHexDrogat.IsChecked = option.IsEnabled;
@@ -487,7 +487,7 @@ namespace BarbarianPrince
          option = options.Find("1923");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "1923");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-1923");
             return false;
          }
          myRadioButtonHexLadyAeravir.IsChecked = option.IsEnabled;
@@ -497,7 +497,7 @@ namespace BarbarianPrince
          option = options.Find("0418");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "0418");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-0418");
             return false;
          }
          myRadioButtonHexFarmland.IsChecked = option.IsEnabled;
@@ -507,7 +507,7 @@ namespace BarbarianPrince
          option = options.Find("0410");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "0410");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-0410");
             return false;
          }
          myRadioButtonHexCountryside.IsChecked = option.IsEnabled;
@@ -517,7 +517,7 @@ namespace BarbarianPrince
          option = options.Find("0409");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "0409");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-0409");
             return false;
          }
          myRadioButtonHexForest.IsChecked = option.IsEnabled;
@@ -527,7 +527,7 @@ namespace BarbarianPrince
          option = options.Find("0406");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "0406");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-0406");
             return false;
          }
          myRadioButtonHexHill.IsChecked = option.IsEnabled;
@@ -537,7 +537,7 @@ namespace BarbarianPrince
          option = options.Find("0405");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "0405");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-0405");
             return false;
          }
          myRadioButtonHexMountain.IsChecked = option.IsEnabled;
@@ -547,7 +547,7 @@ namespace BarbarianPrince
          option = options.Find("0411");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "0411");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-0411");
             return false;
          }
          myRadioButtonHexSwamp.IsChecked = option.IsEnabled;
@@ -557,7 +557,7 @@ namespace BarbarianPrince
          option = options.Find("0407");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "0407");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-0407");
             return false;
          }
          myRadioButtonHexDesert.IsChecked = option.IsEnabled;
@@ -567,7 +567,7 @@ namespace BarbarianPrince
          option = options.Find("1905");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "1905");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-1905");
             return false;
          }
          myRadioButtonHexRoad.IsChecked = option.IsEnabled;
@@ -577,7 +577,7 @@ namespace BarbarianPrince
          option = options.Find("1723");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "1723");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-1723");
             return false;
          }
          myRadioButtonHexBottom.IsChecked = option.IsEnabled;
@@ -590,7 +590,7 @@ namespace BarbarianPrince
          option = options.Find("EasiestMonsters");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "EasiestMonsters");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-EasiestMonsters");
             return false;
          }
          myRadioButtonMonsterEasiest.IsChecked = option.IsEnabled;
@@ -603,7 +603,7 @@ namespace BarbarianPrince
             option = options.Find("EasyMonsters");
             if (null == option)
             {
-               Logger.Log(LogEnum.LE_ERROR, "EasyMonsters");
+               Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-EasyMonsters");
                return false;
             }
             myRadioButtonMonsterEasy.IsChecked = option.IsEnabled;
@@ -613,10 +613,10 @@ namespace BarbarianPrince
             }
             else
             {
-               option = options.Find("EasyMonsters");
+               option = options.Find("UpdateDisplay(): option=null for Find()-EasyMonsters");
                if (null == option)
                {
-                  Logger.Log(LogEnum.LE_ERROR, "EasyMonsters");
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-EasyMonsters");
                   return false;
                }
                myRadioButtonMonsterEasy.IsChecked = option.IsEnabled;
@@ -629,7 +629,7 @@ namespace BarbarianPrince
                   option = options.Find("LessHardMonsters");
                   if (null == option)
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "LessHardMonsters");
+                     Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-LessHardMonsters");
                      return false;
                   }
                   myRadioButtonMonsterLessEasy.IsChecked = option.IsEnabled;
@@ -648,7 +648,7 @@ namespace BarbarianPrince
          option = options.Find("NoLostRoll");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "NoLostRoll");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-NoLostRoll");
             return false;
          }
          myCheckBoxNoLostRoll.IsChecked = option.IsEnabled;
@@ -658,7 +658,7 @@ namespace BarbarianPrince
          option = options.Find("ForceNoLostEvent");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "ForceNoLostEvent");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-ForceNoLostEvent");
             return false;
          }
          myCheckBoxNoLostEvent.IsChecked = option.IsEnabled;
@@ -668,7 +668,7 @@ namespace BarbarianPrince
          option = options.Find("ForceLostEvent");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "ForceLostEvent");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-ForceLostEvent");
             return false;
          }
          myCheckBoxForceLostEvent.IsChecked = option.IsEnabled;
@@ -678,7 +678,7 @@ namespace BarbarianPrince
          option = options.Find("ForceNoEvent");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "ForceNoEvent");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-ForceNoEvent");
             return false;
          }
          myCheckBoxNoEvent.IsChecked = option.IsEnabled;
@@ -688,7 +688,7 @@ namespace BarbarianPrince
          option = options.Find("ForceEvent");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "ForceEvent");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-ForceEvent");
             return false;
          }
          myCheckBoxForceEvent.IsChecked = option.IsEnabled;
@@ -698,7 +698,7 @@ namespace BarbarianPrince
          option = options.Find("ForceNoRoadEvent");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "ForceNoRoadEvent");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-ForceNoRoadEvent");
             return false;
          }
          myCheckBoxNoRoadEvent.IsChecked = option.IsEnabled;
@@ -708,7 +708,7 @@ namespace BarbarianPrince
          option = options.Find("ForceNoAirEvent");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "ForceNoAirEvent");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-ForceNoAirEvent");
             return false;
          }
          myCheckBoxNoAirEvent.IsChecked = option.IsEnabled;
@@ -718,7 +718,7 @@ namespace BarbarianPrince
          option = options.Find("ForceAirEvent");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "ForceAirEvent");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-ForceAirEvent");
             return false;
          }
          myCheckBoxForceAirEvent.IsChecked = option.IsEnabled;
@@ -728,7 +728,7 @@ namespace BarbarianPrince
          option = options.Find("ForceNoCrossEvent");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "ForceNoCrossEvent");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-ForceNoCrossEvent");
             return false;
          }
          myCheckBoxNoCrossEvent.IsChecked = option.IsEnabled;
@@ -738,7 +738,7 @@ namespace BarbarianPrince
          option = options.Find("ForceCrossEvent");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "ForceCrossEvent");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-ForceCrossEvent");
             return false;
          }
          myCheckBoxForceCrossEvent.IsChecked = option.IsEnabled;
@@ -748,7 +748,7 @@ namespace BarbarianPrince
          option = options.Find("ForceLostAfterCrossEvent");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "ForceLostAfterCrossEvent");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-ForceLostAfterCrossEvent");
             return false;
          }
          myCheckBoxForceLostAfterCross.IsChecked = option.IsEnabled;
@@ -758,7 +758,7 @@ namespace BarbarianPrince
          option = options.Find("ForceNoRaftEvent");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "ForceNoRaftEvent");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-ForceNoRaftEvent");
             return false;
          }
          myCheckBoxNoRaftEvent.IsChecked = option.IsEnabled;
@@ -768,7 +768,7 @@ namespace BarbarianPrince
          option = options.Find("ForceRaftEvent");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "ForceRaftEvent");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-ForceRaftEvent");
             return false;
          }
          myCheckBoxForceRaftEvent.IsChecked = option.IsEnabled;
@@ -826,22 +826,22 @@ namespace BarbarianPrince
          if (null != option)
             option.IsEnabled = false;
          else
-            Logger.Log(LogEnum.LE_ERROR, "ResetPrince(): not found AutoLostDecrease");
+            Logger.Log(LogEnum.LE_ERROR, "ResetPrince(): not found PrinceHorse");
          option = myOptions.Find("PrincePegasus");
          if (null != option)
             option.IsEnabled = false;
          else
-            Logger.Log(LogEnum.LE_ERROR, "ResetPrince(): not found AutoLostDecrease");
+            Logger.Log(LogEnum.LE_ERROR, "ResetPrince(): not found PrincePegasus");
          option = myOptions.Find("PrinceCoin");
          if (null != option)
             option.IsEnabled = false;
          else
-            Logger.Log(LogEnum.LE_ERROR, "ResetPrince(): not found AutoLostDecrease");
+            Logger.Log(LogEnum.LE_ERROR, "ResetPrince(): not found PrinceCoin");
          option = myOptions.Find("PrinceFood");
          if (null != option)
             option.IsEnabled = false;
          else
-            Logger.Log(LogEnum.LE_ERROR, "ResetPrince(): not found AutoLostDecrease");
+            Logger.Log(LogEnum.LE_ERROR, "ResetPrince(): not found PrinceFood");
       }
       private void ResetParty()
       {
@@ -879,7 +879,6 @@ namespace BarbarianPrince
       }
       private void ResetPartyMembers()
       {
-         Option option = null;
          myCheckBoxDwarf.IsChecked = false;
          myCheckBoxEagle.IsChecked = false;
          myCheckBoxElf.IsChecked = false;

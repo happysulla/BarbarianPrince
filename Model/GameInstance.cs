@@ -92,13 +92,13 @@ namespace BarbarianPrince
          ITerritory territory = myTerritories.Find("0101");
          myPrince = new MapItem("Prince", 1.0, false, false, false, "c07Prince", "c07Prince", territory, 9, 8, 0);
          PartyMembers.Add(myPrince);
-         if (false == AddStartingPrinceOption())
+         if (false == AddStartingPrinceOption(this.Options))
          {
             Logger.Log(LogEnum.LE_ERROR, "GameInstance(): AddStartingPrinceOption() returned false");
             CtorError = true;
             return;
          }
-         if (false == AddStartingOptions())
+         if (false == AddStartingOptions(this.Options))
          {
             Logger.Log(LogEnum.LE_ERROR, "GameInstance(): AddStartingOptions() returned false");
             CtorError = true;
@@ -106,6 +106,26 @@ namespace BarbarianPrince
          }
          AddSpecialConditionsForUnitTest();
          Logger.Log(LogEnum.LE_GAME_PARTYMEMBER_COUNT, "GameInstance() c=" + PartyMembers.Count.ToString());
+      }
+      public GameInstance(Options newGameOptions) // Constructor - set log levels
+      {
+         //------------------------------------------------------------------------------------
+         ITerritory territory = myTerritories.Find("0101");
+         myPrince = new MapItem("Prince", 1.0, false, false, false, "c07Prince", "c07Prince", territory, 9, 8, 0);
+         PartyMembers.Add(myPrince);
+         if (false == AddStartingPrinceOption(newGameOptions))
+         {
+            Logger.Log(LogEnum.LE_ERROR, "GameInstance(): AddStartingPrinceOption() returned false");
+            CtorError = true;
+            return;
+         }
+         if (false == AddStartingOptions(newGameOptions))
+         {
+            Logger.Log(LogEnum.LE_ERROR, "GameInstance(): AddStartingOptions() returned false");
+            CtorError = true;
+            return;
+         }
+         this.Options = newGameOptions;
       }
       public void Clone(IGameInstance gi) 
       {
@@ -559,13 +579,13 @@ namespace BarbarianPrince
       private Dictionary<string, int[]> myDieResults = new Dictionary<string, int[]>();
       public Dictionary<string, int[]> DieResults { get => myDieResults; }
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      private bool AddStartingPrinceOption()
+      private bool AddStartingPrinceOption(Options options)
       {
          Option option = null;
          String itemToAdd = "";
          //---------------------------------------------------------
          itemToAdd = "PrinceHorse";
-         option = this.Options.Find(itemToAdd);
+         option = options.Find(itemToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
@@ -579,7 +599,7 @@ namespace BarbarianPrince
          }
          //---------------------------------------------------------
          itemToAdd = "PrincePegasus";
-         option = this.Options.Find(itemToAdd);
+         option = options.Find(itemToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
@@ -589,7 +609,7 @@ namespace BarbarianPrince
             this.Prince.AddNewMount(MountEnum.Pegasus);
          //---------------------------------------------------------
          itemToAdd = "PrinceCoin";
-         option = this.Options.Find(itemToAdd);
+         option = options.Find(itemToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
@@ -599,7 +619,7 @@ namespace BarbarianPrince
             this.Prince.Coin += 30;
          //---------------------------------------------------------
          itemToAdd = "PrinceFood";
-         option = this.Options.Find(itemToAdd);
+         option = options.Find(itemToAdd);
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
@@ -609,7 +629,7 @@ namespace BarbarianPrince
             this.Prince.Food += 5;
          return true;
       }
-      private bool AddStartingOptions()
+      private bool AddStartingOptions(Options options)
       {
          int numPartyMembers = 0;
          Option option = this.Options.Find("PartyCustom");
@@ -622,7 +642,7 @@ namespace BarbarianPrince
          {
             foreach (string memberToAdd in Option.theStartingMembers)
             {
-               option = this.Options.Find(memberToAdd);
+               option = options.Find(memberToAdd);
                if (null == option)
                {
                   Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(" + memberToAdd + ") returned null");
@@ -641,7 +661,7 @@ namespace BarbarianPrince
          else // check if random party
          {
             //-----------------------------------------------
-            option = this.Options.Find("RandomParty10");
+            option = options.Find("RandomParty10");
             if (null == option)
             {
                Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty10) returned null");
@@ -650,7 +670,7 @@ namespace BarbarianPrince
             if (true == option.IsEnabled)
                numPartyMembers = 10;
             //-----------------------------------------------
-            option = this.Options.Find("RandomParty08");
+            option = options.Find("RandomParty08");
             if (null == option)
             {
                Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty08) returned null");
@@ -659,7 +679,7 @@ namespace BarbarianPrince
             if (true == option.IsEnabled)
                numPartyMembers = 8;
             //-----------------------------------------------
-            option = this.Options.Find("RandomParty05");
+            option = options.Find("RandomParty05");
             if (null == option)
             {
                Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty05) returned null");
@@ -668,7 +688,7 @@ namespace BarbarianPrince
             if (true == option.IsEnabled)
                numPartyMembers = 5;
             //-----------------------------------------------
-            option = this.Options.Find("RandomParty03");
+            option = options.Find("RandomParty03");
             if (null == option)
             {
                Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty03) returned null");
@@ -677,7 +697,7 @@ namespace BarbarianPrince
             if (true == option.IsEnabled)
                numPartyMembers = 3;
             //-----------------------------------------------
-            option = this.Options.Find("RandomParty01");
+            option = options.Find("RandomParty01");
             if (null == option)
             {
                Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty01) returned null");
@@ -701,7 +721,7 @@ namespace BarbarianPrince
             }
          }
          //---------------------------------------------------------
-         option = this.Options.Find("PartyMounted");
+         option = options.Find("PartyMounted");
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(PartyMounted) returned null");
@@ -716,7 +736,7 @@ namespace BarbarianPrince
             }
          }
          //---------------------------------------------------------
-         option = this.Options.Find("PartyAirborne");
+         option = options.Find("PartyAirborne");
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(PartyMounted) returned null");
