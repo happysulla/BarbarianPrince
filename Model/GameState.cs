@@ -1393,6 +1393,98 @@ namespace BarbarianPrince
             return true;
          }
          //---------------------------------------------------------
+         hex = "RandomTown";
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            List<ITerritory> townHexes = new List<ITerritory>();
+            foreach( ITerritory t in gi.Territories)
+            {
+               if ( true == t.IsTown )
+                  townHexes.Add(t);
+            }
+            int index = Utilities.RandomGenerator.Next(townHexes.Count); // returns [0,count)
+            starting = townHexes[index];
+            return true;
+         }
+         //---------------------------------------------------------
+         hex = "RandomLeft";
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            List<ITerritory> leftEdges = new List<ITerritory>();
+            foreach (ITerritory t in gi.Territories)
+            {
+               int colNum = Int32.Parse(t.Name.Substring(0, 2)); // (start index, length)
+               if (01 == colNum)
+                  leftEdges.Add(t);
+            }
+            int index = Utilities.RandomGenerator.Next(leftEdges.Count); // returns [0,count)
+            starting = leftEdges[index];
+            return true;
+         }
+         //---------------------------------------------------------
+         hex = "RandomRight";
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            List<ITerritory> rightEdges = new List<ITerritory>();
+            foreach (ITerritory t in gi.Territories)
+            {
+               int colNum = Int32.Parse(t.Name.Substring(0, 2)); // (start index, length)
+               if (20 == colNum)
+                  rightEdges.Add(t);
+            }
+            int index = Utilities.RandomGenerator.Next(rightEdges.Count); // returns [0,count)
+            starting = rightEdges[index];
+            return true;
+         }
+         //---------------------------------------------------------
+         hex = "RandomBottom";
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            List<ITerritory> bottomEdges = new List<ITerritory>();
+            foreach (ITerritory t in gi.Territories)
+            {
+               int colNum = Int32.Parse(t.Name.Substring(0, 2)); // (start index, length)
+               int rowNum = Int32.Parse(gi.Prince.Territory.Name.Substring(2));
+               if (0 == colNum%2)
+               {
+                  if (22 == rowNum)
+                     bottomEdges.Add(t);
+               }
+               else
+               {
+                  if (23 == rowNum)
+                     bottomEdges.Add(t);
+               }
+            }
+            int index = Utilities.RandomGenerator.Next(bottomEdges.Count); // returns [0,count)
+            starting = bottomEdges[index];
+            return true;
+         }
+         //---------------------------------------------------------
          hex = "0109";  // Town
          option = gi.Options.Find(hex);
          if (null == option)

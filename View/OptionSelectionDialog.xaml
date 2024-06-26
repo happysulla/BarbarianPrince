@@ -127,8 +127,8 @@
             </StackPanel>
          </GroupBox>
          <StackPanel Name="myStackPanelButtons" Grid.Row="3" Grid.ColumnSpan="5"  Orientation="Horizontal" VerticalAlignment="Center"  HorizontalAlignment="Center" Margin="5,5,5,5" >
-            <Button x:Name="myButtonCancel" HorizontalAlignment="Center" Width="70" Height="30" VerticalAlignment="Top" Margin="0,10,50,0" FontSize="14" Click="ButtonCancel_Click">Cancel</Button>
-            <Button x:Name="myButtonOK" HorizontalAlignment="Center" Width="70" Height="30" VerticalAlignment="Top" Margin="0,10,0,0" FontSize="14" Click="ButtonOk_Click">OK</Button>
+            <Button x:Name="myButtonCancel" HorizontalAlignment="Center" Width="70" Height="30" VerticalAlignment="Top" Margin="0,10,50,0" FontSize="14" Click="ButtonCancel_Click" IsCancel="True">Cancel</Button>
+            <Button x:Name="myButtonOK" HorizontalAlignment="Center" Width="70" Height="30" VerticalAlignment="Top" Margin="0,10,0,0" FontSize="14" Click="ButtonOk_Click" IsDefault="True">OK</Button>
          </StackPanel>
       </Grid>
    </ScrollViewer>

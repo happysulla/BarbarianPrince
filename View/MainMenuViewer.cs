@@ -55,11 +55,6 @@ namespace BarbarianPrince
                   myMenuItemTopLevel22.Click += MenuItemEditRecover_Click;
                   myMenuItemTopLevel22.IsEnabled = false;
                   myMenuItemTopLevel2.Items.Add(myMenuItemTopLevel22);
-                  MenuItem subItem23 = new MenuItem();
-                  subItem23.Header = "_Options...";
-                  subItem23.InputGestureText = "Ctrl+Shift+O";
-                  subItem23.Click += MenuItemEditOptions_Click;
-                  myMenuItemTopLevel2.Items.Add(subItem23);
                }
                //------------------------------------------------
                if (menuItem.Name == "myMenuItemTopLevel3")
@@ -140,7 +135,12 @@ namespace BarbarianPrince
             subItem3.InputGestureText = "Ctrl+S";
             subItem3.Click += MenuItemSaveAs_Click;
             myMenuItemTopLevel1.Items.Add(subItem3);
-         #endif
+            MenuItem subItem4 = new MenuItem();
+            subItem4.Header = "_Options...";
+            subItem4.InputGestureText = "Ctrl+Shift+O";
+            subItem4.Click += MenuItemFileOptions_Click;
+            myMenuItemTopLevel1.Items.Add(subItem4);
+   #endif
       } // end MainMenuViewer()
       //-----------------------------------------------------------------------
       public void UpdateView(ref IGameInstance gi, GameAction action)
@@ -194,6 +194,17 @@ namespace BarbarianPrince
          if (false == GameLoadMgr.SaveGameAsToFile(myGameInstance))
             Logger.Log(LogEnum.LE_ERROR, "MenuItemSave_Click(): GameLoadMgr.SaveGameAs() returned false");
       }
+      public void MenuItemFileOptions_Click(object sender, RoutedEventArgs e)
+      {
+         OptionSelectionDialog dialog = new OptionSelectionDialog(myGameInstance.Options); // Set Options in Game
+         if (true == dialog.CtorError)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "MenuItemFileOptions_Click(): OptionSelectionDialog CtorError=true");
+            return;
+         }
+         if (true == dialog.ShowDialog())
+            myGameInstance.Options = dialog.NewOptions;
+      }
       public void MenuItemEditUndo_Click(object sender, RoutedEventArgs e)
       {
          GameAction action = GameAction.UpdateEventViewerActive;
@@ -215,17 +226,6 @@ namespace BarbarianPrince
             e.CanExecute = true;
          else
             e.CanExecute = false;   
-      }
-      public void MenuItemEditOptions_Click(object sender, RoutedEventArgs e)
-      {
-         OptionSelectionDialog dialog = new OptionSelectionDialog(myGameInstance.Options); // Set Options in Game
-         if( true == dialog.CtorError)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "MenuItemEditOptions_Click(): OptionSelectionDialog CtorError=true");
-            return;
-         }
-         if (true == dialog.ShowDialog())
-            myGameInstance.Options = dialog.NewOptions;
       }
       public void MenuItemViewPath_Click(object sender, RoutedEventArgs e)
       {

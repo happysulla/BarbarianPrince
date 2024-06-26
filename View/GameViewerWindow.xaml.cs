@@ -1991,7 +1991,7 @@ namespace BarbarianPrince
             command = new RoutedCommand();
             keyGesture = new KeyGesture(Key.O, ModifierKeys.Control | ModifierKeys.Shift);
             InputBindings.Add(new KeyBinding(command, keyGesture));
-            CommandBindings.Add(new CommandBinding(command, mmv.MenuItemEditOptions_Click));
+            CommandBindings.Add(new CommandBinding(command, mmv.MenuItemFileOptions_Click));
             //------------------------------------------------
             command = new RoutedCommand();
             keyGesture = new KeyGesture(Key.P, ModifierKeys.Control);

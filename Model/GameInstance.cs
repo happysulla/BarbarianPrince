@@ -611,28 +611,14 @@ namespace BarbarianPrince
       }
       private bool AddStartingOptions()
       {
-         Option option = null;
-         //option = this.Options.Find("RandomParty");
-         //if (null == option)
-         //{
-         //   Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty) returned null");
-         //   return false;
-         //}
-         //if( true == option.IsEnabled)
-         //{
-         //   int numPartyMembers = Utilities.RandomGenerator.Next(8);
-         //   for ( int i=0; i< numPartyMembers; ++i)
-         //   {
-         //      int index = Utilities.RandomGenerator.Next(Option.MEMBER_COUNT);
-         //      string memberToAdd = Option.theStartingMembers[index];
-         //      if (false == AddStartingPartyMemberOption(memberToAdd))
-         //      {
-         //         Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): AddStartingPartyMemberOption(" + memberToAdd + ") returned false");
-         //         return false;
-         //      }
-         //   }
-         //}
-         //else
+         int numPartyMembers = 0;
+         Option option = this.Options.Find("PartyCustom");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty10) returned null");
+            return false;
+         }
+         if( true == option.IsEnabled)  // If this is a custom party, choose based on checked boxes in options
          {
             foreach (string memberToAdd in Option.theStartingMembers)
             {
@@ -647,6 +633,68 @@ namespace BarbarianPrince
                   if (false == AddStartingPartyMemberOption(memberToAdd))
                   {
                      Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): AddStartingPartyMemberOption() returned false");
+                     return false;
+                  }
+               }
+            }
+         }
+         else // check if random party
+         {
+            //-----------------------------------------------
+            option = this.Options.Find("RandomParty10");
+            if (null == option)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty10) returned null");
+               return false;
+            }
+            if (true == option.IsEnabled)
+               numPartyMembers = 10;
+            //-----------------------------------------------
+            option = this.Options.Find("RandomParty08");
+            if (null == option)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty08) returned null");
+               return false;
+            }
+            if (true == option.IsEnabled)
+               numPartyMembers = 8;
+            //-----------------------------------------------
+            option = this.Options.Find("RandomParty05");
+            if (null == option)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty05) returned null");
+               return false;
+            }
+            if (true == option.IsEnabled)
+               numPartyMembers = 5;
+            //-----------------------------------------------
+            option = this.Options.Find("RandomParty03");
+            if (null == option)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty03) returned null");
+               return false;
+            }
+            if (true == option.IsEnabled)
+               numPartyMembers = 3;
+            //-----------------------------------------------
+            option = this.Options.Find("RandomParty01");
+            if (null == option)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty01) returned null");
+               return false;
+            }
+            if (true == option.IsEnabled)
+               numPartyMembers = 1;
+            //-----------------------------------------------
+            if (0 < numPartyMembers)
+            {
+               for (int i = 0; i < numPartyMembers; ++i)
+               {
+                  int index = Utilities.RandomGenerator.Next(Option.MEMBER_COUNT);
+                  string memberToAdd = Option.theStartingMembers[index];
+                  if (false == AddStartingPartyMemberOption(memberToAdd))
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): AddStartingPartyMemberOption(" + memberToAdd + ") returned false");
                      return false;
                   }
                }
