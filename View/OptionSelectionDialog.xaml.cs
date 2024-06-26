@@ -21,6 +21,7 @@ namespace BarbarianPrince
       public bool CtorError { get; }
       public IGameInstance myGameInstance = null;
       private Options myOptions = null;
+      private bool myIsRandomGame = false;
       public Options NewOptions { get => myOptions; set => myOptions = value; }
       public OptionSelectionDialog(Options options)
       {
@@ -183,6 +184,7 @@ namespace BarbarianPrince
                         }
                         if (true == option.IsEnabled)
                         {
+                           isRandomPartyConfig = option.IsEnabled;
                            myCheckBoxDwarf.IsEnabled = true;
                            myCheckBoxEagle.IsEnabled = true;
                            myCheckBoxElf.IsEnabled = true;
@@ -360,8 +362,27 @@ namespace BarbarianPrince
                }
             }
          }
-         if( false == isRandomPartyConfig )
+         if( (false == isRandomPartyConfig ) && (false == isCustomPartyConfig) )
             myRadioButtonPartyOriginal.IsChecked = true;
+         //------------------------------------------------
+         option = options.Find("PartyMounted");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "PartyMounted");
+            return false;
+         }
+         myCheckBoxPartyMounted.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isCustomConfig = true;
+         option = options.Find("PartyAirborne");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "PartyAirborne");
+            return false;
+         }
+         myCheckBoxPartyAirborne.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isCustomConfig = true;
          //++++++++++++++++++++++++++++++++++++++++++++++++
          option = options.Find("RandomHex");
          if (null == option)
@@ -755,21 +776,21 @@ namespace BarbarianPrince
             isCustomConfig = true;
          //++++++++++++++++++++++++++++++++++++++++++++++++
          // Summary Selection
-         if ((true == isCustomConfig) || (true == isCustomPartyConfig) || (true == isCustomHexConfig))
-         {
-            myRadioButtonOriginal.IsChecked = false;
-            myRadioButtonRandomParty.IsChecked = false;
-            myRadioButtonRandomStart.IsChecked = false;
-            myRadioButtonAllRandom.IsChecked = false;
-            myRadioButtonCustom.IsChecked = true;
-         }
-         else if ((true == isRandomPartyConfig) && (true == isRandomHexConfig))
+         if (true == myIsRandomGame)
          {
             myRadioButtonOriginal.IsChecked = false;
             myRadioButtonRandomParty.IsChecked = false;
             myRadioButtonRandomStart.IsChecked = false;
             myRadioButtonAllRandom.IsChecked = true;
             myRadioButtonCustom.IsChecked = false;
+         }
+         else if ((true == isCustomConfig) || (true == isCustomPartyConfig) || (true == isCustomHexConfig))
+         {
+            myRadioButtonOriginal.IsChecked = false;
+            myRadioButtonRandomParty.IsChecked = false;
+            myRadioButtonRandomStart.IsChecked = false;
+            myRadioButtonAllRandom.IsChecked = false;
+            myRadioButtonCustom.IsChecked = true;
          }
          else if (true == isRandomPartyConfig)
          {
@@ -801,25 +822,21 @@ namespace BarbarianPrince
       private void ResetPrince()
       {
          Option option = null;
-         myCheckBoxPrinceHorse.IsChecked = false;
          option = myOptions.Find("PrinceHorse");
          if (null != option)
             option.IsEnabled = false;
          else
             Logger.Log(LogEnum.LE_ERROR, "ResetPrince(): not found AutoLostDecrease");
-         myCheckBoxPrincePegasus.IsChecked = false;
          option = myOptions.Find("PrincePegasus");
          if (null != option)
             option.IsEnabled = false;
          else
             Logger.Log(LogEnum.LE_ERROR, "ResetPrince(): not found AutoLostDecrease");
-         myCheckBoxPrinceCoin.IsChecked = false;
          option = myOptions.Find("PrinceCoin");
          if (null != option)
             option.IsEnabled = false;
          else
             Logger.Log(LogEnum.LE_ERROR, "ResetPrince(): not found AutoLostDecrease");
-         myCheckBoxPrinceFood.IsChecked = false;
          option = myOptions.Find("PrinceFood");
          if (null != option)
             option.IsEnabled = false;
@@ -895,13 +912,11 @@ namespace BarbarianPrince
       private void ResetPartyOptions()
       {
          Option option = null;
-         myCheckBoxPartyMounted.IsChecked = false;
          option = myOptions.Find("PartyMounted");
          if (null != option)
             option.IsEnabled = false;
          else
             Logger.Log(LogEnum.LE_ERROR, "ResetPartyOptions(): not found PartyMounted");
-         myCheckBoxPartyAirborne.IsChecked = false;
          option = myOptions.Find("PartyAirborne");
          if (null != option)
             option.IsEnabled = false;
@@ -1136,6 +1151,128 @@ namespace BarbarianPrince
          else
             Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found ForceNoAirEvent");
       }
+      private void SelectRandomPartyChoice()
+      {
+         int choice = Utilities.RandomGenerator.Next(6);
+         Option option = null;
+         switch(choice)
+         {
+            case 0:  break;
+            case 1: option = myOptions.Find("RandomParty10"); break;
+            case 2: option = myOptions.Find("RandomParty08"); break;
+            case 3: option = myOptions.Find("RandomParty05"); break;
+            case 4: option = myOptions.Find("RandomParty03"); break;
+            case 5: option = myOptions.Find("RandomParty01"); break;
+            default: Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyChoice: reached default choice=" + choice.ToString()); return;
+         }
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyChoice(): myOptions.Find() for choice=" + choice.ToString());
+         else
+            option.IsEnabled = !option.IsEnabled;
+      }
+      private void SelectRandomHexChoice()
+      {
+         int choice = Utilities.RandomGenerator.Next(21);
+         Option option = null;
+         switch (choice)
+         {
+            case 0: break;
+            case 1: option = myOptions.Find("RandomHex"); break;
+            case 2: option = myOptions.Find("RandomTown"); break;
+            case 3: option = myOptions.Find("RandomLeft"); break;
+            case 4: option = myOptions.Find("RandomRight"); break;
+            case 5: option = myOptions.Find("RandomBottom"); break;
+            case 6: option = myOptions.Find("0109"); break;
+            case 7: option = myOptions.Find("0206"); break;
+            case 8: option = myOptions.Find("0711"); break;
+            case 9: option = myOptions.Find("1212"); break;
+            case 10: option = myOptions.Find("0323"); break;
+            case 11: option = myOptions.Find("1923"); break;
+            case 12: option = myOptions.Find("0418"); break;
+            case 13: option = myOptions.Find("0410"); break;
+            case 14: option = myOptions.Find("0409"); break;
+            case 15: option = myOptions.Find("0406"); break;
+            case 16: option = myOptions.Find("0405"); break;
+            case 17: option = myOptions.Find("0411"); break;
+            case 18: option = myOptions.Find("0407"); break;
+            case 19: option = myOptions.Find("1905"); break;
+            case 20: option = myOptions.Find("1723"); break;
+            default: Logger.Log(LogEnum.LE_ERROR, "SelectRandomHexChoice: reached default choice=" + choice.ToString()); return;
+         }
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomHexChoice(): myOptions.Find() for choice=" + choice.ToString());
+         else
+            option.IsEnabled = !option.IsEnabled;
+      }
+      private void SelectRandomPrinceChoice()
+      {
+         int choice = Utilities.RandomGenerator.Next(2);
+         if( 1 == choice )
+         {
+            Option option = myOptions.Find("PrinceHorse");
+            if (null == option)
+               Logger.Log(LogEnum.LE_ERROR, "SelectRandomPrinceChoice(): myOptions.Find() for option=PrinceHorse");
+            else
+               option.IsEnabled = !option.IsEnabled;
+         }
+         choice = Utilities.RandomGenerator.Next(2);
+         if (1 == choice)
+         {
+            Option option = myOptions.Find("PrincePegasus");
+            if (null == option)
+               Logger.Log(LogEnum.LE_ERROR, "SelectRandomPrinceChoice(): myOptions.Find() for option=PrincePegasus");
+            else
+               option.IsEnabled = !option.IsEnabled;
+         }
+         choice = Utilities.RandomGenerator.Next(2);
+         if (1 == choice)
+         {
+            Option option = myOptions.Find("PrinceCoin");
+            if (null == option)
+               Logger.Log(LogEnum.LE_ERROR, "SelectRandomPrinceChoice(): myOptions.Find() for option=PrinceCoin");
+            else
+               option.IsEnabled = !option.IsEnabled;
+         }
+         choice = Utilities.RandomGenerator.Next(2);
+         if (1 == choice)
+         {
+            Option option = myOptions.Find("PrinceFood");
+            if (null == option)
+               Logger.Log(LogEnum.LE_ERROR, "SelectRandomPrinceChoice(): myOptions.Find() for option=PrinceFood");
+            else
+               option.IsEnabled = !option.IsEnabled;
+         }
+      }
+      private void SelectRandomGameOptionChoice()
+      {
+         int choice = Utilities.RandomGenerator.Next(2);
+         if (1 == choice)
+         {
+            Option option = myOptions.Find("PartyMounted");
+            if (null == option)
+               Logger.Log(LogEnum.LE_ERROR, "SelectRandomPrinceChoice(): myOptions.Find() for option=PartyMounted");
+            else
+               option.IsEnabled = !option.IsEnabled;
+         }
+         choice = Utilities.RandomGenerator.Next(2);
+         if (1 == choice)
+         {
+            Option option = myOptions.Find("PartyAirborne");
+            if (null == option)
+               Logger.Log(LogEnum.LE_ERROR, "SelectRandomPrinceChoice(): myOptions.Find() for option=PartyAirborne");
+            else
+               option.IsEnabled = !option.IsEnabled;
+         }
+         choice = Utilities.RandomGenerator.Next(2);
+         if (1 == choice)
+         {
+            Option option = myOptions.Find("AutoLostDecrease");
+            if (null == option)
+               Logger.Log(LogEnum.LE_ERROR, "SelectRandomPrinceChoice(): myOptions.Find() for option=AutoLostDecrease");
+            else
+               option.IsEnabled = !option.IsEnabled;
+         }
+      }
       //----------------------CONTROLLER FUNCTIONS----------------------
       private void ButtonOk_Click(object sender, RoutedEventArgs e)
       {
@@ -1146,49 +1283,36 @@ namespace BarbarianPrince
       }
       private void StackPanelSummary_Click(object sender, RoutedEventArgs e)
       {
+         RadioButton rb = (RadioButton)sender;
+         myCheckBoxAutoLostIncrement.IsChecked = false;
+         Option option = myOptions.Find("AutoLostDecrease");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): myOptions.Find() for name=" + rb.Name);
+         else
+            option.IsEnabled = false;
          ResetPrince();
          ResetParty();
          ResetPartyMembers();
+         ResetPartyOptions();
          ResetHex();
          ResetMonsters();
          ResetEvents();
-         RadioButton rb = (RadioButton)sender;
-         Option option = null;
+         myIsRandomGame = false;
          switch (rb.Name)
          {
-            case "myRadioButtonOriginal":
-               myCheckBoxAutoLostIncrement.IsChecked = false;
-               option = myOptions.Find("AutoLostDecrease");
-               if (null == option)
-                  Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): myOptions.Find() for name=" + rb.Name);
-               else
-                  option.IsEnabled = false;
-               break;
+            case "myRadioButtonOriginal":  break;
             case "myRadioButtonRandomParty":
-               option = myOptions.Find("RandomParty");
-               if (null == option)
-                  Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): myOptions.Find() for name=" + rb.Name);
-               else
-                  option.IsEnabled = true;
+               SelectRandomPartyChoice();
                break;
             case "myRadioButtonRandomStart":
-               option = myOptions.Find("RandomHex");
-               if (null == option)
-                  Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): myOptions.Find() for name=" + rb.Name);
-               else
-                  option.IsEnabled = true;
+               SelectRandomHexChoice();
                break;
             case "myRadioButtonAllRandom":
-               option = myOptions.Find("PartyCustom");
-               if (null == option)
-                  Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): myOptions.Find() for name=" + rb.Name);
-               else
-                  option.IsEnabled = true;
-               option = myOptions.Find("RandomHex");
-               if (null == option)
-                  Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): myOptions.Find() for name=" + rb.Name);
-               else
-                  option.IsEnabled = true;
+               myIsRandomGame = true;
+               SelectRandomPartyChoice();
+               SelectRandomHexChoice();
+               SelectRandomPrinceChoice();
+               SelectRandomGameOptionChoice();
                break;
             default: Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): reached default name=" + rb.Name); return;
          }
@@ -1215,7 +1339,8 @@ namespace BarbarianPrince
                else
                   option.IsEnabled = !option.IsEnabled;
                break;
-            case "myCheckBoxAutoLostIncrement": 
+            case "myCheckBoxAutoLostIncrement":
+               myIsRandomGame = false;
                option = myOptions.Find("AutoLostDecrease");
                if (null == option)
                   Logger.Log(LogEnum.LE_ERROR, "StackPanelOptions_Click(): myOptions.Find() for name=" + cb.Name);
@@ -1231,6 +1356,7 @@ namespace BarbarianPrince
       {
          CheckBox cb = (CheckBox)sender;
          Option option = null;
+         myIsRandomGame = false;
          switch (cb.Name)
          {
             case "myCheckBoxPrinceHorse": option = myOptions.Find("PrinceHorse"); break;
@@ -1254,11 +1380,11 @@ namespace BarbarianPrince
          switch (rb.Name)
          {
             case "myRadioButtonPartyOriginal": ResetPartyMembers(); break;
-            case "myRadioButtonPartyRandom10": ResetPartyMembers(); option = myOptions.Find("RandomParty10"); break;
-            case "myRadioButtonPartyRandom8": ResetPartyMembers(); option = myOptions.Find("RandomParty08"); break;
-            case "myRadioButtonPartyRandom5": ResetPartyMembers(); option = myOptions.Find("RandomParty05"); break;
-            case "myRadioButtonPartyRandom3": ResetPartyMembers(); option = myOptions.Find("RandomParty03"); break;
-            case "myRadioButtonPartyRandom1": ResetPartyMembers(); option = myOptions.Find("RandomParty01"); break;
+            case "myRadioButtonPartyRandom10": ResetPartyMembers(); myIsRandomGame = false; option = myOptions.Find("RandomParty10"); break;
+            case "myRadioButtonPartyRandom8": ResetPartyMembers(); myIsRandomGame = false; option = myOptions.Find("RandomParty08"); break;
+            case "myRadioButtonPartyRandom5": ResetPartyMembers(); myIsRandomGame = false; option = myOptions.Find("RandomParty05"); break;
+            case "myRadioButtonPartyRandom3": ResetPartyMembers(); myIsRandomGame = false; option = myOptions.Find("RandomParty03"); break;
+            case "myRadioButtonPartyRandom1": ResetPartyMembers(); myIsRandomGame = false; option = myOptions.Find("RandomParty01"); break;
             case "myRadioButtonPartyCustom": option = myOptions.Find("PartyCustom"); break;
             default: Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): reached default name=" + rb.Name); return;
          }
@@ -1273,6 +1399,7 @@ namespace BarbarianPrince
       {
          CheckBox cb = (CheckBox)sender;
          Option option = null;
+         myIsRandomGame = false;
          switch (cb.Name)
          {
             case "myCheckBoxDwarf": option = myOptions.Find("Dwarf"); break;
@@ -1294,7 +1421,7 @@ namespace BarbarianPrince
          if (null == option)
             Logger.Log(LogEnum.LE_ERROR, "StackPanelPartyMember_Click(): myOptions.Find() for name=" + cb.Name);
          else
-            option.IsEnabled = true;
+            option.IsEnabled = !option.IsEnabled;
          if (false == UpdateDisplay(myOptions))
             Logger.Log(LogEnum.LE_ERROR, "StackPanelPartyMember_Click(): UpdateDisplay() returned false for name=" + cb.Name);
       }
@@ -1302,17 +1429,16 @@ namespace BarbarianPrince
       {
          CheckBox cb = (CheckBox)sender;
          Option option = null;
-         ResetPartyOptions();
          switch (cb.Name)
          {
-            case "myCheckBoxPartyMounted": option = myOptions.Find("PartyMounted"); break;
-            case "myCheckBoxPartyAirborne": option = myOptions.Find("PartyAirborne"); break;
+            case "myCheckBoxPartyMounted": myIsRandomGame = false; option = myOptions.Find("PartyMounted"); break;
+            case "myCheckBoxPartyAirborne": myIsRandomGame = false; option = myOptions.Find("PartyAirborne"); break;
             default: Logger.Log(LogEnum.LE_ERROR, "StackPanelPartyOption_Click(): reached default name=" + cb.Name); return;
          }
          if (null == option)
             Logger.Log(LogEnum.LE_ERROR, "StackPanelPartyOption_Click(): myOptions.Find() for name=" + cb.Name);
          else
-            option.IsEnabled = true;
+            option.IsEnabled = !option.IsEnabled;
          if (false == UpdateDisplay(myOptions))
             Logger.Log(LogEnum.LE_ERROR, "StackPanelPartyOption_Click(): UpdateDisplay() returned false for name=" + cb.Name);
       }
@@ -1349,6 +1475,7 @@ namespace BarbarianPrince
             case "myRadioButtonHexBottom": option = myOptions.Find("1723"); break;
             default: Logger.Log(LogEnum.LE_ERROR, "StackPanelHex_Click(): reached default name=" + rb.Name); return;
          }
+         myIsRandomGame = false;
          if (null == option)
             Logger.Log(LogEnum.LE_ERROR, "StackPanelHex_Click(): myOptions.Find() for name=" + rb.Name);
          else
@@ -1361,6 +1488,7 @@ namespace BarbarianPrince
          RadioButton rb = (RadioButton)sender;
          Option option = null;
          ResetMonsters();
+         myIsRandomGame = false;
          switch (rb.Name)
          {
             case "myRadioButtonMonsterNormal":
@@ -1383,6 +1511,7 @@ namespace BarbarianPrince
       {
          CheckBox cb = (CheckBox)sender;
          Option option = null;
+         myIsRandomGame = false;
          switch (cb.Name)
          {
             case "myCheckBoxNoLostRoll": option = myOptions.Find("NoLostRoll"); break;
