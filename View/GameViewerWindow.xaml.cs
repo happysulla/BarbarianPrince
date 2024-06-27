@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,7 +22,6 @@ using Point = System.Windows.Point;
 
 namespace BarbarianPrince
 {
-
    public partial class GameViewerWindow : Window, IView
    {
       private const int MAX_DAILY_ACTIONS = 13;
@@ -1886,15 +1887,49 @@ namespace BarbarianPrince
             myScollViewerInside.Height = Settings.Default.ScrollViewerHeight;
             myScollViewerInside.Width = Settings.Default.ScrollViewerWidth;
             //-------------------------------------------
-            //string sNewGameOptions = Settings.Default.NewGameOptions;
-            //myMainMenuViewer.NewGameOptions = Utilities.Deserialize<Options>(sNewGameOptions);
-            //-------------------------------------------
             GameLoadMgr.theDirectoryName = Settings.Default.GameDirectoryName; // remember the game directory name
+            //-------------------------------------------
+            string sNewGameOptions = Settings.Default.GameOptions;
+            myMainMenuViewer.NewGameOptions = new Options();
+            XmlReader reader = null;
+            try
+            {
+               // Load the reader with the data file and ignore all white space nodes.
+               //reader = XmlReader.Create(new StringReader(sNewGameOptions));
+               reader = new XmlTextReader("Options1.xml") { WhitespaceHandling = WhitespaceHandling.None };
+               while (reader.Read())
+               {
+                  if (reader.Name == "Option")
+                  {
+                     if (reader.IsStartElement())
+                     {
+                        string name = reader.GetAttribute("value");
+                        //---------------------------------------------------------
+                        reader.Read();
+                        string isEnabledStr = reader.GetAttribute("value");
+                        bool isEnabled = Boolean.Parse(isEnabledStr);
+                        //---------------------------------------------------------
+                        Option option = new Option(name, isEnabled);
+                        myMainMenuViewer.NewGameOptions.Add(option);
+                     } // end if
+                  } // end if
+               } // end while
+            } // try
+            catch (Exception ex)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "OnClosing(): Ex= " + ex.ToString());
+            }
+            finally
+            {
+               if (reader != null)
+                  reader.Close();
+            }
          }
          catch ( Exception ex ) 
          {
             Logger.Log(LogEnum.LE_ERROR, "OnSourceInitialized() e=" + ex.ToString());
          }
+         return;
       }
       protected override void OnClosing(CancelEventArgs e) //  // WARNING - Not fired when Application.SessionEnding is fired
       {
@@ -1913,8 +1948,31 @@ namespace BarbarianPrince
          //-------------------------------------------
          Settings.Default.GameDirectoryName = Settings.Default.GameDirectoryName;
          //-------------------------------------------
-         string sOptions = Utilities.Serialize<Options>(myMainMenuViewer.NewGameOptions);
-         Settings.Default.NewGameOptions = sOptions;
+         if(null != myMainMenuViewer.NewGameOptions)
+         {
+            try
+            {
+               XmlDocument aXmlDocument = new XmlDocument();
+               aXmlDocument.LoadXml("<Options></Options>");
+               foreach (Option o in myMainMenuViewer.NewGameOptions)
+               {
+                  XmlElement optionElem = aXmlDocument.CreateElement("Option");
+                  optionElem.SetAttribute("value", o.Name);
+                  aXmlDocument.DocumentElement.AppendChild(optionElem);
+                  XmlElement enabledElem = aXmlDocument.CreateElement("IsEnabled");
+                  enabledElem.SetAttribute("value", o.IsEnabled.ToString());
+                  aXmlDocument.DocumentElement.LastChild.AppendChild(enabledElem);
+               }
+               XmlWriterSettings settings = new XmlWriterSettings() { Indent = true, NewLineOnAttributes = true };
+               XmlWriter writer = XmlWriter.Create("Options1.xml", settings);
+               aXmlDocument.Save(writer);
+               Settings.Default.GameOptions = aXmlDocument.ToString();
+            }
+            catch (Exception ex)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "OnClosing(): Ex= " + ex.ToString());
+            }
+         }
          //-------------------------------------------
          Settings.Default.Save();
          //-------------------------------------------

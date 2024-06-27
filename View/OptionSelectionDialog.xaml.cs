@@ -600,10 +600,10 @@ namespace BarbarianPrince
          }
          else
          {
-            option = options.Find("EasyMonsters");
+            option = options.Find("EasiestMonsters");
             if (null == option)
             {
-               Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-EasyMonsters");
+               Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-EasiestMonsters");
                return false;
             }
             myRadioButtonMonsterEasy.IsChecked = option.IsEnabled;
@@ -613,7 +613,7 @@ namespace BarbarianPrince
             }
             else
             {
-               option = options.Find("UpdateDisplay(): option=null for Find()-EasyMonsters");
+               option = options.Find("EasyMonsters");
                if (null == option)
                {
                   Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-EasyMonsters");

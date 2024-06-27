@@ -207,7 +207,10 @@ namespace BarbarianPrince
             return;
          }
          if (true == dialog.ShowDialog())
+         {
+            this.NewGameOptions = dialog.NewOptions;
             myGameInstance.Options = dialog.NewOptions;
+         }
       }
       public void MenuItemEditUndo_Click(object sender, RoutedEventArgs e)
       {
