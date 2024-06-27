@@ -102,7 +102,7 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[4])
          {
-            if (false == ShowRoads(gi.Territories))
+            if (false == ShowRoads(Territory.theTerritories))
             {
                Console.WriteLine("TerritoryCreateUnitTest.Command(): ShowRoads() returned false");
                return false;
@@ -110,7 +110,7 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[5])
          {
-            if (false == ShowRivers(gi.Territories))
+            if (false == ShowRivers(Territory.theTerritories))
             {
                Console.WriteLine("TerritoryCreateUnitTest.Command(): ShowRivers() returned false");
                return false;
@@ -118,7 +118,7 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[6])
          {
-            if (false == ShowAdjacents(gi.Territories))
+            if (false == ShowAdjacents(Territory.theTerritories))
             {
                Console.WriteLine("TerritoryCreateUnitTest.Command(): ShowAdjacents() returned false");
                return false;
@@ -126,24 +126,24 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[7])
          {
-            if (false == ShowRaftTerritories(gi.Territories))
+            if (false == ShowRaftTerritories(Territory.theTerritories))
             {
                Console.WriteLine("TerritoryCreateUnitTest.Command(): ShowRaftTerritories() returned false");
                return false;
             }
             myIndexRaft++;
-            if (gi.Territories.Count <= myIndexRaft)
+            if (Territory.theTerritories.Count <= myIndexRaft)
                myIndexRaft = 0;
          }
          else if (CommandName == myCommandNames[8])
          {
-            if (false == ShowDownRiverTerritory(gi.Territories))
+            if (false == ShowDownRiverTerritory(Territory.theTerritories))
             {
                Console.WriteLine("TerritoryCreateUnitTest.Command(): ShowDownRiverTerritory() returned false");
                return false;
             }
             myIndexDownRiver++;
-            if (gi.Territories.Count <= myIndexDownRiver)
+            if (Territory.theTerritories.Count <= myIndexDownRiver)
                myIndexDownRiver = 0;
          }
          else if (CommandName == myCommandNames[9])
@@ -160,7 +160,7 @@ namespace BarbarianPrince
       {
          if (HeaderName == myHeaderNames[0])
          {
-            CreateEllipses(gi.Territories);
+            CreateEllipses(Territory.theTerritories);
             myCanvas.MouseLeftButtonDown += this.MouseLeftButtonDownCreateTerritory;
             ++myIndexName;
          }
@@ -213,7 +213,7 @@ namespace BarbarianPrince
             ++myIndexName;
             SolidColorBrush aSolidColorBrushClear = new SolidColorBrush { Color = Color.FromArgb(010, 255, 100, 0) }; // almost clear
             SolidColorBrush aSolidColorBrushBlue = new SolidColorBrush { Color = Colors.Blue };
-            foreach (Territory t in gi.Territories) // Clear out all previous results
+            foreach (Territory t in Territory.theTerritories) // Clear out all previous results
             {
                string tName = Utilities.RemoveSpaces(t.ToString());
                foreach (UIElement ui in myCanvas.Children)
@@ -237,7 +237,7 @@ namespace BarbarianPrince
          {
             SolidColorBrush aSolidColorBrushClear = new SolidColorBrush { Color = Color.FromArgb(010, 255, 100, 0) }; // almost clear
             SolidColorBrush aSolidColorBrushBlue = new SolidColorBrush { Color = Colors.Blue };
-            foreach (Territory t in gi.Territories) // Clear out all previous results
+            foreach (Territory t in Territory.theTerritories) // Clear out all previous results
             {
                string tName = Utilities.RemoveSpaces(t.ToString());
                foreach (UIElement ui in myCanvas.Children)
@@ -339,7 +339,7 @@ namespace BarbarianPrince
          try
          {
             System.IO.File.Delete("../Config/Territories.xml");  // delete old file
-            XmlDocument aXmlDocument = CreateXml(myGameInstance.Territories); // create a new XML document based on Territories
+            XmlDocument aXmlDocument = CreateXml(Territory.theTerritories); // create a new XML document based on Territories
             using (FileStream writer = new FileStream("../Config/Territories.xml", FileMode.OpenOrCreate, FileAccess.Write))
             {
                XmlWriterSettings settings = new XmlWriterSettings { Indent = true, OmitXmlDeclaration = true, NewLineOnAttributes = false };
@@ -478,7 +478,7 @@ namespace BarbarianPrince
          SolidColorBrush aSolidColorBrush2 = new SolidColorBrush { Color = Color.FromArgb(255, 0, 0, 0) };     // black
          SolidColorBrush aSolidColorBrush3 = new SolidColorBrush { Color = Colors.Red };
          SolidColorBrush aSolidColorBrush4 = new SolidColorBrush { Color = Colors.Yellow };
-         foreach (Territory anchorTerritory in myGameInstance.Territories)
+         foreach (Territory anchorTerritory in Territory.theTerritories)
          {
             string anchorName = Utilities.RemoveSpaces(anchorTerritory.ToString());
             Ellipse anchorEllipse = null; // Find the corresponding ellipse for this anchor territory
@@ -570,7 +570,7 @@ namespace BarbarianPrince
          SolidColorBrush aSolidColorBrush2 = new SolidColorBrush { Color = Color.FromArgb(255, 0, 0, 0) };     // black
          SolidColorBrush aSolidColorBrush3 = new SolidColorBrush { Color = Colors.Red };
          SolidColorBrush aSolidColorBrush4 = new SolidColorBrush { Color = Colors.Yellow };
-         foreach (Territory anchorTerritory in myGameInstance.Territories)
+         foreach (Territory anchorTerritory in Territory.theTerritories)
          {
             string anchorName = Utilities.RemoveSpaces(anchorTerritory.ToString());
             Ellipse anchorEllipse = null; // Find the corresponding ellipse for this anchor territory
@@ -1119,7 +1119,7 @@ namespace BarbarianPrince
             territory.IsTemple = dialog.IsTemple;
             territory.IsOasis = dialog.IsOasis;
             CreateEllipse(territory);
-            myGameInstance.Territories.Add(territory);
+            Territory.theTerritories.Add(territory);
          }
       }
       void MouseDownSetCenterPoint(object sender, MouseButtonEventArgs e)
@@ -1166,7 +1166,7 @@ namespace BarbarianPrince
             {
                Ellipse ellipse = (Ellipse)myItem;
                string tag = ellipse.Tag.ToString();
-               foreach (Territory t in myGameInstance.Territories)
+               foreach (Territory t in Territory.theTerritories)
                {
                   string name = Utilities.RemoveSpaces(t.ToString());
                   if (tag == name)
@@ -1197,7 +1197,7 @@ namespace BarbarianPrince
                if (true == ui.IsMouseOver)
                {
                   string tag = ellipse.Tag.ToString();
-                  foreach (Territory t in myGameInstance.Territories)
+                  foreach (Territory t in Territory.theTerritories)
                   {
                      string name = Utilities.RemoveSpaces(t.ToString());
                      if (tag == name)
@@ -1246,7 +1246,7 @@ namespace BarbarianPrince
                if (true == ui.IsMouseOver)
                {
                   Territory selectedTerritory = null;  // Find the corresponding Territory that user selected
-                  foreach (Territory t in myGameInstance.Territories) // Find the corresponding territory that correponds to clicked Ellipse
+                  foreach (Territory t in Territory.theTerritories) // Find the corresponding territory that correponds to clicked Ellipse
                   {
                      if (selectedEllipse.Tag.ToString() == Utilities.RemoveSpaces(t.ToString()))
                      {
@@ -1293,7 +1293,7 @@ namespace BarbarianPrince
                         if (ui1 is Ellipse) // find teh anchor ellipse
                         {
                            Ellipse ellipse1 = (Ellipse)ui1;
-                           foreach (Territory t in myGameInstance.Territories)
+                           foreach (Territory t in Territory.theTerritories)
                            {
                               if (ellipse1.Tag.ToString() == Utilities.RemoveSpaces(t.ToString()))
                               {
@@ -1326,7 +1326,7 @@ namespace BarbarianPrince
                if (true == ui.IsMouseOver)
                {
                   Territory selectedTerritory = null;  // Find the corresponding Territory that user selected
-                  foreach (Territory t in myGameInstance.Territories) // Find the corresponding territory that correponds to clicked Ellipse
+                  foreach (Territory t in Territory.theTerritories) // Find the corresponding territory that correponds to clicked Ellipse
                   {
                      if (selectedEllipse.Tag.ToString() == Utilities.RemoveSpaces(t.ToString()))
                      {
@@ -1373,7 +1373,7 @@ namespace BarbarianPrince
                         if (ui1 is Ellipse) // find teh anchor ellipse
                         {
                            Ellipse ellipse1 = (Ellipse)ui1;
-                           foreach (Territory t in myGameInstance.Territories)
+                           foreach (Territory t in Territory.theTerritories)
                            {
                               if (ellipse1.Tag.ToString() == Utilities.RemoveSpaces(t.ToString()))
                               {
@@ -1406,7 +1406,7 @@ namespace BarbarianPrince
                if (true == ui.IsMouseOver)
                {
                   Territory selectedTerritory = null;  // Find the corresponding Territory that user selected
-                  foreach (Territory t in myGameInstance.Territories)
+                  foreach (Territory t in Territory.theTerritories)
                   {
                      if (selectedEllipse.Tag.ToString() == Utilities.RemoveSpaces(t.ToString()))
                      {
@@ -1460,7 +1460,7 @@ namespace BarbarianPrince
                         if (ui1 is Ellipse)
                         {
                            Ellipse ellipse1 = (Ellipse)ui1;
-                           foreach (Territory t in myGameInstance.Territories)
+                           foreach (Territory t in Territory.theTerritories)
                            {
                               if (ellipse1.Tag.ToString() == Utilities.RemoveSpaces(t.ToString()))
                               {
@@ -1493,7 +1493,7 @@ namespace BarbarianPrince
                if (true == ui.IsMouseOver)
                {
                   Territory selectedTerritory = null;  // Find the corresponding Territory that user selected
-                  foreach (Territory t in myGameInstance.Territories)
+                  foreach (Territory t in Territory.theTerritories)
                   {
                      if (selectedEllipse.Tag.ToString() == Utilities.RemoveSpaces(t.ToString()))
                      {
@@ -1555,7 +1555,7 @@ namespace BarbarianPrince
                         if (ui1 is Ellipse)
                         {
                            Ellipse ellipse1 = (Ellipse)ui1;
-                           foreach (Territory t in myGameInstance.Territories)
+                           foreach (Territory t in Territory.theTerritories)
                            {
                               if (ellipse1.Tag.ToString() == Utilities.RemoveSpaces(t.ToString()))
                               {
@@ -1589,7 +1589,7 @@ namespace BarbarianPrince
                if (true == ui.IsMouseOver)
                {
                   Territory selectedTerritory = null;  // Find the corresponding Territory that user selected
-                  foreach (Territory t in myGameInstance.Territories)
+                  foreach (Territory t in Territory.theTerritories)
                   {
                      if (selectedEllipse.Tag.ToString() == Utilities.RemoveSpaces(t.ToString()))
                      {
@@ -1619,7 +1619,7 @@ namespace BarbarianPrince
                         if (ui1 is Ellipse)
                         {
                            Ellipse ellipse1 = (Ellipse)ui1;
-                           foreach (Territory t in myGameInstance.Territories)
+                           foreach (Territory t in Territory.theTerritories)
                            {
                               if (ellipse1.Tag.ToString() == Utilities.RemoveSpaces(t.ToString()))
                               {

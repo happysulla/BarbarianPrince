@@ -152,7 +152,6 @@ namespace BarbarianPrince
       IMapItemMove PreviousMapItemMove { set; get; }
       IMapItemMoves MapItemMoves { set; get; }
       //----------------------------------------------
-      List<ITerritory> Territories { get; }
       List<ITerritory> EnteredTerritories { get; }
       List<ITerritory> DwarfAdviceLocations { get; } // e006
       List<ITerritory> WizardAdviceLocations { get; } // e025

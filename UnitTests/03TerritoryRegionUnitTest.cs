@@ -86,7 +86,7 @@ namespace BarbarianPrince
             }
             foreach (UIElement ui1 in results)
                myCanvas.Children.Remove(ui1);
-            foreach (ITerritory t in gi.Territories)
+            foreach (ITerritory t in Territory.theTerritories)
                t.Points.Clear();
          }
          else if (CommandName == myCommandNames[1])
@@ -103,8 +103,8 @@ namespace BarbarianPrince
             }
             foreach (UIElement ui1 in results)
                myCanvas.Children.Remove(ui1);
-            CreateEllipses(gi.Territories);
-            CreatePolygons(gi.Territories);
+            CreateEllipses(Territory.theTerritories);
+            CreatePolygons(Territory.theTerritories);
          }
          else
          {
@@ -153,7 +153,7 @@ namespace BarbarianPrince
          try
          {
             System.IO.File.Delete("../Config/Territories.xml");  // delete old file
-            XmlDocument aXmlDocument = CreateXml(myGameInstance.Territories); // create a new XML document based on Territories
+            XmlDocument aXmlDocument = CreateXml(Territory.theTerritories); // create a new XML document based on Territories
             using (FileStream writer = new FileStream("../Config/Territories.xml", FileMode.OpenOrCreate, FileAccess.Write))
             {
                XmlWriterSettings settings = new XmlWriterSettings { Indent = true, OmitXmlDeclaration = true, NewLineOnAttributes = false };
@@ -193,7 +193,7 @@ namespace BarbarianPrince
             foreach (String s in myAnchorTerritory.Adjacents)
             {
                Territory adjacentTerritory = null;
-               foreach (Territory t in myGameInstance.Territories)
+               foreach (Territory t in Territory.theTerritories)
                {
                   if (s == Utilities.RemoveSpaces(t.ToString()))
                   {
@@ -338,7 +338,7 @@ namespace BarbarianPrince
          Console.WriteLine("MouseDownEllipse.MouseDown(): {0}", mp.ToString());
          ITerritory matchingTerritory = null; // Find the corresponding Territory
          Ellipse mousedEllipse = (Ellipse)sender;
-         foreach (ITerritory t in myGameInstance.Territories)
+         foreach (ITerritory t in Territory.theTerritories)
          {
             if (mousedEllipse.Tag.ToString() == Utilities.RemoveSpaces(t.ToString()))
             {
@@ -400,7 +400,7 @@ namespace BarbarianPrince
             // This function removes an existing polygon when it is clicked if no achor territory exists
             Polygon aPolygon = (Polygon)sender;
             ITerritory matchingTerritory = null;
-            foreach (ITerritory t in myGameInstance.Territories)
+            foreach (ITerritory t in Territory.theTerritories)
             {
                if (aPolygon.Tag.ToString() == Utilities.RemoveSpaces(t.ToString()))
                {

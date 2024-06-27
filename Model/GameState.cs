@@ -629,7 +629,7 @@ namespace BarbarianPrince
             return false;
          }
          string adjacentName = adjNotCrossingRiverNames[randomNum];
-         ITerritory adjacentTerritory = gi.Territories.Find(adjacentName);
+         ITerritory adjacentTerritory = Territory.theTerritories.Find(adjacentName);
          if (null == adjacentTerritory)
          {
             Logger.Log(LogEnum.LE_ERROR, "EncounterEscape(): invalid param adjacent=null");
@@ -670,7 +670,7 @@ namespace BarbarianPrince
             return false;
          }
          string adjacentName = t.Adjacents[randomNum];
-         ITerritory adjacentTerritory = gi.Territories.Find(adjacentName);
+         ITerritory adjacentTerritory = Territory.theTerritories.Find(adjacentName);
          if (null == adjacentTerritory)
          {
             Logger.Log(LogEnum.LE_ERROR, "EncounterFollow(): invalid param adjacent=null");
@@ -726,7 +726,7 @@ namespace BarbarianPrince
             if (range <= depth)
                continue;
             visited[name] = true;
-            ITerritory t = gi.Territories.Find(name);
+            ITerritory t = Territory.theTerritories.Find(name);
             if (null == t)
             {
                Logger.Log(LogEnum.LE_ERROR, "FindRandomHexRange(): t=null for " + name);
@@ -734,7 +734,7 @@ namespace BarbarianPrince
             }
             foreach (string adj in t.Adjacents)
             {
-               ITerritory adjacent = gi.Territories.Find(adj);
+               ITerritory adjacent = Territory.theTerritories.Find(adj);
                if (null == adjacent)
                {
                   Logger.Log(LogEnum.LE_ERROR, "FindRandomHexRange(): adjacent=null for " + adj);
@@ -771,7 +771,7 @@ namespace BarbarianPrince
             if (range <= depth)
                continue;
             visited[name] = true;
-            ITerritory t = gi.Territories.Find(name);
+            ITerritory t = Territory.theTerritories.Find(name);
             if (null == t)
             {
                Logger.Log(LogEnum.LE_ERROR, "FindRandomHexRange(): t=null for " + name);
@@ -779,7 +779,7 @@ namespace BarbarianPrince
             }
             foreach (string adj in t.Adjacents)
             {
-               ITerritory adjacent = gi.Territories.Find(adj);
+               ITerritory adjacent = Territory.theTerritories.Find(adj);
                if (null == adjacent)
                {
                   Logger.Log(LogEnum.LE_ERROR, "FindRandomHexRange(): adjacent=null for " + adj);
@@ -797,7 +797,7 @@ namespace BarbarianPrince
          //-------------------------------------------------
          masterList.Remove(gi.Prince.Territory.Name);
          int randomNum = Utilities.RandomGenerator.Next(masterList.Count); // get a random index into the masterList
-         ITerritory selected = gi.Territories.Find(masterList[randomNum]); // Find the territory of this random index
+         ITerritory selected = Territory.theTerritories.Find(masterList[randomNum]); // Find the territory of this random index
          if (null == selected)
          {
             Logger.Log(LogEnum.LE_ERROR, "FindRandomHexRange(): selected=null for " + masterList[randomNum]);
@@ -812,7 +812,7 @@ namespace BarbarianPrince
             return gi.Prince.Territory;
          int randomNum = Utilities.RandomGenerator.Next(gi.Prince.Territory.Adjacents.Count); // get a random index into the masterList
          string tName = gi.Prince.Territory.Adjacents[randomNum];
-         ITerritory adjacent = gi.Territories.Find(tName);
+         ITerritory adjacent = Territory.theTerritories.Find(tName);
          return adjacent;
       }
       protected ITerritory FindRandomHexRangeDirectionAndRange(IGameInstance gi, int direction, int range)
@@ -898,7 +898,7 @@ namespace BarbarianPrince
                return null;
          }
          string hex = colNum.ToString("D2") + rowNum.ToString("D2");
-         ITerritory selected = gi.Territories.Find(hex); // Find the territory of this random index
+         ITerritory selected = Territory.theTerritories.Find(hex); // Find the territory of this random index
          if (null == selected)
          {
             Logger.Log(LogEnum.LE_ERROR, "FindRandomHexRangeDirectionAndRange(): selected=null for " + hex);
@@ -1016,7 +1016,7 @@ namespace BarbarianPrince
             return false;
          }
          gi.Prince.TerritoryStarting = gi.Prince.Territory;
-         MapItemMove mim = new MapItemMove(gi.Territories, gi.Prince, newT);
+         MapItemMove mim = new MapItemMove(Territory.theTerritories, gi.Prince, newT);
          if (true == mim.CtorError)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddMapItemMove(): mim.CtorError=true for start=" + gi.Prince.TerritoryStarting.ToString() + " for newT=" + newT.Name);
@@ -1339,17 +1339,17 @@ namespace BarbarianPrince
       }
       private bool SetStartingLocation(ref IGameInstance gi, int dieRoll)
       {
-         ITerritory t1 = gi.Territories.Find("0101"); // set so that on first turn, there is not an error - mostly used for setting up special test conditions during unit testing
+         ITerritory t1 = Territory.theTerritories.Find("0101"); // set so that on first turn, there is not an error - mostly used for setting up special test conditions during unit testing
          gi.EnteredTerritories.Add(t1);
          ITerritory starting = null;
          switch (dieRoll)
          {
-            case 1: starting = gi.Territories.Find("0101"); break;
-            case 2: starting = gi.Territories.Find("0701"); break;
-            case 3: starting = gi.Territories.Find("0801"); break;
-            case 4: starting = gi.Territories.Find("1301"); break;
-            case 5: starting = gi.Territories.Find("1501"); break;
-            case 6: starting = gi.Territories.Find("1801"); break;
+            case 1: starting = Territory.theTerritories.Find("0101"); break;
+            case 2: starting = Territory.theTerritories.Find("0701"); break;
+            case 3: starting = Territory.theTerritories.Find("0801"); break;
+            case 4: starting = Territory.theTerritories.Find("1301"); break;
+            case 5: starting = Territory.theTerritories.Find("1501"); break;
+            case 6: starting = Territory.theTerritories.Find("1801"); break;
             default: Logger.Log(LogEnum.LE_ERROR, "SetStartingLocation() reached default dr=" + dieRoll.ToString()); return false;
          }
          if( false == SetStartingLocationOption(gi, ref starting) )
@@ -1388,8 +1388,8 @@ namespace BarbarianPrince
          }
          if (true == option.IsEnabled)
          {
-            int index = Utilities.RandomGenerator.Next(gi.Territories.Count); // returns [0,count)
-            starting = gi.Territories[index];
+            int index = Utilities.RandomGenerator.Next(Territory.theTerritories.Count); // returns [0,count)
+            starting = Territory.theTerritories[index];
             return true;
          }
          //---------------------------------------------------------
@@ -1403,7 +1403,7 @@ namespace BarbarianPrince
          if (true == option.IsEnabled)
          {
             List<ITerritory> townHexes = new List<ITerritory>();
-            foreach( ITerritory t in gi.Territories)
+            foreach( ITerritory t in Territory.theTerritories)
             {
                if ( true == t.IsTown )
                   townHexes.Add(t);
@@ -1423,7 +1423,7 @@ namespace BarbarianPrince
          if (true == option.IsEnabled)
          {
             List<ITerritory> leftEdges = new List<ITerritory>();
-            foreach (ITerritory t in gi.Territories)
+            foreach (ITerritory t in Territory.theTerritories)
             {
                int colNum = Int32.Parse(t.Name.Substring(0, 2)); // (start index, length)
                if (01 == colNum)
@@ -1444,7 +1444,7 @@ namespace BarbarianPrince
          if (true == option.IsEnabled)
          {
             List<ITerritory> rightEdges = new List<ITerritory>();
-            foreach (ITerritory t in gi.Territories)
+            foreach (ITerritory t in Territory.theTerritories)
             {
                int colNum = Int32.Parse(t.Name.Substring(0, 2)); // (start index, length)
                if (20 == colNum)
@@ -1465,7 +1465,7 @@ namespace BarbarianPrince
          if (true == option.IsEnabled)
          {
             List<ITerritory> bottomEdges = new List<ITerritory>();
-            foreach (ITerritory t in gi.Territories)
+            foreach (ITerritory t in Territory.theTerritories)
             {
                int colNum = Int32.Parse(t.Name.Substring(0, 2)); // (start index, length)
                int rowNum = Int32.Parse(gi.Prince.Territory.Name.Substring(2));
@@ -1493,7 +1493,7 @@ namespace BarbarianPrince
             return false;
          }
          if (true == option.IsEnabled)
-            starting = gi.Territories.Find(hex);
+            starting = Territory.theTerritories.Find(hex);
          //---------------------------------------------------------
          hex = "0206";  // Ruins
          option = gi.Options.Find(hex);
@@ -1503,7 +1503,7 @@ namespace BarbarianPrince
             return false;
          }
          if (true == option.IsEnabled)
-            starting = gi.Territories.Find(hex);
+            starting = Territory.theTerritories.Find(hex);
          //---------------------------------------------------------
          hex = "0711";  // Temple
          option = gi.Options.Find(hex);
@@ -1513,7 +1513,7 @@ namespace BarbarianPrince
             return false;
          }
          if (true == option.IsEnabled)
-            starting = gi.Territories.Find(hex);
+            starting = Territory.theTerritories.Find(hex);
          //---------------------------------------------------------
          hex = "1212";  // Castle
          option = gi.Options.Find(hex);
@@ -1523,7 +1523,7 @@ namespace BarbarianPrince
             return false;
          }
          if (true == option.IsEnabled)
-            starting = gi.Territories.Find(hex);
+            starting = Territory.theTerritories.Find(hex);
          //---------------------------------------------------------
          hex = "0323"; // Castle
          option = gi.Options.Find(hex);
@@ -1533,7 +1533,7 @@ namespace BarbarianPrince
             return false;
          }
          if (true == option.IsEnabled)
-            starting = gi.Territories.Find(hex);
+            starting = Territory.theTerritories.Find(hex);
          //---------------------------------------------------------
          hex = "1923"; // Castle
          option = gi.Options.Find(hex);
@@ -1543,7 +1543,7 @@ namespace BarbarianPrince
             return false;
          }
          if (true == option.IsEnabled)
-            starting = gi.Territories.Find(hex);
+            starting = Territory.theTerritories.Find(hex);
          //---------------------------------------------------------
          hex = "0418";  // farmland
          option = gi.Options.Find(hex);
@@ -1553,7 +1553,7 @@ namespace BarbarianPrince
             return false;
          }
          if (true == option.IsEnabled)
-            starting = gi.Territories.Find(hex);
+            starting = Territory.theTerritories.Find(hex);
          //---------------------------------------------------------
          hex = "0410";  // CountrySide
          option = gi.Options.Find(hex);
@@ -1563,7 +1563,7 @@ namespace BarbarianPrince
             return false;
          }
          if (true == option.IsEnabled)
-            starting = gi.Territories.Find(hex);
+            starting = Territory.theTerritories.Find(hex);
          //---------------------------------------------------------
          hex = "0409";  // Forrest
          option = gi.Options.Find(hex);
@@ -1573,7 +1573,7 @@ namespace BarbarianPrince
             return false;
          }
          if (true == option.IsEnabled)
-            starting = gi.Territories.Find(hex);
+            starting = Territory.theTerritories.Find(hex);
          //---------------------------------------------------------
          hex = "0406";  // hills
          option = gi.Options.Find(hex);
@@ -1583,7 +1583,7 @@ namespace BarbarianPrince
             return false;
          }
          if (true == option.IsEnabled)
-            starting = gi.Territories.Find(hex);
+            starting = Territory.theTerritories.Find(hex);
          //---------------------------------------------------------
          hex = "0405";  // Mountains
          option = gi.Options.Find(hex);
@@ -1593,7 +1593,7 @@ namespace BarbarianPrince
             return false;
          }
          if (true == option.IsEnabled)
-            starting = gi.Territories.Find(hex);
+            starting = Territory.theTerritories.Find(hex);
          //---------------------------------------------------------
          hex = "0411";  // Swamp
          option = gi.Options.Find(hex);
@@ -1603,7 +1603,7 @@ namespace BarbarianPrince
             return false;
          }
          if (true == option.IsEnabled)
-            starting = gi.Territories.Find(hex);
+            starting = Territory.theTerritories.Find(hex);
          //---------------------------------------------------------
          hex = "0407";  // Desert
          option = gi.Options.Find(hex);
@@ -1613,7 +1613,7 @@ namespace BarbarianPrince
             return false;
          }
          if (true == option.IsEnabled)
-            starting = gi.Territories.Find(hex);
+            starting = Territory.theTerritories.Find(hex);
          //---------------------------------------------------------
          hex = "1905";  // Road
          option = gi.Options.Find(hex);
@@ -1623,7 +1623,7 @@ namespace BarbarianPrince
             return false;
          }
          if (true == option.IsEnabled)
-            starting = gi.Territories.Find(hex);
+            starting = Territory.theTerritories.Find(hex);
          //---------------------------------------------------------
          hex = "1723"; // Bottom Board
          option = gi.Options.Find(hex);
@@ -1633,12 +1633,7 @@ namespace BarbarianPrince
             return false;
          }
          if (true == option.IsEnabled)
-            starting = gi.Territories.Find(hex);
-         //---------------------------------------------------------
-         //Farmland=0418 CountrySide=0410 Forest=0409 Hills=0406 Mountains=0405 Swamp=0411 Desert=0407 
-         //starting = gi.Territories.Find("0411"); //ForestTemple=1021 HillsTemple=2009 MountainTemple=1021 
-         //starting = gi.Territories.Find("0207"); //Road Travel=0207->0208
-         //starting = gi.Territories.Find("0707"); //Cross River=0707->0708
+            starting = Territory.theTerritories.Find(hex);
          return true;
       }
       private bool PerformAutoSetup(ref IGameInstance gi, ref GameAction action)
@@ -1766,7 +1761,7 @@ namespace BarbarianPrince
                   gi.DieRollAction = GameAction.DieRollActionNone;
                   Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateRest.PerformAction(RestEncounterCheck): gi.MapItemMoves.Clear()");
                   gi.MapItemMoves.Clear();
-                  MapItemMove mim = new MapItemMove(gi.Territories, gi.Prince, princeTerritory);   // Travel to same hex if rest encounter
+                  MapItemMove mim = new MapItemMove(Territory.theTerritories, gi.Prince, princeTerritory);   // Travel to same hex if rest encounter
                   if ((0 == mim.BestPath.Territories.Count) || (null == mim.NewTerritory))
                   {
                      returnStatus = "Unable to Find Path";
@@ -1893,7 +1888,7 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.DieRollActionNone;
                Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateSunriseChoice.PerformAction(SearchCacheCheck): gi.MapItemMoves.Clear()");
                gi.MapItemMoves.Clear();
-               MapItemMove mimSearch = new MapItemMove(gi.Territories, gi.Prince, princeTerritory);   // Travel to same hex if search cache encounter
+               MapItemMove mimSearch = new MapItemMove(Territory.theTerritories, gi.Prince, princeTerritory);   // Travel to same hex if search cache encounter
                if ((0 == mimSearch.BestPath.Territories.Count) || (null == mimSearch.NewTerritory))
                {
                   returnStatus = "Unable to Find Path";
@@ -1910,7 +1905,7 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.DieRollActionNone;
                Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateSunriseChoice.PerformAction(SearchTreasure): gi.MapItemMoves.Clear()");
                gi.MapItemMoves.Clear();
-               MapItemMove mimSearch1 = new MapItemMove(gi.Territories, gi.Prince, princeTerritory);   // Travel to same hex if search treasure
+               MapItemMove mimSearch1 = new MapItemMove(Territory.theTerritories, gi.Prince, princeTerritory);   // Travel to same hex if search treasure
                if ((0 == mimSearch1.BestPath.Territories.Count) || (null == mimSearch1.NewTerritory))
                {
                   returnStatus = "Unable to Find Path";
@@ -3812,7 +3807,7 @@ namespace BarbarianPrince
                break;
             case GameAction.E018MarkOfCainEnd:
                gi.IsMarkOfCain = true;
-               foreach (ITerritory t in gi.Territories) // all audiences with high priest is forbidden
+               foreach (ITerritory t in Territory.theTerritories) // all audiences with high priest is forbidden
                {
                   if (true == t.IsTemple)
                      gi.ForbiddenAudiences.AddTimeConstraint(t, Utilities.FOREVER);
@@ -3940,7 +3935,7 @@ namespace BarbarianPrince
                gi.DieResults["e045b"][0] = Utilities.NO_RESULT;
                Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateEncounter.PerformAction(E045ArchOfTravelEnd): gi.MapItemMoves.Clear()");
                gi.MapItemMoves.Clear();
-               MapItemMove mimArchTravel = new MapItemMove(gi.Territories, gi.Prince, princeTerritory);   // Travel to same hex is no lost check
+               MapItemMove mimArchTravel = new MapItemMove(Territory.theTerritories, gi.Prince, princeTerritory);   // Travel to same hex is no lost check
                if ((0 == mimArchTravel.BestPath.Territories.Count) || (null == mimArchTravel.NewTerritory))
                   returnStatus = "Unable to Find Path to mim=" + mimArchTravel.ToString();
                gi.MapItemMoves.Add(mimArchTravel);
@@ -4656,7 +4651,7 @@ namespace BarbarianPrince
                falcon.IsRiding = true;
                falcon.IsFlying = true;
                falcon.IsGuide = true;
-               falcon.GuideTerritories = gi.Territories;
+               falcon.GuideTerritories = Territory.theTerritories;
                gi.PartyMembers.Add(falcon);
                gi.ReduceFoods(1);
                if (false == EncounterEnd(gi, ref action))
@@ -4861,7 +4856,7 @@ namespace BarbarianPrince
             case GameAction.E126RaftInCurrentEnd:
                Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateEncounter.PerformAction(): gi.MapItemMoves.Clear() for a=" + action.ToString());
                gi.MapItemMoves.Clear();
-               ITerritory downRiverT1 = gi.Territories.Find(gi.Prince.Territory.DownRiver);
+               ITerritory downRiverT1 = Territory.theTerritories.Find(gi.Prince.Territory.DownRiver);
                if( null == downRiverT1)
                {
                   returnStatus = " downRiverT1=null";
@@ -4884,7 +4879,7 @@ namespace BarbarianPrince
             case GameAction.E126RaftInCurrentRedistribute:
                Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateEncounter.PerformAction(): gi.MapItemMoves.Clear() for a=" + action.ToString());
                gi.MapItemMoves.Clear();
-               ITerritory downRiverT = gi.Territories.Find(gi.Prince.Territory.DownRiver);
+               ITerritory downRiverT = Territory.theTerritories.Find(gi.Prince.Territory.DownRiver);
                if (null == downRiverT)
                {
                   returnStatus = " downRiverT1=null";
@@ -4970,9 +4965,9 @@ namespace BarbarianPrince
             case GameAction.E130JailedOnTravels: 
                switch (gi.DieResults["e130"][1])
                {
-                  case 1: gi.NewHex = gi.Territories.Find("1212"); break;
-                  case 2: gi.NewHex = gi.Territories.Find("0323"); break;
-                  case 3: gi.NewHex = gi.Territories.Find("1923"); break;
+                  case 1: gi.NewHex = Territory.theTerritories.Find("1212"); break;
+                  case 2: gi.NewHex = Territory.theTerritories.Find("0323"); break;
+                  case 3: gi.NewHex = Territory.theTerritories.Find("1923"); break;
                   case 4: gi.NewHex = FindClosestTemple(gi); break;
                   case 5: case 6: gi.NewHex = FindClosestTown(gi); break;
                   default:
@@ -5011,9 +5006,9 @@ namespace BarbarianPrince
                ITerritory t130 = null;
                switch (gi.DieResults["e130"][1]) // castle is forbidden after robbing lord
                {
-                  case 1: t130 = gi.Territories.Find("1212"); break;
-                  case 2: t130 = gi.Territories.Find("0323"); break;
-                  case 3: t130 = gi.Territories.Find("1923"); break;
+                  case 1: t130 = Territory.theTerritories.Find("1212"); break;
+                  case 2: t130 = Territory.theTerritories.Find("0323"); break;
+                  case 3: t130 = Territory.theTerritories.Find("1923"); break;
                   default: break; // do nothing
                }
                if( null != t130 )
@@ -5386,7 +5381,7 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.E160LadyAudience:  // e160
-               ITerritory t160 = gi.Territories.Find("1923");
+               ITerritory t160 = Territory.theTerritories.Find("1923");
                switch (gi.DieResults["e160"][0]) // Based on the die roll, implement event
                {
                   case 1:                                                                                                        // not interested
@@ -5426,7 +5421,7 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.E161CountAudience: 
-               ITerritory t161 = gi.Territories.Find("0323");
+               ITerritory t161 = Territory.theTerritories.Find("0323");
                switch (gi.DieResults["e161"][0]) // Based on the die roll, implement event
                {
                   case 1:                                                                                                           // count victim
@@ -10505,7 +10500,7 @@ namespace BarbarianPrince
                      gi.IsMountsFed = true;
                      IMapItem eagleHelp = CreateCharacter(gi, "Eagle", 1);
                      eagleHelp.IsGuide = true;
-                     eagleHelp.GuideTerritories = gi.Territories;
+                     eagleHelp.GuideTerritories = Territory.theTerritories;
                      eagleHelp.IsTownCastleTempleLeave = true;
                      eagleHelp.IsFlying = true;
                      eagleHelp.IsRiding = true;
@@ -10568,7 +10563,7 @@ namespace BarbarianPrince
                   {
                      IMapItem eagleAlly = CreateCharacter(gi, "Eagle", 1);
                      eagleAlly.IsGuide = true;
-                     eagleAlly.GuideTerritories = gi.Territories;
+                     eagleAlly.GuideTerritories = Territory.theTerritories;
                      eagleAlly.IsFlying = true;
                      eagleAlly.IsRiding = true;
                      gi.AddCompanion(eagleAlly);
@@ -13122,7 +13117,7 @@ namespace BarbarianPrince
             if (range <= depth)
                continue;
             visited[name] = true;
-            ITerritory t = gi.Territories.Find(name);
+            ITerritory t = Territory.theTerritories.Find(name);
             if (null == t)
             {
                Logger.Log(LogEnum.LE_ERROR, "AddGuideTerritories(): t=null for " + name);
@@ -13130,7 +13125,7 @@ namespace BarbarianPrince
             }
             foreach (string adj in t.Adjacents)
             {
-               ITerritory adjacent = gi.Territories.Find(adj);
+               ITerritory adjacent = Territory.theTerritories.Find(adj);
                if (null == adjacent)
                {
                   Logger.Log(LogEnum.LE_ERROR, "AddGuideTerritories(): adjacent=null for " + adj);
@@ -13147,7 +13142,7 @@ namespace BarbarianPrince
          }
          foreach (string tName in masterList)  // add the territories to the guide
          {
-            ITerritory t = gi.Territories.Find(tName);
+            ITerritory t = Territory.theTerritories.Find(tName);
             if (null == t)
             {
                Logger.Log(LogEnum.LE_ERROR, "AddGuideTerritories(): tName=" + tName);
@@ -13265,7 +13260,7 @@ namespace BarbarianPrince
             return startT;
          ITerritory minT = null;
          double minMetric = 100000000000.0;  // start with a big number
-         foreach (ITerritory t in gi.Territories)
+         foreach (ITerritory t in Territory.theTerritories)
          {
             if (false == gi.IsInTown(t))
                continue;
@@ -13287,7 +13282,7 @@ namespace BarbarianPrince
             return startT;
          ITerritory minT = null;
          double minMetric = 100000000000.0;  // start with a big number
-         foreach (ITerritory t in gi.Territories)
+         foreach (ITerritory t in Territory.theTerritories)
          {
             if (false == gi.IsInTemple(t))
                continue;
@@ -13309,7 +13304,7 @@ namespace BarbarianPrince
             return startT;
          ITerritory minT = null;
          double minMetric = 100000000000.0;  // start with a big number
-         foreach (ITerritory t in gi.Territories)
+         foreach (ITerritory t in Territory.theTerritories)
          {
             if (false == t.IsCastle)
                continue;
@@ -13337,7 +13332,7 @@ namespace BarbarianPrince
          else
          {
             double minMetric = 100000000000.0;  // start with a big number
-            foreach (ITerritory t in gi.Territories)
+            foreach (ITerritory t in Territory.theTerritories)
             {
                if (false == gi.GoblinKeeps.Contains(t))
                   continue;

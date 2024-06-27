@@ -69,7 +69,7 @@ namespace BarbarianPrince
          gi.PartyMembers.Clear();
          gi.Prince.Reset();
          gi.PartyMembers.Add(gi.Prince);
-         ITerritory t = gi.Territories.Find("0101");
+         ITerritory t = Territory.theTerritories.Find("0101");
          if (null == t)
          {
             Logger.Log(LogEnum.LE_ERROR, "Command(): t=null");
@@ -119,7 +119,7 @@ namespace BarbarianPrince
             gi.IsMountsStabled = true; // <<<<<<<<<<<<<<<<<<<<<<<<=========================
             gi.CheapLodgings.Add(gi.Prince.Territory); // <<<<<<<<<<<<<<<<<<<<<<<<=========================
             gi.ForbiddenAudiences.AddClothesConstraint(gi.Prince.Territory); // <<<<<<<<<<<<<<<<<<<<<<<<=========================
-            ITerritory t1 = gi.Territories.Find("0109");
+            ITerritory t1 = Territory.theTerritories.Find("0109");
             gi.ForbiddenAudiences.AddClothesConstraint(t1); // <<<<<<<<<<<<<<<<<<<<<<<<=========================
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLodgingCheck);
          }

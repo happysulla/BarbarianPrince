@@ -96,7 +96,7 @@ namespace BarbarianPrince
          {
             gi.EventStart = "e123b";
             gi.EventActive = "e304";
-            gi.Prince.Territory = gi.Territories.Find("0305");
+            gi.Prince.Territory = Territory.theTerritories.Find("0305");
             gi.Prince.AddSpecialItemToShare(SpecialEnum.ShieldOfLight);
             gi.Prince.AddSpecialItemToShare(SpecialEnum.ResistanceRing);
             gi.Prince.SetWounds(7, 0);
@@ -123,7 +123,7 @@ namespace BarbarianPrince
          {
             gi.EventStart = "e075b";
             gi.EventActive = "e309";
-            gi.Prince.Territory = gi.Territories.Find("0305");
+            gi.Prince.Territory = Territory.theTerritories.Find("0305");
             gi.Prince.AddSpecialItemToShare(SpecialEnum.ShieldOfLight);
             //---------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
@@ -157,7 +157,7 @@ namespace BarbarianPrince
          {
             gi.EventStart = "e008";
             gi.EventActive = "e304";
-            gi.Prince.Territory = gi.Territories.Find("0305");
+            gi.Prince.Territory = Territory.theTerritories.Find("0305");
             gi.Prince.AddSpecialItemToKeep(SpecialEnum.ShieldOfLight);
             //---------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
@@ -184,7 +184,7 @@ namespace BarbarianPrince
          {
             gi.EventStart = "e007";
             gi.EventActive = "e310";
-            gi.Prince.Territory = gi.Territories.Find("0305");
+            gi.Prince.Territory = Territory.theTerritories.Find("0305");
             gi.Prince.AddSpecialItemToKeep(SpecialEnum.ShieldOfLight);
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
@@ -248,7 +248,7 @@ namespace BarbarianPrince
                gi.EventActive = "e307";
             else
                gi.EventActive = "e304";
-            gi.Prince.Territory = gi.Territories.Find("0101");
+            gi.Prince.Territory = Territory.theTerritories.Find("0101");
             gi.Prince.AddSpecialItemToShare(SpecialEnum.PoisonDrug);
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
@@ -303,7 +303,7 @@ namespace BarbarianPrince
          {
             gi.EventStart = "e076";
             gi.EventActive = "e310";
-            gi.Prince.Territory = gi.Territories.Find("0105");
+            gi.Prince.Territory = Territory.theTerritories.Find("0105");
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
@@ -351,7 +351,7 @@ namespace BarbarianPrince
          {
             gi.EventStart = "e083";
             gi.EventActive = "e310";
-            gi.Prince.Territory = gi.Territories.Find("0105");
+            gi.Prince.Territory = Territory.theTerritories.Find("0105");
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
@@ -399,7 +399,7 @@ namespace BarbarianPrince
          {
             gi.EventStart = "e074";
             gi.EventActive = "e309";
-            gi.Prince.Territory = gi.Territories.Find("0105");
+            gi.Prince.Territory = Territory.theTerritories.Find("0105");
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
@@ -419,7 +419,7 @@ namespace BarbarianPrince
          else if (CommandName == myCommandNames[9])  // Cavalry
          {
             gi.EventActive = "e304";
-            gi.Prince.Territory = gi.Territories.Find("0101");
+            gi.Prince.Territory = Territory.theTerritories.Find("0101");
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
@@ -457,7 +457,7 @@ namespace BarbarianPrince
                gi.EventActive = "e307";
             else
                gi.EventActive = "e304";
-            gi.Prince.Territory = gi.Territories.Find("0101");
+            gi.Prince.Territory = Territory.theTerritories.Find("0101");
             gi.Prince.AddSpecialItemToShare(SpecialEnum.ResistanceRing);
             //-----------------------------------------
             string farmerName = "Farmer" + Utilities.MapItemNum.ToString();
@@ -471,7 +471,7 @@ namespace BarbarianPrince
          {
             gi.EventStart = "e047";
             gi.EventActive = "e307";
-            gi.Prince.Territory = gi.Territories.Find("0101");
+            gi.Prince.Territory = Territory.theTerritories.Find("0101");
             gi.Prince.AddSpecialItemToShare(SpecialEnum.PoisonDrug);
             gi.Prince.AddSpecialItemToShare(SpecialEnum.ShieldOfLight);
             gi.Prince.AddSpecialItemToKeep(SpecialEnum.MagicSword);
@@ -502,7 +502,7 @@ namespace BarbarianPrince
          else if (CommandName == myCommandNames[12]) // Resistence Ring
          {
             gi.EventActive = "e310";
-            gi.Prince.Territory = gi.Territories.Find("0101");
+            gi.Prince.Territory = Territory.theTerritories.Find("0101");
             gi.Prince.AddSpecialItemToShare(SpecialEnum.ResistanceRing);
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
@@ -525,7 +525,7 @@ namespace BarbarianPrince
          else if (CommandName == myCommandNames[13]) // Shield
          {
             gi.EventActive = "e300";
-            gi.Prince.Territory = gi.Territories.Find("0101");
+            gi.Prince.Territory = Territory.theTerritories.Find("0101");
             gi.Prince.AddSpecialItemToShare(SpecialEnum.PoisonDrug);
             gi.Prince.AddSpecialItemToShare(SpecialEnum.ShieldOfLight);
             gi.Prince.AddSpecialItemToKeep(SpecialEnum.MagicSword);
@@ -555,7 +555,7 @@ namespace BarbarianPrince
          else if (CommandName == myCommandNames[14]) // Hydra Teeth
          {
             gi.EventActive = "e304";
-            gi.Prince.Territory = gi.Territories.Find("0101");
+            gi.Prince.Territory = Territory.theTerritories.Find("0101");
             gi.Prince.AddSpecialItemToShare(SpecialEnum.HydraTeeth);
             gi.HydraTeethCount = 3;
             //------------------------------------------------------
@@ -579,7 +579,7 @@ namespace BarbarianPrince
          else if (CommandName == myCommandNames[15]) // Spectre
          {
             gi.EventActive = "e304";
-            gi.Prince.Territory = gi.Territories.Find("0101");
+            gi.Prince.Territory = Territory.theTerritories.Find("0101");
             gi.Prince.AddSpecialItemToShare(SpecialEnum.ResistanceTalisman);
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
@@ -614,7 +614,7 @@ namespace BarbarianPrince
          else if (CommandName == myCommandNames[16])
          {
             SetCombatEvent(gi);
-            gi.Prince.Territory = gi.Territories.Find("0101");
+            gi.Prince.Territory = Territory.theTerritories.Find("0101");
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
@@ -642,7 +642,7 @@ namespace BarbarianPrince
          else if (CommandName == myCommandNames[17])
          {
             SetCombatEvent(gi);
-            gi.Prince.Territory = gi.Territories.Find("0101");
+            gi.Prince.Territory = Territory.theTerritories.Find("0101");
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
@@ -664,7 +664,7 @@ namespace BarbarianPrince
          else if (CommandName == myCommandNames[18])
          {
             SetCombatEvent(gi);
-            gi.Prince.Territory = gi.Territories.Find("0101");
+            gi.Prince.Territory = Territory.theTerritories.Find("0101");
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;

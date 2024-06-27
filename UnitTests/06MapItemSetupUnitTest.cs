@@ -97,7 +97,7 @@ namespace BarbarianPrince
             myCanvas.Children.Add(myRectangleSelected);
             Canvas.SetZIndex(myRectangleSelected, 1000);
             //------------------------------------------
-            ITerritory starting = gi.Territories.Find("0507");
+            ITerritory starting = Territory.theTerritories.Find("0507");
             IStack newStack = gi.Stacks.Find(starting);
             if (null == newStack)
             {
@@ -138,7 +138,7 @@ namespace BarbarianPrince
         {
             if (HeaderName == myHeaderNames[0])
             {
-                CreateEllipses(gi.Territories);
+                CreateEllipses(Territory.theTerritories);
                 if (false == CreateButtons(this.myMapItems))
                 {
                     Logger.Log(LogEnum.LE_ERROR, "NextTest(): CreateButtons returned false");
@@ -174,7 +174,7 @@ namespace BarbarianPrince
                 }
                 foreach (UIElement ui1 in results)  // remove all ellipses
                     myCanvas.Children.Remove(ui1);
-                CreatePolygons(gi.Territories);
+                CreatePolygons(Territory.theTerritories);
                 foreach (UIElement ui in myCanvas.Children)
                 {
                     if (ui is Button b)
@@ -428,7 +428,7 @@ namespace BarbarianPrince
         public bool CreateButton(IMapItem mi, int counterCount)
         {
             string territoryName = Utilities.RemoveSpaces(mi.Territory.ToString());
-            ITerritory territory = TerritoryExtensions.Find(myGameInstance.Territories, territoryName);
+            ITerritory territory = TerritoryExtensions.Find(Territory.theTerritories, territoryName);
             if (null == territory)
             {
                 Logger.Log(LogEnum.LE_ERROR, "CreateMapItem(): TerritoryExtensions.Find() returned null");
@@ -823,7 +823,7 @@ namespace BarbarianPrince
             Console.WriteLine("MouseDownEllipse.MouseDown(): {0}", mp.ToString());
             ITerritory matchingTerritory = null; // Find the corresponding Territory
             Ellipse mousedEllipse = (Ellipse)sender;
-            foreach (ITerritory t in myGameInstance.Territories)
+            foreach (ITerritory t in Territory.theTerritories)
             {
                 if (mousedEllipse.Tag.ToString() == Utilities.RemoveSpaces(t.ToString()))
                 {
@@ -850,7 +850,7 @@ namespace BarbarianPrince
                 }
                 myGameInstance.PartyMembers.Add(mapItem);
                 //--------------------------------------------------
-                ITerritory territory = TerritoryExtensions.Find(myGameInstance.Territories, matchingTerritoryName);
+                ITerritory territory = TerritoryExtensions.Find(Territory.theTerritories, matchingTerritoryName);
                 IStack stack = myGameInstance.Stacks.Find(matchingTerritory);
                 if (null == stack)
                 {
@@ -1003,7 +1003,7 @@ namespace BarbarianPrince
             ITerritory matchingTerritory = null; // Find the corresponding Territory
             if (result.VisualHit is Ellipse mousedEllipse)
             {
-                foreach (ITerritory t in myGameInstance.Territories)
+                foreach (ITerritory t in Territory.theTerritories)
                 {
                     if (mousedEllipse.Tag.ToString() == Utilities.RemoveSpaces(t.ToString()))
                     {
@@ -1075,7 +1075,7 @@ namespace BarbarianPrince
                     Logger.Log(LogEnum.LE_ERROR, "ClickedSelectMapItem2(): targetedMapItem=null");
                     return;
                 }
-                if (false == CreateMapItemMove(myGameInstance.Territories, myGameInstance, targetedMapItem.Territory))
+                if (false == CreateMapItemMove(Territory.theTerritories, myGameInstance, targetedMapItem.Territory))
                 {
                     Logger.Log(LogEnum.LE_ERROR, "ClickedSelectMapItem2(): CreateMapItemMove() returned false");
                     return;
@@ -1100,7 +1100,7 @@ namespace BarbarianPrince
                 Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygon(): clickedPolygon=null for " + clickedPolygon.Tag.ToString());
                 return;
             }
-            ITerritory selectedTerritory = TerritoryExtensions.Find(myGameInstance.Territories, Utilities.RemoveSpaces(clickedPolygon.Tag.ToString()));
+            ITerritory selectedTerritory = TerritoryExtensions.Find(Territory.theTerritories, Utilities.RemoveSpaces(clickedPolygon.Tag.ToString()));
             if (null == selectedTerritory)
             {
                 Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygon(): selectedTerritory=null for " + clickedPolygon.Tag.ToString());
@@ -1114,7 +1114,7 @@ namespace BarbarianPrince
                     Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygon(): selectedMapItem=null");
                     return;
                 }
-                if (false == CreateMapItemMove(myGameInstance.Territories, myGameInstance, selectedTerritory))
+                if (false == CreateMapItemMove(Territory.theTerritories, myGameInstance, selectedTerritory))
                 {
                     Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygon(): CreateMapItemMove() returned false");
                     return;

@@ -49,7 +49,7 @@ namespace BarbarianPrince
       }
       public bool Command(ref IGameInstance gi)
       {
-         ITerritory t = gi.Territories.Find("0101");
+         ITerritory t = Territory.theTerritories.Find("0101");
          if (null == t)
          {
             Logger.Log(LogEnum.LE_ERROR, "Command(): t=null");
@@ -98,7 +98,7 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[2])
          {
-            ITerritory t1 = gi.Territories.Find("0104"); // Countryside
+            ITerritory t1 = Territory.theTerritories.Find("0104"); // Countryside
             if (null == t1)
             {
                Logger.Log(LogEnum.LE_ERROR, "Command(): t1=null");
@@ -163,7 +163,7 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[7]) // Countryside & Rested Party - OTHERS CAN HELP IN HUNT
          {
-            ITerritory t2 = gi.Territories.Find("0104");
+            ITerritory t2 = Territory.theTerritories.Find("0104");
             if (null == t2)
             {
                Logger.Log(LogEnum.LE_ERROR, "Command(): t2=null");
@@ -180,7 +180,7 @@ namespace BarbarianPrince
             //-------------------------------
             mi = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", prince.Territory, 3, 1, 5);
             mi.IsGuide = true;
-            ITerritory t1 = gi.Territories.Find("1011");// act in guide long ways away mans this is not a guide for this hex
+            ITerritory t1 = Territory.theTerritories.Find("1011");// act in guide long ways away mans this is not a guide for this hex
             if (null == t1)
             {
                Logger.Log(LogEnum.LE_ERROR, "Command(): t1=null");

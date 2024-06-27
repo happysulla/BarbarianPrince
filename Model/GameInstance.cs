@@ -69,8 +69,8 @@ namespace BarbarianPrince
             // Create the territories and the regions marking the territories.
             // Keep a list of Territories used in the game.  All the information 
             // of Territories is static and does not change.
-            myTerritories = ReadTerritoriesXml();
-            if (null == myTerritories)
+            Territory.theTerritories = ReadTerritoriesXml();
+            if (null == Territory.theTerritories)
             {
                Logger.Log(LogEnum.LE_ERROR, "GameInstance(): ReadTerritoriesXml() returned null");
                CtorError = true;
@@ -89,7 +89,7 @@ namespace BarbarianPrince
             MessageBox.Show("Exception in GameEngine() e=" + e.ToString());
          }
          //------------------------------------------------------------------------------------
-         ITerritory territory = myTerritories.Find("0101");
+         ITerritory territory = Territory.theTerritories.Find("0101");
          myPrince = new MapItem("Prince", 1.0, false, false, false, "c07Prince", "c07Prince", territory, 9, 8, 0);
          PartyMembers.Add(myPrince);
          if (false == AddStartingPrinceOption(this.Options))
@@ -110,7 +110,7 @@ namespace BarbarianPrince
       public GameInstance(Options newGameOptions) // Constructor - set log levels
       {
          //------------------------------------------------------------------------------------
-         ITerritory territory = myTerritories.Find("0101");
+         ITerritory territory = Territory.theTerritories.Find("0101");
          myPrince = new MapItem("Prince", 1.0, false, false, false, "c07Prince", "c07Prince", territory, 9, 8, 0);
          PartyMembers.Add(myPrince);
          if (false == AddStartingPrinceOption(newGameOptions))
@@ -149,11 +149,11 @@ namespace BarbarianPrince
          if (null == gi.ActiveHex)
             this.ActiveHex = null;
          else
-            this.ActiveHex = gi.Territories.Find(gi.ActiveHex.Name);
+            this.ActiveHex = Territory.theTerritories.Find(gi.ActiveHex.Name);
          if (null == gi.NewHex)
             this.NewHex = null;
          else
-            this.NewHex = gi.Territories.Find(gi.NewHex.Name);
+            this.NewHex = Territory.theTerritories.Find(gi.NewHex.Name);
          //------------------------------------------------
          foreach ( int i in  gi.CapturedWealthCodes)
             this.CapturedWealthCodes.Add(i);
@@ -300,8 +300,6 @@ namespace BarbarianPrince
          }
          this.PreviousMapItemMove = gi.PreviousMapItemMove;
          //------------------------------------------------
-         foreach (ITerritory t in gi.Territories)
-            this.myTerritories.Add(t);
          foreach (ITerritory t in gi.EnteredTerritories)
             this.EnteredTerritories.Add(t);
          foreach (ITerritory t in gi.DwarfAdviceLocations)
@@ -511,8 +509,6 @@ namespace BarbarianPrince
       public IMapItemMoves MapItemMoves { get; set; } = new MapItemMoves();
       public IMapItemMove PreviousMapItemMove { get; set; } = new MapItemMove();
       //---------------------------------------------------------------
-      private List<ITerritory> myTerritories = null;
-      public List<ITerritory> Territories { get => myTerritories; }
       private List<ITerritory> myEnteredTerritories = new List<ITerritory>();
       public List<ITerritory> EnteredTerritories { get => myEnteredTerritories; }
       private List<ITerritory> myDwarfAdviceLocations = new List<ITerritory>();
@@ -632,10 +628,10 @@ namespace BarbarianPrince
       private bool AddStartingOptions(Options options)
       {
          int numPartyMembers = 0;
-         Option option = this.Options.Find("PartyCustom");
+         Option option = options.Find("PartyCustom");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty10) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(PartyCustom) returned null");
             return false;
          }
          if( true == option.IsEnabled)  // If this is a custom party, choose based on checked boxes in options
@@ -799,7 +795,7 @@ namespace BarbarianPrince
                   member.IsFlying = true;
                   member.IsRiding = true;
                   member.IsGuide = true;
-                  member.GuideTerritories = Territories;
+                  member.GuideTerritories = Territory.theTerritories;
                   AddCompanion(member);
                   IsFalconFed = true;
                }
@@ -871,7 +867,7 @@ namespace BarbarianPrince
                   member.Coin = Utilities.RandomGenerator.Next(20);
                   foreach (string adj in Prince.TerritoryStarting.Adjacents)
                   {
-                     ITerritory t = Territories.Find(adj);
+                     ITerritory t = Territory.theTerritories.Find(adj);
                      member.GuideTerritories.Add(t);
                   }
                   AddCompanion(member);

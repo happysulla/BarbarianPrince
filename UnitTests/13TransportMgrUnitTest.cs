@@ -78,7 +78,7 @@ namespace BarbarianPrince
       {
          gi.PartyMembers.Clear();
          gi.Prince.Reset();
-         ITerritory t = gi.Territories.Find("1005"); // Mountains
+         ITerritory t = Territory.theTerritories.Find("1005"); // Mountains
          if (null == t)
          {
             Logger.Log(LogEnum.LE_ERROR, "Command(): t=null");

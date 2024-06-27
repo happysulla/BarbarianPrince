@@ -253,7 +253,7 @@ namespace BarbarianPrince
       {
          double minDistance = 10;
          IMapPoint selectedMp = mp;
-         foreach (Territory t in myGameInstance.Territories)
+         foreach (Territory t in Territory.theTerritories)
          {
             foreach (IMapPoint mp1 in t.Points)
             {

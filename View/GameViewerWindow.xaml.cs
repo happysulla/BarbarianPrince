@@ -173,7 +173,7 @@ namespace BarbarianPrince
             return;
          }
          //-----------------------------------------------------------------
-         myEventViewer = new EventViewer(myGameEngine, myGameInstance, myCanvas, myScrollViewerTextBlock, myStackPanelEndurance, gi.Territories, myDieRoller);
+         myEventViewer = new EventViewer(myGameEngine, myGameInstance, myCanvas, myScrollViewerTextBlock, myStackPanelEndurance, Territory.theTerritories, myDieRoller);
          CanvasImageViewer civ = new CanvasImageViewer(myCanvas);
          CreateRiversFromXml();
          //-----------------------------------------------------------------
@@ -360,7 +360,7 @@ namespace BarbarianPrince
       private bool CreateButtonMapItem(IMapItem mi, int counterCount)
       {
          string territoryName = Utilities.RemoveSpaces(mi.Territory.ToString());
-         ITerritory territory = TerritoryExtensions.Find(myGameInstance.Territories, territoryName);
+         ITerritory territory = TerritoryExtensions.Find(Territory.theTerritories, territoryName);
          if (null == territory)
          {
             Logger.Log(LogEnum.LE_ERROR, "CreateMapItem(): TerritoryExtensions.Find() returned null");
@@ -861,7 +861,7 @@ namespace BarbarianPrince
          //-------------------------------------------------------
          if (true == gi.IsSecretBaronHuldra) // e144
          {
-            ITerritory t = gi.Territories.Find("1611");
+            ITerritory t = Territory.theTerritories.Find("1611");
             double size = Utilities.ZOOM * Utilities.theMapItemSize;
             Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("WarriorsHillTribe"), Width = size, Height = size };
             Canvas.SetLeft(img1, t.CenterPoint.X - size / 1.7);
@@ -872,7 +872,7 @@ namespace BarbarianPrince
          if (true == gi.IsSecretCountDrogat) // e144
          {
             double size = Utilities.theMapItemSize;
-            ITerritory t = gi.Territories.Find("2018");
+            ITerritory t = Territory.theTerritories.Find("2018");
             Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("FoulBane"), Width = size, Height = size };
             Canvas.SetLeft(img1, t.CenterPoint.X - size / 1.7);
             Canvas.SetTop(img1, t.CenterPoint.Y - size / 2.0);
@@ -1270,7 +1270,7 @@ namespace BarbarianPrince
             sTerritories = gi.Prince.Territory.Adjacents;
          foreach (string s in sTerritories)
          {
-            ITerritory t = gi.Territories.Find(s);
+            ITerritory t = Territory.theTerritories.Find(s);
             if (null == t)
             {
                Logger.Log(LogEnum.LE_ERROR, "UpdateCanvasHexTravelToShowPolygons(): 1 t=null for " + s);
@@ -1291,7 +1291,7 @@ namespace BarbarianPrince
       private bool UpdateCanvasHexArchTravel(IGameInstance gi)
       {
          myPolygons.Clear();
-         foreach (ITerritory t in gi.Territories)
+         foreach (ITerritory t in Territory.theTerritories)
          {
             PointCollection points = new PointCollection();
             foreach (IMapPoint mp1 in t.Points)
@@ -1306,7 +1306,7 @@ namespace BarbarianPrince
       private bool UpdateCanvasHexLetterChoice(IGameInstance gi)
       {
          myPolygons.Clear();
-         foreach (ITerritory t in gi.Territories)
+         foreach (ITerritory t in Territory.theTerritories)
          {
             PointCollection points = new PointCollection();
             foreach (IMapPoint mp1 in t.Points)
@@ -1593,13 +1593,13 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygonTravel(): clickedPolygon=null for " + clickedPolygon.Tag.ToString());
             return;
          }
-         myTerritorySelected = TerritoryExtensions.Find(myGameInstance.Territories, Utilities.RemoveSpaces(clickedPolygon.Tag.ToString()));
+         myTerritorySelected = TerritoryExtensions.Find(Territory.theTerritories, Utilities.RemoveSpaces(clickedPolygon.Tag.ToString()));
          if (null == myTerritorySelected)
          {
             Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygonTravel(): selectedTerritory=null for " + clickedPolygon.Tag.ToString());
             return;
          }
-         if (false == CreateMapItemMove(myGameInstance.Territories, myGameInstance, myTerritorySelected))
+         if (false == CreateMapItemMove(Territory.theTerritories, myGameInstance, myTerritorySelected))
          {
             Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygonTravel(): CreateMapItemMove() returned false");
             return;
@@ -1635,7 +1635,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygonArchOfTravel(): oldStack=null for t=" + oldT.ToString());
             return;
          }
-         ITerritory newT = TerritoryExtensions.Find(myGameInstance.Territories, Utilities.RemoveSpaces(clickedPolygon.Tag.ToString()));
+         ITerritory newT = TerritoryExtensions.Find(Territory.theTerritories, Utilities.RemoveSpaces(clickedPolygon.Tag.ToString()));
          if (null == newT)
          {
             Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygonArchOfTravel(): newT=null for " + clickedPolygon.Tag.ToString());
@@ -1670,7 +1670,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygonLetterChoice(): clickedPolygon=null for " + clickedPolygon.Tag.ToString());
             return;
          }
-         ITerritory letterLocation = TerritoryExtensions.Find(myGameInstance.Territories, Utilities.RemoveSpaces(clickedPolygon.Tag.ToString()));
+         ITerritory letterLocation = TerritoryExtensions.Find(Territory.theTerritories, Utilities.RemoveSpaces(clickedPolygon.Tag.ToString()));
          if (null == letterLocation)
          {
             Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygonLetterChoice(): newT=null for " + clickedPolygon.Tag.ToString());

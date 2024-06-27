@@ -92,8 +92,8 @@ namespace BarbarianPrince
          {
             //AddGuide(ref gi, "1822");
             gi.MapItemMoves.Clear();
-            ITerritory t1 = gi.Territories.Find("1723");
-            ITerritory t2 = gi.Territories.Find("1822");
+            ITerritory t1 = Territory.theTerritories.Find("1723");
+            ITerritory t2 = Territory.theTerritories.Find("1822");
             IMapItemMove mim = new MapItemMove(t1, t2);
             mim.MapItem = myGameInstance.Prince;
             mim.RiverCross = RiverCrossEnum.TC_NO_RIVER;
@@ -103,8 +103,8 @@ namespace BarbarianPrince
          else if (CommandName == myCommandNames[1]) // farmland
          {
             gi.MapItemMoves.Clear();
-            ITerritory t1 = gi.Territories.Find("0417");
-            ITerritory t2 = gi.Territories.Find("0418");
+            ITerritory t1 = Territory.theTerritories.Find("0417");
+            ITerritory t2 = Territory.theTerritories.Find("0418");
             IMapItemMove mim = new MapItemMove(t1, t2);
             mim.MapItem = myGameInstance.Prince;
             gi.MapItemMoves.Add(mim);
@@ -113,8 +113,8 @@ namespace BarbarianPrince
          else if (CommandName == myCommandNames[2])  // countryside
          {
             gi.MapItemMoves.Clear();
-            ITerritory t1 = gi.Territories.Find("0415");
-            ITerritory t2 = gi.Territories.Find("0416");
+            ITerritory t1 = Territory.theTerritories.Find("0415");
+            ITerritory t2 = Territory.theTerritories.Find("0416");
             IMapItemMove mim = new MapItemMove(t1, t2);
             mim.MapItem = myGameInstance.Prince;
             gi.MapItemMoves.Add(mim);
@@ -123,8 +123,8 @@ namespace BarbarianPrince
          else if (CommandName == myCommandNames[3]) // Forest
          {
             gi.MapItemMoves.Clear();
-            ITerritory t1 = gi.Territories.Find("0413");
-            ITerritory t2 = gi.Territories.Find("0414");
+            ITerritory t1 = Territory.theTerritories.Find("0413");
+            ITerritory t2 = Territory.theTerritories.Find("0414");
             IMapItemMove mim = new MapItemMove(t1, t2);
             mim.MapItem = myGameInstance.Prince;
             gi.MapItemMoves.Add(mim);
@@ -133,8 +133,8 @@ namespace BarbarianPrince
          else if (CommandName == myCommandNames[4]) // Hills
          {
             gi.MapItemMoves.Clear();
-            ITerritory t1 = gi.Territories.Find("0405");
-            ITerritory t2 = gi.Territories.Find("0406");
+            ITerritory t1 = Territory.theTerritories.Find("0405");
+            ITerritory t2 = Territory.theTerritories.Find("0406");
             IMapItemMove mim = new MapItemMove(t1, t2);
             mim.MapItem = myGameInstance.Prince;
             gi.MapItemMoves.Add(mim);
@@ -143,8 +143,8 @@ namespace BarbarianPrince
          else if (CommandName == myCommandNames[5]) // Mountains
          {
             gi.MapItemMoves.Clear();
-            ITerritory t1 = gi.Territories.Find("0404");
-            ITerritory t2 = gi.Territories.Find("0405");
+            ITerritory t1 = Territory.theTerritories.Find("0404");
+            ITerritory t2 = Territory.theTerritories.Find("0405");
             IMapItemMove mim = new MapItemMove(t1, t2);
             mim.MapItem = myGameInstance.Prince;
             gi.MapItemMoves.Add(mim);
@@ -153,8 +153,8 @@ namespace BarbarianPrince
          else if (CommandName == myCommandNames[6]) // Swamp
          {
             gi.MapItemMoves.Clear();
-            ITerritory t1 = gi.Territories.Find("0412");
-            ITerritory t2 = gi.Territories.Find("0411");
+            ITerritory t1 = Territory.theTerritories.Find("0412");
+            ITerritory t2 = Territory.theTerritories.Find("0411");
             IMapItemMove mim = new MapItemMove(t1, t2);
             mim.MapItem = myGameInstance.Prince;
             gi.MapItemMoves.Add(mim);
@@ -163,8 +163,8 @@ namespace BarbarianPrince
          else if (CommandName == myCommandNames[7]) // Desert
          {
             gi.MapItemMoves.Clear();
-            ITerritory t1 = gi.Territories.Find("0406");
-            ITerritory t2 = gi.Territories.Find("0407");
+            ITerritory t1 = Territory.theTerritories.Find("0406");
+            ITerritory t2 = Territory.theTerritories.Find("0407");
             IMapItemMove mim = new MapItemMove(t1, t2);
             mim.MapItem = myGameInstance.Prince;
             gi.MapItemMoves.Add(mim);
@@ -173,8 +173,8 @@ namespace BarbarianPrince
          else if (CommandName == myCommandNames[8]) // Airborne
          {
             gi.MapItemMoves.Clear();
-            ITerritory t1 = gi.Territories.Find("0314");
-            ITerritory t2 = gi.Territories.Find("0313");
+            ITerritory t1 = Territory.theTerritories.Find("0314");
+            ITerritory t2 = Territory.theTerritories.Find("0313");
             IMapItemMove mim = new MapItemMove(t1, t2);
             mim.MapItem = myGameInstance.Prince;
             gi.MapItemMoves.Add(mim);
@@ -185,8 +185,8 @@ namespace BarbarianPrince
          {
             AddGuide(ref gi, "0313");
             gi.MapItemMoves.Clear();
-            ITerritory t1 = gi.Territories.Find("0314");
-            ITerritory t2 = gi.Territories.Find("0313");
+            ITerritory t1 = Territory.theTerritories.Find("0314");
+            ITerritory t2 = Territory.theTerritories.Find("0313");
             IMapItemMove mim = new MapItemMove(t1, t2);
             mim.MapItem = myGameInstance.Prince;
             gi.MapItemMoves.Add(mim);
@@ -197,8 +197,8 @@ namespace BarbarianPrince
          {
             AddGuides(ref gi);
             gi.MapItemMoves.Clear();
-            ITerritory t1 = gi.Territories.Find("0314");
-            ITerritory t2 = gi.Territories.Find("0313");
+            ITerritory t1 = Territory.theTerritories.Find("0314");
+            ITerritory t2 = Territory.theTerritories.Find("0313");
             IMapItemMove mim = new MapItemMove(t1, t2);
             mim.MapItem = myGameInstance.Prince;
             gi.MapItemMoves.Add(mim);
@@ -275,7 +275,7 @@ namespace BarbarianPrince
          string miName = "Dwarf" + Utilities.MapItemNum;
          Utilities.MapItemNum++;
          IMapItem guide = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);;
-         ITerritory t2 = gi.Territories.Find(territoryName);
+         ITerritory t2 = Territory.theTerritories.Find(territoryName);
          if (null == t2)
             Logger.Log(LogEnum.LE_ERROR, "AddGuide(): t2=null");
          guide.GuideTerritories.Add(t2);
@@ -287,7 +287,7 @@ namespace BarbarianPrince
          string miName = "Dwarf" + Utilities.MapItemNum.ToString();
          Utilities.MapItemNum++;
          IMapItem guide1 = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12); ;
-         ITerritory t2 = gi.Territories.Find("0313");
+         ITerritory t2 = Territory.theTerritories.Find("0313");
          guide1.GuideTerritories.Add(t2);
          partyMembers.Add(guide1);
          //---------------------------------------

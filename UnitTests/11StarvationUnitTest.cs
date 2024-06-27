@@ -94,7 +94,7 @@ namespace BarbarianPrince
          gi.IsPartyFed = false;
          gi.IsMountsFed = false;
          gi.IsMagicianProvideGift = false;
-         ITerritory t = gi.Territories.Find("0101");
+         ITerritory t = Territory.theTerritories.Find("0101");
          if (null == t)
          {
             Logger.Log(LogEnum.LE_ERROR, "Command(): t=null");
@@ -610,7 +610,7 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[13])
          {
-            t = gi.Territories.Find("0306"); // Mountains
+            t = Territory.theTerritories.Find("0306"); // Mountains
             if (null == t)
             {
                Logger.Log(LogEnum.LE_ERROR, "Command(): t=null");
