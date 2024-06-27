@@ -1230,25 +1230,39 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerDisplay: // Only change active event
                break;
             case GameAction.RemoveSplashScreen:
-               Option option = gi.Options.Find("AutoSetup");
-               if (null == option)
+               if (false == AddStartingPrinceOption(gi))
                {
-                  returnStatus = "gi.Options.Find(AutoSetup) returned null";
+                  returnStatus = "AddStartingPrinceOption() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
+               }
+               else if (false == AddStartingOptions(gi))
+               {
+                  returnStatus = "AddStartingOptions() returned false";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
                }
                else
                {
-                  if (true == option.IsEnabled)
+                  AddSpecialConditionsForUnitTest();
+                  Option option = gi.Options.Find("AutoSetup");
+                  if (null == option)
                   {
-                     if (false == PerformAutoSetup(ref gi, ref action))
-                     {
-                        returnStatus = "PerformAutoSetup() returned false";
-                        Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
-                     }
+                     returnStatus = "gi.Options.Find(AutoSetup) returned null";
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
                   }
                   else
                   {
-                     gi.EventDisplayed = gi.EventActive = "e000";
+                     if (true == option.IsEnabled)
+                     {
+                        if (false == PerformAutoSetup(ref gi, ref action))
+                        {
+                           returnStatus = "PerformAutoSetup() returned false";
+                           Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
+                        }
+                     }
+                     else
+                     {
+                        gi.EventDisplayed = gi.EventActive = "e000";
+                     }
                   }
                }
                break;
@@ -1304,10 +1318,33 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.DieRollActionNone;
                break;
             case GameAction.SetupNewGame:
-               if (false == PerformAutoSetup(ref gi, ref action))
+               if (false == AddStartingPrinceOption(gi))
                {
-                  returnStatus = "PerformAutoSetup() returned false";
+                  returnStatus = "AddStartingPrinceOption() returned false";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
+               }
+               else if (false == AddStartingOptions(gi))
+               {
+                  returnStatus = "AddStartingOptions() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  AddSpecialConditionsForUnitTest();
+                  Option option = gi.Options.Find("AutoSetup");
+                  if (null == option)
+                  {
+                     returnStatus = "gi.Options.Find(AutoSetup) returned null";
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
+                  }
+                  else
+                  {
+                     if (false == PerformAutoSetup(ref gi, ref action))
+                     {
+                        returnStatus = "PerformAutoSetup() returned false";
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
+                     }
+                  }
                }
                action = GameAction.UpdateLoadingGame;
                break;
@@ -1374,12 +1411,528 @@ namespace BarbarianPrince
          }
          return true;
       }
+      private bool PerformAutoSetup(ref IGameInstance gi, ref GameAction action)
+      {
+         int dr = Utilities.RandomGenerator.Next(6);
+         ++dr;
+         switch (dr) // Setup Wealth, Wits and Wiles, Starting Location
+         {
+            case 1: gi.Prince.Coin += 0; break;
+            case 2: gi.Prince.Coin += 1; break;
+            case 3: gi.Prince.Coin += 2; break;
+            case 4: gi.Prince.Coin += 2; break;
+            case 5: gi.Prince.Coin += 3; break;
+            case 6: gi.Prince.Coin += 4; break;
+            default: Logger.Log(LogEnum.LE_ERROR, "PerformAutoSetup(): reached default dr=" + dr.ToString()); return false;
+         }
+         gi.WitAndWile = Utilities.RandomGenerator.Next(6);
+         ++gi.WitAndWile;
+         if (1 == gi.WitAndWile) // cannot start with one 
+            ++gi.WitAndWile;
+         dr = Utilities.RandomGenerator.Next(6);
+         ++dr;
+         if (false == SetStartingLocation(ref gi, dr))
+         {
+            Logger.Log(LogEnum.LE_ERROR, "PerformAutoSetup():  SetStartingLocation() return false");
+            return false;
+         }
+         gi.GamePhase = GamePhase.SunriseChoice;      // PerformAutoSetup()
+         gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
+         gi.DieRollAction = GameAction.DieRollActionNone;
+         return true;
+      }
+      private bool AddStartingPrinceOption(IGameInstance gi)
+      {
+         Options options = gi.Options;
+         Option option = null;
+         String itemToAdd = "";
+         //---------------------------------------------------------
+         itemToAdd = "PrinceHorse";
+         option = options.Find(itemToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            gi.Prince.AddNewMount();
+            gi.Prince.AddNewMount();
+            gi.Prince.AddNewMount();
+         }
+         //---------------------------------------------------------
+         itemToAdd = "PrincePegasus";
+         option = options.Find(itemToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            gi.Prince.AddNewMount(MountEnum.Pegasus);
+         //---------------------------------------------------------
+         itemToAdd = "PrinceCoin";
+         option = options.Find(itemToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            gi.Prince.Coin += Utilities.RandomGenerator.Next(50) + 50;
+         //---------------------------------------------------------
+         itemToAdd = "PrinceFood";
+         option = options.Find(itemToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            gi.Prince.Food += 5;
+         return true;
+      }
+      private bool AddStartingOptions(IGameInstance gi)
+      {
+         Options options = gi.Options;
+         int numPartyMembers = 0;
+         Option option = options.Find("PartyCustom");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(PartyCustom) returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)  // If this is a custom party, choose based on checked boxes in options
+         {
+            foreach (string memberToAdd in Option.theStartingMembers)
+            {
+               option = options.Find(memberToAdd);
+               if (null == option)
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(" + memberToAdd + ") returned null");
+                  return false;
+               }
+               if (true == option.IsEnabled)
+               {
+                  if (false == AddStartingPartyMemberOption(gi, memberToAdd))
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): AddStartingPartyMemberOption() returned false");
+                     return false;
+                  }
+               }
+            }
+         }
+         else // check if random party
+         {
+            //-----------------------------------------------
+            option = options.Find("RandomParty10");
+            if (null == option)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty10) returned null");
+               return false;
+            }
+            if (true == option.IsEnabled)
+               numPartyMembers = 10;
+            //-----------------------------------------------
+            option = options.Find("RandomParty08");
+            if (null == option)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty08) returned null");
+               return false;
+            }
+            if (true == option.IsEnabled)
+               numPartyMembers = 8;
+            //-----------------------------------------------
+            option = options.Find("RandomParty05");
+            if (null == option)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty05) returned null");
+               return false;
+            }
+            if (true == option.IsEnabled)
+               numPartyMembers = 5;
+            //-----------------------------------------------
+            option = options.Find("RandomParty03");
+            if (null == option)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty03) returned null");
+               return false;
+            }
+            if (true == option.IsEnabled)
+               numPartyMembers = 3;
+            //-----------------------------------------------
+            option = options.Find("RandomParty01");
+            if (null == option)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty01) returned null");
+               return false;
+            }
+            if (true == option.IsEnabled)
+               numPartyMembers = 1;
+            //-----------------------------------------------
+            if (0 < numPartyMembers)
+            {
+               for (int i = 0; i < numPartyMembers; ++i)
+               {
+                  int index = Utilities.RandomGenerator.Next(Option.MEMBER_COUNT);
+                  string memberToAdd = Option.theStartingMembers[index];
+                  if (false == AddStartingPartyMemberOption(gi, memberToAdd))
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): AddStartingPartyMemberOption(" + memberToAdd + ") returned false");
+                     return false;
+                  }
+               }
+            }
+         }
+         //---------------------------------------------------------
+         option = options.Find("PartyMounted");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(PartyMounted) returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            foreach (IMapItem mi in gi.PartyMembers)
+            {
+               if (false == mi.IsFlyer())
+                  mi.AddNewMount();
+            }
+         }
+         //---------------------------------------------------------
+         option = options.Find("PartyAirborne");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(PartyMounted) returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            foreach (IMapItem mi in gi.PartyMembers)
+            {
+               if (false == mi.IsFlyer())
+                  mi.AddNewMount(MountEnum.Pegasus);
+            }
+         }
+         return true;
+      }
+      private bool AddStartingPartyMemberOption(IGameInstance gi, string partyMemberName)
+      {
+         switch (partyMemberName)
+         {
+            case "Dwarf":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+                  member.IsFlying = true;
+                  member.IsRiding = true;
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  member.IsFickle = true;
+                  member.AddNewMount(); // riding
+                  gi.AddCompanion(member);
+               }
+               break;
+            case "Eagle":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
+                  member.IsFlying = true;
+                  member.IsRiding = true;
+                  gi.AddCompanion(member);
+               }
+               break;
+            case "Elf":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c56Elf", "c56Elf", gi.Prince.Territory, 5, 5, 0);
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  member.AddNewMount(MountEnum.Horse);
+                  gi.AddCompanion(member);
+               }
+               break;
+            case "Falcon":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c82Falcon", "c82Falcon", gi.Prince.Territory, 0, 0, 0);
+                  member.IsFlying = true;
+                  member.IsRiding = true;
+                  member.IsGuide = true;
+                  member.GuideTerritories = Territory.theTerritories;
+                  gi.AddCompanion(member);
+                  gi.IsFalconFed = true;
+               }
+               break;
+            case "Griffon":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem griffon = new MapItem(memberName, 1.0, false, false, false, "c63Griffon", "c63Griffon", gi.Prince.Territory, 3, 4, 1);
+                  griffon.IsFlying = true;
+                  griffon.IsRiding = true;
+                  gi.AddCompanion(griffon);
+                  //---------------------
+                  memberName = "Mercenary" + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem rider = new MapItem(memberName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 5, 5, 0);
+                  griffon.Rider = rider;
+                  rider.Mounts.Insert(0, griffon);
+                  rider.Food = Utilities.RandomGenerator.Next(5);
+                  rider.Coin = Utilities.RandomGenerator.Next(20);
+                  rider.IsRiding = true;
+                  rider.IsFlying = true;
+                  gi.AddCompanion(rider);
+               }
+               break;
+            case "Harpy":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem harpy = new MapItem(memberName, 1.0, false, false, false, "c83Harpy", "c83Harpy", gi.Prince.Territory, 4, 5, 4);
+                  harpy.IsFlying = true;
+                  harpy.IsRiding = true;
+                  gi.AddCompanion(harpy);
+                  //---------------------
+                  memberName = "Monk" + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem rider = new MapItem(memberName, 1.0, false, false, false, "c19Monk", "c19Monk", gi.Prince.Territory, 5, 4, 4);
+                  harpy.Rider = rider;
+                  rider.Mounts.Insert(0, harpy);
+                  rider.Food = Utilities.RandomGenerator.Next(5);
+                  rider.Coin = Utilities.RandomGenerator.Next(20);
+                  rider.IsRiding = true;
+                  rider.IsFlying = true;
+                  gi.AddCompanion(rider);
+               }
+               break;
+            case "Magician":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  gi.AddCompanion(member);
+               }
+               break;
+            case "Mercenary":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 0);
+                  member.Food = 5;
+                  member.Coin = 98;
+                  member.AddNewMount();  // riding
+                  member.AddNewMount(MountEnum.Pegasus); // flying
+                  member.SetWounds(3, 0); // make unconscious
+                  member.IsGuide = true;
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  foreach (string adj in gi.Prince.TerritoryStarting.Adjacents)
+                  {
+                     ITerritory t = Territory.theTerritories.Find(adj);
+                     member.GuideTerritories.Add(t);
+                  }
+                  gi.AddCompanion(member);
+               }
+               break;
+            case "Merchant":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  gi.AddCompanion(member);
+                  gi.IsMerchantWithParty = true;
+               }
+               break;
+            case "Minstrel":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", gi.Prince.Territory, 0, 0, 0);
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  gi.AddCompanion(member);
+                  gi.IsMinstrelPlaying = true; // e049 - minstrel
+               }
+               break;
+            case "Monk":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c19Monk", "c19Monk", gi.Prince.Territory, 5, 5, 0);
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  gi.AddCompanion(member);
+               }
+               break;
+            case "PorterSlave":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  gi.AddCompanion(member);
+               }
+               break;
+            case "TrueLove":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  gi.AddCompanion(member);
+               }
+               break;
+            case "Wizard":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c12Wizard", "c12Wizard", gi.Prince.Territory, 4, 4, 0);
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  gi.AddCompanion(member);
+               }
+               break;
+            default:
+               Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMemberOption(): reached default name=" + partyMemberName);
+               return false;
+         }
+         return true;
+      }
+      private void AddSpecialConditionsForUnitTest()
+      {
+         //Days = 40;
+         //myPrince.SetWounds(7, 0);
+         //myPrince.PlagueDustWound = 1; 
+         //myPrince.AddNewMount(MountEnum.Pegasus);
+         //this.AddUnitTestTiredMount(myPrince);
+         //myPrince.AddNewMount();
+         //myPrince.AddNewMount();
+         //---------------------
+         //AddSpecialItem(SpecialEnum.GiftOfCharm);
+         //AddSpecialItem(SpecialEnum.ResistanceTalisman);
+         //AddSpecialItem(SpecialEnum.CharismaTalisman);
+         //AddSpecialItem(SpecialEnum.DragonEye);
+         //AddSpecialItem(SpecialEnum.RocBeak);
+         //AddSpecialItem(SpecialEnum.GriffonClaws);
+         //AddSpecialItem(SpecialEnum.HealingPoition);
+         //AddSpecialItem(SpecialEnum.CurePoisonVial);
+         //AddSpecialItem(SpecialEnum.EnduranceSash);
+         //AddSpecialItem(SpecialEnum.PoisonDrug);
+         //AddSpecialItem(SpecialEnum.MagicSword);
+         //AddSpecialItem(SpecialEnum.AntiPoisonAmulet);
+         //AddSpecialItem(SpecialEnum.PegasusMountTalisman);
+         //AddSpecialItem(SpecialEnum.NerveGasBomb);
+         //AddSpecialItem(SpecialEnum.ResistanceRing);
+         //AddSpecialItem(SpecialEnum.ResurrectionNecklace);
+         //AddSpecialItem(SpecialEnum.ShieldOfLight);
+         //AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
+         //myPrince.AddSpecialItemToShare(SpecialEnum.HydraTeeth);
+         //this.HydraTeethCount = 5;
+         //---------------------
+         //ITerritory visited = Territories.Find("0109");
+         //this.myVisitedLoctions.Add(visited);
+         //---------------------
+         //ITerritory escapeLocation = Territories.Find("0605");
+         //EscapedLocations.Add(escapeLocation);
+         //---------------------
+         //ITerritory cacheHex = Territories.Find("0504");
+         //Caches.Add(cacheHex, 66);
+         //cacheHex = Territories.Find("0505");
+         //Caches.Add(cacheHex, 333);
+         //Caches.Add(cacheHex, 100);
+         //Caches.Add(cacheHex, 500);
+         //Caches.Add(cacheHex, 33);
+         //---------------------
+         //ITerritory secretClueHex = Territories.Find("0504");
+         //SecretClues.Add(secretClueHex);
+         //---------------------
+         //ITerritory secretClueHex2 = Territories.Find("0706");
+         //SecretClues.Add(secretClueHex2);
+         //---------------------
+         //ITerritory hiddenTemple = Territories.Find("0605");
+         //HiddenTemples.Add(hiddenTemple);
+         //---------------------
+         //ITerritory hiddenRuin = Territories.Find("0606");
+         //HiddenRuins.Add(hiddenRuin);
+         //---------------------
+         //ITerritory elfTown = Territories.Find("0607");
+         //ElfTowns.Add(elfTown);
+         //---------------------
+         //ITerritory eagleLair = Territories.Find("0407");
+         //EagleLairs.Add(eagleLair);
+         //---------------------
+         //ITerritory dwarvenMine = Territories.Find("0408");  
+         //DwarvenMines.Add(dwarvenMine);
+         //---------------------
+         //ITerritory dwarfAdviceHex = Territories.Find("0319");
+         //DwarfAdviceLocations.Add(dwarfAdviceHex);
+         //---------------------
+         //ITerritory halflingTown = Territories.Find("0303");
+         //HalflingTowns.Add(halflingTown);
+         //---------------------
+         //ITerritory elfCastle  = Territories.Find("0608");
+         //ElfCastles.Add(elfCastle);
+         //---------------------
+         //ITerritory wizarTower = Territories.Find("0404");  //mountain
+         //WizardTowers.Add(wizarTower);
+         //---------------------
+         //ITerritory wizardAdviceHex = Territories.Find("1005");
+         //WizardAdviceLocations.Add(wizardAdviceHex);
+         //---------------------
+         //ITerritory t11 = Territories.Find("0306"); // e114 - verify that eagle hunt can happen in structure
+         //HiddenTemples.Add(t11);
+         //t11 = Territories.Find("0307"); // e114 - verify that eagle hunt can happen in structure
+         //HiddenTemples.Add(t11);
+         //t11 = Territories.Find("0407"); // e114 - verify that eagle hunt can happen in structure
+         //HiddenTemples.Add(t11);
+         //t11 = Territories.Find("0405"); // e114 - verify that eagle hunt can happen in structure
+         //HiddenTemples.Add(t11);
+         //t11 = Territories.Find("0406"); // e114 - verify that eagle hunt can happen in structure
+         //HiddenTemples.Add(t11);
+         //t11 = Territories.Find("0506"); // e114 - verify that eagle hunt can happen in structure
+         //HiddenTemples.Add(t11);
+         //t11 = Territories.Find("0507"); // e114 - verify that eagle hunt can happen in structure
+         //HiddenTemples.Add(t11);
+         //---------------------
+         //ITerritory forbiddenHex = Territories.Find("0705");
+         //ForbiddenHexes.Add(forbiddenHex);
+         //---------------------
+         //ITerritory forbiddenAudience = Territories.Find("0101");
+         //ITerritory lt1 = Territories.Find("0109");
+         //ITerritory lt2 = Territories.Find("0711");
+         //ITerritory lt3 = Territories.Find("1212");
+         //LetterOfRecommendations.Add(lt1);
+         //LetterOfRecommendations.Add(lt1);
+         //ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt1);
+         //LetterOfRecommendations.Add(lt2);
+         //ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt2);
+         //LetterOfRecommendations.Add(lt3);
+         //ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt3);
+         //---------------------
+         //DayOfLastOffering = Days + 4;
+         //IsSecretTempleKnown = true;
+         //IsMarkOfCain = true; // e018
+         //NumMonsterKill = 5; // e161e - kill 5 monsters
+         //ChagaDrugCount = 2;
+         //RaftState = RaftEnum.RE_RAFT_SHOWN;
+      }
       private bool SetStartingLocationOption(IGameInstance gi, ref ITerritory starting)
       {
          Option option = null;
          string hex = "";
          //---------------------------------------------------------
-         hex = "RandomHex"; 
+         hex = "RandomHex";
          option = gi.Options.Find(hex);
          if (null == option)
          {
@@ -1403,9 +1956,9 @@ namespace BarbarianPrince
          if (true == option.IsEnabled)
          {
             List<ITerritory> townHexes = new List<ITerritory>();
-            foreach( ITerritory t in Territory.theTerritories)
+            foreach (ITerritory t in Territory.theTerritories)
             {
-               if ( true == t.IsTown )
+               if (true == t.IsTown)
                   townHexes.Add(t);
             }
             int index = Utilities.RandomGenerator.Next(townHexes.Count); // returns [0,count)
@@ -1425,9 +1978,12 @@ namespace BarbarianPrince
             List<ITerritory> leftEdges = new List<ITerritory>();
             foreach (ITerritory t in Territory.theTerritories)
             {
-               int colNum = Int32.Parse(t.Name.Substring(0, 2)); // (start index, length)
-               if (01 == colNum)
-                  leftEdges.Add(t);
+               if( "offboard" !=  t.Name)
+               {
+                  int colNum = Int32.Parse(t.Name.Substring(0, 2)); // (start index, length)
+                  if (01 == colNum)
+                     leftEdges.Add(t);
+               }
             }
             int index = Utilities.RandomGenerator.Next(leftEdges.Count); // returns [0,count)
             starting = leftEdges[index];
@@ -1446,9 +2002,12 @@ namespace BarbarianPrince
             List<ITerritory> rightEdges = new List<ITerritory>();
             foreach (ITerritory t in Territory.theTerritories)
             {
-               int colNum = Int32.Parse(t.Name.Substring(0, 2)); // (start index, length)
-               if (20 == colNum)
-                  rightEdges.Add(t);
+               if ("offboard" != t.Name)
+               {
+                  int colNum = Int32.Parse(t.Name.Substring(0, 2)); // (start index, length)
+                  if (20 == colNum)
+                     rightEdges.Add(t);
+               }
             }
             int index = Utilities.RandomGenerator.Next(rightEdges.Count); // returns [0,count)
             starting = rightEdges[index];
@@ -1467,18 +2026,19 @@ namespace BarbarianPrince
             List<ITerritory> bottomEdges = new List<ITerritory>();
             foreach (ITerritory t in Territory.theTerritories)
             {
-               int colNum = Int32.Parse(t.Name.Substring(0, 2)); // (start index, length)
-               int rowNum = Int32.Parse(gi.Prince.Territory.Name.Substring(2));
-               if (0 == colNum%2)
+               if ("offboard" != t.Name)
                {
-                  if (22 == rowNum)
+                  int colNum = Int32.Parse(t.Name.Substring(0, 2)); // (start index, length)
+                  int rowNum = Int32.Parse(t.Name.Substring(2));
+                  Logger.Log(LogEnum.LE_ERROR, "t.Name=" + t.Name + " colNum=" + colNum.ToString() + " rowNum=" + rowNum.ToString());
+                  if (((22 == rowNum) && (0 == colNum % 2)) || (23 == rowNum))
                      bottomEdges.Add(t);
                }
-               else
-               {
-                  if (23 == rowNum)
-                     bottomEdges.Add(t);
-               }
+            }
+            if (0 == bottomEdges.Count)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): bottomEdges.Count=0");
+               return false;
             }
             int index = Utilities.RandomGenerator.Next(bottomEdges.Count); // returns [0,count)
             starting = bottomEdges[index];
@@ -1634,36 +2194,6 @@ namespace BarbarianPrince
          }
          if (true == option.IsEnabled)
             starting = Territory.theTerritories.Find(hex);
-         return true;
-      }
-      private bool PerformAutoSetup(ref IGameInstance gi, ref GameAction action)
-      {
-         int dr = Utilities.RandomGenerator.Next(6);
-         ++dr;
-         switch (dr) // Setup Wealth, Wits and Wiles, Starting Location
-         {
-            case 1: gi.Prince.Coin += 0; break;
-            case 2: gi.Prince.Coin += 1; break;
-            case 3: gi.Prince.Coin += 2; break;
-            case 4: gi.Prince.Coin += 2; break;
-            case 5: gi.Prince.Coin += 3; break;
-            case 6: gi.Prince.Coin += 4; break;
-            default: Logger.Log(LogEnum.LE_ERROR, "PerformAutoSetup(): reached default dr=" + dr.ToString()); return false;
-         }
-         gi.WitAndWile = Utilities.RandomGenerator.Next(6);
-         ++gi.WitAndWile;
-         if (1 == gi.WitAndWile) // cannot start with one 
-            ++gi.WitAndWile;
-         dr = Utilities.RandomGenerator.Next(6);
-         ++dr;
-         if (false == SetStartingLocation(ref gi, dr))
-         {
-            Logger.Log(LogEnum.LE_ERROR, "PerformAutoSetup():  SetStartingLocation() return false");
-            return false;
-         }
-         gi.GamePhase = GamePhase.SunriseChoice;      // PerformAutoSetup()
-         gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
-         gi.DieRollAction = GameAction.DieRollActionNone;
          return true;
       }
    }

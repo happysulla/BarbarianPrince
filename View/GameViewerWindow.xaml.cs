@@ -1896,7 +1896,7 @@ namespace BarbarianPrince
             {
                // Load the reader with the data file and ignore all white space nodes.
                //reader = XmlReader.Create(new StringReader(sNewGameOptions));
-               reader = new XmlTextReader("Options1.xml") { WhitespaceHandling = WhitespaceHandling.None };
+               reader = new XmlTextReader(@"../Config/Options.xml") { WhitespaceHandling = WhitespaceHandling.None };
                while (reader.Read())
                {
                   if (reader.Name == "Option")
@@ -1963,8 +1963,8 @@ namespace BarbarianPrince
                   enabledElem.SetAttribute("value", o.IsEnabled.ToString());
                   aXmlDocument.DocumentElement.LastChild.AppendChild(enabledElem);
                }
-               XmlWriterSettings settings = new XmlWriterSettings() { Indent = true, NewLineOnAttributes = true };
-               XmlWriter writer = XmlWriter.Create("Options1.xml", settings);
+               XmlWriterSettings settings = new XmlWriterSettings() { Indent = true };
+               XmlWriter writer = XmlWriter.Create(@"../Config/Options.xml", settings);
                aXmlDocument.Save(writer);
                Settings.Default.GameOptions = aXmlDocument.ToString();
             }

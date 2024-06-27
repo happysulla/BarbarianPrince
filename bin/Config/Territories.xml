@@ -3838,7 +3838,6 @@
   </Territory>
   <Territory value="0802">
     <type value="Forest" />
-
     <point X="343.818181818182" Y="81.8327272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4947,7 +4946,6 @@
   </Territory>
   <Territory value="0919">
     <type value="Countryside" />
-
     <point X="380.909090909091" Y="786.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4957,7 +4955,7 @@
     <DownRiver value="" />
     <adjacent value="0819" />
     <adjacent value="0920" />
-    <adjacent value="18" />
+    <adjacent value="1019" />
     <adjacent value="1018" />
     <adjacent value="0918" />
     <adjacent value="0818" />
@@ -4970,7 +4968,6 @@
   </Territory>
   <Territory value="0920">
     <type value="Countryside" />
-
     <point X="381.636363636364" Y="828.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4981,7 +4978,7 @@
     <adjacent value="0820" />
     <adjacent value="0921" />
     <adjacent value="1020" />
-    <adjacent value="18" />
+    <adjacent value="1019" />
     <adjacent value="0919" />
     <adjacent value="0819" />
     <regionPoint X="393.056701030928" Y="807.166315789474" />
@@ -4992,8 +4989,7 @@
     <regionPoint X="368.932838083687" Y="807.362352941176" />
   </Territory>
   <Territory value="0921">
-    <type value="Countryside" />
-
+    <type value="Countryside" /
     <point X="380.909090909091" Y="871.181818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5567,7 +5563,6 @@
   </Territory>
   <Territory value="1018">
     <type value="Forest" />
-
     <point X="417.24823943662" Y="764.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5579,7 +5574,7 @@
     <adjacent value="1017" />
     <adjacent value="0918" />
     <adjacent value="0919" />
-    <adjacent value="18" />
+    <adjacent value="1019" />
     <adjacent value="1119" />
     <adjacent value="1118" />
     <raft value="1017" />
@@ -5595,9 +5590,8 @@
     <regionPoint X="392.635648399349" Y="764.64" />
     <regionPoint X="405.056701030928" Y="743.376842105263" />
   </Territory>
-  <Territory value="18">
+  <Territory value="1019">
     <type value="Hills" />
-
     <point X="417.24823943662" Y="807.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5631,7 +5625,7 @@
     <adjacent value="1021" />
     <adjacent value="1125" />
     <adjacent value="1120" />
-    <adjacent value="18" />
+    <adjacent value="1019" />
     <adjacent value="0920" />
     <adjacent value="0921" />
     <regionPoint X="429.477753662507" Y="828.64" />
@@ -6189,7 +6183,7 @@
     <river value="1118" />
     <river value="1218" />
     <river value="1219" />
-    <adjacent value="18" />
+    <adjacent value="1019" />
     <adjacent value="1120" />
     <adjacent value="1219" />
     <adjacent value="1218" />
@@ -6227,7 +6221,7 @@
     <adjacent value="1220" />
     <adjacent value="1219" />
     <adjacent value="1119" />
-    <adjacent value="18" />
+    <adjacent value="1019" />
     <raft value="1119" />
     <raft value="1218" />
     <raft value="1219" />

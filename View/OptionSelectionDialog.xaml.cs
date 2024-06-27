@@ -111,6 +111,20 @@ namespace BarbarianPrince
             isCustomConfig = true;
          //++++++++++++++++++++++++++++++++++++++++++++++++
          // Party Members
+         myCheckBoxDwarf.IsEnabled = false;
+         myCheckBoxEagle.IsEnabled = false;
+         myCheckBoxElf.IsEnabled = false;
+         myCheckBoxFalcon.IsEnabled = false;
+         myCheckBoxGriffon.IsEnabled = false;
+         myCheckBoxHarpy.IsEnabled = false;
+         myCheckBoxMagician.IsEnabled = false;
+         myCheckBoxMercenary.IsEnabled = false;
+         myCheckBoxMerchant.IsEnabled = false;
+         myCheckBoxMinstrel.IsEnabled = false;
+         myCheckBoxMonk.IsEnabled = false;
+         myCheckBoxPorterSlave.IsEnabled = false;
+         myCheckBoxTrueLove.IsEnabled = false;
+         myCheckBoxWizard.IsEnabled = false;
          option = options.Find("RandomParty10");
          if (null == option)
          {
@@ -339,23 +353,6 @@ namespace BarbarianPrince
                            myCheckBoxWizard.IsChecked = option.IsEnabled;
                            if (true == option.IsEnabled)
                               isCustomPartyConfig = true;
-                        }
-                        else
-                        {
-                           myCheckBoxDwarf.IsEnabled = false;
-                           myCheckBoxEagle.IsEnabled = false;
-                           myCheckBoxElf.IsEnabled = false;
-                           myCheckBoxFalcon.IsEnabled = false;
-                           myCheckBoxGriffon.IsEnabled = false;
-                           myCheckBoxHarpy.IsEnabled = false;
-                           myCheckBoxMagician.IsEnabled = false;
-                           myCheckBoxMercenary.IsEnabled = false;
-                           myCheckBoxMerchant.IsEnabled = false;
-                           myCheckBoxMinstrel.IsEnabled = false;
-                           myCheckBoxMonk.IsEnabled = false;
-                           myCheckBoxPorterSlave.IsEnabled = false;
-                           myCheckBoxTrueLove.IsEnabled = false;
-                           myCheckBoxWizard.IsEnabled = false;
                         }
                      }
                   }
