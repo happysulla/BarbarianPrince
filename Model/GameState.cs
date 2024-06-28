@@ -964,49 +964,6 @@ namespace BarbarianPrince
          }
          return true;
       } // Before showing Encounter Event, show another event based on hex contents
-      protected bool SetEncounterOptions(IGameInstance gi, bool isNoLost, bool isForceLost, bool isForceLostEvent, bool isNoEvent, bool isForceEvent)
-      {
-         Option optionNoLost = gi.Options.Find("NoLost");
-         if (null == optionNoLost)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "SetEncounterOptions(): gi.Options.Find(NoLost) returned null");
-            return false;
-         }
-         optionNoLost.IsEnabled = isNoLost;
-         //-------------------------------------------
-         Option optionForceLost = gi.Options.Find("ForceLost");
-         if (null == optionForceLost)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "SetEncounterOptions(): gi.Options.Find(ForceLost) returned null");
-            return false;
-         }
-         optionForceLost.IsEnabled = isForceLost;
-         //-------------------------------------------
-         Option optionForceLostEvent = gi.Options.Find("ForceLostEvent");
-         if (null == optionForceLostEvent)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "SetEncounterOptions(): gi.Options.Find(ForceLostEvent) returned null");
-            return false;
-         }
-         optionForceLostEvent.IsEnabled = isForceLostEvent;
-         //-------------------------------------------
-         Option optionNoEvent = gi.Options.Find("NoEvent");
-         if (null == optionNoEvent)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "SetEncounterOptions(): gi.Options.Find(NoEvent) returned null");
-            return false;
-         }
-         optionNoEvent.IsEnabled = isNoEvent;
-         //-------------------------------------------
-         Option optionForceEvent = gi.Options.Find("ForceEvent");
-         if (null == optionForceEvent)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "SetEncounterOptions(): gi.Options.Find(ForceEvent) returned null");
-            return false;
-         }
-         optionForceEvent.IsEnabled = isForceEvent;
-         return true;
-      }
       protected bool AddMapItemMove(IGameInstance gi, ITerritory newT)
       {
          //-------------------------------
@@ -3902,7 +3859,8 @@ namespace BarbarianPrince
    //-----------------------------------------------------
    class GameStateEncounter : GameState
    {
-      static private int theNumHydraTeeth = 0;
+      private static bool theIsFirstTime = true;
+      private static int theNumHydraTeeth = 0;
       public override string PerformAction(ref IGameInstance gi, ref GameAction action, int dieRoll)
       {
          String returnStatus = "OK";
@@ -3928,6 +3886,7 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                }
                break;
+            case GameAction.ShowAllRivers:
             case GameAction.ShowDienstalBranch:
             case GameAction.ShowLargosRiver:
             case GameAction.ShowNesserRiver:
@@ -4990,7 +4949,6 @@ namespace BarbarianPrince
             case GameAction.E095MountAtRisk:
                break;
             case GameAction.E095MountAtRiskEnd:
-               //SetEncounterOptions(gi, false, false, false, false, true); // no lost event and no event -- (gi, isNoLost, isForceLost, isForceLostEvent, isNoEvent, isForceEvent)
                break;
             case GameAction.E096MountsDie:
                gi.IsMountsSick = true;
@@ -5601,6 +5559,23 @@ namespace BarbarianPrince
                break;
             case GameAction.E134ShakyWalls:
                gi.DieRollAction = GameAction.DieRollActionNone;
+               break;
+            case GameAction.E134ShakyWallsEnd:
+               if (null == gi.RuinsUnstable.Find(princeTerritory.Name)) // if this is unstable ruins, it stays unstable ruins
+                  gi.RuinsUnstable.Add(princeTerritory);
+               if (false == EncounterEnd(gi, ref action))
+               {
+                  returnStatus = "EncounterEnd() returned false for a=" + action.ToString();
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+               }
+               break;
+            case GameAction.E134ShakyWallsSearch:
+               if (null == gi.RuinsUnstable.Find(princeTerritory.Name)) // if this is unstable ruins, it stays unstable ruins
+                  gi.RuinsUnstable.Add(princeTerritory);
+               gi.SunriseChoice = GamePhase.SearchRuins;
+               gi.GamePhase = GamePhase.Encounter;
+               gi.EventDisplayed = gi.EventActive = "e208";
+               gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case GameAction.E136FallingCoins:
                if (false == gi.AddCoins(500))
@@ -7400,7 +7375,7 @@ namespace BarbarianPrince
                }
                break;
             case "e056a": // Orc Tower
-               if (null == gi.OrcTowers.Find(princeTerritory.Name))
+               if (null == gi.OrcTowers.Find(gi.NewHex.Name))
                   gi.OrcTowers.Add(princeTerritory);
                gi.EncounteredMembers.Clear();
                IMapItem demiTroll = CreateCharacter(gi, "TrollDemi", 10);
@@ -11891,7 +11866,6 @@ namespace BarbarianPrince
                }
                break;
             case "e195": // possession reference
-               action = GameAction.UpdateEventViewerActive;
                switch (dieRoll)
                {
                   case 2: gi.EventDisplayed = gi.EventActive = "e191"; gi.AddSpecialItem(SpecialEnum.ResistanceRing); break; // resistence ring
@@ -11910,51 +11884,58 @@ namespace BarbarianPrince
                break;
             // ========================Search Ruins================================
             case "e208":
-               action = GameAction.UpdateEventViewerActive;
-               switch (dieRoll)
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  case 2: gi.EventDisplayed = gi.EventActive = "e133"; break;
-                  case 3:
-                     if (true == gi.IsSpecialistInParty())
-                     {
-                        gi.EventDisplayed = gi.EventActive = "e135";
-                        gi.DieRollAction = GameAction.EncounterRoll;
-                     }
-                     else
-                     {
-                        gi.EventDisplayed = gi.EventActive = "e135a";
-                     }
-                     break;
-                  case 4: gi.EventDisplayed = gi.EventActive = "e136"; gi.DieRollAction = GameAction.EncounterRoll; break;
-                  case 5: gi.EventDisplayed = gi.EventActive = "e137"; gi.DieRollAction = GameAction.EncounterRoll; break;
-                  case 6: gi.EventDisplayed = gi.EventActive = "e139"; gi.DieRollAction = GameAction.EncounterRoll; break;
-                  case 7: gi.EventDisplayed = gi.EventActive = "e131"; break;
-                  case 8:
-                     if (1 < gi.PartyMembers.Count) // if not alone
-                     {
-                        gi.EventDisplayed = gi.EventActive = "e132";
-                        gi.DieRollAction = GameAction.EncounterRoll;
-                     }
-                     else
-                     {
-                        gi.EventDisplayed = gi.EventActive = "e132a";
-                     }
-                     break;
-                  case 9: gi.EventDisplayed = gi.EventActive = "e134"; break;
-                  case 10: gi.EventDisplayed = gi.EventActive = "e138"; gi.DieRollAction = GameAction.EncounterRoll; break;
-                  case 11:
-                     if (true == gi.IsSpecialistInParty())
-                     {
-                        gi.EventDisplayed = gi.EventActive = "e135";
-                        gi.DieRollAction = GameAction.EncounterRoll;
-                     }
-                     else
-                     {
-                        gi.EventDisplayed = gi.EventActive = "e135a";
-                     }
-                     break;
-                  case 12: gi.EventDisplayed = gi.EventActive = "e035"; break;
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  switch (gi.DieResults[key][0])
+                  {
+                     case 2: gi.EventDisplayed = gi.EventActive = "e133"; break;
+                     case 3:
+                        if (true == gi.IsSpecialistInParty())
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e135";
+                           gi.DieRollAction = GameAction.EncounterRoll;
+                        }
+                        else
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e135a";
+                        }
+                        break;
+                     case 4: gi.EventDisplayed = gi.EventActive = "e136"; gi.DieRollAction = GameAction.EncounterRoll; break;
+                     case 5: gi.EventDisplayed = gi.EventActive = "e137"; gi.DieRollAction = GameAction.EncounterRoll; break;
+                     case 6: gi.EventDisplayed = gi.EventActive = "e139"; gi.DieRollAction = GameAction.EncounterRoll; break;
+                     case 7: gi.EventDisplayed = gi.EventActive = "e131"; break;
+                     case 8:
+                        if (1 < gi.PartyMembers.Count) // if not alone
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e132";
+                           gi.DieRollAction = GameAction.EncounterRoll;
+                        }
+                        else
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e132a";
+                        }
+                        break;
+                     case 9: gi.EventDisplayed = gi.EventActive = "e134"; break;
+                     case 10: gi.EventDisplayed = gi.EventActive = "e138"; gi.DieRollAction = GameAction.EncounterRoll; break;
+                     case 11:
+                        if (true == gi.IsSpecialistInParty())
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e135";
+                           gi.DieRollAction = GameAction.EncounterRoll;
+                        }
+                        else
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e135a";
+                        }
+                        break;
+                     case 12: gi.EventDisplayed = gi.EventActive = "e035"; break;
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
+               }
+               else
+               {
+                  gi.DieResults[key][0] = dieRoll;
                }
                break;
             // ========================Seek News================================
@@ -13563,11 +13544,7 @@ namespace BarbarianPrince
             case GamePhase.SeekAudience:
             case GamePhase.SeekOffering:
             case GamePhase.SearchRuins:
-               isEndOfDay = true;
-               break;
             case GamePhase.Encounter:
-               if (("e134" == gi.EventActive) && (null == gi.RuinsUnstable.Find(princeTerritory.Name))) // if this is unstable ruins, it stays unstable ruins
-                  gi.RuinsUnstable.Add(princeTerritory);
                isEndOfDay = true;
                break;
             case GamePhase.Rest:

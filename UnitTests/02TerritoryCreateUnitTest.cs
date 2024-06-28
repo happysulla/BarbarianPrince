@@ -261,11 +261,11 @@ namespace BarbarianPrince
                myCanvas.MouseLeftButtonDown -= this.MouseLeftDownSetRaftTerritories;
                myCanvas.MouseLeftButtonDown += this.MouseLeftDownSetDownRiverTerritory;
                CreateRiversFromXml();
-               //UpdateCanvasRiver("Dienstal Branch");  // Show all the rivers
-               //UpdateCanvasRiver("Largos River");
-               //UpdateCanvasRiver("Nesser River");
-               //UpdateCanvasRiver("Greater Nesser River");
-               //UpdateCanvasRiver("Lesser Nesser River");
+               UpdateCanvasRiver("Dienstal Branch");  // Show all the rivers
+               UpdateCanvasRiver("Largos River");
+               UpdateCanvasRiver("Nesser River");
+               UpdateCanvasRiver("Greater Nesser River");
+               UpdateCanvasRiver("Lesser Nesser River");
                UpdateCanvasRiver("Trogoth River");
             }
             myAnchorTerritory = null;

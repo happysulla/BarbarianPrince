@@ -2784,6 +2784,13 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
                break;
+            case "e208": // search ruins
+               if (Utilities.NO_RESULT < myGameInstance.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
+               break;
             case "e209": // Seek News
                if (5 <= gi.GetCoins())
                {
@@ -4074,9 +4081,9 @@ namespace BarbarianPrince
          if ("e134" == myGameInstance.EventActive)
          {
             if (true == isSearchRuins)
-               outAction = GameAction.SearchRuins;
+               outAction = GameAction.E134ShakyWallsSearch;
             else
-               outAction = GameAction.EncounterEnd;
+               outAction = GameAction.E134ShakyWallsEnd;
          }
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          return true;
@@ -5028,6 +5035,13 @@ namespace BarbarianPrince
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               }
                               return;
+                           case "RuinsSearch":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e208"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
                            case "RiverCrossed":
                               action = GameAction.TravelLostCheck;
                               myGameInstance.GamePhase = GamePhase.Travel;
@@ -5065,8 +5079,12 @@ namespace BarbarianPrince
                               action = GameAction.SetupShowStartingWealth;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
-                           case "ShakyWalls":
+                           case "ShakeyWalls":
                               action = GameAction.E134ShakyWalls;
+                              myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              return;
+                           case "ShakeyWallsEnd":
+                              action = GameAction.E134ShakyWallsEnd;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
                            case "SlaveMarketStart":

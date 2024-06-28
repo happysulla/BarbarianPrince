@@ -241,7 +241,7 @@ namespace BarbarianPrince
       }
       public void MenuItemViewRivers_Click(object sender, RoutedEventArgs e)
       {
-         GameAction action = GameAction.UpdateEventViewerActive;
+         GameAction action = GameAction.ShowAllRivers;
          myGameEngine.PerformAction(ref myGameInstance, ref action);
       }
       public void MenuItemViewInventory_Click(object sender, RoutedEventArgs e)

@@ -74,7 +74,9 @@ namespace BarbarianPrince
       private bool myIsTravelingAir = false;
       private bool myIsRiverCrossing = false;
       private bool myIsRaftEncounter = false;
+      private static int theConsecutiveLostCount = 0;
       //---------------------------------------------
+      private bool myOptionAutoLostDecrease = false; // reduce chances of lost on consecutive rolls
       private bool myOptionNoLostRoll = false;
       private bool myOptionNoLostEvent = false;
       private bool myOptionForceLostEvent = false;
@@ -149,123 +151,6 @@ namespace BarbarianPrince
          myDashArray.Add(4);  // used for dotted lines
          myDashArray.Add(2);  // used for dotted lines
          myGridTravelTable.MouseDown += Grid_MouseDown;
-         //--------------------------------------------------
-         Option optionNoLostRoll= myGameInstance.Options.Find("NoLostRoll");
-         if (null == optionNoLostRoll)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceNoLostEvent) returned null");
-            CtorError = true;
-            return;
-         }
-         myOptionNoLostRoll = optionNoLostRoll.IsEnabled;
-         //--------------------------------------------------
-         Option optionNoLostEvent = myGameInstance.Options.Find("ForceNoLostEvent");
-         if (null == optionNoLostEvent)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceNoLostEvent) returned null");
-            CtorError = true;
-            return;
-         }
-         myOptionNoLostEvent = optionNoLostEvent.IsEnabled;
-         //--------------------------------------------------
-         Option optionForceLostEvent = myGameInstance.Options.Find("ForceLostEvent");
-         if (null == optionForceLostEvent)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceLostResult) returned null");
-            CtorError = true;
-            return;
-         }
-         myOptionForceLostEvent = optionForceLostEvent.IsEnabled;
-         //--------------------------------------------------
-         Option optionForceNoCrossEvent = myGameInstance.Options.Find("ForceNoCrossEvent");
-         if (null == optionForceNoCrossEvent)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceNoCrossEvent) returned null");
-            CtorError = true;
-            return;
-         }
-         myOptionForceNoCrossEvent = optionForceNoCrossEvent.IsEnabled;
-         //--------------------------------------------------
-         Option optionForceLostAfterCrossEvent = myGameInstance.Options.Find("ForceLostAfterCrossEvent");
-         if (null == optionForceLostAfterCrossEvent)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceLostAfterCrossEvent) returned null");
-            CtorError = true;
-            return;
-         }
-         myOptionForceLostAfterCrossEvent = optionForceLostAfterCrossEvent.IsEnabled;
-         //--------------------------------------------------
-         Option optionForceCrossEvent = myGameInstance.Options.Find("ForceCrossEvent");
-         if (null == optionForceCrossEvent)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceCrossEvent) returned null");
-            CtorError = true;
-            return;
-         }
-         myOptionForceCrossEvent = optionForceCrossEvent.IsEnabled;
-         //--------------------------------------------------
-         Option optionForceNoEvent = myGameInstance.Options.Find("ForceNoEvent");
-         if (null == optionForceNoEvent)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceNoEvent) returned null");
-            CtorError = true;
-            return;
-         }
-         myOptionForceNoEvent = optionForceNoEvent.IsEnabled;
-         //--------------------------------------------------
-         Option optionForceEvent = myGameInstance.Options.Find("ForceEvent");
-         if (null == optionForceEvent)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceEvent) returned null");
-            CtorError = true;
-            return;
-         }
-         myOptionForceEvent = optionForceEvent.IsEnabled;
-         //--------------------------------------------------
-         Option optionForceNoRoadEvent = myGameInstance.Options.Find("ForceNoRoadEvent");
-         if (null == optionForceNoRoadEvent)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceNoRoadEvent) returned null");
-            CtorError = true;
-            return;
-         }
-         myOptionForceNoRoadEvent = optionForceNoRoadEvent.IsEnabled;
-         //--------------------------------------------------
-         Option optionForceNoAirEvent = myGameInstance.Options.Find("ForceNoAirEvent");
-         if (null == optionForceNoAirEvent)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceNoAirEvent) returned null");
-            CtorError = true;
-            return;
-         }
-         myOptionForceNoAirEvent = optionForceNoAirEvent.IsEnabled;
-         //--------------------------------------------------
-         Option optionForceAirEvent = myGameInstance.Options.Find("ForceAirEvent");
-         if (null == optionForceAirEvent)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceAirEvent) returned null");
-            CtorError = true;
-            return;
-         }
-         myOptionForceAirEvent = optionForceAirEvent.IsEnabled;
-         //--------------------------------------------------
-         Option optionForceNoRaftEvent = myGameInstance.Options.Find("ForceNoRaftEvent");
-         if (null == optionForceNoRaftEvent)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceNoRaftEvent) returned null");
-            CtorError = true;
-            return;
-         }
-         myOptionForceNoRaftEvent = optionForceNoRaftEvent.IsEnabled;
-         //--------------------------------------------------
-         Option optionForceRaftEvent = myGameInstance.Options.Find("ForceRaftEvent");
-         if (null == optionForceRaftEvent)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): myGameInstance.Options.Find(ForceRaftEvent) returned null");
-            CtorError = true;
-            return;
-         }
-         myOptionForceRaftEvent = optionForceRaftEvent.IsEnabled;
          //--------------------------------------------------
          myReferences = new Dictionary<string, string[]>();
          myReferences["Farmland"] = new String[6] { "e009", "r231", "r232", "r233", "r234", "r235" };
@@ -371,6 +256,12 @@ namespace BarbarianPrince
          if (null == myMapItemMove.NewTerritory)
          {
             Logger.Log(LogEnum.LE_ERROR, "PerformTravel(): invalid state mim.nt=null");
+            return false;
+         }
+         //--------------------------------------------------
+         if (false == SetTravelOptions()) 
+         {
+            Logger.Log(LogEnum.LE_ERROR, "PerformTravel(): SetTravelOptions() returned false");
             return false;
          }
          //--------------------------------------------------
@@ -485,6 +376,127 @@ namespace BarbarianPrince
             return false;
          }
          myScrollViewer.Content = myGridTravelTable;
+         return true;
+      }
+      private bool SetTravelOptions()
+      {
+         if (null == myGameInstance)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions():  myGameInstance=null");
+            return false;
+         }
+         //--------------------------------------------------
+         Option optionAutoLostDescrease= myGameInstance.Options.Find("AutoLostDecrease");
+         if (null == optionAutoLostDescrease)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(AutoLostDecrease) returned null");
+            return false;
+         }
+         myOptionAutoLostDecrease = optionAutoLostDescrease.IsEnabled;
+         //--------------------------------------------------
+         Option optionNoLostRoll = myGameInstance.Options.Find("NoLostRoll");
+         if (null == optionNoLostRoll)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceNoLostEvent) returned null");
+            return false;
+         }
+         myOptionNoLostRoll = optionNoLostRoll.IsEnabled;
+         //--------------------------------------------------
+         Option optionNoLostEvent = myGameInstance.Options.Find("ForceNoLostEvent");
+         if (null == optionNoLostEvent)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceNoLostEvent) returned null");
+            return false;
+         }
+         myOptionNoLostEvent = optionNoLostEvent.IsEnabled;
+         //--------------------------------------------------
+         Option optionForceLostEvent = myGameInstance.Options.Find("ForceLostEvent");
+         if (null == optionForceLostEvent)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceLostResult) returned null");
+            return false;
+         }
+         myOptionForceLostEvent = optionForceLostEvent.IsEnabled;
+         //--------------------------------------------------
+         Option optionForceNoCrossEvent = myGameInstance.Options.Find("ForceNoCrossEvent");
+         if (null == optionForceNoCrossEvent)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceNoCrossEvent) returned null");
+            return false;
+         }
+         myOptionForceNoCrossEvent = optionForceNoCrossEvent.IsEnabled;
+         //--------------------------------------------------
+         Option optionForceLostAfterCrossEvent = myGameInstance.Options.Find("ForceLostAfterCrossEvent");
+         if (null == optionForceLostAfterCrossEvent)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceLostAfterCrossEvent) returned null");
+            return false;
+         }
+         myOptionForceLostAfterCrossEvent = optionForceLostAfterCrossEvent.IsEnabled;
+         //--------------------------------------------------
+         Option optionForceCrossEvent = myGameInstance.Options.Find("ForceCrossEvent");
+         if (null == optionForceCrossEvent)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceCrossEvent) returned null");
+            return false;
+         }
+         myOptionForceCrossEvent = optionForceCrossEvent.IsEnabled;
+         //--------------------------------------------------
+         Option optionForceNoEvent = myGameInstance.Options.Find("ForceNoEvent");
+         if (null == optionForceNoEvent)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceNoEvent) returned null");
+            return false;
+         }
+         myOptionForceNoEvent = optionForceNoEvent.IsEnabled;
+         //--------------------------------------------------
+         Option optionForceEvent = myGameInstance.Options.Find("ForceEvent");
+         if (null == optionForceEvent)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceEvent) returned null");
+            return false;
+         }
+         myOptionForceEvent = optionForceEvent.IsEnabled;
+         //--------------------------------------------------
+         Option optionForceNoRoadEvent = myGameInstance.Options.Find("ForceNoRoadEvent");
+         if (null == optionForceNoRoadEvent)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceNoRoadEvent) returned null");
+            return false;
+         }
+         myOptionForceNoRoadEvent = optionForceNoRoadEvent.IsEnabled;
+         //--------------------------------------------------
+         Option optionForceNoAirEvent = myGameInstance.Options.Find("ForceNoAirEvent");
+         if (null == optionForceNoAirEvent)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceNoAirEvent) returned null");
+            return false;
+         }
+         myOptionForceNoAirEvent = optionForceNoAirEvent.IsEnabled;
+         //--------------------------------------------------
+         Option optionForceAirEvent = myGameInstance.Options.Find("ForceAirEvent");
+         if (null == optionForceAirEvent)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceAirEvent) returned null");
+            return false;
+         }
+         myOptionForceAirEvent = optionForceAirEvent.IsEnabled;
+         //--------------------------------------------------
+         Option optionForceNoRaftEvent = myGameInstance.Options.Find("ForceNoRaftEvent");
+         if (null == optionForceNoRaftEvent)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceNoRaftEvent) returned null");
+            return false;
+         }
+         myOptionForceNoRaftEvent = optionForceNoRaftEvent.IsEnabled;
+         //--------------------------------------------------
+         Option optionForceRaftEvent = myGameInstance.Options.Find("ForceRaftEvent");
+         if (null == optionForceRaftEvent)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceRaftEvent) returned null");
+            return false;
+         }
+         myOptionForceRaftEvent = optionForceRaftEvent.IsEnabled;
          return true;
       }
       //-----------------------------------------------------------------------------------------
@@ -1234,7 +1246,7 @@ namespace BarbarianPrince
          int dieRollNeeded = 0;
          if (true == myIsTravelingAir) // Check for airborne
          {
-            dieRollNeeded = 11;
+            dieRollNeeded = 11 + theConsecutiveLostCount;
             if (0 < myLocalGuides.Count)
                ++dieRollNeeded;
             String rtn = " " + dieRollNeeded.ToString() + " < ";
@@ -1242,7 +1254,7 @@ namespace BarbarianPrince
          }
          if (RiverCrossEnum.TC_ATTEMPTING_TO_CROSS == myMapItemMove.RiverCross)
          {
-            dieRollNeeded = 7;
+            dieRollNeeded = 7 + theConsecutiveLostCount;
             if (0 < myLocalGuides.Count)
                ++dieRollNeeded;
             String rtn = " " + dieRollNeeded.ToString() + " < ";
@@ -1254,23 +1266,23 @@ namespace BarbarianPrince
          switch (tLost.Type)
          {
             case "Farmland":
-               dieRollNeeded = 9;
+               dieRollNeeded = 9 + theConsecutiveLostCount;
                break;
             case "Countryside":
-               dieRollNeeded = 8;
+               dieRollNeeded = 8 + theConsecutiveLostCount;
                break;
             case "Forest":
             case "Hills":
-               dieRollNeeded = 7;
+               dieRollNeeded = 7 + theConsecutiveLostCount;
                break;
             case "Mountains":
-               dieRollNeeded = 6;
+               dieRollNeeded = 6 + theConsecutiveLostCount;
                break;
             case "Swamp":
-               dieRollNeeded = 4;
+               dieRollNeeded = 4 + theConsecutiveLostCount;
                break;
             case "Desert":
-               dieRollNeeded = 5;
+               dieRollNeeded = 5 + theConsecutiveLostCount;
                break;
             default:
                Logger.Log(LogEnum.LE_ERROR, "GetLabelForLostCheck(): reached default t=" + mim.NewTerritory.Type);
@@ -1288,10 +1300,12 @@ namespace BarbarianPrince
          EnumR204 state = EnumR204.TC_EVENT_ROLL;
          if (true == myIsTravelingAir) // Check for airborne
          {
-            if (11 < dieRoll)
+            if (11 + theConsecutiveLostCount < dieRoll)
             {
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "GetLostResult(): myLost=true for t=air s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                myIsLost = true;
+               if (true == myOptionAutoLostDecrease)
+                  ++theConsecutiveLostCount;
                if (0 < myLocalGuides.Count)
                {
                   myTextBlockCol0.Text = "Guide";
@@ -1309,14 +1323,20 @@ namespace BarbarianPrince
                   state = EnumR204.TC_END;  // GetLostResult() - myIsTravelingAir
                }
             }
+            else
+            {
+               theConsecutiveLostCount = 0;
+            }
             return state;
          }
          if (RiverCrossEnum.TC_ATTEMPTING_TO_CROSS == myMapItemMove.RiverCross)
          {
-            if (7 < dieRoll)
+            if (7 + theConsecutiveLostCount < dieRoll)
             {
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "GetLostResult(): myLost=true for t=river cross s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                myIsLost = true;
+               if (true == myOptionAutoLostDecrease)
+                  ++theConsecutiveLostCount;
                myMapItemMove.RiverCross = RiverCrossEnum.TC_CROSS_FAIL;
                if (0 < myLocalGuides.Count)
                {
@@ -1332,6 +1352,7 @@ namespace BarbarianPrince
                }
                return EnumR204.TC_LOST_SHOW_CROSS_RESULT;   // GetLostResult() - attempting to cross river fails, so show river crossing failure
             }
+            theConsecutiveLostCount = 0;
             return EnumR204.TC_EVENT_ROLL;   // GetLostResult() - found place to crossed river. Now determine if there event on river
          }
          ITerritory tLost = mim.OldTerritory;
@@ -1340,80 +1361,121 @@ namespace BarbarianPrince
          switch (tLost.Type)
          {
             case "Farmland":
-               if (9 < dieRoll)
+               if (9 + theConsecutiveLostCount < dieRoll)
                {
                   Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "GetLostResult(): myLost=true for t=farmland s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                   myIsLost = true;
+                  if (true == myOptionAutoLostDecrease)
+                     ++theConsecutiveLostCount;
                   if (0 < myLocalGuides.Count)
                      state = EnumR204.TC_DESERTION_ROLL;
                   else
                      state = EnumR204.TC_EVENT_ROLL;  // GetLostResult()
+               }
+               else
+               {
+                  theConsecutiveLostCount = 0;
                }
                break;
             case "Countryside":
-               if (8 < dieRoll)
+               if (8 + theConsecutiveLostCount < dieRoll)
                {
                   Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "GetLostResult(): myLost=true for t=countryside s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                   myIsLost = true;
+                  if (true == myOptionAutoLostDecrease)
+                     ++theConsecutiveLostCount;
                   if (0 < myLocalGuides.Count)
                      state = EnumR204.TC_DESERTION_ROLL;
                   else
                      state = EnumR204.TC_EVENT_ROLL;  // GetLostResult()
+               }
+               else
+               {
+                  theConsecutiveLostCount = 0;
                }
                break;
             case "Forest":
-               if (7 < dieRoll)
+               if (7 + theConsecutiveLostCount < dieRoll)
                {
                   Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "GetLostResult(): myLost=true for t=forest s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                   myIsLost = true;
+                  ++theConsecutiveLostCount;
                   if (0 < myLocalGuides.Count)
                      state = EnumR204.TC_DESERTION_ROLL;
                   else
                      state = EnumR204.TC_EVENT_ROLL;  // GetLostResult()
+               }
+               else
+               {
+                  theConsecutiveLostCount = 0;
                }
                break;
             case "Hills":
-               if (7 < dieRoll)
+               if (7 + theConsecutiveLostCount < dieRoll)
                {
                   Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "GetLostResult(): myLost=true for t=hills s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                   myIsLost = true;
+                  if (true == myOptionAutoLostDecrease)
+                     ++theConsecutiveLostCount;
                   if (0 < myLocalGuides.Count)
                      state = EnumR204.TC_DESERTION_ROLL;
                   else
                      state = EnumR204.TC_EVENT_ROLL;  // GetLostResult()
+               }
+               else
+               {
+                  theConsecutiveLostCount = 0;
                }
                break;
             case "Mountains":
-               if (6 < dieRoll)
+               if (6 + theConsecutiveLostCount < dieRoll)
                {
                   Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "GetLostResult(): myLost=true for t=mountains s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                   myIsLost = true;
+                  if (true == myOptionAutoLostDecrease)
+                     ++theConsecutiveLostCount;
                   if (0 < myLocalGuides.Count)
                      state = EnumR204.TC_DESERTION_ROLL;
                   else
                      state = EnumR204.TC_EVENT_ROLL;  // GetLostResult()
+               }
+               else
+               {
+                  theConsecutiveLostCount = 0;
                }
                break;
             case "Swamp":
-               if (4 < dieRoll)
+               if (4 + theConsecutiveLostCount < dieRoll)
                {
                   Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "GetLostResult(): myLost=true for t=swamp s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                   myIsLost = true;
+                  if (true == myOptionAutoLostDecrease)
+                     ++theConsecutiveLostCount;
                   if (0 < myLocalGuides.Count)
                      state = EnumR204.TC_DESERTION_ROLL;
                   else
                      state = EnumR204.TC_EVENT_ROLL;  // GetLostResult()
                }
+               else
+               {
+                  theConsecutiveLostCount = 0;
+               }
                break;
             case "Desert":
-               if (5 < dieRoll)
+               if (5 + theConsecutiveLostCount < dieRoll)
                {
                   Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "GetLostResult(): myLost=true for t=desert s=" + myState.ToString() + " dr=" + dieRoll.ToString());
                   myIsLost = true;
+                  if( true == myOptionAutoLostDecrease )
+                     ++theConsecutiveLostCount;
                   if (0 < myLocalGuides.Count)
                      state = EnumR204.TC_DESERTION_ROLL;
                   else
                      state = EnumR204.TC_EVENT_ROLL;  // GetLostResult()
+               }
+               else
+               {
+                  theConsecutiveLostCount = 0;
                }
                break;
             default:

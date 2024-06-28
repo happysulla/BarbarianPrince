@@ -7,16 +7,16 @@
     <IsEnabled value="True" />
   </Option>
   <Option value="AutoLostDecrease">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="PrinceHorse">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="PrincePegasus">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="PrinceCoin">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="PrinceFood">
     <IsEnabled value="False" />
@@ -34,7 +34,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomParty01">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="PartyCustom">
     <IsEnabled value="False" />
@@ -82,13 +82,13 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="PartyMounted">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="PartyAirborne">
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomHex">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="RandomTown">
     <IsEnabled value="False" />
@@ -106,7 +106,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="0206">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="0711">
     <IsEnabled value="False" />

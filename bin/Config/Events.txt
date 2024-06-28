@@ -3170,9 +3170,9 @@ Click anywhere to continue."
 e134	"<Bold>e134 Unstable Ruins</Bold>
 <LineBreak/><LineBreak/>In the ruins are many unstable walls and rocks making your search very dangerous. 
 <LineBreak/><LineBreak/>
-<InlineUIContainer><Image Source='../../Images/Campfire2.gif' Height='75'  Width='75'> </Image></InlineUIContainer>Click the campfire to abandon search.
+<InlineUIContainer><Image Name='ShakeyWallsEnd' Source='../../Images/Campfire2.gif' Height='75'  Width='75'> </Image></InlineUIContainer>Click the campfire to abandon search.
 <LineBreak/><LineBreak/>
-<InlineUIContainer><Image Name='ShakyWalls' Source='../../Images/ShakyWalls.gif' Height='75'  Width='75'> </Image></InlineUIContainer> Click the shaking walls to continue. "
+<InlineUIContainer><Image Name='ShakeyWalls' Source='../../Images/ShakyWalls.gif' Height='75'  Width='75'> </Image></InlineUIContainer> Click the shaking walls to continue. "
 e135	"<Bold>e135 Broken Columns</Bold>
 <LineBreak/><LineBreak/>Along a pallisade of broken columns, you find an altar with an ancient inscription. Since your party includes a magician, wizard, witch, priest, or monk; the incription can be desciphered. Roll one die:
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -3991,7 +3991,9 @@ e208	"<Bold>e208 Searching a Ruin</Bold> <InlineUIContainer><Button Content='r20
  <InlineUIContainer><Button Content='e134' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 9 <LineBreak/>
  <InlineUIContainer><Button Content='e138' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 10 <LineBreak/>
  <InlineUIContainer><Button Content='e135' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 11 <LineBreak/>
- <InlineUIContainer><Button Content='e035' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 12"
+ <InlineUIContainer><Button Content='e035' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 12
+<LineBreak/><LineBreak/>
+                                                <InlineUIContainer><Image Name='RuinsSearch' Source='../../Images/Ruins.gif'  Height='100' Width='100'> </Image></InlineUIContainer>"
 e209	"<Bold>e209 Seeking News and Information</Bold> <InlineUIContainer><Button Content='r209' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>In a daily action, you spend the day in taverns, streets, and the market talking and learning. 
 <LineBreak/><LineBreak/>If you spend five gold pieces, you can add one to your die result. If your wit and wiles is 5 or higher, add one additional value to the die results. See

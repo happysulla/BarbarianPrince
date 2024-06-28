@@ -170,6 +170,7 @@ namespace BarbarianPrince
       SearchTreasure,
       ArchTravel,
 
+      ShowAllRivers,
       ShowDienstalBranch,
       ShowLargosRiver,
       ShowNesserRiver,
@@ -329,6 +330,8 @@ namespace BarbarianPrince
       E133PlaguePrince,
       E133PlagueParty,
       E134ShakyWalls,
+      E134ShakyWallsEnd,
+      E134ShakyWallsSearch,
       E136FallingCoins,
       E143ChagaDrugPay,
       E143ChagaDrugDeny,

@@ -240,6 +240,14 @@ namespace BarbarianPrince
          {
             case GameAction.E228ShowTrueLove:
                break;
+            case GameAction.ShowAllRivers:
+               UpdateCanvasRiver("Dienstal Branch", false);
+               UpdateCanvasRiver("Largos River", false);
+               UpdateCanvasRiver("Nesser River", false);
+               UpdateCanvasRiver("Greater Nesser River", false);
+               UpdateCanvasRiver("Lesser Nesser River", false);
+               UpdateCanvasRiver("Trogoth River", false);
+               break;
             case GameAction.ShowDienstalBranch:
                UpdateCanvasRiver("Dienstal Branch");
                if (false == UpdateCanvasHexTravelToShowPolygons(gi))
@@ -396,7 +404,7 @@ namespace BarbarianPrince
          string name = null;
          try
          {
-            reader = new XmlTextReader("../../Config/Rivers.xml") { WhitespaceHandling = WhitespaceHandling.None }; // Load the reader with the data file and ignore all white space nodes.    
+            reader = new XmlTextReader("../Config/Rivers.xml") { WhitespaceHandling = WhitespaceHandling.None }; // Load the reader with the data file and ignore all white space nodes.    
             while (reader.Read())
             {
                if (reader.Name == "River")
@@ -428,7 +436,7 @@ namespace BarbarianPrince
          } // try
          catch (Exception e)
          {
-            Console.WriteLine("ReadTerritoriesXml(): Exception:  e.Message={0} while reading reader.Name={1}", e.Message, reader.Name);
+            Console.WriteLine("CreateRiversFromXml(): Cannot Read from Rivers.xml file:\ne.Message={0} while reading reader.Name={1}", e.Message, reader.Name);
          }
          finally
          {
@@ -845,6 +853,14 @@ namespace BarbarianPrince
          foreach (ITerritory t in gi.GoblinKeeps)
          {
             Image img1 = new Image { Tag = "Keep", Source = MapItem.theMapImages.GetBitmapImage("TowerGoblin"), Width = 0.75 * Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
+            Canvas.SetLeft(img1, t.CenterPoint.X - 0.375 * Utilities.theMapItemOffset);
+            Canvas.SetTop(img1, t.CenterPoint.Y);
+            myCanvas.Children.Add(img1);
+         }
+         //-------------------------------------------------------
+         foreach (ITerritory t in gi.OrcTowers)
+         {
+            Image img1 = new Image { Tag = "KeepOrc", Source = MapItem.theMapImages.GetBitmapImage("TowerOrc"), Width = 0.6 * Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
             Canvas.SetLeft(img1, t.CenterPoint.X - 0.375 * Utilities.theMapItemOffset);
             Canvas.SetTop(img1, t.CenterPoint.Y);
             myCanvas.Children.Add(img1);
