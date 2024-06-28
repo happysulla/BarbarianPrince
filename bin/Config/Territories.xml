@@ -747,7 +747,6 @@
   </Territory>
   <Territory value="0213">
     <type value="Swamp" />
-
     <point X="126.2" Y="551.416" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -829,9 +828,8 @@
   </Territory>
   <Territory value="0216">
     <type value="Farmland" />
-
     <point X="126.727272727273" Y="680.287272727273" />
-    <isTown value="False" />
+    <isTown value="True" />
     <isCastle value="False" />
     <isRuin value="False" />
     <isTemple value="False" />
@@ -875,7 +873,6 @@
   </Territory>
   <Territory value="0218">
     <type value="Forest" />
-
     <point X="126.2" Y="764.616" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -898,7 +895,6 @@
   </Territory>
   <Territory value="0219">
     <type value="Countryside" />
-
     <point X="127.4" Y="807.416" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1294,7 +1290,6 @@
   </Territory>
   <Territory value="0314">
     <type value="Forest" />
-
     <point X="163.25" Y="573.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1317,7 +1312,6 @@
   </Territory>
   <Territory value="0315">
     <type value="Forest" />
-
     <point X="163.75" Y="616.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1340,7 +1334,6 @@
   </Territory>
   <Territory value="0316">
     <type value="Countryside" />
-
     <point X="163.25" Y="658.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1363,7 +1356,6 @@
   </Territory>
   <Territory value="0317">
     <type value="Farmland" />
-
     <point X="162.75" Y="701.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1388,7 +1380,6 @@
   </Territory>
   <Territory value="0318">
     <type value="Countryside" />
-
     <point X="163.25" Y="744" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1413,7 +1404,6 @@
   </Territory>
   <Territory value="0319">
     <type value="Farmland" />
-
     <point X="163.25" Y="787" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1438,7 +1428,6 @@
   </Territory>
   <Territory value="0320">
     <type value="Countryside" />
-
     <point X="162.75" Y="829.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1461,7 +1450,6 @@
   </Territory>
   <Territory value="0321">
     <type value="Countryside" />
-
     <point X="163.25" Y="873" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1484,7 +1472,6 @@
   </Territory>
   <Territory value="0322">
     <type value="Farmland" />
-
     <point X="162.75" Y="915" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1509,7 +1496,6 @@
   </Territory>
   <Territory value="0401">
     <type value="Forest" />
-
     <point X="199.75" Y="43.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1538,7 +1524,6 @@
   </Territory>
   <Territory value="0402">
     <type value="Forest" />
-
     <point X="199.75" Y="84.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1572,7 +1557,6 @@
   </Territory>
   <Territory value="0403">
     <type value="Mountains" />
-
     <point X="199.25" Y="128.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1595,7 +1579,6 @@
   </Territory>
   <Territory value="0404">
     <type value="Mountains" />
-
     <point X="198.25" Y="170.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1618,7 +1601,6 @@
   </Territory>
   <Territory value="0405">
     <type value="Mountains" />
-
     <point X="198.75" Y="212" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1641,7 +1623,6 @@
   </Territory>
   <Territory value="0406">
     <type value="Hills" />
-
     <point X="199.25" Y="254.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1664,7 +1645,6 @@
   </Territory>
   <Territory value="0407">
     <type value="Desert" />
-
     <point X="198.75" Y="297" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1687,7 +1667,6 @@
   </Territory>
   <Territory value="0408">
     <type value="Forest" />
-
     <point X="199.75" Y="339.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1710,7 +1689,6 @@
   </Territory>
   <Territory value="0409">
     <type value="Forest" />
-
     <point X="199.25" Y="382.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1733,7 +1711,6 @@
   </Territory>
   <Territory value="0410">
     <type value="Countryside" />
-
     <point X="198.25" Y="426" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1765,7 +1742,6 @@
   </Territory>
   <Territory value="0411">
     <type value="Swamp" />
-
     <point X="199.25" Y="467.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1799,7 +1775,6 @@
   </Territory>
   <Territory value="0412">
     <type value="Countryside" />
-
     <point X="199.75" Y="508.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1829,7 +1804,6 @@
   </Territory>
   <Territory value="0413">
     <type value="Countryside" />
-
     <point X="199.75" Y="552" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1852,7 +1826,6 @@
   </Territory>
   <Territory value="0414">
     <type value="Forest" />
-
     <point X="199.25" Y="594" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1875,7 +1848,6 @@
   </Territory>
   <Territory value="0415">
     <type value="Countryside" />
-
     <point X="199.75" Y="638" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1898,7 +1870,6 @@
   </Territory>
   <Territory value="0416">
     <type value="Countryside" />
-
     <point X="200.25" Y="680" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1921,7 +1892,6 @@
   </Territory>
   <Territory value="0417">
     <type value="Countryside" />
-
     <point X="199.25" Y="723" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1944,7 +1914,6 @@
   </Territory>
   <Territory value="0418">
     <type value="Farmland" />
-
     <point X="198.75" Y="764.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -1967,7 +1936,6 @@
   </Territory>
   <Territory value="0419">
     <type value="Farmland" />
-
     <point X="199.75" Y="808.5" />
     <isTown value="True" />
     <isCastle value="False" />
@@ -1993,7 +1961,6 @@
   </Territory>
   <Territory value="0420">
     <type value="Farmland" />
-
     <point X="198.75" Y="851" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2018,7 +1985,6 @@
   </Territory>
   <Territory value="0421">
     <type value="Forest" />
-
     <point X="199.75" Y="893" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2043,7 +2009,6 @@
   </Territory>
   <Territory value="0422">
     <type value="Farmland" />
-
     <point X="199.25" Y="936" />
     <isTown value="True" />
     <isCastle value="False" />
@@ -2066,7 +2031,6 @@
   </Territory>
   <Territory value="0323">
     <type value="Farmland" />
-
     <point X="162.75" Y="958.5" />
     <isTown value="False" />
     <isCastle value="True" />
@@ -2088,7 +2052,6 @@
   </Territory>
   <Territory value="0123">
     <type value="Forest" />
-
     <point X="90.6" Y="957.416" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2106,7 +2069,6 @@
   </Territory>
   <Territory value="0501">
     <type value="Forest" />
-
     <point X="236.75" Y="22.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2126,7 +2088,6 @@
   </Territory>
   <Territory value="0502">
     <type value="Countryside" />
-
     <point X="236.25" Y="63.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2160,7 +2121,6 @@
   </Territory>
   <Territory value="0503">
     <type value="Mountains" />
-
     <point X="236.25" Y="106.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2190,7 +2150,6 @@
   </Territory>
   <Territory value="0505">
     <type value="Forest" />
-
     <point X="236.75" Y="191.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2213,7 +2172,6 @@
   </Territory>
   <Territory value="0506">
     <type value="Hills" />
-
     <point X="235.25" Y="233.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2236,7 +2194,6 @@
   </Territory>
   <Territory value="0507">
     <type value="Countryside" />
-
     <point X="236.25" Y="276.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2259,7 +2216,6 @@
   </Territory>
   <Territory value="0504">
     <type value="Mountains" />
-
     <point X="235.25" Y="149.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2282,7 +2238,6 @@
   </Territory>
   <Territory value="0508">
     <type value="Forest" />
-
     <point X="236.25" Y="318.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2305,7 +2260,6 @@
   </Territory>
   <Territory value="0509">
     <type value="Forest" />
-
     <point X="235.25" Y="361.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2328,7 +2282,6 @@
   </Territory>
   <Territory value="0510">
     <type value="Countryside" />
-
     <point X="235.75" Y="403.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2360,7 +2313,6 @@
   </Territory>
   <Territory value="0511">
     <type value="Swamp" />
-
     <point X="236.25" Y="447.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2392,7 +2344,6 @@
   </Territory>
   <Territory value="0512">
     <type value="Countryside" />
-
     <point X="235.75" Y="488.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2415,7 +2366,6 @@
   </Territory>
   <Territory value="0513">
     <type value="Forest" />
-
     <point X="236.75" Y="530.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2438,7 +2388,6 @@
   </Territory>
   <Territory value="0514">
     <type value="Forest" />
-
     <point X="235.75" Y="572.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2461,7 +2410,6 @@
   </Territory>
   <Territory value="0515">
     <type value="Countryside" />
-
     <point X="236.75" Y="615.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2484,7 +2432,6 @@
   </Territory>
   <Territory value="0516">
     <type value="Forest" />
-
     <point X="236.25" Y="659.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2507,7 +2454,6 @@
   </Territory>
   <Territory value="0517">
     <type value="Countryside" />
-
     <point X="236.75" Y="700.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2530,7 +2476,6 @@
   </Territory>
   <Territory value="0518">
     <type value="Forest" />
-
     <point X="236.25" Y="743.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2553,7 +2498,6 @@
   </Territory>
   <Territory value="0519">
     <type value="Farmland" />
-
     <point X="236.25" Y="785.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2576,7 +2520,6 @@
   </Territory>
   <Territory value="0520">
     <type value="Countryside" />
-
     <point X="236.75" Y="829.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2601,7 +2544,6 @@
   </Territory>
   <Territory value="0521">
     <type value="Countryside" />
-
     <point X="237.25" Y="872" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2624,7 +2566,6 @@
   </Territory>
   <Territory value="0522">
     <type value="Forest" />
-
     <point X="236.75" Y="915" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2647,7 +2588,6 @@
   </Territory>
   <Territory value="0523">
     <type value="Countryside" />
-
     <point X="236.25" Y="956.5" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2667,7 +2607,6 @@
   </Territory>
   <Territory value="0601">
     <type value="Countryside" />
-
     <point X="272.25" Y="42.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2698,7 +2637,6 @@
   </Territory>
   <Territory value="0602">
     <type value="Countryside" />
-
     <point X="272.25" Y="84.02" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2730,7 +2668,6 @@
   </Territory>
   <Territory value="0603">
     <type value="Mountains" />
-
     <point X="271.75" Y="126.52" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2753,7 +2690,6 @@
   </Territory>
   <Territory value="0604">
     <type value="Countryside" />
-
     <point X="272.181818181818" Y="169.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2776,7 +2712,6 @@
   </Territory>
   <Territory value="0605">
     <type value="Hills" />
-
     <point X="271.818181818182" Y="212.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2799,7 +2734,6 @@
   </Territory>
   <Territory value="0606">
     <type value="Forest" />
-
     <point X="271.818181818182" Y="254.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2822,7 +2756,6 @@
   </Territory>
   <Territory value="0607">
     <type value="Countryside" />
-
     <point X="272.181818181818" Y="296.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2852,7 +2785,6 @@
   </Territory>
   <Territory value="0608">
     <type value="Countryside" />
-
     <point X="271.818181818182" Y="339.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2885,7 +2817,6 @@
   </Territory>
   <Territory value="0609">
     <type value="Swamp" />
-
     <point X="272.181818181818" Y="382.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2921,7 +2852,6 @@
   </Territory>
   <Territory value="0610">
     <type value="Forest" />
-
     <point X="271.818181818182" Y="425.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2953,7 +2883,6 @@
   </Territory>
   <Territory value="0611">
     <type value="Swamp" />
-
     <point X="271.818181818182" Y="468.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2976,7 +2905,6 @@
   </Territory>
   <Territory value="0612">
     <type value="Countryside" />
-
     <point X="271.090909090909" Y="508.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -2999,7 +2927,6 @@
   </Territory>
   <Territory value="0613">
     <type value="Countryside" />
-
     <point X="272.181818181818" Y="550.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3022,7 +2949,6 @@
   </Territory>
   <Territory value="0614">
     <type value="Countryside" />
-
     <point X="272.181818181818" Y="593.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3045,7 +2971,6 @@
   </Territory>
   <Territory value="0615">
     <type value="Countryside" />
-
     <point X="271.818181818182" Y="635.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3068,7 +2993,6 @@
   </Territory>
   <Territory value="0616">
     <type value="Forest" />
-
     <point X="272.181818181818" Y="679.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3091,7 +3015,6 @@
   </Territory>
   <Territory value="0617">
     <type value="Countryside" />
-
     <point X="272.181818181818" Y="722.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3114,7 +3037,6 @@
   </Territory>
   <Territory value="0618">
     <type value="Farmland" />
-
     <point X="271.818181818182" Y="765.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3137,7 +3059,6 @@
   </Territory>
   <Territory value="0619">
     <type value="Farmland" />
-
     <point X="271.454545454545" Y="807.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3162,7 +3083,6 @@
   </Territory>
   <Territory value="0620">
     <type value="Countryside" />
-
     <point X="271.818181818182" Y="850.818181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3185,7 +3105,6 @@
   </Territory>
   <Territory value="0621">
     <type value="Countryside" />
-
     <point X="272.181818181818" Y="893.363636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3208,7 +3127,6 @@
   </Territory>
   <Territory value="0622">
     <type value="Countryside" />
-
     <point X="272.545454545455" Y="936.272727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3230,7 +3148,6 @@
   </Territory>
   <Territory value="0701">
     <type value="Countryside" />
-
     <point X="307.818181818182" Y="20.0145454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3257,7 +3174,6 @@
   </Territory>
   <Territory value="0702">
     <type value="Countryside" />
-
     <point X="308.545454545455" Y="62.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3291,7 +3207,6 @@
   </Territory>
   <Territory value="0703">
     <type value="Mountains" />
-
     <point X="307.818181818182" Y="104.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3314,7 +3229,6 @@
   </Territory>
   <Territory value="0704">
     <type value="Countryside" />
-
     <point X="307.454545454545" Y="146.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3337,7 +3251,6 @@
   </Territory>
   <Territory value="0705">
     <type value="Forest" />
-
     <point X="307.818181818182" Y="189.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3360,7 +3273,6 @@
   </Territory>
   <Territory value="0706">
     <type value="Countryside" />
-
     <point X="307.454545454545" Y="233.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3383,7 +3295,6 @@
   </Territory>
   <Territory value="0708">
     <type value="Countryside" />
-
     <point X="308.181818181818" Y="318.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3417,7 +3328,6 @@
   </Territory>
   <Territory value="0709">
     <type value="Forest" />
-
     <point X="307.454545454545" Y="360.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3453,7 +3363,6 @@
   </Territory>
   <Territory value="0710">
     <type value="Swamp" />
-
     <point X="307.818181818182" Y="404.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3490,7 +3399,6 @@
   </Territory>
   <Territory value="0711">
     <type value="Forest" />
-
     <point X="307.090909090909" Y="448.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3522,7 +3430,6 @@
   </Territory>
   <Territory value="0712">
     <type value="Forest" />
-
     <point X="307.090909090909" Y="487.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3552,7 +3459,6 @@
   </Territory>
   <Territory value="0713">
     <type value="Swamp" />
-
     <point X="307.090909090909" Y="528.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3575,7 +3481,6 @@
   </Territory>
   <Territory value="0714">
     <type value="Countryside" />
-
     <point X="307.454545454545" Y="572.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3598,7 +3503,6 @@
   </Territory>
   <Territory value="0715">
     <type value="Forest" />
-
     <point X="307.454545454545" Y="615.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3621,7 +3525,6 @@
   </Territory>
   <Territory value="0716">
     <type value="Forest" />
-
     <point X="307.818181818182" Y="658.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3644,7 +3547,6 @@
   </Territory>
   <Territory value="0717">
     <type value="Countryside" />
-
     <point X="307.818181818182" Y="700.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3667,7 +3569,6 @@
   </Territory>
   <Territory value="0718">
     <type value="Countryside" />
-
     <point X="308.181818181818" Y="743.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3690,7 +3591,6 @@
   </Territory>
   <Territory value="0719">
     <type value="Farmland" />
-
     <point X="307.818181818182" Y="786.923636363636" />
     <isTown value="True" />
     <isCastle value="False" />
@@ -3716,7 +3616,6 @@
   </Territory>
   <Territory value="0720">
     <type value="Countryside" />
-
     <point X="308.181818181818" Y="829.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3739,7 +3638,6 @@
   </Territory>
   <Territory value="0721">
     <type value="Forest" />
-
     <point X="308.181818181818" Y="872.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3762,7 +3660,6 @@
   </Territory>
   <Territory value="0722">
     <type value="Countryside" />
-
     <point X="308.181818181818" Y="914.818181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3785,7 +3682,6 @@
   </Territory>
   <Territory value="0723">
     <type value="Forest" />
-
     <point X="308.545454545455" Y="957.363636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3805,7 +3701,6 @@
   </Territory>
   <Territory value="0801">
     <type value="Hills" />
-
     <point X="344.181818181818" Y="39.6509090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3867,7 +3762,6 @@
   </Territory>
   <Territory value="0803">
     <type value="Forest" />
-
     <point X="343.454545454545" Y="125.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3890,7 +3784,6 @@
   </Territory>
   <Territory value="0222">
     <type value="Farmland" />
-
     <point X="125.8" Y="937.016" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3912,7 +3805,6 @@
   </Territory>
   <Territory value="0707">
     <type value="Countryside" />
-
     <point X="307.454545454545" Y="276.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3944,7 +3836,6 @@
   </Territory>
   <Territory value="0805">
     <type value="Mountains" />
-
     <point X="343.818181818182" Y="211.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3967,7 +3858,6 @@
   </Territory>
   <Territory value="0806">
     <type value="Hills" />
-
     <point X="343.454545454545" Y="254.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -3999,7 +3889,6 @@
   </Territory>
   <Territory value="0807">
     <type value="Forest" />
-
     <point X="343.090909090909" Y="296.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4031,7 +3920,6 @@
   </Territory>
   <Territory value="0808">
     <type value="Forest" />
-
     <point X="344.181818181818" Y="340.014545454546" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4054,7 +3942,6 @@
   </Territory>
   <Territory value="0809">
     <type value="Forest" />
-
     <point X="344.181818181818" Y="382.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4084,7 +3971,6 @@
   </Territory>
   <Territory value="0810">
     <type value="Countryside" />
-
     <point X="344.545454545455" Y="425.832727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4116,7 +4002,6 @@
   </Territory>
   <Territory value="0811">
     <type value="Forest" />
-
     <point X="344.545454545455" Y="468.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4150,7 +4035,6 @@
   </Territory>
   <Territory value="0812">
     <type value="Forest" />
-
     <point X="343.818181818182" Y="508.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4182,7 +4066,6 @@
   </Territory>
   <Territory value="0804">
     <type value="Mountains" />
-
     <point X="343.090909090909" Y="168.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4205,7 +4088,6 @@
   </Territory>
   <Territory value="0813">
     <type value="Forest" />
-
     <point X="343.454545454545" Y="549.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4228,7 +4110,6 @@
   </Territory>
   <Territory value="0814">
     <type value="Forest" />
-
     <point X="343.454545454545" Y="593.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4251,7 +4132,6 @@
   </Territory>
   <Territory value="0815">
     <type value="Forest" />
-
     <point X="343.818181818182" Y="636.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4274,7 +4154,6 @@
   </Territory>
   <Territory value="0816">
     <type value="Farmland" />
-
     <point X="344.181818181818" Y="679.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4299,7 +4178,6 @@
   </Territory>
   <Territory value="0817">
     <type value="Countryside" />
-
     <point X="344.545454545455" Y="722.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4324,7 +4202,6 @@
   </Territory>
   <Territory value="0818">
     <type value="Countryside" />
-
     <point X="344.181818181818" Y="764.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4349,7 +4226,6 @@
   </Territory>
   <Territory value="0819">
     <type value="Countryside" />
-
     <point X="344.545454545455" Y="806.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4374,7 +4250,6 @@
   </Territory>
   <Territory value="0820">
     <type value="Countryside" />
-
     <point X="344.545454545455" Y="850.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4399,7 +4274,6 @@
   </Territory>
   <Territory value="0821">
     <type value="Countryside" />
-
     <point X="344.545454545455" Y="892.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4421,8 +4295,7 @@
     <regionPoint X="332.226955730746" Y="871.832941176471" />
   </Territory>
   <Territory value="0822">
-    <type value="Countryside" />
-
+     <type value="Countryside" />
     <point X="344.909090909091" Y="935.545454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4444,7 +4317,6 @@
   </Territory>
   <Territory value="0901">
     <type value="Mountains" />
-
     <point X="379.793693982074" Y="18.9236363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4471,7 +4343,6 @@
   </Territory>
   <Territory value="0902">
     <type value="Countryside" />
-
     <point X="379.818181818182" Y="61.1054545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4505,7 +4376,6 @@
   </Territory>
   <Territory value="0903">
     <type value="Forest" />
-
     <point X="380.909090909091" Y="102.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4528,7 +4398,6 @@
   </Territory>
   <Territory value="0904">
     <type value="Hills" />
-
     <point X="380.545454545455" Y="146.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4551,7 +4420,6 @@
   </Territory>
   <Territory value="0905">
     <type value="Countryside" />
-
     <point X="380.909090909091" Y="189.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4574,7 +4442,6 @@
   </Territory>
   <Territory value="0906">
     <type value="Countryside" />
-
     <point X="380.909090909091" Y="232.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4606,7 +4473,6 @@
   </Territory>
   <Territory value="0907">
     <type value="Countryside" />
-
     <point X="380.909090909091" Y="275.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4638,7 +4504,6 @@
   </Territory>
   <Territory value="0910">
     <type value="Countryside" />
-
     <point X="380.909090909091" Y="404.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4661,7 +4526,6 @@
   </Territory>
   <Territory value="0908">
     <type value="Forest" />
-
     <point X="380.909090909091" Y="317.832727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4684,7 +4548,6 @@
   </Territory>
   <Territory value="0909">
     <type value="Countryside" />
-
     <point X="380.909090909091" Y="361.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4707,7 +4570,6 @@
   </Territory>
   <Territory value="0911">
     <type value="Forest" />
-
     <point X="380.545454545455" Y="447.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4730,7 +4592,6 @@
   </Territory>
   <Territory value="0912">
     <type value="Hills" />
-
     <point X="380.181818181818" Y="488.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4762,7 +4623,6 @@
   </Territory>
   <Territory value="0913">
     <type value="Forest" />
-
     <point X="380.545454545455" Y="528.378181818182" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4796,7 +4656,6 @@
   </Territory>
   <Territory value="0914">
     <type value="Swamp" />
-
     <point X="379.818181818182" Y="571.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4828,7 +4687,6 @@
   </Territory>
   <Territory value="0915">
     <type value="Forest" />
-
     <point X="380.545454545455" Y="614.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4860,7 +4718,6 @@
   </Territory>
   <Territory value="0916">
     <type value="Farmland" />
-
     <point X="379.818181818182" Y="657.105454545455" />
     <isTown value="True" />
     <isCastle value="False" />
@@ -4893,7 +4750,6 @@
   </Territory>
   <Territory value="0917">
     <type value="Countryside" />
-
     <point X="380.545454545455" Y="700.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -4923,7 +4779,6 @@
   </Territory>
   <Territory value="0918">
     <type value="Forest" />
-
     <point X="380.181818181818" Y="743.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5014,7 +4869,6 @@
   </Territory>
   <Territory value="0922">
     <type value="Hills" />
-
     <point X="380.181818181818" Y="914.454545454546" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5037,7 +4891,6 @@
   </Territory>
   <Territory value="0923">
     <type value="Hills" />
-
     <point X="380.909090909091" Y="957" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5057,7 +4910,6 @@
   </Territory>
   <Territory value="1001">
     <type value="Hills" />
-
     <point X="416.520966709347" Y="38.9236363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5090,7 +4942,6 @@
   </Territory>
   <Territory value="1002">
     <type value="Forest" />
-
     <point X="417.24823943662" Y="81.8327272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5120,7 +4971,6 @@
   </Territory>
   <Territory value="1003">
     <type value="Hills" />
-
     <point X="416.884603072983" Y="125.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5150,7 +5000,6 @@
   </Territory>
   <Territory value="1004">
     <type value="Countryside" />
-
     <point X="417.24823943662" Y="167.650909090909" />
     <isTown value="True" />
     <isCastle value="False" />
@@ -5182,7 +5031,6 @@
   </Territory>
   <Territory value="1006">
     <type value="Mountains" />
-
     <point X="417.24823943662" Y="253.832727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5214,7 +5062,6 @@
   </Territory>
   <Territory value="1005">
     <type value="Countryside" />
-
     <point X="417.611875800256" Y="210.56" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5248,7 +5095,6 @@
   </Territory>
   <Territory value="1007">
     <type value="Forest" />
-
     <point X="417.24823943662" Y="296.741818181818" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5271,7 +5117,6 @@
   </Territory>
   <Territory value="1008">
     <type value="Countryside" />
-
     <point X="416.884603072983" Y="340.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5294,7 +5139,6 @@
   </Territory>
   <Territory value="1009">
     <type value="Farmland" />
-
     <point X="416.884603072983" Y="382.56" />
     <isTown value="True" />
     <isCastle value="False" />
@@ -5319,7 +5163,6 @@
   </Territory>
   <Territory value="1010">
     <type value="Hills" />
-
     <point X="416.884603072983" Y="425.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5344,7 +5187,6 @@
   </Territory>
   <Territory value="1011">
     <type value="Hills" />
-
     <point X="416.884603072983" Y="467.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5369,7 +5211,6 @@
   </Territory>
   <Territory value="1012">
     <type value="Countryside" />
-
     <point X="417.24823943662" Y="507.287272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5399,7 +5240,6 @@
   </Territory>
   <Territory value="1013">
     <type value="Countryside" />
-
     <point X="417.24823943662" Y="549.832727272727" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5431,7 +5271,6 @@
   </Territory>
   <Territory value="1014">
     <type value="Countryside" />
-
     <point X="417.24823943662" Y="593.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5463,7 +5302,6 @@
   </Territory>
   <Territory value="1015">
     <type value="Swamp" />
-
     <point X="417.24823943662" Y="636.014545454545" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5495,7 +5333,6 @@
   </Territory>
   <Territory value="1016">
     <type value="Swamp" />
-
     <point X="417.24823943662" Y="678.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5529,7 +5366,6 @@
   </Territory>
   <Territory value="1017">
     <type value="Countryside" />
-
     <point X="417.24823943662" Y="721.469090909091" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5614,7 +5450,6 @@
   </Territory>
   <Territory value="1020">
     <type value="Mountains" />
-
     <point X="417.24823943662" Y="850.196363636364" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5637,7 +5472,6 @@
   </Territory>
   <Territory value="1021">
     <type value="Mountains" />
-
     <point X="416.884603072983" Y="893.105454545455" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5661,7 +5495,6 @@
   </Territory>
   <Territory value="1022">
     <type value="Mountains" />
-
     <point X="416.884603072983" Y="934.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5683,7 +5516,6 @@
   </Territory>
   <Territory value="1101">
     <type value="Hills" />
-
     <point X="453.454545454545" Y="17.8327272727273" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -5710,7 +5542,6 @@
   </Territory>
   <Territory value="1102">
     <type value="Hills" />
-
     <point X="453.818181818182" Y="60.3781818181818" />
     <isTown value="False" />
     <isCastle value="False" />

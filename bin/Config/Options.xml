@@ -10,13 +10,13 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="PrinceHorse">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="PrincePegasus">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="PrinceCoin">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="PrinceFood">
     <IsEnabled value="False" />
@@ -34,7 +34,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomParty01">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="PartyCustom">
     <IsEnabled value="False" />
@@ -82,13 +82,13 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="PartyMounted">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="PartyAirborne">
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomHex">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="RandomTown">
     <IsEnabled value="False" />
@@ -100,7 +100,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomBottom">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="0109">
     <IsEnabled value="False" />

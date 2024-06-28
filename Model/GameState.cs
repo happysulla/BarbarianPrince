@@ -4532,7 +4532,7 @@ namespace BarbarianPrince
                            fugitivePriest.IsFugitive = true;
                            if (false == AddGuideTerritories(gi, fugitivePriest, 2))
                            {
-                              returnStatus = " AddGuideTerritories() returned false for ae=" + gi.EventActive;
+                              returnStatus = " AddGuideTerritories() returned false for ae=" + gi.EventActive + " mi=" + fugitivePriest.Name + " hex=2";
                               Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                            }
                            gi.AddCompanion(fugitivePriest);
@@ -6335,7 +6335,7 @@ namespace BarbarianPrince
                hiredLocalGuide.IsGuide = true;
                if (false == AddGuideTerritories(gi, hiredLocalGuide, 2))
                {
-                  returnStatus = "AddGuideTerritories() returned false for action=" + action.ToString();
+                  returnStatus = "AddGuideTerritories() returned false for action=" + action.ToString() + " mi=" + hiredLocalGuide.Name + " hexes=2";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                }
                gi.AddCompanion(hiredLocalGuide);
@@ -6414,7 +6414,7 @@ namespace BarbarianPrince
                   hiredLocalGuideWithPorter.IsGuide = true;
                   if (false == AddGuideTerritories(gi, hiredLocalGuideWithPorter, 2))
                   {
-                     returnStatus = "AddGuideTerritories() returned false for action=" + action.ToString();
+                     returnStatus = "AddGuideTerritories() returned false for action=" + action.ToString() + " mi=" + hiredLocalGuideWithPorter.Name + " hexes=2";
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
                   gi.AddCompanion(hiredLocalGuideWithPorter);
@@ -6472,7 +6472,7 @@ namespace BarbarianPrince
                         monkGuide.IsGuide = true;
                         if (false == AddGuideTerritories(gi, monkGuide, 1))
                         {
-                           returnStatus = "AddGuideTerritories() returned false for action=" + action.ToString();
+                           returnStatus = "AddGuideTerritories() returned false for action=" + action.ToString() + " mi=" + monkGuide.Name + " hexes=1";
                            Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                         }
                         gi.AddCompanion(monkGuide);
@@ -9149,7 +9149,7 @@ namespace BarbarianPrince
                      farmBoy.IsGuide = true;
                      if (false == AddGuideTerritories(gi, farmBoy, 2))
                      {
-                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddGuideTerritories() returned false ae=" + action.ToString() + " dr=" + dieRoll.ToString());
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddGuideTerritories() returned false ae=" + action.ToString() + " dr=" + dieRoll.ToString() + " mi=" + farmBoy.Name + " hexes=2");
                         return false;
                      }
                      farmBoy.IsGuide = true;
@@ -9819,7 +9819,7 @@ namespace BarbarianPrince
                   trueLoveSlave.IsGuide = true;
                   if (false == AddGuideTerritories(gi, trueLoveSlave, 5))
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddGuideTerritories() returned false for ae=" + gi.EventActive);
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddGuideTerritories() returned false for ae=" + gi.EventActive + " mi=" + trueLoveSlave.Name + " hexes=5");
                      return false;
                   }
                   gi.AddCompanion(trueLoveSlave);
@@ -9838,7 +9838,7 @@ namespace BarbarianPrince
                   fugitiveSlave.IsGuide = true;
                   if (false == AddGuideTerritories(gi, fugitiveSlave, 5))
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddGuideTerritories() returned false for ae=" + gi.EventActive);
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddGuideTerritories() returned false for ae=" + gi.EventActive + " mi=" + fugitiveSlave.Name + " hexes=5");
                      return false;
                   }
                   gi.AddCompanion(fugitiveSlave);
@@ -11582,7 +11582,7 @@ namespace BarbarianPrince
                   cavalry.IsGuide = true;
                   if (false == AddGuideTerritories(gi, cavalry, 3))
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddGuideTerritories() returned false ae=" + action.ToString() + " dr=" + dieRoll.ToString());
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddGuideTerritories() returned false ae=" + action.ToString() + " dr=" + dieRoll.ToString() + " mi=" + cavalry.Name + "hexes=3");
                      return false;
                   }
                   gi.AddCompanion(cavalry);
@@ -13629,15 +13629,15 @@ namespace BarbarianPrince
       //--------------------------------------------
       protected bool AddGuideTerritories(IGameInstance gi, IMapItem guide, int range)
       {
-         //------------------------------------------------------
          List<string> masterList = new List<string>();
          Queue<string> tStack = new Queue<string>();
          Queue<int> depthStack = new Queue<int>();
          Dictionary<string, bool> visited = new Dictionary<string, bool>();
-         tStack.Enqueue(gi.Prince.Territory.Name);
+         ITerritory startT = guide.Territory;
+         tStack.Enqueue(startT.Name);
          depthStack.Enqueue(0);
-         visited[gi.Prince.Territory.Name] = false;
-         masterList.Add(gi.Prince.Territory.Name);
+         visited[startT.Name] = false;
+         masterList.Add(startT.Name);
          while (0 < tStack.Count)
          {
             String name = tStack.Dequeue();
@@ -13658,7 +13658,7 @@ namespace BarbarianPrince
                ITerritory adjacent = Territory.theTerritories.Find(adj);
                if (null == adjacent)
                {
-                  Logger.Log(LogEnum.LE_ERROR, "AddGuideTerritories(): adjacent=null for " + adj);
+                  Logger.Log(LogEnum.LE_ERROR, "AddGuideTerritories(): adjacent=null for " + adj + " t=" + t.Name + " name=" + name + " guide=" + guide.Name + " r=" + range.ToString());
                   return false;
                }
                tStack.Enqueue(adjacent.Name);
