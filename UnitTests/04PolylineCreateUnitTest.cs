@@ -401,7 +401,7 @@ namespace BarbarianPrince
          Ellipse mousedEllipse = (Ellipse)sender;
          //----------------------------------------
          string name = null;
-         switch (myIndexName)
+         switch (myIndexName-1)
          {
             case 0: name = "Dienstal Branch"; break;
             case 1: name = "Largos River"; break;

@@ -145,4 +145,19 @@
     <point X="719.9" Y="955.4" />
     <point X="732.7" Y="977.2" />
   </River>
+  <River value="Largos River">
+    <point X="694.75" Y="655.5" />
+    <point X="682.25" Y="635" />
+    <point X="694.25" Y="613" />
+    <point X="719.75" Y="612" />
+    <point X="732.25" Y="591.5" />
+    <point X="720.25" Y="571" />
+    <point X="732.75" Y="549" />
+    <point X="755.25" Y="548.5" />
+    <point X="766.75" Y="525" />
+    <point X="756.25" Y="504" />
+    <point X="768.25" Y="488" />
+    <point X="793.75" Y="487" />
+    <point X="801.75" Y="471.5" />
+  </River>
 </Rivers>

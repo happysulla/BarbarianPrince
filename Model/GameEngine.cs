@@ -47,13 +47,13 @@ namespace BarbarianPrince
       public bool CreateUnitTests(IGameInstance gi, DockPanel dp, EventViewer ev, IDieRoller dr)
       {
          //-----------------------------------------------------------------------------
-         IUnitTest ut14 = new CombatUnitTest(dp, gi, ev, dr);
-         if (true == ut14.CtorError)
+         IUnitTest ut4 = new PolylineCreateUnitTest(dp, gi);
+         if (true == ut4.CtorError)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): CombatUnitTest() Ctor Error");
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): PolylineCreateUnitTest() Ctor Error");
             return false;
          }
-         gi.UnitTests.Add(ut14);
+         gi.UnitTests.Add(ut4);
          //-----------------------------------------------------------------------------
          IUnitTest ut1 = new GameViewerCreateUnitTest(dp);
          if (true == ut1.CtorError)
@@ -78,14 +78,6 @@ namespace BarbarianPrince
             return false;
          }
          gi.UnitTests.Add(ut3);
-         //-----------------------------------------------------------------------------
-         IUnitTest ut4 = new PolylineCreateUnitTest(dp, gi);
-         if (true == ut4.CtorError)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): PolylineCreateUnitTest() Ctor Error");
-            return false;
-         }
-         gi.UnitTests.Add(ut4);
          //-----------------------------------------------------------------------------
          IUnitTest ut5 = new ConfigMgrUnitTest(dp, ev);
          if (true == ut5.CtorError)
@@ -158,6 +150,14 @@ namespace BarbarianPrince
             return false;
          }
          gi.UnitTests.Add(ut13);
+         //-----------------------------------------------------------------------------
+         IUnitTest ut14 = new CombatUnitTest(dp, gi, ev, dr);
+         if (true == ut14.CtorError)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): CombatUnitTest() Ctor Error");
+            return false;
+         }
+         gi.UnitTests.Add(ut14);
          //-----------------------------------------------------------------------------
          IUnitTest ut15 = new TreasureTableUnitTest(ev);
          if (true == ut15.CtorError)
