@@ -27,7 +27,8 @@ namespace BarbarianPrince
       private const int MAX_DAILY_ACTIONS = 13;
       public bool CtorError { get; } = false;
       //---------------------------------------------------------------------
-      [Serializable] [StructLayout(LayoutKind.Sequential)]
+      [Serializable]
+      [StructLayout(LayoutKind.Sequential)]
       public struct POINT  // used in WindowPlacement structure
       {
          public int X;
@@ -39,7 +40,8 @@ namespace BarbarianPrince
          }
       }
       //-------------------------------------------
-      [Serializable] [StructLayout(LayoutKind.Sequential)]
+      [Serializable]
+      [StructLayout(LayoutKind.Sequential)]
       public struct RECT // used in WindowPlacement structure
       {
          public int Left;
@@ -55,7 +57,8 @@ namespace BarbarianPrince
          }
       }
       //-------------------------------------------
-      [Serializable] [StructLayout(LayoutKind.Sequential)]
+      [Serializable]
+      [StructLayout(LayoutKind.Sequential)]
       public struct WindowPlacement // used to save window position between sessions
       {
          public int length;
@@ -89,7 +92,7 @@ namespace BarbarianPrince
       private readonly List<Button> myButtonMapItems = new List<Button>();
       private readonly SplashDialog mySplashScreen = null;
       private Button[] myButtonTimeTrackDays = new Button[7];
-      private Button[] myButtonTimeTrackWeeks = new Button[10];
+      private Button[] myButtonTimeTrackWeeks = new Button[15];
       private Button[] myButtonFoodSupply1s = new Button[10];
       private Button[] myButtonFoodSupply10s = new Button[10];
       private Button[] myButtonFoodSupply100s = new Button[5];
@@ -121,7 +124,7 @@ namespace BarbarianPrince
          myGameInstance = gi;
          gi.GamePhase = GamePhase.GameSetup;
          myMainMenuViewer = new MainMenuViewer(myMainMenu, ge, gi);
-         if( false == AddHotKeys(myMainMenuViewer) )
+         if (false == AddHotKeys(myMainMenuViewer))
          {
             Logger.Log(LogEnum.LE_ERROR, "GameViewerWindow(): AddHotKeys() returned false");
             CtorError = true;
@@ -189,7 +192,7 @@ namespace BarbarianPrince
          ge.RegisterForUpdates(myEventViewer);
          ge.RegisterForUpdates(sbv);
          ge.RegisterForUpdates(this); // needs to be last so that canvas updates after all actions taken
-         #if UT2
+#if UT2
             if (false == ge.CreateUnitTests(gi, myDockPanelTop, myEventViewer, myDieRoller))
             {
                Logger.Log(LogEnum.LE_ERROR, "GameViewerWindow(): CreateUnitTests() returned false");
@@ -197,8 +200,8 @@ namespace BarbarianPrince
                return;
             }
             gi.GamePhase = GamePhase.UnitTest;
-         #endif
-   }
+#endif
+      }
       public void UpdateView(ref IGameInstance gi, GameAction action)
       {
          if (GameAction.RemoveSplashScreen == action)
@@ -214,7 +217,16 @@ namespace BarbarianPrince
             this.myCanvas.Cursor = myTargetCursor;
          }
          //-------------------------------------------------------
-         if( GameAction.UpdateLoadingGame == action)
+         if (GameAction.UpdateGameOptions == action)
+         {
+            Option option = gi.Options.Find("ExtendEndTime");
+            if( null == option )
+               Logger.Log(LogEnum.LE_ERROR, "UpdateView(): gi.Options.Find(ExtendEndTime)");
+            else if( true == option.IsEnabled )
+               CreateButtonTimeTrack(true);
+         }
+         //-------------------------------------------------------
+         else if (GameAction.UpdateLoadingGame == action)
          {
             myGameInstance = gi;
             myButtonMapItems.Clear();
@@ -222,7 +234,7 @@ namespace BarbarianPrince
             {
                if (ui is Button b)
                {
-                  if(true == b.Name.Contains("Prince"))
+                  if (true == b.Name.Contains("Prince"))
                   {
                      myCanvas.Children.Remove(ui);
                      break;
@@ -230,13 +242,16 @@ namespace BarbarianPrince
                }
             }
             Logger.Log(LogEnum.LE_GAME_INIT, "GameViewerWindow.UpdateView(): a=" + action.ToString() + " gi=" + gi.ToString());
+            Option optionExtraTime = gi.Options.Find("ExtendEndTime");
+            if (true == optionExtraTime.IsEnabled)
+               CreateTimeTrackLongGame();
          }
          //-------------------------------------------------------
          UpdateStackPanelDailyActions(gi);
          UpdateTimeTrack(gi);
          UpdateFoodSupply(gi);
          UpdatePrinceEndurance(gi);
-         switch( action )
+         switch (action)
          {
             case GameAction.E228ShowTrueLove:
                break;
@@ -271,7 +286,7 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvasHexTravelToShowPolygons() returned error ");
                break;
             default:
-               if( false == UpdateCanvas(gi, action) )
+               if (false == UpdateCanvas(gi, action))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvas() returned error ");
                break;
          }
@@ -282,7 +297,7 @@ namespace BarbarianPrince
          GameAction outAction = GameAction.RemoveSplashScreen;
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
       }
-      private void CreateButtonTimeTrack()
+      private void CreateButtonTimeTrack(bool isGameExtended = false)
       {
          myStackPanelTimeTrackDay.Children.Clear();
          Thickness thickness = new Thickness(0, 0, 180, 0);
@@ -296,7 +311,10 @@ namespace BarbarianPrince
             myStackPanelTimeTrackDay.Children.Add(myButtonTimeTrackDays[i]);
          }
          myStackPanelTimeTrackWeek.Children.Clear();
-         for (int i = 0; i < 10; ++i)
+         int numWeeks = 10;
+         if (true == isGameExtended)
+            numWeeks = 15;
+         for (int i = 0; i < numWeeks; ++i)
          {
             int k = i + 1;
             string content = "Week#" + k.ToString();
@@ -310,6 +328,17 @@ namespace BarbarianPrince
          myButtonTimeTrackWeeks[0].FontWeight = FontWeights.Bold;
          myButtonTimeTrackDays[0].IsEnabled = true;
          myButtonTimeTrackWeeks[0].IsEnabled = true;
+      }
+      private void CreateTimeTrackLongGame()
+      {
+         myStackPanelTimeTrackWeek.Children.Clear();
+         for (int i = 0; i < 15; ++i)
+         {
+            int k = i + 1;
+            string content = "Week#" + k.ToString();
+            myButtonTimeTrackWeeks[i] = new Button { Height = Utilities.theMapItemSize, Width = Utilities.theMapItemSize, FontSize = 8, IsEnabled = false, Content = content };
+            myStackPanelTimeTrackWeek.Children.Add(myButtonTimeTrackWeeks[i]);
+         }
       }
       private void CreateButtonFoodSupply()
       {
@@ -462,7 +491,7 @@ namespace BarbarianPrince
          if (gi.Days < 0)
             return;
          int week = gi.Days / 7; // round down to nearest integer
-         if (9 < week)
+         if (14 < week)
             week = 9;
          myButtonTimeTrackWeeks[week].Background = Utilities.theBrushControlButton;
          myButtonTimeTrackWeeks[week].FontWeight = FontWeights.Bold;
@@ -576,19 +605,19 @@ namespace BarbarianPrince
             Label labelDailyActions = new Label() { FontSize = 12, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = "DAILY ACTIONS" };
             myStackPanelDailyActions.Children.Add(labelDailyActions);
             //------------------------------------------------------------------
-            if ((0 <  gi.Prince.Mounts.Count) && (false == gi.IsHeavyRainDismount) ) // if choose to dismount due to heavy rains, do not fly
+            if ((0 < gi.Prince.Mounts.Count) && (false == gi.IsHeavyRainDismount)) // if choose to dismount due to heavy rains, do not fly
             {
                IMapItem mount = gi.Prince.Mounts[0];
-               if( (0 == mount.StarveDayNum ) && ( false == mount.IsExhausted ) ) // mount cannot fly if starving or exhausted
+               if ((0 == mount.StarveDayNum) && (false == mount.IsExhausted)) // mount cannot fly if starving or exhausted
                {
-                  if ( true == mount.IsFlyingMount() )
+                  if (true == mount.IsFlyingMount())
                   {
                      myStackPanelDailyActions.Children.Add(myButtonDailyAcions[12]);    // air travel
                      myStackPanelDailyActions.Visibility = Visibility.Visible;
                   }
                }
             }
-            if (RaftEnum.RE_RAFT_SHOWN == gi.RaftState) 
+            if (RaftEnum.RE_RAFT_SHOWN == gi.RaftState)
             {
                myStackPanelDailyActions.Children.Add(myButtonDailyAcions[11]);    // travel by raft
                myStackPanelDailyActions.Visibility = Visibility.Visible;
@@ -619,11 +648,11 @@ namespace BarbarianPrince
                      myStackPanelDailyActions.Children.Add(myButtonDailyAcions[4]);
                   if ((true == isInTownOrCastle) && (false == myGameInstance.ForbiddenHires.Contains(gi.Prince.Territory))) // hire
                      myStackPanelDailyActions.Children.Add(myButtonDailyAcions[3]);
-                  if ( ((true == isInTownOrCastle) || (true == isInTemple)) && (false == gi.HiddenTowns.Contains(t)) ) // news - hidden towns do not due news
+                  if (((true == isInTownOrCastle) || (true == isInTemple)) && (false == gi.HiddenTowns.Contains(t))) // news - hidden towns do not due news
                      myStackPanelDailyActions.Children.Add(myButtonDailyAcions[2]);
                }
                //-------------------------------------------------------------------------
-               if ((false == gi.IsExhausted) ||  (true == t.IsOasis) || ("Desert" != t.Type)) // e120 - cannot rest if exhausted in desert without oasis
+               if ((false == gi.IsExhausted) || (true == t.IsOasis) || ("Desert" != t.Type)) // e120 - cannot rest if exhausted in desert without oasis
                {
                   if ((true == isInTownOrCastle) || (true == isInTemple))          // heal 
                      myButtonDailyAcions[1].Content = "Rest & Lodge";
@@ -634,7 +663,7 @@ namespace BarbarianPrince
                   myStackPanelDailyActions.Children.Add(myButtonDailyAcions[1]);
                }
             }
-            if ((false == gi.IsTrainHorse) && ( false == gi.IsFloodContinue ) && (false == gi.IsWoundedWarriorRest)&& (false == gi.IsWoundedBlackKnightRest)) // cannot travel if training horse, in flood, or waiting for warrior to rest
+            if ((false == gi.IsTrainHorse) && (false == gi.IsFloodContinue) && (false == gi.IsWoundedWarriorRest) && (false == gi.IsWoundedBlackKnightRest)) // cannot travel if training horse, in flood, or waiting for warrior to rest
             {
                myStackPanelDailyActions.Children.Add(myButtonDailyAcions[0]);    // travel
                myStackPanelDailyActions.Visibility = Visibility.Visible;
@@ -754,7 +783,7 @@ namespace BarbarianPrince
          }
          //-------------------------------------------------------
          foreach (ITerritory t in gi.DwarfAdviceLocations)
-         { 
+         {
             double size = 1.3 * Utilities.theMapItemOffset;
             Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("DwarfAdvice"), Width = size, Height = size };
             Canvas.SetLeft(img1, t.CenterPoint.X - size / 2);
@@ -791,8 +820,8 @@ namespace BarbarianPrince
          //-------------------------------------------------------
          foreach (ITerritory t in gi.DwarvenMines)
          {
-            double size = 0.9*Utilities.theMapItemOffset;
-            Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("DwarfMines"), Width = 2.0*size, Height = size };
+            double size = 0.9 * Utilities.theMapItemOffset;
+            Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("DwarfMines"), Width = 2.0 * size, Height = size };
             Canvas.SetLeft(img1, t.CenterPoint.X - size);
             Canvas.SetTop(img1, t.CenterPoint.Y - size / 2);
             myCanvas.Children.Add(img1);
@@ -812,7 +841,7 @@ namespace BarbarianPrince
             double size = 1.5 * Utilities.theMapItemOffset;
             Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("HalflingTown"), Width = size, Height = size };
             Canvas.SetLeft(img1, t.CenterPoint.X - size / 3);
-            Canvas.SetTop(img1, t.CenterPoint.Y - size / 3 );
+            Canvas.SetTop(img1, t.CenterPoint.Y - size / 3);
             myCanvas.Children.Add(img1);
          }
          //-------------------------------------------------------
@@ -1038,7 +1067,7 @@ namespace BarbarianPrince
                   }
                   if (null != myTerritorySelected)
                   {
-                     if( ("e213a" == myGameInstance.EventActive ) || ("e401" == myGameInstance.EventActive) )
+                     if (("e213a" == myGameInstance.EventActive) || ("e401" == myGameInstance.EventActive))
                         UpdateCanvasHexToShowPolygon(myGameInstance.NewHex); // e126 - if raft moved downriver, show the polygon in the nex hex
                      else
                         UpdateCanvasHexToShowPolygon(myTerritorySelected);
@@ -1193,7 +1222,7 @@ namespace BarbarianPrince
       {
          try
          {
-            if( 0 < gi.MapItemMoves.Count)
+            if (0 < gi.MapItemMoves.Count)
             {
                IMapItemMove mim2 = gi.MapItemMoves[0];
                IMapItem mi = mim2.MapItem;
@@ -1345,7 +1374,7 @@ namespace BarbarianPrince
          }
          if (null == gi.NewHex)
          {
-            Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygonArchOfTravel(): gi.NewHex=null" );
+            Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygonArchOfTravel(): gi.NewHex=null");
             return false;
          }
          IStack newStack = myGameInstance.Stacks.Find(gi.NewHex);
@@ -1393,14 +1422,14 @@ namespace BarbarianPrince
                ITerritory t = mim.BestPath.Territories[i];
                double x = t.CenterPoint.X - Utilities.theMapItemOffset;
                double y = t.CenterPoint.Y - Utilities.theMapItemOffset;
-               System.Windows.Point newPoint = new System.Windows.Point(x , y);
+               System.Windows.Point newPoint = new System.Windows.Point(x, y);
                LineSegment lineSegment = new LineSegment(newPoint, false);
                aPathFigure.Segments.Add(lineSegment);
             }
             // Add the last line segment
             double xEnd = mim.NewTerritory.CenterPoint.X - Utilities.theMapItemOffset;
             double yEnd = mim.NewTerritory.CenterPoint.Y - Utilities.theMapItemOffset;
-            if ( (Math.Abs(xEnd - xStart) < 2) && (Math.Abs(yEnd - yStart) < 2) ) // if already at final location, skip animation or get runtime exception
+            if ((Math.Abs(xEnd - xStart) < 2) && (Math.Abs(yEnd - yStart) < 2)) // if already at final location, skip animation or get runtime exception
                return true;
             System.Windows.Point newPoint2 = new System.Windows.Point(xEnd, yEnd);
             LineSegment lineSegment2 = new LineSegment(newPoint2, false);
@@ -1512,9 +1541,9 @@ namespace BarbarianPrince
          Logger.Log(LogEnum.LE_USER_ACTION, "ClickButtonDailyAction(): >>>>>>>>>>>>>>>>>>>>>>>>>" + s1 + " for ae=" + myGameInstance.EventActive + " c=" + myGameInstance.SunriseChoice.ToString() + " m=" + myGameInstance.Prince.MovementUsed + "/" + myGameInstance.Prince.Movement);
          if (s1 == myButtonDailyContents[0])
          {
-            if( true == myGameInstance.IsHeavyRainContinue )
+            if (true == myGameInstance.IsHeavyRainContinue)
                outAction = GameAction.E079HeavyRainsStartDayCheck;
-            else 
+            else
                outAction = GameAction.Travel;
          }
          else if ((s1 == myButtonDailyContents[1]) || (s1 == "Rest & Lodge") || (s1 == "Rest & Train"))
@@ -1565,7 +1594,7 @@ namespace BarbarianPrince
          }
          else if (s1 == myButtonDailyContents[12])
          {
-            if (true == myGameInstance.IsHeavyRainContinue) 
+            if (true == myGameInstance.IsHeavyRainContinue)
                outAction = GameAction.E079HeavyRainsStartDayCheckInAir;
             else
                outAction = GameAction.TravelAir;
@@ -1578,7 +1607,7 @@ namespace BarbarianPrince
       }
       private void ClickButtonMapItem(object sender, RoutedEventArgs e)
       {
-         if ( (GamePhase.Travel == myGameInstance.GamePhase) && (0 < myGameInstance.Prince.MovementUsed) )
+         if ((GamePhase.Travel == myGameInstance.GamePhase) && (0 < myGameInstance.Prince.MovementUsed))
          {
             Logger.Log(LogEnum.LE_USER_ACTION, "ClickButtonMapItem(): >>>>>>>>>>>>>>>>>>>>>>>>>ae=" + myGameInstance.EventActive + " c=" + myGameInstance.SunriseChoice.ToString() + " m=" + myGameInstance.Prince.MovementUsed + "/" + myGameInstance.Prince.Movement);
             GameAction outAction = GameAction.TravelEndMovement;
@@ -1588,7 +1617,7 @@ namespace BarbarianPrince
       private void MouseEnterMapItem(object sender, System.Windows.Input.MouseEventArgs e)
       {
          Button b = (Button)sender;
-         if( 1 < myGameInstance.PartyMembers.Count )
+         if (1 < myGameInstance.PartyMembers.Count)
          {
             myPartyDisplayDialog = new PartyDisplayDialog(myGameInstance, myCanvas, b);
             myPartyDisplayDialog.Show();
@@ -1596,7 +1625,7 @@ namespace BarbarianPrince
       }
       private void MouseLeaveMapItem(object sender, System.Windows.Input.MouseEventArgs e)
       {
-         if(null != myPartyDisplayDialog)
+         if (null != myPartyDisplayDialog)
             myPartyDisplayDialog.Close();
          myPartyDisplayDialog = null;
       }
@@ -1621,7 +1650,7 @@ namespace BarbarianPrince
             return;
          }
          GameAction outAction = GameAction.TravelLostCheck;
-         if (null != myGameInstance.AirSpiritLocations ) // e110c - air spirit moves party
+         if (null != myGameInstance.AirSpiritLocations) // e110c - air spirit moves party
          {
             myGameInstance.GamePhase = GamePhase.Encounter;
             outAction = GameAction.E110AirSpiritTravelEnd;
@@ -1941,7 +1970,7 @@ namespace BarbarianPrince
                   reader.Close();
             }
          }
-         catch ( Exception ex ) 
+         catch (Exception ex)
          {
             Logger.Log(LogEnum.LE_ERROR, "OnSourceInitialized() e=" + ex.ToString());
          }
@@ -1964,7 +1993,7 @@ namespace BarbarianPrince
          //-------------------------------------------
          Settings.Default.GameDirectoryName = Settings.Default.GameDirectoryName;
          //-------------------------------------------
-         if(null != myMainMenuViewer.NewGameOptions)
+         if (null != myMainMenuViewer.NewGameOptions)
          {
             try
             {
@@ -1992,7 +2021,7 @@ namespace BarbarianPrince
          //-------------------------------------------
          Settings.Default.Save();
          //-------------------------------------------
-         if( false == GameLoadMgr.SaveGameToFile(myGameInstance) )
+         if (false == GameLoadMgr.SaveGameToFile(myGameInstance))
             Logger.Log(LogEnum.LE_ERROR, "OnClosing(): SaveGameToFile() returned false");
       }
       //-------------CONTROLLER HELPER FUNCTIONS---------------------------------
@@ -2114,11 +2143,11 @@ namespace BarbarianPrince
       //-----------------------------------------------------------------------
       #region Win32 API declarations to set and get window placement
       [DllImport("user32.dll")]
-         private static extern bool SetWindowPlacement(IntPtr hWnd, [In] ref WindowPlacement lpwndpl);
-         [DllImport("user32.dll")]
-         private static extern bool GetWindowPlacement(IntPtr hWnd, out WindowPlacement lpwndpl);
-         private const int SwShownormal = 1;
-         private const int SwShowminimized = 2;
+      private static extern bool SetWindowPlacement(IntPtr hWnd, [In] ref WindowPlacement lpwndpl);
+      [DllImport("user32.dll")]
+      private static extern bool GetWindowPlacement(IntPtr hWnd, out WindowPlacement lpwndpl);
+      private const int SwShownormal = 1;
+      private const int SwShowminimized = 2;
       #endregion
    }
    public static class MyGameViewerWindowExtensions

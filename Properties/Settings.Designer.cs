@@ -136,7 +136,7 @@ namespace BarbarianPrince.Properties {
             " value=\"False\" />\r\n  </Option>\r\n  <Option value=\"0323\">\r\n    <IsEnabled value=\"F" +
             "alse\" />\r\n  </Option>\r\n  <Option value=\"1923\">\r\n    <IsEnabled value=\"False\" />\r" +
             "\n  </Option>\r\n  <Option value=\"0418\">\r\n    <IsEnabled value=\"False\" />\r\n  </Opti" +
-            "on>\r\n  <Option value=\"0410\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <O" +
+            "on>\r\n  <Option value=\"0722\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <O" +
             "ption value=\"0409\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <Option val" +
             "ue=\"0406\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <Option value=\"0405\"" +
             ">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <Option value=\"0411\">\r\n    <I" +

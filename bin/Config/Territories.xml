@@ -4844,7 +4844,7 @@
     <regionPoint X="368.932838083687" Y="807.362352941176" />
   </Territory>
   <Territory value="0921">
-    <type value="Countryside" /
+    <type value="Countryside" />
     <point X="380.909090909091" Y="871.181818181818" />
     <isTown value="False" />
     <isCastle value="False" />

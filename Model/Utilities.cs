@@ -39,7 +39,7 @@ namespace BarbarianPrince
       public static int MaxLoad { get; } = 10;
       public static int MaxMountLoad { get; } = 30;
       public static int PersonBurden { get; } = 20; // how much a person measures in loads
-      public static int MaxDays = 70; // 10 weeks
+      public static int MaxDays { set; get; } = 70; // 10 weeks
       //--------------------------------------------
       public static Double ZoomCanvas { get; set; } = 1.0;
       public static Double theMapItemOffset = 20;

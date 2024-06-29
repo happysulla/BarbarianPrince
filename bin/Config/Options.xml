@@ -6,9 +6,6 @@
   <Option value="AutoWealthRollForUnderFive">
     <IsEnabled value="True" />
   </Option>
-  <Option value="AutoLostDecrease">
-    <IsEnabled value="True" />
-  </Option>
   <Option value="PrinceHorse">
     <IsEnabled value="False" />
   </Option>
@@ -91,7 +88,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomTown">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="RandomLeft">
     <IsEnabled value="False" />
@@ -102,11 +99,14 @@
   <Option value="RandomBottom">
     <IsEnabled value="False" />
   </Option>
+  <Option value="0722">
+    <IsEnabled value="False" />
+  </Option>
   <Option value="0109">
     <IsEnabled value="False" />
   </Option>
   <Option value="0206">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="0711">
     <IsEnabled value="False" />
@@ -156,6 +156,15 @@
   <Option value="EasiestMonsters">
     <IsEnabled value="False" />
   </Option>
+  <Option value="AutoLostDecrease">
+    <IsEnabled value="False" />
+  </Option>
+  <Option value="ExtendEndTime">
+    <IsEnabled value="True" />
+  </Option>
+  <Option value="ReduceLodgingCosts">
+    <IsEnabled value="False" />
+  </Option>
   <Option value="NoLostRoll">
     <IsEnabled value="False" />
   </Option>
@@ -184,7 +193,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="ForceEvent">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ForceCrossEvent">
     <IsEnabled value="False" />

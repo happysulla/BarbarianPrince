@@ -1560,7 +1560,7 @@ namespace BarbarianPrince
          option = options.Find("PartyAirborne");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(PartyMounted) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(PartyAirborne) returned null");
             return false;
          }
          if (true == option.IsEnabled)
@@ -1571,6 +1571,15 @@ namespace BarbarianPrince
                   mi.AddNewMount(MountEnum.Pegasus);
             }
          }
+         //---------------------------------------------------------
+         option = options.Find("ExtendEndTime");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(ExtendEndTime) returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            Utilities.MaxDays = 105;
          return true;
       }
       private bool AddStartingPartyMemberOption(IGameInstance gi, string partyMemberName)
@@ -2072,7 +2081,7 @@ namespace BarbarianPrince
          if (true == option.IsEnabled)
             starting = Territory.theTerritories.Find(hex);
          //---------------------------------------------------------
-         hex = "0410";  // CountrySide
+         hex = "0722";  // CountrySide
          option = gi.Options.Find(hex);
          if (null == option)
          {
@@ -2180,6 +2189,8 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
+               break;
+            case GameAction.UpdateGameOptions:
                break;
             case GameAction.UpdateLoadingGame:
                if( false == LoadGame(ref gi, ref action))
@@ -2581,6 +2592,8 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerDisplay:
                break;
+            case GameAction.UpdateGameOptions:
+               break;
             case GameAction.UpdateLoadingGame:
                if (false == LoadGame(ref gi, ref action))
                {
@@ -2704,6 +2717,8 @@ namespace BarbarianPrince
                gi.EventDisplayed = gi.EventActive;
                break;
             case GameAction.UpdateEventViewerDisplay:
+               break;
+            case GameAction.UpdateGameOptions:
                break;
             case GameAction.UpdateLoadingGame:
                if (false == LoadGame(ref gi, ref action))
@@ -2995,6 +3010,8 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
+            case GameAction.UpdateGameOptions:
+               break;
             case GameAction.UpdateLoadingGame:
                if (false == LoadGame(ref gi, ref action))
                {
@@ -3075,6 +3092,8 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
+               break;
+            case GameAction.UpdateGameOptions:
                break;
             case GameAction.UpdateLoadingGame:
                if (false == LoadGame(ref gi, ref action))
@@ -3392,6 +3411,8 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
+            case GameAction.UpdateGameOptions:
+               break;
             case GameAction.UpdateLoadingGame:
                if (false == LoadGame(ref gi, ref action))
                {
@@ -3466,6 +3487,8 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
+            case GameAction.UpdateGameOptions:
+               break;
             case GameAction.UpdateLoadingGame:
                if (false == LoadGame(ref gi, ref action))
                {
@@ -3530,6 +3553,8 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
+            case GameAction.UpdateGameOptions:
+               break;
             case GameAction.UpdateLoadingGame:
                if (false == LoadGame(ref gi, ref action))
                {
@@ -3581,6 +3606,8 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
+               break;
+            case GameAction.UpdateGameOptions:
                break;
             case GameAction.UpdateLoadingGame:
                if (false == LoadGame(ref gi, ref action))
@@ -3634,6 +3661,8 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
+               break;
+            case GameAction.UpdateGameOptions:
                break;
             case GameAction.UpdateLoadingGame:
                if (false == LoadGame(ref gi, ref action))
@@ -3713,6 +3742,8 @@ namespace BarbarianPrince
                break;
             case GameAction.EndGameWin:
                break;
+            case GameAction.UpdateGameOptions:
+               break;
             case GameAction.UpdateLoadingGame:
                if (false == LoadGame(ref gi, ref action))
                {
@@ -3768,6 +3799,8 @@ namespace BarbarianPrince
             case GameAction.RemoveSplashScreen: // do nothing...the unit test is updated in GameViewerWindow:updateView()
                break;
             case GameAction.UpdateLoadingGame:
+               break;
+            case GameAction.UpdateGameOptions:
                break;
             case GameAction.E123BlackKnightCombatEnd:
                action = GameAction.UpdateEventViewerActive;
@@ -3859,7 +3892,7 @@ namespace BarbarianPrince
    //-----------------------------------------------------
    class GameStateEncounter : GameState
    {
-      private static bool theIsFirstTime = true;
+      //private static bool theIsFirstTime = true;
       private static int theNumHydraTeeth = 0;
       public override string PerformAction(ref IGameInstance gi, ref GameAction action, int dieRoll)
       {
@@ -3878,6 +3911,8 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
+               break;
+            case GameAction.UpdateGameOptions:
                break;
             case GameAction.UpdateLoadingGame:
                if (false == LoadGame(ref gi, ref action))
@@ -7272,7 +7307,7 @@ namespace BarbarianPrince
                {
                   if (true == gi.VisitedLocations.Contains(princeTerritory))
                   {
-                     if (false == gi.EscapedLocations.Contains(princeTerritory)) //TODO Add escape location for every town, temple, castle
+                     if (false == gi.EscapedLocations.Contains(princeTerritory)) 
                         theConstableRollModifier = 2;
                   }
                   else
@@ -13761,7 +13796,6 @@ namespace BarbarianPrince
       }
       protected ITerritory FindClosestTown(IGameInstance gi)
       {
-
          ITerritory startT = gi.Prince.Territory;
          if (true == gi.IsInTown(startT))
             return startT;

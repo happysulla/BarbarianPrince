@@ -210,6 +210,8 @@ namespace BarbarianPrince
          {
             this.NewGameOptions = dialog.NewOptions;
             myGameInstance.Options = dialog.NewOptions;
+            GameAction action = GameAction.UpdateGameOptions;
+            myGameEngine.PerformAction(ref myGameInstance, ref action);
          }
       }
       public void MenuItemEditUndo_Click(object sender, RoutedEventArgs e)

@@ -1097,6 +1097,8 @@ namespace BarbarianPrince
                      myGameInstance.EventDisplayed = myGameInstance.EventActive = myEvents[key][i];
                      if( ("e044" == myEvents[key][i]) && (false == myGameInstance.IsReligionInParty()) )
                         myGameInstance.EventDisplayed = myGameInstance.EventActive = "e044a";
+                     else if (("e050" == myEvents[key][i]) && (true == IsStructureWithinRange(myGameInstance,3)) )
+                        myGameInstance.EventDisplayed = myGameInstance.EventActive = "e050a";
                      else if (("e094" == myEvents[key][i]) && ("Cross River" == myKeyReference)) // crocs in river instead of swamp
                         myGameInstance.EventDisplayed = myGameInstance.EventActive = "e094a";
                      else if (("e110" == myEvents[key][i]) && (true == myGameInstance.IsSpecialistInParty())) // encounter air spirit
@@ -1170,7 +1172,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL_ROAD-->" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_REFERENCE:
-               //dieRoll = 5; // <cgs> TEST
+               dieRoll = 2; // <cgs> TEST
                myRollReference = dieRoll; // column number in travel table r207 - reference row
                if ((6 == myRollReference) && (true == myIsTravelingAir) ) // if traveling by air and roll reference 6, need to look  at Table r281
                   myState = EnumR204.TC_EVENT_ROLL_REFERENCE_R281;
@@ -1179,7 +1181,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL_REFERENCE-->" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT:
-               //dieRoll = 6; // <cgs> TEST
+               dieRoll = 3; // <cgs> TEST
                myRollEvent = dieRoll; // column number in traveling event reference - event row
                myState = EnumR204.TC_EVENT_SHOW_RESULTS;
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL_EVENT-->" + myState.ToString() + " dr=" + dieRoll.ToString());
@@ -1711,6 +1713,68 @@ namespace BarbarianPrince
          b.IsEnabled = true;
          MapItem.SetButtonContent(b, mi, false, true); // This sets the image as the button's content
          return b;
+      }
+      protected bool IsStructureWithinRange(IGameInstance gi, int range)
+      {
+         ITerritory startT = gi.Prince.Territory;
+         List<string> masterList = new List<string>();
+         Queue<string> tStack = new Queue<string>();
+         Queue<int> depthStack = new Queue<int>();
+         Dictionary<string, bool> visited = new Dictionary<string, bool>();
+         tStack.Enqueue(startT.Name);
+         depthStack.Enqueue(0);
+         visited[startT.Name] = false;
+         masterList.Add(startT.Name);
+         while (0 < tStack.Count)
+         {
+            String name = tStack.Dequeue();
+            int depth = depthStack.Dequeue();
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < depth; ++i)
+               stringBuilder.Append("\t");
+            if (true == visited[name])
+               continue;
+            if (range <= depth)
+               continue;
+            visited[name] = true;
+            ITerritory t = Territory.theTerritories.Find(name);
+            if (null == t)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "IsStructureWithinRange(): t=null for " + name);
+               return false;
+            }
+            Logger.Log(LogEnum.LE_HEX_WITHIN_RANGE, stringBuilder.ToString() + "==>> t=" + name);
+            stringBuilder.Append("\t");
+            foreach (string adj in t.Adjacents)
+            {
+               ITerritory adjacent = Territory.theTerritories.Find(adj);
+               if (null == adjacent)
+               {
+                  Logger.Log(LogEnum.LE_HEX_WITHIN_RANGE, "IsStructureWithinRange(): adjacent=null for " + adj + " for t=" + name);
+                  return false;
+               }
+               Logger.Log(LogEnum.LE_ERROR, stringBuilder.ToString() + "-->> a=" + adj);
+               tStack.Enqueue(adjacent.Name);
+               depthStack.Enqueue(depth + 1);
+               if (false == masterList.Contains(adj))
+               {
+                  masterList.Add(adj);
+                  visited[adj] = false;
+               }
+            }
+         }
+         foreach( String name in masterList )
+         {
+            ITerritory t = Territory.theTerritories.Find(name);
+            if (null == t)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "IsStructureWithinRange(): t=null in masterlist for t=" + name);
+               return false;
+            }
+            if (true == myGameInstance.IsInStructure(t))
+               return true;
+         }
+         return false;
       }
       //-----------------------------------------------------------------------------------------
       private void Grid_MouseDown(object sender, MouseButtonEventArgs e)

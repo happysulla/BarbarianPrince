@@ -27,6 +27,60 @@ namespace BarbarianPrince
       {
          InitializeComponent();
          myOptions = options.GetDeepCopy(); // make copy b/c do not want to change unless OK button selected by user
+         myRadioButtonOriginal.ToolTip = "Play the game as God Intended. Be prepared to lose often.";
+         myRadioButtonRandomParty.ToolTip = "Choose Random Party Members";
+         myRadioButtonRandomStart.ToolTip = "Choose Random Starting Hex";
+         myRadioButtonAllRandom.ToolTip = "Everything is Random";
+         myRadioButtonCustom.ToolTip = "Custom choices for all choices";
+         //--------------------
+         myCheckBoxAutoSetup.ToolTip = "Skip initial tutorial when starting";
+         myCheckBoxAutoWealth.ToolTip = "All wealth rolls under 5 are automatically rolled";
+         //--------------------
+         myCheckBoxPrinceHorse.ToolTip = "Prince starts with a hex";
+         myCheckBoxPrincePegasus.ToolTip = "Prince starts with Pegasus";
+         myCheckBoxPrinceCoin.ToolTip = "Prince starts with 50-99gp";
+         myCheckBoxPrinceFood.ToolTip = "Prince starts with 10 food";
+         //--------------------
+         myRadioButtonPartyOriginal.ToolTip = "Prince starts by himself";
+         myRadioButtonPartyRandom10.ToolTip = "10 Random Party Member is Added";
+         myRadioButtonPartyRandom8.ToolTip = "8 Random Party Member is Added";
+         myRadioButtonPartyRandom5.ToolTip = "5 Random Party Member is Added";
+         myRadioButtonPartyRandom3.ToolTip = "3 Random Party Member is Added";
+         myRadioButtonPartyRandom1.ToolTip = "1 Random Party Member is Added";
+         myRadioButtonPartyCustom.ToolTip = "Pick and Choose what Party Members to begin";
+         //--------------------
+         myCheckBoxPartyMounted.ToolTip = "All Party Members get Horse unless they are Mounts";
+         myCheckBoxPartyAirborne.ToolTip = "All Party Members get Pegasus unless they are Flying Characters";
+         //--------------------
+         myRadioButtonHexOriginal.ToolTip = "Party starts as originial game intended";
+         myRadioButtonHexRandom.ToolTip = "Party starts on random hex on the map";
+         myRadioButtonHexRandomTown.ToolTip = "Party starts on random town hex";
+         myRadioButtonHexRandomLeft.ToolTip = "Party starts on random left edge";
+         myRadioButtonHexRandomRight.ToolTip = "Party starts on random right edge";
+         myRadioButtonHexRandomBottom.ToolTip = "Party starts on random bottom edge";
+         //--------------------
+         myRadioButtonMonsterNormal.ToolTip = "Monsters start with original game attributes";
+         myRadioButtonMonsterLessEasy.ToolTip = "Monsters subtract 3 from endurance and combat";
+         myRadioButtonMonsterEasy.ToolTip = "Monsters subtract 1 from endurance and combat";
+         myRadioButtonMonsterEasiest.ToolTip = "Monsters have one endurance and combat";
+         //--------------------
+         myCheckBoxAutoLostIncrement.ToolTip = "Lost Chance Descreases on Consecutive Lost Rolls";
+         myCheckBoxExtendTime.ToolTip = "Extend End Time from 70 days to 105 days";
+         myCheckBoxReducedLodgingCosts.ToolTip = "Lodging in Town is Half Price";
+         //--------------------
+         myCheckBoxNoLostRoll.ToolTip = "Skip Lost Rolls";
+         myCheckBoxNoLostEvent.ToolTip = "Lost Encounters never occur";
+         myCheckBoxNoEvent.ToolTip = "Travel Encounters never occur. Lost Encounters may still occur.";
+         myCheckBoxNoRoadEvent.ToolTip = "Road Encounters never occur";
+         myCheckBoxNoCrossEvent.ToolTip = "Crossing River Encounters never occur";
+         myCheckBoxNoRaftEvent.ToolTip = "Raft Encounters never occur when rafting";
+         myCheckBoxNoAirEvent.ToolTip = "Air Events never occur when flying";
+         myCheckBoxForceLostEvent.ToolTip = "Lost Encounters always occur when Lost Roll is made";
+         myCheckBoxForceLostAfterCross.ToolTip = "Lost Encounter always occurs after Crossing River";
+         myCheckBoxForceEvent.ToolTip = "=Ground Encounter always occurs";
+         myCheckBoxForceCrossEvent.ToolTip = "River Crossing Encounter always occurs";
+         myCheckBoxForceRaftEvent.ToolTip = "Raft Event always occurs";
+         myCheckBoxForceAirEvent.ToolTip = "Air Event always occurs when flying";
          if (false == UpdateDisplay(myOptions))
          {
             Logger.Log(LogEnum.LE_ERROR, "OptionSelectionDialog(): UpdateDisplay() returned false");
@@ -58,16 +112,6 @@ namespace BarbarianPrince
             return false;
          }
          myCheckBoxAutoWealth.IsChecked = option.IsEnabled;
-         //-------------------------
-         option = options.Find("AutoLostDecrease");
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-AutoLostDecrease");
-            return false;
-         }
-         myCheckBoxAutoLostIncrement.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
-            isCustomConfig = true;
          //++++++++++++++++++++++++++++++++++++++++++++++++
          // Prince 
          option = options.Find("PrinceHorse");
@@ -501,10 +545,10 @@ namespace BarbarianPrince
          if (true == option.IsEnabled)
             isCustomHexConfig = true;
          //-------------------------
-         option = options.Find("0410");
+         option = options.Find("0722");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-0410");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-0722");
             return false;
          }
          myRadioButtonHexCountryside.IsChecked = option.IsEnabled;
@@ -641,6 +685,35 @@ namespace BarbarianPrince
                }
             }
          }
+         //++++++++++++++++++++++++++++++++++++++++++++++++
+         // Game Options
+         option = options.Find("AutoLostDecrease");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-AutoLostDecrease");
+            return false;
+         }
+         myCheckBoxAutoLostIncrement.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isCustomConfig = true;
+         option = options.Find("ExtendEndTime");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-ExtendEndTime");
+            return false;
+         }
+         myCheckBoxExtendTime.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isCustomConfig = true;
+         option = options.Find("ReduceLodgingCosts");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-ReduceLodgingCosts");
+            return false;
+         }
+         myCheckBoxReducedLodgingCosts.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isCustomConfig = true;
          //++++++++++++++++++++++++++++++++++++++++++++++++
          option = options.Find("NoLostRoll");
          if (null == option)
@@ -994,13 +1067,13 @@ namespace BarbarianPrince
             option.IsEnabled = false;
          else
             Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 0418");
-         option = myOptions.Find("0410");
+         option = myOptions.Find("0722");
          if (null != option)
             option.IsEnabled = false;
          else
-            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 0410");
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 0722");
          myRadioButtonHexForest.IsChecked = false;
-         option = myOptions.Find("0409");
+         option = myOptions.Find("0722");
          if (null != option)
             option.IsEnabled = false;
          else
@@ -1045,25 +1118,40 @@ namespace BarbarianPrince
       private void ResetMonsters()
       {
          Option option = null;
-         myRadioButtonMonsterNormal.IsChecked = false;
-         myRadioButtonMonsterLessEasy.IsChecked = false;
          option = myOptions.Find("LessHardMonsters");
          if (null != option)
             option.IsEnabled = false;
          else
             Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found LessHardMonsters");
-         myRadioButtonMonsterEasy.IsChecked = false;
          option = myOptions.Find("EasyMonsters");
          if (null != option)
             option.IsEnabled = false;
          else
             Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found EasyMonsters");
-         myRadioButtonMonsterEasiest.IsChecked = false;
          option = myOptions.Find("EasiestMonsters");
          if (null != option)
             option.IsEnabled = false;
          else
             Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found EasiestMonsters");
+      }
+      private void ResetGameOptions()
+      {
+         Option option = null;
+         option = myOptions.Find("AutoLostDecrease");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetGameOptions(): not found AutoLostDecrease");
+         option = myOptions.Find("ExtendEndTime");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetGameOptions(): not found ExtendEndTime");
+         option = myOptions.Find("ReduceLodgingCosts");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetGameOptions(): not found ReduceLodgingCosts");
       }
       private void ResetEvents()
       {
@@ -1185,7 +1273,7 @@ namespace BarbarianPrince
             case 10: option = myOptions.Find("0323"); break;
             case 11: option = myOptions.Find("1923"); break;
             case 12: option = myOptions.Find("0418"); break;
-            case 13: option = myOptions.Find("0410"); break;
+            case 13: option = myOptions.Find("0722"); break;
             case 14: option = myOptions.Find("0409"); break;
             case 15: option = myOptions.Find("0406"); break;
             case 16: option = myOptions.Find("0405"); break;
@@ -1239,7 +1327,7 @@ namespace BarbarianPrince
                option.IsEnabled = !option.IsEnabled;
          }
       }
-      private void SelectRandomGameOptionChoice()
+      private void SelectRandomPartyOptionChoice()
       {
          int choice = Utilities.RandomGenerator.Next(2);
          if (1 == choice)
@@ -1259,12 +1347,33 @@ namespace BarbarianPrince
             else
                option.IsEnabled = !option.IsEnabled;
          }
-         choice = Utilities.RandomGenerator.Next(2);
+      }
+      private void SelectRandomGameOptionChoice()
+      {
+         int choice = Utilities.RandomGenerator.Next(2);
          if (1 == choice)
          {
             Option option = myOptions.Find("AutoLostDecrease");
             if (null == option)
-               Logger.Log(LogEnum.LE_ERROR, "SelectRandomPrinceChoice(): myOptions.Find() for option=AutoLostDecrease");
+               Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=AutoLostDecrease");
+            else
+               option.IsEnabled = !option.IsEnabled;
+         }
+         choice = Utilities.RandomGenerator.Next(2);
+         if (1 == choice)
+         {
+            Option option = myOptions.Find("ExtendEndTime");
+            if (null == option)
+               Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=ExtendEndTime");
+            else
+               option.IsEnabled = !option.IsEnabled;
+         }
+         choice = Utilities.RandomGenerator.Next(2);
+         if (1 == choice)
+         {
+            Option option = myOptions.Find("ReduceLodgingCosts");
+            if (null == option)
+               Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=ReduceLodgingCosts");
             else
                option.IsEnabled = !option.IsEnabled;
          }
@@ -1281,18 +1390,13 @@ namespace BarbarianPrince
       private void StackPanelSummary_Click(object sender, RoutedEventArgs e)
       {
          RadioButton rb = (RadioButton)sender;
-         myCheckBoxAutoLostIncrement.IsChecked = false;
-         Option option = myOptions.Find("AutoLostDecrease");
-         if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): myOptions.Find() for name=" + rb.Name);
-         else
-            option.IsEnabled = false;
          ResetPrince();
          ResetParty();
          ResetPartyMembers();
          ResetPartyOptions();
          ResetHex();
          ResetMonsters();
+         ResetGameOptions();
          ResetEvents();
          myIsRandomGame = false;
          switch (rb.Name)
@@ -1310,6 +1414,7 @@ namespace BarbarianPrince
                SelectRandomHexChoice();
                SelectRandomPrinceChoice();
                SelectRandomGameOptionChoice();
+               SelectRandomPartyOptionChoice();
                break;
             default: Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): reached default name=" + rb.Name); return;
          }
@@ -1335,16 +1440,6 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "StackPanelOptions_Click(): myOptions.Find() for name=" + cb.Name);
                else
                   option.IsEnabled = !option.IsEnabled;
-               break;
-            case "myCheckBoxAutoLostIncrement":
-               myIsRandomGame = false;
-               option = myOptions.Find("AutoLostDecrease");
-               if (null == option)
-                  Logger.Log(LogEnum.LE_ERROR, "StackPanelOptions_Click(): myOptions.Find() for name=" + cb.Name);
-               else
-                  option.IsEnabled = !option.IsEnabled;
-               if (false == UpdateDisplay(myOptions))
-                  Logger.Log(LogEnum.LE_ERROR, "StackPanelOptions_Click(): UpdateDisplay() returned false for name=" + cb.Name);
                break;
             default: Logger.Log(LogEnum.LE_ERROR, "StackPanelOptions_Click(): reached default name=" + cb.Name); return;
          }
@@ -1439,6 +1534,24 @@ namespace BarbarianPrince
          if (false == UpdateDisplay(myOptions))
             Logger.Log(LogEnum.LE_ERROR, "StackPanelPartyOption_Click(): UpdateDisplay() returned false for name=" + cb.Name);
       }
+      private void StackPanelGameOption_Click(object sender, RoutedEventArgs e)
+      {
+         CheckBox cb = (CheckBox)sender;
+         Option option = null;
+         switch (cb.Name)
+         {
+            case "myCheckBoxAutoLostIncrement": option = myOptions.Find("AutoLostDecrease"); break;
+            case "myCheckBoxExtendTime": option = myOptions.Find("ExtendEndTime"); break;
+            case "myCheckBoxReducedLodgingCosts": option = myOptions.Find("ReduceLodgingCosts"); break;
+            default: Logger.Log(LogEnum.LE_ERROR, "StackPanelGameOption_Click(): reached default name=" + cb.Name); return;
+         }
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "StackPanelGameOption_Click(): myOptions.Find() for name=" + cb.Name);
+         else
+            option.IsEnabled = !option.IsEnabled;
+         if (false == UpdateDisplay(myOptions))
+            Logger.Log(LogEnum.LE_ERROR, "StackPanelGameOption_Click(): UpdateDisplay() returned false for name=" + cb.Name);
+      }
       private void StackPanelHex_Click(object sender, RoutedEventArgs e)
       {
          RadioButton rb = (RadioButton)sender;
@@ -1462,7 +1575,7 @@ namespace BarbarianPrince
             case "myRadioButtonHexDrogat": option = myOptions.Find("0323"); break;
             case "myRadioButtonHexLadyAeravir": option = myOptions.Find("1923"); break;
             case "myRadioButtonHexFarmland": option = myOptions.Find("0418"); break;
-            case "myRadioButtonHexCountryside": option = myOptions.Find("0410"); break;
+            case "myRadioButtonHexCountryside": option = myOptions.Find("0722"); break;
             case "myRadioButtonHexForest": option = myOptions.Find("0409"); break;
             case "myRadioButtonHexHill": option = myOptions.Find("0406"); break;
             case "myRadioButtonHexMountain": option = myOptions.Find("0405"); break;

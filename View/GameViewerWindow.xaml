@@ -16,101 +16,106 @@
         SizeChanged="SizeChangedGameViewerWindow" 
         ContentRendered="ContentRenderedGameViewerWindow"
         Closed="ClosedGameViewerWindow" >
-    <DockPanel x:Name="myDockPanelTop">
-        <Menu x:Name="myMainMenu" DockPanel.Dock="Top">
-            <MenuItem Header="_File"  x:Name="myMenuItemTopLevel1" InputGestureText="Ctrl+F" Width="120" />
-            <MenuItem Header="_View" x:Name="myMenuItemTopLevel2" InputGestureText="Ctrl+V" Width="120"/>
-            <MenuItem Header="_Options" x:Name="myMenuItemTopLevel3" InputGestureText="Ctrl+O" Width="120"/>
-            <MenuItem Header="_Help" x:Name="myMenuItemTopLevel4" InputGestureText="Ctrl+H" Width="120" />
-        </Menu>
-        <StatusBar x:Name="myStatusBar" DockPanel.Dock="Bottom"></StatusBar>
-        <DockPanel Name="myDockPanelInside" >
-            <DockPanel Name="myDockPanelControls" MinWidth="617" MaxWidth="617" DockPanel.Dock="Left" Margin="0,0,0,0">
-                <Separator Name="mySeparator0" DockPanel.Dock="Top" Height="5" />
-                <StackPanel Name="myStackPanelTimeTrackDay" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,2,5,2">
-                    <Label x:Name="myLabelTimeTrack" Content="TIME TRACK" Margin="0,0,100,0"/>
-                    <Button Name="myButton1stDay" Height="42" Width="42" Content="1st Day" FontSize="10" IsEnabled="True" FontWeight="Bold" Background="#FF4333FF" />
-                    <Button Name="myButton2ndDay" Height="42" Width="42" Content="2nd Day" FontSize="10" IsEnabled="False" />
-                    <Button Name="myButton3rdDay" Height="42" Width="42" Content="3rd Day" FontSize="10" IsEnabled="False" />
-                    <Button Name="myButton4thDay" Height="42" Width="42" Content="4th Day" FontSize="10" IsEnabled="False" />
-                    <Button Name="myButton5thDay" Height="42" Width="42" Content="5th Day" FontSize="10" IsEnabled="False" />
-                    <Button Name="myButton6thDay" Height="42" Width="42" Content="6th Day" FontSize="10" IsEnabled="False" />
-                    <Button Name="myButton7thDay" Height="42" Width="42" Content="7th Day" FontSize="10" IsEnabled="False" />
-                </StackPanel>
-                <StackPanel Name="myStackPanelTimeTrackWeek" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" Margin="-4,0,5,5">
-                    <Button Name="myButton1stWeek" Height="42" Width="42" Content="1st Week" FontSize="8" IsEnabled="True" FontWeight="Bold" Background="#FF4333FF" />
-                    <Button Name="myButton2ndWeek" Height="42" Width="42" Content="2nd Week" FontSize="8" IsEnabled="False" />
-                    <Button Name="myButton3rdWeek" Height="42" Width="42" Content="3rd Week" FontSize="8" IsEnabled="False" />
-                    <Button Name="myButton4thWeek" Height="42" Width="42" Content="4th Week" FontSize="8" IsEnabled="False" />
-                    <Button Name="myButton5thWeek" Height="42" Width="42" Content="5th Week" FontSize="8" IsEnabled="False" />
-                    <Button Name="myButton6thWeek" Height="42" Width="42" Content="6th Week" FontSize="8" IsEnabled="False" />
-                    <Button Name="myButton7thWeek" Height="42" Width="42" Content="7th Week" FontSize="8" IsEnabled="False" />
-                    <Button Name="myButton8thWeek" Height="42" Width="42" Content="8th Week" FontSize="8" IsEnabled="False" />
-                    <Button Name="myButton9thWeek" Height="42" Width="42" Content="9th Week" FontSize="8" IsEnabled="False" />
-                    <Button Name="myButton10thWeek" Height="42" Width="42" Content="10th Week" FontSize="8" IsEnabled="False" />
-                </StackPanel>
-                <Separator Name="mySeparator1" DockPanel.Dock="Top" Height="5" />
-                <StackPanel Name="myStackPanelFoodSupply100s" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5,5,2">
-                    <Label x:Name="myLabelFoodSupply" Content="FOOD SUPPLY" HorizontalAlignment="Left" Margin="0,0,260,0"/>
-                    <Button Name="myButtonFoodSupply000" Height="42" Width="42"  Content="000" IsEnabled="True" FontWeight="Bold" Background="#FF4333FF" />
-                    <Button Name="myButtonFoodSupply100" Height="42" Width="42"  Content="100" IsEnabled="False" />
-                    <Button Name="myButtonFoodSupply200" Height="42" Width="42"  Content="200" IsEnabled="False" />
-                </StackPanel>
-                <StackPanel Name="myStackPanelFoodSupply10s" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,2">
-                    <Button Name="myButtonFoodSupply00" Height="42" Width="42" Content="00" IsEnabled="True" FontWeight="Bold" Background="#FF4333FF" />
-                    <Button Name="myButtonFoodSupply10" Height="42" Width="42" Content="10" IsEnabled="False" />
-                    <Button Name="myButtonFoodSupply20" Height="42" Width="42" Content="20" IsEnabled="False" />
-                    <Button Name="myButtonFoodSupply30" Height="42" Width="42" Content="30" IsEnabled="False" />
-                    <Button Name="myButtonFoodSupply40" Height="42" Width="42" Content="40" IsEnabled="False" />
-                    <Button Name="myButtonFoodSupply50" Height="42" Width="42" Content="50" IsEnabled="False" />
-                    <Button Name="myButtonFoodSupply60" Height="42" Width="42" Content="60" IsEnabled="False" />
-                    <Button Name="myButtonFoodSupply70" Height="42" Width="42" Content="70" IsEnabled="False" />
-                    <Button Name="myButtonFoodSupply80" Height="42" Width="42" Content="80" IsEnabled="False" />
-                    <Button Name="myButtonFoodSupply90" Height="42" Width="42" Content="90" IsEnabled="False" />
-                </StackPanel>
-                <StackPanel Name="myStackPanelFoodSupply1s" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,5">
-                    <Button Name="myButtonFoodSupply0" Height="42" Width="42" Content="0" IsEnabled="True" FontWeight="Bold" Background="#FF4333FF" />
-                    <Button Name="myButtonFoodSupply1" Height="42" Width="42" Content="1" IsEnabled="False" />
-                    <Button Name="myButtonFoodSupply2" Height="42" Width="42" Content="2" IsEnabled="False" />
-                    <Button Name="myButtonFoodSupply3" Height="42" Width="42" Content="3" IsEnabled="False" />
-                    <Button Name="myButtonFoodSupply4" Height="42" Width="42" Content="4" IsEnabled="False" />
-                    <Button Name="myButtonFoodSupply5" Height="42" Width="42" Content="5" IsEnabled="False" />
-                    <Button Name="myButtonFoodSupply6" Height="42" Width="42" Content="6" IsEnabled="False" />
-                    <Button Name="myButtonFoodSupply7" Height="42" Width="42" Content="7" IsEnabled="False" />
-                    <Button Name="myButtonFoodSupply8" Height="42" Width="42" Content="8" IsEnabled="False" />
-                    <Button Name="myButtonFoodSupply9" Height="42" Width="42" Content="9" IsEnabled="False" />
-                </StackPanel>
-                <Separator Name="mySeparator2" DockPanel.Dock="Top" Height="5"/>
-                <StackPanel Name="myStackPanelEndurance" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,5">
-                    <Label x:Name="myLabelEnduarance" Content="Barbarian Prince&#xD;&#xA;ENDURANCE" Height="40" VerticalAlignment="Center" />
-                    <Button Name="myButtonFoodEndurance11" Height="42" Width="42" Content="11" IsEnabled="False" Visibility="Hidden"/>
-                    <Button Name="myButtonFoodEndurance10" Height="42" Width="42" Content="10" IsEnabled="False"  Visibility="Hidden"/>
-                    <Button x:Name="myButtonFoodEndurance9" Height="42" Width="42" Content="9" IsEnabled="True" FontWeight="Bold" Background="#FF4333FF" />
-                    <Button x:Name="myButtonFoodEndurance8" Height="42" Width="42" Content="8" IsEnabled="False" />
-                    <Button x:Name="myButtonFoodEndurance7" Height="42" Width="42" Content="7" IsEnabled="False" />
-                    <Button x:Name="myButtonFoodEndurance6" Height="42" Width="42" Content="6" IsEnabled="False" />
-                    <Button x:Name="myButtonFoodEndurance5" Height="42" Width="42" Content="5" IsEnabled="False" />
-                    <Button x:Name="myButtonFoodEndurance4" Height="42" Width="42" Content="4" IsEnabled="False" />
-                    <Button x:Name="myButtonFoodEndurance3" Height="42" Width="42" Content="3" IsEnabled="False" />
-                    <Button x:Name="myButtonFoodEndurance2" Height="42" Width="42" Content="2" IsEnabled="False" />
-                    <Button x:Name="myButtonFoodEndurance1" Height="42" Width="42" Content="unc." IsEnabled="False" />
-                    <Button Name="myButtonFoodEndurance0" Height="42" Width="42" Content="dead" IsEnabled="False" />
-                </StackPanel>
-                <Separator Name="mySeparator3" DockPanel.Dock="Top" Height="5"/>
-                <StackPanel Name="myStackPanelDailyActions" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,5" Visibility="Hidden">
-                    <Label x:Name="myLabelDailyActions" Content="DAILY ACTIONS" />
-                </StackPanel>
-                <Separator Name="mySeparator4" DockPanel.Dock="Top" Height="5"/>
-                <ScrollViewer Name="myScrollViewerTextBlock" MaxWidth="617" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0" Background="#FFB9EA9E">
-                    <TextBlock Name="myTextBlockDisplay" MinWidth="590" MaxWidth="590" FontFamily="Georgia" FontSize="24" TextWrapping="WrapWithOverflow" IsHyphenationEnabled="true" LineStackingStrategy="BlockLineHeight" Margin="0,0,0,0"  Background="#FFB9EA9E" Height="654" Width="610">
-                    </TextBlock>
-                </ScrollViewer>
-            </DockPanel>
-            <ScrollViewer Name="myScollViewerInside" Height="1000" Width="827" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
-                <Canvas Name="myCanvas" Height="985" Width="810">
-                    <Image Name="myMap" Source="/Images/Map.gif" Height="985" Width="810" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" />
-                </Canvas>
+   <DockPanel x:Name="myDockPanelTop">
+      <Menu x:Name="myMainMenu" DockPanel.Dock="Top">
+         <MenuItem Header="_File"  x:Name="myMenuItemTopLevel1" InputGestureText="Ctrl+F" Width="120" />
+         <MenuItem Header="_View" x:Name="myMenuItemTopLevel2" InputGestureText="Ctrl+V" Width="120"/>
+         <MenuItem Header="_Options" x:Name="myMenuItemTopLevel3" InputGestureText="Ctrl+O" Width="120"/>
+         <MenuItem Header="_Help" x:Name="myMenuItemTopLevel4" InputGestureText="Ctrl+H" Width="120" />
+      </Menu>
+      <StatusBar x:Name="myStatusBar" DockPanel.Dock="Bottom"></StatusBar>
+      <DockPanel Name="myDockPanelInside" >
+         <DockPanel Name="myDockPanelControls" MinWidth="617" MaxWidth="617" DockPanel.Dock="Left" Margin="0,0,0,0">
+            <Separator Name="mySeparator0" DockPanel.Dock="Top" Height="5" />
+            <StackPanel Name="myStackPanelTimeTrackDay" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,2,5,2">
+               <Label x:Name="myLabelTimeTrack" Content="TIME TRACK" Margin="0,0,100,0"/>
+               <Button Name="myButton1stDay" Height="42" Width="42" Content="1st Day" FontSize="10" IsEnabled="True" FontWeight="Bold" Background="#FF4333FF" />
+               <Button Name="myButton2ndDay" Height="42" Width="42" Content="2nd Day" FontSize="10" IsEnabled="False" />
+               <Button Name="myButton3rdDay" Height="42" Width="42" Content="3rd Day" FontSize="10" IsEnabled="False" />
+               <Button Name="myButton4thDay" Height="42" Width="42" Content="4th Day" FontSize="10" IsEnabled="False" />
+               <Button Name="myButton5thDay" Height="42" Width="42" Content="5th Day" FontSize="10" IsEnabled="False" />
+               <Button Name="myButton6thDay" Height="42" Width="42" Content="6th Day" FontSize="10" IsEnabled="False" />
+               <Button Name="myButton7thDay" Height="42" Width="42" Content="7th Day" FontSize="10" IsEnabled="False" />
+            </StackPanel>
+            <StackPanel Name="myStackPanelTimeTrackWeek" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" Margin="-4,0,5,5">
+               <Button Name="myButton1stWeek" Height="42" Width="42" Content="1st Week" FontSize="8" IsEnabled="True" FontWeight="Bold" Background="#FF4333FF" />
+               <Button Name="myButton2ndWeek" Height="42" Width="42" Content="2nd Week" FontSize="8" IsEnabled="False" />
+               <Button Name="myButton3rdWeek" Height="42" Width="42" Content="3rd Week" FontSize="8" IsEnabled="False" />
+               <Button Name="myButton4thWeek" Height="42" Width="42" Content="4th Week" FontSize="8" IsEnabled="False" />
+               <Button Name="myButton5thWeek" Height="42" Width="42" Content="5th Week" FontSize="8" IsEnabled="False" />
+               <Button Name="myButton6thWeek" Height="42" Width="42" Content="6th Week" FontSize="8" IsEnabled="False" />
+               <Button Name="myButton7thWeek" Height="42" Width="42" Content="7th Week" FontSize="8" IsEnabled="False" />
+               <Button Name="myButton8thWeek" Height="42" Width="42" Content="8th Week" FontSize="8" IsEnabled="False" />
+               <Button Name="myButton9thWeek" Height="42" Width="42" Content="9th Week" FontSize="8" IsEnabled="False" />
+               <Button Name="myButton10thWeek" Height="42" Width="42" Content="10th Week" FontSize="8" IsEnabled="False" />
+               <Button Name="myButton11thWeek" Height="42" Width="42" Content="11th Week" FontSize="8" IsEnabled="False" />
+               <Button Name="myButton12thWeek" Height="42" Width="42" Content="12th Week" FontSize="8" IsEnabled="False" />
+               <Button Name="myButton13thWeek" Height="42" Width="42" Content="13th Week" FontSize="8" IsEnabled="False" />
+               <Button Name="myButton14thWeek" Height="42" Width="42" Content="14th Week" FontSize="8" IsEnabled="False" />
+               <Button Name="myButton15thWeek" Height="42" Width="42" Content="15th Week" FontSize="8" IsEnabled="False" />
+            </StackPanel>
+            <Separator Name="mySeparator1" DockPanel.Dock="Top" Height="5" />
+            <StackPanel Name="myStackPanelFoodSupply100s" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5,5,2">
+               <Label x:Name="myLabelFoodSupply" Content="FOOD SUPPLY" HorizontalAlignment="Left" Margin="0,0,260,0"/>
+               <Button Name="myButtonFoodSupply000" Height="42" Width="42"  Content="000" IsEnabled="True" FontWeight="Bold" Background="#FF4333FF" />
+               <Button Name="myButtonFoodSupply100" Height="42" Width="42"  Content="100" IsEnabled="False" />
+               <Button Name="myButtonFoodSupply200" Height="42" Width="42"  Content="200" IsEnabled="False" />
+            </StackPanel>
+            <StackPanel Name="myStackPanelFoodSupply10s" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,2">
+               <Button Name="myButtonFoodSupply00" Height="42" Width="42" Content="00" IsEnabled="True" FontWeight="Bold" Background="#FF4333FF" />
+               <Button Name="myButtonFoodSupply10" Height="42" Width="42" Content="10" IsEnabled="False" />
+               <Button Name="myButtonFoodSupply20" Height="42" Width="42" Content="20" IsEnabled="False" />
+               <Button Name="myButtonFoodSupply30" Height="42" Width="42" Content="30" IsEnabled="False" />
+               <Button Name="myButtonFoodSupply40" Height="42" Width="42" Content="40" IsEnabled="False" />
+               <Button Name="myButtonFoodSupply50" Height="42" Width="42" Content="50" IsEnabled="False" />
+               <Button Name="myButtonFoodSupply60" Height="42" Width="42" Content="60" IsEnabled="False" />
+               <Button Name="myButtonFoodSupply70" Height="42" Width="42" Content="70" IsEnabled="False" />
+               <Button Name="myButtonFoodSupply80" Height="42" Width="42" Content="80" IsEnabled="False" />
+               <Button Name="myButtonFoodSupply90" Height="42" Width="42" Content="90" IsEnabled="False" />
+            </StackPanel>
+            <StackPanel Name="myStackPanelFoodSupply1s" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,5">
+               <Button Name="myButtonFoodSupply0" Height="42" Width="42" Content="0" IsEnabled="True" FontWeight="Bold" Background="#FF4333FF" />
+               <Button Name="myButtonFoodSupply1" Height="42" Width="42" Content="1" IsEnabled="False" />
+               <Button Name="myButtonFoodSupply2" Height="42" Width="42" Content="2" IsEnabled="False" />
+               <Button Name="myButtonFoodSupply3" Height="42" Width="42" Content="3" IsEnabled="False" />
+               <Button Name="myButtonFoodSupply4" Height="42" Width="42" Content="4" IsEnabled="False" />
+               <Button Name="myButtonFoodSupply5" Height="42" Width="42" Content="5" IsEnabled="False" />
+               <Button Name="myButtonFoodSupply6" Height="42" Width="42" Content="6" IsEnabled="False" />
+               <Button Name="myButtonFoodSupply7" Height="42" Width="42" Content="7" IsEnabled="False" />
+               <Button Name="myButtonFoodSupply8" Height="42" Width="42" Content="8" IsEnabled="False" />
+               <Button Name="myButtonFoodSupply9" Height="42" Width="42" Content="9" IsEnabled="False" />
+            </StackPanel>
+            <Separator Name="mySeparator2" DockPanel.Dock="Top" Height="5"/>
+            <StackPanel Name="myStackPanelEndurance" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,5">
+               <Label x:Name="myLabelEnduarance" Content="Barbarian Prince&#xD;&#xA;ENDURANCE" Height="40" VerticalAlignment="Center" />
+               <Button Name="myButtonFoodEndurance11" Height="42" Width="42" Content="11" IsEnabled="False" Visibility="Hidden"/>
+               <Button Name="myButtonFoodEndurance10" Height="42" Width="42" Content="10" IsEnabled="False"  Visibility="Hidden"/>
+               <Button x:Name="myButtonFoodEndurance9" Height="42" Width="42" Content="9" IsEnabled="True" FontWeight="Bold" Background="#FF4333FF" />
+               <Button x:Name="myButtonFoodEndurance8" Height="42" Width="42" Content="8" IsEnabled="False" />
+               <Button x:Name="myButtonFoodEndurance7" Height="42" Width="42" Content="7" IsEnabled="False" />
+               <Button x:Name="myButtonFoodEndurance6" Height="42" Width="42" Content="6" IsEnabled="False" />
+               <Button x:Name="myButtonFoodEndurance5" Height="42" Width="42" Content="5" IsEnabled="False" />
+               <Button x:Name="myButtonFoodEndurance4" Height="42" Width="42" Content="4" IsEnabled="False" />
+               <Button x:Name="myButtonFoodEndurance3" Height="42" Width="42" Content="3" IsEnabled="False" />
+               <Button x:Name="myButtonFoodEndurance2" Height="42" Width="42" Content="2" IsEnabled="False" />
+               <Button x:Name="myButtonFoodEndurance1" Height="42" Width="42" Content="unc." IsEnabled="False" />
+               <Button Name="myButtonFoodEndurance0" Height="42" Width="42" Content="dead" IsEnabled="False" />
+            </StackPanel>
+            <Separator Name="mySeparator3" DockPanel.Dock="Top" Height="5"/>
+            <StackPanel Name="myStackPanelDailyActions" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,5" Visibility="Hidden">
+               <Label x:Name="myLabelDailyActions" Content="DAILY ACTIONS" />
+            </StackPanel>
+            <Separator Name="mySeparator4" DockPanel.Dock="Top" Height="5"/>
+            <ScrollViewer Name="myScrollViewerTextBlock" MaxWidth="617" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0" Background="#FFB9EA9E">
+               <TextBlock Name="myTextBlockDisplay" MinWidth="590" MaxWidth="590" FontFamily="Georgia" FontSize="24" TextWrapping="WrapWithOverflow" IsHyphenationEnabled="true" LineStackingStrategy="BlockLineHeight" Margin="0,0,0,0"  Background="#FFB9EA9E" Height="654" Width="610">
+               </TextBlock>
             </ScrollViewer>
-        </DockPanel>
-    </DockPanel>
+         </DockPanel>
+         <ScrollViewer Name="myScollViewerInside" Height="1000" Width="827" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
+            <Canvas Name="myCanvas" Height="985" Width="810">
+               <Image Name="myMap" Source="/Images/Map.gif" Height="985" Width="810" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" />
+            </Canvas>
+         </ScrollViewer>
+      </DockPanel>
+   </DockPanel>
 </Window>
