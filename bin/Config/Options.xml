@@ -157,10 +157,10 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="AutoLostDecrease">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ExtendEndTime">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="ReduceLodgingCosts">
     <IsEnabled value="False" />
@@ -193,7 +193,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="ForceEvent">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="ForceCrossEvent">
     <IsEnabled value="False" />

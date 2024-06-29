@@ -2990,7 +2990,7 @@ e128c	"<Bold>e128c Merchant with Food for Sale</Bold>
 <LineBreak/><LineBreak/>
                                           <InlineUIContainer><Image Source='../../Images/Merchant.gif' Name='EncounterEnd' Height='200'  Width='125'></Image></InlineUIContainer>"
 e128d	"<Bold>e128d Merchant OutWits You in Game of Chance</Bold>
-<LineBreak/><LineBreak/>If the roll exceeds wit and wiles, you spend up to 10gp needlessly. 'Have you ever heard of Plato, Aristotle, Socrates? Morons!'
+<LineBreak/><LineBreak/>If the roll exceeds wit and wiles, you spend up to 10gp needlessly. ""Have you ever heard of Plato, Aristotle, Socrates? Morons!""
 <LineBreak/><LineBreak/> Roll one die:  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e128e	"<Bold>e128e Merchant Selling Healing Potion Sale</Bold>
 <LineBreak/><LineBreak/>Merchant has healing potions for sale. See
@@ -3563,7 +3563,7 @@ This allows you to add two to your die roll when seeking an audience
  with that Lord in his hex or residence."
 e158	"<Bold>e158 Hostile Guards</Bold>
 <LineBreak/><LineBreak/>
-You leave the rest of your party in an atrium and are then confronted by two hostile guards. Each has combat skill 5, endurance 6, and wealth 7. If you pay gold as a bribe, they will let you pass. 
+You leave the rest of your party in an atrium and are then confronted by two hostile guards. Each has combat skill 5, endurance 6, and wealth 7. If you pay 20 gold as a bribe, they will let you pass. 
 <LineBreak/><LineBreak/>
 If you bribe, roll again on the 'Seeking audience' table
  <InlineUIContainer><Button Content='r211' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
@@ -4804,7 +4804,7 @@ e342a	"<Bold>e342a More Talking</Bold> <InlineUIContainer><Button Content='e341'
 <LineBreak/><LineBreak/>
 Characters reveal themself gradually. More talking is required to review their true nature.
 <LineBreak/><LineBreak/>
-<InlineUIContainer><Button Content='Talk ' FontFamily='Courier New'  FontSize='12' Name='e341'></Button></InlineUIContainer> further or<LineBreak/>
+<InlineUIContainer><Button Content='Talk ' FontFamily='Courier New'  FontSize='12' Name=""e341""></Button></InlineUIContainer> further or<LineBreak/>
 <InlineUIContainer><Button Content='Pass ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>  with dignity."
 e343	"<Bold>e343 Victim Selection</Bold>
 <LineBreak/><LineBreak/>One character in your party is the victim or target of an attack. If your party is just you, then you are the target.
