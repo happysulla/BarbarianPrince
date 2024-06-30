@@ -250,7 +250,7 @@ namespace BarbarianPrince
          UpdateStackPanelDailyActions(gi);
          UpdateTimeTrack(gi);
          UpdateFoodSupply(gi);
-         UpdatePrinceEndurance(gi);
+         UpdatePrinceEnduranceStatus(gi);
          switch (action)
          {
             case GameAction.E228ShowTrueLove:
@@ -558,7 +558,7 @@ namespace BarbarianPrince
          myButtonFoodSupply1s[k].FontWeight = FontWeights.Bold;
          myButtonFoodSupply1s[k].IsEnabled = true;
       }
-      private void UpdatePrinceEndurance(IGameInstance gi)
+      private void UpdatePrinceEnduranceStatus(IGameInstance gi)
       {
          for (int i = 0; i < 12; ++i)
          {
@@ -585,7 +585,8 @@ namespace BarbarianPrince
          int healthRemaining = gi.Prince.Endurance - gi.Prince.Wound - gi.Prince.Poison;
          if ((healthRemaining < 0) || (11 < healthRemaining))
          {
-            Logger.Log(LogEnum.LE_ERROR, "UpdatePrinceEndurance(): healthRemaining=" + healthRemaining.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "UpdatePrinceEnduranceStatus(): healthRemaining=" + healthRemaining.ToString());
+            healthRemaining = 0;
             return;
          }
          myButtonEndurances[healthRemaining].Background = Utilities.theBrushControlButton;
@@ -1036,6 +1037,10 @@ namespace BarbarianPrince
          {
             switch (action)
             {
+               case GameAction.EndGameClose:
+                  GameAction outActionClose = GameAction.EndGameExit;
+                  myGameEngine.PerformAction(ref myGameInstance, ref outActionClose);
+                  break;
                case GameAction.EndGameLost:
                case GameAction.EndGameWin:
                   StringBuilder sbEnd = new StringBuilder();
@@ -2081,6 +2086,11 @@ namespace BarbarianPrince
             keyGesture = new KeyGesture(Key.O, ModifierKeys.Control);
             InputBindings.Add(new KeyBinding(command, keyGesture));
             CommandBindings.Add(new CommandBinding(command, mmv.MenuItemFileOpen_Click));
+            //------------------------------------------------
+            command = new RoutedCommand();
+            keyGesture = new KeyGesture(Key.C, ModifierKeys.Control);
+            InputBindings.Add(new KeyBinding(command, keyGesture));
+            CommandBindings.Add(new CommandBinding(command, mmv.MenuItemClose_Click));
             //------------------------------------------------
             command = new RoutedCommand();
             keyGesture = new KeyGesture(Key.S, ModifierKeys.Control);

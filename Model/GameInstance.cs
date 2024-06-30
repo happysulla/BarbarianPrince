@@ -42,8 +42,8 @@ namespace BarbarianPrince
          Logger.SetOn(LogEnum.LE_COMBAT_RESULT);
          //Logger.SetOn(LogEnum.LE_COMBAT_TROLL_HEAL);
          Logger.SetOn(LogEnum.LE_COMBAT_WIZARD);
-         //Logger.SetOn(LogEnum.LE_MAPITEM_WOUND);
-         //Logger.SetOn(LogEnum.LE_MAPITEM_POISION);
+         Logger.SetOn(LogEnum.LE_MAPITEM_WOUND);
+         Logger.SetOn(LogEnum.LE_MAPITEM_POISION);
          Logger.SetOn(LogEnum.LE_END_ENCOUNTER);
          //Logger.SetOn(LogEnum.LE_HEX_WITHIN_RANGE);
          //Logger.SetOn(LogEnum.LE_STARVATION_STATE_CHANGE);

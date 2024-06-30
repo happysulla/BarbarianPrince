@@ -105,6 +105,7 @@ namespace BarbarianPrince
       EndGameWin,
       EndGameLost,
       EndGameExit,
+      EndGameClose,
 
       SetupShowCalArath,
       SetupShowStartingWealth,

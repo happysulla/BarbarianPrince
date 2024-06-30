@@ -475,7 +475,30 @@ namespace BarbarianPrince
             myPoisonSpots.Add(spot);
          }
          //------------------------------------------------
-         int healthRemaining = this.Endurance - this.Wound - this.Poison;
+         int healthRemaining = this.Endurance;
+         int diff = healthRemaining - this.Wound;
+         if( diff < 0 )
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetWounds(): hr=" + healthRemaining.ToString() + " w=" + this.Wound.ToString() + " p=" + this.Poison.ToString());
+            this.Wound = healthRemaining;
+            this.Poison = 0;
+            healthRemaining = 0;
+         }
+         else
+         {
+            healthRemaining -= this.Wound;
+            diff = healthRemaining - this.Poison;
+            if (diff < 0)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "SetWounds(): hr=" + healthRemaining.ToString() + " w=" + this.Wound.ToString() + " p=" + this.Poison.ToString());
+               this.Poison = healthRemaining;
+               healthRemaining = 0;
+            }
+            else
+            {
+               healthRemaining -= this.Poison;
+            }
+         }
          if ((1 == healthRemaining) && (1 < this.Endurance))
             this.IsUnconscious = true;
          else if (0 == healthRemaining)

@@ -12,7 +12,7 @@ namespace BarbarianPrince
 {
    public static class CustomCommands
    {
-      public static readonly RoutedUICommand NewCommand = new RoutedUICommand("New","New", typeof(CustomCommands), new InputGestureCollection(){ new KeyGesture(Key.N, ModifierKeys.Control)} );
+      public static readonly RoutedUICommand NewCommand = new RoutedUICommand("New", "New", typeof(CustomCommands), new InputGestureCollection() { new KeyGesture(Key.N, ModifierKeys.Control) });
    }
    class MainMenuViewer : IView
    {
@@ -103,7 +103,7 @@ namespace BarbarianPrince
                }
             } // end foreach (Control item in myMainMenu.Items)
          } // end foreach (Control item in myMainMenu.Items)
-         #if UT2
+#if UT2
             myMenuItemTopLevel1.Width = 300;
             myMenuItemTopLevel1.Click += MenuItemStart_Click;
             myMenuItemTopLevel2.Visibility = Visibility.Hidden;
@@ -120,28 +120,33 @@ namespace BarbarianPrince
             subItem3.Header = "_Cleanup";
             subItem3.Click += MenuItemCleanup_Click;
             myMenuItemTopLevel1.Items.Add(subItem3);
-         #else
-            MenuItem subItem1 = new MenuItem();
-            subItem1.Header = "_New...";
-            subItem1.InputGestureText = "Ctrl+N";
-            subItem1.Click += MenuItemNew_Click;
-            myMenuItemTopLevel1.Items.Add(subItem1);
-            MenuItem subItem2 = new MenuItem();
-            subItem2.Header = "_Open...";
-            subItem2.InputGestureText = "Ctrl+O";
-            subItem2.Click += MenuItemFileOpen_Click;
-            myMenuItemTopLevel1.Items.Add(subItem2);
-            MenuItem subItem3 = new MenuItem();
-            subItem3.Header = "_Save As...";
-            subItem3.InputGestureText = "Ctrl+S";
-            subItem3.Click += MenuItemSaveAs_Click;
-            myMenuItemTopLevel1.Items.Add(subItem3);
-            MenuItem subItem4 = new MenuItem();
-            subItem4.Header = "_Options...";
-            subItem4.InputGestureText = "Ctrl+Shift+O";
-            subItem4.Click += MenuItemFileOptions_Click;
-            myMenuItemTopLevel1.Items.Add(subItem4);
-   #endif
+#else
+         MenuItem subItem1 = new MenuItem();
+         subItem1.Header = "_New...";
+         subItem1.InputGestureText = "Ctrl+N";
+         subItem1.Click += MenuItemNew_Click;
+         myMenuItemTopLevel1.Items.Add(subItem1);
+         MenuItem subItem2 = new MenuItem();
+         subItem2.Header = "_Open...";
+         subItem2.InputGestureText = "Ctrl+O";
+         subItem2.Click += MenuItemFileOpen_Click;
+         myMenuItemTopLevel1.Items.Add(subItem2);
+         MenuItem subItem3 = new MenuItem();
+         subItem3.Header = "_Close...";
+         subItem3.InputGestureText = "Ctrl+C";
+         subItem3.Click += MenuItemClose_Click;
+         myMenuItemTopLevel1.Items.Add(subItem3);
+         MenuItem subItem4 = new MenuItem();
+         subItem4.Header = "_Save As...";
+         subItem4.InputGestureText = "Ctrl+S";
+         subItem4.Click += MenuItemSaveAs_Click;
+         myMenuItemTopLevel1.Items.Add(subItem4);
+         MenuItem subItem5 = new MenuItem();
+         subItem5.Header = "_Options...";
+         subItem5.InputGestureText = "Ctrl+Shift+O";
+         subItem5.Click += MenuItemFileOptions_Click;
+         myMenuItemTopLevel1.Items.Add(subItem5);
+#endif
       } // end MainMenuViewer()
       //-----------------------------------------------------------------------
       public void UpdateView(ref IGameInstance gi, GameAction action)
@@ -163,7 +168,7 @@ namespace BarbarianPrince
                }
                break;
             default:
-               if (true ==  GameLoadMgr.theIsCheckFileExist) 
+               if (true == GameLoadMgr.theIsCheckFileExist)
                   myMenuItemTopLevel22.IsEnabled = true;
                return;
          }
@@ -171,11 +176,11 @@ namespace BarbarianPrince
       //------------------------------CONTROLLER-------------------------------
       public void MenuItemNew_Click(object sender, RoutedEventArgs e)
       {
-         if( null == NewGameOptions )
+         if (null == NewGameOptions)
             myGameInstance = new GameInstance();
          else
             myGameInstance = new GameInstance(NewGameOptions);
-         if ( true == myGameInstance.CtorError )
+         if (true == myGameInstance.CtorError)
          {
             Logger.Log(LogEnum.LE_ERROR, "MenuItemNew_Click(): myGameInstance.CtorError = true");
             return;
@@ -183,10 +188,22 @@ namespace BarbarianPrince
          GameAction action = GameAction.SetupNewGame;
          myGameEngine.PerformAction(ref myGameInstance, ref action);
       }
+      public void MenuItemClose_Click(object sender, RoutedEventArgs e)
+      {
+         if (null == myGameInstance)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "MenuItemClose_Click(): myGameInstance=null");
+         }
+         else
+         {
+            GameAction action = GameAction.EndGameClose;
+            myGameEngine.PerformAction(ref myGameInstance, ref action);
+         }
+      }
       public void MenuItemFileOpen_Click(object sender, RoutedEventArgs e)
       {
          IGameInstance gi = GameLoadMgr.OpenGameFromFile();
-         if( null != gi )
+         if (null != gi)
          {
             myGameInstance = gi;
             GameAction action = GameAction.UpdateLoadingGame;
@@ -234,7 +251,7 @@ namespace BarbarianPrince
          if (true == GameLoadMgr.theIsCheckFileExist)
             e.CanExecute = true;
          else
-            e.CanExecute = false;   
+            e.CanExecute = false;
       }
       public void MenuItemViewPath_Click(object sender, RoutedEventArgs e)
       {

@@ -701,7 +701,7 @@ namespace BarbarianPrince
                   myTextBlockInstructions.Inlines.Add(new Run("Not Lost! Roll for possible travel encounter in " + myMapItemMove.NewTerritory.Type + ":"));
                break;
             case EnumR204.TC_EVENT_ROLL_ROAD:
-               myTextBlockInstructions.Inlines.Add(new Run("Not Lost on Road! Roll for Travel encounter off road in " + myMapItemMove.NewTerritory.Type + ":"));
+               myTextBlockInstructions.Inlines.Add(new Run("No Lost Rolls on Road! Roll for Travel encounter off road in " + myMapItemMove.NewTerritory.Type + ":"));
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT_R230:
             case EnumR204.TC_EVENT_ROLL_EVENT_R232:

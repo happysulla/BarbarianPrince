@@ -1305,6 +1305,9 @@ namespace BarbarianPrince
                }
                action = GameAction.UpdateLoadingGame;
                break;
+            case GameAction.EndGameClose:
+               gi.GamePhase = GamePhase.EndGame;
+               break;
             default:
                break;
          }
@@ -2190,6 +2193,9 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
+            case GameAction.EndGameClose:
+               gi.GamePhase = GamePhase.EndGame;
+               break;
             case GameAction.UpdateGameOptions:
                break;
             case GameAction.UpdateLoadingGame:
@@ -2592,6 +2598,9 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerDisplay:
                break;
+            case GameAction.EndGameClose:
+               gi.GamePhase = GamePhase.EndGame;
+               break;
             case GameAction.UpdateGameOptions:
                break;
             case GameAction.UpdateLoadingGame:
@@ -2717,6 +2726,9 @@ namespace BarbarianPrince
                gi.EventDisplayed = gi.EventActive;
                break;
             case GameAction.UpdateEventViewerDisplay:
+               break;
+            case GameAction.EndGameClose:
+               gi.GamePhase = GamePhase.EndGame;
                break;
             case GameAction.UpdateGameOptions:
                break;
@@ -3010,6 +3022,9 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
+            case GameAction.EndGameClose:
+               gi.GamePhase = GamePhase.EndGame;
+               break;
             case GameAction.UpdateGameOptions:
                break;
             case GameAction.UpdateLoadingGame:
@@ -3092,6 +3107,9 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
+               break;
+            case GameAction.EndGameClose:
+               gi.GamePhase = GamePhase.EndGame;
                break;
             case GameAction.UpdateGameOptions:
                break;
@@ -3411,6 +3429,9 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
+            case GameAction.EndGameClose:
+               gi.GamePhase = GamePhase.EndGame;
+               break;
             case GameAction.UpdateGameOptions:
                break;
             case GameAction.UpdateLoadingGame:
@@ -3487,6 +3508,9 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
+            case GameAction.EndGameClose:
+               gi.GamePhase = GamePhase.EndGame;
+               break;
             case GameAction.UpdateGameOptions:
                break;
             case GameAction.UpdateLoadingGame:
@@ -3553,6 +3577,9 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
+            case GameAction.EndGameClose:
+               gi.GamePhase = GamePhase.EndGame;
+               break;
             case GameAction.UpdateGameOptions:
                break;
             case GameAction.UpdateLoadingGame:
@@ -3606,6 +3633,9 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
+               break;
+            case GameAction.EndGameClose:
+               gi.GamePhase = GamePhase.EndGame;
                break;
             case GameAction.UpdateGameOptions:
                break;
@@ -3661,6 +3691,9 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
+               break;
+            case GameAction.EndGameClose:
+               gi.GamePhase = GamePhase.EndGame;
                break;
             case GameAction.UpdateGameOptions:
                break;
@@ -3742,6 +3775,8 @@ namespace BarbarianPrince
                break;
             case GameAction.EndGameWin:
                break;
+            case GameAction.EndGameClose:
+               break;
             case GameAction.UpdateGameOptions:
                break;
             case GameAction.UpdateLoadingGame:
@@ -3799,6 +3834,9 @@ namespace BarbarianPrince
             case GameAction.RemoveSplashScreen: // do nothing...the unit test is updated in GameViewerWindow:updateView()
                break;
             case GameAction.UpdateLoadingGame:
+               break;
+            case GameAction.EndGameClose:
+               gi.GamePhase = GamePhase.EndGame;
                break;
             case GameAction.UpdateGameOptions:
                break;
@@ -3911,6 +3949,9 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
+               break;
+            case GameAction.EndGameClose:
+               gi.GamePhase = GamePhase.EndGame;
                break;
             case GameAction.UpdateGameOptions:
                break;
@@ -13250,9 +13291,9 @@ namespace BarbarianPrince
                   int result = gi.DieResults["e341"][0];
                   if ("e016a" == gi.EventStart) // magician's home - if combat, use e016b
                   {
-                     gi.IsMagicianProvideGift = false;
                      if ((2 == result) || (3 == result) || (4 == result))
                      {
+                        gi.IsMagicianProvideGift = false; // if there is combat, the gift goes away
                         if (false == gi.IsSpecialItemHeld(SpecialEnum.ResistanceTalisman))
                         {
                            gi.EventDisplayed = gi.EventActive = "e016b";
