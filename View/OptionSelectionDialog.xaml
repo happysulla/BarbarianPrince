@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BarbarianPrince"
         mc:Ignorable="d"
-        Title="Options Dialog" FontSize="20" Height="600" Width="1000">
+        Title="Options Dialog" FontSize="20" Height="600" Width="1010">
    <ScrollViewer Name="myScollViewerInside" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
       <Grid x:Name="myGrid">
          <Grid.RowDefinitions>
@@ -27,6 +27,7 @@
                <RadioButton x:Name="myRadioButtonRandomParty" GroupName="Summary" Content="Random Starting Party" Margin="5,0,5,0"  Padding="4,-4,0,0" Click="StackPanelSummary_Click"/>
                <RadioButton x:Name="myRadioButtonRandomStart" GroupName="Summary" Content="Random Starting Hex"  Margin="5,0,5,0"  Padding="4,-4,0,0" Click="StackPanelSummary_Click"/>
                <RadioButton x:Name="myRadioButtonAllRandom" GroupName="Summary" Content="Random Game" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelSummary_Click"/>
+               <RadioButton x:Name="myRadioButtonMaxFun" GroupName="Summary" Content="Fun Options" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelSummary_Click"/>
                <RadioButton x:Name="myRadioButtonCustom" GroupName="Summary" Content="Custom" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelSummary_Click"/>
             </StackPanel>
          </GroupBox>
@@ -114,6 +115,7 @@
                   <CheckBox x:Name="myCheckBoxAutoLostIncrement"  Content="Lost Roll Modifier" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelGameOption_Click"/>
                   <CheckBox x:Name="myCheckBoxExtendTime"  Content="Extend End Time" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelGameOption_Click"/>
                   <CheckBox x:Name="myCheckBoxReducedLodgingCosts"  Content="Reduce Lodging Costs" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelGameOption_Click"/>
+                  <CheckBox x:Name="myCheckBoxAddIncome"  Content="Income at end of day." Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelGameOption_Click"/>
                </StackPanel>
             </GroupBox>
          </StackPanel>

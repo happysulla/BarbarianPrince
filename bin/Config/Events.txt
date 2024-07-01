@@ -1419,7 +1419,7 @@ e050	"<Bold>e050 Local Constabulary</Bold>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e050c'></Button></InlineUIContainer>*<LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='Fight' Name='e050d'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e050d'></Button></InlineUIContainer>"
-e050a	"<Bold>e050a Local Constabulary Not Seen</Bold>
+050a	"<Bold>e050a Local Constabulary Not Seen</Bold>
 <LineBreak/><LineBreak/>Since you are not within three hexes of any town, temple, or castle; there is no event.
 <LineBreak/> <LineBreak/> 
                                   <InlineUIContainer><Image Name='EncounterEnd' Source='../../Images/Nothing.gif' Height='200' Width='200'></Image></InlineUIContainer>"
@@ -2082,7 +2082,7 @@ e073b	"<Bold>e073b  Indifferent Witch</Bold>
 <LineBreak/> <LineBreak/>
                            <InlineUIContainer><Image Name='EncounterEnd' Source='../../Images/Witch.gif' Height='300' Width='240'></Image></InlineUIContainer>"
 e073c	"<Bold>e073c Friendly Witch</Bold>
-<LineBreak/><LineBreak/>Roll one die to determine your actions: <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' ></Image></InlineUIContainer>
+<LineBreak/><LineBreak/>Roll one die to determine her actions: <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' ></Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
  1,2 - She joins your party as an ally
  <InlineUIContainer><Button Content='e218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.<LineBreak/>
@@ -2188,7 +2188,7 @@ e080a	"<Bold>e080a Pixies Gift</Bold>
  2 - Pixie advice. See <InlineUIContainer><Button Content='e025' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.<LineBreak/>
  3 - Lead you to ancient cache. See <InlineUIContainer><Button Content='e038' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.<LineBreak/>
  4 - Provide a magic gift. See  <InlineUIContainer><Button Content='e195' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.<LineBreak/>
- 5 - Same as #4<LineBreak/>
+ 5 - Same as #4
  6 - Give you a winged Pegasus mount. See <InlineUIContainer><Button Content='e188' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>
                                              <InlineUIContainer><Image Name='PixieGift' Source='../../Images/Pixie.gif' Height='200'  Width='150' > </Image></InlineUIContainer>"
@@ -3563,7 +3563,7 @@ This allows you to add two to your die roll when seeking an audience
  with that Lord in his hex or residence."
 e158	"<Bold>e158 Hostile Guards</Bold>
 <LineBreak/><LineBreak/>
-You leave the rest of your party in an atrium and are then confronted by two hostile guards. Each has combat skill 5, endurance 6, and wealth 7. If you pay 20 gold as a bribe, they will let you pass. 
+You leave the rest of your party in an atrium and are then confronted by two hostile guards. Each has combat skill 5, endurance 6, and wealth 7. If you pay gold as a bribe, they will let you pass. 
 <LineBreak/><LineBreak/>
 If you bribe, roll again on the 'Seeking audience' table
  <InlineUIContainer><Button Content='r211' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.

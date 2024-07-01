@@ -888,6 +888,11 @@ namespace BarbarianPrince
                      }
                   }
                }
+               else
+               {
+                  cb.IsEnabled = false;
+                  cb.IsChecked = false;
+               }
             }
             myGrid.Children.Add(cb);
             Grid.SetRow(cb, rowNum);

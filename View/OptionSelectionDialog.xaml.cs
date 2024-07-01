@@ -67,6 +67,7 @@ namespace BarbarianPrince
          myCheckBoxAutoLostIncrement.ToolTip = "Lost Chance Descreases on Consecutive Lost Rolls";
          myCheckBoxExtendTime.ToolTip = "Extend End Time from 70 days to 105 days";
          myCheckBoxReducedLodgingCosts.ToolTip = "Lodging in Town is Half Price";
+         myCheckBoxAddIncome.ToolTip = "Add 3gp at end of each day performing menial tasks during daily activities.";
          //--------------------
          myCheckBoxNoLostRoll.ToolTip = "Skip Lost Rolls";
          myCheckBoxNoLostEvent.ToolTip = "Lost Encounters never occur";
@@ -242,7 +243,7 @@ namespace BarbarianPrince
                         }
                         if (true == option.IsEnabled)
                         {
-                           isRandomPartyConfig = option.IsEnabled;
+                           myRadioButtonPartyCustom.IsChecked = option.IsEnabled;
                            myCheckBoxDwarf.IsEnabled = true;
                            myCheckBoxEagle.IsEnabled = true;
                            myCheckBoxElf.IsEnabled = true;
@@ -714,6 +715,15 @@ namespace BarbarianPrince
          myCheckBoxReducedLodgingCosts.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
             isCustomConfig = true;
+         option = options.Find("SteadyIncome");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-SteadyIncome");
+            return false;
+         }
+         myCheckBoxAddIncome.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+            isCustomConfig = true;
          //++++++++++++++++++++++++++++++++++++++++++++++++
          option = options.Find("NoLostRoll");
          if (null == option)
@@ -1152,6 +1162,11 @@ namespace BarbarianPrince
             option.IsEnabled = false;
          else
             Logger.Log(LogEnum.LE_ERROR, "ResetGameOptions(): not found ReduceLodgingCosts");
+         option = myOptions.Find("SteadyIncome");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetGameOptions(): not found SteadyIncome");
       }
       private void ResetEvents()
       {
@@ -1377,6 +1392,78 @@ namespace BarbarianPrince
             else
                option.IsEnabled = !option.IsEnabled;
          }
+         choice = Utilities.RandomGenerator.Next(2);
+         if (1 == choice)
+         {
+            Option option = myOptions.Find("SteadyIncome");
+            if (null == option)
+               Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=SteadyIncome");
+            else
+               option.IsEnabled = !option.IsEnabled;
+         }
+      }
+      private void SelectFunGameOptions()
+      {
+         Option option = myOptions.Find("AutoLostDecrease");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=AutoLostDecrease");
+         else
+            option.IsEnabled = true;
+         option = myOptions.Find("ExtendEndTime");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=ExtendEndTime");
+         else
+            option.IsEnabled = true;
+         option = myOptions.Find("ReduceLodgingCosts");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=ReduceLodgingCosts");
+         else
+            option.IsEnabled = true;
+         option = myOptions.Find("SteadyIncome");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=SteadyIncome");
+         else
+            option.IsEnabled = true;
+         option = myOptions.Find("EasyMonsters");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=EasyMonsters");
+         else
+            option.IsEnabled = true;
+         option = myOptions.Find("PrinceCoin");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=PrinceCoin");
+         else
+            option.IsEnabled = true;
+         option = myOptions.Find("PartyCustom");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=PartyCustom");
+         else
+            option.IsEnabled = true;
+         option = myOptions.Find("Elf");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=Elf");
+         else
+            option.IsEnabled = true;
+         option = myOptions.Find("Mercenary");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=Mercenary");
+         else
+            option.IsEnabled = true;
+         option = myOptions.Find("Monk");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=Monk");
+         else
+            option.IsEnabled = true;
+         option = myOptions.Find("Wizard");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=Wizard");
+         else
+            option.IsEnabled = true;
+         option = myOptions.Find("RandomHex");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=RandomHex");
+         else
+            option.IsEnabled = true;
       }
       //----------------------CONTROLLER FUNCTIONS----------------------
       private void ButtonOk_Click(object sender, RoutedEventArgs e)
@@ -1415,6 +1502,9 @@ namespace BarbarianPrince
                SelectRandomPrinceChoice();
                SelectRandomGameOptionChoice();
                SelectRandomPartyOptionChoice();
+               break;
+            case "myRadioButtonMaxFun":
+               SelectFunGameOptions();
                break;
             default: Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): reached default name=" + rb.Name); return;
          }
@@ -1543,6 +1633,7 @@ namespace BarbarianPrince
             case "myCheckBoxAutoLostIncrement": option = myOptions.Find("AutoLostDecrease"); break;
             case "myCheckBoxExtendTime": option = myOptions.Find("ExtendEndTime"); break;
             case "myCheckBoxReducedLodgingCosts": option = myOptions.Find("ReduceLodgingCosts"); break;
+            case "myCheckBoxAddIncome": option = myOptions.Find("SteadyIncome"); break;
             default: Logger.Log(LogEnum.LE_ERROR, "StackPanelGameOption_Click(): reached default name=" + cb.Name); return;
          }
          if (null == option)

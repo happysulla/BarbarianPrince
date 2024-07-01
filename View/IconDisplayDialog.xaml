@@ -1,0 +1,128 @@
+﻿<Window x:Class="BarbarianPrince.IconDisplayDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BarbarianPrince"
+        mc:Ignorable="d"
+        Title="Icon Definitions" Height="650" Width="1030">
+   <ScrollViewer Name="myScollViewerInside" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
+      <Grid x:Name="myGrid">
+         <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+         </Grid.RowDefinitions>
+         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="200"/>
+         </Grid.ColumnDefinitions>
+         <Image Grid.Row="0" Grid.Column="0" Height="50" Width="40" Source="/Images/MarkOfCain.gif" IsEnabled="False" Margin="0,5,0,0"/>
+         <Image Grid.Row="1" Grid.Column="0" Height="50" Width="40" Source="/Images/BoxUnopened.gif" IsEnabled="False" />
+         <Image Grid.Row="2" Grid.Column="0" Height="50" Width="40" Source="/Images/CharmGift.gif" IsEnabled="False" />
+         <Image Grid.Row="3" Grid.Column="0" Height="50" Width="40" Source="/Images/CoinBar.gif" IsEnabled="False" />
+         <Image Grid.Row="4" Grid.Column="0" Height="50" Width="40" Source="/Images/DenyAudience.gif" IsEnabled="False" />
+         <Image Grid.Row="5" Grid.Column="0" Height="50" Width="40" Source="/Images/DenyHire.gif" IsEnabled="False" />
+         <Image Grid.Row="6" Grid.Column="0" Height="50" Width="40" Source="/Images/CoinPileSingle.gif" IsEnabled="False" />
+         <Image Grid.Row="7" Grid.Column="0" Height="50" Width="40" Source="/Images/DragonEye.gif" IsEnabled="False" />
+         <Image Grid.Row="8" Grid.Column="0" Height="50" Width="40" Source="/Images/DrugChaga.gif" IsEnabled="False" />
+         <Image Grid.Row="9" Grid.Column="0" Height="50" Width="40" Source="/Images/ElvenTown.gif" IsEnabled="False" />
+         <Image Grid.Row="10" Grid.Column="0" Height="50" Width="40" Source="/Images/c41SlaveGirl.gif" IsEnabled="False" Margin="0,5,0,0"/>
+         <Image Grid.Row="0" Grid.Column="2" Height="50" Width="40" Source="/Images/ElvenCastle.gif" IsEnabled="False" />
+         <Image Grid.Row="1" Grid.Column="2" Height="50" Width="40" Source="/Images/ElfWarriorSmall.gif" IsEnabled="False" />
+         <Image Grid.Row="2" Grid.Column="2" Height="50" Width="40" Source="/Images/Exhausted.gif" IsEnabled="False" />
+         <Image Grid.Row="3" Grid.Column="2" Height="50" Width="40" Source="/Images/FineClothes.gif" IsEnabled="False" />
+         <Image Grid.Row="4" Grid.Column="2" Height="50" Width="40" Source="/Images/Fugitive.gif" IsEnabled="False" />
+         <Image Grid.Row="5" Grid.Column="2" Height="50" Width="40" Source="/Images/FoulBane.gif" IsEnabled="False" />
+         <Image Grid.Row="6" Grid.Column="2" Height="50" Width="40" Source="/Images/God.gif" IsEnabled="False" />
+         <Image Grid.Row="7" Grid.Column="2" Height="50" Width="40" Source="/Images/Gift.gif" IsEnabled="False" />
+         <Image Grid.Row="8" Grid.Column="2" Height="50" Width="40" Source="/Images/GriffonClaw.gif" IsEnabled="False" />
+         <Image Grid.Row="9" Grid.Column="2" Height="50" Width="40" Source="/Images/Group.gif" IsEnabled="False" />
+         <Image Grid.Row="10" Grid.Column="2" Height="50" Width="40" Source="/Images/DenyTemple.gif" IsEnabled="False" />
+         <Image Grid.Row="0" Grid.Column="4" Height="50" Width="40" Source="/Images/Helmet.gif" IsEnabled="False" Margin="0,5,0,0"/>
+         <Image Grid.Row="1" Grid.Column="4" Height="50" Width="40" Source="/Images/HillTribeWarriors.gif" IsEnabled="False" />
+         <Image Grid.Row="2" Grid.Column="4" Height="50" Width="40" Source="/Images/Muscle.gif" IsEnabled="False" />
+         <Image Grid.Row="3" Grid.Column="4" Height="50" Width="40" Source="/Images/Negotiator.gif" IsEnabled="False" />
+         <Image Grid.Row="4" Grid.Column="4" Height="50" Width="40" Source="/Images/RocBeak.gif" IsEnabled="False" />
+         <Image Grid.Row="5" Grid.Column="4" Height="50" Width="40" Source="/Images/Secrets.gif" IsEnabled="False" />
+         <Image Grid.Row="6" Grid.Column="4" Height="50" Width="40" Source="/Images/Teeth.gif" IsEnabled="False" />
+         <Image Grid.Row="7" Grid.Column="4" Height="50" Width="40" Source="/Images/DwarfAdvice.gif" IsEnabled="False" />
+         <Image Grid.Row="8" Grid.Column="4" Height="50" Width="40" Source="/Images/HalflingTown.gif" IsEnabled="False" />
+         <Image Grid.Row="9" Grid.Column="4" Height="50" Width="40" Source="/Images/StructureDeny.gif" IsEnabled="False" />
+         <Image Grid.Row="10" Grid.Column="4" Height="50" Width="40" Source="/Images/Deny.gif" IsEnabled="False" />
+         <Image Grid.Row="0" Grid.Column="6" Height="50" Width="40" Source="/Images/Sun5.gif" IsEnabled="False" Margin="0,5,0,0"/>
+         <Image Grid.Row="1" Grid.Column="6" Height="50" Width="40" Source="/Images/TowerGoblin.gif" IsEnabled="False" />
+         <Image Grid.Row="2" Grid.Column="6" Height="50" Width="40" Source="/Images/TowerOrc.gif" IsEnabled="False" />
+         <Image Grid.Row="3" Grid.Column="6" Height="50" Width="40" Source="/Images/TowerWizard.gif" IsEnabled="False" />
+         <Image Grid.Row="4" Grid.Column="6" Height="50" Width="40" Source="/Images/Staff.gif" IsEnabled="False" />
+         <Image Grid.Row="5" Grid.Column="6" Height="50" Width="40" Source="/Images/TrollSkin.gif" IsEnabled="False" />
+         <Image Grid.Row="6" Grid.Column="6" Height="50" Width="40" Source="/Images/WizardAdvice.gif" IsEnabled="False" />
+         <Image Grid.Row="7" Grid.Column="6" Height="50" Width="40" Source="/Images/Letter.gif" IsEnabled="False" />
+         <Image Grid.Row="8" Grid.Column="6" Height="50" Width="40" Source="/Images/Ally.gif" IsEnabled="False" />
+         <Image Grid.Row="9" Grid.Column="6" Height="50" Width="40" Source="/Images/c60Minstrel.gif" />
+         <Image Grid.Row="10" Grid.Column="6" Height="50" Width="40" Source="/Images/Cache.gif" />
+         <TextBox Grid.Row="0" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Margin="0,5,0,0" Text="All Monks/Priests recognize the mark, and do not join your party." />
+         <TextBox Grid.Row="1" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="A magic box that needs to be opened by a magician, wizard, or witch."/>
+         <TextBox Grid.Row="2" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="A Gift of Charm that allows multiple rolls when talking encounter occurs."/>
+         <TextBox Grid.Row="3" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Hirelings that need to be paided end of each day."/>
+         <TextBox Grid.Row="4" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Audience action is not allowed in this hex."/>
+         <TextBox Grid.Row="5" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Hire action is not allowed in this hex."/>
+         <TextBox Grid.Row="6" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Looter Mark. Stays in party if shares equally in treasure finds."/>
+         <TextBox Grid.Row="7" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Dragon eye increases chances of audience with high priests."/>
+         <TextBox Grid.Row="8" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Chaga drug increases chances of audience with high priests."/>
+         <TextBox Grid.Row="9" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Elven town."/>
+         <TextBox Grid.Row="10" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Slave girl operates as a Gift of Charm allowing multiple rolls for talk encounter."/>
+         <TextBox Grid.Row="0" Grid.Column="3" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Margin="0,5,0,0" Text="Elven castle."/>
+         <TextBox Grid.Row="1" Grid.Column="3" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Elf adds one to wit and wiles roll. Subtract one if in encountered party."/>
+         <TextBox Grid.Row="2" Grid.Column="3" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Party is exhausted. No riding mounts, and all load carrying at 1/2."/>
+         <TextBox Grid.Row="3" Grid.Column="3" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Fine clothes bought in town, temple, or castle for 10gp to hold audience."/>
+         <TextBox Grid.Row="4" Grid.Column="3" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Fugitive mark. Character leaves party when entering structure or encountering constable."/>
+         <TextBox Grid.Row="5" Grid.Column="3" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Foulbane prized by Count Dragot."/>
+         <TextBox Grid.Row="6" Grid.Column="3" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="God has blessed you. You win if you return north of Tragoth River."/>
+         <TextBox Grid.Row="7" Grid.Column="3" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Magician gives you a gift to open at evening meal."/>
+         <TextBox Grid.Row="8" Grid.Column="3" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Griffon claws prized by Lady Aeravir."/>
+         <TextBox Grid.Row="9" Grid.Column="3" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Group Mark. Characters existing as a group in the party."/>
+         <TextBox Grid.Row="10" Grid.Column="3" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Disgraced Temple means it no longer operates as a temple."/>
+         <TextBox Grid.Row="0" Grid.Column="5" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Margin="0,5,0,0" Text="Helmet of Northsland. Game won if return to Ogon or Weshor."/>
+         <TextBox Grid.Row="1" Grid.Column="5" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Hill Tribe. Travel to obtain rightful hier of Huldra Castle."/>
+         <TextBox Grid.Row="2" Grid.Column="5" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Mark of Hireliing. Need to pay for their muscle at end of each day."/>
+         <TextBox Grid.Row="3" Grid.Column="5" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Merchant Negotiator. Reduce lodging, barting, purchases by 1/2."/>
+         <TextBox Grid.Row="4" Grid.Column="5" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Roc beak is prized by Count Dragot."/>
+         <TextBox Grid.Row="5" Grid.Column="5" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Clue to Treasure. Search this hex for possible treasure."/>
+         <TextBox Grid.Row="6" Grid.Column="5" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Hydra teeth. Scatter to create undead party members for one fight."/>
+         <TextBox Grid.Row="7" Grid.Column="5" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Dwarf Advice. Search location for possible treasure."/>
+         <TextBox Grid.Row="8" Grid.Column="5" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Halfling town."/>
+         <TextBox Grid.Row="9" Grid.Column="5" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Character departs if they enter a town, temple, or castle."/>
+         <TextBox Grid.Row="10" Grid.Column="5" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Hex can no longer be entered."/>
+         <TextBox Grid.Row="0" Grid.Column="7" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Margin="0,5,0,0" Text="Sun stroke. Character must be carried until rested in non-desert hex."/>
+         <TextBox Grid.Row="1" Grid.Column="7" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Goblin keep."/>
+         <TextBox Grid.Row="2" Grid.Column="7" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Orc tower."/>
+         <TextBox Grid.Row="3" Grid.Column="7" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Wizard tower."/>
+         <TextBox Grid.Row="4" Grid.Column="7" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Staff of Command. Return to North to regain throne and win."/>
+         <TextBox Grid.Row="5" Grid.Column="7" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Troll Skin. Sell in town, temple, or castle for 50gp."/>
+         <TextBox Grid.Row="6" Grid.Column="7" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Wizard Advice. Search location for possible treasure."/>
+         <TextBox Grid.Row="7" Grid.Column="7" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Letter of Recommendation. Bring letter to this location for better chance of audience."/>
+         <TextBox Grid.Row="8" Grid.Column="7" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Ally Marker. Party member that stays only for food and lodgings."/>
+         <TextBox Grid.Row="9" Grid.Column="7" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Minstrel who keeps departing members without paying for food. Can be used twice."/>
+         <TextBox Grid.Row="10" Grid.Column="7" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Cache storage location. Search Cache to retreive coins."/>
+         <StackPanel Name="myStackPanelButtons" Grid.Row="11" Grid.ColumnSpan="8"  Orientation="Horizontal" VerticalAlignment="Center"  HorizontalAlignment="Center" Margin="5,5,5,5" >
+            <Button x:Name="myButtonOK" HorizontalAlignment="Center" Width="70" Height="30" VerticalAlignment="Top" Margin="0,10,0,0" FontSize="14" Click="ButtonOk_Click" IsDefault="True">OK</Button>
+         </StackPanel>
+      </Grid>
+   </ScrollViewer>
+</Window>

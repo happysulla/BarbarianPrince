@@ -3705,7 +3705,7 @@ namespace BarbarianPrince
       {
          switch (t.Name)
          {
-            case "0323": return "Drogot Castle";
+            case "0323": return "Drogat Castle";
             case "0711": return "Branwyn's Temple";
             case "1212": return "Huldra Castle";
             case "1021": return "Sulwyth Temple";

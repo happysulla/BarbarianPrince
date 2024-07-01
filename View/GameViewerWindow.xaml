@@ -99,7 +99,7 @@
                <Button x:Name="myButtonFoodEndurance3" Height="42" Width="42" Content="3" IsEnabled="False" />
                <Button x:Name="myButtonFoodEndurance2" Height="42" Width="42" Content="2" IsEnabled="False" />
                <Button x:Name="myButtonFoodEndurance1" Height="42" Width="42" Content="unc." IsEnabled="False" />
-               <Button Name="myButtonFoodEndurance0" Height="42" Width="42" Content="dead" IsEnabled="False" />
+               <Button x:Name="myButtonFoodEndurance0" Height="42" Width="42" Content="dead" IsEnabled="False" />
             </StackPanel>
             <Separator Name="mySeparator3" DockPanel.Dock="Top" Height="5"/>
             <StackPanel Name="myStackPanelDailyActions" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,5" Visibility="Hidden">

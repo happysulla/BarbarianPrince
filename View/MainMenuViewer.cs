@@ -275,8 +275,8 @@ namespace BarbarianPrince
       }
       public void MenuItemHelpIcons_Click(object sender, RoutedEventArgs e)
       {
-         GameAction action = GameAction.UpdateEventViewerActive;
-         myGameEngine.PerformAction(ref myGameInstance, ref action);
+         IconDisplayDialog dialog = new IconDisplayDialog();
+         dialog.Show();
       }
       public void MenuItemHelpAbout_Click(object sender, RoutedEventArgs e)
       {
