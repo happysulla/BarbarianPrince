@@ -143,11 +143,12 @@ namespace BarbarianPrince.View
       {
          InitializeComponent();
          SetGridRowData(gi);
+         UpdateGridRowHeader();
          UpdateGridRows(gi);
       }
       private void SetGridRowData(IGameInstance gi)
       {
-         for (int i = 1; i < gi.PartyMembers.Count; ++i)
+         for (int i = 0; i < gi.PartyMembers.Count; ++i)
          {
             IMapItem mi = gi.PartyMembers[i];
             myGridRows[i] = new GridRow(mi);
@@ -232,9 +233,245 @@ namespace BarbarianPrince.View
                myGridRowHeading.myIsStaffOfCommand = true;
          }
       }
+      private void UpdateGridRowHeader()
+      {
+         const int rowNum = 0;
+         //--------------------------------------------------------
+         {
+            Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage("Food") };
+            Button button = new Button(); { Name = "Food", Content=img, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize}
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, 1);
+         }
+         //--------------------------------------------------------
+         {
+            Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage("Coin"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, 2);
+         }
+         //--------------------------------------------------------
+         int colNum = 3;
+         if (true == myGridRowHeading.myIsHorse)
+         {
+            Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage("Mount"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsPegasus)
+         {
+            Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage("Pegasus"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsHealingPoition)
+         {
+            Image img = new Image {Name= "PotionHeal", Source = MapItem.theMapImages.GetBitmapImage("PotionHeal"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsCurePoisonVial)
+         {
+            Image img = new Image { Name = "PotionCure", Source = MapItem.theMapImages.GetBitmapImage("PotionCure"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsGiftOfCharm)
+         {
+            Image img = new Image { Name = "CharmGift", Source = MapItem.theMapImages.GetBitmapImage("CharmGift"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsEnduranceSash)
+         {
+            Image img = new Image { Name = "Sash", Source = MapItem.theMapImages.GetBitmapImage("Sash"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsResistanceTalisman)
+         {
+            Image img = new Image { Name = "TalismanResistance", Source = MapItem.theMapImages.GetBitmapImage("TalismanResistance"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsPoisonDrug)
+         {
+            Image img = new Image { Name = "PoisonDrug", Source = MapItem.theMapImages.GetBitmapImage("PoisonDrug"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsMagicSword)
+         {
+            Image img = new Image { Name = "Sword", Source = MapItem.theMapImages.GetBitmapImage("Sword"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsAntiPoisonAmulet)
+         {
+            Image img = new Image { Name = "AmuletAntiPoison", Source = MapItem.theMapImages.GetBitmapImage("AmuletAntiPoison"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsPegasusMountTalisman)
+         {
+            Image img = new Image { Name = "TalismanPegasus", Source = MapItem.theMapImages.GetBitmapImage("TalismanPegasus"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsCharismaTalisman)
+         {
+            Image img = new Image { Name = "TalismanCharisma", Source = MapItem.theMapImages.GetBitmapImage("TalismanCharisma"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsNerveGasBomb)
+         {
+            Image img = new Image { Name = "NerveGasBomb", Source = MapItem.theMapImages.GetBitmapImage("NerveGasBomb"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsResistanceRing)
+         {
+            Image img = new Image { Name = "RingResistence", Source = MapItem.theMapImages.GetBitmapImage("RingResistence"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsResurrectionNecklace)
+         {
+            Image img = new Image { Name = "Necklace", Source = MapItem.theMapImages.GetBitmapImage("Necklace"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsShieldOfLight)
+         {
+            Image img = new Image { Name = "Shield", Source = MapItem.theMapImages.GetBitmapImage("Shield"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsRoyalHelmOfNorthlands)
+         {
+            Image img = new Image { Name = "Helmet", Source = MapItem.theMapImages.GetBitmapImage("Helmet"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsTrollSkin)
+         {
+            Image img = new Image { Name = "TrollSkin", Source = MapItem.theMapImages.GetBitmapImage("TrollSkin"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsDragonEye)
+         {
+            Image img = new Image { Name = "DragonEye", Source = MapItem.theMapImages.GetBitmapImage("DragonEye"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsRocBeak)
+         {
+            Image img = new Image { Name = "RocBeak", Source = MapItem.theMapImages.GetBitmapImage("RocBeak"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsGriffonClaw)
+         {
+            Image img = new Image { Name = "GriffonClaw", Source = MapItem.theMapImages.GetBitmapImage("GriffonClaw"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsMagicBox)
+         {
+            Image img = new Image { Name = "BoxUnopened", Source = MapItem.theMapImages.GetBitmapImage("BoxUnopened"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsHydraTeeth)
+         {
+            Image img = new Image { Name = "Teeth", Source = MapItem.theMapImages.GetBitmapImage("Teeth"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsStaffOfCommand)
+         {
+            Image img = new Image { Name = "Staff", Source = MapItem.theMapImages.GetBitmapImage("Staff"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+            myGrid.Children.Add(img);
+            Grid.SetRow(img, rowNum);
+            Grid.SetColumn(img, colNum);
+            ++colNum;
+         }
+      }
       private void UpdateGridRows(IGameInstance gi)
       {
-         for (int i = 1; i < gi.PartyMembers.Count; ++i)
+         for (int i = 0; i < gi.PartyMembers.Count; ++i)
          {
             IMapItem mi = gi.PartyMembers[i];
             myGridRows[i] = new GridRow(mi);
@@ -288,6 +525,279 @@ namespace BarbarianPrince.View
             if (true == myGridRowHeading.myIsHealingPoition)
             {
                int count = myGridRows[rowNum].myNumHealingPoition;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsCurePoisonVial)
+            {
+               int count = myGridRows[rowNum].myNumCurePoisonVial;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsGiftOfCharm)
+            {
+               int count = myGridRows[rowNum].myNumGiftOfCharm;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsEnduranceSash)
+            {
+               int count = myGridRows[rowNum].myNumEnduranceSash;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsResistanceTalisman)
+            {
+               int count = myGridRows[rowNum].myNumResistanceTalisman;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsPoisonDrug)
+            {
+               int count = myGridRows[rowNum].myNumPoisonDrug;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsMagicSword)
+            {
+               int count = myGridRows[rowNum].myNumMagicSword;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsAntiPoisonAmulet)
+            {
+               int count = myGridRows[rowNum].myNumAntiPoisonAmulet;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsPegasusMountTalisman)
+            {
+               int count = myGridRows[rowNum].myNumPegasusMountTalisman;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsCharismaTalisman)
+            {
+               int count = myGridRows[rowNum].myNumCharismaTalisman;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsNerveGasBomb)
+            {
+               int count = myGridRows[rowNum].myNumNerveGasBomb;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsResistanceRing)
+            {
+               int count = myGridRows[rowNum].myNumResistanceRing;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsResurrectionNecklace)
+            {
+               int count = myGridRows[rowNum].myNumResurrectionNecklace;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsShieldOfLight)
+            {
+               int count = myGridRows[rowNum].myNumShieldOfLight;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsRoyalHelmOfNorthlands)
+            {
+               int count = myGridRows[rowNum].myNumRoyalHelmOfNorthlands;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsTrollSkin)
+            {
+               int count = myGridRows[rowNum].myNumTrollSkin;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsDragonEye)
+            {
+               int count = myGridRows[rowNum].myNumDragonEye;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsRocBeak)
+            {
+               int count = myGridRows[rowNum].myNumRocBeak;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsGriffonClaw)
+            {
+               int count = myGridRows[rowNum].myNumGriffonClaw;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsMagicBox)
+            {
+               int count = myGridRows[rowNum].myNumMagicBox;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsHydraTeeth)
+            {
+               int count = myGridRows[rowNum].myNumHydraTeeth;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsStaffOfCommand)
+            {
+               int count = myGridRows[rowNum].myNumStaffOfCommand;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
