@@ -827,6 +827,21 @@ namespace BarbarianPrince
          return true;
       }
       //----------------------------------------------------------------------------
+      public int GetNumSpecialItem(SpecialEnum item)
+      {
+         int numItem = 0;
+         foreach (SpecialEnum item2 in SpecialKeeps)
+         {
+            if (item == item2)
+              ++numItem;
+         }
+         foreach (SpecialEnum item2 in mySpecialShares)
+         {
+            if (item == item2)
+               ++numItem;
+         }
+         return numItem;
+      }
       public bool IsSpecialItemHeld(SpecialEnum item)
       {
          foreach (SpecialEnum item2 in SpecialKeeps)

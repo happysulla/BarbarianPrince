@@ -91,6 +91,7 @@ namespace BarbarianPrince
       bool IsSpecialItemHeld(SpecialEnum item);
       bool IsSpecialist();
       bool IsMagicUser();
+      int GetNumSpecialItem(SpecialEnum item);
       bool AddSpecialItemToKeep(SpecialEnum item);
       bool AddSpecialItemToShare(SpecialEnum item);
       bool RemoveSpecialItem(SpecialEnum item);

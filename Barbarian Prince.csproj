@@ -198,6 +198,9 @@
     <Compile Include="View\IconDisplayDialog.xaml.cs">
       <DependentUpon>IconDisplayDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\InventoryDisplayDialog.xaml.cs">
+      <DependentUpon>InventoryDisplayDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\OptionSelectionDialog.xaml.cs">
       <DependentUpon>OptionSelectionDialog.xaml</DependentUpon>
     </Compile>
@@ -460,6 +463,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\IconDisplayDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\InventoryDisplayDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
