@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfAnimatedGif;
+using static BarbarianPrince.GameViewerWindow;
 using static BarbarianPrince.View.InventoryDisplayDialog;
 
 namespace BarbarianPrince.View
@@ -136,12 +137,22 @@ namespace BarbarianPrince.View
          }
       };
       //----------------------------------------------------------------
+      public bool CtorError = false;
+      private RuleDialogViewer myRulesManager = null;
       private GridRowHeading myGridRowHeading = new GridRowHeading(false);
       private GridRow[] myGridRows = new GridRow[Utilities.MAX_GRID_ROW];
       private readonly FontFamily myFontFam = new FontFamily("Tahoma");
-      public InventoryDisplayDialog(IGameInstance gi)
+      public InventoryDisplayDialog(IGameInstance gi, RuleDialogViewer rm)
       {
          InitializeComponent();
+         if ( null == rm )
+         {
+            Logger.Log(LogEnum.LE_ERROR, "InventoryDisplayDialog(): rv=null");
+            CtorError = true;
+            return;
+         }
+         myRulesManager = rm;
+         this.Height = (1.5 * Utilities.theMapItemSize+10) + gi.PartyMembers.Count*( (Utilities.ZOOM * Utilities.theMapItemSize) + 10 ) + (Utilities.ZOOM * Utilities.theMapItemSize);
          SetGridRowData(gi);
          UpdateGridRowHeader();
          UpdateGridRows(gi);
@@ -238,236 +249,271 @@ namespace BarbarianPrince.View
          const int rowNum = 0;
          //--------------------------------------------------------
          {
-            Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage("Food") };
-            Button button = new Button(); { Name = "Food", Content=img, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize}
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, 1);
+            Rectangle rect = new Rectangle { Width = Utilities.theMapItemSize, Height = Utilities.theMapItemSize, Visibility=Visibility.Hidden};
+            myGrid.Children.Add(rect);
+            Grid.SetRow(rect, rowNum);
+            Grid.SetColumn(rect, 0);
          }
          //--------------------------------------------------------
          {
-            Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage("Coin"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, 2);
+            Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage("Food") };
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, 1);
+         }
+         //--------------------------------------------------------
+         {
+            Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage("Coin")};
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, 2);
          }
          //--------------------------------------------------------
          int colNum = 3;
          if (true == myGridRowHeading.myIsHorse)
          {
-            Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage("Mount"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage("Mount")};
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsPegasus)
          {
-            Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage("Pegasus"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage("Pegasus")};
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsHealingPoition)
          {
-            Image img = new Image {Name= "PotionHeal", Source = MapItem.theMapImages.GetBitmapImage("PotionHeal"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image {Name= "PotionHeal", Source = MapItem.theMapImages.GetBitmapImage("PotionHeal")};
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsCurePoisonVial)
          {
-            Image img = new Image { Name = "PotionCure", Source = MapItem.theMapImages.GetBitmapImage("PotionCure"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "PotionCure", Source = MapItem.theMapImages.GetBitmapImage("PotionCure")};
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsGiftOfCharm)
          {
-            Image img = new Image { Name = "CharmGift", Source = MapItem.theMapImages.GetBitmapImage("CharmGift"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "CharmGift", Source = MapItem.theMapImages.GetBitmapImage("CharmGift")};
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsEnduranceSash)
          {
-            Image img = new Image { Name = "Sash", Source = MapItem.theMapImages.GetBitmapImage("Sash"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "Sash", Source = MapItem.theMapImages.GetBitmapImage("Sash")};
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsResistanceTalisman)
          {
-            Image img = new Image { Name = "TalismanResistance", Source = MapItem.theMapImages.GetBitmapImage("TalismanResistance"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "TalismanResistance", Source = MapItem.theMapImages.GetBitmapImage("TalismanResistance")};
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsPoisonDrug)
          {
-            Image img = new Image { Name = "PoisonDrug", Source = MapItem.theMapImages.GetBitmapImage("PoisonDrug"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "PoisonDrug", Source = MapItem.theMapImages.GetBitmapImage("PoisonDrug")};
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsMagicSword)
          {
-            Image img = new Image { Name = "Sword", Source = MapItem.theMapImages.GetBitmapImage("Sword"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "Sword", Source = MapItem.theMapImages.GetBitmapImage("Sword")};
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsAntiPoisonAmulet)
          {
-            Image img = new Image { Name = "AmuletAntiPoison", Source = MapItem.theMapImages.GetBitmapImage("AmuletAntiPoison"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "AmuletAntiPoison", Source = MapItem.theMapImages.GetBitmapImage("AmuletAntiPoison")};
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsPegasusMountTalisman)
          {
-            Image img = new Image { Name = "TalismanPegasus", Source = MapItem.theMapImages.GetBitmapImage("TalismanPegasus"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "TalismanPegasus", Source = MapItem.theMapImages.GetBitmapImage("TalismanPegasus")};
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsCharismaTalisman)
          {
-            Image img = new Image { Name = "TalismanCharisma", Source = MapItem.theMapImages.GetBitmapImage("TalismanCharisma"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "TalismanCharisma", Source = MapItem.theMapImages.GetBitmapImage("TalismanCharisma")};
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsNerveGasBomb)
          {
-            Image img = new Image { Name = "NerveGasBomb", Source = MapItem.theMapImages.GetBitmapImage("NerveGasBomb"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "NerveGasBomb", Source = MapItem.theMapImages.GetBitmapImage("NerveGasBomb")};
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsResistanceRing)
          {
-            Image img = new Image { Name = "RingResistence", Source = MapItem.theMapImages.GetBitmapImage("RingResistence"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "RingResistence", Source = MapItem.theMapImages.GetBitmapImage("RingResistence")};
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsResurrectionNecklace)
          {
-            Image img = new Image { Name = "Necklace", Source = MapItem.theMapImages.GetBitmapImage("Necklace"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "Necklace", Source = MapItem.theMapImages.GetBitmapImage("Necklace")};
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsShieldOfLight)
          {
-            Image img = new Image { Name = "Shield", Source = MapItem.theMapImages.GetBitmapImage("Shield"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "Shield", Source = MapItem.theMapImages.GetBitmapImage("Shield")};
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsRoyalHelmOfNorthlands)
          {
-            Image img = new Image { Name = "Helmet", Source = MapItem.theMapImages.GetBitmapImage("Helmet"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "Helmet", Source = MapItem.theMapImages.GetBitmapImage("Helmet") };
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsTrollSkin)
          {
-            Image img = new Image { Name = "TrollSkin", Source = MapItem.theMapImages.GetBitmapImage("TrollSkin"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "TrollSkin", Source = MapItem.theMapImages.GetBitmapImage("TrollSkin") };
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsDragonEye)
          {
-            Image img = new Image { Name = "DragonEye", Source = MapItem.theMapImages.GetBitmapImage("DragonEye"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "DragonEye", Source = MapItem.theMapImages.GetBitmapImage("DragonEye") };
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsRocBeak)
          {
-            Image img = new Image { Name = "RocBeak", Source = MapItem.theMapImages.GetBitmapImage("RocBeak"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "RocBeak", Source = MapItem.theMapImages.GetBitmapImage("RocBeak")};
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsGriffonClaw)
          {
-            Image img = new Image { Name = "GriffonClaw", Source = MapItem.theMapImages.GetBitmapImage("GriffonClaw"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "GriffonClaw", Source = MapItem.theMapImages.GetBitmapImage("GriffonClaw") };
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsMagicBox)
          {
-            Image img = new Image { Name = "BoxUnopened", Source = MapItem.theMapImages.GetBitmapImage("BoxUnopened"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "BoxUnopened", Source = MapItem.theMapImages.GetBitmapImage("BoxUnopened") };
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsHydraTeeth)
          {
-            Image img = new Image { Name = "Teeth", Source = MapItem.theMapImages.GetBitmapImage("Teeth"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "Teeth", Source = MapItem.theMapImages.GetBitmapImage("Teeth") };
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
          //--------------------------------------------------------
          if (true == myGridRowHeading.myIsStaffOfCommand)
          {
-            Image img = new Image { Name = "Staff", Source = MapItem.theMapImages.GetBitmapImage("Staff"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-            myGrid.Children.Add(img);
-            Grid.SetRow(img, rowNum);
-            Grid.SetColumn(img, colNum);
+            Image img = new Image { Name = "Staff", Source = MapItem.theMapImages.GetBitmapImage("Staff") };
+            Button button = CreateButton(img);
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
             ++colNum;
          }
+         //--------------------------------------------------------
+         ++colNum;
+         this.Width = colNum * ( (Utilities.ZOOM * Utilities.theMapItemSize) + 10 );
       }
       private void UpdateGridRows(IGameInstance gi)
       {
@@ -812,14 +858,23 @@ namespace BarbarianPrince.View
       private Button CreateButton(IMapItem mi)
       {
          System.Windows.Controls.Button b = new Button { };
+         b.Margin = new Thickness(5, 5, 0, 0);
          b.Name = Utilities.RemoveSpaces(mi.Name);
-         b.Width = Utilities.ZOOM * Utilities.theMapItemSize;
-         b.Height = Utilities.ZOOM * Utilities.theMapItemSize;
+         b.Width = (0.1+Utilities.ZOOM) * Utilities.theMapItemSize;
+         b.Height = (0.1+Utilities.ZOOM) * Utilities.theMapItemSize;
          b.BorderThickness = new Thickness(1);
          b.BorderBrush = Brushes.Black;
          b.Background = new SolidColorBrush(Colors.Transparent);
          b.Foreground = new SolidColorBrush(Colors.Transparent);
-         MapItem.SetButtonContent(b, mi, false, true); // This sets the image as the button's content
+         MapItem.SetButtonContent(b, mi, true, false, false, false); 
+         return b;
+      }
+      private Button CreateButton(Image img)
+      { 
+         System.Windows.Controls.Button b = new Button {Name=img.Name, Width= 1.5 * Utilities.theMapItemSize, Height= 1.5 * Utilities.theMapItemSize, Foreground=Brushes.Transparent, Background=Brushes.Transparent, BorderBrush=Brushes.Transparent, Margin=new Thickness(5)};
+         StackPanel sp = new StackPanel();
+         sp.Children.Add(img);
+         b.Content = sp;
          return b;
       }
    }

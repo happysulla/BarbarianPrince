@@ -75,7 +75,7 @@ namespace BarbarianPrince
                   subItem32.Click += MenuItemViewRivers_Click;
                   myMenuItemTopLevel3.Items.Add(subItem32);
                   MenuItem subItem33 = new MenuItem();
-                  subItem33.Header = "_Inventory";
+                  subItem33.Header = "_Inventory...";
                   subItem33.InputGestureText = "Ctrl+I";
                   subItem33.Click += MenuItemViewInventory_Click;
                   myMenuItemTopLevel3.Items.Add(subItem33);
@@ -123,7 +123,7 @@ namespace BarbarianPrince
             myMenuItemTopLevel1.Items.Add(subItem3);
 #else
          MenuItem subItem1 = new MenuItem();
-         subItem1.Header = "_New...";
+         subItem1.Header = "_New";
          subItem1.InputGestureText = "Ctrl+N";
          subItem1.Click += MenuItemNew_Click;
          myMenuItemTopLevel1.Items.Add(subItem1);
@@ -133,7 +133,7 @@ namespace BarbarianPrince
          subItem2.Click += MenuItemFileOpen_Click;
          myMenuItemTopLevel1.Items.Add(subItem2);
          MenuItem subItem3 = new MenuItem();
-         subItem3.Header = "_Close...";
+         subItem3.Header = "_Close";
          subItem3.InputGestureText = "Ctrl+C";
          subItem3.Click += MenuItemClose_Click;
          myMenuItemTopLevel1.Items.Add(subItem3);
@@ -266,8 +266,8 @@ namespace BarbarianPrince
       }
       public void MenuItemViewInventory_Click(object sender, RoutedEventArgs e)
       {
-         InventoryDisplayDialog dialog = new InventoryDisplayDialog(myGameInstance);
-         dialog.Show();
+         GameAction action = GameAction.ShowInventory;
+         myGameEngine.PerformAction(ref myGameInstance, ref action);
       }
       public void MenuItemHelpRules_Click(object sender, RoutedEventArgs e)
       {

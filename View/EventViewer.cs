@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BarbarianPrince.View;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.IO;
@@ -175,6 +176,17 @@ namespace BarbarianPrince
                }
                if (false == OpenEvent(gi, gi.EventActive))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): OpenEvent() returned false ae=" + myGameInstance.EventActive + " a=" + action.ToString());
+               break;
+            case GameAction.ShowInventory:
+               InventoryDisplayDialog dialog = new InventoryDisplayDialog(myGameInstance, myRulesMgr); // Set Options in Game
+               if (true == dialog.CtorError)
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): InventoryDisplayDialog CtorError=true");
+                  return;
+               }
+               if (true == dialog.ShowDialog())
+               {
+               }
                break;
             //-------------------------------------
             case GameAction.TravelLostCheck:

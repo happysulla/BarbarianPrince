@@ -2188,6 +2188,8 @@ namespace BarbarianPrince
          ITerritory princeTerritory = gi.Prince.Territory;
          switch (action)
          {
+            case GameAction.ShowInventory:
+            case GameAction.ShowAllRivers:
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateEventViewerActive:
@@ -2593,10 +2595,12 @@ namespace BarbarianPrince
          string previousEvent = gi.EventActive;
          switch (action)
          {
+            case GameAction.ShowInventory:
+            case GameAction.ShowAllRivers:
+            case GameAction.UpdateEventViewerDisplay:
+               break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
-               break;
-            case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.EndGameClose:
                gi.GamePhase = GamePhase.EndGame;
@@ -2722,10 +2726,12 @@ namespace BarbarianPrince
          gi.MapItemMoves.Clear();
          switch (action)
          {
+            case GameAction.ShowInventory:
+            case GameAction.ShowAllRivers:
+            case GameAction.UpdateEventViewerDisplay:
+               break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
-               break;
-            case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.EndGameClose:
                gi.GamePhase = GamePhase.EndGame;
@@ -3017,6 +3023,8 @@ namespace BarbarianPrince
          ITerritory princeTerritory = gi.Prince.Territory;
          switch (action)
          {
+            case GameAction.ShowInventory:
+            case GameAction.ShowAllRivers:
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateEventViewerActive:
@@ -3103,6 +3111,8 @@ namespace BarbarianPrince
             mi.IsCatchCold = false;
          switch (action)
          {
+            case GameAction.ShowInventory:
+            case GameAction.ShowAllRivers:
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateEventViewerActive:
@@ -3424,6 +3434,8 @@ namespace BarbarianPrince
          string previousStartEvent = gi.EventStart;
          switch (action)
          {
+            case GameAction.ShowInventory:
+            case GameAction.ShowAllRivers:
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateEventViewerActive:
@@ -3503,6 +3515,8 @@ namespace BarbarianPrince
          string previousStartEvent = gi.EventStart;
          switch (action)
          {
+            case GameAction.ShowInventory:
+            case GameAction.ShowAllRivers:
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateEventViewerActive:
@@ -3572,6 +3586,8 @@ namespace BarbarianPrince
          string previousEvent = gi.EventActive;
          switch (action)
          {
+            case GameAction.ShowInventory:
+            case GameAction.ShowAllRivers:
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateEventViewerActive:
@@ -3629,6 +3645,8 @@ namespace BarbarianPrince
          string previousEvent = gi.EventActive;
          switch (action)
          {
+            case GameAction.ShowInventory:
+            case GameAction.ShowAllRivers:
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateEventViewerActive:
@@ -3687,6 +3705,8 @@ namespace BarbarianPrince
          ITerritory princeTerritory = gi.Prince.Territory;
          switch (action)
          {
+            case GameAction.ShowInventory:
+            case GameAction.ShowAllRivers:
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateEventViewerActive:
@@ -3831,7 +3851,9 @@ namespace BarbarianPrince
          string previousStartEvent = gi.EventStart;
          switch (action)
          {
-            case GameAction.RemoveSplashScreen: // do nothing...the unit test is updated in GameViewerWindow:updateView()
+            case GameAction.ShowInventory:
+            case GameAction.ShowAllRivers:
+            case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateLoadingGame:
                break;
@@ -3945,6 +3967,12 @@ namespace BarbarianPrince
          ITerritory princeTerritory = gi.Prince.Territory;
          switch (action)
          {
+            case GameAction.ShowInventory:
+            case GameAction.ShowAllRivers:
+            case GameAction.ShowDienstalBranch:
+            case GameAction.ShowLargosRiver:
+            case GameAction.ShowNesserRiver:
+            case GameAction.ShowTrogothRiver:
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateEventViewerActive:
@@ -3961,12 +3989,6 @@ namespace BarbarianPrince
                   returnStatus = "LoadGame() returned false";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                }
-               break;
-            case GameAction.ShowAllRivers:
-            case GameAction.ShowDienstalBranch:
-            case GameAction.ShowLargosRiver:
-            case GameAction.ShowNesserRiver:
-            case GameAction.ShowTrogothRiver:
                break;
             case GameAction.EncounterAbandon: // Remove all party members that are not riding
                if (false == EncounterAbandon(gi, ref action))

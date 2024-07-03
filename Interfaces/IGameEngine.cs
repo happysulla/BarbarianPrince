@@ -177,6 +177,7 @@ namespace BarbarianPrince
       ShowLargosRiver,
       ShowNesserRiver,
       ShowTrogothRiver,
+      ShowInventory,
 
       EncounterStart,
       EncounterEnd,
