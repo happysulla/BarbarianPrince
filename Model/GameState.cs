@@ -1199,7 +1199,7 @@ namespace BarbarianPrince
                }
                else
                {
-                  AddSpecialConditionsForUnitTest();
+                  AddStartingCompileTimeOptions(gi);
                   Option option = gi.Options.Find("AutoSetup");
                   if (null == option)
                   {
@@ -1287,7 +1287,7 @@ namespace BarbarianPrince
                }
                else
                {
-                  AddSpecialConditionsForUnitTest();
+                  AddStartingCompileTimeOptions(gi);
                   Option option = gi.Options.Find("AutoSetup");
                   if (null == option)
                   {
@@ -1778,7 +1778,7 @@ namespace BarbarianPrince
          }
          return true;
       }
-      private void AddSpecialConditionsForUnitTest()
+      private void AddStartingCompileTimeOptions(IGameInstance gi)
       {
          //Days = 40;
          //myPrince.SetWounds(7, 0);
@@ -1788,26 +1788,26 @@ namespace BarbarianPrince
          //myPrince.AddNewMount();
          //myPrince.AddNewMount();
          //---------------------
-         //AddSpecialItem(SpecialEnum.GiftOfCharm);
-         //AddSpecialItem(SpecialEnum.ResistanceTalisman);
-         //AddSpecialItem(SpecialEnum.CharismaTalisman);
-         //AddSpecialItem(SpecialEnum.DragonEye);
-         //AddSpecialItem(SpecialEnum.RocBeak);
-         //AddSpecialItem(SpecialEnum.GriffonClaws);
-         //AddSpecialItem(SpecialEnum.HealingPoition);
-         //AddSpecialItem(SpecialEnum.CurePoisonVial);
-         //AddSpecialItem(SpecialEnum.EnduranceSash);
-         //AddSpecialItem(SpecialEnum.PoisonDrug);
-         //AddSpecialItem(SpecialEnum.MagicSword);
-         //AddSpecialItem(SpecialEnum.AntiPoisonAmulet);
-         //AddSpecialItem(SpecialEnum.PegasusMountTalisman);
-         //AddSpecialItem(SpecialEnum.NerveGasBomb);
-         //AddSpecialItem(SpecialEnum.ResistanceRing);
-         //AddSpecialItem(SpecialEnum.ResurrectionNecklace);
-         //AddSpecialItem(SpecialEnum.ShieldOfLight);
-         //AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
-         //myPrince.AddSpecialItemToShare(SpecialEnum.HydraTeeth);
-         //this.HydraTeethCount = 5;
+         gi.AddSpecialItem(SpecialEnum.GiftOfCharm);
+         gi.AddSpecialItem(SpecialEnum.ResistanceTalisman);
+         gi.AddSpecialItem(SpecialEnum.CharismaTalisman);
+         gi.AddSpecialItem(SpecialEnum.DragonEye);
+         gi.AddSpecialItem(SpecialEnum.RocBeak);
+         gi.AddSpecialItem(SpecialEnum.GriffonClaws);
+         gi.AddSpecialItem(SpecialEnum.HealingPoition);
+         gi.AddSpecialItem(SpecialEnum.CurePoisonVial);
+         gi.AddSpecialItem(SpecialEnum.EnduranceSash);
+         gi.AddSpecialItem(SpecialEnum.PoisonDrug);
+         gi.AddSpecialItem(SpecialEnum.MagicSword);
+         gi.AddSpecialItem(SpecialEnum.AntiPoisonAmulet);
+         gi.AddSpecialItem(SpecialEnum.PegasusMountTalisman);
+         gi.AddSpecialItem(SpecialEnum.NerveGasBomb);
+         gi.AddSpecialItem(SpecialEnum.ResistanceRing);
+         gi.AddSpecialItem(SpecialEnum.ResurrectionNecklace);
+         gi.AddSpecialItem(SpecialEnum.ShieldOfLight);
+         gi.AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
+         gi.Prince.AddSpecialItemToShare(SpecialEnum.HydraTeeth);
+         gi.HydraTeethCount = 5;
          //---------------------
          //ITerritory visited = Territories.Find("0109");
          //this.myVisitedLoctions.Add(visited);

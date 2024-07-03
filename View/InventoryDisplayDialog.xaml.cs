@@ -258,6 +258,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage("Food") };
             Button button = CreateButton(img);
+            button.Name = "r215";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, 1);
@@ -266,6 +267,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage("Coin")};
             Button button = CreateButton(img);
+            button.Name = "r225";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, 2);
@@ -276,6 +278,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage("Mount")};
             Button button = CreateButton(img);
+            button.Name = "r206";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -286,6 +289,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage("Pegasus")};
             Button button = CreateButton(img);
+            button.Name = "r188";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -296,6 +300,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image {Name= "PotionHeal", Source = MapItem.theMapImages.GetBitmapImage("PotionHeal")};
             Button button = CreateButton(img);
+            button.Name = "r180";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -306,6 +311,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "PotionCure", Source = MapItem.theMapImages.GetBitmapImage("PotionCure")};
             Button button = CreateButton(img);
+            button.Name = "r181";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -316,6 +322,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "CharmGift", Source = MapItem.theMapImages.GetBitmapImage("CharmGift")};
             Button button = CreateButton(img);
+            button.Name = "r182";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -326,6 +333,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "Sash", Source = MapItem.theMapImages.GetBitmapImage("Sash")};
             Button button = CreateButton(img);
+            button.Name = "r183";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -336,6 +344,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "TalismanResistance", Source = MapItem.theMapImages.GetBitmapImage("TalismanResistance")};
             Button button = CreateButton(img);
+            button.Name = "r184";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -346,6 +355,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "PoisonDrug", Source = MapItem.theMapImages.GetBitmapImage("PoisonDrug")};
             Button button = CreateButton(img);
+            button.Name = "r185";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -356,6 +366,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "Sword", Source = MapItem.theMapImages.GetBitmapImage("Sword")};
             Button button = CreateButton(img);
+            button.Name = "r186";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -366,6 +377,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "AmuletAntiPoison", Source = MapItem.theMapImages.GetBitmapImage("AmuletAntiPoison")};
             Button button = CreateButton(img);
+            button.Name = "r187";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -376,6 +388,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "TalismanPegasus", Source = MapItem.theMapImages.GetBitmapImage("TalismanPegasus")};
             Button button = CreateButton(img);
+            button.Name = "r188a";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -386,6 +399,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "TalismanCharisma", Source = MapItem.theMapImages.GetBitmapImage("TalismanCharisma")};
             Button button = CreateButton(img);
+            button.Name = "r189";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -396,6 +410,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "NerveGasBomb", Source = MapItem.theMapImages.GetBitmapImage("NerveGasBomb")};
             Button button = CreateButton(img);
+            button.Name = "r190";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -406,6 +421,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "RingResistence", Source = MapItem.theMapImages.GetBitmapImage("RingResistence")};
             Button button = CreateButton(img);
+            button.Name = "r191";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -416,6 +432,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "Necklace", Source = MapItem.theMapImages.GetBitmapImage("Necklace")};
             Button button = CreateButton(img);
+            button.Name = "r192";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -426,6 +443,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "Shield", Source = MapItem.theMapImages.GetBitmapImage("Shield")};
             Button button = CreateButton(img);
+            button.Name = "r193";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -436,6 +454,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "Helmet", Source = MapItem.theMapImages.GetBitmapImage("Helmet") };
             Button button = CreateButton(img);
+            button.Name = "r194";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -446,6 +465,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "TrollSkin", Source = MapItem.theMapImages.GetBitmapImage("TrollSkin") };
             Button button = CreateButton(img);
+            button.Name = "r057";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -456,6 +476,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "DragonEye", Source = MapItem.theMapImages.GetBitmapImage("DragonEye") };
             Button button = CreateButton(img);
+            button.Name = "r098";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -466,6 +487,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "RocBeak", Source = MapItem.theMapImages.GetBitmapImage("RocBeak")};
             Button button = CreateButton(img);
+            button.Name = "r099";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -476,6 +498,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "GriffonClaw", Source = MapItem.theMapImages.GetBitmapImage("GriffonClaw") };
             Button button = CreateButton(img);
+            button.Name = "r100";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -486,6 +509,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "BoxUnopened", Source = MapItem.theMapImages.GetBitmapImage("BoxUnopened") };
             Button button = CreateButton(img);
+            button.Name = "r140";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -496,6 +520,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "Teeth", Source = MapItem.theMapImages.GetBitmapImage("Teeth") };
             Button button = CreateButton(img);
+            button.Name = "r141";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -506,6 +531,7 @@ namespace BarbarianPrince.View
          {
             Image img = new Image { Name = "Staff", Source = MapItem.theMapImages.GetBitmapImage("Staff") };
             Button button = CreateButton(img);
+            button.Name = "r212m";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -872,10 +898,19 @@ namespace BarbarianPrince.View
       private Button CreateButton(Image img)
       { 
          System.Windows.Controls.Button b = new Button {Name=img.Name, Width= 1.5 * Utilities.theMapItemSize, Height= 1.5 * Utilities.theMapItemSize, Foreground=Brushes.Transparent, Background=Brushes.Transparent, BorderBrush=Brushes.Transparent, Margin=new Thickness(5)};
+         b.Click += ButtonShowRule_Click;
          StackPanel sp = new StackPanel();
          sp.Children.Add(img);
          b.Content = sp;
          return b;
+      }
+      private void ButtonShowRule_Click(object sender, RoutedEventArgs e)
+      {
+         Button b = (Button)sender;
+         if (null == myRulesManager)
+            Logger.Log(LogEnum.LE_ERROR, "ButtonShowRule_Click(): myRulesMgr=null");
+         else if (false == myRulesManager.ShowRule(b.Name))
+            Logger.Log(LogEnum.LE_ERROR, "ButtonShowRule_Click(): myRulesMgr.ShowRule() returned false for c=" + b.Name);
       }
    }
 }

@@ -53,6 +53,11 @@ r051	"<Bold>r051 Bandits</Bold>
 <LineBreak/><LineBreak/>One of the bandits is the leader with combat skill 6, endurance 6, and wealth 15. The rest have combat skill 5, endurance 4, and wealth 1.
 <LineBreak/><LineBreak/>
                                  <InlineUIContainer><Image Source='../../Images/Bandit.gif' Height='300' Width='180'> </Image></InlineUIContainer>"
+r057	"<Bold>r057 Troll Skin</Bold>
+<LineBreak/><LineBreak/>A hugh stone-skinned troll was killed by your party. 
+<LineBreak/><LineBreak/>Since you killed the troll, its stone-skin is a valuble item. Whenever you have an opportunity to buy food at a town, castle, temple, or from merchants; you can sell the skin for 50 gold pieces. It is also known that Count Drogat of Drogat Castle will treasure the gift should you manage to get a personal audience with him.
+<LineBreak/><LineBreak/>
+                <InlineUIContainer><Image Source='../../Images/TrollSkin.gif' Height='300' Width='166'> </Image></InlineUIContainer>"
 r073a	"<Bold>e073a Hostile Witch</Bold>
 <LineBreak/><LineBreak/>Your party must escape
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
@@ -123,10 +128,30 @@ r096	"<Bold>r096 Mounts Sick</Bold>
  4,5,6: Mount dies now
 <LineBreak/><LineBreak/>
                  <InlineUIContainer><Image Name='MountsDie' Source='../../Images/MountsDie.gif' Height='200' Width='400'></Image></InlineUIContainer>"
-r097	"<Bold>e097 Marsh Gas and Rot</Bold>
+r097	"<Bold>r097 Marsh Gas and Rot</Bold>
 <LineBreak/><LineBreak/>Your entire party has unwittingly travelled into an area full of flesh-rot disease and mind-destroying marsh gas. Roll one die for each character. If a one results, the character escapes. Any other result means the character dies a mindless and raving idiot while his flesh rots from his bones before his eyes.
 <LineBreak/><LineBreak/>
          <InlineUIContainer><Image Source='../../Images/FleshRot.gif' Height='250' Width='500'></Image></InlineUIContainer>"
+r098	"<Bold>r098 Dragon Eye</Bold>
+<LineBreak/><LineBreak/>You encountered a huge, winged fire-breathing dragon.
+<LineBreak/><LineBreak/>Since you killed the dragon, you cut out its eyes. The dragon eyes are valued by High Priest and increases the chance of securing an audience with them.
+<LineBreak/><LineBreak/>
+         <InlineUIContainer><Image Source='../../Images/DragonEye.gif' Height='250' Width='500'></Image></InlineUIContainer>"
+r099	"<Bold>r099 Roc Beak</Bold>
+<LineBreak/><LineBreak/>You encountered the Roc, a giagantic bird which swoops down on your party. 
+<LineBreak/><LineBreak/>Since you killed the Roc, you cut off its beak.
+<LineBreak/><LineBreak/>
+Count Drogat  especially prizes the item, and it may help you gain an audience with him. 
+<LineBreak/><LineBreak/>
+In addition, the beak can be sold to any merchant, or in any town/castle/temple whenever you buy food. The beak is worth 35gp.
+<LineBreak/><LineBreak/>
+         <InlineUIContainer><Image Source='../../Images/RocBeak.gif' Height='250' Width='500'></Image></InlineUIContainer>"
+r100	"<Bold>r100 Griffon Claws</Bold>
+<LineBreak/><LineBreak/>You killed a winged griffon.
+<LineBreak/><LineBreak/>The griffon is intelligent and could serve both as a member of your party and as a winged mount for other characters.
+<LineBreak/><LineBreak/>You cut off its claws and carried them as an extra possession. They are especially valued by Lady Aeravir of Aeravir Castle, and it may help you gain audience with her.
+<LineBreak/><LineBreak/>
+         <InlineUIContainer><Image Source='../../Images/GriffonClaws.gif' Height='250' Width='500'></Image></InlineUIContainer>"
 r106	"<Bold>r106 Heavy Overcast</Bold>
 <LineBreak/><LineBreak/>Thick, black clouds obscure your vision. You have become lost.
 <LineBreak/><LineBreak/>Roll one die for each character or unridden mount. A six means that the character or mount disppears into the overcast and is lost from your party.
@@ -222,6 +247,27 @@ r129	"<Bold>r129 Merchant Caravan</Bold>
   12 - Caravan passed a nearby ruins yesterday. Roll one die for which hex: 1-N,2-NE,3-SE, 4-S,5-SW,6-NW.<LineBreak/>
 <LineBreak/>
                            <InlineUIContainer><Image Source='../../Images/Caravan.gif' Height='150'  Width='300'> </Image></InlineUIContainer>	"
+r140	"<Bold>r140 Magic Box Found</Bold>
+<LineBreak/><LineBreak/>You find a magic box. You can open it only if you have a magician, wizard, or witch in your party. 
+<LineBreak/><LineBreak/>Until then, you  carry it with you since it is relatively light.
+<LineBreak/><LineBreak/>Once such a person is in you party, you can open it and examine the contents. THe contents may be one of the following:
+ 1 - Hydra Teeth<LineBreak/>
+ 2 - Gems<LineBreak/>
+ 3 - Wealth 60<LineBreak/>
+ 4 - Wealth 110<LineBreak/>
+ 5 - Random Possession<LineBreak/>
+ 6 - Nothing but rubbish
+<LineBreak/><LineBreak/>
+                                 <InlineUIContainer><Image  Source='../../Images/BoxUnopened.gif' Name='BoxUnopened' Height='200'  Width='200'> </Image></InlineUIContainer> "
+r141	"<Bold>r141 Hydra's Teeth</Bold>
+<LineBreak/><LineBreak/>
+The magician/wizard/witch explains that whenever you scatter these teeth on the ground, that number of undead warriors will rise and fight in your party for one combat at your command.
+<LineBreak/><LineBreak/>
+These undead teeth-warriors have combat skill 5, endurance 4, and wealth 0. They will only last for that combat and then disappear.
+<LineBreak/><LineBreak/>
+You can scatter the teeth at any instant to use them that one time including at the start or during any combat.
+<LineBreak/>
+                                      <InlineUIContainer><Image  Source='../../Images/Teeth.gif' Height='200'  Width='200'> </Image></InlineUIContainer> "
 r180	"<Bold>r180 Healing Potion</Bold>
 <LineBreak/><LineBreak/>This potion can be applied once to any character including yourself at the end of the day after the evening meal
  <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
@@ -769,6 +815,11 @@ r212l	"<Bold>r212l Gods Delcare Crusade</Bold>
   <InlineUIContainer><Button Name='myButtonTragothNorth' Content='North of Tragoth' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 , you will command instant obedience throughout the Norhlands, regain your throne, and win the game! 
 <LineBreak/><LineBreak/>In the meantime, you are given a pair of warrior monks who have combat skill 5 and endurance 6. The monks have mounts and join your parrty to help with your journey northward."
+r212m	"<Bold>e212m Gods Declare Crusade</Bold>
+<LineBreak/><LineBreak/>The gods declare your cause a religious crusade and the Staff of Command is passed into your hands. 
+<LineBreak/><LineBreak/>If you bring this possession to any hex north of the, you will command instant obedience throughout the Norhlands, regain your throne, and win the game! 
+<LineBreak/><LineBreak/>
+                   <InlineUIContainer><Image Source='../../Images/Staff.gif' Height='300' Width='400'></Image></InlineUIContainer>"
 r213	"<Bold>r213 Rafting the Rivers</Bold>
 <LineBreak/><LineBreak/>You have the special option of using raft travel along the river instead of normal travel each day. When raft travel is available, you ride the raft until you get off by selecting a daily action other than raft travel; or when you roll 12 with two die after each day's travel. The latter represents the raft reaching a stopping point for lengthy loading, unloading, or dismantling.
 <LineBreak/><LineBreak/>While on a raft, you travel on the river hexsides themselves. Your speed is either three hexsides per day downriver, or two hexsides per day upriver. 
