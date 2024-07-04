@@ -2514,6 +2514,7 @@ namespace BarbarianPrince
          gi.CapturedWealthCodes.Clear();
          gi.PegasusTreasure = PegasusTreasureEnum.Mount;
          gi.Bribe = 0;
+         Logger.Log(LogEnum.LE_BRIBE, "ResetDayAfterChoice(): bribe=" + gi.Bribe.ToString());
          gi.FickleCoin = 0;
          gi.LooterCoin = 0;
          //----------------------------------------------
@@ -8074,6 +8075,7 @@ namespace BarbarianPrince
                      gi.LostPartyMembers.Add(mi);
                }
                gi.Bribe = 20;
+               Logger.Log(LogEnum.LE_BRIBE, "EncounterStart(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                gi.PartyMembers.Clear();
                gi.PartyMembers.Add(gi.Prince);
                break;
@@ -8751,6 +8753,7 @@ namespace BarbarianPrince
                      gi.Bribe = 15;
                      if (true == gi.IsMerchantWithParty)
                         gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                     Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                      gi.EventDisplayed = gi.EventActive = "e323";
                      break;
                   case 5:
@@ -8758,6 +8761,7 @@ namespace BarbarianPrince
                      gi.Bribe = 25;
                      if (true == gi.IsMerchantWithParty)
                         gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                     Logger.Log(LogEnum.LE_BRIBE, "EncounterStart(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                      gi.EventDisplayed = gi.EventActive = "e323";
                      break;
                   case 6: gi.EventDisplayed = gi.EventActive = "e306"; break;
@@ -8812,6 +8816,7 @@ namespace BarbarianPrince
                      gi.Bribe = 10;
                      if (true == gi.IsMerchantWithParty)
                         gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                     Logger.Log(LogEnum.LE_BRIBE, "EncounterStart(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                      break; 
                   default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
                }
@@ -8836,6 +8841,7 @@ namespace BarbarianPrince
                      gi.Bribe = 5;
                      if (true == gi.IsMerchantWithParty)
                         gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                     Logger.Log(LogEnum.LE_BRIBE, "EncounterStart(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                      break;
                   case 5: case 6: gi.EventDisplayed = gi.EventActive = "e325"; break;                 // pass with dignity
                   default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
@@ -8863,6 +8869,7 @@ namespace BarbarianPrince
                      gi.Bribe = 10;
                      if (true == gi.IsMerchantWithParty)
                         gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                     Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                      break;
                   case 3: gi.EventDisplayed = gi.EventActive = "e338"; break;  // convince to hire
                   case 4: gi.EventDisplayed = gi.EventActive = "e339"; break;  // convince to hire
@@ -8981,6 +8988,7 @@ namespace BarbarianPrince
                      gi.Bribe = 10;
                      if (true == gi.IsMerchantWithParty)
                         gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                     Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                      break;
                   case 3: gi.EventDisplayed = gi.EventActive = "e340"; gi.DieRollAction = GameAction.EncounterRoll; break;  // looters
                   case 4: gi.EventDisplayed = gi.EventActive = "e339"; break;                                               // convince to hire
@@ -9002,7 +9010,8 @@ namespace BarbarianPrince
                      gi.EventDisplayed = gi.EventActive = "e322"; 
                      gi.Bribe = 5; 
                      if (true == gi.IsMerchantWithParty)
-                        gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5); 
+                        gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                     Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                      break;
                   case 2: gi.EventDisplayed = gi.EventActive = "e328"; gi.DieRollAction = GameAction.EncounterRoll; break; // pass rough
                   case 3: gi.EventDisplayed = gi.EventActive = "e314"; gi.DieRollAction = GameAction.EncounterRoll; gi.EventStart = "e006"; break; // escape talking
@@ -9473,6 +9482,7 @@ namespace BarbarianPrince
                      gi.Bribe = 10;
                      if (true == gi.IsMerchantWithParty)
                         gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                     Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                      break;
                   case 5: gi.EventDisplayed = gi.EventActive = "e306"; break;
                   case 6:
@@ -9544,6 +9554,7 @@ namespace BarbarianPrince
                      gi.Bribe = 5;
                      if (true == gi.IsMerchantWithParty)
                         gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                     Logger.Log(LogEnum.LE_BRIBE, "EncounterStart(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                      break;
                   case 4: gi.EventDisplayed = gi.EventActive = "e314"; gi.DieRollAction = GameAction.EncounterRoll; break;  // escape talking
                   case 5:                                                // escape fly
@@ -10009,12 +10020,14 @@ namespace BarbarianPrince
                      gi.Bribe = 10;
                      if (true == gi.IsMerchantWithParty)
                         gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                     Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                      break;                             
                   case 4:                                                                                                  // bribe to pass
                      gi.EventDisplayed = gi.EventActive = "e323"; 
                      gi.Bribe = 15;
                      if (true == gi.IsMerchantWithParty)
                         gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                     Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                      break; 
                   case 5: gi.EventDisplayed = gi.EventActive = "e329"; gi.DieRollAction = GameAction.EncounterRoll; break; // pass charm
                   case 6: gi.EventDisplayed = gi.EventActive = "e306"; break;
@@ -10414,12 +10427,14 @@ namespace BarbarianPrince
                      gi.Bribe = 30;
                      if (true == gi.IsMerchantWithParty)
                         gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                     Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                      break; 
                   case 3:                                                                                                   // bride to hire
                      gi.EventDisplayed = gi.EventActive = "e332"; 
                      gi.Bribe = 10;
                      if (true == gi.IsMerchantWithParty)
                         gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                     Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                      break; 
                   case 4: gi.EventDisplayed = gi.EventActive = "e339"; break;                                               // convince to hire
                   case 5: gi.EventDisplayed = gi.EventActive = "e328"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass rough
@@ -10748,6 +10763,7 @@ namespace BarbarianPrince
                      gi.Bribe = 8;
                      if (true == gi.IsMerchantWithParty)
                         gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                     Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                      break;
                   case 5: gi.EventDisplayed = gi.EventActive = "e306"; break;  // attacked
                   case 6: gi.EventDisplayed = gi.EventActive = "e308"; break;  // surprised
@@ -11640,6 +11656,7 @@ namespace BarbarianPrince
                gi.Bribe = dieRoll * 10;
                if (true == gi.IsMerchantWithParty)
                   gi.Bribe = (int) ((double)gi.Bribe * 0.5);
+               Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                break;
             case "e151": // lord finds favor
                gi.DieResults[key][0] = dieRoll;
@@ -12354,6 +12371,7 @@ namespace BarbarianPrince
                         gi.Bribe = 10;
                         if (true == gi.IsMerchantWithParty)
                            gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                        Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                         if (gi.Bribe <= gi.GetCoins())
                         {
                            gi.EventDisplayed = gi.EventActive = "e148";
@@ -12440,6 +12458,7 @@ namespace BarbarianPrince
                         gi.Bribe = 10;
                         if (true == gi.IsMerchantWithParty)
                            gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                        Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                         if (gi.Bribe <= gi.GetCoins())
                         {
                            gi.EventDisplayed = gi.EventActive = "e148";
@@ -12521,6 +12540,7 @@ namespace BarbarianPrince
                         gi.Bribe = 10;
                         if (true == gi.IsMerchantWithParty)
                            gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                        Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                         if (gi.Bribe <= gi.GetCoins())
                         {
                            gi.EventDisplayed = gi.EventActive = "e148";
@@ -13349,6 +13369,7 @@ namespace BarbarianPrince
                         gi.Bribe = 10;
                         if (true == gi.IsMerchantWithParty)
                            gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                        Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                         foreach (IMapItem mi in gi.EncounteredMembers)
                            mi.IsTownCastleTempleLeave = true;
                         break;
@@ -13357,6 +13378,7 @@ namespace BarbarianPrince
                         gi.Bribe = 5;
                         if (true == gi.IsMerchantWithParty)
                            gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                        Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                         break;
                      case 7: gi.EventDisplayed = gi.EventActive = "e333"; break;                                               // hirelings
                      case 8: gi.EventDisplayed = gi.EventActive = "e338"; break;                                               // hirelings

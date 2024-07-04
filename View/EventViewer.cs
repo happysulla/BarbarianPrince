@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
 using WpfAnimatedGif;
+using static System.Collections.Specialized.BitVector32;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using Point = System.Windows.Point;
 
@@ -2488,11 +2489,12 @@ namespace BarbarianPrince
                cost = 20;
                if (true == gi.IsMerchantWithParty)
                   cost = (int)Math.Ceiling((double)cost * 0.5);
+               Logger.Log(LogEnum.LE_BRIBE, "AppendAtEnd(): bribe=" + gi.Bribe.ToString());
                if (cost <= gi.Prince.Coin)
                {
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
-                  string costToPayS = "Click to pay " + gi.Bribe.ToString() + "gp:";
+                  string costToPayS = "Click to pay " + cost.ToString() + "gp:";
                   myTextBlock.Inlines.Add(new Run(costToPayS));
                   myTextBlock.Inlines.Add(new LineBreak());
                   Image imgE158 = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStacked"), Width = 75, Height = 75, Name = "HostileGuardsPay" };
