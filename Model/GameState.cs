@@ -1778,124 +1778,6 @@ namespace BarbarianPrince
          }
          return true;
       }
-      private void AddStartingCompileTimeOptions(IGameInstance gi)
-      {
-         //Days = 40;
-         //myPrince.SetWounds(7, 0);
-         //myPrince.PlagueDustWound = 1; 
-         //myPrince.AddNewMount(MountEnum.Pegasus);
-         //this.AddUnitTestTiredMount(myPrince);
-         //myPrince.AddNewMount();
-         //myPrince.AddNewMount();
-         //---------------------
-         gi.AddSpecialItem(SpecialEnum.GiftOfCharm);
-         gi.AddSpecialItem(SpecialEnum.ResistanceTalisman);
-         gi.AddSpecialItem(SpecialEnum.CharismaTalisman);
-         gi.AddSpecialItem(SpecialEnum.DragonEye);
-         gi.AddSpecialItem(SpecialEnum.RocBeak);
-         gi.AddSpecialItem(SpecialEnum.GriffonClaws);
-         gi.AddSpecialItem(SpecialEnum.HealingPoition);
-         gi.AddSpecialItem(SpecialEnum.CurePoisonVial);
-         gi.AddSpecialItem(SpecialEnum.EnduranceSash);
-         gi.AddSpecialItem(SpecialEnum.PoisonDrug);
-         gi.AddSpecialItem(SpecialEnum.MagicSword);
-         gi.AddSpecialItem(SpecialEnum.AntiPoisonAmulet);
-         gi.AddSpecialItem(SpecialEnum.PegasusMountTalisman);
-         gi.AddSpecialItem(SpecialEnum.NerveGasBomb);
-         gi.AddSpecialItem(SpecialEnum.ResistanceRing);
-         gi.AddSpecialItem(SpecialEnum.ResurrectionNecklace);
-         gi.AddSpecialItem(SpecialEnum.ShieldOfLight);
-         gi.AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
-         gi.Prince.AddSpecialItemToShare(SpecialEnum.HydraTeeth);
-         gi.HydraTeethCount = 5;
-         //---------------------
-         //ITerritory visited = Territories.Find("0109");
-         //this.myVisitedLoctions.Add(visited);
-         //---------------------
-         //ITerritory escapeLocation = Territories.Find("0605");
-         //EscapedLocations.Add(escapeLocation);
-         //---------------------
-         //ITerritory cacheHex = Territories.Find("0504");
-         //Caches.Add(cacheHex, 66);
-         //cacheHex = Territories.Find("0505");
-         //Caches.Add(cacheHex, 333);
-         //Caches.Add(cacheHex, 100);
-         //Caches.Add(cacheHex, 500);
-         //Caches.Add(cacheHex, 33);
-         //---------------------
-         //ITerritory secretClueHex = Territories.Find("0504");
-         //SecretClues.Add(secretClueHex);
-         //---------------------
-         //ITerritory secretClueHex2 = Territories.Find("0706");
-         //SecretClues.Add(secretClueHex2);
-         //---------------------
-         //ITerritory hiddenTemple = Territories.Find("0605");
-         //HiddenTemples.Add(hiddenTemple);
-         //---------------------
-         //ITerritory hiddenRuin = Territories.Find("0606");
-         //HiddenRuins.Add(hiddenRuin);
-         //---------------------
-         //ITerritory elfTown = Territories.Find("0607");
-         //ElfTowns.Add(elfTown);
-         //---------------------
-         //ITerritory eagleLair = Territories.Find("0407");
-         //EagleLairs.Add(eagleLair);
-         //---------------------
-         //ITerritory dwarvenMine = Territories.Find("0408");  
-         //DwarvenMines.Add(dwarvenMine);
-         //---------------------
-         //ITerritory dwarfAdviceHex = Territories.Find("0319");
-         //DwarfAdviceLocations.Add(dwarfAdviceHex);
-         //---------------------
-         //ITerritory halflingTown = Territories.Find("0303");
-         //HalflingTowns.Add(halflingTown);
-         //---------------------
-         //ITerritory elfCastle  = Territories.Find("0608");
-         //ElfCastles.Add(elfCastle);
-         //---------------------
-         //ITerritory wizarTower = Territories.Find("0404");  //mountain
-         //WizardTowers.Add(wizarTower);
-         //---------------------
-         //ITerritory wizardAdviceHex = Territories.Find("1005");
-         //WizardAdviceLocations.Add(wizardAdviceHex);
-         //---------------------
-         //ITerritory t11 = Territories.Find("0306"); // e114 - verify that eagle hunt can happen in structure
-         //HiddenTemples.Add(t11);
-         //t11 = Territories.Find("0307"); // e114 - verify that eagle hunt can happen in structure
-         //HiddenTemples.Add(t11);
-         //t11 = Territories.Find("0407"); // e114 - verify that eagle hunt can happen in structure
-         //HiddenTemples.Add(t11);
-         //t11 = Territories.Find("0405"); // e114 - verify that eagle hunt can happen in structure
-         //HiddenTemples.Add(t11);
-         //t11 = Territories.Find("0406"); // e114 - verify that eagle hunt can happen in structure
-         //HiddenTemples.Add(t11);
-         //t11 = Territories.Find("0506"); // e114 - verify that eagle hunt can happen in structure
-         //HiddenTemples.Add(t11);
-         //t11 = Territories.Find("0507"); // e114 - verify that eagle hunt can happen in structure
-         //HiddenTemples.Add(t11);
-         //---------------------
-         //ITerritory forbiddenHex = Territories.Find("0705");
-         //ForbiddenHexes.Add(forbiddenHex);
-         //---------------------
-         //ITerritory forbiddenAudience = Territories.Find("0101");
-         //ITerritory lt1 = Territories.Find("0109");
-         //ITerritory lt2 = Territories.Find("0711");
-         //ITerritory lt3 = Territories.Find("1212");
-         //LetterOfRecommendations.Add(lt1);
-         //LetterOfRecommendations.Add(lt1);
-         //ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt1);
-         //LetterOfRecommendations.Add(lt2);
-         //ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt2);
-         //LetterOfRecommendations.Add(lt3);
-         //ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt3);
-         //---------------------
-         //DayOfLastOffering = Days + 4;
-         //IsSecretTempleKnown = true;
-         //IsMarkOfCain = true; // e018
-         //NumMonsterKill = 5; // e161e - kill 5 monsters
-         //ChagaDrugCount = 2;
-         //RaftState = RaftEnum.RE_RAFT_SHOWN;
-      }
       private bool SetStartingLocationOption(IGameInstance gi, ref ITerritory starting)
       {
          Option option = null;
@@ -2164,6 +2046,125 @@ namespace BarbarianPrince
          if (true == option.IsEnabled)
             starting = Territory.theTerritories.Find(hex);
          return true;
+      }
+      private void AddStartingCompileTimeOptions(IGameInstance gi)
+      {
+         //Days = 40;
+         //myPrince.SetWounds(7, 0);
+         //myPrince.PlagueDustWound = 1; 
+         //myPrince.AddNewMount(MountEnum.Pegasus);
+         //this.AddUnitTestTiredMount(myPrince);
+         //myPrince.AddNewMount();
+         //myPrince.AddNewMount();
+         //---------------------
+         //gi.AddSpecialItem(SpecialEnum.GiftOfCharm);
+         //gi.AddSpecialItem(SpecialEnum.ResistanceTalisman);
+         //gi.AddSpecialItem(SpecialEnum.CharismaTalisman);
+         //gi.AddSpecialItem(SpecialEnum.DragonEye);
+         //gi.AddSpecialItem(SpecialEnum.RocBeak);
+         //gi.AddSpecialItem(SpecialEnum.GriffonClaws);
+         //gi.AddSpecialItem(SpecialEnum.HealingPoition);
+         //gi.AddSpecialItem(SpecialEnum.CurePoisonVial);
+         //gi.AddSpecialItem(SpecialEnum.EnduranceSash);
+         //gi.AddSpecialItem(SpecialEnum.PoisonDrug);
+         //gi.AddSpecialItem(SpecialEnum.MagicSword);
+         //gi.AddSpecialItem(SpecialEnum.AntiPoisonAmulet);
+         //gi.AddSpecialItem(SpecialEnum.PegasusMountTalisman);
+         //gi.AddSpecialItem(SpecialEnum.NerveGasBomb);
+         //gi.AddSpecialItem(SpecialEnum.ResistanceRing);
+         gi.AddSpecialItem(SpecialEnum.ResurrectionNecklace);
+         gi.AddSpecialItem(SpecialEnum.ShieldOfLight);
+         gi.AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
+         gi.Prince.AddSpecialItemToShare(SpecialEnum.HydraTeeth);
+         gi.Prince.AddSpecialItemToShare(SpecialEnum.StaffOfCommand);
+         gi.HydraTeethCount = 5;
+         //---------------------
+         //ITerritory visited = Territories.Find("0109");
+         //this.myVisitedLoctions.Add(visited);
+         //---------------------
+         //ITerritory escapeLocation = Territories.Find("0605");
+         //EscapedLocations.Add(escapeLocation);
+         //---------------------
+         //ITerritory cacheHex = Territories.Find("0504");
+         //Caches.Add(cacheHex, 66);
+         //cacheHex = Territories.Find("0505");
+         //Caches.Add(cacheHex, 333);
+         //Caches.Add(cacheHex, 100);
+         //Caches.Add(cacheHex, 500);
+         //Caches.Add(cacheHex, 33);
+         //---------------------
+         //ITerritory secretClueHex = Territories.Find("0504");
+         //SecretClues.Add(secretClueHex);
+         //---------------------
+         //ITerritory secretClueHex2 = Territories.Find("0706");
+         //SecretClues.Add(secretClueHex2);
+         //---------------------
+         //ITerritory hiddenTemple = Territories.Find("0605");
+         //HiddenTemples.Add(hiddenTemple);
+         //---------------------
+         //ITerritory hiddenRuin = Territories.Find("0606");
+         //HiddenRuins.Add(hiddenRuin);
+         //---------------------
+         //ITerritory elfTown = Territories.Find("0607");
+         //ElfTowns.Add(elfTown);
+         //---------------------
+         //ITerritory eagleLair = Territories.Find("0407");
+         //EagleLairs.Add(eagleLair);
+         //---------------------
+         //ITerritory dwarvenMine = Territories.Find("0408");  
+         //DwarvenMines.Add(dwarvenMine);
+         //---------------------
+         //ITerritory dwarfAdviceHex = Territories.Find("0319");
+         //DwarfAdviceLocations.Add(dwarfAdviceHex);
+         //---------------------
+         //ITerritory halflingTown = Territories.Find("0303");
+         //HalflingTowns.Add(halflingTown);
+         //---------------------
+         //ITerritory elfCastle  = Territories.Find("0608");
+         //ElfCastles.Add(elfCastle);
+         //---------------------
+         //ITerritory wizarTower = Territories.Find("0404");  //mountain
+         //WizardTowers.Add(wizarTower);
+         //---------------------
+         //ITerritory wizardAdviceHex = Territories.Find("1005");
+         //WizardAdviceLocations.Add(wizardAdviceHex);
+         //---------------------
+         //ITerritory t11 = Territories.Find("0306"); // e114 - verify that eagle hunt can happen in structure
+         //HiddenTemples.Add(t11);
+         //t11 = Territories.Find("0307"); // e114 - verify that eagle hunt can happen in structure
+         //HiddenTemples.Add(t11);
+         //t11 = Territories.Find("0407"); // e114 - verify that eagle hunt can happen in structure
+         //HiddenTemples.Add(t11);
+         //t11 = Territories.Find("0405"); // e114 - verify that eagle hunt can happen in structure
+         //HiddenTemples.Add(t11);
+         //t11 = Territories.Find("0406"); // e114 - verify that eagle hunt can happen in structure
+         //HiddenTemples.Add(t11);
+         //t11 = Territories.Find("0506"); // e114 - verify that eagle hunt can happen in structure
+         //HiddenTemples.Add(t11);
+         //t11 = Territories.Find("0507"); // e114 - verify that eagle hunt can happen in structure
+         //HiddenTemples.Add(t11);
+         //---------------------
+         //ITerritory forbiddenHex = Territories.Find("0705");
+         //ForbiddenHexes.Add(forbiddenHex);
+         //---------------------
+         //ITerritory forbiddenAudience = Territories.Find("0101");
+         //ITerritory lt1 = Territories.Find("0109");
+         //ITerritory lt2 = Territories.Find("0711");
+         //ITerritory lt3 = Territories.Find("1212");
+         //LetterOfRecommendations.Add(lt1);
+         //LetterOfRecommendations.Add(lt1);
+         //ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt1);
+         //LetterOfRecommendations.Add(lt2);
+         //ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt2);
+         //LetterOfRecommendations.Add(lt3);
+         //ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt3);
+         //---------------------
+         //DayOfLastOffering = Days + 4;
+         //IsSecretTempleKnown = true;
+         //IsMarkOfCain = true; // e018
+         //NumMonsterKill = 5; // e161e - kill 5 monsters
+         //ChagaDrugCount = 2;
+         //RaftState = RaftEnum.RE_RAFT_SHOWN;
       }
    }
    //-----------------------------------------------------

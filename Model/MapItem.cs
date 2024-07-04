@@ -830,9 +830,9 @@ namespace BarbarianPrince
       public int GetNumSpecialItem(SpecialEnum item)
       {
          int numItem = 0;
-         foreach (SpecialEnum item2 in SpecialKeeps)
+         foreach (SpecialEnum item1 in mySpecialKeeps)
          {
-            if (item == item2)
+            if (item == item1)
               ++numItem;
          }
          foreach (SpecialEnum item2 in mySpecialShares)

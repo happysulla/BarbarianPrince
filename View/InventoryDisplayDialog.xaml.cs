@@ -138,6 +138,8 @@ namespace BarbarianPrince.View
       };
       //----------------------------------------------------------------
       public bool CtorError = false;
+      private double myColumnWidth = (1.5 * Utilities.theMapItemSize) + 10;
+      private double myRowHeight = ((0.1 + Utilities.ZOOM) * Utilities.theMapItemSize) + 10;
       private RuleDialogViewer myRulesManager = null;
       private GridRowHeading myGridRowHeading = new GridRowHeading(false);
       private GridRow[] myGridRows = new GridRow[Utilities.MAX_GRID_ROW];
@@ -152,7 +154,7 @@ namespace BarbarianPrince.View
             return;
          }
          myRulesManager = rm;
-         this.Height = (1.5 * Utilities.theMapItemSize+10) + gi.PartyMembers.Count*( (Utilities.ZOOM * Utilities.theMapItemSize) + 10 ) + (Utilities.ZOOM * Utilities.theMapItemSize);
+         this.Height = gi.PartyMembers.Count * myRowHeight + myColumnWidth + 20; // ColumnWidth represents the initial Row's Height -  20 is for border and header space
          SetGridRowData(gi);
          UpdateGridRowHeader();
          UpdateGridRows(gi);
@@ -236,9 +238,12 @@ namespace BarbarianPrince.View
             myGridRows[i].myNumMagicBox = mi.GetNumSpecialItem(SpecialEnum.MagicBox);
             if (0 < myGridRows[i].myNumMagicBox)
                myGridRowHeading.myIsMagicBox = true;
-            myGridRows[i].myNumHydraTeeth = mi.GetNumSpecialItem(SpecialEnum.HydraTeeth);
-            if (0 < myGridRows[i].myNumHydraTeeth)
+            int numTeeth = mi.GetNumSpecialItem(SpecialEnum.HydraTeeth);
+            if (0 < numTeeth)
+            {
                myGridRowHeading.myIsHydraTeeth = true;
+               myGridRows[i].myNumHydraTeeth = gi.HydraTeethCount;
+            }
             myGridRows[i].myNumStaffOfCommand = mi.GetNumSpecialItem(SpecialEnum.StaffOfCommand);
             if (0 < myGridRows[i].myNumStaffOfCommand)
                myGridRowHeading.myIsStaffOfCommand = true;
@@ -538,15 +543,13 @@ namespace BarbarianPrince.View
             ++colNum;
          }
          //--------------------------------------------------------
-         ++colNum;
-         this.Width = colNum * ( (Utilities.ZOOM * Utilities.theMapItemSize) + 10 );
+         this.Width = colNum * myColumnWidth;
       }
       private void UpdateGridRows(IGameInstance gi)
       {
          for (int i = 0; i < gi.PartyMembers.Count; ++i)
          {
             IMapItem mi = gi.PartyMembers[i];
-            myGridRows[i] = new GridRow(mi);
             int rowNum = i + 1;
             Button b = CreateButton(mi);
             myGrid.Children.Add(b);
@@ -570,7 +573,7 @@ namespace BarbarianPrince.View
             int colNum = 3;
             if (true == myGridRowHeading.myIsHorse)
             {
-               int count = myGridRows[rowNum].myNumHorse;
+               int count = myGridRows[i].myNumHorse;
                if ( 0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -583,7 +586,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsPegasus)
             {
-               int count = myGridRows[rowNum].myNumPegasus;
+               int count = myGridRows[i].myNumPegasus;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -596,7 +599,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsHealingPoition)
             {
-               int count = myGridRows[rowNum].myNumHealingPoition;
+               int count = myGridRows[i].myNumHealingPoition;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -609,7 +612,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsCurePoisonVial)
             {
-               int count = myGridRows[rowNum].myNumCurePoisonVial;
+               int count = myGridRows[i].myNumCurePoisonVial;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -622,7 +625,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsGiftOfCharm)
             {
-               int count = myGridRows[rowNum].myNumGiftOfCharm;
+               int count = myGridRows[i].myNumGiftOfCharm;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -635,7 +638,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsEnduranceSash)
             {
-               int count = myGridRows[rowNum].myNumEnduranceSash;
+               int count = myGridRows[i].myNumEnduranceSash;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -648,7 +651,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsResistanceTalisman)
             {
-               int count = myGridRows[rowNum].myNumResistanceTalisman;
+               int count = myGridRows[i].myNumResistanceTalisman;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -661,7 +664,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsPoisonDrug)
             {
-               int count = myGridRows[rowNum].myNumPoisonDrug;
+               int count = myGridRows[i].myNumPoisonDrug;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -674,7 +677,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsMagicSword)
             {
-               int count = myGridRows[rowNum].myNumMagicSword;
+               int count = myGridRows[i].myNumMagicSword;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -687,7 +690,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsAntiPoisonAmulet)
             {
-               int count = myGridRows[rowNum].myNumAntiPoisonAmulet;
+               int count = myGridRows[i].myNumAntiPoisonAmulet;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -700,7 +703,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsPegasusMountTalisman)
             {
-               int count = myGridRows[rowNum].myNumPegasusMountTalisman;
+               int count = myGridRows[i].myNumPegasusMountTalisman;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -713,7 +716,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsCharismaTalisman)
             {
-               int count = myGridRows[rowNum].myNumCharismaTalisman;
+               int count = myGridRows[i].myNumCharismaTalisman;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -726,7 +729,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsNerveGasBomb)
             {
-               int count = myGridRows[rowNum].myNumNerveGasBomb;
+               int count = myGridRows[i].myNumNerveGasBomb;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -739,7 +742,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsResistanceRing)
             {
-               int count = myGridRows[rowNum].myNumResistanceRing;
+               int count = myGridRows[i].myNumResistanceRing;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -752,7 +755,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsResurrectionNecklace)
             {
-               int count = myGridRows[rowNum].myNumResurrectionNecklace;
+               int count = myGridRows[i].myNumResurrectionNecklace;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -765,7 +768,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsShieldOfLight)
             {
-               int count = myGridRows[rowNum].myNumShieldOfLight;
+               int count = myGridRows[i].myNumShieldOfLight;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -778,7 +781,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsRoyalHelmOfNorthlands)
             {
-               int count = myGridRows[rowNum].myNumRoyalHelmOfNorthlands;
+               int count = myGridRows[i].myNumRoyalHelmOfNorthlands;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -791,7 +794,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsTrollSkin)
             {
-               int count = myGridRows[rowNum].myNumTrollSkin;
+               int count = myGridRows[i].myNumTrollSkin;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -804,7 +807,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsDragonEye)
             {
-               int count = myGridRows[rowNum].myNumDragonEye;
+               int count = myGridRows[i].myNumDragonEye;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -817,7 +820,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsRocBeak)
             {
-               int count = myGridRows[rowNum].myNumRocBeak;
+               int count = myGridRows[i].myNumRocBeak;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -830,7 +833,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsGriffonClaw)
             {
-               int count = myGridRows[rowNum].myNumGriffonClaw;
+               int count = myGridRows[i].myNumGriffonClaw;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -843,7 +846,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsMagicBox)
             {
-               int count = myGridRows[rowNum].myNumMagicBox;
+               int count = myGridRows[i].myNumMagicBox;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -856,7 +859,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsHydraTeeth)
             {
-               int count = myGridRows[rowNum].myNumHydraTeeth;
+               int count = myGridRows[i].myNumHydraTeeth;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -869,7 +872,7 @@ namespace BarbarianPrince.View
             //--------------------------------------------------------
             if (true == myGridRowHeading.myIsStaffOfCommand)
             {
-               int count = myGridRows[rowNum].myNumStaffOfCommand;
+               int count = myGridRows[i].myNumStaffOfCommand;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
@@ -899,9 +902,9 @@ namespace BarbarianPrince.View
       { 
          System.Windows.Controls.Button b = new Button {Name=img.Name, Width= 1.5 * Utilities.theMapItemSize, Height= 1.5 * Utilities.theMapItemSize, Foreground=Brushes.Transparent, Background=Brushes.Transparent, BorderBrush=Brushes.Transparent, Margin=new Thickness(5)};
          b.Click += ButtonShowRule_Click;
-         StackPanel sp = new StackPanel();
-         sp.Children.Add(img);
-         b.Content = sp;
+         Viewbox vb = new Viewbox();
+         vb.Child = img;
+         b.Content = vb;
          return b;
       }
       private void ButtonShowRule_Click(object sender, RoutedEventArgs e)

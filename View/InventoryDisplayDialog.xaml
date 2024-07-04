@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:BarbarianPrince.View"
         mc:Ignorable="d"
         Title="InventoryDisplayDialog" Height="450" Width="800">
-   <Grid x:Name="myGrid">
+   <Grid x:Name="myGrid" ShowGridLines="True">
       <Grid.RowDefinitions>
-         <RowDefinition Height="Auto"></RowDefinition>
+         <RowDefinition Height="Auto" Name="myFirstRow"></RowDefinition>
          <RowDefinition Height="Auto"></RowDefinition>
          <RowDefinition Height="Auto"></RowDefinition>
          <RowDefinition Height="Auto"></RowDefinition>
@@ -60,6 +60,24 @@
          <RowDefinition></RowDefinition>
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
+         <ColumnDefinition Width="Auto" Name="myFirstCol"/>
+         <ColumnDefinition Width="Auto"/>
+         <ColumnDefinition Width="Auto"/>
+         <ColumnDefinition Width="Auto"/>
+         <ColumnDefinition Width="Auto"/>
+         <ColumnDefinition Width="Auto"/>
+         <ColumnDefinition Width="Auto"/>
+         <ColumnDefinition Width="Auto"/>
+         <ColumnDefinition Width="Auto"/>
+         <ColumnDefinition Width="Auto"/>
+         <ColumnDefinition Width="Auto"/>
+         <ColumnDefinition Width="Auto"/>
+         <ColumnDefinition Width="Auto"/>
+         <ColumnDefinition Width="Auto"/>
+         <ColumnDefinition Width="Auto"/>
+         <ColumnDefinition Width="Auto"/>
+         <ColumnDefinition Width="Auto"/>
+         <ColumnDefinition Width="Auto"/>
          <ColumnDefinition Width="Auto"/>
          <ColumnDefinition Width="Auto"/>
          <ColumnDefinition Width="Auto"/>
