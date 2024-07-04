@@ -463,6 +463,17 @@ namespace BarbarianPrince
          else
          {
             gi.GamePhase = GamePhase.SunriseChoice;      // Nominal - Wakeup()
+            Option optionSteadyIncome = gi.Options.Find("SteadyIncome");
+            if (null == optionSteadyIncome)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "MenuItemSave_Click(): = gi.Options.Find(SteadyIncome) returned null");
+               return false;
+            }
+            if( true == optionSteadyIncome.IsEnabled )
+            {
+               int dailyCoin = 3 + Utilities.RandomGenerator.Next(3); 
+               gi.AddCoins(dailyCoin);
+            }
             gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
             gi.DieRollAction = GameAction.DieRollActionNone;
          }
@@ -1439,7 +1450,7 @@ namespace BarbarianPrince
             return false;
          }
          if (true == option.IsEnabled)
-            gi.Prince.Coin += Utilities.RandomGenerator.Next(50) + 50;
+            gi.Prince.Coin += (Utilities.RandomGenerator.Next(50) + 50);
          //---------------------------------------------------------
          itemToAdd = "PrinceFood";
          option = options.Find(itemToAdd);
@@ -1697,8 +1708,6 @@ namespace BarbarianPrince
                   member.Food = 5;
                   member.Coin = 98;
                   member.AddNewMount();  // riding
-                  member.AddNewMount(MountEnum.Pegasus); // flying
-                  member.SetWounds(3, 0); // make unconscious
                   member.IsGuide = true;
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
@@ -8064,6 +8073,7 @@ namespace BarbarianPrince
                   if ("Prince" != mi.Name)
                      gi.LostPartyMembers.Add(mi);
                }
+               gi.Bribe = 20;
                gi.PartyMembers.Clear();
                gi.PartyMembers.Add(gi.Prince);
                break;
@@ -12328,11 +12338,11 @@ namespace BarbarianPrince
                            return false;
                         }
                         break;
-                     case 3: gi.EventDisplayed = gi.EventActive = "e154"; gi.DieRollAction = GameAction.EncounterRoll; break;                      // meet king's daughter
+                     case 3: gi.EventDisplayed = gi.EventActive = "e154"; gi.DieRollAction = GameAction.EncounterRoll; break;                  // meet king's daughter
                      case 4: gi.EventDisplayed = gi.EventActive = "e149"; gi.ForbiddenAudiences.AddClothesConstraint(princeTerritory); break;  // learn court manners
-                     case 5: gi.EventDisplayed = gi.EventActive = "e158"; break;                                                                   // hostile guards
+                     case 5: gi.EventDisplayed = gi.EventActive = "e158"; break;                                                               // hostile guards
                      case 6:
-                     case 7:                                                                                                               // nothing happens
+                     case 7:                                                                                                                   // nothing happens
                         if (false == EncounterEnd(gi, ref action))
                         {
                            Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false ae=" + action.ToString() + " dr=" + resultOfDie.ToString());

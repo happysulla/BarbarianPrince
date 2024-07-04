@@ -92,7 +92,7 @@
          <TextBox Grid.Row="2" Grid.Column="3" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Party is exhausted. No riding mounts, and all load carrying at 1/2."/>
          <TextBox Grid.Row="3" Grid.Column="3" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Fine clothes bought in town, temple, or castle for 10gp to hold audience."/>
          <TextBox Grid.Row="4" Grid.Column="3" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Fugitive mark. Character leaves party when entering structure or encountering constable."/>
-         <TextBox Grid.Row="5" Grid.Column="3" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Foulbane prized by Count Dragot."/>
+         <TextBox Grid.Row="5" Grid.Column="3" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Foulbane: Count Dragot vulnerable to foulbane, a rare plant purchased at hex 2018."/>
          <TextBox Grid.Row="6" Grid.Column="3" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="God has blessed you. You win if you return north of Tragoth River."/>
          <TextBox Grid.Row="7" Grid.Column="3" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Magician gives you a gift to open at evening meal."/>
          <TextBox Grid.Row="8" Grid.Column="3" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Griffon claws prized by Lady Aeravir."/>

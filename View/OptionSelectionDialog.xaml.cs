@@ -67,7 +67,7 @@ namespace BarbarianPrince
          myCheckBoxAutoLostIncrement.ToolTip = "Lost Chance Descreases on Consecutive Lost Rolls";
          myCheckBoxExtendTime.ToolTip = "Extend End Time from 70 days to 105 days";
          myCheckBoxReducedLodgingCosts.ToolTip = "Lodging in Town is Half Price";
-         myCheckBoxAddIncome.ToolTip = "Add 3gp at end of each day performing menial tasks during daily activities.";
+         myCheckBoxAddIncome.ToolTip = "Add 3-6gp at end of each day performing menial tasks during daily activities in not incapacitated.";
          //--------------------
          myCheckBoxNoLostRoll.ToolTip = "Skip Lost Rolls";
          myCheckBoxNoLostEvent.ToolTip = "Lost Encounters never occur";
@@ -374,6 +374,9 @@ namespace BarbarianPrince
                            if (true == option.IsEnabled)
                            {
                               isCustomPartyConfig = true;
+                           }
+                           else
+                           {
                               isFunOption = false;
                            }
                            //-------------------------
@@ -471,9 +474,6 @@ namespace BarbarianPrince
                            if (true == option.IsEnabled)
                            {
                               isCustomPartyConfig = true;
-                           }
-                           else
-                           {
                               isFunOption = false;
                            }
                         }
@@ -1172,34 +1172,77 @@ namespace BarbarianPrince
       }
       private void ResetPartyMembers()
       {
-         myCheckBoxDwarf.IsChecked = false;
-         myCheckBoxEagle.IsChecked = false;
-         myCheckBoxElf.IsChecked = false;
-         myCheckBoxFalcon.IsChecked = false;
-         myCheckBoxGriffon.IsChecked = false;
-         myCheckBoxHarpy.IsChecked = false;
-         myCheckBoxMagician.IsChecked = false;
-         myCheckBoxMercenary.IsChecked = false;
-         myCheckBoxMerchant.IsChecked = false;
-         myCheckBoxMinstrel.IsChecked = false;
-         myCheckBoxMonk.IsChecked = false;
-         myCheckBoxPorterSlave.IsChecked = false;
-         myCheckBoxTrueLove.IsChecked = false;
-         myCheckBoxWizard.IsChecked = false;
-         myCheckBoxDwarf.IsEnabled = false;
-         myCheckBoxEagle.IsEnabled = false;
-         myCheckBoxElf.IsEnabled = false;
-         myCheckBoxFalcon.IsEnabled = false;
-         myCheckBoxGriffon.IsEnabled = false;
-         myCheckBoxHarpy.IsEnabled = false;
-         myCheckBoxMagician.IsEnabled = false;
-         myCheckBoxMercenary.IsEnabled = false;
-         myCheckBoxMerchant.IsEnabled = false;
-         myCheckBoxMinstrel.IsEnabled = false;
-         myCheckBoxMonk.IsEnabled = false;
-         myCheckBoxPorterSlave.IsEnabled = false;
-         myCheckBoxTrueLove.IsEnabled = false;
-         myCheckBoxWizard.IsEnabled = false;
+         Option option = null;
+         option = myOptions.Find("Dwarf");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPartyMembers(): not found Dwarf");
+         option = myOptions.Find("Eagle");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPartyMembers(): not found Eagle");
+         option = myOptions.Find("Elf");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPartyMembers(): not found Elf");
+         option = myOptions.Find("Falcon");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPartyMembers(): not found Falcon");
+         option = myOptions.Find("Griffon");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPartyMembers(): not found Griffon");
+         option = myOptions.Find("Harpy");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPartyMembers(): not found Harpy");
+         option = myOptions.Find("Magician");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPartyMembers(): not found Magician");
+         option = myOptions.Find("Mercenary");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPartyMembers(): not found Mercenary");
+         option = myOptions.Find("Merchant");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPartyMembers(): not found Merchant");
+         option = myOptions.Find("Minstrel");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPartyMembers(): not found Minstrel");
+         option = myOptions.Find("Monk");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPartyMembers(): not found Monk");
+         option = myOptions.Find("PorterSlave");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPartyMembers(): not found PorterSlave");
+         option = myOptions.Find("TrueLove");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPartyMembers(): not found TrueLove");
+         option = myOptions.Find("Wizard");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPartyMembers(): not found Wizard");
       }
       private void ResetPartyOptions()
       {
@@ -1662,6 +1705,11 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=Elf");
          else
             option.IsEnabled = true;
+         option = myOptions.Find("Magician");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=Magician");
+         else
+            option.IsEnabled = true;
          option = myOptions.Find("Mercenary");
          if (null == option)
             Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=Mercenary");
@@ -1670,11 +1718,6 @@ namespace BarbarianPrince
          option = myOptions.Find("Monk");
          if (null == option)
             Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=Monk");
-         else
-            option.IsEnabled = true;
-         option = myOptions.Find("Wizard");
-         if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=Wizard");
          else
             option.IsEnabled = true;
          option = myOptions.Find("RandomHex");

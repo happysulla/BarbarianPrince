@@ -59,6 +59,7 @@ namespace BarbarianPrince
       private int myHunterWound = 0;
       private int myCoinOriginal = 0;
       private int myCoinCurrent = 0;
+      private bool myIsHalfLodging = false;
       private ITerritory myCurrentTerritory = null;
       private IMapItem myMapItemDragged = null;
       IMapItems myMapItems = new MapItems();
@@ -145,6 +146,14 @@ namespace BarbarianPrince
             return false;
          }
          Logger.Log(LogEnum.LE_VIEW_SHOW_HUNT, "PerformHunt(): 1-myGameInstance.PartyMembers.Count=" + myGameInstance.PartyMembers.Count.ToString());
+         //--------------------------------------------------
+         Option option = myGameInstance.Options.Find("ReduceLodgingCosts");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "FeedParty(): gi.Options.Find(ReduceLodgingCosts) returned null");
+            return false;
+         }
+         myIsHalfLodging = option.IsEnabled;
          //--------------------------------------------------
          myGridRows = new GridRow[Utilities.MAX_GRID_ROW];
          myState = HuntEnum.LE_HUNT;
@@ -242,7 +251,10 @@ namespace BarbarianPrince
          }
          else
          {
-            if (true == myGameInstance.CheapLodgings.Contains(myCurrentTerritory)) // if this is cheaper food, cost is divided by two
+            bool isCheapLodging = myGameInstance.CheapLodgings.Contains(myCurrentTerritory);
+            if ((true == isCheapLodging) && (true == myIsHalfLodging) ) // if this is cheaper food, cost is divided by two
+               myCoinNeededForParty = (int)Math.Ceiling(((double)myMapItems.Count) / 4.0);
+            if((true == isCheapLodging) || (true == myIsHalfLodging))// if option set to reduce lodging costs
                myCoinNeededForParty = (int)Math.Ceiling(((double)myMapItems.Count) / 2.0);
             if (true == myGameInstance.IsPartyFed) // fed by lord of town or castle
                myCoinNeededForParty = 0;
@@ -261,7 +273,9 @@ namespace BarbarianPrince
                   myGridRows[1].myAssignable = mount;
                   if (true == myGameInstance.IsMountsFed) // fed by lord of town or castle
                      myCoinNeededForMounts = 0;
-                  else if (true == myGameInstance.CheapLodgings.Contains(myCurrentTerritory)) // if this is cheaper food, cost is divided by two
+                  else if ((true == isCheapLodging) && (true == myIsHalfLodging)) // if this is cheaper food, cost is divided by two
+                     myCoinNeededForMounts = (int)Math.Ceiling(((double)myMapItems.Count) / 4.0);
+                  else if ((true == isCheapLodging) || (true == myIsHalfLodging)) // if this is cheaper food, cost is divided by two
                      myCoinNeededForMounts = (int)Math.Ceiling(((double)myNumMounts) / 2.0);
                   else
                      myCoinNeededForMounts = myNumMounts; 
@@ -939,7 +953,10 @@ namespace BarbarianPrince
             if ((true == myIsHeaderCheckBoxChecked) && (true == cb.IsChecked))
             {
                extraFoodBought = myCoinSpentForParty - myCoinNeededForParty;  // this assumes one gold per extra food
-               if (true == myGameInstance.CheapLodgings.Contains(myCurrentTerritory)) // if cheap lodgings, get two food extra per coin
+               bool isCheapLodging = myGameInstance.CheapLodgings.Contains(myCurrentTerritory);
+               if ((true == isCheapLodging) && (true == myIsHalfLodging)) 
+                  extraFoodBought *= 4;
+               else if ((true == isCheapLodging) || (true == myIsHalfLodging)) // if cheap lodgings, get two food extra per coin
                   extraFoodBought *= 2;
             }
             Label labelForExtraFood = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = extraFoodBought.ToString() };
@@ -1467,6 +1484,11 @@ namespace BarbarianPrince
                   --myFoodAdded;
                   --myFoodCurrent;
                }
+               if (true == myIsHalfLodging) // lose two food per coin
+               {
+                  --myFoodAdded;
+                  --myFoodCurrent;
+               }
             }
             else if (" + " == (string)b.Content)
             {
@@ -1475,6 +1497,11 @@ namespace BarbarianPrince
                ++myFoodAdded;
                ++myFoodCurrent;
                if (true == myGameInstance.CheapLodgings.Contains(myCurrentTerritory)) // get two food per coin
+               {
+                  ++myFoodAdded;
+                  ++myFoodCurrent;
+               }
+               if (true == myIsHalfLodging) // get two food per coin
                {
                   ++myFoodAdded;
                   ++myFoodCurrent;

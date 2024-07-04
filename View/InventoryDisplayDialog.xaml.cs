@@ -557,17 +557,25 @@ namespace BarbarianPrince.View
             Grid.SetColumn(b, 0);
             //--------------------------------------------------------
             {
-               Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = mi.Food.ToString() };
-               myGrid.Children.Add(label);
-               Grid.SetRow(label, rowNum);
-               Grid.SetColumn(label, 1);
+               int count = mi.Food;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, 1);
+               }
             }
             //--------------------------------------------------------
             {
-               Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = mi.Coin.ToString() };
-               myGrid.Children.Add(label);
-               Grid.SetRow(label, rowNum);
-               Grid.SetColumn(label, 2);
+               int count = mi.Coin;
+               if( 0 < count )
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, 2);
+               }
             }
             //--------------------------------------------------------
             int colNum = 3;

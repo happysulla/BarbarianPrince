@@ -16,7 +16,7 @@
     <IsEnabled value="True" />
   </Option>
   <Option value="PrinceFood">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="RandomParty10">
     <IsEnabled value="False" />
@@ -55,7 +55,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="Magician">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Mercenary">
     <IsEnabled value="True" />
@@ -76,7 +76,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="Wizard">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="PartyMounted">
     <IsEnabled value="False" />
@@ -85,10 +85,10 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomHex">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="RandomTown">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="RandomLeft">
     <IsEnabled value="False" />
@@ -163,10 +163,10 @@
     <IsEnabled value="True" />
   </Option>
   <Option value="ReduceLodgingCosts">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="SteadyIncome">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="NoLostRoll">
     <IsEnabled value="False" />
