@@ -2049,13 +2049,13 @@ namespace BarbarianPrince
       }
       private void AddStartingCompileTimeOptions(IGameInstance gi)
       {
-         //Days = 40;
-         //myPrince.SetWounds(7, 0);
-         //myPrince.PlagueDustWound = 1; 
-         //myPrince.AddNewMount(MountEnum.Pegasus);
+         //gi.Days = 40;
+         //gi.Prince.SetWounds(7, 0);
+         //gi.Prince.PlagueDustWound = 1; 
+         //gi.Prince.AddNewMount(MountEnum.Pegasus);
          //this.AddUnitTestTiredMount(myPrince);
-         //myPrince.AddNewMount();
-         //myPrince.AddNewMount();
+         //gi.Prince.AddNewMount();
+         //gi.Prince.AddNewMount();
          //---------------------
          //gi.AddSpecialItem(SpecialEnum.GiftOfCharm);
          //gi.AddSpecialItem(SpecialEnum.ResistanceTalisman);
@@ -2072,99 +2072,99 @@ namespace BarbarianPrince
          //gi.AddSpecialItem(SpecialEnum.PegasusMountTalisman);
          //gi.AddSpecialItem(SpecialEnum.NerveGasBomb);
          //gi.AddSpecialItem(SpecialEnum.ResistanceRing);
-         gi.AddSpecialItem(SpecialEnum.ResurrectionNecklace);
-         gi.AddSpecialItem(SpecialEnum.ShieldOfLight);
-         gi.AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
-         gi.Prince.AddSpecialItemToShare(SpecialEnum.HydraTeeth);
-         gi.Prince.AddSpecialItemToShare(SpecialEnum.StaffOfCommand);
-         gi.HydraTeethCount = 5;
+         //gi.AddSpecialItem(SpecialEnum.ResurrectionNecklace);
+         //gi.AddSpecialItem(SpecialEnum.ShieldOfLight);
+         //gi.AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
+         //gi.Prince.AddSpecialItemToShare(SpecialEnum.HydraTeeth);
+         //gi.Prince.AddSpecialItemToShare(SpecialEnum.StaffOfCommand);
+         //gi.HydraTeethCount = 5;
          //---------------------
          //ITerritory visited = Territories.Find("0109");
-         //this.myVisitedLoctions.Add(visited);
+         //gi..myVisitedLoctions.Add(visited);
          //---------------------
          //ITerritory escapeLocation = Territories.Find("0605");
-         //EscapedLocations.Add(escapeLocation);
+         //gi.EscapedLocations.Add(escapeLocation);
          //---------------------
          //ITerritory cacheHex = Territories.Find("0504");
-         //Caches.Add(cacheHex, 66);
+         //gi.Caches.Add(cacheHex, 66);
          //cacheHex = Territories.Find("0505");
-         //Caches.Add(cacheHex, 333);
-         //Caches.Add(cacheHex, 100);
-         //Caches.Add(cacheHex, 500);
-         //Caches.Add(cacheHex, 33);
+         //gi.Caches.Add(cacheHex, 333);
+         //gi.Caches.Add(cacheHex, 100);
+         //gi.Caches.Add(cacheHex, 500);
+         //gi.Caches.Add(cacheHex, 33);
          //---------------------
          //ITerritory secretClueHex = Territories.Find("0504");
-         //SecretClues.Add(secretClueHex);
+         //gi.SecretClues.Add(secretClueHex);
          //---------------------
          //ITerritory secretClueHex2 = Territories.Find("0706");
-         //SecretClues.Add(secretClueHex2);
+         //gi.SecretClues.Add(secretClueHex2);
          //---------------------
          //ITerritory hiddenTemple = Territories.Find("0605");
-         //HiddenTemples.Add(hiddenTemple);
+         //gi.HiddenTemples.Add(hiddenTemple);
          //---------------------
          //ITerritory hiddenRuin = Territories.Find("0606");
-         //HiddenRuins.Add(hiddenRuin);
+         //gi.HiddenRuins.Add(hiddenRuin);
          //---------------------
          //ITerritory elfTown = Territories.Find("0607");
-         //ElfTowns.Add(elfTown);
+         //gi.ElfTowns.Add(elfTown);
          //---------------------
          //ITerritory eagleLair = Territories.Find("0407");
-         //EagleLairs.Add(eagleLair);
+         //gi.EagleLairs.Add(eagleLair);
          //---------------------
          //ITerritory dwarvenMine = Territories.Find("0408");  
-         //DwarvenMines.Add(dwarvenMine);
+         //gi.DwarvenMines.Add(dwarvenMine);
          //---------------------
          //ITerritory dwarfAdviceHex = Territories.Find("0319");
-         //DwarfAdviceLocations.Add(dwarfAdviceHex);
+         //gi.DwarfAdviceLocations.Add(dwarfAdviceHex);
          //---------------------
          //ITerritory halflingTown = Territories.Find("0303");
-         //HalflingTowns.Add(halflingTown);
+         //gi.HalflingTowns.Add(halflingTown);
          //---------------------
          //ITerritory elfCastle  = Territories.Find("0608");
-         //ElfCastles.Add(elfCastle);
+         //gi.ElfCastles.Add(elfCastle);
          //---------------------
          //ITerritory wizarTower = Territories.Find("0404");  //mountain
-         //WizardTowers.Add(wizarTower);
+         //gi.WizardTowers.Add(wizarTower);
          //---------------------
          //ITerritory wizardAdviceHex = Territories.Find("1005");
-         //WizardAdviceLocations.Add(wizardAdviceHex);
+         //gi.WizardAdviceLocations.Add(wizardAdviceHex);
          //---------------------
          //ITerritory t11 = Territories.Find("0306"); // e114 - verify that eagle hunt can happen in structure
-         //HiddenTemples.Add(t11);
+         //gi.HiddenTemples.Add(t11);
          //t11 = Territories.Find("0307"); // e114 - verify that eagle hunt can happen in structure
-         //HiddenTemples.Add(t11);
+         //gi.HiddenTemples.Add(t11);
          //t11 = Territories.Find("0407"); // e114 - verify that eagle hunt can happen in structure
-         //HiddenTemples.Add(t11);
+         //gi.HiddenTemples.Add(t11);
          //t11 = Territories.Find("0405"); // e114 - verify that eagle hunt can happen in structure
-         //HiddenTemples.Add(t11);
+         //gi.HiddenTemples.Add(t11);
          //t11 = Territories.Find("0406"); // e114 - verify that eagle hunt can happen in structure
-         //HiddenTemples.Add(t11);
+         //gi.HiddenTemples.Add(t11);
          //t11 = Territories.Find("0506"); // e114 - verify that eagle hunt can happen in structure
-         //HiddenTemples.Add(t11);
+         //gi.HiddenTemples.Add(t11);
          //t11 = Territories.Find("0507"); // e114 - verify that eagle hunt can happen in structure
-         //HiddenTemples.Add(t11);
+         //gi.HiddenTemples.Add(t11);
          //---------------------
          //ITerritory forbiddenHex = Territories.Find("0705");
-         //ForbiddenHexes.Add(forbiddenHex);
+         //gi.ForbiddenHexes.Add(forbiddenHex);
          //---------------------
          //ITerritory forbiddenAudience = Territories.Find("0101");
          //ITerritory lt1 = Territories.Find("0109");
          //ITerritory lt2 = Territories.Find("0711");
          //ITerritory lt3 = Territories.Find("1212");
-         //LetterOfRecommendations.Add(lt1);
-         //LetterOfRecommendations.Add(lt1);
-         //ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt1);
-         //LetterOfRecommendations.Add(lt2);
-         //ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt2);
-         //LetterOfRecommendations.Add(lt3);
-         //ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt3);
+         //gi.LetterOfRecommendations.Add(lt1);
+         //gi.LetterOfRecommendations.Add(lt1);
+         //gi.ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt1);
+         //gi.LetterOfRecommendations.Add(lt2);
+         //gi.ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt2);
+         //gi.LetterOfRecommendations.Add(lt3);
+         //gi.ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt3);
          //---------------------
-         //DayOfLastOffering = Days + 4;
-         //IsSecretTempleKnown = true;
-         //IsMarkOfCain = true; // e018
-         //NumMonsterKill = 5; // e161e - kill 5 monsters
-         //ChagaDrugCount = 2;
-         //RaftState = RaftEnum.RE_RAFT_SHOWN;
+         //gi.DayOfLastOffering = Days + 4;
+         //gi.IsSecretTempleKnown = true;
+         //gi.IsMarkOfCain = true; // e018
+         //gi.NumMonsterKill = 5; // e161e - kill 5 monsters
+         //gi.ChagaDrugCount = 2;
+         //gi.RaftState = RaftEnum.RE_RAFT_SHOWN;
       }
    }
    //-----------------------------------------------------

@@ -96,6 +96,7 @@ namespace BarbarianPrince
          bool isCustomPartyConfig = false;
          bool isRandomHexConfig = false;
          bool isCustomHexConfig = false;
+         bool isFunOption = true;
          //++++++++++++++++++++++++++++++++++++++++++++++++
          // Auto Rolls
          Option option = options.Find("AutoSetup");
@@ -123,8 +124,11 @@ namespace BarbarianPrince
          }
          myCheckBoxPrinceHorse.IsChecked = option.IsEnabled;
          if( true == option.IsEnabled)
+         {
             isCustomConfig = true;
-         //-------------------------
+            isFunOption = false;
+         }
+        //-------------------------
          option = options.Find("PrincePegasus");
          if (null == option)
          {
@@ -133,7 +137,10 @@ namespace BarbarianPrince
          }
          myCheckBoxPrincePegasus.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("PrinceCoin");
          if (null == option)
@@ -143,7 +150,13 @@ namespace BarbarianPrince
          }
          myCheckBoxPrinceCoin.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+         }
+         else
+         {
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("PrinceFood");
          if (null == option)
@@ -153,7 +166,13 @@ namespace BarbarianPrince
          }
          myCheckBoxPrinceFood.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+         }
+         else
+         {
+            isFunOption = false;
+         }
          //++++++++++++++++++++++++++++++++++++++++++++++++
          // Party Members
          myCheckBoxDwarf.IsEnabled = false;
@@ -178,8 +197,9 @@ namespace BarbarianPrince
          }
          if( true == option.IsEnabled )
          {
-            myRadioButtonPartyRandom10.IsChecked = option.IsEnabled;
-            isRandomPartyConfig = option.IsEnabled;
+            myRadioButtonPartyRandom10.IsChecked = true;
+            isRandomPartyConfig = true;
+            isFunOption = false;
          }
          else
          {
@@ -191,8 +211,9 @@ namespace BarbarianPrince
             }
             if (true == option.IsEnabled)
             {
-               myRadioButtonPartyRandom8.IsChecked = option.IsEnabled;
-               isRandomPartyConfig = option.IsEnabled;
+               myRadioButtonPartyRandom8.IsChecked = true;
+               isRandomPartyConfig = true;
+               isFunOption = false;
             }
             else
             {
@@ -204,8 +225,9 @@ namespace BarbarianPrince
                }
                if (true == option.IsEnabled)
                {
-                  myRadioButtonPartyRandom5.IsChecked = option.IsEnabled;
-                  isRandomPartyConfig = option.IsEnabled;
+                  myRadioButtonPartyRandom5.IsChecked = true;
+                  isRandomPartyConfig = true;
+                  isFunOption = false;
                }
                else
                {
@@ -217,8 +239,9 @@ namespace BarbarianPrince
                   }
                   if (true == option.IsEnabled)
                   {
-                     myRadioButtonPartyRandom3.IsChecked = option.IsEnabled;
-                     isRandomPartyConfig = option.IsEnabled;
+                     myRadioButtonPartyRandom3.IsChecked = true;
+                     isRandomPartyConfig = true;
+                     isFunOption = false;
                   }
                   else
                   {
@@ -230,8 +253,9 @@ namespace BarbarianPrince
                      }
                      if (true == option.IsEnabled)
                      {
-                        myRadioButtonPartyRandom1.IsChecked = option.IsEnabled;
-                        isRandomPartyConfig = option.IsEnabled;
+                        myRadioButtonPartyRandom1.IsChecked = true;
+                        isRandomPartyConfig = true;
+                        isFunOption = false;
                      }
                      else
                      {
@@ -243,7 +267,7 @@ namespace BarbarianPrince
                         }
                         if (true == option.IsEnabled)
                         {
-                           myRadioButtonPartyCustom.IsChecked = option.IsEnabled;
+                           myRadioButtonPartyCustom.IsChecked = true;
                            myCheckBoxDwarf.IsEnabled = true;
                            myCheckBoxEagle.IsEnabled = true;
                            myCheckBoxElf.IsEnabled = true;
@@ -267,7 +291,10 @@ namespace BarbarianPrince
                            }
                            myCheckBoxDwarf.IsChecked = option.IsEnabled;
                            if (true == option.IsEnabled)
+                           {
                               isCustomPartyConfig = true;
+                              isFunOption = false;
+                           }
                            //-------------------------
                            option = options.Find("Eagle");
                            if (null == option)
@@ -277,7 +304,10 @@ namespace BarbarianPrince
                            }
                            myCheckBoxEagle.IsChecked = option.IsEnabled;
                            if (true == option.IsEnabled)
+                           {
                               isCustomPartyConfig = true;
+                              isFunOption = false;
+                           }
                            //-------------------------
                            option = options.Find("Elf");
                            if (null == option)
@@ -287,7 +317,13 @@ namespace BarbarianPrince
                            }
                            myCheckBoxElf.IsChecked = option.IsEnabled;
                            if (true == option.IsEnabled)
+                           {
                               isCustomPartyConfig = true;
+                           }
+                           else
+                           {
+                              isFunOption = false;
+                           }
                            //-------------------------
                            option = options.Find("Falcon");
                            if (null == option)
@@ -297,7 +333,10 @@ namespace BarbarianPrince
                            }
                            myCheckBoxFalcon.IsChecked = option.IsEnabled;
                            if (true == option.IsEnabled)
+                           {
                               isCustomPartyConfig = true;
+                              isFunOption = false;
+                           }
                            //-------------------------
                            option = options.Find("Griffon");
                            if (null == option)
@@ -307,7 +346,10 @@ namespace BarbarianPrince
                            }
                            myCheckBoxGriffon.IsChecked = option.IsEnabled;
                            if (true == option.IsEnabled)
+                           {
                               isCustomPartyConfig = true;
+                              isFunOption = false;
+                           }
                            //-------------------------
                            option = options.Find("Harpy");
                            if (null == option)
@@ -317,7 +359,10 @@ namespace BarbarianPrince
                            }
                            myCheckBoxHarpy.IsChecked = option.IsEnabled;
                            if (true == option.IsEnabled)
+                           {
                               isCustomPartyConfig = true;
+                              isFunOption = false;
+                           }
                            //-------------------------
                            option = options.Find("Magician");
                            if (null == option)
@@ -327,7 +372,10 @@ namespace BarbarianPrince
                            }
                            myCheckBoxMagician.IsChecked = option.IsEnabled;
                            if (true == option.IsEnabled)
+                           {
                               isCustomPartyConfig = true;
+                              isFunOption = false;
+                           }
                            //-------------------------
                            option = options.Find("Mercenary");
                            if (null == option)
@@ -337,7 +385,13 @@ namespace BarbarianPrince
                            }
                            myCheckBoxMercenary.IsChecked = option.IsEnabled;
                            if (true == option.IsEnabled)
+                           {
                               isCustomPartyConfig = true;
+                           }
+                           else
+                           {
+                              isFunOption = false;
+                           }
                            //-------------------------
                            option = options.Find("Merchant");
                            if (null == option)
@@ -347,7 +401,10 @@ namespace BarbarianPrince
                            }
                            myCheckBoxMerchant.IsChecked = option.IsEnabled;
                            if (true == option.IsEnabled)
+                           {
                               isCustomPartyConfig = true;
+                              isFunOption = false;
+                           }
                            //-------------------------
                            option = options.Find("Minstrel");
                            if (null == option)
@@ -357,7 +414,10 @@ namespace BarbarianPrince
                            }
                            myCheckBoxMinstrel.IsChecked = option.IsEnabled;
                            if (true == option.IsEnabled)
+                           {
                               isCustomPartyConfig = true;
+                              isFunOption = false;
+                           }
                            //-------------------------
                            option = options.Find("Monk");
                            if (null == option)
@@ -367,7 +427,13 @@ namespace BarbarianPrince
                            }
                            myCheckBoxMonk.IsChecked = option.IsEnabled;
                            if (true == option.IsEnabled)
+                           {
                               isCustomPartyConfig = true;
+                           }
+                           else
+                           {
+                              isFunOption = false;
+                           }
                            //-------------------------
                            option = options.Find("PorterSlave");
                            if (null == option)
@@ -377,7 +443,10 @@ namespace BarbarianPrince
                            }
                            myCheckBoxPorterSlave.IsChecked = option.IsEnabled;
                            if (true == option.IsEnabled)
+                           {
                               isCustomPartyConfig = true;
+                              isFunOption = false;
+                           }
                            //-------------------------
                            option = options.Find("TrueLove");
                            if (null == option)
@@ -387,7 +456,10 @@ namespace BarbarianPrince
                            }
                            myCheckBoxTrueLove.IsChecked = option.IsEnabled;
                            if (true == option.IsEnabled)
+                           {
                               isCustomPartyConfig = true;
+                              isFunOption = false;
+                           }
                            //-------------------------
                            option = options.Find("Wizard");
                            if (null == option)
@@ -397,7 +469,13 @@ namespace BarbarianPrince
                            }
                            myCheckBoxWizard.IsChecked = option.IsEnabled;
                            if (true == option.IsEnabled)
+                           {
                               isCustomPartyConfig = true;
+                           }
+                           else
+                           {
+                              isFunOption = false;
+                           }
                         }
                      }
                   }
@@ -415,7 +493,10 @@ namespace BarbarianPrince
          }
          myCheckBoxPartyMounted.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+            isFunOption = false;
+         }
          option = options.Find("PartyAirborne");
          if (null == option)
          {
@@ -424,7 +505,10 @@ namespace BarbarianPrince
          }
          myCheckBoxPartyAirborne.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+            isFunOption = false;
+         }
          //++++++++++++++++++++++++++++++++++++++++++++++++
          option = options.Find("RandomHex");
          if (null == option)
@@ -434,7 +518,13 @@ namespace BarbarianPrince
          }
          myRadioButtonHexRandom.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isRandomHexConfig = true;
+         }
+         else
+         {
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("RandomTown");
          if (null == option)
@@ -444,7 +534,10 @@ namespace BarbarianPrince
          }
          myRadioButtonHexRandomTown.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isRandomHexConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("RandomLeft");
          if (null == option)
@@ -454,7 +547,10 @@ namespace BarbarianPrince
          }
          myRadioButtonHexRandomLeft.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isRandomHexConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("RandomRight");
          if (null == option)
@@ -464,7 +560,10 @@ namespace BarbarianPrince
          }
          myRadioButtonHexRandomRight.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isRandomHexConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("RandomBottom");
          if (null == option)
@@ -474,7 +573,10 @@ namespace BarbarianPrince
          }
          myRadioButtonHexRandomBottom.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isRandomHexConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("0109");
          if (null == option)
@@ -484,7 +586,10 @@ namespace BarbarianPrince
          }
          myRadioButtonHexTown.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
-            isCustomHexConfig = true;
+         {
+            isRandomHexConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("0206");
          if (null == option)
@@ -494,7 +599,10 @@ namespace BarbarianPrince
          }
          myRadioButtonHexRuin.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
-            isCustomHexConfig = true;
+         {
+            isRandomHexConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("0711");
          if (null == option)
@@ -504,7 +612,10 @@ namespace BarbarianPrince
          }
          myRadioButtonHexTemple.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomHexConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("1212");
          if (null == option)
@@ -514,7 +625,10 @@ namespace BarbarianPrince
          }
          myRadioButtonHexHuldra.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomHexConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("0323");
          if (null == option)
@@ -524,7 +638,10 @@ namespace BarbarianPrince
          }
          myRadioButtonHexDrogat.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomHexConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("1923");
          if (null == option)
@@ -534,7 +651,10 @@ namespace BarbarianPrince
          }
          myRadioButtonHexLadyAeravir.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomHexConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("0418");
          if (null == option)
@@ -544,7 +664,10 @@ namespace BarbarianPrince
          }
          myRadioButtonHexFarmland.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomHexConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("0722");
          if (null == option)
@@ -554,7 +677,10 @@ namespace BarbarianPrince
          }
          myRadioButtonHexCountryside.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomHexConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("0409");
          if (null == option)
@@ -564,7 +690,10 @@ namespace BarbarianPrince
          }
          myRadioButtonHexForest.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomHexConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("0406");
          if (null == option)
@@ -574,7 +703,10 @@ namespace BarbarianPrince
          }
          myRadioButtonHexHill.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomHexConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("0405");
          if (null == option)
@@ -584,7 +716,10 @@ namespace BarbarianPrince
          }
          myRadioButtonHexMountain.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomHexConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("0411");
          if (null == option)
@@ -594,7 +729,10 @@ namespace BarbarianPrince
          }
          myRadioButtonHexSwamp.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomHexConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("0407");
          if (null == option)
@@ -604,7 +742,10 @@ namespace BarbarianPrince
          }
          myRadioButtonHexDesert.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomHexConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("1905");
          if (null == option)
@@ -614,7 +755,10 @@ namespace BarbarianPrince
          }
          myRadioButtonHexRoad.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomHexConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("1723");
          if (null == option)
@@ -624,7 +768,10 @@ namespace BarbarianPrince
          }
          myRadioButtonHexBottom.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomHexConfig = true;
+            isFunOption = false;
+         }
          if ((false == isRandomHexConfig) && (false == isCustomHexConfig))
             myRadioButtonHexOriginal.IsChecked = true;
          //++++++++++++++++++++++++++++++++++++++++++++++++
@@ -639,10 +786,11 @@ namespace BarbarianPrince
          if (true == option.IsEnabled)
          {
             isCustomConfig = true;
+            isFunOption = false;
          }
          else
          {
-            option = options.Find("EasiestMonsters");
+            option = options.Find("EasyMonsters");
             if (null == option)
             {
                Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-EasiestMonsters");
@@ -655,34 +803,22 @@ namespace BarbarianPrince
             }
             else
             {
-               option = options.Find("EasyMonsters");
+               isFunOption = false;
+               option = options.Find("LessHardMonsters");
                if (null == option)
                {
-                  Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-EasyMonsters");
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-LessHardMonsters");
                   return false;
                }
-               myRadioButtonMonsterEasy.IsChecked = option.IsEnabled;
+               myRadioButtonMonsterLessEasy.IsChecked = option.IsEnabled;
                if (true == option.IsEnabled)
                {
                   isCustomConfig = true;
+                  isFunOption = false;
                }
                else
                {
-                  option = options.Find("LessHardMonsters");
-                  if (null == option)
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-LessHardMonsters");
-                     return false;
-                  }
-                  myRadioButtonMonsterLessEasy.IsChecked = option.IsEnabled;
-                  if (true == option.IsEnabled)
-                  {
-                     isCustomConfig = true;
-                  }
-                  else
-                  {
-                     myRadioButtonMonsterNormal.IsChecked = true;
-                  }
+                  myRadioButtonMonsterNormal.IsChecked = true;
                }
             }
          }
@@ -696,7 +832,13 @@ namespace BarbarianPrince
          }
          myCheckBoxAutoLostIncrement.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+         }
+         else
+         {
+            isFunOption = false;
+         }
          option = options.Find("ExtendEndTime");
          if (null == option)
          {
@@ -705,7 +847,13 @@ namespace BarbarianPrince
          }
          myCheckBoxExtendTime.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+         }
+         else
+         {
+            isFunOption = false;
+         }
          option = options.Find("ReduceLodgingCosts");
          if (null == option)
          {
@@ -714,7 +862,13 @@ namespace BarbarianPrince
          }
          myCheckBoxReducedLodgingCosts.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+         }
+         else
+         {
+            isFunOption = false;
+         }
          option = options.Find("SteadyIncome");
          if (null == option)
          {
@@ -723,7 +877,13 @@ namespace BarbarianPrince
          }
          myCheckBoxAddIncome.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+         }
+         else
+         {
+            isFunOption = false;
+         }
          //++++++++++++++++++++++++++++++++++++++++++++++++
          option = options.Find("NoLostRoll");
          if (null == option)
@@ -733,7 +893,10 @@ namespace BarbarianPrince
          }
          myCheckBoxNoLostRoll.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("ForceNoLostEvent");
          if (null == option)
@@ -743,7 +906,10 @@ namespace BarbarianPrince
          }
          myCheckBoxNoLostEvent.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("ForceLostEvent");
          if (null == option)
@@ -753,7 +919,10 @@ namespace BarbarianPrince
          }
          myCheckBoxForceLostEvent.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("ForceNoEvent");
          if (null == option)
@@ -763,7 +932,10 @@ namespace BarbarianPrince
          }
          myCheckBoxNoEvent.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("ForceEvent");
          if (null == option)
@@ -773,7 +945,10 @@ namespace BarbarianPrince
          }
          myCheckBoxForceEvent.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("ForceNoRoadEvent");
          if (null == option)
@@ -783,7 +958,10 @@ namespace BarbarianPrince
          }
          myCheckBoxNoRoadEvent.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("ForceNoAirEvent");
          if (null == option)
@@ -793,7 +971,10 @@ namespace BarbarianPrince
          }
          myCheckBoxNoAirEvent.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("ForceAirEvent");
          if (null == option)
@@ -803,7 +984,10 @@ namespace BarbarianPrince
          }
          myCheckBoxForceAirEvent.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("ForceNoCrossEvent");
          if (null == option)
@@ -813,7 +997,10 @@ namespace BarbarianPrince
          }
          myCheckBoxNoCrossEvent.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("ForceCrossEvent");
          if (null == option)
@@ -823,7 +1010,10 @@ namespace BarbarianPrince
          }
          myCheckBoxForceCrossEvent.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("ForceLostAfterCrossEvent");
          if (null == option)
@@ -833,7 +1023,10 @@ namespace BarbarianPrince
          }
          myCheckBoxForceLostAfterCross.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("ForceNoRaftEvent");
          if (null == option)
@@ -843,7 +1036,10 @@ namespace BarbarianPrince
          }
          myCheckBoxNoRaftEvent.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+            isFunOption = false;
+         }
          //-------------------------
          option = options.Find("ForceRaftEvent");
          if (null == option)
@@ -853,15 +1049,28 @@ namespace BarbarianPrince
          }
          myCheckBoxForceRaftEvent.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
+         {
             isCustomConfig = true;
+            isFunOption = false;
+         }
          //++++++++++++++++++++++++++++++++++++++++++++++++
          // Summary Selection
-         if (true == myIsRandomGame)
+         if (true == isFunOption)
+         {
+            myRadioButtonOriginal.IsChecked = false;
+            myRadioButtonRandomParty.IsChecked = false;
+            myRadioButtonRandomStart.IsChecked = false;
+            myRadioButtonAllRandom.IsChecked = false;
+            myRadioButtonMaxFun.IsChecked = true;
+            myRadioButtonCustom.IsChecked = false;
+         }
+         else if (true == myIsRandomGame)
          {
             myRadioButtonOriginal.IsChecked = false;
             myRadioButtonRandomParty.IsChecked = false;
             myRadioButtonRandomStart.IsChecked = false;
             myRadioButtonAllRandom.IsChecked = true;
+            myRadioButtonMaxFun.IsChecked = false;
             myRadioButtonCustom.IsChecked = false;
          }
          else if ((true == isCustomConfig) || (true == isCustomPartyConfig) || (true == isCustomHexConfig))
@@ -870,6 +1079,7 @@ namespace BarbarianPrince
             myRadioButtonRandomParty.IsChecked = false;
             myRadioButtonRandomStart.IsChecked = false;
             myRadioButtonAllRandom.IsChecked = false;
+            myRadioButtonMaxFun.IsChecked = false;
             myRadioButtonCustom.IsChecked = true;
          }
          else if (true == isRandomPartyConfig)
@@ -878,6 +1088,7 @@ namespace BarbarianPrince
             myRadioButtonRandomParty.IsChecked = true;
             myRadioButtonRandomStart.IsChecked = false;
             myRadioButtonAllRandom.IsChecked = false;
+            myRadioButtonMaxFun.IsChecked = false;
             myRadioButtonCustom.IsChecked = false;
          }
          else if (true == isRandomHexConfig)
@@ -886,6 +1097,7 @@ namespace BarbarianPrince
             myRadioButtonRandomParty.IsChecked = false;
             myRadioButtonRandomStart.IsChecked = true;
             myRadioButtonAllRandom.IsChecked = false;
+            myRadioButtonMaxFun.IsChecked = false;
             myRadioButtonCustom.IsChecked = false;
          }
          else
@@ -894,6 +1106,7 @@ namespace BarbarianPrince
             myRadioButtonRandomParty.IsChecked = false;
             myRadioButtonRandomStart.IsChecked = false;
             myRadioButtonAllRandom.IsChecked = false;
+            myRadioButtonMaxFun.IsChecked = false;
             myRadioButtonCustom.IsChecked = false;
          }
          //++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1429,6 +1642,11 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=EasyMonsters");
          else
             option.IsEnabled = true;
+         option = myOptions.Find("PrinceFood");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=PrinceFood");
+         else
+            option.IsEnabled = true;
          option = myOptions.Find("PrinceCoin");
          if (null == option)
             Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=PrinceCoin");
@@ -1488,7 +1706,8 @@ namespace BarbarianPrince
          myIsRandomGame = false;
          switch (rb.Name)
          {
-            case "myRadioButtonOriginal":  break;
+            case "myRadioButtonOriginal":
+               break;
             case "myRadioButtonRandomParty":
                SelectRandomPartyChoice();
                break;
@@ -1505,6 +1724,8 @@ namespace BarbarianPrince
                break;
             case "myRadioButtonMaxFun":
                SelectFunGameOptions();
+               break;
+            case "myRadioButtonCustom":
                break;
             default: Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): reached default name=" + rb.Name); return;
          }
