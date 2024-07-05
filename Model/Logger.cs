@@ -6,6 +6,8 @@ namespace BarbarianPrince
       LE_ERROR,
       LE_GAME_INIT,
       LE_USER_ACTION,
+      LE_NEXT_ACTION,
+      LE_UNDO_COMMAND,
       LE_GAME_PARTYMEMBER_COUNT,
       LE_PARTYMEMBER_ADD,
       LE_REMOVE_KILLED,
@@ -18,7 +20,6 @@ namespace BarbarianPrince
       LE_COMBAT_THREAD,
       LE_COMBAT_TROLL_HEAL,
       LE_COMBAT_WIZARD,
-      LE_NEXT_ACTION,
       LE_RESET_ROLL_STATE,
       LE_GET_COIN,
       LE_BRIBE,
@@ -75,6 +76,7 @@ namespace BarbarianPrince
          Logger.SetOn(LogEnum.LE_GAME_INIT);
          Logger.SetOn(LogEnum.LE_USER_ACTION);
          Logger.SetOn(LogEnum.LE_NEXT_ACTION);
+         Logger.SetOn(LogEnum.LE_UNDO_COMMAND);
          //Logger.SetOn(LogEnum.LE_GAME_PARTYMEMBER_COUNT);
          Logger.SetOn(LogEnum.LE_PARTYMEMBER_ADD);
          Logger.SetOn(LogEnum.LE_REMOVE_KILLED);

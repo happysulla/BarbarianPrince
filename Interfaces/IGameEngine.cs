@@ -91,10 +91,13 @@ namespace BarbarianPrince
       UpdateStatusBar,
       UpdateEventViewerDisplay,
       UpdateEventViewerActive,
-      UpdateGameOptions, // user chooses new game options
-      UpdateLoadingGame,
       DieRollActionNone, // The field in IGameInstance indicates what the roll apply. If none expected, it is set to this value.
       TransportRedistributeEnd,
+
+      UpdateNewGame,
+      UpdateGameOptions, // Menu Options
+      UpdateLoadingGame,
+      UpdateUndo, 
 
       UnitTestStart,
       UnitTestCommand,
@@ -113,7 +116,6 @@ namespace BarbarianPrince
       SetupManualWitsWiles,
       SetupStartingLocation,
       SetupFinalize,
-      SetupNewGame,
 
       Hunt,                            // Hunt for Food
       HuntPeasantMobPursuit,           // If hunting in populated area and roll 5

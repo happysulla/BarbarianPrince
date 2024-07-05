@@ -20,6 +20,7 @@ namespace BarbarianPrince
       private readonly Menu myMainMenu;                     // Top level menu items: File | View | Options | Help
       private readonly MenuItem myMenuItemTopLevel1 = null;
       private readonly MenuItem myMenuItemTopLevel2 = null;
+      private readonly MenuItem myMenuItemTopLevel21 = null;
       private readonly MenuItem myMenuItemTopLevel22 = null;
       private readonly MenuItem myMenuItemTopLevel3 = null;
       private readonly MenuItem myMenuItemTopLevel4 = null;
@@ -47,10 +48,12 @@ namespace BarbarianPrince
                   myMenuItemTopLevel2 = menuItem;
                   myMenuItemTopLevel2.Header = "_Edit";
                   myMenuItemTopLevel2.Visibility = Visibility.Visible;
-                  MenuItem subItem21 = new MenuItem();
-                  subItem21.Header = "_Undo";
-                  subItem21.Click += MenuItemEditUndo_Click;
-                  myMenuItemTopLevel2.Items.Add(subItem21);
+                  myMenuItemTopLevel21 = new MenuItem();
+                  myMenuItemTopLevel21.Header = "_Undo";
+                  myMenuItemTopLevel21.InputGestureText = "Ctrl+U";
+                  myMenuItemTopLevel21.IsEnabled = false;
+                  myMenuItemTopLevel21.Click += MenuItemEditUndo_Click;
+                  myMenuItemTopLevel2.Items.Add(myMenuItemTopLevel21);
                   myMenuItemTopLevel22 = new MenuItem();
                   myMenuItemTopLevel22.Header = "_Revert To Daybreak";
                   myMenuItemTopLevel22.InputGestureText = "Ctrl+R";
@@ -171,6 +174,11 @@ namespace BarbarianPrince
             default:
                if (true == GameLoadMgr.theIsCheckFileExist)
                   myMenuItemTopLevel22.IsEnabled = true;
+               Logger.Log(LogEnum.LE_UNDO_COMMAND, "MainMenuViewer.UpdateView(): cmd=" + myGameInstance.IsUndoCommandAvailable.ToString());
+                  if (true == myGameInstance.IsUndoCommandAvailable)
+                  myMenuItemTopLevel21.IsEnabled = true;
+               else
+                  myMenuItemTopLevel21.IsEnabled = false;
                return;
          }
       }
@@ -186,7 +194,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "MenuItemNew_Click(): myGameInstance.CtorError = true");
             return;
          }
-         GameAction action = GameAction.SetupNewGame;
+         GameAction action = GameAction.UpdateNewGame;
          myGameEngine.PerformAction(ref myGameInstance, ref action);
       }
       public void MenuItemClose_Click(object sender, RoutedEventArgs e)
@@ -234,8 +242,15 @@ namespace BarbarianPrince
       }
       public void MenuItemEditUndo_Click(object sender, RoutedEventArgs e)
       {
-         GameAction action = GameAction.UpdateEventViewerActive;
+         GameAction action = GameAction.UpdateUndo;
          myGameEngine.PerformAction(ref myGameInstance, ref action);
+      }
+      public void MenuItemEditUndo_ClickCanExecute(object sender, CanExecuteRoutedEventArgs e)
+      {
+         if (true == myGameInstance.IsUndoCommandAvailable)
+            e.CanExecute = true;
+         else
+            e.CanExecute = false;
       }
       public void MenuItemEditRecover_Click(object sender, RoutedEventArgs e)
       {

@@ -2100,6 +2100,7 @@ namespace BarbarianPrince
             command = new RoutedCommand();
             keyGesture = new KeyGesture(Key.U, ModifierKeys.Control);
             InputBindings.Add(new KeyBinding(command, keyGesture));
+            CommandBinding undoCmdBinding = new CommandBinding(command, mmv.MenuItemEditRecover_Click, mmv.MenuItemEditRecover_ClickCanExecute);
             CommandBindings.Add(new CommandBinding(command, mmv.MenuItemEditUndo_Click));
             //------------------------------------------------
             command = new RoutedCommand();

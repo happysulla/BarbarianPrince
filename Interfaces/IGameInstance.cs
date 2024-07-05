@@ -34,6 +34,7 @@ namespace BarbarianPrince
       List<string> Events { set; get; }
       String EndGameReason { set; get; }
       //----------------------------------------------
+      bool IsUndoCommandAvailable { set; get; } // Allow user to back up if selected wrong daily action or travel hex
       bool IsPartyRested { set; get; }
       bool IsMountsFed { set; get; } // hunt manager
       bool IsMountsStabled { set; get; } // lodge manager

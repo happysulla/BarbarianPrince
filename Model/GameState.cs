@@ -1179,6 +1179,16 @@ namespace BarbarianPrince
          }
          return true;
       }
+      protected void UndoCommand(ref IGameInstance gi, ref GameAction action)
+      {
+         Logger.Log(LogEnum.LE_UNDO_COMMAND, "UndoCommand(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->false  a=" + action.ToString());
+         gi.IsUndoCommandAvailable = false;
+         gi.SunriseChoice = GamePhase.Error;
+         gi.GamePhase = GamePhase.SunriseChoice;
+         gi.EventDisplayed = gi.EventActive = "e203";
+         Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "UndoCommand():  gi.MapItemMoves.Clear()  a=" + action.ToString());
+         gi.MapItemMoves.Clear();
+      }
    }
    //-----------------------------------------------------
    class GameStateSetup : GameState
@@ -1285,7 +1295,7 @@ namespace BarbarianPrince
                gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
                gi.DieRollAction = GameAction.DieRollActionNone;
                break;
-            case GameAction.SetupNewGame:
+            case GameAction.UpdateNewGame:
                if (false == AddStartingPrinceOption(gi))
                {
                   returnStatus = "AddStartingPrinceOption() returned false";
@@ -2255,7 +2265,7 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerDisplay;
                break;
             case GameAction.RestEncounterCheck:
-               ResetDayForNonTravelChoice(gi);
+               ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = gi.GamePhase = GamePhase.Rest;
                if (true == gi.IsInStructure(princeTerritory))
@@ -2268,7 +2278,7 @@ namespace BarbarianPrince
                   if (false == SetHuntState(gi, ref action)) // Resting in same hex
                   {
                      returnStatus = "SetHuntState() returned false";
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateRest.PerformAction(): " + returnStatus);
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
                   }
                }
                else // might have a travel encounter
@@ -2288,6 +2298,8 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.Travel:
+               Logger.Log(LogEnum.LE_UNDO_COMMAND, "GameStateSunriseChoice.PerformAction(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->true  a=" + action.ToString());
+               gi.IsUndoCommandAvailable = true;
                TravelAction(gi, ref action); // GameAction.Travel
                break;
             case GameAction.TravelAir:
@@ -2318,14 +2330,14 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.SeekNews:
-               ResetDayForNonTravelChoice(gi);
+               ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
                gi.EventDisplayed = gi.EventActive = "e209"; // next screen to show
                gi.SunriseChoice = gi.GamePhase = GamePhase.SeekNews;
                gi.DieRollAction = GameAction.DieRollActionNone;
                break;
             case GameAction.SeekHire:
-               ResetDayForNonTravelChoice(gi);
+               ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = GamePhase.SeekHire;
                gi.EventDisplayed = gi.EventActive = "e210"; // next screen to show
@@ -2333,7 +2345,7 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case GameAction.SeekAudience:
-               ResetDayForNonTravelChoice(gi);
+               ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = GamePhase.SeekAudience;
                if (true == gi.IsInTown(princeTerritory))
@@ -2368,7 +2380,7 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case GameAction.SeekOffering:
-               ResetDayForNonTravelChoice(gi);
+               ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = GamePhase.SeekOffering;
                gi.ReduceCoins(1); // must spend one gold to make offering
@@ -2380,7 +2392,7 @@ namespace BarbarianPrince
                break;
             case GameAction.SearchRuins:
                gi.RemoveKilledInParty("e134");
-               ResetDayForNonTravelChoice(gi);
+               ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = GamePhase.SearchRuins;
                if (true == gi.RuinsUnstable.Contains(princeTerritory)) // once a ruins is discovered to be unstable, it is always unstable
@@ -2397,7 +2409,7 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.SearchCacheCheck:
-               ResetDayForNonTravelChoice(gi);
+               ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = gi.GamePhase = GamePhase.SearchCache;
                action = GameAction.TravelLostCheck;
@@ -2414,7 +2426,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateSunriseChoice.PerformAction(SearchCacheCheck): oT=" + princeTerritory.Name + " nT=" + mimSearch.NewTerritory.Name);
                break;
             case GameAction.SearchTreasure:
-               ResetDayForNonTravelChoice(gi);
+               ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = gi.GamePhase = GamePhase.SearchTreasure;
                action = GameAction.TravelLostCheck;
@@ -2431,7 +2443,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateSunriseChoice.PerformAction(SearchCacheCheck): oT=" + princeTerritory.Name + " nT=" + mimSearch1.NewTerritory.Name);
                break;
             case GameAction.ArchTravel:
-               ResetDayForNonTravelChoice(gi);
+               ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = GamePhase.Travel;
                gi.GamePhase = GamePhase.Encounter;
@@ -2440,6 +2452,8 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerActive;
                break;
             case GameAction.EncounterFollow:
+               Logger.Log(LogEnum.LE_UNDO_COMMAND, "GameStateSunriseChoice.PerformAction(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->true for a=" + action.ToString());
+               gi.IsUndoCommandAvailable = true;
                gi.IsBadGoing = false;                 // e078
                gi.IsHeavyRain = false;                // e079
                gi.IsFloodContinue = false;            // e092
@@ -2576,8 +2590,10 @@ namespace BarbarianPrince
          }
          return true;
       } // Reset all variables after user chooses the acton for today
-      protected void ResetDayForNonTravelChoice(IGameInstance gi)
+      protected void ResetDayForNonTravelChoice(IGameInstance gi, GameAction action)
       {
+         Logger.Log(LogEnum.LE_UNDO_COMMAND, "ResetDayForNonTravelChoice(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->true  a=" + action.ToString());
+         gi.IsUndoCommandAvailable = true;
          gi.NumMembersBeingFollowed = 0;
          gi.IsAirborne = false;
          gi.IsWoundedWarriorRest = false;       // e069
@@ -2612,6 +2628,9 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
+               break;
+            case GameAction.UpdateUndo:
+               UndoCommand(ref gi, ref action);
                break;
             case GameAction.EndGameClose:
                gi.GamePhase = GamePhase.EndGame;
@@ -3041,6 +3060,9 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
+            case GameAction.UpdateUndo:
+               UndoCommand(ref gi, ref action);
+               break;
             case GameAction.EndGameClose:
                gi.GamePhase = GamePhase.EndGame;
                break;
@@ -3128,6 +3150,9 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
+               break;
+            case GameAction.UpdateUndo:
+               UndoCommand(ref gi, ref action);
                break;
             case GameAction.EndGameClose:
                gi.GamePhase = GamePhase.EndGame;
@@ -3452,6 +3477,9 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
+            case GameAction.UpdateUndo:
+               UndoCommand(ref gi, ref action);
+               break;
             case GameAction.EndGameClose:
                gi.GamePhase = GamePhase.EndGame;
                break;
@@ -3533,6 +3561,9 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
+            case GameAction.UpdateUndo:
+               UndoCommand(ref gi, ref action);
+               break;
             case GameAction.EndGameClose:
                gi.GamePhase = GamePhase.EndGame;
                break;
@@ -3604,6 +3635,9 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
+            case GameAction.UpdateUndo:
+               UndoCommand(ref gi, ref action);
+               break;
             case GameAction.EndGameClose:
                gi.GamePhase = GamePhase.EndGame;
                break;
@@ -3662,6 +3696,9 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
+               break;
+            case GameAction.UpdateUndo:
+               UndoCommand(ref gi, ref action);
                break;
             case GameAction.EndGameClose:
                gi.GamePhase = GamePhase.EndGame;
@@ -3722,6 +3759,9 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
+               break;
+            case GameAction.UpdateUndo:
+               UndoCommand(ref gi, ref action);
                break;
             case GameAction.EndGameClose:
                gi.GamePhase = GamePhase.EndGame;
@@ -3970,6 +4010,8 @@ namespace BarbarianPrince
          String returnStatus = "OK";
          if (true == PerformEndCheck(gi, ref action))
             return returnStatus;
+         Logger.Log(LogEnum.LE_UNDO_COMMAND, "GameStateEncounter.PerformAction(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->false for a=" + action.ToString());
+         gi.IsUndoCommandAvailable = false;
          GamePhase previousPhase = gi.GamePhase;
          GameAction previousAction = action;
          GameAction previousDieAction = gi.DieRollAction;
@@ -3988,6 +4030,9 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
+               break;
+            case GameAction.UpdateUndo:
+               UndoCommand(ref gi, ref action);
                break;
             case GameAction.EndGameClose:
                gi.GamePhase = GamePhase.EndGame;

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfAnimatedGif;
+using static System.Collections.Specialized.BitVector32;
 using static System.Windows.Forms.AxHost;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using Button = System.Windows.Controls.Button;
@@ -1123,6 +1124,8 @@ namespace BarbarianPrince
       //-----------------------------------------------------------------------------------------
       public void ShowDieResults(int dieRoll)
       {
+         Logger.Log(LogEnum.LE_UNDO_COMMAND, "EventViewerTravelTable.ShowDieResults(): cmd=" + myGameInstance.IsUndoCommandAvailable.ToString() + "-->false");
+         myGameInstance.IsUndoCommandAvailable = false;
          Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): s=" + myState.ToString() + " dr=" + dieRoll.ToString());
          switch (myState)
          {
