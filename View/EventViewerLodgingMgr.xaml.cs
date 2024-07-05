@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -41,6 +43,27 @@ namespace BarbarianPrince
          public bool myIsLodged;
          public int myResult;
          public List<MountRow> myMountRows;
+      };
+      public struct LodgingCost
+      {
+         public double myRoomCost;
+         public double myStableCost;
+         public double myRoomCostSpent;
+         public double myStableCostSpent;
+         public override String ToString()
+         {
+            StringBuilder sb = new StringBuilder("");
+            sb.Append("[rc=");
+            sb.Append(myRoomCost.ToString());
+            sb.Append(",rs=");
+            sb.Append(myRoomCostSpent.ToString());
+            sb.Append(",sc=");
+            sb.Append(myStableCost.ToString());
+            sb.Append(",ss=");
+            sb.Append(myStableCostSpent.ToString());
+            sb.Append("]");
+            return sb.ToString();
+         }
       };
       public enum LodgingEnum
       {
@@ -91,6 +114,7 @@ namespace BarbarianPrince
       private int myRollForMountCost = Utilities.NO_RESULT;  // if horses are for sale by rich farmer, this is cost
       private bool myIsRollInProgress = false;
       private bool myIsHalfLodging = false;
+      private bool myIsCheapLodgings = false;
       //---------------------------------------------
       private string myCheckBoxContent = "";
       private readonly DoubleCollection myDashArray = new DoubleCollection();
@@ -187,6 +211,7 @@ namespace BarbarianPrince
          myRollForMountNum = Utilities.NO_RESULT;
          myRollForMountCost = Utilities.NO_RESULT;
          myNumTrueLove = 0;
+         myIsCheapLodgings = myGameInstance.CheapLodgings.Contains(myGameInstance.Prince.Territory);
          //--------------------------------------------------
          mySuitCost = 10;
          myFoodCost = 0.5;
@@ -1233,6 +1258,55 @@ namespace BarbarianPrince
          return true;
       }
       //-----------------------------------------------------------------------------------------
+      private void GetCurrentCosts(ref LodgingCost lodgingCost)
+      {
+         for (int i = 0; i < myMaxRowCount; ++i)
+         {
+            if (false == myGameInstance.IsPartyLodged)
+            {
+               IMapItem mi = myGridRows[i].myMapItem;
+               if ((true == mi.Name.Contains("Prince")) || (true == mi.IsSpecialist()))
+                  lodgingCost.myRoomCost += 1.0;
+               else if ((true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")))
+                  lodgingCost.myRoomCost += 0.0;
+               else
+                  lodgingCost.myRoomCost += 0.5;
+               if (true == myGridRows[i].myIsLodged)
+               {
+                  if ((true == mi.Name.Contains("Prince")) || (true == mi.IsSpecialist()))
+                     lodgingCost.myRoomCostSpent += 1.0;
+                  else if ((true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")))
+                     lodgingCost.myRoomCostSpent += 0.0;
+                  else
+                     lodgingCost.myRoomCostSpent += 0.5;
+               }
+            }
+            if (false == myGameInstance.IsMountsStabled)
+            {
+               foreach (MountRow mountRow in myGridRows[i].myMountRows)
+               {
+                  lodgingCost.myStableCost += 1.0;
+                  if (true == mountRow.myIsStabled)
+                     lodgingCost.myStableCostSpent += 1.0;
+               }
+            }
+         }
+         if ((true == myIsCheapLodgings) && (true == myIsHalfLodging))
+         {
+            lodgingCost.myRoomCost = lodgingCost.myRoomCost / 4.0;
+            lodgingCost.myRoomCostSpent = lodgingCost.myRoomCostSpent / 4.0;
+            lodgingCost.myStableCost = lodgingCost.myStableCost / 4.0;
+            lodgingCost.myStableCostSpent = lodgingCost.myStableCostSpent / 4.0;
+         }
+         else if ((true == myIsCheapLodgings) || (true == myIsHalfLodging))
+         {
+            lodgingCost.myRoomCost = lodgingCost.myRoomCost / 2.0;
+            lodgingCost.myRoomCostSpent = lodgingCost.myRoomCostSpent / 2.0;
+            lodgingCost.myStableCost = lodgingCost.myStableCost / 2.0;
+            lodgingCost.myStableCostSpent = lodgingCost.myStableCostSpent / 2.0;
+         }
+
+      }
       private void SetStateInitialLodging()
       {
          for (int i = 0; i < myMaxRowCount; ++i)
@@ -1250,45 +1324,21 @@ namespace BarbarianPrince
                myGridRows[i].myResult = DO_NOT_LEAVE;
          }
          if (true == myGameInstance.IsMinstrelPlaying)
+         {
             myGameInstance.IsPartyLodged = true;
-         //-----------------------------------------------
-         double roomCost = 0;
-         double stableCost = 0;
-         if (false == myGameInstance.IsPartyLodged)
-         {
-            for (int i = 0; i < myMaxRowCount; ++i)
-            {
-               IMapItem mi = myGridRows[i].myMapItem;
-               if ((true == mi.Name.Contains("Prince")) || (true == mi.IsSpecialist()))
-                  roomCost += 1.0;
-               else if ((true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")))
-                  roomCost += 0.0;
-               else
-                  roomCost += 0.5;
-            }
+            myGameInstance.IsMountsStabled = true;
          }
-         if (false == myGameInstance.IsMountsStabled)
-            stableCost = (double)myNumMountsCount;
-         double totalCost = roomCost + stableCost;
-         bool isCheapLodging = myGameInstance.CheapLodgings.Contains(myGameInstance.Prince.Territory);
-         if ((true == isCheapLodging) && (true == myIsHalfLodging))
-         {
-            roomCost = roomCost / 4.0;
-            totalCost = totalCost / 4.0;
-         }
-         else if ((true == isCheapLodging) || (true == myIsHalfLodging))
-         {
-            roomCost = roomCost / 2.0;
-            totalCost = totalCost / 2.0;
-         }
+         LodgingCost lodgingCost = new LodgingCost();
+         GetCurrentCosts(ref lodgingCost);
+         double totalCost = lodgingCost.myRoomCost + lodgingCost.myStableCost;
          int diffTotal = (int)Math.Ceiling(totalCost);
-         int diffRoom = (int)Math.Ceiling(roomCost);
+         int diffRoom = (int)Math.Ceiling(lodgingCost.myRoomCost);
          //-----------------------------------------------
          if (totalCost <= myCoinCurrent) // Feed all and eliminate extra starve days
          {
             myState = LodgingEnum.SE_LODGE_ALL;
             myIsHeaderCheckBoxChecked = true;
-            myCoinCurrent -= diffTotal;
+            myCoinCurrent = myCoinOriginal - diffTotal;
             for (int i = 0; i < myMaxRowCount; ++i)
             {
                IMapItem mi = myGridRows[i].myMapItem;
@@ -1301,13 +1351,13 @@ namespace BarbarianPrince
                }
             }
          }
-         else if (roomCost <= myCoinCurrent)
+         else if (lodgingCost.myRoomCost <= myCoinCurrent)
          {
             myState = LodgingEnum.LE_LODGE_PEOPLE;
+            myCoinCurrent = myCoinOriginal - diffRoom;       
             for (int i = 0; i < myMaxRowCount; ++i)
                myGridRows[i].myIsLodged = true;
             myIsHeaderCheckBoxChecked = true;
-            myCoinCurrent -= diffRoom;
          }
          else
          {
@@ -1316,8 +1366,6 @@ namespace BarbarianPrince
                myGridRows[i].myIsLodged = false;
             myIsHeaderCheckBoxChecked = false;
          }
-         if( myCoinOriginal < myCoinCurrent )
-            myCoinCurrent = myCoinOriginal;
          return;
       }
       private bool SetStateLodging()
@@ -1325,81 +1373,30 @@ namespace BarbarianPrince
          if ((LodgingEnum.LE_SHOW_DESERTERS == myState) || (LodgingEnum.LE_SHOW_RESULTS == myState)) // once the rolling starts, cannot change state
             return true;
          //-----------------------------------------------
-         double roomCost = 0;
-         double roomCostSpent = 0;
-         double stableCost = 0;
-         double stableCostSpent = 0;
-         for (int i = 0; i < myMaxRowCount; ++i)
+         LodgingCost lodgingCost = new LodgingCost();
+         GetCurrentCosts(ref lodgingCost);
+
+         if (lodgingCost.myStableCost < lodgingCost.myStableCostSpent)
          {
-            if (false == myGameInstance.IsPartyLodged)
-            {
-               IMapItem mi = myGridRows[i].myMapItem;
-               if ((true == mi.Name.Contains("Prince")) || (true == mi.IsSpecialist()))
-                  roomCost += 1.0;
-               else if ((true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")))
-                  roomCost += 0.0;
-               else
-                  roomCost += 0.5;
-               if (true == myGridRows[i].myIsLodged)
-               {
-                  if ((true == mi.Name.Contains("Prince")) || (true == mi.IsSpecialist()))
-                     roomCostSpent += 1.0;
-                  else if ( (true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")) )
-                     roomCostSpent += 0.0;
-                  else
-                     roomCostSpent += 0.5;
-               }
-            }
-            if (false == myGameInstance.IsMountsStabled)
-            {
-               foreach (MountRow mountRow in myGridRows[i].myMountRows)
-               {
-                  stableCost += 1.0;
-                  if (true == mountRow.myIsStabled)
-                     stableCostSpent += 1.0;
-               }
-            }
+            Logger.Log(LogEnum.LE_ERROR, "SetStateLodging(): invalid state tc=" + lodgingCost.myStableCost.ToString() + " < ts=" + lodgingCost.myStableCostSpent.ToString());
+            return false;
          }
-         double totalCost = roomCost + stableCost;
-         double totalSpent = roomCostSpent + stableCostSpent;
-         bool isCheapLodging = myGameInstance.CheapLodgings.Contains(myGameInstance.Prince.Territory);
-         if ((true == isCheapLodging) && (true == myIsHalfLodging))
+         if (lodgingCost.myRoomCost < lodgingCost.myRoomCostSpent)
          {
-            roomCost = roomCost/4.0; 
-            roomCostSpent = roomCostSpent/4.0;
-            stableCost = stableCost / 4.0;
-            stableCostSpent = stableCostSpent / 4.0;
-            totalCost = totalCost/4.0;
-            totalSpent = totalSpent/4.0; 
-         }
-         else if ((true == isCheapLodging) || (true == myIsHalfLodging))
-         {
-            roomCost = roomCost / 2.0;
-            roomCostSpent = roomCostSpent / 2.0;
-            stableCost = stableCost / 2.0;
-            stableCostSpent = stableCostSpent / 2.0;
-            totalCost = totalCost / 2.0;
-            totalSpent = totalSpent / 2.0;
+            Logger.Log(LogEnum.LE_ERROR, "SetStateLodging(): invalid state rc=" + lodgingCost.myRoomCost.ToString() + " < rs=" + lodgingCost.myRoomCostSpent.ToString());
+            return false;
          }
          //-----------------------------------------------
-         if (totalCost < totalSpent)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "SetStateLodging(): invalid state tc=" + totalCost.ToString() + " < ts=" + totalSpent.ToString());
-            return false;
-         }
-         if (roomCost < roomCostSpent)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "SetStateLodging(): invalid state rc=" + roomCost.ToString() + " < rs=" + roomCostSpent.ToString());
-            return false;
-         }
+         double totalCost = lodgingCost.myRoomCost + lodgingCost.myStableCost;
+         double totalSpent = lodgingCost.myRoomCostSpent + lodgingCost.myStableCostSpent;
          int diffTotal = (int)Math.Ceiling(totalCost - totalSpent);
-         int diffRoom = (int)Math.Ceiling(roomCost - roomCostSpent);
-         int diffStable = (int)Math.Ceiling(stableCost - stableCostSpent);
+         int diffRoom = (int)Math.Ceiling(lodgingCost.myRoomCost - lodgingCost.myRoomCostSpent);
          if (diffTotal < myCoinCurrent)
          {
             myState = LodgingEnum.SE_LODGE_ALL;
             if (true == myIsHeaderCheckBoxChecked)
             {
+               myCoinCurrent = myCoinOriginal - diffTotal;  
                for (int i = 0; i < myMaxRowCount; ++i)
                {
                   IMapItem mi = myGridRows[i].myMapItem;
@@ -1412,8 +1409,6 @@ namespace BarbarianPrince
                      myGridRows[i].myMountRows.Add(mr);
                   }
                } // end for
-               myCoinCurrent -= diffStable;    // get all mounts stabled
-               myCoinCurrent -= diffRoom;      // get all party roomed
             }
          }
          else if (diffRoom <= myCoinCurrent)
@@ -1421,19 +1416,42 @@ namespace BarbarianPrince
             myState = LodgingEnum.LE_LODGE_PEOPLE;
             if (true == myIsHeaderCheckBoxChecked)
             {
+               myCoinCurrent = myCoinOriginal - diffRoom;            // get all party roomed
                for (int i = 0; i < myMaxRowCount; ++i)
                {
                   IMapItem mi = myGridRows[i].myMapItem;
                   if (false == myGridRows[i].myIsLodged)
                      myGridRows[i].myIsLodged = true;
                } // end for
-               myCoinCurrent -= diffRoom;            // get all party roomed
             }
          }
          else
          {
             myState = LodgingEnum.LE_LODGE_NOBODY;
          }
+         return true;
+      }
+      private bool SetStableCost()
+      {
+         //-----------------------------------------------
+         LodgingCost lodgingCost = new LodgingCost();
+         GetCurrentCosts(ref lodgingCost);
+         if (lodgingCost.myStableCost < lodgingCost.myStableCostSpent)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStateLodging(): invalid state tc=" + lodgingCost.myStableCost.ToString() + " < ts=" + lodgingCost.myStableCostSpent.ToString());
+            return false;
+         }
+         if (lodgingCost.myRoomCost < lodgingCost.myRoomCostSpent)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStateLodging(): invalid state rc=" + lodgingCost.myRoomCost.ToString() + " < rs=" + lodgingCost.myRoomCostSpent.ToString());
+            return false;
+         }
+         //-----------------------------------------------
+         double totalCost = lodgingCost.myRoomCost + lodgingCost.myStableCost;
+         double totalSpent = lodgingCost.myRoomCostSpent + lodgingCost.myStableCostSpent;
+         int diffTotal = (int)Math.Ceiling(totalCost - totalSpent);
+         myCoinCurrent = myCoinOriginal - diffTotal;
+         Logger.Log(LogEnum.LE_LODGING_COST, "SetStateLodging(): lc=" + lodgingCost.ToString() + " tc=" + totalCost.ToString() + " ts=" + totalSpent.ToString() + " diff=" + diffTotal.ToString() + " coin=" + myCoinCurrent.ToString());
          return true;
       }
       private Button CreateButton(IMapItem mi)
@@ -1689,10 +1707,9 @@ namespace BarbarianPrince
             }
          }
          double totalSpent = roomCostSpent + stableCostSpent;
-         bool isCheapLodging = myGameInstance.CheapLodgings.Contains(myGameInstance.Prince.Territory);
-         if ((true == isCheapLodging) && (true == myIsHalfLodging))
+         if ((true == myIsCheapLodgings) && (true == myIsHalfLodging))
             totalSpent = totalSpent / 4.0;
-         else if ((true == isCheapLodging) || (true == myIsHalfLodging))
+         else if ((true == myIsCheapLodgings) || (true == myIsHalfLodging))
             totalSpent = totalSpent / 2.0;
          int totalDiff = (int)Math.Ceiling(totalSpent);
          int maxDiff = myCoinOriginal - myCoinCurrent;
@@ -1732,8 +1749,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "CheckBoxMount_Checked(): mounts count=0 for mi=" + mi.Name);
             return;
          }
+         //--------------------------------------------
+         // Stable the selected mount
          IMapItem mount = mi.Mounts[0];
-         --myCoinCurrent;
          int k = 0;
          for (k = 0; k < myGridRows[i].myMountRows.Count; ++k)
          {
@@ -1743,6 +1761,7 @@ namespace BarbarianPrince
          MountRow mr = new MountRow(mount.Name, true);
          myGridRows[i].myMountRows[k] = mr;
          //--------------------------------------------
+         // Handle if the Header Checkbox is checked
          if (true == myGameInstance.IsPartyLodged)
          {
             myIsHeaderCheckBoxChecked = true;
@@ -1751,10 +1770,12 @@ namespace BarbarianPrince
                for (int k2 = 0; k2 < myGridRows[k1].myMountRows.Count; ++k2)
                {
                   if (false == myGridRows[k1].myMountRows[k2].myIsStabled)
-                     myIsHeaderCheckBoxChecked = false; ;
+                     myIsHeaderCheckBoxChecked = false;
                }
             }
          }
+         //--------------------------------------------
+         SetStableCost(); // update money spent
          if (false == UpdateGrid())
             Logger.Log(LogEnum.LE_ERROR, "CheckBoxMount_Checked(): UpdateGrid() return false");
       }
@@ -1775,10 +1796,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "CheckBoxMount_Unchecked(): mounts count=0 for mi=" + mi.Name);
             return;
          }
-         myIsHeaderCheckBoxChecked = false;
+         //--------------------------------------------
+         //  Unstable the selected mount
          IMapItem mount = mi.Mounts[0];
-         if( myCoinCurrent < myCoinOriginal )
-            ++myCoinCurrent;
          int k = 0;
          for (k = 0; k < myGridRows[i].myMountRows.Count; ++k)
          {
@@ -1787,6 +1807,9 @@ namespace BarbarianPrince
          }
          MountRow mr = new MountRow(mount.Name, false);
          myGridRows[i].myMountRows[k] = mr;
+         //--------------------------------------------
+         myIsHeaderCheckBoxChecked = false; // Header Checkbox is automatically unchecked
+         SetStableCost(); // update money spent
          if (false == UpdateGrid())
             Logger.Log(LogEnum.LE_ERROR, "CheckBoxMount_Unchecked(): UpdateGrid() return false");
       }
@@ -1821,11 +1844,13 @@ namespace BarbarianPrince
          string content = (String)b.Content;
          if ("-" == content)
          {
+            myCoinOriginal += 50;
             myCoinCurrent += 50;
             --myTrollSkinsInPartyCurrent;
          }
          else if ("+" == content)
          {
+            myCoinOriginal -= 50;
             myCoinCurrent -= 50;
             ++myTrollSkinsInPartyCurrent;
          }
@@ -1844,11 +1869,13 @@ namespace BarbarianPrince
          string content = (String)b.Content;
          if ("-" == content)
          {
+            myCoinOriginal += 35;
             myCoinCurrent += 35;
             --myRocBeaksInPartyCurrent;
          }
          else if ("+" == content)
          {
+            myCoinOriginal -= 35;
             myCoinCurrent -= 35;
             ++myRocBeaksInPartyCurrent;
          }
@@ -1902,11 +1929,13 @@ namespace BarbarianPrince
          int normalizedFood = (int)( 1/ myFoodCost);
          if ("-" == content)
          {
+            myCoinOriginal += normalizedFoodCost;
             myCoinCurrent += normalizedFoodCost;
             myFoodPurchasedAtFarm -= normalizedFood;
          }
          else if ("+" == content)
          {
+            myCoinOriginal -= normalizedFoodCost;
             myCoinCurrent -= normalizedFoodCost;
             myFoodPurchasedAtFarm += normalizedFood;
          }
@@ -1926,11 +1955,13 @@ namespace BarbarianPrince
          string content = (String)b.Content;
          if ("-" == content)
          {
+            myCoinOriginal += myRollForMountCost;
             myCoinCurrent += myRollForMountCost;
             --myHorsePurchasedAtFarm;
          }
          else if ("+" == content)
          {
+            myCoinOriginal -= myRollForMountCost;
             myCoinCurrent -= myRollForMountCost;
             ++myHorsePurchasedAtFarm;
          }

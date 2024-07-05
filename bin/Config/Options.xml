@@ -79,7 +79,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="PartyMounted">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="PartyAirborne">
     <IsEnabled value="False" />
@@ -163,10 +163,10 @@
     <IsEnabled value="True" />
   </Option>
   <Option value="ReduceLodgingCosts">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="SteadyIncome">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="NoLostRoll">
     <IsEnabled value="False" />

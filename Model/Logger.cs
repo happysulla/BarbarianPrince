@@ -26,6 +26,7 @@ namespace BarbarianPrince
       LE_ADD_COIN,
       LE_ADD_COIN_AUTO,
       LE_ADD_FOOD,
+      LE_LODGING_COST,
       LE_MOUNT_CHANGE,
       LE_END_ENCOUNTER,
       LE_HEX_WITHIN_RANGE,
@@ -85,6 +86,7 @@ namespace BarbarianPrince
          Logger.SetOn(LogEnum.LE_ADD_WEALTH_CODE);
          Logger.SetOn(LogEnum.LE_ADD_COIN);
          Logger.SetOn(LogEnum.LE_ADD_COIN_AUTO);
+         //Logger.SetOn(LogEnum.LE_LODGING_COST);
          //Logger.SetOn(LogEnum.LE_MOUNT_CHANGE);
          Logger.SetOn(LogEnum.LE_COMBAT_STATE);
          //Logger.SetOn(LogEnum.LE_COMBAT_STATE_ESCAPE);

@@ -304,21 +304,6 @@ namespace BarbarianPrince
             }
          }
          //--------------------------------------------------
-         // If only Prince is in party
-         Logger.Log(LogEnum.LE_VIEW_SHOW_HUNT, "PerformHunt(): 3-myMaxRowCount=" + myMaxRowCount.ToString());
-         if (1 == myMaxRowCount)
-         {
-            Logger.Log(LogEnum.LE_VIEW_SHOW_HUNT, "PerformHunt():4-myMaxRowCount.Count=" + myMaxRowCount.ToString());
-            myGridRows[0].myAssignable = myGameInstance.Prince;
-            myGridRows[0].myAssignmentCount = GetAssignedCount();
-            string miName = Utilities.RemoveSpaces(myGameInstance.Prince.Name);
-            myMapItems.Remove(myGameInstance.Prince);
-            if ( (6 < myGameInstance.Prince.Food) || (true == myIsFarmland) )// if prince is by himself - force user to select hunt checkbox
-               myIsHeaderCheckBoxChecked = false;
-            else
-               myIsHeaderCheckBoxChecked = true;
-         }
-         //--------------------------------------------------
          System.Windows.Point hotPoint = new System.Windows.Point(Utilities.theMapItemOffset, Utilities.theMapItemOffset); // set the center of the MapItem as the hot point for the cursor
          foreach (IMapItem mi in myMapItems) // create the cursors for the party member buttons
          {
@@ -330,6 +315,17 @@ namespace BarbarianPrince
             Button b = CreateButton(mount, false, true, false);
             myCursors[mount.Name] = Utilities.ConvertToCursor(b, hotPoint);
          }
+         //--------------------------------------------------
+         // Start with Prince on first row
+         Logger.Log(LogEnum.LE_VIEW_SHOW_HUNT, "PerformHunt(): 3-myMaxRowCount=" + myMaxRowCount.ToString());
+         myGridRows[0].myAssignable = myGameInstance.Prince;
+         myGridRows[0].myAssignmentCount = GetAssignedCount();
+         string miName = Utilities.RemoveSpaces(myGameInstance.Prince.Name);
+         myMapItems.Remove(myGameInstance.Prince);
+         if ((6 < myGameInstance.Prince.Food) || (true == myIsFarmland))// if prince is by himself - force user to select hunt checkbox
+            myIsHeaderCheckBoxChecked = false;
+         else
+            myIsHeaderCheckBoxChecked = true;
          //--------------------------------------------------
          if (false == UpdateGrid())
          {
