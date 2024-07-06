@@ -1142,7 +1142,7 @@ namespace BarbarianPrince
          }
          else if (true == isEasyMonstersOption.IsEnabled)
          {
-            int newEndurance = character.Endurance - 3;
+            int newEndurance = character.Endurance - 2;
             character.Endurance = Math.Max(newEndurance, 1 );
             int newCombat = character.Combat - 3;
             character.Combat = Math.Max(newCombat, 1);
@@ -2306,6 +2306,8 @@ namespace BarbarianPrince
                gi.IsAirborne = true;
                gi.IsAirborneEnd = false;
                gi.IsShortHop = false;
+               Logger.Log(LogEnum.LE_UNDO_COMMAND, "GameStateSunriseChoice.PerformAction(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->true  a=" + action.ToString());
+               gi.IsUndoCommandAvailable = true;
                if ( true == gi.PartyReadyToFly()) // mount to fly returns false if anybody is left or possessions are left
                {
                   TravelAction(gi, ref action); // GameAction.TravelAir

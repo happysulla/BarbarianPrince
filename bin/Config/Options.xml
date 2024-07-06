@@ -82,7 +82,7 @@
     <IsEnabled value="True" />
   </Option>
   <Option value="PartyAirborne">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="RandomHex">
     <IsEnabled value="False" />
