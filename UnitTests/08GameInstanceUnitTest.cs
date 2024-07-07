@@ -18,6 +18,7 @@ namespace BarbarianPrince
          //------------------------------------------
          myIndexName = 0;
          myHeaderNames.Add("08-Show Dialog");
+         myHeaderNames.Add("08-Duplicate Mounts?");
          myHeaderNames.Add("08-Transfer Mounts");
          myHeaderNames.Add("08-Add Mounts");
          myHeaderNames.Add("08-Add Mounts2");
@@ -41,27 +42,28 @@ namespace BarbarianPrince
          myHeaderNames.Add("08-Finish");
          //------------------------------------------
          myCommandNames.Add("00-Show Dialog");
-         myCommandNames.Add("01-Trasnfer Mounts");
-         myCommandNames.Add("02-Add Mounts");
-         myCommandNames.Add("03-Add Mounts2");
-         myCommandNames.Add("04-Add True Love");
-         myCommandNames.Add("05-Remove True Love");
-         myCommandNames.Add("06-True Love Traingle");
-         myCommandNames.Add("07-Change Food-1");
-         myCommandNames.Add("08-Change Food-2");
-         myCommandNames.Add("09-Change Coin-3");
-         myCommandNames.Add("10-Change Coin-4");
-         myCommandNames.Add("11-Change Coin-5");
-         myCommandNames.Add("12-Change Food-6");
-         myCommandNames.Add("13-Change Coin-7");
-         myCommandNames.Add("14-Change Coin-8");
-         myCommandNames.Add("15-Change Coin-9");
-         myCommandNames.Add("16-Kill Party Members");
-         myCommandNames.Add("17-Add Food");
-         myCommandNames.Add("18-Remove Leaderless");
-         myCommandNames.Add("19-Add Food-2");
-         myCommandNames.Add("20-Remove Abandoner");
-         myCommandNames.Add("21-Finish");
+         myCommandNames.Add("01-Duplicate Mounts");
+         myCommandNames.Add("02-Transfer Mounts");
+         myCommandNames.Add("03-Add Mounts");
+         myCommandNames.Add("04-Add Mounts2");
+         myCommandNames.Add("05-Add True Love");
+         myCommandNames.Add("06-Remove True Love");
+         myCommandNames.Add("07-True Love Traingle");
+         myCommandNames.Add("08-Change Food-1");
+         myCommandNames.Add("09-Change Food-2");
+         myCommandNames.Add("10-Change Coin-3");
+         myCommandNames.Add("11-Change Coin-4");
+         myCommandNames.Add("12-Change Coin-5");
+         myCommandNames.Add("13-Change Food-6");
+         myCommandNames.Add("14-Change Coin-7");
+         myCommandNames.Add("15-Change Coin-8");
+         myCommandNames.Add("16-Change Coin-9");
+         myCommandNames.Add("17-Kill Party Members");
+         myCommandNames.Add("18-Add Food");
+         myCommandNames.Add("19-Remove Leaderless");
+         myCommandNames.Add("20-Add Food-2");
+         myCommandNames.Add("21-Remove Abandoner");
+         myCommandNames.Add("22-Finish");
          //------------------------------------------
          gi.PartyMembers.Clear();
          gi.Prince.Reset();
@@ -112,9 +114,74 @@ namespace BarbarianPrince
             myDialog.Show();
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[1]) // Transfer Mounts
+         else if (CommandName == myCommandNames[1]) // Add duplicate mount and check for error
          {
             gi.PartyMembers.Clear();
+            gi.Prince.Reset();
+            gi.PartyMembers.Add(gi.Prince);
+            //------------------------------------------
+            string magicianName = "Magician" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem magician = new MapItem(magicianName, 1.0, false, false, false, "c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
+            gi.AddCompanion(magician);
+            //------------------------------------------
+            IMapItems mounts = new MapItems();
+            for (int i = 0; i < 4; i++)
+               gi.AddNewMountToParty();
+            string name = "Horse" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            MapItem horse = new MapItem(name, 1.0, false, false, false, "MHorse", "", gi.Prince.Territory, 0, 0, 0);
+            gi.Prince.AddMount(horse);
+            for (int i = 0; i < 2; i++)
+               gi.AddNewMountToParty();
+            MapItem horse1 = new MapItem(name, 1.0, false, false, false, "MHorse", "", gi.Prince.Territory, 0, 0, 0);
+            magician.AddMount(horse1);
+            if( false == gi.IsDuplicateMount() )
+            {
+               Logger.Log(LogEnum.LE_ERROR, "Command(): 1-IsDuplicateMount() returned false and should have returned true");
+               return false;
+            }
+            //------------------------------------------
+            if (true == gi.IsDuplicateMount()) // the second time should work since duplicate was removed
+            {
+               Logger.Log(LogEnum.LE_ERROR, "Command(): 2-IsDuplicateMount() returned false and should have returned true");
+               return false;
+            }
+            //------------------------------------------
+            gi.Prince.Mounts.Rotate(1); // See if rotate of many horses causes error
+            if (true == gi.IsDuplicateMount()) // the second time should work since duplicate was removed
+            {
+               Logger.Log(LogEnum.LE_ERROR, "Command(): 3-IsDuplicateMount() returned false and should have returned true");
+               return false;
+            }
+            //------------------------------------------
+            for(int i = 0; i<5; ++i)
+               gi.Prince.Mounts.Rotate(1); // See if rotate of many horses causes error
+            if (true == gi.IsDuplicateMount()) // the second time should work since duplicate was removed
+            {
+               Logger.Log(LogEnum.LE_ERROR, "Command(): 4-IsDuplicateMount() returned false and should have returned true");
+               return false;
+            }
+            //------------------------------------------
+            gi.Prince.Mounts.Clear();
+            gi.AddNewMountToParty();
+            gi.Prince.Mounts.Rotate(1); // See if rotate of one horse causes error
+            if (true == gi.IsDuplicateMount()) // the second time should work since duplicate was removed
+            {
+               Logger.Log(LogEnum.LE_ERROR, "Command(): 5-IsDuplicateMount() returned false and should have returned true");
+               return false;
+            }
+            gi.Prince.Mounts.Rotate(1); // See if rotate of one horse causes error
+            if (true == gi.IsDuplicateMount()) // the second time should work since duplicate was removed
+            {
+               Logger.Log(LogEnum.LE_ERROR, "Command(): 6-IsDuplicateMount() returned false and should have returned true");
+               return false;
+            }
+         }
+         else if (CommandName == myCommandNames[2]) // Transfer Mounts
+         {
+            gi.PartyMembers.Clear();
+            gi.Prince.Reset();
             gi.PartyMembers.Add(gi.Prince);
             //------------------------------------------
             string magicianName = "Magician" + Utilities.MapItemNum.ToString();
@@ -150,7 +217,7 @@ namespace BarbarianPrince
             gi.TransferMounts(mounts);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[2]) // Add Mounts
+         else if (CommandName == myCommandNames[3]) // Add Mounts
          {
             gi.PartyMembers.Clear();
             gi.Prince.Reset();
@@ -197,7 +264,7 @@ namespace BarbarianPrince
             gi.AddNewMountToParty(MountEnum.Pegasus);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[3]) // 
+         else if (CommandName == myCommandNames[4]) // 
          {
             gi.PartyMembers.Clear();
             gi.PartyMembers.Add(gi.Prince);
@@ -236,7 +303,7 @@ namespace BarbarianPrince
             gi.TransferMounts(mounts);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[4]) // Add True Love
+         else if (CommandName == myCommandNames[5]) // Add True Love
          {
             gi.PartyMembers.Clear();
             gi.PartyMembers.Add(gi.Prince);
@@ -257,7 +324,7 @@ namespace BarbarianPrince
             gi.AddCompanion(trueLove);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[5]) // Remove True Love
+         else if (CommandName == myCommandNames[6]) // Remove True Love
          {
             gi.PartyMembers.Clear();
             gi.PartyMembers.Add(gi.Prince);
@@ -279,7 +346,7 @@ namespace BarbarianPrince
             gi.RemoveAbandonedInParty(trueLove);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[6]) // Remove True Love Triangle
+         else if (CommandName == myCommandNames[7]) // Remove True Love Triangle
          {
             gi.PartyMembers.Clear();
             gi.PartyMembers.Add(gi.Prince);
@@ -310,52 +377,52 @@ namespace BarbarianPrince
             gi.RemoveAbandonedInParty(trueLove);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[7]) // Add Foods 
+         else if (CommandName == myCommandNames[8]) // Add Foods 
          {
             gi.AddFoods(11);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[8]) // Reduce Foods
+         else if (CommandName == myCommandNames[9]) // Reduce Foods
          {
             gi.ReduceFoods(5);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[9])  // Add Coin
+         else if (CommandName == myCommandNames[10])  // Add Coin
          {
             gi.AddCoins(355);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[10])
+         else if (CommandName == myCommandNames[11])
          {
             gi.ReduceCoins(25);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[11])
+         else if (CommandName == myCommandNames[12])
          {
             gi.AddCoins(110);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[12])
+         else if (CommandName == myCommandNames[13])
          {
             gi.AddFoods(3);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[13])
+         else if (CommandName == myCommandNames[14])
          {
             gi.ReduceCoins(166);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[14])
+         else if (CommandName == myCommandNames[15])
          {
             gi.AddCoins(152);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[15])
+         else if (CommandName == myCommandNames[16])
          {
             gi.AddCoins(500);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[16]) // kill party members
+         else if (CommandName == myCommandNames[17]) // kill party members
          {
             foreach (IMapItem mi in gi.PartyMembers)
             {
@@ -374,23 +441,23 @@ namespace BarbarianPrince
             gi.RemoveKilledInParty("UnitTest");
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[17])
+         else if (CommandName == myCommandNames[18])
          {
             gi.AddFoods(12);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[18])
+         else if (CommandName == myCommandNames[19])
          {
             gi.RemoveLeaderlessInParty();
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[19])
+         else if (CommandName == myCommandNames[20])
          {
             gi.AddFoods(12);
             gi.AddCoins(733);
             myDialog.UpdateGridRows(gi);
          }
-         else if (CommandName == myCommandNames[20])
+         else if (CommandName == myCommandNames[21])
          {
             foreach (IMapItem mi in gi.PartyMembers) // set one to unconscious
             {
@@ -404,7 +471,7 @@ namespace BarbarianPrince
          else
          {
             if (false == Cleanup(ref gi))
-               Logger.Log(LogEnum.LE_ERROR, "NextTest(): Cleanup() returned error");
+               Logger.Log(LogEnum.LE_ERROR, "Command(): Cleanup() returned error");
          }
          return true;
       }
@@ -462,7 +529,11 @@ namespace BarbarianPrince
          {
             ++myIndexName;
          }
-         else if (HeaderName == myHeaderNames[13]) // make looter for 7
+         else if (HeaderName == myHeaderNames[13])
+         {
+            ++myIndexName;
+         }
+         else if (HeaderName == myHeaderNames[14]) // make looter for 7
          {
             ++myIndexName;
             foreach (IMapItem mi in gi.PartyMembers)
@@ -473,7 +544,7 @@ namespace BarbarianPrince
                break;
             }
          }
-         else if (HeaderName == myHeaderNames[14]) // make looter for 8
+         else if (HeaderName == myHeaderNames[15]) // make looter for 8
          {
             ++myIndexName;
             foreach (IMapItem mi in gi.PartyMembers)
@@ -484,7 +555,7 @@ namespace BarbarianPrince
                break;
             }
          }
-         else if (HeaderName == myHeaderNames[15]) // reconstitute party
+         else if (HeaderName == myHeaderNames[16]) // reconstitute party
          {
             ++myIndexName;
             gi.PartyMembers.Clear();
@@ -527,15 +598,15 @@ namespace BarbarianPrince
                break;
             }
          }
-         else if (HeaderName == myHeaderNames[16])
-         {
-            ++myIndexName;
-         }
          else if (HeaderName == myHeaderNames[17])
          {
             ++myIndexName;
          }
          else if (HeaderName == myHeaderNames[18])
+         {
+            ++myIndexName;
+         }
+         else if (HeaderName == myHeaderNames[19])
          {
             ++myIndexName;
             gi.PartyMembers.Clear();
@@ -571,11 +642,11 @@ namespace BarbarianPrince
             gi.AddCompanion(porter2);
             //------------------------------------------
          }
-         else if (HeaderName == myHeaderNames[19])
+         else if (HeaderName == myHeaderNames[20])
          {
             ++myIndexName;
          }
-         else if (HeaderName == myHeaderNames[20])
+         else if (HeaderName == myHeaderNames[21])
          {
             ++myIndexName;
          }

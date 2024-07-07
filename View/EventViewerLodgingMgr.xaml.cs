@@ -187,6 +187,8 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "FeedParty(): partyMembers=null");
             return false;
          }
+         if( true == myGameInstance.IsDuplicateMount())
+            Logger.Log(LogEnum.LE_ERROR, "FeedParty(): IsDuplicateMount() returned false - Duplicate Removed");
          //--------------------------------------------------
          Option option =  myGameInstance.Options.Find("ReduceLodgingCosts");
          if (null == option)
@@ -1541,7 +1543,7 @@ namespace BarbarianPrince
                   mount.OverlayImageName = "OStolen";
             }
             if (true == IsLodgingRequiredForMembers())
-               myState = LodgingEnum.LE_SHOW_DESERTERS;  // Assume all rolls performed unless one row shows no results
+               myState = LodgingEnum.LE_SHOW_DESERTERS;  
             else
                myState = LodgingEnum.LE_SHOW_RESULTS;  // Assume all rolls performed unless one row shows no results
          }
@@ -1551,6 +1553,10 @@ namespace BarbarianPrince
       }
       private bool IsLodgingRequiredForMembers()
       {
+         while(myGameInstance.IsDuplicateMount()) // remove all duplicate mounts
+         {
+            Logger.Log(LogEnum.LE_ERROR, "IsLodgingRequiredForMembers(): IsDuplicateMount() returned false - Duplicate Removed");
+         }
          bool isLodgingRequred = false;
          for (int i = 0; i < myMaxRowCount; ++i)
          {
@@ -1729,6 +1735,10 @@ namespace BarbarianPrince
          int i = rowNum - STARTING_ASSIGNED_ROW;
          IMapItem mi = myGridRows[i].myMapItem;
          mi.Mounts.Rotate(1);
+         while (myGameInstance.IsDuplicateMount()) // remove all duplicate mounts
+         {
+            Logger.Log(LogEnum.LE_ERROR, "ButtonMount_Click(): IsDuplicateMount() returned false - Duplicate Removed");
+         }
          if (false == UpdateGrid())
             Logger.Log(LogEnum.LE_ERROR, "CheckBox_Click(): UpdateGrid() return false");
       }

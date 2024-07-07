@@ -583,14 +583,22 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "OpenEvent(): myEvents=null");
             return false;
          }
-         foreach (Inline inline in myTextBlock.Inlines) // Clean up resources from old link before adding new one
+         try
          {
-            if (inline is InlineUIContainer)
+            foreach (Inline inline in myTextBlock.Inlines) // Clean up resources from old link before adding new one
             {
-               InlineUIContainer ui = (InlineUIContainer)inline;
-               if (ui.Child is Button b)
-                  b.Click -= Button_Click;
+               if (inline is InlineUIContainer)
+               {
+                  InlineUIContainer ui = (InlineUIContainer)inline;
+                  if (ui.Child is Button b)
+                     b.Click -= Button_Click;
+               }
             }
+         }
+         catch (Exception e)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "OpenEvent(): for key=" + key + " e=" + e.ToString());
+            return false;
          }
          try
          {

@@ -28,60 +28,61 @@ namespace BarbarianPrince
          InitializeComponent();
          myOptions = options.GetDeepCopy(); // make copy b/c do not want to change unless OK button selected by user
          myRadioButtonOriginal.ToolTip = "Play the game as God Intended. Be prepared to lose often.";
-         myRadioButtonRandomParty.ToolTip = "Choose Random Party Members";
-         myRadioButtonRandomStart.ToolTip = "Choose Random Starting Hex";
-         myRadioButtonAllRandom.ToolTip = "Everything is Random";
-         myRadioButtonCustom.ToolTip = "Custom choices for all choices";
+         myRadioButtonRandomParty.ToolTip = "Choose random party members.";
+         myRadioButtonRandomStart.ToolTip = "Choose random starting hex.";
+         myRadioButtonAllRandom.ToolTip = "Everything is random.";
+         myRadioButtonMaxFun.ToolTip = "Recommended choices for maximizing fun.";
+         myRadioButtonCustom.ToolTip = "Custom choices for all choices.";
          //--------------------
-         myCheckBoxAutoSetup.ToolTip = "Skip initial tutorial when starting";
-         myCheckBoxAutoWealth.ToolTip = "All wealth rolls under 5 are automatically rolled";
+         myCheckBoxAutoSetup.ToolTip = "Skip initial tutorial when starting.";
+         myCheckBoxAutoWealth.ToolTip = "All wealth rolls under 5 are automatically rolled.";
          //--------------------
-         myCheckBoxPrinceHorse.ToolTip = "Prince starts with a hex";
-         myCheckBoxPrincePegasus.ToolTip = "Prince starts with Pegasus";
-         myCheckBoxPrinceCoin.ToolTip = "Prince starts with 50-99gp";
-         myCheckBoxPrinceFood.ToolTip = "Prince starts with 10 food";
+         myCheckBoxPrinceHorse.ToolTip = "Prince starts with a hex.";
+         myCheckBoxPrincePegasus.ToolTip = "Prince starts with a Pegasus mount.";
+         myCheckBoxPrinceCoin.ToolTip = "Prince starts with 50-99 gold pieces.";
+         myCheckBoxPrinceFood.ToolTip = "Prince starts with 10 food.";
          //--------------------
-         myRadioButtonPartyOriginal.ToolTip = "Prince starts by himself";
-         myRadioButtonPartyRandom10.ToolTip = "10 Random Party Member is Added";
-         myRadioButtonPartyRandom8.ToolTip = "8 Random Party Member is Added";
-         myRadioButtonPartyRandom5.ToolTip = "5 Random Party Member is Added";
-         myRadioButtonPartyRandom3.ToolTip = "3 Random Party Member is Added";
-         myRadioButtonPartyRandom1.ToolTip = "1 Random Party Member is Added";
-         myRadioButtonPartyCustom.ToolTip = "Pick and Choose what Party Members to begin";
+         myRadioButtonPartyOriginal.ToolTip = "Prince starts by himself.";
+         myRadioButtonPartyRandom10.ToolTip = "10 random party members are added.";
+         myRadioButtonPartyRandom8.ToolTip = "8 random party members are added.";
+         myRadioButtonPartyRandom5.ToolTip = "5 random party members are added.";
+         myRadioButtonPartyRandom3.ToolTip = "3 random party members are added.";
+         myRadioButtonPartyRandom1.ToolTip = "1 random party member is added.";
+         myRadioButtonPartyCustom.ToolTip = "Pick and choose what party members begin the game.";
          //--------------------
-         myCheckBoxPartyMounted.ToolTip = "All Party Members get Horse unless they are Mounts";
-         myCheckBoxPartyAirborne.ToolTip = "All Party Members get Pegasus unless they are Flying Characters";
+         myCheckBoxPartyMounted.ToolTip = "All party members get horse unless they are mounts.";
+         myCheckBoxPartyAirborne.ToolTip = "All party members get Pegasus unless they are flying characters.";
          //--------------------
-         myRadioButtonHexOriginal.ToolTip = "Party starts as originial game intended";
-         myRadioButtonHexRandom.ToolTip = "Party starts on random hex on the map";
-         myRadioButtonHexRandomTown.ToolTip = "Party starts on random town hex";
-         myRadioButtonHexRandomLeft.ToolTip = "Party starts on random left edge";
-         myRadioButtonHexRandomRight.ToolTip = "Party starts on random right edge";
-         myRadioButtonHexRandomBottom.ToolTip = "Party starts on random bottom edge";
+         myRadioButtonHexOriginal.ToolTip = "Party starts as originial game intended.";
+         myRadioButtonHexRandom.ToolTip = "Party starts on random hex on the map.";
+         myRadioButtonHexRandomTown.ToolTip = "Party starts on random town hex.";
+         myRadioButtonHexRandomLeft.ToolTip = "Party starts on random left edge.";
+         myRadioButtonHexRandomRight.ToolTip = "Party starts on random right edge.";
+         myRadioButtonHexRandomBottom.ToolTip = "Party starts on random bottom edge.";
          //--------------------
-         myRadioButtonMonsterNormal.ToolTip = "Monsters start with original game attributes";
-         myRadioButtonMonsterLessEasy.ToolTip = "Monsters subtract 2 from endurance and 3 from combat";
-         myRadioButtonMonsterEasy.ToolTip = "Monsters subtract 1 from endurance and combat";
-         myRadioButtonMonsterEasiest.ToolTip = "Monsters have one endurance and combat";
+         myRadioButtonMonsterNormal.ToolTip = "Monsters start with original game attributes.";
+         myRadioButtonMonsterLessEasy.ToolTip = "Monsters subtract 2 from endurance and 3 from combat.";
+         myRadioButtonMonsterEasy.ToolTip = "Monsters subtract 1 from endurance and combat.";
+         myRadioButtonMonsterEasiest.ToolTip = "Monsters have one endurance and combat.";
          //--------------------
-         myCheckBoxAutoLostIncrement.ToolTip = "Lost Chance Descreases on Consecutive Lost Rolls";
-         myCheckBoxExtendTime.ToolTip = "Extend End Time from 70 days to 105 days";
-         myCheckBoxReducedLodgingCosts.ToolTip = "Lodging in Town is Half Price";
-         myCheckBoxAddIncome.ToolTip = "Add 3-6gp at end of each day performing menial tasks during daily activities in not incapacitated.";
+         myCheckBoxAutoLostIncrement.ToolTip = "Lost chance descreases on consecutive lost rolls.";
+         myCheckBoxExtendTime.ToolTip = "Extend end time from 70 days to 105 days.";
+         myCheckBoxReducedLodgingCosts.ToolTip = "Lodging in structures is half price.";
+         myCheckBoxAddIncome.ToolTip = "Add 3-6gp at end of each day performing menial tasks during daily activities if not incapacitated.";
          //--------------------
-         myCheckBoxNoLostRoll.ToolTip = "Skip Lost Rolls";
-         myCheckBoxNoLostEvent.ToolTip = "Lost Encounters never occur";
-         myCheckBoxNoEvent.ToolTip = "Travel Encounters never occur. Lost Encounters may still occur.";
-         myCheckBoxNoRoadEvent.ToolTip = "Road Encounters never occur";
-         myCheckBoxNoCrossEvent.ToolTip = "Crossing River Encounters never occur";
-         myCheckBoxNoRaftEvent.ToolTip = "Raft Encounters never occur when rafting";
-         myCheckBoxNoAirEvent.ToolTip = "Air Events never occur when flying";
-         myCheckBoxForceLostEvent.ToolTip = "Lost Encounters always occur when Lost Roll is made";
-         myCheckBoxForceLostAfterCross.ToolTip = "Lost Encounter always occurs after Crossing River";
-         myCheckBoxForceEvent.ToolTip = "=Ground Encounter always occurs";
-         myCheckBoxForceCrossEvent.ToolTip = "River Crossing Encounter always occurs";
-         myCheckBoxForceRaftEvent.ToolTip = "Raft Event always occurs";
-         myCheckBoxForceAirEvent.ToolTip = "Air Event always occurs when flying";
+         myCheckBoxNoLostRoll.ToolTip = "Skip Lost Rolls.";
+         myCheckBoxNoLostEvent.ToolTip = "Lost encounters never occur.";
+         myCheckBoxNoEvent.ToolTip = "Travel encounters never occur. Lost encounters may still occur.";
+         myCheckBoxNoRoadEvent.ToolTip = "Road encounters never occur.";
+         myCheckBoxNoCrossEvent.ToolTip = "Crossing river encounters never occur.";
+         myCheckBoxNoRaftEvent.ToolTip = "Raft encounters never occur when rafting.";
+         myCheckBoxNoAirEvent.ToolTip = "Air encounters never occur when flying.";
+         myCheckBoxForceLostEvent.ToolTip = "Lost encounters always occur when lost roll is made.";
+         myCheckBoxForceLostAfterCross.ToolTip = "Lost encounter always occurs after crossing river.";
+         myCheckBoxForceEvent.ToolTip = "Ground encounter always occurs.";
+         myCheckBoxForceCrossEvent.ToolTip = "River crossing encounter always occurs.";
+         myCheckBoxForceRaftEvent.ToolTip = "Raft encounter always occurs.";
+         myCheckBoxForceAirEvent.ToolTip = "Air encounter always occurs when flying.";
          if (false == UpdateDisplay(myOptions))
          {
             Logger.Log(LogEnum.LE_ERROR, "OptionSelectionDialog(): UpdateDisplay() returned false");

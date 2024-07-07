@@ -212,10 +212,9 @@ namespace BarbarianPrince
       void AddSpecialItem(SpecialEnum possession, IMapItem mi = null);
       void AddSpecialItems(List<SpecialEnum> possessions);
       bool RemoveSpecialItem(SpecialEnum possession, IMapItem mi = null);
+      //----------------------------------------------
       bool IsFedSlaveGirlHeld();
       bool IsPartySizeOne();
-      IMapItem RemoveFedSlaveGirl();
-      //----------------------------------------------
       bool IsPartyFlying();
       bool PartyReadyToFly();
       bool IsPartyRiding(); // flying or mounted
@@ -232,8 +231,10 @@ namespace BarbarianPrince
       bool IsMinstrelInParty();
       bool MinstrelStart();
       bool IsInMapItems(string name, IMapItems mapItems = null);
+      bool IsDuplicateMount();
       //----------------------------------------------
       void AddCompanion(IMapItem mi);
+      IMapItem RemoveFedSlaveGirl();
       void RemoveKilledInParty(string reason, bool isEscaping = false);
       bool RemoveVictimInParty(IMapItem victim);
       void RemoveAbandonerInParty(IMapItem mi, bool isTrueLoveRemoved = false); // all food/coin/possessons transferred to Party

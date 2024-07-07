@@ -1625,6 +1625,7 @@ namespace BarbarianPrince
             WitAndWile -= 1;
          return isPossessionRemoved;
       }
+      //---------------------------------------------------------------
       public bool IsFedSlaveGirlHeld()
       {
          foreach (IMapItem member in PartyMembers)
@@ -1659,36 +1660,11 @@ namespace BarbarianPrince
             return false;
          return true;
       }
-      public IMapItem RemoveFedSlaveGirl()
-      {
-         foreach (IMapItem member in PartyMembers)
-         {
-            if (true == member.Name.Contains("SlaveGirl"))
-            {
-               if (0 == member.StarveDayNum)
-               {
-                  this.RemoveAbandonerInParty(member);
-                  return member;
-               }
-            }
-         }
-         return null;
-      }
-      //---------------------------------------------------------------
       public bool IsPartyFlying()
       {
          foreach (IMapItem mi in PartyMembers)
          {
             if (false == mi.IsFlying)
-               return false;
-         }
-         return true;
-      }
-      public bool PartyReadyToFly()
-      {
-         foreach (IMapItem mi in PartyMembers)
-         {
-            if (mi.GetFlyLoad() < 0)
                return false;
          }
          return true;
@@ -1837,6 +1813,57 @@ namespace BarbarianPrince
          }
          return false;
       }
+      public bool IsInMapItems(string name, IMapItems mapItems = null)
+      {
+         if (null == mapItems)
+            mapItems = PartyMembers;
+         foreach (IMapItem mi in mapItems)
+         {
+            if (true == mi.Name.Contains(name))
+               return true;
+         }
+         return false;
+      }
+      public bool IsDuplicateMount()
+      {
+         IMapItems mounts = new MapItems();
+         foreach( IMapItem mi in this.PartyMembers)
+         {
+            foreach(IMapItem mount in mi.Mounts)
+               mounts.Add(mount);
+         }
+         IMapItems duplicates = new MapItems(mounts);
+         foreach (IMapItem mount in mounts)
+         {
+            duplicates.Remove(mount);
+            if (null != duplicates.Find(mount.Name))
+            {
+               Logger.Log(LogEnum.LE_ERROR, "IsDuplicateMapItem(): duplicate=" + mount.Name + " in mounts=" + mounts.ToString());
+               foreach(IMapItem partyMember in PartyMembers)
+               {
+                  foreach(IMapItem mount1 in partyMember.Mounts)
+                  {
+                     if( mount.Name == mount1.Name )
+                     {
+                        partyMember.Mounts.Remove(mount1); // remove the duplicate mount
+                        return true;
+                     }
+                  }
+               }
+            }
+         }
+         return false;
+      }
+      //---------------------------------------------------------------
+      public bool PartyReadyToFly()
+      {
+         foreach (IMapItem mi in PartyMembers)
+         {
+            if (mi.GetFlyLoad() < 0)
+               return false;
+         }
+         return true;
+      }
       public bool MinstrelStart()
       {
          foreach (IMapItem member in PartyMembers)
@@ -1855,18 +1882,21 @@ namespace BarbarianPrince
          }
          return false;
       }
-      public bool IsInMapItems(string name, IMapItems mapItems = null)
+      public IMapItem RemoveFedSlaveGirl()
       {
-         if (null == mapItems)
-            mapItems = PartyMembers;
-         foreach (IMapItem mi in mapItems)
+         foreach (IMapItem member in PartyMembers)
          {
-            if (true == mi.Name.Contains(name))
-               return true;
+            if (true == member.Name.Contains("SlaveGirl"))
+            {
+               if (0 == member.StarveDayNum)
+               {
+                  this.RemoveAbandonerInParty(member);
+                  return member;
+               }
+            }
          }
-         return false;
+         return null;
       }
-      //---------------------------------------------------------------
       public void RemoveKilledInParty(string reason, bool isEscaping = false)
       {
          if (true == Prince.IsKilled) // If prince killed, no need to look at other members

@@ -1357,13 +1357,15 @@ namespace BarbarianPrince
       {
          StringBuilder sb = new StringBuilder("Name=<");
          sb.Append(this.Name);
-         sb.Append("> Territory=<");
+         sb.Append(">T=<");
          sb.Append(this.Territory.Name);
-         sb.Append("> E=<");
+         sb.Append(">E=<");
          sb.Append(this.Endurance.ToString());
-         sb.Append("> C=<");
+         sb.Append(">C=<");
          sb.Append(this.Combat.ToString());
-         sb.Append("> WC=<");
+         sb.Append(">#m<");
+         sb.Append(this.Mounts.Count.ToString());
+         sb.Append(">WC=<");
          sb.Append(this.WealthCode.ToString());
          sb.Append(">");
          return sb.ToString();
@@ -1755,6 +1757,11 @@ namespace BarbarianPrince
    {
       private readonly ArrayList myList;
       public MapItems() { myList = new ArrayList(); }
+      public MapItems(IMapItems mapItems) 
+      {  
+         myList = new ArrayList(); 
+         foreach(IMapItem item in mapItems) { this.Add(item); }   
+      }
       public void Add(IMapItem mi) { myList.Add(mi); }
       public IMapItem RemoveAt(int index)
       {
@@ -1999,15 +2006,14 @@ namespace BarbarianPrince
       public override String ToString()
       {
          StringBuilder sb = new StringBuilder();
+         sb.Append("[ ");
          foreach (Object o in myList)
          {
             IMapItem mi = (IMapItem)o;
-            sb.Append("Name=<");
             sb.Append(mi.Name);
-            sb.Append("> Coin=");
-            sb.Append(mi.Coin.ToString());
-            sb.Append(">\n");
+            sb.Append(" ");
          }
+         sb.Append("]");
          return sb.ToString();
       }
    }

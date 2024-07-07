@@ -89,7 +89,7 @@ namespace BarbarianPrince
          Logger.SetOn(LogEnum.LE_ADD_COIN);
          Logger.SetOn(LogEnum.LE_ADD_COIN_AUTO);
          //Logger.SetOn(LogEnum.LE_LODGING_COST);
-         //Logger.SetOn(LogEnum.LE_MOUNT_CHANGE);
+         Logger.SetOn(LogEnum.LE_MOUNT_CHANGE);
          Logger.SetOn(LogEnum.LE_COMBAT_STATE);
          //Logger.SetOn(LogEnum.LE_COMBAT_STATE_ESCAPE);
          //Logger.SetOn(LogEnum.LE_COMBAT_STATE_ROUTE);

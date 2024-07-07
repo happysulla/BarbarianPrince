@@ -47,13 +47,13 @@ namespace BarbarianPrince
       public bool CreateUnitTests(IGameInstance gi, DockPanel dp, EventViewer ev, IDieRoller dr)
       {
          //-----------------------------------------------------------------------------
-         IUnitTest ut4 = new PolylineCreateUnitTest(dp, gi);
-         if (true == ut4.CtorError)
+         IUnitTest ut8 = new GameInstanceUnitTest(gi);
+         if (true == ut8.CtorError)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): PolylineCreateUnitTest() Ctor Error");
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): GameInstanceUnitTest() Ctor Error");
             return false;
          }
-         gi.UnitTests.Add(ut4);
+         gi.UnitTests.Add(ut8);
          //-----------------------------------------------------------------------------
          IUnitTest ut1 = new GameViewerCreateUnitTest(dp);
          if (true == ut1.CtorError)
@@ -79,6 +79,14 @@ namespace BarbarianPrince
          }
          gi.UnitTests.Add(ut3);
          //-----------------------------------------------------------------------------
+         IUnitTest ut4 = new PolylineCreateUnitTest(dp, gi);
+         if (true == ut4.CtorError)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): PolylineCreateUnitTest() Ctor Error");
+            return false;
+         }
+         gi.UnitTests.Add(ut4);
+         //-----------------------------------------------------------------------------
          IUnitTest ut5 = new ConfigMgrUnitTest(dp, ev);
          if (true == ut5.CtorError)
          {
@@ -102,14 +110,6 @@ namespace BarbarianPrince
             return false;
          }
          gi.UnitTests.Add(ut7);
-         //-----------------------------------------------------------------------------
-         IUnitTest ut8 = new GameInstanceUnitTest(gi);
-         if (true == ut8.CtorError)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): GameInstanceUnitTest() Ctor Error");
-            return false;
-         }
-         gi.UnitTests.Add(ut8);
          //-----------------------------------------------------------------------------
          IUnitTest ut9 = new TravelCheckUnitTest(dp, gi, ev);
          if (true == ut9.CtorError)
