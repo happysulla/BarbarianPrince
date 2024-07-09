@@ -79,16 +79,16 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="PartyMounted">
-    <IsEnabled value="True" />
-  </Option>
-  <Option value="PartyAirborne">
-    <IsEnabled value="True" />
-  </Option>
-  <Option value="RandomHex">
     <IsEnabled value="False" />
   </Option>
-  <Option value="RandomTown">
+  <Option value="PartyAirborne">
+    <IsEnabled value="False" />
+  </Option>
+  <Option value="RandomHex">
     <IsEnabled value="True" />
+  </Option>
+  <Option value="RandomTown">
+    <IsEnabled value="False" />
   </Option>
   <Option value="RandomLeft">
     <IsEnabled value="False" />
