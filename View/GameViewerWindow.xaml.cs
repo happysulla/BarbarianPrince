@@ -192,7 +192,7 @@ namespace BarbarianPrince
          ge.RegisterForUpdates(myEventViewer);
          ge.RegisterForUpdates(sbv);
          ge.RegisterForUpdates(this); // needs to be last so that canvas updates after all actions taken
-#if UT2
+#if UT1
             if (false == ge.CreateUnitTests(gi, myDockPanelTop, myEventViewer, myDieRoller))
             {
                Logger.Log(LogEnum.LE_ERROR, "GameViewerWindow(): CreateUnitTests() returned false");
