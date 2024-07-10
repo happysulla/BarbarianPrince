@@ -97,7 +97,7 @@ namespace BarbarianPrince
       UpdateNewGame,
       UpdateGameOptions, // Menu Options
       UpdateLoadingGame,
-      UpdateUndo, 
+      UpdateUndo,
 
       UnitTestStart,
       UnitTestCommand,
@@ -179,7 +179,10 @@ namespace BarbarianPrince
       ShowLargosRiver,
       ShowNesserRiver,
       ShowTrogothRiver,
+      ShowPartyPath,
       ShowInventory,
+      ShowRuleListing,
+      ShowAboutDialog,
 
       EncounterStart,
       EncounterEnd,

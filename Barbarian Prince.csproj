@@ -258,6 +258,9 @@
     <Compile Include="View\EventViewerCombatMgr.xaml.cs">
       <DependentUpon>EventViewerCombatMgr.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\RuleListingDialog.xaml.cs">
+      <DependentUpon>RuleListingDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SplashDialog.xaml.cs">
       <DependentUpon>SplashDialog.xaml</DependentUpon>
     </Compile>
@@ -475,6 +478,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PartyDisplayDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RuleListingDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

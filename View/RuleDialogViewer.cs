@@ -72,9 +72,7 @@ namespace BarbarianPrince
          catch (System.Collections.Generic.KeyNotFoundException e1)
          {
             // do nothing. This is expected first time dialog is created
-            Logger.Log(LogEnum.LE_GAME_INIT, "ShowRule(): Unable to find key=" + key + " e=" + e1.ToString());
          }
-
          try
          {
             if (null == myRules)
@@ -111,6 +109,34 @@ namespace BarbarianPrince
          {
             Logger.Log(LogEnum.LE_ERROR, "ShowRule(): e=" + e2.ToString() + " for key=" + key);
             return false;
+         }
+      }
+      public string GetTitle(string key)
+      {
+         try
+         {
+            if (null == myRules)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "ShowTitle(): myRules=null for key=" + key);
+               return null;
+            }
+            string multilineString = myRules[key];
+            int indexOfStart = multilineString.IndexOf(key);
+            if( -1 == indexOfStart)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "ShowTitle(): IndexOf() returned -1 for key=" + key);
+               return null;
+            }
+            indexOfStart += key.Length + 1; // add one to get past preceeding space
+            string startOfTitle = multilineString.Substring(indexOfStart);
+            int indexOfEnd = startOfTitle.IndexOf('<');
+            string title = startOfTitle.Substring(0,indexOfEnd);
+            return title;
+         }
+         catch (Exception e2)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "ShowTitle(): e=" + e2.ToString() + " for key=" + key);
+            return null;
          }
       }
       public bool ShowTable(string key)

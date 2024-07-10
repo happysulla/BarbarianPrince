@@ -144,6 +144,7 @@ namespace BarbarianPrince.View
       private GridRowHeading myGridRowHeading = new GridRowHeading(false);
       private GridRow[] myGridRows = new GridRow[Utilities.MAX_GRID_ROW];
       private readonly FontFamily myFontFam = new FontFamily("Tahoma");
+      //----------------------------------------------------------------
       public InventoryDisplayDialog(IGameInstance gi, RuleDialogViewer rm)
       {
          InitializeComponent();

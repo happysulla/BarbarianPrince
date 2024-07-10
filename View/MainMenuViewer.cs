@@ -286,7 +286,7 @@ namespace BarbarianPrince
       }
       public void MenuItemHelpRules_Click(object sender, RoutedEventArgs e)
       {
-         GameAction action = GameAction.UpdateEventViewerActive;
+         GameAction action = GameAction.ShowRuleListing;
          myGameEngine.PerformAction(ref myGameInstance, ref action);
       }
       public void MenuItemHelpIcons_Click(object sender, RoutedEventArgs e)

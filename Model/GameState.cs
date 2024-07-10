@@ -2210,6 +2210,9 @@ namespace BarbarianPrince
          {
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
+            case GameAction.ShowRuleListing:
+            case GameAction.ShowPartyPath:
+            case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateEventViewerActive:
@@ -2626,6 +2629,9 @@ namespace BarbarianPrince
          {
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
+            case GameAction.ShowRuleListing:
+            case GameAction.ShowPartyPath:
+            case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateEventViewerActive:
@@ -2760,6 +2766,9 @@ namespace BarbarianPrince
          {
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
+            case GameAction.ShowRuleListing:
+            case GameAction.ShowPartyPath:
+            case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateEventViewerActive:
@@ -3057,6 +3066,9 @@ namespace BarbarianPrince
          {
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
+            case GameAction.ShowRuleListing:
+            case GameAction.ShowPartyPath:
+            case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateEventViewerActive:
@@ -3148,6 +3160,9 @@ namespace BarbarianPrince
          {
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
+            case GameAction.ShowRuleListing:
+            case GameAction.ShowPartyPath:
+            case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateEventViewerActive:
@@ -3474,6 +3489,9 @@ namespace BarbarianPrince
          {
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
+            case GameAction.ShowRuleListing:
+            case GameAction.ShowPartyPath:
+            case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateEventViewerActive:
@@ -3558,6 +3576,9 @@ namespace BarbarianPrince
          {
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
+            case GameAction.ShowRuleListing:
+            case GameAction.ShowPartyPath:
+            case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateEventViewerActive:
@@ -3632,6 +3653,9 @@ namespace BarbarianPrince
          {
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
+            case GameAction.ShowRuleListing:
+            case GameAction.ShowPartyPath:
+            case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateEventViewerActive:
@@ -3694,6 +3718,9 @@ namespace BarbarianPrince
          {
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
+            case GameAction.ShowRuleListing:
+            case GameAction.ShowPartyPath:
+            case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateEventViewerActive:
@@ -3757,6 +3784,9 @@ namespace BarbarianPrince
          {
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
+            case GameAction.ShowRuleListing:
+            case GameAction.ShowPartyPath:
+            case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateEventViewerActive:
@@ -3906,6 +3936,9 @@ namespace BarbarianPrince
          {
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
+            case GameAction.ShowRuleListing:
+            case GameAction.ShowPartyPath:
+            case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
                break;
             case GameAction.UpdateLoadingGame:
@@ -4023,6 +4056,9 @@ namespace BarbarianPrince
          switch (action)
          {
             case GameAction.ShowInventory:
+            case GameAction.ShowRuleListing:
+            case GameAction.ShowPartyPath:
+            case GameAction.ShowAboutDialog:
             case GameAction.ShowAllRivers:
             case GameAction.ShowDienstalBranch:
             case GameAction.ShowLargosRiver:

@@ -12,7 +12,7 @@ If you select a raid and remain in this hex at the end of today, you may be atta
 r010a	"<Bold>r010a Starving Farmer Snub</Bold>
 <LineBreak/><LineBreak/>
 A starving farmer had a ruined harvest and his family was starving. He begged for charity and you refused. All your followers are disgusted by your evil temper. Roll one die for each follower. A results of 3+ means the follower deserts you."
-r013a	"<Bold>e013a Rich Peasant Family</Bold>
+r013a	"<Bold>r013a Rich Peasant Family</Bold>
 <LineBreak/><LineBreak/><Italic>Friendly Approach:</Italic>The family provides food and lodging as if you are in town with the same penalities if you refuse to pay.
 <LineBreak/><LineBreak/>Family may sell horses. Roll one die, and a result of 4 plus means they do. If they have stables, roll again for the number of horses available for sale. Roll one die again and double it for the price per horse. They will sell horses at this rate and will also sell food at 2 food units per gold piece. An unlimited amount of food is available for sale.
 <LineBreak/>
@@ -58,7 +58,7 @@ r057	"<Bold>r057 Troll Skin</Bold>
 <LineBreak/><LineBreak/>Since you killed the troll, its stone-skin is a valuble item. Whenever you have an opportunity to buy food at a town, castle, temple, or from merchants; you can sell the skin for 50 gold pieces. It is also known that Count Drogat of Drogat Castle will treasure the gift should you manage to get a personal audience with him.
 <LineBreak/><LineBreak/>
                 <InlineUIContainer><Image Source='../../Images/TrollSkin.gif' Height='300' Width='166'> </Image></InlineUIContainer>"
-r073a	"<Bold>e073a Hostile Witch</Bold>
+r073a	"<Bold>r073a Hostile Witch</Bold>
 <LineBreak/><LineBreak/>Your party must escape
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  immediately. Roll one die for each character in your party including yourself. 
@@ -91,7 +91,7 @@ r088	"<Bold>r088 Rockfall</Bold>
  <LineBreak/>6 - Character hit by heavy rock. Roll one die and add one for wounds suffered. Mounts without rider are hit and killed instantly. All of its load are buried beneath the rocks and are lost.
 <LineBreak/><LineBreak/>
           <InlineUIContainer><Image Source='../../Images/LandSlide.gif' Height='250' Width='500'></Image></InlineUIContainer>"
-r090	"<Bold>e090 Quicksand</Bold>
+r090	"<Bold>r090 Quicksand</Bold>
 <LineBreak/><LineBreak/>Your party stumbles into quicksand. Roll one die for each character or mount. If a character is riding a mount, you can roll for both together as a character. Alternatively, you can sacrifice the mount and its load in order to jump from it to safety.
 <LineBreak/><LineBreak/>
 1,2,3 - Character or mount struggles out of the quicksand and is not harmed.<LineBreak/>
@@ -454,7 +454,7 @@ After you finish all these events, at  the end of the day, you must provide food
 <LineBreak/><LineBreak/>After all actions, events, food, and lodging are resolved, the day ends. The day marker is advance on the time track. This continues until the end of the 10th week, which ends the game.
 <LineBreak/><LineBreak/>The game ends sooner if the Barbarian Prince is killed. Better luck next time!
 <LineBreak/><LineBreak/>You can continue to perform the same action day-after-day or you can vary your actions as you desire. Normally, you are limited to just one action per day, but some action events allow you a bonus action that same day. Other times, you may be required to advance the time track foward a certain number of days skipping any opportunity for actions."
-r203a	"<Bold>e203a Prison Escape Attempt</Bold>
+r203a	"<Bold>r203a Prison Escape Attempt</Bold>
 <LineBreak/><LineBreak/><Italic>Escape:</Italic> Prison break! Roll one die for each character in your party who was imprisoned with you. They are part of the escape on 3+. Otherwise, they are unable to join the escape or have already been executed.
 <LineBreak/><LineBreak/>If an escape occurs, use the escape rules
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
@@ -539,7 +539,7 @@ In addition, events where you talk or negotiate occur in only a few minutes. You
 r205	"<Bold>r205 Lost</Bold>
 <LineBreak/><LineBreak/>Each time you attempt to leave a hex, there is a danger of becoming lost. Consult the Travel Table
  <InlineUIContainer><Button Name='myButtonT207' Content='t207' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
- and find the terrain type you are leaving. Read across to the 'Lost"" column entry. Roll two die. If the dice total equals or exceeds the chart's number, your party is lost. If you move more than one hex in a day, you must check for getting lost before each move, i.e., before you enter the new hex.
+ and find the terrain type you are leaving. Read across to the 'Lost' column entry. Roll two die. If the dice total equals or exceeds the chart's number, your party is lost. If you move more than one hex in a day, you must check for getting lost before each move, i.e., before you enter the new hex.
 <LineBreak/><LineBreak/>If you get lost, you cannot move further that day. You are stuck in the hex you tried to leave. You must check for a travel event unless performing self-guiding moves
  <InlineUIContainer><Button Name='myButtonR205b' Content='r205b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
  The travel check is performed in the hex you tried to enter, as if you actually entered it. This reflects you wondering around the edges of the new hex and perhaps encountering something.
@@ -800,7 +800,7 @@ r212i	"<Bold>r212i Fall in Love with Priestess</Bold>
  with her and can never return to this hex. She has a combat skill 2 and endurance 4. Her wealth is 100 wealth code
  <InlineUIContainer><Button Name='myButtonR226' Content='r226' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  which she has stolen from the temple treasure!"
-r212j	"<Bold>r212j  High Priestess Request Audience</Bold>
+r212j	"<Bold>r212j High Priestess Request Audience</Bold>
 <LineBreak/><LineBreak/>High Priestess requests an audience
  <InlineUIContainer><Button Name='myButtonE155' Content='e155' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>."
 r212k	"<Bold>r212k High Priest Encounter</Bold>
@@ -814,7 +814,7 @@ r212l	"<Bold>r212l Gods Delcare Crusade</Bold>
   <InlineUIContainer><Button Name='myButtonTragothNorth' Content='North of Tragoth' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 , you will command instant obedience throughout the Norhlands, regain your throne, and win the game! 
 <LineBreak/><LineBreak/>In the meantime, you are given a pair of warrior monks who have combat skill 5 and endurance 6. The monks have mounts and join your parrty to help with your journey northward."
-r212m	"<Bold>e212m Gods Declare Crusade</Bold>
+r212m	"<Bold>r212m Gods Declare Crusade</Bold>
 <LineBreak/><LineBreak/>The gods declare your cause a religious crusade and the Staff of Command is passed into your hands. 
 <LineBreak/><LineBreak/>If you bring this possession to any hex north of the, you will command instant obedience throughout the Norhlands, regain your throne, and win the game! 
 <LineBreak/><LineBreak/>
@@ -867,7 +867,7 @@ r215a	"<Bold>r215a Food Units</Bold>
 r215b	"<Bold>r215b Hunting</Bold>
 <LineBreak/><LineBreak/>If you are in a farmland, country side, forest, hill, or swamp hex, you can hunt for food. Any one character in your party can be the hunter. 
 <LineBreak/><LineBreak/>Total his combat skill and half his current endurance minus wounds. Round fractions down and  subtract from the total value of the roll of two dice. The result is the number of food units gained by hunting. If the character can act as a guide, add one to the total. If the total is zero or less, the hunting was unsuccessful. 
-<LineBreak/><LineBreak/>If the dice roll was ""12"" , the hunter hurt himself regardless if the hunting was successful. Roll one die for the number of wounds he suffered. If knocked unconscious or killed, the hunt automatically fails unless hunting with others. 
+<LineBreak/><LineBreak/>If the dice roll was '12' , the hunter hurt himself regardless if the hunting was successful. Roll one die for the number of wounds he suffered. If knocked unconscious or killed, the hunt automatically fails unless hunting with others. 
 <LineBreak/><LineBreak/>If your party rested today in the hex, you can send additional characters to hunt. For each additional character hunting, add one to the skill+endurance level of your hunt. The actual skill and endurance of the additional hunters is not counted. However, if the additional hunters are gides, add one for each guide."
 r215c	"<Bold>r215c Populated Regions and Hunting</Bold>
 <LineBreak/><LineBreak/>If you must hunt in a farmland hex, each time you roll one die for a possible event, which occurs after the hunt is finished, but before the evening meal is eaten: 
@@ -888,7 +888,7 @@ r215e	"<Bold>r215e Food Stores</Bold>
  <InlineUIContainer><Button Name='myButtonR206' Content='r206' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  by yourself, other characters, and mounts. 
 <LineBreak/><LineBreak/>Food stores can be purchased in a town, castle, or villiage for one gold piece per food unit, but only if you spent the entire day in the hex. 
-<LineBreak/><LineBreak/>Each food unit is one ""load"" to transport."
+<LineBreak/><LineBreak/>Each food unit is one 'load' to transport."
 r215f	"<Bold>r215f Animal Fodder</Bold>
 <LineBreak/><LineBreak/>Animals can graze and eat fodder for themselves in any terrain where hunting is possible except swamps (i.e., in farmland, country side, forest, or hills). No hunting, stores or purchases are necessary. 
 <LineBreak/><LineBreak/>If you spend the entire day in a town, castle, or temple hex; you must stable your animals which cost one gold piece for food, unless you provide the stable with food stores (two units per animal) to feed them."
@@ -1895,7 +1895,7 @@ r324	"<Bold>r324 Bribe to Pass</Bold>
  <InlineUIContainer><Button Name='myButtonR220' Content='r220' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>."
 r325	"<Bold>r325 Pass with Dignity</Bold>
 <LineBreak/><LineBreak/>Characters encountered lose interest in your party. Encounter and event ends."
-r326	"<Bold>r325 Pass with Talk</Bold>
+r326	"<Bold>r326 Pass with Talk</Bold>
 <LineBreak/><LineBreak/>You think you can lull their suspicions. 
 <LineBreak/><LineBreak/>Roll one die. If your wit and wiles equals or exceeds the roll, the encountered characters let your party pass. The event ends.
 <LineBreak/><LineBreak/>Otherwise, see
@@ -1911,7 +1911,7 @@ r328	"<Bold>r328 Pass Rough</Bold>
 <LineBreak/><LineBreak/>Roll one die. If your wit and wiles exceeds the roll, they let your party pass and the event ends.
 <LineBreak/><LineBreak/>Otherwise, see
  <InlineUIContainer><Button Name='myButtonR330' Content='r330' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>."
-r329	"<Bold>r328 Pass Tough</Bold>
+r329	"<Bold>r329 Pass Tough</Bold>
 <LineBreak/><LineBreak/>Characters encountered have an unpleasant gleem in their eyes. You try to create a favorable impression anyway..
 <LineBreak/><LineBreak/>Roll one die. If your wit and wiles exceeds the roll, they let your party pass and the event ends.
 <LineBreak/><LineBreak/>Otherwise, see
@@ -1996,7 +1996,7 @@ r338	"<Bold>r338 Convince Hirelings</Bold>
 <LineBreak/><LineBreak/>You must pay them one gold piece per day if your wit and wiles exceeded the die roll. You must pay them two gold pieces per day if yoru wit and wiles equaled the die roll.
 <LineBreak/><LineBreak/>Today's pay must be given immediately. 
 <LineBreak/><LineBreak/>If more than one is encountered, you can hire some instead of all if you desire. Those who are not hired or if you fail to convince them to join, will pass by ending the event."
-r339	"<Bold>e339 Convince Hirelings</Bold>
+r339	"<Bold>r339 Convince Hirelings</Bold>
 <LineBreak/><LineBreak/>Characters encountered look askance at you and will pass you by unless you stop to talk. 
 <LineBreak/><LineBreak/>If you stop to talk, you decide you should convince them to join your party as henchmen. 
 <LineBreak/><LineBreak/>Roll one die. If you wit and wiles exeeds the die roll, they can join at two gold pieces per day with today's pay due right now. You can hire some instead of all you desire. 

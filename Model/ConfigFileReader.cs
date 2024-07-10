@@ -93,7 +93,7 @@ namespace BarbarianPrince
         private bool CreateRecord(ref StreamReader sr)
         {
             // This method attempts to create a dictionary entry 
-            // from a StreamReader. The format of tthe stream is
+            // from a StreamReader. The format of the stream is
             // r203  "XAML text"
             // r203  "XAML text"
             // r214  "XAML text"
