@@ -1001,6 +1001,7 @@ e026	"<Bold>e026 Search for Treasure</Bold>
 <LineBreak/>
                              <InlineUIContainer><Image Name='WizardAdviceEnd' Source='../../Images/WizardAdvice.gif' Height='200'  Width='200'> </Image></InlineUIContainer> "
 e026a	"<Bold>e026 Search for Treasure One More Time</Bold>
+<LineBreak/><LineBreak/>
 Clues suggest the treasure is in adjacent hext. 
 <LineBreak/><LineBreak/>Roll one die (1-N, 2-NE, 3-SE- 4-S, 5-SW, 6-NW):
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21'> </Image></InlineUIContainer>

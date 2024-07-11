@@ -2914,13 +2914,43 @@ namespace BarbarianPrince
                if ((true == gi.IsPartyDisgusted) && (false == isPartySizeOne)) // e010 - party is disgusted if ignore starving farmer
                {
                   action = GameAction.CampfireDisgustCheck;
+                  gi.IsPartyDisgusted = false;
+               }
+               else if ((true == gi.IsSpecialItemHeld(SpecialEnum.PegasusMountTalisman)) && (true == gi.IsSpecialistInParty()) && (false == gi.IsPegasusSkip))
+               {
+                  action = GameAction.UpdateEventViewerActive;
+                  gi.EventDisplayed = gi.EventActive = "e188b";
                }
                else if (false == Wakeup(gi, ref action))
                {
                   returnStatus = "Wakeup() return false";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateCampfire.PerformAction(): " + returnStatus);
                }
-               gi.IsPartyDisgusted = false;
+               break;
+            case GameAction.E188TalismanPegasusConversion:
+               if (false == gi.RemoveSpecialItem(SpecialEnum.PegasusMountTalisman))
+               {
+                  returnStatus = "RemoveSpecialItem(PegasusMountTalisman) returned false for ae=" + gi.EventActive;
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateCampfire.PerformAction(): " + returnStatus);
+               }
+               if (false == gi.Prince.AddNewMount(MountEnum.Pegasus))
+               {
+                  returnStatus = "AddMount(Pegasus) returned false for ae=" + gi.EventActive;
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateCampfire.PerformAction(): " + returnStatus);
+               }
+               if (false == Wakeup(gi, ref action))
+               {
+                  returnStatus = "Wakeup() return false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateCampfire.PerformAction(): " + returnStatus);
+               }
+               break;
+            case GameAction.E188TalismanPegasusSkip:
+               gi.IsPegasusSkip = true;
+               if (false == Wakeup(gi, ref action))
+               {
+                  returnStatus = "Wakeup() return false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateCampfire.PerformAction(): " + returnStatus);
+               }
                break;
             default:
                returnStatus = "Reached Default ERROR for a=" + action.ToString();
@@ -4557,14 +4587,14 @@ namespace BarbarianPrince
                   returnStatus = "EncounterEscape() returned false for ae=" + gi.EventActive;
                   Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                }
-               if (false == Wakeup(gi, ref action))
+               if (false == Wakeup(gi, ref action)) //action == E035IdiotStartDay
                {
                   returnStatus = "Wakeup() returned false for ae=" + gi.EventActive;
                   Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                }
                break;
             case GameAction.E035IdiotContinue:
-               if (false == Wakeup(gi, ref action))
+               if (false == Wakeup(gi, ref action)) // acton = E035IdiotContinue
                {
                   returnStatus = "Wakeup() returned false ae=" + gi.EventActive;
                   Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
@@ -5729,7 +5759,7 @@ namespace BarbarianPrince
                      gi.Prince.Mounts.Remove(m);
                }
                //-----------------------------
-               if (false == Wakeup(gi, ref action))
+               if (false == Wakeup(gi, ref action)) // action = E133PlaguePrince
                {
                   returnStatus = "Wakeup() return false for a=" + action.ToString();
                   Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
@@ -9873,7 +9903,7 @@ namespace BarbarianPrince
                else
                {
                   gi.IsSpellBound = false;
-                  if (false == Wakeup(gi, ref action))
+                  if (false == Wakeup(gi, ref action)) // action = EncounterRoll - e035a
                   {
                      Logger.Log(LogEnum.LE_ERROR, "EncounterRoll: Wakeup() returned false ae=" + gi.EventActive);
                      return false;

@@ -7,7 +7,6 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using BarbarianPrince.View;
 using Microsoft.Win32;
 namespace BarbarianPrince
 {

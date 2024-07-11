@@ -13,10 +13,10 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="PrinceCoin">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="PrinceFood">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="RandomParty10">
     <IsEnabled value="False" />
@@ -37,31 +37,31 @@
     <IsEnabled value="True" />
   </Option>
   <Option value="Dwarf">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Eagle">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Elf">
     <IsEnabled value="True" />
   </Option>
   <Option value="Falcon">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Griffon">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Harpy">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Magician">
     <IsEnabled value="True" />
   </Option>
   <Option value="Mercenary">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="Merchant">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Minstrel">
     <IsEnabled value="False" />
@@ -73,10 +73,10 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="TrueLove">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Wizard">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="PartyMounted">
     <IsEnabled value="False" />
@@ -85,7 +85,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomHex">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="RandomTown">
     <IsEnabled value="False" />
@@ -127,7 +127,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="0409">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="0406">
     <IsEnabled value="False" />
@@ -151,22 +151,22 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="EasyMonsters">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="EasiestMonsters">
     <IsEnabled value="False" />
   </Option>
   <Option value="AutoLostDecrease">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="ExtendEndTime">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="ReduceLodgingCosts">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="SteadyIncome">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="NoLostRoll">
     <IsEnabled value="False" />

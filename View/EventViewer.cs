@@ -1,5 +1,4 @@
-﻿using BarbarianPrince.View;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.IO;
@@ -18,7 +17,6 @@ using System.Windows.Shapes;
 using System.Xml;
 using WpfAnimatedGif;
 using static System.Collections.Specialized.BitVector32;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using Point = System.Windows.Point;
 
 namespace BarbarianPrince

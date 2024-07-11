@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BarbarianPrince"
         mc:Ignorable="d"
-        Title="RuleListingDialog" Height="800" Width="450" MinWidth="450" MaxWidth="500">
+        Name ="myDialogRuleListing"
+        Title="RuleListingDialog" Height="800" Width="450" MinWidth="450" MaxWidth="500" WindowStartupLocation="CenterScreen">
    <ScrollViewer Name="myScollViewer" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
       <Grid Name="myGrid" >
          <Grid.RowDefinitions>

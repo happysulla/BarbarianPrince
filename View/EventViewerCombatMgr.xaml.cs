@@ -845,11 +845,11 @@ namespace BarbarianPrince
                   }
                   if ((true == isEnd11) && ((CombatEnum.END_POISON != myState) && (CombatEnum.END_SHIELD != myState) && (CombatEnum.END_TALISMAN != myState)))
                      return true;
-                  if (fightCountBefore1 != fightCountAfter1)
+                  if ( (false== isEnd11) && (fightCountBefore1 != fightCountAfter1) )
                   {
                      if (false == ResetGridForCombat(myGameInstance.PartyMembers, myGameInstance.EncounteredMembers)) // UpdateGrid() - NEXT_ROUND
                      {
-                        Logger.Log(LogEnum.LE_ERROR, "UpdateGrid(): ResetGridForCombat() returned false");
+                        Logger.Log(LogEnum.LE_ERROR, "UpdateGrid(): ResetGridForCombat() returned false for CombatEnum.NEXT_ROUND");
                         return false;
                      }
                   }
@@ -914,7 +914,7 @@ namespace BarbarianPrince
                //-----------------------------------------------
                if (false == ResetGridForCombat(myGameInstance.PartyMembers, myGameInstance.EncounteredMembers)) // // UpdateGrid() - ROLL_FOR_PROTECTOR_SHOW
                {
-                  Logger.Log(LogEnum.LE_ERROR, "UpdateGrid(): RemoveCasualities() returned false");
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateGrid(): ResetGridForCombat() returned false for CombatEnum.ROLL_FOR_PROTECTOR_SHOW");
                   return false;
                }
                if (false == UpdateGridRows())

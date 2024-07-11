@@ -15,9 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfAnimatedGif;
 using static BarbarianPrince.GameViewerWindow;
-using static BarbarianPrince.View.InventoryDisplayDialog;
 
-namespace BarbarianPrince.View
+namespace BarbarianPrince
 {
 
    public partial class InventoryDisplayDialog : Window
