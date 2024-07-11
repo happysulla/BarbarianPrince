@@ -3185,7 +3185,7 @@ e135	"<Bold>e135 Broken Columns</Bold>
 <InlineUIContainer><Button Content='e046' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5<LineBreak/>
 <InlineUIContainer><Button Content='e047' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6
 <LineBreak/>
-          <InlineUIContainer><Image Source='../../Images/BrokenColumns.gif' Height='250'  Width='500'> </Image></InlineUIContainer>"
+          <InlineUIContainer><Image Name='BrokenColumns' Source='../../Images/BrokenColumns.gif' Height='250'  Width='500'> </Image></InlineUIContainer>"
 e135a	"<Bold>e135a Broken Columns with Unknown Inscription</Bold>
 <LineBreak/><LineBreak/>Along a pallisade of broken columns, you find an altar with an ancient inscription. Since your party does not includes a magician, wizard, witch, priest, or monk; the incription cannot be desciphered. There is no event. Click anywhere to continue."
 e136	"<Bold>e136 Hidden Treasures</Bold>
@@ -3197,7 +3197,9 @@ e136	"<Bold>e136 Hidden Treasures</Bold>
 3 - <InlineUIContainer><Button Content='e039' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
 4 - <InlineUIContainer><Button Content='e044' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
 5 - 500 gold pieces<LineBreak/>
-6 - Nothing"
+6 - Nothing
+<LineBreak/><LineBreak/>
+                                 <InlineUIContainer><Image Name='TreasureRoomDoor'  Source='../../Images/TreasureRoomDoor.gif' Height='200'  Width='200'> </Image></InlineUIContainer> "
 e137	"<Bold>e137 Inhabitants</Bold>
 <LineBreak/><LineBreak/>You encounter things living in the ruins. Roll one die:
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>

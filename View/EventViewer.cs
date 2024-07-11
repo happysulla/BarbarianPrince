@@ -2318,6 +2318,14 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new InlineUIContainer(imge130ga));
                }
                break;
+            case "e135":
+            case "e136":
+               if (Utilities.NO_RESULT < myGameInstance.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
+               break;
             case "e143a":
                if (0 < gi.ChagaDrugCount)
                {
@@ -4365,6 +4373,13 @@ namespace BarbarianPrince
                               action = GameAction.E148SeneschalPay;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               break;
+                           case "BrokenColumns":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e135"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
                            case "BrokenLove":
                               if (Utilities.NO_RESULT < myGameInstance.DieResults["e160e"][0])
                               {
@@ -5200,6 +5215,13 @@ namespace BarbarianPrince
                            case "TreasureChest1":
                               action = GameAction.E040TreasureChest;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              return;
+                           case "TreasureRoomDoor":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e136"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
                               return;
                            case "UnpassableWoods":
                               action = GameAction.E087UnpassableWoods;

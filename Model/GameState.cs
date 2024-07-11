@@ -11582,62 +11582,71 @@ namespace BarbarianPrince
                break;
             case "e133": action = GameAction.E133Plague; gi.DieRollAction = GameAction.DieRollActionNone; break;
             case "e135": // broken columns in ruins
-               action = GameAction.UpdateEventViewerActive;
-               switch (dieRoll) // Based on the die roll, implement the attack case
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1:
-                     if (true == gi.IsMagicInParty())
-                        gi.EventDisplayed = gi.EventActive = "e042";
-                     else
-                        gi.EventDisplayed = gi.EventActive = "e042a";
-                     break;
-                  case 2: gi.EventDisplayed = gi.EventActive = "e043"; break;
-                  case 3:
-                     if (true == gi.IsReligionInParty())
-                        gi.EventDisplayed = gi.EventActive = "e044";
-                     else
-                        gi.EventDisplayed = gi.EventActive = "e044a";
-                     break;
-                  case 4:                                                     // arch of travel
-                     if (true == gi.IsMagicInParty())
-                        gi.EventDisplayed = gi.EventActive = "e045";
-                     else
-                        gi.EventDisplayed = gi.EventActive = "e045a";
-                     break;
-                  case 5: gi.EventDisplayed = gi.EventActive = "e046"; break;
-                  case 6: gi.EventDisplayed = gi.EventActive = "e047"; break;
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  switch (gi.DieResults[key][0]) // Based on the die roll, implement the attack case
+                  {
+                     case 1:
+                        if (true == gi.IsMagicInParty())
+                           gi.EventDisplayed = gi.EventActive = "e042";
+                        else
+                           gi.EventDisplayed = gi.EventActive = "e042a";
+                        break;
+                     case 2: gi.EventDisplayed = gi.EventActive = "e043"; break;
+                     case 3:
+                        if (true == gi.IsReligionInParty())
+                           gi.EventDisplayed = gi.EventActive = "e044";
+                        else
+                           gi.EventDisplayed = gi.EventActive = "e044a";
+                        break;
+                     case 4:                                                     // arch of travel
+                        if (true == gi.IsMagicInParty())
+                           gi.EventDisplayed = gi.EventActive = "e045";
+                        else
+                           gi.EventDisplayed = gi.EventActive = "e045a";
+                        break;
+                     case 5: gi.EventDisplayed = gi.EventActive = "e046"; break;
+                     case 6: gi.EventDisplayed = gi.EventActive = "e047"; break;
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e136": // hidden treasures
-               action = GameAction.UpdateEventViewerActive;
-               switch (dieRoll) // Based on the die roll, the proper hidden treasures
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e037"; gi.DieRollAction = GameAction.EncounterRoll; break; // Broken Chest
-                  case 2: gi.EventDisplayed = gi.EventActive = "e038"; gi.DieRollAction = GameAction.EncounterRoll; break; // Cache Under Stone
-                  case 3: gi.EventStart = gi.EventDisplayed = gi.EventActive = "e039"; break;                              // Small Treasure Chest
-                  case 4:
-                     if (true == gi.IsReligionInParty())                       // High Alter
-                        gi.EventDisplayed = gi.EventActive = "e044";
-                     else
-                        gi.EventDisplayed = gi.EventActive = "e044a";
-                     break;
-                  case 5: 
-                     gi.EventDisplayed = gi.EventActive = "e500";              // Horde of 500 gp
-                     if (false == EncounterEnd(gi, ref action))            
-                     {
-                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false for ae=e136 dr=5");
-                        return false;
-                     }
-                     break;  
-                  case 6:
-                     if (false == EncounterEnd(gi, ref action))                // nothing found
-                     {
-                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false for ae=e136 dr=5");
-                        return false;
-                     }
-                     break;
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  switch (gi.DieResults[key][0]) // Based on the die roll, the proper hidden treasures
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e037"; gi.DieRollAction = GameAction.EncounterRoll; break; // Broken Chest
+                     case 2: gi.EventDisplayed = gi.EventActive = "e038"; gi.DieRollAction = GameAction.EncounterRoll; break; // Cache Under Stone
+                     case 3: gi.EventStart = gi.EventDisplayed = gi.EventActive = "e039"; break;                              // Small Treasure Chest
+                     case 4:
+                        if (true == gi.IsReligionInParty())                       // High Alter
+                           gi.EventDisplayed = gi.EventActive = "e044";
+                        else
+                           gi.EventDisplayed = gi.EventActive = "e044a";
+                        break;
+                     case 5:
+                        gi.EventDisplayed = gi.EventActive = "e500";              // Horde of 500 gp
+                        break;
+                     case 6:
+                        if (false == EncounterEnd(gi, ref action))                // nothing found
+                        {
+                           Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false for ae=e136 dr=5");
+                           return false;
+                        }
+                        break;
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e137": // inhabitants

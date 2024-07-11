@@ -85,7 +85,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomHex">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="RandomTown">
     <IsEnabled value="False" />
@@ -106,7 +106,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="0206">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="0711">
     <IsEnabled value="False" />
@@ -151,10 +151,10 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="EasyMonsters">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="EasiestMonsters">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="AutoLostDecrease">
     <IsEnabled value="True" />
