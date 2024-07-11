@@ -295,7 +295,7 @@ namespace BarbarianPrince
       }
       public void MenuItemHelpAbout_Click(object sender, RoutedEventArgs e)
       {
-         GameAction action = GameAction.UpdateEventViewerActive;
+         GameAction action = GameAction.ShowAboutDialog;
          myGameEngine.PerformAction(ref myGameInstance, ref action);
       }
       public void MenuItemStart_Click(object sender, RoutedEventArgs e) // Setup the initial menu options

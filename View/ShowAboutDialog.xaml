@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BarbarianPrince"
         mc:Ignorable="d"
-        Title="ShowAboutDialog" Height="450" Width="800" WindowStartupLocation="CenterOwner">
+        Name="myAboutDialog"
+        Title="About Barbarian Prince" MinHeight="400" MinWidth="400" MaxHeight="800" MaxWidth="800" WindowStartupLocation="CenterOwner" SizeToContent="WidthAndHeight" Topmost="True" ResizeMode="CanResizeWithGrip" IsEnabled="False" Background="#FFC5C3C3">
     <Grid>
-        
-    </Grid>
+      <TextBox x:Name="myTextBox" TextWrapping="Wrap" Width="Auto" Text="HELLO" IsReadOnly="True"/>
+
+   </Grid>
 </Window>
