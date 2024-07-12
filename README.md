@@ -14,5 +14,5 @@ NOTE: This game is a digital version of the boardgame from 1981. It replicates t
 
 If a developer, I have placed design documentation in the Document folder that explains architecture. It is written in C# using WPF. If you download and compile, you will need to obtain the NuGet package: WpfAnimiatedGif per the design documentation.
 
-CURRENT STATE: I have completed all but five events. I have all mechanics working, but I need to playtest to remove bugs. I also need to add startup tutorial, menus, store/recover, feats, and end game user displays.
+CURRENT STATE: I have completed all but five events. I need to playtest to remove bugs. I need to do feats and end game display.
 
