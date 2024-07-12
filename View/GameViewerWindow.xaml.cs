@@ -1072,7 +1072,7 @@ namespace BarbarianPrince
                   }
                   if (null != myTerritorySelected)
                   {
-                     if (("e213a" == myGameInstance.EventActive) || ("e401" == myGameInstance.EventActive))
+                     if (("e213a" == myGameInstance.EventActive) || ("e401" == myGameInstance.EventActive) || (GamePhase.Rest == gi.SunriseChoice))
                         UpdateCanvasHexToShowPolygon(myGameInstance.NewHex); // e126 - if raft moved downriver, show the polygon in the nex hex
                      else
                         UpdateCanvasHexToShowPolygon(myTerritorySelected);
@@ -1123,9 +1123,9 @@ namespace BarbarianPrince
                   }
                   break;
                case GameAction.E130JailedOnTravels:
-                  if (false == MoveToNewHex(gi))
+                  if (false == MoveToNewHexWhenJailed(gi))
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "UpdateCanvas():  MoveToNewHex() returned false");
+                     Logger.Log(LogEnum.LE_ERROR, "UpdateCanvas():  MoveToNewHexWhenJailed() returned false");
                      return false;
                   }
                   break;
@@ -1368,7 +1368,7 @@ namespace BarbarianPrince
          }
          return true;
       }
-      private bool MoveToNewHex(IGameInstance gi)
+      private bool MoveToNewHexWhenJailed(IGameInstance gi)
       {
          ITerritory oldT = gi.Prince.Territory;
          IStack oldStack = gi.Stacks.Find(oldT);
@@ -1391,7 +1391,7 @@ namespace BarbarianPrince
          //-------------------------------------
          foreach (IMapItem mi in myGameInstance.PartyMembers)
          {
-            mi.Territory = gi.NewHex;
+            mi.Territory = gi.NewHex; // MoveToNewHexWhenJailed()
             newStack.MapItems.Add(mi);
             oldStack.MapItems.Remove(mi);
          }
@@ -1659,9 +1659,9 @@ namespace BarbarianPrince
          {
             myGameInstance.GamePhase = GamePhase.Encounter;
             outAction = GameAction.E110AirSpiritTravelEnd;
-            myGameInstance.NewHex = myTerritorySelected;
+            myGameInstance.NewHex = myTerritorySelected;   // MouseDownPolygonTravel() - when air spirit moves party
          }
-         myGameEngine.PerformAction(ref myGameInstance, ref outAction);
+         myGameEngine.PerformAction(ref myGameInstance, ref outAction); 
          Logger.Log(LogEnum.LE_USER_ACTION, "MouseDownPolygonTravel(): >>>>>>>>>>>>>>>>>>>>>>>>>ae=" + myGameInstance.EventActive + " c=" + myGameInstance.SunriseChoice.ToString() + " m=" + myGameInstance.Prince.MovementUsed + "/" + myGameInstance.Prince.Movement + " mim=" + myGameInstance.MapItemMoves[0].ToString());
       }
       private void MouseDownPolygonArchOfTravel(object sender, MouseButtonEventArgs e) // e045
