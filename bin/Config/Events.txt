@@ -1420,7 +1420,7 @@ e050	"<Bold>e050 Local Constabulary</Bold>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e050c'></Button></InlineUIContainer>*<LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='Fight' Name='e050d'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e050d'></Button></InlineUIContainer>"
-050a	"<Bold>e050a Local Constabulary Not Seen</Bold>
+e050a	"<Bold>e050a Local Constabulary Not Seen</Bold>
 <LineBreak/><LineBreak/>Since you are not within three hexes of any town, temple, or castle; there is no event.
 <LineBreak/> <LineBreak/> 
                                   <InlineUIContainer><Image Name='EncounterEnd' Source='../../Images/Nothing.gif' Height='200' Width='200'></Image></InlineUIContainer>"

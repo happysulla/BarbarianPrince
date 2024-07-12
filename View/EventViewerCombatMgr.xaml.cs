@@ -954,23 +954,26 @@ namespace BarbarianPrince
             if (null == cavalry)
             {
                Logger.Log(LogEnum.LE_ERROR, "ResetGridForCombat(): cavalry=null");
-               return false;
+               myGameInstance.IsCavalryEscort = false;
             }
-            myIsPartyMembersAssignable = true;
-            myAssignables = partyMembers;
-            myUnassignables = encounteredMembers;
-            myColumnAssignable = 0;
-            myMaxRowCount = encounteredMembers.Count;
-            for (int i = 0; i < myMaxRowCount; ++i)
+            else
             {
-               IMapItem encountered = encounteredMembers[i];
-               encountered.SetWounds(encountered.Endurance, 0); // kill the encountered member by a cavalry unit
-               myGridRows[i] = new GridRow(encountered);
-               myGridRows[i].myAssignable = new MapItem(cavalry);
+               myIsPartyMembersAssignable = true;
+               myAssignables = partyMembers;
+               myUnassignables = encounteredMembers;
+               myColumnAssignable = 0;
+               myMaxRowCount = encounteredMembers.Count;
+               for (int i = 0; i < myMaxRowCount; ++i)
+               {
+                  IMapItem encountered = encounteredMembers[i];
+                  encountered.SetWounds(encountered.Endurance, 0); // kill the encountered member by a cavalry unit
+                  myGridRows[i] = new GridRow(encountered);
+                  myGridRows[i].myAssignable = new MapItem(cavalry);
+               }
+               Button b = CreateButton(cavalry, IS_ENABLE, false, NO_STATS, NO_ADORN, IS_CURSOR);
+               myCursors[cavalry.Name] = Utilities.ConvertToCursor(b, hotPoint);
+               return true;
             }
-            Button b = CreateButton(cavalry, IS_ENABLE, false, NO_STATS, NO_ADORN, IS_CURSOR);
-            myCursors[cavalry.Name] = Utilities.ConvertToCursor(b, hotPoint);
-            return true;
          }
          //------------------------------------
          if (true == myIsMirrorFight)

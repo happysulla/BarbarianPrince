@@ -939,6 +939,7 @@ namespace BarbarianPrince
       }
       public bool AddCoins(int coins, bool isCoinsShared = true)
       {
+         Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): ++++++++++++++++++" + coins.ToString() + "++++++++++++++++++++++++++++++++++++++++++++" );
          if (0 == coins)
          {
             Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): coins=" + coins.ToString() );
@@ -1093,6 +1094,7 @@ namespace BarbarianPrince
       }
       public void ReduceCoins(int coins)
       {
+         Logger.Log(LogEnum.LE_ADD_COIN, "ReduceCoins(): ------------------" + coins.ToString() + "--------------------------------------------");
          if (coins < 0)
          {
             Logger.Log(LogEnum.LE_ERROR, "ReduceCoins(): invalid parameter coins=" + coins.ToString());
@@ -1111,10 +1113,14 @@ namespace BarbarianPrince
                if (coins <= remainder)
                {
                   mi.Coin -= coins;
+                  if (mi.Coin < 0)
+                     Logger.Log(LogEnum.LE_ERROR, "ReduceCoins(): e - invalid state (mi.Coin=" + mi.Coin.ToString() + ")<0 coins=" + coins.ToString());
                   return;
                }
                coins -= remainder;
                mi.Coin -= remainder;
+               if (mi.Coin < 0)
+                  Logger.Log(LogEnum.LE_ERROR, "ReduceCoins(): f - invalid state (mi.Coin=" + mi.Coin.ToString() + ")<0 coins=" + remainder.ToString());
             }
          }
          //---------------------------------
@@ -1132,9 +1138,13 @@ namespace BarbarianPrince
                   if (coins <= remainder2)
                   {
                      mi.Coin -= coins;
+                     if (mi.Coin < 0)
+                        Logger.Log(LogEnum.LE_ERROR, "ReduceCoins(): a - invalid state (mi.Coin=" + mi.Coin.ToString() + ")<0 coins=" + coins.ToString());
                      return;
                   }
                   mi.Coin -= remainder2;
+                  if (mi.Coin < 0)
+                     Logger.Log(LogEnum.LE_ERROR, "ReduceCoins(): b - invalid state (mi.Coin=" + mi.Coin.ToString() + ")<0 coins=" + remainder2.ToString());
                   coins -= remainder2;
                }
             }
@@ -1148,9 +1158,13 @@ namespace BarbarianPrince
             if (coins <= remainder1)
             {
                myPrince.Coin -= coins;
+               if (myPrince.Coin < 0)
+                  Logger.Log(LogEnum.LE_ERROR, "ReduceCoins(): c - invalid state (myPrince.Coin=" + myPrince.Coin.ToString() + ")<0 coins=" + coins.ToString());
                return;
             }
             myPrince.Coin -= remainder1;
+            if (myPrince.Coin < 0)
+               Logger.Log(LogEnum.LE_ERROR, "ReduceCoins(): d - invalid state (myPrince.Coin=" + myPrince.Coin.ToString() + ")<0 coins=" + coins.ToString());
             coins -= remainder1;
          }
          //---------------------------------
@@ -1164,7 +1178,7 @@ namespace BarbarianPrince
                   --mi.Coin;
                   --coins;
                }
-               if (0 == coins)
+               if (coins <= 0 )
                   return;
             }
          }

@@ -159,7 +159,7 @@ namespace BarbarianPrince
             }
          }
          //--------------------------------------------------
-         myState = E212Enum.SHOW_RESULTS;
+         myState = E212Enum.END; // end this dialog if nobody checks for curses
          for (int k = 0; k < myMaxRowCount; ++k)
          {
             if (DO_NOT_LEAVE == myGridRows[k].myDieRoll)

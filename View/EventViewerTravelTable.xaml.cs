@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 using WpfAnimatedGif;
 using static System.Collections.Specialized.BitVector32;
 using static System.Windows.Forms.AxHost;
@@ -1719,6 +1720,7 @@ namespace BarbarianPrince
       }
       protected bool IsStructureWithinRange(IGameInstance gi, int range)
       {
+         Logger.Log(LogEnum.LE_HEX_WITHIN_RANGE, "=> startT=" + gi.Prince.Territory.Name);
          ITerritory startT = gi.Prince.Territory;
          List<string> masterList = new List<string>();
          Queue<string> tStack = new Queue<string>();
@@ -1753,10 +1755,10 @@ namespace BarbarianPrince
                ITerritory adjacent = Territory.theTerritories.Find(adj);
                if (null == adjacent)
                {
-                  Logger.Log(LogEnum.LE_HEX_WITHIN_RANGE, "IsStructureWithinRange(): adjacent=null for " + adj + " for t=" + name);
+                  Logger.Log(LogEnum.LE_ERROR, "IsStructureWithinRange(): adjacent=null for " + adj + " for t=" + name); 
                   return false;
                }
-               Logger.Log(LogEnum.LE_ERROR, stringBuilder.ToString() + "-->> a=" + adj);
+               Logger.Log(LogEnum.LE_HEX_WITHIN_RANGE, stringBuilder.ToString() + "-->> a=" + adj);
                tStack.Enqueue(adjacent.Name);
                depthStack.Enqueue(depth + 1);
                if (false == masterList.Contains(adj))
