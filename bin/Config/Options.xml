@@ -127,7 +127,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="0409">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="0406">
     <IsEnabled value="False" />
@@ -142,7 +142,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="1905">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="1723">
     <IsEnabled value="False" />
@@ -160,7 +160,7 @@
     <IsEnabled value="True" />
   </Option>
   <Option value="ExtendEndTime">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="ReduceLodgingCosts">
     <IsEnabled value="True" />
@@ -190,13 +190,13 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="ForceLostEvent">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ForceLostAfterCrossEvent">
     <IsEnabled value="False" />
   </Option>
   <Option value="ForceEvent">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="ForceCrossEvent">
     <IsEnabled value="False" />

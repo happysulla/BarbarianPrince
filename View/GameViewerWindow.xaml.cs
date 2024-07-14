@@ -223,8 +223,8 @@ namespace BarbarianPrince
             Option option = gi.Options.Find("ExtendEndTime");
             if( null == option )
                Logger.Log(LogEnum.LE_ERROR, "UpdateView(): gi.Options.Find(ExtendEndTime)");
-            else if( true == option.IsEnabled )
-               CreateButtonTimeTrack(true);
+            else 
+               CreateButtonTimeTrack(option.IsEnabled);
          }
          //-------------------------------------------------------
          else if (GameAction.UpdateLoadingGame == action)

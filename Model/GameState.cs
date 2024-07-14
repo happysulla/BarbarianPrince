@@ -3288,8 +3288,16 @@ namespace BarbarianPrince
                   IMapItemMove mim = gi.MapItemMoves[0];
                   if (RiverCrossEnum.TC_CROSS_YES_SHOWN != mim.RiverCross)
                   {
+                     Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateTravel.PerformAction(): gi.MapItemMoves.Clear() a=TravelShowLostEncounter");
+                     gi.MapItemMoves.Clear();
+                     --gi.Prince.MovementUsed;
+                     if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex - no longer moving to new territory unless this is check after river crossing
+                     {
+                        returnStatus = " AddMapItemMove() return false";
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                     }
+                     ++gi.Prince.MovementUsed;
                      Logger.Log(LogEnum.LE_VIEW_MIM, "GameStateTravel.PerformAction(): a=" + action.ToString() + " RESET mim=(" + mim.ToString() + " m=" + gi.Prince.MovementUsed + "/" + gi.Prince.Movement);
-                     mim.NewTerritory = mim.OldTerritory; // no longer moving to new territory unless this is check after river crossing
                   }
                }
                gi.IsGridActive = false;   // GameAction.TravelShowLostEncounter
@@ -7783,7 +7791,6 @@ namespace BarbarianPrince
             case "e071a": // elves
             case "e071b": // elves
             case "e071c": // elves
-               gi.DieResults["e071"][0] = Utilities.NO_RESULT; // avoid problem if two encounters in the same day
                gi.EventStart = "e071";
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
@@ -10748,6 +10755,7 @@ namespace BarbarianPrince
                   --dieRoll;
                if (true == gi.IsInMapItems("Dwarf"))
                   ++dieRoll;
+               dieRoll = 4; // <cgs> TEST
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
                   case 0: gi.EventDisplayed = gi.EventActive = "e325";  break;                               // pass with dignity
@@ -12981,6 +12989,7 @@ namespace BarbarianPrince
                }
                break;
             case "e320": // Hiding
+               dieRoll = 0; // <cgs> TEST
                if (gi.PartyMembers.Count < dieRoll)
                {
                   if (false == EncounterEnd(gi, ref action))
@@ -12993,6 +13002,8 @@ namespace BarbarianPrince
                {
                   gi.IsEvadeActive = false;
                   gi.EventDisplayed = gi.EventActive = gi.EventStart;
+                  if( "e071" == gi.EventStart )
+                     gi.DieResults[gi.EventStart][0] = gi.EncounteredMembers.Count; // elf hide fails - repopulate the die roll 
                   action = GameAction.UpdateEventViewerActive;
                   gi.DieRollAction = GameAction.EncounterRoll;
                }
@@ -13635,12 +13646,12 @@ namespace BarbarianPrince
                            gi.DieRollAction = GameAction.EncounterRoll;
                         }
                         break;
-                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString() + " result=" + result.ToString()); return false;
                   }
                }
                break;
             default:
-               Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): 123 - Reached default ae=" + gi.EventActive);
+               Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EEEE123EEEEE - Reached default ae=" + gi.EventActive);
                return false;
          }
          return true;

@@ -65,7 +65,7 @@ namespace BarbarianPrince
          myRadioButtonMonsterEasy.ToolTip = "Monsters subtract 1 from endurance and combat.";
          myRadioButtonMonsterEasiest.ToolTip = "Monsters have one endurance and combat.";
          //--------------------
-         myCheckBoxAutoLostIncrement.ToolTip = "Lost chance descreases on consecutive lost rolls.";
+         myCheckBoxAutoLostIncrement.ToolTip = "Lost chance decreases on consecutive lost rolls.";
          myCheckBoxExtendTime.ToolTip = "Extend end time from 70 days to 105 days.";
          myCheckBoxReducedLodgingCosts.ToolTip = "Lodging in structures is half price.";
          myCheckBoxAddIncome.ToolTip = "Add 3-6gp at end of each day performing menial tasks during daily activities if not incapacitated.";
@@ -1484,17 +1484,11 @@ namespace BarbarianPrince
          else
             Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found ForceLostAfterCrossEvent");
          myCheckBoxForceEvent.IsChecked = false;
-         option = myOptions.Find("ForceLostEvent");
+         option = myOptions.Find("ForceEvent");
          if (null != option)
             option.IsEnabled = false;
          else
-            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found ForceLostEvent");
-         myCheckBoxForceCrossEvent.IsChecked = false;
-         option = myOptions.Find("ForceCrossEvent");
-         if (null != option)
-            option.IsEnabled = false;
-         else
-            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found ForceCrossEvent");
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found ForceEvent");
          myCheckBoxForceRaftEvent.IsChecked = false;
          option = myOptions.Find("ForceRaftEvent");
          if (null != option)
