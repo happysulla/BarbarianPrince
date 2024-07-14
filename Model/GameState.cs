@@ -1381,6 +1381,9 @@ namespace BarbarianPrince
             return false;
          }
          gi.EnteredTerritories.Add(starting);
+         IStack newStack = new Stack(starting) as IStack;
+         gi.Stacks.Add(newStack);
+         newStack.MapItems.Add(gi.Prince);
          int counterCount = 0;
          foreach (IMapItem mi in gi.PartyMembers)
          {
@@ -11502,6 +11505,7 @@ namespace BarbarianPrince
                }
                break;
             case "e130a": // talk to high lord 
+               dieRoll = 3;
                switch (dieRoll)
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e327"; gi.DieRollAction = GameAction.EncounterRoll; break; // pass dummies

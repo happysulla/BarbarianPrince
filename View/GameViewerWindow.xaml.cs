@@ -1,5 +1,6 @@
 ﻿using BarbarianPrince.Properties;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -1374,12 +1375,21 @@ namespace BarbarianPrince
          IStack oldStack = gi.Stacks.Find(oldT);
          if (null == oldStack)
          {
-            Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygonArchOfTravel(): oldStack=null for t=" + oldT.ToString());
-            return false;
+            oldStack = myGameInstance.Stacks.Find(gi.Prince.Territory);
+            if( null == oldStack)
+               Logger.Log(LogEnum.LE_ERROR, "MoveToNewHexWhenJailed(): oldStack=null for t=" + oldT.ToString() + " bc Prince not found in any stacks");
+            else
+               Logger.Log(LogEnum.LE_ERROR, "MoveToNewHexWhenJailed(): oldStack=null for t=" + oldT.ToString() + " bc Prince in stack=" + oldStack.Territory.Name);
+            if (null == oldStack)
+            {
+               oldStack = new Stack(gi.Prince.Territory) as IStack;
+               myGameInstance.Stacks.Add(oldStack);
+            }
+            oldStack.MapItems.Add(gi.Prince);
          }
          if (null == gi.NewHex)
          {
-            Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygonArchOfTravel(): gi.NewHex=null");
+            Logger.Log(LogEnum.LE_ERROR, "MoveToNewHexWhenJailed(): gi.NewHex=null");
             return false;
          }
          IStack newStack = myGameInstance.Stacks.Find(gi.NewHex);

@@ -7,13 +7,13 @@
     <IsEnabled value="True" />
   </Option>
   <Option value="PrinceHorse">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="PrincePegasus">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="PrinceCoin">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="PrinceFood">
     <IsEnabled value="True" />
@@ -28,13 +28,13 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomParty03">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="RandomParty01">
     <IsEnabled value="False" />
   </Option>
   <Option value="PartyCustom">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Dwarf">
     <IsEnabled value="False" />
@@ -43,7 +43,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="Elf">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Falcon">
     <IsEnabled value="False" />
@@ -55,10 +55,10 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="Magician">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Mercenary">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Merchant">
     <IsEnabled value="False" />
@@ -67,7 +67,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="Monk">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="PorterSlave">
     <IsEnabled value="False" />
@@ -79,10 +79,10 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="PartyMounted">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="PartyAirborne">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="RandomHex">
     <IsEnabled value="False" />
@@ -130,7 +130,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="0406">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="0405">
     <IsEnabled value="False" />
@@ -142,7 +142,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="1905">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="1723">
     <IsEnabled value="False" />
@@ -196,7 +196,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="ForceEvent">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ForceCrossEvent">
     <IsEnabled value="False" />
