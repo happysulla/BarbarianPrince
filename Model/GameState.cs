@@ -7600,9 +7600,10 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e055": // Orcs
+               gi.DieResults["e055"][0] = dieRoll;
                gi.EncounteredMembers.Clear();
                IMapItem orcChief = CreateCharacter(gi, "OrcChief", 7);
-               gi.DieResults["e055"][0] = dieRoll;
+               gi.EncounteredMembers.Add(orcChief);
                int numOrcsInBand = dieRoll - 1;
                for (int i = 0; i < numOrcsInBand; ++i)
                {
@@ -10289,8 +10290,6 @@ namespace BarbarianPrince
                         }
                         break;
                      default:
-                        Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "EncounterRoll(e053): gi.MapItemMoves.Clear()");
-                        gi.MapItemMoves.Clear();
                         if ("e052" == gi.EventStart)
                         {
                            gi.EventDisplayed = gi.EventActive = "e053a"; // campsite decision with goblins
