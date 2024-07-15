@@ -4833,7 +4833,6 @@ namespace BarbarianPrince
       {
          myIsRouteOfEnemyPossible = false;   // ShowRouteResults()
          Logger.Log(LogEnum.LE_COMBAT_STATE_ROUTE, "ShowRouteResults(): s=" + myState.ToString() + " route?=" + myIsRouteOfEnemyPossible.ToString());
-         //dieRoll = 6; // <cgs> TEST
          if (5 < dieRoll) // if 6+, route enemy
          {
             myIsEscape = false;

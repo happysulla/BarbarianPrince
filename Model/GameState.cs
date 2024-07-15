@@ -48,6 +48,16 @@ namespace BarbarianPrince
             default: Logger.Log(LogEnum.LE_ERROR, "GetGameState(): reached default p=" + phase.ToString()); return null;
          }
       }
+      protected ITerritory GetPreviousTerritority(IGameInstance gi)
+      {
+         for(int i= gi.EnteredTerritories.Count-1; -1 < i; --i)
+         {
+            ITerritory t = gi.EnteredTerritories[i];
+            if (gi.Prince.Territory.Name != t.Name)
+               return t;
+         }
+         return null;
+      }
       protected void TravelAction(IGameInstance gi, ref GameAction action)
       {
          action = GameAction.Travel;
@@ -647,11 +657,14 @@ namespace BarbarianPrince
             return false;
          }
          gi.Prince.TerritoryStarting = gi.Prince.Territory;
+         gi.NewHex = adjacentTerritory;        // EncounterEscape()
+         gi.EnteredTerritories.Add(gi.NewHex); // EncounterEscape()
          if (false == AddMapItemMove(gi, adjacentTerritory))
          {
-            Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): AddMapItemMove() return false");
+            Logger.Log(LogEnum.LE_ERROR, "EncounterEscape(): AddMapItemMove() return false");
             return false;
          }
+         Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "EncounterEscape(): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
          if ("e036" == gi.EventStart) // e036 Party members not discovered again
             gi.LostPartyMembers.Clear();
          Logger.Log(LogEnum.LE_MOVE_COUNT, "EncounterEscape(): MovementUsed=Movement for a=" + action.ToString());
@@ -688,21 +701,22 @@ namespace BarbarianPrince
             return false;
          }
          //---------------------------------------------
+         if ((true == gi.IsExhausted) && ((true == gi.NewHex.IsOasis) || ("Desert" != gi.NewHex.Type))) // e120
+            gi.IsExhausted = false;
          gi.IsMustLeaveHex = false;
          gi.IsImpassable = false;
          gi.IsTrueLoveHeartBroken = false;
          gi.IsTempleGuardEncounteredThisHex = false;
-         gi.NewHex = adjacentTerritory;     // EncounterFollow()
-         gi.EnteredTerritories.Add(gi.NewHex);
-         if ((true == gi.IsExhausted) && ((true == gi.NewHex.IsOasis) || ("Desert" != gi.NewHex.Type))) // e120
-            gi.IsExhausted = false;
          //---------------------------------------------
          gi.Prince.TerritoryStarting = gi.Prince.Territory;
+         gi.NewHex = adjacentTerritory;        // EncounterFollow()
+         gi.EnteredTerritories.Add(gi.NewHex); // EncounterFollow()
          if (false == AddMapItemMove(gi, adjacentTerritory))
          {
-            Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): AddMapItemMove() return false" );
+            Logger.Log(LogEnum.LE_ERROR, "EncounterFollow(): AddMapItemMove() return false");
             return false;
          }
+         Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "EncounterFollow(): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
          switch (gi.EventActive)
          {
             case "e052": gi.EventDisplayed = gi.EventActive = "e052a"; gi.DieRollAction = GameAction.EncounterRoll; break;
@@ -922,22 +936,18 @@ namespace BarbarianPrince
          if ((true == gi.IsHighPass) && (true == isTravel))
          {
             gi.IsHighPass = false;
-            int tCount = gi.EnteredTerritories.Count;
-            if (tCount < 2)
+            ITerritory previousTerritory = GetPreviousTerritority(gi);
+            if ( null == previousTerritory)
             {
-               Logger.Log(LogEnum.LE_ERROR, "SetSubstitutionEvent(): Invalid state with tCount=" + tCount.ToString());
-               return false;
+               Logger.Log(LogEnum.LE_ERROR, "SetSubstitutionEvent(): previousTerritory=null for t=" + gi.Prince.Territory.Name);
+               previousTerritory = gi.Prince.Territory;
             }
-            else
+            if (gi.NewHex.Name != previousTerritory.Name)
             {
-               ITerritory previousTerritory = gi.EnteredTerritories[tCount - 2]; // If do not return from hex entered, must do a High Pass Check for deaths
-               if (gi.NewHex.Name != previousTerritory.Name)
-               {
-                  gi.EventAfterRedistribute = gi.EventActive; // encounter this event after high pass check
-                  gi.EventDisplayed = gi.EventActive = "e086a";
-                  gi.GamePhase = GamePhase.Encounter;
-                  gi.DieRollAction = GameAction.EncounterRoll;
-               }
+               gi.EventAfterRedistribute = gi.EventActive; // encounter this event after high pass check
+               gi.EventDisplayed = gi.EventActive = "e086a";
+               gi.GamePhase = GamePhase.Encounter;
+               gi.DieRollAction = GameAction.EncounterRoll;
             }
             return true;
          }
@@ -1000,7 +1010,6 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "AddMapItemMove(): Invalid State Territories.Count=" + mim.BestPath.Territories.Count.ToString() + " for start=" + gi.Prince.TerritoryStarting.ToString() + " for newT=" + newT.Name);
             return false;
          }
-         Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "AddMapItemMove(): gi.MapItemMoves.Add() mim=" + mim.ToString());
          gi.MapItemMoves.Insert(0,mim); // add at front
          return true;
       }
@@ -1176,6 +1185,7 @@ namespace BarbarianPrince
                return false;
             }
             ++gi.Prince.MovementUsed;
+            Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "LoadGame(): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
          }
          return true;
       }
@@ -1357,8 +1367,6 @@ namespace BarbarianPrince
       }
       private bool SetStartingLocation(ref IGameInstance gi, int dieRoll)
       {
-         ITerritory t1 = Territory.theTerritories.Find("0101"); // set so that on first turn, there is not an error - mostly used for setting up special test conditions during unit testing
-         gi.EnteredTerritories.Add(t1);
          ITerritory starting = null;
          switch (dieRoll)
          {
@@ -1380,6 +1388,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "SetStartingLocation() starting territory=null");
             return false;
          }
+         gi.EnteredTerritories.Add(starting);
          gi.EnteredTerritories.Add(starting);
          IStack newStack = new Stack(starting) as IStack;
          gi.Stacks.Add(newStack);
@@ -2702,7 +2711,6 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.HuntE002aEncounterRoll:
-               //dieRoll = 12; // <cgs> TEST
                int encounterResult = dieRoll - 3;
                if ("0101" == gi.Prince.Territory.Name)
                   ++encounterResult;
@@ -3223,14 +3231,17 @@ namespace BarbarianPrince
                   returnStatus = "Invalid state: gi.MapItemMoves.Count for a=" + action.ToString();
                   Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
                }
-               if (null == gi.MapItemMoves[0].NewTerritory)
-               {
-                  returnStatus = "Invalid state: gi.NewHex=null for a=" + action.ToString();
-                  Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
-               }
                else
                {
-                  gi.NewHex = gi.MapItemMoves[0].NewTerritory;  // GameStateTravel.PerformAction(TravelLostCheck)
+                  if (null == gi.MapItemMoves[0].NewTerritory)
+                  {
+                     returnStatus = "Invalid state: gi.NewHex=null for a=" + action.ToString();
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+                  }
+                  else
+                  {
+                     gi.NewHex = gi.MapItemMoves[0].NewTerritory;  // GameStateTravel.PerformAction(TravelLostCheck) - Not added to gi.EnteredTerritories[]
+                  }
                }
                break;
             case GameAction.TravelShortHop:
@@ -3257,6 +3268,8 @@ namespace BarbarianPrince
                }
                else
                {
+                  gi.NewHex = gi.Prince.Territory;
+                  gi.EnteredTerritories.Add(gi.NewHex);                            // GameStateTravel.PerformAction(TravelShowLost)
                   Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateTravel.PerformAction(): gi.MapItemMoves.Clear() a=TravelShowLost");
                   gi.MapItemMoves.Clear();
                   --gi.Prince.MovementUsed;
@@ -3264,6 +3277,10 @@ namespace BarbarianPrince
                   {
                      returnStatus = " AddMapItemMove() return false";
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
+                  else
+                  {
+                     Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateTravel.PerformAction(TravelShowLost): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
                   }
                   ++gi.Prince.MovementUsed;
                   gi.IsGridActive = false; // GameAction.TravelShowLost
@@ -3285,19 +3302,24 @@ namespace BarbarianPrince
                }
                else
                {
-                  IMapItemMove mim = gi.MapItemMoves[0];
-                  if (RiverCrossEnum.TC_CROSS_YES_SHOWN != mim.RiverCross)
+                  if (RiverCrossEnum.TC_CROSS_YES_SHOWN != gi.MapItemMoves[0].RiverCross)
                   {
+                     gi.NewHex = gi.Prince.Territory;
+                     gi.EnteredTerritories.Add(gi.NewHex);                            // GameStateTravel.PerformAction(TravelShowLostEncounter)
                      Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateTravel.PerformAction(): gi.MapItemMoves.Clear() a=TravelShowLostEncounter");
                      gi.MapItemMoves.Clear();
                      --gi.Prince.MovementUsed;
                      if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex - no longer moving to new territory unless this is check after river crossing
                      {
                         returnStatus = " AddMapItemMove() return false";
-                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+                     }
+                     else
+                     {
+                        Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateTravel.PerformAction(TravelShowLostEncounter): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
                      }
                      ++gi.Prince.MovementUsed;
-                     Logger.Log(LogEnum.LE_VIEW_MIM, "GameStateTravel.PerformAction(): a=" + action.ToString() + " RESET mim=(" + mim.ToString() + " m=" + gi.Prince.MovementUsed + "/" + gi.Prince.Movement);
+                     Logger.Log(LogEnum.LE_VIEW_MIM, "GameStateTravel.PerformAction(): a=" + action.ToString() + " RESET mim=(" + gi.MapItemMoves[0].ToString() + " m=" + gi.Prince.MovementUsed + "/" + gi.Prince.Movement);
                   }
                }
                gi.IsGridActive = false;   // GameAction.TravelShowLostEncounter
@@ -3340,27 +3362,22 @@ namespace BarbarianPrince
                }
                else if ( true == gi.IsHighPass ) // high pass event can happen even if no travel encounter
                {
-
                   gi.IsHighPass = false;
-                  int tCount = gi.EnteredTerritories.Count;
-                  if( tCount < 2 )
+                  ITerritory previousTerritory = GetPreviousTerritority(gi);
+                  if (null == previousTerritory)
                   {
-                     returnStatus = "Invalid state with tCount=" + tCount.ToString() + " for a=" + action.ToString();
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): GetPreviousTerritority() returned null for t=" + gi.Prince.Territory.Name);
+                     previousTerritory = gi.Prince.Territory;
+                  }
+                  if (gi.NewHex.Name == previousTerritory.Name)
+                  {
+                     ShowMovementScreenViewer(gi); // show user instructions in the ScreenViewer
                   }
                   else
                   {
-                     ITerritory previousTerritory = gi.EnteredTerritories[tCount-2];
-                     if (gi.NewHex.Name == previousTerritory.Name)
-                     {
-                        ShowMovementScreenViewer(gi); // show user instructions in the ScreenViewer
-                     }
-                     else
-                     {
-                        gi.EventDisplayed = gi.EventActive = "e086a";
-                        gi.GamePhase = GamePhase.Encounter;
-                        gi.DieRollAction = GameAction.EncounterRoll;
-                     }
+                     gi.EventDisplayed = gi.EventActive = "e086a";
+                     gi.GamePhase = GamePhase.Encounter;
+                     gi.DieRollAction = GameAction.EncounterRoll;
                   }
                }
                else
@@ -3368,7 +3385,7 @@ namespace BarbarianPrince
                   ShowMovementScreenViewer(gi);
                }
                if(gi.NewHex.Name != gi.EnteredTerritories.Last().Name )
-                  gi.EnteredTerritories.Add(gi.NewHex); // NewHex set in the TravelShowLost action
+                  gi.EnteredTerritories.Add(gi.NewHex); // NewHex set in the TravelShowLost action - GameStateTravel.PerformAction(TravelShowMovement)
                break;
             case GameAction.TravelShowRiverEncounter:
                gi.GamePhase = GamePhase.Encounter;
@@ -3394,12 +3411,17 @@ namespace BarbarianPrince
                gi.EnteredTerritories.Add(gi.NewHex);
                break;
             case GameAction.TravelEndMovement: // Prince clicked when still movement left ends movement phase
+               gi.NewHex = gi.Prince.Territory;
                --gi.Prince.MovementUsed;
                gi.Prince.TerritoryStarting = gi.Prince.Territory;
                if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex
                {
                   returnStatus = " AddMapItemMove() return false";
-                  Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateTravel.PerformAction(TravelEndMovement): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
                }
                ++gi.Prince.MovementUsed;
                //--------------------------------------------------------
@@ -5110,6 +5132,10 @@ namespace BarbarianPrince
                      returnStatus = "AddMapItemMove() returned false for action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
+                  else
+                  {
+                     Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateEncounter.PerformAction(TransportRedistributeEnd): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
+                  }
                   ++gi.Prince.MovementUsed;
                   if (false == EncounterEnd(gi, ref action))
                   {
@@ -5224,24 +5250,27 @@ namespace BarbarianPrince
                if(2 < gi.Prince.MovementUsed) // if traveled to third hex in air, need to move back to previous hex
                {
                   gi.IsAirborne = false;
-                  int tCount = gi.EnteredTerritories.Count;
-                  if (tCount < 2)
+                  ITerritory previousTerritory = GetPreviousTerritority(gi);
+                  if (null == previousTerritory)
                   {
-                     returnStatus = " Invalid state with tCount=" + tCount.ToString() + " a=" + action.ToString();
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + "GetPreviousTerritority() returned null for t=" + gi.Prince.Territory.Name);
+                     previousTerritory = gi.Prince.Territory;
+                  }
+                  --gi.Prince.MovementUsed;
+                  gi.Prince.TerritoryStarting = gi.Prince.Territory;
+                  gi.NewHex = previousTerritory;
+                  gi.EnteredTerritories.RemoveAt(gi.EnteredTerritories.Count - 1); // remove last entry 
+                  gi.EnteredTerritories.Add(gi.NewHex);
+                  if (false == AddMapItemMove(gi, previousTerritory))
+                  {
+                     returnStatus = " AddMapItemMove() return false";
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
-                  else // move back to previous hex
+                  else
                   {
-                     ITerritory previousTerritory = gi.EnteredTerritories[tCount - 2]; // If do not return from hex entered, must do a High Pass Check for deaths
-                     --gi.Prince.MovementUsed;
-                     gi.Prince.TerritoryStarting = gi.Prince.Territory;
-                     if (false == AddMapItemMove(gi, previousTerritory))
-                     {
-                        returnStatus = " AddMapItemMove() return false";
-                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                     }
-                     ++gi.Prince.MovementUsed;
+                     Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateEncounter.PerformAction(E103BadHeadWinds): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
                   }
+                  ++gi.Prince.MovementUsed;
                }
                else
                {
@@ -5321,10 +5350,16 @@ namespace BarbarianPrince
                   //--------------------------------------------------------
                   gi.Prince.MovementUsed = 0; // must have movement left to be blown off course
                   gi.Prince.TerritoryStarting = gi.NewHex;
+                  gi.NewHex = blowToTerritory;
+                  gi.EnteredTerritories.Add(gi.NewHex);
                   if (false == AddMapItemMove(gi, blowToTerritory))
                   {
                      returnStatus = " AddMapItemMove() return false";
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
+                  else
+                  {
+                     Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateEncounter.PerformAction(E105ViolentWeather): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
                   }
                   //--------------------------------------------------------
                   gi.IsAirborne = false;
@@ -5349,10 +5384,16 @@ namespace BarbarianPrince
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
                   gi.Prince.TerritoryStarting = gi.NewHex;
+                  gi.NewHex = adjacentTerritory;
+                  gi.EnteredTerritories.Add(gi.NewHex);
                   if (false == AddMapItemMove(gi, adjacentTerritory))
                   {
                      returnStatus = " AddMapItemMove() return false";
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
+                  else
+                  {
+                     Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateEncounter.PerformAction(E106OvercastLost): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
                   }
                   gi.DieResults["e106"][0] = Utilities.NO_RESULT;
                break;
@@ -5584,13 +5625,17 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                }
                gi.Prince.TerritoryStarting = gi.Prince.Territory;
+               gi.NewHex = downRiverT1;
+               gi.EnteredTerritories.Add(gi.NewHex);
                if (false == AddMapItemMove(gi, downRiverT1))
                {
                   returnStatus = " AddMapItemMove() returned false";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                }
-               gi.NewHex = downRiverT1;  // GameStateEncounter.PerformAction(E126RaftInCurrentEnd)
-               gi.EnteredTerritories.Add(gi.NewHex);
+               else
+               {
+                  Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateEncounter.PerformAction(E126RaftInCurrentEnd): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
+               }
                if (false == EncounterEnd(gi, ref action))
                {
                   returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
@@ -5607,13 +5652,17 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                }
                gi.Prince.TerritoryStarting = gi.Prince.Territory;
+               gi.NewHex = downRiverT; //GameStateEncounter.PerformAction(E126RaftInCurrentRedistribute)
+               gi.EnteredTerritories.Add(gi.NewHex);
                if (false == AddMapItemMove(gi, downRiverT))
                {
                   returnStatus = " AddMapItemMove() returned false";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                }
-               gi.NewHex = downRiverT; //GameStateEncounter.PerformAction(E126RaftInCurrentRedistribute)
-               gi.EnteredTerritories.Add(gi.NewHex);  
+               else
+               {
+                  Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateEncounter.PerformAction(E126RaftInCurrentRedistribute): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
+               }
                break;
             case GameAction.E128aBuyPegasus:
                if( false == gi.AddNewMountToParty(MountEnum.Pegasus) )
@@ -7879,11 +7928,17 @@ namespace BarbarianPrince
                   }
                   else
                   {
+                     gi.NewHex = gi.Prince.Territory;
+                     gi.EnteredTerritories.Add(gi.NewHex);
                      --gi.Prince.MovementUsed;
                      if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex
                      {
                         Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): AddMapItemMove() returned false ae=" + gi.EventStart);
                         return false;
+                     }
+                     else
+                     {
+                        Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "EncounterStart(): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString() + " for k=" + key);
                      }
                      ++gi.Prince.MovementUsed;
                      if (false == EncounterEnd(gi, ref action))
@@ -10755,7 +10810,6 @@ namespace BarbarianPrince
                   --dieRoll;
                if (true == gi.IsInMapItems("Dwarf"))
                   ++dieRoll;
-               dieRoll = 4; // <cgs> TEST
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
                   case 0: gi.EventDisplayed = gi.EventActive = "e325";  break;                               // pass with dignity
@@ -11214,14 +11268,15 @@ namespace BarbarianPrince
                   int movementUsed = gi.Prince.MovementUsed;
                   gi.Prince.MovementUsed = 0; // must have movement left to be blown off course
                   gi.Prince.TerritoryStarting = gi.NewHex;
+                  gi.NewHex = blowToTerritory;
+                  gi.EnteredTerritories.Add(gi.NewHex);
                   if (false == AddMapItemMove(gi, blowToTerritory))
                   {
                      Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddMapItemMove() return false for a=" + action.ToString());
                      return false;
                   }
+                  Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "EncounterRoll(): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString() + " for k=" + key);
                   gi.Prince.MovementUsed = movementUsed; // return back to original value
-                  gi.NewHex = blowToTerritory;           // e110b - air spirit blows off course
-                  gi.EnteredTerritories.Add(gi.NewHex);
                }
                break;
             case "e110c": // air spirit - succeed - choose hex
@@ -12989,7 +13044,6 @@ namespace BarbarianPrince
                }
                break;
             case "e320": // Hiding
-               dieRoll = 0; // <cgs> TEST
                if (gi.PartyMembers.Count < dieRoll)
                {
                   if (false == EncounterEnd(gi, ref action))
@@ -14140,11 +14194,14 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "MoveToClosestGoblinKeep(): minT=null finding GoblinKeep closest to t=" + startT.Name);
             return false;
          }
+         gi.NewHex = minT;
+         gi.EnteredTerritories.Add(gi.NewHex);
          if (false == AddMapItemMove(gi, minT) )
          {
             Logger.Log(LogEnum.LE_ERROR, "MoveToClosestGoblinKeep(): AddMapItemMove() returned error for t=" + minT.Name);
             return false;
          }
+         Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "MoveToClosestGoblinKeep(): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString() );
          return true;
       }
       protected bool RiverCrossCheck(IGameInstance gi, ref GameAction action)
