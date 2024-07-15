@@ -5337,6 +5337,7 @@ namespace BarbarianPrince
                      lostInStormMembers.Add(mi);
                   foreach (IMapItem mi in lostInStormMembers)
                      gi.RemoveAbandonedInParty(mi);
+                  gi.Prince.Mounts.Clear(); // remove all mounts
                   //--------------------------------------------------------
                   Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateEncounter.PerformAction(): gi.MapItemMoves.Clear() for a=" + action.ToString());
                   gi.MapItemMoves.Clear();
@@ -8110,7 +8111,7 @@ namespace BarbarianPrince
                }
                else
                {
-                  for (int i = 0; i < dieRoll; ++i)
+                  for (int i = 0; i < gi.DieResults[key][0]; ++i)
                   {
                      IMapItem hawkman = CreateCharacter(gi, "Hawkman", 7);
                      hawkman.IsFlying = true;
