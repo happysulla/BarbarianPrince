@@ -7,10 +7,10 @@
     <IsEnabled value="True" />
   </Option>
   <Option value="PrinceHorse">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="PrincePegasus">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="PrinceCoin">
     <IsEnabled value="True" />
@@ -28,13 +28,13 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomParty03">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="RandomParty01">
     <IsEnabled value="False" />
   </Option>
   <Option value="PartyCustom">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="Dwarf">
     <IsEnabled value="False" />
@@ -76,7 +76,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="Wizard">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="PartyMounted">
     <IsEnabled value="False" />
@@ -85,7 +85,7 @@
     <IsEnabled value="True" />
   </Option>
   <Option value="RandomHex">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="RandomTown">
     <IsEnabled value="False" />
@@ -130,7 +130,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="0406">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="0405">
     <IsEnabled value="False" />
@@ -151,16 +151,16 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="EasyMonsters">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="EasiestMonsters">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="AutoLostDecrease">
     <IsEnabled value="True" />
   </Option>
   <Option value="ExtendEndTime">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ReduceLodgingCosts">
     <IsEnabled value="True" />
@@ -196,7 +196,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="ForceEvent">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="ForceCrossEvent">
     <IsEnabled value="False" />

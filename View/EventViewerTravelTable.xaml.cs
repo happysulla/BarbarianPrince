@@ -1768,8 +1768,12 @@ namespace BarbarianPrince
                }
             }
          }
-         foreach( String name in masterList )
+         StringBuilder stringBuilder1 = new StringBuilder();
+         stringBuilder1.Append("masterList=[");
+         int count = 0;
+         foreach (String name in masterList)
          {
+            Logger.Log(LogEnum.LE_HEX_WITHIN_RANGE, name);
             ITerritory t = Territory.theTerritories.Find(name);
             if (null == t)
             {
@@ -1778,7 +1782,11 @@ namespace BarbarianPrince
             }
             if (true == myGameInstance.IsInStructure(t))
                return true;
+            if( ++count != masterList.Count) // print comma only if not last entry
+               stringBuilder1.Append(",");
          }
+         stringBuilder1.Append("]");
+         Logger.Log(LogEnum.LE_HEX_WITHIN_RANGE, stringBuilder1.ToString());
          return false;
       }
       //-----------------------------------------------------------------------------------------

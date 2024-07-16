@@ -4107,7 +4107,7 @@ e210d	"<Bold>e210d Horse Deal</Bold>
 e210e	"<Bold>e210e Local Guide Available</Bold>
 <LineBreak/><LineBreak/>Local guide available
  <InlineUIContainer><Button Content='r205' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
-. Hires fro 2 gold per day. He has a combat skill of 2 and endurnace 3.
+. Hires for 2 gold per day. He has a combat skill of 2 and endurnace 3.
 <LineBreak/><LineBreak/><InlineUIContainer><Image Name='EncounterEnd' Source='../../Images/CoinsStackedDeny.gif' Height='100'  Width='100'> </Image></InlineUIContainer> 
 <LineBreak/><LineBreak/>Click to allow him to join:
 <LineBreak/><LineBreak/><InlineUIContainer><Image Name='HireLocalGuide' Source='../../Images/CoinsStacked.gif' Height='100'  Width='100'> </Image></InlineUIContainer> "

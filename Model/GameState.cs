@@ -2230,6 +2230,9 @@ namespace BarbarianPrince
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
                break;
+            case GameAction.UpdateUndo:
+               UndoCommand(ref gi, ref action);
+               break;
             case GameAction.EndGameClose:
                gi.GamePhase = GamePhase.EndGame;
                break;
@@ -12344,6 +12347,7 @@ namespace BarbarianPrince
                      dieRoll += 1;
                   if (4 < gi.WitAndWile)
                      dieRoll += 1;
+                  //dieRoll = 10; // <cgs> TEST
                   if (true == gi.HalflingTowns.Contains(princeTerritory))
                   {
                      if ( (true == gi.KilledLocations.Contains(princeTerritory)) || (true == gi.EscapedLocations.Contains(princeTerritory)) )
