@@ -856,6 +856,8 @@ namespace BarbarianPrince
                {
                   if (20 == colNum)
                      break;
+                  if (1 == rowNum)
+                     break;
                   isColNumEven = (0 == colNum % 2);
                   if (false == isColNumEven)
                   {
@@ -870,6 +872,8 @@ namespace BarbarianPrince
                for (int i = 0; i < range; ++i)
                {
                   if (20 == colNum)
+                     break;
+                  if (23 == rowNum)
                      break;
                   isColNumEven = (0 == colNum % 2);
                   if (true == isColNumEven)
@@ -893,6 +897,8 @@ namespace BarbarianPrince
                {
                   if (1 == colNum)
                      break;
+                  if (23 == rowNum)
+                     break;
                   isColNumEven = (0 == colNum % 2);
                   if (true == isColNumEven)
                   {
@@ -907,6 +913,8 @@ namespace BarbarianPrince
                for (int i = 0; i < range; ++i)
                {
                   if (1 == colNum)
+                     break;
+                  if (1 == rowNum)
                      break;
                   isColNumEven = (0 == colNum % 2);
                   if (false == isColNumEven)
@@ -926,7 +934,7 @@ namespace BarbarianPrince
          ITerritory selected = Territory.theTerritories.Find(hex); // Find the territory of this random index
          if (null == selected)
          {
-            Logger.Log(LogEnum.LE_ERROR, "FindRandomHexRangeDirectionAndRange(): selected=null for " + hex);
+            Logger.Log(LogEnum.LE_ERROR, "FindRandomHexRangeDirectionAndRange(): selected=null for " + hex + " starting=" + gi.Prince.Territory.Name + " direction=" + direction.ToString() + " range=" + range.ToString());
             return null;
          }
          return selected;
@@ -3334,7 +3342,7 @@ namespace BarbarianPrince
                {
                   gi.AtRiskMounts.Clear();
                   action = GameAction.UpdateEventViewerActive;
-                  gi.EventAfterRedistribute = gi.EventActive; // encounter this event after high pass check
+                  gi.EventAfterRedistribute = gi.EventActive; // encounter this event after risk mount check
                   gi.EventDisplayed = gi.EventActive = "e095b";
                }
                else if (false == SetSubstitutionEvent(gi, princeTerritory))           // GameStateTravel.PerformAction()   - TravelShowLostEncounter
@@ -5126,6 +5134,7 @@ namespace BarbarianPrince
                         gi.Prince.Movement = 1;
                      }
                   }
+                  gi.EventAfterRedistribute = "";
                }
                else if( "e078" == gi.EventAfterRedistribute )
                {
@@ -5145,6 +5154,16 @@ namespace BarbarianPrince
                      returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
+                  gi.EventAfterRedistribute = "";
+               }
+               else if ("e121" == gi.EventAfterRedistribute)
+               {
+                  if (false == EncounterEnd(gi, ref action))
+                  {
+                     returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
+                  gi.EventAfterRedistribute = "";
                }
                else
                {
@@ -5510,6 +5529,9 @@ namespace BarbarianPrince
             case GameAction.E109PegasusCapture:
                break;
             case GameAction.E121SunStroke:
+               gi.EventAfterRedistribute = gi.EventStart = gi.EventDisplayed = gi.EventActive = "e121";
+               gi.DieRollAction = GameAction.DieRollActionNone;
+               break;
             case GameAction.E121SunStrokeEnd:
                break;
             case GameAction.E122RaftingEndsForDay:
@@ -12347,7 +12369,6 @@ namespace BarbarianPrince
                      dieRoll += 1;
                   if (4 < gi.WitAndWile)
                      dieRoll += 1;
-                  //dieRoll = 10; // <cgs> TEST
                   if (true == gi.HalflingTowns.Contains(princeTerritory))
                   {
                      if ( (true == gi.KilledLocations.Contains(princeTerritory)) || (true == gi.EscapedLocations.Contains(princeTerritory)) )

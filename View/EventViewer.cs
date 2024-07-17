@@ -3871,6 +3871,11 @@ namespace BarbarianPrince
             outAction = GameAction.CampfireTrueLoveCheck;
          else
             outAction = GameAction.CampfireLoadTransport;
+         StringBuilder sb11 = new StringBuilder("     ######ShowResultsLodging() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          return true;
       }
@@ -3888,7 +3893,6 @@ namespace BarbarianPrince
       public bool ShowTransportAfterRedistribute()
       {
          GameAction outAction = GameAction.TransportRedistributeEnd;
-         myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          StringBuilder sb11 = new StringBuilder("     ######ShowTransportAfterRedistribute() :");
          sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
          sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
@@ -3907,11 +3911,21 @@ namespace BarbarianPrince
                outAction = GameAction.E123BlackKnightCombatEnd;
             else
                outAction = GameAction.EncounterEscape;
+            StringBuilder sb11 = new StringBuilder("     ######ShowResultsCombat() :");
+            sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+            sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+            sb11.Append(" a="); sb11.Append(outAction.ToString());
+            Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
             myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          }
          else
          {
             outAction = GameAction.EncounterLootStart;
+            StringBuilder sb11 = new StringBuilder("     ######ShowResultsCombat() :");
+            sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+            sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+            sb11.Append(" a="); sb11.Append(outAction.ToString());
+            Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
             myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          }
          return true;
@@ -3919,12 +3933,22 @@ namespace BarbarianPrince
       public bool ShowE010DisgustCheck()
       {
          GameAction outAction = GameAction.CampfireWakeup;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE010DisgustCheck() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
       public bool ShowMarkOfCainResult()
       {
          GameAction outAction = GameAction.E018MarkOfCainEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowMarkOfCainResult() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
@@ -3935,6 +3959,11 @@ namespace BarbarianPrince
             outAction = GameAction.EncounterLootStart;
          else
             outAction = GameAction.EncounterEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE39ChestOpeningResult() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
@@ -3945,12 +3974,22 @@ namespace BarbarianPrince
             outAction = GameAction.EncounterLootStart;
          else
             outAction = GameAction.EncounterEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE040ChestOpeningResult() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, dieRoll);
          return true;
       }
       public bool ShowE060ReleasePrisonerResult()
       {
          GameAction outAction = GameAction.EncounterEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE060ReleasePrisonerResult() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          return true;
       }
@@ -3963,6 +4002,11 @@ namespace BarbarianPrince
             outAction = GameAction.E073WitchCombat;
          else
             outAction = GameAction.EncounterEscape;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE073WitchSpellResult() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
@@ -3975,24 +4019,44 @@ namespace BarbarianPrince
             outAction = GameAction.E079HeavyRainsRedistribute;
          else
             outAction = GameAction.E079HeavyRainsContinueTravel;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE079ColdCheckResult() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
       public bool ShowE085FallingResult()
       {
          GameAction outAction = GameAction.EncounterEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE085FallingResult() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
       public bool ShowE088FallingRocksResult()
       {
          GameAction outAction = GameAction.EncounterEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE088FallingRocksResult() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
       public bool ShowE090QuicksandResult()
       {
          GameAction outAction = GameAction.EncounterEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE090QuicksandResult() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
@@ -4003,36 +4067,66 @@ namespace BarbarianPrince
             outAction = GameAction.E095MountAtRiskEnd;
          else
             outAction = GameAction.EncounterEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE095MountCheckResult() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
       public bool ShowE096MountDieCheckResult()
       {
          GameAction outAction = GameAction.CampfireMountDieCheckEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE096MountDieCheckResult() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
       public bool ShowE097FleshRotResult()
       {
          GameAction outAction = GameAction.E097FleshRotEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE097FleshRotResult() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
       public bool ShowE106OvercastLostResult()
       {
          GameAction outAction = GameAction.E106OvercastLostEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE106OvercastLostResult() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
       public bool ShowE107FalconCheckResult()
       {
          GameAction outAction = GameAction.CampfireFalconCheckEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE107FalconCheckResult() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
       public bool ShowE109PegasusCapture()
       {
          GameAction outAction = GameAction.EncounterEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE109PegasusCapture() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
@@ -4041,6 +4135,11 @@ namespace BarbarianPrince
          GameAction outAction = GameAction.EncounterEnd;
          if( false == isAttackRepelled )
             outAction = GameAction.E111StormDemonRepelFail;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE111StormDemonRepelResults() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
@@ -4051,12 +4150,22 @@ namespace BarbarianPrince
             outAction = GameAction.E121SunStrokeEnd;
          else
             outAction = GameAction.EncounterEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE121SunStrokeCheckResult() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
       public bool ShowE123DisgustCheck()
       {
          GameAction outAction = GameAction.E123BlackKnightRefuseEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE123DisgustCheck() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
@@ -4069,24 +4178,44 @@ namespace BarbarianPrince
             outAction = GameAction.E126RaftInCurrentLostRaft;
          else
             outAction = GameAction.E126RaftInCurrentEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE126RaftInCurrentResult() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
       public bool ShowE212TempleCurse()
       {
          GameAction outAction = GameAction.EncounterEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE212TempleCurse() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
       public bool ShowTombOpeningResult()
       {
          GameAction outAction = GameAction.EncounterEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowTombOpeningResult() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
       public bool ShowRetreivalResult()
       {
          GameAction outAction = GameAction.E043SmallAltarEnd;
+         StringBuilder sb11 = new StringBuilder("     ######E043SmallAltarEnd() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          return true;
       }
@@ -4099,6 +4228,11 @@ namespace BarbarianPrince
             outAction = GameAction.E044HighAltarClue;
          else
             outAction = GameAction.E044HighAltarEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowInvocationResult() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          return true;
       }
@@ -4106,13 +4240,14 @@ namespace BarbarianPrince
       {
          GameAction outAction = GameAction.Error;
          if (true == isPrinceAffected)
-         {
             outAction = GameAction.E133PlaguePrince;
-         }
          else
-         {
             outAction = GameAction.E133PlagueParty;
-         }
+         StringBuilder sb11 = new StringBuilder("     ######ShowSearchRuinsPlague() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          return true;
       }
@@ -4126,12 +4261,22 @@ namespace BarbarianPrince
             else
                outAction = GameAction.E134ShakyWallsEnd;
          }
+         StringBuilder sb11 = new StringBuilder("     ######ShowSearchRuinsShakey() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          return true;
       }
       public bool ShowPlagueDust()
       {
          GameAction outAction = GameAction.CampfirePlagueDustEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowPlagueDust() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          myGameInstance.IsGridActive = false;  // ShowPlagueDust() - Can show active event button in status bar
          return true;
@@ -4139,6 +4284,11 @@ namespace BarbarianPrince
       public bool ShowCharismaTalismanDestroy()
       {
          GameAction outAction = GameAction.CampfireTalismanDestroyEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowCharismaTalismanDestroy() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          myGameInstance.IsGridActive = false;  // ShowCharismaTalismanDestroy() - Can show active event button in status bar
          return true;
@@ -4146,6 +4296,11 @@ namespace BarbarianPrince
       public bool ShowPrisonBreakResults()
       {
          GameAction outAction = GameAction.E203EscapeFromPrisonEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowPrisonBreakResults() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          myGameInstance.IsGridActive = false;  // ShowPrisonBreakResults() - Can show active event button in status bar
          return true;
@@ -4157,6 +4312,11 @@ namespace BarbarianPrince
             outAction = GameAction.E082SpectreMagicEnd;
          else if ("e091" == myGameInstance.EventStart)
             outAction = GameAction.E091PoisonSnakeEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowFindVictimResults() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          myGameInstance.IsGridActive = false;  // ShowFindVictimResults() - Can show active event button in status bar
          return true;
@@ -4164,6 +4324,11 @@ namespace BarbarianPrince
       public bool ShowTrueLoveCheck()
       {
          GameAction outAction = GameAction.CampfireLoadTransport;
+         StringBuilder sb11 = new StringBuilder("     ######ShowTrueLoveCheck() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          return true;
       }
