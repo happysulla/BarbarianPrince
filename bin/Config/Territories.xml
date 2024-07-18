@@ -6557,7 +6557,6 @@
   </Territory>
   <Territory value="1219">
     <type value="Forest" />
-
     <point X="490.909090909091" Y="806.923636363636" />
     <isTown value="False" />
     <isCastle value="False" />
@@ -7119,6 +7118,7 @@
     <river value="1318" />
     <river value="1218" />
     <adjacent value="1219" />
+    <adjacent value="1318" />
     <adjacent value="1320" />
     <adjacent value="1419" />
     <adjacent value="1418" />

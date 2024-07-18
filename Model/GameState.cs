@@ -268,7 +268,11 @@ namespace BarbarianPrince
       protected bool SetCampfireEncounterState(IGameInstance gi, ref GameAction action)
       {
          // Characters joining party may have knowledge of other locations
-         if (true == gi.IsWizardJoiningParty)
+         if(false == gi.IsInMapItems("Wizard")) // Wizard still needs to be in party to provide advice
+            gi.IsWizardJoiningParty = false;
+         if (false == gi.IsInMapItems("DwarfWarrior")) // Dwarf Warrior still needs to be in party to provide advice
+            gi.IsDwarfWarriorJoiningParty = false;
+         if ( true == gi.IsWizardJoiningParty )
          {
             action = GameAction.UpdateEventViewerActive;
             gi.IsWizardJoiningParty = false;
@@ -6394,15 +6398,17 @@ namespace BarbarianPrince
                break;
             case GameAction.E163SlaveGirlSelected:
                IMapItem slavegirl = gi.RemoveFedSlaveGirl();
-               if (null == null)
+               if (null == slavegirl)
                {
                   returnStatus = "Invalid State - Slave Girl not found in SpecialItems";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                }
-               //-----------------------------------------------
-               gi.EncounteredMembers.Add(slavegirl);
-               gi.IsSlaveGirlActive = true;
-               gi.DieRollAction = GameAction.E182CharmGiftRoll;
+               else
+               {
+                  gi.EncounteredMembers.Add(slavegirl);
+                  gi.IsSlaveGirlActive = true;
+                  gi.DieRollAction = GameAction.E182CharmGiftRoll;
+               }
                break;
             case GameAction.E182CharmGiftSelected:
                if (false == gi.RemoveSpecialItem(SpecialEnum.GiftOfCharm))
@@ -8188,7 +8194,6 @@ namespace BarbarianPrince
                break;
             case "e112": // eagles - EncounterStart()
                gi.EncounteredMembers.Clear();
-               ++dieRoll;
                gi.DieResults["e112"][0] = dieRoll;
                for (int i = 0; i < dieRoll; ++i)
                {
@@ -11594,7 +11599,6 @@ namespace BarbarianPrince
                }
                break;
             case "e130a": // talk to high lord 
-               dieRoll = 3;
                switch (dieRoll)
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e327"; gi.DieRollAction = GameAction.EncounterRoll; break; // pass dummies
@@ -13937,7 +13941,7 @@ namespace BarbarianPrince
                }
                else
                {
-                  Logger.Log(LogEnum.LE_ERROR, "EncounterEnd(): invalid state t=" + princeTerritory.Name + " gi.SunriseChoice=" + gi.SunriseChoice.ToString());
+                  Logger.Log(LogEnum.LE_ERROR, "EncounterEnd(): invalid state princeTerritory=" + princeTerritory.Name + " gi.SunriseChoice=" + gi.SunriseChoice.ToString());
                   return false;
                }
                gi.SunriseChoice = gi.GamePhase = GamePhase.Encounter;

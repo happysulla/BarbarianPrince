@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 
 namespace BarbarianPrince
@@ -405,6 +406,33 @@ namespace BarbarianPrince
       E340PayLooters,
       ExitGame,
       Error
+   };
+   [Serializable]
+   public struct HistoryHex
+   {
+      public String myHexName;
+      public string myEventName;
+      public GameAction myAction;
+      public List<String> myParty;
+      public List<String> myKills;
+      public HistoryHex(string hexName, string eventName, GameAction action, IGameInstance gi)
+      {
+         myHexName = hexName;
+         myEventName = eventName;
+         myAction = action;
+         myParty = new List<String>();
+         myKills = new List<String>();
+         const string pattern = @"\d+$";
+         foreach (IMapItem mi in gi.PartyMembers)
+         {
+            if (true == mi.Name.Contains("Prince"))
+            {
+               continue;
+            }
+            string miName = Regex.Replace(mi.Name, pattern, "");
+            myParty.Add(miName);
+         }
+      }
    };
    public interface IGameEngine
    {

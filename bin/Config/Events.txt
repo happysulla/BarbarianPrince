@@ -591,7 +591,7 @@ e014a	"<Bold>e014a Hostile Reaver Clan Friendly Approach</Bold>
 <LineBreak/><LineBreak/>If you outnumber the clan, see
  <InlineUIContainer><Button Content='e014b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/>
-                                       <InlineUIContainer><Image Source='../../Images/Reaver.gif' Name='Reaver'  Height='300' Width='150'></Image></InlineUIContainer>"
+                                              <InlineUIContainer><Image Source='../../Images/Reaver.gif' Name='Reaver'  Height='300' Width='150'></Image></InlineUIContainer>"
 e014b	"<Bold>e014b Hostile Reaver Clan Barred House</Bold>
 <LineBreak/><LineBreak/>Since your party outnumbers the clan, they will bar the house and bid you pass-on. You can then either pass-on or make inquiries. If you select the latter, see
  <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
@@ -2991,7 +2991,7 @@ e128c	"<Bold>e128c Merchant with Food for Sale</Bold>
 <LineBreak/><LineBreak/>
                                           <InlineUIContainer><Image Source='../../Images/Merchant.gif' Name='EncounterEnd' Height='200'  Width='125'></Image></InlineUIContainer>"
 e128d	"<Bold>e128d Merchant OutWits You in Game of Chance</Bold>
-<LineBreak/><LineBreak/>If the roll exceeds wit and wiles, you spend up to 10gp needlessly. 'Have you ever heard of Plato, Aristotle, Socrates? Morons!'
+<LineBreak/><LineBreak/>If the roll exceeds wit and wiles, you spend up to 10gp needlessly. ""Have you ever heard of Plato, Aristotle, Socrates? Morons!""
 <LineBreak/><LineBreak/> Roll one die:  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e128e	"<Bold>e128e Merchant Selling Healing Potion Sale</Bold>
 <LineBreak/><LineBreak/>Merchant has healing potions for sale. See
@@ -3185,7 +3185,7 @@ e135	"<Bold>e135 Broken Columns</Bold>
 <InlineUIContainer><Button Content='e046' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5<LineBreak/>
 <InlineUIContainer><Button Content='e047' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6
 <LineBreak/>
-          <InlineUIContainer><Image Source='../../Images/BrokenColumns.gif' Height='250'  Width='500'> </Image></InlineUIContainer>"
+          <InlineUIContainer><Image Name='BrokenColumns' Source='../../Images/BrokenColumns.gif' Height='250'  Width='500'> </Image></InlineUIContainer>"
 e135a	"<Bold>e135a Broken Columns with Unknown Inscription</Bold>
 <LineBreak/><LineBreak/>Along a pallisade of broken columns, you find an altar with an ancient inscription. Since your party does not includes a magician, wizard, witch, priest, or monk; the incription cannot be desciphered. There is no event. Click anywhere to continue."
 e136	"<Bold>e136 Hidden Treasures</Bold>
@@ -4805,7 +4805,7 @@ e342a	"<Bold>e342a More Talking</Bold> <InlineUIContainer><Button Content='e341'
 <LineBreak/><LineBreak/>
 Characters reveal themself gradually. More talking is required to review their true nature.
 <LineBreak/><LineBreak/>
-<InlineUIContainer><Button Content='Talk ' FontFamily='Courier New'  FontSize='12' Name='e341'></Button></InlineUIContainer> further or<LineBreak/>
+<InlineUIContainer><Button Content='Talk ' FontFamily='Courier New'  FontSize='12' Name=""e341""></Button></InlineUIContainer> further or<LineBreak/>
 <InlineUIContainer><Button Content='Pass ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>  with dignity."
 e343	"<Bold>e343 Victim Selection</Bold>
 <LineBreak/><LineBreak/>One character in your party is the victim or target of an attack. If your party is just you, then you are the target.

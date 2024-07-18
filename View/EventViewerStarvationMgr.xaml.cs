@@ -982,7 +982,12 @@ namespace BarbarianPrince
          }
          else
          {
-            if ((false == myGameInstance.IsMagicianProvideGift) || (StarveEnum.SE_MAGICIAN_GIFT_SHOW == myState))
+            if ((true == myGameInstance.IsMagicianProvideGift) && (StarveEnum.SE_MAGICIAN_GIFT_SHOW != myState) )
+            {
+               Image img2 = new Image { Name = "MagicianGift", Source = MapItem.theMapImages.GetBitmapImage("Gift"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+               myStackPanelAssignable.Children.Add(img2);
+            }
+            else
             {
                if (true == myGameInstance.IsMinstrelPlaying)
                {
@@ -999,11 +1004,6 @@ namespace BarbarianPrince
                   ImageBehavior.SetAnimatedSource(img2, bmi2);
                   myStackPanelAssignable.Children.Add(img2);
                }
-            }
-            else
-            {
-               Image img2 = new Image { Name = "MagicianGift", Source = MapItem.theMapImages.GetBitmapImage("Gift"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
-               myStackPanelAssignable.Children.Add(img2);
             }
          }
       }
