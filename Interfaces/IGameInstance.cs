@@ -23,7 +23,7 @@ namespace BarbarianPrince
       GamePhase SunriseChoice { set; get; } // This is the action chosen by the user for the day
       GameAction DieRollAction { set; get; } // Used in EventViewerPanel when die roll happens to indicate next event for die roll
       //----------------------------------------------
-      ITerritory ActiveHex { set; get; }
+      ITerritory TargetHex { set; get; } // Used to highlight another hex (find closest castle or find letter location)
       ITerritory NewHex { set; get; } // this is hex moved to if not lost
       //----------------------------------------------
       List<int> CapturedWealthCodes { set; get; }
@@ -152,8 +152,8 @@ namespace BarbarianPrince
       //----------------------------------------------
       IMapItemMove PreviousMapItemMove { set; get; }
       IMapItemMoves MapItemMoves { set; get; }
+      List<EnteredHex> EnteredHexes { get; }
       //----------------------------------------------
-      List<ITerritory> EnteredTerritories { get; }
       List<ITerritory> DwarfAdviceLocations { get; } // e006
       List<ITerritory> WizardAdviceLocations { get; } // e025
       List<ITerritory> AlcoveOfSendings { get; }  // e042
@@ -187,7 +187,6 @@ namespace BarbarianPrince
       IStacks Stacks { set; get; }
       List<IUnitTest> UnitTests { get; }
       //----------------------------------------------
-      void Clone(IGameInstance gi);
       bool IsInTown(ITerritory t);
       bool IsInTemple(ITerritory t);
       bool IsInCastle(ITerritory t);

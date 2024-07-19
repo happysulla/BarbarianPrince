@@ -1028,10 +1028,10 @@ namespace BarbarianPrince
             }
          }
          //-------------------------------------------------------
-         if (null != gi.ActiveHex)
+         if (null != gi.TargetHex)
          {
-            UpdateCanvasHexToShowPolygon(gi.ActiveHex);
-            gi.ActiveHex = null;
+            UpdateCanvasHexToShowPolygon(gi.TargetHex);
+            gi.TargetHex = null;
          }
          //-------------------------------------------------------
          try
@@ -1296,17 +1296,23 @@ namespace BarbarianPrince
          myTerritorySelected = null;
          if (true == gi.IsImpassable) // e089 - must return to hex entered
          {
-            int tCount = gi.EnteredTerritories.Count;
-            if (tCount < 2)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "UpdateCanvasHexTravelToShowPolygons(): Invalid state with tCount=" + tCount.ToString());
-               return false;
+            ITerritory selectedTerritory = null;
+            for (int i = gi.EnteredHexes.Count - 1; -1 < i; --i)  // get previous territory
+               {
+               if (gi.Prince.Territory.Name != gi.EnteredHexes[i].myHexName)
+               {
+                  ITerritory t = Territory.theTerritories.Find(gi.EnteredHexes[i].myHexName);
+                  if (null == t)
+                     Logger.Log(LogEnum.LE_ERROR, "GetPreviousHex(): theTerritories.Find() returned null for n=" + gi.EnteredHexes[i].myHexName);
+                  else
+                     selectedTerritory = gi.Prince.Territory;
+                  break;
+               }
             }
-            ITerritory t = gi.EnteredTerritories[tCount - 2];
             PointCollection points = new PointCollection();
-            foreach (IMapPoint mp1 in t.Points)
+            foreach (IMapPoint mp1 in selectedTerritory.Points)
                points.Add(new System.Windows.Point(mp1.X, mp1.Y));
-            Polygon aPolygon = new Polygon { Fill = Utilities.theBrushRegion, Points = points, Tag = t.ToString() };
+            Polygon aPolygon = new Polygon { Fill = Utilities.theBrushRegion, Points = points, Tag = selectedTerritory.ToString() };
             aPolygon.MouseDown += MouseDownPolygonTravel;
             myPolygons.Add(aPolygon);
             myCanvas.Children.Add(aPolygon);
@@ -1739,7 +1745,7 @@ namespace BarbarianPrince
          //-------------------------------------
          if ((true == myGameInstance.IsInCastle(letterLocation)) || (true == myGameInstance.IsInTemple(letterLocation)))
          {
-            myGameInstance.ActiveHex = letterLocation;
+            myGameInstance.TargetHex = letterLocation;
             myGameInstance.LetterOfRecommendations.Add(letterLocation);
             if (false == myGameInstance.ForbiddenAudiences.UpdateLetterLocation(letterLocation))
             {

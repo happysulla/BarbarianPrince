@@ -408,27 +408,23 @@ namespace BarbarianPrince
       Error
    };
    [Serializable]
-   public struct HistoryHex
+   public struct EnteredHex
    {
       public String myHexName;
       public string myEventName;
-      public GameAction myAction;
       public List<String> myParty;
       public List<String> myKills;
-      public HistoryHex(string hexName, string eventName, GameAction action, IGameInstance gi)
+      public EnteredHex(IGameInstance gi)
       {
-         myHexName = hexName;
-         myEventName = eventName;
-         myAction = action;
+         myHexName = gi.NewHex.Name;
+         myEventName = gi.EventActive;
          myParty = new List<String>();
          myKills = new List<String>();
          const string pattern = @"\d+$";
          foreach (IMapItem mi in gi.PartyMembers)
          {
             if (true == mi.Name.Contains("Prince"))
-            {
                continue;
-            }
             string miName = Regex.Replace(mi.Name, pattern, "");
             myParty.Add(miName);
          }

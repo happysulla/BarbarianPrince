@@ -2502,7 +2502,7 @@ namespace BarbarianPrince
             case "e157":
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new Run("Letter of Recommendation for " + ConvertToStructureName(myGameInstance.ActiveHex)));
+               myTextBlock.Inlines.Add(new Run("Letter of Recommendation for " + ConvertToStructureName(myGameInstance.TargetHex)));
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new Run("                                     "));
@@ -2887,6 +2887,13 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new Run("                                            "));
                   Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100, Name = "SeekNewsNext" };
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+               }
+               break;
+            case "209h":
+               if (Utilities.NO_RESULT < myGameInstance.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
                break;
             case "e209g": // Buy valuable information
@@ -4566,6 +4573,13 @@ namespace BarbarianPrince
                               myGameInstance.DieRollAction = GameAction.EncounterRoll;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               break;
+                           case "BuyInfoEnd":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e209h"][0])
+                              {
+                                 action = GameAction.E160GBrokenLove;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
                            case "BuyPegasus":
                               action = GameAction.E128aBuyPegasus;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);

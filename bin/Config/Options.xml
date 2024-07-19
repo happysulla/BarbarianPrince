@@ -58,7 +58,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="Mercenary">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Merchant">
     <IsEnabled value="False" />
@@ -67,7 +67,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="Monk">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="PorterSlave">
     <IsEnabled value="False" />
@@ -76,7 +76,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="Wizard">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="PartyMounted">
     <IsEnabled value="True" />
@@ -85,7 +85,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomHex">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="RandomTown">
     <IsEnabled value="False" />
@@ -121,7 +121,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="0418">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="0410">
     <IsEnabled value="False" />
@@ -196,7 +196,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="ForceEvent">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ForceCrossEvent">
     <IsEnabled value="False" />
