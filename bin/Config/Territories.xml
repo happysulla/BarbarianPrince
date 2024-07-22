@@ -9206,6 +9206,7 @@
     <isTemple value="False" />
     <isOasis value="False" />
     <DownRiver value="1814" />
+     <river value="1815" />
     <adjacent value="1615" />
     <adjacent value="1716" />
     <adjacent value="1815" />
@@ -9233,6 +9234,7 @@
     <isTemple value="False" />
     <isOasis value="False" />
     <DownRiver value="1715" />
+     <river value="1815" />
     <adjacent value="1616" />
     <adjacent value="1717" />
     <adjacent value="1816" />
@@ -9712,6 +9714,7 @@
     <isTemple value="False" />
     <isOasis value="False" />
     <DownRiver value="1913" />
+    <river value="1914" />
     <road value="1812" />
     <road value="1714" />
     <adjacent value="1713" />
@@ -9742,6 +9745,9 @@
     <isTemple value="False" />
     <isOasis value="False" />
     <DownRiver value="1813" />
+     <river value="1914" />
+     <river value="1915" />
+     <river value="1815" />
     <adjacent value="1715" />
     <adjacent value="1815" />
     <adjacent value="1915" />
@@ -9772,6 +9778,9 @@
     <isTemple value="False" />
     <isOasis value="False" />
     <DownRiver value="1915" />
+     <river value="1814" />
+     <river value="1715" />
+     <river value="1716" />
     <adjacent value="1715" />
     <adjacent value="1814" />
     <adjacent value="1915" />
@@ -9800,6 +9809,9 @@
     <isTemple value="False" />
     <isOasis value="False" />
     <DownRiver value="" />
+          <river value="1814" />
+     <river value="1715" />
+     <river value="1716" />
     <adjacent value="1817" />
     <adjacent value="1717" />
     <adjacent value="1716" />
@@ -10227,6 +10239,7 @@
     <isTemple value="False" />
     <isOasis value="False" />
     <DownRiver value="2011" />
+    <river value="2012" />
     <road value="1812" />
     <road value="1911" />
     <adjacent value="1812" />
@@ -10255,6 +10268,9 @@
     <isTemple value="False" />
     <isOasis value="False" />
     <DownRiver value="1912" />
+    <river value="1914" />
+    <river value="2012" />
+    <river value="2013" />
     <adjacent value="1813" />
     <adjacent value="1914" />
     <adjacent value="2013" />
@@ -10284,6 +10300,9 @@
     <isTemple value="False" />
     <isOasis value="False" />
     <DownRiver value="2013" />
+    <river value="1913" />
+    <river value="1813" />
+    <river value="1814" />
     <adjacent value="1814" />
     <adjacent value="1915" />
     <adjacent value="2014" />
@@ -10314,6 +10333,7 @@
     <isTemple value="False" />
     <isOasis value="False" />
     <DownRiver value="1914" />
+     <river value="1814" />
     <adjacent value="1815" />
     <adjacent value="1916" />
     <adjacent value="2015" />
@@ -10744,6 +10764,7 @@
     <isTemple value="False" />
     <isOasis value="False" />
     <DownRiver value="2011" />
+    <river value="2012" />
     <adjacent value="2010" />
     <adjacent value="1911" />
     <adjacent value="1912" />
@@ -10768,6 +10789,9 @@
     <isTemple value="False" />
     <isOasis value="False" />
     <DownRiver value="2012" />
+    <river value="2011" />
+    <river value="1912" />
+    <river value="1913" />
     <adjacent value="2011" />
     <adjacent value="1912" />
     <adjacent value="1913" />
@@ -10794,6 +10818,7 @@
     <isTemple value="False" />
     <isOasis value="False" />
     <DownRiver value="2012" />
+    <river value="1913" />
     <adjacent value="2012" />
     <adjacent value="1913" />
     <adjacent value="1914" />

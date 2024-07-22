@@ -29,7 +29,7 @@ namespace BarbarianPrince
       public static Double theEllipseOffset = theEllipseDiameter / 2.0;
       private int myIndexRaft = 0;
       private int myIndexDownRiver = 0;
-      private readonly SolidColorBrush mySolidColorBrushDeepSkyBlue = new SolidColorBrush { Color = Colors.DeepSkyBlue };
+      private readonly SolidColorBrush mySolidColorBrushWaterBlue = new SolidColorBrush { Color = Colors.DeepSkyBlue };
       //-----------------------------------------
       private int myIndexName = 0;
       public bool CtorError { get; } = false;
@@ -361,10 +361,7 @@ namespace BarbarianPrince
       //--------------------------------------------------------------------
       public void CreateEllipse(ITerritory territory)
       {
-         SolidColorBrush aSolidColorBrush1 = new SolidColorBrush
-         {
-            Color = Color.FromArgb(100, 255, 255, 0)
-         };
+         SolidColorBrush aSolidColorBrush1 = new SolidColorBrush{ Color = Color.FromArgb(100, 255, 255, 0) };
          Ellipse aEllipse = new Ellipse
          {
             Tag = Utilities.RemoveSpaces(territory.ToString()),
@@ -1021,7 +1018,7 @@ namespace BarbarianPrince
                         }
                      }  // end while
                   } // end if
-                  Polyline polyline = new Polyline { Points = points, Stroke = mySolidColorBrushDeepSkyBlue, StrokeThickness = 2, Visibility = Visibility.Visible };
+                  Polyline polyline = new Polyline { Points = points, Stroke = mySolidColorBrushWaterBlue, StrokeThickness = 2, Visibility = Visibility.Visible };
                   myRivers[name] = polyline;
                } // end if
             } // end while
@@ -1066,7 +1063,7 @@ namespace BarbarianPrince
                   points.Add(two);
                   points.Add(three);
                   //---------------------------------------
-                  Polygon triangle = new Polygon() { Name = "River", Points = points, Stroke = mySolidColorBrushDeepSkyBlue, Fill = mySolidColorBrushDeepSkyBlue, Visibility = Visibility.Visible };
+                  Polygon triangle = new Polygon() { Name = "River", Points = points, Stroke = mySolidColorBrushWaterBlue, Fill = mySolidColorBrushWaterBlue, Visibility = Visibility.Visible };
                   double rotateAngle = 0.0;
                   if (Math.Abs(p.Y - Y1) < 10.0)
                   {

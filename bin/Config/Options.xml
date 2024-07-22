@@ -55,7 +55,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="Magician">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Mercenary">
     <IsEnabled value="True" />
@@ -79,13 +79,13 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="PartyMounted">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="PartyAirborne">
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomHex">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="RandomTown">
     <IsEnabled value="False" />
@@ -121,7 +121,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="0418">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="0410">
     <IsEnabled value="False" />
@@ -151,10 +151,10 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="EasyMonsters">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="EasiestMonsters">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="AutoLostDecrease">
     <IsEnabled value="True" />
@@ -196,7 +196,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="ForceEvent">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="ForceCrossEvent">
     <IsEnabled value="False" />

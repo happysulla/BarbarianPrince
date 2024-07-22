@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
 
@@ -28,7 +29,7 @@ namespace BarbarianPrince
       RE_RAFT_SHOWN,               // Rafting option show to user
       RE_RAFT_CHOSEN,              // Rafting option chosen by user
       RE_RAFT_ENCOUNTER,           // pass checked to cross
-      RE_RAFT_ENDS_TODAY                 // Finished rafting for today
+      RE_RAFT_ENDS_TODAY           // Finished rafting for today
    };
    [Serializable]
    public enum SpecialEnum
@@ -406,29 +407,6 @@ namespace BarbarianPrince
       E340PayLooters,
       ExitGame,
       Error
-   };
-   [Serializable]
-   public struct EnteredHex
-   {
-      public String myHexName;
-      public string myEventName;
-      public List<String> myParty;
-      public List<String> myKills;
-      public EnteredHex(IGameInstance gi)
-      {
-         myHexName = gi.NewHex.Name;
-         myEventName = gi.EventActive;
-         myParty = new List<String>();
-         myKills = new List<String>();
-         const string pattern = @"\d+$";
-         foreach (IMapItem mi in gi.PartyMembers)
-         {
-            if (true == mi.Name.Contains("Prince"))
-               continue;
-            string miName = Regex.Replace(mi.Name, pattern, "");
-            myParty.Add(miName);
-         }
-      }
    };
    public interface IGameEngine
    {

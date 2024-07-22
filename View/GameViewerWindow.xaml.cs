@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -69,6 +70,8 @@ namespace BarbarianPrince
          public POINT maxPosition;
          public RECT normalPosition;
       }
+      private static Double theEllipseDiameter = 6.0;
+      private static Double theEllipseOffset = theEllipseDiameter / 2.0;
       //---------------------------------------------------------------------
       private readonly IGameEngine myGameEngine = null;
       private IGameInstance myGameInstance = null;
@@ -84,12 +87,16 @@ namespace BarbarianPrince
       private readonly SolidColorBrush mySolidColorBrushBlack = new SolidColorBrush();
       private readonly SolidColorBrush mySolidColorBrushGray = new SolidColorBrush();
       private readonly SolidColorBrush mySolidColorBrushGreen = new SolidColorBrush();
+      private readonly SolidColorBrush mySolidColorBrushStart = new SolidColorBrush() { Color = Colors.Gold };
       private readonly SolidColorBrush mySolidColorBrushRed = new SolidColorBrush();
       private readonly SolidColorBrush mySolidColorBrushPurple = new SolidColorBrush();
       private readonly SolidColorBrush mySolidColorBrushRosyBrown = new SolidColorBrush();
       private readonly SolidColorBrush mySolidColorBrushOrange = new SolidColorBrush();
-      private readonly SolidColorBrush mySolidColorBrushDeepSkyBlue = new SolidColorBrush { Color = Colors.DeepSkyBlue };
+      private readonly SolidColorBrush mySolidColorBrushRest = new SolidColorBrush { Color = Colors.White };
+      private readonly SolidColorBrush mySolidColorBrushSkyBlue = new SolidColorBrush { Color = Colors.LightBlue };
+      private readonly SolidColorBrush mySolidColorBrushWaterBlue = new SolidColorBrush { Color = Colors.DeepSkyBlue };
       //---------------------------------------------------------------------
+
       private readonly List<Button> myButtonMapItems = new List<Button>();
       private readonly SplashDialog mySplashScreen = null;
       private Button[] myButtonTimeTrackDays = new Button[7];
@@ -459,7 +466,7 @@ namespace BarbarianPrince
                         }
                      }  // end while
                   } // end if
-                  Polyline polyline = new Polyline { Points = points, Stroke = mySolidColorBrushDeepSkyBlue, StrokeThickness = 2, Visibility = Visibility.Visible };
+                  Polyline polyline = new Polyline { Points = points, Stroke = mySolidColorBrushWaterBlue, StrokeThickness = 2, Visibility = Visibility.Visible };
                   myRivers[name] = polyline;
                } // end if
             } // end while
@@ -473,6 +480,547 @@ namespace BarbarianPrince
             if (reader != null)
                reader.Close();
          }
+      }
+      public bool CreateEllipse(EnteredHex enteredHex, int ellipsesInHex)
+      {
+         ITerritory t = Territory.theTerritories.Find(enteredHex.HexName);
+         if( null == t )
+         {
+            Logger.Log(LogEnum.LE_ERROR, "CreateEllipse(): t=null for name=" + enteredHex.HexName);
+            return false;
+         }
+         //-----------------------------------------
+         Ellipse aEllipse = new Ellipse
+         {
+            Tag = Utilities.RemoveSpaces(t.ToString()),
+            Fill = mySolidColorBrushClear,
+            StrokeThickness = 1,
+            Stroke = mySolidColorBrushBlack,
+            Width = theEllipseDiameter,
+            Height = theEllipseDiameter
+         };
+
+         SolidColorBrush brush = mySolidColorBrushBlack;
+         switch (enteredHex.ColorAction)
+         {
+            case ColorActionEnum.CAE_START:
+               brush = mySolidColorBrushStart;
+               break;
+            case ColorActionEnum.CAE_REST:
+               brush = mySolidColorBrushRest;
+               break;
+            case ColorActionEnum.CAE_LOST:
+               brush = mySolidColorBrushRosyBrown;
+               break;
+            case ColorActionEnum.CAE_JAIL:
+               brush = mySolidColorBrushGray;
+               break;
+            case ColorActionEnum.CAE_TRAVEL:
+               brush = mySolidColorBrushGreen;
+               break;
+            case ColorActionEnum.CAE_TRAVEL_AIR:
+               brush = mySolidColorBrushSkyBlue;
+               break;
+            case ColorActionEnum.CAE_TRAVEL_RAFT:
+               brush = mySolidColorBrushWaterBlue;
+               break;
+            case ColorActionEnum.CAE_ESCAPE:
+               brush = mySolidColorBrushRed;
+               break;
+            case ColorActionEnum.CAE_FOLLOW:
+               brush = mySolidColorBrushRosyBrown;
+               break;
+            case ColorActionEnum.CAE_SEARCH:
+               brush = mySolidColorBrushOrange;
+               break;
+            case ColorActionEnum.CAE_STRUCTURE:
+               brush = mySolidColorBrushPurple;
+               break;
+            default:
+               break;
+         }
+         aEllipse.Stroke = brush;
+         if ( (true == enteredHex.IsEncounter) || (ColorActionEnum.CAE_START == enteredHex.ColorAction) )
+            aEllipse.Fill = brush;
+         //-----------------------------------------
+         double xOffset = 0.0;
+         double yOffset = 0.0;
+         GetEllispeOffsets(enteredHex, ellipsesInHex, out xOffset, out yOffset);
+         //-----------------------------------------
+         System.Windows.Point p = new System.Windows.Point(t.CenterPoint.X, t.CenterPoint.Y);
+         p.X -= theEllipseOffset + xOffset;
+         p.Y -= theEllipseOffset + yOffset;
+         Canvas.SetLeft(aEllipse, p.X);
+         Canvas.SetTop(aEllipse, p.Y);
+         myCanvas.Children.Add(aEllipse);
+         return true;
+      }
+      private void GetEllispeOffsets(EnteredHex enteredHex, int ellipsesInHex, out double xOffset, out double yOffset)
+      {
+         xOffset = 0.0; 
+         yOffset = 0.0; 
+         switch (ellipsesInHex)
+         {
+            case 0:
+               break;
+            case 1:
+               if (0 == enteredHex.Position)
+                  xOffset = -theEllipseDiameter;
+               else
+                  xOffset = +theEllipseDiameter;
+               break;
+            case 2:
+               if (0 == enteredHex.Position)
+                  xOffset = -1.5 * theEllipseDiameter;
+               else if (1 == enteredHex.Position)
+                  xOffset = 0.0;
+               else
+                  xOffset = +1.5 * theEllipseDiameter;
+               break;
+            case 3:
+               if (0 == enteredHex.Position)
+                  xOffset = -3.0 * theEllipseDiameter;
+               else if (1 == enteredHex.Position)
+                  xOffset = -1.0 * theEllipseDiameter;
+               else if (2 == enteredHex.Position)
+                  xOffset = +1.0 * theEllipseDiameter;
+               else
+                  xOffset = +3.0 * theEllipseDiameter;
+               break;
+            case 4:
+               if (0 == enteredHex.Position)
+                  yOffset = -theEllipseDiameter;
+               else if (1 == enteredHex.Position)
+                  xOffset = -2.0 * theEllipseDiameter;
+               else if (2 == enteredHex.Position)
+                  xOffset = -0.5 * theEllipseDiameter;
+               else if (3 == enteredHex.Position)
+                  xOffset = +1.0 * theEllipseDiameter;
+               else
+                  xOffset = +2.0 * theEllipseDiameter;
+               break;
+            case 5:
+               if (0 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+                  xOffset = -theEllipseDiameter;
+               }
+               else if (1 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+                  xOffset = +theEllipseDiameter;
+               }
+               else if (2 == enteredHex.Position)
+               {
+                  xOffset = -2.0 * theEllipseDiameter;
+               }
+               else if (3 == enteredHex.Position)
+               {
+                  xOffset = -0.5 * theEllipseDiameter;
+               }
+               else if (4 == enteredHex.Position)
+               {
+                  xOffset = +1.0 * theEllipseDiameter;
+               }
+               else
+               {
+                  xOffset = +2.0 * theEllipseDiameter;
+               }
+               break;
+            case 6:
+               if (0 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+                  xOffset = -1.5 * theEllipseDiameter;
+               }
+               else if (1 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+               }
+               else if (2 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+                  xOffset = +1.5 * theEllipseDiameter;
+               }
+               else if (3 == enteredHex.Position)
+               {
+                  xOffset = -2.0 * theEllipseDiameter;
+               }
+               else if (4 == enteredHex.Position)
+               {
+                  xOffset = -1.0 * theEllipseDiameter;
+               }
+               else if (5 == enteredHex.Position)
+               {
+                  xOffset = +1.0 * theEllipseDiameter;
+               }
+               else 
+               {
+                  xOffset = +2.0 * theEllipseDiameter;
+               }
+               break;
+            case 7:
+               if (0 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+                  xOffset = -1.5 * theEllipseDiameter;
+               }
+               else if (1 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+               }
+               else if (2 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+                  xOffset = +1.5 * theEllipseDiameter;
+               }
+               else if (3 == enteredHex.Position)
+               {
+                  xOffset = -2.0 * theEllipseDiameter;
+               }
+               else if (4 == enteredHex.Position)
+               {
+                  xOffset = -1.0 * theEllipseDiameter;
+               }
+               else if (5 == enteredHex.Position)
+               {
+                  xOffset = +1.0 * theEllipseDiameter;
+               }
+               else if (6 == enteredHex.Position)
+               {
+                  xOffset = +2.0 * theEllipseDiameter;
+               }
+               else
+               {
+                  yOffset = +theEllipseDiameter;
+               }
+               break;
+            case 8:
+               if (0 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+                  xOffset = -1.5 * theEllipseDiameter;
+               }
+               else if (1 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+               }
+               else if (2 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+                  xOffset = +1.5 * theEllipseDiameter;
+               }
+               else if (3 == enteredHex.Position)
+               {
+                  xOffset = -2.0 * theEllipseDiameter;
+               }
+               else if (4 == enteredHex.Position)
+               {
+                  xOffset = -1.0 * theEllipseDiameter;
+               }
+               else if (5 == enteredHex.Position)
+               {
+                  xOffset = +1.0 * theEllipseDiameter;
+               }
+               else if (6 == enteredHex.Position)
+               {
+                  xOffset = +2.0 * theEllipseDiameter;
+               }
+               else if(7 == enteredHex.Position)
+               {
+                  yOffset = +theEllipseDiameter;
+                  xOffset = -theEllipseDiameter;
+               }
+               else
+               {
+                  yOffset = +theEllipseDiameter;
+                  xOffset = +theEllipseDiameter;
+               }
+               break;
+            case 9:
+               if (0 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+                  xOffset = -1.5 * theEllipseDiameter;
+               }
+               else if (1 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+               }
+               else if (2 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+                  xOffset = +1.5 * theEllipseDiameter;
+               }
+               else if (3 == enteredHex.Position)
+               {
+                  xOffset = -2.0 * theEllipseDiameter;
+               }
+               else if (4 == enteredHex.Position)
+               {
+                  xOffset = -1.0 * theEllipseDiameter;
+               }
+               else if (5 == enteredHex.Position)
+               {
+                  xOffset = +1.0 * theEllipseDiameter;
+               }
+               else if (6 == enteredHex.Position)
+               {
+                  xOffset = +2.0 * theEllipseDiameter;
+               }
+               else if(7 == enteredHex.Position)
+               {
+                  yOffset = +theEllipseDiameter;
+                  xOffset = -1.5 * theEllipseDiameter;
+               }
+               else if(8 == enteredHex.Position)
+               {
+                  yOffset = +theEllipseDiameter;
+               }
+               else
+               {
+                  yOffset = +theEllipseDiameter;
+                  xOffset = +1.5 * theEllipseDiameter;
+               }
+               break;
+            case 10:
+               if (0 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+                  xOffset = -1.5 * theEllipseDiameter;
+               }
+               else if (1 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+               }
+               else if (2 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+                  xOffset = +1.5 * theEllipseDiameter;
+               }
+               else if (3 == enteredHex.Position)
+               {
+                  xOffset = -2.0 * theEllipseDiameter;
+               }
+               else if (4 == enteredHex.Position)
+               {
+                  xOffset = -1.0 * theEllipseDiameter;
+               }
+               else if (5 == enteredHex.Position)
+               {
+                  xOffset = +1.0 * theEllipseDiameter;
+               }
+               else if (6 == enteredHex.Position)
+               {
+                  xOffset = +2.0 * theEllipseDiameter;
+               }
+               else if (7 == enteredHex.Position)
+               {
+                  yOffset = +theEllipseDiameter;
+                  xOffset = -1.5 * theEllipseDiameter;
+               }
+               else if (8 == enteredHex.Position)
+               {
+                  yOffset = +theEllipseDiameter;
+               }
+               else if(9 == enteredHex.Position)
+               {
+                  yOffset = +theEllipseDiameter;
+                  xOffset = +1.5 * theEllipseDiameter;
+               }
+               else
+               {
+                  yOffset = -0.5*theEllipseDiameter;
+                  xOffset = +1.5 * theEllipseDiameter;
+               }
+               break;
+            case 11:
+               if (0 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+                  xOffset = -1.5 * theEllipseDiameter;
+               }
+               else if (1 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+               }
+               else if (2 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+                  xOffset = +1.5 * theEllipseDiameter;
+               }
+               else if (3 == enteredHex.Position)
+               {
+                  xOffset = -2.0 * theEllipseDiameter;
+               }
+               else if (4 == enteredHex.Position)
+               {
+                  xOffset = -1.0 * theEllipseDiameter;
+               }
+               else if (5 == enteredHex.Position)
+               {
+                  xOffset = +1.0 * theEllipseDiameter;
+               }
+               else if (6 == enteredHex.Position)
+               {
+                  xOffset = +2.0 * theEllipseDiameter;
+               }
+               else if (7 == enteredHex.Position)
+               {
+                  yOffset = +theEllipseDiameter;
+                  xOffset = -1.5 * theEllipseDiameter;
+               }
+               else if (8 == enteredHex.Position)
+               {
+                  yOffset = +theEllipseDiameter;
+               }
+               else if (9 == enteredHex.Position)
+               {
+                  yOffset = +theEllipseDiameter;
+                  xOffset = +1.25 * theEllipseDiameter;
+               }
+               else if (10 == enteredHex.Position)
+               {
+                  yOffset = -0.5 * theEllipseDiameter;
+                  xOffset = -theEllipseDiameter;
+               }
+               else
+               {
+                  yOffset = -0.5 * theEllipseDiameter;
+                  xOffset = +theEllipseDiameter;
+               }
+               break;
+            case 12:
+               if (0 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+                  xOffset = -1.5 * theEllipseDiameter;
+               }
+               else if (1 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+               }
+               else if (2 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+                  xOffset = +1.5 * theEllipseDiameter;
+               }
+               else if (3 == enteredHex.Position)
+               {
+                  xOffset = -2.0 * theEllipseDiameter;
+               }
+               else if (4 == enteredHex.Position)
+               {
+                  xOffset = -1.0 * theEllipseDiameter;
+               }
+               else if (5 == enteredHex.Position)
+               {
+                  xOffset = +1.0 * theEllipseDiameter;
+               }
+               else if (6 == enteredHex.Position)
+               {
+                  xOffset = +2.0 * theEllipseDiameter;
+               }
+               else if (7 == enteredHex.Position)
+               {
+                  yOffset = +theEllipseDiameter;
+                  xOffset = -1.5 * theEllipseDiameter;
+               }
+               else if (8 == enteredHex.Position)
+               {
+                  yOffset = +theEllipseDiameter;
+               }
+               else if (9 == enteredHex.Position)
+               {
+                  yOffset = +theEllipseDiameter;
+                  xOffset = +1.5 * theEllipseDiameter;
+               }
+               else if (10 == enteredHex.Position)
+               {
+                  yOffset = -0.5 * theEllipseDiameter;
+                  xOffset = -1.5*theEllipseDiameter;
+               }
+               else if (11 == enteredHex.Position)
+               {
+                  yOffset = -0.5 * theEllipseDiameter;
+               }
+               else
+               {
+                  yOffset = -0.5 * theEllipseDiameter;
+                  xOffset = +1.5*theEllipseDiameter;
+               }
+               break;
+            case 13:
+               if (0 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+                  xOffset = -1.5 * theEllipseDiameter;
+               }
+               else if (1 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+               }
+               else if (2 == enteredHex.Position)
+               {
+                  yOffset = -theEllipseDiameter;
+                  xOffset = +1.5 * theEllipseDiameter;
+               }
+               else if (3 == enteredHex.Position)
+               {
+                  xOffset = -2.0 * theEllipseDiameter;
+               }
+               else if (4 == enteredHex.Position)
+               {
+                  xOffset = -1.0 * theEllipseDiameter;
+               }
+               else if (5 == enteredHex.Position)
+               {
+                  xOffset = +1.0 * theEllipseDiameter;
+               }
+               else if (6 == enteredHex.Position)
+               {
+                  xOffset = +2.0 * theEllipseDiameter;
+               }
+               else if (7 == enteredHex.Position)
+               {
+                  yOffset = +theEllipseDiameter;
+                  xOffset = -1.5 * theEllipseDiameter;
+               }
+               else if (8 == enteredHex.Position)
+               {
+                  yOffset = +theEllipseDiameter;
+               }
+               else if (9 == enteredHex.Position)
+               {
+                  yOffset = +theEllipseDiameter;
+                  xOffset = +1.5 * theEllipseDiameter;
+               }
+               else if (10 == enteredHex.Position)
+               {
+                  yOffset = -0.5 * theEllipseDiameter;
+                  xOffset = -1.5 * theEllipseDiameter;
+               }
+               else if (11 == enteredHex.Position)
+               {
+                  yOffset = -0.5 * theEllipseDiameter;
+               }
+               else if (12 == enteredHex.Position)
+               {
+                  yOffset = -0.5 * theEllipseDiameter;
+               }
+               else
+               {
+                  yOffset = -0.5 * theEllipseDiameter;
+                  xOffset = +1.5 * theEllipseDiameter;
+               }
+               break;
+            default:
+               break;
+         }
+         if ((DirectionEnum.DE_RIGHT_TOP == enteredHex.Direction) || (DirectionEnum.DE_RIGHT_BOTTOM == enteredHex.Direction) || (DirectionEnum.DE_SAME_HEX == enteredHex.Direction))
+            xOffset = -xOffset;
+         if ((DirectionEnum.DE_LEFT_BOTTOM == enteredHex.Direction) || (DirectionEnum.DE_RIGHT_BOTTOM== enteredHex.Direction) || (DirectionEnum.DE_SAME_HEX == enteredHex.Direction))
+            yOffset = -yOffset;
       }
       //---------------------------------------
       private void UpdateTimeTrack(IGameInstance gi)
@@ -718,7 +1266,7 @@ namespace BarbarianPrince
                   points.Add(two);
                   points.Add(three);
                   //---------------------------------------
-                  Polygon triangle = new Polygon() { Name = "River", Points = points, Stroke = mySolidColorBrushDeepSkyBlue, Fill = mySolidColorBrushDeepSkyBlue, Visibility = Visibility.Visible };
+                  Polygon triangle = new Polygon() { Name = "River", Points = points, Stroke = mySolidColorBrushWaterBlue, Fill = mySolidColorBrushWaterBlue, Visibility = Visibility.Visible };
                   double rotateAngle = 0.0;
                   if (Math.Abs(p.Y - Y1) < 10.0)
                   {
@@ -764,6 +1312,8 @@ namespace BarbarianPrince
             if (ui is Polygon polygon)
                elements.Add(ui);
             if (ui is Polyline polyline)
+               elements.Add(ui);
+            if (ui is Ellipse ellipse)
                elements.Add(ui);
             if (ui is Image img)
             {
@@ -1028,6 +1578,15 @@ namespace BarbarianPrince
             }
          }
          //-------------------------------------------------------
+         if( true == myMainMenuViewer.IsPathShown )
+         {
+            if (false == UpdateCanvasPath(gi))
+            {
+               Logger.Log(LogEnum.LE_ERROR, "UpdateCanvas(): UpdateCanvasPath() returned false");
+               return false;
+            }
+         }
+         //-------------------------------------------------------
          if (null != gi.TargetHex)
          {
             UpdateCanvasHexToShowPolygon(gi.TargetHex);
@@ -1224,6 +1783,30 @@ namespace BarbarianPrince
          }
          return true;
       }
+      private bool UpdateCanvasPath(IGameInstance gi)
+      {
+         try
+         {
+            Dictionary<string,int> hexCounts = new Dictionary<string,int>();
+            foreach (EnteredHex hex in gi.EnteredHexes) // get the number of ellipses to be shown in hex
+               hexCounts[hex.HexName] = hex.Position;
+            foreach (EnteredHex hex in gi.EnteredHexes)
+            {
+               int countOfHexesInHex = hexCounts[hex.HexName]; 
+               if( false == CreateEllipse(hex, countOfHexesInHex) )
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateCanvasPath(): CreateEllipse() returned false");
+                  return false;
+               }
+            }
+         }
+         catch (Exception e)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "UpdateCanvasPath(): EXCEPTION THROWN e=" + e.ToString() );
+            return false;
+         }
+         return true;
+      }
       private bool UpdateCanvasMovement(IGameInstance gi, GameAction action)
       {
          try
@@ -1299,11 +1882,11 @@ namespace BarbarianPrince
             ITerritory selectedTerritory = null;
             for (int i = gi.EnteredHexes.Count - 1; -1 < i; --i)  // get previous territory
                {
-               if (gi.Prince.Territory.Name != gi.EnteredHexes[i].myHexName)
+               if (gi.Prince.Territory.Name != gi.EnteredHexes[i].HexName)
                {
-                  ITerritory t = Territory.theTerritories.Find(gi.EnteredHexes[i].myHexName);
+                  ITerritory t = Territory.theTerritories.Find(gi.EnteredHexes[i].HexName);
                   if (null == t)
-                     Logger.Log(LogEnum.LE_ERROR, "GetPreviousHex(): theTerritories.Find() returned null for n=" + gi.EnteredHexes[i].myHexName);
+                     Logger.Log(LogEnum.LE_ERROR, "GetPreviousHex(): theTerritories.Find() returned null for n=" + gi.EnteredHexes[i].HexName);
                   else
                      selectedTerritory = gi.Prince.Territory;
                   break;
@@ -1755,71 +2338,6 @@ namespace BarbarianPrince
             GameAction outAction = GameAction.E156MayorTerritorySelectionEnd;
             myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          }
-      }
-      private void MouseLeftButtonDownCanvas(object sender, MouseButtonEventArgs e)
-      {
-         IGameInstance gi = myGameInstance;
-         //Point p = e.GetPosition(myCanvas);  // not used but useful info
-         //--------------------------------------------------
-         // Get the selected territory
-         ITerritory selectedTerritory = null;
-         foreach (UIElement ui in myCanvas.Children)
-         {
-            if (ui is Polygon aPolygon)
-            {
-               if (true == aPolygon.IsMouseOver)
-               {
-                  foreach (ITerritory t in Territory.theTerritories)
-                  {
-                     if (aPolygon.Tag.ToString() == Utilities.RemoveSpaces(t.ToString()))
-                     {
-                        selectedTerritory = t;
-                        break;
-                     }
-                  }
-               }
-            } // end if (ui is Polygon)
-            if (null != selectedTerritory)
-               break;
-         }  // end foreach (UIElement ui in myCanvas.Children)
-         if (null == selectedTerritory)  // If no territory is selected, return
-            return;
-         //---------------------------------------------------------------------
-         switch (gi.GamePhase)
-         {
-            default:
-               //MapItemCommonAction(selectedTerritory);
-               break;
-         }
-      }
-      private void MouseRightButtonDownCanvas(object sender, MouseButtonEventArgs e)
-      {
-         //Point p = e.GetPosition(myCanvas);  // not used but useful info
-         // Get the selected territory
-         ITerritory selectedTerritory = null;
-         foreach (UIElement ui in myCanvas.Children)
-         {
-            if (ui is Polygon aPolygon)
-            {
-               if (true == aPolygon.IsMouseOver)
-               {
-                  foreach (ITerritory t in Territory.theTerritories)
-                  {
-                     if (aPolygon.Tag.ToString() == Utilities.RemoveSpaces(t.ToString()))
-                     {
-                        selectedTerritory = t;
-                        break;
-                     }
-                  }
-               }
-
-            } // end if (ui is Polygon
-            if (null != selectedTerritory)
-               break;
-         }  // end foreach (UIElement ui in myCanvas.Children)
-         if (null == selectedTerritory)  // If no territory is selected, return
-            return;
-         this.RotateStack(selectedTerritory);
       }
       //-------------ContextMenu---------------------------------
       private void ContextMenuLoaded(object sender, RoutedEventArgs e)

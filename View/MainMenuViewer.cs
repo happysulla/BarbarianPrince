@@ -22,9 +22,11 @@ namespace BarbarianPrince
       private readonly MenuItem myMenuItemTopLevel21 = null;
       private readonly MenuItem myMenuItemTopLevel22 = null;
       private readonly MenuItem myMenuItemTopLevel3 = null;
+      private readonly MenuItem myMenuItemTopLevel31 = null;
       private readonly MenuItem myMenuItemTopLevel4 = null;
       private readonly IGameEngine myGameEngine = null;
       private IGameInstance myGameInstance = null;
+      public bool IsPathShown { get; set; } = false;
       public Options NewGameOptions { get; set; } = null;
       //-----------------------------------------------------------------------
       public MainMenuViewer(Menu mi, IGameEngine ge, IGameInstance gi) // Constructor creates default top level menus that get changed with UpdateView() based on GamePhase and GameAction
@@ -66,11 +68,12 @@ namespace BarbarianPrince
                   myMenuItemTopLevel3 = menuItem;
                   myMenuItemTopLevel3.Header = "_View";
                   myMenuItemTopLevel3.Visibility = Visibility.Visible;
-                  MenuItem subItem31 = new MenuItem();
-                  subItem31.Header = "_Path";
-                  subItem31.InputGestureText = "Ctrl+P";
-                  subItem31.Click += MenuItemViewPath_Click;
-                  myMenuItemTopLevel3.Items.Add(subItem31);
+                  myMenuItemTopLevel31 = new MenuItem();
+                  myMenuItemTopLevel31.Header = "_Path";
+                  myMenuItemTopLevel31.InputGestureText = "Ctrl+P";
+                  myMenuItemTopLevel31.IsCheckable = true;
+                  myMenuItemTopLevel31.Click += MenuItemViewPath_Click;
+                  myMenuItemTopLevel3.Items.Add(myMenuItemTopLevel31);
                   MenuItem subItem32 = new MenuItem();
                   subItem32.Header = "_Rivers";
                   subItem32.InputGestureText = "Ctrl+Shift+R";
@@ -270,7 +273,9 @@ namespace BarbarianPrince
       }
       public void MenuItemViewPath_Click(object sender, RoutedEventArgs e)
       {
-         GameAction action = GameAction.UpdateEventViewerActive;
+         IsPathShown = !IsPathShown;
+         myMenuItemTopLevel31.IsChecked = IsPathShown;
+         GameAction action = GameAction.ShowPartyPath;
          myGameEngine.PerformAction(ref myGameInstance, ref action);
       }
       public void MenuItemViewRivers_Click(object sender, RoutedEventArgs e)
