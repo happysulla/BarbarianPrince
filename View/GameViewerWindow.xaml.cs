@@ -74,10 +74,12 @@ namespace BarbarianPrince
       private static Double theEllipseDiameter = 10.0;
       private static Double theEllipseOffset = theEllipseDiameter / 2.0;
       private static Double X1 = 1.0;
-      private static Double X2 = 1.5;
-      private static Double X3 = 1.0;
-      private static Double X4 = 3.0;
-      private static Double Y1 = 1.0;
+      private static Double X2 = 1.0;
+      private static Double X3 = 0.5;
+      private static Double X4 = 1.5;
+      private static Double X5 = 0.5;
+      private static Double Y1 = 0.8;
+      private static Double Y2 = 1.6;
       //---------------------------------------------------------------------
       private readonly IGameEngine myGameEngine = null;
       private IGameInstance myGameInstance = null;
@@ -546,6 +548,7 @@ namespace BarbarianPrince
                break;
          }
          aEllipse.Stroke = brush;
+         aEllipse.Fill = brush;
          if ( (true == enteredHex.IsEncounter) || (ColorActionEnum.CAE_START == enteredHex.ColorAction) )
             aEllipse.Fill = brush;
          //-----------------------------------------
@@ -554,8 +557,8 @@ namespace BarbarianPrince
          GetEllispeOffsets(enteredHex, ellipsesInHex, out xOffset, out yOffset);
          //-----------------------------------------
          System.Windows.Point p = new System.Windows.Point(t.CenterPoint.X, t.CenterPoint.Y);
-         p.X -= theEllipseOffset + xOffset;
-         p.Y -= theEllipseOffset + yOffset;
+         p.X -= (theEllipseOffset - xOffset);
+         p.Y -= (theEllipseOffset - yOffset);
          Canvas.SetLeft(aEllipse, p.X);
          Canvas.SetTop(aEllipse, p.Y);
          myCanvas.Children.Add(aEllipse);
@@ -669,7 +672,7 @@ namespace BarbarianPrince
                if (0 == enteredHex.Position)
                {
                   yOffset = -Y1 * theEllipseDiameter;
-                  xOffset = X2 * theEllipseDiameter;
+                  xOffset = -X2 * theEllipseDiameter;
                }
                else if (1 == enteredHex.Position)
                {
@@ -698,7 +701,7 @@ namespace BarbarianPrince
                }
                else
                {
-                  yOffset = +theEllipseDiameter;
+                  yOffset = +Y1 * theEllipseDiameter;
                }
                break;
             case 8:
@@ -792,235 +795,236 @@ namespace BarbarianPrince
             case 10:
                if (0 == enteredHex.Position)
                {
-                  yOffset = -Y1 * theEllipseDiameter;
-                  xOffset = -X2 * theEllipseDiameter;
+                  yOffset = -Y2 * theEllipseDiameter;
+                  xOffset = -X5 * theEllipseDiameter;
                }
                else if (1 == enteredHex.Position)
                {
                   yOffset = -Y1 * theEllipseDiameter;
+                  xOffset = -X2 * theEllipseDiameter;
                }
                else if (2 == enteredHex.Position)
                {
                   yOffset = -Y1 * theEllipseDiameter;
-                  xOffset = +X2 * theEllipseDiameter;
                }
                else if (3 == enteredHex.Position)
                {
-                  xOffset = -X4 * theEllipseDiameter;
+                  yOffset = -Y1 * theEllipseDiameter;
+                  xOffset = +X2 * theEllipseDiameter;
                }
                else if (4 == enteredHex.Position)
                {
-                  xOffset = -X3 * theEllipseDiameter;
+                  xOffset = -X4 * theEllipseDiameter;
                }
                else if (5 == enteredHex.Position)
                {
-                  xOffset = +X3 * theEllipseDiameter;
+                  xOffset = -X3 * theEllipseDiameter;
                }
                else if (6 == enteredHex.Position)
                {
-                  xOffset = +X4 * theEllipseDiameter;
+                  xOffset = +X3 * theEllipseDiameter;
                }
                else if (7 == enteredHex.Position)
                {
-                  yOffset = +Y1 * theEllipseDiameter;
-                  xOffset = -X2 * theEllipseDiameter;
+                  xOffset = +X4 * theEllipseDiameter;
                }
                else if (8 == enteredHex.Position)
                {
                   yOffset = +Y1 * theEllipseDiameter;
+                  xOffset = -X2 * theEllipseDiameter;
                }
-               else if(9 == enteredHex.Position)
+               else if (9 == enteredHex.Position)
                {
                   yOffset = +Y1 * theEllipseDiameter;
-                  xOffset = +X2 * theEllipseDiameter;
                }
-               else
+               else 
                {
-                  yOffset = -0.5*theEllipseDiameter;
+                  yOffset = +Y1 * theEllipseDiameter;
                   xOffset = +X2 * theEllipseDiameter;
                }
                break;
             case 11:
                if (0 == enteredHex.Position)
                {
-                  yOffset = -Y1 * theEllipseDiameter;
-                  xOffset = -X2 * theEllipseDiameter;
+                  yOffset = -Y2 * theEllipseDiameter;
+                  xOffset = -X5 * theEllipseDiameter;
                }
                else if (1 == enteredHex.Position)
                {
-                  yOffset = -Y1 * theEllipseDiameter;
+                  yOffset = -Y2 * theEllipseDiameter;
+                  xOffset = +X5 * theEllipseDiameter;
                }
                else if (2 == enteredHex.Position)
                {
                   yOffset = -Y1 * theEllipseDiameter;
-                  xOffset = +X2 * theEllipseDiameter;
+                  xOffset = -X2 * theEllipseDiameter;
                }
                else if (3 == enteredHex.Position)
                {
-                  xOffset = -X4 * theEllipseDiameter;
+                  yOffset = -Y1 * theEllipseDiameter;
                }
                else if (4 == enteredHex.Position)
                {
-                  xOffset = -X3 * theEllipseDiameter;
+                  yOffset = -Y1 * theEllipseDiameter;
+                  xOffset = +X2 * theEllipseDiameter;
                }
                else if (5 == enteredHex.Position)
                {
-                  xOffset = +X3 * theEllipseDiameter;
+                  xOffset = -X4 * theEllipseDiameter;
                }
                else if (6 == enteredHex.Position)
                {
-                  xOffset = +X4 * theEllipseDiameter;
+                  xOffset = -X3 * theEllipseDiameter;
                }
                else if (7 == enteredHex.Position)
                {
-                  yOffset = +Y1 * theEllipseDiameter;
-                  xOffset = -1.5 * theEllipseDiameter;
+                  xOffset = +X3 * theEllipseDiameter;
                }
                else if (8 == enteredHex.Position)
                {
-                  yOffset = +Y1 * theEllipseDiameter;
+                  xOffset = +X4 * theEllipseDiameter;
                }
                else if (9 == enteredHex.Position)
                {
                   yOffset = +Y1 * theEllipseDiameter;
-                  xOffset = +1.25 * theEllipseDiameter;
+                  xOffset = -X2 * theEllipseDiameter;
                }
                else if (10 == enteredHex.Position)
                {
-                  yOffset = -0.5 * theEllipseDiameter;
-                  xOffset = -theEllipseDiameter;
+                  yOffset = +Y1 * theEllipseDiameter;
                }
-               else
+               else 
                {
-                  yOffset = -Y1 * theEllipseDiameter;
-                  xOffset = +theEllipseDiameter;
+                  yOffset = +Y1 * theEllipseDiameter;
+                  xOffset = +X2 * theEllipseDiameter;
                }
                break;
             case 12:
                if (0 == enteredHex.Position)
                {
-                  yOffset = -Y1 * theEllipseDiameter;
-                  xOffset = -X2 * theEllipseDiameter;
+                  yOffset = -Y2 * theEllipseDiameter;
+                  xOffset = -X5 * theEllipseDiameter;
                }
                else if (1 == enteredHex.Position)
                {
-                  yOffset = -Y1 * theEllipseDiameter;
+                  yOffset = -Y2 * theEllipseDiameter;
+                  xOffset = +X5 * theEllipseDiameter;
                }
                else if (2 == enteredHex.Position)
                {
                   yOffset = -Y1 * theEllipseDiameter;
-                  xOffset = +X2 * theEllipseDiameter;
+                  xOffset = -X2 * theEllipseDiameter;
                }
                else if (3 == enteredHex.Position)
                {
-                  xOffset = -X4 * theEllipseDiameter;
+                  yOffset = -Y1 * theEllipseDiameter;
                }
                else if (4 == enteredHex.Position)
                {
-                  xOffset = -X3 * theEllipseDiameter;
+                  yOffset = -Y1 * theEllipseDiameter;
+                  xOffset = +X2 * theEllipseDiameter;
                }
                else if (5 == enteredHex.Position)
                {
-                  xOffset = +X3 * theEllipseDiameter;
+                  xOffset = -X4 * theEllipseDiameter;
                }
                else if (6 == enteredHex.Position)
                {
-                  xOffset = +X4 * theEllipseDiameter;
+                  xOffset = -X3 * theEllipseDiameter;
                }
                else if (7 == enteredHex.Position)
                {
-                  yOffset = +Y1 * theEllipseDiameter;
-                  xOffset = -X2 * theEllipseDiameter;
+                  xOffset = +X3 * theEllipseDiameter;
                }
                else if (8 == enteredHex.Position)
                {
-                  yOffset = +Y1 * theEllipseDiameter;
+                  xOffset = +X4 * theEllipseDiameter;
                }
                else if (9 == enteredHex.Position)
                {
                   yOffset = +Y1 * theEllipseDiameter;
-                  xOffset = +X2 * theEllipseDiameter;
+                  xOffset = -X2 * theEllipseDiameter;
                }
                else if (10 == enteredHex.Position)
                {
                   yOffset = +Y1 * theEllipseDiameter;
-                  xOffset = -X2*theEllipseDiameter;
                }
                else if (11 == enteredHex.Position)
                {
                   yOffset = +Y1 * theEllipseDiameter;
+                  xOffset = +X2 * theEllipseDiameter;
                }
                else
                {
-                  yOffset = +Y1 * theEllipseDiameter;
-                  xOffset = +X2*theEllipseDiameter;
-               }
-               break;
-            case 13:
-               if (0 == enteredHex.Position)
-               {
-                  yOffset = -Y1 * theEllipseDiameter;
-                  xOffset = -X2 * theEllipseDiameter;
-               }
-               else if (1 == enteredHex.Position)
-               {
-                  yOffset = -Y1 * theEllipseDiameter;
-               }
-               else if (2 == enteredHex.Position)
-               {
-                  yOffset = -Y1 * theEllipseDiameter;
-                  xOffset = +X2 * theEllipseDiameter;
-               }
-               else if (3 == enteredHex.Position)
-               {
-                  xOffset = -X4 * theEllipseDiameter;
-               }
-               else if (4 == enteredHex.Position)
-               {
-                  xOffset = -X3 * theEllipseDiameter;
-               }
-               else if (5 == enteredHex.Position)
-               {
-                  xOffset = +X3 * theEllipseDiameter;
-               }
-               else if (6 == enteredHex.Position)
-               {
-                  xOffset = +X4 * theEllipseDiameter;
-               }
-               else if (7 == enteredHex.Position)
-               {
-                  yOffset = +Y1 * theEllipseDiameter;
-                  xOffset = -X2 * theEllipseDiameter;
-               }
-               else if (8 == enteredHex.Position)
-               {
-                  yOffset = +Y1 * theEllipseDiameter;
-               }
-               else if (9 == enteredHex.Position)
-               {
-                  yOffset = +Y1 * theEllipseDiameter;
-                  xOffset = +X2 * theEllipseDiameter;
-               }
-               else if (10 == enteredHex.Position)
-               {
-                  yOffset = +Y1 * theEllipseDiameter;
-                  xOffset = -X2 * theEllipseDiameter;
-               }
-               else if (11 == enteredHex.Position)
-               {
-                  yOffset = +Y1 * theEllipseDiameter;
-               }
-               else if (12 == enteredHex.Position)
-               {
-                  yOffset = +Y1 * theEllipseDiameter;
-               }
-               else
-               {
-                  yOffset = +Y1 * theEllipseDiameter;
-                  xOffset = +X2 * theEllipseDiameter;
+                  yOffset = +Y2 * theEllipseDiameter;
+                  xOffset = -X5 * theEllipseDiameter;
                }
                break;
             default:
+               if (0 == enteredHex.Position)
+               {
+                  yOffset = -Y2 * theEllipseDiameter;
+                  xOffset = -X5 * theEllipseDiameter;
+               }
+               else if (1 == enteredHex.Position)
+               {
+                  yOffset = -Y2 * theEllipseDiameter;
+                  xOffset = +X5 * theEllipseDiameter;
+               }
+               else if (2 == enteredHex.Position)
+               {
+                  yOffset = -Y1 * theEllipseDiameter;
+                  xOffset = -X2 * theEllipseDiameter;
+               }
+               else if (3 == enteredHex.Position)
+               {
+                  yOffset = -Y1 * theEllipseDiameter;
+               }
+               else if (4 == enteredHex.Position)
+               {
+                  yOffset = -Y1 * theEllipseDiameter;
+                  xOffset = +X2 * theEllipseDiameter;
+               }
+               else if (5 == enteredHex.Position)
+               {
+                  xOffset = -X4 * theEllipseDiameter;
+               }
+               else if (6 == enteredHex.Position)
+               {
+                  xOffset = -X3 * theEllipseDiameter;
+               }
+               else if (7 == enteredHex.Position)
+               {
+                  xOffset = +X3 * theEllipseDiameter;
+               }
+               else if (8 == enteredHex.Position)
+               {
+                  xOffset = +X4 * theEllipseDiameter;
+               }
+               else if (9 == enteredHex.Position)
+               {
+                  yOffset = +Y1 * theEllipseDiameter;
+                  xOffset = -X2 * theEllipseDiameter;
+               }
+               else if (10 == enteredHex.Position)
+               {
+                  yOffset = +Y1 * theEllipseDiameter;
+               }
+               else if (11 == enteredHex.Position)
+               {
+                  yOffset = +Y1 * theEllipseDiameter;
+                  xOffset = +X2 * theEllipseDiameter;
+               }
+               else if (12 == enteredHex.Position)
+               {
+                  yOffset = +Y2 * theEllipseDiameter;
+                  xOffset = -X5 * theEllipseDiameter;
+               }
+               else // if 13 or greater, last one shows up here
+               {
+                  yOffset = +Y2 * theEllipseDiameter;
+                  xOffset = +X5 * theEllipseDiameter;
+               }
                break;
          }
          //if ((DirectionEnum.DE_RIGHT_TOP == enteredHex.Direction) || (DirectionEnum.DE_RIGHT_BOTTOM == enteredHex.Direction) || (DirectionEnum.DE_SAME_HEX == enteredHex.Direction))
