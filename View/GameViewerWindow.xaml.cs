@@ -280,6 +280,32 @@ namespace BarbarianPrince
                UpdateCanvasRiver("Lesser Nesser River", false);
                UpdateCanvasRiver("Trogoth River", false);
                break;
+            case GameAction.ShowPartyPath:
+               if (true == myMainMenuViewer.IsPathShown)
+               {
+                  if (false == UpdateCanvasPath(gi))
+                     Logger.Log(LogEnum.LE_ERROR, "UpdateCanvas(): UpdateCanvasPath() returned false");
+               }
+               else
+               {
+                  List<UIElement> elements = new List<UIElement>();
+                  foreach (UIElement ui in myCanvas.Children)
+                  {
+                     if (ui is Polyline polyline) // remove all polylines 
+                        elements.Add(ui);
+                     if (ui is Ellipse ellipse) // remove all polylines 
+                        elements.Add(ui);
+                     if (ui is Image img)
+                     {
+                        if ("myMap" == img.Name)
+                           continue;
+                        elements.Add(ui);
+                     }
+                  }
+                  foreach (UIElement ui1 in elements)
+                     myCanvas.Children.Remove(ui1);
+               }
+               break;
             case GameAction.ShowDienstalBranch:
                UpdateCanvasRiver("Dienstal Branch");
                if (false == UpdateCanvasHexTravelToShowPolygons(gi))

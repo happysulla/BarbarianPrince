@@ -159,6 +159,9 @@ namespace BarbarianPrince
             case GameAction.UnitTestCommand:
             case GameAction.UnitTestNext:
                break;
+            case GameAction.ShowAllRivers:
+            case GameAction.ShowPartyPath:
+               break;
             case GameAction.UpdateLoadingGame:
                myGameInstance = gi;
                myRulesMgr.GameInstance = gi;
