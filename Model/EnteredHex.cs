@@ -36,6 +36,9 @@ namespace BarbarianPrince
    [Serializable]
    public class EnteredHex
    {
+      private static int theId = 0;
+      public int Identifer { get; set; } = 0;
+      public int Day { get; set; } = 0;
       public String HexName { get; set; } = "";
       public string EventName { get; set; } = "";
       public List<String> Party = new List<String>();  
@@ -48,6 +51,8 @@ namespace BarbarianPrince
       //------------------------------------------------------------------------------------------------
       public EnteredHex(IGameInstance gi, ColorActionEnum colorAction, bool isEncounter=false)
       {
+         Identifer = ++theId;
+         Day = gi.Days;
          HexName = gi.NewHex.Name;
          EventName = gi.EventActive;
          ColorAction = colorAction;
