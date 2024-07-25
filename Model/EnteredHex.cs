@@ -8,16 +8,6 @@ using System.Threading.Tasks;
 namespace BarbarianPrince
 {
    [Serializable]
-   public enum DirectionEnum
-   {
-      DE_START_HEX,
-      DE_LEFT_TOP,
-      DE_RIGHT_TOP,
-      DE_LEFT_BOTTOM,
-      DE_RIGHT_BOTTOM,
-      DE_SAME_HEX
-   };
-   [Serializable]
    public enum ColorActionEnum
    {
       CAE_START,
@@ -27,7 +17,6 @@ namespace BarbarianPrince
       CAE_TRAVEL,
       CAE_TRAVEL_AIR,
       CAE_TRAVEL_RAFT,
-      CAE_ENCOUNTER,
       CAE_ESCAPE,
       CAE_FOLLOW,
       CAE_SEARCH,
@@ -37,7 +26,7 @@ namespace BarbarianPrince
    public class EnteredHex
    {
       private static int theId = 0;
-      public int Identifer { get; set; } = 0;
+      public string Identifer { get; set; } = "";
       public int Day { get; set; } = 0;
       public String HexName { get; set; } = "";
       public string EventName { get; set; } = "";
@@ -47,12 +36,12 @@ namespace BarbarianPrince
       public int Position { get; set; } = 0;
       public String PreviousHex { get; set; } = "";
       public ColorActionEnum ColorAction { get; set; } = ColorActionEnum.CAE_LOST;
-      public DirectionEnum Direction { get; set; } = DirectionEnum.DE_START_HEX;
       //------------------------------------------------------------------------------------------------
       public EnteredHex(IGameInstance gi, ColorActionEnum colorAction, bool isEncounter=false)
       {
-         Identifer = ++theId;
-         Day = gi.Days;
+         ++theId;
+         Identifer = "Hex#" + theId.ToString();
+         Day = gi.Days + 1;
          HexName = gi.NewHex.Name;
          EventName = gi.EventActive;
          ColorAction = colorAction;
@@ -65,42 +54,6 @@ namespace BarbarianPrince
             {
                Position = hex.Position + 1;
                break;
-            }
-         }
-         //-----------------------------------------------
-         Direction = DirectionEnum.DE_START_HEX;
-         if ( 0 < gi.EnteredHexes.Count )
-         {
-            String previousHex = gi.EnteredHexes.Last().HexName; // set the direction of the incoming line into the hex
-            if (null != previousHex)
-            {
-               if (previousHex == HexName)
-               {
-                  Direction = DirectionEnum.DE_SAME_HEX;
-               }
-               else
-               {
-                  ITerritory prevT = Territory.theTerritories.Find(previousHex);
-                  if (null == prevT)
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "EnteredHex(): prevT=null for n=" + previousHex);
-                     return;
-                  }
-                  if (prevT.CenterPoint.X < gi.NewHex.CenterPoint.X)
-                  {
-                     if (prevT.CenterPoint.Y < gi.NewHex.CenterPoint.Y)
-                        Direction = DirectionEnum.DE_LEFT_TOP;
-                     else
-                        Direction = DirectionEnum.DE_LEFT_BOTTOM;
-                  }
-                  else
-                  {
-                     if (prevT.CenterPoint.Y < gi.NewHex.CenterPoint.Y)
-                        Direction = DirectionEnum.DE_RIGHT_TOP;
-                     else
-                        Direction = DirectionEnum.DE_RIGHT_BOTTOM;
-                  }
-               }
             }
          }
          //-----------------------------------------------

@@ -88,6 +88,7 @@ namespace BarbarianPrince
       private EventViewer myEventViewer = null;
       private MainMenuViewer myMainMenuViewer = null;
       private PartyDisplayDialog myPartyDisplayDialog = null;
+      private EllipseDisplayDialog myEllipseDisplayDialog = null;
       private System.Windows.Input.Cursor myTargetCursor = null;
       private Dictionary<string, Polyline> myRivers = new Dictionary<string, Polyline>();
       //---------------------------------------------------------------------
@@ -270,6 +271,9 @@ namespace BarbarianPrince
          UpdatePrinceEnduranceStatus(gi);
          switch (action)
          {
+            case GameAction.ShowInventory:
+            case GameAction.ShowRuleListing:
+            case GameAction.ShowAboutDialog:
             case GameAction.E228ShowTrueLove:
                break;
             case GameAction.ShowAllRivers:
@@ -841,14 +845,15 @@ namespace BarbarianPrince
          //-----------------------------------------
          Ellipse aEllipse = new Ellipse
          {
-            Tag = enteredHex.Identifer.ToString(),
+            Tag = enteredHex.Identifer,
             Fill = mySolidColorBrushClear,
             StrokeThickness = 2,
             Stroke = mySolidColorBrushBlack,
             Width = theEllipseDiameter,
             Height = theEllipseDiameter
          };
-         aEllipse.MouseDown += this.MouseDownEllipse;
+         aEllipse.MouseEnter += this.MouseEnterEllipse;
+         aEllipse.MouseLeave += this.MouseLeaveEllipse;
          SolidColorBrush brush = mySolidColorBrushBlack;
          switch (enteredHex.ColorAction)
          {
@@ -2381,12 +2386,32 @@ namespace BarbarianPrince
             myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          }
       }
-      void MouseDownEllipse(object sender, MouseButtonEventArgs e)
+      private void MouseEnterEllipse(object sender, MouseEventArgs e)
       {
          Ellipse mousedEllipse = (Ellipse)sender;
          if (null == mousedEllipse)
             return;
-         MessageBox.Show(mousedEllipse.Tag.ToString());
+         foreach( EnteredHex hex in myGameInstance.EnteredHexes)
+         {
+            string name = (string)mousedEllipse.Tag;
+            if( hex.Identifer == name)
+            {
+               myEllipseDisplayDialog = new EllipseDisplayDialog(hex);
+               myEllipseDisplayDialog.Show();
+               break;
+            }
+         }
+         e.Handled = true;  
+      }
+      private void MouseLeaveEllipse(object sender, MouseEventArgs e)
+      {
+         Ellipse mousedEllipse = (Ellipse)sender;
+         if (null == mousedEllipse)
+            return;
+         if (null != myEllipseDisplayDialog)
+            myEllipseDisplayDialog.Close();
+         myEllipseDisplayDialog = null;
+         e.Handled = true;
       }
       //-------------ContextMenu---------------------------------
       private void ContextMenuLoaded(object sender, RoutedEventArgs e)

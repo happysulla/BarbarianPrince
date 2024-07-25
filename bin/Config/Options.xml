@@ -22,7 +22,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomParty08">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="RandomParty05">
     <IsEnabled value="False" />

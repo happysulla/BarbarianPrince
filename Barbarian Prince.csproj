@@ -109,6 +109,9 @@
     <Compile Include="UnitTests\GameInstanceDialog.xaml.cs">
       <DependentUpon>GameInstanceDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EllipseDisplayDialog.xaml.cs">
+      <DependentUpon>EllipseDisplayDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EventViewerE010Mgr.xaml.cs">
       <DependentUpon>EventViewerE010Mgr.xaml</DependentUpon>
     </Compile>
@@ -305,6 +308,10 @@
       <DependentUpon>EventViewerTravelTable.xaml</DependentUpon>
     </Compile>
     <Page Include="UnitTests\GameInstanceDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EllipseDisplayDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
