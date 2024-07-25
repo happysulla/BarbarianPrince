@@ -2376,6 +2376,7 @@ namespace BarbarianPrince
                ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = GamePhase.SeekHire;
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_HIRE));
                gi.EventDisplayed = gi.EventActive = "e210"; // next screen to show
                gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterRoll;
@@ -2384,6 +2385,7 @@ namespace BarbarianPrince
                ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = GamePhase.SeekAudience;
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_AUDIENCE));
                if (true == gi.IsInTown(princeTerritory))
                {
                   gi.EventDisplayed = gi.EventActive = "e211a";
@@ -2419,6 +2421,7 @@ namespace BarbarianPrince
                ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = GamePhase.SeekOffering;
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_OFFERING));
                gi.ReduceCoins(1); // must spend one gold to make offering
                gi.EventStart = gi.EventDisplayed = gi.EventActive = "e212";
                if (0 < gi.ChagaDrugCount)
@@ -2431,6 +2434,7 @@ namespace BarbarianPrince
                ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = GamePhase.SearchRuins;
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_SEARCH_RUINS));
                if (true == gi.RuinsUnstable.Contains(princeTerritory)) // once a ruins is discovered to be unstable, it is always unstable
                {
                   gi.EventDisplayed = gi.EventActive = "e134";
@@ -3016,6 +3020,8 @@ namespace BarbarianPrince
       }
       protected bool PerformJailBreak(IGameInstance gi, ref GameAction action, int dieRoll)
       {
+         EnteredHex hex = new EnteredHex(gi, ColorActionEnum.CAE_JAIL);
+         hex.JailDay++;
          switch (gi.EventActive)
          {
             case "e203a":
@@ -3034,6 +3040,7 @@ namespace BarbarianPrince
                   }
                   else
                   {
+                     gi.EnteredHexes.Add(hex);
                      if (false == SetEndOfDayState(gi, ref action)) // no hunting in prison so go straight to plague state
                      {
                         Logger.Log(LogEnum.LE_ERROR, "SetHuntState(): SetEndOfDayState() returned false");
@@ -3059,6 +3066,7 @@ namespace BarbarianPrince
                   case 10:
                   case 11:
                   case 12:
+                     gi.EnteredHexes.Add(hex);
                      gi.NightsInDungeon++;
                      if (0 == (gi.NightsInDungeon % 7))
                         gi.Prince.SetWounds(0, 1);
@@ -3603,6 +3611,7 @@ namespace BarbarianPrince
                gi.SunriseChoice = GamePhase.SeekNews;
                gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterRoll;
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_SEEK_NEWS));
                break;
             case GameAction.SeekNewsWithPay:
                gi.IsSeekNewModifier = true;
@@ -3611,6 +3620,7 @@ namespace BarbarianPrince
                gi.SunriseChoice = GamePhase.SeekNews;
                gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterRoll;
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_SEEK_NEWS));
                break;
             default:
                returnStatus = "Reached Default ERROR";
@@ -3689,6 +3699,7 @@ namespace BarbarianPrince
                gi.SunriseChoice = GamePhase.SeekHire;
                gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterRoll;
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_HIRE));
                break;
             default:
                returnStatus = "Reached Default ERROR";
@@ -3895,6 +3906,7 @@ namespace BarbarianPrince
             case GameAction.SearchEncounter:
                gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterStart;
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_SEARCH, true));
                Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateSearch.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
                gi.Prince.MovementUsed = gi.Prince.Movement; // End of the day
                if (false == SetSubstitutionEvent(gi, princeTerritory))           // GameStateSearch.PerformAction() - SearchEncounter
@@ -3906,12 +3918,14 @@ namespace BarbarianPrince
             case GameAction.SearchCache:
                gi.SunriseChoice = gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterRoll;
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_SEARCH));
                Logger.Log(LogEnum.LE_NEXT_ACTION, ":GameStateSearch.PerformAction(): SearchCache action");
                gi.EventActive = gi.EventDisplayed = "e214";
                break;
             case GameAction.SearchTreasure:
                gi.SunriseChoice = gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterRoll;
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_SEARCH));
                if (true == gi.SecretClues.Contains(princeTerritory))
                   gi.EventDisplayed = gi.EventActive = "e147a";
                else if (true == gi.WizardAdviceLocations.Contains(princeTerritory))

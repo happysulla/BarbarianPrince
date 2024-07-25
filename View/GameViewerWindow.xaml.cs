@@ -867,7 +867,7 @@ namespace BarbarianPrince
                brush = mySolidColorBrushRosyBrown;
                break;
             case ColorActionEnum.CAE_JAIL:
-               brush = mySolidColorBrushGray;
+               brush = mySolidColorBrushBlack;
                break;
             case ColorActionEnum.CAE_TRAVEL:
                brush = mySolidColorBrushGreen;
@@ -887,7 +887,13 @@ namespace BarbarianPrince
             case ColorActionEnum.CAE_SEARCH:
                brush = mySolidColorBrushOrange;
                break;
-            case ColorActionEnum.CAE_STRUCTURE:
+            case ColorActionEnum.CAE_SEARCH_RUINS:
+               brush = mySolidColorBrushGray;
+               break;
+            case ColorActionEnum.CAE_SEEK_NEWS:
+            case ColorActionEnum.CAE_HIRE:
+            case ColorActionEnum.CAE_AUDIENCE:
+            case ColorActionEnum.CAE_OFFERING:
                brush = mySolidColorBrushPurple;
                break;
             default:

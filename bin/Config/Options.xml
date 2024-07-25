@@ -7,13 +7,13 @@
     <IsEnabled value="True" />
   </Option>
   <Option value="PrinceHorse">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="PrincePegasus">
     <IsEnabled value="False" />
   </Option>
   <Option value="PrinceCoin">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="PrinceFood">
     <IsEnabled value="True" />
@@ -22,7 +22,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomParty08">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="RandomParty05">
     <IsEnabled value="False" />
@@ -79,10 +79,10 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="PartyMounted">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="PartyAirborne">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="RandomHex">
     <IsEnabled value="False" />
@@ -94,7 +94,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomRight">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="RandomBottom">
     <IsEnabled value="False" />
@@ -127,7 +127,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="0409">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="0406">
     <IsEnabled value="False" />
@@ -157,25 +157,25 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="AutoLostDecrease">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ExtendEndTime">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ReduceLodgingCosts">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="SteadyIncome">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="NoLostRoll">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="ForceNoLostEvent">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="ForceNoEvent">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="ForceNoRoadEvent">
     <IsEnabled value="False" />

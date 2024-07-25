@@ -68,15 +68,30 @@ namespace BarbarianPrince
             case ColorActionEnum.CAE_FOLLOW:
                myTextBlock.Inlines.Add(new Run("Follow"));
                break;
+            case ColorActionEnum.CAE_SEARCH_RUINS:
+               myTextBlock.Inlines.Add(new Run("Search Ruins"));
+               break;
             case ColorActionEnum.CAE_SEARCH:
                if (true == hex.IsEncounter)
                   myTextBlock.Inlines.Add(new Run("Search Encounter"));
                else
                   myTextBlock.Inlines.Add(new Run("Search"));
                break;
-            case ColorActionEnum.CAE_STRUCTURE:
-               myTextBlock.Inlines.Add(new Run(" Town, Temple, Castle Action" + hex.EventName));
+            case ColorActionEnum.CAE_SEEK_NEWS:
+               myTextBlock.Inlines.Add(new Run("Seek News"));
                break;
+            case ColorActionEnum.CAE_HIRE:
+               myTextBlock.Inlines.Add(new Run("Hire"));
+               break;
+            case ColorActionEnum.CAE_AUDIENCE:
+               myTextBlock.Inlines.Add(new Run("Seek Audience"));
+               break;
+            case ColorActionEnum.CAE_OFFERING:
+               myTextBlock.Inlines.Add(new Run("Make Offering"));
+               break;
+            default:
+               Logger.Log(LogEnum.LE_ERROR, "EllipseDisplayDialog(): Reached default with ColorAction=" + hex.ColorAction.ToString());
+               return;
          }
          //-------------------------------------------------------------
          myTextBlock.Inlines.Add(new Run(" on Day #" + hex.Day.ToString()));

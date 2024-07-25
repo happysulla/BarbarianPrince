@@ -20,7 +20,11 @@ namespace BarbarianPrince
       CAE_ESCAPE,
       CAE_FOLLOW,
       CAE_SEARCH,
-      CAE_STRUCTURE
+      CAE_SEARCH_RUINS,
+      CAE_SEEK_NEWS,
+      CAE_HIRE,
+      CAE_AUDIENCE,
+      CAE_OFFERING
    };
    [Serializable]
    public class EnteredHex
@@ -28,6 +32,7 @@ namespace BarbarianPrince
       private static int theId = 0;
       public string Identifer { get; set; } = "";
       public int Day { get; set; } = 0;
+      public int JailDay { get; set; } = 0;
       public String HexName { get; set; } = "";
       public string EventName { get; set; } = "";
       public List<String> Party = new List<String>();  
