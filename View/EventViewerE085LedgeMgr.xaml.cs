@@ -175,6 +175,8 @@ namespace BarbarianPrince
             ++i;
          }
          //--------------------------------------------------
+         myState = E085Enum.FALL_CHECK;
+         bool isAnybodyNeedToCheck = false;
          for( int k=0; k<myMaxRowMemberCount; ++k ) // If this is a Flyer, or the mount is a griffon/harpy or pegasus, considered flying
          {
             IMapItem member = myGridRowsMembers[k].myMapItem;
@@ -186,6 +188,16 @@ namespace BarbarianPrince
                if (true == mount.IsFlyingMount())
                   myGridRowsMembers[k].myDieRoll = IS_FLYING;
             }
+            if( IS_FLYING != myGridRowsMembers[k].myDieRoll )
+               isAnybodyNeedToCheck = true;
+         }
+         //--------------------------------------------------
+         if(false == isAnybodyNeedToCheck)
+         {
+           if(false == myIsUnmountedMount)
+               myState = E085Enum.SHOW_RESULTS;
+           else
+               myState = E085Enum.MOUNTS_CHECK;
          }
          //--------------------------------------------------
          if (false == UpdateGrid())

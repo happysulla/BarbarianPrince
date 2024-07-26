@@ -235,15 +235,6 @@ namespace BarbarianPrince
             this.myCanvas.Cursor = myTargetCursor;
          }
          //-------------------------------------------------------
-         if (GameAction.UpdateGameOptions == action)
-         {
-            Option option = gi.Options.Find("ExtendEndTime");
-            if( null == option )
-               Logger.Log(LogEnum.LE_ERROR, "UpdateView(): gi.Options.Find(ExtendEndTime)");
-            else 
-               CreateButtonTimeTrack(option.IsEnabled);
-         }
-         //-------------------------------------------------------
          else if (GameAction.UpdateLoadingGame == action)
          {
             myGameInstance = gi;
@@ -275,6 +266,13 @@ namespace BarbarianPrince
             case GameAction.ShowRuleListing:
             case GameAction.ShowAboutDialog:
             case GameAction.E228ShowTrueLove:
+               break;
+            case GameAction.UpdateGameOptions:
+               Option option = gi.Options.Find("ExtendEndTime");
+               if (null == option)
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): gi.Options.Find(ExtendEndTime)");
+               else
+                  CreateButtonTimeTrack(option.IsEnabled);
                break;
             case GameAction.ShowAllRivers:
                UpdateCanvasRiver("Dienstal Branch", false);

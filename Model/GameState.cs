@@ -3415,7 +3415,12 @@ namespace BarbarianPrince
                {
                   ShowMovementScreenViewer(gi);
                }
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL)); // NewHex set in the TravelShowLost action - GameStateTravel.PerformAction(TravelShowMovement)
+               if( true == gi.IsAirborne )
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR)); // NewHex set in the TravelShowLost action - GameStateTravel.PerformAction(TravelShowMovement)
+               else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT)); // NewHex set in the TravelShowLost action - GameStateTravel.PerformAction(TravelShowMovement)
+               else
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL)); // NewHex set in the TravelShowLost action - GameStateTravel.PerformAction(TravelShowMovement)
                break;
             case GameAction.TravelShowRiverEncounter:
                gi.GamePhase = GamePhase.Encounter;
@@ -3438,7 +3443,12 @@ namespace BarbarianPrince
                   returnStatus = "SetSubstitutionEvent() returned false";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
                }
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL, true));
+               if (true == gi.IsAirborne)
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR, true)); 
+               else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT, true)); 
+               else
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL, true));
                break;
             case GameAction.TravelEndMovement: // Prince clicked when still movement left ends movement phase
                gi.NewHex = gi.Prince.Territory;
@@ -10944,7 +10954,6 @@ namespace BarbarianPrince
                gi.IsHeavyRainNextDay = false;  // rain is today - need EncounterEnd() to be called to end the day in ShowE079ColdCheckResult->ShowE079ColdCheckResult()
                gi.DieRollAction = GameAction.DieRollActionNone;
                gi.GamePhase = GamePhase.SunriseChoice;      // e079a - Finish Heavy Rains
-               //dieRoll = 5;// <cgs> TEST
                gi.DieResults[key][0] = dieRoll;
                if( 3 < dieRoll )
                {

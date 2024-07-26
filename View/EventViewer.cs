@@ -159,6 +159,7 @@ namespace BarbarianPrince
             case GameAction.UnitTestCommand:
             case GameAction.UnitTestNext:
                break;
+            case GameAction.UpdateGameOptions:
             case GameAction.ShowAllRivers:
             case GameAction.ShowPartyPath:
                break;
