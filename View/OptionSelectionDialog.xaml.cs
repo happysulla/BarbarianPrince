@@ -605,6 +605,19 @@ namespace BarbarianPrince
             isFunOption = false;
          }
          //-------------------------
+         option = options.Find("0708");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-0708");
+            return false;
+         }
+         myRadioButtonHexRiver.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+         {
+            isCustomHexConfig = true;
+            isFunOption = false;
+         }
+         //-------------------------
          option = options.Find("0711");
          if (null == option)
          {
@@ -1304,6 +1317,12 @@ namespace BarbarianPrince
             option.IsEnabled = false;
          else
             Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 0206");
+         myRadioButtonHexRiver.IsChecked = false;
+         option = myOptions.Find("0708");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 0708");
          myRadioButtonHexTemple.IsChecked = false;
          option = myOptions.Find("0711");
          if (null != option)
@@ -1921,6 +1940,7 @@ namespace BarbarianPrince
             case "myRadioButtonHexRandomBottom": option = myOptions.Find("RandomBottom"); break;
             case "myRadioButtonHexTown": option = myOptions.Find("0109"); break;
             case "myRadioButtonHexRuin": option = myOptions.Find("0206"); break;
+            case "myRadioButtonHexRiver": option = myOptions.Find("0708"); break;
             case "myRadioButtonHexTemple": option = myOptions.Find("0711"); break;
             case "myRadioButtonHexHuldra": option = myOptions.Find("1212"); break;
             case "myRadioButtonHexDrogat": option = myOptions.Find("0323"); break;

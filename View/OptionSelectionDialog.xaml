@@ -85,7 +85,8 @@
                <Separator/>
                     <RadioButton x:Name="myRadioButtonHexTown" GroupName="Hex" Content="0109 - Town" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
                     <RadioButton x:Name="myRadioButtonHexRuin" GroupName="Hex" Content="0206 - Ruin" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
-                    <RadioButton x:Name="myRadioButtonHexTemple" GroupName="Hex" Content="0711 - Temple" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
+               <RadioButton x:Name="myRadioButtonHexRiver" GroupName="Hex" Content="0708 - River" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
+               <RadioButton x:Name="myRadioButtonHexTemple" GroupName="Hex" Content="0711 - Temple" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
                     <RadioButton x:Name="myRadioButtonHexHuldra" GroupName="Hex" Content="1212 - Castle" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
                     <RadioButton x:Name="myRadioButtonHexDrogat" GroupName="Hex" Content="0323 - Castle" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
                     <RadioButton x:Name="myRadioButtonHexLadyAeravir" GroupName="Hex" Content="1923 - Castle" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>

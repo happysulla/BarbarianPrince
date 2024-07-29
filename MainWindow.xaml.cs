@@ -38,7 +38,7 @@ namespace BarbarianPrince
             IGameInstance gi = new GameInstance();
             if (true == gi.CtorError)
             {
-               Logger.Log(LogEnum.LE_ERROR, "MainWindow(): GameInstance() Ctor Error");
+               Logger.Log(LogEnum.LE_ERROR, "MainWindow(): GameInstance() ctor error");
                Application.Current.Shutdown();
                return;
             }
@@ -46,7 +46,7 @@ namespace BarbarianPrince
             myGameViewerWindow = new GameViewerWindow(myGameEngine, gi); // Start the main view
             if (true == myGameViewerWindow.CtorError)
             {
-               Logger.Log(LogEnum.LE_ERROR, "MainWindow(): GameViewerWindow() Ctor Error");
+               Logger.Log(LogEnum.LE_ERROR, "MainWindow(): GameViewerWindow() ctor error");
                Application.Current.Shutdown();
                return;
             }

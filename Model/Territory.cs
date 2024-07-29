@@ -61,6 +61,14 @@ namespace BarbarianPrince
          }
          return null;
       }
-
+      public static bool Contains(this List<ITerritory> territories, ITerritory t)
+      {
+         foreach(ITerritory territory in territories)
+         {
+            if(territory.Name == t.Name) 
+               return true;
+         }
+         return false;
+      }
    }
 }

@@ -76,7 +76,7 @@ namespace BarbarianPrince
       public bool IsNewDayChoiceMade { set; get; } = false;
       public bool IsUndoCommandAvailable { set; get; } = false;
       public GamePhase GamePhase { get; set; } = GamePhase.GameSetup;
-      public GamePhase SunriseChoice { set; get; } = GamePhase.Error;
+      public GamePhase SunriseChoice { set; get; } = GamePhase.StartGame;
       public GameAction DieRollAction { get; set; } = GameAction.DieRollActionNone;
       //----------------------------------------------
       public ITerritory TargetHex { set; get; } = null;

@@ -64,6 +64,7 @@ namespace BarbarianPrince
    {
       UnitTest,
       GameSetup,
+      StartGame,
       SunriseChoice,
       Rest,
       Travel,

@@ -363,8 +363,9 @@ namespace BarbarianPrince
                myState = EnumR204.TC_EVENT_ROLL;
                myIsRaftEncounter = true;
             }
-            if (RaftEnum.RE_RAFT_ENDS_TODAY == myGameInstance.RaftState) // If rafting ended, only perform travel check in ending hex
+            if (RaftEnum.RE_RAFT_ENDS_TODAY == myGameInstance.RaftState) // PerformTravel() - If rafting ended, only perform travel check in ending hex
             {
+               myGameInstance.EnteredHexes.Add(new EnteredHex(myGameInstance, ColorActionEnum.CAE_TRAVEL_RAFT)); // PerformTravel()
                myMapItemMove.RiverCross = RiverCrossEnum.TC_NO_RIVER;
                myState = EnumR204.TC_EVENT_ROLL;
             }
@@ -1185,13 +1186,14 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL_REFERENCE-->" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT:
-               //dieRoll = 2; // <cgs> TEST
+               //dieRoll = 3; // <cgs> TEST
                myRollEvent = dieRoll; // column number in traveling event reference - event row
                myState = EnumR204.TC_EVENT_SHOW_RESULTS;
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL_EVENT-->" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT_R230:
                myState = EnumR204.TC_EVENT_SHOW_RESULTS;
+               dieRoll = 3; // <cgs> TEST
                myRollReference = dieRoll;
                if (dieRoll < 7)
                {

@@ -68,6 +68,7 @@ namespace BarbarianPrince
       private bool myIsRollInProgress = false;
       private bool myIsAnybodySafe = false;
       private bool myIsUnmountedMount = false;
+      private bool myIsJumpOptionShown = false;
       //---------------------------------------------
       private readonly FontFamily myFontFam = new FontFamily("Tahoma");
       public EventViewerE090QuicksandMgr(IGameInstance gi, Canvas c, ScrollViewer sv, RuleDialogViewer rdv, IDieRoller dr)
@@ -157,6 +158,8 @@ namespace BarbarianPrince
                myIsAnybodySafe = true;
                continue;
             }
+            if ((true == mi.IsRiding) && (false == mi.IsFlyer())) // if riding and not a flyer, show the jump icon - Member may jump off their mount
+               myIsJumpOptionShown = true;
             myGridRowMembers[i] = new GridRow(mi);
             ++i;
          }
@@ -283,7 +286,10 @@ namespace BarbarianPrince
          switch (myState)
          {
             case E090Enum.QUICKSAND_CHECK:
-               myTextBlockInstructions.Inlines.Add(new Run("Roll for quicksand effects or if riding, jump off."));
+               if( true == myIsJumpOptionShown)
+                  myTextBlockInstructions.Inlines.Add(new Run("Roll for effects or click jump icon to live but abandon mount."));
+               else
+                  myTextBlockInstructions.Inlines.Add(new Run("Roll for quicksand effects."));
                break;
             case E090Enum.MOUNTS_CHECK:
                myTextBlockInstructions.Inlines.Add(new Run("Roll for mount deaths."));

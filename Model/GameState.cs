@@ -1209,7 +1209,7 @@ namespace BarbarianPrince
       {
          Logger.Log(LogEnum.LE_UNDO_COMMAND, "UndoCommand(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->false  a=" + action.ToString());
          gi.IsUndoCommandAvailable = false;
-         gi.SunriseChoice = GamePhase.Error;
+         gi.SunriseChoice = GamePhase.StartGame;
          gi.GamePhase = GamePhase.SunriseChoice;
          gi.EventDisplayed = gi.EventActive = "e203";
          Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "UndoCommand():  gi.MapItemMoves.Clear()  a=" + action.ToString());
@@ -1963,6 +1963,19 @@ namespace BarbarianPrince
          if (true == option.IsEnabled)
             starting = Territory.theTerritories.Find(hex);
          //---------------------------------------------------------
+         hex = "0708";  // River
+         option = gi.Options.Find(hex);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetStartingLocationOption(): myOptions.Find(" + hex + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+         {
+            starting = Territory.theTerritories.Find(hex);
+            gi.RaftState = RaftEnum.RE_RAFT_SHOWN; // party has a raft
+         }
+         //---------------------------------------------------------
          hex = "0711";  // Temple
          option = gi.Options.Find(hex);
          if (null == option)
@@ -2099,10 +2112,7 @@ namespace BarbarianPrince
          //gi.Days = 40;
          //gi.Prince.SetWounds(7, 0);
          //gi.Prince.PlagueDustWound = 1; 
-         //gi.Prince.AddNewMount(MountEnum.Pegasus);
-         //this.AddUnitTestTiredMount(myPrince);
-         //gi.Prince.AddNewMount();
-         //gi.Prince.AddNewMount();
+         //gi.AddUnitTestTiredMount(myPrince);
          //---------------------
          //gi.AddSpecialItem(SpecialEnum.GiftOfCharm);
          //gi.AddSpecialItem(SpecialEnum.ResistanceTalisman);
@@ -2125,73 +2135,57 @@ namespace BarbarianPrince
          //gi.Prince.AddSpecialItemToShare(SpecialEnum.HydraTeeth);
          //gi.HydraTeethCount = 5;
          //gi.Prince.AddSpecialItemToShare(SpecialEnum.StaffOfCommand);
-         //---------------------
-         //ITerritory visited = Territories.Find("0109");
-         //gi..myVisitedLoctions.Add(visited);
-         //---------------------
-         //ITerritory escapeLocation = Territories.Find("0605");
+         //ITerritory visited = Territory.theTerritories.Find("0109");
+         //gi.VisitedLocations.Add(visited);
+         //ITerritory escapeLocation = Territory.theTerritories.Find("0605");
          //gi.EscapedLocations.Add(escapeLocation);
-         //---------------------
-         //ITerritory cacheHex = Territories.Find("0504");
+         //ITerritory cacheHex = Territory.theTerritories.Find("0504");
          //gi.Caches.Add(cacheHex, 66);
-         //cacheHex = Territories.Find("0505");
+         //cacheHex = Territory.theTerritories.Find("0505");
          //gi.Caches.Add(cacheHex, 333);
          //gi.Caches.Add(cacheHex, 100);
          //gi.Caches.Add(cacheHex, 500);
          //gi.Caches.Add(cacheHex, 33);
-         //---------------------
-         //ITerritory secretClueHex = Territories.Find("0504");
+         //ITerritory secretClueHex = Territory.theTerritories.Find("0504");
          //gi.SecretClues.Add(secretClueHex);
-         //---------------------
-         //ITerritory secretClueHex2 = Territories.Find("0706");
+         //ITerritory secretClueHex2 = Territory.theTerritories.Find("0706");
          //gi.SecretClues.Add(secretClueHex2);
-         //---------------------
-         //ITerritory hiddenTemple = Territories.Find("0605");
+         //ITerritory hiddenTemple = Territory.theTerritories.Find("0605");
          //gi.HiddenTemples.Add(hiddenTemple);
-         //---------------------
-         //ITerritory hiddenRuin = Territories.Find("0606");
+         //ITerritory hiddenRuin = Territory.theTerritories.Find("0606");
          //gi.HiddenRuins.Add(hiddenRuin);
-         //---------------------
-         //ITerritory elfTown = Territories.Find("0607");
+         //ITerritory elfTown = Territory.theTerritories.Find("0607");
          //gi.ElfTowns.Add(elfTown);
-         //---------------------
-         //ITerritory eagleLair = Territories.Find("0407");
+         //ITerritory eagleLair = Territory.theTerritories.Find("0407");
          //gi.EagleLairs.Add(eagleLair);
-         //---------------------
-         //ITerritory dwarvenMine = Territories.Find("0408");  
+         //ITerritory dwarvenMine = Territory.theTerritories.Find("0408");
          //gi.DwarvenMines.Add(dwarvenMine);
-         //---------------------
-         //ITerritory dwarfAdviceHex = Territories.Find("0319");
+         //ITerritory dwarfAdviceHex = Territory.theTerritories.Find("0319");
          //gi.DwarfAdviceLocations.Add(dwarfAdviceHex);
-         //---------------------
-         //ITerritory halflingTown = Territories.Find("0303");
+         //ITerritory halflingTown = Territory.theTerritories.Find("0303");
          //gi.HalflingTowns.Add(halflingTown);
-         //---------------------
-         //ITerritory elfCastle  = Territories.Find("0608");
+         //ITerritory elfCastle = Territory.theTerritories.Find("0608");
          //gi.ElfCastles.Add(elfCastle);
-         //---------------------
-         //ITerritory wizarTower = Territories.Find("0404");  //mountain
-         //gi.WizardTowers.Add(wizarTower);
-         //---------------------
-         //ITerritory wizardAdviceHex = Territories.Find("1005");
+         //ITerritory wizardTower = Territory.theTerritories.Find("0404");  //mountain
+         //gi.WizardTowers.Add(wizardTower);
+         //ITerritory wizardAdviceHex = Territory.theTerritories.Find("1005");
          //gi.WizardAdviceLocations.Add(wizardAdviceHex);
-         //---------------------
-         //ITerritory t11 = Territories.Find("0306"); // e114 - verify that eagle hunt can happen in structure
+         //ITerritory t11 = Territory.theTerritories.Find("0306"); // e114 - verify that eagle hunt can happen in structure
          //gi.HiddenTemples.Add(t11);
-         //t11 = Territories.Find("0307"); // e114 - verify that eagle hunt can happen in structure
+         //t11 = Territory.theTerritories.Find("0307"); // e114 - verify that eagle hunt can happen in structure
          //gi.HiddenTemples.Add(t11);
-         //t11 = Territories.Find("0407"); // e114 - verify that eagle hunt can happen in structure
+         //t11 = Territory.theTerritories.Find("0407"); // e114 - verify that eagle hunt can happen in structure
          //gi.HiddenTemples.Add(t11);
-         //t11 = Territories.Find("0405"); // e114 - verify that eagle hunt can happen in structure
+         //t11 = Territory.theTerritories.Find("0405"); // e114 - verify that eagle hunt can happen in structure
          //gi.HiddenTemples.Add(t11);
-         //t11 = Territories.Find("0406"); // e114 - verify that eagle hunt can happen in structure
+         //t11 = Territory.theTerritories.Find("0406"); // e114 - verify that eagle hunt can happen in structure
          //gi.HiddenTemples.Add(t11);
-         //t11 = Territories.Find("0506"); // e114 - verify that eagle hunt can happen in structure
+         //t11 = Territory.theTerritories.Find("0506"); // e114 - verify that eagle hunt can happen in structure
          //gi.HiddenTemples.Add(t11);
-         //t11 = Territories.Find("0507"); // e114 - verify that eagle hunt can happen in structure
+         //t11 = Territory.theTerritories.Find("0507"); // e114 - verify that eagle hunt can happen in structure
          //gi.HiddenTemples.Add(t11);
-         //---------------------
-         //ITerritory forbiddenHex = Territories.Find("0705");
+         ////---------------------
+         //ITerritory forbiddenHex = Territory.theTerritories.Find("0705");
          //gi.ForbiddenHexes.Add(forbiddenHex);
          //---------------------
          //ITerritory forbiddenAudience = Territories.Find("0101");
@@ -2211,7 +2205,6 @@ namespace BarbarianPrince
          //gi.IsMarkOfCain = true; // e018
          //gi.NumMonsterKill = 5; // e161e - kill 5 monsters
          //gi.ChagaDrugCount = 2;
-         //gi.RaftState = RaftEnum.RE_RAFT_SHOWN;
       }
    }
    //-----------------------------------------------------
@@ -3236,6 +3229,10 @@ namespace BarbarianPrince
             case GameAction.ShowPartyPath:
             case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
+            case GameAction.ShowDienstalBranch:
+            case GameAction.ShowLargosRiver:
+            case GameAction.ShowNesserRiver:
+            case GameAction.ShowTrogothRiver:
                break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
@@ -3416,11 +3413,11 @@ namespace BarbarianPrince
                   ShowMovementScreenViewer(gi);
                }
                if( true == gi.IsAirborne )
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR)); // NewHex set in the TravelShowLost action - GameStateTravel.PerformAction(TravelShowMovement)
-               else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT)); // NewHex set in the TravelShowLost action - GameStateTravel.PerformAction(TravelShowMovement)
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR)); // TravelShowMovement 
+               else if (RaftEnum.RE_RAFT_ENDS_TODAY == gi.RaftState)
+                  gi.EnteredHexes.Last().IsEncounter = false; //TravelShowMovement
                else
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL)); // NewHex set in the TravelShowLost action - GameStateTravel.PerformAction(TravelShowMovement)
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL)); // TravelShowMovement 
                break;
             case GameAction.TravelShowRiverEncounter:
                gi.GamePhase = GamePhase.Encounter;
@@ -3444,9 +3441,11 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
                }
                if (true == gi.IsAirborne)
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR, true)); 
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR, true));
                else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT, true)); 
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT, true)); // TravelShowMovementEncounter
+               else if (RaftEnum.RE_RAFT_ENDS_TODAY == gi.RaftState)
+                  gi.EnteredHexes.Last().IsEncounter = true; //TravelShowMovementEncounter
                else
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL, true));
                break;
@@ -5687,7 +5686,7 @@ namespace BarbarianPrince
                }
                gi.Prince.TerritoryStarting = gi.Prince.Territory;
                gi.NewHex = downRiverT1;
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT, true));
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT, true));  // E126RaftInCurrentEnd
                if (false == AddMapItemMove(gi, downRiverT1))
                {
                   returnStatus = " AddMapItemMove() returned false";
@@ -5714,7 +5713,7 @@ namespace BarbarianPrince
                }
                gi.Prince.TerritoryStarting = gi.Prince.Territory;
                gi.NewHex = downRiverT; //GameStateEncounter.PerformAction(E126RaftInCurrentRedistribute)
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT, true));
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT)); // E126RaftInCurrentRedistribute
                if (false == AddMapItemMove(gi, downRiverT))
                {
                   returnStatus = " AddMapItemMove() returned false";

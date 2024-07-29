@@ -85,7 +85,7 @@ namespace BarbarianPrince
          string[] aStringArray1 = aLine.Split(new char[] { '"' });
          int length = aStringArray1.Length;
          if (0 == length % 2)
-            throw new Exception("Syntax Error: Invalid number of quotes");
+            throw new Exception("Syntax error: Invalid number of quotes");
          for (int i = 0; i < aStringArray1.Length; i += 2)
          {
             string aSubString = "";

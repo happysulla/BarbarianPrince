@@ -50,7 +50,7 @@ namespace BarbarianPrince
          IUnitTest ut8 = new GameInstanceUnitTest(gi);
          if (true == ut8.CtorError)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): GameInstanceUnitTest() Ctor Error");
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): GameInstanceUnitTest() ctor error");
             return false;
          }
          gi.UnitTests.Add(ut8);
@@ -58,7 +58,7 @@ namespace BarbarianPrince
          IUnitTest ut1 = new GameViewerCreateUnitTest(dp);
          if (true == ut1.CtorError)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): GameViewerCreateUnitTest() Ctor Error");
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): GameViewerCreateUnitTest() ctor error");
             return false;
          }
          gi.UnitTests.Add(ut1);
@@ -66,7 +66,7 @@ namespace BarbarianPrince
          IUnitTest ut2 = new TerritoryCreateUnitTest(dp, gi);
          if (true == ut2.CtorError)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): TerritoryCreateUnitTest() Ctor Error");
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): TerritoryCreateUnitTest() ctor error");
             return false;
          }
          gi.UnitTests.Add(ut2);
@@ -74,7 +74,7 @@ namespace BarbarianPrince
          IUnitTest ut3 = new TerritoryRegionUnitTest(dp, gi);
          if (true == ut3.CtorError)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): TerritoryRegionUnitTest() Ctor Error");
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): TerritoryRegionUnitTest() ctor error");
             return false;
          }
          gi.UnitTests.Add(ut3);
@@ -82,7 +82,7 @@ namespace BarbarianPrince
          IUnitTest ut4 = new PolylineCreateUnitTest(dp, gi);
          if (true == ut4.CtorError)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): PolylineCreateUnitTest() Ctor Error");
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): PolylineCreateUnitTest() ctor error");
             return false;
          }
          gi.UnitTests.Add(ut4);
@@ -90,7 +90,7 @@ namespace BarbarianPrince
          IUnitTest ut5 = new ConfigMgrUnitTest(dp, ev);
          if (true == ut5.CtorError)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): ConfigMgrUnitTest() Ctor Error");
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): ConfigMgrUnitTest() ctor error");
             return false;
          }
          gi.UnitTests.Add(ut5);
@@ -98,7 +98,7 @@ namespace BarbarianPrince
          IUnitTest ut6 = new MapItemSetupUnitTest(dp, gi, this);
          if (true == ut6.CtorError)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): MapItemSetupUnitTest() Ctor Error");
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): MapItemSetupUnitTest() ctor error");
             return false;
          }
          gi.UnitTests.Add(ut6);
@@ -106,7 +106,7 @@ namespace BarbarianPrince
          IUnitTest ut7 = new DiceRollerUnitTest(dp, dr);
          if (true == ut7.CtorError)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): DiceRollerUnitTest() Ctor Error");
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): DiceRollerUnitTest() ctor error");
             return false;
          }
          gi.UnitTests.Add(ut7);
@@ -114,7 +114,7 @@ namespace BarbarianPrince
          IUnitTest ut9 = new TravelCheckUnitTest(dp, gi, ev);
          if (true == ut9.CtorError)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): TravelCheckUnitTest() Ctor Error");
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): TravelCheckUnitTest() ctor error");
             return false;
          }
          gi.UnitTests.Add(ut9);
@@ -122,7 +122,7 @@ namespace BarbarianPrince
          IUnitTest ut10 = new HuntUnitTest(ev);
          if (true == ut10.CtorError)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): HuntUnitTest() Ctor Error");
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): HuntUnitTest() ctor error");
             return false;
          }
          gi.UnitTests.Add(ut10);
@@ -130,7 +130,7 @@ namespace BarbarianPrince
          IUnitTest ut11 = new StarvationUnitTest(ev);
          if (true == ut11.CtorError)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): StarvationUnitTest() Ctor Error");
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): StarvationUnitTest() ctor error");
             return false;
          }
          gi.UnitTests.Add(ut11);
@@ -138,7 +138,7 @@ namespace BarbarianPrince
          IUnitTest ut12 = new LodgingMgrUnitTest(ev);
          if (true == ut12.CtorError)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): LodgingMgrUnitTest Ctor Error");
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): LodgingMgrUnitTest ctor error");
             return false;
          }
          gi.UnitTests.Add(ut12);
@@ -146,7 +146,7 @@ namespace BarbarianPrince
          IUnitTest ut13 = new TransportMgrUnitTest(ev);
          if (true == ut13.CtorError)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): LoadMgrUnitTest() Ctor Error");
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): LoadMgrUnitTest() ctor error");
             return false;
          }
          gi.UnitTests.Add(ut13);
@@ -154,7 +154,7 @@ namespace BarbarianPrince
          IUnitTest ut14 = new CombatUnitTest(dp, gi, ev, dr);
          if (true == ut14.CtorError)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): CombatUnitTest() Ctor Error");
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): CombatUnitTest() ctor error");
             return false;
          }
          gi.UnitTests.Add(ut14);
@@ -162,7 +162,7 @@ namespace BarbarianPrince
          IUnitTest ut15 = new TreasureTableUnitTest(ev);
          if (true == ut15.CtorError)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): TreasureTableUnitTest() Ctor Error");
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): TreasureTableUnitTest() ctor error");
             return false;
          }
          gi.UnitTests.Add(ut15);
