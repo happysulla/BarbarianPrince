@@ -104,6 +104,7 @@ namespace BarbarianPrince
       private readonly SolidColorBrush mySolidColorBrushRest = new SolidColorBrush { Color = Colors.Yellow };
       private readonly SolidColorBrush mySolidColorBrushSkyBlue = new SolidColorBrush { Color = Colors.LightBlue };
       private readonly SolidColorBrush mySolidColorBrushWaterBlue = new SolidColorBrush { Color = Colors.DeepSkyBlue };
+      private readonly SolidColorBrush mySolidColorBrushWaterDark = new SolidColorBrush { Color = Colors.SteelBlue };
       private readonly SolidColorBrush mySolidColorBrushPath = new SolidColorBrush { Color = Colors.White };
       //---------------------------------------------------------------------
 
@@ -874,7 +875,10 @@ namespace BarbarianPrince
                brush = mySolidColorBrushSkyBlue;
                break;
             case ColorActionEnum.CAE_TRAVEL_RAFT:
-               brush = mySolidColorBrushWaterBlue;
+               brush = mySolidColorBrushWaterBlue; 
+               break;
+            case ColorActionEnum.CAE_TRAVEL_DOWNRIVER:
+               brush = mySolidColorBrushWaterDark; 
                break;
             case ColorActionEnum.CAE_ESCAPE:
                brush = mySolidColorBrushRed;

@@ -62,6 +62,9 @@ namespace BarbarianPrince
                else
                   myTextBlock.Inlines.Add(new Run("Raft Travel"));
                break;
+            case ColorActionEnum.CAE_TRAVEL_DOWNRIVER:
+               myTextBlock.Inlines.Add(new Run("Raft Drifted Downriver"));
+               break;
             case ColorActionEnum.CAE_ESCAPE:
                myTextBlock.Inlines.Add(new Run("Escape"));
                break;

@@ -17,6 +17,7 @@ namespace BarbarianPrince
       CAE_TRAVEL,
       CAE_TRAVEL_AIR,
       CAE_TRAVEL_RAFT,
+      CAE_TRAVEL_DOWNRIVER,
       CAE_ESCAPE,
       CAE_FOLLOW,
       CAE_SEARCH,

@@ -3033,7 +3033,7 @@ namespace BarbarianPrince
                   }
                   else
                   {
-                     gi.EnteredHexes.Add(hex);
+                     gi.EnteredHexes.Add(hex); // staying in jail
                      if (false == SetEndOfDayState(gi, ref action)) // no hunting in prison so go straight to plague state
                      {
                         Logger.Log(LogEnum.LE_ERROR, "SetHuntState(): SetEndOfDayState() returned false");
@@ -3059,7 +3059,7 @@ namespace BarbarianPrince
                   case 10:
                   case 11:
                   case 12:
-                     gi.EnteredHexes.Add(hex);
+                     gi.EnteredHexes.Add(hex); // staying in dungeon
                      gi.NightsInDungeon++;
                      if (0 == (gi.NightsInDungeon % 7))
                         gi.Prince.SetWounds(0, 1);
@@ -3415,7 +3415,7 @@ namespace BarbarianPrince
                if( true == gi.IsAirborne )
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR)); // TravelShowMovement 
                else if (RaftEnum.RE_RAFT_ENDS_TODAY == gi.RaftState)
-                  gi.EnteredHexes.Last().IsEncounter = false; //TravelShowMovement
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT)); // TravelShowMovement()
                else
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL)); // TravelShowMovement 
                break;
@@ -3440,12 +3440,14 @@ namespace BarbarianPrince
                   returnStatus = "SetSubstitutionEvent() returned false";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
                }
+
                if (true == gi.IsAirborne)
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR, true));
-               else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT, true)); // TravelShowMovementEncounter
+               else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState) // need this to show before moving downstream if lost in current
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT, true));
                else if (RaftEnum.RE_RAFT_ENDS_TODAY == gi.RaftState)
-                  gi.EnteredHexes.Last().IsEncounter = true; //TravelShowMovementEncounter
+                  if (ColorActionEnum.CAE_TRAVEL_DOWNRIVER != gi.EnteredHexes.Last().ColorAction)
+                     gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT, true)); // TravelShowMovementEncounter
                else
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL, true));
                break;
@@ -5199,6 +5201,15 @@ namespace BarbarianPrince
                   }
                   gi.EventAfterRedistribute = "";
                }
+               else if ("e126" == gi.EventAfterRedistribute) // raft caught in current
+               {
+                  if (false == EncounterEnd(gi, ref action))
+                  {
+                     returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
+                  gi.EventAfterRedistribute = "";
+               }
                else
                {
                   gi.EventDisplayed = gi.EventActive = gi.EventAfterRedistribute;
@@ -5675,7 +5686,7 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                }
                break;
-            case GameAction.E126RaftInCurrentEnd:
+            case GameAction.E126RaftInCurrentEnd: // raft in current but nobody lost
                Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateEncounter.PerformAction(): gi.MapItemMoves.Clear() for a=" + action.ToString());
                gi.MapItemMoves.Clear();
                ITerritory downRiverT1 = Territory.theTerritories.Find(gi.Prince.Territory.DownRiver);
@@ -5686,7 +5697,7 @@ namespace BarbarianPrince
                }
                gi.Prince.TerritoryStarting = gi.Prince.Territory;
                gi.NewHex = downRiverT1;
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT, true));  // E126RaftInCurrentEnd
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_DOWNRIVER));  // E126RaftInCurrentEnd
                if (false == AddMapItemMove(gi, downRiverT1))
                {
                   returnStatus = " AddMapItemMove() returned false";
@@ -5702,7 +5713,7 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                }
                break;
-            case GameAction.E126RaftInCurrentRedistribute:
+            case GameAction.E126RaftInCurrentRedistribute: // raft in current and somebody lost
                Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateEncounter.PerformAction(): gi.MapItemMoves.Clear() for a=" + action.ToString());
                gi.MapItemMoves.Clear();
                ITerritory downRiverT = Territory.theTerritories.Find(gi.Prince.Territory.DownRiver);
@@ -5713,7 +5724,7 @@ namespace BarbarianPrince
                }
                gi.Prince.TerritoryStarting = gi.Prince.Territory;
                gi.NewHex = downRiverT; //GameStateEncounter.PerformAction(E126RaftInCurrentRedistribute)
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT)); // E126RaftInCurrentRedistribute
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_DOWNRIVER)); // E126RaftInCurrentRedistribute
                if (false == AddMapItemMove(gi, downRiverT))
                {
                   returnStatus = " AddMapItemMove() returned false";
@@ -5723,6 +5734,7 @@ namespace BarbarianPrince
                {
                   Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateEncounter.PerformAction(E126RaftInCurrentRedistribute): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
                }
+               gi.EventAfterRedistribute = "e126";
                break;
             case GameAction.E128aBuyPegasus:
                if( false == gi.AddNewMountToParty(MountEnum.Pegasus) )

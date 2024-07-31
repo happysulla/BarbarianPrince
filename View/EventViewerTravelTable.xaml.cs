@@ -365,7 +365,6 @@ namespace BarbarianPrince
             }
             if (RaftEnum.RE_RAFT_ENDS_TODAY == myGameInstance.RaftState) // PerformTravel() - If rafting ended, only perform travel check in ending hex
             {
-               myGameInstance.EnteredHexes.Add(new EnteredHex(myGameInstance, ColorActionEnum.CAE_TRAVEL_RAFT)); // PerformTravel()
                myMapItemMove.RiverCross = RiverCrossEnum.TC_NO_RIVER;
                myState = EnumR204.TC_EVENT_ROLL;
             }
