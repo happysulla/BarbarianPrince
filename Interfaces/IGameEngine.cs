@@ -28,7 +28,6 @@ namespace BarbarianPrince
       RE_NO_RAFT,                  // Party does not have raft
       RE_RAFT_SHOWN,               // Rafting option show to user
       RE_RAFT_CHOSEN,              // Rafting option chosen by user
-      RE_RAFT_ENCOUNTER,           // pass checked to cross
       RE_RAFT_ENDS_TODAY           // Finished rafting for today
    };
    [Serializable]
@@ -320,7 +319,6 @@ namespace BarbarianPrince
       E122RaftsmenEnd,
       E122RaftsmenCross,
       E122RaftsmenHire,
-      E122RaftingEndsForDay,
       E123BlackKnightCombatEnd,
       E123BlackKnightRefuse,
       E123BlackKnightRefuseEnd,

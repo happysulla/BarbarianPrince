@@ -3835,7 +3835,7 @@
     <regionPoint X="295.428138265615" Y="254.362352941176" />
   </Territory>
   <Territory value="0805">
-    <type value="Mountains" />
+    <type value="Forest" />
     <point X="343.818181818182" Y="211.650909090909" />
     <isTown value="False" />
     <isCastle value="False" />

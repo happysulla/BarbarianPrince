@@ -1176,7 +1176,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL_ROAD-->" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_REFERENCE:
-               //dieRoll = 5; // <cgs> TEST
+               //dieRoll = 6; // <cgs> TEST
                myRollReference = dieRoll; // column number in travel table r207 - reference row
                if ((6 == myRollReference) && (true == myIsTravelingAir) ) // if traveling by air and roll reference 6, need to look  at Table r281
                   myState = EnumR204.TC_EVENT_ROLL_REFERENCE_R281;
@@ -1185,7 +1185,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL_REFERENCE-->" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT:
-               //dieRoll = 3; // <cgs> TEST
+               //dieRoll = 1; // <cgs> TEST
                myRollEvent = dieRoll; // column number in traveling event reference - event row
                myState = EnumR204.TC_EVENT_SHOW_RESULTS;
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL_EVENT-->" + myState.ToString() + " dr=" + dieRoll.ToString());
@@ -1731,50 +1731,56 @@ namespace BarbarianPrince
          depthStack.Enqueue(0);
          visited[startT.Name] = false;
          masterList.Add(startT.Name);
+         StringBuilder stringBuilder0 = new StringBuilder();
+         stringBuilder0.Append("initialList=[");
          while (0 < tStack.Count)
          {
-            String name = tStack.Dequeue();
+            String nameCurrent = tStack.Dequeue();
             int depth = depthStack.Dequeue();
             StringBuilder stringBuilder = new StringBuilder();
             for (int i = 0; i < depth; ++i)
                stringBuilder.Append("\t");
-            if (true == visited[name])
+            if (true == visited[nameCurrent])
                continue;
             if (range <= depth)
                continue;
-            visited[name] = true;
-            ITerritory t = Territory.theTerritories.Find(name);
+            visited[nameCurrent] = true;
+            ITerritory t = Territory.theTerritories.Find(nameCurrent);
             if (null == t)
             {
-               Logger.Log(LogEnum.LE_ERROR, "IsStructureWithinRange(): t=null for " + name);
+               Logger.Log(LogEnum.LE_ERROR, "IsStructureWithinRange(): t=null for " + nameCurrent);
                return false;
             }
-            Logger.Log(LogEnum.LE_HEX_WITHIN_RANGE, stringBuilder.ToString() + "==>> t=" + name);
+            Logger.Log(LogEnum.LE_HEX_WITHIN_RANGE, stringBuilder.ToString() + "==>> t=" + nameCurrent);
             stringBuilder.Append("\t");
-            foreach (string adj in t.Adjacents)
+            foreach (string adjName in t.Adjacents)
             {
-               ITerritory adjacent = Territory.theTerritories.Find(adj);
+               ITerritory adjacent = Territory.theTerritories.Find(adjName);
                if (null == adjacent)
                {
-                  Logger.Log(LogEnum.LE_ERROR, "IsStructureWithinRange(): adjacent=null for " + adj + " for t=" + name); 
+                  Logger.Log(LogEnum.LE_ERROR, "IsStructureWithinRange(): adjacent=null for " + adjName + " for t=" + nameCurrent); 
                   return false;
                }
-               Logger.Log(LogEnum.LE_HEX_WITHIN_RANGE, stringBuilder.ToString() + "-->> a=" + adj);
+               Logger.Log(LogEnum.LE_HEX_WITHIN_RANGE, stringBuilder.ToString() + "-->> a=" + adjName);
                tStack.Enqueue(adjacent.Name);
                depthStack.Enqueue(depth + 1);
-               if (false == masterList.Contains(adj))
+               if (false == masterList.Contains(adjName))
                {
-                  masterList.Add(adj);
-                  visited[adj] = false;
+                  stringBuilder0.Append(adjName);
+                  masterList.Add(adjName);
+                  visited[adjName] = false;
                }
             }
          }
+         stringBuilder0.Append("]");
+         Logger.Log(LogEnum.LE_HEX_WITHIN_RANGE, stringBuilder0.ToString());
+         //----------------------------------------------------------------
          StringBuilder stringBuilder1 = new StringBuilder();
          stringBuilder1.Append("masterList=[");
          int count = 0;
          foreach (String name in masterList)
          {
-            Logger.Log(LogEnum.LE_HEX_WITHIN_RANGE, name);
+            stringBuilder1.Append(name);
             ITerritory t = Territory.theTerritories.Find(name);
             if (null == t)
             {

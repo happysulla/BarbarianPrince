@@ -992,7 +992,7 @@ namespace BarbarianPrince
             gi.EventDisplayed = gi.EventActive = "e096a";
          else if ("e078" == gi.EventActive)
          {
-            if ((true == gi.IsInStructure(princeTerritory)) || (0 < princeTerritory.Roads.Count))
+            if ((true == gi.IsInStructure(princeTerritory)) || (0 < princeTerritory.Roads.Count) || (RaftEnum.RE_NO_RAFT != gi.RaftState)) // if in structure, on roads, or rafting, do not implement bad going
                gi.EventDisplayed = gi.EventActive = "e078a"; // majestic view from road
             else if (0 == gi.GetNonSpecialMountCount(true))
                gi.EventDisplayed = gi.EventActive = "e078b"; // majestic view with no horses
@@ -3414,8 +3414,10 @@ namespace BarbarianPrince
                }
                if( true == gi.IsAirborne )
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR)); // TravelShowMovement 
-               else if (RaftEnum.RE_RAFT_ENDS_TODAY == gi.RaftState)
+               else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT)); // TravelShowMovement()
+               else if (RaftEnum.RE_RAFT_ENDS_TODAY == gi.RaftState)
+                  ; // TravelShowMovement()
                else
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL)); // TravelShowMovement 
                break;
@@ -3442,14 +3444,27 @@ namespace BarbarianPrince
                }
 
                if (true == gi.IsAirborne)
+               {
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR, true));
+               }
                else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState) // need this to show before moving downstream if lost in current
+               {
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT, true));
+               }
+               else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
+               {
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT, true)); // TravelShowMovementEncounter()
+               }
                else if (RaftEnum.RE_RAFT_ENDS_TODAY == gi.RaftState)
-                  if (ColorActionEnum.CAE_TRAVEL_DOWNRIVER != gi.EnteredHexes.Last().ColorAction)
-                     gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT, true)); // TravelShowMovementEncounter
+               {
+                  EnteredHex enteredHex = gi.EnteredHexes.Last();
+                  enteredHex.IsEncounter = true;
+                  enteredHex.EventName = gi.EventActive;
+               }
                else
+               {
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL, true));
+               }
                break;
             case GameAction.TravelEndMovement: // Prince clicked when still movement left ends movement phase
                gi.NewHex = gi.Prince.Territory;
@@ -3507,7 +3522,7 @@ namespace BarbarianPrince
       {
          if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
          {
-            gi.RaftState = RaftEnum.RE_RAFT_ENDS_TODAY;
+            //gi.RaftState = RaftEnum.RE_RAFT_ENDS_TODAY;
             gi.EventDisplayed = gi.EventActive = "e213a";
             gi.GamePhase = GamePhase.Encounter;
             gi.DieRollAction = GameAction.EncounterRoll;
@@ -5578,12 +5593,6 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.DieRollActionNone;
                break;
             case GameAction.E121SunStrokeEnd:
-               break;
-            case GameAction.E122RaftingEndsForDay:
-               action = GameAction.TravelLostCheck;
-               gi.GamePhase = GamePhase.Travel;
-               gi.DieRollAction = GameAction.DieRollActionNone;
-               gi.RaftState = RaftEnum.RE_RAFT_ENDS_TODAY;
                break;
             case GameAction.E123WoundedBlackKnightRemain:
                IMapItem blackKnight = CreateCharacter(gi, "KnightBlack", 0);
@@ -8000,11 +8009,9 @@ namespace BarbarianPrince
                      action = GameAction.E078BadGoingRedistribute;
                      gi.EventAfterRedistribute = "e078";
                   }
-                  else
+                  else // no horses are lost - end encounter
                   {
-                     gi.NewHex = gi.Prince.Territory;
-                     gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL, true));
-                     --gi.Prince.MovementUsed;
+                     --gi.Prince.MovementUsed; // ensure there is a MapItemMove in GameInstance so that EncounterEnd() does not error
                      if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex
                      {
                         Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): AddMapItemMove() returned false ae=" + gi.EventStart);
@@ -13909,7 +13916,7 @@ namespace BarbarianPrince
                }
                else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
                {
-                  gi.RaftState = RaftEnum.RE_RAFT_ENDS_TODAY;
+                  //gi.RaftState = RaftEnum.RE_RAFT_ENDS_TODAY;
                   gi.EventDisplayed = gi.EventActive = "e213a";
                   gi.GamePhase = GamePhase.Encounter;
                   gi.DieRollAction = GameAction.EncounterRoll;
