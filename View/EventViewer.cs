@@ -131,7 +131,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "CreateEvents(): cfr.CtorError=true");
                return false;
             }
-            myEvents = cfr.Output;
+            myEvents = cfr.Records;
             if (0 == myEvents.Count)
             {
                Logger.Log(LogEnum.LE_ERROR, "CreateEvents(): myEvents.Count=0");

@@ -72,7 +72,7 @@ namespace BarbarianPrince
             string key = myRulesManager.Rules.Keys.ElementAt(ruleNum);
             if (4 < key.Length)
                continue;
-            string title = myRulesManager.GetTitle(key);
+            string title = myRulesManager.GetRuleTitle(key);
             if( null == title )
             {
                Logger.Log(LogEnum.LE_ERROR, "UpdateGridRows(): title=null");

@@ -98,11 +98,9 @@ namespace BarbarianPrince
          }
          //-------------------------------------------------------------
          if(ColorActionEnum.CAE_START != hex.ColorAction)
-         {
             myTextBlock.Inlines.Add(new Run(" on Day #" + hex.Day.ToString()));
-            myTextBlock.Inlines.Add(new LineBreak());
-            myTextBlock.Inlines.Add(new LineBreak());
-         }
+         myTextBlock.Inlines.Add(new LineBreak());
+         myTextBlock.Inlines.Add(new LineBreak());
          //-------------------------------------------------------------
          if ( true == hex.IsEncounter )
          {

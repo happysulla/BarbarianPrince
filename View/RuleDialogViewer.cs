@@ -111,7 +111,7 @@ namespace BarbarianPrince
             return false;
          }
       }
-      public string GetTitle(string key)
+      public string GetRuleTitle(string key)
       {
          try
          {
@@ -234,7 +234,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "CreateRules(): cfr.CtorError=true");
                return false;
             }
-            myRules = cfr.Output;
+            myRules = cfr.Records;
             if (0 == myRules.Count)
             {
                Logger.Log(LogEnum.LE_ERROR, "CreateRules(): myRules.Count=0");
@@ -258,7 +258,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "CreateTables(): cfr.CtorError=true");
                return false;
             }
-            myTables = cfr.Output;
+            myTables = cfr.Records;
             if (0 == myTables.Count)
             {
                Logger.Log(LogEnum.LE_ERROR, "CreateTables(): myTables.Count=0");
