@@ -156,34 +156,34 @@ namespace BarbarianPrince
       IMapItemMoves MapItemMoves { set; get; }
       List<EnteredHex> EnteredHexes { get; }
       //----------------------------------------------
-      List<ITerritory> DwarfAdviceLocations { get; } // e006
-      List<ITerritory> WizardAdviceLocations { get; } // e025
-      List<ITerritory> AlcoveOfSendings { get; }  // e042
-      List<ITerritory> Arches { get; } // e045
-      List<ITerritory> VisitedLocations { get; } // e050
-      List<ITerritory> EscapedLocations { get; } // e050
-      List<ITerritory> GoblinKeeps { get; }  // e054
-      List<ITerritory> OrcTowers { get; }  // e056
-      List<ITerritory> DwarvenMines { get; }  // e058
-      List<ITerritory> RuinsUnstable { get; }
-      List<ITerritory> HiddenRuins { get; } // e064
-      List<ITerritory> HiddenTowns { get; } // e065
-      List<ITerritory> HiddenTemples { get; } // e066
-      List<ITerritory> KilledLocations { get; } // e066
-      List<ITerritory> WizardTowers { get; }  // e068b
-      List<ITerritory> HalflingTowns { get; }  // e165
-      List<ITerritory> EagleLairs { get; } // e115
-      List<ITerritory> SecretClues { get; } // e147
-      List<ITerritory> LetterOfRecommendations { get; } // e157
-      List<ITerritory> Purifications { get; } // e159
-      List<ITerritory> ElfTowns { get; }  // e165
-      List<ITerritory> ElfCastles { get; }  // e165
-      List<ITerritory> FeelAtHomes { get; }   // e209
-      List<ITerritory> SecretRites { get; }   // e209
-      List<ITerritory> CheapLodgings { get; } // e209
-      List<ITerritory> ForbiddenHexes { get; } // e209
-      List<ITerritory> AbandonedTemples { get; } // e212
-      List<ITerritory> ForbiddenHires { get; }
+      ITerritories DwarfAdviceLocations { get; } // e006
+      ITerritories WizardAdviceLocations { get; } // e025
+      ITerritories AlcoveOfSendings { get; }  // e042
+      ITerritories Arches { get; } // e045
+      ITerritories VisitedLocations { get; } // e050
+      ITerritories EscapedLocations { get; } // e050
+      ITerritories GoblinKeeps { get; }  // e054
+      ITerritories OrcTowers { get; }  // e056
+      ITerritories DwarvenMines { get; }  // e058
+      ITerritories RuinsUnstable { get; }
+      ITerritories HiddenRuins { get; } // e064
+      ITerritories HiddenTowns { get; } // e065
+      ITerritories HiddenTemples { get; } // e066
+      ITerritories KilledLocations { get; } // e066
+      ITerritories WizardTowers { get; }  // e068b
+      ITerritories HalflingTowns { get; }  // e165
+      ITerritories EagleLairs { get; } // e115
+      ITerritories SecretClues { get; } // e147
+      ITerritories LetterOfRecommendations { get; } // e157
+      ITerritories Purifications { get; } // e159
+      ITerritories ElfTowns { get; }  // e165
+      ITerritories ElfCastles { get; }  // e165
+      ITerritories FeelAtHomes { get; }   // e209
+      ITerritories SecretRites { get; }   // e209
+      ITerritories CheapLodgings { get; } // e209
+      ITerritories ForbiddenHexes { get; } // e209
+      ITerritories AbandonedTemples { get; } // e212
+      ITerritories ForbiddenHires { get; }
       //----------------------------------------------
       Dictionary<string, int[]> DieResults { get; }
       IStacks Stacks { set; get; }

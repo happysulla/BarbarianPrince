@@ -207,7 +207,7 @@ namespace BarbarianPrince
             }
          }
       }
-      public void RemovePurifyConstraints(ITerritory offeringTerritory, List<ITerritory> purifications)
+      public void RemovePurifyConstraints(ITerritory offeringTerritory, ITerritories purifications)
       {
          bool isListModified = true;
          while (true == isListModified) // remove all ForbiddenAudiences requiring offering

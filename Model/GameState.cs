@@ -3522,7 +3522,6 @@ namespace BarbarianPrince
       {
          if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
          {
-            //gi.RaftState = RaftEnum.RE_RAFT_ENDS_TODAY;
             gi.EventDisplayed = gi.EventActive = "e213a";
             gi.GamePhase = GamePhase.Encounter;
             gi.DieRollAction = GameAction.EncounterRoll;
@@ -5134,7 +5133,8 @@ namespace BarbarianPrince
             case GameAction.E085Falling:
                break;
             case GameAction.E086HighPass:
-               gi.IsHighPass = true;
+               if(RaftEnum.RE_RAFT_SHOWN != gi.RaftState) // if rafting, can leave by raft hex
+                  gi.IsHighPass = true;
                if (false == EncounterEnd(gi, ref action))
                {
                   returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
@@ -13916,7 +13916,6 @@ namespace BarbarianPrince
                }
                else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
                {
-                  //gi.RaftState = RaftEnum.RE_RAFT_ENDS_TODAY;
                   gi.EventDisplayed = gi.EventActive = "e213a";
                   gi.GamePhase = GamePhase.Encounter;
                   gi.DieRollAction = GameAction.EncounterRoll;

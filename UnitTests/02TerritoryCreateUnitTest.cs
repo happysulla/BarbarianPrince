@@ -379,7 +379,7 @@ namespace BarbarianPrince
          myCanvas.Children.Add(aEllipse);
          myEllipses.Add(aEllipse);
       }
-      public void CreateEllipses(List<ITerritory> territories)
+      public void CreateEllipses(ITerritories territories)
       {
          SolidColorBrush aSolidColorBrush0 = new SolidColorBrush { Color = Color.FromArgb(100, 100, 100, 0) }; // nearly transparent but slightly colored
          foreach (Territory t in territories)
@@ -399,7 +399,7 @@ namespace BarbarianPrince
             myEllipses.Add(aEllipse);
          }
       }
-      public XmlDocument CreateXml(List<ITerritory> territories)
+      public XmlDocument CreateXml(ITerritories territories)
       {
          XmlDocument aXmlDocument = new XmlDocument();
          aXmlDocument.LoadXml("<Territories></Territories>");
@@ -468,7 +468,7 @@ namespace BarbarianPrince
          }
          return aXmlDocument;
       }
-      public bool ShowRoads(List<ITerritory> territories)
+      public bool ShowRoads(ITerritories territories)
       {
          SolidColorBrush aSolidColorBrush0 = new SolidColorBrush { Color = Color.FromArgb(100, 100, 100, 0) }; // completely clear
          SolidColorBrush aSolidColorBrush1 = new SolidColorBrush { Color = Color.FromArgb(010, 255, 100, 0) }; // almost clear
@@ -560,7 +560,7 @@ namespace BarbarianPrince
          }
          return true;
       }
-      public bool ShowRivers(List<ITerritory> territories)
+      public bool ShowRivers(ITerritories territories)
       {
          SolidColorBrush aSolidColorBrush0 = new SolidColorBrush { Color = Color.FromArgb(100, 100, 100, 0) }; // completely clear
          SolidColorBrush aSolidColorBrush1 = new SolidColorBrush { Color = Color.FromArgb(010, 255, 100, 0) }; // almost clear
@@ -652,7 +652,7 @@ namespace BarbarianPrince
          }
          return true;
       }
-      public bool ShowAdjacents(List<ITerritory> territories)
+      public bool ShowAdjacents(ITerritories territories)
       {
          myAnchorTerritory = null;
          SolidColorBrush aSolidColorBrush0 = new SolidColorBrush { Color = Color.FromArgb(100, 100, 100, 0) }; // completely clear
@@ -745,7 +745,7 @@ namespace BarbarianPrince
          }
          return true;
       }
-      public bool ShowRaftTerritories(List<ITerritory> territories)
+      public bool ShowRaftTerritories(ITerritories territories)
       {
          SolidColorBrush aSolidColorBrushClear = new SolidColorBrush { Color = Color.FromArgb(010, 255, 100, 0) }; // almost clear
          SolidColorBrush aSolidColorBrushBlack = new SolidColorBrush { Color = Color.FromArgb(255, 0, 0, 0) };     // black
@@ -874,7 +874,7 @@ namespace BarbarianPrince
          }
          return true;
       }
-      public bool ShowDownRiverTerritory(List<ITerritory> territories)
+      public bool ShowDownRiverTerritory(ITerritories territories)
       {
          SolidColorBrush aSolidColorBrushClear = new SolidColorBrush { Color = Color.FromArgb(010, 255, 100, 0) }; // almost clear
          SolidColorBrush aSolidColorBrushBlack = new SolidColorBrush { Color = Color.FromArgb(255, 0, 0, 0) };     // black

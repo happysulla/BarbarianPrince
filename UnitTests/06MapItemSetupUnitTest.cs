@@ -367,7 +367,7 @@ namespace BarbarianPrince
                 return null;
             }
         }
-        public void CreateEllipses(List<ITerritory> territories)
+        public void CreateEllipses(ITerritories territories)
         {
             SolidColorBrush aSolidColorBrushRed = new SolidColorBrush { Color = Colors.Red };
             foreach (Territory t in territories)
@@ -428,7 +428,7 @@ namespace BarbarianPrince
         public bool CreateButton(IMapItem mi, int counterCount)
         {
             string territoryName = Utilities.RemoveSpaces(mi.Territory.ToString());
-            ITerritory territory = TerritoryExtensions.Find(Territory.theTerritories, territoryName);
+            ITerritory territory = Territory.theTerritories.Find(territoryName);
             if (null == territory)
             {
                 Logger.Log(LogEnum.LE_ERROR, "CreateMapItem(): TerritoryExtensions.Find() returned null");
@@ -452,7 +452,7 @@ namespace BarbarianPrince
             Canvas.SetZIndex(b, counterCount);
             return true;
         }
-        public void CreatePolygons(List<ITerritory> territories)
+        public void CreatePolygons(ITerritories territories)
         {
             SolidColorBrush aSolidColorBrush0 = new SolidColorBrush { Color = Color.FromArgb(10, 100, 100, 0) }; // nearly transparent but slightly colored
             foreach (Territory t in territories)
@@ -466,7 +466,7 @@ namespace BarbarianPrince
                 myCanvas.Children.Add(aPolygon);
             }
         }
-        private bool CreateMapItemMove(List<ITerritory> territories, IStacks stacks, ITerritory selectedTerritory, IMapItem selectedMapItem)
+        private bool CreateMapItemMove(ITerritories territories, IStacks stacks, ITerritory selectedTerritory, IMapItem selectedMapItem)
         {
             if (null == selectedTerritory)
             {
@@ -512,7 +512,7 @@ namespace BarbarianPrince
             }
             return true;
         }
-        private bool CreateMapItemMove(List<ITerritory> territories, IGameInstance gi, ITerritory newTerritory)
+        private bool CreateMapItemMove(ITerritories territories, IGameInstance gi, ITerritory newTerritory)
         {
             if (null == newTerritory)
             {
@@ -850,7 +850,7 @@ namespace BarbarianPrince
                 }
                 myGameInstance.PartyMembers.Add(mapItem);
                 //--------------------------------------------------
-                ITerritory territory = TerritoryExtensions.Find(Territory.theTerritories, matchingTerritoryName);
+                ITerritory territory = Territory.theTerritories.Find(matchingTerritoryName);
                 IStack stack = myGameInstance.Stacks.Find(matchingTerritory);
                 if (null == stack)
                 {
@@ -1100,7 +1100,7 @@ namespace BarbarianPrince
                 Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygon(): clickedPolygon=null for " + clickedPolygon.Tag.ToString());
                 return;
             }
-            ITerritory selectedTerritory = TerritoryExtensions.Find(Territory.theTerritories, Utilities.RemoveSpaces(clickedPolygon.Tag.ToString()));
+            ITerritory selectedTerritory = Territory.theTerritories.Find(Utilities.RemoveSpaces(clickedPolygon.Tag.ToString()));
             if (null == selectedTerritory)
             {
                 Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygon(): selectedTerritory=null for " + clickedPolygon.Tag.ToString());

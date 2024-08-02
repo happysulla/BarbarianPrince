@@ -225,7 +225,7 @@ namespace BarbarianPrince
          }
          return true;
       }
-      public void CreateEllipses(List<ITerritory> territories)
+      public void CreateEllipses(ITerritories territories)
       {
          foreach (Territory t in territories)
          {
@@ -245,7 +245,7 @@ namespace BarbarianPrince
             aEllipse.MouseDown += this.MouseDownEllipse;
          }
       }
-      public void CreatePolygons(List<ITerritory> territories)
+      public void CreatePolygons(ITerritories territories)
       {
          foreach (Territory t in territories)
          {
@@ -261,7 +261,7 @@ namespace BarbarianPrince
             }
          }
       }
-      public XmlDocument CreateXml(List<ITerritory> territories)
+      public XmlDocument CreateXml(ITerritories territories)
       {
          XmlDocument aXmlDocument = new XmlDocument();
          aXmlDocument.LoadXml("<Territories></Territories>");

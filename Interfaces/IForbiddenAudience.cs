@@ -17,6 +17,7 @@ namespace BarbarianPrince
       MONSTER_KILL,
       ERROR
    };
+   //------------------------------------------------------------------------
    public interface IForbiddenAudience
    {
       AudienceConstraintEnum Constraint { get; set; }
@@ -26,6 +27,7 @@ namespace BarbarianPrince
       bool IsOfferingMade { get; set; }   
       int Day { get; set; }
    }
+   //------------------------------------------------------------------------
    public interface IForbiddenAudiences : System.Collections.IEnumerable
    {
       int Count { get; }
@@ -55,7 +57,7 @@ namespace BarbarianPrince
       bool IsClothesConstraint();
       bool IsOfferingsConstraint(ITerritory offeringTerritory, int offeringDay);
       void RemoveOfferingsConstraints(ITerritory offeringTerritory);
-      void RemovePurifyConstraints(ITerritory offeringTerritory, List<ITerritory> purifications);
+      void RemovePurifyConstraints(ITerritory offeringTerritory, ITerritories purifications);
       void RemoveLetterConstraints(ITerritory letterTerritory);
       void RemoveLetterGivenConstraints(ITerritory letterTerritory);
       void RemoveAssistantConstraints(IMapItem mi);

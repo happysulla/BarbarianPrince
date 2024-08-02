@@ -28,7 +28,7 @@ namespace BarbarianPrince
       public bool CtorError { get; } = false;
       private IGameEngine myGameEngine = null;
       private IGameInstance myGameInstance = null;
-      private List<ITerritory> myTerritories = new List<ITerritory>();
+      private ITerritories myTerritories = null;
       //--------------------------------------------------------------------
       private IDieRoller myDieRoller = null;
       public int DieRoll { set; get; } = 0;
@@ -44,7 +44,7 @@ namespace BarbarianPrince
       //--------------------------------------------------------------------
       private readonly FontFamily myFontFam1 = new FontFamily("Courier New");
       //--------------------------------------------------------------------
-      public EventViewer(IGameEngine ge, IGameInstance gi, Canvas c, ScrollViewer sv, StackPanel sp, List<ITerritory> territories, IDieRoller dr)
+      public EventViewer(IGameEngine ge, IGameInstance gi, Canvas c, ScrollViewer sv, StackPanel sp, ITerritories territories, IDieRoller dr)
       {
          myDieRoller = dr;
          if (null == ge)

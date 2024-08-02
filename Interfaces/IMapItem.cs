@@ -76,7 +76,7 @@ namespace BarbarianPrince
       //----------------------------------------
       ITerritory Territory { get; set; }
       ITerritory TerritoryStarting { get; set; }
-      List<ITerritory> GuideTerritories { get; set; }
+      ITerritories GuideTerritories { get; set; }
       //----------------------------------------
       void SetLocation(int counterCount);
       bool AddNewMount(MountEnum mt = MountEnum.Horse);

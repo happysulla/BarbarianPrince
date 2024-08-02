@@ -199,7 +199,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="ForceEvent">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ForceCrossEvent">
     <IsEnabled value="False" />

@@ -443,7 +443,7 @@ namespace BarbarianPrince
       private bool CreateButtonMapItem(IMapItem mi, int counterCount)
       {
          string territoryName = Utilities.RemoveSpaces(mi.Territory.ToString());
-         ITerritory territory = TerritoryExtensions.Find(Territory.theTerritories, territoryName);
+         ITerritory territory = Territory.theTerritories.Find(territoryName);
          if (null == territory)
          {
             Logger.Log(LogEnum.LE_ERROR, "CreateMapItem(): TerritoryExtensions.Find() returned null");
@@ -2297,7 +2297,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygonTravel(): clickedPolygon=null for " + clickedPolygon.Tag.ToString());
             return;
          }
-         myTerritorySelected = TerritoryExtensions.Find(Territory.theTerritories, Utilities.RemoveSpaces(clickedPolygon.Tag.ToString()));
+         myTerritorySelected = Territory.theTerritories.Find(Utilities.RemoveSpaces(clickedPolygon.Tag.ToString()));
          if (null == myTerritorySelected)
          {
             Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygonTravel(): selectedTerritory=null for " + clickedPolygon.Tag.ToString());
@@ -2339,7 +2339,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygonArchOfTravel(): oldStack=null for t=" + oldT.ToString());
             return;
          }
-         ITerritory newT = TerritoryExtensions.Find(Territory.theTerritories, Utilities.RemoveSpaces(clickedPolygon.Tag.ToString()));
+         ITerritory newT = Territory.theTerritories.Find(Utilities.RemoveSpaces(clickedPolygon.Tag.ToString()));
          if (null == newT)
          {
             Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygonArchOfTravel(): newT=null for " + clickedPolygon.Tag.ToString());
@@ -2374,7 +2374,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygonLetterChoice(): clickedPolygon=null for " + clickedPolygon.Tag.ToString());
             return;
          }
-         ITerritory letterLocation = TerritoryExtensions.Find(Territory.theTerritories, Utilities.RemoveSpaces(clickedPolygon.Tag.ToString()));
+         ITerritory letterLocation = Territory.theTerritories.Find(Utilities.RemoveSpaces(clickedPolygon.Tag.ToString()));
          if (null == letterLocation)
          {
             Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygonLetterChoice(): newT=null for " + clickedPolygon.Tag.ToString());
@@ -2649,7 +2649,7 @@ namespace BarbarianPrince
       private void RotateStack(ITerritory selectedTerritory)
       {
       }
-      private bool CreateMapItemMove(List<ITerritory> territories, IGameInstance gi, ITerritory newTerritory)
+      private bool CreateMapItemMove(ITerritories territories, IGameInstance gi, ITerritory newTerritory)
       {
          if (null == newTerritory)
          {

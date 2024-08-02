@@ -28,7 +28,7 @@ namespace BarbarianPrince
          OldTerritory = oldT;
          NewTerritory = newT;
       }
-      public MapItemMove(List<ITerritory> territories, IMapItem movingMapItem, ITerritory newTerritory) // Do not move into overstacked region
+      public MapItemMove(ITerritories territories, IMapItem movingMapItem, ITerritory newTerritory) // Do not move into overstacked region
       {
          MapItem = movingMapItem;
          OldTerritory = movingMapItem.Territory;
@@ -73,7 +73,7 @@ namespace BarbarianPrince
          double distance = Math.Sqrt(xDelta * xDelta + yDelta * yDelta);
          return distance;
       }
-      public IMapPath GetBestPath(List<ITerritory> territories, ITerritory startT, ITerritory endT, int moveFactor)
+      public IMapPath GetBestPath(ITerritories territories, ITerritory startT, ITerritory endT, int moveFactor)
       {
          IMapPaths paths = new MapPaths();
          if (moveFactor < 1)
@@ -92,7 +92,7 @@ namespace BarbarianPrince
             foreach (String adjTerritory in startT.Adjacents)
             {
                IMapPath path = new MapPath(adjTerritory);
-               ITerritory adj = TerritoryExtensions.Find(territories, adjTerritory);
+               ITerritory adj = territories.Find(adjTerritory);
                path.Territories.Add(adj);
                path.Metric = MapItemMove.GetDistance(adj, endT);
                paths.Add(path);
@@ -132,7 +132,7 @@ namespace BarbarianPrince
                   foreach (String alternative in adj1.Adjacents)
                   {
                      //Console.WriteLine("     ==> Trying {0}", alternative);
-                     ITerritory adj2 = TerritoryExtensions.Find(territories, alternative);
+                     ITerritory adj2 = territories.Find(alternative);
                      // If the end territory is reached, no need to continue
                      // looking at alternates.
                      if (adj2.Name == endT.Name)

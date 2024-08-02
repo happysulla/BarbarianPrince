@@ -69,7 +69,7 @@ namespace BarbarianPrince
       //--------------------------------------------------
       public ITerritory Territory { get; set; } = null;
       public ITerritory TerritoryStarting { get; set; } = null;
-      public List<ITerritory> GuideTerritories { get; set; } = new List<ITerritory>();
+      public ITerritories GuideTerritories { get; set; } = new Territories();
       public IMapPoint Location { get; set; } = new MapPoint(0.0, 0.0);
       //--------------------------------------------------
       public bool IsGuide { get; set; } = false;

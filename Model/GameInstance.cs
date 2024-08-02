@@ -212,62 +212,62 @@ namespace BarbarianPrince
       private List<EnteredHex> myEnteredHexes = new List<EnteredHex>();
       public List<EnteredHex> EnteredHexes { get => myEnteredHexes; }
       //---------------------------------------------------------------
-      private List<ITerritory> myDwarfAdviceLocations = new List<ITerritory>();
-      public List<ITerritory> DwarfAdviceLocations { get => myDwarfAdviceLocations; }
-      private List<ITerritory> myWizardAdviceLocations = new List<ITerritory>();
-      public List<ITerritory> WizardAdviceLocations { get => myWizardAdviceLocations; }
-      private List<ITerritory> myAlcoveOfSendings = new List<ITerritory>();
-      public List<ITerritory> AlcoveOfSendings { get => myAlcoveOfSendings; }
-      private List<ITerritory> myArches = new List<ITerritory>();
-      public List<ITerritory> Arches { get => myArches; }
-      private List<ITerritory> myVisitedLoctions = new List<ITerritory>();
-      public List<ITerritory> VisitedLocations { get => myVisitedLoctions; }
-      private List<ITerritory> myEscapedLoctions = new List<ITerritory>();
-      public List<ITerritory> EscapedLocations { get => myEscapedLoctions; }
-      private List<ITerritory> myGoblinKeeps = new List<ITerritory>();
-      public List<ITerritory> GoblinKeeps { get => myGoblinKeeps; }
-      private List<ITerritory> myDwarvenMines = new List<ITerritory>();
-      public List<ITerritory> DwarvenMines { get => myDwarvenMines; }
-      private List<ITerritory> myOrcTowers = new List<ITerritory>();
-      public List<ITerritory> OrcTowers { get => myOrcTowers; }
-      private List<ITerritory> myWizardTowers = new List<ITerritory>();
-      public List<ITerritory> WizardTowers { get => myWizardTowers; }
-      private List<ITerritory> myHalflingTowns = new List<ITerritory>();
-      public List<ITerritory> HalflingTowns { get => myHalflingTowns; } // e070
-      private List<ITerritory> myRuinsUnstable = new List<ITerritory>();
-      public List<ITerritory> RuinsUnstable { get => myRuinsUnstable; }
-      private List<ITerritory> myHiddenRuins = new List<ITerritory>();
-      public List<ITerritory> HiddenRuins { get => myHiddenRuins; }
-      private List<ITerritory> myHiddenTowns = new List<ITerritory>();
-      public List<ITerritory> HiddenTowns { get => myHiddenTowns; }
-      private List<ITerritory> myHiddenTemples = new List<ITerritory>();
-      public List<ITerritory> HiddenTemples { get => myHiddenTemples; }
-      private List<ITerritory> myKilledLoctions = new List<ITerritory>();
-      public List<ITerritory> KilledLocations { get => myKilledLoctions; }
-      private List<ITerritory> myEagleLairs = new List<ITerritory>();
-      public List<ITerritory> EagleLairs { get => myEagleLairs; } // e115
-      private List<ITerritory> mySecretClues = new List<ITerritory>();
-      public List<ITerritory> SecretClues { get => mySecretClues; } // e147
-      private List<ITerritory> myLetterOfRecommendations = new List<ITerritory>();
-      public List<ITerritory> LetterOfRecommendations { get => myLetterOfRecommendations; } // e157
-      private List<ITerritory> myPurifications = new List<ITerritory>();
-      public List<ITerritory> Purifications { get => myPurifications; } // e159
-      private List<ITerritory> myElfTowns = new List<ITerritory>();
-      public List<ITerritory> ElfTowns { get => myElfTowns; } // e165
-      private List<ITerritory> myElfCastles = new List<ITerritory>();
-      public List<ITerritory> ElfCastles { get => myElfCastles; } // e166
-      private List<ITerritory> myFeelAtHomes = new List<ITerritory>();
-      public List<ITerritory> FeelAtHomes { get => myFeelAtHomes; } // e209
-      private List<ITerritory> mySecretRites = new List<ITerritory>();
-      public List<ITerritory> SecretRites { get => mySecretRites; } // e209
-      private List<ITerritory> myCheapLodgings = new List<ITerritory>();
-      public List<ITerritory> CheapLodgings { get => myCheapLodgings; } // e209
-      private List<ITerritory> myForbiddenHexes = new List<ITerritory>();
-      public List<ITerritory> ForbiddenHexes { get => myForbiddenHexes; } // e209
-      private List<ITerritory> myAbandonedTemples = new List<ITerritory>();
-      public List<ITerritory> AbandonedTemples { get => myAbandonedTemples; }
-      private List<ITerritory> myForbiddenHires = new List<ITerritory>();
-      public List<ITerritory> ForbiddenHires { get => myForbiddenHires; }
+      private ITerritories myDwarfAdviceLocations = new Territories();
+      public ITerritories DwarfAdviceLocations { get => myDwarfAdviceLocations; }
+      private ITerritories myWizardAdviceLocations = new Territories();
+      public ITerritories WizardAdviceLocations { get => myWizardAdviceLocations; }
+      private ITerritories myAlcoveOfSendings = new Territories();
+      public ITerritories AlcoveOfSendings { get => myAlcoveOfSendings; }
+      private ITerritories myArches = new Territories();
+      public ITerritories Arches { get => myArches; }
+      private ITerritories myVisitedLoctions = new Territories();
+      public ITerritories VisitedLocations { get => myVisitedLoctions; }
+      private ITerritories myEscapedLoctions = new Territories();
+      public ITerritories EscapedLocations { get => myEscapedLoctions; }
+      private ITerritories myGoblinKeeps = new Territories();
+      public ITerritories GoblinKeeps { get => myGoblinKeeps; }
+      private ITerritories myDwarvenMines = new Territories();
+      public ITerritories DwarvenMines { get => myDwarvenMines; }
+      private ITerritories myOrcTowers = new Territories();
+      public ITerritories OrcTowers { get => myOrcTowers; }
+      private ITerritories myWizardTowers = new Territories();
+      public ITerritories WizardTowers { get => myWizardTowers; }
+      private ITerritories myHalflingTowns = new Territories();
+      public ITerritories HalflingTowns { get => myHalflingTowns; } // e070
+      private ITerritories myRuinsUnstable = new Territories();
+      public ITerritories RuinsUnstable { get => myRuinsUnstable; }
+      private ITerritories myHiddenRuins = new Territories();
+      public ITerritories HiddenRuins { get => myHiddenRuins; }
+      private ITerritories myHiddenTowns = new Territories();
+      public ITerritories HiddenTowns { get => myHiddenTowns; }
+      private ITerritories myHiddenTemples = new Territories();
+      public ITerritories HiddenTemples { get => myHiddenTemples; }
+      private ITerritories myKilledLoctions = new Territories();
+      public ITerritories KilledLocations { get => myKilledLoctions; }
+      private ITerritories myEagleLairs = new Territories();
+      public ITerritories EagleLairs { get => myEagleLairs; } // e115
+      private ITerritories mySecretClues = new Territories();
+      public ITerritories SecretClues { get => mySecretClues; } // e147
+      private ITerritories myLetterOfRecommendations = new Territories();
+      public ITerritories LetterOfRecommendations { get => myLetterOfRecommendations; } // e157
+      private ITerritories myPurifications = new Territories();
+      public ITerritories Purifications { get => myPurifications; } // e159
+      private ITerritories myElfTowns = new Territories();
+      public ITerritories ElfTowns { get => myElfTowns; } // e165
+      private ITerritories myElfCastles = new Territories();
+      public ITerritories ElfCastles { get => myElfCastles; } // e166
+      private ITerritories myFeelAtHomes = new Territories();
+      public ITerritories FeelAtHomes { get => myFeelAtHomes; } // e209
+      private ITerritories mySecretRites = new Territories();
+      public ITerritories SecretRites { get => mySecretRites; } // e209
+      private ITerritories myCheapLodgings = new Territories();
+      public ITerritories CheapLodgings { get => myCheapLodgings; } // e209
+      private ITerritories myForbiddenHexes = new Territories();
+      public ITerritories ForbiddenHexes { get => myForbiddenHexes; } // e209
+      private ITerritories myAbandonedTemples = new Territories();
+      public ITerritories AbandonedTemples { get => myAbandonedTemples; }
+      private ITerritories myForbiddenHires = new Territories();
+      public ITerritories ForbiddenHires { get => myForbiddenHires; }
       //---------------------------------------------------------------
       public IStacks Stacks { get; set; } = new Stacks();
       [NonSerialized] private List<IUnitTest> myUnitTests = new List<IUnitTest>();
@@ -2096,9 +2096,9 @@ namespace BarbarianPrince
          }
       }
       //---------------------------------------------------------------
-      public List<ITerritory> ReadTerritoriesXml()
+      public ITerritories ReadTerritoriesXml()
       {
-         List<ITerritory> territories = new List<ITerritory>();
+         ITerritories territories = new Territories();
          XmlTextReader reader = null;
          try
          {
@@ -2191,7 +2191,7 @@ namespace BarbarianPrince
                reader.Close();
          }
       }
-      public IMapItems ReadMapItemsXml(List<ITerritory> territories)
+      public IMapItems ReadMapItemsXml(ITerritories territories)
       {
          IMapItems mapItems = new MapItems();
          XmlTextReader reader = null;

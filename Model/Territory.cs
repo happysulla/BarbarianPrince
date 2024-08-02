@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace BarbarianPrince
 {
    [Serializable]
    public class Territory : ITerritory
    {
-      [NonSerialized] static public List<ITerritory> theTerritories = new List<ITerritory>();
+      [NonSerialized] static public ITerritories theTerritories = new Territories();
       public string Name { get; set; } = "";
       public string Type { get; set; } = "";
       public bool IsTown { get; set; } = false;
@@ -39,9 +41,72 @@ namespace BarbarianPrince
             throw (new Exception("Territory.Find(): Unknown Territory=" + name));
       }
    }
+   //---------------------------------------------------------------
+   [Serializable]
+   public class Territories : IEnumerable, ITerritories
+   {
+      private readonly ArrayList myList;
+      public Territories() { myList = new ArrayList(); }
+      public void Add(ITerritory t) { myList.Add(t); }
+      public ITerritory RemoveAt(int index)
+      {
+         ITerritory t = (ITerritory)myList[index];
+         myList.RemoveAt(index);
+         return t;
+      }
+      public void Insert(int index, ITerritory t) { myList.Insert(index, t); }
+      public int Count { get { return myList.Count; } }
+      public void Clear() { myList.Clear(); }
+      public bool Contains(ITerritory t) { return myList.Contains(t); }
+      public IEnumerator GetEnumerator() { return myList.GetEnumerator(); }
+      public int IndexOf(ITerritory t) { return myList.IndexOf(t); }
+      public void Remove(ITerritory t) { myList.Remove(t); }
+      public ITerritory Find(string tName)
+      {
+         foreach (Object o in myList)
+         {
+            ITerritory t = (ITerritory)o;
+            if (tName == Utilities.RemoveSpaces(t.Name))
+               return t;
+         }
+         return null;
+      }
+      public ITerritory Remove(string tName)
+      {
+         foreach (Object o in myList)
+         {
+            ITerritory t = (ITerritory)o;
+            if (tName == t.Name)
+            {
+               myList.Remove(t);
+               return t;
+            }
+         }
+         return null;
+      }
+      public ITerritory this[int index]
+      {
+         get { return (ITerritory)(myList[index]); }
+         set { myList[index] = value; }
+      }
+      public override String ToString()
+      {
+         StringBuilder sb = new StringBuilder();
+         sb.Append("[ ");
+         foreach (Object o in myList)
+         {
+            ITerritory t = (ITerritory)o;
+            sb.Append(t.Name);
+            sb.Append(" ");
+         }
+         sb.Append("]");
+         return sb.ToString();
+      }
+   }
+   //---------------------------------------------------------------
    public static class TerritoryExtensions
    {
-      public static ITerritory Find(this IList<ITerritory> territories, string name)
+      public static ITerritory Find(this IList<ITerritory> territories, String name)
       {
          try
          {
