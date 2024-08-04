@@ -2299,7 +2299,7 @@ e086	"<Bold>e086 High Pass</Bold>
 <LineBreak/><LineBreak/>
                <InlineUIContainer><Image Name='HighPass' Source='../../Images/HighPass.gif' Height='375'  Width='450'> </Image></InlineUIContainer>"
 e086a	"<Bold>e086a High Pass Travels</Bold>
-<LineBreak/><LineBreak/>When you travel the high pass,  roll for the effects of high winds, sub-freezing temperatures, snow, etc. Roll two die for the entire party: <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21' ></Image></InlineUIContainer>
+<LineBreak/><LineBreak/>When you travel the high pass, roll for the effects of high winds, sub-freezing temperatures, snow, etc. Roll two die for the entire party: <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21' ></Image></InlineUIContainer>
 <LineBreak/>
 <LineBreak/>8 = Characters suffers wound
 <LineBreak/>9 = Characters suffer 2 wounds

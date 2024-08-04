@@ -16,6 +16,8 @@ namespace BarbarianPrince
       public Dictionary<string, string> Rules { get => myRules; }
       private Dictionary<string, string> myTables = null;
       public Dictionary<string, string> Tables { get => myTables; }
+      private Dictionary<string, string> myEvents = null;
+      public Dictionary<string, string> Events { get => myEvents; set => myEvents = value; } // this property is used for unit testing - 05COnfigFileMgrUnitTesting
       private Dictionary<string, TableDialog> myTableDialogs = new Dictionary<string, TableDialog>();
       private Dictionary<string, BannerDialog> myBannerDialogs = new Dictionary<string, BannerDialog>();
       private IGameEngine myGameEngine = null;
@@ -117,14 +119,14 @@ namespace BarbarianPrince
          {
             if (null == myRules)
             {
-               Logger.Log(LogEnum.LE_ERROR, "ShowTitle(): myRules=null for key=" + key);
+               Logger.Log(LogEnum.LE_ERROR, "GetRuleTitle(): myRules=null for key=" + key);
                return null;
             }
             string multilineString = myRules[key];
             int indexOfStart = multilineString.IndexOf(key);
             if( -1 == indexOfStart)
             {
-               Logger.Log(LogEnum.LE_ERROR, "ShowTitle(): IndexOf() returned -1 for key=" + key);
+               Logger.Log(LogEnum.LE_ERROR, "GetRuleTitle(): IndexOf() returned -1 for key=" + key);
                return null;
             }
             indexOfStart += key.Length + 1; // add one to get past preceeding space
@@ -135,7 +137,35 @@ namespace BarbarianPrince
          }
          catch (Exception e2)
          {
-            Logger.Log(LogEnum.LE_ERROR, "ShowTitle(): e=" + e2.ToString() + " for key=" + key);
+            Logger.Log(LogEnum.LE_ERROR, "GetRuleTitle(): e=" + e2.ToString() + " for key=" + key);
+            return null;
+         }
+      }
+      public string GetEventTitle(string key)
+      {
+         try
+         {
+            if (null == myEvents)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "GetEventTitle(): myEvents=null for key=" + key);
+               return null;
+            }
+            string multilineString = myEvents[key];
+            int indexOfStart = multilineString.IndexOf(key);
+            if (-1 == indexOfStart)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "GetEventTitle(): IndexOf() returned -1 for key=" + key);
+               return null;
+            }
+            indexOfStart += key.Length + 1; // add one to get past preceeding space
+            string startOfTitle = multilineString.Substring(indexOfStart);
+            int indexOfEnd = startOfTitle.IndexOf('<');
+            string title = startOfTitle.Substring(0, indexOfEnd);
+            return title;
+         }
+         catch (Exception e2)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "GetEventTitle(): e=" + e2.ToString() + " for key=" + key);
             return null;
          }
       }

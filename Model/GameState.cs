@@ -2493,7 +2493,7 @@ namespace BarbarianPrince
                gi.IsEagleHunt = false;                // e114
                gi.RaftState = RaftEnum.RE_NO_RAFT;    // e122
                gi.IsCavalryEscort = false;            // e151
-               if (false == EncounterFollow(gi, ref action))
+               if (false == EncounterFollow(gi, ref action)) // GameStateSunriseChoice
                {
                   returnStatus = "EncounterFollow() returned false";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
@@ -2837,7 +2837,7 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.E203NightEnslaved:
-               if (false == EncounterEscape(gi, ref action))
+               if (false == EncounterEscape(gi, ref action)) // use this function to randomly move one hex direction
                {
                   returnStatus = "EncounterEscape() returned false for a=" + action.ToString();
                   Logger.Log(LogEnum.LE_ERROR, "GameStateCampfire.PerformAction(): " + returnStatus);
@@ -3013,6 +3013,8 @@ namespace BarbarianPrince
       }
       protected bool PerformJailBreak(IGameInstance gi, ref GameAction action, int dieRoll)
       {
+         gi.RaftState = RaftEnum.RE_NO_RAFT;
+         gi.IsAirborne = false;
          EnteredHex hex = new EnteredHex(gi, ColorActionEnum.CAE_JAIL);
          hex.JailDay++;
          switch (gi.EventActive)
@@ -3403,7 +3405,7 @@ namespace BarbarianPrince
                   }
                   else
                   {
-                     gi.EventDisplayed = gi.EventActive = "e086a";
+                     gi.EventAfterRedistribute = gi.EventDisplayed = gi.EventActive = "e086a";
                      gi.GamePhase = GamePhase.Encounter;
                      gi.DieRollAction = GameAction.EncounterRoll;
                   }
@@ -4271,7 +4273,8 @@ namespace BarbarianPrince
                gi.EventDisplayed = gi.EventActive = "e312c";
                gi.DieRollAction = GameAction.DieRollActionNone;
                break;
-            case GameAction.EncounterFollow:
+            case GameAction.EncounterFollow: // GameStateEncounter
+               gi.RaftState = RaftEnum.RE_NO_RAFT;    // e122
                if (false == EncounterFollow(gi, ref action))
                {
                   returnStatus = "EncounterFollow() returned false";
@@ -5141,8 +5144,8 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                }
                break;
-            case GameAction.TransportRedistributeEnd:
-               if( "e079b" == gi.EventAfterRedistribute ) // Need to set movement based on current conditions after Heavy Rains continues into next day
+            case GameAction.TransportRedistributeEnd: // GameStateEncounter.PerformAction()
+               if ( "e079b" == gi.EventAfterRedistribute ) // Need to set movement based on current conditions after Heavy Rains continues into next day
                {
                   gi.IsGridActive = true;  // TransportRedistributeEnd
                   gi.GamePhase = GamePhase.Travel;
@@ -5225,12 +5228,43 @@ namespace BarbarianPrince
                   }
                   gi.EventAfterRedistribute = "";
                }
+               else if ("e086a" == gi.EventAfterRedistribute) // high pass results
+               {
+                  if (false == EncounterEnd(gi, ref action))
+                  {
+                     returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
+                  gi.EventAfterRedistribute = "";
+               }
                else
                {
-                  gi.EventDisplayed = gi.EventActive = gi.EventAfterRedistribute;
-                  gi.EventAfterRedistribute = "";
-                  gi.DieRollAction = GameAction.EncounterStart;
-                  action = GameAction.UpdateEventViewerActive;
+                  if( "" == gi.EventAfterRedistribute )
+                  {
+                     --gi.Prince.MovementUsed;
+                     if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex
+                     {
+                        returnStatus = "AddMapItemMove() returned false for action=" + action.ToString();
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                     }
+                     else
+                     {
+                        Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateEncounter.PerformAction(TransportRedistributeEnd): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
+                     }
+                     ++gi.Prince.MovementUsed;
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                     }
+                  }
+                  else
+                  {
+                     gi.EventDisplayed = gi.EventActive = gi.EventAfterRedistribute;
+                     gi.EventAfterRedistribute = "";
+                     gi.DieRollAction = GameAction.EncounterStart;
+                     action = GameAction.UpdateEventViewerActive;
+                  }
                }
                break;
             case GameAction.E088FallingRocks:
@@ -14012,6 +14046,8 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_END_ENCOUNTER, "EncounterEnd(): eeeeeeeeeee ae=" + gi.EventActive + " c=" + gi.SunriseChoice.ToString() + " rs=" + riverState + " m=" + gi.Prince.MovementUsed + "/" + gi.Prince.Movement + "eeeeeeeeeeeeeeeeeeeeeeeeeeee");
             if (RaftEnum.RE_RAFT_ENDS_TODAY == gi.RaftState)
             {
+               if (0 == gi.Prince.Territory.Rafts.Count) // if there are no raft hexes, destroy the raft
+                  gi.IsRaftDestroyed = true;
                if ((true == gi.IsRaftDestroyed) || (0==gi.GetCoins()) ) // e122 - raft destroyed on 12 
                   gi.RaftState = RaftEnum.RE_NO_RAFT;
                else

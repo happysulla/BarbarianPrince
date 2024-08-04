@@ -16,7 +16,7 @@ namespace BarbarianPrince
 {
    public partial class EllipseDisplayDialog : Window
    {
-      public EllipseDisplayDialog(EnteredHex hex)
+      public EllipseDisplayDialog(EnteredHex hex, string title)
       {
          InitializeComponent();
          //-------------------------------------------------------------
@@ -102,14 +102,8 @@ namespace BarbarianPrince
          myTextBlock.Inlines.Add(new LineBreak());
          myTextBlock.Inlines.Add(new LineBreak());
          //-------------------------------------------------------------
-         if ( true == hex.IsEncounter )
-         {
-            myTextBlock.Inlines.Add(new Run("Event Name: " + hex.EventName));
-            myTextBlock.Inlines.Add(new LineBreak());
-         }
-         //-------------------------------------------------------------
          StringBuilder sb22 = new StringBuilder();
-         if ( 0 < hex.Party.Count )
+         if (0 < hex.Party.Count)
          {
             int i = 0;
             int lastEntry = hex.Party.Count;
@@ -120,6 +114,12 @@ namespace BarbarianPrince
                   sb22.Append(", ");
             }
             myTextBlock.Inlines.Add(new Run("Party Members: " + sb22.ToString()));
+         }
+         //-------------------------------------------------------------
+         if ( true == hex.IsEncounter )
+         {
+            myTextBlock.Inlines.Add(new Run(hex.EventName + ": " + title));
+            myTextBlock.Inlines.Add(new LineBreak());
          }
          //-------------------------------------------------------------
       }

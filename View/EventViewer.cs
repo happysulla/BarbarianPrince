@@ -33,8 +33,6 @@ namespace BarbarianPrince
       private IDieRoller myDieRoller = null;
       public int DieRoll { set; get; } = 0;
       //--------------------------------------------------------------------
-      private Dictionary<string, string> myEvents = null;
-      public Dictionary<string, string> Events { get => myEvents; } // this property is used for unit testing - 05COnfigFileMgrUnitTesting
       public RuleDialogViewer myRulesMgr = null;
       //--------------------------------------------------------------------
       private ScrollViewer myScrollViewerTextBlock = null;
@@ -113,9 +111,9 @@ namespace BarbarianPrince
             CtorError = true;
             return;
          }
-         if (null == myEvents)
+         if (null == myRulesMgr.Events)
          {
-            Logger.Log(LogEnum.LE_ERROR, "EventPanelViewer(): myEvents=null");
+            Logger.Log(LogEnum.LE_ERROR, "EventPanelViewer(): myRulesMgr.Events=null");
             CtorError = true;
             return;
          }
@@ -131,14 +129,14 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "CreateEvents(): cfr.CtorError=true");
                return false;
             }
-            myEvents = cfr.Records;
-            if (0 == myEvents.Count)
+            myRulesMgr.Events = cfr.Records;
+            if (0 == myRulesMgr.Events.Count)
             {
-               Logger.Log(LogEnum.LE_ERROR, "CreateEvents(): myEvents.Count=0");
+               Logger.Log(LogEnum.LE_ERROR, "CreateEvents(): myRulesMgr.Events.Count=0");
                return false;
             }
             // For each event, create a dictionary entry. Assume no more than three die rolls per event
-            foreach (string key in myEvents.Keys)
+            foreach (string key in myRulesMgr.Events.Keys)
                gi.DieResults[key] = new int[3] { Utilities.NO_RESULT, Utilities.NO_RESULT, Utilities.NO_RESULT };
          }
          catch (Exception e)
@@ -169,7 +167,7 @@ namespace BarbarianPrince
                gi.IsGridActive = false;
                try // resync the gi.DieResults[] to initial conditions
                {
-                  foreach (string key in myEvents.Keys)
+                  foreach (string key in myRulesMgr.Events.Keys)
                      gi.DieResults[key] = new int[3] { Utilities.NO_RESULT, Utilities.NO_RESULT, Utilities.NO_RESULT };
                }
                catch (Exception e)
@@ -593,9 +591,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "OpenEvent(): myTextBlock=null");
             return false;
          }
-         if (null == myEvents)
+         if (null == myRulesMgr.Events)
          {
-            Logger.Log(LogEnum.LE_ERROR, "OpenEvent(): myEvents=null");
+            Logger.Log(LogEnum.LE_ERROR, "OpenEvent(): myRulesMgr.Events=null");
             return false;
          }
          try
@@ -619,7 +617,7 @@ namespace BarbarianPrince
          {
             StringBuilder sb = new StringBuilder();
             sb.Append(@"<TextBlock xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Name='myTextBlockDisplay' xml:space='preserve' Width='600' Background='#17000000' FontFamily='Georgia' FontSize='18' TextWrapping='WrapWithOverflow' IsHyphenationEnabled='true' LineStackingStrategy='BlockLineHeight' Margin='3,0,3,0'>");
-            sb.Append(myEvents[key]);
+            sb.Append(myRulesMgr.Events[key]);
             sb.Append(@"</TextBlock>");
             StringReader sr = new StringReader(sb.ToString());
             XmlTextReader xr = new XmlTextReader(sr);

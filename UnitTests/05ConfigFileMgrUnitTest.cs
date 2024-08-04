@@ -85,14 +85,14 @@ namespace BarbarianPrince
         {
             if (CommandName == myCommandNames[0])
             {
-                string key = myEventViewer.Events.Keys.ElementAt(myKeyIndex);
+                string key = myEventViewer.myRulesMgr.Events.Keys.ElementAt(myKeyIndex);
                 if (false == myEventViewer.OpenEvent(gi, key))
                 {
                     Logger.Log(LogEnum.LE_ERROR, "Command(): OpenEvent() returned false key=" + gi.EventActive + " keyindex=" + myKeyIndex.ToString());
                     return false;
                 }
                 ++myKeyIndex;
-                if (myEventViewer.Events.Keys.Count <= myKeyIndex)
+                if (myEventViewer.myRulesMgr.Events.Keys.Count <= myKeyIndex)
                     myKeyIndex = 0;
             }
             else if (CommandName == myCommandNames[1])
