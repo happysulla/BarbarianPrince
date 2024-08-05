@@ -1192,7 +1192,7 @@ namespace BarbarianPrince
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT_R230:
                myState = EnumR204.TC_EVENT_SHOW_RESULTS;
-               dieRoll = 3; // <cgs> TEST
+               //dieRoll = 3; // <cgs> TEST
                myRollReference = dieRoll;
                if (dieRoll < 7)
                {

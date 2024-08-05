@@ -5452,8 +5452,25 @@ namespace BarbarianPrince
             }
             if (true == myIsHalflingFight)
             {
-               Logger.Log(LogEnum.LE_COMBAT_STATE, "Grid_MouseDown(): " + myState.ToString() + "-->ROLL_FOR_HALFLING");
-               myState = CombatEnum.ROLL_FOR_HALFLING;
+               IMapItem halfling = null;
+               if (true == myIsPartyMembersAssignable) // determine if halfling is dead or unconscious
+               {
+                  if( 0 < myUnassignables.Count )
+                     halfling = myUnassignables[0]; 
+               }
+               else
+               {
+                  if (0 < myAssignables.Count)
+                     halfling = myAssignables[0];
+               }
+               if( null != halfling)
+               {
+                  if ((false == halfling.IsKilled) && (false == halfling.IsUnconscious)) // if not dead or unconscious, halfling tries to escape
+                  {
+                     Logger.Log(LogEnum.LE_COMBAT_STATE, "Grid_MouseDown(): " + myState.ToString() + "-->ROLL_FOR_HALFLING");
+                     myState = CombatEnum.ROLL_FOR_HALFLING;
+                  }
+               }
             }
             else if (true == myIsWolvesFight)
             {

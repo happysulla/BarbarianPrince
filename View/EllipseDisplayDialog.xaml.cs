@@ -114,6 +114,8 @@ namespace BarbarianPrince
                   sb22.Append(", ");
             }
             myTextBlock.Inlines.Add(new Run("Party Members: " + sb22.ToString()));
+            myTextBlock.Inlines.Add(new LineBreak());
+            myTextBlock.Inlines.Add(new LineBreak());
          }
          //-------------------------------------------------------------
          if ( true == hex.IsEncounter )

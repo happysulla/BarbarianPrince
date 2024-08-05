@@ -677,6 +677,8 @@ namespace BarbarianPrince
             gi.LostPartyMembers.Clear();
          Logger.Log(LogEnum.LE_MOVE_COUNT, "EncounterEscape(): MovementUsed=Movement for a=" + action.ToString());
          gi.Prince.MovementUsed = gi.Prince.Movement; // no more travel or today
+         if (0 == adjacentTerritory.Rafts.Count) // if there are no raft hexes, destroy the raft
+            gi.RaftState = RaftEnum.RE_NO_RAFT;
          // !!!!!!Must call EncounterEnd() in the calling routine if this is end of encounter b/c of EncounterEscapeFly and EncounterEscapeMounted take user to different screen to end encounter
          return true;
       }
@@ -1168,7 +1170,7 @@ namespace BarbarianPrince
          else if (true == isEasyMonstersOption.IsEnabled)
          {
             int newEndurance = character.Endurance - 2;
-            character.Endurance = Math.Max(newEndurance, 1 );
+            character.Endurance = Math.Max(newEndurance, 1);
             int newCombat = character.Combat - 3;
             character.Combat = Math.Max(newCombat, 1);
          }
