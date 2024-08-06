@@ -20,6 +20,7 @@ namespace BarbarianPrince
       public Dictionary<string, string> Events { get => myEvents; set => myEvents = value; } // this property is used for unit testing - 05COnfigFileMgrUnitTesting
       private Dictionary<string, TableDialog> myTableDialogs = new Dictionary<string, TableDialog>();
       private Dictionary<string, BannerDialog> myBannerDialogs = new Dictionary<string, BannerDialog>();
+      private Dictionary<string, BannerDialog> myEventDialogs = new Dictionary<string, BannerDialog>();
       private IGameEngine myGameEngine = null;
       private IGameInstance myGameInstance = null;
       public IGameInstance GameInstance{ set => myGameInstance = value; } // the game instance changes when a Game is loaded
@@ -57,6 +58,62 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "RuleDialogViewer(): CreateRules() returned false");
             CtorError = true;
             return;
+         }
+      }
+      public string GetRuleTitle(string key)
+      {
+         try
+         {
+            if (null == myRules)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "GetRuleTitle(): myRules=null for key=" + key);
+               return null;
+            }
+            string multilineString = myRules[key];
+            int indexOfStart = multilineString.IndexOf(key);
+            if (-1 == indexOfStart)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "GetRuleTitle(): IndexOf() returned -1 for key=" + key);
+               return null;
+            }
+            indexOfStart += key.Length + 1; // add one to get past preceeding space
+            string startOfTitle = multilineString.Substring(indexOfStart);
+            int indexOfEnd = startOfTitle.IndexOf('<');
+            string title = startOfTitle.Substring(0, indexOfEnd);
+            return title;
+         }
+         catch (Exception e2)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "GetRuleTitle(): e=" + e2.ToString() + " for key=" + key);
+            return null;
+         }
+      }
+      public string GetEventTitle(string key)
+      {
+         try
+         {
+            if (null == myEvents)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "GetEventTitle(): myEvents=null for key=" + key);
+               return null;
+            }
+            string multilineString = myEvents[key];
+            int indexOfStart = multilineString.IndexOf(key);
+            if (-1 == indexOfStart)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "GetEventTitle(): IndexOf() returned -1 for key=" + key);
+               return null;
+            }
+            indexOfStart += key.Length + 1; // add one to get past preceeding space
+            string startOfTitle = multilineString.Substring(indexOfStart);
+            int indexOfEnd = startOfTitle.IndexOf('<');
+            string title = startOfTitle.Substring(0, indexOfEnd);
+            return title;
+         }
+         catch (Exception e2)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "GetEventTitle(): e=" + e2.ToString() + " for key=" + key);
+            return null;
          }
       }
       public bool ShowRule(string key)
@@ -111,62 +168,6 @@ namespace BarbarianPrince
          {
             Logger.Log(LogEnum.LE_ERROR, "ShowRule(): e=" + e2.ToString() + " for key=" + key);
             return false;
-         }
-      }
-      public string GetRuleTitle(string key)
-      {
-         try
-         {
-            if (null == myRules)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "GetRuleTitle(): myRules=null for key=" + key);
-               return null;
-            }
-            string multilineString = myRules[key];
-            int indexOfStart = multilineString.IndexOf(key);
-            if( -1 == indexOfStart)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "GetRuleTitle(): IndexOf() returned -1 for key=" + key);
-               return null;
-            }
-            indexOfStart += key.Length + 1; // add one to get past preceeding space
-            string startOfTitle = multilineString.Substring(indexOfStart);
-            int indexOfEnd = startOfTitle.IndexOf('<');
-            string title = startOfTitle.Substring(0,indexOfEnd);
-            return title;
-         }
-         catch (Exception e2)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "GetRuleTitle(): e=" + e2.ToString() + " for key=" + key);
-            return null;
-         }
-      }
-      public string GetEventTitle(string key)
-      {
-         try
-         {
-            if (null == myEvents)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "GetEventTitle(): myEvents=null for key=" + key);
-               return null;
-            }
-            string multilineString = myEvents[key];
-            int indexOfStart = multilineString.IndexOf(key);
-            if (-1 == indexOfStart)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "GetEventTitle(): IndexOf() returned -1 for key=" + key);
-               return null;
-            }
-            indexOfStart += key.Length + 1; // add one to get past preceeding space
-            string startOfTitle = multilineString.Substring(indexOfStart);
-            int indexOfEnd = startOfTitle.IndexOf('<');
-            string title = startOfTitle.Substring(0, indexOfEnd);
-            return title;
-         }
-         catch (Exception e2)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "GetEventTitle(): e=" + e2.ToString() + " for key=" + key);
-            return null;
          }
       }
       public bool ShowTable(string key)
@@ -243,7 +244,11 @@ namespace BarbarianPrince
       {
          if (true == myGameInstance.IsGridActive)
          {
-            MessageBox.Show("Must wait for event to complete before showing.");
+            if (false == ShowEventDialog(key))
+            {
+               Logger.Log(LogEnum.LE_ERROR, "ShowEvent():  ShowEventDialog() returned false");
+               return false;
+            }
          }
          else
          {
@@ -252,6 +257,60 @@ namespace BarbarianPrince
             myGameEngine.PerformAction(ref myGameInstance, ref action);
          }
          return true;
+      }
+      public bool ShowEventDialog(string key)
+      {
+         try
+         {
+            BannerDialog dialog = myBannerDialogs[key];
+            if (null != dialog)
+            {
+               dialog.Activate(); // bring to top
+               dialog.Focus();
+               return true;
+            }
+         }
+         catch (System.Collections.Generic.KeyNotFoundException e1)
+         {
+            // do nothing. This is expected first time dialog is created
+         }
+         try
+         {
+            if (null == myRules)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "ShowEventDialog(): myRules=null for key=" + key);
+               return false;
+            }
+            StringBuilder sb = new StringBuilder();
+            sb.Append(@"<TextBlock xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Name='myTextBlockDisplay' xml:space='preserve' Width='555' Height='690' FontFamily='Old English Text MT' FontSize='20' TextWrapping='WrapWithOverflow' IsHyphenationEnabled='true' HorizontalAlignment='Left' VerticalAlignment='Top' Margin='15,0,0,0'>");
+            sb.Append(myEvents[key]);
+            sb.Append(@"</TextBlock>");
+            StringReader sr = new StringReader(sb.ToString());
+            BannerDialog dialog = new BannerDialog(key, sr);
+            if (true == dialog.CtorError)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "ShowEventDialog(): BannerDialog() returned false");
+               return false;
+            }
+            dialog.Closed += BannerDialog_Closed;
+            foreach (Inline inline in dialog.TextBoxDiplay.Inlines)
+            {
+               if (inline is InlineUIContainer)
+               {
+                  InlineUIContainer ui = (InlineUIContainer)inline;
+                  if (ui.Child is Button b)
+                     b.Click += Button_Click1;
+               }
+            }
+            myEventDialogs[key] = dialog;
+            dialog.Show();
+            return true;
+         }
+         catch (Exception e2)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "ShowRule(): e=" + e2.ToString() + " for key=" + key);
+            return false;
+         }
       }
       //--------------------------------------------------------------------
       private bool CreateRules()
@@ -368,6 +427,20 @@ namespace BarbarianPrince
          }
          myBannerDialogs[dialog.Key] = null;
       }
+      private void EventDialog_Closed(object sender, EventArgs e)
+      {
+         BannerDialog dialog = (BannerDialog)sender;
+         foreach (Inline inline in dialog.TextBoxDiplay.Inlines)
+         {
+            if (inline is InlineUIContainer)
+            {
+               InlineUIContainer ui = (InlineUIContainer)inline;
+               if (ui.Child is Button b)
+                  b.Click -= Button_Click1;
+            }
+         }
+         myEventDialogs[dialog.Key] = null;
+      }
       private void TableDialog_Closed(object sender, EventArgs e)
       {
          TableDialog dialog = (TableDialog)sender;
@@ -396,6 +469,35 @@ namespace BarbarianPrince
          else if (true == key.StartsWith("e")) // rules based click
          {
             if (false == ShowEvent(key))
+            {
+               Logger.Log(LogEnum.LE_ERROR, "Button_Click():  ShowEvent() returned false");
+               return;
+            }
+         }
+      }
+      private void Button_Click1(object sender, RoutedEventArgs e)
+      {
+         Button b = (Button)sender;
+         string key = (string)b.Content;
+         if (true == key.StartsWith("r")) // rules based click
+         {
+            if (false == ShowRule(key))
+            {
+               Logger.Log(LogEnum.LE_ERROR, "Button_Click(): ShowRule() returned false");
+               return;
+            }
+         }
+         else if (true == key.StartsWith("t")) // rules based click
+         {
+            if (false == ShowTable(key))
+            {
+               Logger.Log(LogEnum.LE_ERROR, "Button_Click():  ShowTable() returned false");
+               return;
+            }
+         }
+         else if (true == key.StartsWith("e")) // rules based click
+         {
+            if (false == ShowEventDialog(key))
             {
                Logger.Log(LogEnum.LE_ERROR, "Button_Click():  ShowEvent() returned false");
                return;

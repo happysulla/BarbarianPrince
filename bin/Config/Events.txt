@@ -390,7 +390,7 @@ Roll one die to determine the elf's additional characteristics: <InlineUIContain
 <LineBreak/> 6- He has a friend travelling with him who has combat skill 4, endurance 4, and wealth 7.
 <LineBreak/>
                                          <InlineUIContainer><Image Name='ElfWarrior' Source='../../Images/ElfWarrior.gif' Height='200'  Width='136' > </Image></InlineUIContainer>"
-e007c	"<Bold>e007a Talk to Elf</Bold>
+e007c	"<Bold>e007c Talk to Elf</Bold>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1: Inquiry<LineBreak/>
  <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2: Conversation<LineBreak/>
@@ -404,7 +404,7 @@ e007c	"<Bold>e007a Talk to Elf</Bold>
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>"
-e007d	"<Bold>e007b Evade Elf</Bold>
+e007d	"<Bold>e007d Evade Elf</Bold>
 <LineBreak/><LineBreak/>Roll for results:
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
@@ -416,7 +416,7 @@ e007d	"<Bold>e007b Evade Elf</Bold>
  <InlineUIContainer><Button Content='e326' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6: Pass<LineBreak/>
  <InlineUIContainer><Button Content='e329' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7: Pass<LineBreak/>
  <InlineUIContainer><Button Content='e310' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 8: Surprised"
-e007e	"<Bold>e007c Fight Elf</Bold>
+e007e	"<Bold>e007e Fight Elf</Bold>
 <LineBreak/><LineBreak/>Roll for results:
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
@@ -537,7 +537,7 @@ e011c	"<Bold>e011c Peaceful Farmer Killed</Bold>
 <LineBreak/><LineBreak/>Roll one die: <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
                     <InlineUIContainer><Image Source='../../Images/Food.gif' Name='Food'  Height='300' Width='300'></Image></InlineUIContainer> "
-e011d	"<Bold>e011a Farmer's Boy</Bold>
+e011d	"<Bold>e011d Farmer's Boy</Bold>
 <LineBreak/><LineBreak/>Finally when you stop purchasing food, roll one die. If the result is 6, the farmer's youngest son joins you for an adventurous life. He has combat skill 3, endurance 4, and wealth 0. He can act as a guide within two hexes of the location of the farm. Roll one die: <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
                                               <InlineUIContainer><Image Source='../../Images/FarmerBoy.gif' Name='FarmerBoyEnd'  Height='300' Width='150'></Image></InlineUIContainer>"
@@ -960,7 +960,7 @@ e024b	"<Bold>e024b Wizard's Slave</Bold>
 <LineBreak/><LineBreak/>You lose all your wealth, possessions, and mounts. You are the wizard's slave and follow the chaotic movement of the wizard. He will only move one hex per day. Click image to continue.
 <LineBreak/><LineBreak/>
                                   <InlineUIContainer><Image Name='WizardSlave' Source='../../Images/WizardWander.gif' Height='300'  Width='210' > </Image></InlineUIContainer>"
-e024c	"<Bold>e024a Wizard Attack Unsuccessful</Bold>
+e024c	"<Bold>e024c Wizard Attack Unsuccessful</Bold>
 <LineBreak/><LineBreak/>A wizard attempts to use magic and take control of you and your party. However, since you have a Talisman of Resistence, you cancel his magic and engage in combat. Click image to continue.
 <LineBreak/><LineBreak/>
                              <InlineUIContainer><Image Name='WizardFight'  Source='../../Images/TalismanResistance.gif' Height='300' Width='300'></Image></InlineUIContainer>"
@@ -1000,7 +1000,7 @@ e026	"<Bold>e026 Search for Treasure</Bold>
  6 - <InlineUIContainer><Button Content='e026a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/>
                              <InlineUIContainer><Image Name='WizardAdviceEnd' Source='../../Images/WizardAdvice.gif' Height='200'  Width='200'> </Image></InlineUIContainer> "
-e026a	"<Bold>e026 Search for Treasure One More Time</Bold>
+e026a	"<Bold>e026a Search for Treasure One More Time</Bold>
 <LineBreak/><LineBreak/>
 Clues suggest the treasure is in adjacent hext. 
 <LineBreak/><LineBreak/>Roll one die (1-N, 2-NE, 3-SE- 4-S, 5-SW, 6-NW):
@@ -1117,7 +1117,7 @@ As you continue, at the end of the day before the evening meal, you finally reac
  for details.  Click on image to continue.
 <LineBreak/><LineBreak/>
   <InlineUIContainer><Image Source='../../Images/Spectre.gif' Name='Spectre' Height='275'  Width='550'> </Image></InlineUIContainer>"
-e034b	"<Bold>e033b Spectre Treasure</Bold>
+e034b	"<Bold>e034b Spectre Treasure</Bold>
 <LineBreak/><LineBreak/>You have defeated the spectre in the inner tomb. You find it guarding a treasure. Wealth codes are based on a die roll per
  <InlineUIContainer><Button Content='r225' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>:
 <LineBreak/><LineBreak/> 1 - 5   2 - 12   3 - 25   4 - 25   5 - 60   6 - 110
@@ -1266,7 +1266,7 @@ e044	"<Bold>e044 High Altar</Bold>
 <LineBreak/><LineBreak/>Possible results are <InlineUIContainer><Button Content='e044b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.  Choose an image to continue."
 e044a	"<Bold>e044a High Altar Not Usable</Bold>
 <LineBreak/><LineBreak/>You find a high altar of godly power. Since you have no conscious priest or monk, the event ends. Click anywhere to continue."
-e044b	"<Bold>e044a High Altar Possible Outcomes</Bold>
+e044b	"<Bold>e044b High Altar Possible Outcomes</Bold>
 <LineBreak/><LineBreak/>
  1 - Monk or priest is engulfed in godly flames.<LineBreak/>
  2 - Lighting and earthquakes destroy the high altar. Roll one die for each character in the party. Suffer that many wounds due to flying stones and fire.<LineBreak/>
@@ -1749,7 +1749,7 @@ Roll one die and if the result is less than your wit and wiles, the band does no
 2,3,4,5,6 - Campfire <InlineUIContainer><Button Content='e053' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>
 Roll one die: <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
-e058e	"<Bold>e050e Talk with Dwarves</Bold>
+e058e	"<Bold>e058e Talk with Dwarves</Bold>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Inquiry<LineBreak/>
  <InlineUIContainer><Button Content='e331' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Bribe to join (30gp) <LineBreak/>
@@ -1763,7 +1763,7 @@ e058e	"<Bold>e050e Talk with Dwarves</Bold>
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
                                           <InlineUIContainer><Image Source='../../Images/Dwarfs.gif'  Height='200' Width='200'> </Image></InlineUIContainer>"
-e058f	"<Bold>e050f Evade Dwarves</Bold>
+e058f	"<Bold>e058f Evade Dwarves</Bold>
 <LineBreak/><LineBreak/>Roll for results:
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/> 
@@ -1775,7 +1775,7 @@ e058f	"<Bold>e050f Evade Dwarves</Bold>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Attacked
 <LineBreak/><LineBreak/>
                                           <InlineUIContainer><Image Source='../../Images/Dwarfs.gif'  Height='200' Width='200'> </Image></InlineUIContainer>"
-e058g	"<Bold>e050g Fight Dwarves</Bold>
+e058g	"<Bold>e058g Fight Dwarves</Bold>
 <LineBreak/><LineBreak/>Roll for results:
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
@@ -1864,7 +1864,7 @@ e066	"<Bold>e066 Secret Temple</Bold>
 <LineBreak/><LineBreak/>If the result is less than your wit and wiles, you talk your way past the guardians, and you can stay at the temple as if it were a normal temple marked on the map. See
  <InlineUIContainer><Button Content='e066a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>Roll one die: <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
-e066a	"<Bold>e066 Secret Temple Access</Bold>
+e066a	"<Bold>e066a Secret Temple Access</Bold>
 <LineBreak/><LineBreak/>The guards allow access to the secret temple. Thus the rules for food
  <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  and lodging
@@ -2006,7 +2006,7 @@ e071c	"<Bold>e071c Fight Elven Band</Bold>
  <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7 Attack
 <LineBreak/> <LineBreak/>
                                    <InlineUIContainer><Image Source='../../Images/Elf.gif' Height='250' Width='200'></Image></InlineUIContainer>"
-e071d	"<Bold>e071 Elven Band</Bold>
+e071d	"<Bold>e071d Elven Band</Bold>
 <LineBreak/><LineBreak/>The elf leader is the leader of a band of elves. Each elf has combat skill 5, endurance 4, and wealth 7.  Roll one die and add one for the number of elves in the band. Die Roll=
 <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/> <LineBreak/>
@@ -2193,7 +2193,7 @@ e080a	"<Bold>e080a Pixies Gift</Bold>
  6 - Give you a winged Pegasus mount. See <InlineUIContainer><Button Content='e188' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>
                                              <InlineUIContainer><Image Name='PixieGift' Source='../../Images/Pixie.gif' Height='200'  Width='150' > </Image></InlineUIContainer>"
-e080b	"<Bold>e080 Pixies</Bold>
+e080b	"<Bold>e080b Pixies</Bold>
 <LineBreak/><LineBreak/>Since your party has no magician, wizard, witch, elf, or halfling; they dance away and the encounter ends. If you had a pixie affictionado, see <InlineUIContainer><Button Content='e080a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>Click image to continue.
 <LineBreak/><LineBreak/>
@@ -2273,11 +2273,11 @@ e084	"<Bold>e084 Bear Spotted</Bold>
 You spot a menacing bear in the distance. You hope it disappears without a fight. The bear has combat skill 5 and endurance 5. You expect there might be problems tonight. Click image to continue.
 <LineBreak/><LineBreak/>
               <InlineUIContainer><Image Name='BearEncounter' Source='../../Images/BearStory.gif' Height='110' Width='450'></Image></InlineUIContainer>"
-e084a	"<Bold>e084 Bear Stories</Bold>
+e084a	"<Bold>e084a Bear Stories</Bold>
 <LineBreak/><LineBreak/>While sitting down to dinner, a passerby tells the story of a bear attacking a campsite and massacring  the group of travelers. You are glad you are in the confines of a community for protection. Click image to continue.
 <LineBreak/><LineBreak/>
               <InlineUIContainer><Image Name='EncounterEnd' Source='../../Images/BearStory.gif' Height='110' Width='450'></Image></InlineUIContainer>"
-e084b	"<Bold>e084 Bear Comes to Dinner</Bold>
+e084b	"<Bold>e084b Bear Comes to Dinner</Bold>
 <LineBreak/><LineBreak/>You are about to sit down for a meal when a large, black bear wanders into your campsite! 
 <LineBreak/><LineBreak/>The bear will randomly attack one character after another in your party until all are killed, the bear is killed, or you escape. 
 <LineBreak/><LineBreak/>The bear strikes first in combat
@@ -2381,7 +2381,7 @@ Roll one die for an additional event:  <InlineUIContainer><Image Source='../../I
  5,6 - No additional events
 <LineBreak/><LineBreak/>
                                <InlineUIContainer><Image  Name='PoisonPlant' Source='../../Images/PoisonPlant.gif' Height='225' Width='300'></Image></InlineUIContainer>"
-e094	"<Bold>e094a Crocodiles in Swamp</Bold>
+e094	"<Bold>e094 Crocodiles in Swamp</Bold>
 <LineBreak/><LineBreak/>Your party is attacked by very large and very hungry crocodiles. They achieve surprise in combat  <InlineUIContainer><Button Content='r310' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. They have combat skill 4 and endurance of 6. Roll one die for the number of crocs:
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' ></Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
@@ -2482,7 +2482,7 @@ Count Drogat
  especially prizes the item, and it may help you gain audience with him. 
 <LineBreak/><LineBreak/>
 In addition, the beak can be sold to any merchant, or in any town/castle/temple whenever you buy food. The beak is worth 35gp."
-e099a	"<Bold>e098a Evade Roc</Bold>
+e099a	"<Bold>e099a Evade Roc</Bold>
 <LineBreak/><LineBreak/>Roll one die and determine outcome below:
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
@@ -2494,7 +2494,7 @@ e099a	"<Bold>e098a Evade Roc</Bold>
  <InlineUIContainer><Button Content='r308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surpised
 <LineBreak/><LineBreak/>
                                   <InlineUIContainer><Image Source='../../Images/Roc.gif' Height='200' Width='300'></Image></InlineUIContainer>"
-e099b	"<Bold>e098b Fight Roc</Bold>
+e099b	"<Bold>e099b Fight Roc</Bold>
 <LineBreak/><LineBreak/>Roll one die and determine outcome below:
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
@@ -2595,7 +2595,7 @@ e101b	"<Bold>e101b Fight Harpy</Bold>
  <InlineUIContainer><Button Content='r329' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Pass
 <LineBreak/><LineBreak/>
                              <InlineUIContainer><Image Source='../../Images/Harpy.gif' Height='300'  Width='265' > </Image></InlineUIContainer>"
-e101c	"<Bold>e101b Fight Harpy</Bold>
+e101c	"<Bold>e101c Fight Harpy</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
@@ -3010,7 +3010,7 @@ e128f	"<Bold>e128f Merchant Selling Horses</Bold>
 <InlineUIContainer><Button Content='  +  ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>
                                           <InlineUIContainer><Image Source='../../Images/Merchant.gif' Name='EncounterEnd' Height='200'  Width='125'> </Image></InlineUIContainer>"
-e128g	"<Bold>e128d Merchant Ignores you</Bold>
+e128g	"<Bold>e128g Merchant Ignores you</Bold>
 <LineBreak/><LineBreak/>Since you have no gold, the merchant ignores you. Click image to continue.
 <LineBreak/><LineBreak/>
                <InlineUIContainer><Image Source='../../Images/MerchantOutwit.gif' Name='EncounterEnd' Height='200'  Width='400'> </Image></InlineUIContainer>"
@@ -3042,7 +3042,7 @@ e129	"<Bold>e129 Merchant Caravan</Bold>
 e129a	"<Bold>e129a Merchant Caravan Selling Aumulet</Bold>
 <LineBreak/><LineBreak/>Caravan have anti-poison amulet. See
  <InlineUIContainer><Button Content='e187' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>."
-e129b	"<Bold>e128b Caravan Healer Selling Potions</Bold>
+e129b	"<Bold>e129b Caravan Healer Selling Potions</Bold>
 <LineBreak/><LineBreak/>Caravan healer has healing potions for sale. See
  <InlineUIContainer><Button Content='e180' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>
@@ -3221,7 +3221,7 @@ The ruins are unclean and have horrible, gruesome creatures populating them. Rol
  5 -  <InlineUIContainer><Button Content='e082' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  6 -  <InlineUIContainer><Button Content='e098' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
                        <InlineUIContainer><Image  Source='../../Images/RuinsRat.gif' Name='RuinsRat' Height='300'  Width='300'> </Image></InlineUIContainer>"
-e138a	"<Bold>e138 Unclean Survived</Bold>
+e138a	"<Bold>e138a Unclean Survived</Bold>
 <LineBreak/><LineBreak/>You survived the encounter in the unclean ruins. Consult
  <InlineUIContainer><Button Content='r208' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  again to continue your search today. Alternatively, you can end the searching for the day and have your evening meal
@@ -3329,7 +3329,7 @@ Another choice is to simply fight through the guards to rescue the heir. You mak
  Each guard has a combat skill 4 and endurance 5.  Roll three die and add one for the number of guards.  Click image to continue.
 <LineBreak/><LineBreak/>
                                      <InlineUIContainer><Image Source='../../Images/WarriorsHillTribe.gif' Name='EncounterEnd' Height='250' Width='200'></Image></InlineUIContainer>"
-e144a	"<Bold>e144 Escape with True Heir to Huldra Castle</Bold>
+e144a	"<Bold>e144a Escape with True Heir to Huldra Castle</Bold>
 After either using the the item or killing the guards, you can escape
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  from the hill tribe
@@ -3339,7 +3339,7 @@ After either using the the item or killing the guards, you can escape
 Next take the heir to the Huldra castle. If you succeed in disposing the original Baron, the heir will take the throne and will return the favor by marching his army with you back to the Northlands to help you regain your throne. You win the game due to the aide of the new Baron Huldra! Click the image to continue.
 <LineBreak/><LineBreak/>
                                      <InlineUIContainer><Image Source='../../Images/WarriorBoy.gif' Name='ChagaDrug' Height='250' Width='200'></Image></InlineUIContainer>"
-e144b	"<Bold>e144a Travel with Heir to Huldra Castle</Bold>
+e144b	"<Bold>e144b Travel with Heir to Huldra Castle</Bold>
 <LineBreak/><LineBreak/>
 You travel with the heir. If you reach Huldra Castle, your party and the heir have two options.<LineBreak/>
 1.) You can seek an audience with the current Baron
@@ -3415,7 +3415,7 @@ If you pay this bribe, add 10 to the die roll for seeking an audience
  once more. 
 <LineBreak/><LineBreak/>
 If you do not pay the bribe, you cannot attempt an audience with the Lord or Lady in this hex the rest of the game."
-e148e	"<Bold>e148 Seneschal Requires Bribe</Bold>
+e148e	"<Bold>e148e Seneschal Requires Bribe</Bold>
 <LineBreak/><LineBreak/>Seneschal requires a bribe, but you do not have enough money. You cannot attempt an audience with the Lord or Lady in this hex the rest of the game.
 <LineBreak/><LineBreak/>
                                               <InlineUIContainer><Image Source='../../Images/Nothing.gif' Name='Nothing' Height='100' Width='100'></Image></InlineUIContainer>"
@@ -3689,7 +3689,7 @@ e163	"<Bold>e163 Slave Market</Bold>
 <LineBreak/><LineBreak/>Porters <InlineUIContainer><Button Content='e163b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>: Roll one die for cost. Die Roll=<InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer><LineBreak/>
 <LineBreak/><LineBreak/>Slave Girls <InlineUIContainer><Button Content='e163c' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>: Roll two die and add 2 for cost. Dice Roll=<InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21' > </Image></InlineUIContainer><LineBreak/>
 <LineBreak/><LineBreak/>Old Warrior <InlineUIContainer><Button Content='e163d' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>: Roll die and add 2 if no other purchases. Die Roll=<InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll2' Height='21' Width='21' > </Image></InlineUIContainer><LineBreak/>"
-e163a	"<Bold>e163 Slave Market Sale</Bold>
+e163a	"<Bold>e163a Slave Market Sale</Bold>
 <LineBreak/><LineBreak/>You can purchase slaves at the auction block per <InlineUIContainer><Button Content='e163' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>
   <InlineUIContainer><Button Content='  -  ' FontFamily='Courier New'  FontSize='12' Name='SlavePorterMinus'></Button></InlineUIContainer> 
@@ -4017,7 +4017,7 @@ e209a	"<Bold>e209a Seeking News and Information Results</Bold>
  <InlineUIContainer><Button Content='e016' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/> 11 - Discover local thieves' guild. See <InlineUIContainer><Button Content='e209e' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/> 12 - Secret informant offers valuable information for 10 gold. See <InlineUIContainer><Button Content='e209g' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>."
-e209b	"<Bold>e209a Discover Thief's Den</Bold>
+e209b	"<Bold>e209b Discover Thief's Den</Bold>
 <LineBreak/><LineBreak/>You discover a thief's den. Pilliage it while they are out. Click image to continue.
 <LineBreak/><LineBreak/>
                                     <InlineUIContainer><Image Source='../../Images/CoinBag.gif' Name='CoinBag' Height='150' Width='150'></Image></InlineUIContainer>"
@@ -4191,7 +4191,7 @@ e211c	"<Bold>e211c Seeking an Audience with the Baron of Huldra Castle</Bold>
   <InlineUIContainer><Button Content='e150' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 10,11 Pay your respects to the Baron<LineBreak/>
   <InlineUIContainer><Button Content='e151' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 12 Find favor in the eyes of the Baron<LineBreak/>
   <InlineUIContainer><Button Content='e152' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 13 plus - Baron becomes your Noble ally<LineBreak/>"
-e211d	"<Bold>r211c Seeking an Audience with the Count Drogat</Bold>
+e211d	"<Bold>r211d Seeking an Audience with the Count Drogat</Bold>
 <LineBreak/><LineBreak/>As a daily action, you spend the day trying to gain admission to see the Baron Huldra. Roll two die and consult the list below for results: 
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21'> </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
@@ -4205,7 +4205,7 @@ e211d	"<Bold>r211c Seeking an Audience with the Count Drogat</Bold>
   <InlineUIContainer><Button Content='e149' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 9 Must learn court manners<LineBreak/>
   <InlineUIContainer><Button Content='e151' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 10 Find favor in Count's eye<LineBreak/>
   <InlineUIContainer><Button Content='e161' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 11 plus - Audience granted<LineBreak/>"
-e211e	"<Bold>r211c Seeking an Audience with Lady Aeravir</Bold>
+e211e	"<Bold>r211e Seeking an Audience with Lady Aeravir</Bold>
 <LineBreak/><LineBreak/>As a daily action, you spend the day trying to gain admission to see the Baron Huldra. Roll two die and consult the list below for results: 
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21'> </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
@@ -4821,5 +4821,5 @@ e402	"<Bold>e402 Unable to Pay Wages</Bold>
 <LineBreak/><LineBreak/> Unable to pay wages. Encounter ends. Click image to continue.
 <LineBreak/><InlineUIContainer>
                                 <Image Name='EncounterEnd' Source='../../Images/CoinsStackedDeny.gif' Height='75'  Width='75'> </Image></InlineUIContainer> "
-e500	"<Bold>Click Horde to continue</Bold><LineBreak/>
+e500	"<Bold>>e500 Click Horde to continue</Bold><LineBreak/>
 <InlineUIContainer><Image Source='../../Images/CoinsFalling.gif' Name='Horde' Height='550' Width='550'></Image></InlineUIContainer>"

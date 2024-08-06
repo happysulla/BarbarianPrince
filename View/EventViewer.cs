@@ -202,6 +202,15 @@ namespace BarbarianPrince
                }
                dialogRuleListing.Show();
                break;
+            case GameAction.ShowEventListing:
+               RuleListingDialog dialogEventListing = new RuleListingDialog(myRulesMgr, true);
+               if (true == dialogEventListing.CtorError)
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): RuleListingDialog CtorError=true");
+                  return;
+               }
+               dialogEventListing.Show();
+               break;
             //-------------------------------------
             case GameAction.TravelLostCheck:
                EventViewerTravelTable aTravelTableViewer = new EventViewerTravelTable(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);

@@ -265,6 +265,7 @@ namespace BarbarianPrince
          {
             case GameAction.ShowInventory:
             case GameAction.ShowRuleListing:
+            case GameAction.ShowEventListing:
             case GameAction.ShowAboutDialog:
             case GameAction.E228ShowTrueLove:
                break;
@@ -2753,6 +2754,11 @@ namespace BarbarianPrince
             //------------------------------------------------
             command = new RoutedCommand();
             keyGesture = new KeyGesture(Key.F2, ModifierKeys.None);
+            InputBindings.Add(new KeyBinding(command, keyGesture));
+            CommandBindings.Add(new CommandBinding(command, mmv.MenuItemHelpEvents_Click));
+            //------------------------------------------------
+            command = new RoutedCommand();
+            keyGesture = new KeyGesture(Key.F3, ModifierKeys.None);
             InputBindings.Add(new KeyBinding(command, keyGesture));
             CommandBindings.Add(new CommandBinding(command, mmv.MenuItemHelpIcons_Click));
             //------------------------------------------------

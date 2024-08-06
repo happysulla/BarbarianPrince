@@ -97,15 +97,20 @@ namespace BarbarianPrince
                   subItem41.Click += MenuItemHelpRules_Click;
                   myMenuItemTopLevel4.Items.Add(subItem41);
                   MenuItem subItem42 = new MenuItem();
-                  subItem42.Header = "_Icons...";
+                  subItem42.Header = "_Events...";
                   subItem42.InputGestureText = "F2";
-                  subItem42.Click += MenuItemHelpIcons_Click;
+                  subItem42.Click += MenuItemHelpEvents_Click;
                   myMenuItemTopLevel4.Items.Add(subItem42);
                   MenuItem subItem43 = new MenuItem();
-                  subItem43.Header = "_About...";
-                  subItem43.InputGestureText = "Ctrl+A";
-                  subItem43.Click += MenuItemHelpAbout_Click;
+                  subItem43.Header = "_Icons...";
+                  subItem43.InputGestureText = "F3";
+                  subItem43.Click += MenuItemHelpIcons_Click;
                   myMenuItemTopLevel4.Items.Add(subItem43);
+                  MenuItem subItem44 = new MenuItem();
+                  subItem44.Header = "_About...";
+                  subItem44.InputGestureText = "Ctrl+A";
+                  subItem44.Click += MenuItemHelpAbout_Click;
+                  myMenuItemTopLevel4.Items.Add(subItem44);
                }
             } // end foreach (Control item in myMainMenu.Items)
          } // end foreach (Control item in myMainMenu.Items)
@@ -291,6 +296,11 @@ namespace BarbarianPrince
       public void MenuItemHelpRules_Click(object sender, RoutedEventArgs e)
       {
          GameAction action = GameAction.ShowRuleListing;
+         myGameEngine.PerformAction(ref myGameInstance, ref action);
+      }
+      public void MenuItemHelpEvents_Click(object sender, RoutedEventArgs e)
+      {
+         GameAction action = GameAction.ShowEventListing;
          myGameEngine.PerformAction(ref myGameInstance, ref action);
       }
       public void MenuItemHelpIcons_Click(object sender, RoutedEventArgs e)
