@@ -67,11 +67,11 @@ namespace BarbarianPrince
       {
          if ( true == isEventDialog)
          {
-            int numToDisplay = myRulesManager.Events.Keys.Count - STARTING_RULE_ROW; // add one for header row and one for separator
+            int numToDisplay = myRulesManager.Events.Keys.Count - STARTING_EVENT_ROW; // add one for header row and one for separator
             int rowNum = 2;
             for (int i = 0; i < numToDisplay; ++i)
             {
-               int eventNum = i + STARTING_RULE_ROW;
+               int eventNum = i + STARTING_EVENT_ROW;
                string key = myRulesManager.Events.Keys.ElementAt(eventNum);
                string title = myRulesManager.GetEventTitle(key);
                if (null == title)
