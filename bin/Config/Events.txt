@@ -104,7 +104,7 @@ e002b	"<Bold>e002b Talk to Mercenary Royal Guardsmen</Bold>
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>"
-e002c	"<Bold>e002c Evade Royal Guardsmen</Bold>
+e002c	"<Bold>e002c Evade Mercenary Royal Guardsmen</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>

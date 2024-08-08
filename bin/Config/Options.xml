@@ -175,10 +175,10 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="ForceNoLostEvent">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ForceNoEvent">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ForceNoRoadEvent">
     <IsEnabled value="False" />
@@ -199,13 +199,13 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="ForceEvent">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="ForceCrossEvent">
     <IsEnabled value="False" />
   </Option>
   <Option value="ForceRaftEvent">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="ForceAirEvent">
     <IsEnabled value="False" />
