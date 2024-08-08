@@ -2405,8 +2405,7 @@ namespace BarbarianPrince
             string name = (string)mousedEllipse.Tag;
             if( hex.Identifer == name)
             {
-               string title = myEventViewer.myRulesMgr.GetEventTitle(hex.EventName);
-               myEllipseDisplayDialog = new EllipseDisplayDialog(hex, title);
+               myEllipseDisplayDialog = new EllipseDisplayDialog(hex, myEventViewer.myRulesMgr);
                myEllipseDisplayDialog.Show();
                break;
             }

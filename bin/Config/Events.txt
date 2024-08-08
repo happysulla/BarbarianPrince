@@ -1,4 +1,4 @@
-e000	"<LineBreak/><Bold>Game Events Shown Here</Bold>
+e000	"<LineBreak/><Bold>e000 Game Events Shown Here</Bold>
 <LineBreak/><LineBreak/>Active events show a green background. The game may only advance when a green background is displayed. However, the game lets you explore what may happen by showing inactive events. Inactive events have a gray background. To return to the current active event, select the active event button in the status bar per the image.
 <LineBreak/><LineBreak/>
                      <InlineUIContainer><Image Source='../../Images/Tutorial0.gif' Height='70'  Width='370'> </Image></InlineUIContainer>
@@ -228,7 +228,7 @@ e004c	"<Bold>e004c Fight Mercenary Band</Bold>
 <LineBreak/><LineBreak/>
                              <InlineUIContainer><Image Source='../../Images/Mercenaries.gif' Height='300'  Width='225' > </Image></InlineUIContainer>"
 e005	"<Bold>e005 Amazons</Bold>
-<LineBreak/><LineBreak/>You see a group of amazon warriors approaching all on foot. The number in the group is one die roll plus one.
+<LineBreak/><LineBreak/>You see a group of amazon warriors approaching all on foot. The number in the group is one die roll plus one. Die Roll=
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>All have a combat skill 6, endurance 5, and wealth 4. 
 <LineBreak/><LineBreak/>They are blood-sisters and will always hire out together and serve together. If any are abandoned or left behind, all will desert you. 
@@ -509,21 +509,21 @@ e009b	"<Bold>e009b Farm Raid</Bold>
  <InlineUIContainer><Button Content='e016b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 12
 <LineBreak/>
         <InlineUIContainer><Image Source='../../Images/Farmland.gif' Name='FarmlandRaid'  Height='250' Width='500'></Image></InlineUIContainer>"
-e010a	"<Bold>e010a Starving Farmer</Bold>
+e010a	"<Bold>e010a Starving Farmer Friendly Approach</Bold>
 <LineBreak/><LineBreak/><Italic>Friendly Approach:</Italic> Farmer had a ruined harvest and his family is now starving. He begs for charity of five food units from you. If you refuse to give food but have it, all your followers are disgusted by your evil temper. Roll one die for each follower at the start of Tomorrow. A results of 3 plus means the follower deserts you. If you grant the charity or do not have five units, there is no special event or encounter.
 <LineBreak/><LineBreak/>Click not to give: 
 <LineBreak/><InlineUIContainer><Image Name='FoodDeny' Source='../../Images/FoodDeny.gif' Height='75'  Width='75'> </Image></InlineUIContainer> "
-e010b	"<Bold>e010b Starving Farmer</Bold>
+e010b	"<Bold>e010b Starving Farmer Raid</Bold>
 <LineBreak/><LineBreak/><Italic>Raid:</Italic> Farmers and his family are quickly killed. Not combat is necessary, but you find he was poor and starving. No food or money can be gained. Click image to continue.
 <LineBreak/><LineBreak/>
              <InlineUIContainer><Image Source='../../Images/FarmerDead.gif' Name='FarmlandDead'  Height='300' Width='500'></Image></InlineUIContainer>"
-e011a	"<Bold>e011a Peaceful Farmer</Bold>
+e011a	"<Bold>e011a Peaceful Farmer Friendly Approach</Bold>
 <LineBreak/><LineBreak/><Italic>Friendly Approach:</Italic> Farmer is generous and provides food and lodging for your entire party tonight at no cost. Additionally, he will sell you as much as you want to buy.
 <LineBreak/>
                                       <InlineUIContainer><Button Content='  -  ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 
 <InlineUIContainer><Image Source='../../Images/FarmerBoy.gif' Name='FarmerBoy'  Height='300' Width='150'></Image></InlineUIContainer>
 <InlineUIContainer><Button Content='  +  ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>"
-e011b	"<Bold>e011b Peaceful Farmer</Bold>
+e011b	"<Bold>e011b Peaceful Farmer Raid</Bold>
 <LineBreak/><LineBreak/><Italic>Raid:</Italic> The farmer and his family fight back. Together, they count as combat skill 4, endurance 7, and wealth 1. See
  <InlineUIContainer><Button Content='r330' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  for combat situation.
@@ -541,7 +541,7 @@ e011d	"<Bold>e011d Farmer's Boy</Bold>
 <LineBreak/><LineBreak/>Finally when you stop purchasing food, roll one die. If the result is 6, the farmer's youngest son joins you for an adventurous life. He has combat skill 3, endurance 4, and wealth 0. He can act as a guide within two hexes of the location of the farm. Roll one die: <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
                                               <InlineUIContainer><Image Source='../../Images/FarmerBoy.gif' Name='FarmerBoyEnd'  Height='300' Width='150'></Image></InlineUIContainer>"
-e012a	"<Bold>e012a Farmer with Protector</Bold>
+e012a	"<Bold>e012a Farmer with Protector Friendly Approach</Bold>
 <LineBreak/><LineBreak/><Italic>Friendly Approach:</Italic>The farmer warns you off his land, but he will sell you food in any quantity you desire. 
 Regardless of whether you buy or not, the event will end and you continue on your way.
 <LineBreak/><LineBreak/> 
@@ -549,7 +549,7 @@ Regardless of whether you buy or not, the event will end and you continue on you
 <InlineUIContainer><Image Source='../../Images/Food.gif' Name='Food'  Height='50' Width='50'></Image></InlineUIContainer> 
 <InlineUIContainer><Button Content='  +  ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>         <InlineUIContainer><Image Source='../../Images/Farmland.gif' Name='FarmlandEnd'  Height='250' Width='500'></Image></InlineUIContainer>"
-e012b	"<Bold>e012b Farmer with Protector</Bold>
+e012b	"<Bold>e012b Farmer with Protector Raid</Bold>
 <LineBreak/><LineBreak/><Italic>Raid:</Italic> The farmer and his family bolt the doors and send smoke signals. Farmer and family have combat skill 4, endurance 7, and wealth 2 when fighting
  <InlineUIContainer><Button Content='r220' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>However, after each round, roll one die.  A 3 plus means the Protector arrives with his men. If they arrive, on the next round they strike first. They are five men strong. The Protector has combat skill 6, endurance 5, and wealth 25. His four men each have combat skill 5, endurnace 5, and wealth 4.
@@ -557,7 +557,7 @@ e012b	"<Bold>e012b Farmer with Protector</Bold>
  <InlineUIContainer><Button Content='e040' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. Click image to continue.
 <LineBreak/>
                           <InlineUIContainer><Image Source='../../Images/BarredDoor.gif' Name='FarmlandBoltDoor' Height='300' Width='300'></Image></InlineUIContainer>"
-e013a	"<Bold>e013a Rich Peasant Family</Bold>
+e013a	"<Bold>e013a Rich Peasant Family Friendly Approach</Bold>
 <LineBreak/><LineBreak/><Italic>Friendly Approach:</Italic>The family provides food
  <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> and lodging
  <InlineUIContainer><Button Content='r217' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
@@ -4060,7 +4060,7 @@ e209h	"<Bold>e209h Buy Valuable Information</Bold>
 <LineBreak/>   4 - <InlineUIContainer><Button Content='e144' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/>   5 - <InlineUIContainer><Button Content='e145' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/>   6 - <InlineUIContainer><Button Content='e146' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
-<LineBreak/><LineBreak/><InlineUIContainer>
+<LineBreak/><LineBreak/>
                                       <InlineUIContainer><Image Name='BuyInfoEnd' Source='../../Images/Nothing.gif' Height='150' Width='150'></Image></InlineUIContainer>"
 e210	"<Bold>e210 Seeking to Hire Followers</Bold>
 <LineBreak/><LineBreak/>In this daily action, you spend the day posting notices, visiting agents/merchants, and inquiring at taverns about the availability of hired help. Roll two die and consult the list below for results: 

@@ -80,6 +80,7 @@ namespace BarbarianPrince
          else
             gi.Prince.Movement = 1;
          //----------------------------------------------
+         gi.RaftStatePrevUndo = gi.RaftState;
          if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
             gi.ReduceCoins(1); // pay one to raftsmen
          else                  // e122 - if travel some other way other than raft
@@ -678,7 +679,7 @@ namespace BarbarianPrince
          Logger.Log(LogEnum.LE_MOVE_COUNT, "EncounterEscape(): MovementUsed=Movement for a=" + action.ToString());
          gi.Prince.MovementUsed = gi.Prince.Movement; // no more travel or today
          if (0 == adjacentTerritory.Rafts.Count) // if there are no raft hexes, destroy the raft
-            gi.RaftState = RaftEnum.RE_NO_RAFT; // EncounterEscape()
+            gi.RaftStatePrevUndo = gi.RaftState = RaftEnum.RE_NO_RAFT; // EncounterEscape()
          // !!!!!!Must call EncounterEnd() in the calling routine if this is end of encounter b/c of EncounterEscapeFly and EncounterEscapeMounted take user to different screen to end encounter
          return true;
       }
@@ -969,6 +970,7 @@ namespace BarbarianPrince
             }
             return true;
          }
+         gi.RaftStatePrevUndo = gi.RaftState;
          if (false == isTravel)
             gi.RaftState = RaftEnum.RE_NO_RAFT; // SetSubstitutionEvent() and not traveling
          // if traveling and flying into eagle lairs, show e115. If not traveling and in eagle lair, assume already there.
@@ -1213,6 +1215,8 @@ namespace BarbarianPrince
          gi.IsUndoCommandAvailable = false;
          gi.SunriseChoice = GamePhase.StartGame;
          gi.GamePhase = GamePhase.SunriseChoice;
+         if( (RaftEnum.RE_RAFT_CHOSEN == gi.RaftStatePrevUndo) || (RaftEnum.RE_RAFT_SHOWN == gi.RaftStatePrevUndo) )
+            gi.RaftState = RaftEnum.RE_RAFT_SHOWN;
          gi.EventDisplayed = gi.EventActive = "e203";
          Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "UndoCommand():  gi.MapItemMoves.Clear()  a=" + action.ToString());
          gi.MapItemMoves.Clear();
@@ -2336,6 +2340,7 @@ namespace BarbarianPrince
                gi.IsAirborne = true;
                gi.IsAirborneEnd = false;
                gi.IsShortHop = false;
+               gi.RaftStatePrevUndo = gi.RaftState;
                gi.RaftState = RaftEnum.RE_NO_RAFT;    // e122
                Logger.Log(LogEnum.LE_UNDO_COMMAND, "GameStateSunriseChoice.PerformAction(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->true  a=" + action.ToString());
                gi.IsUndoCommandAvailable = true;
@@ -2495,6 +2500,7 @@ namespace BarbarianPrince
                gi.IsHeavyRain = false;                // e079
                gi.IsFloodContinue = false;            // e092
                gi.IsEagleHunt = false;                // e114
+               gi.RaftStatePrevUndo = gi.RaftState;
                gi.RaftState = RaftEnum.RE_NO_RAFT;    // e122
                gi.IsCavalryEscort = false;            // e151
                if (false == EncounterFollow(gi, ref action)) // GameStateSunriseChoice
@@ -2633,15 +2639,16 @@ namespace BarbarianPrince
          gi.IsUndoCommandAvailable = true;
          gi.NumMembersBeingFollowed = 0;
          gi.IsAirborne = false;
-         gi.IsWoundedWarriorRest = false;       // e069
-         gi.IsTrainHorse = false;               // e077
-         gi.IsBadGoing = false;                 // e078
-         gi.IsFloodContinue = false;            // e092
-         gi.AtRiskMounts.Clear();               // e095
-         gi.IsEagleHunt = false;                // e114
-         gi.RaftState = RaftEnum.RE_NO_RAFT;    // e122
-         gi.IsWoundedBlackKnightRest = false;   // e123
-         gi.IsCavalryEscort = false;            // e151
+         gi.IsWoundedWarriorRest = false;          // e069
+         gi.IsTrainHorse = false;                  // e077
+         gi.IsBadGoing = false;                    // e078
+         gi.IsFloodContinue = false;               // e092
+         gi.AtRiskMounts.Clear();                  // e095
+         gi.IsEagleHunt = false;                   // e114
+         gi.RaftStatePrevUndo = gi.RaftState;
+         gi.RaftState = RaftEnum.RE_NO_RAFT;       // e122
+         gi.IsWoundedBlackKnightRest = false;      // e123
+         gi.IsCavalryEscort = false;               // e151
          foreach (IMapItem mi in gi.PartyMembers)
             mi.IsCatchCold = false;
       }
@@ -3020,9 +3027,11 @@ namespace BarbarianPrince
       }
       protected bool PerformJailBreak(IGameInstance gi, ref GameAction action, int dieRoll)
       {
-         gi.RaftState = RaftEnum.RE_NO_RAFT; // PerformJailBreak()
+         gi.RaftStatePrevUndo = gi.RaftState = RaftEnum.RE_NO_RAFT; // PerformJailBreak()
          gi.IsAirborne = false;
          EnteredHex hex = new EnteredHex(gi, ColorActionEnum.CAE_JAIL);
+         hex.EventName = gi.EventActive;
+         hex.IsEncounter = true;
          hex.JailDay++;
          switch (gi.EventActive)
          {
@@ -4290,6 +4299,7 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.DieRollActionNone;
                break;
             case GameAction.EncounterFollow: // GameStateEncounter
+               gi.RaftStatePrevUndo = gi.RaftState;
                gi.RaftState = RaftEnum.RE_NO_RAFT;    // e122 - GameStateEncounter(GameAction.EncounterFollow)
                if (false == EncounterFollow(gi, ref action))
                {
@@ -4910,7 +4920,7 @@ namespace BarbarianPrince
                   action = GameAction.UpdateEventViewerActive;
                   gi.EventStart = gi.EventDisplayed = gi.EventActive = "e063"; // imprisoned
                   gi.IsJailed = true;
-                  gi.RaftState = RaftEnum.RE_NO_RAFT; // GameAction.E060JailOvernigh
+                  gi.RaftStatePrevUndo = gi.RaftState = RaftEnum.RE_NO_RAFT; // GameAction.E060JailOvernigh
                   gi.Prince.ResetPartial();
                   if (false == gi.RemoveBelongingsInParty())
                   {
@@ -5736,7 +5746,7 @@ namespace BarbarianPrince
             case GameAction.E126RaftInCurrent:
                break;
             case GameAction.E126RaftInCurrentLostRaft:
-               gi.RaftState = RaftEnum.RE_NO_RAFT;
+               gi.RaftStatePrevUndo = gi.RaftState = RaftEnum.RE_NO_RAFT;
                Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateEncounter.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
                gi.Prince.MovementUsed = gi.Prince.Movement; // stop movement
                if (false == EncounterEnd(gi, ref action))
@@ -5934,7 +5944,7 @@ namespace BarbarianPrince
                int countOfPersons = gi.RemoveLeaderlessInParty();
                if (0 < countOfPersons)  // If there are any surviving party members, they run away and take all mounts and treasures
                {
-                  gi.RaftState = RaftEnum.RE_NO_RAFT;
+                  gi.RaftStatePrevUndo = gi.RaftState = RaftEnum.RE_NO_RAFT;
                   gi.Prince.ResetPartial();
                }
                else
@@ -14065,7 +14075,7 @@ namespace BarbarianPrince
                if (0 == gi.Prince.Territory.Rafts.Count) // if there are no raft hexes, destroy the raft
                   gi.IsRaftDestroyed = true;
                if ((true == gi.IsRaftDestroyed) || (0==gi.GetCoins()) ) // e122 - raft destroyed on 12 
-                  gi.RaftState = RaftEnum.RE_NO_RAFT;
+                  gi.RaftStatePrevUndo = gi.RaftState = RaftEnum.RE_NO_RAFT;
                else
                   gi.RaftState = RaftEnum.RE_RAFT_SHOWN;
             }
@@ -14187,7 +14197,7 @@ namespace BarbarianPrince
       {
          gi.EventStart = gi.EventDisplayed = gi.EventActive = "e061";
          gi.IsJailed = true;
-         gi.RaftState = RaftEnum.RE_NO_RAFT; // MarkedForDeath()
+         gi.RaftStatePrevUndo = gi.RaftState = RaftEnum.RE_NO_RAFT; // MarkedForDeath()
          gi.HydraTeethCount = 0;
          gi.ChagaDrugCount = 0;
          gi.Prince.ResetPartial();
@@ -14204,7 +14214,7 @@ namespace BarbarianPrince
          gi.WanderingDayCount = 0;
          gi.DieRollAction = GameAction.EncounterRoll;
          gi.IsEnslaved = true;
-         gi.RaftState = RaftEnum.RE_NO_RAFT; // Enslaved()
+         gi.RaftStatePrevUndo = gi.RaftState = RaftEnum.RE_NO_RAFT; // Enslaved()
          gi.HydraTeethCount = 0;
          gi.ChagaDrugCount = 0;
          gi.Prince.ResetPartial();
@@ -14218,7 +14228,7 @@ namespace BarbarianPrince
             abandonedPartyMembers.Add(mi);
          foreach (IMapItem mi in abandonedPartyMembers)
             gi.RemoveAbandonedInParty(mi);
-         gi.RaftState = RaftEnum.RE_NO_RAFT;
+         gi.RaftStatePrevUndo = gi.RaftState = RaftEnum.RE_NO_RAFT;
          gi.HydraTeethCount = 0;
          gi.ChagaDrugCount = 0;
          gi.Prince.ResetPartial();
@@ -14227,7 +14237,7 @@ namespace BarbarianPrince
       {
          gi.EventStart = gi.EventDisplayed = gi.EventActive = "e063";
          gi.IsJailed = true;
-         gi.RaftState = RaftEnum.RE_NO_RAFT;
+         gi.RaftStatePrevUndo = gi.RaftState = RaftEnum.RE_NO_RAFT;
          gi.HydraTeethCount = 0;
          gi.ChagaDrugCount = 0;
          gi.Prince.ResetPartial();

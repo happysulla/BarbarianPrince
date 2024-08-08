@@ -147,6 +147,7 @@ namespace BarbarianPrince
       public bool IsEagleHunt { set; get; } = false;
       public bool IsExhausted { set; get; } = false;
       public RaftEnum RaftState { set; get; } = RaftEnum.RE_NO_RAFT; // e122 - Party can be rafting for the day
+      public RaftEnum RaftStatePrevUndo { set; get; } = RaftEnum.RE_NO_RAFT;
       public bool IsRaftDestroyed { set; get; } = false;
       public bool IsWoundedBlackKnightRest { set; get; } = false;
       public bool IsTrainHorse { set; get; } = false;

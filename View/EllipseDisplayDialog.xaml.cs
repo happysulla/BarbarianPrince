@@ -16,9 +16,17 @@ namespace BarbarianPrince
 {
    public partial class EllipseDisplayDialog : Window
    {
-      public EllipseDisplayDialog(EnteredHex hex, string title)
+      public RuleDialogViewer myRulesMgr = null;
+      public EllipseDisplayDialog(EnteredHex hex, RuleDialogViewer rm)
       {
          InitializeComponent();
+         //-------------------------------------------------------------
+         if( null == rm )
+         {
+            Logger.Log(LogEnum.LE_ERROR, "EllipseDisplayDialog(): rm=null");
+            return;
+         }
+         myRulesMgr = rm;
          //-------------------------------------------------------------
          myTextBlock.Inlines.Add(new Run(" Hex #" + hex.HexName));
          myTextBlock.Inlines.Add(new LineBreak());
@@ -42,7 +50,7 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new Run("Rest"));
                break;
             case ColorActionEnum.CAE_JAIL:
-               myTextBlock.Inlines.Add(new Run("Event Name: " + hex.EventName));
+               myTextBlock.Inlines.Add(new Run("Jailed"));
                break;
             case ColorActionEnum.CAE_TRAVEL:
                if (true == hex.IsEncounter)
@@ -106,11 +114,10 @@ namespace BarbarianPrince
          if (0 < hex.Party.Count)
          {
             int i = 0;
-            int lastEntry = hex.Party.Count;
             foreach (String partyMember in hex.Party)
             {
                sb22.Append(partyMember);
-               if (++i != lastEntry)
+               if (++i != hex.Party.Count)
                   sb22.Append(", ");
             }
             myTextBlock.Inlines.Add(new Run("Party Members: " + sb22.ToString()));
@@ -118,6 +125,33 @@ namespace BarbarianPrince
             myTextBlock.Inlines.Add(new LineBreak());
          }
          //-------------------------------------------------------------
+         string title = null;
+         if (ColorActionEnum.CAE_JAIL == hex.ColorAction)
+         {
+            switch( hex.EventName )
+            {
+               case "e203a":
+                  title = "Prison Escape Attempt";
+                  break;
+               case "e203c":
+                  title = "Night in Dungeon";
+                  break;
+               case "e203e":
+                  title = "Wizard's Slave";
+                  break;
+               default:
+                  Logger.Log(LogEnum.LE_ERROR, "EllipseDisplayDialog(): Reached default with hex.EventName =" + hex.EventName);
+                  return;
+            }
+         }
+         else if("e000" == hex.EventName)
+         {
+            return;
+         }
+         else
+         {
+            title = myRulesMgr.GetEventTitle(hex.EventName);
+         }
          if ( true == hex.IsEncounter )
          {
             myTextBlock.Inlines.Add(new Run(hex.EventName + ": " + title));

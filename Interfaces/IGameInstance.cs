@@ -97,6 +97,7 @@ namespace BarbarianPrince
       bool IsEagleHunt { set; get; } // e114 - Eagles help to hunt
       bool IsExhausted { set; get; } // e120 - Party is exhausted
       RaftEnum RaftState { set; get; } // e122 - Party can be rafting for the day
+      RaftEnum RaftStatePrevUndo { set; get; } // e122 - Need to return to this raft state if undo command is selected
       bool IsRaftDestroyed { set; get; } // e122 - Destroyed on a 12 after use
       bool IsWoundedBlackKnightRest { set; get; } // e123 - Defeated black knight - so may now rest
       int PurchasedPotionCure { set; get; } // e128 - purchased potion cures
