@@ -520,27 +520,30 @@ namespace BarbarianPrince
       }
       private bool UpdateHeader()
       {
+         myStackPanelCheckMarks.Children.Clear();
          CheckBox cb = new CheckBox() { FontSize = 12, IsEnabled = false, IsChecked = true, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
+         string content = "";
+
          switch (myState)
          {
             case LoadEnum.LE_ASSIGN_MOUNTS:
-               myStackPanelCheckMarks.Children.Clear();
-               cb.Content = "Assign Mounts";
+               content = "Assign Mounts";
                break;
             case LoadEnum.LE_ASSIGN_CARRIERS:
-               myStackPanelCheckMarks.Children.Clear();
-               cb.Content = "Assign Carriers";
+               content = "Assign Carriers";
                break;
             case LoadEnum.LE_ASSIGN_FOOD_GOLD:
                if (false == myIsSomeCoinOrFood)
                   cb.IsChecked = false;
-               myStackPanelCheckMarks.Children.Clear();
-               cb.Content = "Assign Loads";
+               content = "Assign Loads";
                break;
             default:
                Logger.Log(LogEnum.LE_ERROR, "UpdateHeader(): reached default");
                return false;
          }
+         if (true == myGameInstance.IsAirborne)
+            content += " and Prince must be assigned flying mount";
+         cb.Content = content;
          myStackPanelCheckMarks.Children.Add(cb);
          return true;
       }
@@ -692,10 +695,13 @@ namespace BarbarianPrince
                   Image img21 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Tag = "Continue", Width = Utilities.theMapItemSize, Height = Height = Utilities.theMapItemSize };
                   myStackPanelAssignable.Children.Add(img21);
                }
-               else if (myGameInstance.Prince.MovementUsed < myGameInstance.Prince.Movement)
+               else if ( myGameInstance.Prince.MovementUsed < myGameInstance.Prince.Movement )
                {
-                  Image img21 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Tag = "Continue", Width = Utilities.theMapItemSize, Height = Height = Utilities.theMapItemSize };
-                  myStackPanelAssignable.Children.Add(img21);
+                  if( (true == myGameInstance.IsAirborne) && (true == myGameInstance.Prince.IsFlying) )
+                  {
+                     Image img21 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Tag = "Continue", Width = Utilities.theMapItemSize, Height = Height = Utilities.theMapItemSize };
+                     myStackPanelAssignable.Children.Add(img21);
+                  }
                }
                else
                {

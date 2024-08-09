@@ -178,16 +178,8 @@ namespace BarbarianPrince
          myBrushes.Add(Brushes.Orange);
          myDashArray.Add(4);  // used for dotted lines
          myDashArray.Add(2);  // used for dotted lines
-         //-----------------------------------------------------------------            
-         myRectangleSelected.Stroke = Brushes.Red; // Create a Bounding Rectangle to indicate when a MapItem is selected to be moved by mouse pointer
-         myRectangleSelected.StrokeThickness = 3.0;
-         myRectangleSelected.Width = Utilities.theMapItemSize + 2;
-         myRectangleSelected.Height = Utilities.theMapItemSize + 2;
-         myRectangleSelected.Visibility = Visibility.Hidden;
-         myCanvas.Children.Add(myRectangleSelected);
-         Canvas.SetZIndex(myRectangleSelected, 1000);
          //-----------------------------------------------------------------
-         myDieRoller = new DieRoller(myCanvas, RemoveSplashScreen);
+         myDieRoller = new DieRoller(myCanvas, CloseSplashScreen);
          if (true == myDieRoller.CtorError)
          {
             Logger.Log(LogEnum.LE_ERROR, "GameViewerWindow(): myDieRoller.CtorError=true");
@@ -225,6 +217,9 @@ namespace BarbarianPrince
       {
          if (GameAction.RemoveSplashScreen == action)
             mySplashScreen.Close();
+         //-------------------------------------------------------
+         if (GameAction.TravelAirRedistribute == action)
+            return;
          //-------------------------------------------------------
          if ((null != myTargetCursor) && (GameAction.UpdateStatusBar == action)) // increase/decrease size of cursor when zoom in or out
          {
@@ -339,7 +334,7 @@ namespace BarbarianPrince
          }
       }
       //-----------------------SUPPORTING FUNCTIONS--------------------
-      private void RemoveSplashScreen() // callback function that removes splash screen when dice are loaded
+      private void CloseSplashScreen() // callback function that removes splash screen when dice are loaded
       {
          GameAction outAction = GameAction.RemoveSplashScreen;
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
@@ -916,7 +911,7 @@ namespace BarbarianPrince
          p.Y = t.CenterPoint.Y + yOffset;
          Canvas.SetLeft(aEllipse, p.X - theEllipseOffset);
          Canvas.SetTop(aEllipse, p.Y - theEllipseOffset);
-         Canvas.SetZIndex(aEllipse, 2);
+         Canvas.SetZIndex(aEllipse, 1000);
          myCanvas.Children.Add(aEllipse);
          return p;
       }
@@ -2413,7 +2408,7 @@ namespace BarbarianPrince
                break;
             }
          }
-         e.Handled = true;  
+         //e.Handled = true;  
       }
       private void MouseLeaveEllipse(object sender, MouseEventArgs e)
       {

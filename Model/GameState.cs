@@ -2356,6 +2356,8 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.TransportRedistributeEnd:
+               Logger.Log(LogEnum.LE_UNDO_COMMAND, "GameStateSunriseChoice.PerformAction(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->false for a=" + action.ToString());
+               gi.IsUndoCommandAvailable = false; // cannot undo after redistribute happens
                if (false == gi.PartyReadyToFly()) // mount to fly returns false if anybody is left or possessions are left
                {
                   gi.IsAirborne = false;
