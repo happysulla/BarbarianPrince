@@ -41,6 +41,8 @@ namespace BarbarianPrince
          myCheckBoxPrincePegasus.ToolTip = "Prince starts with a Pegasus mount.";
          myCheckBoxPrinceCoin.ToolTip = "Prince starts with 50-99 gold pieces.";
          myCheckBoxPrinceFood.ToolTip = "Prince starts with 10 food.";
+         myCheckBoxStartNerveGas.ToolTip = "Prince starts with Nerve Gas Bomb.";
+         myCheckBoxStartNecklass.ToolTip = "Prince starts with Resurrection Necklass.";
          //--------------------
          myRadioButtonPartyOriginal.ToolTip = "Prince starts by himself.";
          myRadioButtonPartyRandom10.ToolTip = "10 random party members are added.";
@@ -166,6 +168,38 @@ namespace BarbarianPrince
             return false;
          }
          myCheckBoxPrinceFood.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+         {
+            isCustomConfig = true;
+         }
+         else
+         {
+            isFunOption = false;
+         }
+         //-------------------------
+         option = options.Find("StartWithNerveGame");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-StartWithNerveGame");
+            return false;
+         }
+         myCheckBoxStartNerveGas.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+         {
+            isCustomConfig = true;
+         }
+         else
+         {
+            isFunOption = false;
+         }
+         //-------------------------
+         option = options.Find("StartWithNecklass");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-StartWithNecklass");
+            return false;
+         }
+         myCheckBoxStartNecklass.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
          {
             isCustomConfig = true;
@@ -1149,6 +1183,16 @@ namespace BarbarianPrince
             option.IsEnabled = false;
          else
             Logger.Log(LogEnum.LE_ERROR, "ResetPrince(): not found PrinceFood");
+         option = myOptions.Find("StartWithNerveGame");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPrince(): not found StartWithNerveGame");
+         option = myOptions.Find("StartWithNecklass");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPrince(): not found StartWithNecklass");
       }
       private void ResetParty()
       {
@@ -1612,6 +1656,24 @@ namespace BarbarianPrince
             else
                option.IsEnabled = !option.IsEnabled;
          }
+         choice = Utilities.RandomGenerator.Next(2);
+         if (1 == choice)
+         {
+            Option option = myOptions.Find("StartWithNerveGame");
+            if (null == option)
+               Logger.Log(LogEnum.LE_ERROR, "SelectRandomPrinceChoice(): myOptions.Find() for option=StartWithNerveGame");
+            else
+               option.IsEnabled = !option.IsEnabled;
+         }
+         choice = Utilities.RandomGenerator.Next(2);
+         if (1 == choice)
+         {
+            Option option = myOptions.Find("StartWithNecklass");
+            if (null == option)
+               Logger.Log(LogEnum.LE_ERROR, "SelectRandomPrinceChoice(): myOptions.Find() for option=StartWithNecklass");
+            else
+               option.IsEnabled = !option.IsEnabled;
+         }
       }
       private void SelectRandomPartyOptionChoice()
       {
@@ -1708,6 +1770,16 @@ namespace BarbarianPrince
          option = myOptions.Find("PrinceCoin");
          if (null == option)
             Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=PrinceCoin");
+         else
+            option.IsEnabled = true;
+         option = myOptions.Find("StartWithNerveGame");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=StartWithNerveGame");
+         else
+            option.IsEnabled = true;
+         option = myOptions.Find("StartWithNecklass");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=StartWithNecklass");
          else
             option.IsEnabled = true;
          option = myOptions.Find("PartyCustom");
@@ -1824,6 +1896,8 @@ namespace BarbarianPrince
             case "myCheckBoxPrincePegasus": option = myOptions.Find("PrincePegasus"); break;
             case "myCheckBoxPrinceCoin": option = myOptions.Find("PrinceCoin"); break;
             case "myCheckBoxPrinceFood": option = myOptions.Find("PrinceFood"); break;
+            case "myCheckBoxStartNerveGas": option = myOptions.Find("StartWithNerveGame"); break;
+            case "myCheckBoxStartNecklass": option = myOptions.Find("StartWithNecklass"); break;
             default: Logger.Log(LogEnum.LE_ERROR, "StackPanelPrince_Click(): reached default name=" + cb.Name); return;
          }
          if (null == option)

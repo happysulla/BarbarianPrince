@@ -269,7 +269,7 @@ namespace BarbarianPrince
          }
          else
          {
-            SetStateStarvation();
+            SetStateStarvation(); // Party if Fed if they are in a town and money was paid to feed them during the HUNTING phase - EventViewerHuntMgr class
          }
          //--------------------------------------------------
          System.Windows.Point hotPoint = new System.Windows.Point(Utilities.theMapItemOffset, Utilities.theMapItemOffset); // set the center of the MapItem as the hot point for the cursor

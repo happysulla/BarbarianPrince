@@ -143,7 +143,7 @@ namespace BarbarianPrince
          ITerritory t = gi.NewHex;
          if (null == t)
             t = gi.Prince.Territory;
-         bool isStructure = gi.IsInTownOrCastle(t);
+         bool isStructure = gi.IsInStructure(t);
          bool isHunting = (false == isStructure) && (("Countryside" == t.Type) || ("Hills" == t.Type) || ("Forest" == t.Type) || ("Farmland" == t.Type) || ("Swamp" == t.Type)) || (true == gi.IsEagleHunt); // no hunting in mountain or desert w/o eagle
          bool isBuyingFood = ((true == isStructure) && (0 < gi.GetCoins()));
          if (((true == isBuyingFood) || (true == isHunting)) && (false == gi.IsJailed) && (false == gi.IsEnslaved) && (false == gi.IsGuardEncounteredThisTurn) && (false == gi.IsHuntedToday) && (false == gi.IsPoisonPlant))
@@ -1507,6 +1507,26 @@ namespace BarbarianPrince
          }
          if (true == option.IsEnabled)
             gi.Prince.Food += 5;
+         //---------------------------------------------------------
+         itemToAdd = "StartWithNerveGame";
+         option = options.Find(itemToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            gi.AddSpecialItem(SpecialEnum.NerveGasBomb);
+         //---------------------------------------------------------
+         itemToAdd = "StartWithNecklass";
+         option = options.Find(itemToAdd);
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
+            return false;
+         }
+         if (true == option.IsEnabled)
+            gi.AddSpecialItem(SpecialEnum.ResurrectionNecklace);
          return true;
       }
       private bool AddStartingOptions(IGameInstance gi)
@@ -2133,7 +2153,7 @@ namespace BarbarianPrince
          //gi.AddSpecialItem(SpecialEnum.MagicSword);
          //gi.AddSpecialItem(SpecialEnum.AntiPoisonAmulet);
          //gi.AddSpecialItem(SpecialEnum.PegasusMountTalisman);
-         gi.AddSpecialItem(SpecialEnum.NerveGasBomb);
+         //gi.AddSpecialItem(SpecialEnum.NerveGasBomb);
          //gi.AddSpecialItem(SpecialEnum.ResistanceRing);
          //gi.AddSpecialItem(SpecialEnum.ResurrectionNecklace);
          //gi.AddSpecialItem(SpecialEnum.ShieldOfLight);
@@ -12612,7 +12632,6 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerActive;
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
                      case 2:

@@ -6,7 +6,7 @@ Alternately, you can go up to it. If you approach the farm, you must decide whet
 <InlineUIContainer><Button Content='e009a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <Italic> - Friendly Approach</Italic>
 <LineBreak/><InlineUIContainer><Button Content='e009b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
-<Italic> - Raid:</Italic> 
+<Italic> - Raid</Italic> 
 <LineBreak/><LineBreak/>
 If you select a raid and remain in this hex at the end of today, you may be attacked by a revengful mob tomorrow morning before you have a chance to do your daily action. At that time, roll one die. A result of 5+ results in a peasant mob in hot pursuit.  If any other number occurs, there is no mob or event."
 r010a	"<Bold>r010a Starving Farmer Snub</Bold>

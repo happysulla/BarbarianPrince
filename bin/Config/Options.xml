@@ -18,6 +18,12 @@
   <Option value="PrinceFood">
     <IsEnabled value="True" />
   </Option>
+  <Option value="StartWithNerveGame">
+    <IsEnabled value="True" />
+  </Option>
+  <Option value="StartWithNecklass">
+    <IsEnabled value="True" />
+  </Option>
   <Option value="RandomParty10">
     <IsEnabled value="False" />
   </Option>
@@ -28,13 +34,13 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomParty03">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="RandomParty01">
     <IsEnabled value="False" />
   </Option>
   <Option value="PartyCustom">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Dwarf">
     <IsEnabled value="False" />
@@ -43,7 +49,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="Elf">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Falcon">
     <IsEnabled value="False" />
@@ -55,10 +61,10 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="Magician">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Mercenary">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Merchant">
     <IsEnabled value="False" />
@@ -67,7 +73,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="Monk">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="PorterSlave">
     <IsEnabled value="False" />
@@ -109,10 +115,10 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="0708">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="0711">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="1212">
     <IsEnabled value="False" />
@@ -169,13 +175,13 @@
     <IsEnabled value="True" />
   </Option>
   <Option value="SteadyIncome">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="NoLostRoll">
     <IsEnabled value="False" />
   </Option>
   <Option value="ForceNoLostEvent">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="ForceNoEvent">
     <IsEnabled value="False" />
@@ -199,7 +205,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="ForceEvent">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="ForceCrossEvent">
     <IsEnabled value="False" />

@@ -4587,7 +4587,7 @@ namespace BarbarianPrince
                            case "BuyInfoEnd":
                               if (Utilities.NO_RESULT < myGameInstance.DieResults["e209h"][0])
                               {
-                                 action = GameAction.E160GBrokenLove;
+                                 action = GameAction.EncounterRoll;
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               }
                               return;

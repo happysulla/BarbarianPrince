@@ -542,7 +542,7 @@ e011d	"<Bold>e011d Farmer's Boy</Bold>
 <LineBreak/><LineBreak/>
                                               <InlineUIContainer><Image Source='../../Images/FarmerBoy.gif' Name='FarmerBoyEnd'  Height='300' Width='150'></Image></InlineUIContainer>"
 e012a	"<Bold>e012a Farmer with Protector Friendly Approach</Bold>
-<LineBreak/><LineBreak/><Italic>Friendly Approach:</Italic>The farmer warns you off his land, but he will sell you food in any quantity you desire. 
+<LineBreak/><LineBreak/><Italic>Friendly Approach:</Italic> The farmer warns you off his land, but he will sell you food in any quantity you desire. 
 Regardless of whether you buy or not, the event will end and you continue on your way.
 <LineBreak/><LineBreak/> 
                                                      <InlineUIContainer><Button Content='  -  ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 
@@ -3593,7 +3593,7 @@ If you do make the required offering and then try for another audience in this h
                                      <InlineUIContainer><Image Source='../../Images/Purify.gif' Name='Nothing' Height='250' Width='250'></Image></InlineUIContainer>"
 e160	"<Bold>e160 Audience with Lady Aeravir</Bold>
 <LineBreak/><LineBreak/>
-You are allowed a semi-private interview with the rule of Aeravir Castle. Roll one die for the results:  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
+You are allowed a semi-private interview with the ruler of Aeravir Castle. Roll one die for the results:  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button Content='e160a' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> - 1 - Shows No Interest<LineBreak/>
 <InlineUIContainer><Button Content='e160b' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> - 2 -Distracted <LineBreak/>

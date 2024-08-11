@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BarbarianPrince"
         mc:Ignorable="d"
-        Title="Options Dialog" FontSize="20" Height="600" Width="1010" WindowStartupLocation="CenterScreen">
+        Title="Options Dialog" FontSize="20" Height="600" Width="1040" WindowStartupLocation="CenterScreen">
    <ScrollViewer Name="myScollViewerInside" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
       <Grid x:Name="myGrid">
          <Grid.RowDefinitions>
@@ -39,10 +39,12 @@
          </GroupBox>
          <GroupBox x:Name="myGroupBoxPrince" Grid.Row="2" Grid.Column="0" Header="Prince" FontSize="14"  Margin="10,0,10,0">
             <StackPanel Name="myStackPanelPrince" Orientation="Vertical" VerticalAlignment="Top" Margin="5,5,5,5" >
-                    <CheckBox x:Name="myCheckBoxPrinceHorse"  Content="Add Horse" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPrince_Click"/>
-                    <CheckBox x:Name="myCheckBoxPrincePegasus"  Content="Add Pegasus" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPrince_Click"/>
-                    <CheckBox x:Name="myCheckBoxPrinceCoin"  Content="Add Coin" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPrince_Click"/>
-                    <CheckBox x:Name="myCheckBoxPrinceFood"  Content="Add Food" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPrince_Click"/>
+               <CheckBox x:Name="myCheckBoxPrinceHorse"  Content="Add Horse" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPrince_Click"/>
+               <CheckBox x:Name="myCheckBoxPrincePegasus"  Content="Add Pegasus" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPrince_Click"/>
+               <CheckBox x:Name="myCheckBoxPrinceCoin"  Content="Add Coin" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPrince_Click"/>
+               <CheckBox x:Name="myCheckBoxPrinceFood"  Content="Add Food" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPrince_Click"/>
+               <CheckBox x:Name="myCheckBoxStartNerveGas"  Content="Add Nerve Gas" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPrince_Click"/>
+               <CheckBox x:Name="myCheckBoxStartNecklass"  Content="Add Necklass" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPrince_Click"/>
             </StackPanel>
          </GroupBox>
          <GroupBox x:Name="myGroupBoxParty" Grid.Row="2" Grid.Column="1" Header="Starting Party Members" FontSize="14"  Margin="10,0,10,0">
