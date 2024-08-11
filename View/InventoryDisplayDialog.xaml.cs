@@ -137,7 +137,7 @@ namespace BarbarianPrince
       };
       //----------------------------------------------------------------
       public bool CtorError = false;
-      private double myColumnWidth = (1.5 * Utilities.theMapItemSize) + 10;
+      private double myColumnWidth = (1.5 * Utilities.theMapItemSize) + 17;
       private double myRowHeight = ((0.1 + Utilities.ZOOM) * Utilities.theMapItemSize) + 10;
       private RuleDialogViewer myRulesManager = null;
       private GridRowHeading myGridRowHeading = new GridRowHeading(false);

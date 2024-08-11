@@ -181,6 +181,7 @@ namespace BarbarianPrince
       public bool IsSlaveGirlActive { set; get; } = false;
       public bool IsGiftCharmActive { set; get; } = false;
       public bool IsPegasusSkip { set; get; } = false;
+      public bool IsResurrected { get; set; } = false;
       public bool IsCharismaTalismanActive { set; get; } = false;
       public bool IsSeekNewModifier { set; get; } = false;
       public int PurchasedHenchman { set; get; } = 0;// e210f - Amount  of henchmen hired  
@@ -340,6 +341,24 @@ namespace BarbarianPrince
       }
       private void RestoreMapItemAttribute(IMapItem mi)
       {
+         if (true == mi.Name.Contains("TrueLoveSwordwoman"))
+         {
+            mi.Endurance = 7;
+            mi.Combat = 7;
+            return;
+         }
+         if (true == mi.Name.Contains("TrueLovePriestDaughter"))
+         {
+            mi.Endurance = 4;
+            mi.Combat = 2;
+            return;
+         }
+         if (true == mi.Name.Contains("TrueLoveSlave"))
+         {
+            mi.Endurance = 4;
+            mi.Combat = 2;
+            return;
+         }
          if (true == mi.Name.Contains("Amazon"))
          {
             mi.Endurance = 5;
@@ -442,16 +461,16 @@ namespace BarbarianPrince
             mi.Combat = 2;
             return;
          }
-         if (true == mi.Name.Contains("Knight"))
-         {
-            mi.Endurance = 6;
-            mi.Combat = 7;
-            return;
-         }
          if (true == mi.Name.Contains("KnightBlack"))
          {
             mi.Endurance = 8;
             mi.Combat = 8;
+            return;
+         }
+         if (true == mi.Name.Contains("Knight"))
+         {
+            mi.Endurance = 6;
+            mi.Combat = 7;
             return;
          }
          if (true == mi.Name.Contains("Lancer"))
@@ -568,18 +587,6 @@ namespace BarbarianPrince
             mi.Combat = 7;
             return;
          }
-         if (true == mi.Name.Contains("TrueLovePriestDaughter"))
-         {
-            mi.Endurance = 4;
-            mi.Combat = 2;
-            return;
-         }
-         if (true == mi.Name.Contains("TrueLoveSlave"))
-         {
-            mi.Endurance = 4;
-            mi.Combat = 2;
-            return;
-         }
          if (true == mi.Name.Contains("TrustedAssistant"))
          {
             mi.Endurance = 4;
@@ -598,16 +605,16 @@ namespace BarbarianPrince
             mi.Combat = 1;
             return;
          }
-         if (true == mi.Name.Contains("Wizard"))
-         {
-            mi.Endurance = 4;
-            mi.Combat = 4;
-            return;
-         }
          if (true == mi.Name.Contains("WizardHenchman"))
          {
             mi.Endurance = 4;
             mi.Combat = 5;
+            return;
+         }
+         if (true == mi.Name.Contains("Wizard"))
+         {
+            mi.Endurance = 4;
+            mi.Combat = 4;
             return;
          }
       }

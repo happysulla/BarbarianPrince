@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -125,11 +126,13 @@ namespace BarbarianPrince
             myTextBlock.Inlines.Add(new LineBreak());
          }
          //-------------------------------------------------------------
-         string title = null;
-         if (ColorActionEnum.CAE_JAIL == hex.ColorAction)
+         foreach(String eventName in hex.EventNames)
          {
-            switch( hex.EventName )
+            string title = null;
+            switch (eventName)
             {
+               case "e000":
+                  continue;
                case "e203a":
                   title = "Prison Escape Attempt";
                   break;
@@ -139,22 +142,18 @@ namespace BarbarianPrince
                case "e203e":
                   title = "Wizard's Slave";
                   break;
+               case "e341":
+                  if (true == hex.Party.Contains("Minstrel"))
+                     title = "Conversation with Minstrel After Dinner";
+                  else
+                     title = "Conversation";
+                  break;
                default:
-                  Logger.Log(LogEnum.LE_ERROR, "EllipseDisplayDialog(): Reached default with hex.EventName =" + hex.EventName);
-                  return;
+                  break;
             }
-         }
-         else if("e000" == hex.EventName)
-         {
-            return;
-         }
-         else
-         {
-            title = myRulesMgr.GetEventTitle(hex.EventName);
-         }
-         if ( true == hex.IsEncounter )
-         {
-            myTextBlock.Inlines.Add(new Run(hex.EventName + ": " + title));
+            if( null == title )
+               title = myRulesMgr.GetEventTitle(eventName);
+            myTextBlock.Inlines.Add(new Run(eventName + ": " + title));
             myTextBlock.Inlines.Add(new LineBreak());
          }
          //-------------------------------------------------------------

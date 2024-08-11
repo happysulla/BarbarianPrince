@@ -28,13 +28,13 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomParty03">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="RandomParty01">
     <IsEnabled value="False" />
   </Option>
   <Option value="PartyCustom">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="Dwarf">
     <IsEnabled value="False" />
@@ -43,31 +43,31 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="Elf">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="Falcon">
     <IsEnabled value="False" />
   </Option>
   <Option value="Griffon">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="Harpy">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="Magician">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="Mercenary">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="Merchant">
     <IsEnabled value="False" />
   </Option>
   <Option value="Minstrel">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="Monk">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="PorterSlave">
     <IsEnabled value="False" />
@@ -178,7 +178,7 @@
     <IsEnabled value="True" />
   </Option>
   <Option value="ForceNoEvent">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="ForceNoRoadEvent">
     <IsEnabled value="False" />
@@ -199,7 +199,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="ForceEvent">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ForceCrossEvent">
     <IsEnabled value="False" />

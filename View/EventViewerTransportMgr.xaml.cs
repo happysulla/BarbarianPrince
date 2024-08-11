@@ -680,9 +680,9 @@ namespace BarbarianPrince
                }
                break;
             case LoadEnum.LE_ASSIGN_FOOD_GOLD:
-               if( true == myIsHighPass)
+               if (true == myIsHighPass)
                {
-                  Image img21 = new Image { Source = MapItem.theMapImages.GetBitmapImage("SnowShoes"), Tag = "Continue", Width = Utilities.theMapItemSize, Height = Height = Utilities.theMapItemSize};
+                  Image img21 = new Image { Source = MapItem.theMapImages.GetBitmapImage("SnowShoes"), Tag = "Continue", Width = Utilities.theMapItemSize, Height = Height = Utilities.theMapItemSize };
                   myStackPanelAssignable.Children.Add(img21);
                }
                else if (0 < myUnassignedCoin)
@@ -690,14 +690,19 @@ namespace BarbarianPrince
                   Image img31 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Cache"), Tag = "Cache", Width = Utilities.theMapItemSize + 10, Height = Height = Utilities.theMapItemSize + 10 };
                   myStackPanelAssignable.Children.Add(img31);
                }
-               else if( (true == myGameInstance.IsMountsAtRisk ) || (("e078" == myGameInstance.EventActive) && (myGameInstance.Prince.MovementUsed < myGameInstance.Prince.Movement))  || ("e126" == myGameInstance.EventActive))
+               else if ((true == myGameInstance.IsMountsAtRisk) || (("e078" == myGameInstance.EventActive) && (myGameInstance.Prince.MovementUsed < myGameInstance.Prince.Movement)) || ("e126" == myGameInstance.EventActive))
                {
                   Image img21 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Tag = "Continue", Width = Utilities.theMapItemSize, Height = Height = Utilities.theMapItemSize };
                   myStackPanelAssignable.Children.Add(img21);
                }
-               else if ( myGameInstance.Prince.MovementUsed < myGameInstance.Prince.Movement )
+               else if (myGameInstance.Prince.MovementUsed < myGameInstance.Prince.Movement)
                {
-                  if( (true == myGameInstance.IsAirborne) && (true == myGameInstance.Prince.IsFlying) )
+                  if (false == myGameInstance.IsAirborne) // If not airborne 
+                  {
+                     Image img21 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Tag = "Continue", Width = Utilities.theMapItemSize, Height = Height = Utilities.theMapItemSize };
+                     myStackPanelAssignable.Children.Add(img21);
+                  }
+                  else if (true == myGameInstance.Prince.IsFlying)  // If airborne, prince must be flying
                   {
                      Image img21 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Tag = "Continue", Width = Utilities.theMapItemSize, Height = Height = Utilities.theMapItemSize };
                      myStackPanelAssignable.Children.Add(img21);

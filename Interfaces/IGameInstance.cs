@@ -124,6 +124,7 @@ namespace BarbarianPrince
       bool IsSlaveGirlActive { set; get; } // e163 - repeat the evade roll twice more
       bool IsGiftCharmActive { set; get; } // e182 - repeat the evade roll twice more
       bool IsPegasusSkip { set; get; } // e188 - do not convert talisman to pegasus
+      bool IsResurrected { set; get; } // e192 - Resurrection Necklace used to revive Prince
       bool IsCharismaTalismanActive { set; get; } // e189 - +1 to Wits and Wiles roll for escape
       bool IsAirborne { set; get; }  // r204 - Party may travel by air if all can fly
       bool IsAirborneEnd { set; get; }  // r204 - Party finished traveling for today

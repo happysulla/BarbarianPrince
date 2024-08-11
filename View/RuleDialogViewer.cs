@@ -323,7 +323,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "CreateRules(): cfr.CtorError=true");
                return false;
             }
-            myRules = cfr.Records;
+            myRules = cfr.Entries;
             if (0 == myRules.Count)
             {
                Logger.Log(LogEnum.LE_ERROR, "CreateRules(): myRules.Count=0");
@@ -347,7 +347,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "CreateTables(): cfr.CtorError=true");
                return false;
             }
-            myTables = cfr.Records;
+            myTables = cfr.Entries;
             if (0 == myTables.Count)
             {
                Logger.Log(LogEnum.LE_ERROR, "CreateTables(): myTables.Count=0");

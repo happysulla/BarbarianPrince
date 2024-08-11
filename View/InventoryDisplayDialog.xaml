@@ -5,88 +5,90 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BarbarianPrince"
         mc:Ignorable="d"
-        Title="InventoryDisplayDialog" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-   <Grid x:Name="myGrid" ShowGridLines="True">
-      <Grid.RowDefinitions>
-         <RowDefinition Height="Auto" Name="myFirstRow"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition Height="Auto"></RowDefinition>
-         <RowDefinition></RowDefinition>
-      </Grid.RowDefinitions>
-      <Grid.ColumnDefinitions>
-         <ColumnDefinition Width="Auto" Name="myFirstCol"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="Auto"/>
-      </Grid.ColumnDefinitions>
-   </Grid>
+        Title="InventoryDisplayDialog" Height="450" Width="800" WindowStartupLocation="CenterScreen" MaxHeight="1000">
+   <ScrollViewer Name="myScollViewer" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
+      <Grid x:Name="myGrid" ShowGridLines="True">
+         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" Name="myFirstRow"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+         </Grid.RowDefinitions>
+         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" Name="myFirstCol"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+         </Grid.ColumnDefinitions>
+      </Grid>
+   </ScrollViewer>
 </Window>

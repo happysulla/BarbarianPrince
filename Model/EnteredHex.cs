@@ -35,7 +35,8 @@ namespace BarbarianPrince
       public int Day { get; set; } = 0;
       public int JailDay { get; set; } = 0;
       public String HexName { get; set; } = "";
-      public string EventName { get; set; } = "";
+      public List<String> EventNames { get; set; } = new List<String>();
+      public List<String> EventDescriptions { get; set; } = new List<String>();
       public List<String> Party = new List<String>();  
       public List<String> Kills = new List<String>();
       public bool IsEncounter { get; set; } = false;
@@ -43,15 +44,14 @@ namespace BarbarianPrince
       public String PreviousHex { get; set; } = "";
       public ColorActionEnum ColorAction { get; set; } = ColorActionEnum.CAE_LOST;
       //------------------------------------------------------------------------------------------------
-      public EnteredHex(IGameInstance gi, ColorActionEnum colorAction, bool isEncounter=false)
+      public EnteredHex(IGameInstance gi, ColorActionEnum colorAction)
       {
          ++theId;
          Identifer = "Hex#" + theId.ToString();
          Day = gi.Days + 1;
          HexName = gi.NewHex.Name;
-         EventName = gi.EventActive;
+         EventNames.Add(gi.EventActive);
          ColorAction = colorAction;
-         IsEncounter = isEncounter;
          //-----------------------------------------------
          Position = 0;
          foreach (EnteredHex hex in gi.EnteredHexes.AsEnumerable().Reverse())

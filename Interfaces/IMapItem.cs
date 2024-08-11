@@ -42,6 +42,7 @@ namespace BarbarianPrince
       bool IsSunStroke { get; set; } // e121 - member must be carried
       bool IsPlagued { get; set; }  // e133 - kill plagued members
       bool IsPoisonApplied { get; set; } // e185
+      bool IsResurrected { set; get; } // e192 - Resurrection Necklace used to revive character
       bool IsShieldApplied { get; set; } // e193
       int PlagueDustWound { get; set; } // r227 - trap with plague dust
       bool IsTrueLove { set; get; } //e228

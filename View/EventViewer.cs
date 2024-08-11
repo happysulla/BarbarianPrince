@@ -129,7 +129,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "CreateEvents(): cfr.CtorError=true");
                return false;
             }
-            myRulesMgr.Events = cfr.Records;
+            myRulesMgr.Events = cfr.Entries;
             if (0 == myRulesMgr.Events.Count)
             {
                Logger.Log(LogEnum.LE_ERROR, "CreateEvents(): myRulesMgr.Events.Count=0");
@@ -974,18 +974,18 @@ namespace BarbarianPrince
                else // follow button only enabled if no horses and no non-human/elf party members
                {
                   bool isNonHumanElfInParty = false;
-                  bool isHorseInParty = false;
+                  bool isNonPegasusMount = false;
                   foreach (IMapItem mi in myGameInstance.PartyMembers)
                   {
                      if (true == mi.Name.Contains("Dwarf") || true == mi.Name.Contains("Halfling"))
                         isNonHumanElfInParty = true;
                      foreach (IMapItem mount in mi.Mounts)
                      {
-                        if (true == mount.Name.Contains("Horse"))
-                           isHorseInParty = true;
+                        if ((true == mount.Name.Contains("Horse")) || (true == mount.Name.Contains("Griffon")) || (true == mount.Name.Contains("Harpy")) )
+                           isNonPegasusMount = true;
                      }
                   }
-                  if ( (" Fly " == content) && ( (true == isNonHumanElfInParty) || (true == isHorseInParty) || (false == gi.PartyReadyToFly()) ) ) // if unable to fly, do not show button
+                  if ( (" Fly " == content) && ( (true == isNonHumanElfInParty) || (true == isNonPegasusMount) || (false == gi.PartyReadyToFly()) ) ) // if unable to fly, do not show button
                      b.IsEnabled = false;
                   else
                      b.Click += Button_Click;

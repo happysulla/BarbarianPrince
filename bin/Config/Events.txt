@@ -2291,6 +2291,10 @@ e085	"<Bold>e085 Narrow Ledges</Bold>
 <LineBreak/><LineBreak/>If you personally slip or your mount falls over the edge, you are presumed to catch a ledge somewhere down the cliff and survive.  Click image to continue.
 <LineBreak/><LineBreak/>
           <InlineUIContainer><Image Name='NarrowLedge' Source='../../Images/NarrowLedge.gif' Height='250'  Width='500'> </Image></InlineUIContainer>"
+e085a	"<Bold>e085a Narrow Ledges In Distance Mountains</Bold>
+<LineBreak/><LineBreak/>You look up from your cozy inn to see very treacherous cliffs in the distance. Click image to continue.
+<LineBreak/><LineBreak/>
+              <InlineUIContainer><Image Name='EncounterEnd' Source='../../Images/NarrowLedge.gif' Height='250'  Width='500'> </Image></InlineUIContainer>"
 e086	"<Bold>e086 High Pass</Bold>
 <LineBreak/><LineBreak/>In order to leave the hex from any hex than the one you entered, you must travel through a very high, alpine pass. On your next travel action
  <InlineUIContainer><Button Content='r204' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
@@ -2463,7 +2467,7 @@ e098b	"<Bold>e098b Fight Dragon</Bold>
  <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Attack<LineBreak/>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Attacked<LineBreak/>
  <InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Surprised<LineBreak/>
- <InlineUIContainer><Button Content='e309' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surpised
+ <InlineUIContainer><Button Content='e309' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprised
 <LineBreak/><LineBreak/>
            <InlineUIContainer><Image Source='../../Images/DragonFight.gif' Height='280' Width='500'></Image></InlineUIContainer>"
 e099	"<Bold>e099 Roc</Bold>
@@ -2681,7 +2685,7 @@ e110	"<Bold>e110 Air Spirit Unrecognized</Bold>
 <LineBreak/><LineBreak/>
                               <InlineUIContainer><Image Name='EncounterEnd' Source='../../Images/AirSpirit.gif' Height='300' Width='300'></Image></InlineUIContainer>"
 e110a	"<Bold>e110a Air Spirit Recognized</Bold>
-<LineBreak/><LineBreak/>Since you have a magician, wizard, witch, or monk in your party, you recognize it. You can attempt to if you wish.
+<LineBreak/><LineBreak/>Since you have a magician, wizard, witch, or monk in your party, you recognize it. You can attempt to talk to it if you wish.
 <LineBreak/><LineBreak/>To talk to the air spirit, roll one die: <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>Roll is greater or equal to your wit and wiles, communication fails. See <InlineUIContainer><Button Content='e110b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/>Roll is less than wit and wiles, communication succeeds. See <InlineUIContainer><Button Content='e110c' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.

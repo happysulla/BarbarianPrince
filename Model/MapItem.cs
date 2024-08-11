@@ -90,6 +90,7 @@ namespace BarbarianPrince
       public bool IsSecretGatewayToDarknessKnown { set; get; } = false;
       public bool IsFugitive { set; get; } = false;
       public bool IsPoisonApplied { get; set; } = false;
+      public bool IsResurrected { get; set; } = false;
       public bool IsShieldApplied { get; set; } = false;
       public bool IsTrueLove { set; get; } = false;
       public bool IsFickle { set; get; } = false;
@@ -1194,11 +1195,16 @@ namespace BarbarianPrince
              loadCanCarry -= coinLoads;
          }
          loadCanCarry -= this.Food;
+         if( 0 < loadCanCarry)
+            Logger.Log(LogEnum.LE_ERROR, "GetFreeLoadWithoutModify(): name=" + this.Name + " lc=" + loadCanCarry.ToString() + " f=" + Food.ToString() + " c=" + coinLoads.ToString() + "(cons=" + this.Coin.ToString() + ") ml=" + mountCarry.ToString());
          return loadCanCarry;
       }   // get free load - dismount if load does not support - but do not mount 
       public int GetFlyLoad()
       {
          int loadCanCarry = 0;
+         //------------------------------------------
+         if (true == this.Name.Contains("Eagle")) // Eagles can always fly
+            return 0;
          //------------------------------------------
          if ( false == this.IsFlyer() )
          {
@@ -1840,7 +1846,7 @@ namespace BarbarianPrince
                   int metric2 = mi2.GetFreeLoadWithoutModify();
                   if (metric2 < 0)
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "SortOnFreeLoad(): returned 0 > metric12=" + metric1.ToString() + " for mi=" + mi1.Name);
+                     Logger.Log(LogEnum.LE_ERROR, "SortOnFreeLoad(): returned 0 > metric2=" + metric2.ToString() + " for mi2=" + mi2.Name + " metric1=" + metric1.ToString() + " for mi1=" + mi1.Name);
                      continue;
                   }
                   if (metric2 < metric1)

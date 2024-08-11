@@ -988,7 +988,9 @@ namespace BarbarianPrince
             gi.EventDisplayed = gi.EventActive = "e076a";
          else if (("e077" == gi.EventActive) && (true == gi.IsInStructure(princeTerritory))) // no herd of wild horses encounter if in structure
             gi.EventDisplayed = gi.EventActive = "e077a";
-         else if (("e085" == gi.EventActive) && (true == gi.IsInStructure(princeTerritory))) // bear encounter does not happen in structure
+         else if (("e084" == gi.EventActive) && (true == gi.IsInStructure(princeTerritory))) // bear encounter does not happen in structure
+            gi.EventDisplayed = gi.EventActive = "e084a";
+         else if (("e085" == gi.EventActive) && (true == gi.IsInStructure(princeTerritory))) // narrow ledges does not happen in structure
             gi.EventDisplayed = gi.EventActive = "e085a";
          else if (("e095" == gi.EventActive) && (0 == gi.GetNonSpecialMountCount())) // Mounts at risk - Lost mounts do not happen if have none - Griffons/Harpy do not count
             gi.EventDisplayed = gi.EventActive = "e095a";
@@ -1807,12 +1809,10 @@ namespace BarbarianPrince
                break;
             case "TrueLove":
                {
-                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
-                  member.Food = Utilities.RandomGenerator.Next(5);
-                  member.Coin = Utilities.RandomGenerator.Next(20);
-                  gi.AddCompanion(member);
+                  IMapItem trueLove = CreateCharacter(gi, "TrueLovePriestDaughter", 0); 
+                  trueLove.Food = Utilities.RandomGenerator.Next(5);
+                  trueLove.Coin = Utilities.RandomGenerator.Next(20);
+                  gi.AddCompanion(trueLove);
                }
                break;
             case "Wizard":
@@ -2644,6 +2644,7 @@ namespace BarbarianPrince
          gi.IsWoundedWarriorRest = false;          // e069
          gi.IsTrainHorse = false;                  // e077
          gi.IsBadGoing = false;                    // e078
+         gi.IsHeavyRainContinue = false;           // e079
          gi.IsFloodContinue = false;               // e092
          gi.AtRiskMounts.Clear();                  // e095
          gi.IsEagleHunt = false;                   // e114
@@ -2749,6 +2750,17 @@ namespace BarbarianPrince
                   ++encounterResult;
                if (0 < encounterResult)
                {
+                  --gi.Prince.MovementUsed;
+                  if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex
+                  {
+                     returnStatus = " AddMapItemMove() return false";
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
+                  else
+                  {
+                     Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateTravel.PerformAction(HuntE002aEncounterRoll): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
+                  }
+                  ++gi.Prince.MovementUsed;
                   gi.EventDisplayed = gi.EventActive = "e002a"; // next screen to show
                   gi.GamePhase = GamePhase.Encounter;
                   gi.DieRollAction = GameAction.EncounterStart;
@@ -3032,7 +3044,7 @@ namespace BarbarianPrince
          gi.RaftStatePrevUndo = gi.RaftState = RaftEnum.RE_NO_RAFT; // PerformJailBreak()
          gi.IsAirborne = false;
          EnteredHex hex = new EnteredHex(gi, ColorActionEnum.CAE_JAIL);
-         hex.EventName = gi.EventActive;
+         hex.EventNames.Add(gi.EventActive);
          hex.IsEncounter = true;
          hex.JailDay++;
          switch (gi.EventActive)
@@ -3175,7 +3187,7 @@ namespace BarbarianPrince
                gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterStart;
                gi.NewHex = gi.Prince.Territory;
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_REST, true));
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_REST));
                Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateRest.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
                gi.Prince.MovementUsed = gi.Prince.Movement; // End of the day
                if ( false == SetSubstitutionEvent(gi, princeTerritory))           // GameStateRest.PerformAction()      - RestHealingEncounter
@@ -3355,7 +3367,7 @@ namespace BarbarianPrince
                   if (RiverCrossEnum.TC_CROSS_YES_SHOWN != gi.MapItemMoves[0].RiverCross)
                   {
                      gi.NewHex = gi.Prince.Territory;
-                     gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_LOST, true)); // GameStateTravel.PerformAction(TravelShowLostEncounter)
+                     gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_LOST)); // GameStateTravel.PerformAction(TravelShowLostEncounter)
                      Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateTravel.PerformAction(): gi.MapItemMoves.Clear() a=TravelShowLostEncounter");
                      gi.MapItemMoves.Clear();
                      --gi.Prince.MovementUsed;
@@ -3435,13 +3447,22 @@ namespace BarbarianPrince
                   ShowMovementScreenViewer(gi);
                }
                if( true == gi.IsAirborne )
+               {
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR)); // TravelShowMovement 
+               }
                else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
+               {
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT)); // TravelShowMovement()
-               else if (RaftEnum.RE_RAFT_ENDS_TODAY == gi.RaftState)
-                  ; // TravelShowMovement()
+               }
+               else if (RaftEnum.RE_RAFT_ENDS_TODAY == gi.RaftState) // TravelShowMovement()
+               {
+                  //do nothing
+               }
                else
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL)); // TravelShowMovement 
+               {
+                  if( false == gi.IsAirborneEnd )
+                     gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL)); // TravelShowMovement 
+               }
                break;
             case GameAction.TravelShowRiverEncounter:
                gi.GamePhase = GamePhase.Encounter;
@@ -3467,25 +3488,28 @@ namespace BarbarianPrince
 
                if (true == gi.IsAirborne)
                {
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR, true));
-               }
-               else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState) // need this to show before moving downstream if lost in current
-               {
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT, true));
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR));
                }
                else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
                {
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT, true)); // TravelShowMovementEncounter()
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT)); // TravelShowMovementEncounter()
                }
                else if (RaftEnum.RE_RAFT_ENDS_TODAY == gi.RaftState)
                {
                   EnteredHex enteredHex = gi.EnteredHexes.Last();
-                  enteredHex.IsEncounter = true;
-                  enteredHex.EventName = gi.EventActive;
+                  enteredHex.EventNames.Add(gi.EventActive);
                }
                else
                {
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL, true));
+                  if (false == gi.IsAirborneEnd)
+                  {
+                     gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL));
+                  }
+                  else
+                  {
+                     EnteredHex enteredHex = gi.EnteredHexes.Last();
+                     enteredHex.EventNames.Add(gi.EventActive);
+                  }
                }
                break;
             case GameAction.TravelEndMovement: // Prince clicked when still movement left ends movement phase
@@ -3958,7 +3982,7 @@ namespace BarbarianPrince
             case GameAction.SearchEncounter:
                gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterStart;
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_SEARCH, true));
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_SEARCH));
                Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateSearch.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
                gi.Prince.MovementUsed = gi.Prince.Movement; // End of the day
                if (false == SetSubstitutionEvent(gi, princeTerritory))           // GameStateSearch.PerformAction() - SearchEncounter
@@ -5404,7 +5428,7 @@ namespace BarbarianPrince
                   gi.Prince.TerritoryStarting = gi.Prince.Territory;
                   gi.NewHex = previousTerritory;
                   gi.EnteredHexes.RemoveAt(gi.EnteredHexes.Count - 1); // remove last entry 
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR, true));
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR));
                   if (false == AddMapItemMove(gi, previousTerritory))
                   {
                      returnStatus = " AddMapItemMove() return false";
@@ -5496,7 +5520,7 @@ namespace BarbarianPrince
                   gi.Prince.MovementUsed = 0; // must have movement left to be blown off course
                   gi.Prince.TerritoryStarting = gi.NewHex;
                   gi.NewHex = blowToTerritory;
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR, true));
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR));
                   if (false == AddMapItemMove(gi, blowToTerritory))
                   {
                      returnStatus = " AddMapItemMove() return false";
@@ -5530,7 +5554,7 @@ namespace BarbarianPrince
                   }
                   gi.Prince.TerritoryStarting = gi.NewHex;
                   gi.NewHex = adjacentTerritory;
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR, true));
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR));
                   if (false == AddMapItemMove(gi, adjacentTerritory))
                   {
                      returnStatus = " AddMapItemMove() return false";
@@ -5607,7 +5631,7 @@ namespace BarbarianPrince
             case GameAction.E110AirSpiritTravelEnd:
                gi.DieResults["e110c"][0] = Utilities.NO_RESULT; // setup if event occurs again in same day
                gi.AirSpiritLocations = null;
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR, true)); // NexHex changed to proper hex in GameViewerWindow->MouseDownPolygonTravel()
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR)); // NexHex changed to proper hex in GameViewerWindow->MouseDownPolygonTravel()
                if (gi.Prince.MovementUsed < gi.Prince.Movement)
                {
                   if (false == EncounterEnd(gi, ref action))
@@ -5896,7 +5920,7 @@ namespace BarbarianPrince
                else
                {
                   ++gi.Days;  // advance the day by one day
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_JAIL, true));
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_JAIL));
                   if ((true == gi.IsExhausted) && ((true == gi.NewHex.IsOasis) || ("Desert" != gi.NewHex.Type))) // e120
                      gi.IsExhausted = false;
                }
@@ -9075,9 +9099,11 @@ namespace BarbarianPrince
          //--------------------------------------------------------
          gi.DieRollAction = GameAction.DieRollActionNone;
          string key = gi.EventActive;
+         gi.EnteredHexes.Last().EventNames.Add(key);
          switch (key)
          {
             case "e002b": // talk
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e327"; gi.DieRollAction = GameAction.EncounterRoll; break; // pass dummies
@@ -9128,6 +9154,7 @@ namespace BarbarianPrince
                }
                break;
             case "e002d": // fight mercenary
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement the attack case
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e300"; break;
@@ -11016,9 +11043,20 @@ namespace BarbarianPrince
             case "e072d":
                switch (dieRoll)
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e165"; gi.DieRollAction = GameAction.EncounterRoll; break;   // town
-                  case 2: gi.EventDisplayed = gi.EventActive = "e166"; gi.DieRollAction = GameAction.EncounterRoll; break;   // castle
-                  default: gi.EventDisplayed = gi.EventActive = "e053"; gi.DieRollAction = GameAction.EncounterRoll; break; // campfire
+                  case 1:                                              // town
+                     gi.NumMembersBeingFollowed = 0;
+                     gi.EventDisplayed = gi.EventActive = "e165"; 
+                     gi.DieRollAction = GameAction.EncounterRoll; 
+                     break; 
+                  case 2:                                              // castle
+                     gi.NumMembersBeingFollowed = 0;
+                     gi.EventDisplayed = gi.EventActive = "e166"; 
+                     gi.DieRollAction = GameAction.EncounterRoll; 
+                     break;   
+                  default:                                             // campfire
+                     gi.EventDisplayed = gi.EventActive = "e053"; 
+                     gi.DieRollAction = GameAction.EncounterRoll; 
+                     break; 
                }
                break;
             case "e073c": // friendly witch
@@ -11031,7 +11069,7 @@ namespace BarbarianPrince
                }
                break;
             case "e079a": // heavy rains
-               gi.IsHeavyRainNextDay = false;  // rain is today - need EncounterEnd() to be called to end the day in ShowE079ColdCheckResult->ShowE079ColdCheckResult()
+               gi.IsHeavyRainNextDay = false;  // rain is today - need EncounterEnd() to be called to end the day in EventViewer.ShowE079ColdCheckResult()
                gi.DieRollAction = GameAction.DieRollActionNone;
                gi.GamePhase = GamePhase.SunriseChoice;      // e079a - Finish Heavy Rains
                gi.DieResults[key][0] = dieRoll;
@@ -11411,7 +11449,7 @@ namespace BarbarianPrince
                   gi.Prince.MovementUsed = 0; // must have movement left to be blown off course
                   gi.Prince.TerritoryStarting = gi.NewHex;
                   gi.NewHex = blowToTerritory;
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR, true));
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR));
                   if (false == AddMapItemMove(gi, blowToTerritory))
                   {
                      Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddMapItemMove() return false for a=" + action.ToString());
@@ -14345,7 +14383,7 @@ namespace BarbarianPrince
             return false;
          }
          gi.NewHex = minT;
-         gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_JAIL, true));
+         gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_JAIL));
          if (false == AddMapItemMove(gi, minT) )
          {
             Logger.Log(LogEnum.LE_ERROR, "MoveToClosestGoblinKeep(): AddMapItemMove() returned error for t=" + minT.Name);

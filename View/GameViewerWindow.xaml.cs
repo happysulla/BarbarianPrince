@@ -105,9 +105,9 @@ namespace BarbarianPrince
       private readonly SolidColorBrush mySolidColorBrushSkyBlue = new SolidColorBrush { Color = Colors.LightBlue };
       private readonly SolidColorBrush mySolidColorBrushWaterBlue = new SolidColorBrush { Color = Colors.DeepSkyBlue };
       private readonly SolidColorBrush mySolidColorBrushWaterDark = new SolidColorBrush { Color = Colors.SteelBlue };
+      private readonly SolidColorBrush mySolidColorBrushFollow = new SolidColorBrush { Color = Colors.HotPink };
       private readonly SolidColorBrush mySolidColorBrushPath = new SolidColorBrush { Color = Colors.White };
       //---------------------------------------------------------------------
-
       private readonly List<Button> myButtonMapItems = new List<Button>();
       private readonly SplashDialog mySplashScreen = null;
       private Button[] myButtonTimeTrackDays = new Button[7];
@@ -883,7 +883,7 @@ namespace BarbarianPrince
                brush = mySolidColorBrushRed;
                break;
             case ColorActionEnum.CAE_FOLLOW:
-               brush = mySolidColorBrushRosyBrown;
+               brush = mySolidColorBrushFollow;
                break;
             case ColorActionEnum.CAE_SEARCH:
                brush = mySolidColorBrushOrange;

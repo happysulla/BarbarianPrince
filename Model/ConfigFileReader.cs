@@ -8,8 +8,8 @@ namespace BarbarianPrince
    public class ConfigFileReader
    {
       public bool CtorError { get; } = false;
-      private Dictionary<string, string> myRecords = new Dictionary<string, string>();
-      public Dictionary<string, string> Records { get => myRecords; }
+      private Dictionary<string, string> myEntries = new Dictionary<string, string>();
+      public Dictionary<string, string> Entries { get => myEntries; }
       private Dictionary<string, string> myRecordTitles = new Dictionary<string, string>();
       public Dictionary<string, string> RecordTitles { get => myRecordTitles; }
       private StreamReader myStreamReader = null;
@@ -166,7 +166,7 @@ namespace BarbarianPrince
          }
          try
          {
-            myRecords.Add(key, sb.ToString()); // create dictionary entry
+            myEntries.Add(key, sb.ToString()); // create dictionary entry
          }
          catch (Exception e)
          {
