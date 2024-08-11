@@ -187,6 +187,8 @@ namespace BarbarianPrince
       private bool myIsBoarFight = false;   // e083
       private bool myIsBearFight = false;   // e085
       private bool myIsKnightOnBridge = false; // e123b
+      private bool myIsSurprise = false; // e300, e301, e302, e303
+      private bool myIsSurprised = false; // e007 - elf may be owner of nerve gas
       //---------------------------------------------
       private CombatEnum myState = CombatEnum.ASSIGN;
       private CombatEnum myPreviousCombatState = CombatEnum.NONE;
@@ -315,6 +317,8 @@ namespace BarbarianPrince
          myDragStateColNum = 0;
          myIsNerveGasBombShown = false;
          myNerveGasOwner = null;
+         myIsSurprise = false;
+         myIsSurprised = false;
          myIsHalflingFight = false;
          myIsTalismanShown = false;
          myIsTalismanActivated = false;
@@ -438,9 +442,7 @@ namespace BarbarianPrince
             }
             mi.IsShieldApplied = false;
             mi.IsPoisonApplied = false;
-            if ( (true == mi.IsSpecialItemHeld(SpecialEnum.NerveGasBomb)) && ("e300" == myGameInstance.EventActive) )
-               myNerveGasOwner = mi;
-            if (("e014a" == myGameInstance.EventStart) && (true == mi.Name.Contains("Reaver")))// if in e014b, hired reavers do not fight for the party
+            if (("e014a" == myGameInstance.EventStart) && (true == mi.Name.Contains("Reaver"))) // if in e014b, hired reavers do not fight for the party
                myNonCombatants.Add(mi);
             if ((true == mi.Name.Contains("Slave")) && (false == myIsBoarFight) && (null == myCatVictim) && (false == myIsBearFight)) // slaves do not fight in combat
                myNonCombatants.Add(mi);
@@ -489,7 +491,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "PerformCombat(): mi=null");
                return false;
             }
-            if ((true == mi.IsSpecialItemHeld(SpecialEnum.NerveGasBomb)) && ("e310" == myGameInstance.EventActive))
+            if (true == mi.IsSpecialItemHeld(SpecialEnum.NerveGasBomb))
                myNerveGasOwner = mi;
             mi.IsShieldApplied = false;
             mi.IsPoisonApplied = false;
@@ -505,6 +507,7 @@ namespace BarbarianPrince
          {
             case "e300":
                myBattleEnum = BattleEnum.R300;
+               myIsSurprise = true;
                if (false == SetInitialFightState("PerformCombat(e300)"))
                {
                   Logger.Log(LogEnum.LE_ERROR, "PerformCombat(): SetInitialFightState() return false for BattleEnum.R300");
@@ -564,6 +567,7 @@ namespace BarbarianPrince
                break;
             case "e310":
                myBattleEnum = BattleEnum.R310;
+               myIsSurprised = true;
                if (null != myNerveGasOwner)  // e007 - elf can have nerve gas bomb
                {
                   Logger.Log(LogEnum.LE_COMBAT_STATE, "PerformCombat(): " + myState.ToString() + "-->APPLY_NERVE_GAS");
@@ -1737,7 +1741,7 @@ namespace BarbarianPrince
                   break;
                case BattleEnum.R303:  // Suprise if party size  less than roll - otherwise strike first
                   int partySize = (true == myIsPartyMembersAssignable) ? myAssignables.Count : myUnassignables.Count;
-                  cb.Content = "Surprise if roll equal or exceeds the party size = " + partySize.ToString();
+                  cb.Content = "Surprise if roll greater than party size = " + partySize.ToString();
                   myStackPanelCheckMarks.Children.Add(cb);
                   myStackPanelCheckMarks.Children.Add(img);
                   break;
@@ -1834,7 +1838,7 @@ namespace BarbarianPrince
                   if (CombatEnum.FINALIZE_BATTLE_STATE == myState)
                   {
                      int partySize = (true == myIsPartyMembersAssignable) ? myAssignables.Count : myUnassignables.Count;
-                     cb.Content = "Surprise if roll equal or exeeds the party size = " + partySize.ToString();
+                     cb.Content = "Surprise if roll greater than the party size = " + partySize.ToString();
                      myStackPanelCheckMarks.Children.Add(cb);
                      myStackPanelCheckMarks.Children.Add(img);
                   }
@@ -4564,7 +4568,7 @@ namespace BarbarianPrince
       }
       private bool IsNerveGasBombShown()
       {
-         if (BattleEnum.R300 == myBattleEnum)
+         if (true == myIsSurprise)
          {
             foreach (IMapItem mi in myGameInstance.PartyMembers)
             {
@@ -4573,12 +4577,18 @@ namespace BarbarianPrince
                foreach (SpecialEnum possession in mi.SpecialKeeps)
                {
                   if (SpecialEnum.NerveGasBomb == possession)
+                  {
+                     myNerveGasOwner = mi;
                      return true;
+                  }
                }
                foreach (SpecialEnum possession in mi.SpecialShares)
                {
                   if (SpecialEnum.NerveGasBomb == possession)
+                  {
+                     myNerveGasOwner = mi;
                      return true;
+                  }
                }
             }
          }
@@ -4876,24 +4886,39 @@ namespace BarbarianPrince
          {
             case BattleEnum.R301:  // Suprise if roll less than or equls W&W - otherwise strike first
                if (dieRoll <= myWitAndWiles)
+               {
                   myBattleEnum = BattleEnum.R300;
+                  myIsSurprise = true;
+               }
                else
+               {
                   myBattleEnum = BattleEnum.R304;
+               }
                myBattleEnumInitial = BattleEnum.R304;
                break;
             case BattleEnum.R302:  // Suprise if roll less than W&W - otherwise strike first
                if (dieRoll < myWitAndWiles)
+               {
                   myBattleEnum = BattleEnum.R300;
+                  myIsSurprise = true;
+               }
                else
+               {
                   myBattleEnum = BattleEnum.R304;
+               }
                myBattleEnumInitial = BattleEnum.R304;
                break;
             case BattleEnum.R303:  // Suprise if party size less than roll - otherwise strike first
                int partySize = (true == myIsPartyMembersAssignable) ? myAssignables.Count : myUnassignables.Count;
                if (partySize < myRollResult)
+               {
                   myBattleEnum = BattleEnum.R300;
+                  myIsSurprise = true;
+               }
                else
+               {
                   myBattleEnum = BattleEnum.R304;
+               }
                myBattleEnumInitial = BattleEnum.R304;
                break;
             case BattleEnum.R305:  // Attack first if roll less or equal to W&W - otherwise encountered strike first
@@ -4922,36 +4947,58 @@ namespace BarbarianPrince
                }
                myBattleEnumInitial = myBattleEnum;
                break;
-            case BattleEnum.R308:  // Suprised if roll exceeds W&W - otherwise encountered strike first
+            case BattleEnum.R308:  // Surprised if roll exceeds W&W - otherwise encountered strike first
                if (dieRoll <= myWitAndWiles)
+               {
                   myBattleEnum = BattleEnum.R307;
+               }
                else
+               {
                   myBattleEnum = BattleEnum.R310;
+                  myIsSurprised = true;
+               }
                myBattleEnumInitial = BattleEnum.R307;
                break;
             case BattleEnum.R309:  // Suprised if Roll equal or exceeds to W&W - otherwise encountered strike first
                if (dieRoll < myWitAndWiles)
+               {
                   myBattleEnum = BattleEnum.R307;
+               }
                else
+               {
                   myBattleEnum = BattleEnum.R310;
+                  myIsSurprised = true;
+               }
                myBattleEnumInitial = BattleEnum.R307;
                break;
-            case BattleEnum.R300:  // Suprise - repeat attack
-            case BattleEnum.R304:  // Suprise - repeat attack
+            case BattleEnum.R300:  // Surprise - repeat attack
+            case BattleEnum.R304:  // Surprise - repeat attack
             case BattleEnum.R307:  // Attacked
             case BattleEnum.RCTR:  // Counter
-            case BattleEnum.R310:  // Suprised - repeat attack
+            case BattleEnum.R310:  // Surprised - repeat attack
             default:
                Logger.Log(LogEnum.LE_ERROR, "ShowFirstStrikeResults(): reached default for myState=" + myState.ToString() + " for battleEnum=" + myBattleEnum.ToString());
                return;
          }
          //--------------------------------------------------
-         if (false == SetInitialFightState("ShowFirstStrikeResults()"))
-            Logger.Log(LogEnum.LE_ERROR, "ShowFirstStrikeResults(): SetInitialFightState()=false for myState=" + myBattleEnum.ToString());
-         if (false == ResetGridForCombat(myGameInstance.PartyMembers, myGameInstance.EncounteredMembers))  // ShowFirstStrikeResults()
-            Logger.Log(LogEnum.LE_ERROR, "ShowFirstStrikeResults(): ResetGridForCombat() return false");
-         else if (false == UpdateGrid())
-            Logger.Log(LogEnum.LE_ERROR, "ShowFirstStrikeResults(): UpdateGrid() return false");
+         if( (true == myIsSurprised) && (null != myNerveGasOwner) )  // e007 - elf can have nerve gas bomb
+         {
+            Logger.Log(LogEnum.LE_COMBAT_STATE, "PerformCombat(): " + myState.ToString() + "-->APPLY_NERVE_GAS");
+            myState = CombatEnum.APPLY_NERVE_GAS;
+            if (false == ResetGridForNerveGas(myGameInstance.PartyMembers))
+               Logger.Log(LogEnum.LE_ERROR, "PerformCombat(): ResetGridForNerveGas(PartyMembers)=false myState=" + myState.ToString());
+            if (false == UpdateGrid())
+               Logger.Log(LogEnum.LE_ERROR, "Grid_MouseDown(): UpdateGrid() return false myState=" + myState.ToString());
+         }
+         else
+         {
+            if (false == SetInitialFightState("ShowFirstStrikeResults()"))
+               Logger.Log(LogEnum.LE_ERROR, "ShowFirstStrikeResults(): SetInitialFightState()=false for myState=" + myBattleEnum.ToString());
+            if (false == ResetGridForCombat(myGameInstance.PartyMembers, myGameInstance.EncounteredMembers))  // ShowFirstStrikeResults()
+               Logger.Log(LogEnum.LE_ERROR, "ShowFirstStrikeResults(): ResetGridForCombat() return false");
+            else if (false == UpdateGrid())
+               Logger.Log(LogEnum.LE_ERROR, "ShowFirstStrikeResults(): UpdateGrid() return false");
+         }
          myIsRollInProgress = false;
       }
       public void ShowDrugEndResults(int dieRoll)

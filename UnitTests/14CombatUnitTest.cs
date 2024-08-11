@@ -182,10 +182,12 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[3]) // Elf with Nerve Gas
          {
+            if( false == gi.IsSpecialItemHeld(SpecialEnum.NerveGasBomb) )
+               gi.Prince.AddSpecialItemToShare(SpecialEnum.NerveGasBomb);
             gi.EventStart = "e007";
-            gi.EventActive = "e310";
+            SetCombatEvent(gi);
             gi.Prince.Territory = Territory.theTerritories.Find("0305");
-            gi.Prince.AddSpecialItemToKeep(SpecialEnum.ShieldOfLight);
+            //gi.Prince.AddSpecialItemToKeep(SpecialEnum.ShieldOfLight);
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
@@ -792,7 +794,7 @@ namespace BarbarianPrince
             case 7: gi.EventActive = "e307"; break;
             case 8: gi.EventActive = "e308"; break;
             case 9: gi.EventActive = "e309"; break;
-            case 10: gi.EventActive = "e310"; break;
+            case 10: gi.EventActive = "e310"; myIndexCombat = 0; break;
             default: myIndexCombat = 0; break;  // reset
          }
          ++myIndexCombat;

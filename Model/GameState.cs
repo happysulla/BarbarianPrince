@@ -9099,7 +9099,6 @@ namespace BarbarianPrince
          //--------------------------------------------------------
          gi.DieRollAction = GameAction.DieRollActionNone;
          string key = gi.EventActive;
-         gi.EnteredHexes.Last().EventNames.Add(key);
          switch (key)
          {
             case "e002b": // talk
@@ -9132,6 +9131,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
             case "e002c": // Evade
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (true == gi.IsPartyRiding())
                   dieRoll += 1;
                switch (dieRoll) // Based on the die roll, implement the correct screen
@@ -9167,6 +9167,7 @@ namespace BarbarianPrince
                }
                break;
             case "e003a": // talk to swordsman
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
                   case 1: case 2: gi.EventDisplayed = gi.EventActive = "e341"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e341"][0] = Utilities.NO_RESULT; break; // converse
@@ -9186,6 +9187,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
             case "e003b": // evade to swordsman
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
                   case 1:
@@ -9210,6 +9212,7 @@ namespace BarbarianPrince
                }
                break;
             case "e003c": // fight swordsman
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the attack case
                {
@@ -9223,6 +9226,7 @@ namespace BarbarianPrince
                }
                break;
             case "e004a": // talk to mercenaries
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll)
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e341"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e341"][0] = Utilities.NO_RESULT; break; // converse
@@ -9244,7 +9248,8 @@ namespace BarbarianPrince
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
             case "e004b": // evade mercenaries
-               foreach( IMapItem mi in gi.PartyMembers ) // if there is at least one mount in party, add one to evade
+               gi.EnteredHexes.Last().EventNames.Add(key);
+               foreach ( IMapItem mi in gi.PartyMembers ) // if there is at least one mount in party, add one to evade
                {
                   if ((0 < mi.Mounts.Count) || (true == mi.IsFlyingMountCarrier()))
                   {
@@ -9272,6 +9277,7 @@ namespace BarbarianPrince
                gi.DieResults["e004"][0] = Utilities.NO_RESULT;
                break;
             case "e004c": // fight mercenaries
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll)
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e301"; break;
@@ -9285,6 +9291,7 @@ namespace BarbarianPrince
                gi.DieResults["e004"][0] = Utilities.NO_RESULT;
                break;
             case "e005a": // talk to amazon
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll)
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e341"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e341"][0] = Utilities.NO_RESULT; break; // converse
@@ -9300,6 +9307,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
             case "e005b": // evade amazon
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll)
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e311"; break;                                               // escape
@@ -9313,6 +9321,7 @@ namespace BarbarianPrince
                gi.DieResults["e005"][0] = Utilities.NO_RESULT;
                break;
             case "e005c": // fight amazon
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll)
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e302"; break;
@@ -9326,6 +9335,7 @@ namespace BarbarianPrince
                gi.DieResults["e005"][0] = Utilities.NO_RESULT;
                break;
             case "e006b": // number of dwarf friends
+               gi.EnteredHexes.Last().EventNames.Add(key);
                for (int i = 0; i < dieRoll; ++i)
                {
                   IMapItem dwarfFriend = CreateCharacter(gi, "Dwarf", 12);
@@ -9340,6 +9350,7 @@ namespace BarbarianPrince
                }
                break;
             case "e006c": // talk to dwarf warrior
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (gi.DieResults["e006a"][0] < 4) // if alone add one to die roll
                   ++dieRoll;
                switch (dieRoll)
@@ -9364,6 +9375,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
             case "e006d": // evade dwarf warrior 
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (gi.DieResults["e006a"][0] < 4) // if alone add one to die roll
                   ++dieRoll;
                switch (dieRoll)
@@ -9386,6 +9398,7 @@ namespace BarbarianPrince
                gi.DieResults["e006a"][0] = Utilities.NO_RESULT;
                break;
             case "e006e": // fight dwarf warrior
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (gi.DieResults["e006a"][0] < 4) // if alone add one to die roll
                   ++dieRoll;
                switch (dieRoll)
@@ -9402,6 +9415,7 @@ namespace BarbarianPrince
                gi.DieResults["e006a"][0] = Utilities.NO_RESULT;
                break;
             case "e006g": // Search for treasure
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
                   gi.DwarfAdviceLocations.Remove(gi.NewHex);
@@ -9425,6 +9439,7 @@ namespace BarbarianPrince
                }
                break;
             case "e007c": // talk to elf warrior
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if ("Forest" == princeTerritory.Type) // if in forest, add two
                   dieRoll += 2;
                switch (dieRoll)
@@ -9442,6 +9457,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
             case "e007d": // evade elf warrior 
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if ("Forest" == princeTerritory.Type) // if in forest, add two
                   dieRoll += 2;
                 switch (dieRoll)
@@ -9458,6 +9474,7 @@ namespace BarbarianPrince
                gi.DieResults["e007a"][0] = Utilities.NO_RESULT;
                break;
             case "e007e": // fight elf warrior
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if ("Forest" == princeTerritory.Type) // if in forest, add two
                   dieRoll += 2;
                switch (dieRoll)
@@ -9475,6 +9492,7 @@ namespace BarbarianPrince
                gi.DieResults["e007a"][0] = Utilities.NO_RESULT;
                break;
             case "e008a": // talk to halfling
+               gi.EnteredHexes.Last().EventNames.Add(key);
                gi.EventStart = "e008";
                if( 0 == gi.EncounteredMembers.Count )
                {
@@ -9509,6 +9527,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
             case "e008b": // halfing gossip
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (dieRoll < 4)
                {
                   gi.EventDisplayed = gi.EventActive = "e147"; // secret clue
@@ -9524,6 +9543,7 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerActive;
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
                      case 2: case 3: gi.EventDisplayed = gi.EventActive = "e012a"; break;                                       // farmer with protector
@@ -9565,6 +9585,7 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerActive;
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
                      case 2: case 3: gi.EventDisplayed = gi.EventActive = "e012b"; gi.DieRollAction = GameAction.EncounterStart; break; // farmer with protector
@@ -9598,6 +9619,7 @@ namespace BarbarianPrince
             case "e011d": // FarmerBoy
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   if (6 == gi.DieResults[key][0])
                   {
                      IMapItem farmBoy = CreateCharacter(gi, "FarmerBoy", 0);
@@ -9623,6 +9645,7 @@ namespace BarbarianPrince
                }
                break;
             case "e011c": // Steal Farmers Food
+               gi.EnteredHexes.Last().EventNames.Add(key);
                int foodToAdd = dieRoll * 4;
                if (false == gi.AddFoods(foodToAdd))
                {
@@ -9636,6 +9659,7 @@ namespace BarbarianPrince
                }
                break;
             case "e013d": // Steal Rich Farmers Food
+               gi.EnteredHexes.Last().EventNames.Add(key);
                int foodToAdd1 = dieRoll * 6;
                if (false == gi.AddFoods(foodToAdd1))
                {
@@ -9649,6 +9673,7 @@ namespace BarbarianPrince
                }
                break;
             case "e014a": // Hostile reapers
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (gi.EncounteredMembers.Count < gi.PartyMembers.Count)
                   gi.EventDisplayed = gi.EventActive = "e014b";
                else
@@ -9656,22 +9681,26 @@ namespace BarbarianPrince
                gi.DieResults[key][0] = Utilities.NO_RESULT;
                break;
             case "e014c": // Hostile reapers
+               gi.EnteredHexes.Last().EventNames.Add(key);
                gi.EventDisplayed = gi.EventActive = "e330";
                gi.DieRollAction = GameAction.EncounterRoll;
                gi.DieResults[key][0] = Utilities.NO_RESULT;
                break;
             case "e015a": // Friendly reapers
+               gi.EnteredHexes.Last().EventNames.Add(key);
                gi.EventDisplayed = gi.EventActive = "e342";
                gi.DieResults["e342"][0] = Utilities.NO_RESULT;
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e015c": // Hostile reapers
+               gi.EnteredHexes.Last().EventNames.Add(key);
                gi.EventDisplayed = gi.EventActive = "e330";
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e016b": // Hostile Magician wins
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   gi.DieResults["e016b"][0] = dieRoll;
                   IMapItems abandonedPartyMembers = new MapItems();
                   foreach (IMapItem mi in gi.PartyMembers)
@@ -9687,6 +9716,7 @@ namespace BarbarianPrince
                }
                break;
             case "e016d": // Hostile magician
+               gi.EnteredHexes.Last().EventNames.Add(key);
                gi.DieResults[key][0] = dieRoll;
                if (false == gi.RemoveSpecialItem(SpecialEnum.ResistanceTalisman))
                {
@@ -9695,10 +9725,12 @@ namespace BarbarianPrince
                }
                break;
             case "e017": // Peasant Mob
+               gi.EnteredHexes.Last().EventNames.Add(key);
                gi.EventDisplayed = gi.EventActive = "e330";
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e018a": // talk to priest
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
                   case 1: case 2: gi.EventDisplayed = gi.EventActive = "e336"; gi.DieRollAction = GameAction.EncounterRoll; break;  // please commrades - sympathic
@@ -9712,6 +9744,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
             case "e018b": // fight priest
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the attack case
                {
@@ -9725,6 +9758,7 @@ namespace BarbarianPrince
                }
                break;
             case "e018c": // killed priest
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                if (4 < dieRoll)
                {
@@ -9740,6 +9774,7 @@ namespace BarbarianPrince
                }
                break;
             case "e019a": // talk hermit monk
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
@@ -9759,6 +9794,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
             case "e019b": // evade hermit monk
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
@@ -9770,6 +9806,7 @@ namespace BarbarianPrince
                }
                break;
             case "e019c":  // fight hermit monk
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                gi.DieRollAction = GameAction.EncounterRoll;
                switch (dieRoll) // Based on the die roll, implement the correct screen
@@ -9784,6 +9821,7 @@ namespace BarbarianPrince
                }
                break;
             case "e020a": // talk traveling monk
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
@@ -9799,6 +9837,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
             case "e020b": // evade traveling monk
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
@@ -9811,6 +9850,7 @@ namespace BarbarianPrince
                }
                break;
             case "e020c":  // fight traveling monk
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
@@ -9824,6 +9864,7 @@ namespace BarbarianPrince
             case "e021": // Warrior Monks
                if (Utilities.NO_RESULT == gi.DieResults[key][1])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   gi.DieResults[key][1] = dieRoll;
                   if (3 < dieRoll) // if above 3, add mounts to each warrior monk
                   {
@@ -9833,6 +9874,7 @@ namespace BarbarianPrince
                }
                break;
             case "e021a": // talk to warrior monks
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
@@ -9860,6 +9902,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
             case "e021b": // evade warrior monks
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
@@ -9873,6 +9916,7 @@ namespace BarbarianPrince
                }
                break;
             case "e021c": // evade warrior monks
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
@@ -9885,6 +9929,7 @@ namespace BarbarianPrince
                }
                break;
             case "e023a": // talk to wizard 
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
                   case 1: case 2: gi.EventDisplayed = gi.EventActive = "e342"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e342"][0] = Utilities.NO_RESULT; break; // inquriy
@@ -9908,6 +9953,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
             case "e023b": // evade to wizard
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
                   case 1: case 2: gi.EventDisplayed = gi.EventActive = "e325"; break; // pass with dignity
@@ -9942,6 +9988,7 @@ namespace BarbarianPrince
                }
                break;
             case "e023c": // fight wizard
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the attack case
                {
@@ -9964,6 +10011,7 @@ namespace BarbarianPrince
                }
                break;
             case "e024": // wizard attack
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                if (gi.WitAndWile <= dieRoll)
                {
@@ -9993,6 +10041,7 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerActive;
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   if (gi.WitAndWile < gi.DieResults[key][0])
                   {
                      Enslaved(gi);
@@ -10019,6 +10068,7 @@ namespace BarbarianPrince
             case "e026": // Search for treasure
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   action = GameAction.UpdateEventViewerActive;
                   gi.WizardAdviceLocations.Remove(princeTerritory);
                   switch (gi.DieResults[key][0]) // Based on the die roll, implement the attack case
@@ -10045,6 +10095,7 @@ namespace BarbarianPrince
                }
                break;
             case "e028a": // Cave Tombs
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll)
                {
@@ -10058,6 +10109,7 @@ namespace BarbarianPrince
                }
                break;
             case "e029": // danger and treasure
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll)
                {
@@ -10076,6 +10128,7 @@ namespace BarbarianPrince
                }
                break;
             case "e032a": // hidden altar 
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement the attack case
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e037"; gi.DieRollAction = GameAction.EncounterRoll; break; // broken chest
@@ -10098,6 +10151,7 @@ namespace BarbarianPrince
                }
                break;
             case "e033a": // defeated warrior wraiths
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.EncounterLoot;
                gi.ActiveMember = gi.Prince;
                gi.PegasusTreasure = PegasusTreasureEnum.Mount;
@@ -10113,6 +10167,7 @@ namespace BarbarianPrince
                }
                break;
             case "e034b": //  defeated spectre
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.EncounterLoot;
                gi.ActiveMember = gi.Prince;
                gi.PegasusTreasure = PegasusTreasureEnum.Mount;
@@ -10128,6 +10183,7 @@ namespace BarbarianPrince
                }
                break;
             case "e035a": // wandering idiot
+               gi.EnteredHexes.Last().EventNames.Add(key);
                ++gi.Prince.StarveDayNum;
                IMapItems deadMounts = new MapItems();
                foreach (IMapItem mount in gi.Prince.Mounts)
@@ -10160,6 +10216,7 @@ namespace BarbarianPrince
                }
                break;
             case "e036a": // golem defeated
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll)
                {
@@ -10185,6 +10242,7 @@ namespace BarbarianPrince
                }
                break;
             case "e037": // broken chest
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, give the artifact
                {
@@ -10198,6 +10256,7 @@ namespace BarbarianPrince
                }
                break;
             case "e038": // cache under stone
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, give the artifact
                {
@@ -10211,6 +10270,7 @@ namespace BarbarianPrince
                }
                break;
             case "e041": // vision gem
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll)
                {
@@ -10224,6 +10284,7 @@ namespace BarbarianPrince
                }
                break;
             case "e045b":
+               gi.EnteredHexes.Last().EventNames.Add(key);
                gi.DieResults["e045b"][0] = dieRoll;
                int remainingDays = Utilities.MaxDays - gi.Days;
                int daysToAdvance = Math.Min(dieRoll, remainingDays);
@@ -10231,13 +10292,15 @@ namespace BarbarianPrince
                action = GameAction.E045ArchOfTravel;
                break;
             case "e046a": // gateway to darkness - finished combat against guardians
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                int maxDaysToRemove = Math.Min(gi.Days, dieRoll);
                gi.Days -= maxDaysToRemove;
                gi.DieResults["e046a"][0] = dieRoll;
                break;
             case "e048a": // fugitive swordswoman
-               if( 6 == dieRoll )
+               gi.EnteredHexes.Last().EventNames.Add(key);
+               if ( 6 == dieRoll )
                {
                   gi.EncounteredMembers.Clear();
                   gi.EventDisplayed = gi.EventActive = "e048i";
@@ -10266,6 +10329,7 @@ namespace BarbarianPrince
                }
                break;
             case "e048b": // fugitive slave woman
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (6 == dieRoll)
                {
                   gi.EncounteredMembers.Clear();
@@ -10307,6 +10371,7 @@ namespace BarbarianPrince
                }
                break;
             case "e048e": // fugitive merchant
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (0 == gi.EncounteredMembers.Count)
                {
                   Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): gi.EncounteredMembers.Count=0 for ae=" + gi.EventActive);
@@ -10327,6 +10392,7 @@ namespace BarbarianPrince
                }
                break;
             case "e048f": // fugitive deserter
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (0 == gi.EncounteredMembers.Count)
                {
                   Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): gi.EncounteredMembers.Count=0 for ae=" + gi.EventActive);
@@ -10345,7 +10411,8 @@ namespace BarbarianPrince
                }
                break;
             case "e048g": // fugitive deserter
-               if( 0 == gi.EncounteredMembers.Count )
+               gi.EnteredHexes.Last().EventNames.Add(key);
+               if ( 0 == gi.EncounteredMembers.Count )
                {
                   Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): gi.EncounteredMembers.Count=0 for ae=" + gi.EventActive); 
                   return false;
@@ -10358,6 +10425,7 @@ namespace BarbarianPrince
                gi.EventDisplayed = gi.EventActive = "e300";
                break;
             case "e048h": // fugitive deserter
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (0 == gi.EncounteredMembers.Count)
                {
                   Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): gi.EncounteredMembers.Count=0 for ae=" + gi.EventActive);
@@ -10371,6 +10439,7 @@ namespace BarbarianPrince
                gi.EventDisplayed = gi.EventActive = "e300";
                break;
             case "e050b": // Talk with Constabulary
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                int resulte050b = theConstableRollModifier + dieRoll;
                switch (resulte050b)
@@ -10411,6 +10480,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
             case "e050c": // Evade with Constabulary
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                int resulte050c = theConstableRollModifier + dieRoll;
                switch (resulte050c)
@@ -10434,6 +10504,7 @@ namespace BarbarianPrince
                   gi.RemoveAbandonerInParty(mi);
                break;
             case "e050d": // Fight with Constabulary
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                int resulte050d = theConstableRollModifier + dieRoll;
                switch (resulte050d)
@@ -10450,6 +10521,7 @@ namespace BarbarianPrince
                }
                break;
             case "e052a": // following goblins
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                if (dieRoll <= gi.WitAndWile)
                {
@@ -10462,6 +10534,7 @@ namespace BarbarianPrince
                }
                break;
             case "e052b": // following goblins undiscovered
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                if (1 == dieRoll)
                {
@@ -10484,6 +10557,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0]) // Based on the die roll, implement the attack case
                   {
                      case 5: // campsize rendezvous
@@ -10550,6 +10624,7 @@ namespace BarbarianPrince
                }
                break;
             case "e053b": // campsite rendezvous
+               gi.EnteredHexes.Last().EventNames.Add(key);
                gi.DieResults[key][0] = dieRoll;
                int start = gi.EncounteredMembers.Count;
                int end = 2 * gi.EncounteredMembers.Count;
@@ -10589,6 +10664,7 @@ namespace BarbarianPrince
                }
                break;
             case "e053c":
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // e053 - take control of campsite after combat
                {
                   case 2: gi.EventDisplayed = gi.EventActive = "e043"; break;
@@ -10612,6 +10688,7 @@ namespace BarbarianPrince
                }
                break;
             case "e053d": // campsite with small building
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll)
                {
@@ -10630,6 +10707,7 @@ namespace BarbarianPrince
                }
                break;
             case "e053e": // campsite near magic
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll)
                {
@@ -10660,6 +10738,7 @@ namespace BarbarianPrince
                }
                break;
             case "e053f": // campsite near strong magic
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll)
                {
@@ -10690,6 +10769,7 @@ namespace BarbarianPrince
                }
                break;
             case "e054a": // escaping goblin keep
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (null == gi.GoblinKeeps.Find(princeTerritory.Name))
                   gi.GoblinKeeps.Add(princeTerritory);
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
@@ -10715,11 +10795,13 @@ namespace BarbarianPrince
                }
                break;
             case "e054b": // fighting goblin keep - EncounterRoll()
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (null == gi.GoblinKeeps.Find(princeTerritory.Name))
                   gi.GoblinKeeps.Add(princeTerritory);
                gi.EventDisplayed = gi.EventActive = "e304"; // party attacks first
                break;
             case "e055a": // following orcs
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                if (dieRoll <= gi.WitAndWile)
                {
@@ -10732,6 +10814,7 @@ namespace BarbarianPrince
                }
                break;
             case "e055b": // following orcs undiscovered
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                if (1 == dieRoll)
                {
@@ -10747,11 +10830,13 @@ namespace BarbarianPrince
                }
                break;
             case "e056a": // fighting orc tower
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                gi.EventDisplayed = gi.EventActive = "e330";
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e058c": // following dwarves
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                if (dieRoll < gi.WitAndWile)
                {
@@ -10764,6 +10849,7 @@ namespace BarbarianPrince
                }
                break;
             case "e058d": // following dwarves undiscovered
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                if (1 == dieRoll)
                {
@@ -10779,6 +10865,7 @@ namespace BarbarianPrince
                }
                break;
             case "e058e": // talk to dwarves
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll)
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e342"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e342"][0] = Utilities.NO_RESULT; break; // inquiry
@@ -10805,6 +10892,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
             case "e058f": // evade dwarves
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll)
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e311"; break;                                               // escape
@@ -10817,6 +10905,7 @@ namespace BarbarianPrince
                }
                break;
             case "e058g": // fight dwarves
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll)
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e302"; break;
@@ -10829,6 +10918,7 @@ namespace BarbarianPrince
                }
                break;
             case "e058h": // Band of Dwarves
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
                   gi.DieResults[key][0] = dieRoll;
@@ -10854,6 +10944,7 @@ namespace BarbarianPrince
             case "e059": // dwarven mines
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   if (gi.WitAndWile <= gi.DieResults[key][0])
                   {
                      gi.EventDisplayed = gi.EventActive = "e060";   // arrested
@@ -10879,6 +10970,7 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerActive;
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
                      case 0:
@@ -10906,6 +10998,7 @@ namespace BarbarianPrince
             case "e066b": // secret temple unfriendly
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   if (gi.DieResults[key][0] < gi.WitAndWile)
                   {
                      gi.EventDisplayed = gi.EventActive = "e066a";   // access temple
@@ -10931,6 +11024,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
                      case 1: case 3: case 5: // raid approach
@@ -10951,7 +11045,8 @@ namespace BarbarianPrince
                   }
                }
                break;
-            case "e071a": // talk to elves    
+            case "e071a": // talk to elves
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (true == gi.IsInMapItems("Elf"))
                   --dieRoll;
                if (true == gi.IsInMapItems("Dwarf"))
@@ -10975,6 +11070,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
             case "e071b": // evade elves
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (true == gi.IsInMapItems("Elf"))
                   --dieRoll;
                if (true == gi.IsInMapItems("Dwarf"))
@@ -10999,6 +11095,7 @@ namespace BarbarianPrince
                }
                break;
             case "e071c": // fight elves
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (true == gi.IsInMapItems("Elf"))
                   --dieRoll;
                if (true == gi.IsInMapItems("Dwarf"))
@@ -11023,6 +11120,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   int numElves = gi.DieResults[key][0] + 1;
                   for (int i = 0; i < numElves; ++i)
                   {
@@ -11041,6 +11139,7 @@ namespace BarbarianPrince
                break;
             case "e072a": // follow elves
             case "e072d":
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll)
                {
                   case 1:                                              // town
@@ -11060,6 +11159,7 @@ namespace BarbarianPrince
                }
                break;
             case "e073c": // friendly witch
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll)
                {
                   case 1: case 2: gi.EventDisplayed = gi.EventActive = "e334"; break;
@@ -11069,6 +11169,7 @@ namespace BarbarianPrince
                }
                break;
             case "e079a": // heavy rains
+               gi.EnteredHexes.Last().EventNames.Add(key);
                gi.IsHeavyRainNextDay = false;  // rain is today - need EncounterEnd() to be called to end the day in EventViewer.ShowE079ColdCheckResult()
                gi.DieRollAction = GameAction.DieRollActionNone;
                gi.GamePhase = GamePhase.SunriseChoice;      // e079a - Finish Heavy Rains
@@ -11089,6 +11190,7 @@ namespace BarbarianPrince
             case "e080a": // pixie gift
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0]) 
                   {
                      case 1:
@@ -11118,6 +11220,7 @@ namespace BarbarianPrince
                }
                break;
             case "e081a": // talk to mounted patrol 
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll)
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e342"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e342"][0] = Utilities.NO_RESULT; break; // inquiry
@@ -11144,6 +11247,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
             case "e081b": // evade mounted patrol
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll)
                {
                   case 1:case 2:                                                                                            // escape mounted
@@ -11163,6 +11267,7 @@ namespace BarbarianPrince
                }
                break;
             case "e081c": // fight mounted patrol
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll)
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e302"; break;
@@ -11175,6 +11280,7 @@ namespace BarbarianPrince
                }
                break;
             case "e083a": // roasted boar
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
                   if (false == gi.AddFoods(gi.DieResults[key][0]))
@@ -11201,6 +11307,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   int numWound = 0;
                   int numPoison = 0;
                   switch (gi.DieResults[key][0])
@@ -11239,6 +11346,7 @@ namespace BarbarianPrince
                }
                break;
             case "e092a": // flood
+               gi.EnteredHexes.Last().EventNames.Add(key);
                gi.DieRollAction = GameAction.DieRollActionNone;
                gi.GamePhase = GamePhase.SunriseChoice;      // e092a - Finish Flood
                gi.DieResults[key][0] = dieRoll;
@@ -11253,6 +11361,7 @@ namespace BarbarianPrince
                }
                break;
             case "e098a": // evade dragon
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
@@ -11273,6 +11382,7 @@ namespace BarbarianPrince
                }
                break;
             case "e098b": // fight dragon
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
@@ -11286,6 +11396,7 @@ namespace BarbarianPrince
                }
                break;
             case "e099a": // evade roc
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
@@ -11306,6 +11417,7 @@ namespace BarbarianPrince
                }
                break;
             case "e099b": // fight roc
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
@@ -11319,6 +11431,7 @@ namespace BarbarianPrince
                }
                break;
             case "e100a": // talk to griffon
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e342"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e342"][0] = Utilities.NO_RESULT; break; // inquiry  
@@ -11333,6 +11446,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
             case "e100b": // evade to griffon
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
                   case 1:
@@ -11352,6 +11466,7 @@ namespace BarbarianPrince
                }
                break;
             case "e100c": // fight griffon
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the attack case
                {
@@ -11365,6 +11480,7 @@ namespace BarbarianPrince
                }
                break;
             case "e101a": // talk to harpy
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e342"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e342"][0] = Utilities.NO_RESULT; break; // inquiry  
@@ -11378,6 +11494,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
             case "e101b": // evade to harpy
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
                   case 1:
@@ -11397,6 +11514,7 @@ namespace BarbarianPrince
                }
                break;
             case "e101c": // fight harpy
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the attack case
                {
@@ -11410,6 +11528,7 @@ namespace BarbarianPrince
                }
                break;
             case "e105": // storm clouds
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (gi.DieResults[key][0]) // Based on the die roll, implement the attack case
                {
@@ -11436,6 +11555,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   int directionLost = gi.DieResults[key][0];
                   int range = gi.DieResults[key][1] = dieRoll;
                   ITerritory blowToTerritory = FindRandomHexRangeDirectionAndRange(gi, directionLost, range);
@@ -11462,6 +11582,7 @@ namespace BarbarianPrince
             case "e110c": // air spirit - succeed - choose hex
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   action = GameAction.E110AirSpiritTravel;
                   gi.DieResults[key][0] = dieRoll;
                   gi.AirSpiritLocations = GetHexesWithinRange(gi, dieRoll);
@@ -11473,6 +11594,7 @@ namespace BarbarianPrince
                }
                break;
             case "e112a": // follow eagles
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e113"; gi.DieRollAction = GameAction.EncounterRoll; break;  // eagle ambush
@@ -11513,6 +11635,7 @@ namespace BarbarianPrince
                }
                break;
             case "e112b": // evade eagles 
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
                   case 1: case 2: gi.EventDisplayed = gi.EventActive = "e325"; break;                                               // pass with dignity
@@ -11523,6 +11646,7 @@ namespace BarbarianPrince
                }
                break;
             case "e112c": // fight eagles
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e304"; break;  // attack
@@ -11537,6 +11661,7 @@ namespace BarbarianPrince
             case "e113": // eagle ambush
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   for (int i = 0; i < gi.DieResults[key][0]; ++i) // additional eagles arrive
                   {
                      IMapItem eagle = CreateCharacter(gi, "Eagle", 1);
@@ -11554,6 +11679,7 @@ namespace BarbarianPrince
             case "e117":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   gi.IsPartyFed = true;
                   gi.IsMountsFed = true;
                   if (false == gi.AddCoins(50))
@@ -11582,6 +11708,7 @@ namespace BarbarianPrince
                }
                break;
             case "e118a": // talk to giant
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e342"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e342"][0] = Utilities.NO_RESULT; break; // inquiry
@@ -11596,6 +11723,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
             case "e118b": // evade to giant
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
                   case 1:
@@ -11622,6 +11750,7 @@ namespace BarbarianPrince
                }
                break;
             case "e118c": // fight giant
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the attack case
                {
@@ -11635,6 +11764,7 @@ namespace BarbarianPrince
                }
                break;
             case "e124": // make raft
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (gi.DieResults[key][0]) // Based on the die roll, implement the attack case
                {
@@ -11657,6 +11787,7 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerActive;
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   if (GamePhase.Travel == gi.GamePhase)
                      gi.SunriseChoice = GamePhase.Encounter; // if talk with merchant, no more travel
                   switch (gi.DieResults[key][0])
@@ -11693,6 +11824,7 @@ namespace BarbarianPrince
                }
                break;
             case "e128d": // merchant outwit
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (gi.WitAndWile < dieRoll)
                {
                   int maxLoss = Math.Min(gi.GetCoins(), 10);
@@ -11748,6 +11880,7 @@ namespace BarbarianPrince
                }
                break;
             case "e130a": // talk to high lord 
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll)
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e327"; gi.DieRollAction = GameAction.EncounterRoll; break; // pass dummies
@@ -11762,6 +11895,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
             case "e130b": // evade high lord 
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll)
                {
                   case 1:
@@ -11781,6 +11915,7 @@ namespace BarbarianPrince
                }
                break;
             case "e130c": // fight high lord
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll)
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e302"; break;
@@ -11793,6 +11928,7 @@ namespace BarbarianPrince
                }
                break;
             case "e130e": // Audience with high lord
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (gi.DieResults["e130"][1])
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e130f"; gi.DieRollAction = GameAction.EncounterRoll; break;
@@ -11811,6 +11947,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
                      case 1:case 2:
@@ -11829,6 +11966,7 @@ namespace BarbarianPrince
                break;
             // ========================Search Ruin Results================================
             case "e132":
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (dieRoll < gi.PartyMembers.Count)
                {
                   gi.EventDisplayed = gi.EventActive = "e208";
@@ -11839,7 +11977,7 @@ namespace BarbarianPrince
                   gi.EventDisplayed = gi.EventActive = "e132a";
                }
                break;
-            case "e133": action = GameAction.E133Plague; gi.DieRollAction = GameAction.DieRollActionNone; break;
+            case "e133": gi.EnteredHexes.Last().EventNames.Add(key); action = GameAction.E133Plague; gi.DieRollAction = GameAction.DieRollActionNone; break;
             case "e135": // broken columns in ruins
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
@@ -11847,6 +11985,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0]) // Based on the die roll, implement the attack case
                   {
                      case 1:
@@ -11882,6 +12021,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0]) // Based on the die roll, the proper hidden treasures
                   {
                      case 1: gi.EventDisplayed = gi.EventActive = "e037"; gi.DieRollAction = GameAction.EncounterRoll; break; // Broken Chest
@@ -11909,6 +12049,7 @@ namespace BarbarianPrince
                }
                break;
             case "e137": // inhabitants
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement event
                {
@@ -11926,6 +12067,7 @@ namespace BarbarianPrince
                }
                break;
             case "e138": // unclean creatures
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement event
                {
@@ -11943,6 +12085,7 @@ namespace BarbarianPrince
                }
                break;
             case "e139": // minor treasures
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement event
                {
@@ -11968,6 +12111,7 @@ namespace BarbarianPrince
                break;
             case "e140":  // magic box
             case "e140b": // magic box
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement event
                {
@@ -11981,6 +12125,7 @@ namespace BarbarianPrince
                }
                break;
             case "e141": // hydra teeth
+               gi.EnteredHexes.Last().EventNames.Add(key);
                gi.AddSpecialItem(SpecialEnum.HydraTeeth);
                gi.HydraTeethCount += dieRoll;
                if (false == EncounterEnd(gi, ref action))
@@ -11994,7 +12139,7 @@ namespace BarbarianPrince
                gi.SecretClues.Remove(princeTerritory);
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0]) // Based on the die roll, implement event
                   {
                      case 2: gi.EventDisplayed = gi.EventActive = "e066"; gi.DieRollAction = GameAction.EncounterRoll; break;   // hidden temple
@@ -12033,6 +12178,7 @@ namespace BarbarianPrince
                }
                break;
             case "e148": // seneschal requires a bribe
+               gi.EnteredHexes.Last().EventNames.Add(key);
                gi.DieResults[key][0] = dieRoll;
                gi.Bribe = dieRoll * 10;
                if (true == gi.IsMerchantWithParty)
@@ -12040,6 +12186,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
                break;
             case "e151": // lord finds favor
+               gi.EnteredHexes.Last().EventNames.Add(key);
                gi.DieResults[key][0] = dieRoll;
                if (false == gi.AddCoins(dieRoll * 100))
                {
@@ -12074,6 +12221,7 @@ namespace BarbarianPrince
             case "e154": // meet lords daughter
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   action = GameAction.UpdateEventViewerActive;
                   switch (gi.DieResults[key][0]) // Based on the die roll, implement event
                   {
@@ -12093,6 +12241,7 @@ namespace BarbarianPrince
             case "e155": // meet high priest
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   action = GameAction.UpdateEventViewerActive;
                   switch (gi.DieResults[key][0]) // Based on the die roll, implement event
                   {
@@ -12113,6 +12262,7 @@ namespace BarbarianPrince
             case "e156": // audience with town mayor
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   action = GameAction.UpdateEventViewerActive;
                   switch (gi.DieResults[key][0]) // Based on the die roll, implement event
                   {
@@ -12147,6 +12297,7 @@ namespace BarbarianPrince
             case "e160": // audience with lady 
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   action = GameAction.UpdateEventViewerActive;
                   switch (gi.DieResults[key][0]) // Based on the die roll, implement event
                   {
@@ -12165,11 +12316,13 @@ namespace BarbarianPrince
                }
                break;
             case "e160e": // audience with lady
+               gi.EnteredHexes.Last().EventNames.Add(key);
                gi.DieResults[key][0] = dieRoll;
                break;
             case "e160f":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   gi.AddCoins(gi.DieResults[key][0] * 150);
                   gi.IsPartyFed = true;
                   gi.IsMountsFed = true;
@@ -12212,6 +12365,7 @@ namespace BarbarianPrince
             case "e161": // audience with count drogat
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   action = GameAction.UpdateEventViewerActive;
                   switch (gi.DieResults[key][0]) // Based on the die roll, implement event
                   {
@@ -12244,6 +12398,7 @@ namespace BarbarianPrince
                }
                break;
             case "e162": //learn secrets
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
@@ -12268,6 +12423,7 @@ namespace BarbarianPrince
                }
                else if (Utilities.NO_RESULT == gi.DieResults[key][2])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   gi.DieResults[key][2] = dieRoll;
                }
                else
@@ -12277,6 +12433,7 @@ namespace BarbarianPrince
                }
                break;
             case "e163c": //buy slave girls
+               gi.EnteredHexes.Last().EventNames.Add(key);
                gi.DieResults[key][0] = dieRoll;
                if (12 == dieRoll)
                {
@@ -12293,6 +12450,7 @@ namespace BarbarianPrince
                --gi.PurchasedSlaveGirl;
                break;
             case "e163d": //buy warrior
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
                   gi.DieResults["e163d"][0] = dieRoll;
@@ -12315,6 +12473,7 @@ namespace BarbarianPrince
             case "e165": // elf town - EncounterRoll()
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   if (gi.WitAndWile < gi.DieResults[key][0])
                   {
                      gi.EventDisplayed = gi.EventActive = "e060";   // arrested
@@ -12345,6 +12504,7 @@ namespace BarbarianPrince
             case "e166": // elf castle
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   if (gi.WitAndWile <= gi.DieResults[key][0])
                   {
                      gi.EventDisplayed = gi.EventActive = "e060";   // arrested
@@ -12373,6 +12533,7 @@ namespace BarbarianPrince
                }
                break;
             case "e195": // possession reference
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll)
                {
                   case 2: gi.EventDisplayed = gi.EventActive = "e191"; gi.AddSpecialItem(SpecialEnum.ResistanceRing); break; // resistence ring
@@ -12393,6 +12554,7 @@ namespace BarbarianPrince
             case "e208":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
                      case 2: gi.EventDisplayed = gi.EventActive = "e133"; break;
@@ -12450,6 +12612,7 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerActive;
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
                      case 2:
@@ -12543,6 +12706,7 @@ namespace BarbarianPrince
                }
                break;
             case "e209f":
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (false == gi.AddCoins(180))
                {
                   Logger.Log(LogEnum.LE_ERROR, "EncounterRoll: AddCoins() returned false for action=" + action.ToString());
@@ -12558,6 +12722,7 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerActive;
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   gi.ReduceCoins(10);
                   switch (gi.DieResults[key][0])
                   {
@@ -12581,6 +12746,7 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerActive;
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
                      case 2: gi.EventDisplayed = gi.EventActive = "e210a"; break;  // hire freeman
@@ -12614,6 +12780,7 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerActive;
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
                      case 2: ThrownInDungeon(gi); break;                                                                       // thrown in dungeon
@@ -12653,6 +12820,7 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerActive;
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
                      case 2: Imprisoned(gi); break;                                                                            // imprisoned
@@ -12734,6 +12902,7 @@ namespace BarbarianPrince
                int resultOfDie = gi.DieResults[key][0];
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
                      case 2:                                                                                                                       // no audience ever
@@ -12813,6 +12982,7 @@ namespace BarbarianPrince
                int resultOfDie1 = gi.DieResults["e211d"][0];
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
                      case 2:                                                                                                                        // next victim                                                               
@@ -12891,6 +13061,7 @@ namespace BarbarianPrince
                int resultOfDie2 = gi.DieResults["e211e"][0];
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
                      case 2: gi.EventDisplayed = gi.EventActive = "e060"; gi.DieRollAction = GameAction.EncounterRoll; break;                      // arrested
@@ -12978,6 +13149,7 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerActive;
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
                      case 2: gi.EventDisplayed = gi.EventActive = "e212a"; break;
@@ -13044,6 +13216,7 @@ namespace BarbarianPrince
                }
                break;
             case "e212l": //learn secrets
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
@@ -13079,6 +13252,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   ICaches caches = gi.Caches.Sort();
                   ICache targetCache = caches.Find(princeTerritory.Name);
                   if (null == targetCache)
@@ -13123,6 +13297,7 @@ namespace BarbarianPrince
             case "e313b": action = GameAction.UpdateEventViewerActive; gi.EventDisplayed = gi.EventActive = "e330"; gi.DieRollAction = GameAction.EncounterRoll; break;
             // ========================Escape================================
             case "e314": // escape easy
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (true == gi.IsCharismaTalismanActive)
                   --dieRoll;
                if (true == gi.IsElfWitAndWileActive)
@@ -13149,6 +13324,7 @@ namespace BarbarianPrince
                }
                break;
             case "e315": // escape hard
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (true == gi.IsCharismaTalismanActive)
                   --dieRoll;
                if (true == gi.IsElfWitAndWileActive)
@@ -13176,6 +13352,7 @@ namespace BarbarianPrince
                break;
             // ========================Hiding================================
             case "e317": // Hiding
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (true == gi.IsElfWitAndWileActive)
                   ++dieRoll;
                if (dieRoll <= gi.WitAndWile)
@@ -13195,6 +13372,7 @@ namespace BarbarianPrince
                }
                break;
             case "e318": // Hiding
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (true == gi.IsElfWitAndWileActive)
                   ++dieRoll;
                if (dieRoll < gi.WitAndWile)
@@ -13214,6 +13392,7 @@ namespace BarbarianPrince
                }
                break;
             case "e319": // Hiding
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (gi.PartyMembers.Count <= dieRoll)
                {
                   if (false == EncounterEnd(gi, ref action))
@@ -13231,6 +13410,7 @@ namespace BarbarianPrince
                }
                break;
             case "e320": // Hiding
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (gi.PartyMembers.Count < dieRoll)
                {
                   if (false == EncounterEnd(gi, ref action))
@@ -13250,12 +13430,13 @@ namespace BarbarianPrince
                }
                break;
             // ========================Bribe================================
-            case "e321": action = GameAction.UpdateEventViewerActive; gi.EventDisplayed = gi.EventActive = "e330"; gi.DieRollAction = GameAction.EncounterRoll; theCombatModifer = 1; break;
-            case "e322": action = GameAction.UpdateEventViewerActive; gi.EventDisplayed = gi.EventActive = "e330"; gi.DieRollAction = GameAction.EncounterRoll; break;
-            case "e323": action = GameAction.UpdateEventViewerActive; gi.EventDisplayed = gi.EventActive = "e330"; gi.DieRollAction = GameAction.EncounterRoll; theCombatModifer = -1; break;
-            case "e324": action = GameAction.UpdateEventViewerActive; gi.EventDisplayed = gi.EventActive = "e307"; break;
+            case "e321": gi.EnteredHexes.Last().EventNames.Add(key); action = GameAction.UpdateEventViewerActive; gi.EventDisplayed = gi.EventActive = "e330"; gi.DieRollAction = GameAction.EncounterRoll; theCombatModifer = 1; break;
+            case "e322": gi.EnteredHexes.Last().EventNames.Add(key); action = GameAction.UpdateEventViewerActive; gi.EventDisplayed = gi.EventActive = "e330"; gi.DieRollAction = GameAction.EncounterRoll; break;
+            case "e323": gi.EnteredHexes.Last().EventNames.Add(key); action = GameAction.UpdateEventViewerActive; gi.EventDisplayed = gi.EventActive = "e330"; gi.DieRollAction = GameAction.EncounterRoll; theCombatModifer = -1; break;
+            case "e324": gi.EnteredHexes.Last().EventNames.Add(key); action = GameAction.UpdateEventViewerActive; gi.EventDisplayed = gi.EventActive = "e307"; break;
             // ========================Pass================================
             case "e326": // Pass encounter
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (true == gi.IsCharismaTalismanActive)
                   --dieRoll;
                if (true == gi.IsElfWitAndWileActive)
@@ -13277,6 +13458,7 @@ namespace BarbarianPrince
                }
                break;
             case "e327": // Pass encounter
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (true == gi.IsCharismaTalismanActive)
                   --dieRoll;
                if (true == gi.IsElfWitAndWileActive)
@@ -13297,6 +13479,7 @@ namespace BarbarianPrince
                }
                break;
             case "e328": // Pass encounter
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (true == gi.IsCharismaTalismanActive)
                   --dieRoll;
                if (true == gi.IsElfWitAndWileActive)
@@ -13317,6 +13500,7 @@ namespace BarbarianPrince
                }
                break;
             case "e329": // Pass encounter
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (true == gi.IsCharismaTalismanActive)
                   --dieRoll;
                if (true == gi.IsElfWitAndWileActive)
@@ -13339,6 +13523,7 @@ namespace BarbarianPrince
                break;
             // ========================Roll for Fight================================
             case "e330":
+               gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                dieRoll += theCombatModifer;
                theCombatModifer = 0;
@@ -13371,6 +13556,7 @@ namespace BarbarianPrince
                break;
             // ========================Character Interaction================================
             case "e331a": // failed to bribe to join
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement event
                {
                   case 1: case 2: case 3: gi.EventDisplayed = gi.EventActive = "e401"; break;
@@ -13381,6 +13567,7 @@ namespace BarbarianPrince
                }
                break;
             case "e332a": // failed to bribe to hire
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement event
                {
                   case 1: case 2: gi.EventDisplayed = gi.EventActive = "e401"; break;
@@ -13392,6 +13579,7 @@ namespace BarbarianPrince
                }
                break;
             case "e333a": // failed to hire 
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement event
                {
                   case 1: case 2: case 3: case 4: gi.EventDisplayed = gi.EventActive = "e325"; break;                      // pass with dignity
@@ -13401,6 +13589,7 @@ namespace BarbarianPrince
                }
                break;
             case "e336": // Plead Comrades
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
                {
                   action = GameAction.E018MarkOfCain;
@@ -13425,6 +13614,7 @@ namespace BarbarianPrince
                }
                break;
             case "e337": // Plead Comrades
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
                {
                   action = GameAction.E018MarkOfCain;
@@ -13455,6 +13645,7 @@ namespace BarbarianPrince
                }
                break;
             case "e337a": // Plead
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement event
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e325"; break;                                               // pass with dignity
@@ -13467,6 +13658,7 @@ namespace BarbarianPrince
                }
                break;
             case "e338a": // convince hirelings
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (true == gi.IsCharismaTalismanActive)
                   --dieRoll;
                if (true == gi.IsElfWitAndWileActive)
@@ -13521,6 +13713,7 @@ namespace BarbarianPrince
                }
                break;
             case "e338c": // convince hirelings
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (true == gi.IsCharismaTalismanActive)
                   --dieRoll;
                if (true == gi.IsElfWitAndWileActive)
@@ -13568,6 +13761,7 @@ namespace BarbarianPrince
                }
                break;
             case "e339a": // convince hirelings
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (true == gi.IsCharismaTalismanActive)
                   --dieRoll;
                if (true == gi.IsElfWitAndWileActive)
@@ -13610,6 +13804,7 @@ namespace BarbarianPrince
                }
                break;
             case "e339b": // failed to hire 
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement event
                {
                   case 1: case 2: case 3: gi.EventDisplayed = gi.EventActive = "e325"; break;  // pass with dignity
@@ -13618,6 +13813,7 @@ namespace BarbarianPrince
                }
                break;
             case "e339d": // convince hirelings
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (true == gi.IsCharismaTalismanActive)
                   --dieRoll;
                if (true == gi.IsElfWitAndWileActive)
@@ -13653,6 +13849,7 @@ namespace BarbarianPrince
                }
                break;
             case "e340": // looters
+               gi.EnteredHexes.Last().EventNames.Add(key);
                if (true == gi.IsCharismaTalismanActive)
                   --dieRoll;
                if (true == gi.IsElfWitAndWileActive)
@@ -13685,6 +13882,7 @@ namespace BarbarianPrince
                }
                break;
             case "e340a": // looters hostile
+               gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll) // Based on the die roll, implement event
                {
                   case 1:
@@ -13732,6 +13930,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   int result = gi.DieResults["e341"][0];
                   if ("e016a" == gi.EventStart) // magician's home - if combat, use e016b
                   {
@@ -13788,6 +13987,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
                   int result = gi.DieResults[key][0];
                   if ("e016a" == gi.EventStart) // magician's home - if combat, use e016b
                   {

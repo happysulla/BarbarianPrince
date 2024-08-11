@@ -1993,7 +1993,7 @@ namespace BarbarianPrince
                {
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run("Add one for Drawf in party."));
+                  myTextBlock.Inlines.Add(new Run("Add one for Dwarf in party."));
                }
                else if (true == isElfInParty)
                {

@@ -2742,7 +2742,7 @@ e112a	"<Bold>e112a Follow Eagle Clan</Bold>
  <InlineUIContainer><Button Content='e117' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Allies
 <LineBreak/> <LineBreak/>
                 <InlineUIContainer><Image Source='../../Images/Eagle.gif' Height='210' Width='400'></Image></InlineUIContainer>"
-e112b	"<Bold>e112b Evade to Eagle Clan</Bold>
+e112b	"<Bold>e112b Evade Eagle Clan</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
