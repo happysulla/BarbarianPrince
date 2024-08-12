@@ -208,6 +208,7 @@ namespace BarbarianPrince
       public IMapItems EncounteredMembers { get; set; } = new MapItems();
       public IMapItems EncounteredMinstrels { get; set; } = new MapItems();
       public IMapItems AtRiskMounts { get; set; } = new MapItems();
+      public IMapItems ResurrectedMembers { set; get; } = new MapItems();
       //---------------------------------------------------------------
       public IMapItemMoves MapItemMoves { get; set; } = new MapItemMoves();
       public IMapItemMove PreviousMapItemMove { get; set; } = new MapItemMove();
@@ -1744,13 +1745,18 @@ namespace BarbarianPrince
          IMapItems killedMembers0 = new MapItems();
          foreach (IMapItem mi in members)
          {
-            if (true == mi.Name.Contains("Undead")) // remove any undead warriors that were crated by Hydra Teeth - See e140
+            if (true == mi.Name.Contains("Undead")) // remove any undead warriors that were created by Hydra Teeth - See e140
                killedMembers0.Add(mi);
             if (true == mi.IsKilled)
             {
                Logger.Log(LogEnum.LE_REMOVE_KILLED, "RemoveKilledInParty(): ================"+mi.Name+"=KIA c=" + mi.Coin.ToString() + " f=" + mi.Food.ToString() + "=========================");
                isMemberKilled = true;
                killedMembers0.Add(mi);
+               if( true == mi.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+               {
+                  mi.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
+                  this.ResurrectedMembers.Add(mi);
+               }
                if (false == isEscaping)
                {
                   TransferMounts(mi.Mounts);
@@ -1893,6 +1899,12 @@ namespace BarbarianPrince
             ++this.WitAndWile;
          else if ((1 != numTrueLovesAfter) && (1 == numTrueLovesBefore)) // If the number of True Loves changed from one, decrease wit and wiles
             --this.WitAndWile;
+         //--------------------------------
+         if (true == victim.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+         {
+            victim.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
+            this.ResurrectedMembers.Add(victim);
+         }
          return true;
       }
       public bool RemoveBelongingsInParty(bool isMountsLost=true)
@@ -1908,6 +1920,7 @@ namespace BarbarianPrince
                mi.Rider.Mounts.Remove(mi);  // Griffon/Harpy Rider removes griffon/harpy as mount
                mi.Rider = null;            
             }
+            mi.CarriedMembers.Clear();
          }
          if (true == isMountsLost)
          {
@@ -1963,6 +1976,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "RemoveBelongingsInParty(): 2-invalid state count < 0");
             return false;
          }
+         this.RaftStatePrevUndo = this.RaftState = RaftEnum.RE_NO_RAFT;
+         this.HydraTeethCount = 0;
+         this.ChagaDrugCount = 0;
          return true;
       }
       public int RemoveLeaderlessInParty()

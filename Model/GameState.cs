@@ -16,6 +16,7 @@ using System.Windows.Documents;
 using System.Windows.Documents.DocumentStructures;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Xml.Linq;
 
 namespace BarbarianPrince
@@ -185,20 +186,53 @@ namespace BarbarianPrince
             }
             else
             {
-               if (false == SetPlagueStateCheck(gi, ref action))
+               if (false == SetResurrectionStateCheck(gi, ref action))
                {
-                  Logger.Log(LogEnum.LE_ERROR, "SetEndOfDayState(): SetPlagueStateCheck() returned false");
+                  Logger.Log(LogEnum.LE_ERROR, "SetEndOfDayState(): SetResurrectionStateCheck() returned false");
                   return false;
                }
             }
          }
          else
          {
-            if (false == SetPlagueStateCheck(gi, ref action))
+            if (false == SetResurrectionStateCheck(gi, ref action))
             {
-               Logger.Log(LogEnum.LE_ERROR, "SetEndOfDayState(): SetPlagueStateCheck() returned false");
+               Logger.Log(LogEnum.LE_ERROR, "SetEndOfDayState(): SetResurrectionStateCheck() returned false");
                return false;
             }
+         }
+         return true;
+      }
+      protected bool SetResurrectionStateCheck(IGameInstance gi, ref GameAction action)
+      {
+         if (true == gi.IsResurrected)
+         {
+            gi.RemoveLeaderlessInParty();
+            if( false == gi.RemoveBelongingsInParty(true))
+            {
+               Logger.Log(LogEnum.LE_ERROR, "SetResurrectionStateCheck(): RemoveBelongingsInParty() returned false");
+               return false;
+            }
+            gi.Prince.HealWounds(gi.Prince.Wound, gi.Prince.Poison);
+            gi.Prince.Endurance = Math.Min(1, gi.Prince.Endurance - 1);
+            gi.Prince.IsKilled = false;
+            gi.Prince.IsUnconscious = false;
+            gi.Prince.IsResurrected = true;
+            gi.IsResurrected = false;
+         }
+         else
+         {
+            foreach (IMapItem mi in gi.ResurrectedMembers)
+            {
+               mi.Endurance = Math.Min(1, mi.Endurance - 1);
+               mi.IsResurrected = true;
+               gi.AddCompanion(mi);
+            }
+         }
+         if (false == SetPlagueStateCheck(gi, ref action))
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetResurrectionStateCheck(): SetPlagueStateCheck() returned false");
+            return false;
          }
          return true;
       }
@@ -439,7 +473,7 @@ namespace BarbarianPrince
          gi.IsNewDayChoiceMade = false;
          gi.IsHeavyRainDismount = false;  // reset to indicate user needs to choose dismount if e079 heavy rains shown at beginning of day
          gi.ForbiddenAudiences.RemoveTimeConstraints(gi.Days);
-         if (true == PerformEndCheck(gi, ref action))
+         if (true == PerformEndCheck(gi, ref action)) // Wakeup()
             return true;
          if (true == gi.IsJailed)
          {
@@ -509,7 +543,13 @@ namespace BarbarianPrince
             return false;
          if (true == gi.Prince.IsKilled)
          {
-            action = GameAction.EndGameLost;
+            if (true == gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+            {
+               gi.Prince.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
+               gi.IsResurrected = true;
+               return false;
+            }
+            action = GameAction.EndGameLost;  // PerformEndCheck()
             gi.GamePhase = GamePhase.EndGame;
             if ("e203b" == gi.EventActive)
                gi.EndGameReason = "Beheaded in gory execution";
@@ -519,14 +559,20 @@ namespace BarbarianPrince
          }
          if ((true == gi.Prince.IsUnconscious) && (1 == gi.PartyMembers.Count))
          {
-            action = GameAction.EndGameLost;
+            if (true == gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+            {
+               gi.Prince.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
+               gi.IsResurrected = true;
+               return false;
+            }
+            action = GameAction.EndGameLost; // PerformEndCheck()
             gi.GamePhase = GamePhase.EndGame;
             gi.EndGameReason = "Prince unconscious and alone to die";
             return true;
          }
          if (Utilities.MaxDays < gi.Days)
          {
-            action = GameAction.EndGameLost;
+            action = GameAction.EndGameLost;  // PerformEndCheck()
             gi.GamePhase = GamePhase.EndGame;
             gi.EndGameReason = "Time Limit Reached";
             return true;
@@ -2682,7 +2728,7 @@ namespace BarbarianPrince
       public override string PerformAction(ref IGameInstance gi, ref GameAction action, int dieRoll)
       {
          String returnStatus = "OK";
-         if (true == PerformEndCheck(gi, ref action))
+         if (true == PerformEndCheck(gi, ref action)) // GameStateHunt.PerformAction()
             return returnStatus;
          GamePhase previousPhase = gi.GamePhase;
          GameAction previousAction = action;
@@ -2828,7 +2874,7 @@ namespace BarbarianPrince
       public override string PerformAction(ref IGameInstance gi, ref GameAction action, int dieRoll)
       {
          String returnStatus = "OK";
-         if (true == PerformEndCheck(gi, ref action))
+         if (true == PerformEndCheck(gi, ref action)) // GameStateCampfire.PerformAction()
             return returnStatus;
          GamePhase previousPhase = gi.GamePhase;
          GameAction previousAction = action;
@@ -3127,7 +3173,7 @@ namespace BarbarianPrince
                   int healthRemaining = gi.Prince.Endurance - gi.Prince.Wound - gi.Prince.Poison;
                   if (1 == healthRemaining) // left for dead
                   {
-                     action = GameAction.EndGameLost;
+                     action = GameAction.EndGameLost; // wizard slave
                      gi.GamePhase = GamePhase.EndGame;
                      gi.EndGameReason = "Prince starves to dead as Wizard's slave";
                      return true;
@@ -3146,7 +3192,7 @@ namespace BarbarianPrince
                      int healthRemaining = gi.Prince.Endurance - gi.Prince.Wound - gi.Prince.Poison;
                      if (1 == healthRemaining) // left for dead
                      {
-                        action = GameAction.EndGameLost;
+                        action = GameAction.EndGameLost; // wizard slave
                         gi.GamePhase = GamePhase.EndGame;
                         gi.EndGameReason = "Prince beaten to death as Wizard's slave";
                         return true;
@@ -3264,7 +3310,7 @@ namespace BarbarianPrince
       public override string PerformAction(ref IGameInstance gi, ref GameAction action, int dieRoll)
       {
          String returnStatus = "OK";
-         if (true == PerformEndCheck(gi, ref action))
+         if (true == PerformEndCheck(gi, ref action))  // GameStateTravel.PerformAction()
             return returnStatus;
          GamePhase previousPhase = gi.GamePhase;
          GameAction previousAction = action;
@@ -4239,7 +4285,7 @@ namespace BarbarianPrince
       public override string PerformAction(ref IGameInstance gi, ref GameAction action, int dieRoll)
       {
          String returnStatus = "OK";
-         if (true == PerformEndCheck(gi, ref action))
+         if (true == PerformEndCheck(gi, ref action)) // GameStateEncounter.PerformAction()
             return returnStatus;
          Logger.Log(LogEnum.LE_UNDO_COMMAND, "GameStateEncounter.PerformAction(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->false for a=" + action.ToString());
          gi.IsUndoCommandAvailable = false;
@@ -5089,7 +5135,7 @@ namespace BarbarianPrince
                }
                else
                {
-                  action = GameAction.EndGameLost;
+                  action = GameAction.EndGameLost; // turned into frog
                   gi.GamePhase = GamePhase.EndGame;
                   gi.EndGameReason = "Prince is a Frog";
                }
@@ -5491,78 +5537,89 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.E105ViolentWeather:
+               //--------------------------------------------------------
+               IMapItems lostInStormMembers = new MapItems();
+               foreach (IMapItem mi in gi.PartyMembers)
+                  lostInStormMembers.Add(mi);
+               foreach (IMapItem mi in lostInStormMembers)
+                  gi.RemoveAbandonedInParty(mi);
+               gi.Prince.Mounts.Clear(); // remove all mounts
+               //--------------------------------------------------------
+               int directionvw = gi.DieResults["e105a"][0];
+               int rangevw = gi.DieResults["e105a"][1];
+               if ((directionvw < 1) || (6 < directionvw))
+               {
+                  returnStatus = " invalid direction=" + directionvw.ToString() + " for  action =" + action.ToString();
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+               }
+               if ((rangevw < 1) || (6 < rangevw))
+               {
+                  returnStatus = " invalid direction=" + rangevw.ToString() + " for  action =" + action.ToString();
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+               }
+               rangevw = (int)Math.Ceiling((double)rangevw * 0.5); // half rounded up
+               //--------------------------------------------------------
+               Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateEncounter.PerformAction(): gi.MapItemMoves.Clear() for a=" + action.ToString());
+               gi.MapItemMoves.Clear();
+               ITerritory blowToTerritory = FindRandomHexRangeDirectionAndRange(gi, directionvw, rangevw);// Find a random hex at random direction and range 1
+               if (null == blowToTerritory)
+               {
+                  returnStatus = " blowToTerritory=null action=" + action.ToString();
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+               }
+               gi.Prince.MovementUsed = 0; // must have movement left to be blown off course
+               gi.Prince.TerritoryStarting = gi.NewHex;
+               gi.NewHex = blowToTerritory;
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR));
+               if (false == AddMapItemMove(gi, blowToTerritory))
+               {
+                  returnStatus = " AddMapItemMove() return false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateEncounter.PerformAction(E105ViolentWeather): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
+               }
+               //--------------------------------------------------------
+               Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateEncounter.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
+               gi.Prince.MovementUsed = gi.Prince.Movement; // end movement after being blown off course
+               //--------------------------------------------------------
                int woundsvw = gi.DieResults["e105a"][2];
                if ((woundsvw < 1) || (6 < woundsvw))
                {
                   returnStatus = " invalid direction=" + woundsvw.ToString() + " for  action =" + action.ToString();
                   Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                }
-               //--------------------------------------------------------
                gi.Prince.SetWounds(woundsvw, 0);  // prince is wounded one die
                if( true == gi.Prince.IsKilled )
                {
-                  action = GameAction.EndGameLost;
-                  gi.GamePhase = GamePhase.EndGame;
-               }
-               else
-               {
-                  int directionvw = gi.DieResults["e105a"][0];
-                  int rangevw = gi.DieResults["e105a"][1];
-                  if ((directionvw < 1) || (6 < directionvw))
+                  if (true == gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
                   {
-                     returnStatus = " invalid direction=" + directionvw.ToString() + " for  action =" + action.ToString();
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                  }
-                  if ((rangevw < 1) || (6 < rangevw))
-                  {
-                     returnStatus = " invalid direction=" + rangevw.ToString() + " for  action =" + action.ToString();
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                  }
-                  rangevw = (int)Math.Ceiling((double)rangevw*0.5); // half rounded up
-                  //--------------------------------------------------------
-                  IMapItems lostInStormMembers = new MapItems();
-                  foreach (IMapItem mi in gi.PartyMembers)
-                     lostInStormMembers.Add(mi);
-                  foreach (IMapItem mi in lostInStormMembers)
-                     gi.RemoveAbandonedInParty(mi);
-                  gi.Prince.Mounts.Clear(); // remove all mounts
-                  //--------------------------------------------------------
-                  Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateEncounter.PerformAction(): gi.MapItemMoves.Clear() for a=" + action.ToString());
-                  gi.MapItemMoves.Clear();
-                  //--------------------------------------------------------
-                  ITerritory blowToTerritory = FindRandomHexRangeDirectionAndRange(gi, directionvw, rangevw);// Find a random hex at random direction and range 1
-                  if (null == blowToTerritory)
-                  {
-                     returnStatus = " blowToTerritory=null action=" + action.ToString();
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                  }
-                  //--------------------------------------------------------
-                  gi.Prince.MovementUsed = 0; // must have movement left to be blown off course
-                  gi.Prince.TerritoryStarting = gi.NewHex;
-                  gi.NewHex = blowToTerritory;
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR));
-                  if (false == AddMapItemMove(gi, blowToTerritory))
-                  {
-                     returnStatus = " AddMapItemMove() return false";
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                     gi.Prince.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
+                     gi.IsResurrected = true;
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                     }
                   }
                   else
                   {
-                     Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateEncounter.PerformAction(E105ViolentWeather): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
+                     action = GameAction.EndGameLost;
+                     gi.GamePhase = GamePhase.EndGame;
                   }
-                  //--------------------------------------------------------
-                  gi.IsAirborne = false;
-                  Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateEncounter.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
-                  gi.Prince.MovementUsed = gi.Prince.Movement; // end movement after being blown off course
+               }
+               else
+               {
                   if (false == EncounterEnd(gi, ref action))
                   {
                      returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
-                  gi.DieResults["e105a"][0] = Utilities.NO_RESULT;
-                  gi.DieResults["e105a"][1] = Utilities.NO_RESULT;
-                  gi.DieResults["e105a"][2] = Utilities.NO_RESULT;
                }
+               gi.DieResults["e105a"][0] = Utilities.NO_RESULT;
+               gi.DieResults["e105a"][1] = Utilities.NO_RESULT;
+               gi.DieResults["e105a"][2] = Utilities.NO_RESULT;
                break;
             case GameAction.E106OvercastLost:
                   int direction = gi.DieResults["e106"][0];
@@ -6345,8 +6402,8 @@ namespace BarbarianPrince
                   gi.RemoveAbandonerInParty(mi);
                gi.IsTrueLoveHeartBroken = true;
                //-------------------------------
-               gi.Days += gi.DieResults["e160e"][0];
-               if (false == PerformEndCheck(gi, ref action))
+               gi.Days += gi.DieResults["e160e"][0]; // number of days pass with you hardbroken
+               if (false == PerformEndCheck(gi, ref action)) // GameStateEncounter.PerformAction(E160GBrokenLove)
                {
                   gi.DieResults["e160"][0] = Utilities.NO_RESULT;
                   gi.DieResults["e160e"][0] = Utilities.NO_RESULT;
@@ -11348,8 +11405,21 @@ namespace BarbarianPrince
                   }
                   if ((true == gi.Prince.IsKilled)) // if Prince killed, game over
                   {
-                     action = GameAction.EndGameLost;
-                     gi.GamePhase = GamePhase.EndGame;
+                     if (true == gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+                     {
+                        gi.Prince.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
+                        gi.IsResurrected = true;
+                        if (false == EncounterEnd(gi, ref action))
+                        {
+                           Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive + " a=" + action.ToString());
+                           return false;
+                        }
+                     }
+                     else
+                     {
+                        action = GameAction.EndGameLost;
+                        gi.GamePhase = GamePhase.EndGame;
+                     }
                   }
                   else if ( (true==isMemberIncapacited) || (8 < gi.DieResults[key][0]) ) // if anybody is incapacitied or the mounts are lost, redistribute belongings
                   {

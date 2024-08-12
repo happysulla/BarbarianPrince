@@ -121,8 +121,8 @@ namespace BarbarianPrince
       int PurchasedSlaveWarrior { set; get; } // e163 - purchased warrior
       int PurchasedSlaveGirl { set; get; } // e163 - purchased slave girls
       int SlaveGirlIndex { set; get; } // e163 - purchased slave girls
-      bool IsSlaveGirlActive { set; get; } // e163 - repeat the evade roll twice more
-      bool IsGiftCharmActive { set; get; } // e182 - repeat the evade roll twice more
+      bool IsSlaveGirlActive { set; get; } // e163 - repeat the talk roll twice more
+      bool IsGiftCharmActive { set; get; } // e182 - repeat the talk roll twice more
       bool IsPegasusSkip { set; get; } // e188 - do not convert talisman to pegasus
       bool IsResurrected { set; get; } // e192 - Resurrection Necklace used to revive Prince
       bool IsCharismaTalismanActive { set; get; } // e189 - +1 to Wits and Wiles roll for escape
@@ -153,6 +153,7 @@ namespace BarbarianPrince
       IMapItems EncounteredMembers { set; get; }
       IMapItems EncounteredMinstrels { set; get; } // e049
       IMapItems AtRiskMounts { set; get; } // e095 - at risk mounts are killed if decide to travel
+      IMapItems ResurrectedMembers { set; get; } // e192 - dead member resurrect at end of day
       //----------------------------------------------
       IMapItemMove PreviousMapItemMove { set; get; }
       IMapItemMoves MapItemMoves { set; get; }
