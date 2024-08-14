@@ -5475,7 +5475,7 @@ namespace BarbarianPrince
             //---------------------------------------
             if (false == SetInitialFightState("Grid_MouseDown() - Nerve Gas Attack"))
                Logger.Log(LogEnum.LE_ERROR, "Grid_MouseDown(): SetInitialFightState()=false");
-            if (false == ResetGridForCombat(myGameInstance.PartyMembers, myGameInstance.EncounteredMembers)) // Grid_MouseDown() - APPLY_NERVE_GAS_SHOW - RemoveCasualtiesDueToNerveGas()
+            if (false == ResetGridForCombat(myGameInstance.PartyMembers, myGameInstance.EncounteredMembers)) // Grid_MouseDown() - APPLY_NERVE_GAS_SHOW
                Logger.Log(LogEnum.LE_ERROR, "Grid_MouseDown(): ResetGridForCombat() return false");
             else if (false == UpdateGrid())
                Logger.Log(LogEnum.LE_ERROR, "Grid_MouseDown(): UpdateGrid() return false");
