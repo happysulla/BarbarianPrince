@@ -2200,7 +2200,7 @@ namespace BarbarianPrince
          //gi.AddSpecialItem(SpecialEnum.AntiPoisonAmulet);
          //gi.AddSpecialItem(SpecialEnum.PegasusMountTalisman);
          //gi.AddSpecialItem(SpecialEnum.NerveGasBomb);
-         //gi.AddSpecialItem(SpecialEnum.ResistanceRing);
+         gi.AddSpecialItem(SpecialEnum.ResistanceRing);
          //gi.AddSpecialItem(SpecialEnum.ResurrectionNecklace);
          //gi.AddSpecialItem(SpecialEnum.ShieldOfLight);
          //gi.AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
@@ -2277,6 +2277,9 @@ namespace BarbarianPrince
          //gi.IsMarkOfCain = true; // e018
          //gi.NumMonsterKill = 5; // e161e - kill 5 monsters
          //gi.ChagaDrugCount = 2;
+         //---------------------
+         foreach (IMapItem mi in gi.PartyMembers)
+            mi.AddSpecialItemToKeep(SpecialEnum.ResurrectionNecklace);
       }
    }
    //-----------------------------------------------------
@@ -2500,7 +2503,7 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case GameAction.SearchRuins:
-               gi.RemoveKilledInParty("e134");
+               gi.ProcessIncapacitedPartyMembers("e134");
                ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = GamePhase.SearchRuins;
@@ -2908,7 +2911,7 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.CampfirePlagueDustEnd:
-               gi.RemoveKilledInParty("Plague Dust");
+               gi.ProcessIncapacitedPartyMembers("Plague Dust");
                gi.IsGridActive = false;   // GameAction.CampfirePlagueDustEnd
                if (false == SetTalismanCheckState(gi, ref action))
                {
@@ -4352,7 +4355,7 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.EncounterEscape:
-               gi.RemoveKilledInParty("Escape", true);
+               gi.ProcessIncapacitedPartyMembers("Escape", true);
                if (false == EncounterEscape(gi, ref action))
                {
                   returnStatus = "EncounterEscape() returned false";
@@ -4823,7 +4826,7 @@ namespace BarbarianPrince
             case GameAction.E043SmallAltar:
                break;
             case GameAction.E043SmallAltarEnd:
-               gi.RemoveKilledInParty("E043");
+               gi.ProcessIncapacitedPartyMembers("E043");
                if (false == EncounterEnd(gi, ref action))
                {
                   returnStatus = "EncounterEnd() returned false for E044HighAltarEnd";
@@ -4833,7 +4836,7 @@ namespace BarbarianPrince
             case GameAction.E044HighAltar:
                break;
             case GameAction.E044HighAltarEnd:
-               gi.RemoveKilledInParty("E044");
+               gi.ProcessIncapacitedPartyMembers("E044");
                if (false == EncounterEnd(gi, ref action))
                {
                   returnStatus = "EncounterEnd() returned false for E044HighAltarEnd";
@@ -5388,7 +5391,7 @@ namespace BarbarianPrince
             case GameAction.E088FallingRocks:
                break;
             case GameAction.E082SpectreMagicEnd:
-               gi.RemoveKilledInParty("Spectre takes person", true);
+               gi.ProcessIncapacitedPartyMembers("Spectre takes person", true);
                if (false == EncounterEnd(gi, ref action))
                {
                   returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
@@ -5422,7 +5425,7 @@ namespace BarbarianPrince
             case GameAction.E091PoisonSnake: break;
             case GameAction.E091PoisonSnakeEnd:
                gi.DieResults["e091"][0] = Utilities.NO_RESULT;
-               gi.RemoveKilledInParty("Snake takes person", true);
+               gi.ProcessIncapacitedPartyMembers("Snake takes person", true);
                if (false == EncounterEnd(gi, ref action))
                {
                   returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
@@ -5463,7 +5466,7 @@ namespace BarbarianPrince
             case GameAction.E097FleshRot:
                break;
             case GameAction.E097FleshRotEnd:
-               gi.RemoveKilledInParty("Marsh Flesh Rot");
+               gi.ProcessIncapacitedPartyMembers("Marsh Flesh Rot");
                if (false == EncounterEnd(gi, ref action))
                {
                   returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
@@ -5742,7 +5745,7 @@ namespace BarbarianPrince
                      mi.IsRiding = false;
                   mi.IsFlying = false;
                }
-               gi.RemoveKilledInParty("E120 Exhausted");
+               gi.ProcessIncapacitedPartyMembers("E120 Exhausted");
                if (false == EncounterEnd(gi, ref action))
                {
                   returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
@@ -6041,7 +6044,7 @@ namespace BarbarianPrince
                gi.Prince.IsRiding = false;
                gi.Prince.IsFlying = false;
                gi.Prince.IsPlagued = false;
-               gi.RemoveKilledInParty("E133");
+               gi.ProcessIncapacitedPartyMembers("E133");
                //-----------------------------
                int partyCount = gi.PartyMembers.Count;
                int countOfPersons = gi.RemoveLeaderlessInParty();
@@ -6075,7 +6078,7 @@ namespace BarbarianPrince
                   if (true == mi.IsPlagued)
                      mi.IsKilled = true;
                }
-               gi.RemoveKilledInParty("E133");
+               gi.ProcessIncapacitedPartyMembers("E133");
                action = GameAction.EncounterEscape;
                if (false == EncounterEscape(gi, ref action))
                {
@@ -8626,7 +8629,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): returned option=null");
             return false;
          }
-         gi.RemoveKilledInParty(gi.EventActive);
+         gi.ProcessIncapacitedPartyMembers(gi.EventActive);
          //----------------------------------------------
          string key = gi.EventStart;
          ITerritory princeTerritory = gi.Prince.Territory;
@@ -8856,6 +8859,7 @@ namespace BarbarianPrince
             case "e071":   // elves
             case "e072a":  // elves
             case "e072d":  // elves
+            case "e071e":  // elves
                break;
             case "e073": // witch 
                if (true == autoWealthOption.IsEnabled)  // automatically perform wealth code rolls if enabled.
@@ -14189,7 +14193,7 @@ namespace BarbarianPrince
       protected bool EncounterEnd(IGameInstance gi, ref GameAction action)
       {
          ITerritory princeTerritory = gi.Prince.Territory;
-         gi.RemoveKilledInParty(gi.EventActive);
+         gi.ProcessIncapacitedPartyMembers(gi.EventActive);
          //---------------------------------------------------
          if (true == gi.DwarfAdviceLocations.Contains(princeTerritory)) // encounter dwarf advice event if not already encountered
          {

@@ -371,7 +371,7 @@ namespace BarbarianPrince
       {
          if (HuntEnum.LE_END == myState)
          {
-            myGameInstance.RemoveKilledInParty("Hunter's Death");
+            myGameInstance.ProcessIncapacitedPartyMembers("Hunter's Death");
             int diffFood = myFoodCurrent - myFoodOriginal;  // allocate new food to party members
             myGameInstance.AddFoods(diffFood, true);
             int diffCoin = myCoinOriginal - myCoinCurrent;  // decrease coin from party members evenly
@@ -1141,7 +1141,7 @@ namespace BarbarianPrince
             {
                if(false == myGameInstance.IsPartyRested)
                   myFoodCurrent = myFoodOriginal;
-               myGameInstance.RemoveKilledInParty("Died Hunting", false);
+               myGameInstance.ProcessIncapacitedPartyMembers("Died Hunting", false);
             }
             if (true == myIsFarmland)
                myState = HuntEnum.LE_MOB_CHASE;

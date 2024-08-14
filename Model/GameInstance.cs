@@ -1688,7 +1688,7 @@ namespace BarbarianPrince
          }
          return null;
       }
-      public void RemoveKilledInParty(string reason, bool isEscaping = false)
+      public void ProcessIncapacitedPartyMembers(string reason, bool isEscaping = false)
       {
          if (true == Prince.IsKilled) // If prince killed, no need to look at other members
             return;
@@ -1708,7 +1708,7 @@ namespace BarbarianPrince
             }
          }
          //--------------------------------
-         foreach (IMapItem member in PartyMembers)
+         foreach (IMapItem member in PartyMembers) // do initial processing before removal
          {
             if (true == member.Name.Contains("TrueLove"))
                ++numTrueLovesBefore;
@@ -1727,7 +1727,7 @@ namespace BarbarianPrince
             }
          }
          //--------------------------------
-         if (true == isMemberKilled)
+         if (true == isMemberKilled) // if anybody killed, all fickle members disappear
          {
             IMapItems fickleMembers = new MapItems();
             foreach (IMapItem mi in PartyMembers) // the fickle members disappear
@@ -1739,7 +1739,7 @@ namespace BarbarianPrince
                RemoveAbandonerInParty(mi);
          }
          //---------------------------------------------
-         IMapItems members = new MapItems();
+         IMapItems members = new MapItems(); // make a copy of MapItems 
          foreach (IMapItem mi in PartyMembers)
             members.Add(mi);
          IMapItems killedMembers0 = new MapItems();
@@ -1749,7 +1749,7 @@ namespace BarbarianPrince
                killedMembers0.Add(mi);
             if (true == mi.IsKilled)
             {
-               Logger.Log(LogEnum.LE_REMOVE_KILLED, "RemoveKilledInParty(): ================"+mi.Name+"=KIA c=" + mi.Coin.ToString() + " f=" + mi.Food.ToString() + "=========================");
+               Logger.Log(LogEnum.LE_REMOVE_KILLED, "ProcessIncapacitedPartyMembers(): ================"+mi.Name+"=KIA c=" + mi.Coin.ToString() + " f=" + mi.Food.ToString() + "=========================");
                isMemberKilled = true;
                killedMembers0.Add(mi);
                if( true == mi.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
@@ -1764,12 +1764,12 @@ namespace BarbarianPrince
                   AddSpecialItems(mi.SpecialShares);
                   if (false == AddFoods(mi.Food))
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "RemoveKilledInParty(): AddFoods() returned false");
+                     Logger.Log(LogEnum.LE_ERROR, "ProcessIncapacitedPartyMembers(): AddFoods() returned false");
                      return;
                   }
                   if( false == AddCoins(mi.Coin, false))
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "RemoveKilledInParty(): AddCoins() returned false");
+                     Logger.Log(LogEnum.LE_ERROR, "ProcessIncapacitedPartyMembers(): AddCoins() returned false");
                      return;
                   }
                   mi.Food = 0;
@@ -1781,19 +1781,19 @@ namespace BarbarianPrince
             }
             if (true == mi.IsUnconscious)
             {
-               Logger.Log(LogEnum.LE_REMOVE_KILLED, "RemoveKilledInParty(): ----------------" + mi.Name + "=MIA c=" + mi.Coin.ToString() + " f=" + mi.Food.ToString() + "-------------------------");
+               Logger.Log(LogEnum.LE_REMOVE_KILLED, "ProcessIncapacitedPartyMembers(): ----------------" + mi.Name + "=MIA c=" + mi.Coin.ToString() + " f=" + mi.Food.ToString() + "-------------------------");
                if (false == isEscaping)
                {
                   TransferMounts(mi.Mounts);
                   AddSpecialItems(mi.SpecialShares);
                   if (false == AddFoods(mi.Food))
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "RemoveKilledInParty(): AddFoods() returned false");
+                     Logger.Log(LogEnum.LE_ERROR, "ProcessIncapacitedPartyMembers(): AddFoods() returned false");
                      return;
                   }
                   if (false == AddCoins(mi.Coin, false))
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "RemoveKilledInParty(): AddCoins() returned false");
+                     Logger.Log(LogEnum.LE_ERROR, "ProcessIncapacitedPartyMembers(): AddCoins() returned false");
                      return;
                   }
                   mi.Food = 0;

@@ -4138,6 +4138,11 @@ namespace BarbarianPrince
                {
                   isPartyMemberDied = true;
                   results1.Add(mi);
+                  if (true == mi.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+                  {
+                     mi.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
+                     myGameInstance.ResurrectedMembers.Add(mi);
+                  }
                   foreach (IMapItem mount in mi.Mounts)
                      myCapturedMounts.Add(mount);
                   foreach (SpecialEnum possession in mi.SpecialKeeps)
@@ -4199,6 +4204,11 @@ namespace BarbarianPrince
                {
                   isPartyMemberDied = true;
                   results2.Add(mi);
+                  if (true == mi.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+                  {
+                     mi.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
+                     myGameInstance.ResurrectedMembers.Add(mi);
+                  }
                   foreach (IMapItem mount in mi.Mounts)
                      myCapturedMounts.Add(mount);
                   foreach (SpecialEnum possession in mi.SpecialKeeps)
@@ -4458,7 +4468,7 @@ namespace BarbarianPrince
             else if (NO_EFFECT_THIS_ATTACK != myGridRows[i].myDamage)
                myGridRows[i].myDamage = (wound + poison);
             defender.SetWounds(wound, poison);
-            Logger.Log(LogEnum.LE_COMBAT_RESULT, "SetWounds(): r[" + i.ToString() + "]=" + myGridRows[i].myDamage.ToString() + " w=" + wound.ToString() + " p=" + poison.ToString());
+            Logger.Log(LogEnum.LE_COMBAT_RESULT, "SetWounds(): defender=" + defender.Name + " row[" + i.ToString() + "]=" + myGridRows[i].myDamage.ToString() + " w=" + wound.ToString() + " p=" + poison.ToString());
             if (("Prince" == defender.Name) && (0 < myGridRows[i].myDamage))
             {
                if (false == UpdatePrinceEndurance())

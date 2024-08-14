@@ -4659,6 +4659,7 @@ namespace BarbarianPrince
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               }
                               return;
+
                            case "Coin":
                               action = GameAction.EncounterLootStart;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);

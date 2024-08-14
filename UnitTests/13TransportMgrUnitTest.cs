@@ -155,7 +155,7 @@ namespace BarbarianPrince
                if ((false == mi.Name.Contains("Griffon")) && (false == mi.Name.Contains("Eagle")))
                   mi.IsRiding = false;
             }
-            gi.RemoveKilledInParty("E120 Exhausted");
+            gi.ProcessIncapacitedPartyMembers("E120 Exhausted");
             myEventViewer.UpdateView(ref gi, GameAction.CampfireLoadTransport);
          }
          else if (CommandName == myCommandNames[2]) //13-Prince w/ 3 Mounts

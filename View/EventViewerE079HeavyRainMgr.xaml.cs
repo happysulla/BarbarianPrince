@@ -215,7 +215,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "UpdateEndState(): myCallback=null");
                return false;
             }
-            myGameInstance.RemoveKilledInParty("Caught your death of cold"); 
+            myGameInstance.ProcessIncapacitedPartyMembers("Caught your death of cold"); 
             if (false == myCallback(myIsAnyLost))
             {
                Logger.Log(LogEnum.LE_ERROR, "UpdateEndState(): myCallback() returned false");

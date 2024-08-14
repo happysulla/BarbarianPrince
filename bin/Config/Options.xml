@@ -22,7 +22,7 @@
     <IsEnabled value="True" />
   </Option>
   <Option value="StartWithNecklass">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="RandomParty10">
     <IsEnabled value="False" />
@@ -91,7 +91,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomHex">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="RandomTown">
     <IsEnabled value="False" />
@@ -118,7 +118,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="0711">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="1212">
     <IsEnabled value="False" />
@@ -157,10 +157,10 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="LessHardMonsters">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="EasyMonsters">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="EasiestMonsters">
     <IsEnabled value="False" />

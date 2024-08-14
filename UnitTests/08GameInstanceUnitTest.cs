@@ -438,7 +438,7 @@ namespace BarbarianPrince
                mi.IsUnconscious = true;
                break;
             }
-            gi.RemoveKilledInParty("UnitTest");
+            gi.ProcessIncapacitedPartyMembers("UnitTest");
             myDialog.UpdateGridRows(gi);
          }
          else if (CommandName == myCommandNames[18])

@@ -239,7 +239,7 @@ namespace BarbarianPrince
       //----------------------------------------------
       void AddCompanion(IMapItem mi);
       IMapItem RemoveFedSlaveGirl();
-      void RemoveKilledInParty(string reason, bool isEscaping = false);
+      void ProcessIncapacitedPartyMembers(string reason, bool isEscaping = false);
       bool RemoveVictimInParty(IMapItem victim);
       void RemoveAbandonerInParty(IMapItem mi, bool isTrueLoveRemoved = false); // all food/coin/possessons transferred to Party
       void RemoveAbandonedInParty(IMapItem mi, bool isTrueLoveRemoved = false); // no food/coin/possessons given

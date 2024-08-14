@@ -245,7 +245,7 @@ namespace BarbarianPrince
             }
             else
             {
-               myGameInstance.RemoveKilledInParty("Lost Overboard"); // possessions, food, coin, mounts are all transferred
+               myGameInstance.ProcessIncapacitedPartyMembers("Lost Overboard"); // possessions, food, coin, mounts are all transferred
             }
             //---------------------------------
             if (false == myCallback(myIsAnybodyLost, myIsPrinceLost))

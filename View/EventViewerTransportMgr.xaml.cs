@@ -158,7 +158,7 @@ namespace BarbarianPrince
                   mi.Coin = 0;
                }
             }
-            myGameInstance.RemoveKilledInParty("High Pass");
+            myGameInstance.ProcessIncapacitedPartyMembers("High Pass");
             if (true == isMountsKilled)
             {
                foreach (IMapItem mi in myGameInstance.PartyMembers)

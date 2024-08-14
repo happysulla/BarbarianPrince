@@ -248,7 +248,7 @@ namespace BarbarianPrince
                }
             }
             //---------------------------------
-            myGameInstance.RemoveKilledInParty("Lost in Overcast"); // This removes party members that are killed
+            myGameInstance.ProcessIncapacitedPartyMembers("Lost in Overcast"); // This removes party members that are killed
             //---------------------------------
             if (false == myCallback())
             {

@@ -270,7 +270,7 @@ namespace BarbarianPrince
                }
             }
             //---------------------------------
-            myGameInstance.RemoveKilledInParty("Quicksand");
+            myGameInstance.ProcessIncapacitedPartyMembers("Quicksand");
             //---------------------------------
             if (false == myCallback())
             {

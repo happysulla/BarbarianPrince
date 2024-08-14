@@ -459,7 +459,7 @@ namespace BarbarianPrince
          }
          //------------------------------------------------
          int spotDelta = (int)Math.Round(PERCENT_MAPITEM_COVERED * (this.Wound - woundBefore) / this.Endurance);
-         Logger.Log(LogEnum.LE_MAPITEM_WOUND, "SetWounds(): Name=" + this.Name + " woundBefore=" + woundBefore.ToString() + " this.Wound =" + this.Wound.ToString() + " ++++++spotDelta=" + spotDelta.ToString());
+         Logger.Log(LogEnum.LE_MAPITEM_WOUND, "SetWounds(): Name=" + this.Name + " woundBefore=" + woundBefore.ToString() + " this.Wound=" + this.Wound.ToString() + " ++++++spotDelta=" + spotDelta.ToString());
          for (int spots = 0; spots < spotDelta; ++spots) // splatter the MapItem with random blood spots
          {
             int range = (int)(Utilities.theMapItemSize);
@@ -1195,7 +1195,7 @@ namespace BarbarianPrince
              loadCanCarry -= coinLoads;
          }
          loadCanCarry -= this.Food;
-         if( 0 < loadCanCarry)
+         if( loadCanCarry < 0 )
             Logger.Log(LogEnum.LE_ERROR, "GetFreeLoadWithoutModify(): name=" + this.Name + " lc=" + loadCanCarry.ToString() + " f=" + Food.ToString() + " c=" + coinLoads.ToString() + "(cons=" + this.Coin.ToString() + ") ml=" + mountCarry.ToString());
          return loadCanCarry;
       }   // get free load - dismount if load does not support - but do not mount 
