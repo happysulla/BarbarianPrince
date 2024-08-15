@@ -7085,7 +7085,6 @@
     <road value="1317" />
     <road value="1319" />
     <river value="1418" />
-    <river value="1319" />
     <adjacent value="1319" />
     <adjacent value="1418" />
     <adjacent value="1417" />
@@ -7115,7 +7114,6 @@
     <DownRiver value="1219" />
     <road value="1318" />
     <road value="1320" />
-    <river value="1318" />
     <river value="1218" />
     <adjacent value="1219" />
     <adjacent value="1318" />

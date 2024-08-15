@@ -1933,16 +1933,17 @@ namespace BarbarianPrince
          myTerritorySelected = null;
          if (true == gi.IsImpassable) // e089 - must return to hex entered
          {
-            ITerritory selectedTerritory = null;
+            ITerritory selectedTerritory = gi.Prince.Territory;
             for (int i = gi.EnteredHexes.Count - 1; -1 < i; --i)  // get previous territory
+            {
+               string hexName = gi.EnteredHexes[i].HexName;
+               if (gi.Prince.Territory.Name != hexName)
                {
-               if (gi.Prince.Territory.Name != gi.EnteredHexes[i].HexName)
-               {
-                  ITerritory t = Territory.theTerritories.Find(gi.EnteredHexes[i].HexName);
+                  ITerritory t = Territory.theTerritories.Find(hexName);
                   if (null == t)
-                     Logger.Log(LogEnum.LE_ERROR, "GetPreviousHex(): theTerritories.Find() returned null for n=" + gi.EnteredHexes[i].HexName);
+                     Logger.Log(LogEnum.LE_ERROR, "GetPreviousHex(): theTerritories.Find() returned null for n=" + hexName);
                   else
-                     selectedTerritory = gi.Prince.Territory;
+                     selectedTerritory = t;
                   break;
                }
             }

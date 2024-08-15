@@ -1299,6 +1299,10 @@ namespace BarbarianPrince
          IsPoisonApplied = false;
          IsSunStroke = false;
          IsExhausted = false;
+         IsPlagued = false;
+         PlagueDustWound = 0;
+         IsCatchCold = false;
+         IsShowFireball = false;
          MovementUsed = 0;
          Wound = 0;
          Poison = 0;
@@ -1308,10 +1312,10 @@ namespace BarbarianPrince
          Mounts.Clear();
          CarriedMembers.Clear();
          SpecialKeeps.Clear();
-         mySpecialShares.Clear();
+         SpecialShares.Clear();
          OverlayImageName = "";
-         myWoundSpots.Clear();
-         myPoisonSpots.Clear();
+         WoundSpots.Clear();
+         PoisonSpots.Clear();
       }
       public void ResetPartial()
       {

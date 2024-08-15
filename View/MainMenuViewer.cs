@@ -26,7 +26,7 @@ namespace BarbarianPrince
       private readonly MenuItem myMenuItemTopLevel4 = null;
       private readonly IGameEngine myGameEngine = null;
       private IGameInstance myGameInstance = null;
-      public bool IsPathShown { get; set; } = false;
+      public bool IsPathShown { get; set; } = true;
       public Options NewGameOptions { get; set; } = null;
       //-----------------------------------------------------------------------
       public MainMenuViewer(Menu mi, IGameEngine ge, IGameInstance gi) // Constructor creates default top level menus that get changed with UpdateView() based on GamePhase and GameAction

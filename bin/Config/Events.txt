@@ -1586,7 +1586,7 @@ Campsite is near a place where you sense magic. Roll one die:
      6 -  <InlineUIContainer><Button Content='e046' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>
            <InlineUIContainer><Image Name='Magic' Source='../../Images/Magic.gif'  Height='300' Width='500'> </Image></InlineUIContainer>"
-e053f	" <Bold>e053f Campsite Near Srong Magic</Bold>
+e053f	" <Bold>e053f Campsite Near Strong Magic</Bold>
 <LineBreak/><LineBreak/>
 Campsite is near a place of hidden magic. Roll one die:
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -2994,7 +2994,7 @@ e128c	"<Bold>e128c Merchant with Food for Sale</Bold>
 <InlineUIContainer><Button Content='  +  ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>
                                           <InlineUIContainer><Image Source='../../Images/Merchant.gif' Name='EncounterEnd' Height='200'  Width='125'></Image></InlineUIContainer>"
-e128d	"<Bold>e128d Merchant OutWits You in Game of Chance</Bold>
+e128d	"<Bold>e128d Merchant Game of Chance</Bold>
 <LineBreak/><LineBreak/>If the roll exceeds wit and wiles, you spend up to 10gp needlessly. 'Have you ever heard of Plato, Aristotle, Socrates? Morons!'
 <LineBreak/><LineBreak/> Roll one die:  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e128e	"<Bold>e128e Merchant Selling Healing Potion Sale</Bold>
@@ -3561,7 +3561,7 @@ Since your party includes a monk or priest, he will support your cause for relig
 <LineBreak/><LineBreak/>Click a hex on map that contains either a temple or castle."
 e156f	"<Bold>e156f Town Mayor Religious Interest</Bold>
 <LineBreak/><LineBreak/>
-Since your party does not includes a monk or priest, he dismisses you and refuses any further audiences until you have such a character in your party. When you do have a monk or priest, he will provide a letter of recommendation to any castle or temple you request, gives you wealth 100, and his trusted assistent becomes a member of your party. Click image to continue."
+Since your party does not includes a monk or priest, he dismisses you and refuses any further audiences until you have such a character in your party. When you do have a monk or priest, he will provide a letter of recommendation to any castle or temple you request, gives you wealth 100, and his trusted assistant becomes a member of your party. Click image to continue."
 e157	"<Bold>e157 Letter of Recommendation</Bold>
 <LineBreak/><LineBreak/>
 You are given a properly signed and sealed letter that provides an introduction to the appropriate Lord.<LineBreak/><LineBreak/>

@@ -213,7 +213,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "SetResurrectionStateCheck(): RemoveBelongingsInParty() returned false");
                return false;
             }
-            gi.Prince.HealWounds(gi.Prince.Wound, gi.Prince.Poison);
+            
             gi.Prince.Endurance = Math.Min(1, gi.Prince.Endurance - 1);
             gi.Prince.IsKilled = false;
             gi.Prince.IsUnconscious = false;
@@ -224,9 +224,11 @@ namespace BarbarianPrince
          {
             foreach (IMapItem mi in gi.ResurrectedMembers)
             {
-               mi.Endurance = Math.Min(1, mi.Endurance - 1);
-               mi.IsResurrected = true;
+               mi.Reset();
                gi.AddCompanion(mi);
+               mi.Endurance = Math.Min(1, mi.Endurance - 1);
+               mi.OverlayImageName = "Resurrected";
+               mi.IsResurrected = true;
             }
          }
          if (false == SetPlagueStateCheck(gi, ref action))
@@ -2201,6 +2203,7 @@ namespace BarbarianPrince
          //gi.AddSpecialItem(SpecialEnum.PegasusMountTalisman);
          //gi.AddSpecialItem(SpecialEnum.NerveGasBomb);
          gi.AddSpecialItem(SpecialEnum.ResistanceRing);
+         gi.Prince.OverlayImageName = "Resurrected";
          //gi.AddSpecialItem(SpecialEnum.ResurrectionNecklace);
          //gi.AddSpecialItem(SpecialEnum.ShieldOfLight);
          //gi.AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
@@ -2279,7 +2282,10 @@ namespace BarbarianPrince
          //gi.ChagaDrugCount = 2;
          //---------------------
          foreach (IMapItem mi in gi.PartyMembers)
+         {
             mi.AddSpecialItemToKeep(SpecialEnum.ResurrectionNecklace);
+            mi.OverlayImageName = "Resurrected";
+         }
       }
    }
    //-----------------------------------------------------
@@ -6290,10 +6296,10 @@ namespace BarbarianPrince
                      ITerritory t156b = FindClosestTown(gi);
                      gi.ForbiddenAudiences.AddLetterConstraint(t156b, closetCastle1);
                      break;
-                  case 6:                                                                                                          // letter of recommendation nearest castle
+                  case 6:
                      if (true == gi.IsReligionInParty())
                      {
-                        gi.EventDisplayed = gi.EventActive = "e157";
+                        gi.EventDisplayed = gi.EventActive = "e157"; // <cgs> Do not think this code runs - If 6 is rolled for Mayer Audience, event e156e is displayed meaing E156MayorAudience will not be triggered
                         if (false == gi.AddCoins(100))
                         {
                            returnStatus = "AddCoins() returned false for action=" + action.ToString();
@@ -12370,9 +12376,14 @@ namespace BarbarianPrince
                         {
                            action = GameAction.E156MayorTerritorySelection;
                            gi.EventDisplayed = gi.EventActive = "e156e";
+                           if (false == gi.AddCoins(100))
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddCoins() returned false for action=" + action.ToString() + "  and ae=" + gi.EventActive);
+                              return false;
+                           }
                            IMapItem trustedAssistant = CreateCharacter(gi, "TrustedAssistant", 0);
                            gi.AddCompanion(trustedAssistant);
-                           ITerritory t156a = FindClosestTown(gi);
+                           ITerritory t156a = FindClosestTown(gi); // this territory is updated by user selecting a castle
                            gi.ForbiddenAudiences.AddAssistantConstraint(t156a, trustedAssistant);
                         }
                         else
