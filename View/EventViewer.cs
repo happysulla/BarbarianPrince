@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Xml;
 using WpfAnimatedGif;
 using static System.Collections.Specialized.BitVector32;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using Point = System.Windows.Point;
 
 namespace BarbarianPrince
@@ -279,7 +280,7 @@ namespace BarbarianPrince
                EventViewerE039Mgr aE039MgrViewer = new EventViewerE039Mgr(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);
                if (true == aE039MgrViewer.CtorError)
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): aE039MgrViewer.CtorError=true");
-               else if (false == aE039MgrViewer.OpenChest(ShowE39ChestOpeningResult))
+               else if (false == aE039MgrViewer.OpenChest(ShowE039ChestOpeningResult))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): OpenChest() returned false");
                break;
             //-------------------------------------
@@ -3923,40 +3924,36 @@ namespace BarbarianPrince
       {
          myGameInstance.ForbiddenAudiences.RemoveMonsterKillConstraints(myGameInstance.NumMonsterKill);
          GameAction outAction = GameAction.Error;
-         if (true == isEscape)
+         if( true == myGameInstance.Prince.IsKilled )
+         {
+            myGameInstance.GamePhase = GamePhase.EndGame;
+            if (true == myGameInstance.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+            {
+               outAction = GameAction.EndGameResurrect;  // ShowResultsCombat()
+            }
+            else
+            {
+               outAction = GameAction.EndGameLost;  // ShowResultsCombat()
+               myGameInstance.EndGameReason = "Prince died as a warrior in battle";
+            }
+         }
+         else if (true == isEscape)
          {
             if( "e123b" == myGameInstance.EventStart ) // fight black knight
                outAction = GameAction.E123BlackKnightCombatEnd;
             else
                outAction = GameAction.EncounterEscape;
-            StringBuilder sb11 = new StringBuilder("     ######ShowResultsCombat() :");
-            sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
-            sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
-            sb11.Append(" a="); sb11.Append(outAction.ToString());
-            Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
-            myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          }
          else
          {
             outAction = GameAction.EncounterLootStart;
-            StringBuilder sb11 = new StringBuilder("     ######ShowResultsCombat() :");
-            sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
-            sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
-            sb11.Append(" a="); sb11.Append(outAction.ToString());
-            Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
-            myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          }
-         return true;
-      }
-      public bool ShowE010DisgustCheck()
-      {
-         GameAction outAction = GameAction.CampfireWakeup;
-         StringBuilder sb11 = new StringBuilder("     ######ShowE010DisgustCheck() :");
+         StringBuilder sb11 = new StringBuilder("     ######ShowResultsCombat() :");
          sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
          sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
          sb11.Append(" a="); sb11.Append(outAction.ToString());
          Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
-         myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
+         myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          return true;
       }
       public bool ShowMarkOfCainResult()
@@ -3970,14 +3967,25 @@ namespace BarbarianPrince
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
          return true;
       }
-      public bool ShowE39ChestOpeningResult(bool isChestOpen)
+      public bool ShowE010DisgustCheck()
+      {
+         GameAction outAction = GameAction.CampfireWakeup;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE010DisgustCheck() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
+         myGameEngine.PerformAction(ref myGameInstance, ref outAction, 0);
+         return true;
+      }
+      public bool ShowE039ChestOpeningResult(bool isChestOpen)
       {
          GameAction outAction = GameAction.Error;
          if (true == isChestOpen)
             outAction = GameAction.EncounterLootStart;
          else
             outAction = GameAction.EncounterEnd;
-         StringBuilder sb11 = new StringBuilder("     ######ShowE39ChestOpeningResult() :");
+         StringBuilder sb11 = new StringBuilder("     ######ShowE039ChestOpeningResult() :");
          sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
          sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
          sb11.Append(" a="); sb11.Append(outAction.ToString());
@@ -5198,6 +5206,11 @@ namespace BarbarianPrince
                               action = GameAction.EncounterStart;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               break;
+                           case "PrinceResurrected":
+                              action = GameAction.E192PrinceResurrected;
+                              myGameInstance.GamePhase = GamePhase.Encounter;
+                              myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              return;
                            case "Prisoner":
                               action = GameAction.CampfireWakeup;
                               myGameInstance.GamePhase = GamePhase.Campfire;
@@ -5571,10 +5584,13 @@ namespace BarbarianPrince
                   myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                }
                break;
-            case "e203b":
+            case "e203b": // axe kills
                myGameInstance.DieResults["e203a"][0] = Utilities.NO_RESULT;
-               action = GameAction.EndGameLost;
                myGameInstance.GamePhase = GamePhase.EndGame;
+               if (true == myGameInstance.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+                  action = GameAction.EndGameResurrect;  // axe kills
+               else
+                  action = GameAction.EndGameLost; // axe kills
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
             case "e300":

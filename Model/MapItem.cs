@@ -1558,6 +1558,13 @@ namespace BarbarianPrince
                g.Children.Add(overlay);
             }
             //----------------------------------------------------
+            if (true == mi.IsResurrected)
+            {
+               Image resurrected = new Image() { Stretch = Stretch.Fill };
+               resurrected.Source = MapItem.theMapImages.GetBitmapImage("Resurrected");
+               g.Children.Add(resurrected);
+            }
+            //----------------------------------------------------
             if (true == mi.IsDisappear)
             {
                BitmapImage bmi = new BitmapImage();

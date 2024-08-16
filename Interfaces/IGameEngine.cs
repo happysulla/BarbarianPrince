@@ -109,6 +109,7 @@ namespace BarbarianPrince
 
       EndGameWin,
       EndGameLost,
+      EndGameResurrect,
       EndGameExit,
       EndGameClose,
 
@@ -369,6 +370,7 @@ namespace BarbarianPrince
       E182CharmGiftRoll,
       E188TalismanPegasusConversion,
       E188TalismanPegasusSkip,
+      E192PrinceResurrected,
       E203NightInPrison,
       E203EscapeFromPrison,
       E203EscapeFromPrisonEnd,

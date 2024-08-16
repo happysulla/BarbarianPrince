@@ -207,27 +207,12 @@ namespace BarbarianPrince
       {
          if (true == gi.IsResurrected)
          {
-            gi.RemoveLeaderlessInParty();
-            if( false == gi.RemoveBelongingsInParty(true))
-            {
-               Logger.Log(LogEnum.LE_ERROR, "SetResurrectionStateCheck(): RemoveBelongingsInParty() returned false");
-               return false;
-            }
-            
-            gi.Prince.Endurance = Math.Min(1, gi.Prince.Endurance - 1);
-            gi.Prince.IsKilled = false;
-            gi.Prince.IsUnconscious = false;
-            gi.Prince.IsResurrected = true;
             gi.IsResurrected = false;
-         }
-         else
-         {
             foreach (IMapItem mi in gi.ResurrectedMembers)
             {
                mi.Reset();
                gi.AddCompanion(mi);
                mi.Endurance = Math.Min(1, mi.Endurance - 1);
-               mi.OverlayImageName = "Resurrected";
                mi.IsResurrected = true;
             }
          }
@@ -545,36 +530,38 @@ namespace BarbarianPrince
             return false;
          if (true == gi.Prince.IsKilled)
          {
+            gi.GamePhase = GamePhase.EndGame;
             if (true == gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
             {
-               gi.Prince.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
-               gi.IsResurrected = true;
-               return false;
+               action = GameAction.EndGameResurrect;  // PerformEndCheck()
             }
-            action = GameAction.EndGameLost;  // PerformEndCheck()
-            gi.GamePhase = GamePhase.EndGame;
-            if ("e203b" == gi.EventActive)
-               gi.EndGameReason = "Beheaded in gory execution";
             else
-               gi.EndGameReason = "Prince killed";
+            {
+               action = GameAction.EndGameLost;  // PerformEndCheck() - Killed
+               if ("e203b" == gi.EventActive)
+                  gi.EndGameReason = "Beheaded in gory execution";
+               else
+                  gi.EndGameReason = "Prince killed";
+            }
             return true;
          }
          if ((true == gi.Prince.IsUnconscious) && (1 == gi.PartyMembers.Count))
          {
+            gi.GamePhase = GamePhase.EndGame;
             if (true == gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
             {
-               gi.Prince.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
-               gi.IsResurrected = true;
-               return false;
+               action = GameAction.EndGameResurrect;  // PerformEndCheck()
             }
-            action = GameAction.EndGameLost; // PerformEndCheck()
-            gi.GamePhase = GamePhase.EndGame;
-            gi.EndGameReason = "Prince unconscious and alone to die";
+            else
+            {
+               action = GameAction.EndGameLost; // PerformEndCheck() - Unconscious and alone
+               gi.EndGameReason = "Prince unconscious and alone to die";
+            }
             return true;
          }
          if (Utilities.MaxDays < gi.Days)
          {
-            action = GameAction.EndGameLost;  // PerformEndCheck()
+            action = GameAction.EndGameLost;  // PerformEndCheck() - reached end time limit
             gi.GamePhase = GamePhase.EndGame;
             gi.EndGameReason = "Time Limit Reached";
             return true;
@@ -2202,8 +2189,7 @@ namespace BarbarianPrince
          //gi.AddSpecialItem(SpecialEnum.AntiPoisonAmulet);
          //gi.AddSpecialItem(SpecialEnum.PegasusMountTalisman);
          //gi.AddSpecialItem(SpecialEnum.NerveGasBomb);
-         gi.AddSpecialItem(SpecialEnum.ResistanceRing);
-         gi.Prince.OverlayImageName = "Resurrected";
+         //gi.AddSpecialItem(SpecialEnum.ResistanceRing);
          //gi.AddSpecialItem(SpecialEnum.ResurrectionNecklace);
          //gi.AddSpecialItem(SpecialEnum.ShieldOfLight);
          //gi.AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
@@ -2282,10 +2268,7 @@ namespace BarbarianPrince
          //gi.ChagaDrugCount = 2;
          //---------------------
          foreach (IMapItem mi in gi.PartyMembers)
-         {
             mi.AddSpecialItemToKeep(SpecialEnum.ResurrectionNecklace);
-            mi.OverlayImageName = "Resurrected";
-         }
       }
    }
    //-----------------------------------------------------
@@ -3182,9 +3165,16 @@ namespace BarbarianPrince
                   int healthRemaining = gi.Prince.Endurance - gi.Prince.Wound - gi.Prince.Poison;
                   if (1 == healthRemaining) // left for dead
                   {
-                     action = GameAction.EndGameLost; // wizard slave
                      gi.GamePhase = GamePhase.EndGame;
-                     gi.EndGameReason = "Prince starves to dead as Wizard's slave";
+                     if (true == gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+                     {
+                        action = GameAction.EndGameResurrect;  // wizard slave
+                     }
+                     else
+                     {
+                        action = GameAction.EndGameLost; // wizard slave
+                        gi.EndGameReason = "Prince starves to dead as Wizard's slave";
+                     }
                      return true;
                   }
                }
@@ -3201,9 +3191,16 @@ namespace BarbarianPrince
                      int healthRemaining = gi.Prince.Endurance - gi.Prince.Wound - gi.Prince.Poison;
                      if (1 == healthRemaining) // left for dead
                      {
-                        action = GameAction.EndGameLost; // wizard slave
                         gi.GamePhase = GamePhase.EndGame;
-                        gi.EndGameReason = "Prince beaten to death as Wizard's slave";
+                        if (true == gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+                        {
+                           action = GameAction.EndGameResurrect;  // wizard slave
+                        }
+                        else
+                        {
+                           action = GameAction.EndGameLost; // wizard slave
+                           gi.EndGameReason = "Prince beaten to death as Wizard's slave";
+                        }
                         return true;
                      }
                   }
@@ -4124,7 +4121,11 @@ namespace BarbarianPrince
          string previousEvent = gi.EventActive;
          switch (action)
          {
-            case GameAction.EndGameLost:
+            case GameAction.EndGameResurrect:
+               gi.EventDisplayed = gi.EventActive = "e192a";
+               gi.DieRollAction = GameAction.DieRollActionNone;
+               break;
+            case GameAction.EndGameLost: // GameViewerWindow.xaml.cs shows end game on this state change
                break;
             case GameAction.EndGameWin:
                break;
@@ -5602,20 +5603,15 @@ namespace BarbarianPrince
                gi.Prince.SetWounds(woundsvw, 0);  // prince is wounded one die
                if( true == gi.Prince.IsKilled )
                {
+                  gi.GamePhase = GamePhase.EndGame;
                   if (true == gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
                   {
-                     gi.Prince.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
-                     gi.IsResurrected = true;
-                     if (false == EncounterEnd(gi, ref action))
-                     {
-                        returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
-                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                     }
+                     action = GameAction.EndGameResurrect;  // E105ViolentWeather
                   }
                   else
                   {
-                     action = GameAction.EndGameLost;
-                     gi.GamePhase = GamePhase.EndGame;
+                     action = GameAction.EndGameLost;  // E105ViolentWeather
+                     gi.EndGameReason = "Prince died in violent crash to ground due to weather";
                   }
                }
                else
@@ -6661,6 +6657,27 @@ namespace BarbarianPrince
                   gi.DieResults[gi.EventActive][1] = dieRoll;
                else if (Utilities.NO_RESULT == gi.DieResults[gi.EventActive][2])
                   gi.DieResults[gi.EventActive][2] = dieRoll;
+               break;
+            case GameAction.E192PrinceResurrected: 
+               gi.RemoveLeaderlessInParty();
+               gi.Prince.Reset();
+               gi.Prince.Endurance = Math.Min(1, gi.Prince.Endurance - 1);
+               gi.Prince.IsResurrected = true;
+               if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex
+               {
+                  returnStatus = "AddMapItemMove() returned false ae=" + gi.EventActive;
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateEncounter.PerformAction(E192PrinceResurrected): MovementUsed=Movement for a=" + action.ToString());
+                  gi.Prince.MovementUsed = gi.Prince.Movement; // no more travel or today
+                  if (false == EncounterEnd(gi, ref action))
+                  {
+                     returnStatus = "EncounterEnd(E192PrinceResurrected) returned false ae=" + gi.EventActive;
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
+               }
                break;
             case GameAction.E188TalismanPegasusConversion:
                if (false == gi.RemoveSpecialItem(SpecialEnum.PegasusMountTalisman))
@@ -11415,20 +11432,15 @@ namespace BarbarianPrince
                   }
                   if ((true == gi.Prince.IsKilled)) // if Prince killed, game over
                   {
+                     gi.GamePhase = GamePhase.EndGame;
                      if (true == gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
                      {
-                        gi.Prince.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
-                        gi.IsResurrected = true;
-                        if (false == EncounterEnd(gi, ref action))
-                        {
-                           Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive + " a=" + action.ToString());
-                           return false;
-                        }
+                        action = GameAction.EndGameResurrect;  // High Pass
                      }
                      else
                      {
-                        action = GameAction.EndGameLost;
-                        gi.GamePhase = GamePhase.EndGame;
+                        action = GameAction.EndGameLost;  // High Pass
+                        gi.EndGameReason = "Prince died in gory fall off cliff";
                      }
                   }
                   else if ( (true==isMemberIncapacited) || (8 < gi.DieResults[key][0]) ) // if anybody is incapacitied or the mounts are lost, redistribute belongings

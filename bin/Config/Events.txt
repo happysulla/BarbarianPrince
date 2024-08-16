@@ -3885,20 +3885,23 @@ The ring can also be used to ward magic attacks against the wearer, but it will 
                    <InlineUIContainer><Image Source='../../Images/RingResistence.gif' Name='EncounterEnd' Height='300' Width='300'></Image></InlineUIContainer>"
 e192	"<Bold>e192 Resurrection Necklace</Bold>
 <LineBreak/><LineBreak/>
-This necklace of black opals and red rubies holds the secret of a second life. If the wearer dies for any reason, including voluntary suicide, at the end of the day, the character rises from the dead.
+This necklace of black opals and red rubies holds the secret of a second life. If the wearer dies, the character rises from the dead. The necklace disintegrates as the character revives and thus only works once. Resurrected party members reappear at the end of the day. The character has a somewhat gholish cast and is a bit weaker. Endurance is reduced by one.
 <LineBreak/><LineBreak/>
-The necklace disintegrates as the character revives and thus only works once. The resurrection occurs in the same hex, but the character is now free to select any action on the next day.
+If the Prince is resurrected, see <InlineUIContainer><Button Content='e192a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>
-A character revived by the necklace haveing been left for dead will have lost all possessions and money. The entire party will have scattered although a lover might return
+Click image when ready to continue.
+<LineBreak/><LineBreak/>
+                             <InlineUIContainer><Image Source='../../Images/Necklace.gif' Name='EncounterEnd' Height='200' Width='200'></Image></InlineUIContainer>"
+e192a	"<Bold>e192a Prince Resurrected</Bold>
+<LineBreak/><LineBreak/>
+The resurrection necklass resurrects the Prince. Prior to resurrection, the Prince is left for dead losing all possessions and money. The entire party scattered although a lover might return
  <InlineUIContainer><Button Content='r228' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. 
 <LineBreak/><LineBreak/>
-A character revived by the necklace has a somewhat ghoulish cast and is a bit weaker. Endurance is reduced by one. 
-<LineBreak/><LineBreak/>
-You learn that such appearances are favored at the Dragot Castle. You can add one if seeking an audience
+The Prince revived by the necklace has a somewhat ghoulish cast and is a bit weaker. Endurance is reduced by one.  You learn that such appearances are favored at the Dragot Castle. You can add one if seeking an audience
  <InlineUIContainer><Button Content='r211' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  with Count Dragot. Click image when ready to continue.
 <LineBreak/><LineBreak/>
-                             <InlineUIContainer><Image Source='../../Images/Necklace.gif' Name='EncounterEnd' Height='200' Width='200'></Image></InlineUIContainer>"
+                             <InlineUIContainer><Image Source='../../Images/Necklace.gif' Name='PrinceResurrected' Height='200' Width='200'></Image></InlineUIContainer>"
 e193	"<Bold>e193 Shield of Light</Bold>
 <LineBreak/><LineBreak/>This enchanted shield will flash and shine in the eyes of any attacker. When a character has this shield, any opponent in combat has his combat skill reduced by one. 
 <LineBreak/><LineBreak/>If a character dies with the shield, the shield will dull and die becoming useless. 

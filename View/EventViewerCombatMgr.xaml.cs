@@ -1287,7 +1287,6 @@ namespace BarbarianPrince
          }
          else if ((true == myGameInstance.Prince.IsKilled) || (false == isAnyPartyMemberAlive))
          {
-
             if( (true == myIsKnightOnBridge) && (true == myGameInstance.Prince.IsUnconscious) )
             {
                myGameInstance.Prince.HealWounds(1, 0);

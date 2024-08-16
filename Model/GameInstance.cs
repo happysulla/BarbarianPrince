@@ -1691,7 +1691,9 @@ namespace BarbarianPrince
       public void ProcessIncapacitedPartyMembers(string reason, bool isEscaping = false)
       {
          if (true == Prince.IsKilled) // If prince killed, no need to look at other members
+         {
             return;
+         }
          //--------------------------------
          int numTrueLovesBefore = 0;
          bool isMemberKilled = false;
