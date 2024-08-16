@@ -526,12 +526,16 @@ namespace BarbarianPrince
       }
       protected bool PerformEndCheck(IGameInstance gi, ref GameAction action)
       {
+         Logger.Log(LogEnum.LE_END_GAME_CHECK, "PerformEndCheck(): ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString());
          if ((6 == gi.DieResults["e203a"][0]) && ("e061" == gi.EventStart)) // need to show the battle axe chopping off head before ending game
             return false;
          if (true == gi.Prince.IsKilled)
          {
             gi.GamePhase = GamePhase.EndGame;
-            if (true == gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+            gi.GamePhase = GamePhase.EndGame;
+            bool isNecklass = gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace);
+            Logger.Log(LogEnum.LE_END_GAME_CHECK, "PerformEndCheck(): 1-isNecklass=" + isNecklass.ToString());
+            if (true == isNecklass)
             {
                action = GameAction.EndGameResurrect;  // PerformEndCheck()
             }
@@ -548,6 +552,8 @@ namespace BarbarianPrince
          if ((true == gi.Prince.IsUnconscious) && (1 == gi.PartyMembers.Count))
          {
             gi.GamePhase = GamePhase.EndGame;
+            bool isNecklass = gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace);
+            Logger.Log(LogEnum.LE_END_GAME_CHECK, "PerformEndCheck(): 2-isNecklass=" + isNecklass.ToString());
             if (true == gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
             {
                action = GameAction.EndGameResurrect;  // PerformEndCheck()
@@ -4294,11 +4300,14 @@ namespace BarbarianPrince
       private static int theNumHydraTeeth = 0;
       public override string PerformAction(ref IGameInstance gi, ref GameAction action, int dieRoll)
       {
-         String returnStatus = "OK";
-         if (true == PerformEndCheck(gi, ref action)) // GameStateEncounter.PerformAction()
-            return returnStatus;
          Logger.Log(LogEnum.LE_UNDO_COMMAND, "GameStateEncounter.PerformAction(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->false for a=" + action.ToString());
          gi.IsUndoCommandAvailable = false;
+         String returnStatus = "OK";
+         if (GameAction.E192PrinceResurrected != action)
+         {
+            if (true == PerformEndCheck(gi, ref action)) // GameStateEncounter.PerformAction()
+               return returnStatus;
+         }
          GamePhase previousPhase = gi.GamePhase;
          GameAction previousAction = action;
          GameAction previousDieAction = gi.DieRollAction;

@@ -11,6 +11,7 @@ namespace BarbarianPrince
       LE_GAME_PARTYMEMBER_COUNT,
       LE_PARTYMEMBER_ADD,
       LE_REMOVE_KILLED,
+      LE_END_GAME_CHECK,
       LE_MOVE_STACKING,
       LE_MOVE_COUNT,
       LE_COMBAT_RESULT,
@@ -80,6 +81,7 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_GAME_PARTYMEMBER_COUNT);
          Logger.SetOn(LogEnum.LE_PARTYMEMBER_ADD);
          Logger.SetOn(LogEnum.LE_REMOVE_KILLED);
+         Logger.SetOn(LogEnum.LE_END_GAME_CHECK);
          //Logger.SetOn(LogEnum.LE_MOVE_STACKING);
          Logger.SetOn(LogEnum.LE_MOVE_COUNT);
          //Logger.SetOn(LogEnum.LE_RESET_ROLL_STATE);

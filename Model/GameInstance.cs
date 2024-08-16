@@ -1253,7 +1253,7 @@ namespace BarbarianPrince
          }
          if (null == firstConsciousMapItem) // if there is no conscious member to assign mounts, mount disappears
          {
-            Logger.Log(LogEnum.LE_ERROR, "TransferMounts(): assigning mounts to unconscious Prince");
+            Logger.Log(LogEnum.LE_MOUNT_CHANGE, "TransferMounts(): Nobody conscious to receive mount. Lose mount as it wonders off to feed.");
             return; 
          }
          //---------------------------------------
