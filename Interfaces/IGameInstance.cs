@@ -105,6 +105,7 @@ namespace BarbarianPrince
       int HydraTeethCount { set; get; }   //e141
       int ChagaDrugCount { set; get; }    // e143 Chaga Drug purchased in town - 2gp per serving
       int FoulBaneCount { set; get; }    // e146 FoulBane purchased in Duffyd Temple - 1gp per serving
+      bool IsFoulBaneUsedThisTurn { set; get; } // e146 - FoulBane used to roll again
       int SeneschalRollModifier { set; get; }   //e148
       bool IsCavalryEscort { set; get; }   // e151
       bool IsNobleAlly { set; get; }   // e152

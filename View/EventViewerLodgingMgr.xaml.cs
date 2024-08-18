@@ -229,8 +229,6 @@ namespace BarbarianPrince
             myFoulBaneCost = 0.5 * myFoulBaneCost;
             myChagaCost = (int)Math.Ceiling((double)myChagaCost * 0.5);
          }
-         if ((true == myGameInstance.ForbiddenAudiences.IsClothesConstraint()) && (mySuitCost <= myCoinCurrent))
-            myIsPurchasedClothShown = true;
          //--------------------------------------------------
          myTrollSkinsInPartyOriginal = 0;
          foreach (IMapItem mi in myGameInstance.PartyMembers)
@@ -314,7 +312,10 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "LodgeParty(): IsInStructure() returned false & isFarmerLodging=false for invalid param t=" + t.ToString());
             return false;
          }
+         //--------------------------------------------------
          myCoinCurrent = myCoinOriginal;
+         if ((true == myGameInstance.ForbiddenAudiences.IsClothesConstraint()) && (mySuitCost <= myCoinCurrent))
+            myIsPurchasedClothShown = true;
          //--------------------------------------------------
          SetStateInitialLodging();
          //--------------------------------------------------

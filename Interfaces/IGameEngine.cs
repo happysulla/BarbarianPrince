@@ -348,6 +348,7 @@ namespace BarbarianPrince
       E143ChagaDrugPay,
       E143ChagaDrugDeny,
       E143SecretOfTemple,
+      E146CountAudienceReroll,
       E147ClueToTreasure,
       E148SeneschalDeny,
       E148SeneschalPay,

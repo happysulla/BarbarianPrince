@@ -2564,14 +2564,34 @@ namespace BarbarianPrince
             case "e161":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imgE161 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100, Name = "AudienceCountDrogat" };
-                  myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
-                  myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run("                                            "));
-                  myTextBlock.Inlines.Add(new InlineUIContainer(imgE161));
+                  if ((0 < myGameInstance.FoulBaneCount) && (false == myGameInstance.IsFoulBaneUsedThisTurn) )// e146 - if have foul bane
+                  {
+                     myTextBlock.Inlines.Add(new LineBreak());
+                     myTextBlock.Inlines.Add(new LineBreak());
+                     myTextBlock.Inlines.Add(new Run(" Using the Foulbane, you can choose to: "));
+                     myTextBlock.Inlines.Add(new LineBreak());
+                     myTextBlock.Inlines.Add(new LineBreak());
+                     Button b161a1 = new Button() { Name="AcceptRoll", Content = "Accept Roll", FontFamily = myFontFam1, FontSize = 12 };
+                     b161a1.Click += Button_Click;
+                     myTextBlock.Inlines.Add(new InlineUIContainer(b161a1));
+                     myTextBlock.Inlines.Add(new Run(" --or-- "));
+                     Button b161a2 = new Button() { Name = "RollAgain", Content = "Roll Again", FontFamily = myFontFam1, FontSize = 12 };
+                     b161a2.Click += Button_Click;
+                     myTextBlock.Inlines.Add(new InlineUIContainer(b161a2));
+                     myTextBlock.Inlines.Add(new Run(" to override first roll."));
+                     myTextBlock.Inlines.Add(new LineBreak());
+                  }
+                  else
+                  {
+                     Image imgE161a = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100, Name = "AudienceCountDrogat" };
+                     myTextBlock.Inlines.Add(new LineBreak());
+                     myTextBlock.Inlines.Add(new LineBreak());
+                     myTextBlock.Inlines.Add(new Run("Click image to continue."));
+                     myTextBlock.Inlines.Add(new LineBreak());
+                     myTextBlock.Inlines.Add(new LineBreak());
+                     myTextBlock.Inlines.Add(new Run("                                            "));
+                     myTextBlock.Inlines.Add(new InlineUIContainer(imgE161a));
+                  }
                }
                else
                {
@@ -5683,6 +5703,16 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "Button_Click(): ShowRule() returned false");
                return;
             }
+         }
+         else if ("AcceptRoll" == b.Name) // accept the roll for audience with Count Drogat
+         {
+            action = GameAction.EncounterRoll;
+            myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+         }
+         else if ("RollAgain" == b.Name) // reroll the roll for audience with Count Drogat
+         {
+            action = GameAction.E146CountAudienceReroll;
+            myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
          }
          else if (true == key.StartsWith("r")) // rules based click
          {

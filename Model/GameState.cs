@@ -2665,6 +2665,7 @@ namespace BarbarianPrince
          gi.IsMountsAtRisk = false;             // e095
          gi.PurchasedPotionCure = 0;            // e128b
          gi.PurchasedPotionHeal = 0;            // e128e
+         gi.IsFoulBaneUsedThisTurn = false;     // e146
          gi.SeneschalRollModifier = 0;          // e148
          gi.DaughterRollModifier = 0;           // e154
          gi.IsPartyFed = false;                 // e156
@@ -6155,6 +6156,12 @@ namespace BarbarianPrince
                      returnStatus = "EncounterEnd() returned false for a=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
+                  break;
+               case GameAction.E146CountAudienceReroll:
+                  gi.EventDisplayed = gi.EventActive = "e161"; 
+                  gi.DieRollAction = GameAction.EncounterRoll;
+                  gi.DieResults["e161"][0] = Utilities.NO_RESULT;
+                  gi.IsFoulBaneUsedThisTurn = true;
                   break;
                case GameAction.E147ClueToTreasure:
                   if (Utilities.NO_RESULT == gi.DieResults["e147"][0])
@@ -13196,6 +13203,7 @@ namespace BarbarianPrince
                   //--------------------------------
                   if (true == gi.Prince.IsResurrected)
                      dieRoll += 1;
+                  dieRoll = 11; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                break;
