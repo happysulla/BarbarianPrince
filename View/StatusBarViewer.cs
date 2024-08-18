@@ -170,6 +170,17 @@ namespace BarbarianPrince
             myStatusBar.Items.Add(imgChaga);
          }
          //--------------------------------------------
+         if (true == gi.IsSecretCountDrogat)
+         {
+            myStatusBar.Items.Add(new Separator());
+            StringBuilder sbFB = new StringBuilder("FoulBane=");
+            sbFB.Append(gi.FoulBaneCount);
+            Label labelFoulBane = new Label() { FontFamily = myFontFam, FontSize = 12, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, Content = sbFB.ToString() };
+            Image imgFoulBane = new Image { Source = MapItem.theMapImages.GetBitmapImage("FoulBane"), Width = 30, Height = 30 };
+            myStatusBar.Items.Add(labelFoulBane);
+            myStatusBar.Items.Add(imgFoulBane);
+         }
+         //--------------------------------------------
          if (0 < gi.HydraTeethCount)
          {
             myStatusBar.Items.Add(new Separator());

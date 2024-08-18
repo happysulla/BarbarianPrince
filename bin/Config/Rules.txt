@@ -267,6 +267,21 @@ These undead teeth-warriors have combat skill 5, endurance 4, and wealth 0. They
 You can scatter the teeth at any instant to use them that one time including at the start or during any combat.
 <LineBreak/>
                               <InlineUIContainer><Image  Source='../../Images/Teeth.gif' Height='200'  Width='200'> </Image></InlineUIContainer> "
+r146	"<Bold>r146 The Secret of Count Dragot</Bold>
+<LineBreak/><LineBreak/>You learn that Count Drogat, lord of Drogat Castle, is acutally an undead creature who enjoys the suffering, pain, and death of others. This explains why he so often tortures and dismembers felons in his realm.
+<LineBreak/><LineBreak/>He often goes into rages that leave his lands in a reign of terror. 
+<LineBreak/><LineBreak/>However, he is very vulnerable to foulbane, a rare plant which can be purchased from the food merchants at Duffyd Temple
+ <InlineUIContainer><Button Content='2018' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+ for one gold piece.
+<LineBreak/><LineBreak/>Using foulbane, when you attempt to gain an audience
+ <InlineUIContainer><Button Content='r211' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+ with Count Drogat, you add one to your dice roll. If you gain an audience, you can ignore the first audience result dice roll and try again. However, if you wish to roll again, you must abide by the second result regardless of the outcome.
+<LineBreak/><LineBreak/>Finally, using the foulbane in Drogat Castle, you can spend a day instead of a normal daily action in arranging for a special theft of the Count's personnel jewels.
+<LineBreak/><LineBreak/>At the end of the day, you escape from the hex
+ <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+ with wealth 110. However, you can never return to the castle hex due to the Count's anger. In the process of the theft, you might acquire magic items as part of the wealth 110 check. 
+<LineBreak/><LineBreak/>
+                                     <InlineUIContainer><Image Source='../../Images/FoulBane.gif' Name='EncounterEnd' Height='250' Width='200'></Image></InlineUIContainer>"
 r180	"<Bold>r180 Healing Potion</Bold>
 <LineBreak/><LineBreak/>This potion can be applied once to any character including yourself at the end of the day after the evening meal
  <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>

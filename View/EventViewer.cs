@@ -3055,10 +3055,10 @@ namespace BarbarianPrince
                   }
                }
                break;
-            case "e211c":
-            case "e211d":
-            case "e211e":
-            case "e211f":
+            case "e211c": // Seeking audence with Baron of Huldra Castle
+            case "e211d": // Seeking audience with Baron of Count Drogat
+            case "e211e": // Seeking audience with Lady Aeravir
+            case "e211f": // Seeking audience with Dwarven King
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
                   Image imgE211 = null;
@@ -3095,6 +3095,14 @@ namespace BarbarianPrince
                   bool isPurified = myGameInstance.Purifications.Contains(princeTerritory);
                   int purifyModifier = (isPurified ? 2 : 0);
                   int audienceRollModifier = myGameInstance.DaughterRollModifier + myGameInstance.SeneschalRollModifier + letterModifier + purifyModifier;
+                  if ("e211d" == key) // Seeking audencie with Count Drogat
+                  {
+                     if (true == gi.IsSpecialItemHeld(SpecialEnum.Foulbane))
+                        audienceRollModifier++;
+                     if (true == gi.Prince.IsResurrected)
+                        audienceRollModifier++;
+                  }
+                  //------------------------------------------
                   if (0 < audienceRollModifier)
                   {
                      StringBuilder sb = new StringBuilder();
@@ -3127,6 +3135,13 @@ namespace BarbarianPrince
                         sb.Append(" Add ");
                         sb.Append(purifyModifier.ToString());
                         sb.Append(" for Purification.");
+                     }
+                     if ("e211d" == key) // Seeking audencie with Count Drogat
+                     {
+                        if( true == gi.IsSpecialItemHeld(SpecialEnum.Foulbane))
+                           sb.Append(" Add 1 for holding foulbane.");
+                        if (true == gi.Prince.IsResurrected)
+                           sb.Append(" Add 1 for ghostly skin glow due to resurrection.");
                      }
                      myTextBlock.Inlines.Add(new LineBreak());
                      myTextBlock.Inlines.Add(new LineBreak());

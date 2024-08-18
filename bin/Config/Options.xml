@@ -91,7 +91,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomHex">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="RandomTown">
     <IsEnabled value="False" />
@@ -124,7 +124,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="0323">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="1923">
     <IsEnabled value="False" />

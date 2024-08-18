@@ -104,6 +104,7 @@ namespace BarbarianPrince
       int PurchasedPotionHeal { set; get; } // e128 - purchased potion healing
       int HydraTeethCount { set; get; }   //e141
       int ChagaDrugCount { set; get; }    // e143 Chaga Drug purchased in town - 2gp per serving
+      int FoulBaneCount { set; get; }    // e146 FoulBane purchased in Duffyd Temple - 1gp per serving
       int SeneschalRollModifier { set; get; }   //e148
       bool IsCavalryEscort { set; get; }   // e151
       bool IsNobleAlly { set; get; }   // e152
@@ -124,7 +125,7 @@ namespace BarbarianPrince
       bool IsSlaveGirlActive { set; get; } // e163 - repeat the talk roll twice more
       bool IsGiftCharmActive { set; get; } // e182 - repeat the talk roll twice more
       bool IsPegasusSkip { set; get; } // e188 - do not convert talisman to pegasus
-      bool IsResurrected { set; get; } // e192 - Resurrection Necklace used to revive Prince
+      bool IsResurrectedThisTurn { set; get; } // e192 - Resurrection Necklace used to revive Prince - need to hanlde a change in End Game condition
       bool IsCharismaTalismanActive { set; get; } // e189 - +1 to Wits and Wiles roll for escape
       bool IsAirborne { set; get; }  // r204 - Party may travel by air if all can fly
       bool IsAirborneEnd { set; get; }  // r204 - Party finished traveling for today
@@ -145,7 +146,7 @@ namespace BarbarianPrince
       bool IsSecretBaronHuldra { set; get; }  // e144 
       bool IsSecretLadyAeravir { set; get; }  // e145 
       bool IsSecretCountDrogat { set; get; }  // e146 
-      bool IsChagaDrugProvided { set; get; }   // e211b - delivered drug to temple
+      bool IsChagaDrugProvided { set; get; }  // e211b - delivered drug to temple
       //----------------------------------------------
       IMapItems PartyMembers { set; get; }
       IMapItems LostPartyMembers { set; get; }

@@ -54,6 +54,7 @@ namespace BarbarianPrince
       DragonEye,
       RocBeak,
       GriffonClaws,
+      Foulbane,
       MagicBox,
       HydraTeeth,
       StaffOfCommand

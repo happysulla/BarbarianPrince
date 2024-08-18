@@ -93,11 +93,13 @@ namespace BarbarianPrince
       private int myRocBeaksInPartyCurrent = 0;
       private bool myIsPurchasedCloth = false; // e149 - need to purchase fine clothes 
       private bool myIsPurchasedClothShown = false;
-      private int myFoodPurchasedAtFarm = 0;  // only applies to e013a when farmer sells food
+      private int myFoodPurchasedAtFarm = 0;   // only applies to e013a when farmer sells food
       private int myHorsePurchasedAtFarm = 0;  // only applies to e013a when farmer sells food
-      private int myNumTrueLove = 0; // if number of true loves is greater than one, it is a triangle. True Loves can leave.
+      private int myFoulBanePurchased = 0;     // purchasing foul bane from hex 2018
+      private int myNumTrueLove = 0;           // if number of true loves is greater than one, it is a triangle. True Loves can leave.
       private int mySuitCost = 10;             // e048 - merchant can reduce cost by 1/2
-      private double myFoodCost = 0.5;             // e048 - merchant can reduce cost by 1/2
+      private double myFoodCost = 0.5;         // e048 - merchant can reduce cost by 1/2
+      private double myFoulBaneCost = 1.0;     // e048 - merchant can reduce cost by 1/2
       private int myChagaCost = 2;             // e048 - merchant can reduce cost by 1/2
       //---------------------------------------------
       private IGameInstance myGameInstance = null;
@@ -209,6 +211,7 @@ namespace BarbarianPrince
          myIsPurchasedClothShown = false;
          myFoodPurchasedAtFarm = 0;
          myHorsePurchasedAtFarm = 0;
+         myFoulBanePurchased = 0;
          myRollForMount = Utilities.NO_RESULT;
          myRollForMountNum = Utilities.NO_RESULT;
          myRollForMountCost = Utilities.NO_RESULT;
@@ -217,11 +220,13 @@ namespace BarbarianPrince
          //--------------------------------------------------
          mySuitCost = 10;
          myFoodCost = 0.5;
+         myFoulBaneCost = 1.0;
          myChagaCost = 2;
          if (true == myGameInstance.IsMerchantWithParty) // e048 - a negotiator in the party half the costs
          {
             mySuitCost = (int)Math.Ceiling((double)mySuitCost * 0.5);
-            myFoodCost = 0.5*myFoodCost;
+            myFoodCost = 0.5 * myFoodCost;
+            myFoulBaneCost = 0.5 * myFoulBaneCost;
             myChagaCost = (int)Math.Ceiling((double)myChagaCost * 0.5);
          }
          if ((true == myGameInstance.ForbiddenAudiences.IsClothesConstraint()) && (mySuitCost <= myCoinCurrent))
@@ -414,6 +419,8 @@ namespace BarbarianPrince
                   return false;
                }
             }
+            //--------------------------------------------
+            myGameInstance.FoulBaneCount += myFoulBanePurchased;
             //--------------------------------------------
             int diffTrollSkins = myTrollSkinsInPartyOriginal - myTrollSkinsInPartyCurrent;
             for (int k = 0; k < diffTrollSkins; ++k )
@@ -797,6 +804,8 @@ namespace BarbarianPrince
          //--------------------------------------------
          if (true == myGameInstance.IsSecretTempleKnown)
             UpdateAssignablePanelChagaDrug();
+         if (("2018" == myGameInstance.Prince.Territory.Name) && (true == myGameInstance.IsSecretCountDrogat)) // if in Duffyd Temple and Secret of Count Drogat known, show 
+            UpdateAssignablePanelFoulBane();
          if (true == myIsPurchasedClothShown)
             UpdateAssignablePanelFineClothes();
          if (true == myGameInstance.IsSpecialItemHeld(SpecialEnum.TrollSkin))
@@ -875,6 +884,7 @@ namespace BarbarianPrince
       {
          Rectangle r0 = new Rectangle() { Visibility = Visibility.Hidden, Width = Utilities.ZOOM * Utilities.theMapItemOffset, Height = Utilities.ZOOM * Utilities.theMapItemOffset };
          myStackPanelAssignable.Children.Add(r0);
+         //--------------------------------------------
          StackPanel stackpanelDrug = new StackPanel() { HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Orientation = Orientation.Horizontal };
          Button bMinusDrug = new Button() { IsEnabled = false, Height = Utilities.theMapItemOffset, Width = Utilities.theMapItemOffset, FontFamily = myFontFam1, Content = "-" };
          if (0 < myGameInstance.ChagaDrugCount)
@@ -897,6 +907,37 @@ namespace BarbarianPrince
          string sContent = "= " + myGameInstance.ChagaDrugCount.ToString();
          Label labelForDrug = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = sContent };
          myStackPanelAssignable.Children.Add(labelForDrug);
+      }
+      private void UpdateAssignablePanelFoulBane()
+      {
+         Rectangle r0 = new Rectangle() { Visibility = Visibility.Hidden, Width = Utilities.ZOOM * Utilities.theMapItemOffset, Height = Utilities.ZOOM * Utilities.theMapItemOffset };
+         myStackPanelAssignable.Children.Add(r0);
+         //--------------------------------------------
+         StackPanel foulBaneStackPanel = new StackPanel() { HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Orientation = Orientation.Horizontal };
+         Button bMinusFoulBane = new Button() { IsEnabled = false, Height = Utilities.theMapItemOffset, Width = Utilities.theMapItemOffset, FontFamily = myFontFam1, Content = "-" };
+         if (0 < myFoulBanePurchased)
+         {
+            bMinusFoulBane.Click += ButtonFoulBane_Click;
+            bMinusFoulBane.IsEnabled = true;
+         }
+         foulBaneStackPanel.Children.Add(bMinusFoulBane);
+         Image img31 = new Image { Tag = "FoulBane", Source = MapItem.theMapImages.GetBitmapImage("FoulBane"), Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
+         foulBaneStackPanel.Children.Add(img31);
+         Button bPlusFoulBane = new Button() { IsEnabled = false, Height = Utilities.theMapItemOffset, Width = Utilities.theMapItemOffset, FontFamily = myFontFam1, Content = "+" };
+         int totalCostBefore = (int)Math.Ceiling(myFoulBanePurchased * myFoulBaneCost);
+         int totalCostAfter = (int)Math.Ceiling((myFoulBanePurchased+1) * myFoulBaneCost);
+         int diff = totalCostAfter - totalCostBefore;
+         if (diff <= myCoinCurrent)
+         {
+            bPlusFoulBane.Click += ButtonFoulBane_Click;
+            bPlusFoulBane.IsEnabled = true;
+         }
+         foulBaneStackPanel.Children.Add(bPlusFoulBane);
+         myStackPanelAssignable.Children.Add(foulBaneStackPanel);
+         //--------------------------------------------
+         string sContent = "= " + myFoulBanePurchased.ToString();
+         Label labelForFoulBane = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = sContent };
+         myStackPanelAssignable.Children.Add(labelForFoulBane);
       }
       private void UpdateAssignablePanelFineClothes()
       {
@@ -1146,8 +1187,10 @@ namespace BarbarianPrince
          Label labelforFood = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = myFoodPurchasedAtFarm.ToString() };
          stackpanelFood.Children.Add(labelforFood);
          Button bPlusFood = new Button() { IsEnabled = false, Height = Utilities.theMapItemOffset, Width = Utilities.theMapItemOffset, FontFamily = myFontFam1, Content = "+" };
-         int normalizedFoodCost = (int)Math.Ceiling(myFoodCost);
-         if (normalizedFoodCost <= myCoinCurrent)
+         int totalCostBefore = (int)Math.Ceiling(myFoodPurchasedAtFarm * myFoodCost);
+         int totalCostAfter = (int)Math.Ceiling((myFoodPurchasedAtFarm + 1) * myFoodCost);
+         int diff = totalCostAfter - totalCostBefore;
+         if (diff <= myCoinCurrent)
          {
             bPlusFood.Click += ButtonFood_Click;
             bPlusFood.IsEnabled = true;
@@ -1848,6 +1891,38 @@ namespace BarbarianPrince
          if (false == UpdateGrid())
             Logger.Log(LogEnum.LE_ERROR, "ButtonDrug_Click(): UpdateGrid() return false");
       }
+      private void ButtonFoulBane_Click(object sender, RoutedEventArgs e)
+      {
+         Button b = (Button)sender;
+         string content = (String)b.Content;
+         if ("-" == content)
+         {
+            int totalCostBefore = (int) Math.Ceiling(myFoulBanePurchased * myFoulBaneCost);
+            myFoulBanePurchased -= 1;
+            int totalCostAfter = (int) Math.Ceiling(myFoulBanePurchased * myFoulBaneCost);
+            int diff = totalCostBefore - totalCostAfter;
+            myCoinOriginal += diff;
+            myCoinCurrent += diff;
+
+         }
+         else if ("+" == content)
+         {
+            int totalCostBefore = (int)Math.Ceiling(myFoulBanePurchased * myFoulBaneCost);
+            myFoulBanePurchased += 1;
+            int totalCostAfter = (int)Math.Ceiling(myFoulBanePurchased * myFoulBaneCost);
+            int diff = totalCostAfter - totalCostBefore;
+            myCoinOriginal -= diff;
+            myCoinCurrent -= diff;
+         }
+         else
+         {
+            Logger.Log(LogEnum.LE_ERROR, "ButtonFoulBane_Click(): Reached default for " + content);
+         }
+         if (false == SetStateLodging())
+            Logger.Log(LogEnum.LE_ERROR, "ButtonFoulBane_Click(): SetStateLodging() return false");
+         if (false == UpdateGrid())
+            Logger.Log(LogEnum.LE_ERROR, "ButtonFoulBane_Click(): UpdateGrid() return false");
+      }
       private void ButtonSkin_Click(object sender, RoutedEventArgs e)
       {
          Button b = (Button)sender;
@@ -1927,8 +2002,6 @@ namespace BarbarianPrince
       {
          Button b = (Button)sender;
          StackPanel sp = (StackPanel)b.Parent;
-         int rowNum = Grid.GetRow(sp);
-         int i = rowNum - STARTING_ASSIGNED_ROW;
          string content = (String)b.Content;
          int normalizedFoodCost = (int)Math.Ceiling(myFoodCost);
          if (0 == myFoodCost)
@@ -1936,18 +2009,24 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "ButtonFood_Click(): myFoodCost=0");
             return;
          }
-         int normalizedFood = (int)( 1/ myFoodCost);
+         int normalizedFood = (int)( 1/ myFoodCost );
          if ("-" == content)
          {
-            myCoinOriginal += normalizedFoodCost;
-            myCoinCurrent += normalizedFoodCost;
-            myFoodPurchasedAtFarm -= normalizedFood;
+            int totalCostBefore = (int)Math.Ceiling(myFoodPurchasedAtFarm * myFoodCost);
+            myFoodPurchasedAtFarm -= 1;
+            int totalCostAfter = (int)Math.Ceiling(myFoodPurchasedAtFarm * myFoodCost);
+            int diff = totalCostBefore - totalCostAfter;
+            myCoinOriginal += diff;
+            myCoinCurrent += diff;
          }
          else if ("+" == content)
          {
-            myCoinOriginal -= normalizedFoodCost;
-            myCoinCurrent -= normalizedFoodCost;
-            myFoodPurchasedAtFarm += normalizedFood;
+            int totalCostBefore = (int)Math.Ceiling(myFoodPurchasedAtFarm * myFoodCost);
+            myFoodPurchasedAtFarm += 1;
+            int totalCostAfter = (int)Math.Ceiling(myFoodPurchasedAtFarm * myFoodCost);
+            int diff = totalCostAfter - totalCostBefore;
+            myCoinOriginal -= diff;
+            myCoinCurrent -= diff;
          }
          else
          {

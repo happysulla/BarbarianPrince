@@ -4481,6 +4481,8 @@ namespace BarbarianPrince
                ++myGameInstance.NumMonsterKill; // e161e - need to kill 5 monsters to seek audience with count
             }
          }
+         if (true == defender.Name.Contains("Prince") && (true == defender.IsUnconscious)) // if prince is unconscious, cannot escape from battle
+            myIsEscapePossible = false;
          return true;
       }
       private bool UpdatePrinceEndurance()
@@ -4792,6 +4794,23 @@ namespace BarbarianPrince
                   myGameInstance.RemoveAbandonerInParty(fickle);  // all wealth or possessions are transferred
             }
             //-------------------------------
+            IMapItems unconsciousMembers = new MapItems(); // unconscious members are left behind
+            foreach (IMapItem partyMember in myGameInstance.PartyMembers)
+            {
+               if (true == partyMember.IsUnconscious)
+                  unconsciousMembers.Add(partyMember);
+            }
+            IMapItems fickle1Members = new MapItems();
+            foreach (IMapItem partyMember in myGameInstance.PartyMembers)
+            {
+               if ((true == partyMember.IsFickle) && (0 < unconsciousMembers.Count))
+                  fickle1Members.Add(partyMember);
+            }
+            foreach (IMapItem unconscious in unconsciousMembers)
+               myGameInstance.RemoveAbandonedInParty(unconscious); // no wealth or possessions are transferred
+            foreach (IMapItem fickle in fickle1Members)
+               myGameInstance.RemoveAbandonerInParty(fickle);  // all wealth or possessions are transferred
+            //-------------------------------
             myIsEscape = true;
             myIsRoute = false;
             if (false == SetStateIfItemUsed())
@@ -5090,6 +5109,8 @@ namespace BarbarianPrince
             defender.SetWounds(myGridRows[i].myWoundsPending, myGridRows[i].myPoisonPending);
             if ("Prince" == defender.Name)
             {
+               if (true == defender.IsUnconscious) // if prince is unconscious, do not show escape button to user
+                  myIsEscapePossible = false;
                if (false == UpdatePrinceEndurance())
                   Logger.Log(LogEnum.LE_ERROR, "ShowRingRollResult(): UpdatePrinceEndurance() returned false");
             }
@@ -5106,6 +5127,8 @@ namespace BarbarianPrince
             defender.SetWounds(myGridRows[i].myWoundsPending, myGridRows[i].myPoisonPending);
             if (("Prince" == defender.Name) && (0 < myGridRows[i].myDamage))
             {
+               if (true == defender.IsUnconscious) // if prince is unconscious, do not show escape button to user
+                  myIsEscapePossible = false;
                if (false == UpdatePrinceEndurance())
                   Logger.Log(LogEnum.LE_ERROR, "ShowRingRollResult(): UpdatePrinceEndurance() returned false");
             }

@@ -47,6 +47,7 @@ namespace BarbarianPrince
          public int myNumDragonEye;
          public int myNumRocBeak;
          public int myNumGriffonClaw;
+         public int myNumFoulbane;
          public int myNumMagicBox;
          public int myNumHydraTeeth;
          public int myNumStaffOfCommand;
@@ -76,6 +77,7 @@ namespace BarbarianPrince
             myNumDragonEye = 0;
             myNumRocBeak = 0;
             myNumGriffonClaw = 0;
+            myNumFoulbane = 0;
             myNumMagicBox = 0;
             myNumHydraTeeth = 0;
             myNumStaffOfCommand = 0;
@@ -104,6 +106,7 @@ namespace BarbarianPrince
          public bool myIsDragonEye;
          public bool myIsRocBeak;
          public bool myIsGriffonClaw;
+         public bool myIsFoulbane;
          public bool myIsMagicBox;
          public bool myIsHydraTeeth;
          public bool myIsStaffOfCommand;
@@ -130,6 +133,7 @@ namespace BarbarianPrince
             myIsDragonEye = false;
             myIsRocBeak = false;
             myIsGriffonClaw = false;
+            myIsFoulbane = false;
             myIsMagicBox = false;
             myIsHydraTeeth = false;
             myIsStaffOfCommand = false;
@@ -235,6 +239,9 @@ namespace BarbarianPrince
             myGridRows[i].myNumGriffonClaw = mi.GetNumSpecialItem(SpecialEnum.GriffonClaws);
             if (0 < myGridRows[i].myNumGriffonClaw)
                myGridRowHeading.myIsGriffonClaw = true;
+            myGridRows[i].myNumFoulbane = mi.GetNumSpecialItem(SpecialEnum.Foulbane);
+            if (0 < myGridRows[i].myNumFoulbane)
+               myGridRowHeading.myIsFoulbane = true;
             myGridRows[i].myNumMagicBox = mi.GetNumSpecialItem(SpecialEnum.MagicBox);
             if (0 < myGridRows[i].myNumMagicBox)
                myGridRowHeading.myIsMagicBox = true;
@@ -504,6 +511,17 @@ namespace BarbarianPrince
             Image img = new Image { Name = "GriffonClaw", Source = MapItem.theMapImages.GetBitmapImage("GriffonClaw") };
             Button button = CreateButton(img);
             button.Name = "r100";
+            myGrid.Children.Add(button);
+            Grid.SetRow(button, rowNum);
+            Grid.SetColumn(button, colNum);
+            ++colNum;
+         }
+         //--------------------------------------------------------
+         if (true == myGridRowHeading.myIsFoulbane)
+         {
+            Image img = new Image { Name = "Foulbane", Source = MapItem.theMapImages.GetBitmapImage("FoulBane") };
+            Button button = CreateButton(img);
+            button.Name = "r146";
             myGrid.Children.Add(button);
             Grid.SetRow(button, rowNum);
             Grid.SetColumn(button, colNum);
@@ -842,6 +860,19 @@ namespace BarbarianPrince
             if (true == myGridRowHeading.myIsGriffonClaw)
             {
                int count = myGridRows[i].myNumGriffonClaw;
+               if (0 < count)
+               {
+                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };
+                  myGrid.Children.Add(label);
+                  Grid.SetRow(label, rowNum);
+                  Grid.SetColumn(label, colNum);
+               }
+               ++colNum;
+            }
+            //--------------------------------------------------------
+            if (true == myGridRowHeading.myIsFoulbane)
+            {
+               int count = myGridRows[i].myNumFoulbane;
                if (0 < count)
                {
                   Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = count.ToString() };

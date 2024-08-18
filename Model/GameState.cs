@@ -205,9 +205,9 @@ namespace BarbarianPrince
       }
       protected bool SetResurrectionStateCheck(IGameInstance gi, ref GameAction action)
       {
-         if (true == gi.IsResurrected)
+         if (true == gi.IsResurrectedThisTurn)
          {
-            gi.IsResurrected = false;
+            gi.IsResurrectedThisTurn = false;
             foreach (IMapItem mi in gi.ResurrectedMembers)
             {
                mi.Reset();
@@ -2177,6 +2177,7 @@ namespace BarbarianPrince
          //gi.Days = 40;
          //gi.Prince.SetWounds(7, 0);
          //gi.Prince.PlagueDustWound = 1; 
+         gi.Prince.IsResurrected = true;
          //gi.AddUnitTestTiredMount(myPrince);
          //---------------------
          //gi.AddSpecialItem(SpecialEnum.GiftOfCharm);
@@ -2185,6 +2186,8 @@ namespace BarbarianPrince
          //gi.AddSpecialItem(SpecialEnum.DragonEye);
          //gi.AddSpecialItem(SpecialEnum.RocBeak);
          //gi.AddSpecialItem(SpecialEnum.GriffonClaws);
+         gi.Prince.AddSpecialItemToShare(SpecialEnum.Foulbane);
+         gi.Prince.AddSpecialItemToShare(SpecialEnum.Foulbane);
          //gi.AddSpecialItem(SpecialEnum.HealingPoition);
          //gi.AddSpecialItem(SpecialEnum.CurePoisonVial);
          //gi.AddSpecialItem(SpecialEnum.EnduranceSash);
@@ -2267,12 +2270,14 @@ namespace BarbarianPrince
          //---------------------
          //gi.DayOfLastOffering = Days + 4;
          //gi.IsSecretTempleKnown = true;
+         //gi.ChagaDrugCount = 2;
          //gi.IsMarkOfCain = true; // e018
          //gi.NumMonsterKill = 5; // e161e - kill 5 monsters
-         //gi.ChagaDrugCount = 2;
+         gi.IsSecretCountDrogat = true;
+         gi.FoulBaneCount = 2;
          //---------------------
-         foreach (IMapItem mi in gi.PartyMembers)
-            mi.AddSpecialItemToKeep(SpecialEnum.ResurrectionNecklace);
+         //foreach (IMapItem mi in gi.PartyMembers)
+         //   mi.AddSpecialItemToKeep(SpecialEnum.ResurrectionNecklace);
       }
    }
    //-----------------------------------------------------
@@ -6471,8 +6476,8 @@ namespace BarbarianPrince
                         break;
                   }
                   break;
-               case GameAction.E161CountAudience:
-                  ITerritory t161 = Territory.theTerritories.Find("0323");
+               case GameAction.E161CountAudience: // already rolled e161 and have an audience - this is audience results
+                  ITerritory t161 = Territory.theTerritories.Find("0323"); // Drogat Castle may have a constraint on killing monsters
                   switch (gi.DieResults["e161"][0]) // Based on the die roll, implement event
                   {
                      case 1:                                                                                                           // count victim
@@ -6539,7 +6544,7 @@ namespace BarbarianPrince
                            }
                         }
                         break;
-                     case 6: gi.IsNobleAlly = true; break;
+                     case 6: gi.IsNobleAlly = true; break; // you immediately win
                      default:
                         returnStatus = "Reach Default ae=" + action.ToString() + " dr=" + gi.DieResults["e161"][0].ToString();
                         Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
@@ -13029,8 +13034,8 @@ namespace BarbarianPrince
                   gi.DieResults[key][0] = dieRoll;
                }
                break;
-            case "e211c":
-            case "e211f":
+            case "e211c": // seeking audience with Baron of Huldra Castle
+            case "e211f": // seeking audience with Dwarven King
                action = GameAction.UpdateEventViewerActive;
                int resultOfDie = gi.DieResults[key][0];
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
@@ -13110,7 +13115,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][0] = dieRoll;
                }
                break;
-            case "e211d":
+            case "e211d": // Audience with Count Drogat
                action = GameAction.UpdateEventViewerActive;
                int resultOfDie1 = gi.DieResults["e211d"][0];
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
@@ -13162,7 +13167,7 @@ namespace BarbarianPrince
                            gi.EventDisplayed = gi.EventActive = "e148e";
                         }
                         break;
-                     case 9: gi.EventDisplayed = gi.EventActive = "e149"; gi.ForbiddenAudiences.AddClothesConstraint(princeTerritory); break;  // learn court manners
+                     case 9: gi.EventDisplayed = gi.EventActive = "e149"; gi.ForbiddenAudiences.AddClothesConstraint(princeTerritory); break;      // learn court manners
                      case 10: gi.EventDisplayed = gi.EventActive = "e151"; gi.DieRollAction = GameAction.EncounterRoll; break;                     // find favor
                      default: gi.EventDisplayed = gi.EventActive = "e161"; gi.DieRollAction = GameAction.EncounterRoll; break;                     // gain audience
                   }
@@ -13186,10 +13191,15 @@ namespace BarbarianPrince
                   dieRoll += gi.SeneschalRollModifier;
                   gi.SeneschalRollModifier = 0;
                   //--------------------------------
+                  if (true == gi.IsSpecialItemHeld(SpecialEnum.Foulbane))
+                     dieRoll += 1;
+                  //--------------------------------
+                  if (true == gi.Prince.IsResurrected)
+                     dieRoll += 1;
                   gi.DieResults[key][0] = dieRoll;
                }
                break;
-            case "e211e":
+            case "e211e": // Seeking audience with lady Aeravir
                action = GameAction.UpdateEventViewerActive;
                int resultOfDie2 = gi.DieResults["e211e"][0];
                if (Utilities.NO_RESULT < gi.DieResults[key][0])

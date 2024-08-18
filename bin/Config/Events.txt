@@ -3370,16 +3370,27 @@ Add one when attempting to gain an audience
 However, the Lady dislikes blackmail, and you must escape from the hex at the end of the day when you use this secret knowledge. You can never return. Click image to continue.
 <LineBreak/><LineBreak/>
                                      <InlineUIContainer><Image Source='../../Images/LadyAeravir.gif' Name='EncounterEnd' Height='250' Width='200'></Image></InlineUIContainer>"
-e146	"<Bold>e146 The Secret of Count Dragot</Bold>
+e146	"<Bold>e146 Secret of Count Drogat</Bold>
 <LineBreak/><LineBreak/>You learn that Count Drogat, lord of Drogat Castle, is acutally an undead creature who enjoys the suffering, pain, and death of others. This explains why he so often tortures and dismembers felons in his realm.
 <LineBreak/><LineBreak/>He often goes into rages that leave his lands in a reign of terror. 
 <LineBreak/><LineBreak/>However, he is very vulnerable to foulbane, a rare plant which can be purchased from the food merchants at Duffyd Temple
  <InlineUIContainer><Button Content='2018' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  for one gold piece.
-<LineBreak/><LineBreak/>Using foulbane, when you attempt to gain an audience
+<LineBreak/><LineBreak/>Using foulbane, when you attempt to gain an audience, see <InlineUIContainer><Button Content='e146b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> for special rules.
+<LineBreak/><LineBreak/>Finally, if you have Foulbane, see  <InlineUIContainer><Button Content='e146b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. 
+<LineBreak/><LineBreak/>Click image to continue.
+<LineBreak/><LineBreak/>
+                                     <InlineUIContainer><Image Source='../../Images/FoulBane.gif' Name='EncounterEnd' Height='250' Width='200'></Image></InlineUIContainer>"
+e146a	"<Bold>e146a Use Foulbane on Count Drogat</Bold>
+<LineBreak/><LineBreak/>Using foulbane, as you attempt to gain an audience
  <InlineUIContainer><Button Content='r211' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
- with Count Drogat, you add one to your dice roll. If you gain an audience, you can ignore the first audience result dice roll and try again. However, if you wish to roll again, you must abide by the second result regardless of the outcome.
-<LineBreak/><LineBreak/>Finally, using the foulbane in Drogat Castle, you can spend a day instead of a normal daily action in arranging for a special theft of the Count's personnel jewels.
+ with Count Drogat, you add one to your dice roll. 
+<LineBreak/><LineBreak/>If you gain an audience, you can ignore the first audience result dice roll and try again. However, if you wish to roll again, you must abide by the second result regardless of the outcome.  
+<LineBreak/><LineBreak/>Click image to continue.
+<LineBreak/><LineBreak/>
+                                     <InlineUIContainer><Image Source='../../Images/FoulBane.gif' Name='EncounterEnd' Height='250' Width='200'></Image></InlineUIContainer>"
+e146b	"<Bold>e146b Stealing Count Drogat Jewels</Bold>
+<LineBreak/><LineBreak/>Using the foulbane in Drogat Castle, you can spend a day instead of a normal daily action in arranging for a special theft of the Count's personnel jewels.
 <LineBreak/><LineBreak/>At the end of the day, you escape from the hex
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  with wealth 110. However, you can never return to the castle hex due to the Count's anger. In the process of the theft, you might acquire magic items as part of the wealth 110 check. Click image to continue.
@@ -3445,7 +3456,8 @@ e151	"<Bold>e151 Find Favor</Bold>
  free tonight. 
 <LineBreak/><LineBreak/>Tomorrow, you are given a gift of gold, roll one die and multiply by 100 for the amount. Die Roll=
 <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21'> </Image></InlineUIContainer>
-<LineBreak/><LineBreak/>You also get an escort of a cavalry man that guides you and remains with you during the day you leave the hex. The escort is so strong that you will automatically defeat and kill anything in combat without using the normal combat rules.
+<LineBreak/><LineBreak/>You also get an escort of a cavalry man that guides you and remains with you during the day you leave the hex.
+ The escort is so strong that you will automatically defeat and kill anything in combat without using the normal combat rules.
 <LineBreak/><LineBreak/>
                      <InlineUIContainer><Image Name='Cavalry' Source='../../Images/Cavalry.gif' Height='270' Width='400'></Image></InlineUIContainer>"
 e152	"<Bold>e152 Noble Ally</Bold>
@@ -3678,6 +3690,10 @@ e161g	"<Bold>e161g Count Drogat Needs More Gravitas</Bold>
 <LineBreak/><LineBreak/>Since you have not personally killed at least five men or creatures, the Count takes no interest in you. You are dismissed and cannot seek an audience again until you have killed five. Click image to continue.
 <LineBreak/><LineBreak/>
                      <InlineUIContainer><Image Source='../../Images/BaronDrogat.gif' Name='BaronDrogat' Height='350' Width='300'></Image></InlineUIContainer>"
+e161h	"<Bold>e161h Count Drogat Manipulated by Foulbane</Bold>
+<LineBreak/><LineBreak/>Since you have foulbane, you force another audience roll with Count Drogat and choose which one you prefer. Click image to continue.
+<LineBreak/><LineBreak/>
+                                     <InlineUIContainer><Image Source='../../Images/FoulBane.gif' Name='FoulbaneReroll' Height='250' Width='200'></Image></InlineUIContainer>"
 e162	"<Bold>e162 Learn Secrets</Bold>
 <LineBreak/><LineBreak/>You finally accumulate enough hints and bits of unrelated information to learn the important secrets of this region. Roll one die:
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -3897,7 +3913,7 @@ e192a	"<Bold>e192a Prince Resurrected</Bold>
 The resurrection necklass resurrects the Prince. Prior to resurrection, the Prince is left for dead losing all possessions and money. The entire party scattered although a lover might return
  <InlineUIContainer><Button Content='r228' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. 
 <LineBreak/><LineBreak/>
-The Prince revived by the necklace has a somewhat ghoulish cast and is a bit weaker. Endurance is reduced by one.  You learn that such appearances are favored at the Dragot Castle. You can add one if seeking an audience
+The Prince revived by the necklace has a somewhat ghoulish cast and is a bit weaker. Endurance is reduced by one.  You learn that such appearances are favored at the Drogat Castle. You can add one if seeking an audience
  <InlineUIContainer><Button Content='r211' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  with Count Dragot. Click image when ready to continue.
 <LineBreak/><LineBreak/>
@@ -4215,7 +4231,7 @@ e211d	"<Bold>r211d Seeking an Audience with the Count Drogat</Bold>
   <InlineUIContainer><Button Content='e151' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 10 Find favor in Count's eye<LineBreak/>
   <InlineUIContainer><Button Content='e161' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 11 plus - Audience granted<LineBreak/>"
 e211e	"<Bold>r211e Seeking an Audience with Lady Aeravir</Bold>
-<LineBreak/><LineBreak/>As a daily action, you spend the day trying to gain admission to see the Baron Huldra. Roll two die and consult the list below for results: 
+<LineBreak/><LineBreak/>As a daily action, you spend the day trying to gain admission to see the Count Drogat. Roll two die and consult the list below for results: 
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21'> </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
   <InlineUIContainer><Button Content='e060' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 2 You insult the Lady's dignity and are arrested<LineBreak/>

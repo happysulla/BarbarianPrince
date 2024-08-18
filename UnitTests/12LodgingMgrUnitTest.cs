@@ -79,6 +79,14 @@ namespace BarbarianPrince
          //-----------------------------------------------------------
          if (CommandName == myCommandNames[0])
          {
+            gi.IsSecretCountDrogat = true;
+            ITerritory t11 = Territory.theTerritories.Find("2018");
+            if (null == t11)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "Command(): t=null");
+               return false;
+            }
+            gi.Prince.Territory = t11;
             gi.Prince.AddSpecialItemToKeep(SpecialEnum.TrollSkin);
             gi.Prince.AddSpecialItemToShare(SpecialEnum.TrollSkin);
             AddPrinceMounts(ref gi, 1);
@@ -91,6 +99,10 @@ namespace BarbarianPrince
                eagle.IsFlying = true;  
                gi.AddCompanion(eagle);
             }
+            string merchantName = "Merchant" + Utilities.MapItemNum.ToString();
+            ++Utilities.MapItemNum;
+            IMapItem merchant = new MapItem(merchantName, 1.0, false, false, false, "c77Merchant", "c77Merchant", gi.Prince.Territory, 3, 2, 0);
+            gi.AddCompanion(merchant);
             string porterName = "PorterSlave" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
             IMapItem porter = new MapItem(porterName, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);

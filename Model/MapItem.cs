@@ -888,6 +888,7 @@ namespace BarbarianPrince
             case SpecialEnum.DragonEye: break;
             case SpecialEnum.RocBeak: break;
             case SpecialEnum.GriffonClaws: break;
+            case SpecialEnum.Foulbane: break;
             case SpecialEnum.MagicBox: break;
             case SpecialEnum.HydraTeeth: break;
             case SpecialEnum.StaffOfCommand: break;
@@ -929,6 +930,7 @@ namespace BarbarianPrince
             case SpecialEnum.DragonEye: break;
             case SpecialEnum.RocBeak: break;
             case SpecialEnum.GriffonClaws: break;
+            case SpecialEnum.Foulbane: break;
             case SpecialEnum.MagicBox: break;
             case SpecialEnum.HydraTeeth: break;
             case SpecialEnum.StaffOfCommand: break;
@@ -982,6 +984,7 @@ namespace BarbarianPrince
                case SpecialEnum.DragonEye: break;
                case SpecialEnum.RocBeak: break;
                case SpecialEnum.GriffonClaws: break;
+               case SpecialEnum.Foulbane: break;
                case SpecialEnum.MagicBox: break;
                case SpecialEnum.HydraTeeth: break;
                case SpecialEnum.StaffOfCommand: break;
@@ -1032,6 +1035,7 @@ namespace BarbarianPrince
                case SpecialEnum.DragonEye: break;
                case SpecialEnum.RocBeak: break;
                case SpecialEnum.GriffonClaws: break;
+               case SpecialEnum.Foulbane: break;
                case SpecialEnum.MagicBox: break;
                case SpecialEnum.HydraTeeth: break;
                case SpecialEnum.StaffOfCommand: break;
@@ -1727,42 +1731,6 @@ namespace BarbarianPrince
                Canvas.SetLeft(helm, s0a - s2a);
                Canvas.SetTop(helm, -s2b);
                break;
-            //case SpecialEnum.TrollSkin:
-            //   Image skin = new Image() { Height = s2, Width = s2, Source = MapItem.theMapImages.GetBitmapImage("TrollSkin") };
-            //   c.Children.Add(skin);
-            //   Canvas.SetLeft(skin, s0a - s2a);
-            //   Canvas.SetTop(skin, +s2a);
-            //   break;
-            //case SpecialEnum.DragonEye:
-            //   Image eye = new Image() { Height = s2, Width = s2, Source = MapItem.theMapImages.GetBitmapImage("DragonEye") };
-            //   c.Children.Add(eye);
-            //   Canvas.SetLeft(eye, s0a - s2a);
-            //   Canvas.SetTop(eye, +s0a);
-            //   break;
-            //case SpecialEnum.RocBeak:
-            //   Image beak = new Image() { Height = s2, Width = s2, Source = MapItem.theMapImages.GetBitmapImage("RocBeak") };
-            //   c.Children.Add(beak);
-            //   Canvas.SetLeft(beak, s0a - s2a);
-            //   Canvas.SetTop(beak, +s0a);
-            //   break;
-            //case SpecialEnum.GriffonClaws:
-            //   Image claws = new Image() { Height = s2, Width = s2, Source = MapItem.theMapImages.GetBitmapImage("GriffonClaw") };
-            //   c.Children.Add(claws);
-            //   Canvas.SetLeft(claws, s0a - s2a);
-            //   Canvas.SetTop(claws, +s0b);
-            //   break;
-            //case SpecialEnum.MagicBox:
-            //   Image box = new Image() { Height = s2, Width = s2, Source = MapItem.theMapImages.GetBitmapImage("BoxUnopened") };
-            //   c.Children.Add(box);
-            //   Canvas.SetLeft(box, s0a - s2b);
-            //   Canvas.SetTop(box, s0a + s2a);
-            //   break;
-            //case SpecialEnum.HydraTeeth:
-            //   Image teeth = new Image() { Height = s2, Width = s2, Source = MapItem.theMapImages.GetBitmapImage("Teeth") };
-            //   c.Children.Add(teeth);
-            //   Canvas.SetLeft(teeth, s0a + s2b);
-            //   Canvas.SetTop(teeth, s0a + s2a);
-            //   break;
             default:
                break;
          }

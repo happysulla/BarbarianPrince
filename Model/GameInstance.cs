@@ -181,7 +181,7 @@ namespace BarbarianPrince
       public bool IsSlaveGirlActive { set; get; } = false;
       public bool IsGiftCharmActive { set; get; } = false;
       public bool IsPegasusSkip { set; get; } = false;
-      public bool IsResurrected { get; set; } = false;
+      public bool IsResurrectedThisTurn { get; set; } = false;
       public bool IsCharismaTalismanActive { set; get; } = false;
       public bool IsSeekNewModifier { set; get; } = false;
       public int PurchasedHenchman { set; get; } = 0;// e210f - Amount  of henchmen hired  
@@ -196,11 +196,12 @@ namespace BarbarianPrince
       public bool IsDayEnd { set; get; } = false;
       //---------------------------------------------------------------
       public bool IsSecretTempleKnown { set; get; } = false;   // e143 
+      public int ChagaDrugCount { set; get; } = 0;             // e143 Chaga Drug purchased in town - 2gp per serving
+      public bool IsChagaDrugProvided { set; get; } = false;   // e211b
       public bool IsSecretBaronHuldra { set; get; } = false;   // e144 
       public bool IsSecretLadyAeravir { set; get; } = false;   // e145 
       public bool IsSecretCountDrogat { set; get; } = false;   // e146 
-      public int ChagaDrugCount { set; get; } = 0;             // e143 Chaga Drug purchased in town - 2gp per serving
-      public bool IsChagaDrugProvided { set; get; } = false;   // e211b
+      public int FoulBaneCount { set; get; } = 0;   // e146 FoulBane purchased in Duffyd Temple - 1gp per serving
       //---------------------------------------------------------------
       public IMapItems PartyMembers { get; set; } = new MapItems();
       public IMapItems LostPartyMembers { get; set; } = new MapItems();
@@ -330,6 +331,9 @@ namespace BarbarianPrince
             else if (1 == numTrueLoves)  // add effects of true love
                ++this.WitAndWile;
          }
+         //--------------------------------
+         if (true == companion.Name.Contains("Merchant"))
+            IsMerchantWithParty = true;
          //--------------------------------
          if (true == companion.Name.Contains("Wizard"))
             IsWizardJoiningParty = true;
