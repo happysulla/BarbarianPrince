@@ -2177,7 +2177,7 @@ namespace BarbarianPrince
          //gi.Days = 40;
          //gi.Prince.SetWounds(7, 0);
          //gi.Prince.PlagueDustWound = 1; 
-         gi.Prince.IsResurrected = true;
+         //gi.Prince.IsResurrected = true;
          //gi.AddUnitTestTiredMount(myPrince);
          //---------------------
          //gi.AddSpecialItem(SpecialEnum.GiftOfCharm);
@@ -2186,8 +2186,7 @@ namespace BarbarianPrince
          //gi.AddSpecialItem(SpecialEnum.DragonEye);
          //gi.AddSpecialItem(SpecialEnum.RocBeak);
          //gi.AddSpecialItem(SpecialEnum.GriffonClaws);
-         gi.Prince.AddSpecialItemToShare(SpecialEnum.Foulbane);
-         gi.Prince.AddSpecialItemToShare(SpecialEnum.Foulbane);
+         //gi.Prince.AddSpecialItemToShare(SpecialEnum.Foulbane);
          //gi.AddSpecialItem(SpecialEnum.HealingPoition);
          //gi.AddSpecialItem(SpecialEnum.CurePoisonVial);
          //gi.AddSpecialItem(SpecialEnum.EnduranceSash);
@@ -2273,8 +2272,8 @@ namespace BarbarianPrince
          //gi.ChagaDrugCount = 2;
          //gi.IsMarkOfCain = true; // e018
          //gi.NumMonsterKill = 5; // e161e - kill 5 monsters
-         gi.IsSecretCountDrogat = true;
-         gi.FoulBaneCount = 2;
+         //gi.IsSecretCountDrogat = true;
+         //gi.FoulBaneCount = 2;
          //---------------------
          //foreach (IMapItem mi in gi.PartyMembers)
          //   mi.AddSpecialItemToKeep(SpecialEnum.ResurrectionNecklace);
@@ -13220,7 +13219,6 @@ namespace BarbarianPrince
                   //--------------------------------
                   if (true == gi.Prince.IsResurrected)
                      dieRoll += 1;
-                  dieRoll = 11; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                break;
