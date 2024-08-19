@@ -2365,6 +2365,13 @@ namespace BarbarianPrince
                }
                action = GameAction.UpdateEventViewerDisplay;
                break;
+            case GameAction.E146StealGems:
+               ResetDayForNonTravelChoice(gi, action);
+               gi.NumMembersBeingFollowed = 0;
+               gi.EventDisplayed = gi.EventActive = "e146a"; // next screen to show
+               gi.SunriseChoice = gi.GamePhase = GamePhase.Encounter;
+               gi.DieRollAction = GameAction.DieRollActionNone;
+               break;
             case GameAction.RestEncounterCheck:
                ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
@@ -6162,6 +6169,16 @@ namespace BarbarianPrince
                   gi.DieRollAction = GameAction.EncounterRoll;
                   gi.DieResults["e161"][0] = Utilities.NO_RESULT;
                   gi.IsFoulBaneUsedThisTurn = true;
+                  break;
+               case GameAction.E146StealGems:
+                  gi.ForbiddenHexes.Add(princeTerritory);
+                  gi.CapturedWealthCodes.Add(110);
+                  action = GameAction.EncounterLootStart;
+                  if (false == EncounterEscape(gi, ref action)) // move to random hex
+                  {
+                     returnStatus = "EncounterRoll(): EncounterEscape() returned false ae=" + action.ToString();
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
                   break;
                case GameAction.E147ClueToTreasure:
                   if (Utilities.NO_RESULT == gi.DieResults["e147"][0])

@@ -26,7 +26,7 @@ namespace BarbarianPrince
 {
    public partial class GameViewerWindow : Window, IView
    {
-      private const int MAX_DAILY_ACTIONS = 13;
+      private const int MAX_DAILY_ACTIONS = 14;
       public bool CtorError { get; } = false;
       //---------------------------------------------------------------------
       [Serializable]
@@ -117,7 +117,7 @@ namespace BarbarianPrince
       private Button[] myButtonFoodSupply100s = new Button[5];
       private Button[] myButtonEndurances = new Button[12];
       private readonly List<Button> myButtonDailyAcions = new List<Button>();
-      private readonly string[] myButtonDailyContents = new string[MAX_DAILY_ACTIONS] { "Travel", "Rest", "News", "Hire", "Audience", "Offering", "Search Ruins", "Search Cache", "Search Clue", "Arch Travel", "Follow", "Rafting", "Air Travel" };
+      private readonly string[] myButtonDailyContents = new string[MAX_DAILY_ACTIONS] { "Travel", "Rest", "News", "Hire", "Audience", "Offering", "Search Ruins", "Search Cache", "Search Clue", "Arch Travel", "Follow", "Rafting", "Air Travel", "Steal Gems" };
       //---------------------------------------------------------------------
       private ContextMenu myContextMenuButton = new ContextMenu();
       private readonly ContextMenu myContextMenuCanvas = new ContextMenu();
@@ -648,6 +648,11 @@ namespace BarbarianPrince
             Label labelDailyActions = new Label() { FontSize = 12, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = "DAILY ACTIONS" };
             myStackPanelDailyActions.Children.Add(labelDailyActions);
             //------------------------------------------------------------------
+            if ((0 < gi.FoulBaneCount) && ("0323" == gi.Prince.Territory.Name))
+            {
+               myStackPanelDailyActions.Children.Add(myButtonDailyAcions[13]);    // Steal Count Drogat Gems
+               myStackPanelDailyActions.Visibility = Visibility.Visible;
+            }
             if (false == gi.IsHeavyRainDismount) // if choose to dismount due to heavy rains, do not fly
             {
                foreach(IMapItem partyMember in gi.PartyMembers) // if at least one party member is a flying mount, Prince can fly
@@ -2257,6 +2262,11 @@ namespace BarbarianPrince
                outAction = GameAction.E079HeavyRainsStartDayCheckInAir;
             else
                outAction = GameAction.TravelAir;
+         }
+         else if (s1 == myButtonDailyContents[13])
+         {
+
+               outAction = GameAction.E146StealGems;
          }
          else
          {

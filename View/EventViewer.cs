@@ -4715,6 +4715,10 @@ namespace BarbarianPrince
                               action = GameAction.EncounterRoll;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               break;
+                           case "CountDrogatJewels":
+                              action = GameAction.E146StealGems;
+                              myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              break;
                            case "Crocodile":
                               if ( (Utilities.NO_RESULT < myGameInstance.DieResults["e094"][0]) || (Utilities.NO_RESULT < myGameInstance.DieResults["e094a"][0]) )
                               {

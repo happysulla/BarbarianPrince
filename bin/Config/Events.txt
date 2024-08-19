@@ -3387,7 +3387,7 @@ e146a	"<Bold>e146a Stealing Count Drogat Jewels</Bold>
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  with wealth 110. However, you can never return to the castle hex due to the Count's anger. In the process of the theft, you might acquire magic items as part of the wealth 110 check. Click image to continue.
 <LineBreak/><LineBreak/>
-                                     <InlineUIContainer><Image Source='../../Images/FoulBane.gif' Name='EncounterEnd' Height='250' Width='200'></Image></InlineUIContainer>"
+                           <InlineUIContainer><Image Source='../../Images/CountDrogatJewels.gif' Name='CountDrogatJewels' Height='300' Width='300'></Image></InlineUIContainer>"
 e147	"<Bold>e147 Clue to Secret</Bold>
 <LineBreak/><LineBreak/>You gain information about a nearby treasure. 
 <LineBreak/><LineBreak/>Roll one die for direction: 1-N, 2-NE, 3-SE, 4-S, 5-SW, 6-NW.
