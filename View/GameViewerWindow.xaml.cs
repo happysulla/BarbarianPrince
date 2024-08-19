@@ -657,13 +657,25 @@ namespace BarbarianPrince
             {
                foreach(IMapItem partyMember in gi.PartyMembers) // if at least one party member is a flying mount, Prince can fly
                {
-                  if ((0 == partyMember.StarveDayNum) && (false == partyMember.IsExhausted)) // mount cannot fly if starving or exhausted
+                  if (true == partyMember.IsFlyingMountCarrier())  // mount cannot fly if starving or exhausted
                   {
-                     if (true == partyMember.IsFlyingMount())
+                     if( (0 == partyMember.StarveDayNum) && (false == partyMember.IsExhausted) && (false == partyMember.IsSunStroke) )
                      {
                         myStackPanelDailyActions.Children.Add(myButtonDailyAcions[12]);    // air travel
                         myStackPanelDailyActions.Visibility = Visibility.Visible;
                         break;
+                     }
+                  }
+                  else
+                  {
+                     foreach (IMapItem mount in partyMember.Mounts)
+                     {
+                        if ((true == mount.IsFlyingMount()) && (0 == mount.StarveDayNum) && (false == mount.IsExhausted) && (false == mount.IsSunStroke))
+                        {
+                           myStackPanelDailyActions.Children.Add(myButtonDailyAcions[12]);    // air travel
+                           myStackPanelDailyActions.Visibility = Visibility.Visible;
+                           break;
+                        }
                      }
                   }
                }

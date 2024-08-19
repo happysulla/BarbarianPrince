@@ -57,7 +57,16 @@ namespace BarbarianPrince
       public void Insert(int index, ITerritory t) { myList.Insert(index, t); }
       public int Count { get { return myList.Count; } }
       public void Clear() { myList.Clear(); }
-      public bool Contains(ITerritory t) { return myList.Contains(t); }
+      public bool Contains(ITerritory t) 
+      {
+         foreach (Object o in myList)
+         {
+            ITerritory t1 = (ITerritory)o;
+            if (Utilities.RemoveSpaces(t.Name) == Utilities.RemoveSpaces(t1.Name)) // match on name
+               return true;
+         }
+         return false;
+      }
       public IEnumerator GetEnumerator() { return myList.GetEnumerator(); }
       public int IndexOf(ITerritory t) { return myList.IndexOf(t); }
       public void Remove(ITerritory t) { myList.Remove(t); }
