@@ -6461,7 +6461,7 @@ namespace BarbarianPrince
                   }
                   action = GameAction.UpdateEventViewerActive;
                   break;
-               case GameAction.E160GBrokenLove:
+               case GameAction.E160BrokenLove:
                   IMapItems trueLoves = new MapItems();
                   foreach (IMapItem mi in gi.PartyMembers)
                   {
@@ -6474,7 +6474,7 @@ namespace BarbarianPrince
                   gi.IsTrueLoveHeartBroken = true;
                   //-------------------------------
                   gi.Days += gi.DieResults["e160e"][0]; // number of days pass with you hardbroken
-                  if (false == PerformEndCheck(gi, ref action)) // GameStateEncounter.PerformAction(E160GBrokenLove)
+                  if (false == PerformEndCheck(gi, ref action)) // GameStateEncounter.PerformAction(E160BrokenLove)
                   {
                      gi.DieResults["e160"][0] = Utilities.NO_RESULT;
                      gi.DieResults["e160e"][0] = Utilities.NO_RESULT;
@@ -6482,8 +6482,18 @@ namespace BarbarianPrince
                      gi.DieRollAction = GameAction.EncounterRoll;
                   }
                   break;
-               case GameAction.E160LadyAudience:  // e160
+               case GameAction.E160LadyAudienceApplyResults:  // e160
                   ITerritory t160 = Territory.theTerritories.Find("1923");
+                  if( true == gi.IsLadyAeravirRerollActive )
+                  {
+                     gi.IsLadyAeravirRerollActive = false;
+                     gi.ForbiddenHexes.Add(t160); // can never return to this hex.
+                     //if (false == EncounterEscape(gi, ref action)) // use this function to randomly move one hex direction
+                     //{
+                     //   returnStatus = "EncounterEscape() returned false for a=" + action.ToString();
+                     //   Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                     //}
+                  }
                   switch (gi.DieResults["e160"][0]) // Based on the die roll, implement event
                   {
                      case 1:                                                                                                        // not interested
@@ -6517,7 +6527,7 @@ namespace BarbarianPrince
                         action = GameAction.EncounterLootStart;
                         break;
                      default:
-                        returnStatus = "Reach Default ae=" + action.ToString() + " dr=" + gi.DieResults["e160"][0].ToString();
+                        returnStatus = "Reach Default ae=" + action.ToString() + " gi.DieResults[e160][0]=" + gi.DieResults["e160"][0].ToString();
                         Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                         break;
                   }
@@ -12554,6 +12564,33 @@ namespace BarbarianPrince
                   gi.DieResults[key][0] = dieRoll;
                }
                break;
+            case "e160g": // audience with lady 
+               if (Utilities.NO_RESULT < gi.DieResults[key][1])
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  action = GameAction.UpdateEventViewerActive;
+                  gi.DieResults[key][0] = dieRoll; // when applying results, gi.DieResults[key][0] is what is looked at
+                  switch (dieRoll) // Based on the die roll, implement event
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e160a"; break;        // not interested
+                     case 2: gi.EventDisplayed = gi.EventActive = "e160b"; break;        // distracted listening
+                     case 3: gi.EventDisplayed = gi.EventActive = "e160c"; break;        // takes pity
+                     case 4: gi.EventDisplayed = gi.EventActive = "e160d"; break;        // supports your virtue
+                     case 5: gi.EventDisplayed = gi.EventActive = "e160e"; gi.DieRollAction = GameAction.EncounterRoll; break;        // seductively charmed
+                     case 6: gi.EventDisplayed = gi.EventActive = "e160f"; gi.DieRollAction = GameAction.EncounterRoll; break;        // supports your cause
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  }
+               }
+               else if (Utilities.NO_RESULT == gi.DieResults[key][0])
+               {
+                  gi.DieResults[key][0] = dieRoll;
+                  gi.DieRollAction = GameAction.EncounterRoll;
+               }
+               else 
+               {
+                  gi.DieResults[key][1] = dieRoll;
+               }
+               break;
             case "e161": // audience with count drogat
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
@@ -13271,7 +13308,15 @@ namespace BarbarianPrince
                               Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): RemoveSpecialItem() returned false ae=" + action.ToString() + " dr=" + resultOfDie2.ToString());
                               return false;
                            }
-                           gi.EventStart = gi.EventDisplayed = gi.EventActive = "e160";
+                           if (false == gi.IsSecretLadyAeravir)
+                           {
+                              gi.EventStart = gi.EventDisplayed = gi.EventActive = "e160";
+                           }
+                           else
+                           {
+                              gi.EventStart = gi.EventDisplayed = gi.EventActive = "e160g";
+                              gi.IsLadyAeravirRerollActive = true;
+                           }
                            gi.DieRollAction = GameAction.EncounterRoll;
                         }
                         else
@@ -13306,10 +13351,29 @@ namespace BarbarianPrince
                            gi.EventDisplayed = gi.EventActive = "e148e";
                         }
                         break;
-                     case 10: gi.EventDisplayed = gi.EventActive = "e160"; gi.DieRollAction = GameAction.EncounterRoll; break;                     // gain audience
+                     case 10:
+                        if (false == gi.IsSecretLadyAeravir)
+                        {
+                           gi.EventStart = gi.EventDisplayed = gi.EventActive = "e160";
+                        }
+                        else
+                        {
+                           gi.EventStart = gi.EventDisplayed = gi.EventActive = "e160g";
+                           gi.IsLadyAeravirRerollActive = true;
+                        }
+                        gi.DieRollAction = GameAction.EncounterRoll; 
+                        break;                     // gain audience
                      case 11: gi.EventDisplayed = gi.EventActive = "e154"; gi.DieRollAction = GameAction.EncounterRoll; break;                     // meet lord's daughter
                      default:                                                                                                                      // gain audience
-                        gi.EventDisplayed = gi.EventActive = "e160"; 
+                        if (false == gi.IsSecretLadyAeravir)
+                        {
+                           gi.EventStart = gi.EventDisplayed = gi.EventActive = "e160";
+                        }
+                        else
+                        {
+                           gi.EventStart = gi.EventDisplayed = gi.EventActive = "e160g";
+                           gi.IsLadyAeravirRerollActive = true;
+                        }
                         gi.DieRollAction = GameAction.EncounterRoll; 
                         break;
                   }
@@ -13342,6 +13406,7 @@ namespace BarbarianPrince
                   if (true == gi.IsSecretLadyAeravir) // know the secret of Lady Aeravir
                      ++dieRoll;
                   //--------------------------------
+                  dieRoll = 13; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                break;

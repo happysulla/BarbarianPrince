@@ -127,7 +127,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="1923">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="0418">
     <IsEnabled value="False" />
@@ -136,7 +136,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="0409">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="0406">
     <IsEnabled value="False" />

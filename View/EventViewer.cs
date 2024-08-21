@@ -4619,7 +4619,7 @@ namespace BarbarianPrince
                            case "BrokenLove":
                               if (Utilities.NO_RESULT < myGameInstance.DieResults["e160e"][0])
                               {
-                                 action = GameAction.E160GBrokenLove;
+                                 action = GameAction.E160BrokenLove;
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               }
                               return;
@@ -5091,7 +5091,7 @@ namespace BarbarianPrince
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               break;
                            case "LadyAeravir":
-                              action = GameAction.E160LadyAudience;
+                              action = GameAction.E160LadyAudienceApplyResults;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               break;
                            case "LadyAeravirSupport":
@@ -5753,7 +5753,7 @@ namespace BarbarianPrince
             action = GameAction.UpdateEventViewerDisplay;
             myGameEngine.PerformAction(ref myGameInstance, ref action);
          }
-         else if ((true == myGameInstance.IsGiftCharmActive) || (true == myGameInstance.IsSlaveGirlActive)) // User made a selection of one of three die rolls
+         else if ((true == myGameInstance.IsGiftCharmActive) || (true == myGameInstance.IsSlaveGirlActive) || (true == myGameInstance.IsLadyAeravirRerollActive)) // User made a selection of one of three die rolls
          {
             string buttonContent = (string)b.Content;
             int dieRoll = Int32.Parse(buttonContent);
