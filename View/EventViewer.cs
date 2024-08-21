@@ -681,7 +681,7 @@ namespace BarbarianPrince
                            else
                            {
                               img.Visibility = Visibility.Hidden;
-                              if ((false == myGameInstance.IsGiftCharmActive) && (false == myGameInstance.IsSlaveGirlActive))
+                              if ((false == myGameInstance.IsGiftCharmActive) && (false == myGameInstance.IsSlaveGirlActive) && (false == gi.IsLadyAeravirRerollActive) )
                               {
                                  Run newInline = new Run(eventDieRolls[dieNumIndex].ToString());  // Insert the die roll number result
                                  myTextBlock.Inlines.InsertBefore(inline, newInline); // If modified, need to start again
@@ -701,7 +701,7 @@ namespace BarbarianPrince
                         }
                         else
                         {
-                           if (false == myGameInstance.IsGiftCharmActive)
+                           if ( (false == myGameInstance.IsGiftCharmActive) && (false == gi.IsLadyAeravirRerollActive) )
                               img.Visibility = Visibility.Hidden;
                         }
                         ++dieCount;
@@ -3115,6 +3115,11 @@ namespace BarbarianPrince
                   bool isPurified = myGameInstance.Purifications.Contains(princeTerritory);
                   int purifyModifier = (isPurified ? 2 : 0);
                   int audienceRollModifier = myGameInstance.DaughterRollModifier + myGameInstance.SeneschalRollModifier + letterModifier + purifyModifier;
+                  if ("e211e" == key) // Seeking audencie with Lady Aeravir
+                  {
+                     if (true == gi.IsSecretLadyAeravir)
+                        audienceRollModifier++;
+                  }
                   if ("e211d" == key) // Seeking audencie with Count Drogat
                   {
                      if (true == gi.IsSpecialItemHeld(SpecialEnum.Foulbane))
@@ -3155,6 +3160,11 @@ namespace BarbarianPrince
                         sb.Append(" Add ");
                         sb.Append(purifyModifier.ToString());
                         sb.Append(" for Purification.");
+                     }
+                     if ("e211e" == key) //  Seeking audencie with Lady Aeravir
+                     {
+                        if (true == gi.IsSecretLadyAeravir)
+                           sb.Append(" Add 1 for knowing Lady Aeravir's promiscuity.");
                      }
                      if ("e211d" == key) // Seeking audencie with Count Drogat
                      {
@@ -4702,7 +4712,6 @@ namespace BarbarianPrince
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               }
                               return;
-
                            case "Coin":
                               action = GameAction.EncounterLootStart;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
@@ -5240,6 +5249,10 @@ namespace BarbarianPrince
                                  action = GameAction.EncounterRoll;
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               }
+                              break;
+                           case "PlaguePrinceEnd":
+                              action = GameAction.E133PlaguePrinceEnd;
+                              myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               break;
                            case "PoisonPlant":
                               action = GameAction.EncounterStart;

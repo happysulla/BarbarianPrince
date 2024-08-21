@@ -320,12 +320,25 @@ namespace BarbarianPrince
          Logger.Log(LogEnum.LE_VIEW_SHOW_HUNT, "PerformHunt(): 3-myMaxRowCount=" + myMaxRowCount.ToString());
          myGridRows[0].myAssignable = myGameInstance.Prince;
          myGridRows[0].myAssignmentCount = GetAssignedCount();
-         string miName = Utilities.RemoveSpaces(myGameInstance.Prince.Name);
          myMapItems.Remove(myGameInstance.Prince);
          if ((6 < myGameInstance.Prince.Food) || (true == myIsFarmland))// if prince is by himself - force user to select hunt checkbox
             myIsHeaderCheckBoxChecked = false;
          else
             myIsHeaderCheckBoxChecked = true;
+         //--------------------------------------------------
+         if( true == myGameInstance.IsPartyRested) // if party is rested, assign all mapitems to grid rows
+         {
+            int k = 1;
+            foreach(IMapItem mi in myGameInstance.PartyMembers)
+            {
+               if (true == mi.Name.Contains("Prince")) // dont add prince twice
+                  continue;
+               myGridRows[k].myAssignable = mi;
+               myGridRows[k].myAssignmentCount = GetAssignedCount();
+               myMapItems.Remove(mi);
+               ++k;
+            }
+         }
          //--------------------------------------------------
          if (false == UpdateGrid())
          {

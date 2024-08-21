@@ -46,10 +46,10 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="Eagle">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Elf">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="Falcon">
     <IsEnabled value="False" />
@@ -61,7 +61,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="Magician">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="Mercenary">
     <IsEnabled value="True" />
@@ -124,7 +124,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="0323">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="1923">
     <IsEnabled value="False" />
@@ -136,7 +136,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="0409">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="0406">
     <IsEnabled value="False" />
@@ -163,7 +163,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="EasiestMonsters">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="AutoLostDecrease">
     <IsEnabled value="True" />
@@ -205,7 +205,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="ForceEvent">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="ForceCrossEvent">
     <IsEnabled value="False" />

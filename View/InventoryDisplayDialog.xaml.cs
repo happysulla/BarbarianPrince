@@ -158,7 +158,7 @@ namespace BarbarianPrince
             return;
          }
          myRulesManager = rm;
-         this.Height = gi.PartyMembers.Count * myRowHeight + myColumnWidth + 20; // ColumnWidth represents the initial Row's Height -  20 is for border and header space
+         this.Height = gi.PartyMembers.Count * myRowHeight + myColumnWidth + 30; // ColumnWidth represents the initial Row's Height -  20 is for border and header space
          SetGridRowData(gi);
          UpdateGridRowHeader();
          UpdateGridRows(gi);

@@ -340,6 +340,7 @@ namespace BarbarianPrince
       E130RobGuard,
       E133Plague,
       E133PlaguePrince,
+      E133PlaguePrinceEnd,
       E133PlagueParty,
       E134ShakyWalls,
       E134ShakyWallsEnd,

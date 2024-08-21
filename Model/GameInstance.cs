@@ -160,6 +160,7 @@ namespace BarbarianPrince
       public int PurchasedPotionCure { set; get; } = 0;
       public int PurchasedPotionHeal { set; get; } = 0;
       public int HydraTeethCount { set; get; } = 0;
+      public bool IsLadyAeravirRerollActive { set; get; } = false;
       public bool IsCavalryEscort { set; get; } = false;  // e151
       public bool IsNobleAlly { set; get; } = false;  // e152
       public int SeneschalRollModifier { set; get; } = 0;
@@ -597,6 +598,10 @@ namespace BarbarianPrince
          {
             mi.Endurance = 4;
             mi.Combat = 4;
+            return;
+         }
+         if (true == mi.Name.Contains("WarriorOld"))
+         {
             return;
          }
          if (true == mi.Name.Contains("Warrior"))

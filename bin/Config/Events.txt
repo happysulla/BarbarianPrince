@@ -3169,9 +3169,18 @@ e132a	"<Bold>e132a Unproductive Searching</Bold>
 e133	"<Bold>e133 Plague</Bold>
 <LineBreak/><LineBreak/>After considerable searching during the day, you and your party find a variety of items worth 50 gold pieces amoung may skeletons. Tonight, just before you start to eat
  <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>,
- a plague of mind-madness begins to affect your party due to an ancient curse on this place.
+ a plague of mind-madness begins to affect your party due to an ancient curse on this place. 
+<LineBreak/><LineBreak/>Roll one die for each character in the party, a 3+ means madness has destroyed the mind and the character crumples into a heap and soon dies, foaming at the mouth. All surviving members of the party immediately ecape from the hex per <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> and camp elsewhere for the night per <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. 
+<LineBreak/><LineBreak/>Mounts are not affected, so survivors can bring mounts, possessions, and wealth of the entire party with them.
+<LineBreak/><LineBreak/>If the Prince is affected by the plague, see  <InlineUIContainer><Button Content='e133a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>
 Click anywhere to continue."
+e133a	"<Bold>e133a Plague Affects Prince</Bold>
+<LineBreak/><LineBreak/>If the you are affected by the plague, your Northern blood helps him to survive. You awake the next morning, having gone without food <InlineUIContainer><Button Content='r216' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>, and find all your surviving followers dead or escaped with all your wealth and possessioins. You can now deicde what action to take for the new day per <InlineUIContainer><Button Content='r203' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
+<LineBreak/><LineBreak/>
+Click image to continue.
+<LineBreak/><LineBreak/>
+                                  <InlineUIContainer><Image Name='PlaguePrinceEnd' Source='../../Images/Nothing.gif' Height='200' Width='200'></Image></InlineUIContainer>"
 e134	"<Bold>e134 Unstable Ruins</Bold>
 <LineBreak/><LineBreak/>In the ruins are many unstable walls and rocks making your search very dangerous. 
 <LineBreak/><LineBreak/>
@@ -3203,7 +3212,7 @@ e136	"<Bold>e136 Hidden Treasures</Bold>
 5 - 500 gold pieces<LineBreak/>
 6 - Nothing<LineBreak/>
 <LineBreak/>
-          <InlineUIContainer><Image Name='TreasureRoomDoor' Source='../../Images/TreasureRoomDoor.gif' Height='220'  Width='300'> </Image></InlineUIContainer>"
+                         <InlineUIContainer><Image Name='TreasureRoomDoor' Source='../../Images/TreasureRoomDoor.gif' Height='220'  Width='300'> </Image></InlineUIContainer>"
 e137	"<Bold>e137 Inhabitants</Bold>
 <LineBreak/><LineBreak/>You encounter things living in the ruins. Roll one die:
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -3644,6 +3653,21 @@ The Lady decides to support your cause fully. She gives you one die roll times 1
  free. If any party members have wounds, her healers will cure all wounds tonight as well, even poisoned wounds.
 <LineBreak/><LineBreak/>
                                         <InlineUIContainer><Image Source='../../Images/LadyAeravir.gif' Name='LadyAeravirSupport' Height='350' Width='140'></Image></InlineUIContainer>"
+e160g	"<Bold>e160g Audience with Lady Aeravir Knowing Her Secret</Bold>
+<LineBreak/><LineBreak/>
+You are allowed a semi-private interview with the ruler of Aeravir Castle. Since you know her secret, see  <InlineUIContainer><Button Content='e145' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. You roll twice and pick the result you want.
+<LineBreak/><LineBreak/>
+Roll one die for the results:  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
+<LineBreak/><LineBreak/>
+<InlineUIContainer><Button Content='e160a' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> - 1 - Shows No Interest<LineBreak/>
+<InlineUIContainer><Button Content='e160b' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> - 2 -Distracted <LineBreak/>
+<InlineUIContainer><Button Content='e160c' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> - 3 - Shows Pity<LineBreak/>
+<InlineUIContainer><Button Content='e160d' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> - 4 - Finds Virtue <LineBreak/>
+<InlineUIContainer><Button Content='e160e' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> - 5 - Seduction<LineBreak/>
+<InlineUIContainer><Button Content='e160f' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 - Shows Support
+<LineBreak/><LineBreak/> Roll die:
+ <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
+ <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>"
 e161	"<Bold>e161 Audience with Count Drogat</Bold>
 <LineBreak/><LineBreak/>You are allowed a semi-private interview with the ruler of Drogat Castle. Roll one die for the result and add one if you have a troll skin giving it to the Count. Die Roll = 
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -4039,7 +4063,7 @@ e209b	"<Bold>e209b Discover Thief's Den</Bold>
 <LineBreak/><LineBreak/>
                                     <InlineUIContainer><Image Source='../../Images/CoinBag.gif' Name='CoinBag' Height='150' Width='150'></Image></InlineUIContainer>"
 e209c	"<Bold>e209c Feel at Home</Bold>
-<LineBreak/><LineBreak/> Feel at home, learning nothing, but in the future always add one whenever resolving this action in this hex or when Seeking to Hire in this hex
+<LineBreak/><LineBreak/>Feel at home, learning nothing, but in the future always add one whenever resolving this action in this hex or when Seeking to Hire in this hex
   <InlineUIContainer><Button Content='r210' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. Click image to continue.
 <LineBreak/><LineBreak/>
                               <InlineUIContainer><Image Source='../../Images/HappyFace.gif' Name='EncounterEnd' Height='300' Width='300'></Image></InlineUIContainer>"
