@@ -5915,6 +5915,14 @@ namespace BarbarianPrince
                action = GameAction.E069WoundedWarriorCarry;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
+            case " Charm ":
+               action = GameAction.E144RescueCharm;
+               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
+            case " Cast  ":
+               action = GameAction.E144RescueCast;
+               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
             case "Count Drogat ":
                action = GameAction.EncounterEnd;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
@@ -6032,6 +6040,10 @@ namespace BarbarianPrince
                }
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
+            case " Fight ":
+               action = GameAction.E144RescueFight;
+               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
             case "Follow":
                action = GameAction.EncounterFollow;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
@@ -6064,10 +6076,18 @@ namespace BarbarianPrince
                action = GameAction.EncounterEnd;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
+            case "Impress":
+               action = GameAction.E144RescueImpress;
+               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
             case "Join":
                action = GameAction.UpdateEventViewerActive;
                myGameInstance.EventDisplayed = myGameInstance.EventActive = "e209f";
                action = GameAction.EncounterRoll;
+               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
+            case " Kill  ":
+               action = GameAction.E144RescueKill;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
             case "Inquiries":

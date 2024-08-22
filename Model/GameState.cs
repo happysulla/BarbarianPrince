@@ -1172,6 +1172,7 @@ namespace BarbarianPrince
             case "TrueLoveSwordwoman": character = new MapItem(miName, 1.0, false, false, false, "c44TrueLove", "Swordswoman", princeTerritory, 7, 7, 4); break;
             case "TrustedAssistant": character = new MapItem(miName, 1.0, false, false, false, "c51TrustedAssistant", "c51TrustedAssistant", princeTerritory, 4, 4, 0); break;
             case "Warrior": character = new MapItem(miName, 1.0, false, false, false, "c79Warrior", "c79Warrior", princeTerritory, 6, 7, 0); break;
+            case "WarriorBoy": character = new MapItem(miName, 1.0, false, false, false, "c86WarriorBoy", "c86WarriorBoy", princeTerritory, 7, 5, 0); break;
             case "WarriorOld": character = new MapItem(miName, 1.0, false, false, false, "c43OldWarrior", "c43OldWarrior", princeTerritory, 0, 0, 0); break;
             case "Witch": character = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", princeTerritory, 3, 1, 5); break;
             case "Wizard": character = new MapItem(miName, 1.0, false, false, false, "c12Wizard", "c12Wizard", princeTerritory, 4, 4, 60); break;
@@ -2123,7 +2124,7 @@ namespace BarbarianPrince
          if (true == option.IsEnabled)
             starting = Territory.theTerritories.Find(hex);
          //---------------------------------------------------------
-         hex = "0405";  // Mountains
+         hex = "1611";  // Mountains
          option = gi.Options.Find(hex);
          if (null == option)
          {
@@ -2184,7 +2185,7 @@ namespace BarbarianPrince
          //---------------------
          //gi.AddSpecialItem(SpecialEnum.GiftOfCharm);
          //gi.AddSpecialItem(SpecialEnum.ResistanceTalisman);
-         //gi.AddSpecialItem(SpecialEnum.CharismaTalisman);
+         gi.AddSpecialItem(SpecialEnum.CharismaTalisman);
          //gi.AddSpecialItem(SpecialEnum.DragonEye);
          //gi.AddSpecialItem(SpecialEnum.RocBeak);
          //gi.AddSpecialItem(SpecialEnum.GriffonClaws);
@@ -2193,13 +2194,13 @@ namespace BarbarianPrince
          //gi.AddSpecialItem(SpecialEnum.CurePoisonVial);
          //gi.AddSpecialItem(SpecialEnum.EnduranceSash);
          //gi.AddSpecialItem(SpecialEnum.PoisonDrug);
-         //gi.AddSpecialItem(SpecialEnum.MagicSword);
+         gi.AddSpecialItem(SpecialEnum.MagicSword);
          //gi.AddSpecialItem(SpecialEnum.AntiPoisonAmulet);
          //gi.AddSpecialItem(SpecialEnum.PegasusMountTalisman);
          //gi.AddSpecialItem(SpecialEnum.NerveGasBomb);
          //gi.AddSpecialItem(SpecialEnum.ResistanceRing);
          //gi.AddSpecialItem(SpecialEnum.ResurrectionNecklace);
-         //gi.AddSpecialItem(SpecialEnum.ShieldOfLight);
+         gi.AddSpecialItem(SpecialEnum.ShieldOfLight);
          //gi.AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
          //gi.Prince.AddSpecialItemToShare(SpecialEnum.HydraTeeth);
          //gi.HydraTeethCount = 5;
@@ -2276,7 +2277,8 @@ namespace BarbarianPrince
          //gi.NumMonsterKill = 5; // e161e - kill 5 monsters
          //gi.IsSecretCountDrogat = true; // e146
          //gi.FoulBaneCount = 2;
-         gi.IsSecretLadyAeravir = true; // e145
+         //gi.IsSecretLadyAeravir = true; // e145
+         gi.IsSecretBaronHuldra = true; // e144
          //---------------------
          //foreach (IMapItem mi in gi.PartyMembers)
          //   mi.AddSpecialItemToKeep(SpecialEnum.ResurrectionNecklace);
@@ -2327,7 +2329,7 @@ namespace BarbarianPrince
                if( false == LoadGame(ref gi, ref action))
                {
                   returnStatus = "LoadGame() returned false";
-                  Logger.Log(LogEnum.LE_ERROR, "GameStateRest.PerformAction(): " + returnStatus);
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
                }
                break;
             case GameAction.E079HeavyRainsStartDayCheck:
@@ -2367,6 +2369,13 @@ namespace BarbarianPrince
                }
                action = GameAction.UpdateEventViewerDisplay;
                break;
+            case GameAction.E144RescueHeir:
+               ResetDayForNonTravelChoice(gi, action);
+               gi.NumMembersBeingFollowed = 0;
+               gi.EventDisplayed = gi.EventActive = "e144a"; // next screen to show
+               gi.SunriseChoice = gi.GamePhase = GamePhase.Encounter;
+               gi.DieRollAction = GameAction.DieRollActionNone;
+               break;
             case GameAction.E146StealGems:
                ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
@@ -2395,7 +2404,7 @@ namespace BarbarianPrince
                {
                   action = GameAction.TravelLostCheck;
                   gi.DieRollAction = GameAction.DieRollActionNone;
-                  Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateRest.PerformAction(RestEncounterCheck): gi.MapItemMoves.Clear()");
+                  Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateSunriseChoice.PerformAction(RestEncounterCheck): gi.MapItemMoves.Clear()");
                   gi.MapItemMoves.Clear();
                   MapItemMove mim = new MapItemMove(Territory.theTerritories, gi.Prince, princeTerritory);   // Travel to same hex if rest encounter
                   if ((0 == mim.BestPath.Territories.Count) || (null == mim.NewTerritory))
@@ -2438,7 +2447,7 @@ namespace BarbarianPrince
                {
                   gi.IsAirborne = false;
                   returnStatus = "gi.PartyReadyToFly() returned false for " + action.ToString();
-                  Logger.Log(LogEnum.LE_ERROR, "GameStateRest.PerformAction(): " + returnStatus);
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
                }
                else
                {
@@ -6185,6 +6194,62 @@ namespace BarbarianPrince
                      returnStatus = "EncounterEnd() returned false for a=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
+                  break;
+               case GameAction.E144RescueCast:
+               case GameAction.E144RescueImpress:
+                  gi.EventDisplayed = gi.EventActive = "e144c";
+                  gi.IsSecretBaronHuldra = false;
+                  if (false == EncounterEscape(gi, ref action)) // move to random hex
+                  {
+                     returnStatus = "EncounterRoll(): EncounterEscape() returned false ae=" + action.ToString();
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
+                  IMapItem trueHeir = CreateCharacter(gi, "WarriorBoy", 0);
+                  gi.AddCompanion(trueHeir);
+                  if (false == EncounterEnd(gi, ref action))
+                  {
+                     returnStatus = "EncounterEnd() returned false for a=" + action.ToString();
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
+                  break;
+               case GameAction.E144RescueCharm:
+                  gi.EventDisplayed = gi.EventActive = "e144c";
+                  gi.IsSecretBaronHuldra = false;
+                  if (false == EncounterEscape(gi, ref action)) // move to random hex
+                  {
+                     returnStatus = "EncounterRoll(): EncounterEscape() returned false ae=" + action.ToString();
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
+                  IMapItem trueHeir1 = CreateCharacter(gi, "WarriorBoy", 0);
+                  gi.AddCompanion(trueHeir1);
+                  gi.IsCharismaTalismanActive = true;
+                  if (false == EncounterEnd(gi, ref action))
+                  {
+                     returnStatus = "EncounterEnd() returned false for a=" + action.ToString();
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
+                  break;
+               case GameAction.E144RescueKill:
+                  gi.EventStart = gi.EventDisplayed = gi.EventActive = "e144c";
+                  gi.IsSecretBaronHuldra = false;
+                  if (false == EncounterEscape(gi, ref action)) // move to random hex
+                  {
+                     returnStatus = "EncounterRoll(): EncounterEscape() returned false ae=" + action.ToString();
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
+                  IMapItem trueHeir2 = CreateCharacter(gi, "WarriorBoy", 0);
+                  gi.AddCompanion(trueHeir2);
+                  gi.RemoveSpecialItem(SpecialEnum.NerveGasBomb);
+                  if (false == EncounterEnd(gi, ref action))
+                  {
+                     returnStatus = "EncounterEnd() returned false for a=" + action.ToString();
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
+                  break;
+               case GameAction.E144RescueFight:
+                  gi.EventStart = gi.EventDisplayed = gi.EventActive = "e144b";
+                  gi.DieRollAction = GameAction.EncounterRoll;
+                  action = GameAction.EncounterStart;
                   break;
                case GameAction.E146CountAudienceReroll:
                   gi.EventDisplayed = gi.EventActive = "e161"; 
@@ -10464,7 +10529,17 @@ namespace BarbarianPrince
                switch (dieRoll)
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e143"; gi.IsSecretTempleKnown = true; break; // Secret of Temples
-                  case 2: gi.EventDisplayed = gi.EventActive = "e144"; gi.IsSecretBaronHuldra = true; break; // Secret of Baron Huldra
+                  case 2:                                                                                    // Secret of Baron Huldra
+                     if (true == gi.IsHuldraHeirKilled)
+                     {
+                        gi.EventDisplayed = gi.EventActive = "e144e";
+                     }
+                     else
+                     {
+                        gi.EventDisplayed = gi.EventActive = "e144";
+                        gi.IsSecretBaronHuldra = true;
+                     }
+                     break; 
                   case 3: gi.EventDisplayed = gi.EventActive = "e145"; gi.IsSecretLadyAeravir = true; break; // Secret of Lady Aeravir
                   case 4: gi.EventDisplayed = gi.EventActive = "e146"; gi.IsSecretCountDrogat = true; break; // Secret of Count Drogat
                   case 5: gi.EventDisplayed = gi.EventActive = "e147"; gi.DieRollAction = GameAction.E147ClueToTreasure; break; // Clue to Treasure
@@ -12632,7 +12707,17 @@ namespace BarbarianPrince
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
                   case 1: case 2: gi.EventDisplayed = gi.EventActive = "e143"; break;
-                  case 3: case 4: gi.EventDisplayed = gi.EventActive = "e144"; gi.IsSecretBaronHuldra = true; break;
+                  case 3: case 4:
+                     if (true == gi.IsHuldraHeirKilled)
+                     {
+                        gi.EventDisplayed = gi.EventActive = "e144e";
+                     }
+                     else
+                     {
+                        gi.EventDisplayed = gi.EventActive = "e144";
+                        gi.IsSecretBaronHuldra = true;
+                     }
+                     break;
                   case 5: gi.EventDisplayed = gi.EventActive = "e145"; gi.IsSecretLadyAeravir = true; break;
                   case 6: gi.EventDisplayed = gi.EventActive = "e146"; gi.IsSecretCountDrogat = true; break;
                   default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
@@ -12957,7 +13042,17 @@ namespace BarbarianPrince
                      case 1: gi.EventDisplayed = gi.EventActive = "e401"; break; // nothing
                      case 2: gi.EventDisplayed = gi.EventActive = "e147"; gi.DieRollAction = GameAction.E147ClueToTreasure; break; // Clue to Treasure
                      case 3: gi.EventDisplayed = gi.EventActive = "e143"; gi.IsSecretTempleKnown = true; break; // Secret of Temples
-                     case 4: gi.EventDisplayed = gi.EventActive = "e144"; gi.IsSecretBaronHuldra = true; break; // Secret of Baron Huldra
+                     case 4:                                                                               // Secret of Baron Huldra
+                        if (true == gi.IsHuldraHeirKilled)
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e144e";
+                        }
+                        else
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e144";
+                           gi.IsSecretBaronHuldra = true;
+                        }
+                        break;
                      case 5: gi.EventDisplayed = gi.EventActive = "e145"; gi.IsSecretLadyAeravir = true; break; // Secret of Lady Aeravir
                      case 6: gi.EventDisplayed = gi.EventActive = "e146"; gi.IsSecretCountDrogat = true; break; // Secret of Count Drogat
                      default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
@@ -13564,7 +13659,17 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the correct screen
                {
-                  case 1: case 2: gi.EventDisplayed = gi.EventActive = "e144"; gi.IsSecretBaronHuldra = true; break;
+                  case 1: case 2:
+                     if (true == gi.IsHuldraHeirKilled)
+                     {
+                        gi.EventDisplayed = gi.EventActive = "e144e";
+                     }
+                     else
+                     {
+                        gi.EventDisplayed = gi.EventActive = "e144";
+                        gi.IsSecretBaronHuldra = true;
+                     }
+                     break;
                   case 3: case 4: gi.EventDisplayed = gi.EventActive = "e145"; gi.IsSecretLadyAeravir = true; break;
                   case 5: case 6: gi.EventDisplayed = gi.EventActive = "e146"; gi.IsSecretCountDrogat = true; break;
                   default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;

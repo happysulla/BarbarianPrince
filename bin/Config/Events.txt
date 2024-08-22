@@ -3333,28 +3333,38 @@ You learn that the Baron of Huldra is actually a double bastard and has imprison
 <LineBreak/><LineBreak/>
 You can attempt to rescue the heir and install him as the rightful Baron at Huldra if you wish. To do this, you must travel to
  <InlineUIContainer><Button Content='1611' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
- and defeat the hill tribe. This requires that you have:<LineBreak/>
--- a magician, wizard, or priest in your party to cast a spell and :<LineBreak/>
--- magic sword <InlineUIContainer><Button Content='e186' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> to impress the tribesmen or :<LineBreak/>
--- shield of light <InlineUIContainer><Button Content='e193' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> to impress the tribesmen or :<LineBreak/>
--- charisma talisman <InlineUIContainer><Button Content='e189' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> to walk amoung them or:<LineBreak/>
--- a nerve gas bomb <InlineUIContainer><Button Content='e190' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>  to kill them.:<LineBreak/>
-<LineBreak/>
-Another choice is to simply fight through the guards to rescue the heir. You make a surprise attack in combat <InlineUIContainer><Button Content='r220' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
- Each guard has a combat skill 4 and endurance 5.  Roll three die and add one for the number of guards.  Click image to continue.
+ and defeat the hill tribe. See  <InlineUIContainer><Button Content='e144a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> for how to rescue. If you succeed, see <InlineUIContainer><Button Content='e144c' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> for next steps to dispose Baron Huldra.
+<LineBreak/><LineBreak/>
+ Click image to continue.
 <LineBreak/><LineBreak/>
                                      <InlineUIContainer><Image Source='../../Images/WarriorsHillTribe.gif' Name='EncounterEnd' Height='250' Width='200'></Image></InlineUIContainer>"
-e144a	"<Bold>e144a Escape with True Heir to Huldra Castle</Bold>
-After either using the the item or killing the guards, you can escape
+e144a	"<Bold>e144a Rescue True Heir of Huldra Castle</Bold>
+<LineBreak/><LineBreak/>You can attempt to rescue the heir and install him as the rightful Baron at Huldra if you wish. This requires that you have:
+<LineBreak/>
+<LineBreak/><InlineUIContainer><Button Content='Impress' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> with magic sword <InlineUIContainer><Button Content='e186' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> or shield of light <InlineUIContainer><Button Content='e193' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+<LineBreak/><InlineUIContainer><Button Content=' Cast  ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> a spell if you have a magician, wizard, or priest
+<LineBreak/><InlineUIContainer><Button Content=' Charm ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> with charisma talisman <InlineUIContainer><Button Content='e189' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> to walk amoung them
+<LineBreak/><InlineUIContainer><Button Content=' Kill  ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> with nerve gas bomb <InlineUIContainer><Button Content='e190' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+<LineBreak/><InlineUIContainer><Button Content=' Fight ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> guards per
+ <InlineUIContainer><Button Content='e144b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+<LineBreak/><LineBreak/> 
+If you succeed, see <InlineUIContainer><Button Content='e144c' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> for the next steps to dispose Baron Huldra. Choose button to proceed."
+e144b	"<Bold>e144b Fight Guards to Rescue Heir of Huldra Castle</Bold>
+<LineBreak/><LineBreak/>You can attempt to rescue the heir by fighting through guards using a suprise attack per <InlineUIContainer><Button Content='r220' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.  If you succeed, see <InlineUIContainer><Button Content='e144c' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> for the next steps to dispose Baron Huldra.
+<LineBreak/><LineBreak/>Each guard has a combat skill 4 and endurance 5.  Roll three die and add one for the number of guards.  Die Roll = <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='Die3Roll' Height='21' Width='21' > </Image></InlineUIContainer>.
+<LineBreak/><LineBreak/>
+                   <InlineUIContainer><Image Source='../../Images/CrossedSwords.gif' Name='HeirRescue' Height='400' Width='400'></Image></InlineUIContainer>"
+e144c	"<Bold>e144c Escape with True Heir to Huldra Castle</Bold>
+<LineBreak/><LineBreak/>After either using the an item or killing the guards, you can escape
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
- from the hill tribe
- <InlineUIContainer><Button Content='1611' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
+ from the hill tribe in
+ <InlineUIContainer><Button Content='1611' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. You escape
  with the true heir who has combat skill 5 and endurance 7.
 <LineBreak/><LineBreak/>
-Next take the heir to the Huldra castle. If you succeed in disposing the original Baron, the heir will take the throne and will return the favor by marching his army with you back to the Northlands to help you regain your throne. You win the game due to the aide of the new Baron Huldra! Click the image to continue.
+Next, take the heir to the Huldra castle.  See  <InlineUIContainer><Button Content='e144d' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> when you get there. Click the image to continue.
 <LineBreak/><LineBreak/>
-                                     <InlineUIContainer><Image Source='../../Images/WarriorBoy.gif' Name='ChagaDrug' Height='250' Width='200'></Image></InlineUIContainer>"
-e144b	"<Bold>e144b Travel with Heir to Huldra Castle</Bold>
+                                     <InlineUIContainer><Image Source='../../Images/WarriorBoy.gif' Name='HeirEscape' Height='250' Width='200'></Image></InlineUIContainer>"
+e144d	"<Bold>e144d Travel with Heir to Huldra Castle</Bold>
 <LineBreak/><LineBreak/>
 You travel with the heir. If you reach Huldra Castle, your party and the heir have two options.<LineBreak/>
 1.) You can seek an audience with the current Baron
@@ -3367,7 +3377,11 @@ You travel with the heir. If you reach Huldra Castle, your party and the heir ha
 <LineBreak/><LineBreak/>
 If you succeed in disposing the original Baron, the heir will take the throne and will return the favor by marching his army with you back to the Northlands to help you regain your throne. You win the game due to the aide of the new Baron Huldra! Click image to continue.
 <LineBreak/><LineBreak/>
-                                     <InlineUIContainer><Image Source='../../Images/BaronHuldra1.gif' Name='ChagaDrug' Height='250' Width='200'></Image></InlineUIContainer>"
+                                     <InlineUIContainer><Image Source='../../Images/BaronHuldra1.gif' Name='BaronHuldraFight' Height='250' Width='200'></Image></InlineUIContainer>"
+e144e	"<Bold>e144e Heir to Huldra Castle Killed</Bold>
+<LineBreak/><LineBreak/>You freed the Heir to Huldra Castle, but he was killed or disappeared before you could restore him to the throne. Such a sad day. Click image to continue.
+<LineBreak/><LineBreak/>
+                                       <InlineUIContainer><Image Name='Nothing' Source='../../Images/Nothing.gif' Height='200' Width='200'></Image></InlineUIContainer>"
 e145	"<Bold>e145 Secret of Lady Aeravir</Bold>
 <LineBreak/><LineBreak/>
 The Lady of Aeravir Castle is the priestess of a local temple cult that requires virginity. You discover that she is actually quite promiscuous. You can use this knowledge to your advantage if you gain an audience with her.

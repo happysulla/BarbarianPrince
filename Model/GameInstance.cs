@@ -160,6 +160,7 @@ namespace BarbarianPrince
       public int PurchasedPotionCure { set; get; } = 0;
       public int PurchasedPotionHeal { set; get; } = 0;
       public int HydraTeethCount { set; get; } = 0;
+      public bool IsHuldraHeirKilled { set; get; } = false;
       public bool IsLadyAeravirRerollActive { set; get; } = false;
       public bool IsCavalryEscort { set; get; } = false;  // e151
       public bool IsNobleAlly { set; get; } = false;  // e152
@@ -598,6 +599,12 @@ namespace BarbarianPrince
          {
             mi.Endurance = 4;
             mi.Combat = 4;
+            return;
+         }
+         if (true == mi.Name.Contains("WarriorBoy"))
+         {
+            mi.Endurance = 7;
+            mi.Combat = 5;
             return;
          }
          if (true == mi.Name.Contains("WarriorOld"))
@@ -1729,6 +1736,8 @@ namespace BarbarianPrince
                isMemberKilled = true;
                if (true == member.Name.Contains("ElfWarrior"))
                   --this.WitAndWile;
+               if (true == member.Name.Contains("WarriorBoy"))
+                  IsHuldraHeirKilled = true;
             }
             if( null != member.Rider ) // If Griffon/Harpy is killed, and it has a rider, must remove
             {
@@ -1850,6 +1859,9 @@ namespace BarbarianPrince
          //---------------------------------------------
          if (true == victim.Name.Contains("ElfWarrior"))
             --this.WitAndWile;
+         //---------------------------------------------
+         if (true == victim.Name.Contains("WarriorBoy"))
+            IsHuldraHeirKilled = true;
          //--------------------------------
          IMapItems fickleMembers = new MapItems();
          foreach (IMapItem mi in PartyMembers) // the fickle members disappear
@@ -2014,6 +2026,8 @@ namespace BarbarianPrince
          {
             if (true == mi.Name.Contains("ElfWarrior"))
                --this.WitAndWile;
+            if (true == mi.Name.Contains("WarriorBoy"))
+               IsHuldraHeirKilled = true;
             PartyMembers.Remove(mi);
          }
          return count;
@@ -2058,6 +2072,9 @@ namespace BarbarianPrince
          //--------------------------------
          if (true == mi.Name.Contains("ElfWarrior"))
             --this.WitAndWile;
+         //--------------------------------
+         if (true == mi.Name.Contains("WarriorBoy"))
+            IsHuldraHeirKilled = true;
          //--------------------------------
          PartyMembers.Remove(mi);
          //--------------------------------
@@ -2121,6 +2138,9 @@ namespace BarbarianPrince
          //--------------------------------
          if (true == mi.Name.Contains("ElfWarrior"))
             --this.WitAndWile;
+         //--------------------------------
+         if (true == mi.Name.Contains("WarriorBoy"))
+            IsHuldraHeirKilled = true;
          //--------------------------------
          PartyMembers.Remove(mi);
          //--------------------------------

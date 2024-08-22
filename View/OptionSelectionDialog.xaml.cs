@@ -755,11 +755,11 @@ namespace BarbarianPrince
             isCustomHexConfig = true;
             isFunOption = false;
          }
-         //-------------------------
-         option = options.Find("0405");
+         //-------------------------   
+         option = options.Find("1611");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-0405");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-1611");
             return false;
          }
          myRadioButtonHexMountain.IsChecked = option.IsEnabled;
@@ -1416,11 +1416,11 @@ namespace BarbarianPrince
          else
             Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 0406");
          myRadioButtonHexMountain.IsChecked = false;
-         option = myOptions.Find("0405");
+         option = myOptions.Find("1611"); 
          if (null != option)
             option.IsEnabled = false;
          else
-            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 0405");
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 1611");
          myRadioButtonHexSwamp.IsChecked = false;
          option = myOptions.Find("0411");
          if (null != option)
@@ -1606,7 +1606,7 @@ namespace BarbarianPrince
             case 13: option = myOptions.Find("0722"); break;
             case 14: option = myOptions.Find("0409"); break;
             case 15: option = myOptions.Find("0406"); break;
-            case 16: option = myOptions.Find("0405"); break;
+            case 16: option = myOptions.Find("1611"); break;
             case 17: option = myOptions.Find("0411"); break;
             case 18: option = myOptions.Find("0407"); break;
             case 19: option = myOptions.Find("1905"); break;
@@ -2023,7 +2023,7 @@ namespace BarbarianPrince
             case "myRadioButtonHexCountryside": option = myOptions.Find("0722"); break;
             case "myRadioButtonHexForest": option = myOptions.Find("0409"); break;
             case "myRadioButtonHexHill": option = myOptions.Find("0406"); break;
-            case "myRadioButtonHexMountain": option = myOptions.Find("0405"); break;
+            case "myRadioButtonHexMountain": option = myOptions.Find("1611"); break;
             case "myRadioButtonHexSwamp": option = myOptions.Find("0411"); break;
             case "myRadioButtonHexDesert": option = myOptions.Find("0407"); break;
             case "myRadioButtonHexRoad": option = myOptions.Find("1905"); break;

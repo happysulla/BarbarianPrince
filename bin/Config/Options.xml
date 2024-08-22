@@ -127,7 +127,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="1923">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="0418">
     <IsEnabled value="False" />
@@ -141,8 +141,8 @@
   <Option value="0406">
     <IsEnabled value="False" />
   </Option>
-  <Option value="0405">
-    <IsEnabled value="False" />
+  <Option value="1611">
+    <IsEnabled value="True" />
   </Option>
   <Option value="0411">
     <IsEnabled value="False" />
@@ -181,7 +181,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="ForceNoLostEvent">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ForceNoEvent">
     <IsEnabled value="False" />
@@ -205,7 +205,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="ForceEvent">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ForceCrossEvent">
     <IsEnabled value="False" />
