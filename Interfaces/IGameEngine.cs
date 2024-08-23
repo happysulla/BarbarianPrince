@@ -355,6 +355,7 @@ namespace BarbarianPrince
       E144RescueCharm,
       E144RescueKill,
       E144RescueFight,
+      E144SneakAttack,
       E146CountAudienceReroll,
       E146StealGems,
       E147ClueToTreasure,

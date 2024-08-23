@@ -222,6 +222,7 @@ namespace BarbarianPrince
          myCheckBoxMinstrel.IsEnabled = false;
          myCheckBoxMonk.IsEnabled = false;
          myCheckBoxPorterSlave.IsEnabled = false;
+         myCheckBoxPriest.IsEnabled = false;
          myCheckBoxTrueLove.IsEnabled = false;
          myCheckBoxWizard.IsEnabled = false;
          option = options.Find("RandomParty10");
@@ -315,6 +316,7 @@ namespace BarbarianPrince
                            myCheckBoxMinstrel.IsEnabled = true;
                            myCheckBoxMonk.IsEnabled = true;
                            myCheckBoxPorterSlave.IsEnabled = true;
+                           myCheckBoxPriest.IsEnabled = true;
                            myCheckBoxTrueLove.IsEnabled = true;
                            myCheckBoxWizard.IsEnabled = true;
                            //-------------------------
@@ -480,6 +482,19 @@ namespace BarbarianPrince
                               return false;
                            }
                            myCheckBoxPorterSlave.IsChecked = option.IsEnabled;
+                           if (true == option.IsEnabled)
+                           {
+                              isCustomPartyConfig = true;
+                              isFunOption = false;
+                           }
+                           //-------------------------
+                           option = options.Find("Priest");
+                           if (null == option)
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-Priest");
+                              return false;
+                           }
+                           myCheckBoxPriest.IsChecked = option.IsEnabled;
                            if (true == option.IsEnabled)
                            {
                               isCustomPartyConfig = true;
@@ -1291,6 +1306,11 @@ namespace BarbarianPrince
             option.IsEnabled = false;
          else
             Logger.Log(LogEnum.LE_ERROR, "ResetPartyMembers(): not found PorterSlave");
+         option = myOptions.Find("Priest");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetPartyMembers(): not found Priest");
          option = myOptions.Find("TrueLove");
          if (null != option)
             option.IsEnabled = false;
@@ -1949,6 +1969,7 @@ namespace BarbarianPrince
             case "myCheckBoxMinstrel": option = myOptions.Find("Minstrel"); break;
             case "myCheckBoxMonk": option = myOptions.Find("Monk"); break;
             case "myCheckBoxPorterSlave": option = myOptions.Find("PorterSlave"); break;
+            case "myCheckBoxPriest": option = myOptions.Find("Priest"); break;
             case "myCheckBoxTrueLove": option = myOptions.Find("TrueLove"); break;
             case "myCheckBoxWizard": option = myOptions.Find("Wizard"); break;
             default: Logger.Log(LogEnum.LE_ERROR, "StackPanelPartyMember_Click(): reached default name=" + cb.Name); return;

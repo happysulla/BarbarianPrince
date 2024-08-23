@@ -1126,11 +1126,32 @@ namespace BarbarianPrince
                }
                break;
             case "e130":
-               if (Utilities.NO_RESULT == myGameInstance.DieResults[key][1])
+               if (("Talk " == content) || ("Evade" == content) || ("Fight" == content))
                {
-                  if (("Talk " == content) || ("Evade" == content) || ("Fight" == content))
-                     b.IsEnabled = false;
+                  b.IsEnabled = false;
                   return;
+               }
+               break;
+            case "e144a": // Rescue True Heir of Huldra Castle
+               if ( (false == gi.IsSpecialItemHeld(SpecialEnum.MagicSword)) && (false == gi.IsSpecialItemHeld(SpecialEnum.ShieldOfLight)) )
+               {
+                  if ("Impress" == content)
+                     b.IsEnabled = false;
+               }
+               if ((false == gi.IsInMapItems("Magician")) && (false == gi.IsInMapItems("Priest")) && (false == gi.IsInMapItems("Wizard")))
+               {
+                  if (" Cast  " == content)
+                     b.IsEnabled = false;
+               }
+               if (false == gi.IsSpecialItemHeld(SpecialEnum.CharismaTalisman))
+               {
+                  if (" Charm " == content)
+                     b.IsEnabled = false;
+               }
+               if (false == gi.IsSpecialItemHeld(SpecialEnum.NerveGasBomb))
+               {
+                  if (" Kill  " == content)
+                     b.IsEnabled = false;
                }
                break;
             case "e163a": // Merchant Selling Slaves
@@ -4946,6 +4967,13 @@ namespace BarbarianPrince
                               action = GameAction.E079HeavyRains;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
+                           case "HeirRescue":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e144b"][0])
+                              {
+                                 action = GameAction.EncounterStart;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              break;
                            case "HiddenRuins":
                               action = GameAction.E064HiddenRuins;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
@@ -5038,6 +5066,14 @@ namespace BarbarianPrince
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
                            case "HostileGuardsDeny":
+                              action = GameAction.EncounterStart;
+                              myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              return;
+                           case "HuldraGuardFight":
+                              action = GameAction.EncounterStart;
+                              myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              return;
+                           case "HuldraFight":
                               action = GameAction.EncounterStart;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;

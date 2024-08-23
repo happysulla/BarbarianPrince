@@ -104,7 +104,8 @@ namespace BarbarianPrince
       int PurchasedPotionHeal { set; get; } // e128 - purchased potion healing
       int HydraTeethCount { set; get; }   //e141
       int ChagaDrugCount { set; get; }    // e143 Chaga Drug purchased in town - 2gp per serving
-      bool IsHuldraHeirKilled { set; get; }
+      bool IsHuldraHeirFight { set; get; } // e144b
+      bool IsHuldraHeirKilled { set; get; } // e144e
       bool IsLadyAeravirRerollActive { set; get; } // e145 Event=e160 and reroll is active
       int FoulBaneCount { set; get; }    // e146 FoulBane purchased in Duffyd Temple - 1gp per serving
       bool IsFoulBaneUsedThisTurn { set; get; } // e146 - FoulBane used to roll again

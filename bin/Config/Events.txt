@@ -2995,7 +2995,7 @@ e128c	"<Bold>e128c Merchant with Food for Sale</Bold>
 <LineBreak/><LineBreak/>
                                           <InlineUIContainer><Image Source='../../Images/Merchant.gif' Name='EncounterEnd' Height='200'  Width='125'></Image></InlineUIContainer>"
 e128d	"<Bold>e128d Merchant Game of Chance</Bold>
-<LineBreak/><LineBreak/>If the roll exceeds wit and wiles, you spend up to 10gp needlessly. 'Have you ever heard of Plato, Aristotle, Socrates? Morons!'
+<LineBreak/><LineBreak/>If the roll exceeds wit and wiles, you spend up to 10gp needlessly. ""Have you ever heard of Plato, Aristotle, Socrates? Morons!""
 <LineBreak/><LineBreak/> Roll one die:  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e128e	"<Bold>e128e Merchant Selling Healing Potion Sale</Bold>
 <LineBreak/><LineBreak/>Merchant has healing potions for sale. See
@@ -3351,7 +3351,8 @@ e144a	"<Bold>e144a Rescue True Heir of Huldra Castle</Bold>
 If you succeed, see <InlineUIContainer><Button Content='e144c' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> for the next steps to dispose Baron Huldra. Choose button to proceed."
 e144b	"<Bold>e144b Fight Guards to Rescue Heir of Huldra Castle</Bold>
 <LineBreak/><LineBreak/>You can attempt to rescue the heir by fighting through guards using a suprise attack per <InlineUIContainer><Button Content='r220' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.  If you succeed, see <InlineUIContainer><Button Content='e144c' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> for the next steps to dispose Baron Huldra.
-<LineBreak/><LineBreak/>Each guard has a combat skill 4 and endurance 5.  Roll three die and add one for the number of guards.  Die Roll = <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='Die3Roll' Height='21' Width='21' > </Image></InlineUIContainer>.
+<LineBreak/><LineBreak/>Each guard has a combat skill 4 and endurance 5.  Roll three die and add one for the number of guards.  
+Die Roll=<InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='Die3Roll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
                    <InlineUIContainer><Image Source='../../Images/CrossedSwords.gif' Name='HeirRescue' Height='400' Width='400'></Image></InlineUIContainer>"
 e144c	"<Bold>e144c Escape with True Heir to Huldra Castle</Bold>
@@ -3363,7 +3364,7 @@ e144c	"<Bold>e144c Escape with True Heir to Huldra Castle</Bold>
 <LineBreak/><LineBreak/>
 Next, take the heir to the Huldra castle.  See  <InlineUIContainer><Button Content='e144d' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> when you get there. Click the image to continue.
 <LineBreak/><LineBreak/>
-                                     <InlineUIContainer><Image Source='../../Images/WarriorBoy.gif' Name='HeirEscape' Height='250' Width='200'></Image></InlineUIContainer>"
+                                     <InlineUIContainer><Image Source='../../Images/WarriorBoy.gif' Name='EncounterEnd' Height='250' Width='200'></Image></InlineUIContainer>"
 e144d	"<Bold>e144d Travel with Heir to Huldra Castle</Bold>
 <LineBreak/><LineBreak/>
 You travel with the heir. If you reach Huldra Castle, your party and the heir have two options.<LineBreak/>
@@ -3377,11 +3378,37 @@ You travel with the heir. If you reach Huldra Castle, your party and the heir ha
 <LineBreak/><LineBreak/>
 If you succeed in disposing the original Baron, the heir will take the throne and will return the favor by marching his army with you back to the Northlands to help you regain your throne. You win the game due to the aide of the new Baron Huldra! Click image to continue.
 <LineBreak/><LineBreak/>
-                                     <InlineUIContainer><Image Source='../../Images/BaronHuldra1.gif' Name='BaronHuldraFight' Height='250' Width='200'></Image></InlineUIContainer>"
+                                <InlineUIContainer><Image Source='../../Images/BaronHuldra1.gif' Height='250' Width='200'></Image></InlineUIContainer>"
 e144e	"<Bold>e144e Heir to Huldra Castle Killed</Bold>
 <LineBreak/><LineBreak/>You freed the Heir to Huldra Castle, but he was killed or disappeared before you could restore him to the throne. Such a sad day. Click image to continue.
 <LineBreak/><LineBreak/>
-                                       <InlineUIContainer><Image Name='Nothing' Source='../../Images/Nothing.gif' Height='200' Width='200'></Image></InlineUIContainer>"
+                                  <InlineUIContainer><Image Name='BaronHuldra1' Source='../../Images/Nothing.gif' Height='200' Width='200'></Image></InlineUIContainer>"
+e144f	"<Bold>e144f Baron Hauldra Exposed as a Fraud</Bold>
+<LineBreak/><LineBreak/>
+After seeking an audience with Baron Hauldra with the true heir in tow, you attempt to expose Baron Hauldra as a fraud. If you roll a 10 plus, you can reveal the true heir at the audience and despose the current Baron instantly. 
+Die Roll= <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21' > </Image></InlineUIContainer>
+<LineBreak/><LineBreak/>
+                                <InlineUIContainer><Image Source='../../Images/BaronHuldra1.gif' Name='HuldraExposeAttempt' Height='250' Width='200'></Image></InlineUIContainer>"
+e144g	"<Bold>e144g Baron Hauldra Banished You</Bold>
+<LineBreak/><LineBreak/>
+After seeking an audience with Baron Hauldra with the true heir in tow, you attempted but failed to expose Baron Hauldra as a fraud. You are banished from the castle and may no longer seek an audience with the Baron Huldra.
+<LineBreak/><LineBreak/>
+                                <InlineUIContainer><Image Source='../../Images/BaronHuldra1.gif' Name='HuldraExposeFails' Height='250' Width='200'></Image></InlineUIContainer>"
+e144h	"<Bold>e144h Baron Hauldra Exposed as Fraud</Bold>
+<LineBreak/><LineBreak/>
+After seeking an audience with Baron Hauldra with the true heir in tow, you attempted and succeeded to expose Baron Hauldra as a fraud. The heir takes the throne and returns the favor by marching his army with you back to the Northlands to help you regain your throne. You win the game due to the aide of the new Baron Huldra! Click image to continue.
+<LineBreak/><LineBreak/>
+                             <InlineUIContainer><Image Name='AllyNoble' Source='../../Images/AllyNoble.gif' Height='200' Width='300'></Image></InlineUIContainer>"
+e144i	"<Bold>e144i Baron Hauldra Sneak Attack</Bold>
+<LineBreak/><LineBreak/>
+You can make a sneak attack on the Baron at night suprising his traditional six bodyguards <InlineUIContainer> <Button Content='r220' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. Each has combat skill 6 and endurance 6. Once you kill the bodyguards, you can attack the Baron who has combat skill 6 and endurance 8. The Baron strikes first in combat. Click image to continue.
+<LineBreak/><LineBreak/>
+                           <InlineUIContainer><Image Source='../../Images/BodyGuard.gif' Name='HuldraGuardFight' Height='350' Width='350'></Image></InlineUIContainer>"
+e144j	"<Bold>e144i Baron Hauldra Sneak Attack</Bold>
+<LineBreak/><LineBreak/>
+Once you have killed all the Baron Huldra's bodyguards, you now come face-to-face with Huldra and must kill him to restore the heir to the throne. Click image to continue.
+<LineBreak/><LineBreak/>
+                      <InlineUIContainer><Image Source='../../Images/BaronHuldra1.gif' Name='HuldraFight' Height='350' Width='350'></Image></InlineUIContainer>"
 e145	"<Bold>e145 Secret of Lady Aeravir</Bold>
 <LineBreak/><LineBreak/>
 The Lady of Aeravir Castle is the priestess of a local temple cult that requires virginity. You discover that she is actually quite promiscuous. You can use this knowledge to your advantage if you gain an audience with her.
@@ -4860,7 +4887,7 @@ e342a	"<Bold>e342a More Talking</Bold> <InlineUIContainer><Button Content='e341'
 <LineBreak/><LineBreak/>
 Characters reveal themself gradually. More talking is required to review their true nature.
 <LineBreak/><LineBreak/>
-<InlineUIContainer><Button Content='Talk ' FontFamily='Courier New'  FontSize='12' Name='e341'></Button></InlineUIContainer> further or<LineBreak/>
+<InlineUIContainer><Button Content='Talk ' FontFamily='Courier New'  FontSize='12' Name=""e341""></Button></InlineUIContainer> further or<LineBreak/>
 <InlineUIContainer><Button Content='Pass ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>  with dignity."
 e343	"<Bold>e343 Victim Selection</Bold>
 <LineBreak/><LineBreak/>One character in your party is the victim or target of an attack. If your party is just you, then you are the target.

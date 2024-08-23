@@ -22,13 +22,13 @@
     <IsEnabled value="True" />
   </Option>
   <Option value="StartWithNecklass">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="RandomParty10">
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomParty08">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="RandomParty05">
     <IsEnabled value="False" />
@@ -40,13 +40,13 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="PartyCustom">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="Dwarf">
     <IsEnabled value="False" />
   </Option>
   <Option value="Eagle">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="Elf">
     <IsEnabled value="False" />
@@ -64,7 +64,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="Mercenary">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="Merchant">
     <IsEnabled value="False" />
@@ -73,9 +73,12 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="Monk">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="PorterSlave">
+    <IsEnabled value="False" />
+  </Option>
+  <Option value="Priest">
     <IsEnabled value="False" />
   </Option>
   <Option value="TrueLove">
@@ -121,7 +124,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="1212">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="0323">
     <IsEnabled value="False" />
@@ -142,7 +145,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="1611">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="0411">
     <IsEnabled value="False" />

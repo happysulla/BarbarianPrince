@@ -1116,6 +1116,8 @@ namespace BarbarianPrince
             case "Golem": character = new MapItem(miName, 1.0, false, false, false, "c27Golem", "c27Golem", princeTerritory, 8, 6, 0); break;
             case "Griffon": character = new MapItem(miName, 1.0, false, false, false, "c63Griffon", "c63Griffon", princeTerritory, 6, 7, 12); break;
             case "Guard": character = new MapItem(miName, 1.0, false, false, false, "c66Guard", "c66Guard", princeTerritory, 5, 6, 4); break;
+            case "GuardBody": character = new MapItem(miName, 1.0, false, false, false, "c87BodyGuard", "c87BodyGuard", princeTerritory, 6, 6, 0); break;
+            case "GuardHeir": character = new MapItem(miName, 1.0, false, false, false, "c66Guard", "c66Guard", princeTerritory, 5, 4, 0); break;
             case "GuardHostile": character = new MapItem(miName, 1.0, false, false, false, "c50GuardHostile", "c50GuardHostile", princeTerritory, 6, 5, 7); break;
             case "Guardian": character = new MapItem(miName, 1.0, false, false, false, "c28Guardian", "c28Guardian", princeTerritory, 7, 7, 0); break;
             case "Guide": character = new MapItem(miName, 1.0, false, false, false, "c48Guide", "c48Guide", princeTerritory, 3, 2, 0); break;
@@ -1124,6 +1126,7 @@ namespace BarbarianPrince
             case "Hawkman": character = new MapItem(miName, 1.0, false, false, false, "c81Hawkman", "c81Hawkman", princeTerritory, 5, 7, 7); break;
             case "Hobgoblin": character = new MapItem(miName, 1.0, false, false, false, "c23Hobgoblin", "c23Hobgoblin", princeTerritory, 5, 6, 5); break;
             case "Henchman": character = new MapItem(miName, 1.0, false, false, false, "c49Henchman", "c49Henchman", princeTerritory, 3, 2, 0); break;
+            case "Huldra": character = new MapItem(miName, 1.0, false, false, false, "c89Huldra", "c89Huldra", princeTerritory, 8, 6, 0); break;
             case "Knight": character = new MapItem(miName, 1.0, false, false, false, "c52Knight", "c52Knight", princeTerritory, 6, 7, 0); break;
             case "KnightBlack": character = new MapItem(miName, 1.0, false, false, false, "c80BlackKnight", "c80BlackKnight", princeTerritory, 8, 8, 0); break;
             case "Lancer": character = new MapItem(miName, 1.0, false, false, false, "c47Lancer", "c47Lancer", princeTerritory, 5, 5, 0); break;
@@ -1869,6 +1872,16 @@ namespace BarbarianPrince
                   gi.AddCompanion(member);
                }
                break;
+            case "Priest":
+               {
+                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
+                  ++Utilities.MapItemNum;
+                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c14Priest", "c14Priest", gi.Prince.Territory, 3, 3, 0);
+                  member.Food = Utilities.RandomGenerator.Next(5);
+                  member.Coin = Utilities.RandomGenerator.Next(20);
+                  gi.AddCompanion(member);
+               }
+               break;
             case "TrueLove":
                {
                   IMapItem trueLove = CreateCharacter(gi, "TrueLovePriestDaughter", 0); 
@@ -2185,7 +2198,7 @@ namespace BarbarianPrince
          //---------------------
          //gi.AddSpecialItem(SpecialEnum.GiftOfCharm);
          //gi.AddSpecialItem(SpecialEnum.ResistanceTalisman);
-         gi.AddSpecialItem(SpecialEnum.CharismaTalisman);
+         //gi.AddSpecialItem(SpecialEnum.CharismaTalisman);
          //gi.AddSpecialItem(SpecialEnum.DragonEye);
          //gi.AddSpecialItem(SpecialEnum.RocBeak);
          //gi.AddSpecialItem(SpecialEnum.GriffonClaws);
@@ -2194,13 +2207,13 @@ namespace BarbarianPrince
          //gi.AddSpecialItem(SpecialEnum.CurePoisonVial);
          //gi.AddSpecialItem(SpecialEnum.EnduranceSash);
          //gi.AddSpecialItem(SpecialEnum.PoisonDrug);
-         gi.AddSpecialItem(SpecialEnum.MagicSword);
+         //gi.AddSpecialItem(SpecialEnum.MagicSword);
          //gi.AddSpecialItem(SpecialEnum.AntiPoisonAmulet);
          //gi.AddSpecialItem(SpecialEnum.PegasusMountTalisman);
          //gi.AddSpecialItem(SpecialEnum.NerveGasBomb);
          //gi.AddSpecialItem(SpecialEnum.ResistanceRing);
          //gi.AddSpecialItem(SpecialEnum.ResurrectionNecklace);
-         gi.AddSpecialItem(SpecialEnum.ShieldOfLight);
+         //gi.AddSpecialItem(SpecialEnum.ShieldOfLight);
          //gi.AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
          //gi.Prince.AddSpecialItemToShare(SpecialEnum.HydraTeeth);
          //gi.HydraTeethCount = 5;
@@ -2278,7 +2291,9 @@ namespace BarbarianPrince
          //gi.IsSecretCountDrogat = true; // e146
          //gi.FoulBaneCount = 2;
          //gi.IsSecretLadyAeravir = true; // e145
-         gi.IsSecretBaronHuldra = true; // e144
+         //gi.IsSecretBaronHuldra = true; // e144
+         IMapItem trueHeir = CreateCharacter(gi, "WarriorBoy", 0);
+         gi.AddCompanion(trueHeir);
          //---------------------
          //foreach (IMapItem mi in gi.PartyMembers)
          //   mi.AddSpecialItemToKeep(SpecialEnum.ResurrectionNecklace);
@@ -2373,6 +2388,13 @@ namespace BarbarianPrince
                ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
                gi.EventDisplayed = gi.EventActive = "e144a"; // next screen to show
+               gi.SunriseChoice = gi.GamePhase = GamePhase.Encounter;
+               gi.DieRollAction = GameAction.DieRollActionNone;
+               break;
+            case GameAction.E144SneakAttack:
+               ResetDayForNonTravelChoice(gi, action);
+               gi.NumMembersBeingFollowed = 0;
+               gi.EventDisplayed = gi.EventActive = "e144i"; // next screen to show
                gi.SunriseChoice = gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.DieRollActionNone;
                break;
@@ -6206,11 +6228,6 @@ namespace BarbarianPrince
                   }
                   IMapItem trueHeir = CreateCharacter(gi, "WarriorBoy", 0);
                   gi.AddCompanion(trueHeir);
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     returnStatus = "EncounterEnd() returned false for a=" + action.ToString();
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                  }
                   break;
                case GameAction.E144RescueCharm:
                   gi.EventDisplayed = gi.EventActive = "e144c";
@@ -6223,11 +6240,6 @@ namespace BarbarianPrince
                   IMapItem trueHeir1 = CreateCharacter(gi, "WarriorBoy", 0);
                   gi.AddCompanion(trueHeir1);
                   gi.IsCharismaTalismanActive = true;
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     returnStatus = "EncounterEnd() returned false for a=" + action.ToString();
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                  }
                   break;
                case GameAction.E144RescueKill:
                   gi.EventStart = gi.EventDisplayed = gi.EventActive = "e144c";
@@ -6240,15 +6252,10 @@ namespace BarbarianPrince
                   IMapItem trueHeir2 = CreateCharacter(gi, "WarriorBoy", 0);
                   gi.AddCompanion(trueHeir2);
                   gi.RemoveSpecialItem(SpecialEnum.NerveGasBomb);
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     returnStatus = "EncounterEnd() returned false for a=" + action.ToString();
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                  }
                   break;
                case GameAction.E144RescueFight:
                   gi.EventStart = gi.EventDisplayed = gi.EventActive = "e144b";
-                  gi.DieRollAction = GameAction.EncounterRoll;
+                  gi.DieRollAction = GameAction.EncounterStart;
                   action = GameAction.EncounterStart;
                   break;
                case GameAction.E146CountAudienceReroll:
@@ -8673,6 +8680,40 @@ namespace BarbarianPrince
                   gi.DieRollAction = GameAction.EncounterRoll;
                }
                break;
+            case "e144b": // Hill Tribe Fight
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
+               {
+                  gi.EncounteredMembers.Clear();
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EventDisplayed = gi.EventActive = "e300"; // surprise attack
+                  int hillTribeGuardNum = gi.DieResults[key][0] + 1; // roll three die and add 1
+                  for (int i = 0; i < hillTribeGuardNum; ++i)
+                  {
+                     IMapItem guard = CreateCharacter(gi, "GuardHeir", 0);
+                     gi.EncounteredMembers.Add(guard);
+                  }
+                  gi.DieRollAction = GameAction.DieRollActionNone;
+               }
+               break;
+            case "e144i": // Huldra Bodyguard Fight
+               gi.EventDisplayed = gi.EventActive = "e300"; // surprise attack
+               gi.EncounteredMembers.Clear();
+               for (int i = 0; i < 6; ++i)
+               {
+                  IMapItem guard = CreateCharacter(gi, "GuardBody", 0);
+                  gi.EncounteredMembers.Add(guard);
+               }
+               gi.DieRollAction = GameAction.DieRollActionNone;
+               break;
+            case "e144j": // Huldra Fight
+               gi.EventDisplayed = gi.EventActive = "e307"; // surprise attack
+               gi.EncounteredMembers.Clear();
+               IMapItem huldra = CreateCharacter(gi, "Huldra", 0); // Now need to fight Huldra
+               gi.EncounteredMembers.Add(huldra);
+               break;
             case "e158": // hostile guards
                gi.EncounteredMembers.Clear();
                IMapItem guardHostile1 = CreateCharacter(gi, "GuardHostile", 7);
@@ -9122,6 +9163,29 @@ namespace BarbarianPrince
                gi.CapturedWealthCodes.Add(100);
                gi.CapturedWealthCodes.Add(100);
                break;
+            case "e144b": // defeated Hill Tribe
+               gi.EventDisplayed = gi.EventActive = "e144c";
+               gi.DieRollAction = GameAction.DieRollActionNone;
+               gi.IsSecretBaronHuldra = false;
+               IMapItem trueHeir = CreateCharacter(gi, "WarriorBoy", 0);
+               gi.AddCompanion(trueHeir);
+               if (false == EncounterEscape(gi, ref action)) // move to random hex
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): EncounterEscape() returned false ae = " + action.ToString());
+                  return false;
+               }
+               action = GameAction.UpdateEventViewerActive;
+               return true; //<<<<<<<<<<<<<<<<<<<<<
+            case "e144i": // defeated Huldra Body Guards
+               action = GameAction.UpdateEventViewerActive;
+               gi.EventDisplayed = gi.EventActive = "e144j";
+               gi.DieRollAction = GameAction.DieRollActionNone;
+               return true; //<<<<<<<<<<<<<<<<<<<<<
+            case "e144j": // defeated Huldra
+               action = GameAction.EndGameWin;
+               gi.GamePhase = GamePhase.EndGame;
+               gi.EndGameReason = "Restored Huldra's Heir to the Throne.";
+               return true; //<<<<<<<<<<<<<<<<<<<<<
             case "e154e": // lords daughter
                gi.CapturedWealthCodes.Add(100);
                gi.CapturedWealthCodes.Add(100);

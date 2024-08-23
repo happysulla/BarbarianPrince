@@ -69,6 +69,7 @@
                     <CheckBox x:Name="myCheckBoxMinstrel" Content="Minstrel" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
                     <CheckBox x:Name="myCheckBoxMonk" Content="Monk" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
                     <CheckBox x:Name="myCheckBoxPorterSlave" Content="PorterSlave" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
+                    <CheckBox x:Name="myCheckBoxPriest" Content="Priest" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
                     <CheckBox x:Name="myCheckBoxTrueLove" Content="TrueLove" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
                     <CheckBox x:Name="myCheckBoxWizard" Content="Wizard" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
                <Separator/>
