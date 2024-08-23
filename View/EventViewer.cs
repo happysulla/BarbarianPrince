@@ -3100,6 +3100,7 @@ namespace BarbarianPrince
             case "e211d": // Seeking audience with Baron of Count Drogat
             case "e211e": // Seeking audience with Lady Aeravir
             case "e211f": // Seeking audience with Dwarven King
+            case "e211g": // Seeking audence with Baron of Huldra Castle with Real Heir in Party
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
                   Image imgE211 = null;
@@ -3111,6 +3112,12 @@ namespace BarbarianPrince
                      myTextBlock.Inlines.Add(new LineBreak());
                      myTextBlock.Inlines.Add(new Run("                                            "));
                      myTextBlock.Inlines.Add(new InlineUIContainer(imgE211));
+                  }
+                  else if ("e211g" == key)
+                  {
+                     myTextBlock.Inlines.Add(new LineBreak());
+                     myTextBlock.Inlines.Add(new LineBreak());
+                     myTextBlock.Inlines.Add(new Run("Click image to continue."));
                   }
                   else
                   {
@@ -5069,6 +5076,13 @@ namespace BarbarianPrince
                               action = GameAction.EncounterStart;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
+                           case "HuldraAudience":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e211g"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              break;
                            case "HuldraGuardFight":
                               action = GameAction.EncounterStart;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);

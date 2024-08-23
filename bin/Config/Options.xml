@@ -28,7 +28,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="RandomParty08">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="RandomParty05">
     <IsEnabled value="False" />
@@ -40,7 +40,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="PartyCustom">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Dwarf">
     <IsEnabled value="False" />
@@ -64,7 +64,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="Mercenary">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="Merchant">
     <IsEnabled value="False" />
@@ -166,7 +166,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="EasiestMonsters">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="AutoLostDecrease">
     <IsEnabled value="True" />

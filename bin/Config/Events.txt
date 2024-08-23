@@ -2995,7 +2995,7 @@ e128c	"<Bold>e128c Merchant with Food for Sale</Bold>
 <LineBreak/><LineBreak/>
                                           <InlineUIContainer><Image Source='../../Images/Merchant.gif' Name='EncounterEnd' Height='200'  Width='125'></Image></InlineUIContainer>"
 e128d	"<Bold>e128d Merchant Game of Chance</Bold>
-<LineBreak/><LineBreak/>If the roll exceeds wit and wiles, you spend up to 10gp needlessly. ""Have you ever heard of Plato, Aristotle, Socrates? Morons!""
+<LineBreak/><LineBreak/>If the roll exceeds wit and wiles, you spend up to 10gp needlessly. 'Have you ever heard of Plato, Aristotle, Socrates? Morons!'
 <LineBreak/><LineBreak/> Roll one die:  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e128e	"<Bold>e128e Merchant Selling Healing Potion Sale</Bold>
 <LineBreak/><LineBreak/>Merchant has healing potions for sale. See
@@ -4261,7 +4261,7 @@ e211c	"<Bold>e211c Seeking an Audience with the Baron of Huldra Castle</Bold>
 <LineBreak/><LineBreak/>As a daily action, you spend the day trying to gain admission to see the Baron Huldra. Roll two die and consult the list below for results: 
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21'> </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
-           2 Audience permantently refused. You cannot try again<LineBreak/>
+           2 Audience permanently refused. You cannot try again<LineBreak/>
   <InlineUIContainer><Button Content='e154' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 3 Meet Baron's Daughter<LineBreak/>
   <InlineUIContainer><Button Content='e149' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 4 Must learn court manners<LineBreak/>
   <InlineUIContainer><Button Content='e158' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 5 Confonted by hostile guards<LineBreak/>
@@ -4314,6 +4314,14 @@ e211f	"<Bold>e211f Seeking an Audience with the Dwarven King</Bold>
   <InlineUIContainer><Button Content='e150' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 10,11 Pay your respects to the King<LineBreak/>
   <InlineUIContainer><Button Content='e151' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 12 Find favor in the eyes of the King<LineBreak/>
   <InlineUIContainer><Button Content='e152' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 13 plus - King becomes your Noble ally<LineBreak/>"
+e211g	"<Bold>e211g Seeking an Audience with Real Heir in Party</Bold>
+<LineBreak/><LineBreak/>As a daily action, you spend the day trying to gain admission to see the Baron Huldra. You have the real Huldra's heir in your party, and you want to restore him to the throne.  Choose one option:
+<LineBreak/><LineBreak/>
+<InlineUIContainer><Button Content='Continue' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> to seek normal audience per <InlineUIContainer><Button Content='e211c' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer>.
+<LineBreak/><LineBreak/>Alternatively, you can despose Baron Huldra if 10 plus rolled. Die Roll=
+<InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21'> </Image></InlineUIContainer>
+<LineBreak/><LineBreak/>
+                                     <InlineUIContainer><Image Name='HuldraAudience' Source='../../Images/BaronHuldra1.gif' Height='250' Width='200'></Image></InlineUIContainer>"
 e212	"<Bold>e212 Make an Offering at a Temple</Bold>
 <LineBreak/><LineBreak/>
 You spend the day preparing, waiting in line, and finally giving an offering at the temple alter.  You spent one gold piece for proper herbs and sacrifice.  Roll two die and consult the list below for results: 
@@ -4887,7 +4895,7 @@ e342a	"<Bold>e342a More Talking</Bold> <InlineUIContainer><Button Content='e341'
 <LineBreak/><LineBreak/>
 Characters reveal themself gradually. More talking is required to review their true nature.
 <LineBreak/><LineBreak/>
-<InlineUIContainer><Button Content='Talk ' FontFamily='Courier New'  FontSize='12' Name=""e341""></Button></InlineUIContainer> further or<LineBreak/>
+<InlineUIContainer><Button Content='Talk ' FontFamily='Courier New'  FontSize='12' Name='e341'></Button></InlineUIContainer> further or<LineBreak/>
 <InlineUIContainer><Button Content='Pass ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>  with dignity."
 e343	"<Bold>e343 Victim Selection</Bold>
 <LineBreak/><LineBreak/>One character in your party is the victim or target of an attack. If your party is just you, then you are the target.

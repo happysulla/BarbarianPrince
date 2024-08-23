@@ -2510,15 +2510,28 @@ namespace BarbarianPrince
                else if (true == gi.IsInCastle(princeTerritory))
                {
                   if ("1212" == princeTerritory.Name)
-                     gi.EventStart = gi.EventDisplayed = gi.EventActive = "e211c";
+                  {
+                     if( true == gi.IsInMapItems("WarriorBoy"))
+                        gi.EventStart = gi.EventDisplayed = gi.EventActive = "e211g";
+                     else
+                        gi.EventStart = gi.EventDisplayed = gi.EventActive = "e211c";
+                  }
                   else if ("0323" == princeTerritory.Name)
+                  {
                      gi.EventStart = gi.EventDisplayed = gi.EventActive = "e211d";
+                  }
                   else if ("1923" == princeTerritory.Name)
+                  {
                      gi.EventStart = gi.EventDisplayed = gi.EventActive = "e211e";
+                  }
                   else if (true == gi.DwarvenMines.Contains(princeTerritory))
+                  {
                      gi.EventStart = gi.EventDisplayed = gi.EventActive = "e211f";
+                  }
                   else
+                  {
                      gi.EventDisplayed = gi.EventActive = "e211b"; // treat audience in other castles as temple audience
+                  }
                }
                else
                {
@@ -13624,6 +13637,60 @@ namespace BarbarianPrince
                         break;
                      case 12: gi.EventDisplayed = gi.EventActive = "e151"; gi.DieRollAction = GameAction.EncounterRoll; break;                     // find favor
                      default: gi.EventDisplayed = gi.EventActive = "e152"; gi.IsNobleAlly = true; break;                    // ally                       
+                  }
+               }
+               else
+               {
+                  List<ITerritory> letters = new List<ITerritory>();
+                  foreach (ITerritory t in gi.LetterOfRecommendations)
+                  {
+                     if (t.Name == princeTerritory.Name)
+                        letters.Add(t);
+                  }
+                  dieRoll += (letters.Count * 2);
+                  foreach (ITerritory t in letters)
+                     gi.LetterOfRecommendations.Remove(t);
+                  gi.ForbiddenAudiences.RemoveLetterConstraints(princeTerritory);
+                  //--------------------------------
+                  dieRoll += gi.DaughterRollModifier;
+                  gi.DaughterRollModifier = 0;
+                  //--------------------------------
+                  dieRoll += gi.SeneschalRollModifier;
+                  gi.SeneschalRollModifier = 0;
+                  //--------------------------------
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               break;
+            case "e211g": // attempt to dispose Baron Huldra with real Heir
+               action = GameAction.UpdateEventViewerActive;
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if (9 < gi.DieResults[key][0])
+                  {
+                     action = GameAction.EndGameWin;
+                     gi.GamePhase = GamePhase.EndGame;
+                     gi.EndGameReason = "Restore True Heir to Huldra Throne in Audience.";
+                  }
+                  else
+                  {
+                     ITerritory t = Territory.theTerritories.Find("1212");
+                     if( null == t )
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddCoins() return false for ae=" + gi.EventActive + " for a=" + action.ToString());
+                        return false;
+                     }
+                     gi.ForbiddenHexes.Add(t);
+                     if (false == EncounterEscape(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEscape() return false for ae=" + gi.EventActive);
+                        return false;
+                     }
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
+                        return false;
+                     }
                   }
                }
                else
