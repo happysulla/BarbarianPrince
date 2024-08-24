@@ -119,6 +119,7 @@ namespace BarbarianPrince
       public bool IsEnslaved { set; get; } = false;
       public bool IsSpellBound { set; get; } = false;
       public int WanderingDayCount { set; get; } = 1;
+      public bool IsAlcoveOfSendingAudience { set; get; } = false;
       public bool IsBlessed { set; get; } = false;
       public int GuardianCount { set; get; } = 0;
       public bool IsMerchantWithParty { set; get; } = false;
@@ -225,8 +226,6 @@ namespace BarbarianPrince
       public ITerritories DwarfAdviceLocations { get => myDwarfAdviceLocations; }
       private ITerritories myWizardAdviceLocations = new Territories();
       public ITerritories WizardAdviceLocations { get => myWizardAdviceLocations; }
-      private ITerritories myAlcoveOfSendings = new Territories();
-      public ITerritories AlcoveOfSendings { get => myAlcoveOfSendings; }
       private ITerritories myArches = new Territories();
       public ITerritories Arches { get => myArches; }
       private ITerritories myVisitedLoctions = new Territories();

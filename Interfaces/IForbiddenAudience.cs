@@ -43,7 +43,7 @@ namespace BarbarianPrince
       //----------------------------------------------
       void AddPurifyConstaint(ITerritory forbidden);
       void AddOfferingConstaint(ITerritory forbidden, int offeringDay);
-      void AddLetterConstraint(ITerritory forbidden, ITerritory targetTerritory);
+      void AddLetterConstraint(ITerritory forbidden, ITerritory targetTerritory=null); // target territory is null when user is selecting territory with bullseye
       void AddLetterGivenConstraint(ITerritory forbidden);
       void AddAssistantConstraint(ITerritory forbidden, IMapItem assistant);
       void AddTimeConstraint(ITerritory forbidden, int day);

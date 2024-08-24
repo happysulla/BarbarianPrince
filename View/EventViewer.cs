@@ -2366,6 +2366,7 @@ namespace BarbarianPrince
                if (Utilities.NO_RESULT < myGameInstance.DieResults[key][0])
                {
                   myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
                break;
@@ -4583,7 +4584,7 @@ namespace BarbarianPrince
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
                            case "BaronDrogat":
-                              action = GameAction.E161CountAudience;
+                              action = GameAction.E161CountAudienceApplyResults;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               break;
                            case "BearAttack":
@@ -5180,7 +5181,7 @@ namespace BarbarianPrince
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               break;
                            case "Letter":
-                              action = GameAction.EncounterEnd;
+                              action = GameAction.E157LetterEnd;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
                            case "Lizard":
@@ -5995,7 +5996,7 @@ namespace BarbarianPrince
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
             case "Count Drogat ":
-               action = GameAction.EncounterEnd;
+               action = GameAction.E042CountDrogatAudience;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
             case "Detour":
@@ -6144,7 +6145,7 @@ namespace BarbarianPrince
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
             case "High Priest  ":
-               action = GameAction.EncounterEnd;
+               action = GameAction.E042HighPriestAudience;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
             case "Ignore":
@@ -6170,7 +6171,7 @@ namespace BarbarianPrince
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
             case "Lady Aeravir ":
-               action = GameAction.EncounterEnd;
+               action = GameAction.E042LadyAeravirAudience;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
             case "Land":
@@ -6178,7 +6179,7 @@ namespace BarbarianPrince
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
             case "Mayor of Town":
-               action = GameAction.EncounterEnd;
+               action = GameAction.E042MayorAudience;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
             case "Pass ":

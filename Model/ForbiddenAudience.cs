@@ -113,7 +113,7 @@ namespace BarbarianPrince
          fa.Day = day;
          myList.Add(fa);
       }
-      public void AddLetterConstraint(ITerritory forbidden, ITerritory target)
+      public void AddLetterConstraint(ITerritory forbidden, ITerritory target=null) // target set to null when user is selecting target with bullseye on map
       {
          IForbiddenAudience fa = new ForbiddenAudience(forbidden, target);
          fa.Constraint = AudienceConstraintEnum.LETTER;
@@ -147,6 +147,14 @@ namespace BarbarianPrince
          foreach (IForbiddenAudience fa in myList)
          {
             if ((fa.Constraint == AudienceConstraintEnum.ASSISTANT_OR_LETTER) && (null == fa.TargetTerritory) )
+            {
+               fa.TargetTerritory = letterTerritory;
+               return true;
+            }
+         }
+         foreach (IForbiddenAudience fa in myList)
+         {
+            if ((fa.Constraint == AudienceConstraintEnum.LETTER) && (null == fa.TargetTerritory))
             {
                fa.TargetTerritory = letterTerritory;
                return true;

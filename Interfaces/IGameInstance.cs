@@ -63,6 +63,7 @@ namespace BarbarianPrince
       bool IsEnslaved { set; get; } // e024 - wizard enslaves
       bool IsSpellBound { set; get; } // e035 - spell of choas has made mindless
       int WanderingDayCount { set; get; } // e035 - days wandering as idiot
+      bool IsAlcoveOfSendingAudience { set; get; } // e042 - audience by sending
       bool IsBlessed { set; get; } // e044 gods have blessed Prince
       int GuardianCount { set; get; }  // e046
       bool IsMerchantWithParty { set; get; }  // e048
@@ -167,7 +168,6 @@ namespace BarbarianPrince
       //----------------------------------------------
       ITerritories DwarfAdviceLocations { get; } // e006
       ITerritories WizardAdviceLocations { get; } // e025
-      ITerritories AlcoveOfSendings { get; }  // e042
       ITerritories Arches { get; } // e045
       ITerritories VisitedLocations { get; } // e050
       ITerritories EscapedLocations { get; } // e050

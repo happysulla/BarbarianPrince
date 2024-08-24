@@ -1226,8 +1226,8 @@ e041	"<Bold>e041 Vision Gem</Bold>
 <LineBreak/><LineBreak/>
                                  <InlineUIContainer><Image Source='../../Images/GemVision.gif' Height='300' Width='300'> </Image></InlineUIContainer>"
 e042	"<Bold>e042 Alcove of Sending</Bold>
-<LineBreak/><LineBreak/>You find a small alcove inscribed with runes. Sincy your party includes a magician, wizard, or witch; the runes can be deciphered to determine the alcove's secret purpose.
-<LineBreak/><LineBreak/>The secret of the alcove is simple. Yyou can command an audience with:
+<LineBreak/><LineBreak/>You find a small alcove inscribed with runes. Since your party includes a magician, wizard, or witch; the runes can be deciphered to determine the alcove's secret purpose.
+<LineBreak/><LineBreak/>The secret of the alcove is simple. You can command an audience with:
 <LineBreak/><InlineUIContainer><Button Content='e155' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  <InlineUIContainer><Button Content='High Priest  ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><InlineUIContainer><Button Content='e156' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
@@ -1237,11 +1237,15 @@ e042	"<Bold>e042 Alcove of Sending</Bold>
 <LineBreak/><InlineUIContainer><Button Content='e161' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  <InlineUIContainer><Button Content='Count Drogat ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>For the audience, you are temporarily transported to that location and will return at the end of the day just before the evening meal.
-<LineBreak/><LineBreak/>Followers given as part of the audience event cannot return with you and are lost. 
-<LineBreak/><LineBreak/>After use, the alcove needs many months to recharge, so it cannot be used again during the game. 
-<LineBreak/><LineBreak/><InlineUIContainer><Image Name='Campfire' Source='../../Images/Campfire2.gif' Height='75'  Width='75'></Image></InlineUIContainer>Click the campfire to skip audience."
-e042a	"<Bold>e042a Alcove of Sending with undecipherable runes</Bold>
-<LineBreak/><LineBreak/>You find a small alcove inscribed with runes. Since your party does not includes a magician, wizard, or witch; the runes are undeciphered. The event ends. Click anywere to continue."
+<LineBreak/><LineBreak/>After use, see <InlineUIContainer><Button Content='e042b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>."
+e042a	"<Bold>e042a Alcove of Sending with Undecipherable Runes</Bold>
+<LineBreak/><LineBreak/>You find a small alcove inscribed with runes. Since your party does not includes a magician, wizard, or witch; the runes are undeciphered. The event ends. Click image to continue.
+<LineBreak/><LineBreak/>
+                                  <InlineUIContainer><Image Name='EncounterEnd' Source='../../Images/Nothing.gif' Height='200' Width='200'></Image></InlineUIContainer>"
+e042b	"<Bold>e042b Alcove of Sending Return</Bold>
+<LineBreak/><LineBreak/>At the end of the day, you are returned back to your campsite. The portal takes several months to recharge and sits useless for the remainder of the game.  Any followers given as part of the audience cannot return and are lost. Click image to continue.
+<LineBreak/><LineBreak/>
+                <InlineUIContainer><Image Name='EncounterEnd' Source='../../Images/Campfire0.gif'  Height='200' Width='400'> </Image></InlineUIContainer>"
 e043	"<Bold>e043 Small Altar with Magic Spell</Bold>
 <LineBreak/><LineBreak/>There is  a magic spell shimmering around a small altar. If your party includes a magician, wizard, or witch; you can determine the nature of the spell before getting the item.
 <LineBreak/><LineBreak/>
@@ -3718,7 +3722,7 @@ e161	"<Bold>e161 Audience with Count Drogat</Bold>
 <InlineUIContainer><Button Content='e161e' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> - 5 - Needs Trophies<LineBreak/>
 <InlineUIContainer><Button Content='e161f' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 - Noble Ally"
 e161a	"<Bold>e161a Count Drogat Victim</Bold>
-<LineBreak/><LineBreak/>Count's eyes glow like red coals. You are his next victim. See <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. Click image to continue.
+<LineBreak/><LineBreak/>Count's eyes glow like red coals. You are his next victim. See <InlineUIContainer><Button Content='e061' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. Click image to continue.
 <LineBreak/><LineBreak/>
                      <InlineUIContainer><Image Source='../../Images/BaronDrogat.gif' Name='BaronDrogat' Height='350' Width='300'></Image></InlineUIContainer>"
 e161b	"<Bold>e161b Count Drogat Half Listens</Bold>

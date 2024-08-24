@@ -2283,7 +2283,7 @@ namespace BarbarianPrince
          //gi.LetterOfRecommendations.Add(lt3);
          //gi.ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt3);
          //---------------------
-         //gi.DayOfLastOffering = Days + 4;
+         //gi.DayOfLastOffering = gi.Days - 4;
          //gi.IsSecretTempleKnown = true;
          //gi.ChagaDrugCount = 2;
          //gi.IsMarkOfCain = true; // e018
@@ -2292,8 +2292,8 @@ namespace BarbarianPrince
          //gi.FoulBaneCount = 2;
          //gi.IsSecretLadyAeravir = true; // e145
          //gi.IsSecretBaronHuldra = true; // e144
-         IMapItem trueHeir = CreateCharacter(gi, "WarriorBoy", 0);
-         gi.AddCompanion(trueHeir);
+         //IMapItem trueHeir = CreateCharacter(gi, "WarriorBoy", 0);
+         //gi.AddCompanion(trueHeir);
          //---------------------
          //foreach (IMapItem mi in gi.PartyMembers)
          //   mi.AddSpecialItemToKeep(SpecialEnum.ResurrectionNecklace);
@@ -4900,6 +4900,26 @@ namespace BarbarianPrince
                case GameAction.E040TreasureChest: // Handled by EventViewerE040Mgr 
                   gi.EventStart = "e040";
                   break;
+               case GameAction.E042HighPriestAudience:
+                  gi.IsAlcoveOfSendingAudience = true;
+                  gi.EventStart = gi.EventDisplayed = gi.EventActive = "e155";
+                  gi.DieRollAction = GameAction.EncounterRoll;
+                  break;
+               case GameAction.E042MayorAudience:
+                  gi.IsAlcoveOfSendingAudience = true;
+                  gi.EventStart = gi.EventDisplayed = gi.EventActive = "e156";
+                  gi.DieRollAction = GameAction.EncounterRoll;
+                  break;
+               case GameAction.E042LadyAeravirAudience:
+                  gi.IsAlcoveOfSendingAudience = true;
+                  gi.EventStart = gi.EventDisplayed = gi.EventActive = "e160";
+                  gi.DieRollAction = GameAction.EncounterRoll;
+                  break;
+               case GameAction.E042CountDrogatAudience:
+                  gi.IsAlcoveOfSendingAudience = true;
+                  gi.EventStart = gi.EventDisplayed = gi.EventActive = "e161";
+                  gi.DieRollAction = GameAction.EncounterRoll;
+                  break;
                case GameAction.E043SmallAltar:
                   break;
                case GameAction.E043SmallAltarEnd:
@@ -6394,28 +6414,52 @@ namespace BarbarianPrince
                   break;
                case GameAction.E156MayorAudience:
                   switch (gi.DieResults["e156"][0]) // Based on the die roll, implement event 
-                  {
-                     case 1: gi.EventDisplayed = gi.EventActive = "e060"; gi.DieRollAction = GameAction.EncounterRoll; break;          // insulted
-                     case 2:                                                                                                           // stone faced
-                        if (false == EncounterEnd(gi, ref action))
+                  { 
+                     case 1:                                                                            // insulted
+                        if( true == gi.IsAlcoveOfSendingAudience)
                         {
-                           returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e156"][0].ToString();
-                           Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                           gi.EventDisplayed = gi.EventActive = "e042b";
                         }
-                        break;                                                                                                         // free food and lodging
-                     case 3:
-                        gi.EventDisplayed = gi.EventActive = "e156a";
-                        gi.IsPartyFed = true;
-                        gi.IsMountsFed = true;
-                        gi.IsPartyLodged = true;
-                        gi.IsMountsStabled = true;
-                        if (false == EncounterEnd(gi, ref action))
+                        else
                         {
-                           returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e156"][0].ToString();
-                           Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                           gi.EventDisplayed = gi.EventActive = "e060";
+                           gi.DieRollAction = GameAction.EncounterRoll;
+                        }
+                        break; 
+                     case 2:                                                                            // stone faced
+                        if (true == gi.IsAlcoveOfSendingAudience)
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e042b";
+                        }
+                        else
+                        {
+                           if (false == EncounterEnd(gi, ref action))
+                           {
+                              returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e156"][0].ToString();
+                              Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                           }
+                        }
+                        break;                                                                          // free food and lodging
+                     case 3:
+                        if (true == gi.IsAlcoveOfSendingAudience)
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e042b";
+                        }
+                        else
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e156a";
+                           gi.IsPartyFed = true;
+                           gi.IsMountsFed = true;
+                           gi.IsPartyLodged = true;
+                           gi.IsMountsStabled = true;
+                           if (false == EncounterEnd(gi, ref action))
+                           {
+                              returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e156"][0].ToString();
+                              Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                           }
                         }
                         break;
-                     case 4:                                                                                                          // letter of recommendation nearest castle
+                     case 4:                                                                           // letter of recommendation nearest castle
                         gi.EventDisplayed = gi.EventActive = "e157";
                         ITerritory closetCastle0 = FindClosestCastle(gi);
                         if (null == closetCastle0)
@@ -6429,7 +6473,7 @@ namespace BarbarianPrince
                         ITerritory t156 = FindClosestTown(gi);
                         gi.ForbiddenAudiences.AddTimeConstraint(t156, gi.Days + 6);
                         break;
-                     case 5:                                                                                                          // letter of recommendation nearest castle
+                     case 5:                                                                             // letter of recommendation nearest castle
                         gi.EventDisplayed = gi.EventActive = "e157";
                         if (false == gi.AddCoins(50))
                         {
@@ -6448,25 +6492,25 @@ namespace BarbarianPrince
                         ITerritory t156b = FindClosestTown(gi);
                         gi.ForbiddenAudiences.AddLetterConstraint(t156b, closetCastle1);
                         break;
-                     case 6:
-                        if (true == gi.IsReligionInParty())
-                        {
-                           gi.EventDisplayed = gi.EventActive = "e157"; // Do not think this code runs - If 6 is rolled for Mayer Audience, event e156e is displayed meaing E156MayorAudience will not be triggered
-                           if (false == gi.AddCoins(100))
-                           {
-                              returnStatus = "AddCoins() returned false for action=" + action.ToString();
-                              Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                           }
-                        }
-                        else
-                        {
-                           if (false == EncounterEnd(gi, ref action))
-                           {
-                              returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e156"][0].ToString();
-                              Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                           }
-                        }
-                        break;
+                     //case 6:
+                     //   if (true == gi.IsReligionInParty())
+                     //   {
+                     //      gi.EventDisplayed = gi.EventActive = "e157"; // Do not think this code runs - If 6 is rolled for Mayer Audience, event e156e is displayed meaing E156MayorAudience will not be triggered
+                     //      if (false == gi.AddCoins(100))
+                     //      {
+                     //         returnStatus = "AddCoins() returned false for action=" + action.ToString();
+                     //         Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                     //      }
+                     //   }
+                     //   else
+                     //   {
+                     //      if (false == EncounterEnd(gi, ref action))
+                     //      {
+                     //         returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e156"][0].ToString();
+                     //         Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                     //      }
+                     //   }
+                     //   break;
                      default:
                         returnStatus = "Reach Default ae=" + action.ToString() + " dr=" + gi.DieResults["e156"][0].ToString();
                         Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
@@ -6477,41 +6521,72 @@ namespace BarbarianPrince
                   ITerritory t155 = FindClosestTemple(gi);
                   switch (gi.DieResults["e155"][0]) // Based on the die roll, implement event
                   {
-                     case 1: gi.EventDisplayed = gi.EventActive = "e060"; gi.DieRollAction = GameAction.EncounterRoll; break;  // arrested
-                     case 2:                                                                                                   // stone faced
-                        if (true == gi.IsInTemple(t155))
-                           gi.ForbiddenAudiences.AddTimeConstraint(t155, gi.Days + 6);
-                        if (false == EncounterEnd(gi, ref action))
+                     case 1:                                                                                                  // arrested
+                        if( false == gi.IsAlcoveOfSendingAudience)
                         {
-                           returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e155"][0].ToString();
-                           Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                        }
-                        break;
-                     case 3:                                                                                                  // hears pleas
-                        if ((gi.DayOfLastOffering - gi.Days < 4) && (gi.Days <= gi.DayOfLastOffering))
-                        {
-                           gi.EventStart = gi.EventDisplayed = gi.EventActive = "e211b";
+                           gi.EventDisplayed = gi.EventActive = "e060";
                            gi.DieRollAction = GameAction.EncounterRoll;
-                           gi.DieResults["e211b"][0] = Utilities.NO_RESULT;
                         }
                         else
                         {
-                           if (true == gi.IsInTemple(t155))
-                              gi.ForbiddenAudiences.AddOfferingConstaint(t155, Utilities.FOREVER);
+                           gi.EventDisplayed = gi.EventActive = "e042b";
+                        }
+                        break;
+                     case 2:
+                        if (true == gi.IsInTemple(t155))
+                           gi.ForbiddenAudiences.AddTimeConstraint(t155, gi.Days + 6);// stone faced
+                        if (false == gi.IsAlcoveOfSendingAudience)
+                        {
                            if (false == EncounterEnd(gi, ref action))
                            {
                               returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e155"][0].ToString();
                               Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                            }
                         }
+                        else
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e042b";
+                        }
+                        break;
+                     case 3:                                                                                                  // hears pleas
+                        if (gi.Days - gi.DayOfLastOffering < 4)
+                        {
+                           gi.EventStart = gi.EventDisplayed = gi.EventActive = "e155";
+                           gi.DieRollAction = GameAction.EncounterRoll;
+                           gi.DieResults["e155"][0] = Utilities.NO_RESULT;
+                        }
+                        else
+                        {
+                           if (true == gi.IsInTemple(t155))
+                              gi.ForbiddenAudiences.AddOfferingConstaint(t155, Utilities.FOREVER);
+                           if (false == gi.IsAlcoveOfSendingAudience)
+                           {
+                              if (false == EncounterEnd(gi, ref action))
+                              {
+                                 returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e155"][0].ToString();
+                                 Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                              }
+                           }
+                           else
+                           {
+                              gi.EventDisplayed = gi.EventActive = "e042b";
+                           }
+                        }
                         break;
                      case 4:
                         if (true == gi.IsInTemple(t155))
                            gi.ForbiddenAudiences.AddOfferingConstaint(t155, gi.Days + 1);
-                        if (false == EncounterEnd(gi, ref action))
+                        if (false == gi.IsAlcoveOfSendingAudience)
                         {
-                           returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e155"][0].ToString();
-                           Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                           if (false == EncounterEnd(gi, ref action))
+                           {
+                              returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e155"][0].ToString();
+                              Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                           }
+                        }
+                        else
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e042b";
                         }
                         break;
                      case 5:
@@ -6542,6 +6617,20 @@ namespace BarbarianPrince
                case GameAction.E156MayorTerritorySelectionEnd:
                   gi.EventDisplayed = gi.EventActive = "e157";
                   break;
+               case GameAction.E157LetterEnd:
+                  if (true == gi.IsAlcoveOfSendingAudience)
+                  {
+                     gi.EventDisplayed = gi.EventActive = "e042b";
+                  }
+                  else
+                  {
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e160"][0].ToString();
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                     }
+                  }
+                  break;
                case GameAction.E158HostileGuardPay:
                   gi.ReduceCoins(20);
                   if (false == ResetDieResultsForAudience(gi))
@@ -6568,8 +6657,15 @@ namespace BarbarianPrince
                   {
                      gi.DieResults["e160"][0] = Utilities.NO_RESULT;
                      gi.DieResults["e160e"][0] = Utilities.NO_RESULT;
-                     gi.EventDisplayed = gi.EventActive = "e160"; // Get Audience after end of Broken Love
-                     gi.DieRollAction = GameAction.EncounterRoll;
+                     if (true == gi.IsAlcoveOfSendingAudience)
+                     {
+                        gi.EventDisplayed = gi.EventActive = "e042b";
+                     }
+                     else
+                     {
+                        gi.EventDisplayed = gi.EventActive = "e160"; // Get Audience after end of Broken Love
+                        gi.DieRollAction = GameAction.EncounterRoll;
+                     }
                   }
                   break;
                case GameAction.E160LadyAudienceApplyResults:  // e160
@@ -6583,17 +6679,31 @@ namespace BarbarianPrince
                   {
                      case 1:                                                                                                        // not interested
                         gi.ForbiddenAudiences.AddTimeConstraint(t160, Utilities.FOREVER);
-                        if (false == EncounterEnd(gi, ref action))
+                        if( true == gi.IsAlcoveOfSendingAudience)
                         {
-                           returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e160"][0].ToString();
-                           Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                           gi.EventDisplayed = gi.EventActive = "e042b";
+                        }
+                        else
+                        {
+                           if (false == EncounterEnd(gi, ref action))
+                           {
+                              returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e160"][0].ToString();
+                              Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                           }
                         }
                         break;
-                     case 2:                                                                                                        // distracted listening
-                        if (false == EncounterEnd(gi, ref action))
+                     case 2:                                                                                                       // distracted listening
+                        if (true == gi.IsAlcoveOfSendingAudience)
                         {
-                           returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e160"][0].ToString();
-                           Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                           gi.EventDisplayed = gi.EventActive = "e042b";
+                        }
+                        else
+                        {
+                           if (false == EncounterEnd(gi, ref action))
+                           {
+                              returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e160"][0].ToString();
+                              Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                           }
                         }
                         break;
                      case 3:                                                                                                         // takes pity
@@ -6617,31 +6727,52 @@ namespace BarbarianPrince
                         break;
                   }
                   break;
-               case GameAction.E161CountAudience: // already rolled e161 and have an audience - this is audience results
+               case GameAction.E161CountAudienceApplyResults: // already rolled e161 and have an audience - this is audience results
                   ITerritory t161 = Territory.theTerritories.Find("0323"); // Drogat Castle may have a constraint on killing monsters
                   switch (gi.DieResults["e161"][0]) // Based on the die roll, implement event
                   {
-                     case 1:                                                                                                           // count victim
-                        if (false == MarkedForDeath(gi))
+                     case 1:                                                                                                          // count victim
+                        if (true == gi.IsAlcoveOfSendingAudience)
                         {
-                           returnStatus = "ResetDieResultsForAudience() returned false ae=" + action.ToString();
-                           Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                           gi.EventDisplayed = gi.EventActive = "e042b";
+                        }
+                        else
+                        {
+                           if (false == MarkedForDeath(gi))
+                           {
+                              returnStatus = "ResetDieResultsForAudience() returned false ae=" + action.ToString();
+                              Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                           }
                         }
                         break;
-                     case 2:                                                                                                           // half listens
-                        if (false == EncounterEnd(gi, ref action))
+                     case 2:
+                        if (true == gi.IsAlcoveOfSendingAudience)
                         {
-                           returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e161"][0].ToString();
-                           Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                           gi.EventDisplayed = gi.EventActive = "e042b";
+                        }
+                        else
+                        {                                                                                                    // half listens
+                           if (false == EncounterEnd(gi, ref action))
+                           {
+                              returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e161"][0].ToString();
+                              Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                           }
                         }
                         break;
-                     case 3:                                                                                                         // flippant advice
-                        gi.ForbiddenAudiences.AddLetterGivenConstraint(t161); // must have letter given for this territory to hold audience  
-                        gi.IsMustLeaveHex = true;
-                        if (false == EncounterEnd(gi, ref action))
+                     case 3:
+                        gi.ForbiddenAudiences.AddLetterGivenConstraint(t161); // must have letter given for this territory to hold audience  // flippant advice
+                        if (true == gi.IsAlcoveOfSendingAudience)
                         {
-                           returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e161"][0].ToString();
-                           Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                           gi.EventDisplayed = gi.EventActive = "e042b";
+                        }
+                        else
+                        {
+                           gi.IsMustLeaveHex = true;
+                           if (false == EncounterEnd(gi, ref action))
+                           {
+                              returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e161"][0].ToString();
+                              Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                           }
                         }
                         break;
                      case 4:                                                                                                          // interested
@@ -6656,32 +6787,43 @@ namespace BarbarianPrince
                      case 5:
                         if (4 < gi.NumMonsterKill)// needs trophies
                         {
+                           if (false == gi.IsAlcoveOfSendingAudience)
+                           {
+                              if (false == gi.AddNewMountToParty(MountEnum.Pegasus))
+                              {
+                                 returnStatus = "AddNewMountToParty() returned false for action=" + action.ToString();
+                                 Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                              }
+                              if (false == gi.AddNewMountToParty(MountEnum.Pegasus))
+                              {
+                                 returnStatus = "AddNewMountToParty() returned false for action=" + action.ToString();
+                                 Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                              }
+                           }
                            if (false == gi.AddCoins(500))
                            {
                               returnStatus = "AddCoins() returned false for action=" + action.ToString();
                               Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                            }
                            gi.CapturedWealthCodes.Add(110);
-                           if (false == gi.AddNewMountToParty(MountEnum.Pegasus))
-                           {
-                              returnStatus = "AddNewMountToParty() returned false for action=" + action.ToString();
-                              Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                           }
-                           if (false == gi.AddNewMountToParty(MountEnum.Pegasus))
-                           {
-                              returnStatus = "AddNewMountToParty() returned false for action=" + action.ToString();
-                              Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                           }
+ 
                            gi.ForbiddenAudiences.AddTimeConstraint(t161, Utilities.FOREVER);
                            action = GameAction.EncounterLootStart;
                         }
                         else
                         {
                            gi.ForbiddenAudiences.AddMonsterKillConstraint(t161);
-                           if (false == EncounterEnd(gi, ref action))
+                           if (true == gi.IsAlcoveOfSendingAudience)
                            {
-                              returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e161"][0].ToString();
-                              Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                              gi.EventDisplayed = gi.EventActive = "e042b";
+                           }
+                           else
+                           {
+                              if (false == EncounterEnd(gi, ref action))
+                              {
+                                 returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e161"][0].ToString();
+                                 Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                              }
                            }
                         }
                         break;
@@ -9215,8 +9357,6 @@ namespace BarbarianPrince
                gi.CapturedWealthCodes.Add(100);
                gi.CapturedWealthCodes.Add(100);
                break;
-            case "e155": // high priest audience
-               break;
             case "e158": // hostile guards
                if (false == EncounterEscape(gi, ref action))
                {
@@ -9404,6 +9544,22 @@ namespace BarbarianPrince
                {
                   Logger.Log(LogEnum.LE_ERROR, "EncounterLootStartEnd(): EncounterEnd() returned false w/ es=" + gi.EventStart);
                   return false;
+               }
+               break;
+            case "e155": // Audience with High Priest
+            case "e160": // Audience with Lady Aeravir
+            case "e161": // Audience with Count Drogat
+               if (true == gi.IsAlcoveOfSendingAudience)
+               {
+                  gi.EventDisplayed = gi.EventActive = "e042b";
+               }
+               else
+               {
+                  if (false == EncounterEnd(gi, ref action))
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStartEnd(): EncounterEnd() returned false w/ es=" + gi.EventStart);
+                     return false;
+                  }
                }
                break;
             default:
@@ -12301,10 +12457,10 @@ namespace BarbarianPrince
                   default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default dr=" + gi.DieResults["e130"][1].ToString() + " ae=" + gi.EventActive); return false;
                }
                break;
-            case "e130f": // Audience with Baron
+            case "e130f": // Audience with Baron when Meeting on Travels
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  gi.DieResults[key][0] = dieRoll; 
+                  gi.DieResults[key][0] = dieRoll;
                }
                else
                {
@@ -12627,12 +12783,30 @@ namespace BarbarianPrince
                   action = GameAction.UpdateEventViewerActive;
                   switch (gi.DieResults[key][0]) // Based on the die roll, implement event
                   {
-                     case 1: gi.EventDisplayed = gi.EventActive = "e060"; gi.DieRollAction = GameAction.EncounterRoll; break;         // arrested
-                     case 2: gi.EventDisplayed = gi.EventActive = "e156a"; break;                                                     // stone faced
-                     case 3: gi.EventDisplayed = gi.EventActive = "e156b"; break;                                                     // lodging and food   
-                     case 4: gi.EventDisplayed = gi.EventActive = "e156c"; break;                                                     // favor
-                     case 5: gi.EventDisplayed = gi.EventActive = "e156d"; break;                                                     // interest
-                     case 6:                                                                                                          // religious interest
+                     case 1:                                                                      // arrested
+                        if( true == gi.IsAlcoveOfSendingAudience)
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e042b";
+                        }
+                        else
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e060";
+                           gi.DieRollAction = GameAction.EncounterRoll;
+                        }
+                        break; 
+                     case 2:                                                                      // stone faced
+                        gi.EventDisplayed = gi.EventActive = "e156a"; 
+                        break;   
+                     case 3:                                                                      // lodging and food   
+                        gi.EventDisplayed = gi.EventActive = "e156b"; 
+                        break;   
+                     case 4:                                                                       // favor
+                        gi.EventDisplayed = gi.EventActive = "e156c"; 
+                        break;                                                
+                     case 5:                                                                       // interest
+                        gi.EventDisplayed = gi.EventActive = "e156d";
+                        break;     
+                     case 6:                                                                       // religious interest
                         if (true == gi.IsReligionInParty())
                         {
                            action = GameAction.E156MayorTerritorySelection;
@@ -12642,10 +12816,18 @@ namespace BarbarianPrince
                               Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddCoins() returned false for action=" + action.ToString() + "  and ae=" + gi.EventActive);
                               return false;
                            }
-                           IMapItem trustedAssistant = CreateCharacter(gi, "TrustedAssistant", 0);
-                           gi.AddCompanion(trustedAssistant);
-                           ITerritory t156a = FindClosestTown(gi); // this territory is updated by user selecting a castle
-                           gi.ForbiddenAudiences.AddAssistantConstraint(t156a, trustedAssistant);
+                           if( false == gi.IsAlcoveOfSendingAudience)
+                           {
+                              IMapItem trustedAssistant = CreateCharacter(gi, "TrustedAssistant", 0);
+                              gi.AddCompanion(trustedAssistant);
+                              ITerritory t156a = FindClosestTown(gi); // this territory is updated by user selecting a castle
+                              gi.ForbiddenAudiences.AddAssistantConstraint(t156a, trustedAssistant);
+                           }
+                           else // only get letter but no trusted assistant
+                           {
+                              ITerritory t156b = FindClosestTown(gi); // this territory is updated by user selecting a castle
+                              gi.ForbiddenAudiences.AddLetterConstraint(t156b);
+                           }
                         }
                         else
                         {
@@ -12690,37 +12872,48 @@ namespace BarbarianPrince
                {
                   gi.EnteredHexes.Last().EventNames.Add(key);
                   gi.AddCoins(gi.DieResults[key][0] * 150);
-                  gi.IsPartyFed = true;
-                  gi.IsMountsFed = true;
-                  gi.IsPartyLodged = true;
-                  gi.IsMountsStabled = true;
-                  //-----------------------------------------------
-                  foreach (IMapItem e160Mi in gi.PartyMembers)   // heal all wounds
+                  if(false == gi.IsAlcoveOfSendingAudience)
                   {
-                     e160Mi.PlagueDustWound = 0; // assume that healers cure any plague dust
-                     int wound = e160Mi.Wound;
-                     int poision = e160Mi.Poison;
-                     e160Mi.HealWounds(wound, poision);
-                     if (0 == e160Mi.Mounts.Count)  // add mount if do not have one
-                        e160Mi.AddNewMount();
+                     gi.IsPartyFed = true;
+                     gi.IsMountsFed = true;
+                     gi.IsPartyLodged = true;
+                     gi.IsMountsStabled = true;
+                     //-----------------------------------------------
+                     foreach (IMapItem e160Mi in gi.PartyMembers)   // heal all wounds
+                     {
+                        e160Mi.PlagueDustWound = 0; // assume that healers cure any plague dust
+                        int wound = e160Mi.Wound;
+                        int poision = e160Mi.Poison;
+                        e160Mi.HealWounds(wound, poision);
+                        if (0 == e160Mi.Mounts.Count)  // add mount if do not have one
+                           e160Mi.AddNewMount();
+                     }
+                     //-----------------------------------------------
+                     if (false == gi.AddNewMountToParty()) // add a spare pack horse
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddNewMountToParty() return false for ae=" + gi.EventActive);
+                        return false;
+                     }
+                     for (int k = 0; k < 3; ++k) // add three knights
+                     {
+                        IMapItem knight = CreateCharacter(gi, "Knight", 0);
+                        knight.AddNewMount();
+                        gi.AddCompanion(knight);
+                     }
+                     //-----------------------------------------------
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e160f"][0].ToString());
+                        return false;
+                     }
                   }
-                  //-----------------------------------------------
-                  if( false == gi.AddNewMountToParty() ) // add a spare pack horse
+                  else
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddNewMountToParty() return false for ae=" + gi.EventActive);
-                     return false;
-                  }
-                  for (int k = 0; k < 3; ++k) // add three knights
-                  {
-                     IMapItem knight = CreateCharacter(gi, "Knight", 0);
-                     knight.AddNewMount();
-                     gi.AddCompanion(knight);
-                  }
-                  //-----------------------------------------------
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e160f"][0].ToString());
-                     return false;
+                     gi.Prince.PlagueDustWound = 0; // assume that healers cure any plague dust - Heal all words for Prince
+                     int wound = gi.Prince.Wound;
+                     int poision = gi.Prince.Poison;
+                     gi.Prince.HealWounds(wound, poision);
+                     gi.EventDisplayed = gi.EventActive = "e042b";
                   }
                }
                else
@@ -12772,7 +12965,7 @@ namespace BarbarianPrince
                         else
                            gi.EventDisplayed = gi.EventActive = "e161g";
                         break;
-                     case 6: gi.EventDisplayed = gi.EventActive = "e161f"; break;        // noble ally
+                     case 6: case 7: gi.EventDisplayed = gi.EventActive = "e161f"; break;        // noble ally
                      default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
                   }
                }
@@ -13228,7 +13421,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][0] = dieRoll;
                }
                break;
-            case "e211b":
+            case "e211b": // seeking audience with High Priest
                action = GameAction.UpdateEventViewerActive;
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
@@ -13394,7 +13587,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][0] = dieRoll;
                }
                break;
-            case "e211d": // Audience with Count Drogat
+            case "e211d": // Seek Audience with Count Drogat
                action = GameAction.UpdateEventViewerActive;
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
@@ -13596,7 +13789,6 @@ namespace BarbarianPrince
                   if (true == gi.IsSecretLadyAeravir) // know the secret of Lady Aeravir
                      ++dieRoll;
                   //--------------------------------
-                  dieRoll = 13; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                break;
