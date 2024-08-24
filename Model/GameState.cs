@@ -2718,6 +2718,7 @@ namespace BarbarianPrince
          gi.IsMountsAtRisk = false;             // e095
          gi.PurchasedPotionCure = 0;            // e128b
          gi.PurchasedPotionHeal = 0;            // e128e
+         gi.IsArrestedByDrogat = false;         // e130d
          gi.IsLadyAeravirRerollActive = false;  // e145
          gi.IsFoulBaneUsedThisTurn = false;     // e146
          gi.SeneschalRollModifier = 0;          // e148
@@ -6113,7 +6114,19 @@ namespace BarbarianPrince
                      if ((true == gi.IsExhausted) && ((true == gi.NewHex.IsOasis) || ("Desert" != gi.NewHex.Type))) // e120
                         gi.IsExhausted = false;
                   }
-                  gi.EventDisplayed = gi.EventActive = "e060";
+                  if( true == gi.IsArrestedByDrogat)
+                  {
+                     gi.IsArrestedByDrogat = false;
+                     if (false == MarkedForDeath(gi))
+                     {
+                        returnStatus = "ResetDieResultsForAudience() returned false ae=" + action.ToString();
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                     }
+                  }
+                  else
+                  {
+                     gi.EventDisplayed = gi.EventActive = "e060"; // normal arrest
+                  }
                   gi.DieRollAction = GameAction.EncounterRoll;
                   break;
                case GameAction.E130BribeGuard:
@@ -6124,11 +6137,6 @@ namespace BarbarianPrince
                   gi.EventDisplayed = gi.EventActive = "e130e";
                   break;
                case GameAction.E130RobGuard:
-                  if (false == gi.AddCoins(100))
-                  {
-                     returnStatus = "AddCoins() returned false for action=" + action.ToString();
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                  }
                   ITerritory t130 = null;
                   switch (gi.DieResults["e130"][1]) // castle is forbidden after robbing lord
                   {
@@ -6142,11 +6150,9 @@ namespace BarbarianPrince
                      if (false == gi.ForbiddenHexes.Contains(t130)) // cannot return to this hex
                         gi.ForbiddenHexes.Add(t130);
                   }
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                  }
+                  gi.EventStart = "e130";
+                  gi.CapturedWealthCodes.Add(100);
+                  action = GameAction.EncounterLootStart;
                   break;
                case GameAction.E133PlaguePrince:
                   foreach (IMapItem mi in gi.PartyMembers) // kill all plagued party members
@@ -6412,7 +6418,7 @@ namespace BarbarianPrince
                         break;
                   }
                   break;
-               case GameAction.E156MayorAudience:
+               case GameAction.E156MayorAudienceApplyResults:
                   switch (gi.DieResults["e156"][0]) // Based on the die roll, implement event 
                   { 
                      case 1:                                                                            // insulted
@@ -6422,7 +6428,10 @@ namespace BarbarianPrince
                         }
                         else
                         {
-                           gi.EventDisplayed = gi.EventActive = "e060";
+                           if ("e130" == gi.EventStart) // arrested by lords on travel
+                              gi.EventDisplayed = gi.EventActive = "e130d";
+                           else
+                              gi.EventDisplayed = gi.EventActive = "e060";
                            gi.DieRollAction = GameAction.EncounterRoll;
                         }
                         break; 
@@ -6492,39 +6501,23 @@ namespace BarbarianPrince
                         ITerritory t156b = FindClosestTown(gi);
                         gi.ForbiddenAudiences.AddLetterConstraint(t156b, closetCastle1);
                         break;
-                     //case 6:
-                     //   if (true == gi.IsReligionInParty())
-                     //   {
-                     //      gi.EventDisplayed = gi.EventActive = "e157"; // Do not think this code runs - If 6 is rolled for Mayer Audience, event e156e is displayed meaing E156MayorAudience will not be triggered
-                     //      if (false == gi.AddCoins(100))
-                     //      {
-                     //         returnStatus = "AddCoins() returned false for action=" + action.ToString();
-                     //         Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                     //      }
-                     //   }
-                     //   else
-                     //   {
-                     //      if (false == EncounterEnd(gi, ref action))
-                     //      {
-                     //         returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e156"][0].ToString();
-                     //         Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                     //      }
-                     //   }
-                     //   break;
                      default:
                         returnStatus = "Reach Default ae=" + action.ToString() + " dr=" + gi.DieResults["e156"][0].ToString();
                         Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                         break;
                   }
                   break;
-               case GameAction.E155HighPriestAudience:
+               case GameAction.E155HighPriestAudienceApplyResults:
                   ITerritory t155 = FindClosestTemple(gi);
                   switch (gi.DieResults["e155"][0]) // Based on the die roll, implement event
                   {
                      case 1:                                                                                                  // arrested
                         if( false == gi.IsAlcoveOfSendingAudience)
                         {
-                           gi.EventDisplayed = gi.EventActive = "e060";
+                           if( "e130" == gi.EventStart)  //e130 - arrested by Lords on travel
+                              gi.EventDisplayed = gi.EventActive = "e130d";
+                           else
+                              gi.EventDisplayed = gi.EventActive = "e060";
                            gi.DieRollAction = GameAction.EncounterRoll;
                         }
                         else
@@ -6738,10 +6731,18 @@ namespace BarbarianPrince
                         }
                         else
                         {
-                           if (false == MarkedForDeath(gi))
+                           if( "e130" == gi.EventStart )
                            {
-                              returnStatus = "ResetDieResultsForAudience() returned false ae=" + action.ToString();
-                              Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                              gi.EventDisplayed = gi.EventActive = "e130d";
+                              gi.IsArrestedByDrogat = true;   // Jailed on travels resutls in MarkedForDeath()
+                           }
+                           else
+                           {
+                              if (false == MarkedForDeath(gi))
+                              {
+                                 returnStatus = "ResetDieResultsForAudience() returned false ae=" + action.ToString();
+                                 Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                              }
                            }
                         }
                         break;
@@ -9501,6 +9502,13 @@ namespace BarbarianPrince
                      Logger.Log(LogEnum.LE_ERROR, "EncounterLootStartEnd(): EncounterEnd() returned false w/ es=" + gi.EventStart);
                      return false;
                   }
+               }
+               break;
+            case "e130": // Robbery of High Lord on Travels
+               if (false == EncounterEnd(gi, ref action))
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "EncounterLootStartEnd(): EncounterEnd() returned false w/ es=" + gi.EventStart);
+                  return false;
                }
                break;
             case "e142":
@@ -12398,6 +12406,7 @@ namespace BarbarianPrince
                break;
             case "e130a": // talk to high lord 
                gi.EnteredHexes.Last().EventNames.Add(key);
+               dieRoll = 5; // <cgs> TEST
                switch (dieRoll)
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e327"; gi.DieRollAction = GameAction.EncounterRoll; break; // pass dummies
@@ -12467,7 +12476,7 @@ namespace BarbarianPrince
                   gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
-                     case 1:case 2:
+                     case 1: case 2:
                         if (false == EncounterEnd(gi, ref action))
                         {
                            Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false for ae=" + gi.EventActive + " dr=" + dieRoll.ToString());

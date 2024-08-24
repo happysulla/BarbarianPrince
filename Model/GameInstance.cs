@@ -160,6 +160,7 @@ namespace BarbarianPrince
       public bool IsEvadeActive { set; get; } = true;
       public int PurchasedPotionCure { set; get; } = 0;
       public int PurchasedPotionHeal { set; get; } = 0;
+      public bool IsArrestedByDrogat { set; get; } = false;
       public int HydraTeethCount { set; get; } = 0;
       public bool IsHuldraHeirFight { set; get; } = false; // e144b
       public bool IsHuldraHeirKilled { set; get; } = false; // e144e

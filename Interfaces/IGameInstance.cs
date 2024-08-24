@@ -103,6 +103,7 @@ namespace BarbarianPrince
       bool IsWoundedBlackKnightRest { set; get; } // e123 - Defeated black knight - so may now rest
       int PurchasedPotionCure { set; get; } // e128 - purchased potion cures
       int PurchasedPotionHeal { set; get; } // e128 - purchased potion healing
+      bool IsArrestedByDrogat { set; get; } // e130 arrested by Count Drogat
       int HydraTeethCount { set; get; }   //e141
       int ChagaDrugCount { set; get; }    // e143 Chaga Drug purchased in town - 2gp per serving
       bool IsHuldraHeirFight { set; get; } // e144b

@@ -2999,7 +2999,7 @@ e128c	"<Bold>e128c Merchant with Food for Sale</Bold>
 <LineBreak/><LineBreak/>
                                           <InlineUIContainer><Image Source='../../Images/Merchant.gif' Name='EncounterEnd' Height='200'  Width='125'></Image></InlineUIContainer>"
 e128d	"<Bold>e128d Merchant Game of Chance</Bold>
-<LineBreak/><LineBreak/>If the roll exceeds wit and wiles, you spend up to 10gp needlessly. 'Have you ever heard of Plato, Aristotle, Socrates? Morons!'
+<LineBreak/><LineBreak/>If the roll exceeds wit and wiles, you spend up to 10gp needlessly. ""Have you ever heard of Plato, Aristotle, Socrates? Morons!""
 <LineBreak/><LineBreak/> Roll one die:  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e128e	"<Bold>e128e Merchant Selling Healing Potion Sale</Bold>
 <LineBreak/><LineBreak/>Merchant has healing potions for sale. See
@@ -3094,9 +3094,11 @@ e130a	"<Bold>e130a Talk to High Lord</Bold>
  <InlineUIContainer><Button Content='e329' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Pass<LineBreak/>
  <InlineUIContainer><Button Content='e130d' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Arrested<LineBreak/>
  <InlineUIContainer><Button Content='e130e' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Audience<LineBreak/>
- <InlineUIContainer><Button Content='e130g' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Inquiry<LineBreak/>
+ <InlineUIContainer><Button Content='r342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Inquiry*<LineBreak/>
  <InlineUIContainer><Button Content='e307' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Attacked
-<LineBreak/>Roll die:
+<LineBreak/><LineBreak/>
+<Italic>*Note:</Italic> Any inquiry result that normally allows hiring a character instead permits you to bribe the bodyguards with 10gp for an audience. If you do not pay, encounter ends. Aternatively, you can perform a robbery for wealth class 100.
+<LineBreak/><LineBreak/>Roll die:
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
@@ -3152,9 +3154,12 @@ Roll one die:  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name=
                      <InlineUIContainer><Image Name='EncounterRoll' Source='../../Images/BaronDrogat.gif' Height='350' Width='300'></Image></InlineUIContainer>"
 e130g	"<Bold>e130g High Lord Inquiry Bribe/Robbery</Bold>
 <LineBreak/><LineBreak/>
-You may bribe the bodyguard for an audience. If you pay this, see <InlineUIContainer><Button Content='e130d' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. However, you must still suffer any adverse results from the audience. Presumably, this is due to additional guards in the area, magic protection, or power of the Lord/Lady. 
+You may bribe the bodyguard for an audience. If you pay this, see <InlineUIContainer><Button Content='e130e' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. However, you must still suffer any adverse results from the audience. Presumably, this is due to additional guards in the area, magic protection, or power of the Lord/Lady. 
 <LineBreak/><LineBreak/>Alternatively, instead of an audience, you can rob the Lord/Lady who has wealth 100. However, if you rob Baron Huldra, Count Drogat, or Lady Aeravir; you can never enter the castle hex where they rule.
-<LineBreak/><LineBreak/>Robbery: <LineBreak/><InlineUIContainer><Image Name='GuardRob' Source='../../Images/CoinsStackedDeny.gif' Height='75'  Width='75'> </Image></InlineUIContainer> "
+<LineBreak/><LineBreak/>Do nothing and event ends: 
+<LineBreak/><InlineUIContainer><Image Name='EncounterEnd' Source='../../Images/CoinsStackedDeny.gif' Height='100'  Width='100'> </Image></InlineUIContainer> 
+<LineBreak/>Robbery: 
+<LineBreak/><InlineUIContainer><Image Name='GuardRob' Source='../../Images/Robbery.gif' Height='100'  Width='100'> </Image></InlineUIContainer> "
 e131	"<Bold>e131 Empty Ruins</Bold>
 <LineBreak/><LineBreak/>
 You spend the entire day fruitlessly searching the ruins and find nothing.
@@ -4904,7 +4909,7 @@ e342a	"<Bold>e342a More Talking</Bold> <InlineUIContainer><Button Content='e341'
 <LineBreak/><LineBreak/>
 Characters reveal themself gradually. More talking is required to review their true nature.
 <LineBreak/><LineBreak/>
-<InlineUIContainer><Button Content='Talk ' FontFamily='Courier New'  FontSize='12' Name='e341'></Button></InlineUIContainer> further or<LineBreak/>
+<InlineUIContainer><Button Content='Talk ' FontFamily='Courier New'  FontSize='12' Name=""e341""></Button></InlineUIContainer> further or<LineBreak/>
 <InlineUIContainer><Button Content='Pass ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>  with dignity."
 e343	"<Bold>e343 Victim Selection</Bold>
 <LineBreak/><LineBreak/>One character in your party is the victim or target of an attack. If your party is just you, then you are the target.

@@ -1126,10 +1126,13 @@ namespace BarbarianPrince
                }
                break;
             case "e130":
-               if (("Talk " == content) || ("Evade" == content) || ("Fight" == content))
+               if( Utilities.NO_RESULT == myGameInstance.DieResults[key][1])
                {
-                  b.IsEnabled = false;
-                  return;
+                  if (("Talk " == content) || ("Evade" == content) || ("Fight" == content))
+                  {
+                     b.IsEnabled = false;
+                     return;
+                  }
                }
                break;
             case "e144a": // Rescue True Heir of Huldra Castle
@@ -2354,10 +2357,11 @@ namespace BarbarianPrince
                if (cost <= gi.GetCoins())
                {
                   myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new LineBreak());
                   string costToPayS = "Click to pay " + cost.ToString() + "gp:";
                   myTextBlock.Inlines.Add(new Run(costToPayS));
                   myTextBlock.Inlines.Add(new LineBreak());
-                  Image imge130ga = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStacked"), Width = 75, Height = 75, Name = "GuardBribe" };
+                  Image imge130ga = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStacked"), Width = 100, Height = 100, Name = "GuardBribe" };
                   myTextBlock.Inlines.Add(new InlineUIContainer(imge130ga));
                }
                break;
@@ -5030,7 +5034,7 @@ namespace BarbarianPrince
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
                            case "HighPriest":
-                              action = GameAction.E155HighPriestAudience;
+                              action = GameAction.E155HighPriestAudienceApplyResults;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
                            case "HireFreeman":
@@ -5235,7 +5239,7 @@ namespace BarbarianPrince
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
                            case "Mayor":
-                              action = GameAction.E156MayorAudience;
+                              action = GameAction.E156MayorAudienceApplyResults;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               break;
                            case "MineAbandoned":
