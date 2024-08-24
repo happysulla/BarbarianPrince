@@ -1354,6 +1354,16 @@ namespace BarbarianPrince
                   }
                }
                break;
+            case "e211c":
+               if ( ("Dismiss" == content) && ( (false == myGameInstance.IsMagicInParty()) || (true == myGameInstance.IsMagicUserDismissed) || (0 < myGameInstance.DieResults["e211c"][0]) ) )
+                  b.IsEnabled = false;
+               break;
+            case "e211g":
+               if (("Continue" == content) && (0 < myGameInstance.DieResults["e211g"][0]))
+                  b.IsEnabled = false;
+               if (("Dismiss" == content) && ((false == myGameInstance.IsMagicInParty()) || (true == myGameInstance.IsMagicUserDismissed) || (0 < myGameInstance.DieResults["e211g"][0])))
+                  b.IsEnabled = false;
+               break;
             case "e212": // offering at temple
                if ("Spend" == content)
                {
@@ -3133,6 +3143,7 @@ namespace BarbarianPrince
                }
                else
                {
+
                   ITerritory princeTerritory = myGameInstance.Prince.Territory;
                   int letterModifier = 0;
                   foreach (ITerritory t in myGameInstance.LetterOfRecommendations)
@@ -3148,11 +3159,21 @@ namespace BarbarianPrince
                      if (true == gi.IsSecretLadyAeravir)
                         audienceRollModifier++;
                   }
-                  if ("e211d" == key) // Seeking audencie with Count Drogat
+                  else if ("e211c" == key)
+                  {
+                     if (true == gi.IsMagicUserDismissed)
+                        audienceRollModifier++;
+                  }
+                  else if ("e211d" == key) // Seeking audencie with Count Drogat
                   {
                      if (true == gi.IsSpecialItemHeld(SpecialEnum.Foulbane))
                         audienceRollModifier++;
                      if (true == gi.Prince.IsResurrected)
+                        audienceRollModifier++;
+                  }
+                  else if ("e211g" == key)
+                  {
+                     if (true == gi.IsMagicUserDismissed)
                         audienceRollModifier++;
                   }
                   //------------------------------------------
@@ -3189,6 +3210,11 @@ namespace BarbarianPrince
                         sb.Append(purifyModifier.ToString());
                         sb.Append(" for Purification.");
                      }
+                     if ("e211c" == key)
+                     {
+                        if (true == gi.IsMagicUserDismissed)
+                           sb.Append(" Add 1 for dismissing magic user to work for Baron Huldra.");
+                     }
                      if ("e211e" == key) //  Seeking audencie with Lady Aeravir
                      {
                         if (true == gi.IsSecretLadyAeravir)
@@ -3200,6 +3226,11 @@ namespace BarbarianPrince
                            sb.Append(" Add 1 for holding foulbane.");
                         if (true == gi.Prince.IsResurrected)
                            sb.Append(" Add 1 for ghostly skin glow due to resurrection.");
+                     }
+                     if ("e211g" == key)
+                     {
+                        if (true == gi.IsMagicUserDismissed)
+                           sb.Append(" Add 1 for dismissing magic user to work for Baron Huldra.");
                      }
                      myTextBlock.Inlines.Add(new LineBreak());
                      myTextBlock.Inlines.Add(new LineBreak());
@@ -5763,24 +5794,6 @@ namespace BarbarianPrince
             int numHirelings = Int32.Parse(key);
             myGameEngine.PerformAction(ref myGameInstance, ref action, numHirelings);
          }
-         else if ("Read_Rules" == b.Name) // if this button is a number, it indictes hiring Hirelings
-         {
-            if (false == ShowRule("r200"))
-            {
-               Logger.Log(LogEnum.LE_ERROR, "Button_Click(): ShowRule() returned false");
-               return;
-            }
-         }
-         else if ("AcceptRoll" == b.Name) // accept the roll for audience with Count Drogat
-         {
-            action = GameAction.EncounterRoll;
-            myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
-         }
-         else if ("RollAgain" == b.Name) // reroll the roll for audience with Count Drogat
-         {
-            action = GameAction.E146CountAudienceReroll;
-            myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
-         }
          else if (true == key.StartsWith("r")) // rules based click
          {
             if (false == ShowRule(key))
@@ -5949,6 +5962,10 @@ namespace BarbarianPrince
                action = GameAction.EncounterAbandon;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
+            case "Accept Roll":
+               action = GameAction.EncounterRoll;
+               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
             case "Avoid":
                action = GameAction.EncounterEnd;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
@@ -5973,8 +5990,24 @@ namespace BarbarianPrince
                action = GameAction.E144RescueCast;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
+            case "Continue":
+               action = GameAction.E144ContinueNormalAudienceRoll;
+               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
             case "Count Drogat ":
                action = GameAction.EncounterEnd;
+               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
+            case "Detour":
+               action = GameAction.E009FarmDetour;
+               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
+            case "Dismiss":
+               action = GameAction.E211DismissMagicUser;
+               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
+            case "Dismount":
+               action = GameAction.E079HeavyRainsDismount;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
             case "Escape":
@@ -6016,14 +6049,6 @@ namespace BarbarianPrince
                myGameInstance.EventDisplayed = myGameInstance.EventActive = name;
                action = GameAction.UpdateEventViewerActive;
                myGameInstance.DieRollAction = GameAction.EncounterRoll;
-               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
-               break;
-            case "Detour":
-               action = GameAction.E009FarmDetour;
-               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
-               break;
-            case "Dismount":
-               action = GameAction.E079HeavyRainsDismount;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
             case "Feed":
@@ -6198,8 +6223,19 @@ namespace BarbarianPrince
                action = GameAction.E212TempleTenGold;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
+            case "Read Rules":
+               if (false == ShowRule("r200"))
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "Button_ClickShowOther(): ShowRule(r200) returned false");
+                  return false;
+               }
+               break;
             case "Request":
                action = GameAction.E212TempleRequestClues;
+               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
+            case "Roll Again":
+               action = GameAction.E146CountAudienceReroll;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
             case "Short Hop":

@@ -190,6 +190,7 @@ namespace BarbarianPrince
       public int PurchasedHenchman { set; get; } = 0;// e210f - Amount  of henchmen hired  
       public int PurchasedPorter { set; get; } = 0; // e210i - Amount  of porter purchases  
       public int PurchasedGuide { set; get; } = 0; // e210i - Amount  of local guides purchases  
+      public bool IsMagicUserDismissed { set; get; } = false;
       public bool IsOfferingModifier { set; get; } = false; // e212 - add +1 due to spending 10 gold
       public bool IsOmenModifier { set; get; } = false;  // e212f
       public bool IsInfluenceModifier { set; get; } = false; // e212l

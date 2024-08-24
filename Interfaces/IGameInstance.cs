@@ -138,6 +138,7 @@ namespace BarbarianPrince
       int PurchasedHenchman { set; get; } // e210f - Amount  of henchmen hired  
       int PurchasedPorter { set; get; } // e210i - Amount  of porter hired  
       int PurchasedGuide { set; get; } // e210i - Amount  of local guides hired  
+      bool IsMagicUserDismissed { set; get; } // e211c - Audience with Baron Huldra and magic user dismissed 
       bool IsOfferingModifier { set; get; } // e212 - Add one for spending 10 gold
       bool IsOmenModifier { set; get; } // e212f - Add for next offering
       bool IsInfluenceModifier { set; get; } // e212l - Add for next offering

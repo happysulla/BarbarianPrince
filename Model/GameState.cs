@@ -2737,6 +2737,7 @@ namespace BarbarianPrince
          gi.PurchasedPorter = 0;                // e210i 
          gi.PurchasedGuide = 0;                 // e210i 
          gi.IsChagaDrugProvided = false;        // e211b
+         gi.IsMagicUserDismissed = false;       // e211c
          gi.IsAssassination = false;            // e341
          gi.IsDayEnd = false;                   // e341
          gi.IsEvadeActive = true;
@@ -6271,6 +6272,10 @@ namespace BarbarianPrince
                   gi.DieRollAction = GameAction.EncounterStart;
                   action = GameAction.EncounterStart;
                   break;
+               case GameAction.E144ContinueNormalAudienceRoll:
+                  gi.EventDisplayed = gi.EventActive = "e211c";
+                  gi.DieRollAction = GameAction.EncounterRoll;
+                  break;
                case GameAction.E146CountAudienceReroll:
                   gi.EventDisplayed = gi.EventActive = "e161"; 
                   gi.DieRollAction = GameAction.EncounterRoll;
@@ -6573,11 +6578,6 @@ namespace BarbarianPrince
                   {
                      gi.IsLadyAeravirRerollActive = false;
                      gi.ForbiddenHexes.Add(t160); // can never return to this hex.
-                     //if (false == EncounterEscape(gi, ref action)) // use this function to randomly move one hex direction
-                     //{
-                     //   returnStatus = "EncounterEscape() returned false for a=" + action.ToString();
-                     //   Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                     //}
                   }
                   switch (gi.DieResults["e160"][0]) // Based on the die roll, implement event
                   {
@@ -7053,6 +7053,18 @@ namespace BarbarianPrince
                      returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
+                  break;
+               case GameAction.E211DismissMagicUser:
+                  IMapItems magicUsers1 = new MapItems();
+                  foreach(IMapItem mi in gi.PartyMembers)
+                  {
+                     if (true == mi.IsMagicUser())
+                        magicUsers1.Add(mi);
+                  }
+                  int randNum = Utilities.RandomGenerator.Next(magicUsers1.Count);
+                  IMapItem mapItemToRemove = magicUsers1[randNum];
+                  gi.RemoveAbandonedInParty(mapItemToRemove);
+                  gi.IsMagicUserDismissed = true;
                   break;
                case GameAction.E210HirePorter:
                   for (int i = 0; i < gi.PurchasedPorter; ++i)
@@ -13373,6 +13385,12 @@ namespace BarbarianPrince
                   dieRoll += gi.SeneschalRollModifier;
                   gi.SeneschalRollModifier = 0;
                   //--------------------------------
+                  if (true == gi.IsMagicUserDismissed)
+                  {
+                     ++dieRoll;
+                     gi.IsMagicUserDismissed = false;
+                  }
+                  //--------------------------------
                   gi.DieResults[key][0] = dieRoll;
                }
                break;
@@ -13711,6 +13729,12 @@ namespace BarbarianPrince
                   //--------------------------------
                   dieRoll += gi.SeneschalRollModifier;
                   gi.SeneschalRollModifier = 0;
+                  //--------------------------------
+                  if (true == gi.IsMagicUserDismissed)
+                  {
+                     ++dieRoll;
+                     gi.IsMagicUserDismissed = false;
+                  }
                   //--------------------------------
                   gi.DieResults[key][0] = dieRoll;
                }

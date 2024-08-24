@@ -4258,9 +4258,7 @@ e211b	"<Bold>e211b Seeking an Audience at any Temple</Bold>
 <LineBreak/>  <InlineUIContainer><Button Content='e159' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 10 Must purify yourself
 <LineBreak/>  <InlineUIContainer><Button Content='e155' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>  11 plus - Audience permitted"
 e211c	"<Bold>e211c Seeking an Audience with the Baron of Huldra Castle</Bold>
-<LineBreak/><LineBreak/>As a daily action, you spend the day trying to gain admission to see the Baron Huldra. Roll two die and consult the list below for results: 
- <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21'> </Image></InlineUIContainer>
-<LineBreak/><LineBreak/>
+<LineBreak/><LineBreak/>As a daily action, you spend the day trying to gain admission to see the Baron Huldra.<LineBreak/><LineBreak/>
            2 Audience permanently refused. You cannot try again<LineBreak/>
   <InlineUIContainer><Button Content='e154' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 3 Meet Baron's Daughter<LineBreak/>
   <InlineUIContainer><Button Content='e149' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 4 Must learn court manners<LineBreak/>
@@ -4270,7 +4268,11 @@ e211c	"<Bold>e211c Seeking an Audience with the Baron of Huldra Castle</Bold>
   <InlineUIContainer><Button Content='e148' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 9 Seneschal requires a bribe<LineBreak/>
   <InlineUIContainer><Button Content='e150' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 10,11 Pay your respects to the Baron<LineBreak/>
   <InlineUIContainer><Button Content='e151' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 12 Find favor in the eyes of the Baron<LineBreak/>
-  <InlineUIContainer><Button Content='e152' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 13 plus - Baron becomes your Noble ally<LineBreak/>"
+  <InlineUIContainer><Button Content='e152' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 13 plus - Baron becomes your Noble ally
+<LineBreak/><LineBreak/>
+<InlineUIContainer><Button Content='Dismiss' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> a random magic user from party to add one to die roll.
+<LineBreak/><LineBreak/>
+Roll two die and consult list for results:  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21'> </Image></InlineUIContainer>"
 e211d	"<Bold>r211d Seeking an Audience with the Count Drogat</Bold>
 <LineBreak/><LineBreak/>As a daily action, you spend the day trying to gain admission to see the Count Drogat. Roll two die and consult the list below for results: 
  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21'> </Image></InlineUIContainer>
@@ -4315,13 +4317,16 @@ e211f	"<Bold>e211f Seeking an Audience with the Dwarven King</Bold>
   <InlineUIContainer><Button Content='e151' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 12 Find favor in the eyes of the King<LineBreak/>
   <InlineUIContainer><Button Content='e152' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 13 plus - King becomes your Noble ally<LineBreak/>"
 e211g	"<Bold>e211g Seeking an Audience with Real Heir in Party</Bold>
-<LineBreak/><LineBreak/>As a daily action, you spend the day trying to gain admission to see the Baron Huldra. You have the real Huldra's heir in your party, and you want to restore him to the throne.  Choose one option:
+<LineBreak/><LineBreak/>As a daily action, you spend the day trying to gain admission to see the Baron Huldra. You have the real Huldra's heir in your party, and you want to restore him to the throne. You will despose Baron Huldra if a 10 plus is rolled. If you fail, you will be expelled from the kingdom and may never return. 
+<LineBreak/><LineBreak/>Alternately, you can 
+<InlineUIContainer><Button Name='Continue' Content='Continue' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> 
+to seek normal audience per <InlineUIContainer><Button Content='e211c' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>
-<InlineUIContainer><Button Content='Continue' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> to seek normal audience per <InlineUIContainer><Button Content='e211c' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer>.
-<LineBreak/><LineBreak/>Alternatively, you can despose Baron Huldra if 10 plus rolled. Die Roll=
-<InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21'> </Image></InlineUIContainer>
+                                     <InlineUIContainer><Image Name='HuldraAudience' Source='../../Images/BaronHuldra1.gif' Height='250' Width='200'></Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
-                                     <InlineUIContainer><Image Name='HuldraAudience' Source='../../Images/BaronHuldra1.gif' Height='250' Width='200'></Image></InlineUIContainer>"
+<InlineUIContainer><Button Content='Dismiss' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> a random magic user from party to add one to die roll.
+<LineBreak/><LineBreak/>
+Roll two die and consult list for results:  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21'> </Image></InlineUIContainer>"
 e212	"<Bold>e212 Make an Offering at a Temple</Bold>
 <LineBreak/><LineBreak/>
 You spend the day preparing, waiting in line, and finally giving an offering at the temple alter.  You spent one gold piece for proper herbs and sacrifice.  Roll two die and consult the list below for results: 
