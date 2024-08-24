@@ -12406,7 +12406,6 @@ namespace BarbarianPrince
                break;
             case "e130a": // talk to high lord 
                gi.EnteredHexes.Last().EventNames.Add(key);
-               dieRoll = 5; // <cgs> TEST
                switch (dieRoll)
                {
                   case 1: gi.EventDisplayed = gi.EventActive = "e327"; gi.DieRollAction = GameAction.EncounterRoll; break; // pass dummies
