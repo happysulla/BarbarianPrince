@@ -51,6 +51,7 @@ namespace BarbarianPrince
       private int myCoinSpentForParty = 0;
       private int myCoinNeededForMounts = 0;
       private int myCoinSpentForMounts = 0;
+      private int myFoodNeededByParty = 0;
       private int myFoodAdded = 0;
       private bool myIsMobPursuit = false;
       private bool myIsConstabularyPursuit = false;
@@ -164,6 +165,7 @@ namespace BarbarianPrince
          myCoinSpentForParty = 0;
          myCoinSpentForMounts = 0;
          myFoodAdded = 0;
+         myFoodNeededByParty = 0;
          myHunterWound = 0;
          myCoinOriginal = 0;
          myCoinCurrent = 0;
@@ -233,11 +235,26 @@ namespace BarbarianPrince
             myCoinOriginal += mi.Coin;
             myNumMounts += mi.Mounts.Count;
             if( true == mi.Name.Contains("Giant") )
+            {
                myCoinNeededForParty += 2;
+               myFoodNeededByParty += 2;
+            }
             else if (true == mi.Name.Contains("Eagle")) // eagles do not require food
+            {
                myCoinNeededForParty += 0;
+               myFoodNeededByParty += 0;
+            }
             else
+            {
                myCoinNeededForParty += 1;
+               myFoodNeededByParty += 1;
+            }
+            foreach(IMapItem mount1 in mi.Mounts)
+            {
+               if ((true == mount1.Name.Contains("Griffon")) || (true == mount1.Name.Contains("Harpy"))) // Harpy and Griffon party of PartyMembers
+                  continue;
+               myFoodNeededByParty += 2;
+            }
             ++i;
          }
          //--------------------------------------------------
@@ -261,7 +278,7 @@ namespace BarbarianPrince
             //-----------------------------------------------
             myGridRows[0].myAssignable = myGameInstance.Prince;
             Logger.Log(LogEnum.LE_VIEW_SHOW_HUNT, "PerformHunt(): 2-myMapItems.Count=" + myMapItems.Count.ToString());
-            if ((myCoinNeededForParty <= myCoinOriginal) && (0 != myCoinNeededForParty) )// can purchase food for entire group if have enough coins
+            if ((myCoinNeededForParty <= myCoinOriginal) && (0 != myCoinNeededForParty) ) // can purchase food for entire group if have enough coins
             {
                myState = HuntEnum.LE_PURCHASE;
                myGameInstance.IsPartyFed = true; // if not fed by lord, then food paid for by coin
@@ -285,6 +302,17 @@ namespace BarbarianPrince
                      myCoinCurrent -= myCoinSpentForMounts;
                      myGameInstance.IsMountsFed = true;
                   }
+               }
+               if( myFoodNeededByParty <= myGameInstance.GetFoods() )
+               {
+                  myIsHeaderCheckBoxChecked = false;
+                  myGameInstance.IsPartyFed = false;
+                  myGameInstance.IsMountsFed = false;
+                  myFoodCurrent = myFoodOriginal;
+                  myCoinCurrent = myCoinOriginal;
+                  myCoinSpentForParty = 0;
+                  myCoinSpentForMounts = 0;
+                  myFoodAdded = 0;
                }
             }
             else
@@ -316,27 +344,30 @@ namespace BarbarianPrince
             myCursors[mount.Name] = Utilities.ConvertToCursor(b, hotPoint);
          }
          //--------------------------------------------------
-         // Start with Prince on first row
-         Logger.Log(LogEnum.LE_VIEW_SHOW_HUNT, "PerformHunt(): 3-myMaxRowCount=" + myMaxRowCount.ToString());
-         myGridRows[0].myAssignable = myGameInstance.Prince;
-         myGridRows[0].myAssignmentCount = GetAssignedCount();
-         myMapItems.Remove(myGameInstance.Prince);
-         if ((6 < myGameInstance.Prince.Food) || (true == myIsFarmland))// if prince is by himself - force user to select hunt checkbox
-            myIsHeaderCheckBoxChecked = false;
-         else
-            myIsHeaderCheckBoxChecked = true;
-         //--------------------------------------------------
-         if( true == myGameInstance.IsPartyRested) // if party is rested, assign all mapitems to grid rows
+         if (HuntEnum.LE_HUNT == myState)
          {
-            int k = 1;
-            foreach(IMapItem mi in myGameInstance.PartyMembers)
+            // Start with Prince on first row
+            Logger.Log(LogEnum.LE_VIEW_SHOW_HUNT, "PerformHunt(): 3-myMaxRowCount=" + myMaxRowCount.ToString());
+            myGridRows[0].myAssignable = myGameInstance.Prince;
+            myGridRows[0].myAssignmentCount = GetAssignedCount();
+            myMapItems.Remove(myGameInstance.Prince);
+            if ((6 < myGameInstance.Prince.Food) || (true == myIsFarmland))// if prince is by himself - force user to select hunt checkbox
+               myIsHeaderCheckBoxChecked = false;
+            else
+               myIsHeaderCheckBoxChecked = true;
+            //--------------------------------------------------
+            if ((true == myGameInstance.IsPartyRested) && (HuntEnum.LE_HUNT == myState))// if party is rested, assign all mapitems to grid rows for hunting
             {
-               if (true == mi.Name.Contains("Prince")) // dont add prince twice
-                  continue;
-               myGridRows[k].myAssignable = mi;
-               myGridRows[k].myAssignmentCount = GetAssignedCount();
-               myMapItems.Remove(mi);
-               ++k;
+               int k = 1;
+               foreach (IMapItem mi in myGameInstance.PartyMembers)
+               {
+                  if (true == mi.Name.Contains("Prince")) // dont add prince twice
+                     continue;
+                  myGridRows[k].myAssignable = mi;
+                  myGridRows[k].myAssignmentCount = GetAssignedCount();
+                  myMapItems.Remove(mi);
+                  ++k;
+               }
             }
          }
          //--------------------------------------------------
