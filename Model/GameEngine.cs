@@ -47,14 +47,6 @@ namespace BarbarianPrince
       public bool CreateUnitTests(IGameInstance gi, DockPanel dp, EventViewer ev, IDieRoller dr)
       {
          //-----------------------------------------------------------------------------
-         IUnitTest ut12 = new LodgingMgrUnitTest(ev);
-         if (true == ut12.CtorError)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): LodgingMgrUnitTest ctor error");
-            return false;
-         }
-         gi.UnitTests.Add(ut12);
-         //-----------------------------------------------------------------------------
          IUnitTest ut1 = new GameViewerCreateUnitTest(dp);
          if (true == ut1.CtorError)
          {
@@ -142,6 +134,14 @@ namespace BarbarianPrince
             return false;
          }
          gi.UnitTests.Add(ut11);
+         //-----------------------------------------------------------------------------
+         IUnitTest ut12 = new LodgingMgrUnitTest(ev);
+         if (true == ut12.CtorError)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): LodgingMgrUnitTest ctor error");
+            return false;
+         }
+         gi.UnitTests.Add(ut12);
          //-----------------------------------------------------------------------------
          IUnitTest ut13 = new TransportMgrUnitTest(ev);
          if (true == ut13.CtorError)

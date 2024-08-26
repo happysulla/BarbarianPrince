@@ -216,7 +216,12 @@ namespace BarbarianPrince
       public void UpdateView(ref IGameInstance gi, GameAction action)
       {
          if (GameAction.RemoveSplashScreen == action)
+         {
+            this.UpdateScrollbarThumbnails(gi);
             mySplashScreen.Close();
+         }
+         if (GameAction.SetupFinalize == action)
+            this.UpdateScrollbarThumbnails(gi);
          //-------------------------------------------------------
          if (GameAction.TravelAirRedistribute == action)
             return;
@@ -234,6 +239,7 @@ namespace BarbarianPrince
          else if (GameAction.UpdateLoadingGame == action)
          {
             myGameInstance = gi;
+            this.UpdateScrollbarThumbnails(gi);
             myButtonMapItems.Clear();
             foreach (UIElement ui in myCanvas.Children) // remove all buttons on map
             {
@@ -1851,11 +1857,11 @@ namespace BarbarianPrince
                   }
                   else
                   {
-                     if (false == UpdateMapItemRectangle(gi))
-                     {
-                        Logger.Log(LogEnum.LE_ERROR, "UpdateCanvas():  UpdateMapItemRectangle() returned false");
-                        return false;
-                     }
+                     //if (false == UpdateMapItemRectangle(gi))
+                     //{
+                     //   Logger.Log(LogEnum.LE_ERROR, "UpdateCanvas():  UpdateMapItemRectangle() returned false");
+                     //   return false;
+                     //}
                   }
                   if (gi.Prince.MovementUsed < gi.Prince.Movement)
                   {
@@ -1914,6 +1920,30 @@ namespace BarbarianPrince
             return false;
          }
          return true;
+      }
+      private void UpdateScrollbarThumbnails(IGameInstance gi)
+      {
+         IMapPoint mp = gi.Prince.Territory.CenterPoint;
+         double percentHeight = (mp.Y / myCanvas.ActualHeight);
+         double percentToScroll = 0.0;
+         if (percentHeight < 0.25)
+            percentToScroll = 0.0;
+         else if (0.75 < percentHeight)
+            percentToScroll = 1.0;
+         else
+            percentToScroll = percentHeight / 0.5 - 0.5;
+         double amountToScroll = percentToScroll * myScollViewerInside.ScrollableHeight;
+         myScollViewerInside.ScrollToVerticalOffset(amountToScroll);
+         //--------------------------------------------------------------------
+         double percentWidth = (mp.X / myCanvas.ActualWidth);
+         if (percentWidth < 0.25)
+            percentToScroll = 0.0;
+         else if (0.75 < percentWidth)
+            percentToScroll = 1.0;
+         else
+            percentToScroll = percentWidth / 0.5 - 0.5;
+         amountToScroll = percentToScroll * myScollViewerInside.ScrollableWidth;
+         myScollViewerInside.ScrollToHorizontalOffset(amountToScroll);
       }
       private bool UpdateMapItemRectangle(IGameInstance gi)
       {
