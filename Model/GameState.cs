@@ -1313,6 +1313,9 @@ namespace BarbarianPrince
                            returnStatus = "PerformAutoSetup() returned false";
                            Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
                         }
+                        gi.GamePhase = GamePhase.SunriseChoice;      // RemoveSplashScreen
+                        gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
+                        gi.DieRollAction = GameAction.DieRollActionNone;
                      }
                      else
                      {
@@ -1398,6 +1401,12 @@ namespace BarbarianPrince
                      {
                         returnStatus = "PerformAutoSetup() returned false";
                         Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
+                     }
+                     else
+                     {
+                        gi.GamePhase = GamePhase.SunriseChoice;      // UpdateNewGame
+                        gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
+                        gi.DieRollAction = GameAction.DieRollActionNone;
                      }
                   }
                }
@@ -1496,9 +1505,6 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "PerformAutoSetup():  SetStartingLocation() return false");
             return false;
          }
-         gi.GamePhase = GamePhase.SunriseChoice;      // PerformAutoSetup()
-         gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
-         gi.DieRollAction = GameAction.DieRollActionNone;
          return true;
       }
       private bool AddStartingPrinceOption(IGameInstance gi)
@@ -3173,6 +3179,7 @@ namespace BarbarianPrince
          hex.EventNames.Add(gi.EventActive);
          hex.IsEncounter = true;
          hex.JailDay++;
+         gi.EnteredHexes.Add(hex);
          switch (gi.EventActive)
          {
             case "e203a":

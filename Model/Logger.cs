@@ -75,8 +75,8 @@ namespace BarbarianPrince
       {
          Logger.SetOn(LogEnum.LE_ERROR);
          //Logger.SetOn(LogEnum.LE_GAME_INIT);
-         Logger.SetOn(LogEnum.LE_USER_ACTION);
-         Logger.SetOn(LogEnum.LE_NEXT_ACTION);
+         //Logger.SetOn(LogEnum.LE_USER_ACTION);
+         //Logger.SetOn(LogEnum.LE_NEXT_ACTION);
          //Logger.SetOn(LogEnum.LE_UNDO_COMMAND);
          //Logger.SetOn(LogEnum.LE_GAME_PARTYMEMBER_COUNT);
          Logger.SetOn(LogEnum.LE_PARTYMEMBER_ADD);
@@ -98,8 +98,8 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_COMBAT_RESULT);
          //Logger.SetOn(LogEnum.LE_COMBAT_TROLL_HEAL);
          Logger.SetOn(LogEnum.LE_COMBAT_WIZARD);
-         Logger.SetOn(LogEnum.LE_MAPITEM_WOUND);
-         Logger.SetOn(LogEnum.LE_MAPITEM_POISION);
+         //Logger.SetOn(LogEnum.LE_MAPITEM_WOUND);
+         //Logger.SetOn(LogEnum.LE_MAPITEM_POISION);
          Logger.SetOn(LogEnum.LE_END_ENCOUNTER);
          Logger.SetOn(LogEnum.LE_HEX_WITHIN_RANGE);
          Logger.SetOn(LogEnum.LE_STARVATION_STATE_CHANGE);

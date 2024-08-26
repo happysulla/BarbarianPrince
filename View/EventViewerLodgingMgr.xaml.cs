@@ -294,9 +294,14 @@ namespace BarbarianPrince
             myGridRows[i].myResult = Utilities.NO_RESULT;
             if (true == mi.Name.Contains("TrueLove")) // if there is more than one true love, all but one may leave
                ++myNumTrueLove;
+            mi.IsExposedToUser = true;
             myGridRows[i].myMountRows = new List<MountRow>();
             foreach (IMapItem mount in mi.Mounts)
             {
+               if (1 < mi.Mounts.Count)
+                  mount.IsExposedToUser = false;
+               else
+                  mount.IsExposedToUser = true;
                MountRow mr = new MountRow(mount.Name, false);
                myGridRows[i].myMountRows.Add(mr);
             }
@@ -998,9 +1003,19 @@ namespace BarbarianPrince
       private bool UpdateGridRowsForLodging()
       {
          if (true == myIsMoreThanOneMountToMapItem)
-            myTextBlock3.Text = "Click to Rotate";
+         {
+            myTextBlock3.Inlines.Clear();
+            Span span = new Span() { Foreground = Brushes.Red, FontFamily = myFontFam };
+            span.Inlines.Add("Click to Rotate");
+            myTextBlock3.Inlines.Add(span);
+         }
          else
-            myTextBlock3.Text = "Mounts";
+         {
+            myTextBlock3.Inlines.Clear();
+            Span span = new Span() { Foreground = Brushes.Black, FontFamily = myFontFam };
+            span.Inlines.Add("Mounts");
+            myTextBlock3.Inlines.Add(span);
+         }
          for (int i = 0; i < myMaxRowCount; ++i)
          {
             int rowNum = i + STARTING_ASSIGNED_ROW;
@@ -1510,6 +1525,11 @@ namespace BarbarianPrince
          b.Background = new SolidColorBrush(Colors.Transparent);
          b.Foreground = new SolidColorBrush(Colors.Transparent);
          b.IsEnabled = true;
+         if (false == mi.IsExposedToUser)
+         {
+            b.BorderBrush = Brushes.Red;
+            b.BorderThickness = new Thickness(3);
+         }
          MapItem.SetButtonContent(b, mi, true, true); // This sets the image as the button's content
          return b;
       }
@@ -1778,6 +1798,7 @@ namespace BarbarianPrince
          }
          int i = rowNum - STARTING_ASSIGNED_ROW;
          IMapItem mi = myGridRows[i].myMapItem;
+         mi.Mounts[0].IsExposedToUser = true;
          mi.Mounts.Rotate(1);
          while (myGameInstance.IsDuplicateMount()) // remove all duplicate mounts
          {

@@ -27,6 +27,7 @@ namespace BarbarianPrince
          public bool myIsDoubleMeal;
          public bool myIsHired;
          public int myResult;
+         public bool myIsExposed; // only applies to mount. If not exposed, indicate with a red box
          public int myWages;
          public int myGroupNum;
          public bool myIsPreviouslyRiding;
@@ -158,8 +159,8 @@ namespace BarbarianPrince
             return false;
          }
          //--------------------------------------------------
+         Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "FeedParty(): set state " + myState.ToString() + "->SE_STARVE");
          myState = StarveEnum.SE_STARVE;
-         Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "FeedParty(): set state=" + myState.ToString());
          myFoodOriginal = 0;
          myFoodCurrent = 0;
          myNumMountsCount = 0;
@@ -188,6 +189,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "FeedParty(): mi=null");
                return false;
             }
+            mi.IsExposedToUser = true;
             if (true == mi.IsSunStroke) // e121 - sunstroke removed at evening meal
             {
                mi.OverlayImageName = "";
@@ -218,6 +220,10 @@ namespace BarbarianPrince
                myIsMoreThanOneMountToMapItem = true;
             foreach (IMapItem mount in mi.Mounts)
             {
+               if( 1 < mi.Mounts.Count )
+                  mount.IsExposedToUser = false;
+               else
+                  mount.IsExposedToUser = true;
                if (true == myGameInstance.IsMountsFed) 
                   mount.StarveDayNumOld = mount.StarveDayNum;
                else
@@ -1065,9 +1071,19 @@ namespace BarbarianPrince
             myTextBlockCol1.Text = "Double?";
             myTextBlockCol2.Text = "Starve Days";
             if (true == myIsMoreThanOneMountToMapItem)
-               myTextBlockCol3.Text = "Click to Rotate";
+            {
+               myTextBlockCol3.Inlines.Clear();
+               Span span = new Span() { Foreground = Brushes.Red, FontFamily = myFontFam };
+               span.Inlines.Add("Click to Rotate");
+               myTextBlockCol3.Inlines.Add(span);
+            }
             else
-               myTextBlockCol3.Text = "Mount";
+            {
+               myTextBlockCol3.Inlines.Clear();
+               Span span = new Span() { Foreground = Brushes.Black, FontFamily = myFontFam };
+               span.Inlines.Add("Mount");
+               myTextBlockCol3.Inlines.Add(span);
+            }
             myTextBlockCol4.Text = "Feed Mount?";
             myTextBlockCol5.Text = "Max Loads";
             myTextBlockCol6.Text = "Result";
@@ -1720,8 +1736,8 @@ namespace BarbarianPrince
          // Set State based on food needs
          if (foodNeededTotalWithExtra <= myFoodCurrent) // Feed all and eliminate extra starve days
          {
+            Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "SetStateStarvation(): set state " + myState.ToString() + "->SE_FEED_ALL_WITH_EXTRA");
             myState = StarveEnum.SE_FEED_ALL_WITH_EXTRA;
-            Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "SetStateStarvation(): set state=" + myState.ToString());
             myIsHeaderCheckBoxChecked = true;
             myFoodCurrent -= foodNeededTotalWithExtra;
             if( true == myGameInstance.IsFalconInParty())
@@ -1760,8 +1776,8 @@ namespace BarbarianPrince
          //-------------------------------------------------
          else if (foodNeededForPeople <= myFoodCurrent) // Feed people but do not feed mounts
          {
+            Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "SetStateStarvation(): set state " + myState.ToString() + "->SE_FEED_PEOPLE");
             myState = StarveEnum.SE_FEED_PEOPLE;
-            Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "SetStateStarvation(): set state=" + myState.ToString());
             myIsHeaderCheckBoxChecked = true;
             myFoodCurrent -= foodNeededForPeople;
             if (true == myGameInstance.IsFalconInParty())
@@ -1801,8 +1817,8 @@ namespace BarbarianPrince
          //-------------------------------------------------
          else
          {
+            Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "SetStateStarvation(): set state " + myState.ToString() + "->SE_STARVE");
             myState = StarveEnum.SE_STARVE;
-            Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "SetStateStarvation(): set state=" + myState.ToString());
             myIsHeaderCheckBoxChecked = false;
             myGameInstance.IsFalconFed = false;
             foreach (IMapItem mi in myPartyMembers)
@@ -1818,19 +1834,6 @@ namespace BarbarianPrince
                }
             }
          }
-         //-------------------------------------------------
-         bool isAnyDieRollNeeded = false;
-         for (int k = 0; k < myMaxRowCount; ++k)
-         {
-            IMapItem mi1 = myGridRows[k].myMapItem;
-            if (Utilities.NO_RESULT == myGridRows[k].myResult) // die roll not needed for Prince, Hirelings not paired, True Love, etc
-               isAnyDieRollNeeded = true;
-         }
-         if( false == isAnyDieRollNeeded ) // if no die is needed, it will end with mouse click 
-         {
-            Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "SetStateStarvation(): change state=" + myState.ToString() + " to SE_SHOW_FEED_RESULTS");
-            myState = StarveEnum.SE_SHOW_FEED_RESULTS;  // Assume all rolls performed unless one row shows no results
-         }
       }
       private Button CreateButton(IMapItem mi, bool isAdornmentsShown)
       {
@@ -1842,6 +1845,11 @@ namespace BarbarianPrince
          b.Background = new SolidColorBrush(Colors.Transparent);
          b.Foreground = new SolidColorBrush(Colors.Transparent);
          b.IsEnabled = true;
+         if (false == mi.IsExposedToUser)
+         {
+            b.BorderBrush = Brushes.Red;
+            b.BorderThickness = new Thickness(3);
+         }
          MapItem.SetButtonContent(b, mi, true, isAdornmentsShown); // This sets the image as the button's content
          return b;
       }
@@ -1902,16 +1910,15 @@ namespace BarbarianPrince
                }
             }
             //----------------------------------------------
+            Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "ShowDieResults(): state " + myState.ToString() + "->SE_SHOW_FEED_RESULTS");
             myState = StarveEnum.SE_SHOW_FEED_RESULTS;  // Assume all rolls performed unless one row shows no results
-            Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "ShowDieResults(): init state=" + myState.ToString());
             for (int k = 0; k < myMaxRowCount; ++k)
             {
                IMapItem mi1 = myGridRows[k].myMapItem;
-               Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "ShowDieResults(): mi=" + mi1.Name + " result=" + myGridRows[k].myResult.ToString());
                if (Utilities.NO_RESULT == myGridRows[k].myResult)  
                {
+                  Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "ShowDieResults(): state " + myState.ToString() + "->SE_ROLL_DESERTERS");
                   myState = StarveEnum.SE_ROLL_DESERTERS;
-                  Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "ShowDieResults(): change state=" + myState.ToString());
                   break;
                }
             }
@@ -1923,13 +1930,15 @@ namespace BarbarianPrince
       //-----------------------------------------------------------------------------------------
       private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
       {
+
          if (StarveEnum.SE_SHOW_FEED_RESULTS == myState)
          {
+            StarveEnum previousState = myState;
             if ((true == IsPotionHealShown()) && (true == IsPotionCureShown()))
                myState = StarveEnum.SE_SHOW_POTIONS;
             else
                myState = StarveEnum.SE_END;
-            Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "Grid_MouseDown(): set state=" + myState.ToString());
+            Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "Grid_MouseDown(): state=" + previousState.ToString() + "->" + myState.ToString());
             if (false == UpdateGrid())
                Logger.Log(LogEnum.LE_ERROR, "Grid_MouseDown(): UpdateGrid() return false");
             return;
@@ -1949,23 +1958,24 @@ namespace BarbarianPrince
                         string name = (string)img.Name;
                         if ("Campfire" == name)
                         {
+                           Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "Grid_MouseDown(): set state=" + myState.ToString() + "->SE_END");
                            myState = StarveEnum.SE_END;
-                           Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "Grid_MouseDown(): set state=" + myState.ToString());
                         }
                         else if (true == name.Contains("Potion"))
                         {
+                           Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "Grid_MouseDown(): set state=" + myState.ToString() + "->SE_SHOW_POTIONS");
                            myState = StarveEnum.SE_SHOW_POTIONS;
-                           Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "Grid_MouseDown(): set state=" + myState.ToString());
                         }
                         else if (true == name.Contains("Muscle"))
                         {
+                           StarveEnum previousState = myState;
                            SetStateStarvation();
-                           Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "Grid_MouseDown(): set state=" + myState.ToString());
+                           Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "Grid_MouseDown(): state=" + previousState.ToString() + "->" + myState.ToString());
                         }
                         else if ("MagicianGift" == name)
                         {
+                           Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "Grid_MouseDown(): set state=" + myState.ToString() + "->SE_MAGICIAN_GIFT");
                            myState = StarveEnum.SE_MAGICIAN_GIFT;
-                           Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "Grid_MouseDown(): set state=" + myState.ToString());
                         }
                         else if ("GiftRoll" == name)
                         {
@@ -2196,6 +2206,7 @@ namespace BarbarianPrince
          if (1 < mi.Mounts.Count)
          {
             IMapItem mountBeingRotated = mi.Mounts[0];
+            mountBeingRotated.IsExposedToUser = true;
             if (true == mountBeingRotated.IsFlyingMountCarrier())
             {
                mountBeingRotated.Rider.Mounts.Remove(mountBeingRotated);
@@ -2252,17 +2263,18 @@ namespace BarbarianPrince
                   foodNeededForPeople += 1;
             }
          }
+         int foodNeededWithExtra = 0;
          for (int i = 0; i < myMaxRowCount; ++i)  //  If have extra starve days, can remove two if extra food - only applies to people and not mounts
          {
             IMapItem mi = myGridRows[i].myMapItem;
             if (2 < mi.StarveDayNum)
             {
                if (true == mi.Name.Contains("Giant"))
-                  foodNeededForPeople += 2;
+                  foodNeededWithExtra += 2;
                else if ( (true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")) || (true == mi.IsUnconscious) )
-                  foodNeededForPeople += 0;
+                  foodNeededWithExtra += 0;
                else
-                  foodNeededForPeople += 1;
+                  foodNeededWithExtra += 1;
             }
          }
          int foodNeededForMounts = 0;
@@ -2271,11 +2283,12 @@ namespace BarbarianPrince
          //--------------------------------------------------------------------
          if (("Desert" == myTerritory.Type) && (false == myTerritory.IsOasis)) // Double food needs if in desert
          {
+            foodNeededWithExtra = foodNeededWithExtra << 1;
             foodNeededForPeople = foodNeededForPeople << 1;
             foodNeededForMounts = foodNeededForMounts << 1;
          }
-         int foodNeededTotalWithExtra = foodNeededForMounts + foodNeededForPeople;
-         int foodNeededTotal = foodNeededForPeople + foodNeededForMounts;
+         int foodNeededTotalWithExtra = foodNeededWithExtra + foodNeededForMounts + foodNeededForPeople;
+         int foodNeededTotalWithoutExtra = foodNeededForPeople + foodNeededForMounts;
          //--------------------------------------------------------------------
          myFoodCurrent = myFoodOriginal;
          switch (myState)
@@ -2301,7 +2314,7 @@ namespace BarbarianPrince
                }
                break;
             case StarveEnum.SE_FEED_ALL:
-               myFoodCurrent -= foodNeededTotal;
+               myFoodCurrent -= foodNeededTotalWithoutExtra;
                if (true == myGameInstance.IsFalconInParty())
                   myGameInstance.IsFalconFed = true;
                for (int i = 0; i < myMaxRowCount; ++i)

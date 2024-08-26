@@ -917,7 +917,7 @@ r216	"<Bold>r216 Starvation</Bold>
   <InlineUIContainer><Button Name='myButtonR216c' Content='r216c' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  Mount Starvation"
 r216a	"<Bold>r216a Follower Starvation</Bold>
-<LineBreak/><LineBreak/>If followers are not fed, they may desert. Roll two dice for each follower, and subtract your wit and wiles from the total. If the result is 4 or more, the chaacter deserts your party. Otherwise, he/she stays and suffers from the character starvation
+<LineBreak/><LineBreak/>If followers are not fed, they may desert. Roll two dice for each follower, and subtract your wit and wiles from the total. If the result is 4 or more, the follwer deserts your party. Otherwise, he/she stays and suffers from the character starvation
  <InlineUIContainer><Button Name='myButtonR216b' Content='r216b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>If you have food units or money to purchase it (in a town, castle, or temple), you cannot voluntarily withhold food from your followers unless you go without yourself as well. 
 <LineBreak/><LineBreak/>If there is insufficient food for all, either you withhold it from all (including yourself) or share out what is available to all (this prevents the effects of character starvation

@@ -47,6 +47,14 @@ namespace BarbarianPrince
       public bool CreateUnitTests(IGameInstance gi, DockPanel dp, EventViewer ev, IDieRoller dr)
       {
          //-----------------------------------------------------------------------------
+         IUnitTest ut11 = new StarvationUnitTest(ev);
+         if (true == ut11.CtorError)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): StarvationUnitTest() ctor error");
+            return false;
+         }
+         gi.UnitTests.Add(ut11);
+         //-----------------------------------------------------------------------------
          IUnitTest ut1 = new GameViewerCreateUnitTest(dp);
          if (true == ut1.CtorError)
          {
@@ -126,14 +134,6 @@ namespace BarbarianPrince
             return false;
          }
          gi.UnitTests.Add(ut10);
-         //-----------------------------------------------------------------------------
-         IUnitTest ut11 = new StarvationUnitTest(ev);
-         if (true == ut11.CtorError)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): StarvationUnitTest() ctor error");
-            return false;
-         }
-         gi.UnitTests.Add(ut11);
          //-----------------------------------------------------------------------------
          IUnitTest ut12 = new LodgingMgrUnitTest(ev);
          if (true == ut12.CtorError)

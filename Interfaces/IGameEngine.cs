@@ -97,8 +97,8 @@ namespace BarbarianPrince
       DieRollActionNone, // The field in IGameInstance indicates what the roll apply. If none expected, it is set to this value.
       TransportRedistributeEnd,
 
-      UpdateNewGame,
-      UpdateGameOptions, // Menu Options
+      UpdateNewGame,  // Menu Options
+      UpdateGameOptions, 
       UpdateLoadingGame,
       UpdateUndo,
 

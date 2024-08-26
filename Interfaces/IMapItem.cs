@@ -28,6 +28,7 @@ namespace BarbarianPrince
       List<BloodSpot> PoisonSpots { get; }
       double Zoom { get; set; }
       bool IsHidden { get; set; }
+      bool IsExposedToUser { get; set; } // some dialogs require clicking on mount to rotate it. This variable tracks if user has seen this item yet.
       bool IsAnimated { get; set; }
       IMapPoint Location { get; set; }
       //----------------------------------------

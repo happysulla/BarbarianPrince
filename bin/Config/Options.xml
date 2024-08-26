@@ -7,10 +7,10 @@
     <IsEnabled value="True" />
   </Option>
   <Option value="PrinceHorse">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="PrincePegasus">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="PrinceCoin">
     <IsEnabled value="True" />
@@ -73,7 +73,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="Monk">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="PorterSlave">
     <IsEnabled value="False" />
@@ -88,7 +88,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="PartyMounted">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="PartyAirborne">
     <IsEnabled value="False" />
@@ -163,10 +163,10 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="EasyMonsters">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="EasiestMonsters">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="AutoLostDecrease">
     <IsEnabled value="True" />
@@ -181,25 +181,25 @@
     <IsEnabled value="True" />
   </Option>
   <Option value="NoLostRoll">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ForceNoLostEvent">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ForceNoEvent">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ForceNoRoadEvent">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ForceNoCrossEvent">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ForceNoRaftEvent">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ForceNoAirEvent">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ForceLostEvent">
     <IsEnabled value="False" />

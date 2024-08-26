@@ -15,6 +15,7 @@ using WpfAnimatedGif;
 using Point = System.Windows.Point;
 using static BarbarianPrince.EventViewerStarvationMgr;
 using static BarbarianPrince.EventViewerLodgingMgr;
+using System.Threading;
 
 namespace BarbarianPrince
 {
@@ -26,7 +27,7 @@ namespace BarbarianPrince
       public struct MountRow
       {
          public string myName;
-         public bool myIsReleased;
+         public bool myIsReleased; // indicates that mount disappears 
          public MountRow(string name, bool isReleased)
          {
             myName = name;
@@ -70,9 +71,7 @@ namespace BarbarianPrince
       //---------------------------------------------
       private bool myIsHeaderCheckBoxChecked = false;
       //---------------------------------------------
-      private readonly SolidColorBrush mySolidColorBrushBlack = new SolidColorBrush() { Color = Colors.Black };
       private readonly FontFamily myFontFam = new FontFamily("Tahoma");
-      private readonly FontFamily myFontFam1 = new FontFamily("Courier New");
       //-----------------------------------------------------------------------------------------
       public EventViewerE060Mgr(IGameInstance gi, Canvas c, ScrollViewer sv, RuleDialogViewer rdv, IDieRoller dr)
       {
@@ -143,11 +142,10 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "PaymentCheck(): mi=null");
                return false;
             }
+            mi.IsExposedToUser = true;
             myGridRows[i] = new GridRow(mi);
             myCoinOriginal += mi.Coin;
             myNumMountsCount += mi.Mounts.Count;
-            if (1 < mi.Mounts.Count)
-               myIsMoreThanOneMountToMapItem = true;
             if ("Prince" == mi.Name)
                myGridRows[i].myIsReleased = true;
             //-----------------------------------
@@ -162,9 +160,15 @@ namespace BarbarianPrince
                mi.Rider = null;
             }
             //-----------------------------------
+            if (1 < mi.Mounts.Count)
+               myIsMoreThanOneMountToMapItem = true;
             myGridRows[i].myMountRows = new List<MountRow>();
             foreach (IMapItem mount in mi.Mounts)
             {
+               if (1 < mi.Mounts.Count)
+                  mount.IsExposedToUser = false;
+               else
+                  mount.IsExposedToUser = true;
                MountRow mr = new MountRow(mount.Name, false);
                myGridRows[i].myMountRows.Add(mr);
             }
@@ -180,9 +184,10 @@ namespace BarbarianPrince
             myCoinCurrent = myCoinOriginal - myTotalCost;
             for (int k = 0; k < myMaxRowCount; ++k)
             {
+               IMapItem mi = myGridRows[k].myMapItem;
                myGridRows[k].myIsReleased = true;
                myGridRows[k].myMountRows.Clear();
-               foreach (IMapItem mount in myGridRows[k].myMapItem.Mounts)
+               foreach (IMapItem mount in mi.Mounts)
                {
                   MountRow mr = new MountRow(mount.Name, true);
                   myGridRows[k].myMountRows.Add(mr);
@@ -328,9 +333,12 @@ namespace BarbarianPrince
       private bool UpdateGridRows()
       {
          if (true == myIsMoreThanOneMountToMapItem)
-            myTextBlock3.Text = "Click to Rotate";
-         else
-            myTextBlock3.Text = "Mounts";
+         {
+            myTextBlock3.Inlines.Clear();
+            Span span = new Span() { Foreground = Brushes.Red, FontFamily = myFontFam };
+            span.Inlines.Add("Click to Rotate");
+            myTextBlock3.Inlines.Add(span);
+         }
          //------------------------------------------------------------
          // Clear out existing Grid Row data
          List<UIElement> results = new List<UIElement>();
@@ -450,6 +458,11 @@ namespace BarbarianPrince
          b.BorderBrush = Brushes.Black;
          b.Background = new SolidColorBrush(Colors.Transparent);
          b.Foreground = new SolidColorBrush(Colors.Transparent);
+         if( false == mi.IsExposedToUser )
+         {
+            b.BorderBrush = Brushes.Red;
+            b.BorderThickness = new Thickness(3);
+         }
          MapItem.SetButtonContent(b, mi, false, true); // This sets the image as the button's content
          return b;
       }
@@ -580,6 +593,7 @@ namespace BarbarianPrince
          }
          int i = rowNum - STARTING_ASSIGNED_ROW;
          IMapItem mi = myGridRows[i].myMapItem;
+         mi.Mounts[0].IsExposedToUser = true;
          mi.Mounts.Rotate(1);
          if (false == UpdateGrid())
             Logger.Log(LogEnum.LE_ERROR, "CheckBox_Click(): UpdateGrid() return false");

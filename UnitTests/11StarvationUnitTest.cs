@@ -31,7 +31,7 @@ namespace BarbarianPrince
          myHeaderNames.Add("10-Henchmen Group w/ Mistrel");
          myHeaderNames.Add("10-Party w/ 10 food 0 SD");
          myHeaderNames.Add("10-Party w/ 8 food, multi SD");
-         myHeaderNames.Add("10-Party w/ 10 food, 3 Mounts");
+         myHeaderNames.Add("10-Party w/ 10 food, 5 Mounts");
          myHeaderNames.Add("10-Party w/ 3 food, 3 SD, 4 Mounts");
          myHeaderNames.Add("10-Party w/ 3 food, 3 SD, 4 Mounts, Party Fed");
          myHeaderNames.Add("10-Party w/ 3 food, 3 SD, 4 Mounts, Mounts Fed");
@@ -119,6 +119,8 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[1]) 
          {
+            gi.IsPartyFed = false;
+            gi.IsMountsFed = false;
             gi.Prince.Food = 30;
             gi.Prince.Coin = 30;
             //-----------------------------
@@ -162,7 +164,7 @@ namespace BarbarianPrince
             gi.PartyMembers.Reverse();
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         if (CommandName == myCommandNames[2])
+         else if (CommandName == myCommandNames[2])
          {
             gi.Prince.Food = 6;
             gi.Prince.StarveDayNum = 0;
@@ -251,7 +253,7 @@ namespace BarbarianPrince
             gi.IsMagicianProvideGift = true; // <<<<<<<<<<<<<<<<<<<<=================================
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[4]) //Henchmen Group
+         else if (CommandName == myCommandNames[4]) //10-Henchmen Group - Witches Paid
          {
             gi.Prince.Coin = 10;
             gi.Prince.Food = 10;
@@ -478,7 +480,7 @@ namespace BarbarianPrince
             //--------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[9])
+         else if (CommandName == myCommandNames[9]) // 10-Party w/ 10 food, 5 Mounts
          {
             gi.Prince.Food = 4;
             gi.Prince.StarveDayNum = 0;
@@ -496,6 +498,8 @@ namespace BarbarianPrince
             IMapItem companion2 = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
             companion2.Food = 2;
             companion2.StarveDayNum = 2;
+            companion2.AddNewMount();
+            companion2.AddNewMount();
             companion2.AddNewMount();
             gi.PartyMembers.Add(companion2);
             //---------------------------------------------------
@@ -697,6 +701,8 @@ namespace BarbarianPrince
             gi.Prince.Food = 2;
             gi.Prince.StarveDayNum = 0;
             AddPrinceMounts(ref gi, 1); // 1 mount
+            gi.IsPartyFed = true;
+            gi.IsMountsFed = true;
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[22])
@@ -704,6 +710,8 @@ namespace BarbarianPrince
             gi.Prince.Food = 2;
             gi.Prince.StarveDayNum = 0;
             AddPrinceMounts(ref gi, 1); // 1 mount
+            gi.IsPartyFed = true;
+            gi.IsMountsFed = false;
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[23])
@@ -711,7 +719,7 @@ namespace BarbarianPrince
             gi.Prince.Food = 2;
             gi.Prince.StarveDayNum = 0;
             AddPrinceMounts(ref gi, 1);
-            gi.IsPartyFed = true;
+            gi.IsPartyFed = false;
             gi.IsMountsFed = true;
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }

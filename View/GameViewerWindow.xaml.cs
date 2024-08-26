@@ -179,7 +179,7 @@ namespace BarbarianPrince
          myDashArray.Add(4);  // used for dotted lines
          myDashArray.Add(2);  // used for dotted lines
          //-----------------------------------------------------------------
-         myDieRoller = new DieRoller(myCanvas, CloseSplashScreen);
+         myDieRoller = new DieRoller(myCanvas, CloseSplashScreen); // Close the splash screen when die resources are loaded
          if (true == myDieRoller.CtorError)
          {
             Logger.Log(LogEnum.LE_ERROR, "GameViewerWindow(): myDieRoller.CtorError=true");
@@ -215,12 +215,8 @@ namespace BarbarianPrince
       }
       public void UpdateView(ref IGameInstance gi, GameAction action)
       {
-         if (GameAction.RemoveSplashScreen == action)
-            mySplashScreen.Close();
-         if (GameAction.SetupFinalize == action)
-            this.UpdateScrollbarThumbnails(gi);
          //-------------------------------------------------------
-         if (GameAction.TravelAirRedistribute == action)
+         if (GameAction.TravelAirRedistribute == action) // if redistributing loads to to air travel, do not update canvas
             return;
          //-------------------------------------------------------
          if ((null != myTargetCursor) && (GameAction.UpdateStatusBar == action)) // increase/decrease size of cursor when zoom in or out
@@ -236,7 +232,6 @@ namespace BarbarianPrince
          else if (GameAction.UpdateLoadingGame == action)
          {
             myGameInstance = gi;
-            this.UpdateScrollbarThumbnails(gi);
             myButtonMapItems.Clear();
             foreach (UIElement ui in myCanvas.Children) // remove all buttons on map
             {
@@ -259,6 +254,7 @@ namespace BarbarianPrince
          UpdateTimeTrack(gi);
          UpdateFoodSupply(gi);
          UpdatePrinceEnduranceStatus(gi);
+         UpdateScrollbarThumbnails(gi.Prince.Territory);
          switch (action)
          {
             case GameAction.ShowInventory:
@@ -266,6 +262,12 @@ namespace BarbarianPrince
             case GameAction.ShowEventListing:
             case GameAction.ShowAboutDialog:
             case GameAction.E228ShowTrueLove:
+               break;
+            case GameAction.RemoveSplashScreen:
+               if (false == UpdateCanvas(gi, action))
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvas() returned error ");
+               mySplashScreen.Close();
+               UpdateScrollbarThumbnails(gi.Prince.Territory);
                break;
             case GameAction.UpdateGameOptions:
                Option option = gi.Options.Find("ExtendEndTime");
@@ -1707,21 +1709,21 @@ namespace BarbarianPrince
             {
                case GameAction.EndGameClose:
                   GameAction outActionClose = GameAction.EndGameExit;
-                  myGameEngine.PerformAction(ref myGameInstance, ref outActionClose);
+                  myGameEngine.PerformAction(ref gi, ref outActionClose);
                   break;
                case GameAction.EndGameLost:
                case GameAction.EndGameWin:
                   StringBuilder sbEnd = new StringBuilder();
                   sbEnd.Append("Game ends on Day#");
                   ++myGameInstance.Days;
-                  sbEnd.Append(myGameInstance.Days.ToString());
+                  sbEnd.Append(gi.Days.ToString());
                   sbEnd.Append(" due to '");
-                  sbEnd.Append(myGameInstance.EndGameReason);
+                  sbEnd.Append(gi.EndGameReason);
                   sbEnd.Append("' in ");
-                  sbEnd.Append(myGameInstance.Prince.Territory.Name);
+                  sbEnd.Append(gi.Prince.Territory.Name);
                   MessageBox.Show(sbEnd.ToString());
                   GameAction outAction = GameAction.EndGameExit;
-                  myGameEngine.PerformAction(ref myGameInstance, ref outAction);
+                  myGameEngine.PerformAction(ref gi, ref outAction);
                   break;
                case GameAction.TravelLostCheck:
                   if (0 == gi.MapItemMoves.Count)
@@ -1918,10 +1920,9 @@ namespace BarbarianPrince
          }
          return true;
       }
-      private void UpdateScrollbarThumbnails(IGameInstance gi)
+      private void UpdateScrollbarThumbnails(ITerritory t)
       {
-         IMapPoint mp = gi.Prince.Territory.CenterPoint;
-         double percentHeight = (mp.Y / myCanvas.ActualHeight);
+         double percentHeight = (t.CenterPoint.Y / myCanvas.ActualHeight);
          double percentToScroll = 0.0;
          if (percentHeight < 0.25)
             percentToScroll = 0.0;
@@ -1932,7 +1933,7 @@ namespace BarbarianPrince
          double amountToScroll = percentToScroll * myScollViewerInside.ScrollableHeight;
          myScollViewerInside.ScrollToVerticalOffset(amountToScroll);
          //--------------------------------------------------------------------
-         double percentWidth = (mp.X / myCanvas.ActualWidth);
+         double percentWidth = (t.CenterPoint.X / myCanvas.ActualWidth);
          if (percentWidth < 0.25)
             percentToScroll = 0.0;
          else if (0.75 < percentWidth)

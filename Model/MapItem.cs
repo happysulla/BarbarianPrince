@@ -50,6 +50,7 @@ namespace BarbarianPrince
       public List<BloodSpot> PoisonSpots { get => myPoisonSpots; }
       public double Zoom { get; set; } = 1.0;
       public bool IsHidden { get; set; } = false;
+      public bool IsExposedToUser { get; set; } = false;
       //--------------------------------------------------
       public int Endurance { get; set; } = 0;
       public int Movement { get; set; } = 4;
