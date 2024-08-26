@@ -216,10 +216,7 @@ namespace BarbarianPrince
       public void UpdateView(ref IGameInstance gi, GameAction action)
       {
          if (GameAction.RemoveSplashScreen == action)
-         {
-            this.UpdateScrollbarThumbnails(gi);
             mySplashScreen.Close();
-         }
          if (GameAction.SetupFinalize == action)
             this.UpdateScrollbarThumbnails(gi);
          //-------------------------------------------------------
