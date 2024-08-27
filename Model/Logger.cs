@@ -75,21 +75,21 @@ namespace BarbarianPrince
       {
          Logger.SetOn(LogEnum.LE_ERROR);
          //Logger.SetOn(LogEnum.LE_GAME_INIT);
-         //Logger.SetOn(LogEnum.LE_USER_ACTION);
-         //Logger.SetOn(LogEnum.LE_NEXT_ACTION);
+         Logger.SetOn(LogEnum.LE_USER_ACTION);
+         Logger.SetOn(LogEnum.LE_NEXT_ACTION);
          //Logger.SetOn(LogEnum.LE_UNDO_COMMAND);
          //Logger.SetOn(LogEnum.LE_GAME_PARTYMEMBER_COUNT);
          Logger.SetOn(LogEnum.LE_PARTYMEMBER_ADD);
          Logger.SetOn(LogEnum.LE_REMOVE_KILLED);
          //Logger.SetOn(LogEnum.LE_END_GAME_CHECK);
          //Logger.SetOn(LogEnum.LE_MOVE_STACKING);
-         Logger.SetOn(LogEnum.LE_MOVE_COUNT);
+         //Logger.SetOn(LogEnum.LE_MOVE_COUNT);
          //Logger.SetOn(LogEnum.LE_RESET_ROLL_STATE);
          //Logger.SetOn(LogEnum.LE_GET_COIN);
          //Logger.SetOn(LogEnum.LE_BRIBE);
-         Logger.SetOn(LogEnum.LE_ADD_WEALTH_CODE);
-         Logger.SetOn(LogEnum.LE_ADD_COIN);
-         Logger.SetOn(LogEnum.LE_ADD_COIN_AUTO);
+         //Logger.SetOn(LogEnum.LE_ADD_WEALTH_CODE);
+         //Logger.SetOn(LogEnum.LE_ADD_COIN);
+         //Logger.SetOn(LogEnum.LE_ADD_COIN_AUTO);
          //Logger.SetOn(LogEnum.LE_LODGING_COST);
          Logger.SetOn(LogEnum.LE_MOUNT_CHANGE);
          //Logger.SetOn(LogEnum.LE_COMBAT_STATE);
@@ -114,7 +114,7 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_VIEW_DEC_COUNT_GRID);
          Logger.SetOn(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_DAILY_ACTIONS);
-         Logger.SetOn(LogEnum.LE_VIEW_TRAVEL_CHECK);
+         //Logger.SetOn(LogEnum.LE_VIEW_TRAVEL_CHECK);
          Logger.SetOn(LogEnum.LE_VIEW_MIM);
          Logger.SetOn(LogEnum.LE_VIEW_MIM_ADD);
          Logger.SetOn(LogEnum.LE_VIEW_MIM_CLEAR);

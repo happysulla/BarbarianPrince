@@ -3346,12 +3346,12 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                         "));
-                  Image imge059 = null;
+                  Image imge213a = null;
                   if (12 == gi.DieResults[key][0])
-                     imge059 = new Image { Source = MapItem.theMapImages.GetBitmapImage("RaftDeny"), Width = 200, Height = 200, Name = "RaftingEndsForDay" };
-                  else 
-                     imge059 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Raft"), Width = 200, Height = 200, Name = "RaftingEndsForDay" };
-                  myTextBlock.Inlines.Add(new InlineUIContainer(imge059));
+                     imge213a = new Image { Source = MapItem.theMapImages.GetBitmapImage("RaftDeny"), Width = 200, Height = 200, Name = "RaftingEndsForDay" };
+                  else
+                     imge213a = new Image { Source = MapItem.theMapImages.GetBitmapImage("Raft"), Width = 200, Height = 200, Name = "RaftingEndsForDay" };
+                  myTextBlock.Inlines.Add(new InlineUIContainer(imge213a));
                }
                break;
             case "e214":
@@ -4571,7 +4571,7 @@ namespace BarbarianPrince
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               break;
                            case "ArchSkip":
-                              action = GameAction.E045ArchOfTravelSkip;
+                              action = GameAction.E045ArchOfTravelSkip; // Found an Arch, but skipped traveling through it
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               break;
                            case "AudienceDaughter":

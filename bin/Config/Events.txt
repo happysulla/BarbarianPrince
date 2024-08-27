@@ -1807,13 +1807,13 @@ e059	"<Bold>e059 Dwarf Mines</Bold>
 <LineBreak/><LineBreak/>You see a great underground castle inhabited by dwarves. Dwarven constables and patrols intercept your party. 
 <LineBreak/><LineBreak/>Roll one die. If the die roll exceeds your wit and wiles, you and your party are arrested immediately, see
  <InlineUIContainer><Button Content='e060' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
-<LineBreak/><LineBreak/>Otherwise, you may pass and enter the castle mines. There you can undertake any actions and activities normally allowed in a castle
+<LineBreak/><LineBreak/>Otherwise, you may pass and enter the castle mines. There you can undertake any actions and activities normally allowed in a castle.
  <InlineUIContainer><Button Content='r203' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
  This includes seeking an audence with the Dwarf King who rules there. See 
  <InlineUIContainer><Button Content='r211' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>Like any castle, you must spend the normal amounts for food <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  and lodgings <InlineUIContainer><Button Content='r217' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. Any hired help in this hex are dwarves.
-<LineBreak/><LineBreak/>Die Roll = <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
+<LineBreak/><LineBreak/>Die Roll =  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e060	"<Bold>e060 Arrested</Bold>
 <LineBreak/><LineBreak/>You and your party are arrested by an overwhelming force and cannot resist. You are put into jail. 
 <LineBreak/><LineBreak/>

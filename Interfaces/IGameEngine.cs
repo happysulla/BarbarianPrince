@@ -251,7 +251,7 @@ namespace BarbarianPrince
       E045ArchOfTravel,
       E045ArchOfTravelEnd,
       E045ArchOfTravelEndEncounter,
-      E045ArchOfTravelSkip,
+      E045ArchOfTravelSkip,  // Found an Arch, but skipped traveling through it
       E048FugitiveAlly,
       E048FugitiveFight,
       E049MinstrelJoin,

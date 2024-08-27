@@ -3189,7 +3189,6 @@ namespace BarbarianPrince
                }
                else
                {
-                  dieRoll = 6;
                   if (("e061" == gi.EventStart) && (6 == dieRoll)) // only e061 does die roll = 6 cause death
                   {
                      gi.DieResults["e203a"][0] = 6;
@@ -4980,11 +4979,13 @@ namespace BarbarianPrince
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL)); // GameStateEncounter.PerformAction(E045ArchOfTravelEnd)
                   if ((true == gi.IsExhausted) && ((true == gi.NewHex.IsOasis) || ("Desert" != gi.NewHex.Type))) // e120
                      gi.IsExhausted = false;
+                  if (false == gi.Arches.Contains(gi.NewHex))
+                     gi.Arches.Add(gi.NewHex);
                   break;
                case GameAction.E045ArchOfTravelEndEncounter:
                   action = GameAction.UpdateEventViewerDisplay;
                   break;
-               case GameAction.E045ArchOfTravelSkip:
+               case GameAction.E045ArchOfTravelSkip: // Found an arch but skip traveling through it
                   if (false == gi.Arches.Contains(princeTerritory))
                      gi.Arches.Add(princeTerritory);
                   if (false == EncounterEnd(gi, ref action))
@@ -8321,28 +8322,9 @@ namespace BarbarianPrince
                }
                break;
             case "e059": // dwarven mines
-               if (Utilities.NO_RESULT < gi.DieResults[key][0])
-               {
-                  if (gi.WitAndWile <= gi.DieResults[key][0])
-                  {
-                     gi.EventDisplayed = gi.EventActive = "e060";   // arrested
-                     gi.DieRollAction = GameAction.EncounterRoll;
-                  }
-                  else
-                  {
-                     if (false == EncounterEnd(gi, ref action))
-                     {
-                        Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): EncounterEnd() returned false w/ ae=" + gi.EventActive);
-                        return false;
-                     }
-                  }
-               }
-               else
-               {
-                  gi.DieResults[key][0] = dieRoll;
-                  if (null == gi.DwarvenMines.Find(princeTerritory.Name))
-                     gi.DwarvenMines.Add(princeTerritory);
-               }
+               if (null == gi.DwarvenMines.Find(princeTerritory.Name))
+                  gi.DwarvenMines.Add(princeTerritory);
+               gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e065": // hidden town
                ITerritory t065 = gi.NewHex;
@@ -8362,6 +8344,7 @@ namespace BarbarianPrince
             case "e067": // abandoned mines
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
+                  dieRoll = 4;// <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                else
@@ -8380,7 +8363,7 @@ namespace BarbarianPrince
                         break;
                      case 4:                                                                                                 // arch of travel
                         if (true == gi.IsMagicInParty())
-                           gi.EventDisplayed = gi.EventActive = "e045";
+                           gi.EventDisplayed = gi.EventActive = "e045"; // abandoned mines
                         else
                            gi.EventDisplayed = gi.EventActive = "e045a";
                         break;  
@@ -10814,6 +10797,8 @@ namespace BarbarianPrince
                int daysToAdvance = Math.Min(dieRoll, remainingDays);
                gi.Days += daysToAdvance;
                action = GameAction.E045ArchOfTravel;
+               if (false == gi.Arches.Contains(gi.NewHex))
+                  gi.Arches.Add(gi.NewHex);
                break;
             case "e046a": // gateway to darkness - finished combat against guardians
                gi.EnteredHexes.Last().EventNames.Add(key);
@@ -11243,10 +11228,10 @@ namespace BarbarianPrince
                         gi.EventDisplayed = gi.EventActive = "e044";
                      else
                         gi.EventDisplayed = gi.EventActive = "e044a";
-                     break;
-                  case 5:
+                     break;  
+                  case 5:                                                      // arch of travel
                      if (true == gi.IsMagicInParty())
-                        gi.EventDisplayed = gi.EventActive = "e045";
+                        gi.EventDisplayed = gi.EventActive = "e045"; // campsite near magic
                      else
                         gi.EventDisplayed = gi.EventActive = "e045a";
                      break; // arch of travel
@@ -11276,8 +11261,8 @@ namespace BarbarianPrince
                         gi.EventDisplayed = gi.EventActive = "e044a";
                      break;
                   case 5:                                                    // arch of travel
-                     if (true == gi.IsMagicInParty())
-                        gi.EventDisplayed = gi.EventActive = "e045";
+                     if (true == gi.IsMagicInParty())        
+                        gi.EventDisplayed = gi.EventActive = "e045"; // campsite near strong magic   
                      else
                         gi.EventDisplayed = gi.EventActive = "e045a";
                      break;
@@ -11468,6 +11453,7 @@ namespace BarbarianPrince
             case "e059": // dwarven mines
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                   gi.EnteredHexes.Last().EventNames.Add(key);
                   if (gi.WitAndWile <= gi.DieResults[key][0])
                   {
@@ -12535,7 +12521,7 @@ namespace BarbarianPrince
                         break;
                      case 4:                                                     // arch of travel
                         if (true == gi.IsMagicInParty())
-                           gi.EventDisplayed = gi.EventActive = "e045";
+                           gi.EventDisplayed = gi.EventActive = "e045"; // broken columns in ruins
                         else
                            gi.EventDisplayed = gi.EventActive = "e045a";
                         break;
