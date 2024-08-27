@@ -797,10 +797,10 @@ namespace BarbarianPrince
             isFunOption = false;
          }
          //-------------------------
-         option = options.Find("0407");
+         option = options.Find("1507");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-0407");
+            Logger.Log(LogEnum.LE_ERROR, "UpdateDisplay(): option=null for Find()-1507");
             return false;
          }
          myRadioButtonHexDesert.IsChecked = option.IsEnabled;
@@ -1448,11 +1448,11 @@ namespace BarbarianPrince
          else
             Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 0411");
          myRadioButtonHexDesert.IsChecked = false;
-         option = myOptions.Find("0407");
+         option = myOptions.Find("1507");
          if (null != option)
             option.IsEnabled = false;
          else
-            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 0407");
+            Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found 1507");
          myRadioButtonHexRoad.IsChecked = false;
          option = myOptions.Find("1905");
          if (null != option)
@@ -1628,7 +1628,7 @@ namespace BarbarianPrince
             case 15: option = myOptions.Find("0406"); break;
             case 16: option = myOptions.Find("1611"); break;
             case 17: option = myOptions.Find("0411"); break;
-            case 18: option = myOptions.Find("0407"); break;
+            case 18: option = myOptions.Find("1507"); break;
             case 19: option = myOptions.Find("1905"); break;
             case 20: option = myOptions.Find("1723"); break;
             default: Logger.Log(LogEnum.LE_ERROR, "SelectRandomHexChoice: reached default choice=" + choice.ToString()); return;
@@ -2046,7 +2046,7 @@ namespace BarbarianPrince
             case "myRadioButtonHexHill": option = myOptions.Find("0406"); break;
             case "myRadioButtonHexMountain": option = myOptions.Find("1611"); break;
             case "myRadioButtonHexSwamp": option = myOptions.Find("0411"); break;
-            case "myRadioButtonHexDesert": option = myOptions.Find("0407"); break;
+            case "myRadioButtonHexDesert": option = myOptions.Find("1507"); break;
             case "myRadioButtonHexRoad": option = myOptions.Find("1905"); break;
             case "myRadioButtonHexBottom": option = myOptions.Find("1723"); break;
             default: Logger.Log(LogEnum.LE_ERROR, "StackPanelHex_Click(): reached default name=" + rb.Name); return;

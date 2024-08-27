@@ -99,7 +99,7 @@
                     <RadioButton x:Name="myRadioButtonHexHill" GroupName="Hex" Content="0406 - Hill" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
                     <RadioButton x:Name="myRadioButtonHexMountain" GroupName="Hex" Content="1611 - Mountain" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
                     <RadioButton x:Name="myRadioButtonHexSwamp" GroupName="Hex" Content="0411 - Swamp" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
-                    <RadioButton x:Name="myRadioButtonHexDesert" GroupName="Hex" Content="0407 - Desert" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
+                    <RadioButton x:Name="myRadioButtonHexDesert" GroupName="Hex" Content="1507 - Desert" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
                     <RadioButton x:Name="myRadioButtonHexRoad" GroupName="Hex" Content="1905 - Road" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
                     <RadioButton x:Name="myRadioButtonHexBottom" GroupName="Hex" Content="1723 - Bottom Board" Margin="5,0,5,0" Padding="4,-4,0,0"  Click="StackPanelHex_Click"/>
             </StackPanel>

@@ -2163,7 +2163,7 @@ namespace BarbarianPrince
          if (true == option.IsEnabled)
             starting = Territory.theTerritories.Find(hex);
          //---------------------------------------------------------
-         hex = "0407";  // Desert
+         hex = "1507";  // Desert
          option = gi.Options.Find(hex);
          if (null == option)
          {
@@ -2245,7 +2245,7 @@ namespace BarbarianPrince
          //gi.HiddenRuins.Add(hiddenRuin);
          //ITerritory elfTown = Territory.theTerritories.Find("0607");
          //gi.ElfTowns.Add(elfTown);
-         //ITerritory eagleLair = Territory.theTerritories.Find("0407");
+         //ITerritory eagleLair = Territory.theTerritories.Find("1507");
          //gi.EagleLairs.Add(eagleLair);
          //ITerritory dwarvenMine = Territory.theTerritories.Find("0408");
          //gi.DwarvenMines.Add(dwarvenMine);
@@ -2263,7 +2263,7 @@ namespace BarbarianPrince
          //gi.HiddenTemples.Add(t11);
          //t11 = Territory.theTerritories.Find("0307"); // e114 - verify that eagle hunt can happen in structure
          //gi.HiddenTemples.Add(t11);
-         //t11 = Territory.theTerritories.Find("0407"); // e114 - verify that eagle hunt can happen in structure
+         //t11 = Territory.theTerritories.Find("1507"); // e114 - verify that eagle hunt can happen in structure
          //gi.HiddenTemples.Add(t11);
          //t11 = Territory.theTerritories.Find("0405"); // e114 - verify that eagle hunt can happen in structure
          //gi.HiddenTemples.Add(t11);
@@ -2288,6 +2288,11 @@ namespace BarbarianPrince
          //gi.ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt2);
          //gi.LetterOfRecommendations.Add(lt3);
          //gi.ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt3);
+         //---------------------
+         ITerritory arch1 = Territory.theTerritories.Find("0821");
+         gi.Arches.Add(arch1);
+         ITerritory arch2 = Territory.theTerritories.Find("0820");
+         gi.Arches.Add(arch2);
          //---------------------
          //gi.DayOfLastOffering = gi.Days - 4;
          //gi.IsSecretTempleKnown = true;
@@ -8344,7 +8349,6 @@ namespace BarbarianPrince
             case "e067": // abandoned mines
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  dieRoll = 4;// <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                else

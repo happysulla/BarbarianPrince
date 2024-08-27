@@ -76,6 +76,8 @@ namespace BarbarianPrince
                myTargetCursor = Utilities.ConvertToCursor(img1, hotPoint);
                this.myCanvas.Cursor = myTargetCursor; // set the cursor in the canvas
                break;
+            case GameAction.UpdateLoadingGame:
+            case GameAction.UpdateUndo:
             case GameAction.E045ArchOfTravelEnd:
             case GameAction.E156MayorTerritorySelectionEnd:
                if (null != myTargetCursor)
