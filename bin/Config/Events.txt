@@ -2999,7 +2999,7 @@ e128c	"<Bold>e128c Merchant with Food for Sale</Bold>
 <LineBreak/><LineBreak/>
                                           <InlineUIContainer><Image Source='../../Images/Merchant.gif' Name='EncounterEnd' Height='200'  Width='125'></Image></InlineUIContainer>"
 e128d	"<Bold>e128d Merchant Game of Chance</Bold>
-<LineBreak/><LineBreak/>If the roll exceeds wit and wiles, you spend up to 10gp needlessly. 'Have you ever heard of Plato, Aristotle, Socrates? Morons!'
+<LineBreak/><LineBreak/>If the roll exceeds wit and wiles, you spend up to 10gp needlessly. ""Have you ever heard of Plato, Aristotle, Socrates? Morons!""
 <LineBreak/><LineBreak/> Roll one die:  <InlineUIContainer><Image Source='../../Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e128e	"<Bold>e128e Merchant Selling Healing Potion Sale</Bold>
 <LineBreak/><LineBreak/>Merchant has healing potions for sale. See
@@ -3413,7 +3413,7 @@ e144i	"<Bold>e144i Baron Hauldra Sneak Attack</Bold>
 You can make a sneak attack on the Baron at night suprising his traditional six bodyguards <InlineUIContainer> <Button Content='r220' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. Each has combat skill 6 and endurance 6. Once you kill the bodyguards, you can attack the Baron who has combat skill 6 and endurance 8. The Baron strikes first in combat. Click image to continue.
 <LineBreak/><LineBreak/>
                            <InlineUIContainer><Image Source='../../Images/BodyGuard.gif' Name='HuldraGuardFight' Height='350' Width='350'></Image></InlineUIContainer>"
-e144j	"<Bold>e144i Baron Hauldra Sneak Attack</Bold>
+e144j	"<Bold>e144j Baron Hauldra Sneak Attack</Bold>
 <LineBreak/><LineBreak/>
 Once you have killed all the Baron Huldra's bodyguards, you now come face-to-face with Huldra and must kill him to restore the heir to the throne. Click image to continue.
 <LineBreak/><LineBreak/>
@@ -3617,14 +3617,21 @@ e156d	"<Bold>e156d Town Mayor Interest</Bold>
 He hears your story with interest. He gives you a letter of recommendation to the Lord of the nearest castle
  <InlineUIContainer><Button Content='e157' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  and gives you 50 gold for expenses. You cannot seek another audience with him until you have used the letter. Click image to continue."
-e156e	"<Bold>e156e Town Mayor Religious Interest</Bold>
+e156e	"<Bold>e156e Town Mayor Religious Interest Stoked</Bold>
 <LineBreak/><LineBreak/>
 Since your party includes a monk or priest, he will support your cause for religious reasons. 
 <LineBreak/><LineBreak/>He provides a letter of recommendation to any castle or temple you request, gives you wealth 100, and his trusted assistant becomes a member of your party. The assistant has combat skill 4 and endurance 4. You cannot seek another audience with him until you have used the letter. Alternatively, you can seek a new audience if the assistant is killed or leaves your party other than by you voluntarily dismissing him. 
 <LineBreak/><LineBreak/>Click a hex on map that contains either a temple or castle."
-e156f	"<Bold>e156f Town Mayor Religious Interest</Bold>
+e156f	"<Bold>e156f Town Mayor Religious Interest Thwarted</Bold>
 <LineBreak/><LineBreak/>
 Since your party does not includes a monk or priest, he dismisses you and refuses any further audiences until you have such a character in your party. When you do have a monk or priest, he will provide a letter of recommendation to any castle or temple you request, gives you wealth 100, and his trusted assistant becomes a member of your party. Click image to continue."
+e156g	"<Bold>e156g Town Mayor Honors Promise</Bold>
+<LineBreak/><LineBreak/>
+In a previous audience, the town mayer encouraged you to get a monk or priest <InlineUIContainer><Button Content='e156f' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> and return for an audience. 
+<LineBreak/><LineBreak/>
+Since now you have a religious person in the party, he provides a letter of recommendation to any castle or temple you request, gives you wealth 100, and his trusted assistant becomes a member of your party. 
+<LineBreak/><LineBreak/>The assistant has combat skill 4 and endurance 4. You cannot seek another audience with him until you have used the letter. Alternatively, you can seek a new audience if the assistant is killed or leaves your party other than by you voluntarily dismissing him. 
+<LineBreak/><LineBreak/>Click a hex on map that contains either a temple or castle."
 e157	"<Bold>e157 Letter of Recommendation</Bold>
 <LineBreak/><LineBreak/>
 You are given a properly signed and sealed letter that provides an introduction to the appropriate Lord.<LineBreak/><LineBreak/>
@@ -4909,7 +4916,7 @@ e342a	"<Bold>e342a More Talking</Bold> <InlineUIContainer><Button Content='e341'
 <LineBreak/><LineBreak/>
 Characters reveal themself gradually. More talking is required to review their true nature.
 <LineBreak/><LineBreak/>
-<InlineUIContainer><Button Content='Talk ' FontFamily='Courier New'  FontSize='12' Name='e341'></Button></InlineUIContainer> further or<LineBreak/>
+<InlineUIContainer><Button Content='Talk ' FontFamily='Courier New'  FontSize='12' Name=""e341""></Button></InlineUIContainer> further or<LineBreak/>
 <InlineUIContainer><Button Content='Pass ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>  with dignity."
 e343	"<Bold>e343 Victim Selection</Bold>
 <LineBreak/><LineBreak/>One character in your party is the victim or target of an attack. If your party is just you, then you are the target.

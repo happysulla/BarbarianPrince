@@ -2274,6 +2274,12 @@ namespace BarbarianPrince
          //t11 = Territory.theTerritories.Find("0507"); // e114 - verify that eagle hunt can happen in structure
          //gi.HiddenTemples.Add(t11);
          ////---------------------
+         foreach( ITerritory t in Territory.theTerritories )
+         {
+            if( true == t.IsTown )
+               gi.ForbiddenAudiences.AddReligiousConstraint(t);
+         }
+         ////---------------------
          //ITerritory forbiddenHex = Territory.theTerritories.Find("0705");
          //gi.ForbiddenHexes.Add(forbiddenHex);
          //---------------------
@@ -2289,10 +2295,10 @@ namespace BarbarianPrince
          //gi.LetterOfRecommendations.Add(lt3);
          //gi.ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt3);
          //---------------------
-         ITerritory arch1 = Territory.theTerritories.Find("0821");
-         gi.Arches.Add(arch1);
-         ITerritory arch2 = Territory.theTerritories.Find("0820");
-         gi.Arches.Add(arch2);
+         //ITerritory arch1 = Territory.theTerritories.Find("0821");
+         //gi.Arches.Add(arch1);
+         //ITerritory arch2 = Territory.theTerritories.Find("0820");
+         //gi.Arches.Add(arch2);
          //---------------------
          //gi.DayOfLastOffering = gi.Days - 4;
          //gi.IsSecretTempleKnown = true;
@@ -4917,10 +4923,26 @@ namespace BarbarianPrince
                   gi.EventStart = gi.EventDisplayed = gi.EventActive = "e155";
                   gi.DieRollAction = GameAction.EncounterRoll;
                   break;
-               case GameAction.E042MayorAudience:
+               case GameAction.E042MayorAudience: // meet mayor from closest town using AlcoveOfSending...
                   gi.IsAlcoveOfSendingAudience = true;
-                  gi.EventStart = gi.EventDisplayed = gi.EventActive = "e156";
-                  gi.DieRollAction = GameAction.EncounterRoll;
+                  ITerritory t156b = FindClosestTown(gi); // this territory is updated by user selecting a castle or temple
+                  if ((true == gi.IsReligionInParty()) && (true == gi.ForbiddenAudiences.IsReligiousConstraint(t156b)))
+                  {
+                     gi.ForbiddenAudiences.RemoveReligionConstraint(t156b); // no trusted advisor is provided
+                     action = GameAction.E156MayorTerritorySelection;
+                     gi.EventDisplayed = gi.EventActive = "e156g";
+                     gi.ForbiddenAudiences.AddLetterConstraint(t156b);
+                     if (false == gi.AddCoins(100))
+                     {
+                        returnStatus = "EncounterRoll(): AddCoins()=false ae=" + gi.EventActive + " dr=" + dieRoll.ToString();
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                     }
+                  }
+                  else
+                  {
+                     gi.EventDisplayed = gi.EventActive = "e156"; // audience with mayor due to alcove of sending
+                     gi.DieRollAction = GameAction.EncounterRoll;
+                  }
                   break;
                case GameAction.E042LadyAeravirAudience:
                   gi.IsAlcoveOfSendingAudience = true;
@@ -6511,8 +6533,15 @@ namespace BarbarianPrince
                         gi.TargetHex = closetCastle1;
                         gi.LetterOfRecommendations.Add(closetCastle1);
                         gi.ForbiddenAudiences.RemoveLetterGivenConstraints(closetCastle1); // if a letter is given for a Drogat Castle, remove the constraint to have audience
-                        ITerritory t156b = FindClosestTown(gi);
-                        gi.ForbiddenAudiences.AddLetterConstraint(t156b, closetCastle1);
+                        ITerritory t156cb = FindClosestTown(gi);
+                        gi.ForbiddenAudiences.AddLetterConstraint(t156cb, closetCastle1);
+                        break;
+                     case 6: // This is only executed when there is no religion in party and a six is rolled. 
+                        if (false == EncounterEnd(gi, ref action))
+                        {
+                           returnStatus = "EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e156"][0].ToString();
+                           Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                        }
                         break;
                      default:
                         returnStatus = "Reach Default ae=" + action.ToString() + " dr=" + gi.DieResults["e156"][0].ToString();
@@ -12401,7 +12430,7 @@ namespace BarbarianPrince
                   }
                }
                break;
-            case "e130a": // talk to high lord 
+            case "e130a": // talk to high lord on travels
                gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll)
                {
@@ -12416,7 +12445,7 @@ namespace BarbarianPrince
                for (int i = 0; i < 3; ++i)
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
-            case "e130b": // evade high lord 
+            case "e130b": // evade high lord on travels
                gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll)
                {
@@ -12436,7 +12465,7 @@ namespace BarbarianPrince
                   default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
                }
                break;
-            case "e130c": // fight high lord
+            case "e130c": // fight high lord on travels
                gi.EnteredHexes.Last().EventNames.Add(key);
                switch (dieRoll)
                {
@@ -12449,7 +12478,7 @@ namespace BarbarianPrince
                   default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
                }
                break;
-            case "e130e": // Audience with high lord
+            case "e130e": // Audience with high lord on travels
                gi.EnteredHexes.Last().EventNames.Add(key);
                switch (gi.DieResults["e130"][1])
                {
@@ -12457,8 +12486,29 @@ namespace BarbarianPrince
                   case 2: gi.EventDisplayed = gi.EventActive = "e161"; gi.DieRollAction = GameAction.EncounterRoll; break;
                   case 3: gi.EventDisplayed = gi.EventActive = "e160"; gi.DieRollAction = GameAction.EncounterRoll; break;
                   case 4: gi.EventDisplayed = gi.EventActive = "e155"; gi.DieRollAction = GameAction.EncounterRoll; break;
-                  case 5: gi.EventDisplayed = gi.EventActive = "e156"; gi.DieRollAction = GameAction.EncounterRoll; break;
-                  case 6: gi.EventDisplayed = gi.EventActive = "e156"; gi.DieRollAction = GameAction.EncounterRoll; break;
+                  case 5: case 6:   // Audience with mayor on travels from closest twon
+                     ITerritory t156b = FindClosestTown(gi); // this territory is updated by user selecting a castle
+                     if ((true == gi.IsReligionInParty()) && (true == gi.ForbiddenAudiences.IsReligiousConstraint(t156b)))
+                     {
+                        gi.ForbiddenAudiences.RemoveReligionConstraint(t156b);
+                        action = GameAction.E156MayorTerritorySelection;
+                        gi.EventDisplayed = gi.EventActive = "e156g";
+                        IMapItem trustedAssistant = CreateCharacter(gi, "TrustedAssistant", 0);
+                        gi.AddCompanion(trustedAssistant);
+                        ITerritory t156a = FindClosestTown(gi); // this territory is updated by user selecting a castle or temple
+                        gi.ForbiddenAudiences.AddAssistantConstraint(t156a, trustedAssistant);
+                        if (false == gi.AddCoins(100))
+                        {
+                           Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddCoins()=false ae=" + gi.EventActive + " dr=" + dieRoll.ToString());
+                           return false;
+                        }
+                     }
+                     else
+                     {
+                        gi.EventDisplayed = gi.EventActive = "e156";  // Audience with mayor on travels 
+                        gi.DieRollAction = GameAction.EncounterRoll;
+                     }
+                     break;
                   default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default dr=" + gi.DieResults["e130"][1].ToString() + " ae=" + gi.EventActive); return false;
                }
                break;
@@ -12816,11 +12866,6 @@ namespace BarbarianPrince
                         {
                            action = GameAction.E156MayorTerritorySelection;
                            gi.EventDisplayed = gi.EventActive = "e156e";
-                           if (false == gi.AddCoins(100))
-                           {
-                              Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddCoins() returned false for action=" + action.ToString() + "  and ae=" + gi.EventActive);
-                              return false;
-                           }
                            if( false == gi.IsAlcoveOfSendingAudience)
                            {
                               IMapItem trustedAssistant = CreateCharacter(gi, "TrustedAssistant", 0);
@@ -12833,10 +12878,17 @@ namespace BarbarianPrince
                               ITerritory t156b = FindClosestTown(gi); // this territory is updated by user selecting a castle
                               gi.ForbiddenAudiences.AddLetterConstraint(t156b);
                            }
+                           if( false == gi.AddCoins(100))
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddCoins()=false ae=" + gi.EventActive + " dr=" + dieRoll.ToString());
+                              return false;
+                           }
                         }
                         else
                         {
-                           gi.EventDisplayed = gi.EventActive = "e156f";
+                           ITerritory t156b = FindClosestTown(gi); // this territory is updated by user selecting a castle
+                           gi.ForbiddenAudiences.AddReligiousConstraint(t156b);
+                           gi.EventDisplayed = gi.EventActive = "e156f"; // display event showing need a religous person 
                         }
                         break;
                      default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
@@ -13399,16 +13451,74 @@ namespace BarbarianPrince
                      case 5: gi.EventDisplayed = gi.EventActive = "e153"; break;                                               // master of house hold
                      case 6:
                      case 7:
-                     case 8:                                                                                   // do nothing
+                     case 8:                                                                                                   // do nothing
                         if (false == EncounterEnd(gi, ref action))
                         {
                            Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e211a"][0].ToString());
                            return false;
                         }
                         break;
-                     case 9: case 10: gi.EventDisplayed = gi.EventActive = "e156"; gi.DieRollAction = GameAction.EncounterRoll; break; // audience permitted
-                     case 11: gi.EventDisplayed = gi.EventActive = "e154"; gi.DieRollAction = GameAction.EncounterRoll; break; // mayor's daughter
-                     case 12: case 13: case 14: case 15: case 16: gi.EventDisplayed = gi.EventActive = "e156"; gi.DieRollAction = GameAction.EncounterRoll; break; //  audience permitted
+                     case 9: case 10:                           // audience permitted
+                        ITerritory e211a1 = FindClosestTown(gi); // this territory is updated by user selecting a castle or temple
+                        if ((true == gi.IsReligionInParty()) && (true == gi.ForbiddenAudiences.IsReligiousConstraint(e211a1)))
+                        {
+                           gi.ForbiddenAudiences.RemoveReligionConstraint(e211a1);
+                           action = GameAction.E156MayorTerritorySelection;
+                           gi.EventDisplayed = gi.EventActive = "e156g";  // e211a - seek audience in town - die roll 9/10
+                           if (false == gi.IsAlcoveOfSendingAudience)
+                           {
+                              IMapItem trustedAssistant = CreateCharacter(gi, "TrustedAssistant", 0);
+                              gi.AddCompanion(trustedAssistant);
+                              ITerritory t156a = FindClosestTown(gi); // this territory is updated by user selecting a castle
+                              gi.ForbiddenAudiences.AddAssistantConstraint(t156a, trustedAssistant);
+                           }
+                           else // only get letter but no trusted assistant
+                           {
+                              gi.ForbiddenAudiences.AddLetterConstraint(e211a1);
+                           }
+                           if (false == gi.AddCoins(100))
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddCoins()=false ae=" + gi.EventActive + " dr=" + dieRoll.ToString());
+                              return false;
+                           }
+                        }
+                        else
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e156";  // e211a - seek audience in town 
+                           gi.DieRollAction = GameAction.EncounterRoll;
+                        }
+                        break; 
+                     case 11: gi.EventDisplayed = gi.EventActive = "e154"; gi.DieRollAction = GameAction.EncounterRoll; break;  // mayor's daughter
+                     case 12: case 13: case 14: case 15: case 16:                                                              //  audience permitted
+                        ITerritory e211a2 = FindClosestTown(gi); // this territory is updated by user selecting a castle or temple
+                        if ((true == gi.IsReligionInParty()) && (true == gi.ForbiddenAudiences.IsReligiousConstraint(e211a2)) )
+                        {
+                           gi.ForbiddenAudiences.RemoveReligionConstraint(e211a2);
+                           action = GameAction.E156MayorTerritorySelection;
+                           gi.EventDisplayed = gi.EventActive = "e156g";  // e211a - seek audience in town - die roll 12+
+                           if (false == gi.IsAlcoveOfSendingAudience)
+                           {
+                              IMapItem trustedAssistant = CreateCharacter(gi, "TrustedAssistant", 0);
+                              gi.AddCompanion(trustedAssistant);
+                              ITerritory t156a = FindClosestTown(gi); // this territory is updated by user selecting a castle
+                              gi.ForbiddenAudiences.AddAssistantConstraint(t156a, trustedAssistant);
+                           }
+                           else // only get letter but no trusted assistant
+                           {
+                              gi.ForbiddenAudiences.AddLetterConstraint(e211a2); // this territory is updated by user selecting a castle
+                           }
+                           if (false == gi.AddCoins(100))
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddCoins()=false ae=" + gi.EventActive + " dr=" + dieRoll.ToString());
+                              return false;
+                           }
+                        }
+                        else
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e156"; // e211a - seek audience in town 
+                           gi.DieRollAction = GameAction.EncounterRoll;
+                        }
+                        break; 
                      default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
                   }
                }

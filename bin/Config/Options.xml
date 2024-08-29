@@ -133,7 +133,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="0418">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="0410">
     <IsEnabled value="False" />
@@ -151,7 +151,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="1507">
-    <IsEnabled value="True" />
+    <IsEnabled value="False" />
   </Option>
   <Option value="1905">
     <IsEnabled value="False" />
@@ -208,7 +208,7 @@
     <IsEnabled value="False" />
   </Option>
   <Option value="ForceEvent">
-    <IsEnabled value="False" />
+    <IsEnabled value="True" />
   </Option>
   <Option value="ForceCrossEvent">
     <IsEnabled value="False" />

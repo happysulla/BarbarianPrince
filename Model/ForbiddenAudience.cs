@@ -74,7 +74,15 @@ namespace BarbarianPrince
       public void Insert(int index, IForbiddenAudience fa) { myList.Insert(index, fa); }
       public void Reverse() { myList.Reverse(); }
       public void Clear() { myList.Clear(); }
-      public bool Contains(IForbiddenAudience fa) { return myList.Contains(fa); }   
+      public bool Contains(IForbiddenAudience fa) 
+      {
+         foreach (IForbiddenAudience fa1 in myList)
+         {
+            if (fa1.ForbiddenTerritory.Name == fa.ForbiddenTerritory.Name)
+               return true;
+         }
+         return false;
+      }   
       public IEnumerator GetEnumerator() { return myList.GetEnumerator(); }
       public int IndexOf(IForbiddenAudience fa) { return myList.IndexOf(fa); }
       public void Remove(IForbiddenAudience fa) { myList.Remove(fa); }
@@ -84,12 +92,15 @@ namespace BarbarianPrince
          set { myList[index] = value; }
       }
       //-------------------------------------------------------------
-      public bool Contains(ITerritory forbidden)
+      public bool Contains(IGameInstance gi)
       {
          foreach (IForbiddenAudience fa in myList)
          {
-            if (fa.ForbiddenTerritory.Name == forbidden.Name)
-               return true;
+            if (fa.ForbiddenTerritory.Name == gi.Prince.Territory.Name)
+            {
+               if( (false == gi.IsReligionInParty()) || (AudienceConstraintEnum.RELIGION != fa.Constraint) ) // if this is a RELIGION constraint and party has a religious person, do not return true
+                  return true;
+            }
          }
          return false;
       }
@@ -134,6 +145,12 @@ namespace BarbarianPrince
       public void AddTimeConstraint(ITerritory forbidden, int day)
       {
          IForbiddenAudience fa = new ForbiddenAudience(forbidden, day);
+         myList.Add(fa);
+      }
+      public void AddReligiousConstraint(ITerritory forbidden)
+      {
+         IForbiddenAudience fa = new ForbiddenAudience(forbidden);
+         fa.Constraint = AudienceConstraintEnum.RELIGION;
          myList.Add(fa);
       }
       public void AddAssistantConstraint(ITerritory forbidden, IMapItem assistant)
@@ -182,6 +199,15 @@ namespace BarbarianPrince
          foreach (IForbiddenAudience fa in myList)
          {
             if (AudienceConstraintEnum.CLOTHES == fa.Constraint)
+               return true;
+         }
+         return false;
+      }
+      public bool IsReligiousConstraint(ITerritory t)
+      {
+         foreach (IForbiddenAudience fa in myList)
+         {
+            if ((AudienceConstraintEnum.RELIGION == fa.Constraint) && (t.Name == fa.ForbiddenTerritory.Name) )
                return true;
          }
          return false;
@@ -343,6 +369,23 @@ namespace BarbarianPrince
             foreach (IForbiddenAudience fa in myList)
             {
                if (AudienceConstraintEnum.CLOTHES == fa.Constraint)
+               {
+                  Remove(fa);
+                  isListModified = true;
+                  break;
+               }
+            }
+         }
+      }
+      public void RemoveReligionConstraint(ITerritory t)
+      {
+         bool isListModified = true;
+         while (true == isListModified) // remove all ForbiddenAudiences requiring due to relegious constraints for this hex
+         {
+            isListModified = false;
+            foreach (IForbiddenAudience fa in myList)
+            {
+               if ((AudienceConstraintEnum.RELIGION == fa.Constraint) && (t.Name == fa.ForbiddenTerritory.Name) )
                {
                   Remove(fa);
                   isListModified = true;

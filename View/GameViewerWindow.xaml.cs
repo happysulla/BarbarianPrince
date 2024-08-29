@@ -722,7 +722,7 @@ namespace BarbarianPrince
                      myStackPanelDailyActions.Children.Add(myButtonDailyAcions[6]);
                   if ((true == isInTemple) && (1 < myGameInstance.GetCoins()))
                      myStackPanelDailyActions.Children.Add(myButtonDailyAcions[5]);   // offering
-                  if (((true == isInTownOrCastle) || (true == isInTemple)) && (false == gi.ForbiddenAudiences.Contains(gi.Prince.Territory))) // audience
+                  if (((true == isInTownOrCastle) || (true == isInTemple)) && (false == gi.ForbiddenAudiences.Contains(gi))) // audience
                      myStackPanelDailyActions.Children.Add(myButtonDailyAcions[4]);
                   if ((true == isInTownOrCastle) && (false == myGameInstance.ForbiddenHires.Contains(gi.Prince.Territory))) // hire
                      myStackPanelDailyActions.Children.Add(myButtonDailyAcions[3]);
@@ -1618,7 +1618,15 @@ namespace BarbarianPrince
          //-------------------------------------------------------
          foreach (IForbiddenAudience fa in gi.ForbiddenAudiences)
          {
-            if (false == gi.AbandonedTemples.Contains(fa.ForbiddenTerritory))
+            if (true == gi.AbandonedTemples.Contains(fa.ForbiddenTerritory)) // abandoned temples disappear
+            {
+               // do nothing
+            }
+            else if((AudienceConstraintEnum.RELIGION == fa.Constraint) && (true == gi.IsReligionInParty()) ) // If religious constraint, but religion in party, ignore it
+            {
+               // do nothing
+            }
+            else
             {
                double size = 0.85 * Utilities.theMapItemOffset;
                Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("DenyAudience"), Width = size, Height = size };

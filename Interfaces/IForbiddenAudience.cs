@@ -12,6 +12,7 @@ namespace BarbarianPrince
       LETTER_GIVEN,
       ASSISTANT_OR_LETTER,
       OFFERING,      // e155c & 155d (fa.Day is set)
+      RELIGION,      // Religious constraint is never removed... it can be deactivated if Priest/Monk in party
       PURIFICATION,
       CLOTHES,   // e149 - learn court manners
       MONSTER_KILL,
@@ -48,13 +49,15 @@ namespace BarbarianPrince
       void AddAssistantConstraint(ITerritory forbidden, IMapItem assistant);
       void AddTimeConstraint(ITerritory forbidden, int day);
       void AddClothesConstraint(ITerritory forbidden);
+      void AddReligiousConstraint(ITerritory forbidden);
       void AddMonsterKillConstraint(ITerritory forbidden);
       //----------------------------------------------
-      bool Contains(ITerritory forbidden);
+      bool Contains(IGameInstance gi);
       bool UpdateLetterLocation(ITerritory letterTerritory);
       void UpdateOfferingLocation(ITerritory offeringTerritory);
       //----------------------------------------------
       bool IsClothesConstraint();
+      bool IsReligiousConstraint(ITerritory t);
       bool IsOfferingsConstraint(ITerritory offeringTerritory, int offeringDay);
       void RemoveOfferingsConstraints(ITerritory offeringTerritory);
       void RemovePurifyConstraints(ITerritory offeringTerritory, ITerritories purifications);
@@ -63,6 +66,7 @@ namespace BarbarianPrince
       void RemoveAssistantConstraints(IMapItem mi);
       void RemoveTimeConstraints(int day);
       void RemoveClothesConstraints();
+      void RemoveReligionConstraint(ITerritory t);
       void RemoveMonsterKillConstraints(int numKills);
    }
 }
