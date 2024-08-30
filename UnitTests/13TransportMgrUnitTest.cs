@@ -84,6 +84,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "Command(): t=null");
             return false;
          }
+         gi.PartyMembers.Add(gi.Prince);
          gi.Prince.Territory = t;
          gi.Prince.Food = 1;
          gi.Prince.Coin = 1;

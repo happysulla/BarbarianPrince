@@ -708,6 +708,8 @@ namespace BarbarianPrince
          gi.Prince.TerritoryStarting = gi.Prince.Territory;
          gi.NewHex = adjacentTerritory;         // EncounterEscape()
          gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_ESCAPE)); // EncounterEscape()
+         if ((true == gi.IsInStructure(gi.NewHex)) && (false == gi.VisitedLocations.Contains(gi.NewHex)))
+            gi.VisitedLocations.Add(gi.NewHex);
          if (false == AddMapItemMove(gi, adjacentTerritory))
          {
             Logger.Log(LogEnum.LE_ERROR, "EncounterEscape(): AddMapItemMove() return false");
@@ -762,6 +764,8 @@ namespace BarbarianPrince
          gi.Prince.TerritoryStarting = gi.Prince.Territory;
          gi.NewHex = adjacentTerritory;         // EncounterFollow()
          gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_FOLLOW)); // EncounterFollow()
+         if ((true == gi.IsInStructure(gi.NewHex)) && (false == gi.VisitedLocations.Contains(gi.NewHex)))
+            gi.VisitedLocations.Add(gi.NewHex);
          if (false == AddMapItemMove(gi, adjacentTerritory))
          {
             Logger.Log(LogEnum.LE_ERROR, "EncounterFollow(): AddMapItemMove() return false");
@@ -1466,6 +1470,8 @@ namespace BarbarianPrince
          }
          gi.NewHex = gi.Prince.Territory = gi.Prince.TerritoryStarting = starting;
          gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_START));
+         if ((true == gi.IsInStructure(gi.NewHex)) && (false == gi.VisitedLocations.Contains(gi.NewHex)))
+            gi.VisitedLocations.Add(gi.NewHex);
          IStack newStack = new Stack(starting) as IStack;
          gi.Stacks.Add(newStack);
          newStack.MapItems.Add(gi.Prince);
@@ -3190,10 +3196,13 @@ namespace BarbarianPrince
          hex.EventNames.Add(gi.EventActive);
          hex.IsEncounter = true;
          hex.JailDay++;
-         gi.EnteredHexes.Add(hex);
+         gi.EnteredHexes.Add(hex); // show staying in hex when in jail
+
          switch (gi.EventActive)
          {
             case "e203a":
+               if ((true == gi.IsInStructure(gi.NewHex)) && (false == gi.VisitedLocations.Contains(gi.NewHex)))
+                  gi.VisitedLocations.Add(gi.NewHex);
                if (1 == dieRoll)
                {
                   gi.IsJailed = false;
@@ -3217,6 +3226,8 @@ namespace BarbarianPrince
                }
                break;
             case "e203c":
+               if ((true == gi.IsInStructure(gi.NewHex)) && (false == gi.VisitedLocations.Contains(gi.NewHex)))
+                  gi.VisitedLocations.Add(gi.NewHex);
                switch (dieRoll) // Based on the die roll, implement event
                {
                   case 2:
@@ -3609,6 +3620,8 @@ namespace BarbarianPrince
                else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
                {
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT)); // TravelShowMovement()
+                  if ((true == gi.IsInStructure(gi.NewHex)) && (false == gi.VisitedLocations.Contains(gi.NewHex)))
+                     gi.VisitedLocations.Add(gi.NewHex);
                }
                else if (RaftEnum.RE_RAFT_ENDS_TODAY == gi.RaftState) // TravelShowMovement()
                {
@@ -3617,7 +3630,15 @@ namespace BarbarianPrince
                else
                {
                   if( false == gi.IsAirborneEnd )
+                  {
                      gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL)); // TravelShowMovement 
+
+                  }
+                  else
+                  {
+                     if ((true == gi.IsInStructure(gi.NewHex)) && (false == gi.VisitedLocations.Contains(gi.NewHex)))
+                        gi.VisitedLocations.Add(gi.NewHex);
+                  }
                }
                break;
             case GameAction.TravelShowRiverEncounter:
@@ -3649,6 +3670,9 @@ namespace BarbarianPrince
                else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
                {
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT)); // TravelShowMovementEncounter()
+                  if( (true == gi.IsInStructure(gi.NewHex) ) && (false == gi.VisitedLocations.Contains(gi.NewHex)) )
+                        gi.VisitedLocations.Add(gi.NewHex);
+                     
                }
                else if (RaftEnum.RE_RAFT_ENDS_TODAY == gi.RaftState)
                {
@@ -3665,6 +3689,8 @@ namespace BarbarianPrince
                   {
                      EnteredHex enteredHex = gi.EnteredHexes.Last();
                      enteredHex.EventNames.Add(gi.EventActive);
+                     if ((true == gi.IsInStructure(gi.NewHex)) && (false == gi.VisitedLocations.Contains(gi.NewHex)))
+                        gi.VisitedLocations.Add(gi.NewHex);
                   }
                }
                break;
@@ -5004,6 +5030,8 @@ namespace BarbarianPrince
                   gi.Prince.MovementUsed = gi.Prince.Movement;
                   gi.NewHex = princeTerritory; // GameStateEncounter.PerformAction(E045ArchOfTravelEnd)
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL)); // GameStateEncounter.PerformAction(E045ArchOfTravelEnd)
+                  if ((true == gi.IsInStructure(gi.NewHex)) && (false == gi.VisitedLocations.Contains(gi.NewHex)))
+                     gi.VisitedLocations.Add(gi.NewHex);
                   if ((true == gi.IsExhausted) && ((true == gi.NewHex.IsOasis) || ("Desert" != gi.NewHex.Type))) // e120
                      gi.IsExhausted = false;
                   if (false == gi.Arches.Contains(gi.NewHex))
@@ -12121,6 +12149,8 @@ namespace BarbarianPrince
                   gi.Prince.TerritoryStarting = gi.NewHex;
                   gi.NewHex = blowToTerritory;
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR));
+                  if ((true == gi.IsInStructure(gi.NewHex)) && (false == gi.VisitedLocations.Contains(gi.NewHex)))
+                     gi.VisitedLocations.Add(gi.NewHex);
                   if (false == AddMapItemMove(gi, blowToTerritory))
                   {
                      Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddMapItemMove() return false for a=" + action.ToString());

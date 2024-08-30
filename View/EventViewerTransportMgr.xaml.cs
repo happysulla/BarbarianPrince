@@ -180,7 +180,24 @@ namespace BarbarianPrince
                }
                if (true == mi.IsFlyer())
                {
-                  mi.IsFlying = true;
+                  if( (true == mi.IsExhausted ) || (false == mi.IsSunStroke) )
+                  {
+                     mi.IsFlying = false;
+                  }
+                  else
+                  {
+                     if( 0 != mi.StarveDayNum ) // if starving only eagles and falcon fly
+                     {
+                        if ((true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")))
+                           mi.IsFlying = true;
+                        else
+                           mi.IsFlying = false;
+                     }
+                     else
+                     {
+                        mi.IsFlying = true;
+                     }
+                  }
                   mi.IsRiding = true;
                }
             }
@@ -203,6 +220,15 @@ namespace BarbarianPrince
                {
                   mi.IsRiding = false; // dismount all party members
                   mi.IsFlying = false;
+               }
+               else
+               {
+                  mi.IsRiding = true;
+                  mi.IsFlying = true;
+                  if ((0 != mi.StarveDayNum) && (false == mi.Name.Contains("Eagle")) && (false == mi.Name.Contains("Eagle")))
+                     mi.IsFlying = false;
+                  if ( (false==mi.IsExhausted) || (false == mi.IsSunStroke) )
+                     mi.IsFlying = false;
                }
             }
          }
@@ -913,7 +939,7 @@ namespace BarbarianPrince
             if (0 < partyMember.Mounts.Count)
             {
                IMapItem mount = partyMember.Mounts[0];
-               if ((true == mount.IsFlyingMount()) && (true == partyMember.IsRiding) && (0 == mount.StarveDayNum)) // Cannot fly if mount has any starvation days
+               if ((true == mount.IsFlyingMount()) && (true == partyMember.IsRiding) && (0 == mount.StarveDayNum) && (false == mount.IsExhausted)) // Cannot fly if mount has any starvation days
                {
                   if (true == partyMember.IsFlying)
                      cb2.IsChecked = true;
@@ -942,7 +968,7 @@ namespace BarbarianPrince
                {
                   if ((null != partyMember.Rider) && (true == partyMember.Rider.IsFlying))
                      cb2.IsChecked = true;
-                  else if ((null == partyMember.Rider) && ((0 == partyMember.StarveDayNum) && (false == partyMember.IsExhausted) ))// if Griffon has any starvation days or exhausted, it cannot fly
+                  else if ( (null == partyMember.Rider) && (0 == partyMember.StarveDayNum) && (false == partyMember.IsExhausted) && (false == partyMember.IsSunStroke))// if Griffon has any starvation days or exhausted, it cannot fly
                      cb2.IsChecked = true;
                   else
                      cb2.IsChecked = false;
@@ -1208,6 +1234,8 @@ namespace BarbarianPrince
                maxMountLoad = Utilities.MaxMountLoad >> 1; // e120 - half the load if exhausted 
                partyMember.IsFlying = false;
             }
+            if( (false == partyMember.Name.Contains("Eagle")) && (false == partyMember.Name.Contains("Falcon")) && (0 != partyMember.StarveDayNum ) )
+               partyMember.IsFlying = false;
             loadCanCarry = (maxMountLoad >> partyMember.StarveDayNum);
             if (null != partyMember.Rider)
                loadCanCarry = 0;
@@ -1598,7 +1626,6 @@ namespace BarbarianPrince
                                  myUnassignedMounts.Add(myMapItemDragged);
                                  if (true == myMapItemDragged.IsFlyingMountCarrier()) 
                                  {
-
                                     IMapItem rider = myMapItemDragged.Rider;
                                     if (null != rider )
                                     {
@@ -1645,13 +1672,16 @@ namespace BarbarianPrince
                         if( 0 < owner.Mounts.Count )
                         {
                            IMapItem mountBeingReplaced = owner.Mounts[0];
-                           if (true == mountBeingReplaced.IsFlyingMountCarrier()) // return Griffon back to unassigned pool
+                           if (true == mountBeingReplaced.IsFlyingMountCarrier()) // return Griffon/Harpy back to unassigned pool
                            {
                               myUnassignedMounts.Add(mountBeingReplaced);
                               mountBeingReplaced.Rider.Mounts.Remove(mountBeingReplaced);
                               mountBeingReplaced.Rider = null;
                               mountBeingReplaced.IsRiding = true;
-                              mountBeingReplaced.IsFlying = true;
+                              if( (true == mountBeingReplaced.IsExhausted) || (0 != mountBeingReplaced.StarveDayNum) || (true == mountBeingReplaced.IsSunStroke))
+                                 mountBeingReplaced.IsFlying = false;
+                              else
+                                 mountBeingReplaced.IsFlying = true;
                            }
                         }
                         owner.Mounts.Insert(0, myMapItemDragged);
@@ -1710,7 +1740,8 @@ namespace BarbarianPrince
                      {
                         myMapItemDragged.Rider = owner; // replace the rider
                         owner.IsRiding = true;
-                        owner.IsFlying = true;
+                        if( true == myMapItemDragged.IsFlying )
+                           owner.IsFlying = true;
                      }
                      if (0 < owner.Mounts.Count)
                      {
@@ -1721,7 +1752,10 @@ namespace BarbarianPrince
                            mountBeingReplaced.Rider = null;
                            myUnassignedMounts.Add(mountBeingReplaced);
                            mountBeingReplaced.IsRiding = true;
-                           mountBeingReplaced.IsFlying = true;
+                           if ((true == mountBeingReplaced.IsExhausted) || (0 != mountBeingReplaced.StarveDayNum) || (true == mountBeingReplaced.IsSunStroke))
+                              mountBeingReplaced.IsFlying = false;
+                           else
+                              mountBeingReplaced.IsFlying = true;
                         }
                      }
                      owner.Mounts.Insert(0, myMapItemDragged);
@@ -1789,7 +1823,7 @@ namespace BarbarianPrince
                      if (Utilities.PersonBurden <= owner.GetFreeLoad())
                      {
                         owner.IsRiding = true;
-                        if (true == mountBeingRotated.Name.Contains("Pegasus"))
+                        if ( (true == mountBeingRotated.Name.Contains("Pegasus")) && (false == mountBeingRotated.IsExhausted) && (0 == mountBeingRotated.StarveDayNum) )
                            owner.IsFlying = true;
                      }
                   }
@@ -1900,7 +1934,7 @@ namespace BarbarianPrince
          {
             for (int j = 0; j < myConsciousMembers.Count; ++j)
             {
-               if (mount.Name == myGridRows[j].myMapItem.Name)
+               if (mount.Name == myGridRows[j].myMapItem.Name) 
                   myGridRows[j].myMapItem.IsFlying = true;
             }
          }

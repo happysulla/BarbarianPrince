@@ -1208,8 +1208,13 @@ namespace BarbarianPrince
       {
          int loadCanCarry = 0;
          //------------------------------------------
-         if (true == this.Name.Contains("Eagle")) // Eagles can always fly
-            return 0;
+         if ((true == this.Name.Contains("Eagle")) || (true == this.Name.Contains("Falcon"))) // Falcons/Eagles can always fly unless exhausted
+         {
+            if (false == this.IsExhausted) 
+               return 0;
+            else
+               return NOT_FLYING;
+         } 
          //------------------------------------------
          if ( false == this.IsFlyer() )
          {
@@ -1237,9 +1242,7 @@ namespace BarbarianPrince
          }
          //------------------------------------------
          int maxLoad = 0;
-         if ( (true == this.Name.Contains("Eagle")) || (true == this.Name.Contains("Falcon")) )
-            maxLoad = 0;
-         else if ( true == this.IsFlyingMountCarrier() )
+         if ( true == this.IsFlyingMountCarrier() )
             maxLoad = Utilities.MaxMountLoad;
          else
             maxLoad = Utilities.MaxLoad;

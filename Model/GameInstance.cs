@@ -1379,7 +1379,7 @@ namespace BarbarianPrince
          }
          //--------------------------------
          // Adding to Share list instead of Keep List
-         if ((false == myPrince.IsSpecialItemHeld(possession)) && (false == myPrince.IsUnconscious) && (false == myPrince.IsKilled))
+         if ((false == myPrince.IsSpecialItemHeld(possession)) && (false == myPrince.IsUnconscious) && (false == myPrince.IsKilled)) // give to prince if he does not own this special item
          {
             myPrince.AddSpecialItemToShare(possession);
             if ((false == IsRoyalHelmHeldStart) && (SpecialEnum.RoyalHelmOfNorthlands == possession))
@@ -1391,6 +1391,8 @@ namespace BarbarianPrince
             if ((true == member.IsKilled) || (true == member.IsUnconscious))
                continue;
             if (true == member.IsSpecialItemHeld(possession))
+               continue;
+            if ( (true == member.Name.Contains("Porter")) || (true == member.Name.Contains("Slave")) || (true == member.Name.Contains("Minstrel")) || (true == member.Name.Contains("Eagle"))  )
                continue;
             member.AddSpecialItemToShare(possession);
             if ((false == IsRoyalHelmHeldStart) && (SpecialEnum.RoyalHelmOfNorthlands == possession))
