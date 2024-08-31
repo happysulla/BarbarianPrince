@@ -35,6 +35,7 @@ namespace BarbarianPrince
          InitializeComponent();
          try
          {
+            Utilities.InitializeRandomNumGenerators();
             IGameInstance gi = new GameInstance();
             if (true == gi.CtorError)
             {

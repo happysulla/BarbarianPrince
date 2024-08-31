@@ -2,23 +2,18 @@
 using System.IO;
 using System.Text;
 using System.Windows;
-using System.Windows.Forms;
+using System.Threading;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Xml.Serialization;
 using System.Xml;
+using System.Collections;
 namespace BarbarianPrince
 {
    public class Utilities
    {
-      public enum TaskBarLocation
-      {
-         TOP,
-         BOTTOM,
-         LEFT,
-         RIGHT
-      }
+      private const int NUM_RANDOM_GEN = 13;
       public const int NO_RESULT = -100;
       public const int FOREVER = 100000;
       public const int STACK = 1;
@@ -47,39 +42,34 @@ namespace BarbarianPrince
       public static int theStackSize = 1000;
       public static string[] theNorthOfTragothHexes = new string[21] { "0101", "0201", "0301", "0302", "0401", "0501", "0502", "0601", "0701", "0801", "0901", "1001", "1101", "1201", "1301", "1501", "1601", "1701", "1801", "1901", "2001" };
       //--------------------------------------------
-      private static readonly Random theRandom = new Random(); // default seed is System time 
+      static private int theRandomIndex = 0;
+      private static readonly Random[] theRandoms = new Random[NUM_RANDOM_GEN]; // default seed is System time 
       static public Random RandomGenerator
       {
-         get
+         get 
          {
-            //int outIndex = theRandom.Next(300);
-            //int divisor = 3;
-            //for ( int j=0; j < outIndex; ++j )
-            //{
-            //   switch(divisor)
-            //   {
-            //      case 3:  divisor = 11; break;
-            //      case 5:  divisor = 19; break;
-            //      case 7:  divisor = 5;  break;
-            //      case 11: divisor = 13; break;
-            //      case 13: divisor = 7;  break;
-            //      case 17: divisor = 3;  break;
-            //      case 19: divisor = 17; break;
-            //   }
-            //   int seed = theRandom.Next(265535);
-            //   while (seed < divisor)
-            //      seed *= 3 ;
-            //   int index = seed / divisor;
-            //   int inIndex = theRandom.Next(2000);
-            //   for (int i = 0; i < inIndex; i++)
-            //      seed = theRandom.Next(seed);
-            //}
-            //Random aRandom = new Random(theRandom.Next(265535));
-            return theRandom;
+            int newIndex = theRandomIndex + 3;
+            if (NUM_RANDOM_GEN <= newIndex)
+               newIndex = newIndex - NUM_RANDOM_GEN;
+            Thread.Sleep(43 + theRandoms[theRandomIndex].Next(97));
+            theRandomIndex = newIndex;
+            return theRandoms[theRandomIndex]; 
          }
       }
       //--------------------------------------------
       // Utilities Functions
+      public static void InitializeRandomNumGenerators()
+      {
+         theRandoms[0] = new Random(); // default seed is System time 
+         for (int i = 1; i < NUM_RANDOM_GEN; i++)
+         {
+            int seed = 265535;
+            for (int j = 0; j < i; j++)
+               seed += theRandoms[j].Next(seed);
+            Thread.Sleep(97 + theRandoms[i-1].Next(113));
+            theRandoms[i] = new Random(seed);
+         }
+      }
       public static string RemoveSpaces(string aLine)
       {
          string[] aStringArray1 = aLine.Split(new char[] { '"' });
@@ -161,26 +151,6 @@ namespace BarbarianPrince
          // return cursor stream
          cursorStream.Seek(0, SeekOrigin.Begin);
          return new System.Windows.Input.Cursor(cursorStream);
-      }
-      public static TaskBarLocation GetTaskBarLocation()
-      {
-         TaskBarLocation taskBarLocation = TaskBarLocation.BOTTOM;
-         foreach (Screen screen in Screen.AllScreens)
-         {
-            if (screen.WorkingArea.Width == screen.Bounds.Width)
-            {
-               if (screen.WorkingArea.Top > 0)
-                  taskBarLocation = TaskBarLocation.TOP;
-            }
-            else
-            {
-               if (screen.WorkingArea.Left > 0)
-                  taskBarLocation = TaskBarLocation.LEFT;
-               else
-                  taskBarLocation = TaskBarLocation.RIGHT;
-            }
-         }
-         return taskBarLocation;
       }
       public static String Serialize<T>(T t)
       {

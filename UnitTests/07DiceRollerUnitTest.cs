@@ -88,8 +88,7 @@ namespace BarbarianPrince
             {
                 int NUM_OF_ROLLS = 1200;
                 StringBuilder sb = new StringBuilder("RandomNumbers=");
-                Random theRandom = Utilities.RandomGenerator;
-                int randomNum = theRandom.Next(1, 7);
+                int randomNum = Utilities.RandomGenerator.Next(1, 7);
                 double average = randomNum;
                 int duplicates = 0;
                 int previousNum = 0;
@@ -98,7 +97,7 @@ namespace BarbarianPrince
                     System.Threading.Thread.Sleep(1);
                     sb.Append(randomNum.ToString());
                     sb.Append(",");
-                    randomNum = theRandom.Next(1, 7);
+                    randomNum = Utilities.RandomGenerator.Next(1, 7);
                     average += randomNum;
                     if (randomNum == previousNum)
                         ++duplicates;

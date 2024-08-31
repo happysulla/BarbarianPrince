@@ -47,13 +47,13 @@ namespace BarbarianPrince
       public bool CreateUnitTests(IGameInstance gi, DockPanel dp, EventViewer ev, IDieRoller dr)
       {
          //-----------------------------------------------------------------------------
-         IUnitTest ut13 = new TransportMgrUnitTest(ev);
-         if (true == ut13.CtorError)
+         IUnitTest ut7 = new DiceRollerUnitTest(dp, dr);
+         if (true == ut7.CtorError)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): LoadMgrUnitTest() ctor error");
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): DiceRollerUnitTest() ctor error");
             return false;
          }
-         gi.UnitTests.Add(ut13);
+         gi.UnitTests.Add(ut7);
          //-----------------------------------------------------------------------------
          IUnitTest ut1 = new GameViewerCreateUnitTest(dp);
          if (true == ut1.CtorError)
@@ -103,14 +103,6 @@ namespace BarbarianPrince
          }
          gi.UnitTests.Add(ut6);
          //-----------------------------------------------------------------------------
-         IUnitTest ut7 = new DiceRollerUnitTest(dp, dr);
-         if (true == ut7.CtorError)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): DiceRollerUnitTest() ctor error");
-            return false;
-         }
-         gi.UnitTests.Add(ut7);
-         //-----------------------------------------------------------------------------
          IUnitTest ut8 = new GameInstanceUnitTest(gi);
          if (true == ut8.CtorError)
          {
@@ -150,6 +142,14 @@ namespace BarbarianPrince
             return false;
          }
          gi.UnitTests.Add(ut12);
+         //-----------------------------------------------------------------------------
+         IUnitTest ut13 = new TransportMgrUnitTest(ev);
+         if (true == ut13.CtorError)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): LoadMgrUnitTest() ctor error");
+            return false;
+         }
+         gi.UnitTests.Add(ut13);
          //-----------------------------------------------------------------------------
          IUnitTest ut14 = new CombatUnitTest(dp, gi, ev, dr);
          if (true == ut14.CtorError)
