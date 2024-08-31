@@ -15,6 +15,11 @@ namespace BarbarianPrince
 {
    public class DieRoller : IDieRoller
    {
+      private const int ANIMATE_TIME_MS = 1100;         // To speed up die rolling, need to redo the die animation speed in GIF creation
+      private const double PATH_DISTANCE = 600;        // limits the animation path - distance & time correlate to speed of dice
+      private const double DECELARATION_RATIO = 0.8;   // how fast the animation decelerates
+      private const double ACCELERATION_RATIO = 0.05;    // how fast the animation decelerates
+      private const double BUTTON_BOARDER = 15;         // add for the button border
       private const double ZOOM_DICE = 1.707;
       private RollEndCallback myCallbackEndRoll = null;
       private LoadEndCallback myCallbackEndLoad = null;
@@ -357,10 +362,6 @@ namespace BarbarianPrince
          // Path Distance += sqrt(x^2 + y^2)
          try
          {
-            //const int ANIMATE_TIME_MS = 2200;
-            const int ANIMATE_TIME_MS = 1800;
-            const double PATH_DISTANCE = 1000;  // limits the animation path - distance & time correlate to speed of dice
-            const double BUTTON_BOARDER = 15; // add 10 for the button border
             double dieSize = ZOOM_DICE * Utilities.theMapItemSize / Utilities.ZoomCanvas;
             PathFigure aPathFigure = new PathFigure() { StartPoint = new System.Windows.Point(startPoint.X, startPoint.Y) };
             double angle1InDegrees = Utilities.RandomGenerator.Next(20, 60);
@@ -502,14 +503,16 @@ namespace BarbarianPrince
             aPathGeo.Freeze();
             DoubleAnimationUsingPath xAnimiation = new DoubleAnimationUsingPath
             {
-               DecelerationRatio = 0.9,
+               DecelerationRatio = DECELARATION_RATIO,
+               AccelerationRatio = ACCELERATION_RATIO,
                PathGeometry = aPathGeo,
                Duration = TimeSpan.FromMilliseconds(ANIMATE_TIME_MS),
                Source = PathAnimationSource.X
             };
             DoubleAnimationUsingPath yAnimiation = new DoubleAnimationUsingPath
             {
-               DecelerationRatio = 0.9,
+               DecelerationRatio = DECELARATION_RATIO,
+               AccelerationRatio = ACCELERATION_RATIO,
                PathGeometry = aPathGeo,
                Duration = TimeSpan.FromMilliseconds(ANIMATE_TIME_MS),
                Source = PathAnimationSource.Y

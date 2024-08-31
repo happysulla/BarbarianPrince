@@ -51,8 +51,9 @@ namespace BarbarianPrince
             int newIndex = theRandomIndex + 3;
             if (NUM_RANDOM_GEN <= newIndex)
                newIndex = newIndex - NUM_RANDOM_GEN;
-            Thread.Sleep(43 + theRandoms[theRandomIndex].Next(97));
             theRandomIndex = newIndex;
+            for (int i = 0; i < 23; i++)
+               Thread.Sleep(theRandoms[theRandomIndex].Next(3));
             return theRandoms[theRandomIndex]; 
          }
       }
@@ -66,7 +67,6 @@ namespace BarbarianPrince
             int seed = 265535;
             for (int j = 0; j < i; j++)
                seed += theRandoms[j].Next(seed);
-            Thread.Sleep(97 + theRandoms[i-1].Next(113));
             theRandoms[i] = new Random(seed);
          }
       }

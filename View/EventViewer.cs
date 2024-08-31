@@ -162,10 +162,17 @@ namespace BarbarianPrince
             case GameAction.ShowAllRivers:
             case GameAction.ShowPartyPath:
                break;
+            case GameAction.UpdateUndo:
+               myScrollViewerTextBlock.Cursor = Cursors.Arrow;
+               gi.IsGridActive = false;
+               if (false == OpenEvent(gi, gi.EventActive))
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): OpenEvent() returned false ae=" + myGameInstance.EventActive + " a=" + action.ToString());
+               break;
             case GameAction.UpdateLoadingGame:
                myGameInstance = gi;
                myRulesMgr.GameInstance = gi;
                gi.IsGridActive = false;
+               myScrollViewerTextBlock.Cursor = Cursors.Arrow;
                try // resync the gi.DieResults[] to initial conditions
                {
                   foreach (string key in myRulesMgr.Events.Keys)

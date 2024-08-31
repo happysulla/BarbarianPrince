@@ -1264,6 +1264,7 @@ namespace BarbarianPrince
          gi.IsUndoCommandAvailable = false;
          gi.SunriseChoice = GamePhase.StartGame;
          gi.GamePhase = GamePhase.SunriseChoice;
+         gi.NewHex = gi.Prince.Territory;
          if( (RaftEnum.RE_RAFT_CHOSEN == gi.RaftStatePrevUndo) || (RaftEnum.RE_RAFT_SHOWN == gi.RaftStatePrevUndo) )
             gi.RaftState = RaftEnum.RE_RAFT_SHOWN;
          gi.EventDisplayed = gi.EventActive = "e203";
@@ -2240,15 +2241,18 @@ namespace BarbarianPrince
          //gi.Caches.Add(cacheHex, 333);
          //gi.Caches.Add(cacheHex, 100);
          //gi.Caches.Add(cacheHex, 500);
-         //gi.Caches.Add(cacheHex, 33);
-         //ITerritory secretClueHex = Territory.theTerritories.Find("0504");
-         //gi.SecretClues.Add(secretClueHex);
-         //ITerritory secretClueHex2 = Territory.theTerritories.Find("0706");
-         //gi.SecretClues.Add(secretClueHex2);
+         //gi.Caches.Add(cacheHex,m 33);
+         ////---------------------
+         ITerritory secretClueHex = Territory.theTerritories.Find("0507");
+         gi.SecretClues.Add(secretClueHex);
+         ITerritory secretClueHex2 = Territory.theTerritories.Find("0406");
+         gi.SecretClues.Add(secretClueHex2);
+         ////---------------------
          //ITerritory hiddenTemple = Territory.theTerritories.Find("0605");
          //gi.HiddenTemples.Add(hiddenTemple);
          //ITerritory hiddenRuin = Territory.theTerritories.Find("0606");
          //gi.HiddenRuins.Add(hiddenRuin);
+         ////---------------------
          //ITerritory elfTown = Territory.theTerritories.Find("0607");
          //gi.ElfTowns.Add(elfTown);
          //ITerritory eagleLair = Territory.theTerritories.Find("1507");
@@ -2261,10 +2265,12 @@ namespace BarbarianPrince
          //gi.HalflingTowns.Add(halflingTown);
          //ITerritory elfCastle = Territory.theTerritories.Find("0608");
          //gi.ElfCastles.Add(elfCastle);
+         ////---------------------
          //ITerritory wizardTower = Territory.theTerritories.Find("0404");  //mountain
          //gi.WizardTowers.Add(wizardTower);
          //ITerritory wizardAdviceHex = Territory.theTerritories.Find("1005");
          //gi.WizardAdviceLocations.Add(wizardAdviceHex);
+         ////---------------------
          //ITerritory t11 = Territory.theTerritories.Find("0306"); // e114 - verify that eagle hunt can happen in structure
          //gi.HiddenTemples.Add(t11);
          //t11 = Territory.theTerritories.Find("0307"); // e114 - verify that eagle hunt can happen in structure
@@ -2280,11 +2286,11 @@ namespace BarbarianPrince
          //t11 = Territory.theTerritories.Find("0507"); // e114 - verify that eagle hunt can happen in structure
          //gi.HiddenTemples.Add(t11);
          ////---------------------
-         foreach( ITerritory t in Territory.theTerritories )
-         {
-            if( true == t.IsTown )
-               gi.ForbiddenAudiences.AddReligiousConstraint(t);
-         }
+         //foreach( ITerritory t in Territory.theTerritories )
+         //{
+         //   if( true == t.IsTown )
+         //      gi.ForbiddenAudiences.AddReligiousConstraint(t);
+         //}
          ////---------------------
          //ITerritory forbiddenHex = Territory.theTerritories.Find("0705");
          //gi.ForbiddenHexes.Add(forbiddenHex);
@@ -2301,10 +2307,10 @@ namespace BarbarianPrince
          //gi.LetterOfRecommendations.Add(lt3);
          //gi.ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt3);
          //---------------------
-         //ITerritory arch1 = Territory.theTerritories.Find("0821");
-         //gi.Arches.Add(arch1);
-         //ITerritory arch2 = Territory.theTerritories.Find("0820");
-         //gi.Arches.Add(arch2);
+         ITerritory arch1 = Territory.theTerritories.Find("0418");
+         gi.Arches.Add(arch1);
+         ITerritory arch2 = Territory.theTerritories.Find("0517");
+         gi.Arches.Add(arch2);
          //---------------------
          //gi.DayOfLastOffering = gi.Days - 4;
          //gi.IsSecretTempleKnown = true;

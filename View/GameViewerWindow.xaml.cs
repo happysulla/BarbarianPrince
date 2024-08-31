@@ -1750,7 +1750,7 @@ namespace BarbarianPrince
                   }
                   if (null != myTerritorySelected)
                   {
-                     if (("e213a" == myGameInstance.EventActive) || ("e401" == myGameInstance.EventActive) || (GamePhase.Rest == gi.SunriseChoice))
+                     if (("e213a" == myGameInstance.EventActive) || ("e401" == myGameInstance.EventActive) || (GamePhase.Rest == gi.SunriseChoice) || (GamePhase.SearchCache == gi.SunriseChoice) || (GamePhase.SearchTreasure == gi.SunriseChoice) || (GamePhase.SearchRuins == gi.SunriseChoice))
                         UpdateCanvasHexToShowPolygon(myGameInstance.NewHex); // e126 - if raft moved downriver, show the polygon in the nex hex
                      else
                         UpdateCanvasHexToShowPolygon(myTerritorySelected);

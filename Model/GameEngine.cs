@@ -47,14 +47,6 @@ namespace BarbarianPrince
       public bool CreateUnitTests(IGameInstance gi, DockPanel dp, EventViewer ev, IDieRoller dr)
       {
          //-----------------------------------------------------------------------------
-         IUnitTest ut7 = new DiceRollerUnitTest(dp, dr);
-         if (true == ut7.CtorError)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): DiceRollerUnitTest() ctor error");
-            return false;
-         }
-         gi.UnitTests.Add(ut7);
-         //-----------------------------------------------------------------------------
          IUnitTest ut1 = new GameViewerCreateUnitTest(dp);
          if (true == ut1.CtorError)
          {
@@ -102,6 +94,14 @@ namespace BarbarianPrince
             return false;
          }
          gi.UnitTests.Add(ut6);
+         //-----------------------------------------------------------------------------
+         IUnitTest ut7 = new DiceRollerUnitTest(dp, dr);
+         if (true == ut7.CtorError)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): DiceRollerUnitTest() ctor error");
+            return false;
+         }
+         gi.UnitTests.Add(ut7);
          //-----------------------------------------------------------------------------
          IUnitTest ut8 = new GameInstanceUnitTest(gi);
          if (true == ut8.CtorError)
