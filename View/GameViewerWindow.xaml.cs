@@ -669,7 +669,7 @@ namespace BarbarianPrince
                myStackPanelDailyActions.Children.Add(myButtonDailyAcions[14]);    // Rescue True Heir to Huldra Castle
                myStackPanelDailyActions.Visibility = Visibility.Visible;
             }
-            else if ((0 < gi.FoulBaneCount) && ("0323" == gi.Prince.Territory.Name))
+            else if ((true == gi.IsSpecialItemHeld(SpecialEnum.Foulbane)) && ("0323" == gi.Prince.Territory.Name))
             {
                myStackPanelDailyActions.Children.Add(myButtonDailyAcions[13]);    // Steal Count Drogat Gems
                myStackPanelDailyActions.Visibility = Visibility.Visible;

@@ -4106,6 +4106,8 @@ namespace BarbarianPrince
          {
             if ((true == mi.IsKilled) || (true == mi.IsUnconscious))
             {
+               if( (true == mi.IsKilled ) && (0 < mi.WealthCode) ) // add dead companions wealth to wealthcodes
+                  myCapturedWealthCodes.Add(mi.WealthCode);
                myDeadPartyMemberCoin += mi.Coin;
                foreach (IMapItem mount in mi.Mounts)
                   myCapturedMounts.Add(mount);
@@ -4166,6 +4168,8 @@ namespace BarbarianPrince
                   foreach (SpecialEnum possession in mi.SpecialShares)
                      myCapturedPossessions.Add(possession);
                   myDeadPartyMemberCoin += mi.Coin;
+                  if (0 < mi.WealthCode) // add companion wealth code to captured wealth code
+                     myCapturedWealthCodes.Add(mi.WealthCode);
                   if (true == mi.Name.Contains("Griffon"))  // e100 - griffon claws helps with Lady Aeravir
                      myCapturedPossessions.Add(SpecialEnum.GriffonClaws);
                }
@@ -4232,6 +4236,8 @@ namespace BarbarianPrince
                   foreach (SpecialEnum possession in mi.SpecialShares)
                      myCapturedPossessions.Add(possession);
                   myDeadPartyMemberCoin += mi.Coin;
+                  if (0 < mi.WealthCode) // add companion wealth code to captured wealth code
+                     myCapturedWealthCodes.Add(mi.WealthCode);
                   if (true == mi.Name.Contains("Griffon"))  // e100 - griffon claws helps with Lady Aeravir
                      myCapturedPossessions.Add(SpecialEnum.GriffonClaws);
                }

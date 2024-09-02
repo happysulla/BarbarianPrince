@@ -426,7 +426,8 @@ namespace BarbarianPrince
                }
             }
             //--------------------------------------------
-            myGameInstance.FoulBaneCount += myFoulBanePurchased;
+            for (int i = 0; i < myFoulBanePurchased; i++ )
+               myGameInstance.AddSpecialItem(SpecialEnum.Foulbane);
             //--------------------------------------------
             int diffTrollSkins = myTrollSkinsInPartyOriginal - myTrollSkinsInPartyCurrent;
             for (int k = 0; k < diffTrollSkins; ++k )

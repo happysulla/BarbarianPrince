@@ -2607,7 +2607,7 @@ namespace BarbarianPrince
             case "e161":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  if ((0 < myGameInstance.FoulBaneCount) && (false == myGameInstance.IsFoulBaneUsedThisTurn) )// e146 - if have foul bane
+                  if ((true == myGameInstance.IsSpecialItemHeld(SpecialEnum.Foulbane)) && (false == myGameInstance.IsFoulBaneUsedThisTurn) ) // e146 - if have foul bane
                   {
                      myTextBlock.Inlines.Add(new LineBreak());
                      myTextBlock.Inlines.Add(new LineBreak());
@@ -5711,9 +5711,15 @@ namespace BarbarianPrince
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
             case "e135a":
-            case "e147": // Clue to Treasure
                action = GameAction.EncounterEnd;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
+            case "e147": // Clue to Treasure
+               if( Utilities.NO_RESULT < myGameInstance.DieResults["e056a"][1])
+               {
+                  action = GameAction.EncounterEnd;
+                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               }
                break;
             case "e150": // Pay your respects
                action = GameAction.EncounterEnd;

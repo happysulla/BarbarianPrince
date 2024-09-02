@@ -176,7 +176,7 @@ namespace BarbarianPrince
          {
             myStatusBar.Items.Add(new Separator());
             StringBuilder sbFB = new StringBuilder("FoulBane=");
-            sbFB.Append(gi.FoulBaneCount);
+            sbFB.Append( myGameInstance.GetCountSpecialItem(SpecialEnum.Foulbane) );
             Label labelFoulBane = new Label() { FontFamily = myFontFam, FontSize = 12, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, Content = sbFB.ToString() };
             Image imgFoulBane = new Image { Source = MapItem.theMapImages.GetBitmapImage("FoulBane"), Width = 30, Height = 30 };
             myStatusBar.Items.Add(labelFoulBane);

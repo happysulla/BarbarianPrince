@@ -3627,7 +3627,7 @@ e156f	"<Bold>e156f Town Mayor Religious Interest Thwarted</Bold>
 Since your party does not includes a monk or priest, he dismisses you and refuses any further audiences until you have such a character in your party. When you do have a monk or priest, he will provide a letter of recommendation to any castle or temple you request, gives you wealth 100, and his trusted assistant becomes a member of your party. Click image to continue."
 e156g	"<Bold>e156g Town Mayor Honors Promise</Bold>
 <LineBreak/><LineBreak/>
-In a previous audience, the town mayer encouraged you to get a monk or priest <InlineUIContainer><Button Content='e156f' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> and return for an audience. 
+In a previous audience, the town mayor encouraged you to get a monk or priest <InlineUIContainer><Button Content='e156f' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> and return for an audience. 
 <LineBreak/><LineBreak/>
 Since now you have a religious person in the party, he provides a letter of recommendation to any castle or temple you request, gives you wealth 100, and his trusted assistant becomes a member of your party. 
 <LineBreak/><LineBreak/>The assistant has combat skill 4 and endurance 4. You cannot seek another audience with him until you have used the letter. Alternatively, you can seek a new audience if the assistant is killed or leaves your party other than by you voluntarily dismissing him. 
@@ -3895,7 +3895,7 @@ e185	"<Bold>e185 Poison Drug</Bold>
 <LineBreak/><LineBreak/>After a combat where the poisoned weapon is used, roll one die. A result of 6 means the poison has worn off and the weapon returns to normal.
 <LineBreak/><LineBreak/>Since a character often has multiple weapons, he has the option of using his poisoned weapon or a normal weapon as desired. Click image when ready to continue.
 <LineBreak/><LineBreak/>
-                   <InlineUIContainer><Image Source='../../Images/PoisonDrug.gif' Name='EncounterEnd' Height='300' Width='300'></Image></InlineUIContainer>"
+                             <InlineUIContainer><Image Source='../../Images/PoisonDrug.gif' Name='EncounterEnd' Height='300' Width='300'></Image></InlineUIContainer>"
 e186	"<Bold>e186 Magic Sword</Bold>
 <LineBreak/><LineBreak/>A character can carry this special sword amoung his weapons. The magic sword adds one to the combat skill of the character with it.
 In addition, the blade's magic means that every wound it inflicts counts as a poisoned wound. Click image when ready to continue.
@@ -4396,7 +4396,7 @@ e212g	"<Bold>e212g Gods Favor your Questions</Bold>
 <LineBreak/><LineBreak/>
                    <InlineUIContainer><Image Source='../../Images/Temple.gif' Name='Temple' Height='300' Width='400'></Image></InlineUIContainer>"
 e212h	"<Bold>e212h Special Omen Riddle</Bold>
-<LineBreak/><LineBreak/>A special omen and riddle provides a clue to treasures. Click image to continue.
+<LineBreak/><LineBreak/>A special omen and riddle provides a clue to treasures per
  <InlineUIContainer><Button Content='e147' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. Click image to continue.
 <LineBreak/><LineBreak/>
                    <InlineUIContainer><Image Source='../../Images/Temple.gif' Name='Temple' Height='300' Width='400'></Image></InlineUIContainer>"

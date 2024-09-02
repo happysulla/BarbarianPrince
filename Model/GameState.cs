@@ -2291,7 +2291,6 @@ namespace BarbarianPrince
          //gi.IsMarkOfCain = true; // e018
          //gi.NumMonsterKill = 5; // e161e - kill 5 monsters
          //gi.IsSecretCountDrogat = true; // e146
-         //gi.FoulBaneCount = 2;
          //gi.IsSecretLadyAeravir = true; // e145
          //gi.IsSecretBaronHuldra = true; // e144
          //IMapItem trueHeir = CreateCharacter(gi, "WarriorBoy");
@@ -3172,11 +3171,9 @@ namespace BarbarianPrince
          gi.RaftStatePrevUndo = gi.RaftState = RaftEnum.RE_NO_RAFT; // PerformJailBreak()
          gi.IsAirborne = false;
          EnteredHex hex = new EnteredHex(gi, ColorActionEnum.CAE_JAIL);
-         hex.EventNames.Add(gi.EventActive);
          hex.IsEncounter = true;
          hex.JailDay++;
          gi.EnteredHexes.Add(hex); // show staying in hex when in jail
-
          switch (gi.EventActive)
          {
             case "e203a":
@@ -3613,7 +3610,6 @@ namespace BarbarianPrince
                   if( false == gi.IsAirborneEnd )
                   {
                      gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL)); // TravelShowMovement 
-
                   }
                   else
                   {
@@ -4232,8 +4228,8 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.EndGameExit:
-               //if (null != System.Windows.Application.Current)
-               //   System.Windows.Application.Current.Shutdown();
+               if (null != System.Windows.Application.Current)
+                  System.Windows.Application.Current.Shutdown();
                break;
             default:
                returnStatus = "Reached Default ERROR";

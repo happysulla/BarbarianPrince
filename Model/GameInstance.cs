@@ -21,7 +21,12 @@ namespace BarbarianPrince
       public bool CtorError { get; } = false;
       public GameInstance() // Constructor - set log levels
       {
-         Logger.SetInitial(); // turn on initial log levels
+         if( false == Logger.SetInitial()) // tsetup logger
+         {
+            Logger.Log(LogEnum.LE_ERROR, "GameInstance(): SetInitial() returned false");
+            CtorError = true;
+            return;
+         }
          try
          {
             // Create the territories and the regions marking the territories.
@@ -206,8 +211,7 @@ namespace BarbarianPrince
       public bool IsSecretBaronHuldra { set; get; } = false;    // e144 
       public bool IsSecretLadyAeravir { set; get; } = false;    // e145 
       public bool IsSecretCountDrogat { set; get; } = false;    // e146 
-      public int FoulBaneCount { set; get; } = 0;               // e146 FoulBane purchased in Duffyd Temple - 1gp per serving
-      public bool IsFoulBaneUsedThisTurn { set; get; } = false; 
+      public bool IsFoulBaneUsedThisTurn { set; get; } = false; // e146 FoulBane purchased in Duffyd Temple - 1gp per serving
       //---------------------------------------------------------------
       public IMapItems PartyMembers { get; set; } = new MapItems();
       public IMapItems LostPartyMembers { get; set; } = new MapItems();
@@ -1802,7 +1806,15 @@ namespace BarbarianPrince
                      Logger.Log(LogEnum.LE_ERROR, "ProcessIncapacitedPartyMembers(): AddFoods() returned false");
                      return;
                   }
-                  if( false == AddCoins(mi.Coin, false))
+                  int coin = GameEngine.theTreasureMgr.GetCoin(mi.WealthCode); // add the wealth code of character to character's coin pile
+                  if( coin < -1 )
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "ProcessIncapacitedPartyMembers(): AddCoins() returned false");
+                     return;
+                  }
+                  Logger.Log(LogEnum.LE_ADD_COIN, "ProcessIncapacitedPartyMembers(): Wealth Code Dead Companion=" + coin.ToString());
+                  mi.Coin += coin;
+                  if ( false == AddCoins(mi.Coin, false))
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ProcessIncapacitedPartyMembers(): AddCoins() returned false");
                      return;

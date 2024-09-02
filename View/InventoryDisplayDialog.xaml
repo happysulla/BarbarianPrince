@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BarbarianPrince"
         mc:Ignorable="d"
-        Title="InventoryDisplayDialog" Height="450" Width="800" WindowStartupLocation="CenterScreen" MaxHeight="1000">
+        Title="Party Inventory" Height="450" Width="800" WindowStartupLocation="CenterScreen" MaxHeight="1000">
    <ScrollViewer Name="myScollViewer" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
       <Grid x:Name="myGrid" ShowGridLines="True">
          <Grid.RowDefinitions>

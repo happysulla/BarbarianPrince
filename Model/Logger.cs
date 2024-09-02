@@ -1,4 +1,9 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
+
 namespace BarbarianPrince
 {
    public enum LogEnum
@@ -57,10 +62,36 @@ namespace BarbarianPrince
    {
       const int NUM_LOG_LEVELS = (int)LogEnum.LE_END_ENUM;
       public static Boolean[] theLogLevel = new Boolean[NUM_LOG_LEVELS];
+      private static string theDirectoryName = "";
+      private static string theFileName = "";
+      //--------------------------------------------------
+      public static string AssemblyDirectory
+      {
+         get
+         {
+            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+            UriBuilder uri = new UriBuilder(codeBase);
+            string path = Uri.UnescapeDataString(uri.Path);
+            return System.IO.Path.GetDirectoryName(path);
+         }
+      }
+      //--------------------------------------------------
       static public void Log(LogEnum logLevel, String description)
       {
          if (true == theLogLevel[(int)logLevel])
+         {
+            FileInfo file = new FileInfo(theFileName);
+            if( true == File.Exists(theFileName))
+            {
+               StreamWriter swriter = File.AppendText(theFileName);
+               swriter.Write(logLevel.ToString());
+               swriter.Write(" ");
+               swriter.Write(description);
+               swriter.Write("\n");
+               swriter.Close();
+            }
             Console.WriteLine("{0} {1}", logLevel.ToString(), description);
+         }
       }
       static public void SetOn(LogEnum logLevel)
       {
@@ -72,8 +103,43 @@ namespace BarbarianPrince
          if ((int)logLevel < NUM_LOG_LEVELS)
             theLogLevel[(int)logLevel] = false;
       }
-      static public void SetInitial()
+      static public bool SetInitial()
       {
+         //---------------------------------------------------------------------
+         try // create directory if it does not exists
+         {
+            if (true == string.IsNullOrEmpty(theDirectoryName)) // use the directory name as the place to load games. If none exists, create directory name
+               theDirectoryName = Directory.GetParent(Environment.CurrentDirectory.ToString()).ToString() + @"\Logs";
+            if (false == Directory.Exists(theDirectoryName)) // create directory if does not exists
+               Directory.CreateDirectory(theDirectoryName);
+            Directory.SetCurrentDirectory(theDirectoryName);
+         }
+         catch (Exception e)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SaveGameAsToFile(): path=" + theDirectoryName + " e=" + e.ToString());
+            Directory.SetCurrentDirectory(AssemblyDirectory);
+            return false;
+         }
+         //---------------------------------------------------------------------
+         try // create the file
+         {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(theDirectoryName);
+            sb.Append("/");
+            sb.Append(DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+            sb.Append(".txt");
+            theFileName = sb.ToString();
+            FileInfo f = new FileInfo(theFileName);
+            f.Create();
+         }
+         catch (Exception ex)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SaveGameAsToFile(): path=" + theDirectoryName + " e =" + ex.ToString());
+            Directory.SetCurrentDirectory(AssemblyDirectory);
+            return false;
+         }
+         Directory.SetCurrentDirectory(AssemblyDirectory);
+         //---------------------------------------------------------------------
          Logger.SetOn(LogEnum.LE_ERROR);
          //Logger.SetOn(LogEnum.LE_GAME_INIT);
          Logger.SetOn(LogEnum.LE_USER_ACTION);
@@ -82,7 +148,7 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_GAME_PARTYMEMBER_COUNT);
          Logger.SetOn(LogEnum.LE_PARTYMEMBER_ADD);
          Logger.SetOn(LogEnum.LE_REMOVE_KILLED);
-         Logger.SetOn(LogEnum.LE_END_GAME);
+         //Logger.SetOn(LogEnum.LE_END_GAME);
          //Logger.SetOn(LogEnum.LE_END_GAME_CHECK);
          //Logger.SetOn(LogEnum.LE_MOVE_STACKING);
          //Logger.SetOn(LogEnum.LE_MOVE_COUNT);
@@ -103,8 +169,8 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_MAPITEM_WOUND);
          //Logger.SetOn(LogEnum.LE_MAPITEM_POISION);
          Logger.SetOn(LogEnum.LE_END_ENCOUNTER);
-         Logger.SetOn(LogEnum.LE_HEX_WITHIN_RANGE);
-         Logger.SetOn(LogEnum.LE_STARVATION_STATE_CHANGE);
+         //Logger.SetOn(LogEnum.LE_HEX_WITHIN_RANGE);
+         //Logger.SetOn(LogEnum.LE_STARVATION_STATE_CHANGE);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_WINDOW);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_MENU);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_STATUS_BAR);
@@ -118,10 +184,11 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_DAILY_ACTIONS);
          //Logger.SetOn(LogEnum.LE_VIEW_TRAVEL_CHECK);
          //Logger.SetOn(LogEnum.LE_VIEW_MIM);
-         Logger.SetOn(LogEnum.LE_VIEW_MIM_ADD);
-         Logger.SetOn(LogEnum.LE_VIEW_MIM_CLEAR);
+         //Logger.SetOn(LogEnum.LE_VIEW_MIM_ADD);
+         //Logger.SetOn(LogEnum.LE_VIEW_MIM_CLEAR);
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_LOADS);
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_HUNT);
+         return true;
       }
    }
 }

@@ -108,7 +108,6 @@ namespace BarbarianPrince
       bool IsHuldraHeirFight { set; get; } // e144b
       bool IsHuldraHeirKilled { set; get; } // e144e
       bool IsLadyAeravirRerollActive { set; get; } // e145 Event=e160 and reroll is active
-      int FoulBaneCount { set; get; }    // e146 FoulBane purchased in Duffyd Temple - 1gp per serving
       bool IsFoulBaneUsedThisTurn { set; get; } // e146 - FoulBane used to roll again
       int SeneschalRollModifier { set; get; }   //e148
       bool IsCavalryEscort { set; get; }   // e151
