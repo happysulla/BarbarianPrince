@@ -4040,10 +4040,11 @@ namespace BarbarianPrince
       {
          myGameInstance.ForbiddenAudiences.RemoveMonsterKillConstraints(myGameInstance.NumMonsterKill);
          GameAction outAction = GameAction.Error;
-         if( true == myGameInstance.Prince.IsKilled )
+         bool isNecklass = myGameInstance.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace);
+         if ( true == myGameInstance.Prince.IsKilled )
          {
             myGameInstance.GamePhase = GamePhase.EndGame;
-            if (true == myGameInstance.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+            if (true == isNecklass)
             {
                outAction = GameAction.EndGameResurrect;  // ShowResultsCombat()
             }
@@ -4068,6 +4069,7 @@ namespace BarbarianPrince
          sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
          sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
          sb11.Append(" a="); sb11.Append(outAction.ToString());
+         sb11.Append(" n?="); sb11.Append(isNecklass.ToString());
          Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          return true;

@@ -68,7 +68,6 @@ namespace BarbarianPrince
       int GuardianCount { set; get; }  // e046
       bool IsMerchantWithParty { set; get; }  // e048
       bool IsMinstrelPlaying { set; get; }  //e049 - Minstrel at dinner
-      bool IsMinstrelJoining { set; get; }  //e049 - Minstrel conversation to join
       bool IsJailed { set; get; } // e061 - marked for death
       bool IsDungeon { set; get; } // e062 - thrown in dungeon
       int NightsInDungeon { set; get; } // e062 - thrown in dungeon

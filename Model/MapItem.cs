@@ -574,30 +574,33 @@ namespace BarbarianPrince
          }
          else if (true == IsRiding)
          {
-            if (0 == Mounts.Count)
+            if (0 == Mounts.Count) 
             {
-               Logger.Log(LogEnum.LE_ERROR, "RemoveVictimMountAndLoad(): Invalid state mi=" + this.Name + " #m=" + Mounts.Count.ToString());
-               return false;
+               Logger.Log(LogEnum.LE_ERROR, "RemoveVictimMountAndLoad(): Invalid state isRiding=true but no mounts for mi=" + this.Name + " #m=" + Mounts.Count.ToString());
+               IsRiding = false;
             }
-            int maxMountLoad = Utilities.MaxMountLoad;
-            IMapItem mount = Mounts[0];
-            if (true == mount.IsExhausted)
-               maxMountLoad = Utilities.MaxMountLoad >> 1; // e120 - half the mount load if exhausted
-            loadCanCarry = (maxMountLoad >> Mounts[0].StarveDayNum);
-            loadCanCarry -= Utilities.PersonBurden; // 20 for man riding and what he can carry
-            if (loadCanCarry < 0)
+            else
             {
-               int maxLoad1 = Utilities.MaxLoad;
-               if (true == this.IsExhausted)
-                  maxLoad1 = Utilities.MaxLoad >> 1; // e120 - half the load if exhausted 
-               loadCanCarry = (maxLoad1 >> StarveDayNum);
+               int maxMountLoad = Utilities.MaxMountLoad;
+               IMapItem mount = Mounts[0];
+               if (true == mount.IsExhausted)
+                  maxMountLoad = Utilities.MaxMountLoad >> 1; // e120 - half the mount load if exhausted
+               loadCanCarry = (maxMountLoad >> Mounts[0].StarveDayNum);
+               loadCanCarry -= Utilities.PersonBurden; // 20 for man riding and what he can carry
+               if (loadCanCarry < 0)
+               {
+                  int maxLoad1 = Utilities.MaxLoad;
+                  if (true == this.IsExhausted)
+                     maxLoad1 = Utilities.MaxLoad >> 1; // e120 - half the load if exhausted 
+                  loadCanCarry = (maxLoad1 >> StarveDayNum);
+               }
+               if (true == mount.IsFlyingMountCarrier())
+               {
+                  mount.IsKilled = true;
+                  mount.Rider = null;
+               }
+               Mounts.Remove(mount);
             }
-            if (true == mount.IsFlyingMountCarrier())
-            {
-               mount.IsKilled = true;
-               mount.Rider = null;
-            }
-            Mounts.Remove(mount);
          }
          else
          {

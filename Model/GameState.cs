@@ -540,6 +540,7 @@ namespace BarbarianPrince
             }
             else
             {
+               Logger.Log(LogEnum.LE_END_GAME, "PerformEndCheck(): EndGameLost-0 ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString());
                action = GameAction.EndGameLost;  // PerformEndCheck() - Killed
                if ("e203b" == gi.EventActive)
                   gi.EndGameReason = "Beheaded in gory execution";
@@ -550,6 +551,7 @@ namespace BarbarianPrince
          }
          if ((true == gi.Prince.IsUnconscious) && (1 == gi.PartyMembers.Count))
          {
+            Logger.Log(LogEnum.LE_END_GAME, "PerformEndCheck(): EndGameLost-1 ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString());
             gi.GamePhase = GamePhase.EndGame;
             bool isNecklass = gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace);
             Logger.Log(LogEnum.LE_END_GAME_CHECK, "PerformEndCheck(): 2-isNecklass=" + isNecklass.ToString());
@@ -566,6 +568,7 @@ namespace BarbarianPrince
          }
          if (Utilities.MaxDays < gi.Days)
          {
+            Logger.Log(LogEnum.LE_END_GAME, "PerformEndCheck(): EndGameLost-3 ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString());
             action = GameAction.EndGameLost;  // PerformEndCheck() - reached end time limit
             gi.GamePhase = GamePhase.EndGame;
             gi.EndGameReason = "Time Limit Reached";
@@ -1079,7 +1082,7 @@ namespace BarbarianPrince
          gi.MapItemMoves.Insert(0,mim); // add at front
          return true;
       }
-      protected IMapItem CreateCharacter(IGameInstance gi, string cName, int wealthCode)
+      protected IMapItem CreateCharacter(IGameInstance gi, string cName)
       {
          ITerritory princeTerritory = gi.Prince.Territory;
          string miName = cName + Utilities.MapItemNum.ToString();
@@ -1099,7 +1102,8 @@ namespace BarbarianPrince
             case "Croc": character = new MapItem(miName, 1.0, false, false, false, "c73Crocodile", "c73Crocodile", princeTerritory, 6, 4, 0); break;
             case "Deserter": character = new MapItem(miName, 1.0, false, false, false, "c78Deserter", "c78Deserter", princeTerritory, 4, 4, 2); break;
             case "Dragon": character = new MapItem(miName, 1.0, false, false, false, "c33Dragon", "c33Dragon", princeTerritory, 11, 10, 0); break;
-            case "Dwarf": character = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 6, 5, 12); break;
+            case "Dwarf": character = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 6, 5, 10); break;
+            case "DwarfW": character = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 6, 5, 12); break;
             case "DwarfLead": character = new MapItem(miName, 1.0, false, false, false, "c68DwarfLead", "c68DwarfLead", princeTerritory, 7, 6, 21); break;
             case "Eagle": character = new MapItem(miName, 1.0, false, false, false, "c62Eagle", "c62Eagle", princeTerritory, 3, 4, 1); break;
             case "Elf": character = new MapItem(miName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 4, 5, 7); break;
@@ -1108,8 +1112,10 @@ namespace BarbarianPrince
             case "ElfLead": character = new MapItem(miName, 1.0, false, false, false, "c69ElfLead", "c69ElfLead", princeTerritory, 7, 6, 21); break;
             case "Falcon": character = new MapItem(miName, 1.0, false, false, false, "c82Falcon", "c82Falcon", princeTerritory, 0, 0, 0); break;
             case "Farmer": character = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 7, 4, 1); break;
+            case "FarmerW": character = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 7, 4, 2); break;
             case "FarmerBoy": character = new MapItem(miName, 1.0, false, false, false, "c35FarmerBoy", "c35FarmerBoy", princeTerritory, 4, 3, 0); break;
             case "FarmerLeader": character = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 3, 2, 2); break;
+            case "FarmerMobLeader": character = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 3, 2, 0); break;
             case "FarmerMob": character = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 2, 2, 0); break;
             case "FarmerRetainer": character = new MapItem(miName, 1.0, false, false, false, "c40Retainer", "c40Retainer", princeTerritory, 4, 4, 1); break;
             case "FarmerRich": character = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 6, 5, 30); break;
@@ -1128,18 +1134,19 @@ namespace BarbarianPrince
             case "HalflingLead": character = new MapItem(miName, 1.0, false, false, false, "c70HalflingLead", "c70HalflingLead", princeTerritory, 6, 3, 4); break;
             case "Harpy": character = new MapItem(miName, 1.0, false, false, false, "c83Harpy", "c83Harpy", princeTerritory, 4, 5, 4); break;
             case "Hawkman": character = new MapItem(miName, 1.0, false, false, false, "c81Hawkman", "c81Hawkman", princeTerritory, 5, 7, 7); break;
-            case "Hobgoblin": character = new MapItem(miName, 1.0, false, false, false, "c23Hobgoblin", "c23Hobgoblin", princeTerritory, 5, 6, 5); break;
+            case "Hobgoblin": character = new MapItem(miName, 1.0, false, false, false, "c23Hobgoblin", "c23Hobgoblin", princeTerritory, 5, 6, 4); break;
+            case "HobgoblinW": character = new MapItem(miName, 1.0, false, false, false, "c23Hobgoblin", "c23Hobgoblin", princeTerritory, 5, 6, 5); break;
             case "Henchman": character = new MapItem(miName, 1.0, false, false, false, "c49Henchman", "c49Henchman", princeTerritory, 3, 2, 0); break;
             case "Huldra": character = new MapItem(miName, 1.0, false, false, false, "c89Huldra", "c89Huldra", princeTerritory, 8, 6, 0); break;
             case "Knight": character = new MapItem(miName, 1.0, false, false, false, "c52Knight", "c52Knight", princeTerritory, 6, 7, 0); break;
-            case "KnightBlack": character = new MapItem(miName, 1.0, false, false, false, "c80BlackKnight", "c80BlackKnight", princeTerritory, 8, 8, 0); break;
+            case "KnightBlack": character = new MapItem(miName, 1.0, false, false, false, "c80BlackKnight", "c80BlackKnight", princeTerritory, 8, 8, 30); break;
             case "Lancer": character = new MapItem(miName, 1.0, false, false, false, "c47Lancer", "c47Lancer", princeTerritory, 5, 5, 0); break;
             case "Lizard": character = new MapItem(miName, 1.0, false, false, false, "c67Lizard", "c67Lizard", princeTerritory, 12, 10, 0); break;
             case "Magician": character = new MapItem(miName, 1.0, false, false, false, "c16Magician", "c16Magician", princeTerritory, 5, 3, 0); break;
             case "MagicianWeak": character = new MapItem(miName, 1.0, false, false, false, "c16Magician", "c16Magician", princeTerritory, 2, 3, 5); break;
             case "Mercenary": character = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", princeTerritory, 4, 5, 4); break;
             case "MercenaryLead": character = new MapItem(miName, 1.0, false, false, false, "c65MercLead", "c65MercLead", princeTerritory, 6, 6, 50); break;
-            case "Merchant": character = new MapItem(miName, 1.0, false, false, false, "c77Merchant", "c77Merchant", princeTerritory, 3, 2, 0); break;
+            case "Merchant": character = new MapItem(miName, 1.0, false, false, false, "c77Merchant", "c77Merchant", princeTerritory, 3, 2, 5); break;
             case "Minstrel": character = new MapItem(miName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", princeTerritory, 0, 0, 0); break;
             case "Mirror":
                character = new MapItem(gi.Prince);
@@ -1151,9 +1158,10 @@ namespace BarbarianPrince
             case "Monk": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 5, 4, 4); break;
             case "MonkGuide": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 3, 2, 0); break;
             case "MonkHermit": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 6, 3, 0); break;
-            case "MonkTraveling": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 3, 2, 0); break;
+            case "MonkTraveling": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 3, 2, 4); break;
             case "MonkWarrior": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 6, 6, 10); break;
             case "Orc": character = new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 5, 5, 2); break;
+            case "OrcW": character = new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 5, 5, 2); break;
             case "OrcWeak": character = new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 5, 4, 1); break;
             case "OrcChief": character = new MapItem(miName, 1.0, false, false, false, "c64OrcChief", "c64OrcChief", princeTerritory, 6, 5, 7); break;
             case "PatrolMounted": character = new MapItem(miName, 1.0, false, false, false, "c74MountedPatrol", "c74MountedPatrol", princeTerritory, 5, 6, 4); break;
@@ -1233,9 +1241,6 @@ namespace BarbarianPrince
             int newCombat = character.Combat - 1;
             character.Combat = Math.Max(newCombat, 1);
          }
-         //------------------------------------------------------------
-         if (-1 < wealthCode)
-            character.WealthCode = wealthCode;
          //------------------------------------------------------------
          Logger.Log(LogEnum.LE_PARTYMEMBER_ADD, "CreateCharacter(): mi=" + character.ToString());
          return character;
@@ -1724,9 +1729,7 @@ namespace BarbarianPrince
          {
             case "Dwarf":
                {
-                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+                  IMapItem member = CreateCharacter(gi, "Dwarf");
                   member.IsFlying = true;
                   member.IsRiding = true;
                   member.Food = Utilities.RandomGenerator.Next(5);
@@ -1738,9 +1741,7 @@ namespace BarbarianPrince
                break;
             case "Eagle":
                {
-                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
+                  IMapItem member = CreateCharacter(gi, "Eagle");
                   member.IsFlying = true;
                   member.IsRiding = true;
                   member.IsGuide = true;
@@ -1750,9 +1751,7 @@ namespace BarbarianPrince
                break;
             case "Elf":
                {
-                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c56Elf", "c56Elf", gi.Prince.Territory, 5, 5, 0);
+                  IMapItem member = CreateCharacter(gi, "Elf");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
                   member.AddNewMount(MountEnum.Horse);
@@ -1761,9 +1760,7 @@ namespace BarbarianPrince
                break;
             case "Falcon":
                {
-                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c82Falcon", "c82Falcon", gi.Prince.Territory, 0, 0, 0);
+                  IMapItem member = CreateCharacter(gi, "Falcon");
                   member.IsFlying = true;
                   member.IsRiding = true;
                   member.IsGuide = true;
@@ -1774,16 +1771,12 @@ namespace BarbarianPrince
                break;
             case "Griffon":
                {
-                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem griffon = new MapItem(memberName, 1.0, false, false, false, "c63Griffon", "c63Griffon", gi.Prince.Territory, 3, 4, 1);
+                  IMapItem griffon = CreateCharacter(gi, "Griffon");
                   griffon.IsFlying = true;
                   griffon.IsRiding = true;
                   gi.AddCompanion(griffon);
                   //---------------------
-                  memberName = "Mercenary" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem rider = new MapItem(memberName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 5, 5, 0);
+                  IMapItem rider = CreateCharacter(gi, "Mercenary");
                   griffon.Rider = rider;
                   rider.Mounts.Insert(0, griffon);
                   rider.Food = Utilities.RandomGenerator.Next(5);
@@ -1795,16 +1788,12 @@ namespace BarbarianPrince
                break;
             case "Harpy":
                {
-                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem harpy = new MapItem(memberName, 1.0, false, false, false, "c83Harpy", "c83Harpy", gi.Prince.Territory, 4, 5, 4);
+                  IMapItem harpy = CreateCharacter(gi, "Harpy");
                   harpy.IsFlying = true;
                   harpy.IsRiding = true;
                   gi.AddCompanion(harpy);
                   //---------------------
-                  memberName = "Monk" + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem rider = new MapItem(memberName, 1.0, false, false, false, "c19Monk", "c19Monk", gi.Prince.Territory, 5, 4, 4);
+                  IMapItem rider = CreateCharacter(gi, "Monk");
                   harpy.Rider = rider;
                   rider.Mounts.Insert(0, harpy);
                   rider.Food = Utilities.RandomGenerator.Next(5);
@@ -1816,9 +1805,7 @@ namespace BarbarianPrince
                break;
             case "Magician":
                {
-                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
+                  IMapItem member = CreateCharacter(gi, "Magician");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
                   gi.AddCompanion(member);
@@ -1826,9 +1813,7 @@ namespace BarbarianPrince
                break;
             case "Mercenary":
                {
-                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 0);
+                  IMapItem member = CreateCharacter(gi, "Mercenary");
                   member.Food = 5;
                   member.Coin = 98;
                   member.AddNewMount();  // riding
@@ -1845,9 +1830,7 @@ namespace BarbarianPrince
                break;
             case "Merchant":
                {
-                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
+                  IMapItem member = CreateCharacter(gi, "Merchant");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
                   gi.AddCompanion(member);
@@ -1856,9 +1839,7 @@ namespace BarbarianPrince
                break;
             case "Minstrel":
                {
-                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", gi.Prince.Territory, 0, 0, 0);
+                  IMapItem member = CreateCharacter(gi, "Minstrel");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
                   gi.AddCompanion(member);
@@ -1867,9 +1848,7 @@ namespace BarbarianPrince
                break;
             case "Monk":
                {
-                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c19Monk", "c19Monk", gi.Prince.Territory, 5, 5, 0);
+                  IMapItem member = CreateCharacter(gi, "Monk");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
                   gi.AddCompanion(member);
@@ -1877,9 +1856,7 @@ namespace BarbarianPrince
                break;
             case "PorterSlave":
                {
-                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
+                  IMapItem member = CreateCharacter(gi, "PorterSlave");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
                   gi.AddCompanion(member);
@@ -1887,9 +1864,7 @@ namespace BarbarianPrince
                break;
             case "Priest":
                {
-                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c14Priest", "c14Priest", gi.Prince.Territory, 3, 3, 0);
+                  IMapItem member = CreateCharacter(gi, "Priest");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
                   gi.AddCompanion(member);
@@ -1897,7 +1872,7 @@ namespace BarbarianPrince
                break;
             case "TrueLove":
                {
-                  IMapItem trueLove = CreateCharacter(gi, "TrueLovePriestDaughter", 0); 
+                  IMapItem trueLove = CreateCharacter(gi, "TrueLovePriestDaughter"); 
                   trueLove.Food = Utilities.RandomGenerator.Next(5);
                   trueLove.Coin = Utilities.RandomGenerator.Next(20);
                   gi.AddCompanion(trueLove);
@@ -1905,9 +1880,7 @@ namespace BarbarianPrince
                break;
             case "Wizard":
                {
-                  string memberName = partyMemberName + Utilities.MapItemNum.ToString();
-                  ++Utilities.MapItemNum;
-                  IMapItem member = new MapItem(memberName, 1.0, false, false, false, "c12Wizard", "c12Wizard", gi.Prince.Territory, 4, 4, 0);
+                  IMapItem member = CreateCharacter(gi, "Wizard");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
                   gi.AddCompanion(member);
@@ -2204,7 +2177,7 @@ namespace BarbarianPrince
       private void AddStartingTestingOptions(IGameInstance gi)
       {
          //gi.Days = 40;
-         //gi.Prince.SetWounds(7, 0);
+         //gi.Prince.SetWounds(5, 0);
          //gi.Prince.PlagueDustWound = 1; 
          //gi.Prince.IsResurrected = true;
          //gi.AddUnitTestTiredMount(myPrince);
@@ -2243,10 +2216,10 @@ namespace BarbarianPrince
          //gi.Caches.Add(cacheHex, 500);
          //gi.Caches.Add(cacheHex,m 33);
          ////---------------------
-         ITerritory secretClueHex = Territory.theTerritories.Find("0507");
-         gi.SecretClues.Add(secretClueHex);
-         ITerritory secretClueHex2 = Territory.theTerritories.Find("0406");
-         gi.SecretClues.Add(secretClueHex2);
+         //ITerritory secretClueHex = Territory.theTerritories.Find("0507");
+         //gi.SecretClues.Add(secretClueHex);
+         //ITerritory secretClueHex2 = Territory.theTerritories.Find("0406");
+         //gi.SecretClues.Add(secretClueHex2);
          ////---------------------
          //ITerritory hiddenTemple = Territory.theTerritories.Find("0605");
          //gi.HiddenTemples.Add(hiddenTemple);
@@ -2307,10 +2280,10 @@ namespace BarbarianPrince
          //gi.LetterOfRecommendations.Add(lt3);
          //gi.ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt3);
          //---------------------
-         ITerritory arch1 = Territory.theTerritories.Find("0418");
-         gi.Arches.Add(arch1);
-         ITerritory arch2 = Territory.theTerritories.Find("0517");
-         gi.Arches.Add(arch2);
+         //ITerritory arch1 = Territory.theTerritories.Find("0418");
+         //gi.Arches.Add(arch1);
+         //ITerritory arch2 = Territory.theTerritories.Find("0517");
+         //gi.Arches.Add(arch2);
          //---------------------
          //gi.DayOfLastOffering = gi.Days - 4;
          //gi.IsSecretTempleKnown = true;
@@ -2321,7 +2294,7 @@ namespace BarbarianPrince
          //gi.FoulBaneCount = 2;
          //gi.IsSecretLadyAeravir = true; // e145
          //gi.IsSecretBaronHuldra = true; // e144
-         //IMapItem trueHeir = CreateCharacter(gi, "WarriorBoy", 0);
+         //IMapItem trueHeir = CreateCharacter(gi, "WarriorBoy");
          //gi.AddCompanion(trueHeir);
          //---------------------
          //foreach (IMapItem mi in gi.PartyMembers)
@@ -2666,7 +2639,7 @@ namespace BarbarianPrince
                gi.EncounteredMembers.Clear();
                for (int i = 0; i < gi.NumMembersBeingFollowed; ++i) // if following elves, repopulate EncounterMembers container
                {
-                  IMapItem elf = CreateCharacter(gi, "Elf", 7);
+                  IMapItem elf = CreateCharacter(gi, "Elf");
                   gi.EncounteredMembers.Add(elf);
                }
                break;
@@ -3273,6 +3246,7 @@ namespace BarbarianPrince
                      }
                      else
                      {
+                        Logger.Log(LogEnum.LE_END_GAME, "PerformJailBreak(): EndGameLost-1 ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString());
                         action = GameAction.EndGameLost; // wizard slave
                         gi.EndGameReason = "Prince starves to dead as Wizard's slave";
                      }
@@ -3299,6 +3273,7 @@ namespace BarbarianPrince
                         }
                         else
                         {
+                           Logger.Log(LogEnum.LE_END_GAME, "PerformJailBreak(): EndGameLost-2 ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString());
                            action = GameAction.EndGameLost; // wizard slave
                            gi.EndGameReason = "Prince beaten to death as Wizard's slave";
                         }
@@ -4257,8 +4232,8 @@ namespace BarbarianPrince
                }
                break;
             case GameAction.EndGameExit:
-               if (null != System.Windows.Application.Current)
-                  System.Windows.Application.Current.Shutdown();
+               //if (null != System.Windows.Application.Current)
+               //   System.Windows.Application.Current.Shutdown();
                break;
             default:
                returnStatus = "Reached Default ERROR";
@@ -4545,7 +4520,7 @@ namespace BarbarianPrince
                   {
                      gi.EncounteredMembers.Clear();
                      gi.EventStart = gi.EventActive;
-                     IMapItem magician = CreateCharacter(gi, "Magician", 0);
+                     IMapItem magician = CreateCharacter(gi, "Magician");
                      gi.EncounteredMembers.Add(magician);
                      gi.IsMagicianProvideGift = true;
                   }
@@ -5216,7 +5191,6 @@ namespace BarbarianPrince
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
                   break;
-
                case GameAction.E068WizardTower:
                   IMapItems magicUsers = new MapItems();
                   foreach (IMapItem mi in gi.PartyMembers)
@@ -5233,7 +5207,7 @@ namespace BarbarianPrince
                   }
                   break;
                case GameAction.E069WoundedWarriorCarry:
-                  IMapItem warriorWounded = CreateCharacter(gi, "Warrior", 0);
+                  IMapItem warriorWounded = CreateCharacter(gi, "Warrior");
                   warriorWounded.IsAlly = true;
                   gi.AddCompanion(warriorWounded);
                   int woundsToAdd = warriorWounded.Endurance - 1;
@@ -5250,7 +5224,7 @@ namespace BarbarianPrince
                   }
                   break;
                case GameAction.E069WoundedWarriorRemain:
-                  IMapItem warriorWounded1 = CreateCharacter(gi, "Warrior", 0);
+                  IMapItem warriorWounded1 = CreateCharacter(gi, "Warrior");
                   warriorWounded1.IsAlly = true;
                   gi.AddCompanion(warriorWounded1);
                   int woundsToAdd1 = warriorWounded1.Endurance - 1;
@@ -5299,7 +5273,8 @@ namespace BarbarianPrince
                   gi.EventDisplayed = gi.EventActive = "e330";
                   gi.DieRollAction = GameAction.EncounterRoll;
                   break;
-               case GameAction.E073WitchMeet: break;
+               case GameAction.E073WitchMeet: 
+                  break;
                case GameAction.E073WitchTurnsPrinceIsFrog:
                   if ((true == gi.IsInMapItems("TrueLove")) || (true == gi.IsMagicInParty()))
                   {
@@ -5311,6 +5286,7 @@ namespace BarbarianPrince
                   }
                   else
                   {
+                     Logger.Log(LogEnum.LE_END_GAME, "GameStateEncounter.PerformAction(): EndGameLost ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString());
                      action = GameAction.EndGameLost; // turned into frog
                      gi.GamePhase = GamePhase.EndGame;
                      gi.EndGameReason = "Prince is a Frog";
@@ -5327,7 +5303,7 @@ namespace BarbarianPrince
                case GameAction.E076HuntingCat:
                   gi.EventStart = "e076";
                   gi.EventDisplayed = gi.EventActive = "e310";
-                  IMapItem huntingCat = CreateCharacter(gi, "Cat", 0);
+                  IMapItem huntingCat = CreateCharacter(gi, "Cat");
                   gi.EncounteredMembers.Add(huntingCat);
                   break;
                case GameAction.E077HerdCapture: // herd of wild horses
@@ -5585,7 +5561,7 @@ namespace BarbarianPrince
                case GameAction.E083WildBoar:
                   gi.EventStart = "e083";
                   gi.EventDisplayed = gi.EventActive = "e310";
-                  IMapItem boar = CreateCharacter(gi, "Boar", 0);
+                  IMapItem boar = CreateCharacter(gi, "Boar");
                   gi.EncounteredMembers.Add(boar);
                   break;
                case GameAction.E084BearEncounter:
@@ -5837,7 +5813,7 @@ namespace BarbarianPrince
                   break;
                case GameAction.E107FalconAdd:
                   gi.IsFalconFed = true;
-                  IMapItem falcon = CreateCharacter(gi, "Falcon", 0);
+                  IMapItem falcon = CreateCharacter(gi, "Falcon");
                   falcon.IsRiding = true;
                   falcon.IsFlying = true;
                   falcon.IsGuide = true;
@@ -5940,7 +5916,7 @@ namespace BarbarianPrince
                case GameAction.E121SunStrokeEnd:
                   break;
                case GameAction.E123WoundedBlackKnightRemain:
-                  IMapItem blackKnight = CreateCharacter(gi, "KnightBlack", 0);
+                  IMapItem blackKnight = CreateCharacter(gi, "KnightBlack");
                   blackKnight.SetWounds(7, 0);
                   blackKnight.IsAlly = true;
                   gi.PartyMembers.Add(blackKnight);
@@ -6335,7 +6311,7 @@ namespace BarbarianPrince
                      returnStatus = "EncounterRoll(): EncounterEscape() returned false ae=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
-                  IMapItem trueHeir = CreateCharacter(gi, "WarriorBoy", 0);
+                  IMapItem trueHeir = CreateCharacter(gi, "WarriorBoy");
                   gi.AddCompanion(trueHeir);
                   break;
                case GameAction.E144RescueCharm:
@@ -6346,7 +6322,7 @@ namespace BarbarianPrince
                      returnStatus = "EncounterRoll(): EncounterEscape() returned false ae=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
-                  IMapItem trueHeir1 = CreateCharacter(gi, "WarriorBoy", 0);
+                  IMapItem trueHeir1 = CreateCharacter(gi, "WarriorBoy");
                   gi.AddCompanion(trueHeir1);
                   gi.IsCharismaTalismanActive = true;
                   break;
@@ -6358,7 +6334,7 @@ namespace BarbarianPrince
                      returnStatus = "EncounterRoll(): EncounterEscape() returned false ae=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
-                  IMapItem trueHeir2 = CreateCharacter(gi, "WarriorBoy", 0);
+                  IMapItem trueHeir2 = CreateCharacter(gi, "WarriorBoy");
                   gi.AddCompanion(trueHeir2);
                   gi.RemoveSpecialItem(SpecialEnum.NerveGasBomb);
                   break;
@@ -7106,7 +7082,7 @@ namespace BarbarianPrince
                   }
                   break;
                case GameAction.E210HireFreeman:
-                  IMapItem freeman = CreateCharacter(gi, "Freeman", 0);
+                  IMapItem freeman = CreateCharacter(gi, "Freeman");
                   string freemanName = "Freeman";
                   if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                      freemanName += "Elf";
@@ -7125,7 +7101,7 @@ namespace BarbarianPrince
                   }
                   break;
                case GameAction.E210HireLancer:
-                  IMapItem lancer = CreateCharacter(gi, "Lancer", 0);
+                  IMapItem lancer = CreateCharacter(gi, "Lancer");
                   string lancerName = "Lancer";
                   if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                      lancerName += "Elf";
@@ -7146,7 +7122,7 @@ namespace BarbarianPrince
                   }
                   break;
                case GameAction.E210HireMerc1:
-                  IMapItem merc0 = CreateCharacter(gi, "Mercenary", 0);
+                  IMapItem merc0 = CreateCharacter(gi, "Mercenary");
                   string merc0Name = "Mercenary";
                   if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                      merc0Name += "Elf";
@@ -7166,7 +7142,7 @@ namespace BarbarianPrince
                   }
                   break;
                case GameAction.E210HireMerc2:
-                  IMapItem merc1 = CreateCharacter(gi, "Mercenary", 0);
+                  IMapItem merc1 = CreateCharacter(gi, "Mercenary");
                   string merc1Name = "Mercenary";
                   if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                      merc1Name += "Elf";
@@ -7179,7 +7155,7 @@ namespace BarbarianPrince
                   ++Utilities.MapItemNum;
                   merc1.Wages = 2;
                   gi.AddCompanion(merc1);
-                  IMapItem merc2 = CreateCharacter(gi, "Mercenary", 0);
+                  IMapItem merc2 = CreateCharacter(gi, "Mercenary");
                   string merc2Name = "Mercenary";
                   if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                      merc2Name += "Elf";
@@ -7207,7 +7183,7 @@ namespace BarbarianPrince
                   {
                      for (int i = 0; i < gi.PurchasedHenchman; ++i)
                      {
-                        IMapItem henchman = CreateCharacter(gi, "Henchman", 0);
+                        IMapItem henchman = CreateCharacter(gi, "Henchman");
                         string henchmanName = "Henchman";
                         if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                            henchmanName += "Elf";
@@ -7229,7 +7205,7 @@ namespace BarbarianPrince
                   }
                   break;
                case GameAction.E210HireLocalGuide:
-                  IMapItem hiredLocalGuide = CreateCharacter(gi, "Guide", 0);
+                  IMapItem hiredLocalGuide = CreateCharacter(gi, "Guide");
                   string localGuideName = "Guide";
                   if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                      localGuideName += "Elf";
@@ -7255,7 +7231,7 @@ namespace BarbarianPrince
                   }
                   break;
                case GameAction.E210HireRunaway:
-                  IMapItem runaway = CreateCharacter(gi, "Runaway", 0);
+                  IMapItem runaway = CreateCharacter(gi, "Runaway");
                   string runawayName = "Runaway";
                   if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                      runawayName += "Elf";
@@ -7288,7 +7264,7 @@ namespace BarbarianPrince
                case GameAction.E210HirePorter:
                   for (int i = 0; i < gi.PurchasedPorter; ++i)
                   {
-                     IMapItem porter = CreateCharacter(gi, "Porter", 0);
+                     IMapItem porter = CreateCharacter(gi, "Porter");
                      string porterName = "Porter";
                      if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                         porterName += "Elf";
@@ -7303,7 +7279,7 @@ namespace BarbarianPrince
                      porter.Wages = 1;
                      gi.AddCompanion(porter);
                      //----------------------------  add second porter
-                     porter = CreateCharacter(gi, "Porter", 0);
+                     porter = CreateCharacter(gi, "Porter");
                      porterName = "Porter";
                      if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                         porterName += "Elf";
@@ -7320,7 +7296,7 @@ namespace BarbarianPrince
                   }
                   if (0 < gi.PurchasedGuide)
                   {
-                     IMapItem hiredLocalGuideWithPorter = CreateCharacter(gi, "Guide", 0);
+                     IMapItem hiredLocalGuideWithPorter = CreateCharacter(gi, "Guide");
                      string hiredGuideName1 = "Guide";
                      if ((true == gi.ElfCastles.Contains(princeTerritory)) || (true == gi.ElfTowns.Contains(princeTerritory)))
                         hiredGuideName1 += "Elf";
@@ -7403,7 +7379,7 @@ namespace BarbarianPrince
                      case 8:
                         if (false == gi.IsMarkOfCain)
                         {
-                           IMapItem monkGuide = CreateCharacter(gi, "Monk", 0);
+                           IMapItem monkGuide = CreateCharacter(gi, "Monk");
                            monkGuide.IsGuide = true;
                            if (false == AddGuideTerritories(gi, monkGuide, 1))
                            {
@@ -7437,11 +7413,11 @@ namespace BarbarianPrince
                         gi.AddSpecialItem(SpecialEnum.StaffOfCommand);
                         if (false == gi.IsMarkOfCain)
                         {
-                           IMapItem warriorMonk1 = CreateCharacter(gi, "MonkWarrior", 0);
+                           IMapItem warriorMonk1 = CreateCharacter(gi, "MonkWarrior");
                            warriorMonk1.AddNewMount();
                            gi.AddCompanion(warriorMonk1);
 
-                           IMapItem warriorMonk2 = CreateCharacter(gi, "MonkWarrior", 0);
+                           IMapItem warriorMonk2 = CreateCharacter(gi, "MonkWarrior");
                            warriorMonk2.AddNewMount();
                            gi.AddCompanion(warriorMonk2);
                         }
@@ -7697,7 +7673,7 @@ namespace BarbarianPrince
                gi.EncounteredMembers.Clear();
                for (int i = 0; i < dieRoll; ++i)
                {
-                  IMapItem mercenanary11 = CreateCharacter(gi, "Mercenary", 4);
+                  IMapItem mercenanary11 = CreateCharacter(gi, "Mercenary");
                   gi.EncounteredMembers.Add(mercenanary11);
                }
                gi.DieResults[key][0] = dieRoll;
@@ -7708,19 +7684,19 @@ namespace BarbarianPrince
             case "e003c": // Swordsman
                gi.EventStart = "e003";
                gi.EncounteredMembers.Clear();
-               IMapItem swordsman = CreateCharacter(gi, "Swordsman", 7);
+               IMapItem swordsman = CreateCharacter(gi, "Swordsman");
                swordsman.AddNewMount();
                gi.EncounteredMembers.Add(swordsman);
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
-            case "e004": // Mercenaries
+            case "e004": // Mercenaries - EncounterStart
                gi.EncounteredMembers.Clear();
-               IMapItem mercenaryLead = CreateCharacter(gi, "MercenaryLead", 50);
+               IMapItem mercenaryLead = CreateCharacter(gi, "MercenaryLead");
                mercenaryLead.AddNewMount();
                gi.EncounteredMembers.Add(mercenaryLead);
                for (int i = 0; i < dieRoll; ++i)
                {
-                  IMapItem mercenary = CreateCharacter(gi, "Mercenary", 4);
+                  IMapItem mercenary = CreateCharacter(gi, "Mercenary");
                   if (dieRoll < 3)
                      mercenary.AddNewMount();
                   gi.EncounteredMembers.Add(mercenary);
@@ -7734,7 +7710,7 @@ namespace BarbarianPrince
                ++Utilities.GroupNum;
                for (int i = 0; i < dieRoll + 1; ++i)
                {
-                  IMapItem amazon = CreateCharacter(gi, "Amazon", 4);
+                  IMapItem amazon = CreateCharacter(gi, "Amazon");
                   amazon.GroupNum = amazonGroupNum;
                   gi.EncounteredMembers.Add(amazon);
                }
@@ -7746,7 +7722,7 @@ namespace BarbarianPrince
                {
                   gi.DieResults[key][0] = dieRoll;
                   gi.EncounteredMembers.Clear();
-                  IMapItem dwarfLeader = CreateCharacter(gi, "DwarfLead", 21);
+                  IMapItem dwarfLeader = CreateCharacter(gi, "DwarfLead");
                   gi.EncounteredMembers.Add(dwarfLeader);
                }
                else
@@ -7765,7 +7741,7 @@ namespace BarbarianPrince
                      case 4:
                         if( false == gi.IsDwarvenBandSizeSet)
                         {
-                           IMapItem dwarfFriend = CreateCharacter(gi, "Dwarf", 12);
+                           IMapItem dwarfFriend = CreateCharacter(gi, "DwarfW");
                            gi.EncounteredMembers.Add(dwarfFriend);
                         }
                         switch (gi.DwarvenChoice)
@@ -7805,7 +7781,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][0] = dieRoll;
                   gi.IsElfWitAndWileActive = true;
                   gi.EncounteredMembers.Clear();
-                  IMapItem elfLead = CreateCharacter(gi, "ElfLead", 21);
+                  IMapItem elfLead = CreateCharacter(gi, "ElfLead");
                   gi.EncounteredMembers.Add(elfLead);
                }
                else
@@ -7849,7 +7825,7 @@ namespace BarbarianPrince
                               return false;
                            }
                            gi.EncounteredMembers[0].AddSpecialItemToShare(SpecialEnum.CurePoisonVial);
-                           IMapItem elfAssistant = CreateCharacter(gi, "ElfAssistant", 2);
+                           IMapItem elfAssistant = CreateCharacter(gi, "ElfAssistant");
                            gi.EncounteredMembers.Add(elfAssistant);
                         }
                         switch (gi.ElvenChoice)
@@ -7881,7 +7857,7 @@ namespace BarbarianPrince
                      case 6:
                         if (false == gi.IsElvenBandSizeSet)
                         {
-                           IMapItem elfFriend = CreateCharacter(gi, "ElfFriend", 7);
+                           IMapItem elfFriend = CreateCharacter(gi, "ElfFriend");
                            gi.EncounteredMembers.Add(elfFriend);
                         }
                         switch (gi.ElvenChoice)
@@ -7899,25 +7875,25 @@ namespace BarbarianPrince
                break;
             case "e008": // Halfling
                gi.EncounteredMembers.Clear();
-               IMapItem halflingWarrior = CreateCharacter(gi, "HalflingLead", 4);
+               IMapItem halflingWarrior = CreateCharacter(gi, "HalflingLead");
                gi.EncounteredMembers.Add(halflingWarrior);
                gi.EventDisplayed = gi.EventActive = "e304";
                break;
             case "e008a": // Halfling
                gi.EventStart = "e008";
                gi.EncounteredMembers.Clear();
-               IMapItem halflingWarrior1 = CreateCharacter(gi, "HalflingLead", 4);
+               IMapItem halflingWarrior1 = CreateCharacter(gi, "HalflingLead");
                gi.EncounteredMembers.Add(halflingWarrior1);
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e011b": // peaceful farmer - raid 
-               IMapItem farmerPeaceful = CreateCharacter(gi, "Farmer", 1);
+               IMapItem farmerPeaceful = CreateCharacter(gi, "Farmer");
                gi.EncounteredMembers.Add(farmerPeaceful);
                gi.EventDisplayed = gi.EventActive = "e330";
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e012b": // farmer with protector - raid 
-               IMapItem farmerWithProtector = CreateCharacter(gi, "Farmer", 2);
+               IMapItem farmerWithProtector = CreateCharacter(gi, "FarmerW");
                gi.EncounteredMembers.Add(farmerWithProtector);
                gi.EventDisplayed = gi.EventActive = "e330";
                gi.DieRollAction = GameAction.EncounterRoll;
@@ -7926,7 +7902,7 @@ namespace BarbarianPrince
                int numRetainers = 4;
                for (int i = 0; i < numRetainers; ++i)
                {
-                  IMapItem farmerRetainer = CreateCharacter(gi, "FarmerRetainer", 1);
+                  IMapItem farmerRetainer = CreateCharacter(gi, "FarmerRetainer");
                   gi.EncounteredMembers.Add(farmerRetainer);
                }
                gi.EventDisplayed = gi.EventActive = "e330";
@@ -7934,41 +7910,41 @@ namespace BarbarianPrince
                break;
             case "e013c": // rich farmer - raid 
                gi.EncounteredMembers.Clear();
-               IMapItem farmerRich = CreateCharacter(gi, "FarmerRich", 30);
+               IMapItem farmerRich = CreateCharacter(gi, "FarmerRich");
                gi.EncounteredMembers.Add(farmerRich);
                gi.EventDisplayed = gi.EventActive = "e330";
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e014a": // hostile reapers - freadly approach
-               IMapItem reaverHostileBoss0 = CreateCharacter(gi, "ReaverBoss", 10);
+               IMapItem reaverHostileBoss0 = CreateCharacter(gi, "ReaverBoss");
                gi.EncounteredMembers.Add(reaverHostileBoss0);
                int numReapers0 = dieRoll + 1;
                for (int i = 0; i < numReapers0; ++i)
                {
-                  IMapItem reaver = CreateCharacter(gi, "Reaver", 4);
+                  IMapItem reaver = CreateCharacter(gi, "Reaver");
                   gi.EncounteredMembers.Add(reaver);
                }
                gi.DieResults["e014a"][0] = dieRoll;
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e014c": // hostile reapers
-               IMapItem reaverLead = CreateCharacter(gi, "ReaverLead", 7);
+               IMapItem reaverLead = CreateCharacter(gi, "ReaverLead");
                gi.EncounteredMembers.Add(reaverLead);
                int numReapers1 = dieRoll + 1;
                for (int i = 0; i < numReapers1; ++i)
                {
-                  IMapItem reaver = CreateCharacter(gi, "Reaver", 4);
+                  IMapItem reaver = CreateCharacter(gi, "Reaver");
                   gi.EncounteredMembers.Add(reaver);
                }
                gi.DieResults["e014c"][0] = dieRoll;
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e015a": // Friendly reapers
-               IMapItem reaverLeadFriendly = CreateCharacter(gi, "ReaverLead", 7);
+               IMapItem reaverLeadFriendly = CreateCharacter(gi, "ReaverLead");
                gi.EncounteredMembers.Add(reaverLeadFriendly);
                for (int i = 0; i < dieRoll; ++i)
                {
-                  IMapItem reaver = CreateCharacter(gi, "Reaver", 4);
+                  IMapItem reaver = CreateCharacter(gi, "Reaver");
                   gi.EncounteredMembers.Add(reaver);
                }
                gi.IsReaverClanTrade = true;
@@ -7976,12 +7952,12 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e015c": // friendly reapers raid
-               IMapItem reaverLeadFriendlyRaid = CreateCharacter(gi, "ReaverLead", 7);
+               IMapItem reaverLeadFriendlyRaid = CreateCharacter(gi, "ReaverLead");
                gi.EncounteredMembers.Add(reaverLeadFriendlyRaid);
                int numReapers11 = dieRoll + 1;
                for (int i = 0; i < numReapers11; ++i)
                {
-                  IMapItem reaver = CreateCharacter(gi, "Reaver", 4);
+                  IMapItem reaver = CreateCharacter(gi, "Reaver");
                   gi.EncounteredMembers.Add(reaver);
                }
                gi.DieResults["e015c"][0] = dieRoll;
@@ -7989,7 +7965,7 @@ namespace BarbarianPrince
                break;
             case "e016a": // Friendly magician
                gi.IsMagicianProvideGift = true;
-               IMapItem magician = CreateCharacter(gi, "Magician", 0);
+               IMapItem magician = CreateCharacter(gi, "Magician");
                gi.EncounteredMembers.Add(magician);
                if (false == EncounterEnd(gi, ref action))
                {
@@ -7998,12 +7974,12 @@ namespace BarbarianPrince
                }
                break;
             case "e017": // Peasant Mob
-               IMapItem farmLeader = CreateCharacter(gi, "FarmerLeader", 0);
+               IMapItem farmLeader = CreateCharacter(gi, "FarmerMobLeader");
                gi.EncounteredMembers.Add(farmLeader);
                int numFarmers = 2 * dieRoll - 1;
                for (int i = 0; i < numFarmers; ++i)
                {
-                  IMapItem farmerMob = CreateCharacter(gi, "FarmerMob", 0);
+                  IMapItem farmerMob = CreateCharacter(gi, "FarmerMob");
                   gi.EncounteredMembers.Add(farmerMob);
                }
                gi.EventDisplayed = gi.EventActive = "e017";
@@ -8013,17 +7989,17 @@ namespace BarbarianPrince
             case "e018a": // priest
             case "e018b": // priest
                gi.EventStart = "e018";
-               IMapItem priest = CreateCharacter(gi, "Priest", 25);
+               IMapItem priest = CreateCharacter(gi, "Priest");
                priest.AddNewMount();
                gi.EncounteredMembers.Add(priest);
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e020": // Traveling Monk
-               IMapItem travelingMonk1 = CreateCharacter(gi, "MonkTraveling", 4);
+               IMapItem travelingMonk1 = CreateCharacter(gi, "MonkTraveling");
                gi.EncounteredMembers.Add(travelingMonk1);
                if (4 < dieRoll) // add a second one on die of 5 or 6
                {
-                  IMapItem travelingMonk2 = CreateCharacter(gi, "MonkTraveling", 4);
+                  IMapItem travelingMonk2 = CreateCharacter(gi, "MonkTraveling");
                   gi.EncounteredMembers.Add(travelingMonk2);
                }
                gi.DieResults["e020"][0] = dieRoll;
@@ -8033,7 +8009,7 @@ namespace BarbarianPrince
                int numMonkWarriors = (int)Math.Ceiling((double)dieRoll * 0.5);
                for (int i = 0; i < numMonkWarriors; ++i)
                {
-                  IMapItem warriorMonk = CreateCharacter(gi, "MonkWarrior", 10);
+                  IMapItem warriorMonk = CreateCharacter(gi, "MonkWarrior");
                   gi.EncounteredMembers.Add(warriorMonk);
                }
                gi.DieResults["e021"][0] = dieRoll;
@@ -8048,7 +8024,7 @@ namespace BarbarianPrince
                   case 2:                                              // hermit monk
                      gi.EventStart = gi.EventDisplayed = gi.EventActive = "e019";
                      gi.DieRollAction = GameAction.DieRollActionNone;
-                     IMapItem hermitMonk = CreateCharacter(gi, "MonkHermit", 0);
+                     IMapItem hermitMonk = CreateCharacter(gi, "MonkHermit");
                      gi.EncounteredMembers.Add(hermitMonk);
                      break;
                   case 3:
@@ -8067,12 +8043,12 @@ namespace BarbarianPrince
             case "e023":
                gi.DieResults[key][0] = dieRoll;
                gi.EncounteredMembers.Clear();
-               IMapItem wizard = CreateCharacter(gi, "Wizard", 60);
+               IMapItem wizard = CreateCharacter(gi, "Wizard");
                if (3 < dieRoll)
                   wizard.AddNewMount();
                gi.EncounteredMembers.Add(wizard);
                //--------------------------------
-               IMapItem wizardHenchman = CreateCharacter(gi, "WizardHenchman", 4);
+               IMapItem wizardHenchman = CreateCharacter(gi, "WizardHenchman");
                string henchmanName = "Henchman" + Utilities.MapItemNum.ToString();
                if (3 < dieRoll)
                   wizardHenchman.AddNewMount();
@@ -8091,7 +8067,7 @@ namespace BarbarianPrince
                int numGhosts = dieRoll + 1;
                for (int i = 0; i < numGhosts; ++i)
                {
-                  IMapItem ghost = CreateCharacter(gi, "Ghost", 0);
+                  IMapItem ghost = CreateCharacter(gi, "Ghost");
                   gi.EncounteredMembers.Add(ghost);
                }
                gi.EventDisplayed = gi.EventActive = "e310";  // party is surprised
@@ -8103,20 +8079,20 @@ namespace BarbarianPrince
                   ++numWraiths;
                for (int i = 0; i < numWraiths; ++i)
                {
-                  IMapItem wraith = CreateCharacter(gi, "Wraith", 0);
+                  IMapItem wraith = CreateCharacter(gi, "Wraith");
                   gi.EncounteredMembers.Add(wraith);
                }
                gi.EventDisplayed = gi.EventActive = "e307"; // wraiths attack first
                break;
             case "e034":  // Spectre of Inner Tomb
                gi.EncounteredMembers.Clear();
-               IMapItem spectre = CreateCharacter(gi, "Spectre", 0);
+               IMapItem spectre = CreateCharacter(gi, "Spectre");
                gi.EncounteredMembers.Add(spectre);
                gi.EventDisplayed = gi.EventActive = "e034a";
                break;
             case "e036":  // golem at the gate
                gi.EncounteredMembers.Clear();
-               IMapItem golem = CreateCharacter(gi, "Golem", 0);
+               IMapItem golem = CreateCharacter(gi, "Golem");
                gi.EncounteredMembers.Add(golem);
                foreach (IMapItem mi in gi.PartyMembers)  // Prince fights golem alone
                {
@@ -8137,7 +8113,7 @@ namespace BarbarianPrince
             case "e046":  // gateway to darkness
                gi.EncounteredMembers.Clear();
                ++gi.GuardianCount;
-               IMapItem guardian = CreateCharacter(gi, "Guardian", 0);
+               IMapItem guardian = CreateCharacter(gi, "Guardian");
                gi.EncounteredMembers.Add(guardian);
                IMapItems membersLeaving = new MapItems(); // make a copy b/c changing container when member departs
                foreach (IMapItem mi in gi.PartyMembers)
@@ -8154,14 +8130,14 @@ namespace BarbarianPrince
                ++gi.GuardianCount;
                for (int i = 0; i < gi.GuardianCount; ++i)
                {
-                  IMapItem guardian1 = CreateCharacter(gi, "Guardian", 0);
+                  IMapItem guardian1 = CreateCharacter(gi, "Guardian");
                   gi.EncounteredMembers.Add(guardian1);
                }
                gi.EventDisplayed = gi.EventActive = "e307";
                break;
             case "e047":  // mirror of reversal
                gi.EncounteredMembers.Clear();
-               IMapItem mirror = CreateCharacter(gi, "Mirror", 0);
+               IMapItem mirror = CreateCharacter(gi, "Mirror");
                theNumHydraTeeth = gi.HydraTeethCount; // save off number of teeth b/c cannot use in this battle - return to this value if defeat mirror
                gi.EncounteredMembers.Add(mirror);
                gi.EventDisplayed = gi.EventActive = "e307";
@@ -8172,12 +8148,12 @@ namespace BarbarianPrince
                switch (gi.DieResults["e048"][0])
                {
                   case 1:
-                     IMapItem swordswoman = CreateCharacter(gi, "Swordswoman", 4);
+                     IMapItem swordswoman = CreateCharacter(gi, "Swordswoman");
                      swordswoman.IsFugitive = true;
                      gi.EncounteredMembers.Add(swordswoman);
                      break;
                   case 2:
-                     IMapItem runaway = CreateCharacter(gi, "Runaway", 0);
+                     IMapItem runaway = CreateCharacter(gi, "Runaway");
                      runaway.IsFugitive = true;
                      gi.EncounteredMembers.Add(runaway);
                      break;
@@ -8188,23 +8164,23 @@ namespace BarbarianPrince
                      }
                      else
                      {
-                        IMapItem priest3 = CreateCharacter(gi, "Priest", 10);
+                        IMapItem priest3 = CreateCharacter(gi, "Priest");
                         priest3.IsFugitive = true;
                         gi.EncounteredMembers.Add(priest3);
                      }
                      break;
                   case 4:
-                     IMapItem magician4 = CreateCharacter(gi, "MagicianWeak", 5);
+                     IMapItem magician4 = CreateCharacter(gi, "MagicianWeak");
                      magician4.IsFugitive = true;
                      gi.EncounteredMembers.Add(magician4);
                      break;
                   case 5:
-                     IMapItem merchant5 = CreateCharacter(gi, "Merchant", 5);
+                     IMapItem merchant5 = CreateCharacter(gi, "Merchant");
                      merchant5.IsFugitive = true;
                      gi.EncounteredMembers.Add(merchant5);
                      break;
                   case 6:
-                     IMapItem deserter = CreateCharacter(gi, "Deserter", 2);
+                     IMapItem deserter = CreateCharacter(gi, "Deserter");
                      deserter.IsFugitive = true;
                      gi.EncounteredMembers.Add(deserter);
                      break;
@@ -8221,7 +8197,7 @@ namespace BarbarianPrince
                }
                gi.ReduceFoods(1);
                gi.IsMinstrelPlaying = true;
-               IMapItem minstrel = CreateCharacter(gi, "Minstrel", 0);
+               IMapItem minstrel = CreateCharacter(gi, "Minstrel");
                gi.EncounteredMinstrels.Add(minstrel);
                if (false == EncounterEnd(gi, ref action))
                {
@@ -8254,7 +8230,7 @@ namespace BarbarianPrince
                      numOfConstabulary += 3; // on foot
                   for (int i = 0; i < numOfConstabulary; ++i)
                   {
-                     IMapItem constabulary = CreateCharacter(gi, "Constabulary", 4);
+                     IMapItem constabulary = CreateCharacter(gi, "Constabulary");
                      if (4 < gi.DieResults[key][0])
                         constabulary.AddNewMount();
                      gi.EncounteredMembers.Add(constabulary);
@@ -8289,7 +8265,7 @@ namespace BarbarianPrince
                break;
             case "e051":  // Bandits
                gi.EncounteredMembers.Clear();
-               IMapItem banditLeader = CreateCharacter(gi, "BanditLeader", 15);
+               IMapItem banditLeader = CreateCharacter(gi, "BanditLeader");
                gi.EncounteredMembers.Add(banditLeader);
                int numBandits = 1; // leader plus one extra exceeds party count by two
                foreach (IMapItem mi in gi.PartyMembers) // non-fighting party members do not bring more bandits
@@ -8301,19 +8277,19 @@ namespace BarbarianPrince
                }
                for (int i = 0; i < numBandits; ++i)
                {
-                  IMapItem bandit1 = CreateCharacter(gi, "Bandit", 1);
+                  IMapItem bandit1 = CreateCharacter(gi, "Bandit");
                   gi.EncounteredMembers.Add(bandit1);
                }
                gi.EventDisplayed = gi.EventActive = "e310"; // party is surprised
                break;
             case "e052": // Goblins
-               IMapItem hobgoblin = CreateCharacter(gi, "Hobgoblin", 5);
+               IMapItem hobgoblin = CreateCharacter(gi, "HobgoblinW");
                gi.EncounteredMembers.Add(hobgoblin);
                gi.DieResults["e052"][0] = dieRoll;
                int numGoblins = dieRoll - 1;
                for (int i = 0; i < numGoblins; ++i)
                {
-                  IMapItem goblin = CreateCharacter(gi, "Goblin", 1);
+                  IMapItem goblin = CreateCharacter(gi, "Goblin");
                   gi.EncounteredMembers.Add(goblin);
                }
                break;
@@ -8321,13 +8297,13 @@ namespace BarbarianPrince
                if (null == gi.GoblinKeeps.Find(princeTerritory.Name))
                   gi.GoblinKeeps.Add(princeTerritory);
                gi.EncounteredMembers.Clear();
-               IMapItem hobgoblin1 = CreateCharacter(gi, "Hobgoblin", 4);
+               IMapItem hobgoblin1 = CreateCharacter(gi, "Hobgoblin");
                gi.EncounteredMembers.Add(hobgoblin1);
                gi.DieResults["e054b"][0] = dieRoll;
                int numGoblins1 = dieRoll - 1;
                for (int i = 0; i < numGoblins1; ++i)
                {
-                  IMapItem goblin = CreateCharacter(gi, "Goblin", 1);
+                  IMapItem goblin = CreateCharacter(gi, "Goblin");
                   gi.EncounteredMembers.Add(goblin);
                }
                gi.DieRollAction = GameAction.EncounterRoll;
@@ -8335,12 +8311,12 @@ namespace BarbarianPrince
             case "e055": // Orcs
                gi.DieResults["e055"][0] = dieRoll;
                gi.EncounteredMembers.Clear();
-               IMapItem orcChief = CreateCharacter(gi, "OrcChief", 7);
+               IMapItem orcChief = CreateCharacter(gi, "OrcChief");
                gi.EncounteredMembers.Add(orcChief);
                int numOrcsInBand = dieRoll - 1;
                for (int i = 0; i < numOrcsInBand; ++i)
                {
-                  IMapItem orc = CreateCharacter(gi, "Orc", 1);
+                  IMapItem orc = CreateCharacter(gi, "Orc");
                   gi.EncounteredMembers.Add(orc);
                }
                break;
@@ -8348,20 +8324,20 @@ namespace BarbarianPrince
                if (null == gi.OrcTowers.Find(gi.NewHex.Name))
                   gi.OrcTowers.Add(princeTerritory);
                gi.EncounteredMembers.Clear();
-               IMapItem demiTroll = CreateCharacter(gi, "TrollDemi", 10);
+               IMapItem demiTroll = CreateCharacter(gi, "TrollDemi");
                gi.EncounteredMembers.Add(demiTroll);
                gi.DieResults["e056a"][0] = dieRoll;
                int numOrcs = dieRoll + 1;
                for (int i = 0; i < numOrcs; ++i)
                {
-                  IMapItem orc = CreateCharacter(gi, "Orc", 2);
+                  IMapItem orc = CreateCharacter(gi, "OrcW");
                   gi.EncounteredMembers.Add(orc);
                }
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e057": // troll
                gi.EncounteredMembers.Clear();
-               IMapItem troll = CreateCharacter(gi, "Troll", 15);
+               IMapItem troll = CreateCharacter(gi, "Troll");
                gi.EncounteredMembers.Add(troll);
                gi.DieRollAction = GameAction.DieRollActionNone;
                if (gi.WitAndWile < dieRoll)
@@ -8380,7 +8356,7 @@ namespace BarbarianPrince
                   int numDwarves = gi.DieResults[key][0] + 1;
                   for (int i = 0; i < numDwarves; ++i)
                   {
-                     IMapItem dwarf = CreateCharacter(gi, "Dwarf", 10);
+                     IMapItem dwarf = CreateCharacter(gi, "Dwarf");
                      gi.EncounteredMembers.Add(dwarf);
                   }
                   if (gi.PartyMembers.Count < numDwarves)
@@ -8430,7 +8406,7 @@ namespace BarbarianPrince
                         break;
                      case 4:                                                                                                 // arch of travel
                         if (true == gi.IsMagicInParty())
-                           gi.EventDisplayed = gi.EventActive = "e045"; // abandoned mines
+                           gi.EventDisplayed = gi.EventActive = "e045";                                                      // arch travel
                         else
                            gi.EventDisplayed = gi.EventActive = "e045a";
                         break;  
@@ -8444,7 +8420,7 @@ namespace BarbarianPrince
                {
                   gi.DieResults[key][0] = dieRoll;
                   gi.EncounteredMembers.Clear();
-                  IMapItem wizard2 = CreateCharacter(gi, "Wizard", 60);
+                  IMapItem wizard2 = CreateCharacter(gi, "Wizard");
                   gi.EncounteredMembers.Add(wizard2);
                }
                else
@@ -8486,7 +8462,7 @@ namespace BarbarianPrince
                   gi.NumMembersBeingFollowed = dieRoll;
                   for (int i = 0; i < dieRoll; ++i)
                   {
-                     IMapItem elf = CreateCharacter(gi, "Elf", 7);
+                     IMapItem elf = CreateCharacter(gi, "Elf");
                      gi.EncounteredMembers.Add(elf);
                   }
                }
@@ -8511,7 +8487,7 @@ namespace BarbarianPrince
                   gi.NumMembersBeingFollowed = dieRoll;
                   for (int i = 0; i < dieRoll; ++i)
                   {
-                     IMapItem elf = CreateCharacter(gi, "Elf", 7);
+                     IMapItem elf = CreateCharacter(gi, "Elf");
                      gi.EncounteredMembers.Add(elf);
                   }
                }
@@ -8519,7 +8495,7 @@ namespace BarbarianPrince
                break;
             case "e073":  // witch
                gi.EncounteredMembers.Clear();
-               IMapItem witch = CreateCharacter(gi, "Witch", 5);
+               IMapItem witch = CreateCharacter(gi, "Witch");
                gi.EncounteredMembers.Add(witch);
                if (gi.WitAndWile < dieRoll)
                   gi.EventStart = gi.EventDisplayed = gi.EventActive = "e073a";
@@ -8536,7 +8512,7 @@ namespace BarbarianPrince
                   int numSpiders = gi.DieResults[key][0];
                   for (int i = 0; i < numSpiders; ++i)
                   {
-                     IMapItem spider = CreateCharacter(gi, "Spider", 0);
+                     IMapItem spider = CreateCharacter(gi, "Spider");
                      gi.EncounteredMembers.Add(spider);
                   }
                   gi.EventDisplayed = gi.EventActive = "e309";  // party may be surprised
@@ -8554,7 +8530,7 @@ namespace BarbarianPrince
                   int numWolves = gi.DieResults[key][0];
                   for (int i = 0; i < numWolves; ++i)
                   {
-                     IMapItem wolf = CreateCharacter(gi, "Wolf", 0);
+                     IMapItem wolf = CreateCharacter(gi, "Wolf");
                      gi.EncounteredMembers.Add(wolf);
                   }
                   gi.EventDisplayed = gi.EventActive = "e309";  // party may be surprised
@@ -8623,12 +8599,12 @@ namespace BarbarianPrince
             case "e081":  // mounted patrol
                gi.EventStart = "e081";
                gi.EncounteredMembers.Clear();
-               IMapItem patrolLead = CreateCharacter(gi, "PatrolMountedLead", 10);
+               IMapItem patrolLead = CreateCharacter(gi, "PatrolMountedLead");
                patrolLead.AddNewMount();
                gi.EncounteredMembers.Add(patrolLead);
                for (int i = 0; i < dieRoll; ++i)
                {
-                  IMapItem patrol = CreateCharacter(gi, "PatrolMounted", 4);
+                  IMapItem patrol = CreateCharacter(gi, "PatrolMounted");
                   patrol.AddNewMount();
                   gi.EncounteredMembers.Add(patrol);
                }
@@ -8637,7 +8613,7 @@ namespace BarbarianPrince
                break;
             case "e084b":  // bear
                gi.EncounteredMembers.Clear();
-               IMapItem bear = CreateCharacter(gi, "Bear", 0);
+               IMapItem bear = CreateCharacter(gi, "Bear");
                gi.EncounteredMembers.Add(bear);
                gi.EventDisplayed = gi.EventActive = "e307";  // bear strikes first
                break;
@@ -8679,7 +8655,7 @@ namespace BarbarianPrince
                   gi.EncounteredMembers.Clear();
                   for (int i = 0; i < gi.DieResults[key][0]; ++i)
                   {
-                     IMapItem crocodile = CreateCharacter(gi, "Croc", 0);
+                     IMapItem crocodile = CreateCharacter(gi, "Croc");
                      gi.EncounteredMembers.Add(crocodile);
                   }
                   gi.EventDisplayed = gi.EventActive = "e310";
@@ -8696,7 +8672,7 @@ namespace BarbarianPrince
                   gi.EncounteredMembers.Clear();
                   for (int i = 0; i < gi.DieResults[key][0]; ++i)
                   {
-                     IMapItem crocodile = CreateCharacter(gi, "Croc", 0);
+                     IMapItem crocodile = CreateCharacter(gi, "Croc");
                      gi.EncounteredMembers.Add(crocodile);
                   }
                   gi.EventDisplayed = gi.EventActive = "e307";
@@ -8704,7 +8680,7 @@ namespace BarbarianPrince
                }
                break;
             case "e098": // Dragon
-               IMapItem dragon = CreateCharacter(gi, "Dragon", 0);
+               IMapItem dragon = CreateCharacter(gi, "Dragon");
                gi.EncounteredMembers.Add(dragon);
                gi.DieResults[key][0] = dieRoll;
                gi.DieRollAction = GameAction.EncounterRoll;
@@ -8713,7 +8689,7 @@ namespace BarbarianPrince
             case "e099b": // Roc
                gi.EventStart = "e099";
                gi.EncounteredMembers.Clear();
-               IMapItem roc = CreateCharacter(gi, "Roc", 10);
+               IMapItem roc = CreateCharacter(gi, "Roc");
                gi.EncounteredMembers.Add(roc);
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
@@ -8722,7 +8698,7 @@ namespace BarbarianPrince
             case "e100c": // griffon
                gi.EventStart = "e100"; // assign for loot purposes
                gi.EncounteredMembers.Clear();
-               IMapItem griffon = CreateCharacter(gi, "Griffon", 12);
+               IMapItem griffon = CreateCharacter(gi, "Griffon");
                griffon.IsFlying = true;
                griffon.IsRiding = true;
                gi.EncounteredMembers.Add(griffon);
@@ -8733,7 +8709,7 @@ namespace BarbarianPrince
             case "e101c": // harpy
                gi.EventStart = "e101";  // assign for loot purposes
                gi.EncounteredMembers.Clear();
-               IMapItem harpy = CreateCharacter(gi, "Harpy", 4);
+               IMapItem harpy = CreateCharacter(gi, "Harpy");
                harpy.IsFlying = true;
                harpy.IsRiding = true;
                gi.EncounteredMembers.Add(harpy);
@@ -8764,7 +8740,7 @@ namespace BarbarianPrince
                {
                   for (int i = 0; i < gi.DieResults[key][0]; ++i)
                   {
-                     IMapItem hawkman = CreateCharacter(gi, "Hawkman", 7);
+                     IMapItem hawkman = CreateCharacter(gi, "Hawkman");
                      hawkman.IsFlying = true;
                      hawkman.IsRiding = true;
                      gi.EncounteredMembers.Add(hawkman);
@@ -8817,7 +8793,7 @@ namespace BarbarianPrince
                gi.DieResults["e112"][0] = dieRoll;
                for (int i = 0; i < dieRoll; ++i)
                {
-                  IMapItem eagle = CreateCharacter(gi, "Eagle", 1);
+                  IMapItem eagle = CreateCharacter(gi, "Eagle");
                   eagle.IsFlying = true;
                   eagle.IsRiding = true;
                   gi.EncounteredMembers.Add(eagle);
@@ -8836,13 +8812,13 @@ namespace BarbarianPrince
                gi.DieResults["e118"][0] = Utilities.NO_RESULT; // avoid problem if two encounters in the same day
                gi.EventStart = "e118";
                gi.EncounteredMembers.Clear();
-               IMapItem giant = CreateCharacter(gi, "Giant", 10);
+               IMapItem giant = CreateCharacter(gi, "Giant");
                gi.EncounteredMembers.Add(giant);
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e123b": // Black Knight
                gi.EncounteredMembers.Clear();
-               IMapItem blackKnight = CreateCharacter(gi, "KnightBlack", 30);
+               IMapItem blackKnight = CreateCharacter(gi, "KnightBlack");
                gi.EncounteredMembers.Add(blackKnight);
                gi.EventDisplayed = gi.EventActive = "e304";
                break;
@@ -8899,7 +8875,7 @@ namespace BarbarianPrince
                   int highLordGuardNum = gi.DieResults[key][0] + 1;
                   for (int i = 0; i < highLordGuardNum; ++i)
                   {
-                     IMapItem guard = CreateCharacter(gi, "Guard", 4);
+                     IMapItem guard = CreateCharacter(gi, "Guard");
                      gi.EncounteredMembers.Add(guard);
                   }
                   gi.DieRollAction = GameAction.EncounterRoll;
@@ -8917,7 +8893,7 @@ namespace BarbarianPrince
                   int hillTribeGuardNum = gi.DieResults[key][0] + 1; // roll three die and add 1
                   for (int i = 0; i < hillTribeGuardNum; ++i)
                   {
-                     IMapItem guard = CreateCharacter(gi, "GuardHeir", 0);
+                     IMapItem guard = CreateCharacter(gi, "GuardHeir");
                      gi.EncounteredMembers.Add(guard);
                   }
                   gi.DieRollAction = GameAction.DieRollActionNone;
@@ -8928,7 +8904,7 @@ namespace BarbarianPrince
                gi.EncounteredMembers.Clear();
                for (int i = 0; i < 6; ++i)
                {
-                  IMapItem guard = CreateCharacter(gi, "GuardBody", 0);
+                  IMapItem guard = CreateCharacter(gi, "GuardBody");
                   gi.EncounteredMembers.Add(guard);
                }
                gi.DieRollAction = GameAction.DieRollActionNone;
@@ -8936,13 +8912,13 @@ namespace BarbarianPrince
             case "e144j": // Huldra Fight
                gi.EventDisplayed = gi.EventActive = "e307"; // surprise attack
                gi.EncounteredMembers.Clear();
-               IMapItem huldra = CreateCharacter(gi, "Huldra", 0); // Now need to fight Huldra
+               IMapItem huldra = CreateCharacter(gi, "Huldra"); // Now need to fight Huldra
                gi.EncounteredMembers.Add(huldra);
                break;
             case "e158": // hostile guards
                gi.EncounteredMembers.Clear();
-               IMapItem guardHostile1 = CreateCharacter(gi, "GuardHostile", 7);
-               IMapItem guardHostile2 = CreateCharacter(gi, "GuardHostile", 7);
+               IMapItem guardHostile1 = CreateCharacter(gi, "GuardHostile");
+               IMapItem guardHostile2 = CreateCharacter(gi, "GuardHostile");
                gi.EncounteredMembers.Add(guardHostile1);
                gi.EncounteredMembers.Add(guardHostile2);
                gi.EventDisplayed = gi.EventActive = "e307";
@@ -8959,7 +8935,7 @@ namespace BarbarianPrince
                break;
             case "e164": // giant lizard
                gi.EncounteredMembers.Clear();
-               IMapItem lizard = CreateCharacter(gi, "Lizard", 0);
+               IMapItem lizard = CreateCharacter(gi, "Lizard");
                gi.EncounteredMembers.Add(lizard);
                gi.EventDisplayed = gi.EventActive = "e304";
                break;
@@ -9085,7 +9061,7 @@ namespace BarbarianPrince
                }
                break;
             case "e003": break; // swordman
-            case "e004": // Mercenaries
+            case "e004": // Mercenaries - EncounterLootStart
             case "e005": // Amazons
                if (true == autoWealthOption.IsEnabled)  // automatically perform wealth code rolls if enabled.
                {
@@ -9392,7 +9368,7 @@ namespace BarbarianPrince
                gi.EventDisplayed = gi.EventActive = "e144c";
                gi.DieRollAction = GameAction.DieRollActionNone;
                gi.IsSecretBaronHuldra = false;
-               IMapItem trueHeir = CreateCharacter(gi, "WarriorBoy", 0);
+               IMapItem trueHeir = CreateCharacter(gi, "WarriorBoy");
                gi.AddCompanion(trueHeir);
                if (false == EncounterEscape(gi, ref action)) // move to random hex
                {
@@ -9429,7 +9405,7 @@ namespace BarbarianPrince
                   action = GameAction.UpdateEventViewerActive;
                   for (int i = 0; i < gi.PurchasedSlavePorter; ++i)
                   {
-                     IMapItem porter = CreateCharacter(gi, "PorterSlave", 0);
+                     IMapItem porter = CreateCharacter(gi, "PorterSlave");
                      gi.AddCompanion(porter);
                   }
                   gi.PurchasedSlavePorter = 0;
@@ -9585,7 +9561,7 @@ namespace BarbarianPrince
                }
                break;
             case "e154e": // lords daughter 
-               IMapItem trueLoveLordsDaughter = CreateCharacter(gi, "TrueLoveLordsDaughter", 0);
+               IMapItem trueLoveLordsDaughter = CreateCharacter(gi, "TrueLoveLordsDaughter");
                gi.AddCompanion(trueLoveLordsDaughter);
                foreach (IMapItem e154Mi in gi.PartyMembers) // if no mount, add a mount
                {
@@ -9599,6 +9575,17 @@ namespace BarbarianPrince
                {
                   Logger.Log(LogEnum.LE_ERROR, "EncounterLootStartEnd(): ResetDieResultsForAudience() returned false w/ es=" + gi.EventStart);
                   return false;
+               }
+               foreach(ITerritory t in Territory.theTerritories) // Accused of kidnapping and considered as if killed somebody from every town, temple, castle in game south of Tragfor River
+               {
+                  if( true == gi.IsInStructure(t))
+                  {
+                     if (false == gi.KilledLocations.Contains(t))
+                     {
+                        if (false == IsNorthofTragothRiver(gi.Prince.Territory)) // exclude rivers north of Tragoth River
+                           gi.KilledLocations.Add(t);
+                     }
+                  }
                }
                break;
             case "e158":
@@ -9902,7 +9889,7 @@ namespace BarbarianPrince
                gi.EnteredHexes.Last().EventNames.Add(key);
                for (int i = 0; i < dieRoll; ++i)
                {
-                  IMapItem dwarfFriend = CreateCharacter(gi, "Dwarf", 12);
+                  IMapItem dwarfFriend = CreateCharacter(gi, "DwarfW");
                   gi.EncounteredMembers.Add(dwarfFriend);
                }
                switch (gi.DwarvenChoice)
@@ -10060,7 +10047,7 @@ namespace BarbarianPrince
                gi.EventStart = "e008";
                if( 0 == gi.EncounteredMembers.Count )
                {
-                  IMapItem halflingWarrior1 = CreateCharacter(gi, "HalflingLead", 4);
+                  IMapItem halflingWarrior1 = CreateCharacter(gi, "HalflingLead");
                   gi.EncounteredMembers.Add(halflingWarrior1);
                }
                switch (dieRoll)
@@ -10186,7 +10173,7 @@ namespace BarbarianPrince
                   gi.EnteredHexes.Last().EventNames.Add(key);
                   if (6 == gi.DieResults[key][0])
                   {
-                     IMapItem farmBoy = CreateCharacter(gi, "FarmerBoy", 0);
+                     IMapItem farmBoy = CreateCharacter(gi, "FarmerBoy");
                      farmBoy.IsGuide = true;
                      if (false == AddGuideTerritories(gi, farmBoy, 2))
                      {
@@ -10880,7 +10867,7 @@ namespace BarbarianPrince
                {
                   gi.EncounteredMembers.Clear();
                   gi.EventDisplayed = gi.EventActive = "e048i";
-                  IMapItem trueLoveSwordswoman = CreateCharacter(gi, "TrueLoveSwordwoman", 4);
+                  IMapItem trueLoveSwordswoman = CreateCharacter(gi, "TrueLoveSwordwoman");
                   trueLoveSwordswoman.IsFugitive = true;
                   trueLoveSwordswoman.IsTownCastleTempleLeave = true;
                   gi.AddCompanion(trueLoveSwordswoman);
@@ -10910,7 +10897,7 @@ namespace BarbarianPrince
                {
                   gi.EncounteredMembers.Clear();
                   gi.EventDisplayed = gi.EventActive = "e048j";
-                  IMapItem trueLoveSlave = CreateCharacter(gi, "TrueLoveSlave", 0);
+                  IMapItem trueLoveSlave = CreateCharacter(gi, "TrueLoveSlave");
                   trueLoveSlave.IsFugitive = true;
                   trueLoveSlave.IsTownCastleTempleLeave = true;
                   trueLoveSlave.IsGuide = true;
@@ -11163,7 +11150,7 @@ namespace BarbarianPrince
                            int maxCount1 = Math.Min(Utilities.MAX_GRID_ROW - 8, end1); // cannot grow over number that can be shown
                            for (int i = start1; i < maxCount1; ++i) // double the number of elves
                            {
-                              IMapItem elf = CreateCharacter(gi, "Elf", 7);
+                              IMapItem elf = CreateCharacter(gi, "Elf");
                               gi.EncounteredMembers.Add(elf);
                            }
                         }
@@ -11209,17 +11196,17 @@ namespace BarbarianPrince
                {
                   if ("e052" == gi.EventStart)
                   {
-                     IMapItem goblin = CreateCharacter(gi, "Goblin", 1);
+                     IMapItem goblin = CreateCharacter(gi, "Goblin");
                      gi.EncounteredMembers.Add(goblin);
                   }
                   else if ("e055" == gi.EventStart)
                   {
-                     IMapItem orc = CreateCharacter(gi, "Orc", 1);
+                     IMapItem orc = CreateCharacter(gi, "Orc");
                      gi.EncounteredMembers.Add(orc);
                   }
                   else if ("e058a" == gi.EventStart)
                   {
-                     IMapItem dwarf = CreateCharacter(gi, "Dwarf", 10);
+                     IMapItem dwarf = CreateCharacter(gi, "Dwarf");
                      gi.EncounteredMembers.Add(dwarf);
                   }
                   else
@@ -11504,7 +11491,7 @@ namespace BarbarianPrince
                   int numDwarves = gi.DieResults[key][0] + 1;
                   for (int i = 0; i < numDwarves; ++i)
                   {
-                     IMapItem dwarf = CreateCharacter(gi, "Dwarf", 10);
+                     IMapItem dwarf = CreateCharacter(gi, "Dwarf");
                      gi.EncounteredMembers.Add(dwarf);
                   }
                   gi.EventStart = "e058i"; // show this screen if evade is not a possible option.
@@ -11701,7 +11688,7 @@ namespace BarbarianPrince
                   int numElves = gi.DieResults[key][0] + 1;
                   for (int i = 0; i < numElves; ++i)
                   {
-                     IMapItem elf = CreateCharacter(gi, "Elf", 7);
+                     IMapItem elf = CreateCharacter(gi, "Elf");
                      gi.EncounteredMembers.Add(elf);
                   }
                   gi.EventStart = "e071e"; // show this screen if evade is not a possible option.
@@ -12209,7 +12196,7 @@ namespace BarbarianPrince
                         gi.EagleLairs.Add(princeTerritory);
                      gi.IsPartyFed = true;
                      gi.IsMountsFed = true;
-                     IMapItem eagleHelp = CreateCharacter(gi, "Eagle", 1);
+                     IMapItem eagleHelp = CreateCharacter(gi, "Eagle");
                      eagleHelp.IsGuide = true;
                      eagleHelp.GuideTerritories = Territory.theTerritories;
                      eagleHelp.IsTownCastleTempleLeave = true;
@@ -12251,7 +12238,7 @@ namespace BarbarianPrince
                   gi.EnteredHexes.Last().EventNames.Add(key);
                   for (int i = 0; i < gi.DieResults[key][0]; ++i) // additional eagles arrive
                   {
-                     IMapItem eagle = CreateCharacter(gi, "Eagle", 1);
+                     IMapItem eagle = CreateCharacter(gi, "Eagle");
                      eagle.IsFlying = true;
                      eagle.IsRiding = true;
                      gi.EncounteredMembers.Add(eagle);
@@ -12276,7 +12263,7 @@ namespace BarbarianPrince
                   }
                   for (int i = 0; i < gi.DieResults[key][0]; ++i) // additional eagles arrive
                   {
-                     IMapItem eagleAlly = CreateCharacter(gi, "Eagle", 1);
+                     IMapItem eagleAlly = CreateCharacter(gi, "Eagle");
                      eagleAlly.IsGuide = true;
                      eagleAlly.GuideTerritories = Territory.theTerritories;
                      eagleAlly.IsFlying = true;
@@ -12529,7 +12516,7 @@ namespace BarbarianPrince
                         gi.ForbiddenAudiences.RemoveReligionConstraint(t156b);
                         action = GameAction.E156MayorTerritorySelection;
                         gi.EventDisplayed = gi.EventActive = "e156g";
-                        IMapItem trustedAssistant = CreateCharacter(gi, "TrustedAssistant", 0);
+                        IMapItem trustedAssistant = CreateCharacter(gi, "TrustedAssistant");
                         gi.AddCompanion(trustedAssistant);
                         ITerritory t156a = FindClosestTown(gi); // this territory is updated by user selecting a castle or temple
                         gi.ForbiddenAudiences.AddAssistantConstraint(t156a, trustedAssistant);
@@ -12815,7 +12802,7 @@ namespace BarbarianPrince
                }
                if (false == isCavalryAlreadyInParty)
                {
-                  IMapItem cavalry = CreateCharacter(gi, "Cavalry", 0);
+                  IMapItem cavalry = CreateCharacter(gi, "Cavalry");
                   cavalry.IsGuide = true;
                   if (false == AddGuideTerritories(gi, cavalry, 3))
                   {
@@ -12904,7 +12891,7 @@ namespace BarbarianPrince
                            gi.EventDisplayed = gi.EventActive = "e156e";
                            if( false == gi.IsAlcoveOfSendingAudience)
                            {
-                              IMapItem trustedAssistant = CreateCharacter(gi, "TrustedAssistant", 0);
+                              IMapItem trustedAssistant = CreateCharacter(gi, "TrustedAssistant");
                               gi.AddCompanion(trustedAssistant);
                               ITerritory t156a = FindClosestTown(gi); // this territory is updated by user selecting a castle
                               gi.ForbiddenAudiences.AddAssistantConstraint(t156a, trustedAssistant);
@@ -12989,7 +12976,7 @@ namespace BarbarianPrince
                      }
                      for (int k = 0; k < 3; ++k) // add three knights
                      {
-                        IMapItem knight = CreateCharacter(gi, "Knight", 0);
+                        IMapItem knight = CreateCharacter(gi, "Knight");
                         knight.AddNewMount();
                         gi.AddCompanion(knight);
                      }
@@ -13126,14 +13113,14 @@ namespace BarbarianPrince
                gi.DieResults[key][0] = dieRoll;
                if (12 == dieRoll)
                {
-                  IMapItem slaveGirl = CreateCharacter(gi, "TrueLoveSlave", 0);
+                  IMapItem slaveGirl = CreateCharacter(gi, "TrueLoveSlave");
                   slaveGirl.BottomImageName = "SlaveGirlFace" + gi.SlaveGirlIndex.ToString();
                   gi.AddCompanion(slaveGirl);
                   action = GameAction.E228ShowTrueLove;
                }
                else
                {
-                  IMapItem slaveGirl = CreateCharacter(gi, "SlaveGirl", 0);
+                  IMapItem slaveGirl = CreateCharacter(gi, "SlaveGirl");
                   gi.AddCompanion(slaveGirl);
                }
                --gi.PurchasedSlaveGirl;
@@ -13148,7 +13135,7 @@ namespace BarbarianPrince
                else if (Utilities.NO_RESULT == gi.DieResults[key][1])
                {
                   gi.DieResults[key][1] = dieRoll;
-                  IMapItem oldWarrior = CreateCharacter(gi, "WarriorOld", 0);
+                  IMapItem oldWarrior = CreateCharacter(gi, "WarriorOld");
                   oldWarrior.Endurance = gi.DieResults[key][0];
                   oldWarrior.Combat = gi.DieResults[key][1];
                   gi.AddCompanion(oldWarrior);
@@ -13503,7 +13490,7 @@ namespace BarbarianPrince
                            gi.EventDisplayed = gi.EventActive = "e156g";  // e211a - seek audience in town - die roll 9/10
                            if (false == gi.IsAlcoveOfSendingAudience)
                            {
-                              IMapItem trustedAssistant = CreateCharacter(gi, "TrustedAssistant", 0);
+                              IMapItem trustedAssistant = CreateCharacter(gi, "TrustedAssistant");
                               gi.AddCompanion(trustedAssistant);
                               ITerritory t156a = FindClosestTown(gi); // this territory is updated by user selecting a castle
                               gi.ForbiddenAudiences.AddAssistantConstraint(t156a, trustedAssistant);
@@ -13534,7 +13521,7 @@ namespace BarbarianPrince
                            gi.EventDisplayed = gi.EventActive = "e156g";  // e211a - seek audience in town - die roll 12+
                            if (false == gi.IsAlcoveOfSendingAudience)
                            {
-                              IMapItem trustedAssistant = CreateCharacter(gi, "TrustedAssistant", 0);
+                              IMapItem trustedAssistant = CreateCharacter(gi, "TrustedAssistant");
                               gi.AddCompanion(trustedAssistant);
                               ITerritory t156a = FindClosestTown(gi); // this territory is updated by user selecting a castle
                               gi.ForbiddenAudiences.AddAssistantConstraint(t156a, trustedAssistant);
@@ -13706,8 +13693,8 @@ namespace BarbarianPrince
                         }
                         gi.ForbiddenAudiences.AddTimeConstraint(princeTerritory, gi.Days + 1);
                         break;
-                     case 12: gi.EventDisplayed = gi.EventActive = "e151"; gi.DieRollAction = GameAction.EncounterRoll; break;                     // find favor
-                     default: gi.EventDisplayed = gi.EventActive = "e152"; gi.IsNobleAlly = true; break;                    // ally                       
+                     case 12: gi.EventDisplayed = gi.EventActive = "e151"; gi.DieRollAction = GameAction.EncounterRoll; break;             // find favor
+                     default: gi.EventDisplayed = gi.EventActive = "e152"; gi.IsNobleAlly = true; break;                                   // ally                       
                   }
                }
                else
@@ -14102,7 +14089,7 @@ namespace BarbarianPrince
                         gi.EventStart = gi.EventDisplayed = gi.EventActive = "e212i";
                         gi.CapturedWealthCodes.Add(100);
                         gi.ForbiddenHexes.Add(princeTerritory);
-                        IMapItem trueLove = CreateCharacter(gi, "TrueLovePriestDaughter", 0);
+                        IMapItem trueLove = CreateCharacter(gi, "TrueLovePriestDaughter");
                         gi.AddCompanion(trueLove);
                         break;
                      case 11: gi.EventDisplayed = gi.EventActive = "e212j"; break;
@@ -14315,7 +14302,7 @@ namespace BarbarianPrince
                   gi.IsEvadeActive = false;
                   gi.EventDisplayed = gi.EventActive = gi.EventStart;
                   action = GameAction.UpdateEventViewerActive;
-                  gi.DieRollAction = GameAction.EncounterRoll;
+                  gi.DieRollAction = GameAction.DieRollActionNone;
                }
                break;
             case "e318": // Hiding

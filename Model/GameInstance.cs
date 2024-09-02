@@ -124,7 +124,6 @@ namespace BarbarianPrince
       public int GuardianCount { set; get; } = 0;
       public bool IsMerchantWithParty { set; get; } = false;
       public bool IsMinstrelPlaying { set; get; } = false;
-      public bool IsMinstrelJoining { set; get; } = false;
       public bool IsJailed { set; get; } = false;
       public bool IsDungeon { set; get; } = false;
       public int NightsInDungeon { set; get; } = 0;
@@ -385,6 +384,12 @@ namespace BarbarianPrince
          {
             mi.Endurance = 7;
             mi.Combat = 6;
+            return;
+         }
+         if (true == mi.Name.Contains("DwarfW"))
+         {
+            mi.Endurance = 6;
+            mi.Combat = 5;
             return;
          }
          if (true == mi.Name.Contains("Dwarf"))
@@ -1410,7 +1415,10 @@ namespace BarbarianPrince
       public void AddSpecialItems(List<SpecialEnum> possessions)
       {
          foreach (SpecialEnum possession in possessions)
-            AddSpecialItem(possession);
+         {
+            if( SpecialEnum.ResurrectionNecklace != possession) // Special Items do not transfer
+               AddSpecialItem(possession);
+         }
       }
       public bool RemoveSpecialItem(SpecialEnum possession, IMapItem mi = null)
       {
@@ -1742,6 +1750,8 @@ namespace BarbarianPrince
                   --this.WitAndWile;
                if (true == member.Name.Contains("WarriorBoy"))
                   IsHuldraHeirKilled = true;
+               if (true == member.Name.Contains("Minstel"))
+                  IsMinstrelPlaying = false;
             }
             if( null != member.Rider ) // If Griffon/Harpy is killed, and it has a rider, must remove
             {
@@ -1785,8 +1795,8 @@ namespace BarbarianPrince
                if (false == isEscaping)
                {
                   TransferMounts(mi.Mounts);
-                  AddSpecialItems(mi.SpecialKeeps);
-                  AddSpecialItems(mi.SpecialShares);
+                  AddSpecialItems(mi.SpecialKeeps);  // ProcessIncapacitedPartyMembers() - IsKilled
+                  AddSpecialItems(mi.SpecialShares); // ProcessIncapacitedPartyMembers() - IsKilled
                   if (false == AddFoods(mi.Food))
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ProcessIncapacitedPartyMembers(): AddFoods() returned false");
@@ -1810,7 +1820,7 @@ namespace BarbarianPrince
                if (false == isEscaping)
                {
                   TransferMounts(mi.Mounts);
-                  AddSpecialItems(mi.SpecialShares);
+                  AddSpecialItems(mi.SpecialShares); // ProcessIncapacitedPartyMembers() - IsUnconscious
                   if (false == AddFoods(mi.Food))
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ProcessIncapacitedPartyMembers(): AddFoods() returned false");
@@ -1867,6 +1877,9 @@ namespace BarbarianPrince
          if (true == victim.Name.Contains("WarriorBoy"))
             IsHuldraHeirKilled = true;
          //--------------------------------
+         if (true == victim.Name.Contains("Minstel"))
+            IsMinstrelPlaying = false;
+         //--------------------------------
          IMapItems fickleMembers = new MapItems();
          foreach (IMapItem mi in PartyMembers) // the fickle members disappear
          {
@@ -1894,7 +1907,7 @@ namespace BarbarianPrince
          //---------------------------------------------
          if (false == victim.RemoveVictimMountAndLoad()) // remove mount, coin, food that victim is carrying
          {
-            Logger.Log(LogEnum.LE_ERROR, "RemoveVictimInParty(): RemoveVictimLoads() returned false");
+            Logger.Log(LogEnum.LE_ERROR, "RemoveVictimInParty(): RemoveVictimMountAndLoad() returned false");
             return false;
          }
          IMapItems mounts = new MapItems();
@@ -2024,6 +2037,7 @@ namespace BarbarianPrince
             --this.WitAndWile;
          //--------------------------------
          IsMerchantWithParty = false; // remove effects of having a merchant
+         IsMinstrelPlaying = false;
          //--------------------------------
          int count = partyMembers.Count;
          foreach (IMapItem mi in partyMembers)
@@ -2080,6 +2094,9 @@ namespace BarbarianPrince
          if (true == mi.Name.Contains("WarriorBoy"))
             IsHuldraHeirKilled = true;
          //--------------------------------
+         if (true == mi.Name.Contains("Minstel"))
+            IsMinstrelPlaying = false;
+         //--------------------------------
          PartyMembers.Remove(mi);
          //--------------------------------
          IsMerchantWithParty = false; // remove the effects of merchant unless one still exists
@@ -2089,7 +2106,7 @@ namespace BarbarianPrince
                IsMerchantWithParty = true;
          }
          //--------------------------------
-         AddSpecialItems(mi.SpecialShares);
+         AddSpecialItems(mi.SpecialShares); // RemoveAbandonerInParty()
          TransferMounts(mi.Mounts);
          if (false == AddFoods(mi.Food))
          {
@@ -2145,6 +2162,9 @@ namespace BarbarianPrince
          //--------------------------------
          if (true == mi.Name.Contains("WarriorBoy"))
             IsHuldraHeirKilled = true;
+         //--------------------------------
+         if (true == mi.Name.Contains("Minstel"))
+            IsMinstrelPlaying = false;
          //--------------------------------
          PartyMembers.Remove(mi);
          //--------------------------------

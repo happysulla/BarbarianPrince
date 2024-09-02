@@ -191,7 +191,12 @@ namespace BarbarianPrince
          CanvasImageViewer civ = new CanvasImageViewer(myCanvas);
          CreateRiversFromXml();
          //-----------------------------------------------------------------
-         CreateButtonTimeTrack();
+         Option option = gi.Options.Find("ExtendEndTime");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "UpdateView(): gi.Options.Find(ExtendEndTime)");
+         else
+            option = new Option("ExtendEndTime", false);
+         CreateButtonTimeTrack(gi, option.IsEnabled);
          CreateButtonFoodSupply();
          CreateButtonEndurance();
          CreateButtonDailyAction();
@@ -274,7 +279,7 @@ namespace BarbarianPrince
                if (null == option)
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): gi.Options.Find(ExtendEndTime)");
                else
-                  CreateButtonTimeTrack(option.IsEnabled);
+                  CreateButtonTimeTrack(gi,  option.IsEnabled);
                break;
             case GameAction.ShowAllRivers:
                UpdateCanvasRiver("Dienstal Branch", false);
@@ -344,7 +349,7 @@ namespace BarbarianPrince
          GameAction outAction = GameAction.RemoveSplashScreen;
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
       }
-      private void CreateButtonTimeTrack(bool isGameExtended = false)
+      private void CreateButtonTimeTrack(IGameInstance gi, bool isGameExtended = false)
       {
          myStackPanelTimeTrackDay.Children.Clear();
          Thickness thickness = new Thickness(0, 0, 180, 0);
@@ -375,6 +380,7 @@ namespace BarbarianPrince
          myButtonTimeTrackWeeks[0].FontWeight = FontWeights.Bold;
          myButtonTimeTrackDays[0].IsEnabled = true;
          myButtonTimeTrackWeeks[0].IsEnabled = true;
+         UpdateTimeTrack(gi);
       }
       private void CreateTimeTrackLongGame()
       {
@@ -1774,6 +1780,7 @@ namespace BarbarianPrince
                   }
                   break;
                case GameAction.E045ArchOfTravelEnd:
+                  myIsTravelThroughGateActive = false;
                   foreach (Polygon p in myPolygons)
                      p.MouseDown -= MouseDownPolygonArchOfTravel;
                   myPolygons.Clear();
@@ -2397,7 +2404,6 @@ namespace BarbarianPrince
       {
          if (false == myIsTravelThroughGateActive)
             return;
-         myIsTravelThroughGateActive = false;  // only allow one time per mouse click
          //-------------------------------------
          System.Windows.Point canvasPoint = e.GetPosition(myCanvas);
          Polygon clickedPolygon = (Polygon)sender;
@@ -2412,7 +2418,8 @@ namespace BarbarianPrince
          if (null == oldStack)
          {
             Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygonArchOfTravel(): oldStack=null for t=" + oldT.ToString());
-            return;
+            oldStack = new Stack(myGameInstance.Prince.Territory) as IStack;
+            myGameInstance.Stacks.Add(oldStack);
          }
          ITerritory newT = Territory.theTerritories.Find(Utilities.RemoveSpaces(clickedPolygon.Tag.ToString()));
          if (null == newT)

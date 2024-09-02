@@ -11,6 +11,7 @@ namespace BarbarianPrince
       LE_GAME_PARTYMEMBER_COUNT,
       LE_PARTYMEMBER_ADD,
       LE_REMOVE_KILLED,
+      LE_END_GAME,
       LE_END_GAME_CHECK,
       LE_MOVE_STACKING,
       LE_MOVE_COUNT,
@@ -77,10 +78,11 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_GAME_INIT);
          Logger.SetOn(LogEnum.LE_USER_ACTION);
          Logger.SetOn(LogEnum.LE_NEXT_ACTION);
-         Logger.SetOn(LogEnum.LE_UNDO_COMMAND);
+         //Logger.SetOn(LogEnum.LE_UNDO_COMMAND);
          //Logger.SetOn(LogEnum.LE_GAME_PARTYMEMBER_COUNT);
          Logger.SetOn(LogEnum.LE_PARTYMEMBER_ADD);
          Logger.SetOn(LogEnum.LE_REMOVE_KILLED);
+         Logger.SetOn(LogEnum.LE_END_GAME);
          //Logger.SetOn(LogEnum.LE_END_GAME_CHECK);
          //Logger.SetOn(LogEnum.LE_MOVE_STACKING);
          //Logger.SetOn(LogEnum.LE_MOVE_COUNT);
@@ -109,13 +111,13 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_ACTION_PANEL);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_ACTION_PANEL_CLEAR);
          //Logger.SetOn(LogEnum.LE_RETURN_TO_START);
-         Logger.SetOn(LogEnum.LE_VIEW_DICE_MOVING);
+         //Logger.SetOn(LogEnum.LE_VIEW_DICE_MOVING);
          //Logger.SetOn(LogEnum.LE_VIEW_RESET_BATTLE_GRID);
          //Logger.SetOn(LogEnum.LE_VIEW_DEC_COUNT_GRID);
          Logger.SetOn(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_DAILY_ACTIONS);
          //Logger.SetOn(LogEnum.LE_VIEW_TRAVEL_CHECK);
-         Logger.SetOn(LogEnum.LE_VIEW_MIM);
+         //Logger.SetOn(LogEnum.LE_VIEW_MIM);
          Logger.SetOn(LogEnum.LE_VIEW_MIM_ADD);
          Logger.SetOn(LogEnum.LE_VIEW_MIM_CLEAR);
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_LOADS);

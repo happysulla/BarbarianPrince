@@ -1235,8 +1235,11 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): myGridRows[i].myAssignable=null");
                return false;
             }
-            if ((true == myIsWizardEscape) && (true == mi.Name.Contains("Wizard"))) // e023 - wizard escapes if damaged and sent fireball - being removed in RemoveCasualties()
-               continue;
+            if (false == myIsPartyMembersAssignable)
+            {
+               if ((true == myIsWizardEscape) && (true == mi.Name.Contains("Wizard"))) // e023 - wizard escapes if damaged and sent fireball - being removed in RemoveCasualties()
+                  continue;
+            }
             if ((false == mi.IsKilled) && (false == mi.IsUnconscious))
             {
                if (true == myIsPartyMembersAssignable)
@@ -1257,8 +1260,11 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): myGridRows[i].myUnassignable=null");
                return false;
             }
-            if ((true == myIsWizardEscape) && (true == mi1.Name.Contains("Wizard"))) // e023 - wizard escapes if damaged and sent fireball - being removed in RemoveCasualties()
-               continue;
+            if (true == myIsPartyMembersAssignable)
+            {
+               if ((true == myIsWizardEscape) && (true == mi1.Name.Contains("Wizard"))) // e023 - wizard escapes if damaged and sent fireball - being removed in RemoveCasualties()
+                  continue;
+            }
             if ((false == mi1.IsKilled) && (false == mi1.IsUnconscious))
             {
                if (false == myIsPartyMembersAssignable)
@@ -1310,6 +1316,7 @@ namespace BarbarianPrince
             else
             {
                isEnd = true;
+               myGameInstance.Prince.IsKilled = true; // if prince is unconscious and nobody is left alive, kill him
                if (false == myCallback(myIsRoute, myIsEscape)) // UpdateCombatEnd() - Players lost combat
                {
                   Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): lost combat and myCallback() returned false");
@@ -1323,6 +1330,8 @@ namespace BarbarianPrince
             {
                if ((true == myCatVictim.IsKilled) || (true == myCatVictim.IsUnconscious))
                {
+                  if (true == myCatVictim.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+                     myGameInstance.ResurrectedMembers.Add(myCatVictim);
                   if (false == myGameInstance.RemoveVictimInParty(myCatVictim))
                   {
                      Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): RemoveVictimInParty() returned false");
@@ -4083,9 +4092,9 @@ namespace BarbarianPrince
                   myCapturedPossessions.Add(possession);
                foreach (IMapItem mount in mi.Mounts)
                   myCapturedMounts.Add(mount);
-               if (true == mi.Name.Contains("Troll"))  // e057 - Trolls skins are worth money
+               if (true == mi.Name.Contains("Troll"))    // e057 - Trolls skins are worth money
                   myCapturedPossessions.Add(SpecialEnum.TrollSkin);
-               if (true == mi.Name.Contains("Roc"))  // e099 - Roc Beaks worth money
+               if (true == mi.Name.Contains("Roc"))      // e099 - Roc Beaks worth money
                   myCapturedPossessions.Add(SpecialEnum.RocBeak);
                if (true == mi.Name.Contains("Griffon"))  // e100 - Griffon Claws worth money
                   myCapturedPossessions.Add(SpecialEnum.GriffonClaws);
@@ -4101,9 +4110,17 @@ namespace BarbarianPrince
                foreach (IMapItem mount in mi.Mounts)
                   myCapturedMounts.Add(mount);
                foreach (SpecialEnum possession in mi.SpecialShares)
-                  myCapturedPossessions.Add(possession);
+               {
+                  if( SpecialEnum.ResurrectionNecklace != possession)
+                     myCapturedPossessions.Add(possession);
+               }
                if (true == mi.IsKilled) // If party member is killed, can have the special possessions that they own
                {
+                  if (true == mi.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+                  {
+                     mi.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
+                     myGameInstance.ResurrectedMembers.Add(mi);
+                  }
                   killedMembers.Add(mi);
                   foreach (SpecialEnum possession in mi.SpecialKeeps)
                      myCapturedPossessions.Add(possession);
