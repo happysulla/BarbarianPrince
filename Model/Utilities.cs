@@ -175,12 +175,14 @@ namespace BarbarianPrince
       {
          try // XML serializer does not work for Interfaces
          {
-            XmlReader xw = XmlReader.Create(new StringReader(s_xml));
+            StringReader reader = new StringReader(s_xml);
+            XmlReader xw = XmlReader.Create(reader);
             return (T)new XmlSerializer(typeof(T)).Deserialize(xw);
          }
          catch (Exception e)
          {
-            Logger.Log(LogEnum.LE_ERROR, "Deserialize(): e=" + e.ToString());
+            var type = typeof(T);
+            Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + " T=" + type.ToString() + "\n\n e=" + e.ToString());
             return default(T);
          }
       }

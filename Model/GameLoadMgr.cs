@@ -30,7 +30,10 @@ namespace BarbarianPrince
          try
          {
             if (true == string.IsNullOrEmpty(theDirectoryName)) // use the directory name as the place to load games. If none exists, create directory name
-               theDirectoryName = AssemblyDirectory + @"\Games";
+            {
+               string parent = Directory.GetParent(AssemblyDirectory).ToString();
+               theDirectoryName = parent + @"/Games";
+            }
             if (false == Directory.Exists(theDirectoryName)) // create directory if does not exists
                Directory.CreateDirectory(theDirectoryName);
             Directory.SetCurrentDirectory(theDirectoryName);
@@ -60,7 +63,6 @@ namespace BarbarianPrince
             Directory.SetCurrentDirectory(AssemblyDirectory);
             return null;
          }
-
       }
       //--------------------------------------------------
       public static bool SaveGameToFile(IGameInstance gi)
@@ -68,7 +70,10 @@ namespace BarbarianPrince
          try
          {
             if (true == string.IsNullOrEmpty(theDirectoryName)) // use the directory name as the place to load games. If none exists, create directory name
-               theDirectoryName = AssemblyDirectory + @"\Games";
+            {
+               string parent = Directory.GetParent(AssemblyDirectory).ToString();
+               theDirectoryName = parent + @"/Games";
+            }
             if (false == Directory.Exists(theDirectoryName)) // create directory if does not exists
                Directory.CreateDirectory(theDirectoryName);
             Directory.SetCurrentDirectory(theDirectoryName);
@@ -82,7 +87,7 @@ namespace BarbarianPrince
          FileStream fileStream = null;
          try
          {
-            string filename = theDirectoryName + @"\Checkpoint.bpg";
+            string filename = theDirectoryName + @"/Checkpoint.bpg";
             fileStream = File.OpenWrite(filename);
             BinaryFormatter formatter = new BinaryFormatter();
             formatter.Serialize(fileStream, gi);
@@ -94,6 +99,7 @@ namespace BarbarianPrince
          catch (Exception ex)
          {
             Logger.Log(LogEnum.LE_ERROR, "SaveGameToFile(): path=" + theDirectoryName + " e =" + ex.ToString());
+            Console.WriteLine(ex.ToString());
             if (null != fileStream)
                fileStream.Close();
             Directory.SetCurrentDirectory(AssemblyDirectory);
@@ -178,6 +184,7 @@ namespace BarbarianPrince
          catch (Exception ex)
          {
             Logger.Log(LogEnum.LE_ERROR, "SaveGameAsToFile(): path=" + theDirectoryName + " e =" + ex.ToString());
+            Console.WriteLine(ex.ToString());
             if (null != fileStream)
                fileStream.Close();
             Directory.SetCurrentDirectory(AssemblyDirectory);

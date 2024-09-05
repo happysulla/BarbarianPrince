@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Xml.Serialization;
 
 namespace BarbarianPrince
 {
@@ -10,12 +11,16 @@ namespace BarbarianPrince
       [NonSerialized] public static string[] theStartingMembers = new string[MEMBER_COUNT] { "Dwarf", "Eagle", "Elf", "Falcon", "Griffon", "Harpy", "Magician", "Mercenary", "Merchant", "Minstrel", "Monk", "PorterSlave", "Priest", "TrueLove", "Wizard" };
       public string Name { get; set; }
       public bool IsEnabled { get; set; }
+      public Option()
+      {
+      }
       public Option(string name, bool isEnabled)
       {
          Name = name;
          IsEnabled = isEnabled;
       }
    }
+   [XmlInclude(typeof(Option))]
    [Serializable]
    public class Options : IEnumerable
    {
@@ -23,6 +28,7 @@ namespace BarbarianPrince
       public Options() { myList = new ArrayList(); }
       public int Count { get => myList.Count; }
       public void Add(Option o) { myList.Add(o); }
+      public void Add(System.Object o) { myList.Add(o); }
       public Option RemoveAt(int index)
       {
          Option option = (Option)myList[index];

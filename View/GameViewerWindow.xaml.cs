@@ -69,6 +69,22 @@ namespace BarbarianPrince
          public POINT minPosition;
          public POINT maxPosition;
          public RECT normalPosition;
+         public bool IsZero()
+         {
+            if (0 != length)
+               return false;
+            if (0 != flags)
+               return false;
+            if (0 != minPosition.X)
+               return false;
+            if (0 != minPosition.Y)
+               return false;
+            if (0 != maxPosition.X)
+               return false;
+            if (0 != maxPosition.Y)
+               return false;
+            return true;
+         }
       }
       //-------------------------------------------
       private static Double theEllipseDiameter = 10.0;
@@ -149,6 +165,14 @@ namespace BarbarianPrince
             CtorError = true;
             return;
          }
+         Options options = Utilities.Deserialize<Options>(Settings.Default.GameOptions);
+         myMainMenuViewer.NewGameOptions = options;
+         gi.Options = options; // use the new game options for setting up the first game
+         //-------------------------------------------
+         GameLoadMgr.theDirectoryName = Settings.Default.GameDirectoryName; // remember the game directory name
+         //-------------------------------------------
+         Utilities.ZoomCanvas = Settings.Default.ZoomCanvas;
+         myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas);
          StatusBarViewer sbv = new StatusBarViewer(myStatusBar, ge, gi, myCanvas);
          //-----------------------------------------------------------------
          Utilities.theBrushBlood.Color = Color.FromArgb(0xFF, 0xA4, 0x07, 0x07);
@@ -208,6 +232,7 @@ namespace BarbarianPrince
          ge.RegisterForUpdates(myEventViewer);
          ge.RegisterForUpdates(sbv);
          ge.RegisterForUpdates(this); // needs to be last so that canvas updates after all actions taken
+         Logger.Log(LogEnum.LE_GAME_INIT, "GameViewerWindow(): \nzoomCanvas=" + Settings.Default.ZoomCanvas.ToString() + "\nwp=" + Settings.Default.WindowPlacement + "\noptions=" + Settings.Default.GameOptions);
 #if UT1
             if (false == ge.CreateUnitTests(gi, myDockPanelTop, myEventViewer, myDieRoller))
             {
@@ -2620,57 +2645,17 @@ namespace BarbarianPrince
             // Load window placement details for previous application session from application settings
             // Note - if window was closed on a monitor that is now disconnected from the computer,
             //        SetWindowPlacement places the window onto a visible monitor.
-            string placeString = Settings.Default.WindowPlacement;
-            WindowPlacement wp = Utilities.Deserialize<WindowPlacement>(placeString);
-            wp.length = Marshal.SizeOf(typeof(WindowPlacement));
-            wp.flags = 0;
-            wp.showCmd = (wp.showCmd == SwShowminimized ? SwShownormal : wp.showCmd);
-            var hwnd = new WindowInteropHelper(this).Handle;
-            if (false == SetWindowPlacement(hwnd, ref wp))
-               Logger.Log(LogEnum.LE_ERROR, "SetWindowPlacement() returned false");
-            //-------------------------------------------
-            Utilities.ZoomCanvas = Settings.Default.ZoomCanvas;
-            myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas);
-            //-------------------------------------------
-            myScollViewerInside.Height = Settings.Default.ScrollViewerHeight;
-            myScollViewerInside.Width = Settings.Default.ScrollViewerWidth;
-            //-------------------------------------------
-            GameLoadMgr.theDirectoryName = Settings.Default.GameDirectoryName; // remember the game directory name
-            //-------------------------------------------
-            string sNewGameOptions = Settings.Default.GameOptions;
-            myMainMenuViewer.NewGameOptions = new Options();
-            XmlReader reader = null;
-            try
+            if (false == String.IsNullOrEmpty(Settings.Default.WindowPlacement))
             {
-               // Load the reader with the data file and ignore all white space nodes.
-               //reader = XmlReader.Create(new StringReader(sNewGameOptions));
-               reader = new XmlTextReader(@"../Config/Options.xml") { WhitespaceHandling = WhitespaceHandling.None };
-               while (reader.Read())
-               {
-                  if (reader.Name == "Option")
-                  {
-                     if (reader.IsStartElement())
-                     {
-                        string name = reader.GetAttribute("value");
-                        //---------------------------------------------------------
-                        reader.Read();
-                        string isEnabledStr = reader.GetAttribute("value");
-                        bool isEnabled = Boolean.Parse(isEnabledStr);
-                        //---------------------------------------------------------
-                        Option option = new Option(name, isEnabled);
-                        myMainMenuViewer.NewGameOptions.Add(option);
-                     } // end if
-                  } // end if
-               } // end while
-            } // try
-            catch (Exception ex)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "OnClosing(): Ex= " + ex.ToString());
-            }
-            finally
-            {
-               if (reader != null)
-                  reader.Close();
+               WindowPlacement wp = Utilities.Deserialize<WindowPlacement>(Settings.Default.WindowPlacement);
+               wp.length = Marshal.SizeOf(typeof(WindowPlacement));
+               wp.flags = 0;
+               wp.showCmd = (wp.showCmd == SwShowminimized ? SwShownormal : wp.showCmd);
+               var hwnd = new WindowInteropHelper(this).Handle;
+               if (false == SetWindowPlacement(hwnd, ref wp))
+                  Logger.Log(LogEnum.LE_ERROR, "SetWindowPlacement() returned false");
+               myScollViewerInside.Height = Settings.Default.ScrollViewerHeight;
+               myScollViewerInside.Width = Settings.Default.ScrollViewerWidth;
             }
          }
          catch (Exception ex)
@@ -2696,31 +2681,8 @@ namespace BarbarianPrince
          //-------------------------------------------
          Settings.Default.GameDirectoryName = Settings.Default.GameDirectoryName;
          //-------------------------------------------
-         if (null != myMainMenuViewer.NewGameOptions)
-         {
-            try
-            {
-               XmlDocument aXmlDocument = new XmlDocument();
-               aXmlDocument.LoadXml("<Options></Options>");
-               foreach (Option o in myMainMenuViewer.NewGameOptions)
-               {
-                  XmlElement optionElem = aXmlDocument.CreateElement("Option");
-                  optionElem.SetAttribute("value", o.Name);
-                  aXmlDocument.DocumentElement.AppendChild(optionElem);
-                  XmlElement enabledElem = aXmlDocument.CreateElement("IsEnabled");
-                  enabledElem.SetAttribute("value", o.IsEnabled.ToString());
-                  aXmlDocument.DocumentElement.LastChild.AppendChild(enabledElem);
-               }
-               XmlWriterSettings settings = new XmlWriterSettings() { Indent = true };
-               XmlWriter writer = XmlWriter.Create(@"../Config/Options.xml", settings);
-               aXmlDocument.Save(writer);
-               Settings.Default.GameOptions = aXmlDocument.ToString();
-            }
-            catch (Exception ex)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "OnClosing(): Ex= " + ex.ToString());
-            }
-         }
+         string sOptions = Utilities.Serialize<Options>(myGameInstance.Options);
+         Settings.Default.GameOptions = sOptions;
          //-------------------------------------------
          Settings.Default.Save();
          //-------------------------------------------

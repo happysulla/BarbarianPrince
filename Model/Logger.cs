@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.IO.Pipes;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
@@ -80,17 +81,24 @@ namespace BarbarianPrince
       {
          if (true == theLogLevel[(int)logLevel])
          {
-            FileInfo file = new FileInfo(theFileName);
-            if( true == File.Exists(theFileName))
-            {
-               StreamWriter swriter = File.AppendText(theFileName);
-               swriter.Write(logLevel.ToString());
-               swriter.Write(" ");
-               swriter.Write(description);
-               swriter.Write("\n");
-               swriter.Close();
-            }
             Console.WriteLine("{0} {1}", logLevel.ToString(), description);
+            try
+            {
+               FileInfo file = new FileInfo(theFileName);
+               if (true == File.Exists(theFileName))
+               {
+                  StreamWriter swriter = File.AppendText(theFileName);
+                  swriter.Write(logLevel.ToString());
+                  swriter.Write(" ");
+                  swriter.Write(description);
+                  swriter.Write("\n");
+                  swriter.Close();
+               }
+            }
+            catch (Exception ex)
+            {
+               Console.WriteLine(ex.ToString());
+            }
          }
       }
       static public void SetOn(LogEnum logLevel)
@@ -141,7 +149,7 @@ namespace BarbarianPrince
          Directory.SetCurrentDirectory(AssemblyDirectory);
          //---------------------------------------------------------------------
          Logger.SetOn(LogEnum.LE_ERROR);
-         //Logger.SetOn(LogEnum.LE_GAME_INIT);
+         Logger.SetOn(LogEnum.LE_GAME_INIT);
          Logger.SetOn(LogEnum.LE_USER_ACTION);
          Logger.SetOn(LogEnum.LE_NEXT_ACTION);
          //Logger.SetOn(LogEnum.LE_UNDO_COMMAND);

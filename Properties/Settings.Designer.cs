@@ -12,7 +12,7 @@ namespace BarbarianPrince.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,7 +25,7 @@ namespace BarbarianPrince.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?><WindowPlacement xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema""><length>44</length><flags>2</flags><showCmd>3</showCmd><minPosition><X>-1</X><Y>-1</Y></minPosition><maxPosition><X>-1</X><Y>-1</Y></maxPosition><normalPosition><Left>26</Left><Top>26</Top><Right>1946</Right><Bottom>1106</Bottom></normalPosition></WindowPlacement>")]
         public string WindowPlacement {
             get {
                 return ((string)(this["WindowPlacement"]));
@@ -97,69 +97,89 @@ namespace BarbarianPrince.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"<Options>\r\n  <Option value=\"AutoSetup\">\r\n    <IsEnabled value=\"True\" />\r\n  </Opt" +
-            "ion>\r\n  <Option value=\"AutoWealthRollForUnderFive\">\r\n    <IsEnabled value=\"True\"" +
-            " />\r\n  </Option>\r\n  <Option value=\"AutoLostDecrease\">\r\n    <IsEnabled value=\"Fal" +
-            "se\" />\r\n  </Option>\r\n  <Option value=\"PrinceHorse\">\r\n    <IsEnabled value=\"False" +
-            "\" />\r\n  </Option>\r\n  <Option value=\"PrincePegasus\">\r\n    <IsEnabled value=\"False" +
-            "\" />\r\n  </Option>\r\n  <Option value=\"PrinceCoin\">\r\n    <IsEnabled value=\"False\" /" +
-            ">\r\n  </Option>\r\n  <Option value=\"PrinceFood\">\r\n    <IsEnabled value=\"False\" />\r\n" +
-            "  </Option>\r\n  <Option value=\"RandomParty10\">\r\n    <IsEnabled value=\"False\" />\r\n" +
-            "  </Option>\r\n  <Option value=\"RandomParty08\">\r\n    <IsEnabled value=\"False\" />\r\n" +
-            "  </Option>\r\n  <Option value=\"RandomParty05\">\r\n    <IsEnabled value=\"False\" />\r\n" +
-            "  </Option>\r\n  <Option value=\"RandomParty03\">\r\n    <IsEnabled value=\"False\" />\r\n" +
-            "  </Option>\r\n  <Option value=\"RandomParty01\">\r\n    <IsEnabled value=\"False\" />\r\n" +
-            "  </Option>\r\n  <Option value=\"PartyCustom\">\r\n    <IsEnabled value=\"False\" />\r\n  " +
-            "</Option>\r\n  <Option value=\"Dwarf\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option" +
-            ">\r\n  <Option value=\"Eagle\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <Op" +
-            "tion value=\"Elf\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <Option value" +
-            "=\"Falcon\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <Option value=\"Griff" +
-            "on\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <Option value=\"Harpy\">\r\n  " +
-            "  <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <Option value=\"Magician\">\r\n    <Is" +
-            "Enabled value=\"False\" />\r\n  </Option>\r\n  <Option value=\"Mercenary\">\r\n    <IsEnab" +
-            "led value=\"False\" />\r\n  </Option>\r\n  <Option value=\"Merchant\">\r\n    <IsEnabled v" +
-            "alue=\"False\" />\r\n  </Option>\r\n  <Option value=\"Minstrel\">\r\n    <IsEnabled value=" +
-            "\"False\" />\r\n  </Option>\r\n  <Option value=\"Monk\">\r\n    <IsEnabled value=\"False\" /" +
-            ">\r\n  </Option>\r\n  <Option value=\"PorterSlave\">\r\n    <IsEnabled value=\"False\" />\r" +
-            "\n  </Option>\r\n  <Option value=\"TrueLove\">\r\n    <IsEnabled value=\"False\" />\r\n  </" +
-            "Option>\r\n  <Option value=\"Wizard\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>" +
-            "\r\n  <Option value=\"PartyMounted\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r" +
-            "\n  <Option value=\"PartyAirborne\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r" +
-            "\n  <Option value=\"RandomHex\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <" +
-            "Option value=\"RandomTown\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <Opt" +
-            "ion value=\"RandomLeft\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <Option" +
-            " value=\"RandomRight\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <Option v" +
-            "alue=\"RandomBottom\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <Option va" +
-            "lue=\"0109\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <Option value=\"0206" +
-            "\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <Option value=\"0711\">\r\n    <" +
-            "IsEnabled value=\"False\" />\r\n  </Option>\r\n  <Option value=\"1212\">\r\n    <IsEnabled" +
-            " value=\"False\" />\r\n  </Option>\r\n  <Option value=\"0323\">\r\n    <IsEnabled value=\"F" +
-            "alse\" />\r\n  </Option>\r\n  <Option value=\"1923\">\r\n    <IsEnabled value=\"False\" />\r" +
-            "\n  </Option>\r\n  <Option value=\"0418\">\r\n    <IsEnabled value=\"False\" />\r\n  </Opti" +
-            "on>\r\n  <Option value=\"0722\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <O" +
-            "ption value=\"0409\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <Option val" +
-            "ue=\"0406\">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <Option value=\"0405\"" +
-            ">\r\n    <IsEnabled value=\"False\" />\r\n  </Option>\r\n  <Option value=\"0411\">\r\n    <I" +
-            "sEnabled value=\"False\" />\r\n  </Option>\r\n  <Option value=\"0407\">\r\n    <IsEnabled " +
-            "value=\"False\" />\r\n  </Option>\r\n  <Option value=\"1905\">\r\n    <IsEnabled value=\"Fa" +
-            "lse\" />\r\n  </Option>\r\n  <Option value=\"1723\">\r\n    <IsEnabled value=\"False\" />\r\n" +
-            "  </Option>\r\n  <Option value=\"LessHardMonsters\">\r\n    <IsEnabled value=\"False\" /" +
-            ">\r\n  </Option>\r\n  <Option value=\"EasyMonsters\">\r\n    <IsEnabled value=\"False\" />" +
-            "\r\n  </Option>\r\n  <Option value=\"EasiestMonsters\">\r\n    <IsEnabled value=\"False\" " +
-            "/>\r\n  </Option>\r\n  <Option value=\"NoLostRoll\">\r\n    <IsEnabled value=\"False\" />\r" +
-            "\n  </Option>\r\n  <Option value=\"ForceNoLostEvent\">\r\n    <IsEnabled value=\"False\" " +
-            "/>\r\n  </Option>\r\n  <Option value=\"ForceNoEvent\">\r\n    <IsEnabled value=\"False\" /" +
-            ">\r\n  </Option>\r\n  <Option value=\"ForceNoRoadEvent\">\r\n    <IsEnabled value=\"False" +
-            "\" />\r\n  </Option>\r\n  <Option value=\"ForceNoCrossEvent\">\r\n    <IsEnabled value=\"F" +
-            "alse\" />\r\n  </Option>\r\n  <Option value=\"ForceNoRaftEvent\">\r\n    <IsEnabled value" +
-            "=\"False\" />\r\n  </Option>\r\n  <Option value=\"ForceNoAirEvent\">\r\n    <IsEnabled val" +
-            "ue=\"False\" />\r\n  </Option>\r\n  <Option value=\"ForceLostEvent\">\r\n    <IsEnabled va" +
-            "lue=\"False\" />\r\n  </Option>\r\n  <Option value=\"ForceLostAfterCrossEvent\">\r\n    <I" +
-            "sEnabled value=\"False\" />\r\n  </Option>\r\n  <Option value=\"ForceEvent\">\r\n    <IsEn" +
-            "abled value=\"False\" />\r\n  </Option>\r\n  <Option value=\"ForceCrossEvent\">\r\n    <Is" +
-            "Enabled value=\"False\" />\r\n  </Option>\r\n  <Option value=\"ForceRaftEvent\">\r\n    <I" +
-            "sEnabled value=\"False\" />\r\n  </Option>\r\n  <Option value=\"ForceAirEvent\">\r\n    <I" +
-            "sEnabled value=\"False\" />\r\n  </Option>\r\n</Options>\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?><ArrayOfAnyType xmlns:xsi=\"http://www.w3.o" +
+            "rg/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><anyTyp" +
+            "e xsi:type=\"Option\"><Name>AutoSetup</Name><IsEnabled>false</IsEnabled></anyType>" +
+            "<anyType xsi:type=\"Option\"><Name>AutoWealthRollForUnderFive</Name><IsEnabled>fal" +
+            "se</IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>PrinceHorse</Name><IsEn" +
+            "abled>false</IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>PrincePegasus<" +
+            "/Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>Pri" +
+            "nceCoin</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Option\"><" +
+            "Name>PrinceFood</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"O" +
+            "ption\"><Name>StartWithNerveGame</Name><IsEnabled>false</IsEnabled></anyType><any" +
+            "Type xsi:type=\"Option\"><Name>StartWithNecklass</Name><IsEnabled>false</IsEnabled" +
+            "></anyType><anyType xsi:type=\"Option\"><Name>RandomParty10</Name><IsEnabled>false" +
+            "</IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>RandomParty08</Name><IsEn" +
+            "abled>false</IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>RandomParty05<" +
+            "/Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>Ran" +
+            "domParty03</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Option" +
+            "\"><Name>RandomParty01</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:t" +
+            "ype=\"Option\"><Name>PartyCustom</Name><IsEnabled>false</IsEnabled></anyType><anyT" +
+            "ype xsi:type=\"Option\"><Name>Dwarf</Name><IsEnabled>false</IsEnabled></anyType><a" +
+            "nyType xsi:type=\"Option\"><Name>Eagle</Name><IsEnabled>false</IsEnabled></anyType" +
+            "><anyType xsi:type=\"Option\"><Name>Elf</Name><IsEnabled>false</IsEnabled></anyTyp" +
+            "e><anyType xsi:type=\"Option\"><Name>Falcon</Name><IsEnabled>false</IsEnabled></an" +
+            "yType><anyType xsi:type=\"Option\"><Name>Griffon</Name><IsEnabled>false</IsEnabled" +
+            "></anyType><anyType xsi:type=\"Option\"><Name>Harpy</Name><IsEnabled>false</IsEnab" +
+            "led></anyType><anyType xsi:type=\"Option\"><Name>Magician</Name><IsEnabled>false</" +
+            "IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>Mercenary</Name><IsEnabled>" +
+            "false</IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>Merchant</Name><IsEn" +
+            "abled>false</IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>Minstrel</Name" +
+            "><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>Monk</Na" +
+            "me><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>Porter" +
+            "Slave</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Option\"><Na" +
+            "me>Priest</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Option\"" +
+            "><Name>TrueLove</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"O" +
+            "ption\"><Name>Wizard</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:typ" +
+            "e=\"Option\"><Name>PartyMounted</Name><IsEnabled>false</IsEnabled></anyType><anyTy" +
+            "pe xsi:type=\"Option\"><Name>PartyAirborne</Name><IsEnabled>false</IsEnabled></any" +
+            "Type><anyType xsi:type=\"Option\"><Name>RandomHex</Name><IsEnabled>false</IsEnable" +
+            "d></anyType><anyType xsi:type=\"Option\"><Name>RandomTown</Name><IsEnabled>false</" +
+            "IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>RandomLeft</Name><IsEnabled" +
+            ">false</IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>RandomRight</Name><" +
+            "IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>RandomBott" +
+            "om</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>" +
+            "0722</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Option\"><Nam" +
+            "e>0109</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Option\"><N" +
+            "ame>0206</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Option\">" +
+            "<Name>0708</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Option" +
+            "\"><Name>0711</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Opti" +
+            "on\"><Name>1212</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Op" +
+            "tion\"><Name>0323</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"" +
+            "Option\"><Name>1923</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type" +
+            "=\"Option\"><Name>0418</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:ty" +
+            "pe=\"Option\"><Name>0410</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:" +
+            "type=\"Option\"><Name>0409</Name><IsEnabled>false</IsEnabled></anyType><anyType xs" +
+            "i:type=\"Option\"><Name>0406</Name><IsEnabled>false</IsEnabled></anyType><anyType " +
+            "xsi:type=\"Option\"><Name>1611</Name><IsEnabled>false</IsEnabled></anyType><anyTyp" +
+            "e xsi:type=\"Option\"><Name>0411</Name><IsEnabled>false</IsEnabled></anyType><anyT" +
+            "ype xsi:type=\"Option\"><Name>1507</Name><IsEnabled>false</IsEnabled></anyType><an" +
+            "yType xsi:type=\"Option\"><Name>1905</Name><IsEnabled>false</IsEnabled></anyType><" +
+            "anyType xsi:type=\"Option\"><Name>1723</Name><IsEnabled>false</IsEnabled></anyType" +
+            "><anyType xsi:type=\"Option\"><Name>LessHardMonsters</Name><IsEnabled>false</IsEna" +
+            "bled></anyType><anyType xsi:type=\"Option\"><Name>EasyMonsters</Name><IsEnabled>fa" +
+            "lse</IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>EasiestMonsters</Name>" +
+            "<IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>AutoLostD" +
+            "ecrease</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Option\"><" +
+            "Name>ExtendEndTime</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type" +
+            "=\"Option\"><Name>ReduceLodgingCosts</Name><IsEnabled>false</IsEnabled></anyType><" +
+            "anyType xsi:type=\"Option\"><Name>SteadyIncome</Name><IsEnabled>false</IsEnabled><" +
+            "/anyType><anyType xsi:type=\"Option\"><Name>NoLostRoll</Name><IsEnabled>false</IsE" +
+            "nabled></anyType><anyType xsi:type=\"Option\"><Name>ForceNoLostEvent</Name><IsEnab" +
+            "led>false</IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>ForceNoEvent</Na" +
+            "me><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>ForceN" +
+            "oRoadEvent</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Option" +
+            "\"><Name>ForceNoCrossEvent</Name><IsEnabled>false</IsEnabled></anyType><anyType x" +
+            "si:type=\"Option\"><Name>ForceNoRaftEvent</Name><IsEnabled>false</IsEnabled></anyT" +
+            "ype><anyType xsi:type=\"Option\"><Name>ForceNoAirEvent</Name><IsEnabled>false</IsE" +
+            "nabled></anyType><anyType xsi:type=\"Option\"><Name>ForceLostEvent</Name><IsEnable" +
+            "d>false</IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>ForceLostAfterCros" +
+            "sEvent</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Option\"><N" +
+            "ame>ForceEvent</Name><IsEnabled>false</IsEnabled></anyType><anyType xsi:type=\"Op" +
+            "tion\"><Name>ForceCrossEvent</Name><IsEnabled>false</IsEnabled></anyType><anyType" +
+            " xsi:type=\"Option\"><Name>ForceRaftEvent</Name><IsEnabled>false</IsEnabled></anyT" +
+            "ype><anyType xsi:type=\"Option\"><Name>ForceAirEvent</Name><IsEnabled>false</IsEna" +
+            "bled></anyType></ArrayOfAnyType>\n")]
         public string GameOptions {
             get {
                 return ((string)(this["GameOptions"]));
