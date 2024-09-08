@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barbarian Prince", "Barbarian Prince.csproj", "{BF013D26-C0AA-4995-A178-A4C2D739B1A1}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "BarbarianPrince", "..\BarbarianPrinceSetup\BarbarianPrinceSetup.vdproj", "{64E72BFA-58C3-4A1B-A433-5DCAAE559C85}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "BarbarianPrinceSetup", "..\BarbarianPrinceSetup\BarbarianPrinceSetup.vdproj", "{64E72BFA-58C3-4A1B-A433-5DCAAE559C85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

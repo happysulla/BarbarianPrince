@@ -29,6 +29,8 @@ namespace BarbarianPrince
       private Canvas myCanvas = null;
       public List<Button> theDice = null;
       private int myLoadedCount = 0;
+      private Mutex myMutex = new Mutex();
+      public Mutex DieMutex { get=>myMutex; }
       //-----------------------------------------------------------
       public DieRoller(Canvas c, LoadEndCallback callback = null)
       {
@@ -596,6 +598,7 @@ namespace BarbarianPrince
       }
       private void ImageAnimationCompleted(object sender, RoutedEventArgs e)
       {
+         myMutex.WaitOne();
          Image img = (Image)sender;
          if (false == Reset(myCanvas, img))
          {
@@ -607,7 +610,7 @@ namespace BarbarianPrince
             myCallbackEndRoll(myDieRollResults);
             myCallbackEndRoll = null; // only do one callback per dice roll
          }
-
+         myMutex.ReleaseMutex();
       }
    }
 }

@@ -1204,7 +1204,7 @@ namespace BarbarianPrince
          }
          loadCanCarry -= this.Food;
          if( loadCanCarry < 0 )
-            Logger.Log(LogEnum.LE_ERROR, "GetFreeLoadWithoutModify(): name=" + this.Name + " lc=" + loadCanCarry.ToString() + " f=" + Food.ToString() + " c=" + coinLoads.ToString() + "(cons=" + this.Coin.ToString() + ") ml=" + mountCarry.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "GetFreeLoadWithoutModify(): name=" + this.Name + " lc=" + loadCanCarry.ToString() + " fl=" + Food.ToString() + " cl=" + coinLoads.ToString() + "(cons=" + this.Coin.ToString() + ") ml=" + mountCarry.ToString());
          return loadCanCarry;
       }   // get free load - dismount if load does not support - but do not mount 
       public int GetFlyLoad()

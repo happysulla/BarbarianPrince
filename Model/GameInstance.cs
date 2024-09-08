@@ -39,13 +39,6 @@ namespace BarbarianPrince
                CtorError = true;
                return;
             }
-            //---------------------------------------------------------
-            if (false == ReadOptionsXml(this.Options))
-            {
-               Logger.Log(LogEnum.LE_ERROR, "GameInstance(): ReadOptionsXml() returned false");
-               CtorError = true;
-               return;
-            }
          }
          catch (Exception e)
          {
@@ -420,10 +413,10 @@ namespace BarbarianPrince
             mi.Combat = 4;
             return;
          }
-         if (true == mi.Name.Contains("ElfLead"))
+         if (true == mi.Name.Contains("ElfWarrior"))
          {
-            mi.Endurance = 7;
-            mi.Combat = 6;
+            mi.Endurance = 5;
+            mi.Combat = 5;
             return;
          }
          if (true == mi.Name.Contains("Elf"))
@@ -2407,43 +2400,6 @@ namespace BarbarianPrince
             if (reader != null)
                reader.Close();
          }
-      }
-      public bool ReadOptionsXml(Options options)
-      {
-         XmlTextReader reader = null;
-         try
-         {
-            // Load the reader with the data file and ignore all white space nodes.         
-            reader = new XmlTextReader(@"../Config/Options.xml") { WhitespaceHandling = WhitespaceHandling.None };
-            while (reader.Read())
-            {
-               if (reader.Name == "Option")
-               {
-                  if (reader.IsStartElement())
-                  {
-                     string name = reader.GetAttribute("value");
-                     //---------------------------------------------------------
-                     reader.Read();
-                     string isEnabledStr = reader.GetAttribute("value");
-                     bool isEnabled = Boolean.Parse(isEnabledStr);
-                     //---------------------------------------------------------
-                     Option option = new Option(name, isEnabled);
-                     options.Add(option);
-                  } // end if
-               } // end if
-            } // end while
-         } // try
-         catch (Exception e)
-         {
-            Console.WriteLine("ReadOptionsXml(): Exception:  e.Message={0} while reading reader.Name={1}", e.Message, reader.Name);
-            return false;
-         }
-         finally
-         {
-            if (reader != null)
-               reader.Close();
-         }
-         return true;
       }
       public override String ToString()
       {

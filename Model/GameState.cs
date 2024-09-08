@@ -1109,7 +1109,7 @@ namespace BarbarianPrince
             case "Elf": character = new MapItem(miName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 4, 5, 7); break;
             case "ElfAssistant": character = new MapItem(miName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 3, 3, 2); break;
             case "ElfFriend": character = new MapItem(miName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 4, 4, 7); break;
-            case "ElfLead": character = new MapItem(miName, 1.0, false, false, false, "c69ElfLead", "c69ElfLead", princeTerritory, 7, 6, 21); break;
+            case "ElfWarrior": character = new MapItem(miName, 1.0, false, false, false, "c69ElfLead", "c69ElfLead", princeTerritory, 5, 5, 15); break;
             case "Falcon": character = new MapItem(miName, 1.0, false, false, false, "c82Falcon", "c82Falcon", princeTerritory, 0, 0, 0); break;
             case "Farmer": character = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 7, 4, 1); break;
             case "FarmerW": character = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 7, 4, 2); break;
@@ -1754,6 +1754,13 @@ namespace BarbarianPrince
                   IMapItem member = CreateCharacter(gi, "Elf");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
+                  member.AddNewMount(MountEnum.Horse);
+                  gi.AddCompanion(member);
+               }
+               break;
+            case "ElfWarrior":
+               {
+                  IMapItem member = CreateCharacter(gi, "ElfWarrior");
                   member.AddNewMount(MountEnum.Horse);
                   gi.AddCompanion(member);
                }
@@ -7777,7 +7784,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][0] = dieRoll;
                   gi.IsElfWitAndWileActive = true;
                   gi.EncounteredMembers.Clear();
-                  IMapItem elfLead = CreateCharacter(gi, "ElfLead");
+                  IMapItem elfLead = CreateCharacter(gi, "ElfWarrior");
                   gi.EncounteredMembers.Add(elfLead);
                }
                else
@@ -9074,11 +9081,11 @@ namespace BarbarianPrince
             case "e006d": // Dwarf Warrior
             case "e006e": // Dwarf Warrior
             case "e006i": // Dwarf Warrior
-            case "e007":  // Elf Warrior
-            case "e007a": // Elf Warrior
-            case "e007c": // Elf Warrior
-            case "e007d": // Elf Warrior
-            case "e007e": // Elf Warrior
+            case "e007":  // Elf Lead
+            case "e007a": // Elf Lead
+            case "e007c": // Elf Lead
+            case "e007d": // Elf Lead
+            case "e007e": // Elf Lead
                break;
             case "e008": // halfing warrior
                if (true == autoWealthOption.IsEnabled)  // automatically perform wealth code rolls if enabled.
@@ -9646,6 +9653,7 @@ namespace BarbarianPrince
          //--------------------------------------------------------
          gi.DieRollAction = GameAction.DieRollActionNone;
          string key = gi.EventActive;
+         Logger.Log(LogEnum.LE_VIEW_APPEND_EVENT, "EncounterRoll(): k=" + key + " d0=" + gi.DieResults[key][0].ToString() + " d1=" + gi.DieResults[key][1].ToString() + " d2=" + gi.DieResults[key][2].ToString());
          switch (key)
          {
             case "e002b": // talk
@@ -9985,7 +9993,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][0] = dieRoll;
                }
                break;
-            case "e007c": // talk to elf warrior
+            case "e007c": // talk to elf lead
                gi.EnteredHexes.Last().EventNames.Add(key);
                if ("Forest" == princeTerritory.Type) // if in forest, add two
                   dieRoll += 2;
@@ -10003,7 +10011,7 @@ namespace BarbarianPrince
                for (int i = 0; i < 3; ++i)
                   gi.DieResults[key][i] = Utilities.NO_RESULT;
                break;
-            case "e007d": // evade elf warrior 
+            case "e007d": // evade elf lead 
                gi.EnteredHexes.Last().EventNames.Add(key);
                if ("Forest" == princeTerritory.Type) // if in forest, add two
                   dieRoll += 2;
@@ -10020,7 +10028,7 @@ namespace BarbarianPrince
                }
                gi.DieResults["e007a"][0] = Utilities.NO_RESULT;
                break;
-            case "e007e": // fight elf warrior
+            case "e007e": // fight elf lead
                gi.EnteredHexes.Last().EventNames.Add(key);
                if ("Forest" == princeTerritory.Type) // if in forest, add two
                   dieRoll += 2;

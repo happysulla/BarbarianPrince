@@ -43,6 +43,7 @@ namespace BarbarianPrince
       LE_MAPITEM_MOVING_COUNT,
       LE_MAPITEM_WOUND,
       LE_MAPITEM_POISION,
+      LE_VIEW_APPEND_EVENT,
       LE_VIEW_DICE_MOVING,
       LE_VIEW_RESET_BATTLE_GRID,
       LE_VIEW_DEC_COUNT_GRID,
@@ -97,7 +98,7 @@ namespace BarbarianPrince
             }
             catch (Exception ex)
             {
-               Console.WriteLine(ex.ToString());
+               Console.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description +  "\n" +ex.ToString());
             }
          }
       }
@@ -185,6 +186,7 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_ACTION_PANEL);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_ACTION_PANEL_CLEAR);
          //Logger.SetOn(LogEnum.LE_RETURN_TO_START);
+         Logger.SetOn(LogEnum.LE_VIEW_APPEND_EVENT);
          //Logger.SetOn(LogEnum.LE_VIEW_DICE_MOVING);
          //Logger.SetOn(LogEnum.LE_VIEW_RESET_BATTLE_GRID);
          //Logger.SetOn(LogEnum.LE_VIEW_DEC_COUNT_GRID);

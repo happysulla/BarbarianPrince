@@ -73,32 +73,8 @@ namespace BarbarianPrince.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string GameDirectoryName {
-            get {
-                return ((string)(this["GameDirectoryName"]));
-            }
-            set {
-                this["GameDirectoryName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string GameRestorePoint {
-            get {
-                return ((string)(this["GameRestorePoint"]));
-            }
-            set {
-                this["GameRestorePoint"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?><ArrayOfAnyType xmlns:xsi=\"http://www.w3.o" +
-            "rg/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><anyTyp" +
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?><ArrayOfAnyType xmlns:xsd=\"http://www.w3.o" +
+            "rg/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><anyTyp" +
             "e xsi:type=\"Option\"><Name>AutoSetup</Name><IsEnabled>false</IsEnabled></anyType>" +
             "<anyType xsi:type=\"Option\"><Name>AutoWealthRollForUnderFive</Name><IsEnabled>fal" +
             "se</IsEnabled></anyType><anyType xsi:type=\"Option\"><Name>PrinceHorse</Name><IsEn" +
@@ -186,6 +162,18 @@ namespace BarbarianPrince.Properties {
             }
             set {
                 this["GameOptions"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\BarbarianPrince\\bin")]
+        public string GameDirectoryName {
+            get {
+                return ((string)(this["GameDirectoryName"]));
+            }
+            set {
+                this["GameDirectoryName"] = value;
             }
         }
     }
