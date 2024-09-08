@@ -174,11 +174,11 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_COMBAT_STATE_ROUTE);
          //Logger.SetOn(LogEnum.LE_COMBAT_RESULT);
          //Logger.SetOn(LogEnum.LE_COMBAT_TROLL_HEAL);
-         Logger.SetOn(LogEnum.LE_COMBAT_WIZARD);
+         //Logger.SetOn(LogEnum.LE_COMBAT_WIZARD);
          //Logger.SetOn(LogEnum.LE_MAPITEM_WOUND);
          //Logger.SetOn(LogEnum.LE_MAPITEM_POISION);
          Logger.SetOn(LogEnum.LE_END_ENCOUNTER);
-         //Logger.SetOn(LogEnum.LE_HEX_WITHIN_RANGE);
+         Logger.SetOn(LogEnum.LE_HEX_WITHIN_RANGE);
          //Logger.SetOn(LogEnum.LE_STARVATION_STATE_CHANGE);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_WINDOW);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_MENU);
@@ -186,7 +186,7 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_ACTION_PANEL);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_ACTION_PANEL_CLEAR);
          //Logger.SetOn(LogEnum.LE_RETURN_TO_START);
-         Logger.SetOn(LogEnum.LE_VIEW_APPEND_EVENT);
+         //Logger.SetOn(LogEnum.LE_VIEW_APPEND_EVENT);
          //Logger.SetOn(LogEnum.LE_VIEW_DICE_MOVING);
          //Logger.SetOn(LogEnum.LE_VIEW_RESET_BATTLE_GRID);
          //Logger.SetOn(LogEnum.LE_VIEW_DEC_COUNT_GRID);

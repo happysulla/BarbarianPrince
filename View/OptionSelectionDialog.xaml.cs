@@ -109,7 +109,6 @@ namespace BarbarianPrince
             option = new Option(name, false);
             myOptions.Add(option);
          }
-         option = new Option("AutoSetup", false);
          myCheckBoxAutoSetup.IsChecked = option.IsEnabled;
          //-------------------------
          name = "AutoWealthRollForUnderFive";

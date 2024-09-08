@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.IO.Pipes;
 using System.Linq;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -1248,9 +1249,28 @@ namespace BarbarianPrince
       protected bool LoadGame(ref IGameInstance gi, ref GameAction action)
       {
          gi.Stacks.Clear();
-         gi.GamePhase = GamePhase.Encounter;      // GameStateSetup.PerformAction()
-         gi.EventDisplayed = gi.EventActive = "e401"; // next screen to show
-         gi.DieRollAction = GameAction.DieRollActionNone;
+         Option option = gi.Options.Find("AutoSetup");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "LoadGame: gi.Options.Find(AutoSetup) returned null");
+            return false;
+         }
+         else
+         {
+            if (true == option.IsEnabled)
+            {
+               gi.GamePhase = GamePhase.Encounter;  
+               gi.EventDisplayed = gi.EventActive = "e401"; // next screen to show
+               gi.DieRollAction = GameAction.DieRollActionNone;
+            }
+            else
+            {
+               action = GameAction.UpdateEventViewerActive;
+               gi.GamePhase = GamePhase.GameSetup;    
+               gi.EventDisplayed = gi.EventActive = "e000"; // next screen to show
+               gi.DieRollAction = GameAction.DieRollActionNone;
+            }
+         }
          if( 0 == gi.MapItemMoves.Count )
          {
             --gi.Prince.MovementUsed;
@@ -1407,15 +1427,25 @@ namespace BarbarianPrince
                   }
                   else
                   {
-                     if (false == PerformAutoSetup(ref gi, ref action))
+                     if (true == option.IsEnabled)
                      {
-                        returnStatus = "PerformAutoSetup() returned false";
-                        Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
+                        if (false == PerformAutoSetup(ref gi, ref action))
+                        {
+                           returnStatus = "PerformAutoSetup() returned false";
+                           Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
+                        }
+                        else
+                        {
+                           gi.GamePhase = GamePhase.SunriseChoice;      // UpdateNewGame
+                           gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
+                           gi.DieRollAction = GameAction.DieRollActionNone;
+                        }
                      }
                      else
                      {
-                        gi.GamePhase = GamePhase.SunriseChoice;      // UpdateNewGame
-                        gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
+                        action = GameAction.UpdateEventViewerActive;
+                        gi.GamePhase = GamePhase.GameSetup;
+                        gi.EventDisplayed = gi.EventActive = "e000"; // next screen to show
                         gi.DieRollAction = GameAction.DieRollActionNone;
                      }
                   }
