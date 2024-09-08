@@ -246,7 +246,7 @@ namespace BarbarianPrince
             case E096Enum.SHOW_RESULTS_MOUNTS:
                BitmapImage bmi2 = new BitmapImage();
                bmi2.BeginInit();
-               bmi2.UriSource = new Uri("../../Images/CampFire2.gif", UriKind.Relative);
+               bmi2.UriSource = new Uri(Utilities.theImageDirectoryPath + "CampFire2.gif", UriKind.Relative);
                bmi2.EndInit();
                Image img2 = new Image { Name = "Campfire", Source = bmi2, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                ImageBehavior.SetAnimatedSource(img2, bmi2);
@@ -292,7 +292,7 @@ namespace BarbarianPrince
             {
                BitmapImage bmi = new BitmapImage();
                bmi.BeginInit();
-               bmi.UriSource = new Uri("../../Images/dieRoll.gif", UriKind.Relative);
+               bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
                bmi.EndInit();
                Image img = new Image { Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                ImageBehavior.SetAnimatedSource(img, bmi);

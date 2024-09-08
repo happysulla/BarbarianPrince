@@ -309,7 +309,7 @@ namespace BarbarianPrince
             case E060Enum.RELEASE_SELECTION:
                BitmapImage bmi11 = new BitmapImage();
                bmi11.BeginInit();
-               bmi11.UriSource = new Uri("../../Images/Campfire2.gif", UriKind.Relative);
+               bmi11.UriSource = new Uri(Utilities.theImageDirectoryPath + "Campfire2.gif", UriKind.Relative);
                bmi11.EndInit();
                Image img11 = new Image { Name = "Campfire", Source = bmi11, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                ImageBehavior.SetAnimatedSource(img11, bmi11);

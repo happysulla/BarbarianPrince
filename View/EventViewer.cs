@@ -720,7 +720,7 @@ namespace BarbarianPrince
                         img.Visibility = Visibility.Hidden;
                         double sizeCursor = Utilities.ZoomCanvas * Utilities.ZOOM * Utilities.theMapItemSize;
                         System.Windows.Point hotPoint = new System.Windows.Point(Utilities.theMapItemOffset, sizeCursor * 0.5); // set the center of the MapItem as the hot point for the cursor
-                        Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Target"), Width = sizeCursor, Height = sizeCursor };
+                        Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Target"), Width = sizeCursor, Height = sizeCursor };
                         myScrollViewerTextBlock.Cursor = Utilities.ConvertToCursor(img1, hotPoint);
                      }
                      else if (("e016d" == gi.EventActive) && (Utilities.NO_RESULT == gi.DieResults["e016d"][0]))
@@ -1561,7 +1561,7 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Click to give 5 food:"));
                   myTextBlock.Inlines.Add(new LineBreak());
-                  Image imge010a = new Image { Source = MapItem.theMapImages.GetBitmapImage("Food"), Width = 75, Height = 75, Name = "FoodGive" };
+                  Image imge010a = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Food"), Width = 75, Height = 75, Name = "FoodGive" };
                   myTextBlock.Inlines.Add(new InlineUIContainer(imge010a));
                }
                break;
@@ -1622,7 +1622,7 @@ namespace BarbarianPrince
             case "e016c":
                if (true == myGameInstance.IsSpecialItemHeld(SpecialEnum.ResistanceTalisman))
                {
-                  Image imge016c = new Image { Source = MapItem.theMapImages.GetBitmapImage("TalismanResistance"), Name = "TalismanActivate", Width = 75, Height = 75 };
+                  Image imge016c = new Image { Source = MapItem.theMapImages.GetBitmapImage2("TalismanResistance"), Name = "TalismanActivate", Width = 75, Height = 75 };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new InlineUIContainer(imge016c));
@@ -1650,7 +1650,7 @@ namespace BarbarianPrince
             case "e020":
                if (4 < gi.DieResults[key][0])
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("MonkTraveling"), Width = 87, Height = 350 };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("MonkTraveling"), Width = 87, Height = 350 };
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Traveling Monks!"));
@@ -1662,7 +1662,7 @@ namespace BarbarianPrince
             case "e021":
                if (Utilities.NO_RESULT < gi.DieResults[key][1])
                {
-                  Image imgE021 = new Image { Source = MapItem.theMapImages.GetBitmapImage("MonkWarrior"), Width = 175, Height = 200 };
+                  Image imgE021 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("MonkWarrior"), Width = 175, Height = 200 };
                   AppendEscapeMethods(gi, true);
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                  "));
@@ -1721,8 +1721,8 @@ namespace BarbarianPrince
             case "e048":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image e0481 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Ally"), Width = 75, Height = 75, Name = "FugitiveAlly" };
-                  Image e0482 = new Image { Source = MapItem.theMapImages.GetBitmapImage("CrossedSwords"), Width = 75, Height = 75, Name = "FugitiveFight" };
+                  Image e0481 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Ally"), Width = 75, Height = 75, Name = "FugitiveAlly" };
+                  Image e0482 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CrossedSwords"), Width = 75, Height = 75, Name = "FugitiveFight" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new InlineUIContainer(e0481));
@@ -1748,7 +1748,7 @@ namespace BarbarianPrince
             case "e050":
                if (Utilities.NO_RESULT < gi.DieResults[key][1])
                {
-                  Image imgE050 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Constabulary"), Width = 250, Height = 250 };
+                  Image imgE050 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Constabulary"), Width = 250, Height = 250 };
                   AppendEscapeMethods(gi, true);
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
@@ -1808,7 +1808,7 @@ namespace BarbarianPrince
                }
                break;
             case "e052a":
-               Image img52 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Goblin2"), Width = 170, Height = 250 };
+               Image img52 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Goblin2"), Width = 170, Height = 250 };
                modifiedWitAndWile = gi.WitAndWile + 1;
                myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
                myTextBlock.Inlines.Add(new LineBreak());
@@ -1834,7 +1834,7 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new LineBreak());
                if( "e052" == gi.EventStart )
                {
-                  Image img053b = new Image { Source = MapItem.theMapImages.GetBitmapImage("Goblin2"), Width = 53, Height = 80 };
+                  Image img053b = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Goblin2"), Width = 53, Height = 80 };
                   myTextBlock.Inlines.Add(new InlineUIContainer(img053b));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
@@ -1842,7 +1842,7 @@ namespace BarbarianPrince
                }
                else if ("e055" == gi.EventStart)
                {
-                  Image img053b = new Image { Source = MapItem.theMapImages.GetBitmapImage("Orc"), Width = 53, Height = 80 };
+                  Image img053b = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Orc"), Width = 53, Height = 80 };
                   myTextBlock.Inlines.Add(new InlineUIContainer(img053b));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
@@ -1850,7 +1850,7 @@ namespace BarbarianPrince
                }
                else if ("e058a" == gi.EventStart)
                {
-                  Image img053b = new Image { Source = MapItem.theMapImages.GetBitmapImage("Dwarfs"), Width = 80, Height = 80 };
+                  Image img053b = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Dwarfs"), Width = 80, Height = 80 };
                   myTextBlock.Inlines.Add(new InlineUIContainer(img053b));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
@@ -1875,7 +1875,7 @@ namespace BarbarianPrince
                {
                   if (gi.DieResults[key][0] < gi.WitAndWile)
                   {
-                     Image img54a = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100, Name = "EncounterEnd" };
+                     Image img54a = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Nothing"), Width = 100, Height = 100, Name = "EncounterEnd" };
                      myTextBlock.Inlines.Add(new LineBreak());
                      myTextBlock.Inlines.Add(new LineBreak());
                      myTextBlock.Inlines.Add(new Run("                                            "));
@@ -1886,9 +1886,9 @@ namespace BarbarianPrince
                   }
                   else
                   {
-                     Image img54a0 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Goblin"), Width = 170, Height = 250 };
-                     Image img54a1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Goblin2"), Width = 170, Height = 250 };
-                     Image img54a2 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Goblin2"), Width = 170, Height = 250 };
+                     Image img54a0 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Goblin"), Width = 170, Height = 250 };
+                     Image img54a1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Goblin2"), Width = 170, Height = 250 };
+                     Image img54a2 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Goblin2"), Width = 170, Height = 250 };
                      myTextBlock.Inlines.Add(new LineBreak());
                      myTextBlock.Inlines.Add(new InlineUIContainer(img54a0));
                      myTextBlock.Inlines.Add(new InlineUIContainer(img54a1));
@@ -1915,7 +1915,7 @@ namespace BarbarianPrince
                }
                break;
             case "e055a":
-               Image img55 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Orc"), Width = 170, Height = 250 };
+               Image img55 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Orc"), Width = 170, Height = 250 };
                modifiedWitAndWile = gi.WitAndWile + 1;
                myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
                myTextBlock.Inlines.Add(new LineBreak());
@@ -1935,7 +1935,7 @@ namespace BarbarianPrince
                }
                break;
             case "e057":
-               Image img57 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Troll"), Width = 170, Height = 250 };
+               Image img57 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Troll"), Width = 170, Height = 250 };
                modifiedWitAndWile = gi.WitAndWile + 1;
                myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
                myTextBlock.Inlines.Add(new LineBreak());
@@ -1959,7 +1959,7 @@ namespace BarbarianPrince
                AppendEscapeMethods(gi, true); // e058a, e058b
                break;
             case "e058c":
-               Image img58c = new Image { Source = MapItem.theMapImages.GetBitmapImage("Dwarves"), Width = 300, Height = 300 };
+               Image img58c = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Dwarves"), Width = 300, Height = 300 };
                modifiedWitAndWile = gi.WitAndWile;
                myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
                myTextBlock.Inlines.Add(new LineBreak());
@@ -1976,7 +1976,7 @@ namespace BarbarianPrince
             case "e059":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imge059 = new Image { Source = MapItem.theMapImages.GetBitmapImage("DwarfMines"), Width = 300, Height = 150, Name = "EncounterRoll" };
+                  Image imge059 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("DwarfMines"), Width = 300, Height = 150, Name = "EncounterRoll" };
                   myTextBlock.Inlines.Add(new Run("Click image to continue."));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
@@ -1995,7 +1995,7 @@ namespace BarbarianPrince
             case "e060":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imge060 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Arrested"), Width = 175, Height = 200, Name = "JailArrested" };
+                  Image imge060 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Arrested"), Width = 175, Height = 200, Name = "JailArrested" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                          "));
@@ -2017,7 +2017,7 @@ namespace BarbarianPrince
             case "e066b":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imge060 = new Image { Source = MapItem.theMapImages.GetBitmapImage("MonksWarrior"), Width = 175, Height = 200, Name = "MonksWarrior" };
+                  Image imge060 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("MonksWarrior"), Width = 175, Height = 200, Name = "MonksWarrior" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                               "));
@@ -2041,7 +2041,7 @@ namespace BarbarianPrince
             case "e068":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imge060 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100, Name = "WizardAbode" };
+                  Image imge060 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Nothing"), Width = 100, Height = 100, Name = "WizardAbode" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                            "));
@@ -2054,7 +2054,7 @@ namespace BarbarianPrince
             case "e068a":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imge068 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Magician"), Width = 150, Height = 300, Name = "MagicianHome" };
+                  Image imge068 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Magician"), Width = 150, Height = 300, Name = "MagicianHome" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                       "));
@@ -2110,7 +2110,7 @@ namespace BarbarianPrince
                }
                break;
             case "e072c":
-               Image imge072c = new Image { Source = MapItem.theMapImages.GetBitmapImage("Elf"), Width = 65, Height = 80 };
+               Image imge072c = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Elf"), Width = 65, Height = 80 };
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new InlineUIContainer(imge072c));
@@ -2152,7 +2152,7 @@ namespace BarbarianPrince
             case "e083a":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imge083a = new Image { Source = MapItem.theMapImages.GetBitmapImage("BoarCooked"), Width = 400, Height = 250, Name = "BoarCooked" };
+                  Image imge083a = new Image { Source = MapItem.theMapImages.GetBitmapImage2("BoarCooked"), Width = 400, Height = 250, Name = "BoarCooked" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new InlineUIContainer(imge083a));
@@ -2164,7 +2164,7 @@ namespace BarbarianPrince
             case "e086a":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imgee086a = new Image { Source = MapItem.theMapImages.GetBitmapImage("SnowShoes"), Width = 200, Height = 200, Name = "HighPassRedistribute" };
+                  Image imgee086a = new Image { Source = MapItem.theMapImages.GetBitmapImage2("SnowShoes"), Width = 200, Height = 200, Name = "HighPassRedistribute" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                      "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(imgee086a));
@@ -2242,12 +2242,12 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Click to pay 1gp to cross river:"));
                   myTextBlock.Inlines.Add(new LineBreak());
-                  Image imge122 = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStacked"), Width = 75, Height = 75, Name = "RaftsmenCross" };
+                  Image imge122 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CoinsStacked"), Width = 75, Height = 75, Name = "RaftsmenCross" };
                   myTextBlock.Inlines.Add(new InlineUIContainer(imge122));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Click to pay 1gp to hire ending travel for today:"));
                   myTextBlock.Inlines.Add(new LineBreak());
-                  Image imge1221 = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStacked"), Width = 75, Height = 75, Name = "RaftsmenHire" };
+                  Image imge1221 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CoinsStacked"), Width = 75, Height = 75, Name = "RaftsmenHire" };
                   myTextBlock.Inlines.Add(new InlineUIContainer(imge1221));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Click image to continue."));
@@ -2265,7 +2265,7 @@ namespace BarbarianPrince
                }
                break;
             case "e128a":
-               Image imgE128a1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStackedDeny"), Width = 100, Height = 100, Name = "BuyPegasusDeny" };
+               Image imgE128a1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CoinsStackedDeny"), Width = 100, Height = 100, Name = "BuyPegasusDeny" };
                cost = 50;
                if (true == gi.IsMerchantWithParty)
                   cost = (int)Math.Ceiling((double)cost * 0.5);
@@ -2277,7 +2277,7 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new InlineUIContainer(imgE128a1));
                if (cost <= gi.GetCoins())
                {
-                  Image img209 = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStacked"), Width = 100, Height = 100, Name = "BuyPegasus" };
+                  Image img209 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CoinsStacked"), Width = 100, Height = 100, Name = "BuyPegasus" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   string costToPayS = "Click to pay " + cost.ToString() + "gp:";
@@ -2315,7 +2315,7 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new Run("Click merchant image to stop buying."));
                break;
             case "e128d":
-               Image e128d = new Image { Source = MapItem.theMapImages.GetBitmapImage("MerchantOutwit"), Width = 400, Height = 200 };
+               Image e128d = new Image { Source = MapItem.theMapImages.GetBitmapImage2("MerchantOutwit"), Width = 400, Height = 200 };
                modifiedWitAndWile = gi.WitAndWile + 1;
                myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
                myTextBlock.Inlines.Add(new LineBreak());
@@ -2353,7 +2353,7 @@ namespace BarbarianPrince
                }
                break;
             case "e129a":
-               Image imgE129a1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStackedDeny"), Width = 100, Height = 100, Name = "BuyAmuletDeny" };
+               Image imgE129a1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CoinsStackedDeny"), Width = 100, Height = 100, Name = "BuyAmuletDeny" };
                cost = 25;
                if (true == gi.IsMerchantWithParty)
                   cost = (int)Math.Ceiling((double)cost * 0.5);
@@ -2365,7 +2365,7 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new InlineUIContainer(imgE129a1));
                if (cost <= gi.GetCoins())
                {
-                  Image imgE129a = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStacked"), Width = 100, Height = 100, Name = "BuyAmulet" };
+                  Image imgE129a = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CoinsStacked"), Width = 100, Height = 100, Name = "BuyAmulet" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   string costToPayS = "Click to pay " + cost.ToString() + "gp:";
@@ -2415,7 +2415,7 @@ namespace BarbarianPrince
                   cost = (int)Math.Ceiling((double)cost * 0.5);
                if (cost <= gi.GetCoins())
                {
-                  Image imge130ga = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStacked"), Width = 100, Height = 100, Name = "GuardBribe" };
+                  Image imge130ga = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CoinsStacked"), Width = 100, Height = 100, Name = "GuardBribe" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   string costToPayS = "Click to pay " + cost.ToString() + "gp:";
@@ -2438,7 +2438,7 @@ namespace BarbarianPrince
             case "e143a":
                if (0 < gi.ChagaDrugCount)
                {
-                  Image imgE143a = new Image { Source = MapItem.theMapImages.GetBitmapImage("DrugChaga"), Width = 100, Height = 100, Name = "ChagaDrugPay" };
+                  Image imgE143a = new Image { Source = MapItem.theMapImages.GetBitmapImage2("DrugChaga"), Width = 100, Height = 100, Name = "ChagaDrugPay" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Click to give Chaga drug:"));
                   myTextBlock.Inlines.Add(new LineBreak());
@@ -2450,7 +2450,7 @@ namespace BarbarianPrince
             case "e147a":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imgE147 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Secrets"), Width = 250, Height = 220, Name = "Chest" };
+                  Image imgE147 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Secrets"), Width = 250, Height = 220, Name = "Chest" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                     "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(imgE147));
@@ -2461,8 +2461,8 @@ namespace BarbarianPrince
             case "e148":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image e148a = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStackedDeny"), Width = 75, Height = 75, Name = "BribeToSeneschalDeny" };
-                  Image e148b = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStacked"), Width = 75, Height = 75, Name = "BribeToSeneschalPay" };
+                  Image e148a = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CoinsStackedDeny"), Width = 75, Height = 75, Name = "BribeToSeneschalDeny" };
+                  Image e148b = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CoinsStacked"), Width = 75, Height = 75, Name = "BribeToSeneschalPay" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Click to not pay: "));
@@ -2501,7 +2501,7 @@ namespace BarbarianPrince
                   string costToPayS = "Click to pay " + cost.ToString() + "gp:";
                   myTextBlock.Inlines.Add(new Run(costToPayS));
                   myTextBlock.Inlines.Add(new LineBreak());
-                  Image img209 = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStacked"), Width = 75, Height = 75, Name = "MasterOfHouseholdPay" };
+                  Image img209 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CoinsStacked"), Width = 75, Height = 75, Name = "MasterOfHouseholdPay" };
                   myTextBlock.Inlines.Add(new InlineUIContainer(img209));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
@@ -2511,7 +2511,7 @@ namespace BarbarianPrince
             case "e154":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imgE154 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100, Name = "AudienceDaughter" };
+                  Image imgE154 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Nothing"), Width = 100, Height = 100, Name = "AudienceDaughter" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                       "));
@@ -2528,17 +2528,17 @@ namespace BarbarianPrince
                ITerritory t154x = gi.Prince.Territory;
                Image imgE154x = null;
                if (true == gi.HalflingTowns.Contains(t154x))
-                  imgE154x = new Image { Source = MapItem.theMapImages.GetBitmapImage("HalflingDaughter"), Width = 200, Height = 250, Name = "LordsDaughter" };
+                  imgE154x = new Image { Source = MapItem.theMapImages.GetBitmapImage2("HalflingDaughter"), Width = 200, Height = 250, Name = "LordsDaughter" };
                else if (true == gi.ElfTowns.Contains(t154x))
-                  imgE154x = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfDaughter"), Width = 200, Height = 250, Name = "LordsDaughter" };
+                  imgE154x = new Image { Source = MapItem.theMapImages.GetBitmapImage2("ElfDaughter"), Width = 200, Height = 250, Name = "LordsDaughter" };
                else if (true == gi.IsInTown(t154x))
-                  imgE154x = new Image { Source = MapItem.theMapImages.GetBitmapImage("MayorDaughter"), Width = 200, Height = 250, Name = "LordsDaughter" };
+                  imgE154x = new Image { Source = MapItem.theMapImages.GetBitmapImage2("MayorDaughter"), Width = 200, Height = 250, Name = "LordsDaughter" };
                else if (true == gi.IsInTemple(t154x))
-                  imgE154x = new Image { Source = MapItem.theMapImages.GetBitmapImage("PriestDaughter"), Width = 200, Height = 250, Name = "LordsDaughter" };
+                  imgE154x = new Image { Source = MapItem.theMapImages.GetBitmapImage2("PriestDaughter"), Width = 200, Height = 250, Name = "LordsDaughter" };
                else if (true == gi.DwarvenMines.Contains(t154x))
-                  imgE154x = new Image { Source = MapItem.theMapImages.GetBitmapImage("DwarfPrincess"), Width = 200, Height = 250, Name = "LordsDaughter" };
+                  imgE154x = new Image { Source = MapItem.theMapImages.GetBitmapImage2("DwarfPrincess"), Width = 200, Height = 250, Name = "LordsDaughter" };
                else
-                  imgE154x = new Image { Source = MapItem.theMapImages.GetBitmapImage("LordDaughter1"), Width = 200, Height = 250, Name = "LordsDaughter" };
+                  imgE154x = new Image { Source = MapItem.theMapImages.GetBitmapImage2("LordDaughter1"), Width = 200, Height = 250, Name = "LordsDaughter" };
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new Run("                                  "));
@@ -2551,17 +2551,17 @@ namespace BarbarianPrince
                ITerritory t154e = gi.Prince.Territory;
                Image imgE154e = null;
                if (true == gi.HalflingTowns.Contains(t154e))
-                  imgE154e = new Image { Source = MapItem.theMapImages.GetBitmapImage("HalflingDaughter"), Width = 200, Height = 250, Name = "LordsDaughterLove" };
+                  imgE154e = new Image { Source = MapItem.theMapImages.GetBitmapImage2("HalflingDaughter"), Width = 200, Height = 250, Name = "LordsDaughterLove" };
                else if (true == gi.ElfTowns.Contains(t154e))
-                  imgE154e = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfDaughter"), Width = 200, Height = 250, Name = "LordsDaughterLove" };
+                  imgE154e = new Image { Source = MapItem.theMapImages.GetBitmapImage2("ElfDaughter"), Width = 200, Height = 250, Name = "LordsDaughterLove" };
                else if (true == gi.IsInTown(t154e))
-                  imgE154e = new Image { Source = MapItem.theMapImages.GetBitmapImage("MayorDaughter"), Width = 200, Height = 250, Name = "LordsDaughterLove" };
+                  imgE154e = new Image { Source = MapItem.theMapImages.GetBitmapImage2("MayorDaughter"), Width = 200, Height = 250, Name = "LordsDaughterLove" };
                else if (true == gi.IsInTemple(t154e))
-                  imgE154e = new Image { Source = MapItem.theMapImages.GetBitmapImage("PriestDaughter"), Width = 200, Height = 250, Name = "LordsDaughterLove" };
+                  imgE154e = new Image { Source = MapItem.theMapImages.GetBitmapImage2("PriestDaughter"), Width = 200, Height = 250, Name = "LordsDaughterLove" };
                else if (true == gi.DwarvenMines.Contains(t154e))
-                  imgE154e = new Image { Source = MapItem.theMapImages.GetBitmapImage("DwarfPrincess"), Width = 200, Height = 250, Name = "LordsDaughterLove" };
+                  imgE154e = new Image { Source = MapItem.theMapImages.GetBitmapImage2("DwarfPrincess"), Width = 200, Height = 250, Name = "LordsDaughterLove" };
                else
-                  imgE154e = new Image { Source = MapItem.theMapImages.GetBitmapImage("LordDaughter1"), Width = 200, Height = 250, Name = "LordsDaughterLove" };
+                  imgE154e = new Image { Source = MapItem.theMapImages.GetBitmapImage2("LordDaughter1"), Width = 200, Height = 250, Name = "LordsDaughterLove" };
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new Run("                                  "));
@@ -2573,7 +2573,7 @@ namespace BarbarianPrince
             case "e155":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imgE155 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100, Name = "AudienceHighPriest" };
+                  Image imgE155 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Nothing"), Width = 100, Height = 100, Name = "AudienceHighPriest" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                            "));
@@ -2586,7 +2586,7 @@ namespace BarbarianPrince
             case "e156":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imgE156 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100, Name = "AudienceMayor" };
+                  Image imgE156 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Nothing"), Width = 100, Height = 100, Name = "AudienceMayor" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                            "));
@@ -2604,13 +2604,13 @@ namespace BarbarianPrince
                ITerritory t156x = gi.Prince.Territory;
                Image imgE156x = null;
                if (true == gi.HalflingTowns.Contains(t156x))
-                  imgE156x = new Image { Source = MapItem.theMapImages.GetBitmapImage("MayorHalfling"), Width = 200, Height = 230, Name = "Mayor" };
+                  imgE156x = new Image { Source = MapItem.theMapImages.GetBitmapImage2("MayorHalfling"), Width = 200, Height = 230, Name = "Mayor" };
                else if (true == gi.ElfTowns.Contains(t156x))
-                  imgE156x = new Image { Source = MapItem.theMapImages.GetBitmapImage("MayorElf"), Width = 200, Height = 230, Name = "Mayor" };
+                  imgE156x = new Image { Source = MapItem.theMapImages.GetBitmapImage2("MayorElf"), Width = 200, Height = 230, Name = "Mayor" };
                else if (true == gi.IsInTown(t156x))
-                  imgE156x = new Image { Source = MapItem.theMapImages.GetBitmapImage("Mayor"), Width = 200, Height = 230, Name = "Mayor" };
+                  imgE156x = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Mayor"), Width = 200, Height = 230, Name = "Mayor" };
                else
-                  imgE156x = new Image { Source = MapItem.theMapImages.GetBitmapImage("Mayor"), Width = 200, Height = 230, Name = "Mayor" };
+                  imgE156x = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Mayor"), Width = 200, Height = 230, Name = "Mayor" };
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new Run("                                     "));
@@ -2626,7 +2626,7 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new Run("                                     "));
-               Image imgE157 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Letter"), Width = 250, Height = 160, Name = "Letter" };
+               Image imgE157 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Letter"), Width = 250, Height = 160, Name = "Letter" };
                myTextBlock.Inlines.Add(new InlineUIContainer(imgE157));
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
@@ -2639,7 +2639,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_BRIBE, "AppendAtEnd(): bribe=" + gi.Bribe.ToString());
                if (cost <= gi.Prince.Coin)
                {
-                  Image imgE158 = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStacked"), Width = 75, Height = 75, Name = "HostileGuardsPay" };
+                  Image imgE158 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CoinsStacked"), Width = 75, Height = 75, Name = "HostileGuardsPay" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   string costToPayS = "Click to pay " + cost.ToString() + "gp:";
@@ -2654,7 +2654,7 @@ namespace BarbarianPrince
             case "e160":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imgE160 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100, Name = "AudienceLadyAeravir" };
+                  Image imgE160 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Nothing"), Width = 100, Height = 100, Name = "AudienceLadyAeravir" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                            "));
@@ -2694,7 +2694,7 @@ namespace BarbarianPrince
                   }
                   else
                   {
-                     Image imgE161a = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100, Name = "AudienceCountDrogat" };
+                     Image imgE161a = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Nothing"), Width = 100, Height = 100, Name = "AudienceCountDrogat" };
                      myTextBlock.Inlines.Add(new LineBreak());
                      myTextBlock.Inlines.Add(new LineBreak());
                      myTextBlock.Inlines.Add(new Run("                                            "));
@@ -2717,7 +2717,7 @@ namespace BarbarianPrince
             case "e163":
                if (Utilities.NO_RESULT < gi.DieResults[key][2])
                {
-                  Image imgE163 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Coffle"), Width = 400, Height = 200, Name = "SlaveMarketStart" };
+                  Image imgE163 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Coffle"), Width = 400, Height = 200, Name = "SlaveMarketStart" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                 "));
@@ -2752,7 +2752,7 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new Run("                         "));
                string imageSource = "SlaveGirlFace" + gi.SlaveGirlIndex.ToString();
-               Image e163c = new Image { Source = MapItem.theMapImages.GetBitmapImage(imageSource), Width = 300, Height = 300, Name = "SlaveGirlCheck" };
+               Image e163c = new Image { Source = MapItem.theMapImages.GetBitmapImage2(imageSource), Width = 300, Height = 300, Name = "SlaveGirlCheck" };
                myTextBlock.Inlines.Add(new InlineUIContainer(e163c));
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
@@ -2764,7 +2764,7 @@ namespace BarbarianPrince
             case "e163d":
                if (Utilities.NO_RESULT < gi.DieResults[key][1])
                {
-                  Image img209 = new Image { Source = MapItem.theMapImages.GetBitmapImage("OldMan"), Width = 200, Height = 300, Name = "SlaveMarketEnd" };
+                  Image img209 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("OldMan"), Width = 200, Height = 300, Name = "SlaveMarketEnd" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                "));
@@ -2777,14 +2777,12 @@ namespace BarbarianPrince
             case "e165":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imge165 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Elf"), Width = 175, Height = 200, Name = "EncounterRoll" };
+                  Image imge165 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Elf"), Width = 175, Height = 200, Name = "EncounterRoll" };
+                  myTextBlock.Inlines.Add(new Run(" Click image to to continue."));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                               "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(imge165));
-                  myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run("Click image to to continue."));
                }
                else
                {
@@ -2810,7 +2808,7 @@ namespace BarbarianPrince
             case "e166":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imge166 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Elf"), Width = 175, Height = 200, Name = "EncounterRoll" };
+                  Image imge166 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Elf"), Width = 175, Height = 200, Name = "EncounterRoll" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                               "));
@@ -2843,7 +2841,7 @@ namespace BarbarianPrince
             case "e203a":
                if (1 == gi.DieResults["e203a"][0])
                {
-                  Image e203a0 = new Image { Source = MapItem.theMapImages.GetBitmapImage("JailBreak"), Name = "Jail", Width = 250, Height = 250 };
+                  Image e203a0 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("JailBreak"), Name = "Jail", Width = 250, Height = 250 };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                   "));
@@ -2862,7 +2860,7 @@ namespace BarbarianPrince
                   }
                   else if (Utilities.NO_RESULT < gi.DieResults["e203a"][0])
                   {
-                     Image e203a1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Jail"), Name = "Jail", Width = 250, Height = 250 };
+                     Image e203a1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Jail"), Name = "Jail", Width = 250, Height = 250 };
                      myTextBlock.Inlines.Add(new LineBreak());
                      myTextBlock.Inlines.Add(new LineBreak());
                      myTextBlock.Inlines.Add(new Run("                                   "));
@@ -2878,7 +2876,7 @@ namespace BarbarianPrince
                {
                   case 2:
                   case 3:
-                     Image imgE203c = new Image { Source = MapItem.theMapImages.GetBitmapImage("DungeonJailBreak"), Name = "JailDungeon", Width = 400, Height = 280 };
+                     Image imgE203c = new Image { Source = MapItem.theMapImages.GetBitmapImage2("DungeonJailBreak"), Name = "JailDungeon", Width = 400, Height = 280 };
                      myTextBlock.Inlines.Add(new LineBreak());
                      myTextBlock.Inlines.Add(new LineBreak());
                      myTextBlock.Inlines.Add(new Run("                    "));
@@ -2896,7 +2894,7 @@ namespace BarbarianPrince
                   case 10:
                   case 11:
                   case 12:
-                     Image e203a1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("DungeonJail"), Name = "JailDungeon", Width = 400, Height = 280 };
+                     Image e203a1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("DungeonJail"), Name = "JailDungeon", Width = 400, Height = 280 };
                      myTextBlock.Inlines.Add(new LineBreak());
                      myTextBlock.Inlines.Add(new LineBreak());
                      myTextBlock.Inlines.Add(new Run("Nights In Dungeon = " + gi.NightsInDungeon.ToString()));
@@ -2934,7 +2932,7 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("             "));
-                  Image imgE203e = new Image { Source = MapItem.theMapImages.GetBitmapImage("WizardEscape"), Name = "WizardWander", Width = 400, Height = 200 };
+                  Image imgE203e = new Image { Source = MapItem.theMapImages.GetBitmapImage2("WizardEscape"), Name = "WizardWander", Width = 400, Height = 200 };
                   myTextBlock.Inlines.Add(new InlineUIContainer(imgE203e));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
@@ -2942,7 +2940,7 @@ namespace BarbarianPrince
                }
                else
                {
-                  Image e203a1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("WizardWander"), Name = "WizardWander", Width = 160, Height = 225 };
+                  Image e203a1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("WizardWander"), Name = "WizardWander", Width = 160, Height = 225 };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                          "));
@@ -2982,7 +2980,7 @@ namespace BarbarianPrince
             case "e209": // Seek News
                if (5 <= gi.GetCoins())
                {
-                  Image img209 = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStacked"), Width = 100, Height = 100, Name = "SeekNewsWithPay" };
+                  Image img209 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CoinsStacked"), Width = 100, Height = 100, Name = "SeekNewsWithPay" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Click to pay 5gp:"));
@@ -3029,7 +3027,7 @@ namespace BarbarianPrince
                }
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100, Name = "SeekNewsNext" };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Nothing"), Width = 100, Height = 100, Name = "SeekNewsNext" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                            "));
@@ -3051,7 +3049,7 @@ namespace BarbarianPrince
                   cost = (int)Math.Ceiling((double)cost * 0.5);
                if (cost <= gi.GetCoins())
                {
-                  Image imge209g = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStacked"), Width = 75, Height = 75, Name = "BuyInfo" };
+                  Image imge209g = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CoinsStacked"), Width = 75, Height = 75, Name = "BuyInfo" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   string costToPayS = "Click to pay " + cost.ToString() + "gp:";
@@ -3065,7 +3063,7 @@ namespace BarbarianPrince
             case "e210": // Hire Followers
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imgE210 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100, Name = "SeekHireNext" };
+                  Image imgE210 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Nothing"), Width = 100, Height = 100, Name = "SeekHireNext" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                            "));
@@ -3096,7 +3094,7 @@ namespace BarbarianPrince
             case "e210f":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100, Name = "HireHenchmanEnd" };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Nothing"), Width = 100, Height = 100, Name = "HireHenchmanEnd" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                            "));
@@ -3115,7 +3113,7 @@ namespace BarbarianPrince
             case "e211a": // See audience in town
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imgE210 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100, Name = "SeekAudience" };
+                  Image imgE210 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Nothing"), Width = 100, Height = 100, Name = "SeekAudience" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                            "));
@@ -3151,7 +3149,7 @@ namespace BarbarianPrince
             case "e211b":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imgE211 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100, Name = "SeekAudience" };
+                  Image imgE211 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Nothing"), Width = 100, Height = 100, Name = "SeekAudience" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                            "));
@@ -3204,7 +3202,7 @@ namespace BarbarianPrince
                   Image imgE211 = null;
                   if( "e211f" == key )
                   {
-                     imgE211 = new Image { Source = MapItem.theMapImages.GetBitmapImage("DwarfKing"), Width = 132, Height = 200, Name = "SeekAudience" };
+                     imgE211 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("DwarfKing"), Width = 132, Height = 200, Name = "SeekAudience" };
                      myTextBlock.Inlines.Add(new LineBreak());
                      myTextBlock.Inlines.Add(new Run("                                            "));
                      myTextBlock.Inlines.Add(new InlineUIContainer(imgE211));
@@ -3220,7 +3218,7 @@ namespace BarbarianPrince
                   }
                   else
                   {
-                     imgE211 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100, Name = "SeekAudience" };
+                     imgE211 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Nothing"), Width = 100, Height = 100, Name = "SeekAudience" };
                      myTextBlock.Inlines.Add(new LineBreak());
                      myTextBlock.Inlines.Add(new LineBreak());
                      myTextBlock.Inlines.Add(new Run("                                            "));
@@ -3330,7 +3328,7 @@ namespace BarbarianPrince
             case "e212":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imgE212 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100, Name = "AudienceOffering" };
+                  Image imgE212 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Nothing"), Width = 100, Height = 100, Name = "AudienceOffering" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                            "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(imgE212));
@@ -3430,9 +3428,9 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new Run("                                         "));
                   Image imge213a = null;
                   if (12 == gi.DieResults[key][0])
-                     imge213a = new Image { Source = MapItem.theMapImages.GetBitmapImage("RaftDeny"), Width = 200, Height = 200, Name = "RaftingEndsForDay" };
+                     imge213a = new Image { Source = MapItem.theMapImages.GetBitmapImage2("RaftDeny"), Width = 200, Height = 200, Name = "RaftingEndsForDay" };
                   else
-                     imge213a = new Image { Source = MapItem.theMapImages.GetBitmapImage("Raft"), Width = 200, Height = 200, Name = "RaftingEndsForDay" };
+                     imge213a = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Raft"), Width = 200, Height = 200, Name = "RaftingEndsForDay" };
                   myTextBlock.Inlines.Add(new InlineUIContainer(imge213a));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
@@ -3452,14 +3450,14 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
                if (true == gi.IsSpecialItemHeld(SpecialEnum.CharismaTalisman))
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
                   gi.IsCharismaTalismanActive = true;
                   myTextBlock.Inlines.Add(new Run(" + "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                }
                if (true == gi.IsElfWitAndWileActive)
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
                   myTextBlock.Inlines.Add(new Run(" - "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                }
@@ -3471,14 +3469,14 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new Run(" < " + gi.WitAndWile.ToString()));
                if (true == gi.IsSpecialItemHeld(SpecialEnum.CharismaTalisman))
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
                   gi.IsCharismaTalismanActive = true;
                   myTextBlock.Inlines.Add(new Run(" + "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                }
                if (true == gi.IsElfWitAndWileActive)
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
                   myTextBlock.Inlines.Add(new Run(" - "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                }
@@ -3491,7 +3489,7 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
                if (true == gi.IsElfWitAndWileActive)
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
                   myTextBlock.Inlines.Add(new Run(" - "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                }
@@ -3503,7 +3501,7 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new Run(" < " + gi.WitAndWile.ToString()));
                if (true == gi.IsElfWitAndWileActive)
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
                   myTextBlock.Inlines.Add(new Run(" - "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                }
@@ -3520,7 +3518,7 @@ namespace BarbarianPrince
             case "e322":
             case "e323":
             case "e324":
-               Image swordsImg = new Image { Source = MapItem.theMapImages.GetBitmapImage("CrossedSwords"), Width = 150, Height = 150, VerticalAlignment = VerticalAlignment.Bottom };
+               Image swordsImg = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CrossedSwords"), Width = 150, Height = 150, VerticalAlignment = VerticalAlignment.Bottom };
                if (gi.Bribe <= gi.GetCoins())
                {
                   myTextBlock.Inlines.Add(new LineBreak());
@@ -3550,14 +3548,14 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
                if (true == gi.IsSpecialItemHeld(SpecialEnum.CharismaTalisman))
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
                   gi.IsCharismaTalismanActive = true;
                   myTextBlock.Inlines.Add(new Run(" + "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                }
                if (true == gi.IsElfWitAndWileActive)
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
                   myTextBlock.Inlines.Add(new Run(" - "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                }
@@ -3571,14 +3569,14 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
                if (true == gi.IsSpecialItemHeld(SpecialEnum.CharismaTalisman))
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
                   gi.IsCharismaTalismanActive = true;
                   myTextBlock.Inlines.Add(new Run(" + "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                }
                if (true == gi.IsElfWitAndWileActive)
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
                   myTextBlock.Inlines.Add(new Run(" - "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                }
@@ -3589,7 +3587,7 @@ namespace BarbarianPrince
             case "e331":
                if (gi.Bribe <= gi.GetCoins())
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinBar"), Width = 75, Height = 75, Name = "BribeToJoinPay" };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CoinBar"), Width = 75, Height = 75, Name = "BribeToJoinPay" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   string costToPayS = "Click to pay " + gi.Bribe.ToString() + "gp:";
@@ -3604,7 +3602,7 @@ namespace BarbarianPrince
             case "e331b":
                if ((true == myGameInstance.IsMinstrelPlaying) || (true == myGameInstance.IsMinstrelInParty()))
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("c60Minstrel"), Width = 75, Height = 75, Name = "MinstrelStart" };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("c60Minstrel"), Width = 75, Height = 75, Name = "MinstrelStart" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Click to soothe with a song keeping them happy without paying: "));
@@ -3619,7 +3617,7 @@ namespace BarbarianPrince
             case "e332":
                if (gi.Bribe <= gi.GetCoins())
                {
-                  Image img332 = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStacked"), Width = 75, Height = 75, Name = "BribeToHirePay" };
+                  Image img332 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CoinsStacked"), Width = 75, Height = 75, Name = "BribeToHirePay" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   string costToPayS = "Click to pay " + gi.Bribe.ToString() + "gp:";
@@ -3638,7 +3636,7 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Click to pay: "));
                   myTextBlock.Inlines.Add(new LineBreak());
-                  Image img333 = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStacked"), Width = 75, Height = 75, Name = "HirelingsPay" };
+                  Image img333 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CoinsStacked"), Width = 75, Height = 75, Name = "HirelingsPay" };
                   myTextBlock.Inlines.Add(new InlineUIContainer(img333));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
@@ -3666,7 +3664,7 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new Run("                                  "));
-               Image img333b = new Image { Source = MapItem.theMapImages.GetBitmapImage("Muscle"), Width = 200, Height = 200 };
+               Image img333b = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Muscle"), Width = 200, Height = 200 };
                myTextBlock.Inlines.Add(new InlineUIContainer(img333b));
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
@@ -3677,14 +3675,14 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
                if (true == gi.IsSpecialItemHeld(SpecialEnum.CharismaTalisman))
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
                   gi.IsCharismaTalismanActive = true;
                   myTextBlock.Inlines.Add(new Run(" + "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                }
                if (true == gi.IsElfWitAndWileActive)
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
                   myTextBlock.Inlines.Add(new Run(" - "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                }
@@ -3697,14 +3695,14 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
                if (true == gi.IsSpecialItemHeld(SpecialEnum.CharismaTalisman))
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
                   gi.IsCharismaTalismanActive = true;
                   myTextBlock.Inlines.Add(new Run(" + "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                }
                if (true == gi.IsElfWitAndWileActive)
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
                   myTextBlock.Inlines.Add(new Run(" - "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                }
@@ -3718,7 +3716,7 @@ namespace BarbarianPrince
                   minCoinsNeeded = myGameInstance.EncounteredMembers.Count;
                if (minCoinsNeeded < gi.GetCoins())
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStacked"), Width = 75, Height = 75, Name = "HirelingsRoll" };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CoinsStacked"), Width = 75, Height = 75, Name = "HirelingsRoll" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   string costToPayS = "Click to pay " + minCoinsNeeded.ToString() + "gp:";
@@ -3736,14 +3734,14 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
                if (true == gi.IsSpecialItemHeld(SpecialEnum.CharismaTalisman))
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
                   gi.IsCharismaTalismanActive = true;
                   myTextBlock.Inlines.Add(new Run(" + "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                }
                if (true == gi.IsElfWitAndWileActive)
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
                   myTextBlock.Inlines.Add(new Run(" - "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                }
@@ -3752,7 +3750,7 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new Run(" "));
                break;
             case "e338b":
-               Image img338b = new Image { Source = MapItem.theMapImages.GetBitmapImage("Muscle"), Width = 200, Height = 200 };
+               Image img338b = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Muscle"), Width = 200, Height = 200 };
                int numButtons1 = Math.Min(gi.GetCoins(), gi.EncounteredMembers.Count);
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
@@ -3784,7 +3782,7 @@ namespace BarbarianPrince
                   coinsNeeded = 2 * myGameInstance.EncounteredMembers.Count;
                if (coinsNeeded < gi.GetCoins())
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStacked"), Width = 75, Height = 75, Name = "HirelingsRoll" };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CoinsStacked"), Width = 75, Height = 75, Name = "HirelingsRoll" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Click to pay: "));
@@ -3803,13 +3801,13 @@ namespace BarbarianPrince
                {
                   gi.IsCharismaTalismanActive = true;
                   myTextBlock.Inlines.Add(new Run(" + "));
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                }
                if (true == gi.IsElfWitAndWileActive)
                {
                   myTextBlock.Inlines.Add(new Run(" - "));
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                }
                myTextBlock.Inlines.Add(new LineBreak());
@@ -3817,7 +3815,7 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new Run(" "));
                break;
             case "e339c":
-               Image img339c = new Image { Source = MapItem.theMapImages.GetBitmapImage("Muscle"), Width = 200, Height = 200 };
+               Image img339c = new Image { Source = MapItem.theMapImages.GetBitmapImage2("Muscle"), Width = 200, Height = 200 };
                int numButtons2 = Math.Min(gi.GetCoins(), gi.EncounteredMembers.Count);
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
@@ -3844,19 +3842,19 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new Run(" "));
                break;
             case "e340":
-               Image img340 = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinPileSingle"), Width = 1500, Height = 150 };
+               Image img340 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CoinPileSingle"), Width = 1500, Height = 150 };
                modifiedWitAndWile = gi.WitAndWile + gi.MonkPleadModifier + 1;
                myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
                if (true == gi.IsSpecialItemHeld(SpecialEnum.CharismaTalisman))
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
                   gi.IsCharismaTalismanActive = true;
                   myTextBlock.Inlines.Add(new Run(" + "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                }
                if (true == gi.IsElfWitAndWileActive)
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
+                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
                   myTextBlock.Inlines.Add(new Run(" - "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                }
@@ -3871,7 +3869,7 @@ namespace BarbarianPrince
             case "e341":
                if (Utilities.NO_RESULT < gi.DieResults["e341"][0])
                {
-                  Image img1 = new Image { Name="Converse", Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100 };
+                  Image img1 = new Image { Name="Converse", Source = MapItem.theMapImages.GetBitmapImage2("Nothing"), Width = 100, Height = 100 };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Click image to continue."));
@@ -3894,7 +3892,7 @@ namespace BarbarianPrince
             case "e342":
                if (Utilities.NO_RESULT < gi.DieResults["e342"][0])
                {
-                  Image img1 = new Image { Name = "Inquiry", Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100 };
+                  Image img1 = new Image { Name = "Inquiry", Source = MapItem.theMapImages.GetBitmapImage2("Nothing"), Width = 100, Height = 100 };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                            "));
@@ -3973,24 +3971,24 @@ namespace BarbarianPrince
             if ((true == isGiftOfCharmHeld) && (true == isSlaveGirlHeld))
             {
                myTextBlock.Inlines.Add(new LineBreak());
-               Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage("CharmGift"), Width = 75, Height = 75, Tag = "CharmGift", Name = "CharmGift" };  // Click this image causes E182CharmGiftSelected
+               Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CharmGift"), Width = 75, Height = 75, Tag = "CharmGift", Name = "CharmGift" };  // Click this image causes E182CharmGiftSelected
                myTextBlock.Inlines.Add(new InlineUIContainer(img));
                myTextBlock.Inlines.Add(new Run("   or   "));
-               Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("c41SlaveGirl"), Width = 75, Height = 75, Tag = "CharmSlaveGirl", Name = "CharmSlaveGirl" }; // Click this image causes E163SlaveGirlSelected
+               Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage2("c41SlaveGirl"), Width = 75, Height = 75, Tag = "CharmSlaveGirl", Name = "CharmSlaveGirl" }; // Click this image causes E163SlaveGirlSelected
                myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                myTextBlock.Inlines.Add(new Run("    Click on either to reroll twice."));
             }
             else if (true == isGiftOfCharmHeld)
             {
                myTextBlock.Inlines.Add(new LineBreak());
-               Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage("CharmGift"), Width = 75, Height = 75, Tag = "CharmGift", Name = "CharmGift" };
+               Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage2("CharmGift"), Width = 75, Height = 75, Tag = "CharmGift", Name = "CharmGift" };
                myTextBlock.Inlines.Add(new InlineUIContainer(img));
                myTextBlock.Inlines.Add(new Run(" Click the Gift of Charm to reroll twice."));
             }
             else if (true == isSlaveGirlHeld)
             {
                myTextBlock.Inlines.Add(new LineBreak());
-               Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage("c41SlaveGirl"), Width = 75, Height = 75, Tag = "CharmSlaveGirl", Name = "CharmSlaveGirl" };
+               Image img = new Image { Source = MapItem.theMapImages.GetBitmapImage2("c41SlaveGirl"), Width = 75, Height = 75, Tag = "CharmSlaveGirl", Name = "CharmSlaveGirl" };
                myTextBlock.Inlines.Add(new InlineUIContainer(img));
                myTextBlock.Inlines.Add(new Run(" Click the Slave Girl to reroll twice."));
             }

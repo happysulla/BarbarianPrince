@@ -769,7 +769,7 @@ namespace BarbarianPrince
          Rectangle r1 = new Rectangle() { Visibility = Visibility.Hidden, Width = Utilities.ZOOM * Utilities.theMapItemOffset, Height = Utilities.ZOOM * Utilities.theMapItemOffset };
          BitmapImage bmi = new BitmapImage();
          bmi.BeginInit();
-         bmi.UriSource = new Uri("../../Images/dieRoll.gif", UriKind.Relative);
+         bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
          bmi.EndInit();
          Image img1 = new Image { Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
          ImageBehavior.SetAnimatedSource(img1, bmi);
@@ -934,7 +934,7 @@ namespace BarbarianPrince
             {
                BitmapImage bmi = new BitmapImage();
                bmi.BeginInit();
-               bmi.UriSource = new Uri("../../Images/dieRoll.gif", UriKind.Relative);
+               bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
                bmi.EndInit();
                Image img1 = new Image { Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                ImageBehavior.SetAnimatedSource(img1, bmi);
@@ -1176,7 +1176,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL_ROAD-->" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_REFERENCE:
-               //dieRoll = 5; // <cgs> TEST
+               dieRoll = 5; // <cgs> TEST
                myRollReference = dieRoll; // column number in travel table r207 - reference row
                if ((6 == myRollReference) && (true == myIsTravelingAir) ) // if traveling by air and roll reference 6, need to look  at Table r281
                   myState = EnumR204.TC_EVENT_ROLL_REFERENCE_R281;
@@ -1185,14 +1185,14 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL_REFERENCE-->" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT:
-               //dieRoll = 3; // <cgs> TEST
+               dieRoll = 1; // <cgs> TEST
                myRollEvent = dieRoll; // column number in traveling event reference - event row
                myState = EnumR204.TC_EVENT_SHOW_RESULTS;
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL_EVENT-->" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT_R230:
                myState = EnumR204.TC_EVENT_SHOW_RESULTS;
-               //dieRoll = 3; // <cgs> TEST
+               //dieRoll = 1; // <cgs> TEST
                myRollReference = dieRoll;
                if (dieRoll < 7)
                {

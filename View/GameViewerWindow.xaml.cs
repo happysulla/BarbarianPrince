@@ -701,7 +701,8 @@ namespace BarbarianPrince
             }
             if (false == gi.IsHeavyRainDismount) // if choose to dismount due to heavy rains, do not fly
             {
-               foreach(IMapItem partyMember in gi.PartyMembers) // if at least one party member is a flying mount, Prince can fly
+               bool isButtonAdded = false;
+               foreach (IMapItem partyMember in gi.PartyMembers) // if at least one party member is a flying mount, Prince can fly
                {
                   if (true == partyMember.IsFlyingMountCarrier())  // mount cannot fly if starving or exhausted
                   {
@@ -709,6 +710,7 @@ namespace BarbarianPrince
                      {
                         myStackPanelDailyActions.Children.Add(myButtonDailyAcions[12]);    // air travel
                         myStackPanelDailyActions.Visibility = Visibility.Visible;
+                        isButtonAdded = true;
                         break;
                      }
                   }
@@ -720,10 +722,15 @@ namespace BarbarianPrince
                         {
                            myStackPanelDailyActions.Children.Add(myButtonDailyAcions[12]);    // air travel
                            myStackPanelDailyActions.Visibility = Visibility.Visible;
+                           isButtonAdded = true;
                            break;
                         }
+                        if (true == isButtonAdded)
+                           break;
                      }
                   }
+                  if (true == isButtonAdded)
+                     break;
                }
             }
             if (RaftEnum.RE_RAFT_SHOWN == gi.RaftState)
@@ -2528,90 +2535,6 @@ namespace BarbarianPrince
          myEllipseDisplayDialog = null;
          e.Handled = true;
       }
-      //-------------ContextMenu---------------------------------
-      private void ContextMenuLoaded(object sender, RoutedEventArgs e)
-      {
-         if (sender is ContextMenu cm)
-         {
-            for (int i = 0; i < cm.Items.Count; ++i) // Gray out all menu items as default
-            {
-               if (cm.Items[i] is MenuItem menuItem)
-                  menuItem.IsEnabled = true;
-            }
-            if (cm.PlacementTarget is Button b)
-            {
-               IMapItem mi = myGameInstance.PartyMembers.Find(b.Name);
-               if (1 < cm.Items.Count) // Gray out the "Rotate Stack" menu item
-               {
-                  if (cm.Items[1] is MenuItem menuItem)
-                  {
-                     IStack stack = myGameInstance.Stacks.Find(mi.Territory);
-                     if (stack.MapItems.Count < 2)
-                        menuItem.IsEnabled = false;
-                  }
-               }
-            }
-         }
-      }
-      private void ContextMenuButtonClickReturnToStart(object sender, RoutedEventArgs e)
-      {
-         if (sender is MenuItem mi)
-         {
-         }
-      }
-      private void ContextMenuButtonClickRotate(object sender, RoutedEventArgs e)
-      {
-         if (sender is MenuItem menuItem)
-         {
-            if (menuItem.Parent is ContextMenu cm)
-            {
-               if (cm.PlacementTarget is Button b)
-               {
-                  IMapItem mi = myGameInstance.PartyMembers.Find(b.Name);
-                  ITerritory t = mi.Territory;
-                  IStack stack = myGameInstance.Stacks.Find(t);
-                  if (null == stack)
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "ContextMenuButtonClickRotate(): stack=null for name=" + b.Name);
-                     return;
-                  }
-                  stack.Rotate();
-                  UpdateCanvas(myGameInstance, GameAction.DieRollActionNone);
-               }
-            }
-         }
-      }
-      private void ContextMenuButtonFlip(object sender, RoutedEventArgs e)
-      {
-         if (sender is MenuItem menuItem)
-         {
-            if (menuItem.Parent is ContextMenu cm)
-            {
-               if (cm.PlacementTarget is Button b)
-               {
-                  IMapItem mi = myGameInstance.PartyMembers.Find(b.Name);
-                  mi.Flip();
-                  MapItem.SetButtonContent(b, mi, false, true);
-               }
-            }
-         }
-      }
-      private void ContextMenuButtonUnflip(object sender, RoutedEventArgs e)
-      {
-         if (sender is MenuItem menuItem)
-         {
-            if (menuItem.Parent is ContextMenu cm)
-            {
-               if (cm.PlacementTarget is Button b)
-               {
-                  IMapItem mi = myGameInstance.PartyMembers.Find(b.Name);
-                  mi.Unflip();
-                  MapItem.SetButtonContent(b, mi, false, true);
-
-               }
-            }
-         }
-      }
       //-------------GameViewerWindow---------------------------------
       private void ContentRenderedGameViewerWindow(object sender, EventArgs e)
       {
@@ -2690,9 +2613,6 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "OnClosing(): SaveGameToFile() returned false");
       }
       //-------------CONTROLLER HELPER FUNCTIONS---------------------------------
-      private void RotateStack(ITerritory selectedTerritory)
-      {
-      }
       private bool CreateMapItemMove(ITerritories territories, IGameInstance gi, ITerritory newTerritory)
       {
          if (null == newTerritory)
@@ -2715,23 +2635,6 @@ namespace BarbarianPrince
          Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "CreateMapItemMove(): oT=" + gi.Prince.Territory.Name + " nT=" + mim.NewTerritory.Name);
          gi.MapItemMoves.Insert(0, mim); // insert at front of line
          return true;
-      }
-      private void CreateButtonContextMenu()
-      {
-         // Setup Context Menu for Buttons
-         myContextMenuButton.Loaded += this.ContextMenuLoaded;
-         MenuItem mi1 = new MenuItem() { Header = "_Return to Starting point", InputGestureText = "Ctrl+S" };
-         mi1.Click += this.ContextMenuButtonClickReturnToStart;
-         myContextMenuButton.Items.Add(mi1);
-         MenuItem mi2 = new MenuItem { Header = "_Rotate Stack", InputGestureText = "Ctrl+R" };
-         mi2.Click += this.ContextMenuButtonClickRotate;
-         myContextMenuButton.Items.Add(mi2);
-         MenuItem mi3 = new MenuItem() { Header = "_Flip", InputGestureText = "Ctrl+F" };
-         mi3.Click += this.ContextMenuButtonFlip;
-         myContextMenuButton.Items.Add(mi3);
-         MenuItem mi4 = new MenuItem() { Header = "_Unflip", InputGestureText = "Ctrl+U" };
-         mi4.Click += this.ContextMenuButtonUnflip;
-         myContextMenuButton.Items.Add(mi4);
       }
       private bool AddHotKeys(MainMenuViewer mmv)
       {

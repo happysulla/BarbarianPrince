@@ -261,7 +261,7 @@ namespace BarbarianPrince
             case E088Enum.FALL_ROCK_WOUNDS:
                BitmapImage bmi0 = new BitmapImage();
                bmi0.BeginInit();
-               bmi0.UriSource = new Uri("../../Images/dieRoll.gif", UriKind.Relative);
+               bmi0.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
                bmi0.EndInit();
                Image img0 = new Image { Name = "WoundRoll", Source = bmi0, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                ImageBehavior.SetAnimatedSource(img0, bmi0);
@@ -315,7 +315,7 @@ namespace BarbarianPrince
                {
                   BitmapImage bmi = new BitmapImage();
                   bmi.BeginInit();
-                  bmi.UriSource = new Uri("../../Images/dieRoll.gif", UriKind.Relative);
+                  bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
                   bmi.EndInit();
                   Image img = new Image { Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                   ImageBehavior.SetAnimatedSource(img, bmi);

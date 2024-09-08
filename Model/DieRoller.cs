@@ -206,7 +206,7 @@ namespace BarbarianPrince
                      //------------------------------------------------
                      BitmapImage bmi = new BitmapImage();
                      bmi.BeginInit();
-                     bmi.UriSource = new Uri("../../Images/" + Utilities.RemoveSpaces(topImageName) + ".gif", UriKind.Relative);
+                     bmi.UriSource = new Uri("../bin/Images/" + Utilities.RemoveSpaces(topImageName) + ".gif", UriKind.Relative);
                      bmi.EndInit();
                      Image img = new Image { Source = bmi, Stretch = Stretch.Fill, Name = imageName };
                      ImageBehavior.SetAnimatedSource(img, bmi);

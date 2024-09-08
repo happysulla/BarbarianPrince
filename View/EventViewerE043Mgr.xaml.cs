@@ -259,7 +259,7 @@ namespace BarbarianPrince
             case E043Enum.ROLL_ITEM:
                BitmapImage bmi0 = new BitmapImage();
                bmi0.BeginInit();
-               bmi0.UriSource = new Uri("../../Images/CampFire2.gif", UriKind.Relative);
+               bmi0.UriSource = new Uri(Utilities.theImageDirectoryPath + "CampFire2.gif", UriKind.Relative);
                bmi0.EndInit();
                Image img0 = new Image { Tag = "Campfire", Source = bmi0, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                ImageBehavior.SetAnimatedSource(img0, bmi0);
@@ -270,7 +270,7 @@ namespace BarbarianPrince
                //-----------------------------------------
                BitmapImage bmi1 = new BitmapImage();
                bmi1.BeginInit();
-               bmi1.UriSource = new Uri("../../Images/dieRoll.gif", UriKind.Relative);
+               bmi1.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
                bmi1.EndInit();
                Image img1 = new Image { Tag = "DieRoll", Source = bmi1, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                ImageBehavior.SetAnimatedSource(img1, bmi1);
@@ -294,7 +294,7 @@ namespace BarbarianPrince
                //-----------------------------------------
                BitmapImage bmi3 = new BitmapImage();
                bmi3.BeginInit();
-               bmi3.UriSource = new Uri("../../Images/dieRoll.gif", UriKind.Relative);
+               bmi3.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
                bmi3.EndInit();
                Image img3 = new Image { Tag = "DieRoll", Source = bmi3, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                ImageBehavior.SetAnimatedSource(img3, bmi3);
@@ -303,7 +303,7 @@ namespace BarbarianPrince
             case E043Enum.CHOOSE_VICTIM_ROLLER:
                BitmapImage bmi4 = new BitmapImage();
                bmi4.BeginInit();
-               bmi4.UriSource = new Uri("../../Images/CampFire2.gif", UriKind.Relative);
+               bmi4.UriSource = new Uri(Utilities.theImageDirectoryPath + "CampFire2.gif", UriKind.Relative);
                bmi4.EndInit();
                Image img4 = new Image { Tag = "Campfire", Source = bmi4, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                ImageBehavior.SetAnimatedSource(img4, bmi4);
@@ -321,7 +321,7 @@ namespace BarbarianPrince
             case E043Enum.CHOOSE_VICTIM:
                BitmapImage bmi4a = new BitmapImage();
                bmi4a.BeginInit();
-               bmi4a.UriSource = new Uri("../../Images/CampFire2.gif", UriKind.Relative);
+               bmi4a.UriSource = new Uri(Utilities.theImageDirectoryPath + "CampFire2.gif", UriKind.Relative);
                bmi4a.EndInit();
                Image img4a = new Image { Tag = "Campfire", Source = bmi4a, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                ImageBehavior.SetAnimatedSource(img4a, bmi4a);
@@ -348,7 +348,7 @@ namespace BarbarianPrince
             case E043Enum.MAGIC_SHOCK_SPELL_BEFORE:
                BitmapImage bmi5 = new BitmapImage();
                bmi5.BeginInit();
-               bmi5.UriSource = new Uri("../../Images/CampFire2.gif", UriKind.Relative);
+               bmi5.UriSource = new Uri(Utilities.theImageDirectoryPath + "CampFire2.gif", UriKind.Relative);
                bmi5.EndInit();
                Image img5 = new Image { Tag = "Campfire", Source = bmi5, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                ImageBehavior.SetAnimatedSource(img5, bmi5);
@@ -369,7 +369,7 @@ namespace BarbarianPrince
             case E043Enum.MAGIC_SHOCK_SPELL_AFTER:
                BitmapImage bmi5a = new BitmapImage();
                bmi5a.BeginInit();
-               bmi5a.UriSource = new Uri("../../Images/CampFire2.gif", UriKind.Relative);
+               bmi5a.UriSource = new Uri(Utilities.theImageDirectoryPath + "CampFire2.gif", UriKind.Relative);
                bmi5a.EndInit();
                Image img5a = new Image { Tag = "Campfire", Source = bmi5a, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                ImageBehavior.SetAnimatedSource(img5a, bmi5a);
@@ -394,7 +394,7 @@ namespace BarbarianPrince
             case E043Enum.SHOW_RESULTS:
                BitmapImage bmi6 = new BitmapImage();
                bmi6.BeginInit();
-               bmi6.UriSource = new Uri("../../Images/CampFire2.gif", UriKind.Relative);
+               bmi6.UriSource = new Uri(Utilities.theImageDirectoryPath + "CampFire2.gif", UriKind.Relative);
                bmi6.EndInit();
                Image img6 = new Image { Tag = "Campfire", Source = bmi6, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                ImageBehavior.SetAnimatedSource(img6, bmi6);
@@ -550,7 +550,7 @@ namespace BarbarianPrince
                      Grid.SetColumn(b2, 0);
                      BitmapImage bmi = new BitmapImage();
                      bmi.BeginInit();
-                     bmi.UriSource = new Uri("../../Images/dieRoll.gif", UriKind.Relative);
+                     bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
                      bmi.EndInit();
                      Image img = new Image { Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                      ImageBehavior.SetAnimatedSource(img, bmi);
@@ -584,7 +584,7 @@ namespace BarbarianPrince
                      Grid.SetColumn(b4, 0);
                      BitmapImage bmi1 = new BitmapImage();
                      bmi1.BeginInit();
-                     bmi1.UriSource = new Uri("../../Images/dieRoll.gif", UriKind.Relative);
+                     bmi1.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
                      bmi1.EndInit();
                      Image img1 = new Image { Source = bmi1, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                      ImageBehavior.SetAnimatedSource(img1, bmi1);
@@ -602,7 +602,7 @@ namespace BarbarianPrince
                      Grid.SetColumn(b4a, 0);
                      BitmapImage bmi1 = new BitmapImage();
                      bmi1.BeginInit();
-                     bmi1.UriSource = new Uri("../../Images/dieRoll.gif", UriKind.Relative);
+                     bmi1.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
                      bmi1.EndInit();
                      Image img1 = new Image { Source = bmi1, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                      ImageBehavior.SetAnimatedSource(img1, bmi1);
@@ -620,7 +620,7 @@ namespace BarbarianPrince
                      Grid.SetColumn(b5, 0);
                      BitmapImage bmi1 = new BitmapImage();
                      bmi1.BeginInit();
-                     bmi1.UriSource = new Uri("../../Images/dieRoll.gif", UriKind.Relative);
+                     bmi1.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
                      bmi1.EndInit();
                      Image img1 = new Image { Source = bmi1, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                      ImageBehavior.SetAnimatedSource(img1, bmi1);

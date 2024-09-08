@@ -319,7 +319,7 @@ namespace BarbarianPrince
          //-------------------------------------------------------------------
          BitmapImage bmi = new BitmapImage();
          bmi.BeginInit();
-         bmi.UriSource = new Uri("../../Images/dieRoll.gif", UriKind.Relative);
+         bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
          bmi.EndInit();
          Image img1 = new Image { Name = "DieRoll", Source = bmi, Width = Utilities.theMapItemSize, Height = Utilities.theMapItemSize };
          ImageBehavior.SetAnimatedSource(img1, bmi);

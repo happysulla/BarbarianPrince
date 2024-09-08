@@ -136,20 +136,28 @@ namespace BarbarianPrince
       public MapItem() { }
       public MapItem(string aName, double zoom, bool isHidden, bool isAnimated, string topImageName)
       {
-         this.Name = aName;
-         this.Zoom = zoom;
-         this.IsHidden = isHidden;
-         this.Location = null;
-         this.TopImageName = topImageName;
-         this.BottomImageName = null;
-         this.Territory = null;
-         IMapImage mii = theMapImages.Find(topImageName);
-         if (null == mii)
+         try
          {
-            mii = (IMapImage)new MapImage(topImageName);
-            theMapImages.Add(mii);
+            this.Name = aName;
+            this.Zoom = zoom;
+            this.IsHidden = isHidden;
+            this.Location = null;
+            this.TopImageName = topImageName;
+            this.BottomImageName = null;
+            this.Territory = null;
+            IMapImage mii = theMapImages.Find(topImageName);
+            if (null == mii)
+            {
+               mii = (IMapImage)new MapImage(topImageName);
+               theMapImages.Add(mii);
+            }
+            this.IsAnimated = isAnimated;
          }
-         this.IsAnimated = isAnimated;
+         catch (Exception ex) 
+         {
+            Logger.Log(LogEnum.LE_ERROR, "MapItem(): aName=" + aName + "\n Ex=" + ex.ToString());
+            return;
+         }
       }
       public MapItem(IMapItem mi)
       {
@@ -212,12 +220,13 @@ namespace BarbarianPrince
          this.IsLooter = mi.IsLooter;
          this.IsTownCastleTempleLeave = mi.IsTownCastleTempleLeave;
       }
-      protected MapItem(string name)
+      protected MapItem(string name, bool isDynamic)
       {
          this.Name = name;
       }
       public MapItem(string aName, double zoom, bool isHidden, bool isAnimated, bool isGuide, string topImageName, string bottomImageName, IMapPoint aStartingPoint)
       {
+         
          this.Name = aName;
          this.Zoom = zoom;
          this.IsHidden = isHidden;
@@ -225,20 +234,28 @@ namespace BarbarianPrince
          this.TopImageName = topImageName;
          this.BottomImageName = bottomImageName;
          this.Territory = null;
-         IMapImage mii = theMapImages.Find(topImageName);
-         if (null == mii)
+         try
          {
-            mii = (IMapImage)new MapImage(topImageName);
-            theMapImages.Add(mii);
+            IMapImage mii = theMapImages.Find(topImageName);
+            if (null == mii)
+            {
+               mii = (IMapImage)new MapImage(topImageName);
+               theMapImages.Add(mii);
+            }
+            mii = theMapImages.Find(bottomImageName);
+            if (null == mii)
+            {
+               mii = (IMapImage)new MapImage(bottomImageName);
+               theMapImages.Add(mii);
+            }
+            this.IsAnimated = isAnimated; // This must come after the creating of the image
+            this.IsGuide = isGuide; // This must come after the creating of the image
          }
-         mii = theMapImages.Find(bottomImageName);
-         if (null == mii)
+         catch (Exception ex)
          {
-            mii = (IMapImage)new MapImage(bottomImageName);
-            theMapImages.Add(mii);
+            Logger.Log(LogEnum.LE_ERROR, "MapItem(): aName=" + aName + "\n Ex=" + ex.ToString());
+            return;
          }
-         this.IsAnimated = isAnimated; // This must come after the creating of the image
-         this.IsGuide = isGuide; // This must come after the creating of the image
       }
       public MapItem(string aName, double zoom, bool isHidden, bool isAnimated, bool isGuide, string topImageName, string bottomImageName, MapPoint aStartingPoint, ITerritory territory) :
         this(aName, zoom, isHidden, isAnimated, isGuide, topImageName, bottomImageName, aStartingPoint)
@@ -1580,7 +1597,7 @@ namespace BarbarianPrince
             {
                BitmapImage bmi = new BitmapImage();
                bmi.BeginInit();
-               bmi.UriSource = new Uri("../../Images/Smoke.gif", UriKind.Relative);
+               bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "Smoke.gif", UriKind.Relative);
                bmi.EndInit();
                Image img1 = new Image { Source = bmi, Stretch = Stretch.UniformToFill, StretchDirection = StretchDirection.Both };
                ImageBehavior.SetAnimatedSource(img1, bmi);
@@ -1614,7 +1631,7 @@ namespace BarbarianPrince
             {
                BitmapImage bmi = new BitmapImage();
                bmi.BeginInit();
-               bmi.UriSource = new Uri("../../Images/Fireball.gif", UriKind.Relative);
+               bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "Fireball.gif", UriKind.Relative);
                bmi.EndInit();
                Image img1 = new Image { Source = bmi, Stretch = Stretch.UniformToFill, StretchDirection = StretchDirection.Both };
                ImageBehavior.SetAnimatedSource(img1, bmi);

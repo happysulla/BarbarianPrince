@@ -295,7 +295,7 @@ namespace BarbarianPrince
                {
                   BitmapImage bmi1 = new BitmapImage();
                   bmi1.BeginInit();
-                  bmi1.UriSource = new Uri("../../Images/Campfire2.gif", UriKind.Relative);
+                  bmi1.UriSource = new Uri(Utilities.theImageDirectoryPath + "Campfire2.gif", UriKind.Relative);
                   bmi1.EndInit();
                   Image img1 = new Image { Name = "Campfire", Source = bmi1, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                   ImageBehavior.SetAnimatedSource(img1, bmi1);
@@ -349,7 +349,7 @@ namespace BarbarianPrince
             {
                BitmapImage bmi = new BitmapImage();
                bmi.BeginInit();
-               bmi.UriSource = new Uri("../../Images/dieRoll.gif", UriKind.Relative);
+               bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
                bmi.EndInit();
                Image img = new Image { Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                ImageBehavior.SetAnimatedSource(img, bmi);

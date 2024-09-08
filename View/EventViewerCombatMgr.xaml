@@ -80,7 +80,6 @@
         <StackPanel Grid.Row="3" Grid.ColumnSpan="6" Name="myStackPanelAssignable" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5,0,0,0">
             <Button Height="42" Width="42">
                 <Grid>
-                    <Image Source="/Images/c08Dwarf.gif"></Image>
                     <Canvas>
                         <Label Name="myEndurance" Canvas.Left="0" Canvas.Top="0" Content="8" FontWeight="Bold" FontFamily="Franklin Gothic Heavy" Padding="0,0,0,0" />
                         <Label Name="myCombat" Canvas.Left="30" Canvas.Top="0" Content="4" FontWeight="Bold" FontFamily="Franklin Gothic Heavy" Padding="0,0,0,0"  />
@@ -94,7 +93,7 @@
         <Rectangle Grid.Row="4" Grid.ColumnSpan="6" Margin="5" Height="1" Fill="Black"/>
         <StackPanel Grid.Row="5" Grid.ColumnSpan="6" Name="myStackPanelCheckMarks" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5,0,0,0">
             <Label Name="myLabelRollFirstStrike" Content="Roll for First Strike:" FontSize='12' Margin="5,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Image Name="myImageDieRoll1" Width="24" Height="24" gif:ImageBehavior.AnimatedSource="/Images/DieRoll.gif"/>
+         <Image Name="myImageDieRoll1" Width="24" Height="24" gif:ImageBehavior.AnimatedSource="/bin/Images/dieRoll.gif"/>
         </StackPanel>
         <Rectangle Grid.Row="6" Grid.ColumnSpan="6" Margin="5" Height="1" Fill="Black"/>
         <!--Table Header Row-->

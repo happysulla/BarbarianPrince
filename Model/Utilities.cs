@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Xml.Serialization;
 using System.Xml;
 using System.Collections;
+using System.Net.NetworkInformation;
 namespace BarbarianPrince
 {
    public class Utilities
@@ -20,6 +21,7 @@ namespace BarbarianPrince
       public const double ZOOM = 1.25;
       public const int MAX_GRID_ROW = 40;
       public const int MAX_SLAVE_GIRLS = 7;
+      public static string theImageDirectoryPath = MapImage.IMAGE_DIR_PROJECT;
       //--------------------------------------------
       public static SolidColorBrush theBrushBlood = new SolidColorBrush();
       public static SolidColorBrush theBrushRegion = new SolidColorBrush();

@@ -32,50 +32,50 @@
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="200"/>
          </Grid.ColumnDefinitions>
-         <Image Grid.Row="0" Grid.Column="0" Height="50" Width="40" Source="/Images/MarkOfCain.gif" IsEnabled="False" Margin="0,5,0,0"/>
-         <Image Grid.Row="1" Grid.Column="0" Height="50" Width="40" Source="/Images/BoxUnopened.gif" IsEnabled="False" />
-         <Image Grid.Row="2" Grid.Column="0" Height="50" Width="40" Source="/Images/CharmGift.gif" IsEnabled="False" />
-         <Image Grid.Row="3" Grid.Column="0" Height="50" Width="40" Source="/Images/CoinBar.gif" IsEnabled="False" />
-         <Image Grid.Row="4" Grid.Column="0" Height="50" Width="40" Source="/Images/DenyAudience.gif" IsEnabled="False" />
-         <Image Grid.Row="5" Grid.Column="0" Height="50" Width="40" Source="/Images/DenyHire.gif" IsEnabled="False" />
-         <Image Grid.Row="6" Grid.Column="0" Height="50" Width="40" Source="/Images/CoinPileSingle.gif" IsEnabled="False" />
-         <Image Grid.Row="7" Grid.Column="0" Height="50" Width="40" Source="/Images/DragonEye.gif" IsEnabled="False" />
-         <Image Grid.Row="8" Grid.Column="0" Height="50" Width="40" Source="/Images/DrugChaga.gif" IsEnabled="False" />
-         <Image Grid.Row="9" Grid.Column="0" Height="50" Width="40" Source="/Images/ElvenTown.gif" IsEnabled="False" />
-         <Image Grid.Row="10" Grid.Column="0" Height="50" Width="40" Source="/Images/c41SlaveGirl.gif" IsEnabled="False" Margin="0,5,0,0"/>
-         <Image Grid.Row="0" Grid.Column="2" Height="50" Width="40" Source="/Images/ElvenCastle.gif" IsEnabled="False" />
-         <Image Grid.Row="1" Grid.Column="2" Height="50" Width="40" Source="/Images/ElfWarriorSmall.gif" IsEnabled="False" />
-         <Image Grid.Row="2" Grid.Column="2" Height="50" Width="40" Source="/Images/Exhausted.gif" IsEnabled="False" />
-         <Image Grid.Row="3" Grid.Column="2" Height="50" Width="40" Source="/Images/FineClothes.gif" IsEnabled="False" />
-         <Image Grid.Row="4" Grid.Column="2" Height="50" Width="40" Source="/Images/Fugitive.gif" IsEnabled="False" />
-         <Image Grid.Row="5" Grid.Column="2" Height="50" Width="40" Source="/Images/FoulBane.gif" IsEnabled="False" />
-         <Image Grid.Row="6" Grid.Column="2" Height="50" Width="40" Source="/Images/God.gif" IsEnabled="False" />
-         <Image Grid.Row="7" Grid.Column="2" Height="50" Width="40" Source="/Images/Gift.gif" IsEnabled="False" />
-         <Image Grid.Row="8" Grid.Column="2" Height="50" Width="40" Source="/Images/GriffonClaw.gif" IsEnabled="False" />
-         <Image Grid.Row="9" Grid.Column="2" Height="50" Width="40" Source="/Images/Group.gif" IsEnabled="False" />
-         <Image Grid.Row="10" Grid.Column="2" Height="50" Width="40" Source="/Images/DenyTemple.gif" IsEnabled="False" />
-         <Image Grid.Row="0" Grid.Column="4" Height="50" Width="40" Source="/Images/Helmet.gif" IsEnabled="False" Margin="0,5,0,0"/>
-         <Image Grid.Row="1" Grid.Column="4" Height="50" Width="40" Source="/Images/HillTribeWarriors.gif" IsEnabled="False" />
-         <Image Grid.Row="2" Grid.Column="4" Height="50" Width="40" Source="/Images/Muscle.gif" IsEnabled="False" />
-         <Image Grid.Row="3" Grid.Column="4" Height="50" Width="40" Source="/Images/Negotiator.gif" IsEnabled="False" />
-         <Image Grid.Row="4" Grid.Column="4" Height="50" Width="40" Source="/Images/RocBeak.gif" IsEnabled="False" />
-         <Image Grid.Row="5" Grid.Column="4" Height="50" Width="40" Source="/Images/Secrets.gif" IsEnabled="False" />
-         <Image Grid.Row="6" Grid.Column="4" Height="50" Width="40" Source="/Images/Teeth.gif" IsEnabled="False" />
-         <Image Grid.Row="7" Grid.Column="4" Height="50" Width="40" Source="/Images/DwarfAdvice.gif" IsEnabled="False" />
-         <Image Grid.Row="8" Grid.Column="4" Height="50" Width="40" Source="/Images/HalflingTown.gif" IsEnabled="False" />
-         <Image Grid.Row="9" Grid.Column="4" Height="50" Width="40" Source="/Images/StructureDeny.gif" IsEnabled="False" />
-         <Image Grid.Row="10" Grid.Column="4" Height="50" Width="40" Source="/Images/Deny.gif" IsEnabled="False" />
-         <Image Grid.Row="0" Grid.Column="6" Height="50" Width="40" Source="/Images/Sun5.gif" IsEnabled="False" Margin="0,5,0,0"/>
-         <Image Grid.Row="1" Grid.Column="6" Height="50" Width="40" Source="/Images/TowerGoblin.gif" IsEnabled="False" />
-         <Image Grid.Row="2" Grid.Column="6" Height="50" Width="40" Source="/Images/TowerOrc.gif" IsEnabled="False" />
-         <Image Grid.Row="3" Grid.Column="6" Height="50" Width="40" Source="/Images/TowerWizard.gif" IsEnabled="False" />
-         <Image Grid.Row="4" Grid.Column="6" Height="50" Width="40" Source="/Images/Staff.gif" IsEnabled="False" />
-         <Image Grid.Row="5" Grid.Column="6" Height="50" Width="40" Source="/Images/TrollSkin.gif" IsEnabled="False" />
-         <Image Grid.Row="6" Grid.Column="6" Height="50" Width="40" Source="/Images/WizardAdvice.gif" IsEnabled="False" />
-         <Image Grid.Row="7" Grid.Column="6" Height="50" Width="40" Source="/Images/Letter.gif" IsEnabled="False" />
-         <Image Grid.Row="8" Grid.Column="6" Height="50" Width="40" Source="/Images/Ally.gif" IsEnabled="False" />
-         <Image Grid.Row="9" Grid.Column="6" Height="50" Width="40" Source="/Images/c60Minstrel.gif" />
-         <Image Grid.Row="10" Grid.Column="6" Height="50" Width="40" Source="/Images/Cache.gif" />
+         <Image Grid.Row="0" Grid.Column="0" Height="50" Width="40" Source="/bin/Images/MarkOfCain.gif" IsEnabled="False" Margin="0,5,0,0"/>
+         <Image Grid.Row="1" Grid.Column="0" Height="50" Width="40" Source="/bin/Images/BoxUnopened.gif" IsEnabled="False" />
+         <Image Grid.Row="2" Grid.Column="0" Height="50" Width="40" Source="/bin/Images/CharmGift.gif" IsEnabled="False" />
+         <Image Grid.Row="3" Grid.Column="0" Height="50" Width="40" Source="/bin/Images/CoinBar.gif" IsEnabled="False" />
+         <Image Grid.Row="4" Grid.Column="0" Height="50" Width="40" Source="/bin/Images/DenyAudience.gif" IsEnabled="False" />
+         <Image Grid.Row="5" Grid.Column="0" Height="50" Width="40" Source="/bin/Images/DenyHire.gif" IsEnabled="False" />
+         <Image Grid.Row="6" Grid.Column="0" Height="50" Width="40" Source="/bin/Images/CoinPileSingle.gif" IsEnabled="False" />
+         <Image Grid.Row="7" Grid.Column="0" Height="50" Width="40" Source="/bin/Images/DragonEye.gif" IsEnabled="False" />
+         <Image Grid.Row="8" Grid.Column="0" Height="50" Width="40" Source="/bin/Images/DrugChaga.gif" IsEnabled="False" />
+         <Image Grid.Row="9" Grid.Column="0" Height="50" Width="40" Source="/bin/Images/ElvenTown.gif" IsEnabled="False" />
+         <Image Grid.Row="10" Grid.Column="0" Height="50" Width="40" Source="/bin/Images/c41SlaveGirl.gif" IsEnabled="False" Margin="0,5,0,0"/>
+         <Image Grid.Row="0" Grid.Column="2" Height="50" Width="40" Source="/bin/Images/ElvenCastle.gif" IsEnabled="False" />
+         <Image Grid.Row="1" Grid.Column="2" Height="50" Width="40" Source="/bin/Images/ElfWarriorSmall.gif" IsEnabled="False" />
+         <Image Grid.Row="2" Grid.Column="2" Height="50" Width="40" Source="/bin/Images/Exhausted.gif" IsEnabled="False" />
+         <Image Grid.Row="3" Grid.Column="2" Height="50" Width="40" Source="/bin/Images/FineClothes.gif" IsEnabled="False" />
+         <Image Grid.Row="4" Grid.Column="2" Height="50" Width="40" Source="/bin/Images/Fugitive.gif" IsEnabled="False" />
+         <Image Grid.Row="5" Grid.Column="2" Height="50" Width="40" Source="/bin/Images/FoulBane.gif" IsEnabled="False" />
+         <Image Grid.Row="6" Grid.Column="2" Height="50" Width="40" Source="/bin/Images/God.gif" IsEnabled="False" />
+         <Image Grid.Row="7" Grid.Column="2" Height="50" Width="40" Source="/bin/Images/Gift.gif" IsEnabled="False" />
+         <Image Grid.Row="8" Grid.Column="2" Height="50" Width="40" Source="/bin/Images/GriffonClaw.gif" IsEnabled="False" />
+         <Image Grid.Row="9" Grid.Column="2" Height="50" Width="40" Source="/bin/Images/Group.gif" IsEnabled="False" />
+         <Image Grid.Row="10" Grid.Column="2" Height="50" Width="40" Source="/bin/Images/DenyTemple.gif" IsEnabled="False" />
+         <Image Grid.Row="0" Grid.Column="4" Height="50" Width="40" Source="/bin/Images/Helmet.gif" IsEnabled="False" Margin="0,5,0,0"/>
+         <Image Grid.Row="1" Grid.Column="4" Height="50" Width="40" Source="/bin/Images/HillTribeWarriors.gif" IsEnabled="False" />
+         <Image Grid.Row="2" Grid.Column="4" Height="50" Width="40" Source="/bin/Images/Muscle.gif" IsEnabled="False" />
+         <Image Grid.Row="3" Grid.Column="4" Height="50" Width="40" Source="/bin/Images/Negotiator.gif" IsEnabled="False" />
+         <Image Grid.Row="4" Grid.Column="4" Height="50" Width="40" Source="/bin/Images/RocBeak.gif" IsEnabled="False" />
+         <Image Grid.Row="5" Grid.Column="4" Height="50" Width="40" Source="/bin/Images/Secrets.gif" IsEnabled="False" />
+         <Image Grid.Row="6" Grid.Column="4" Height="50" Width="40" Source="/bin/Images/Teeth.gif" IsEnabled="False" />
+         <Image Grid.Row="7" Grid.Column="4" Height="50" Width="40" Source="/bin/Images/DwarfAdvice.gif" IsEnabled="False" />
+         <Image Grid.Row="8" Grid.Column="4" Height="50" Width="40" Source="/bin/Images/HalflingTown.gif" IsEnabled="False" />
+         <Image Grid.Row="9" Grid.Column="4" Height="50" Width="40" Source="/bin/Images/StructureDeny.gif" IsEnabled="False" />
+         <Image Grid.Row="10" Grid.Column="4" Height="50" Width="40" Source="/bin/Images/Deny.gif" IsEnabled="False" />
+         <Image Grid.Row="0" Grid.Column="6" Height="50" Width="40" Source="/bin/Images/Sun5.gif" IsEnabled="False" Margin="0,5,0,0"/>
+         <Image Grid.Row="1" Grid.Column="6" Height="50" Width="40" Source="/bin/Images/TowerGoblin.gif" IsEnabled="False" />
+         <Image Grid.Row="2" Grid.Column="6" Height="50" Width="40" Source="/bin/Images/TowerOrc.gif" IsEnabled="False" />
+         <Image Grid.Row="3" Grid.Column="6" Height="50" Width="40" Source="/bin/Images/TowerWizard.gif" IsEnabled="False" />
+         <Image Grid.Row="4" Grid.Column="6" Height="50" Width="40" Source="/bin/Images/Staff.gif" IsEnabled="False" />
+         <Image Grid.Row="5" Grid.Column="6" Height="50" Width="40" Source="/bin/Images/TrollSkin.gif" IsEnabled="False" />
+         <Image Grid.Row="6" Grid.Column="6" Height="50" Width="40" Source="/bin/Images/WizardAdvice.gif" IsEnabled="False" />
+         <Image Grid.Row="7" Grid.Column="6" Height="50" Width="40" Source="/bin/Images/Letter.gif" IsEnabled="False" />
+         <Image Grid.Row="8" Grid.Column="6" Height="50" Width="40" Source="/bin/Images/Ally.gif" IsEnabled="False" />
+         <Image Grid.Row="9" Grid.Column="6" Height="50" Width="40" Source="/bin/Images/c60Minstrel.gif" />
+         <Image Grid.Row="10" Grid.Column="6" Height="50" Width="40" Source="/bin/Images/Cache.gif" />
          <TextBox Grid.Row="0" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Margin="0,5,0,0" Text="All Monks/Priests recognize the mark, and do not join your party." />
          <TextBox Grid.Row="1" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="A magic box that needs to be opened by a magician, wizard, or witch."/>
          <TextBox Grid.Row="2" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="A Gift of Charm that allows multiple rolls when talking encounter occurs."/>

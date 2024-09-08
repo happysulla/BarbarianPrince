@@ -55,7 +55,7 @@ namespace BarbarianPrince
         {
             BitmapImage bmi2 = new BitmapImage();
             bmi2.BeginInit();
-            bmi2.UriSource = new Uri("../../Images/FallingHearts.gif", UriKind.Relative);
+            bmi2.UriSource = new Uri(Utilities.theImageDirectoryPath + "FallingHearts.gif", UriKind.Relative);
             bmi2.EndInit();
             Image img = new Image { Source = bmi2, Height = c.ActualHeight, Width = c.ActualWidth, Stretch = Stretch.Fill };
             ImageBehavior.SetAnimatedSource(img, bmi2);

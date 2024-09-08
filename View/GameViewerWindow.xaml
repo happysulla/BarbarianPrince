@@ -9,7 +9,7 @@
         Title="Barbarian Prince"  
         BorderThickness="3" 
         Height="1080" Width="1920" 
-        Icon="../Images/GameBox.gif" 
+        Icon="/bin/Images/GameBox.gif" 
         ResizeMode="CanResizeWithGrip" 
         MinHeight="600" MinWidth="800"
         WindowState="Maximized" 
@@ -113,7 +113,7 @@
          </DockPanel>
          <ScrollViewer Name="myScollViewerInside" Height="1000" Width="827" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
             <Canvas Name="myCanvas" Height="985" Width="810">
-               <Image Name="myMap" Source="/Images/Map.gif" Height="985" Width="810" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" />
+               <Image Name="myMap" Source="/bin/Images/Map.gif" Height="985" Width="810" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" />
             </Canvas>
          </ScrollViewer>
       </DockPanel>

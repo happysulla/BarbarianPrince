@@ -7,8 +7,8 @@ namespace BarbarianPrince
    [Serializable]
    public class Option
    {
-      [NonSerialized] public const int MEMBER_COUNT = 15;
-      [NonSerialized] public static string[] theStartingMembers = new string[MEMBER_COUNT] { "Dwarf", "Eagle", "Elf", "Falcon", "Griffon", "Harpy", "Magician", "Mercenary", "Merchant", "Minstrel", "Monk", "PorterSlave", "Priest", "TrueLove", "Wizard" };
+      [NonSerialized] public const int MEMBER_COUNT = 16;
+      [NonSerialized] public static string[] theStartingMembers = new string[MEMBER_COUNT] { "Dwarf", "Eagle", "Elf", "ElfWarrior","Falcon", "Griffon", "Harpy", "Magician", "Mercenary", "Merchant", "Minstrel", "Monk", "PorterSlave", "Priest", "TrueLove", "Wizard" };
       public string Name { get; set; }
       public bool IsEnabled { get; set; }
       public Option()
