@@ -2051,6 +2051,8 @@ namespace BarbarianPrince
                --this.WitAndWile;
             if (true == mi.Name.Contains("WarriorBoy"))
                IsHuldraHeirKilled = true;
+            if (true == mi.Name.Contains("TrueLove"))
+               LostTrueLoves.Add(mi);
             PartyMembers.Remove(mi);
          }
          return count;

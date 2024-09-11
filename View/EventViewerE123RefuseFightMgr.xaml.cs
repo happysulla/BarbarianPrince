@@ -216,7 +216,7 @@ namespace BarbarianPrince
             {
                if (6 == myGridRows[i].myDieRoll)
                {
-                  myGameInstance.RemoveAbandonerInParty(myGridRows[i].myMapItem, true);
+                  myGameInstance.RemoveAbandonerInParty(myGridRows[i].myMapItem, true); // EventViewerE123RefuseFightMgr - dert due to cowardice
                   isAnyMemberLeaving = true;
                }
             }

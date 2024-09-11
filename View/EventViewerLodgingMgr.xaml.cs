@@ -393,7 +393,7 @@ namespace BarbarianPrince
             }
             //--------------------------------------------
             foreach (IMapItem deserter in deserters)
-               myGameInstance.RemoveAbandonerInParty(deserter, true);
+               myGameInstance.RemoveAbandonerInParty(deserter, true); // EventViewerLodgingMgr 
             //--------------------------------------------
             if (myCoinCurrent < myCoinOriginal)
             {

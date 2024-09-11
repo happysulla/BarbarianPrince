@@ -216,7 +216,7 @@ namespace BarbarianPrince
             {
                if (myGameInstance.WitAndWile < myGridRows[i].myDieRoll)
                {
-                  myGameInstance.RemoveAbandonerInParty(myGridRows[i].myMapItem, true);
+                  myGameInstance.RemoveAbandonerInParty(myGridRows[i].myMapItem, true); // EventViewerE018Mgr - mark of kain
                   isAnyMemberLeaving = true;
                }
             }

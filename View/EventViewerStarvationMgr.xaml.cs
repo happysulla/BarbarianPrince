@@ -377,7 +377,7 @@ namespace BarbarianPrince
             {
                IMapItem mi = myGridRows[i].myMapItem;
                if ((3 < myGridRows[i].myResult) || ((0 < myGridRows[i].myWages) && (false == myGridRows[i].myIsHired)) )
-                  myGameInstance.RemoveAbandonerInParty(mi, true);
+                  myGameInstance.RemoveAbandonerInParty(mi, true); // EventViewerStarvationMgr
             }
             //---------------------------------------------
             if (null == myCallback)

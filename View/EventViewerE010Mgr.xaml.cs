@@ -213,7 +213,7 @@ namespace BarbarianPrince
             {
                if (2 < myGridRows[i].myDieRoll)
                {
-                  myGameInstance.RemoveAbandonerInParty(myGridRows[i].myMapItem, true);
+                  myGameInstance.RemoveAbandonerInParty(myGridRows[i].myMapItem, true); // EventViewerE010Mgr - disgust due to starving farmer
                   isAnyMemberLeaving = true;
                }
             }

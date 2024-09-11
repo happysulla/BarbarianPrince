@@ -197,7 +197,7 @@ namespace BarbarianPrince
                 {
                     if (6 == myGridRows[i].myDieRoll)
                     {
-                        myGameInstance.RemoveAbandonedInParty(myGridRows[i].myMapItem, true); // no possessions are transferred as part of escape
+                        myGameInstance.RemoveAbandonedInParty(myGridRows[i].myMapItem, true); // EventViewerE073FrogMgr - no possessions are transferred as part of escape
                         isAnyMemberFrog = true;
                     }
                 }

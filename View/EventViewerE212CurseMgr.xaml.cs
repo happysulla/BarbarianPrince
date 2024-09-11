@@ -162,7 +162,7 @@ namespace BarbarianPrince
          myState = E212Enum.END; // end this dialog if nobody checks for curses
          for (int k = 0; k < myMaxRowCount; ++k)
          {
-            if (DO_NOT_LEAVE == myGridRows[k].myDieRoll)
+            if (DO_NOT_LEAVE != myGridRows[k].myDieRoll)
                myState = E212Enum.CURSE_CHECK;
          }
          //--------------------------------------------------
@@ -217,7 +217,7 @@ namespace BarbarianPrince
             {
                if (1 < myGridRows[i].myDieRoll)
                {
-                  myGameInstance.RemoveAbandonerInParty(myGridRows[i].myMapItem, true);
+                  myGameInstance.RemoveAbandonerInParty(myGridRows[i].myMapItem, true); // EventViewerE212CurseMgr - dert due to curse
                   isAnyMemberLeaving = true;
                }
             }
