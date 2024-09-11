@@ -5,6 +5,6 @@
         Name="myWindowMain" IsEnabled="False" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" ResizeMode="CanResizeWithGrip" WindowStyle="None"
         MinWidth="352" MinHeight="597" MaxWidth="352" MaxHeight="597" Cursor="Wait" Visibility="Hidden">
     <Viewbox Name="myViewBoxSplash" Stretch="UniformToFill">
-        <Image Name="myImageGameBox" Source="/GameBox.gif" Stretch="Uniform" />
+        <Image Name="myImageGameBox" Source="/bin/Images/GameBox.gif" Stretch="Uniform" />
     </Viewbox>
 </Window>

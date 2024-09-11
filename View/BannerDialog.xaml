@@ -24,7 +24,7 @@
     </Window.Background>
     <DockPanel Name="myDockPanel" MinWidth="612" MaxWidth="612" MinHeight="790" MaxHeight="790" Margin="15,0,0,0" >
         <Button Name="myButtonClose" Width="50" Height="50" DockPanel.Dock="Top" Click="ButtonClose_Click" HorizontalAlignment="Right" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" >
-            <Image Name="myImageClose" Source="/bin/Images/CrossedAxes.gif" />
+            <Image Name="myImageClose" Source="../bin/Images/CrossedAxes.gif" />
         </Button>
         <ScrollViewer Name="myScrollViewerTextBlock" MinWidth="600" MaxWidth="600" Height="640" VerticalScrollBarVisibility="Auto">
             <TextBlock Name='myTextBlockDisplay' FontFamily='Old English Text MT' FontSize='20' TextWrapping='WrapWithOverflow' IsHyphenationEnabled='true' Width="555" Height="695" HorizontalAlignment="Left" VerticalAlignment="Top">

@@ -230,6 +230,7 @@ namespace BarbarianPrince
       E023WizardAdvice,
       E024WizardFight,
       E024WizardWander,
+      E027AncientTreasure,
       E028CaveTombs,
       E031LootedTomb,
       E032NumberOfGhosts,

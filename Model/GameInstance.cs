@@ -46,14 +46,14 @@ namespace BarbarianPrince
          }
          //------------------------------------------------------------------------------------
          ITerritory territory = Territory.theTerritories.Find("0101");
-         myPrince = new MapItem("Prince", 1.0, false, false, false, "c07Prince", "c07Prince", territory, 9, 8, 0);
+         myPrince= new MapItem("Prince", 1.0, false, false, false, "c07Prince", "c07Prince", territory, 9, 8, 0);
          PartyMembers.Add(myPrince);
       }
       public GameInstance(Options newGameOptions) // Constructor - set log levels
       {
          //------------------------------------------------------------------------------------
          ITerritory territory = Territory.theTerritories.Find("0101");
-         myPrince = new MapItem("Prince", 1.0, false, false, false, "c07Prince", "c07Prince", territory, 9, 8, 0);
+         myPrince= new MapItem("Prince", 1.0, false, false, false, "c07Prince", "c07Prince", territory, 9, 8, 0);
          PartyMembers.Add(myPrince);
          this.Options = newGameOptions;
       }
@@ -2383,7 +2383,7 @@ namespace BarbarianPrince
                      string isKilledStr = reader.GetAttribute("value");
                      bool isKilled = Boolean.Parse(isKilledStr);
                      //---------------------------------------------------------
-                     MapItem mi = new MapItem(name, zoom, isHidden, isAnimated, isGuide, topImageName, bottomImageName, matchingTerritory, endurance, combat, coin);
+                     MapItem mi= new MapItem(name, zoom, isHidden, isAnimated, isGuide, topImageName, bottomImageName, matchingTerritory, endurance, combat, coin);
                      mapItems.Add(mi);
                   } // end if
                } // end if

@@ -769,7 +769,7 @@ namespace BarbarianPrince
          Rectangle r1 = new Rectangle() { Visibility = Visibility.Hidden, Width = Utilities.ZOOM * Utilities.theMapItemOffset, Height = Utilities.ZOOM * Utilities.theMapItemOffset };
          BitmapImage bmi = new BitmapImage();
          bmi.BeginInit();
-         bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+         bmi.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
          bmi.EndInit();
          Image img1 = new Image { Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
          ImageBehavior.SetAnimatedSource(img1, bmi);
@@ -934,7 +934,7 @@ namespace BarbarianPrince
             {
                BitmapImage bmi = new BitmapImage();
                bmi.BeginInit();
-               bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+               bmi.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                bmi.EndInit();
                Image img1 = new Image { Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                ImageBehavior.SetAnimatedSource(img1, bmi);

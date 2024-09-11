@@ -1,10 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.IO.Pipes;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using System.Xml.Serialization;
 using Microsoft.Win32;
 
 namespace BarbarianPrince

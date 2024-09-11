@@ -101,7 +101,7 @@
          <TextBox Grid.Row="0" Grid.Column="5" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Margin="0,5,0,0" Text="Helmet of Northsland. Game won if return to Ogon or Weshor."/>
          <TextBox Grid.Row="1" Grid.Column="5" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Hill Tribe. Travel to obtain rightful hier of Huldra Castle."/>
          <TextBox Grid.Row="2" Grid.Column="5" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Mark of Hireling. Need to pay for their muscle at end of each day."/>
-         <TextBox Grid.Row="3" Grid.Column="5" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Merchant Negotiator. Reduce lodging, barting, purchases by 1/2."/>
+         <TextBox Grid.Row="3" Grid.Column="5" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Merchant Negotiator. Reduce lodging, bartering, purchases by 1/2."/>
          <TextBox Grid.Row="4" Grid.Column="5" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Roc beak is prized by Count Dragot. Sell in town, castle, or temple for 35gp."/>
          <TextBox Grid.Row="5" Grid.Column="5" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Clue to Treasure. Search this hex for possible treasure."/>
          <TextBox Grid.Row="6" Grid.Column="5" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Hydra teeth. Scatter to create undead party members for one fight."/>

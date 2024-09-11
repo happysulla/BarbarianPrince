@@ -21,7 +21,6 @@ namespace BarbarianPrince
       public const double ZOOM = 1.25;
       public const int MAX_GRID_ROW = 40;
       public const int MAX_SLAVE_GIRLS = 7;
-      public static string theImageDirectoryPath = MapImage.IMAGE_DIR_PROJECT;
       //--------------------------------------------
       public static SolidColorBrush theBrushBlood = new SolidColorBrush();
       public static SolidColorBrush theBrushRegion = new SolidColorBrush();

@@ -242,7 +242,7 @@ namespace BarbarianPrince
             case E121Enum.SUNSTROKE_WOUNDS:
                BitmapImage bmi0 = new BitmapImage();
                bmi0.BeginInit();
-               bmi0.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+               bmi0.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                bmi0.EndInit();
                Image img0 = new Image { Name = "DieRoll", Source = bmi0, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                ImageBehavior.SetAnimatedSource(img0, bmi0);
@@ -297,7 +297,7 @@ namespace BarbarianPrince
                {
                   BitmapImage bmi = new BitmapImage();
                   bmi.BeginInit();
-                  bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+                  bmi.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                   bmi.EndInit();
                   Image img = new Image { Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                   ImageBehavior.SetAnimatedSource(img, bmi);

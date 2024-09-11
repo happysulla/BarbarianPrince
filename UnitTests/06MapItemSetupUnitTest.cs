@@ -842,7 +842,7 @@ namespace BarbarianPrince
             if (true == dialog.ShowDialog())
             {
                 // Create the Image from the passed in data
-                MapItem mapItem = new MapItem(dialog.MapItemName, dialog.Zoom, dialog.IsHidden, dialog.IsAnimated, false, dialog.TopImageName, dialog.BottomImageName, matchingTerritory, Int32.Parse(dialog.Endurance), Int32.Parse(dialog.Combat), 0);
+                MapItem mapItem= new MapItem(dialog.MapItemName, dialog.Zoom, dialog.IsHidden, dialog.IsAnimated, false, dialog.TopImageName, dialog.BottomImageName, matchingTerritory, Int32.Parse(dialog.Endurance), Int32.Parse(dialog.Combat), 0);
                 if (null == mapItem)
                 {
                     Logger.Log(LogEnum.LE_ERROR, "MouseDownEllipse(): unable to new mapItem");
@@ -882,7 +882,7 @@ namespace BarbarianPrince
             dialog.myTextBoxTopImageName.Focus();
             if (true == dialog.ShowDialog())
             {
-                MapItem mapItem = new MapItem(dialog.MapItemName, dialog.Zoom, dialog.IsHidden, dialog.IsAnimated, false, dialog.TopImageName, dialog.BottomImageName, t, Int32.Parse(dialog.Endurance), Int32.Parse(dialog.Combat), 0);
+                MapItem mapItem= new MapItem(dialog.MapItemName, dialog.Zoom, dialog.IsHidden, dialog.IsAnimated, false, dialog.TopImageName, dialog.BottomImageName, t, Int32.Parse(dialog.Endurance), Int32.Parse(dialog.Combat), 0);
                 if (null == mapItem)
                 {
                     Logger.Log(LogEnum.LE_ERROR, "clickedButton(): unable to new mapItem");

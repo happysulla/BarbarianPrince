@@ -1,24 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.IO.Pipes;
 using System.Linq;
-using System.Net.Sockets;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Security.Policy;
 using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Documents.DocumentStructures;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Xml.Linq;
 
 namespace BarbarianPrince
 {
@@ -1088,113 +1071,113 @@ namespace BarbarianPrince
          ITerritory princeTerritory = gi.Prince.Territory;
          string miName = cName + Utilities.MapItemNum.ToString();
          ++Utilities.MapItemNum;
-         IMapItem character = new MapItem(miName, 1.0, false, false, false, "c84Rat", "c84Rat", gi.Prince.Territory, 1, 1, 0); ; // default character if something does not work
+         IMapItem character= new MapItem(miName, 1.0, false, false, false, "c84Rat", "c84Rat", gi.Prince.Territory, 1, 1, 0); ; // default character if something does not work
          //------------------------------------------------------------
          switch ( cName )
          {
-            case "Amazon": character = new MapItem(miName, 1.0, false, false, false, "c57Amazon", "c57Amazon", princeTerritory, 5, 6, 4); break;
-            case "Bandit": character = new MapItem(miName, 1.0, false, false, false, "c21Bandit", "c21Bandit", princeTerritory, 4, 5, 1); break;
-            case "BanditLeader": character = new MapItem(miName, 1.0, false, false, false, "c85BanditLead", "c85BanditLead", princeTerritory, 6, 6, 15); break;
-            case "Bear": character = new MapItem(miName, 1.0, false, false, false, "c72Bear", "c72Bear", princeTerritory, 5, 5, 0); break;
-            case "Boar": character = new MapItem(miName, 1.0, false, false, false, "c58Boar", "c58Boar", princeTerritory, 5, 8, 0); break;
-            case "Cavalry": character = new MapItem(miName, 1.0, false, false, false, "Cavalry", "Cavalry", princeTerritory, 0, 0, 0); break;
-            case "Cat": character = new MapItem(miName, 1.0, false, false, false, "c59HuntingCat", "c59HuntingCat", princeTerritory, 3, 6, 0); break;
-            case "Constabulary": character = new MapItem(miName, 1.0, false, false, false, "c45Constabulary", "c45Constabulary", princeTerritory, 4, 5, 4); break;
-            case "Croc": character = new MapItem(miName, 1.0, false, false, false, "c73Crocodile", "c73Crocodile", princeTerritory, 6, 4, 0); break;
-            case "Deserter": character = new MapItem(miName, 1.0, false, false, false, "c78Deserter", "c78Deserter", princeTerritory, 4, 4, 2); break;
-            case "Dragon": character = new MapItem(miName, 1.0, false, false, false, "c33Dragon", "c33Dragon", princeTerritory, 11, 10, 0); break;
-            case "Dwarf": character = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 6, 5, 10); break;
-            case "DwarfW": character = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 6, 5, 12); break;
-            case "DwarfLead": character = new MapItem(miName, 1.0, false, false, false, "c68DwarfLead", "c68DwarfLead", princeTerritory, 7, 6, 21); break;
-            case "Eagle": character = new MapItem(miName, 1.0, false, false, false, "c62Eagle", "c62Eagle", princeTerritory, 3, 4, 1); break;
-            case "Elf": character = new MapItem(miName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 4, 5, 7); break;
-            case "ElfAssistant": character = new MapItem(miName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 3, 3, 2); break;
-            case "ElfFriend": character = new MapItem(miName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 4, 4, 7); break;
-            case "ElfWarrior": character = new MapItem(miName, 1.0, false, false, false, "c69ElfLead", "c69ElfLead", princeTerritory, 5, 5, 15); break;
-            case "Falcon": character = new MapItem(miName, 1.0, false, false, false, "c82Falcon", "c82Falcon", princeTerritory, 0, 0, 0); break;
-            case "Farmer": character = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 7, 4, 1); break;
-            case "FarmerW": character = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 7, 4, 2); break;
-            case "FarmerBoy": character = new MapItem(miName, 1.0, false, false, false, "c35FarmerBoy", "c35FarmerBoy", princeTerritory, 4, 3, 0); break;
-            case "FarmerLeader": character = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 3, 2, 2); break;
-            case "FarmerMobLeader": character = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 3, 2, 0); break;
-            case "FarmerMob": character = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 2, 2, 0); break;
-            case "FarmerRetainer": character = new MapItem(miName, 1.0, false, false, false, "c40Retainer", "c40Retainer", princeTerritory, 4, 4, 1); break;
-            case "FarmerRich": character = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 6, 5, 30); break;
-            case "Freeman": character = new MapItem(miName, 1.0, false, false, false, "c46Freeman", "c46Freeman", princeTerritory, 4, 4, 0); break;
-            case "Ghost": character = new MapItem(miName, 1.0, false, false, false, "c20Ghost", "c20Ghost", princeTerritory, 2, 4, 0); break;
-            case "Giant": character = new MapItem(miName, 1.0, false, false, false, "c61Giant", "c61Giant", princeTerritory, 8, 9, 10); break;
-            case "Goblin": character = new MapItem(miName, 1.0, false, false, false, "c22Goblin", "c22Goblin", princeTerritory, 3, 3, 1); break;
-            case "Golem": character = new MapItem(miName, 1.0, false, false, false, "c27Golem", "c27Golem", princeTerritory, 8, 6, 0); break;
-            case "Griffon": character = new MapItem(miName, 1.0, false, false, false, "c63Griffon", "c63Griffon", princeTerritory, 6, 7, 12); break;
-            case "Guard": character = new MapItem(miName, 1.0, false, false, false, "c66Guard", "c66Guard", princeTerritory, 5, 6, 4); break;
-            case "GuardBody": character = new MapItem(miName, 1.0, false, false, false, "c87BodyGuard", "c87BodyGuard", princeTerritory, 6, 6, 0); break;
-            case "GuardHeir": character = new MapItem(miName, 1.0, false, false, false, "c66Guard", "c66Guard", princeTerritory, 5, 4, 0); break;
-            case "GuardHostile": character = new MapItem(miName, 1.0, false, false, false, "c50GuardHostile", "c50GuardHostile", princeTerritory, 6, 5, 7); break;
-            case "Guardian": character = new MapItem(miName, 1.0, false, false, false, "c28Guardian", "c28Guardian", princeTerritory, 7, 7, 0); break;
-            case "Guide": character = new MapItem(miName, 1.0, false, false, false, "c48Guide", "c48Guide", princeTerritory, 3, 2, 0); break;
-            case "HalflingLead": character = new MapItem(miName, 1.0, false, false, false, "c70HalflingLead", "c70HalflingLead", princeTerritory, 6, 3, 4); break;
-            case "Harpy": character = new MapItem(miName, 1.0, false, false, false, "c83Harpy", "c83Harpy", princeTerritory, 4, 5, 4); break;
-            case "Hawkman": character = new MapItem(miName, 1.0, false, false, false, "c81Hawkman", "c81Hawkman", princeTerritory, 5, 7, 7); break;
-            case "Hobgoblin": character = new MapItem(miName, 1.0, false, false, false, "c23Hobgoblin", "c23Hobgoblin", princeTerritory, 5, 6, 4); break;
-            case "HobgoblinW": character = new MapItem(miName, 1.0, false, false, false, "c23Hobgoblin", "c23Hobgoblin", princeTerritory, 5, 6, 5); break;
-            case "Henchman": character = new MapItem(miName, 1.0, false, false, false, "c49Henchman", "c49Henchman", princeTerritory, 3, 2, 0); break;
-            case "Huldra": character = new MapItem(miName, 1.0, false, false, false, "c89Huldra", "c89Huldra", princeTerritory, 8, 6, 0); break;
-            case "Knight": character = new MapItem(miName, 1.0, false, false, false, "c52Knight", "c52Knight", princeTerritory, 6, 7, 0); break;
-            case "KnightBlack": character = new MapItem(miName, 1.0, false, false, false, "c80BlackKnight", "c80BlackKnight", princeTerritory, 8, 8, 30); break;
-            case "Lancer": character = new MapItem(miName, 1.0, false, false, false, "c47Lancer", "c47Lancer", princeTerritory, 5, 5, 0); break;
-            case "Lizard": character = new MapItem(miName, 1.0, false, false, false, "c67Lizard", "c67Lizard", princeTerritory, 12, 10, 0); break;
-            case "Magician": character = new MapItem(miName, 1.0, false, false, false, "c16Magician", "c16Magician", princeTerritory, 5, 3, 0); break;
-            case "MagicianWeak": character = new MapItem(miName, 1.0, false, false, false, "c16Magician", "c16Magician", princeTerritory, 2, 3, 5); break;
-            case "Mercenary": character = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", princeTerritory, 4, 5, 4); break;
-            case "MercenaryLead": character = new MapItem(miName, 1.0, false, false, false, "c65MercLead", "c65MercLead", princeTerritory, 6, 6, 50); break;
-            case "Merchant": character = new MapItem(miName, 1.0, false, false, false, "c77Merchant", "c77Merchant", princeTerritory, 3, 2, 5); break;
-            case "Minstrel": character = new MapItem(miName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", princeTerritory, 0, 0, 0); break;
+            case "Amazon": character= new MapItem(miName, 1.0, false, false, false, "c57Amazon", "c57Amazon", princeTerritory, 5, 6, 4); break;
+            case "Bandit": character= new MapItem(miName, 1.0, false, false, false, "c21Bandit", "c21Bandit", princeTerritory, 4, 5, 1); break;
+            case "BanditLeader": character= new MapItem(miName, 1.0, false, false, false, "c85BanditLead", "c85BanditLead", princeTerritory, 6, 6, 15); break;
+            case "Bear": character= new MapItem(miName, 1.0, false, false, false, "c72Bear", "c72Bear", princeTerritory, 5, 5, 0); break;
+            case "Boar": character= new MapItem(miName, 1.0, false, false, false, "c58Boar", "c58Boar", princeTerritory, 5, 8, 0); break;
+            case "Cavalry": character= new MapItem(miName, 1.0, false, false, false, "Cavalry", "Cavalry", princeTerritory, 0, 0, 0); break;
+            case "Cat": character= new MapItem(miName, 1.0, false, false, false, "c59HuntingCat", "c59HuntingCat", princeTerritory, 3, 6, 0); break;
+            case "Constabulary": character= new MapItem(miName, 1.0, false, false, false, "c45Constabulary", "c45Constabulary", princeTerritory, 4, 5, 4); break;
+            case "Croc": character= new MapItem(miName, 1.0, false, false, false, "c73Crocodile", "c73Crocodile", princeTerritory, 6, 4, 0); break;
+            case "Deserter": character= new MapItem(miName, 1.0, false, false, false, "c78Deserter", "c78Deserter", princeTerritory, 4, 4, 2); break;
+            case "Dragon": character= new MapItem(miName, 1.0, false, false, false, "c33Dragon", "c33Dragon", princeTerritory, 11, 10, 0); break;
+            case "Dwarf": character= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 6, 5, 10); break;
+            case "DwarfW": character= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 6, 5, 12); break;
+            case "DwarfLead": character= new MapItem(miName, 1.0, false, false, false, "c68DwarfLead", "c68DwarfLead", princeTerritory, 7, 6, 21); break;
+            case "Eagle": character= new MapItem(miName, 1.0, false, false, false, "c62Eagle", "c62Eagle", princeTerritory, 3, 4, 1); break;
+            case "Elf": character= new MapItem(miName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 4, 5, 7); break;
+            case "ElfAssistant": character= new MapItem(miName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 3, 3, 2); break;
+            case "ElfFriend": character= new MapItem(miName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 4, 4, 7); break;
+            case "ElfWarrior": character= new MapItem(miName, 1.0, false, false, false, "c69ElfLead", "c69ElfLead", princeTerritory, 5, 5, 15); break;
+            case "Falcon": character= new MapItem(miName, 1.0, false, false, false, "c82Falcon", "c82Falcon", princeTerritory, 0, 0, 0); break;
+            case "Farmer": character= new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 7, 4, 1); break;
+            case "FarmerW": character= new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 7, 4, 2); break;
+            case "FarmerBoy": character= new MapItem(miName, 1.0, false, false, false, "c35FarmerBoy", "c35FarmerBoy", princeTerritory, 4, 3, 0); break;
+            case "FarmerLeader": character= new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 3, 2, 2); break;
+            case "FarmerMobLeader": character= new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 3, 2, 0); break;
+            case "FarmerMob": character= new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 2, 2, 0); break;
+            case "FarmerRetainer": character= new MapItem(miName, 1.0, false, false, false, "c40Retainer", "c40Retainer", princeTerritory, 4, 4, 1); break;
+            case "FarmerRich": character= new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 6, 5, 30); break;
+            case "Freeman": character= new MapItem(miName, 1.0, false, false, false, "c46Freeman", "c46Freeman", princeTerritory, 4, 4, 0); break;
+            case "Ghost": character= new MapItem(miName, 1.0, false, false, false, "c20Ghost", "c20Ghost", princeTerritory, 2, 4, 0); break;
+            case "Giant": character= new MapItem(miName, 1.0, false, false, false, "c61Giant", "c61Giant", princeTerritory, 8, 9, 10); break;
+            case "Goblin": character= new MapItem(miName, 1.0, false, false, false, "c22Goblin", "c22Goblin", princeTerritory, 3, 3, 1); break;
+            case "Golem": character= new MapItem(miName, 1.0, false, false, false, "c27Golem", "c27Golem", princeTerritory, 8, 6, 0); break;
+            case "Griffon": character= new MapItem(miName, 1.0, false, false, false, "c63Griffon", "c63Griffon", princeTerritory, 6, 7, 12); break;
+            case "Guard": character= new MapItem(miName, 1.0, false, false, false, "c66Guard", "c66Guard", princeTerritory, 5, 6, 4); break;
+            case "GuardBody": character= new MapItem(miName, 1.0, false, false, false, "c87BodyGuard", "c87BodyGuard", princeTerritory, 6, 6, 0); break;
+            case "GuardHeir": character= new MapItem(miName, 1.0, false, false, false, "c66Guard", "c66Guard", princeTerritory, 5, 4, 0); break;
+            case "GuardHostile": character= new MapItem(miName, 1.0, false, false, false, "c50GuardHostile", "c50GuardHostile", princeTerritory, 6, 5, 7); break;
+            case "Guardian": character= new MapItem(miName, 1.0, false, false, false, "c28Guardian", "c28Guardian", princeTerritory, 7, 7, 0); break;
+            case "Guide": character= new MapItem(miName, 1.0, false, false, false, "c48Guide", "c48Guide", princeTerritory, 3, 2, 0); break;
+            case "HalflingLead": character= new MapItem(miName, 1.0, false, false, false, "c70HalflingLead", "c70HalflingLead", princeTerritory, 6, 3, 4); break;
+            case "Harpy": character= new MapItem(miName, 1.0, false, false, false, "c83Harpy", "c83Harpy", princeTerritory, 4, 5, 4); break;
+            case "Hawkman": character= new MapItem(miName, 1.0, false, false, false, "c81Hawkman", "c81Hawkman", princeTerritory, 5, 7, 7); break;
+            case "Hobgoblin": character= new MapItem(miName, 1.0, false, false, false, "c23Hobgoblin", "c23Hobgoblin", princeTerritory, 5, 6, 4); break;
+            case "HobgoblinW": character= new MapItem(miName, 1.0, false, false, false, "c23Hobgoblin", "c23Hobgoblin", princeTerritory, 5, 6, 5); break;
+            case "Henchman": character= new MapItem(miName, 1.0, false, false, false, "c49Henchman", "c49Henchman", princeTerritory, 3, 2, 0); break;
+            case "Huldra": character= new MapItem(miName, 1.0, false, false, false, "c89Huldra", "c89Huldra", princeTerritory, 8, 6, 0); break;
+            case "Knight": character= new MapItem(miName, 1.0, false, false, false, "c52Knight", "c52Knight", princeTerritory, 6, 7, 0); break;
+            case "KnightBlack": character= new MapItem(miName, 1.0, false, false, false, "c80BlackKnight", "c80BlackKnight", princeTerritory, 8, 8, 30); break;
+            case "Lancer": character= new MapItem(miName, 1.0, false, false, false, "c47Lancer", "c47Lancer", princeTerritory, 5, 5, 0); break;
+            case "Lizard": character= new MapItem(miName, 1.0, false, false, false, "c67Lizard", "c67Lizard", princeTerritory, 12, 10, 0); break;
+            case "Magician": character= new MapItem(miName, 1.0, false, false, false, "c16Magician", "c16Magician", princeTerritory, 5, 3, 0); break;
+            case "MagicianWeak": character= new MapItem(miName, 1.0, false, false, false, "c16Magician", "c16Magician", princeTerritory, 2, 3, 5); break;
+            case "Mercenary": character= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", princeTerritory, 4, 5, 4); break;
+            case "MercenaryLead": character= new MapItem(miName, 1.0, false, false, false, "c65MercLead", "c65MercLead", princeTerritory, 6, 6, 50); break;
+            case "Merchant": character= new MapItem(miName, 1.0, false, false, false, "c77Merchant", "c77Merchant", princeTerritory, 3, 2, 5); break;
+            case "Minstrel": character= new MapItem(miName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", princeTerritory, 0, 0, 0); break;
             case "Mirror":
-               character = new MapItem(gi.Prince);
+               character= new MapItem(gi.Prince);
                character.Name = "Mirror";
                character.TopImageName = "c34PrinceMirror";
                character.BottomImageName = "c34PrinceMirror";
                character.OverlayImageName = "";
                break;
-            case "Monk": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 5, 4, 4); break;
-            case "MonkGuide": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 3, 2, 0); break;
-            case "MonkHermit": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 6, 3, 0); break;
-            case "MonkTraveling": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 3, 2, 4); break;
-            case "MonkWarrior": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 6, 6, 10); break;
-            case "Orc": character = new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 5, 5, 2); break;
-            case "OrcW": character = new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 5, 5, 2); break;
-            case "OrcWeak": character = new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 5, 4, 1); break;
-            case "OrcChief": character = new MapItem(miName, 1.0, false, false, false, "c64OrcChief", "c64OrcChief", princeTerritory, 6, 5, 7); break;
-            case "PatrolMounted": character = new MapItem(miName, 1.0, false, false, false, "c74MountedPatrol", "c74MountedPatrol", princeTerritory, 5, 6, 4); break;
-            case "PatrolMountedLead": character = new MapItem(miName, 1.0, false, false, false, "c75MountedPatrolLead", "c75MountedPatrolLead", princeTerritory, 5, 6, 10); break;
-            case "Priest": character = new MapItem(miName, 1.0, false, false, false, "c14Priest", "c14Priest", princeTerritory, 3, 3, 25); break;
-            case "Porter": character = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", princeTerritory, 0, 0, 0); break;
-            case "PorterSlave": character = new MapItem(miName, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", princeTerritory, 0, 0, 0); break;
-            case "Reaver": character = new MapItem(miName, 1.0, false, false, false, "C36Reaver", "C36Reaver", princeTerritory, 4, 4, 4); break;
-            case "ReaverBoss": character = new MapItem(miName, 1.0, false, false, false, "C37ReaverBoss", "C37ReaverBoss", princeTerritory, 5, 5, 10); break;
-            case "ReaverLead": character = new MapItem(miName, 1.0, false, false, false, "C37ReaverBoss", "C37ReaverBoss", princeTerritory, 4, 5, 7); break;
-            case "Roc": character = new MapItem(miName, 1.0, false, false, false, "c55Roc", "c55Roc", princeTerritory, 8, 9, 10); break;
-            case "Runaway": character = new MapItem(miName, 1.0, false, false, false, "c09Runaway", "c09Runaway", princeTerritory, 4, 4, 0); break;
-            case "Spectre": character = new MapItem(miName, 1.0, false, false, false, "c25Spectre", "c25Spectre", princeTerritory, 3, 7, 0); break;
-            case "SlaveGirl": character = new MapItem(miName, 1.0, false, false, false, "c41SlaveGirl", "c41SlaveGirl", princeTerritory, 0, 0, 0); break;
-            case "Spider": character = new MapItem(miName, 1.0, false, false, false, "c54Spider", "c54Spider", princeTerritory, 3, 4, 0); break;
-            case "Swordsman": character = new MapItem(miName, 1.0, false, false, false, "c53Swordsman", "c53Swordsman", princeTerritory, 6, 6, 7); break;
-            case "Swordswoman": character = new MapItem(miName, 1.0, false, false, false, "c76Swordswoman", "c76Swordswoman", princeTerritory, 7, 7, 4); break;
-            case "Troll": character = new MapItem(miName, 1.0, false, false, false, "c31Troll", "c31Troll", princeTerritory, 8, 8, 15); break;
-            case "TrollDemi": character = new MapItem(miName, 1.0, false, false, false, "c29DemiTroll", "c29DemiTroll", princeTerritory, 7, 8, 10); break;
-            case "TrueLoveLordsDaughter": character = new MapItem(miName, 1.0, false, false, false, "c44TrueLove", "LordsDaughter", princeTerritory, 0, 0, 0); break;
-            case "TrueLovePriestDaughter": character = new MapItem(miName, 1.0, false, false, false, "c44TrueLove", "LordsDaughter", princeTerritory, 4, 2, 0); break;
-            case "TrueLoveSlave": character = new MapItem(miName, 1.0, false, false, false, "c44TrueLove", "SlaveWoman", princeTerritory, 4, 2, 0); break;
-            case "TrueLoveSwordwoman": character = new MapItem(miName, 1.0, false, false, false, "c44TrueLove", "Swordswoman", princeTerritory, 7, 7, 4); break;
-            case "TrustedAssistant": character = new MapItem(miName, 1.0, false, false, false, "c51TrustedAssistant", "c51TrustedAssistant", princeTerritory, 4, 4, 0); break;
-            case "Warrior": character = new MapItem(miName, 1.0, false, false, false, "c79Warrior", "c79Warrior", princeTerritory, 6, 7, 0); break;
-            case "WarriorBoy": character = new MapItem(miName, 1.0, false, false, false, "c86WarriorBoy", "c86WarriorBoy", princeTerritory, 7, 5, 0); break;
-            case "WarriorOld": character = new MapItem(miName, 1.0, false, false, false, "c43OldWarrior", "c43OldWarrior", princeTerritory, 0, 0, 0); break;
-            case "Witch": character = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", princeTerritory, 3, 1, 5); break;
-            case "Wizard": character = new MapItem(miName, 1.0, false, false, false, "c12Wizard", "c12Wizard", princeTerritory, 4, 4, 60); break;
-            case "WizardHenchman": character = new MapItem(miName, 1.0, false, false, false, "c49Henchman", "c49Henchman", princeTerritory, 4, 5, 4); break;
-            case "Wolf": character = new MapItem(miName, 1.0, false, false, false, "c71Wolf", "c71Wolf", princeTerritory, 3, 3, 0); break;
-            case "Wraith": character = new MapItem(miName, 1.0, false, false, false, "c24Wraith", "c24Wraith", princeTerritory, 9, 6, 0); break;
+            case "Monk": character= new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 5, 4, 4); break;
+            case "MonkGuide": character= new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 3, 2, 0); break;
+            case "MonkHermit": character= new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 6, 3, 0); break;
+            case "MonkTraveling": character= new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 3, 2, 4); break;
+            case "MonkWarrior": character= new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 6, 6, 10); break;
+            case "Orc": character= new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 5, 5, 2); break;
+            case "OrcW": character= new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 5, 5, 2); break;
+            case "OrcWeak": character= new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 5, 4, 1); break;
+            case "OrcChief": character= new MapItem(miName, 1.0, false, false, false, "c64OrcChief", "c64OrcChief", princeTerritory, 6, 5, 7); break;
+            case "PatrolMounted": character= new MapItem(miName, 1.0, false, false, false, "c74MountedPatrol", "c74MountedPatrol", princeTerritory, 5, 6, 4); break;
+            case "PatrolMountedLead": character= new MapItem(miName, 1.0, false, false, false, "c75MountedPatrolLead", "c75MountedPatrolLead", princeTerritory, 5, 6, 10); break;
+            case "Priest": character= new MapItem(miName, 1.0, false, false, false, "c14Priest", "c14Priest", princeTerritory, 3, 3, 25); break;
+            case "Porter": character= new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", princeTerritory, 0, 0, 0); break;
+            case "PorterSlave": character= new MapItem(miName, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", princeTerritory, 0, 0, 0); break;
+            case "Reaver": character= new MapItem(miName, 1.0, false, false, false, "C36Reaver", "C36Reaver", princeTerritory, 4, 4, 4); break;
+            case "ReaverBoss": character= new MapItem(miName, 1.0, false, false, false, "C37ReaverBoss", "C37ReaverBoss", princeTerritory, 5, 5, 10); break;
+            case "ReaverLead": character= new MapItem(miName, 1.0, false, false, false, "C37ReaverBoss", "C37ReaverBoss", princeTerritory, 4, 5, 7); break;
+            case "Roc": character= new MapItem(miName, 1.0, false, false, false, "c55Roc", "c55Roc", princeTerritory, 8, 9, 10); break;
+            case "Runaway": character= new MapItem(miName, 1.0, false, false, false, "c09Runaway", "c09Runaway", princeTerritory, 4, 4, 0); break;
+            case "Spectre": character= new MapItem(miName, 1.0, false, false, false, "c25Spectre", "c25Spectre", princeTerritory, 3, 7, 0); break;
+            case "SlaveGirl": character= new MapItem(miName, 1.0, false, false, false, "c41SlaveGirl", "c41SlaveGirl", princeTerritory, 0, 0, 0); break;
+            case "Spider": character= new MapItem(miName, 1.0, false, false, false, "c54Spider", "c54Spider", princeTerritory, 3, 4, 0); break;
+            case "Swordsman": character= new MapItem(miName, 1.0, false, false, false, "c53Swordsman", "c53Swordsman", princeTerritory, 6, 6, 7); break;
+            case "Swordswoman": character= new MapItem(miName, 1.0, false, false, false, "c76Swordswoman", "c76Swordswoman", princeTerritory, 7, 7, 4); break;
+            case "Troll": character= new MapItem(miName, 1.0, false, false, false, "c31Troll", "c31Troll", princeTerritory, 8, 8, 15); break;
+            case "TrollDemi": character= new MapItem(miName, 1.0, false, false, false, "c29DemiTroll", "c29DemiTroll", princeTerritory, 7, 8, 10); break;
+            case "TrueLoveLordsDaughter": character= new MapItem(miName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", princeTerritory, 0, 0, 0); break;
+            case "TrueLovePriestDaughter": character= new MapItem(miName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", princeTerritory, 4, 2, 0); break;
+            case "TrueLoveSlave": character= new MapItem(miName, 1.0, false, false, false, "c44TrueLove", "SlaveWoman", princeTerritory, 4, 2, 0); break;
+            case "TrueLoveSwordwoman": character= new MapItem(miName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", princeTerritory, 7, 7, 4); break;
+            case "TrustedAssistant": character= new MapItem(miName, 1.0, false, false, false, "c51TrustedAssistant", "c51TrustedAssistant", princeTerritory, 4, 4, 0); break;
+            case "Warrior": character= new MapItem(miName, 1.0, false, false, false, "c79Warrior", "c79Warrior", princeTerritory, 6, 7, 0); break;
+            case "WarriorBoy": character= new MapItem(miName, 1.0, false, false, false, "c86WarriorBoy", "c86WarriorBoy", princeTerritory, 7, 5, 0); break;
+            case "WarriorOld": character= new MapItem(miName, 1.0, false, false, false, "c43OldWarrior", "c43OldWarrior", princeTerritory, 0, 0, 0); break;
+            case "Witch": character= new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", princeTerritory, 3, 1, 5); break;
+            case "Wizard": character= new MapItem(miName, 1.0, false, false, false, "c12Wizard", "c12Wizard", princeTerritory, 4, 4, 60); break;
+            case "WizardHenchman": character= new MapItem(miName, 1.0, false, false, false, "c49Henchman", "c49Henchman", princeTerritory, 4, 5, 4); break;
+            case "Wolf": character= new MapItem(miName, 1.0, false, false, false, "c71Wolf", "c71Wolf", princeTerritory, 3, 3, 0); break;
+            case "Wraith": character= new MapItem(miName, 1.0, false, false, false, "c24Wraith", "c24Wraith", princeTerritory, 9, 6, 0); break;
             default:
                Logger.Log(LogEnum.LE_ERROR, "CreateCharacter(): Reached default character=" + cName);
                gi.EncounteredMembers.Add(character);
@@ -1249,29 +1232,10 @@ namespace BarbarianPrince
       protected bool LoadGame(ref IGameInstance gi, ref GameAction action)
       {
          gi.Stacks.Clear();
-         Option option = gi.Options.Find("AutoSetup");
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "LoadGame: gi.Options.Find(AutoSetup) returned null");
-            return false;
-         }
-         else
-         {
-            if (true == option.IsEnabled)
-            {
-               gi.GamePhase = GamePhase.Encounter;  
-               gi.EventDisplayed = gi.EventActive = "e401"; // next screen to show
-               gi.DieRollAction = GameAction.DieRollActionNone;
-            }
-            else
-            {
-               action = GameAction.UpdateEventViewerActive;
-               gi.GamePhase = GamePhase.GameSetup;    
-               gi.EventDisplayed = gi.EventActive = "e000"; // next screen to show
-               gi.DieRollAction = GameAction.DieRollActionNone;
-            }
-         }
-         if( 0 == gi.MapItemMoves.Count )
+         gi.GamePhase = GamePhase.Encounter;      // GameStateSetup.PerformAction()
+         gi.EventDisplayed = gi.EventActive = "e401"; // next screen to show
+         gi.DieRollAction = GameAction.DieRollActionNone;
+         if (0 == gi.MapItemMoves.Count)
          {
             --gi.Prince.MovementUsed;
             if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex
@@ -1281,6 +1245,7 @@ namespace BarbarianPrince
             }
             ++gi.Prince.MovementUsed;
          }
+         gi.Prince.MovementUsed = gi.Prince.Movement; // no more movement when reverting to daybreak
          return true;
       }
       protected void UndoCommand(ref IGameInstance gi, ref GameAction action)
@@ -1314,6 +1279,7 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateEventViewerDisplay: // Only change active event
                break;
+            case GameAction.UpdateNewGame:
             case GameAction.RemoveSplashScreen:
                if (false == AddStartingPrinceOption(gi))
                {
@@ -1349,7 +1315,9 @@ namespace BarbarianPrince
                      }
                      else
                      {
-                        gi.EventDisplayed = gi.EventActive = "e000";
+                        gi.GamePhase = GamePhase.GameSetup;
+                        gi.EventDisplayed = gi.EventActive = "e000"; // next screen to show
+                        gi.DieRollAction = GameAction.DieRollActionNone;
                      }
                   }
                }
@@ -1404,53 +1372,6 @@ namespace BarbarianPrince
                gi.GamePhase = GamePhase.SunriseChoice;      // GameStateSetup.PerformAction()
                gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
                gi.DieRollAction = GameAction.DieRollActionNone;
-               break;
-            case GameAction.UpdateNewGame:
-               if (false == AddStartingPrinceOption(gi))
-               {
-                  returnStatus = "AddStartingPrinceOption() returned false";
-                  Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
-               }
-               else if (false == AddStartingOptions(gi))
-               {
-                  returnStatus = "AddStartingOptions() returned false";
-                  Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
-               }
-               else
-               {
-                  AddStartingTestingOptions(gi);
-                  Option option = gi.Options.Find("AutoSetup");
-                  if (null == option)
-                  {
-                     returnStatus = "gi.Options.Find(AutoSetup) returned null";
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
-                  }
-                  else
-                  {
-                     if (true == option.IsEnabled)
-                     {
-                        if (false == PerformAutoSetup(ref gi, ref action))
-                        {
-                           returnStatus = "PerformAutoSetup() returned false";
-                           Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
-                        }
-                        else
-                        {
-                           gi.GamePhase = GamePhase.SunriseChoice;      // UpdateNewGame
-                           gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
-                           gi.DieRollAction = GameAction.DieRollActionNone;
-                        }
-                     }
-                     else
-                     {
-                        action = GameAction.UpdateEventViewerActive;
-                        gi.GamePhase = GamePhase.GameSetup;
-                        gi.EventDisplayed = gi.EventActive = "e000"; // next screen to show
-                        gi.DieRollAction = GameAction.DieRollActionNone;
-                     }
-                  }
-               }
-               action = GameAction.UpdateLoadingGame;
                break;
             case GameAction.EndGameClose:
                gi.GamePhase = GamePhase.EndGame;
@@ -2280,6 +2201,8 @@ namespace BarbarianPrince
          //gi.WizardTowers.Add(wizardTower);
          //ITerritory wizardAdviceHex = Territory.theTerritories.Find("1005");
          //gi.WizardAdviceLocations.Add(wizardAdviceHex);
+         //ITerritory wizardAdviceHex2 = Territory.theTerritories.Find("0406");
+         //gi.WizardAdviceLocations.Add(wizardAdviceHex2);
          ////---------------------
          //ITerritory t11 = Territory.theTerritories.Find("0306"); // e114 - verify that eagle hunt can happen in structure
          //gi.HiddenTemples.Add(t11);
@@ -4910,6 +4833,10 @@ namespace BarbarianPrince
                case GameAction.E024WizardFight:
                   gi.DieRollAction = GameAction.EncounterRoll;
                   gi.EventDisplayed = gi.EventActive = "e330";
+                  break;
+               case GameAction.E027AncientTreasure:
+                  gi.CapturedWealthCodes.Add(100);
+                  action = GameAction.EncounterLootStart;
                   break;
                case GameAction.E028CaveTombs:
                   gi.EventDisplayed = gi.EventActive = "e028a";
@@ -9211,7 +9138,7 @@ namespace BarbarianPrince
                   }
                }
                break;
-            case "e027": // defeated ghosts
+            case "e027": // defeated golem or secret clue found treasure
                gi.PegasusTreasure = PegasusTreasureEnum.Mount;
                gi.CapturedWealthCodes.Add(110);
                break;

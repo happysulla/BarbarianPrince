@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         MinWidth="400" MinHeight="620" MaxWidth="400" MaxHeight="620" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="Manual" Cursor="Wait" IsEnabled="False" Topmost="True" ShowInTaskbar="False" Focusable="False" IsHitTestVisible="False" IsTabStop="False">
     <Viewbox Name="myViewBoxSplash" Stretch="UniformToFill" Cursor="Wait">
-        <Image Name="myImageGameBox" Source="/View/GameBox.gif" Stretch="Uniform" IsEnabled="False" IsHitTestVisible="False" />
+        <Image Name="myImageGameBox" Source="../bin/Images/GameBox.gif" Stretch="Uniform" IsEnabled="False" IsHitTestVisible="False" />
     </Viewbox>
 </Window>

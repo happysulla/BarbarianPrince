@@ -201,7 +201,7 @@ namespace BarbarianPrince
          //--------------------------------------------------
          foreach (IMapItem mount in mi.Mounts)
          {
-            IMapItem mountClone = new MapItem(mount);
+            IMapItem mountClone= new MapItem(mount);
             this.Mounts.Add(mountClone);
          }
          //--------------------------------------------------
@@ -312,7 +312,7 @@ namespace BarbarianPrince
          {
             string mountName = "Pegasus" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            MapItem pegasus = new MapItem(mountName, 1.0, false, false, false, "MPegasus", "", this.Territory, 0, 0, 0);
+            MapItem pegasus= new MapItem(mountName, 1.0, false, false, false, "MPegasus", "MPegasus", this.Territory, 0, 0, 0);
             Logger.Log(LogEnum.LE_MOUNT_CHANGE, "AddNewMount(): add=" + mountName + " for mi=" + Name);
             this.Mounts.Add(pegasus);
             if (false == this.Name.Contains("Giant"))  // mounts cannot carry giants
@@ -325,7 +325,7 @@ namespace BarbarianPrince
          {
             string mountName = "Horse" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            MapItem horse = new MapItem(mountName, 1.0, false, false, false, "MHorse", "", this.Territory, 0, 0, 0);
+            MapItem horse= new MapItem(mountName, 1.0, false, false, false, "MHorse", "MHorse", this.Territory, 0, 0, 0);
             Logger.Log(LogEnum.LE_MOUNT_CHANGE, "AddNewMount(): add=" + mountName + " for mi=" + Name);
             this.Mounts.Add(horse);
             if (false == this.Name.Contains("Giant"))  // mounts cannot carry giants
@@ -1194,19 +1194,36 @@ namespace BarbarianPrince
          int loadCanCarry = mountCarry;
          //------------------------------------------
          int maxLoad = Utilities.MaxLoad;
-         if ((true == IsKilled) || (true == IsUnconscious) || (true == this.IsFlyer())) // Griffon & Harpy free load counted with rider
+         if ((true == IsKilled) || (true == IsUnconscious) || (true == Name.Contains("Eagle")) || (true == Name.Contains("Falcon"))) // Griffon & Harpy free load counted with rider
          {
             maxLoad = 0;
          }
-         if (true == this.IsExhausted)
-            maxLoad = Utilities.MaxLoad >> 1; // e120 - half the load if exhausted 
-         if( 0 < maxLoad)
+         else if (true == IsFlyingMountCarrier()) // Griffon & Harpy free load counted with rider
          {
-            int personCarry = maxLoad >> this.StarveDayNum;
-            if (true == this.IsRiding)
-               loadCanCarry -= Utilities.PersonBurden; // 20 for man riding and what he can carry
+            if (null == this.Rider)
+            {
+               maxLoad = 0; // Griffon & Harpy free load counted with rider
+            }
             else
-               loadCanCarry += personCarry;
+            {
+               if (true == this.IsExhausted)
+                  maxLoad = Utilities.MaxMountLoad >> 1; // e120 - half the load if exhausted 
+               if (0 < maxLoad)
+                  loadCanCarry = maxLoad >> this.StarveDayNum;
+            }
+         }
+         else
+         {
+            if (true == this.IsExhausted)
+               maxLoad = Utilities.MaxLoad >> 1; // e120 - half the load if exhausted 
+            if (0 < maxLoad)
+            {
+               int personCarry = maxLoad >> this.StarveDayNum;
+               if (true == this.IsRiding)
+                  loadCanCarry -= Utilities.PersonBurden; // 20 for man riding and what he can carry
+               else
+                  loadCanCarry += personCarry;
+            }
          }
          //------------------------------------------
          int coinLoads = 0;
@@ -1221,7 +1238,7 @@ namespace BarbarianPrince
          }
          loadCanCarry -= this.Food;
          if( loadCanCarry < 0 )
-            Logger.Log(LogEnum.LE_ERROR, "GetFreeLoadWithoutModify(): name=" + this.Name + " lc=" + loadCanCarry.ToString() + " fl=" + Food.ToString() + " cl=" + coinLoads.ToString() + "(cons=" + this.Coin.ToString() + ") ml=" + mountCarry.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "GetFreeLoadWithoutModify(): name=" + this.Name + " lc=" + loadCanCarry.ToString() + " fl=" + Food.ToString() + " cl=" + coinLoads.ToString() + "(coins=" + this.Coin.ToString() + ") ml=" + mountCarry.ToString());
          return loadCanCarry;
       }   // get free load - dismount if load does not support - but do not mount 
       public int GetFlyLoad()
@@ -1439,8 +1456,7 @@ namespace BarbarianPrince
             g.Children.Add(img);
             if ((0 < mi.PlagueDustWound) && (true == isAdornmentsShown))
             {
-               Image plagueDust = new Image() { Stretch = Stretch.Fill };
-               plagueDust.Source = MapItem.theMapImages.GetBitmapImage("OPlagueDust");
+               Image plagueDust = new Image() { Stretch = Stretch.Fill, Source = MapItem.theMapImages.GetBitmapImage("OPlagueDust") };
                g.Children.Add(plagueDust);
             }
             //----------------------------------------------------
@@ -1581,15 +1597,13 @@ namespace BarbarianPrince
             //----------------------------------------------------
             if ("" != mi.OverlayImageName)
             {
-               Image overlay = new Image() { Stretch = Stretch.Fill };
-               overlay.Source = theMapImages.GetBitmapImage(mi.OverlayImageName);
+               Image overlay = new Image() { Stretch = Stretch.Fill, Source = theMapImages.GetBitmapImage(mi.OverlayImageName) };
                g.Children.Add(overlay);
             }
             //----------------------------------------------------
             if (true == mi.IsResurrected)
             {
-               Image resurrected = new Image() { Stretch = Stretch.Fill };
-               resurrected.Source = MapItem.theMapImages.GetBitmapImage("Resurrected");
+               Image resurrected = new Image() { Stretch = Stretch.Fill, Source = MapItem.theMapImages.GetBitmapImage("Resurrected") };
                g.Children.Add(resurrected);
             }
             //----------------------------------------------------
@@ -1597,7 +1611,7 @@ namespace BarbarianPrince
             {
                BitmapImage bmi = new BitmapImage();
                bmi.BeginInit();
-               bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "Smoke.gif", UriKind.Relative);
+               bmi.UriSource = new Uri(MapImage.theImageDirectory + "Smoke.gif", UriKind.Absolute);
                bmi.EndInit();
                Image img1 = new Image { Source = bmi, Stretch = Stretch.UniformToFill, StretchDirection = StretchDirection.Both };
                ImageBehavior.SetAnimatedSource(img1, bmi);
@@ -1605,33 +1619,29 @@ namespace BarbarianPrince
             }
             else if (true == mi.IsKilled) // add Overlays
             {
-               Image kia = new Image() { Stretch = Stretch.Fill };
-               kia.Source = MapItem.theMapImages.GetBitmapImage("OKIA");
+               Image kia = new Image() { Stretch = Stretch.Fill, Source= MapItem.theMapImages.GetBitmapImage("OKIA") };
                g.Children.Add(kia);
             }
             else if ((true == mi.IsUnconscious) && ("ORest" != mi.OverlayImageName) ) // if unconscous person is resting, do not show UNC image on counter
             {
-               Image mia = new Image() { Stretch = Stretch.Fill };
-               mia.Source = MapItem.theMapImages.GetBitmapImage("OUNC");
+               Image mia = new Image() { Stretch = Stretch.Fill, Source = MapItem.theMapImages.GetBitmapImage("OUNC") };
                g.Children.Add(mia);
             }
             else if (true == mi.IsRunAway)
             {
-               Image runs = new Image() { Stretch = Stretch.Fill };
-               runs.Source = MapItem.theMapImages.GetBitmapImage("ORUNS");
+               Image runs = new Image() { Stretch = Stretch.Fill, Source = MapItem.theMapImages.GetBitmapImage("ORUNS") };
                g.Children.Add(runs);
             }
             else if (true == mi.IsPlagued)
             {
-               Image mia = new Image() { Stretch = Stretch.Fill };
-               mia.Source = MapItem.theMapImages.GetBitmapImage("Foam");
+               Image mia = new Image() { Stretch = Stretch.Fill, Source = MapItem.theMapImages.GetBitmapImage("Foam") };
                g.Children.Add(mia);
             }
             if (true == mi.IsShowFireball)
             {
                BitmapImage bmi = new BitmapImage();
                bmi.BeginInit();
-               bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "Fireball.gif", UriKind.Relative);
+               bmi.UriSource = new Uri(MapImage.theImageDirectory + "Fireball.gif", UriKind.Absolute);
                bmi.EndInit();
                Image img1 = new Image { Source = bmi, Stretch = Stretch.UniformToFill, StretchDirection = StretchDirection.Both };
                ImageBehavior.SetAnimatedSource(img1, bmi);

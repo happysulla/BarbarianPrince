@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Data.Common;
 using System.IO;
-using System.IO.Pipes;
 using System.Reflection;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace BarbarianPrince
 {
@@ -66,6 +67,8 @@ namespace BarbarianPrince
       public static Boolean[] theLogLevel = new Boolean[NUM_LOG_LEVELS];
       private static string theDirectoryName = "";
       private static string theFileName = "";
+      private static bool theIsLogFileCreated = false;
+      private static Mutex theMutex = new Mutex();
       //--------------------------------------------------
       public static string AssemblyDirectory
       {
@@ -83,6 +86,9 @@ namespace BarbarianPrince
          if (true == theLogLevel[(int)logLevel])
          {
             Console.WriteLine("{0} {1}", logLevel.ToString(), description);
+            theMutex.WaitOne();
+            if (false == theIsLogFileCreated)
+               return;
             try
             {
                FileInfo file = new FileInfo(theFileName);
@@ -96,10 +102,20 @@ namespace BarbarianPrince
                   swriter.Close();
                }
             }
+            catch (FileNotFoundException fileException)
+            {
+               Console.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + fileException.ToString());
+            }
+            catch (IOException ioException)
+            {
+               Console.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + ioException.ToString());
+            }
             catch (Exception ex)
             {
-               Console.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description +  "\n" +ex.ToString());
+               Console.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + ex.ToString());
             }
+            theMutex.ReleaseMutex();
+
          }
       }
       static public void SetOn(LogEnum logLevel)
@@ -123,11 +139,21 @@ namespace BarbarianPrince
                Directory.CreateDirectory(theDirectoryName);
             Directory.SetCurrentDirectory(theDirectoryName);
          }
-         catch (Exception e)
+         catch (DirectoryNotFoundException dirException)
          {
-            Logger.Log(LogEnum.LE_ERROR, "SaveGameAsToFile(): path=" + theDirectoryName + " e=" + e.ToString());
-            Directory.SetCurrentDirectory(AssemblyDirectory);
-            return false;
+            Console.WriteLine("SetInitial(): create dir\n" + dirException.ToString());
+         }
+         catch (FileNotFoundException fileException)
+         {
+            Console.WriteLine("SetInitial(): create dir\n" + fileException.ToString());
+         }
+         catch (IOException ioException)
+         {
+            Console.WriteLine("SetInitial(): create dir\n" + ioException.ToString());
+         }
+         catch (Exception ex)
+         {
+            Console.WriteLine("SetInitial(): create dir\n" + ex.ToString());
          }
          //---------------------------------------------------------------------
          try // create the file
@@ -140,17 +166,27 @@ namespace BarbarianPrince
             theFileName = sb.ToString();
             FileInfo f = new FileInfo(theFileName);
             f.Create();
+            Directory.SetCurrentDirectory(AssemblyDirectory);
+         }
+         catch (DirectoryNotFoundException dirException)
+         {
+            Console.WriteLine("SetInitial(): create file\n" + dirException.ToString());
+         }
+         catch (FileNotFoundException fileException)
+         {
+            Console.WriteLine("SetInitial(): create file\n" + fileException.ToString());
+         }
+         catch (IOException ioException)
+         {
+            Console.WriteLine("SetInitial(): create file\n" + ioException.ToString());
          }
          catch (Exception ex)
          {
-            Logger.Log(LogEnum.LE_ERROR, "SaveGameAsToFile(): path=" + theDirectoryName + " e =" + ex.ToString());
-            Directory.SetCurrentDirectory(AssemblyDirectory);
-            return false;
+            Console.WriteLine("SetInitial(): create file\n" + ex.ToString());
          }
-         Directory.SetCurrentDirectory(AssemblyDirectory);
          //---------------------------------------------------------------------
          Logger.SetOn(LogEnum.LE_ERROR);
-         Logger.SetOn(LogEnum.LE_GAME_INIT);
+         //Logger.SetOn(LogEnum.LE_GAME_INIT);
          Logger.SetOn(LogEnum.LE_USER_ACTION);
          Logger.SetOn(LogEnum.LE_NEXT_ACTION);
          //Logger.SetOn(LogEnum.LE_UNDO_COMMAND);

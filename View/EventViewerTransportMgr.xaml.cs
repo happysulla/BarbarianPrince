@@ -327,13 +327,13 @@ namespace BarbarianPrince
          //----------------------------------------
          if (0 < myPartyMountCount)
          {
-            IMapItem horse = new MapItem("Horse", 1.0, false, false, false, "MHorse", "", myTerritory, 0, 0, 0);
+            IMapItem horse= new MapItem("Horse", 1.0, false, false, false, "MHorse", "MHorse", myTerritory, 0, 0, 0);
             Button h = CreateButton(horse, false, false, true);
             myCursors[horse.Name] = Utilities.ConvertToCursor(h, hotPoint);
-            IMapItem pegasus = new MapItem("Pegasus", 1.0, false, false, false, "MPegasus", "", myTerritory, 0, 0, 0);
+            IMapItem pegasus= new MapItem("Pegasus", 1.0, false, false, false, "MPegasus", "MPegasus", myTerritory, 0, 0, 0);
             Button p = CreateButton(pegasus, false, false, true);
             myCursors[pegasus.Name] = Utilities.ConvertToCursor(p, hotPoint);
-            IMapItem unicorn = new MapItem("Unicorn", 1.0, false, false, false, "MUnicorn", "", myTerritory, 0, 0, 0);
+            IMapItem unicorn= new MapItem("Unicorn", 1.0, false, false, false, "MUnicorn", "MUnicorn", myTerritory, 0, 0, 0);
             Button u = CreateButton(unicorn, false, false, true);
             myCursors[unicorn.Name] = Utilities.ConvertToCursor(u, hotPoint);
          }
@@ -591,7 +591,7 @@ namespace BarbarianPrince
                   {
                      BitmapImage bmi = new BitmapImage();
                      bmi.BeginInit();
-                     bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "CarryingMan.gif", UriKind.Relative);
+                     bmi.UriSource = new Uri(MapImage.theImageDirectory + "CarryingMan.gif", UriKind.Absolute);
                      bmi.EndInit();
                      Image img = new Image { Tag = "CarryingMan", Source = bmi, Width = Utilities.theMapItemSize + 15, Height = Utilities.theMapItemSize + 10 };
                      myStackPanelAssignable.Children.Add(img);
@@ -600,7 +600,7 @@ namespace BarbarianPrince
                   {
                      BitmapImage bmi0 = new BitmapImage();
                      bmi0.BeginInit();
-                     bmi0.UriSource = new Uri(Utilities.theImageDirectoryPath + "Backpack.gif", UriKind.Relative);
+                     bmi0.UriSource = new Uri(MapImage.theImageDirectory + "Backpack.gif", UriKind.Absolute);
                      bmi0.EndInit();
                      Image img0 = new Image { Tag = "Backpack", Source = bmi0, Width = Utilities.theMapItemSize + 10, Height = Utilities.theMapItemSize + 10 };
                      myStackPanelAssignable.Children.Add(img0);
@@ -643,7 +643,7 @@ namespace BarbarianPrince
                {
                   BitmapImage bmi1 = new BitmapImage();
                   bmi1.BeginInit();
-                  bmi1.UriSource = new Uri(Utilities.theImageDirectoryPath + "Backpack.gif", UriKind.Relative);
+                  bmi1.UriSource = new Uri(MapImage.theImageDirectory + "Backpack.gif", UriKind.Absolute);
                   bmi1.EndInit();
                   Image img1 = new Image { Tag = "Backpack", Source = bmi1, Width = Utilities.theMapItemSize, Height = Utilities.theMapItemSize + 10 };
                   myStackPanelAssignable.Children.Add(img1);
@@ -659,7 +659,7 @@ namespace BarbarianPrince
                {
                   BitmapImage bmi2 = new BitmapImage();
                   bmi2.BeginInit();
-                  bmi2.UriSource = new Uri(Utilities.theImageDirectoryPath + "Mount.gif", UriKind.Relative);
+                  bmi2.UriSource = new Uri(MapImage.theImageDirectory + "Mount.gif", UriKind.Absolute);
                   bmi2.EndInit();
                   Image img2 = new Image { Tag = "Mount", Source = bmi2, Width = Utilities.theMapItemSize, Height = Utilities.theMapItemSize };
                   myStackPanelAssignable.Children.Add(img2);
@@ -738,7 +738,7 @@ namespace BarbarianPrince
                {
                   BitmapImage bmi4 = new BitmapImage();
                   bmi4.BeginInit();
-                  bmi4.UriSource = new Uri(Utilities.theImageDirectoryPath + "Sun1.gif", UriKind.Relative);
+                  bmi4.UriSource = new Uri(MapImage.theImageDirectory + "Sun1.gif", UriKind.Absolute);
                   bmi4.EndInit();
                   Image img4 = new Image { Tag = "Continue", Source = bmi4, Width = Utilities.theMapItemSize + 10, Height = Utilities.theMapItemSize + 10 };
                   ImageBehavior.SetAnimatedSource(img4, bmi4);
@@ -753,7 +753,7 @@ namespace BarbarianPrince
                {
                   BitmapImage bmi3 = new BitmapImage();
                   bmi3.BeginInit();
-                  bmi3.UriSource = new Uri(Utilities.theImageDirectoryPath + "Mount.gif", UriKind.Relative);
+                  bmi3.UriSource = new Uri(MapImage.theImageDirectory + "Mount.gif", UriKind.Absolute);
                   bmi3.EndInit();
                   Image img3 = new Image { Tag = "Mount", Source = bmi3, Width = Utilities.theMapItemSize, Height = Utilities.theMapItemSize };
                   myStackPanelAssignable.Children.Add(img3);
@@ -766,7 +766,7 @@ namespace BarbarianPrince
                {
                   BitmapImage bmi5 = new BitmapImage();
                   bmi5.BeginInit();
-                  bmi5.UriSource = new Uri(Utilities.theImageDirectoryPath + "CarryingMan.gif", UriKind.Relative);
+                  bmi5.UriSource = new Uri(MapImage.theImageDirectory + "CarryingMan.gif", UriKind.Absolute);
                   bmi5.EndInit();
                   Image img5 = new Image { Tag = "CarryingMan", Source = bmi5, Width = Utilities.theMapItemSize + 15, Height = Utilities.theMapItemSize + 15 };
                   myStackPanelAssignable.Children.Add(img5);
@@ -779,7 +779,7 @@ namespace BarbarianPrince
                   //--------------------------------------------
                   BitmapImage bmi6 = new BitmapImage();
                   bmi6.BeginInit();
-                  bmi6.UriSource = new Uri(Utilities.theImageDirectoryPath + "Food.gif", UriKind.Relative);
+                  bmi6.UriSource = new Uri(MapImage.theImageDirectory + "Food.gif", UriKind.Absolute);
                   bmi6.EndInit();
                   Image img6 = new Image { Source = bmi6, Width = Utilities.theMapItemSize, Height = Utilities.theMapItemSize };
                   myStackPanelAssignable.Children.Add(img6);
@@ -793,7 +793,7 @@ namespace BarbarianPrince
                   //--------------------------------------------
                   BitmapImage bmi7 = new BitmapImage();
                   bmi7.BeginInit();
-                  bmi7.UriSource = new Uri(Utilities.theImageDirectoryPath + "Coin.gif", UriKind.Relative);
+                  bmi7.UriSource = new Uri(MapImage.theImageDirectory + "Coin.gif", UriKind.Absolute);
                   bmi7.EndInit();
                   Image img7 = new Image { Source = bmi7, Width = Utilities.theMapItemSize, Height = Utilities.theMapItemSize };
                   myStackPanelAssignable.Children.Add(img7);

@@ -259,7 +259,7 @@ namespace BarbarianPrince
             this.myCanvas.Cursor = myTargetCursor;
          }
          //-------------------------------------------------------
-         else if (GameAction.UpdateLoadingGame == action)
+         else if ((GameAction.UpdateLoadingGame == action) || (GameAction.UpdateNewGame == action))
          {
             myGameInstance = gi;
             myButtonMapItems.Clear();

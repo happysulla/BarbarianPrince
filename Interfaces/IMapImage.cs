@@ -22,9 +22,9 @@ namespace BarbarianPrince
       bool Contains(IMapImage mii);
       int IndexOf(IMapImage mii);
       void Remove(IMapImage mii);
+      IMapImage this[int index] { get; set; }
       IMapImage Find(string pathToMatch);
       BitmapImage GetBitmapImage(string name);
-      BitmapImage GetBitmapImage2(string name);
-      IMapImage this[int index] { get; set; }
+
    }
 }

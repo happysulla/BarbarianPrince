@@ -1011,7 +1011,7 @@ e027	"<Bold>e027 Ancient Treasure</Bold>
 <LineBreak/><LineBreak/>You find an ancient treasure that was long lost. It has wealth code 110. See
  <InlineUIContainer><Button Content='r225' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.  Click image to continue.
 <LineBreak/>
-                   <InlineUIContainer><Image Name='EncounterEnd' Source='../bin/Images/CoinsStacked.gif' Height='400'  Width='400'> </Image></InlineUIContainer> "
+                   <InlineUIContainer><Image Name='AncientTreasure' Source='../bin/Images/CoinsStacked.gif' Height='400'  Width='400'> </Image></InlineUIContainer> "
 e028	"<Bold>e028 Cave Tombs Entrance</Bold>
 <LineBreak/><LineBreak/>Amid the howling winds on a craggy cliff, you find caves. Within the caves, you find the tombs of an ancient race. You can decide to avoid them which ends this event. Or, you can continue inward and investigate the tombs. See
  <InlineUIContainer><Button Content='e028a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.<LineBreak/>

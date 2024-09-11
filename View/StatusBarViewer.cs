@@ -32,7 +32,7 @@ namespace BarbarianPrince
       //-----------------------------------------------------------------
       public void UpdateView(ref IGameInstance gi, GameAction action)
       {
-         if(GameAction.UpdateLoadingGame == action )
+         if ((GameAction.UpdateLoadingGame == action) || (GameAction.UpdateNewGame == action))
          {
             myGameInstance = gi;
          }
@@ -76,6 +76,7 @@ namespace BarbarianPrince
                myTargetCursor = Utilities.ConvertToCursor(img1, hotPoint);
                this.myCanvas.Cursor = myTargetCursor; // set the cursor in the canvas
                break;
+            case GameAction.UpdateNewGame:
             case GameAction.UpdateLoadingGame:
             case GameAction.UpdateUndo:
             case GameAction.E045ArchOfTravelEnd:

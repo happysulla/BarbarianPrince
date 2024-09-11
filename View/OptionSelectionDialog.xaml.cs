@@ -275,7 +275,6 @@ namespace BarbarianPrince
                {
                   myRadioButtonPartyRandom5.IsChecked = true;
                   isRandomPartyConfig = true;
-                  isFunOption = false;
                }
                else
                {
@@ -375,9 +374,6 @@ namespace BarbarianPrince
                            if (true == option.IsEnabled)
                            {
                               isCustomPartyConfig = true;
-                           }
-                           else
-                           {
                               isFunOption = false;
                            }
                            //-------------------------
@@ -448,9 +444,6 @@ namespace BarbarianPrince
                            if (true == option.IsEnabled)
                            {
                               isCustomPartyConfig = true;
-                           }
-                           else
-                           {
                               isFunOption = false;
                            }
                            //-------------------------
@@ -465,9 +458,6 @@ namespace BarbarianPrince
                            if (true == option.IsEnabled)
                            {
                               isCustomPartyConfig = true;
-                           }
-                           else
-                           {
                               isFunOption = false;
                            }
                            //-------------------------
@@ -510,9 +500,6 @@ namespace BarbarianPrince
                            if (true == option.IsEnabled)
                            {
                               isCustomPartyConfig = true;
-                           }
-                           else
-                           {
                               isFunOption = false;
                            }
                            //-------------------------
@@ -1895,34 +1882,9 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=StartWithNecklass");
          else
             option.IsEnabled = true;
-         option = myOptions.Find("PartyCustom");
+         option = myOptions.Find("RandomParty05");
          if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=PartyCustom");
-         else
-            option.IsEnabled = true;
-         option = myOptions.Find("Elf");
-         if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=Elf");
-         else
-            option.IsEnabled = true;
-         option = myOptions.Find("ElfWarrior");
-         if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=ElfWarrior");
-         else
-            option.IsEnabled = true;
-         option = myOptions.Find("Magician");
-         if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=Magician");
-         else
-            option.IsEnabled = true;
-         option = myOptions.Find("Mercenary");
-         if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=Mercenary");
-         else
-            option.IsEnabled = true;
-         option = myOptions.Find("Monk");
-         if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=Monk");
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=RandomParty05");
          else
             option.IsEnabled = true;
          option = myOptions.Find("RandomHex");

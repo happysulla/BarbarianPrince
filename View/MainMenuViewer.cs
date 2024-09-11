@@ -1,13 +1,8 @@
-﻿using System;
-using System.IO;
-using System.IO.Pipes;
-using System.Linq.Expressions;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
+﻿using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Microsoft.Win32;
+
 namespace BarbarianPrince
 {
    public static class CustomCommands

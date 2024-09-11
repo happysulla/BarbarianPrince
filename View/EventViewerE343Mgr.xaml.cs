@@ -288,7 +288,7 @@ namespace BarbarianPrince
                {
                   BitmapImage bmi = new BitmapImage();
                   bmi.BeginInit();
-                  bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "Luck.gif", UriKind.Relative);
+                  bmi.UriSource = new Uri(MapImage.theImageDirectory + "Luck.gif", UriKind.Absolute);
                   bmi.EndInit();
                   double size = Utilities.ZOOM * Utilities.theMapItemSize;
                   Image img = new Image { Source = bmi, Width = 1.75 * size, Height = size };
@@ -370,7 +370,7 @@ namespace BarbarianPrince
                {
                   BitmapImage bmi = new BitmapImage();
                   bmi.BeginInit();
-                  bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+                  bmi.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                   bmi.EndInit();
                   Image img = new Image { Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                   ImageBehavior.SetAnimatedSource(img, bmi);
@@ -422,7 +422,7 @@ namespace BarbarianPrince
                   {
                      BitmapImage bmi0 = new BitmapImage();
                      bmi0.BeginInit();
-                     bmi0.UriSource = new Uri(Utilities.theImageDirectoryPath + "TalismanResistanceDestroy.gif", UriKind.Relative);
+                     bmi0.UriSource = new Uri(MapImage.theImageDirectory + "TalismanResistanceDestroy.gif", UriKind.Absolute);
                      bmi0.EndInit();
                      Image img0 = new Image { Source = bmi0, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                      ImageBehavior.SetAnimatedSource(img0, bmi0);
@@ -451,7 +451,7 @@ namespace BarbarianPrince
                   {
                      BitmapImage bmi0 = new BitmapImage();
                      bmi0.BeginInit();
-                     bmi0.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+                     bmi0.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                      bmi0.EndInit();
                      Image img0 = new Image { Source = bmi0, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                      ImageBehavior.SetAnimatedSource(img0, bmi0);

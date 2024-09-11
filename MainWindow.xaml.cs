@@ -22,6 +22,7 @@ using BarbarianPrince.Properties;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace BarbarianPrince
 {
@@ -35,7 +36,16 @@ namespace BarbarianPrince
          InitializeComponent();
          try
          {
+            //--------------------------------------------
+            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+            UriBuilder uri = new UriBuilder(codeBase);
+            string path = Uri.UnescapeDataString(uri.Path);
+            string assemplyDirectory = System.IO.Path.GetDirectoryName(path);
+            string parentDir = System.IO.Path.GetDirectoryName(assemplyDirectory);
+            MapImage.theImageDirectory = parentDir + @"\Images\";
+            //--------------------------------------------
             Utilities.InitializeRandomNumGenerators();
+            //--------------------------------------------
             IGameInstance gi = new GameInstance();
             if (true == gi.CtorError)
             {

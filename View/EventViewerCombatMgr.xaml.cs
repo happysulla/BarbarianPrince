@@ -972,7 +972,7 @@ namespace BarbarianPrince
                   IMapItem encountered = encounteredMembers[i];
                   encountered.SetWounds(encountered.Endurance, 0); // kill the encountered member by a cavalry unit
                   myGridRows[i] = new GridRow(encountered);
-                  myGridRows[i].myAssignable = new MapItem(cavalry);
+                  myGridRows[i].myAssignable= new MapItem(cavalry);
                }
                Button b = CreateButton(cavalry, IS_ENABLE, false, NO_STATS, NO_ADORN, IS_CURSOR);
                myCursors[cavalry.Name] = Utilities.ConvertToCursor(b, hotPoint);
@@ -1729,7 +1729,7 @@ namespace BarbarianPrince
          {
             BitmapImage bmi = new BitmapImage();
             bmi.BeginInit();
-            bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+            bmi.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
             bmi.EndInit();
             Image img = new Image { Name = "FirstStrikeDie", Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
             ImageBehavior.SetAnimatedSource(img, bmi);
@@ -1786,7 +1786,7 @@ namespace BarbarianPrince
          {
             BitmapImage bmi = new BitmapImage();
             bmi.BeginInit();
-            bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+            bmi.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
             bmi.EndInit();
             Image img = new Image { Name = myState.ToString(), Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
             ImageBehavior.SetAnimatedSource(img, bmi);
@@ -2037,7 +2037,7 @@ namespace BarbarianPrince
                   {
                      BitmapImage bmi0a = new BitmapImage();
                      bmi0a.BeginInit();
-                     bmi0a.UriSource = new Uri(Utilities.theImageDirectoryPath + "lightening.gif", UriKind.Relative);
+                     bmi0a.UriSource = new Uri(MapImage.theImageDirectory + "lightening.gif", UriKind.Absolute);
                      bmi0a.EndInit();
                      Image img0a = new Image { Name = "Lightening", Source = bmi0a, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                      ImageBehavior.SetAnimatedSource(img0a, bmi0a);
@@ -2075,7 +2075,7 @@ namespace BarbarianPrince
                   {
                      BitmapImage bmi0b = new BitmapImage();
                      bmi0b.BeginInit();
-                     bmi0b.UriSource = new Uri(Utilities.theImageDirectoryPath + "lightening.gif", UriKind.Relative);
+                     bmi0b.UriSource = new Uri(MapImage.theImageDirectory + "lightening.gif", UriKind.Absolute);
                      bmi0b.EndInit();
                      Image img0b = new Image { Name = "Lightening", Source = bmi0b, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                      ImageBehavior.SetAnimatedSource(img0b, bmi0b);
@@ -2113,7 +2113,7 @@ namespace BarbarianPrince
                   {
                      BitmapImage bmi0c = new BitmapImage();
                      bmi0c.BeginInit();
-                     bmi0c.UriSource = new Uri(Utilities.theImageDirectoryPath + "lightening.gif", UriKind.Relative);
+                     bmi0c.UriSource = new Uri(MapImage.theImageDirectory + "lightening.gif", UriKind.Absolute);
                      bmi0c.EndInit();
                      Image img0c = new Image { Name = "Lightening", Source = bmi0c, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                      ImageBehavior.SetAnimatedSource(img0c, bmi0c);
@@ -2136,7 +2136,7 @@ namespace BarbarianPrince
             case CombatEnum.APPLY_RING:
                BitmapImage bmi0 = new BitmapImage();
                bmi0.BeginInit();
-               bmi0.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+               bmi0.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                bmi0.EndInit();
                Image img0 = new Image { Name = "RingRoll", Source = bmi0, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                ImageBehavior.SetAnimatedSource(img0, bmi0);
@@ -2149,7 +2149,7 @@ namespace BarbarianPrince
                myStackPanelAssignable.Children.Add(labelForFireball);
                BitmapImage bmi101 = new BitmapImage();
                bmi101.BeginInit();
-               bmi101.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+               bmi101.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                bmi101.EndInit();
                Image img101 = new Image { Name = "WizardStrike", Source = bmi101, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                ImageBehavior.SetAnimatedSource(img101, bmi101);
@@ -2165,7 +2165,7 @@ namespace BarbarianPrince
             case CombatEnum.WIZARD_STRIKE_SHOW:
                BitmapImage bmi100 = new BitmapImage();
                bmi100.BeginInit();
-               bmi100.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+               bmi100.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                bmi100.EndInit();
                Image img100 = new Image { Name = "WizardStrike", Source = bmi100, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                ImageBehavior.SetAnimatedSource(img100, bmi100);
@@ -2174,7 +2174,7 @@ namespace BarbarianPrince
             case CombatEnum.MIRROR_STRIKE:
                BitmapImage bmi10 = new BitmapImage();
                bmi10.BeginInit();
-               bmi10.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+               bmi10.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                bmi10.EndInit();
                Image img10 = new Image { Name = "MirrorStrike", Source = bmi10, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                ImageBehavior.SetAnimatedSource(img10, bmi10);
@@ -2204,7 +2204,7 @@ namespace BarbarianPrince
             case CombatEnum.KNIGHT_STRIKE:
                BitmapImage bmi10111 = new BitmapImage();
                bmi10111.BeginInit();
-               bmi10111.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+               bmi10111.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                bmi10111.EndInit();
                Image img10111 = new Image { Name = "KnightStrike", Source = bmi10111, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                ImageBehavior.SetAnimatedSource(img10111, bmi10111);
@@ -2225,7 +2225,7 @@ namespace BarbarianPrince
             case CombatEnum.ROLL_FOR_PROTECTOR:
                BitmapImage bmi1011 = new BitmapImage();
                bmi1011.BeginInit();
-               bmi1011.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+               bmi1011.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                bmi1011.EndInit();
                Image img1011 = new Image { Name = "Protector", Source = bmi1011, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                ImageBehavior.SetAnimatedSource(img1011, bmi1011);
@@ -2244,7 +2244,7 @@ namespace BarbarianPrince
             case CombatEnum.ROLL_FOR_HALFLING:
                BitmapImage bmi110 = new BitmapImage();
                bmi110.BeginInit();
-               bmi110.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+               bmi110.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                bmi110.EndInit();
                Image img110 = new Image { Name = "HalflingRoll", Source = bmi110, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                ImageBehavior.SetAnimatedSource(img110, bmi110);
@@ -2777,7 +2777,7 @@ namespace BarbarianPrince
                   {
                      BitmapImage bmi = new BitmapImage();
                      bmi.BeginInit();
-                     bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+                     bmi.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                      bmi.EndInit();
                      Image img = new Image { Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                      ImageBehavior.SetAnimatedSource(img, bmi);
@@ -2806,7 +2806,7 @@ namespace BarbarianPrince
                      myGridRows[i].myResult = Utilities.NO_RESULT;
                      BitmapImage bmi = new BitmapImage();
                      bmi.BeginInit();
-                     bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+                     bmi.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                      bmi.EndInit();
                      Image img = new Image { Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                      ImageBehavior.SetAnimatedSource(img, bmi);
@@ -2847,7 +2847,7 @@ namespace BarbarianPrince
                         //------------------------------------
                         BitmapImage bmi = new BitmapImage();
                         bmi.BeginInit();
-                        bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+                        bmi.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                         bmi.EndInit();
                         Image img = new Image { Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                         ImageBehavior.SetAnimatedSource(img, bmi);
@@ -2889,7 +2889,7 @@ namespace BarbarianPrince
                         myGridRows[i].myResult = Utilities.NO_RESULT;
                         BitmapImage bmi = new BitmapImage();
                         bmi.BeginInit();
-                        bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+                        bmi.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                         bmi.EndInit();
                         Image img = new Image { Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                         ImageBehavior.SetAnimatedSource(img, bmi);
@@ -3169,7 +3169,7 @@ namespace BarbarianPrince
                isAllDiceResultsShown = false;
                BitmapImage bmi0 = new BitmapImage();
                bmi0.BeginInit();
-               bmi0.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+               bmi0.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                bmi0.EndInit();
                Image img0 = new Image { Source = bmi0, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                ImageBehavior.SetAnimatedSource(img0, bmi0);
@@ -3334,7 +3334,7 @@ namespace BarbarianPrince
                isAllDiceResultsShown = false;
                BitmapImage bmi0 = new BitmapImage();
                bmi0.BeginInit();
-               bmi0.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+               bmi0.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                bmi0.EndInit();
                Image img0 = new Image { Source = bmi0, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                ImageBehavior.SetAnimatedSource(img0, bmi0);
@@ -3424,7 +3424,7 @@ namespace BarbarianPrince
             {
                BitmapImage bmi0 = new BitmapImage();
                bmi0.BeginInit();
-               bmi0.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+               bmi0.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                bmi0.EndInit();
                Image img0 = new Image { Source = bmi0, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                ImageBehavior.SetAnimatedSource(img0, bmi0);
@@ -3439,7 +3439,7 @@ namespace BarbarianPrince
                {
                   BitmapImage bmi0 = new BitmapImage();
                   bmi0.BeginInit();
-                  bmi0.UriSource = new Uri(Utilities.theImageDirectoryPath + "TalismanResistanceDestroy.gif", UriKind.Relative);
+                  bmi0.UriSource = new Uri(MapImage.theImageDirectory + "TalismanResistanceDestroy.gif", UriKind.Absolute);
                   bmi0.EndInit();
                   Image img0 = new Image { Source = bmi0, Width = Utilities.ZOOM * Utilities.theMapItemSize, Height = Utilities.ZOOM * Utilities.theMapItemSize };
                   ImageBehavior.SetAnimatedSource(img0, bmi0);
@@ -3505,7 +3505,7 @@ namespace BarbarianPrince
             {
                BitmapImage bmi0 = new BitmapImage();
                bmi0.BeginInit();
-               bmi0.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+               bmi0.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                bmi0.EndInit();
                Image img0 = new Image { Source = bmi0, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                ImageBehavior.SetAnimatedSource(img0, bmi0);
@@ -3672,7 +3672,7 @@ namespace BarbarianPrince
                {
                   BitmapImage bmi = new BitmapImage();
                   bmi.BeginInit();
-                  bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+                  bmi.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                   bmi.EndInit();
                   Image img = new Image { Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                   ImageBehavior.SetAnimatedSource(img, bmi);
@@ -3711,7 +3711,7 @@ namespace BarbarianPrince
                {
                   BitmapImage bmi = new BitmapImage();
                   bmi.BeginInit();
-                  bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+                  bmi.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                   bmi.EndInit();
                   Image img = new Image { Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                   ImageBehavior.SetAnimatedSource(img, bmi);
@@ -3727,7 +3727,7 @@ namespace BarbarianPrince
                {
                   BitmapImage bmi = new BitmapImage();
                   bmi.BeginInit();
-                  bmi.UriSource = new Uri(Utilities.theImageDirectoryPath + "dieRoll.gif", UriKind.Relative);
+                  bmi.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
                   bmi.EndInit();
                   Image img = new Image { Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
                   ImageBehavior.SetAnimatedSource(img, bmi);
@@ -5281,9 +5281,9 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "ShowProtectorResults(): returned option=null");
             string miName = "ProtectorBoss" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem protectorBoss = new MapItem(miName, 1.0, false, false, false, "C38ProtectorBoss", "C38ProtectorBoss", myGameInstance.Prince.Territory, 5, 5, 25);
+            IMapItem protectorBoss= new MapItem(miName, 1.0, false, false, false, "C38ProtectorBoss", "C38ProtectorBoss", myGameInstance.Prince.Territory, 5, 5, 25);
             if (true == isEasyMonstersOption.IsEnabled)
-               protectorBoss = new MapItem(miName, 1.0, false, false, false, "C38ProtectorBoss", "C38ProtectorBoss", myGameInstance.Prince.Territory, 1, 1, 25);
+               protectorBoss= new MapItem(miName, 1.0, false, false, false, "C38ProtectorBoss", "C38ProtectorBoss", myGameInstance.Prince.Territory, 1, 1, 25);
             myGameInstance.EncounteredMembers.Add(protectorBoss);
             int numOfMembersInCrew = 4;
             if (true == isEasyMonstersOption.IsEnabled)
@@ -5292,9 +5292,9 @@ namespace BarbarianPrince
             {
                miName = "Protector" + Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               IMapItem protectorMan = new MapItem(miName, 1.0, false, false, false, "C39Protector", "C39Protector", myGameInstance.Prince.Territory, 5, 5, 4);
+               IMapItem protectorMan= new MapItem(miName, 1.0, false, false, false, "C39Protector", "C39Protector", myGameInstance.Prince.Territory, 5, 5, 4);
                if (true == isEasyMonstersOption.IsEnabled)
-                  protectorMan = new MapItem(miName, 1.0, false, false, false, "C39Protector", "C39Protector", myGameInstance.Prince.Territory, 1, 1, 4);
+                  protectorMan= new MapItem(miName, 1.0, false, false, false, "C39Protector", "C39Protector", myGameInstance.Prince.Territory, 1, 1, 4);
                myGameInstance.EncounteredMembers.Add(protectorMan);
             }
          }
@@ -5752,7 +5752,7 @@ namespace BarbarianPrince
                               for (int k = 0; k < myGameInstance.HydraTeethCount; ++k)
                               {
                                  string nameUndead = "Undead" + k.ToString();
-                                 IMapItem undeadWarrior = new MapItem(nameUndead, 1.0, false, false, false, "c32UndeadWarrior", "c32UndeadWarrior", myGameInstance.Prince.Territory, 4, 5, 0);
+                                 IMapItem undeadWarrior= new MapItem(nameUndead, 1.0, false, false, false, "c32UndeadWarrior", "c32UndeadWarrior", myGameInstance.Prince.Territory, 4, 5, 0);
                                  myGameInstance.PartyMembers.Add(undeadWarrior);
                               }
                               myGameInstance.HydraTeethCount = 0;
