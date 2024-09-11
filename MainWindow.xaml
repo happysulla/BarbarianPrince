@@ -4,7 +4,4 @@
         mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         Name="myWindowMain" IsEnabled="False" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" ResizeMode="CanResizeWithGrip" WindowStyle="None"
         MinWidth="352" MinHeight="597" MaxWidth="352" MaxHeight="597" Cursor="Wait" Visibility="Hidden">
-    <Viewbox Name="myViewBoxSplash" Stretch="UniformToFill">
-        <Image Name="myImageGameBox" Source="/bin/Images/GameBox.gif" Stretch="Uniform" />
-    </Viewbox>
 </Window>

@@ -9,13 +9,12 @@
         Title="Barbarian Prince"  
         BorderThickness="3" 
         Height="1080" Width="1920" 
-        Icon="/bin/Images/GameBox.gif" 
         ResizeMode="CanResizeWithGrip" 
         MinHeight="600" MinWidth="800"
         WindowState="Maximized" 
         SizeChanged="SizeChangedGameViewerWindow" 
         ContentRendered="ContentRenderedGameViewerWindow"
-        Closed="ClosedGameViewerWindow" >
+        Closed="ClosedGameViewerWindow" Icon="/View/BarbarianPrince.ico" >
    <DockPanel x:Name="myDockPanelTop">
       <Menu x:Name="myMainMenu" DockPanel.Dock="Top">
          <MenuItem Header="_File"  x:Name="myMenuItemTopLevel1" InputGestureText="Ctrl+F" Width="120" />
@@ -112,9 +111,7 @@
             </ScrollViewer>
          </DockPanel>
          <ScrollViewer Name="myScollViewerInside" Height="1000" Width="827" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
-            <Canvas Name="myCanvas" Height="985" Width="810">
-               <Image Name="myMap" Source="../bin/Images/Map.gif" Height="985" Width="810" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" />
-            </Canvas>
+            <Canvas Name="myCanvas" Height="985" Width="810"></Canvas>
          </ScrollViewer>
       </DockPanel>
    </DockPanel>

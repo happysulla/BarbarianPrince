@@ -2038,11 +2038,11 @@ namespace BarbarianPrince
             case "e068":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imge060 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100, Name = "WizardAbode" };
+                  Image imge068 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Nothing"), Width = 100, Height = 100, Name = "WizardAbode" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                            "));
-                  myTextBlock.Inlines.Add(new InlineUIContainer(imge060));
+                  myTextBlock.Inlines.Add(new InlineUIContainer(imge068));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Click image to continue."));
@@ -2051,11 +2051,11 @@ namespace BarbarianPrince
             case "e068a":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image imge068 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Magician"), Width = 150, Height = 300, Name = "MagicianHome" };
+                  Image imge068a = new Image { Source = MapItem.theMapImages.GetBitmapImage("Magician"), Width = 150, Height = 300, Name = "MagicianHome" };
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                       "));
-                  myTextBlock.Inlines.Add(new InlineUIContainer(imge068));
+                  myTextBlock.Inlines.Add(new InlineUIContainer(imge068a));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Click image to continue."));
@@ -5939,8 +5939,6 @@ namespace BarbarianPrince
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
             default:
-               action = GameAction.UpdateEventViewerDisplay;
-               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
          }
       }

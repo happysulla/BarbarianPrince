@@ -93,7 +93,6 @@
         <Rectangle Grid.Row="4" Grid.ColumnSpan="6" Margin="5" Height="1" Fill="Black"/>
         <StackPanel Grid.Row="5" Grid.ColumnSpan="6" Name="myStackPanelCheckMarks" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5,0,0,0">
             <Label Name="myLabelRollFirstStrike" Content="Roll for First Strike:" FontSize='12' Margin="5,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-         <Image Name="myImageDieRoll1" Width="24" Height="24" gif:ImageBehavior.AnimatedSource="/bin/Images/dieRoll.gif"/>
         </StackPanel>
         <Rectangle Grid.Row="6" Grid.ColumnSpan="6" Margin="5" Height="1" Fill="Black"/>
         <!--Table Header Row-->

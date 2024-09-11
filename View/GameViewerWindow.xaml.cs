@@ -155,6 +155,11 @@ namespace BarbarianPrince
          mySplashScreen.Show();
          InitializeComponent();
          //-----------------------------------------------------------------
+         Image imageMap = new Image() { Name="Map", Width=810, Height=985, Stretch= Stretch.Fill, Source = MapItem.theMapImages.GetBitmapImage("Map") };
+         myCanvas.Children.Add(imageMap);
+         Canvas.SetLeft(imageMap, 0);
+         Canvas.SetTop(imageMap, 0);
+         //-----------------------------------------------------------------
          myGameEngine = ge;
          myGameInstance = gi;
          gi.GamePhase = GamePhase.GameSetup;
@@ -331,7 +336,7 @@ namespace BarbarianPrince
                         elements.Add(ui);
                      if (ui is Image img)
                      {
-                        if ("myMap" == img.Name)
+                        if ("Map" == img.Name)
                            continue;
                         elements.Add(ui);
                      }
@@ -1465,7 +1470,7 @@ namespace BarbarianPrince
                elements.Add(ui);
             if (ui is Image img)
             {
-               if ("myMap" == img.Name)
+               if ("Map" == img.Name)
                   continue;
                elements.Add(ui);
             }
