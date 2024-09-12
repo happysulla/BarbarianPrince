@@ -21,7 +21,7 @@ namespace BarbarianPrince
       public double myLeft;   // left of where blood spot exists on canvas
       public double myTop;    // top of where blood spot exists on canvas
       public BloodSpot(int range)
-      { 
+      {
          mySize = Utilities.RandomGenerator.Next(8) + 5;
          myLeft = Utilities.RandomGenerator.Next(range);
          myTop = Utilities.RandomGenerator.Next(range);
@@ -153,7 +153,7 @@ namespace BarbarianPrince
             }
             this.IsAnimated = isAnimated;
          }
-         catch (Exception ex) 
+         catch (Exception ex)
          {
             Logger.Log(LogEnum.LE_ERROR, "MapItem(): aName=" + aName + "\n Ex=" + ex.ToString());
             return;
@@ -201,7 +201,7 @@ namespace BarbarianPrince
          //--------------------------------------------------
          foreach (IMapItem mount in mi.Mounts)
          {
-            IMapItem mountClone= new MapItem(mount);
+            IMapItem mountClone = new MapItem(mount);
             this.Mounts.Add(mountClone);
          }
          //--------------------------------------------------
@@ -226,7 +226,7 @@ namespace BarbarianPrince
       }
       public MapItem(string aName, double zoom, bool isHidden, bool isAnimated, bool isGuide, string topImageName, string bottomImageName, IMapPoint aStartingPoint)
       {
-         
+
          this.Name = aName;
          this.Zoom = zoom;
          this.IsHidden = isHidden;
@@ -305,14 +305,14 @@ namespace BarbarianPrince
       {
          if (true == this.IsFlyer())
          {
-            Logger.Log(LogEnum.LE_ERROR, "AddNewMount(): name=" + Name + " cannot have mounts" );
+            Logger.Log(LogEnum.LE_ERROR, "AddNewMount(): name=" + Name + " cannot have mounts");
             return false;
          }
          if (MountEnum.Pegasus == mt)
          {
             string mountName = "Pegasus" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            MapItem pegasus= new MapItem(mountName, 1.0, false, false, false, "MPegasus", "MPegasus", this.Territory, 0, 0, 0);
+            MapItem pegasus = new MapItem(mountName, 1.0, false, false, false, "MPegasus", "MPegasus", this.Territory, 0, 0, 0);
             Logger.Log(LogEnum.LE_MOUNT_CHANGE, "AddNewMount(): add=" + mountName + " for mi=" + Name);
             this.Mounts.Add(pegasus);
             if (false == this.Name.Contains("Giant"))  // mounts cannot carry giants
@@ -325,7 +325,7 @@ namespace BarbarianPrince
          {
             string mountName = "Horse" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            MapItem horse= new MapItem(mountName, 1.0, false, false, false, "MHorse", "MHorse", this.Territory, 0, 0, 0);
+            MapItem horse = new MapItem(mountName, 1.0, false, false, false, "MHorse", "MHorse", this.Territory, 0, 0, 0);
             Logger.Log(LogEnum.LE_MOUNT_CHANGE, "AddNewMount(): add=" + mountName + " for mi=" + Name);
             this.Mounts.Add(horse);
             if (false == this.Name.Contains("Giant"))  // mounts cannot carry giants
@@ -340,9 +340,9 @@ namespace BarbarianPrince
          bool isGriffonOwned = false;
          bool isHarpyOwned = false;
          bool isPegasusOwned = false;
-         foreach (IMapItem mount in this.Mounts) 
+         foreach (IMapItem mount in this.Mounts)
          {
-            if ((true == mount.Name.Contains("Griffon")) && (false == mount.Name.Contains("Giant")) )
+            if ((true == mount.Name.Contains("Griffon")) && (false == mount.Name.Contains("Giant")))
             {
                isGriffonOwned = true;
                IsFlying = true;
@@ -356,7 +356,7 @@ namespace BarbarianPrince
                IsRiding = true;
                mount.Rider = this;
             }
-            else if ((true == mount.Name.Contains("Pegasus")) && (false == mount.Name.Contains("Giant")) )
+            else if ((true == mount.Name.Contains("Pegasus")) && (false == mount.Name.Contains("Giant")))
             {
                isPegasusOwned = true;
                IsFlying = true;
@@ -390,7 +390,7 @@ namespace BarbarianPrince
          this.Mounts.Add(mount);                    // add the mount to the list
          if (false == this.Name.Contains("Giant"))  // mounts cannot carry giants
          {
-            if(true == mount.IsFlyingMountCarrier())
+            if (true == mount.IsFlyingMountCarrier())
             {
                this.IsRiding = true;                   // assume to be riding until the first night regardless of load
                this.IsFlying = true;
@@ -414,7 +414,7 @@ namespace BarbarianPrince
          bool isGriffonOwned = false;
          bool isHarpyOwned = false;
          bool isPegasusOwned = false;
-         foreach (IMapItem m in this.Mounts) 
+         foreach (IMapItem m in this.Mounts)
          {
             if (true == m.Name.Contains("Griffon"))
                isGriffonOwned = true;
@@ -446,10 +446,10 @@ namespace BarbarianPrince
          this.IsFlying = false;
          if (Utilities.PersonBurden <= this.GetFreeLoad())
          {
-            if( false == mount.IsExhausted )
+            if (false == mount.IsExhausted)
             {
                this.IsRiding = true;
-               if ((0 == mount.StarveDayNum) && ( (true == mount.IsFlyingMount()) ) ) // flying mount and no starve days
+               if ((0 == mount.StarveDayNum) && ((true == mount.IsFlyingMount()))) // flying mount and no starve days
                   this.IsFlying = true;
             }
          }
@@ -496,7 +496,7 @@ namespace BarbarianPrince
          //------------------------------------------------
          int healthRemaining = this.Endurance;
          int diff = healthRemaining - this.Wound;
-         if( diff < 0 )
+         if (diff < 0)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetWounds(): hr=" + healthRemaining.ToString() + " w=" + this.Wound.ToString() + " p=" + this.Poison.ToString());
             this.Wound = healthRemaining;
@@ -543,7 +543,7 @@ namespace BarbarianPrince
          Logger.Log(LogEnum.LE_MAPITEM_WOUND, "SetWounds(): Name=" + this.Name + " woundBefore=" + woundBefore.ToString() + " this.Wound=" + this.Wound.ToString() + "---------spotDelta=" + spotDelta.ToString());
          for (int spots = 0; spots < spotDelta; ++spots) // remove a random wound splatter
          {
-            if( 0 < myWoundSpots.Count )
+            if (0 < myWoundSpots.Count)
             {
                int i = Utilities.RandomGenerator.Next(myWoundSpots.Count);
                myWoundSpots.RemoveAt(i);
@@ -571,17 +571,17 @@ namespace BarbarianPrince
          // This function assume that the victim is carrying its maximum amount
          // which is 10 if riding a horse or not riding
          int loadCanCarry = 0;
-         if ( (true == Name.Contains("Eagle")) || (true == Name.Contains("Falcon")) )
+         if ((true == Name.Contains("Eagle")) || (true == Name.Contains("Falcon")))
          {
             return true;
          }
-         else if ( true == IsFlyingMountCarrier() )
+         else if (true == IsFlyingMountCarrier())
          {
             int maxLoad1 = Utilities.MaxMountLoad;
             if (true == this.IsExhausted)
                maxLoad1 = Utilities.MaxLoad >> 1; // e120 - half the load if exhausted 
             loadCanCarry = (maxLoad1 >> StarveDayNum);
-            if( null != this.Rider )
+            if (null != this.Rider)
             {
                loadCanCarry -= Utilities.PersonBurden;
                this.Rider.IsKilled = true;
@@ -591,7 +591,7 @@ namespace BarbarianPrince
          }
          else if (true == IsRiding)
          {
-            if (0 == Mounts.Count) 
+            if (0 == Mounts.Count)
             {
                Logger.Log(LogEnum.LE_ERROR, "RemoveVictimMountAndLoad(): Invalid state isRiding=true but no mounts for mi=" + this.Name + " #m=" + Mounts.Count.ToString());
                IsRiding = false;
@@ -766,10 +766,10 @@ namespace BarbarianPrince
             Mounts.Remove(mount);
          //-------------------------
          // Switch rider to next mount
-         if( 0 < Mounts.Count )
+         if (0 < Mounts.Count)
          {
-            IMapItem newMount = Mounts[0];   
-            if( true == newMount.IsFlyingMountCarrier())
+            IMapItem newMount = Mounts[0];
+            if (true == newMount.IsFlyingMountCarrier())
                newMount.Rider = this;
             IsRiding = true;
          }
@@ -798,9 +798,9 @@ namespace BarbarianPrince
                   break;
                }
             }
-            if( "" == mountName )
+            if ("" == mountName)
             {
-               if( 0 < this.Mounts.Count )
+               if (0 < this.Mounts.Count)
                   mountName = this.Mounts[0].Name;
             }
             foreach (IMapItem mount in this.Mounts)
@@ -817,14 +817,14 @@ namespace BarbarianPrince
          IMapItems adbandonedMounts = new MapItems();
          foreach (IMapItem mount in this.Mounts)
          {
-            if ( (true == mount.Name.Contains("Horse")) || (true == mount.IsExhausted) || (0 < mount.StarveDayNum) )
+            if ((true == mount.Name.Contains("Horse")) || (true == mount.IsExhausted) || (0 < mount.StarveDayNum))
                adbandonedMounts.Add(mount);
          }
          foreach (IMapItem mount in adbandonedMounts)
             this.Mounts.Remove(mount.Name);
          this.IsFlying = false;
          this.IsRiding = false;
-         if ( 0 < this.Mounts.Count )  
+         if (0 < this.Mounts.Count)
          {
             IMapItem mount = this.Mounts[0];
             if (true == mount.Name.Contains("Pegasus"))
@@ -855,7 +855,7 @@ namespace BarbarianPrince
          foreach (SpecialEnum item1 in mySpecialKeeps)
          {
             if (item == item1)
-              ++numItem;
+               ++numItem;
          }
          foreach (SpecialEnum item2 in mySpecialShares)
          {
@@ -1074,7 +1074,7 @@ namespace BarbarianPrince
          if ((true == this.Name.Contains("Eagle")) || (true == this.Name.Contains("Falcon")) || (true == this.IsSunStroke) || (true == this.IsUnconscious))
             return 0;
          int freeLoad = 0;
-         if ( true == this.IsFlyingMountCarrier() )
+         if (true == this.IsFlyingMountCarrier())
          {
             int maxMountLoad = Utilities.MaxMountLoad;
             if (true == this.IsExhausted)
@@ -1103,7 +1103,7 @@ namespace BarbarianPrince
       }
       public int GetFreeLoad()
       {
-         if ( (true == IsKilled) || (true == IsUnconscious) || (true == this.IsFlyer()) ) // Griffon & Harpy free load counted with rider
+         if ((true == IsKilled) || (true == IsUnconscious) || (true == this.IsFlyer())) // Griffon & Harpy free load counted with rider
             return 0;
          //------------------------------------------
          bool isPreviouslyRiding = this.IsRiding;
@@ -1116,9 +1116,9 @@ namespace BarbarianPrince
             int load = (maxMountLoad >> mount.StarveDayNum);
             mountCarry += load;
          }
-         if( 0 < this.Mounts.Count) // This routine can only dismount. SetMountState() can cause mounting
+         if (0 < this.Mounts.Count) // This routine can only dismount. SetMountState() can cause mounting
          {
-            IMapItem mount = this.Mounts[0]; 
+            IMapItem mount = this.Mounts[0];
             if ((0 == mount.StarveDayNum) && (false == mount.IsExhausted))
             {
                this.IsRiding = false;
@@ -1130,7 +1130,7 @@ namespace BarbarianPrince
          int maxLoad = Utilities.MaxLoad;
          if (true == this.IsExhausted)
             maxLoad = Utilities.MaxLoad >> 1; // e120 - half the load if exhausted 
-         int personCarry = maxLoad >> this.StarveDayNum; 
+         int personCarry = maxLoad >> this.StarveDayNum;
          if (true == this.IsRiding)
             loadCanCarry -= Utilities.PersonBurden; // 20 for man riding and what he can carry
          else
@@ -1193,36 +1193,40 @@ namespace BarbarianPrince
          }
          int loadCanCarry = mountCarry;
          //------------------------------------------
-         int maxLoad = Utilities.MaxLoad;
          if ((true == IsKilled) || (true == IsUnconscious) || (true == Name.Contains("Eagle")) || (true == Name.Contains("Falcon"))) // Griffon & Harpy free load counted with rider
          {
-            maxLoad = 0;
+            // do nothing - only the mount loads apply
          }
          else if (true == IsFlyingMountCarrier()) // Griffon & Harpy free load counted with rider
          {
-            if (null == this.Rider)
+            int personCarry = Utilities.MaxMountLoad;
+            if (true == this.IsExhausted)
+               personCarry = Utilities.MaxMountLoad >> 1; // e120 - half the load if exhausted 
+            if (0 < personCarry)
             {
-               if (true == this.IsExhausted)
-                  maxLoad = Utilities.MaxMountLoad >> 1; // e120 - half the load if exhausted 
-               if (0 < maxLoad)
-                  loadCanCarry = maxLoad >> this.StarveDayNum;
+               if (null == this.Rider)
+                  personCarry = personCarry >> this.StarveDayNum;
+               else
+                  personCarry = 0; // Griffon & Harpy free load counted with rider
             }
-            else
-            {
-               maxLoad = 0; // Griffon & Harpy free load counted with rider
-            }
+            loadCanCarry += personCarry;
          }
          else
          {
+            int personCarry = Utilities.MaxLoad;
             if (true == this.IsExhausted)
-               maxLoad = Utilities.MaxLoad >> 1; // e120 - half the load if exhausted 
-            if (0 < maxLoad)
+               personCarry = Utilities.MaxLoad >> 1; // e120 - half the load if exhausted 
+            if (0 < personCarry)
             {
-               int personCarry = maxLoad >> this.StarveDayNum;
+               personCarry = personCarry >> this.StarveDayNum;
                if (true == this.IsRiding)
-                  loadCanCarry -= Utilities.PersonBurden; // 20 for man riding and what he can carry
-               else
-                  loadCanCarry += personCarry;
+               {
+                  if (personCarry < Utilities.PersonBurden)
+                     this.IsRiding = false;
+                  else
+                     personCarry -= Utilities.PersonBurden;
+               }
+               loadCanCarry += personCarry;
             }
          }
          //------------------------------------------
@@ -1234,11 +1238,11 @@ namespace BarbarianPrince
             coinLoads = hundreds / 100;
             if (0 < remainder)
                ++coinLoads;
-             loadCanCarry -= coinLoads;
+            loadCanCarry -= coinLoads;
          }
          loadCanCarry -= this.Food;
-         if( loadCanCarry < 0 )
-            Logger.Log(LogEnum.LE_ERROR, "GetFreeLoadWithoutModify(): name=" + this.Name + " lc=" + loadCanCarry.ToString() + " fl=" + Food.ToString() + " cl=" + coinLoads.ToString() + "(coins=" + this.Coin.ToString() + ") ml=" + mountCarry.ToString());
+         if (loadCanCarry < 0)
+            Logger.Log(LogEnum.LE_ERROR, "GetFreeLoadWithoutModify(): name=" + this.Name + " lc=" + loadCanCarry.ToString() + " fl=" + Food.ToString() + " cl=" + coinLoads.ToString() + "(coins=" + this.Coin.ToString() + ") ml=" + mountCarry.ToString() + " kia?=" + this.IsKilled + " mia?=" + this.IsUnconscious);
          return loadCanCarry;
       }   // get free load - dismount if load does not support - but do not mount 
       public int GetFlyLoad()
@@ -1247,13 +1251,13 @@ namespace BarbarianPrince
          //------------------------------------------
          if ((true == this.Name.Contains("Eagle")) || (true == this.Name.Contains("Falcon"))) // Falcons/Eagles can always fly unless exhausted
          {
-            if (false == this.IsExhausted) 
+            if (false == this.IsExhausted)
                return 0;
             else
                return NOT_FLYING;
-         } 
+         }
          //------------------------------------------
-         if ( false == this.IsFlyer() )
+         if (false == this.IsFlyer())
          {
             if (0 == this.Mounts.Count) // if no mounts, the only way to fly if being carried
             {
@@ -1268,18 +1272,18 @@ namespace BarbarianPrince
          IMapItem mountedAnimal = null;
          foreach (IMapItem mount in this.Mounts)
          {
-            if ( (0 != mount.StarveDayNum) || (true == mount.IsExhausted) || (false == mount.IsFlyingMount()) ) // any non-flying mounts or horses means cannot fly
+            if ((0 != mount.StarveDayNum) || (true == mount.IsExhausted) || (false == mount.IsFlyingMount())) // any non-flying mounts or horses means cannot fly
                return NOT_FLYING;
             loadCanCarry += Utilities.MaxMountLoad;
-            if ( 0 == i )
+            if (0 == i)
             {
                mountedAnimal = mount;
-               loadCanCarry -= - Utilities.PersonBurden;
+               loadCanCarry -= -Utilities.PersonBurden;
             }
          }
          //------------------------------------------
          int maxLoad = 0;
-         if ( true == this.IsFlyingMountCarrier() )
+         if (true == this.IsFlyingMountCarrier())
             maxLoad = Utilities.MaxMountLoad;
          else
             maxLoad = Utilities.MaxLoad;
@@ -1309,19 +1313,19 @@ namespace BarbarianPrince
       }   // get what load can be carried if flying...this function can return negative which indication something needs to be dropped
       public bool IsFlyer()
       {
-         if ( (true == Name.Contains("Eagle")) || (true == Name.Contains("Falcon")) || (true == IsFlyingMountCarrier() ) )
+         if ((true == Name.Contains("Eagle")) || (true == Name.Contains("Falcon")) || (true == IsFlyingMountCarrier()))
             return true;
          return false;
       }
       public bool IsFlyingMount()
       {
-         if ( (true == Name.Contains("Pegasus")) || (true == this.IsFlyingMountCarrier()) )
+         if ((true == Name.Contains("Pegasus")) || (true == this.IsFlyingMountCarrier()))
             return true;
          return false;
       }
       public bool IsFlyingMountCarrier()
       {
-         if ( (true == Name.Contains("Griffon")) || (true == Name.Contains("Harpy")) )
+         if ((true == Name.Contains("Griffon")) || (true == Name.Contains("Harpy")))
             return true;
          return false;
       }
@@ -1331,7 +1335,7 @@ namespace BarbarianPrince
          IsUnconscious = false;
          IsRunAway = false;
          IsMoved = false;
-         if ( false == this.IsFlyer() )
+         if (false == this.IsFlyer())
          {
             IsFlying = false;
             IsRiding = false;
@@ -1366,7 +1370,7 @@ namespace BarbarianPrince
       {
          IsRunAway = false;
          IsMoved = false;
-         if ( false == this.IsFlyer() )
+         if (false == this.IsFlyer())
          {
             IsFlying = false;
             IsRiding = false;
@@ -1381,7 +1385,7 @@ namespace BarbarianPrince
          Food = 0;
          Mounts.Clear();
          CarriedMembers.Clear();
-         List<SpecialEnum> keepItems = new List<SpecialEnum> (mySpecialKeeps); // make a copy of the list in order to delete from SpecialKeep list -- cannot modify list when using foreach
+         List<SpecialEnum> keepItems = new List<SpecialEnum>(mySpecialKeeps); // make a copy of the list in order to delete from SpecialKeep list -- cannot modify list when using foreach
          foreach (SpecialEnum item in keepItems)
             RemoveSpecialItem(item);
          List<SpecialEnum> shareItems = new List<SpecialEnum>(mySpecialShares);
@@ -1497,7 +1501,7 @@ namespace BarbarianPrince
             if (true == mi.IsFugitive)
             {
                double s2 = Utilities.theMapItemOffset;
-               Image fugitiveDeny = new Image() { Height = 0.55*s2, Width = s2, Source = MapItem.theMapImages.GetBitmapImage("Fugitive") };
+               Image fugitiveDeny = new Image() { Height = 0.55 * s2, Width = s2, Source = MapItem.theMapImages.GetBitmapImage("Fugitive") };
                c.Children.Add(fugitiveDeny);
                Canvas.SetLeft(fugitiveDeny, Utilities.ZOOM * Utilities.theMapItemOffset - 0.5 * s2);
                Canvas.SetTop(fugitiveDeny, 0);
@@ -1559,7 +1563,7 @@ namespace BarbarianPrince
                   labelForStarveDayNum.Foreground = Brushes.White;
             }
             //----------------------------------------------------
-            if( true == isBloodSpotsShown )
+            if (true == isBloodSpotsShown)
             {
                foreach (BloodSpot bs in mi.WoundSpots) // create wound spot on canvas
                {
@@ -1619,10 +1623,10 @@ namespace BarbarianPrince
             }
             else if (true == mi.IsKilled) // add Overlays
             {
-               Image kia = new Image() { Stretch = Stretch.Fill, Source= MapItem.theMapImages.GetBitmapImage("OKIA") };
+               Image kia = new Image() { Stretch = Stretch.Fill, Source = MapItem.theMapImages.GetBitmapImage("OKIA") };
                g.Children.Add(kia);
             }
-            else if ((true == mi.IsUnconscious) && ("ORest" != mi.OverlayImageName) ) // if unconscous person is resting, do not show UNC image on counter
+            else if ((true == mi.IsUnconscious) && ("ORest" != mi.OverlayImageName)) // if unconscous person is resting, do not show UNC image on counter
             {
                Image mia = new Image() { Stretch = Stretch.Fill, Source = MapItem.theMapImages.GetBitmapImage("OUNC") };
                g.Children.Add(mia);
@@ -1776,10 +1780,10 @@ namespace BarbarianPrince
    {
       private readonly ArrayList myList;
       public MapItems() { myList = new ArrayList(); }
-      public MapItems(IMapItems mapItems) 
-      {  
-         myList = new ArrayList(); 
-         foreach(IMapItem item in mapItems) { this.Add(item); }   
+      public MapItems(IMapItems mapItems)
+      {
+         myList = new ArrayList();
+         foreach (IMapItem item in mapItems) { this.Add(item); }
       }
       public void Add(IMapItem mi) { myList.Add(mi); }
       public IMapItem RemoveAt(int index)
