@@ -20,11 +20,11 @@ namespace BarbarianPrince
       public int mySize;      // diameter  of blood spot
       public double myLeft;   // left of where blood spot exists on canvas
       public double myTop;    // top of where blood spot exists on canvas
-      public BloodSpot(int range)
+      public BloodSpot(int range, Random r)
       {
-         mySize = Utilities.RandomGenerator.Next(8) + 5;
-         myLeft = Utilities.RandomGenerator.Next(range);
-         myTop = Utilities.RandomGenerator.Next(range);
+         mySize = r.Next(8) + 5;
+         myLeft = r.Next(range);
+         myTop = r.Next(range);
       }
       public BloodSpot(int size, double left, double top)
       {
@@ -39,8 +39,21 @@ namespace BarbarianPrince
       private const double PERCENT_MAPITEM_COVERED = 40.0;
       private const int NOT_FLYING = -1000;
       [NonSerialized] public static IMapImages theMapImages = new MapImages();
-      [NonSerialized] private static BitmapImage theBloodStop = theMapImages.GetBitmapImage("OBlood1");
+      [NonSerialized] private static BitmapImage theAlly = theMapImages.GetBitmapImage("Ally");
+      [NonSerialized] private static BitmapImage theMuscle = theMapImages.GetBitmapImage("Muscle");
+      [NonSerialized] private static BitmapImage theCoinPileSingle = theMapImages.GetBitmapImage("CoinPileSingle");
+      [NonSerialized] private static BitmapImage theCoinBar = theMapImages.GetBitmapImage("CoinBar");
+      [NonSerialized] private static BitmapImage theFugitive = theMapImages.GetBitmapImage("Fugitive");
+      [NonSerialized] private static BitmapImage theStructureDeny = theMapImages.GetBitmapImage("StructureDeny");
+      [NonSerialized] private static BitmapImage theGroup = theMapImages.GetBitmapImage("Group");
+      [NonSerialized] private static BitmapImage thePlagueDust = theMapImages.GetBitmapImage("OPlagueDust");
+      [NonSerialized] private static BitmapImage theBloodSpot = theMapImages.GetBitmapImage("OBlood1");
+      [NonSerialized] private static BitmapImage thePoisonSpot = theMapImages.GetBitmapImage("OPoison");
+      [NonSerialized] private static BitmapImage thResurrected = theMapImages.GetBitmapImage("Resurrected");
+      [NonSerialized] private static BitmapImage theMia = theMapImages.GetBitmapImage("OUNC");
+      [NonSerialized] private static BitmapImage theRunAway = theMapImages.GetBitmapImage("ORUNS");
       [NonSerialized] private static BitmapImage theKia = theMapImages.GetBitmapImage("OKIA");
+      [NonSerialized] private Random myRandom = new Random();
       //--------------------------------------------------
       public string Name { get; set; } = "";
       public string TopImageName { get; set; } = "";
@@ -483,7 +496,7 @@ namespace BarbarianPrince
          for (int spots = 0; spots < spotDelta; ++spots) // splatter the MapItem with random blood spots
          {
             int range = (int)(Utilities.theMapItemSize);
-            BloodSpot spot = new BloodSpot(range);
+            BloodSpot spot = new BloodSpot(range, myRandom);
             myWoundSpots.Add(spot);
          }
          //------------------------------------------------
@@ -492,7 +505,7 @@ namespace BarbarianPrince
          for (int spots = 0; spots < spotDelta; ++spots) // splatter the MapItem with random blood spots
          {
             int range = (int)(Utilities.theMapItemSize);
-            BloodSpot spot = new BloodSpot(range);
+            BloodSpot spot = new BloodSpot(range, myRandom);
             myPoisonSpots.Add(spot);
          }
          //------------------------------------------------
@@ -547,7 +560,7 @@ namespace BarbarianPrince
          {
             if (0 < myWoundSpots.Count)
             {
-               int i = Utilities.RandomGenerator.Next(myWoundSpots.Count);
+               int i = myRandom.Next(myWoundSpots.Count);
                myWoundSpots.RemoveAt(i);
             }
          }
@@ -558,7 +571,7 @@ namespace BarbarianPrince
          {
             if (0 < myPoisonSpots.Count)
             {
-               int i = Utilities.RandomGenerator.Next(myPoisonSpots.Count);
+               int i = myRandom.Next(myPoisonSpots.Count);
                myPoisonSpots.RemoveAt(i);
             }
          }
@@ -1488,7 +1501,7 @@ namespace BarbarianPrince
             g.Children.Add(img);
             if ((0 < mi.PlagueDustWound) && (true == isAdornmentsShown))
             {
-               Image plagueDust = new Image() { Stretch = Stretch.Fill, Source = MapItem.theMapImages.GetBitmapImage("OPlagueDust") };
+               Image plagueDust = new Image() { Stretch = Stretch.Fill, Source = thePlagueDust };
                g.Children.Add(plagueDust);
             }
             //----------------------------------------------------
@@ -1496,7 +1509,7 @@ namespace BarbarianPrince
             if (true == mi.IsAlly)
             {
                double s2 = 0.8 * Utilities.theMapItemOffset;
-               Image stackedCoin = new Image() { Height = s2, Width = s2, Source = MapItem.theMapImages.GetBitmapImage("Ally") };
+               Image stackedCoin = new Image() { Height = s2, Width = s2, Source = theAlly };
                c.Children.Add(stackedCoin);
                Canvas.SetLeft(stackedCoin, Utilities.ZOOM * Utilities.theMapItemOffset - 0.5 * s2);
                Canvas.SetTop(stackedCoin, 1.1 * Utilities.ZOOM * Utilities.theMapItemOffset);
@@ -1504,7 +1517,7 @@ namespace BarbarianPrince
             else if (0 < mi.Wages)
             {
                double s1 = 0.8 * Utilities.theMapItemOffset;
-               Image muscle = new Image() { Height = s1, Width = s1, Source = MapItem.theMapImages.GetBitmapImage("Muscle") };
+               Image muscle = new Image() { Height = s1, Width = s1, Source = theMuscle };
                c.Children.Add(muscle);
                Canvas.SetLeft(muscle, Utilities.ZOOM * Utilities.theMapItemOffset - 0.5 * s1);
                Canvas.SetTop(muscle, 1.1 * Utilities.ZOOM * Utilities.theMapItemOffset);
@@ -1512,7 +1525,7 @@ namespace BarbarianPrince
             else if (true == mi.IsLooter)
             {
                double s2 = 0.8 * Utilities.theMapItemOffset;
-               Image stackedCoin = new Image() { Height = s2, Width = s2, Source = MapItem.theMapImages.GetBitmapImage("CoinPileSingle") };
+               Image stackedCoin = new Image() { Height = s2, Width = s2, Source = theCoinPileSingle };
                c.Children.Add(stackedCoin);
                Canvas.SetLeft(stackedCoin, Utilities.ZOOM * Utilities.theMapItemOffset - 0.5 * s2);
                Canvas.SetTop(stackedCoin, 1.1 * Utilities.ZOOM * Utilities.theMapItemOffset);
@@ -1529,7 +1542,7 @@ namespace BarbarianPrince
             if (true == mi.IsFugitive)
             {
                double s2 = Utilities.theMapItemOffset;
-               Image fugitiveDeny = new Image() { Height = 0.55 * s2, Width = s2, Source = MapItem.theMapImages.GetBitmapImage("Fugitive") };
+               Image fugitiveDeny = new Image() { Height = 0.55 * s2, Width = s2, Source = theFugitive };
                c.Children.Add(fugitiveDeny);
                Canvas.SetLeft(fugitiveDeny, Utilities.ZOOM * Utilities.theMapItemOffset - 0.5 * s2);
                Canvas.SetTop(fugitiveDeny, 0);
@@ -1537,7 +1550,7 @@ namespace BarbarianPrince
             else if (true == mi.IsTownCastleTempleLeave)
             {
                double s2 = Utilities.theMapItemOffset;
-               Image structDeny = new Image() { Height = s2, Width = s2, Source = MapItem.theMapImages.GetBitmapImage("StructureDeny") };
+               Image structDeny = new Image() { Height = s2, Width = s2, Source = theStructureDeny };
                c.Children.Add(structDeny);
                Canvas.SetLeft(structDeny, Utilities.ZOOM * Utilities.theMapItemOffset - 0.5 * s2);
                Canvas.SetTop(structDeny, 0);
@@ -1545,7 +1558,7 @@ namespace BarbarianPrince
             else if (0 < mi.GroupNum)
             {
                double s2 = Utilities.theMapItemOffset;
-               Image group = new Image() { Height = s2, Width = s2, Source = MapItem.theMapImages.GetBitmapImage("Group") };
+               Image group = new Image() { Height = s2, Width = s2, Source = theGroup };
                c.Children.Add(group);
                Canvas.SetLeft(group, Utilities.ZOOM * Utilities.theMapItemOffset - 0.5 * s2);
                Canvas.SetTop(group, -1);
@@ -1595,14 +1608,14 @@ namespace BarbarianPrince
             {
                foreach (BloodSpot bs in mi.WoundSpots) // create wound spot on canvas
                {
-                  Image spotImg = new Image() { Stretch = Stretch.Fill, Height = bs.mySize, Width = bs.mySize, Source = theBloodStop };
+                  Image spotImg = new Image() { Stretch = Stretch.Fill, Height = bs.mySize, Width = bs.mySize, Source = theBloodSpot };
                   c.Children.Add(spotImg);
                   Canvas.SetLeft(spotImg, bs.myLeft);
                   Canvas.SetTop(spotImg, bs.myTop);
                }
                foreach (BloodSpot bs in mi.PoisonSpots) // create poison spot on canvas
                {
-                  Image spotImg = new Image() { Stretch = Stretch.Fill, Height = bs.mySize, Width = bs.mySize, Source = MapItem.theMapImages.GetBitmapImage("OPoison") };
+                  Image spotImg = new Image() { Stretch = Stretch.Fill, Height = bs.mySize, Width = bs.mySize, Source = thePoisonSpot };
                   c.Children.Add(spotImg);
                   Canvas.SetLeft(spotImg, bs.myLeft);
                   Canvas.SetTop(spotImg, bs.myTop);
@@ -1635,7 +1648,7 @@ namespace BarbarianPrince
             //----------------------------------------------------
             if (true == mi.IsResurrected)
             {
-               Image resurrected = new Image() { Stretch = Stretch.Fill, Source = MapItem.theMapImages.GetBitmapImage("Resurrected") };
+               Image resurrected = new Image() { Stretch = Stretch.Fill, Source = thResurrected };
                g.Children.Add(resurrected);
             }
             //----------------------------------------------------
@@ -1656,18 +1669,18 @@ namespace BarbarianPrince
             }
             else if ((true == mi.IsUnconscious) && ("ORest" != mi.OverlayImageName)) // if unconscous person is resting, do not show UNC image on counter
             {
-               Image mia = new Image() { Stretch = Stretch.Fill, Source = MapItem.theMapImages.GetBitmapImage("OUNC") };
+               Image mia = new Image() { Stretch = Stretch.Fill, Source = theMia };
                g.Children.Add(mia);
             }
             else if (true == mi.IsRunAway)
             {
-               Image runs = new Image() { Stretch = Stretch.Fill, Source = MapItem.theMapImages.GetBitmapImage("ORUNS") };
+               Image runs = new Image() { Stretch = Stretch.Fill, Source = theRunAway };
                g.Children.Add(runs);
             }
             else if (true == mi.IsPlagued)
             {
-               Image mia = new Image() { Stretch = Stretch.Fill, Source = MapItem.theMapImages.GetBitmapImage("Foam") };
-               g.Children.Add(mia);
+               Image foam = new Image() { Stretch = Stretch.Fill, Source = MapItem.theMapImages.GetBitmapImage("Foam") };
+               g.Children.Add(foam);
             }
             if (true == mi.IsShowFireball)
             {
