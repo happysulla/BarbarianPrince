@@ -603,6 +603,7 @@ namespace BarbarianPrince
          if (false == Reset(myCanvas, img))
          {
             Logger.Log(LogEnum.LE_ERROR, "ImageAnimationCompleted(): Reset() returned false");
+            myMutex.ReleaseMutex();
             return;
          }
          if (null != myCallbackEndRoll)

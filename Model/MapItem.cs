@@ -39,6 +39,8 @@ namespace BarbarianPrince
       private const double PERCENT_MAPITEM_COVERED = 40.0;
       private const int NOT_FLYING = -1000;
       [NonSerialized] public static IMapImages theMapImages = new MapImages();
+      [NonSerialized] private static BitmapImage theBloodStop = theMapImages.GetBitmapImage("OBlood1");
+      [NonSerialized] private static BitmapImage theKia = theMapImages.GetBitmapImage("OKIA");
       //--------------------------------------------------
       public string Name { get; set; } = "";
       public string TopImageName { get; set; } = "";
@@ -1567,7 +1569,7 @@ namespace BarbarianPrince
             {
                foreach (BloodSpot bs in mi.WoundSpots) // create wound spot on canvas
                {
-                  Image spotImg = new Image() { Stretch = Stretch.Fill, Height = bs.mySize, Width = bs.mySize, Source = MapItem.theMapImages.GetBitmapImage("OBlood1") };
+                  Image spotImg = new Image() { Stretch = Stretch.Fill, Height = bs.mySize, Width = bs.mySize, Source = theBloodStop };
                   c.Children.Add(spotImg);
                   Canvas.SetLeft(spotImg, bs.myLeft);
                   Canvas.SetTop(spotImg, bs.myTop);
@@ -1623,7 +1625,7 @@ namespace BarbarianPrince
             }
             else if (true == mi.IsKilled) // add Overlays
             {
-               Image kia = new Image() { Stretch = Stretch.Fill, Source = MapItem.theMapImages.GetBitmapImage("OKIA") };
+               Image kia = new Image() { Stretch = Stretch.Fill, Source = theKia };
                g.Children.Add(kia);
             }
             else if ((true == mi.IsUnconscious) && ("ORest" != mi.OverlayImageName)) // if unconscous person is resting, do not show UNC image on counter
