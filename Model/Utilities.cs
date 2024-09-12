@@ -178,12 +178,32 @@ namespace BarbarianPrince
          {
             StringReader reader = new StringReader(s_xml);
             XmlReader xw = XmlReader.Create(reader);
-            return (T)new XmlSerializer(typeof(T)).Deserialize(xw);
+            XmlSerializer serializer = new XmlSerializer(typeof(T));
+            object obj = serializer.Deserialize(xw);  
+            return (T)obj;
          }
-         catch (Exception e)
+         catch (DirectoryNotFoundException dirException)
          {
             var type = typeof(T);
-            Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + " T=" + type.ToString() + "\n\n e=" + e.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + " T=" + type.ToString() + "\ndirException=" + dirException.ToString());
+            return default(T);
+         }
+         catch (FileNotFoundException fileException)
+         {
+            var type = typeof(T);
+            Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + " T=" + type.ToString() + "\nfileException=" + fileException.ToString());
+            return default(T);
+         }
+         catch (IOException ioException)
+         {
+            var type = typeof(T);
+            Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + " T=" + type.ToString() + "\nioException=" + ioException.ToString());
+            return default(T);
+         }
+         catch (Exception ex)
+         {
+            var type = typeof(T);
+            Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + " T=" + type.ToString() + "\nex=" + ex.ToString());
             return default(T);
          }
       }

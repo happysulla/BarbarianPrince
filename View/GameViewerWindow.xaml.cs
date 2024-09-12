@@ -18,6 +18,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 using Button = System.Windows.Controls.Button;
 using MenuItem = System.Windows.Controls.MenuItem;
 using Point = System.Windows.Point;
@@ -170,7 +171,7 @@ namespace BarbarianPrince
             CtorError = true;
             return;
          }
-         Options options = Utilities.Deserialize<Options>(Settings.Default.GameOptions);
+         Options options = Deserialize(Settings.Default.GameOptions);
          myMainMenuViewer.NewGameOptions = options;
          gi.Options = options; // use the new game options for setting up the first game
          //-------------------------------------------
@@ -555,6 +556,35 @@ namespace BarbarianPrince
             if (reader != null)
                reader.Close();
          }
+      }
+      //-----------------------------------------------------------------------
+      private Options Deserialize(String s_xml)
+      {
+         Options options = new Options();
+         try // XML serializer does not work for Interfaces
+         {
+            StringReader stringreader = new StringReader(s_xml);
+            XmlReader xmlReader = XmlReader.Create(stringreader);
+            XmlSerializer serializer = new XmlSerializer(typeof(Options)); // Sustem.IO.FileNotFoundException thrown but normal behavior - handled in XmlSerializer constructor
+            options = (Options)serializer.Deserialize(xmlReader);
+         }
+         catch (DirectoryNotFoundException dirException)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + "\ndirException=" + dirException.ToString());
+         }
+         catch (FileNotFoundException fileException)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + "\nfileException=" + fileException.ToString());
+         }
+         catch (IOException ioException)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + "\nioException=" + ioException.ToString());
+         }
+         catch (Exception ex)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + "\nex=" + ex.ToString());
+         }
+         return options;
       }
       //---------------------------------------
       private void UpdateTimeTrack(IGameInstance gi)

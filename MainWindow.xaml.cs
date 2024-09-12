@@ -23,6 +23,9 @@ using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using System.ComponentModel;
 using System.Reflection;
+using System.IO;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace BarbarianPrince
 {
@@ -76,6 +79,5 @@ namespace BarbarianPrince
          foreach (IView v in myGameEngine.Views)
             v.UpdateView(ref gi, action);
       }
-      //-----------------------------------------------------------------------
    } // end class
 }
