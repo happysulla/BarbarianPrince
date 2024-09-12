@@ -1481,7 +1481,7 @@ namespace BarbarianPrince
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
-            return false;
+            option = new Option(itemToAdd, false);
          }
          if (true == option.IsEnabled)
          {
@@ -1495,7 +1495,7 @@ namespace BarbarianPrince
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
-            return false;
+            option = new Option(itemToAdd, false);
          }
          if (true == option.IsEnabled)
             gi.Prince.AddNewMount(MountEnum.Pegasus);
@@ -1505,7 +1505,7 @@ namespace BarbarianPrince
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
-            return false;
+            option = new Option(itemToAdd, false);
          }
          if (true == option.IsEnabled)
             gi.Prince.Coin += (Utilities.RandomGenerator.Next(50) + 50);
@@ -1515,7 +1515,7 @@ namespace BarbarianPrince
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
-            return false;
+            option = new Option(itemToAdd, false);
          }
          if (true == option.IsEnabled)
             gi.Prince.Food += 5;
@@ -1525,7 +1525,7 @@ namespace BarbarianPrince
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
-            return false;
+            option = new Option(itemToAdd, false);
          }
          if (true == option.IsEnabled)
             gi.AddSpecialItem(SpecialEnum.NerveGasBomb);
@@ -1535,7 +1535,7 @@ namespace BarbarianPrince
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(" + itemToAdd + ") returned null");
-            return false;
+            option = new Option(itemToAdd, false);
          }
          if (true == option.IsEnabled)
             gi.AddSpecialItem(SpecialEnum.ResurrectionNecklace);
@@ -1553,20 +1553,21 @@ namespace BarbarianPrince
          }
          if (true == option.IsEnabled)  // If this is a custom party, choose based on checked boxes in options
          {
-            foreach (string memberToAdd in Option.theStartingMembers)
+            for (int i= 0; i < Options.MEMBER_COUNT; i++)
             {
+               string memberToAdd = Options.theDefaults[i];
                option = options.Find(memberToAdd);
                if (null == option)
                {
                   Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(" + memberToAdd + ") returned null");
-                  return false;
+                  option = new Option(memberToAdd, false);
                }
                if (true == option.IsEnabled)
                {
                   if (false == AddStartingPartyMemberOption(gi, memberToAdd))
                   {
                      Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): AddStartingPartyMemberOption() returned false");
-                     return false;
+                     option = new Option(memberToAdd, false);
                   }
                }
             }
@@ -1574,47 +1575,52 @@ namespace BarbarianPrince
          else // check if random party
          {
             //-----------------------------------------------
+            string itemToAdd1 = "RandomParty10";
             option = options.Find("RandomParty10");
             if (null == option)
             {
                Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty10) returned null");
-               return false;
+               option = new Option(itemToAdd1, false);
             }
             if (true == option.IsEnabled)
                numPartyMembers = 10;
             //-----------------------------------------------
+            itemToAdd1 = "RandomParty08";
             option = options.Find("RandomParty08");
             if (null == option)
             {
                Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty08) returned null");
-               return false;
+               option = new Option(itemToAdd1, false);
             }
             if (true == option.IsEnabled)
                numPartyMembers = 8;
             //-----------------------------------------------
+            itemToAdd1 = "RandomParty05";
             option = options.Find("RandomParty05");
             if (null == option)
             {
                Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty05) returned null");
-               return false;
+               option = new Option(itemToAdd1, false);
             }
             if (true == option.IsEnabled)
                numPartyMembers = 5;
             //-----------------------------------------------
+            itemToAdd1 = "RandomParty03";
             option = options.Find("RandomParty03");
             if (null == option)
             {
                Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty03) returned null");
-               return false;
+               option = new Option(itemToAdd1, false);
             }
             if (true == option.IsEnabled)
                numPartyMembers = 3;
             //-----------------------------------------------
+            itemToAdd1 = "RandomParty01";
             option = options.Find("RandomParty01");
             if (null == option)
             {
                Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): myOptions.Find(RandomParty01) returned null");
-               return false;
+               option = new Option(itemToAdd1, false);
             }
             if (true == option.IsEnabled)
                numPartyMembers = 1;
@@ -1623,8 +1629,8 @@ namespace BarbarianPrince
             {
                for (int i = 0; i < numPartyMembers; ++i)
                {
-                  int index = Utilities.RandomGenerator.Next(Option.MEMBER_COUNT);
-                  string memberToAdd = Option.theStartingMembers[index];
+                  int index = Utilities.RandomGenerator.Next(Options.MEMBER_COUNT);
+                  string memberToAdd = Options.theDefaults[index];
                   if (false == AddStartingPartyMemberOption(gi, memberToAdd))
                   {
                      Logger.Log(LogEnum.LE_ERROR, "AddStartingOptions(): AddStartingPartyMemberOption(" + memberToAdd + ") returned false");
@@ -1634,11 +1640,12 @@ namespace BarbarianPrince
             }
          }
          //---------------------------------------------------------
+         string itemToAdd = "PartyMounted";
          option = options.Find("PartyMounted");
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(PartyMounted) returned null");
-            return false;
+            option = new Option(itemToAdd, false);
          }
          if (true == option.IsEnabled)
          {
@@ -1649,11 +1656,12 @@ namespace BarbarianPrince
             }
          }
          //---------------------------------------------------------
+         itemToAdd = "PartyAirborne";
          option = options.Find("PartyAirborne");
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(PartyAirborne) returned null");
-            return false;
+            option = new Option(itemToAdd, false);
          }
          if (true == option.IsEnabled)
          {
@@ -1664,11 +1672,12 @@ namespace BarbarianPrince
             }
          }
          //---------------------------------------------------------
+         itemToAdd = "ExtendEndTime";
          option = options.Find("ExtendEndTime");
          if (null == option)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddStartingPartyMembers(): myOptions.Find(ExtendEndTime) returned null");
-            return false;
+            option = new Option(itemToAdd, false);
          }
          if (true == option.IsEnabled)
             Utilities.MaxDays = 105;

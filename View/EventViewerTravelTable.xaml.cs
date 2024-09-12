@@ -392,7 +392,7 @@ namespace BarbarianPrince
          if (null == optionAutoLostDescrease)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(AutoLostDecrease) returned null");
-            return false;
+            optionAutoLostDescrease = new Option("AutoLostDecrease", false);
          }
          myOptionAutoLostDecrease = optionAutoLostDescrease.IsEnabled;
          //--------------------------------------------------
@@ -400,7 +400,7 @@ namespace BarbarianPrince
          if (null == optionNoLostRoll)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceNoLostEvent) returned null");
-            return false;
+            optionNoLostRoll = new Option("NoLostRoll", false);
          }
          myOptionNoLostRoll = optionNoLostRoll.IsEnabled;
          //--------------------------------------------------
@@ -408,7 +408,7 @@ namespace BarbarianPrince
          if (null == optionNoLostEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceNoLostEvent) returned null");
-            return false;
+            optionNoLostEvent = new Option("ForceNoLostEvent", false);
          }
          myOptionNoLostEvent = optionNoLostEvent.IsEnabled;
          //--------------------------------------------------
@@ -416,7 +416,7 @@ namespace BarbarianPrince
          if (null == optionForceLostEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceLostResult) returned null");
-            return false;
+            optionForceLostEvent = new Option("ForceLostEvent", false);
          }
          myOptionForceLostEvent = optionForceLostEvent.IsEnabled;
          //--------------------------------------------------
@@ -424,7 +424,7 @@ namespace BarbarianPrince
          if (null == optionForceNoCrossEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceNoCrossEvent) returned null");
-            return false;
+            optionForceNoCrossEvent = new Option("ForceNoCrossEvent", false);
          }
          myOptionForceNoCrossEvent = optionForceNoCrossEvent.IsEnabled;
          //--------------------------------------------------
@@ -432,7 +432,7 @@ namespace BarbarianPrince
          if (null == optionForceLostAfterCrossEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceLostAfterCrossEvent) returned null");
-            return false;
+            optionForceLostAfterCrossEvent = new Option("ForceLostAfterCrossEvent", false);
          }
          myOptionForceLostAfterCrossEvent = optionForceLostAfterCrossEvent.IsEnabled;
          //--------------------------------------------------
@@ -440,7 +440,7 @@ namespace BarbarianPrince
          if (null == optionForceCrossEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceCrossEvent) returned null");
-            return false;
+            optionForceCrossEvent = new Option("ForceCrossEvent", false);
          }
          myOptionForceCrossEvent = optionForceCrossEvent.IsEnabled;
          //--------------------------------------------------
@@ -448,7 +448,7 @@ namespace BarbarianPrince
          if (null == optionForceNoEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceNoEvent) returned null");
-            return false;
+            optionForceNoEvent = new Option("ForceNoEvent", false);
          }
          myOptionForceNoEvent = optionForceNoEvent.IsEnabled;
          //--------------------------------------------------
@@ -456,7 +456,7 @@ namespace BarbarianPrince
          if (null == optionForceEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceEvent) returned null");
-            return false;
+            optionForceEvent = new Option("ForceEvent", false);
          }
          myOptionForceEvent = optionForceEvent.IsEnabled;
          //--------------------------------------------------
@@ -464,7 +464,7 @@ namespace BarbarianPrince
          if (null == optionForceNoRoadEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceNoRoadEvent) returned null");
-            return false;
+            optionForceNoRoadEvent = new Option("ForceNoRoadEvent", false);
          }
          myOptionForceNoRoadEvent = optionForceNoRoadEvent.IsEnabled;
          //--------------------------------------------------
@@ -472,7 +472,7 @@ namespace BarbarianPrince
          if (null == optionForceNoAirEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceNoAirEvent) returned null");
-            return false;
+            optionForceNoAirEvent = new Option("ForceNoAirEvent", false);
          }
          myOptionForceNoAirEvent = optionForceNoAirEvent.IsEnabled;
          //--------------------------------------------------
@@ -480,7 +480,7 @@ namespace BarbarianPrince
          if (null == optionForceAirEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceAirEvent) returned null");
-            return false;
+            optionForceAirEvent = new Option("ForceAirEvent", false);
          }
          myOptionForceAirEvent = optionForceAirEvent.IsEnabled;
          //--------------------------------------------------
@@ -488,7 +488,7 @@ namespace BarbarianPrince
          if (null == optionForceNoRaftEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceNoRaftEvent) returned null");
-            return false;
+            optionForceNoRaftEvent = new Option("ForceNoRaftEvent", false);
          }
          myOptionForceNoRaftEvent = optionForceNoRaftEvent.IsEnabled;
          //--------------------------------------------------
@@ -496,7 +496,7 @@ namespace BarbarianPrince
          if (null == optionForceRaftEvent)
          {
             Logger.Log(LogEnum.LE_ERROR, "SetTravelOptions(): myGameInstance.Options.Find(ForceRaftEvent) returned null");
-            return false;
+            optionForceRaftEvent = new Option("ForceRaftEvent", false);
          }
          myOptionForceRaftEvent = optionForceRaftEvent.IsEnabled;
          return true;

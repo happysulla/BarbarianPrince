@@ -223,9 +223,10 @@ namespace BarbarianPrince
          //-----------------------------------------------------------------
          Option option = gi.Options.Find("ExtendEndTime");
          if (null == option)
+         {
             Logger.Log(LogEnum.LE_ERROR, "UpdateView(): gi.Options.Find(ExtendEndTime)");
-         else
             option = new Option("ExtendEndTime", false);
+         }
          CreateButtonTimeTrack(gi, option.IsEnabled);
          CreateButtonFoodSupply();
          CreateButtonEndurance();
@@ -584,6 +585,8 @@ namespace BarbarianPrince
          {
             Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + "\nex=" + ex.ToString());
          }
+         if (0 == options.Count )
+            options.SetDefaults();
          return options;
       }
       //---------------------------------------
