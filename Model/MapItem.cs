@@ -1202,14 +1202,14 @@ namespace BarbarianPrince
          {
             if (null == this.Rider)
             {
-               maxLoad = 0; // Griffon & Harpy free load counted with rider
-            }
-            else
-            {
                if (true == this.IsExhausted)
                   maxLoad = Utilities.MaxMountLoad >> 1; // e120 - half the load if exhausted 
                if (0 < maxLoad)
                   loadCanCarry = maxLoad >> this.StarveDayNum;
+            }
+            else
+            {
+               maxLoad = 0; // Griffon & Harpy free load counted with rider
             }
          }
          else

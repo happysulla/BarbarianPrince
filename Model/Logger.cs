@@ -85,10 +85,14 @@ namespace BarbarianPrince
       {
          if (true == theLogLevel[(int)logLevel])
          {
-            Console.WriteLine("{0} {1}", logLevel.ToString(), description);
             theMutex.WaitOne();
+            Console.WriteLine("{0} {1}", logLevel.ToString(), description);
             if (false == theIsLogFileCreated)
+            {
+               theMutex.ReleaseMutex();
                return;
+            }
+
             try
             {
                FileInfo file = new FileInfo(theFileName);
@@ -115,7 +119,6 @@ namespace BarbarianPrince
                Console.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + ex.ToString());
             }
             theMutex.ReleaseMutex();
-
          }
       }
       static public void SetOn(LogEnum logLevel)
@@ -166,6 +169,7 @@ namespace BarbarianPrince
             theFileName = sb.ToString();
             FileInfo f = new FileInfo(theFileName);
             f.Create();
+            theIsLogFileCreated = true;
             Directory.SetCurrentDirectory(AssemblyDirectory);
          }
          catch (DirectoryNotFoundException dirException)
