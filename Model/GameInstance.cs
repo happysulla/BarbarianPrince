@@ -777,7 +777,7 @@ namespace BarbarianPrince
          foreach (IMapItem mi in sortedMapItems) // add to party members to get to 100 increment
          {
             int miRemainder = mi.Coin % 100;
-            if ( (0 != miRemainder) && (false == mi.IsUnconscious) && (false == mi.IsKilled) )
+            if ( (0 != miRemainder) && (false == mi.IsUnconscious) && (false == mi.IsKilled) && (false == mi.Name.Contains("Eagle")) && (false == mi.Name.Contains("Falcon")))
             {
                int diffToGetTo100 = 100 - miRemainder;
                if (remainingCoins <= diffToGetTo100)
