@@ -1105,8 +1105,13 @@ namespace BarbarianPrince
       }
       public int GetFreeLoad()
       {
-         if ((true == IsKilled) || (true == IsUnconscious) || (true == this.IsFlyer())) // Griffon & Harpy free load counted with rider
+         if ((true == IsKilled) || (true == IsUnconscious)) 
             return 0;
+         if(true == this.IsFlyer())
+         {
+            if ((true == this.IsFlyingMountCarrier()) && (null != this.Rider)) // Griffon & Harpy free load counted with rider
+               return 0;
+         }
          //------------------------------------------
          bool isPreviouslyRiding = this.IsRiding;
          int mountCarry = 0;
@@ -1121,7 +1126,7 @@ namespace BarbarianPrince
          if (0 < this.Mounts.Count) // This routine can only dismount. SetMountState() can cause mounting
          {
             IMapItem mount = this.Mounts[0];
-            if ((0 == mount.StarveDayNum) && (false == mount.IsExhausted))
+            if ((0 < mount.StarveDayNum) || (true == mount.IsExhausted))
             {
                this.IsRiding = false;
                this.IsFlying = false;
@@ -1129,14 +1134,29 @@ namespace BarbarianPrince
          }
          int loadCanCarry = mountCarry;
          //------------------------------------------
-         int maxLoad = Utilities.MaxLoad;
-         if (true == this.IsExhausted)
-            maxLoad = Utilities.MaxLoad >> 1; // e120 - half the load if exhausted 
-         int personCarry = maxLoad >> this.StarveDayNum;
-         if (true == this.IsRiding)
-            loadCanCarry -= Utilities.PersonBurden; // 20 for man riding and what he can carry
+         int personCarry = 0;
+         if (true == this.IsFlyingMountCarrier()) // if this is true, must not have a rider
+         {
+            int maxLoad = Utilities.MaxMountLoad;
+            if (true == this.IsExhausted)
+               maxLoad = Utilities.MaxLoad >> 1; // e120 - half the load if exhausted 
+            personCarry = maxLoad >> this.StarveDayNum;
+         }
          else
-            loadCanCarry += personCarry;
+         {
+            int maxLoad = Utilities.MaxLoad;
+            if (true == this.IsExhausted)
+               maxLoad = Utilities.MaxLoad >> 1; // e120 - half the load if exhausted 
+            personCarry = maxLoad >> this.StarveDayNum;
+            if (true == this.IsRiding)
+            {
+               if (personCarry < Utilities.PersonBurden)
+                  this.IsRiding = false;
+               else
+                  personCarry -= Utilities.PersonBurden; // 20 for man riding and what he can carry
+            }
+         }
+         loadCanCarry += personCarry;
          //------------------------------------------
          int coinLoads = 0;
          if (0 < this.Coin)
@@ -1148,8 +1168,11 @@ namespace BarbarianPrince
                ++coinLoads;
             if ((true == this.IsRiding) && (loadCanCarry < coinLoads))
             {
-               this.IsRiding = false;
-               loadCanCarry += Utilities.PersonBurden;
+               if (false == this.IsFlyingMountCarrier()) // if this is true, must not have a rider
+               {
+                  this.IsRiding = false;
+                  loadCanCarry += Utilities.PersonBurden;
+               }
             }
             if (loadCanCarry < coinLoads)
             {
@@ -1167,8 +1190,11 @@ namespace BarbarianPrince
          }
          if ((true == this.IsRiding) && (loadCanCarry < this.Food))
          {
-            this.IsRiding = false;
-            loadCanCarry += Utilities.PersonBurden;
+            if (false == this.IsFlyingMountCarrier()) // if this is true, must not have a rider
+            {
+               this.IsRiding = false;
+               loadCanCarry += Utilities.PersonBurden;
+            }
          }
          if (loadCanCarry < this.Food)
          {

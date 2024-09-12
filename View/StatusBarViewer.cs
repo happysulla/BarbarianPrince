@@ -216,10 +216,10 @@ namespace BarbarianPrince
          if (true == gi.IsMerchantWithParty)
          {
             myStatusBar.Items.Add(new Separator());
-            Label labelBlessed = new Label() { FontFamily = myFontFam, FontSize = 12, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, Content = " Negotiator" };
-            Image imgBlessed = new Image { Source = MapItem.theMapImages.GetBitmapImage("Negotiator"), Width = 30, Height = 30 };
-            myStatusBar.Items.Add(labelBlessed);
-            myStatusBar.Items.Add(imgBlessed);
+            Label labelMerchant = new Label() { FontFamily = myFontFam, FontSize = 12, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, Content = " Negotiator" };
+            Image imgMerchant = new Image { Source = MapItem.theMapImages.GetBitmapImage("Negotiator"), Width = 30, Height = 30 };
+            myStatusBar.Items.Add(labelMerchant);
+            myStatusBar.Items.Add(imgMerchant);
          }
          //--------------------------------------------
          if (true == gi.IsMarkOfCain)

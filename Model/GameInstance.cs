@@ -663,7 +663,7 @@ namespace BarbarianPrince
             int totalFreeLoad = 0;
             foreach (IMapItem mi in sortedMapItems)
             {
-               if ((true == mi.IsUnconscious) || (true == mi.IsKilled))
+               if ((true == mi.IsUnconscious) || (true == mi.IsKilled) || (true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")))
                   continue;
                int freeLoad = 0;
                if (false == isHunt)

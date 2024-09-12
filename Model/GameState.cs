@@ -1130,7 +1130,7 @@ namespace BarbarianPrince
             case "MagicianWeak": character= new MapItem(miName, 1.0, false, false, false, "c16Magician", "c16Magician", princeTerritory, 2, 3, 5); break;
             case "Mercenary": character= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", princeTerritory, 4, 5, 4); break;
             case "MercenaryLead": character= new MapItem(miName, 1.0, false, false, false, "c65MercLead", "c65MercLead", princeTerritory, 6, 6, 50); break;
-            case "Merchant": character= new MapItem(miName, 1.0, false, false, false, "c77Merchant", "c77Merchant", princeTerritory, 3, 2, 5); break;
+            case "Merchant": character= new MapItem(miName, 1.0, false, false, false, "Negotiator1", "c77Merchant", princeTerritory, 3, 2, 5); break;
             case "Minstrel": character= new MapItem(miName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", princeTerritory, 0, 0, 0); break;
             case "Mirror":
                character= new MapItem(gi.Prince);
