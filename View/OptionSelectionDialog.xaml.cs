@@ -63,8 +63,8 @@ namespace BarbarianPrince
          myRadioButtonHexRandomBottom.ToolTip = "Party starts on random bottom edge.";
          //--------------------
          myRadioButtonMonsterNormal.ToolTip = "Monsters start with original game attributes.";
-         myRadioButtonMonsterLessEasy.ToolTip = "Monsters subtract 2 from endurance and 3 from combat.";
-         myRadioButtonMonsterEasy.ToolTip = "Monsters subtract 1 from endurance and combat.";
+         myRadioButtonMonsterLessEasy.ToolTip = "Monsters subtract 1 from endurance and combat.";
+         myRadioButtonMonsterEasy.ToolTip = "Monsters subtract 2 from endurance and 3 from combat.";
          myRadioButtonMonsterEasiest.ToolTip = "Monsters have one endurance and combat.";
          //--------------------
          myCheckBoxAutoLostIncrement.ToolTip = "Lost chance decreases on consecutive lost rolls.";
