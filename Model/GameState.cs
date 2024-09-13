@@ -1180,8 +1180,7 @@ namespace BarbarianPrince
             case "Wraith": character= new MapItem(miName, 1.0, false, false, false, "c24Wraith", "c24Wraith", princeTerritory, 9, 6, 0); break;
             default:
                Logger.Log(LogEnum.LE_ERROR, "CreateCharacter(): Reached default character=" + cName);
-               gi.EncounteredMembers.Add(character);
-               return character;
+               break;
          }
          //------------------------------------------------------------
          Option isEasiestMonstersOption = gi.Options.Find("EasiestMonsters");
@@ -8018,7 +8017,7 @@ namespace BarbarianPrince
                   wizard.AddNewMount();
                gi.EncounteredMembers.Add(wizard);
                //--------------------------------
-               IMapItem wizardHenchman = CreateCharacter(gi, "W6Henchman");
+               IMapItem wizardHenchman = CreateCharacter(gi, "WHenchman");
                if (3 < dieRoll)
                   wizardHenchman.AddNewMount();
                gi.EncounteredMembers.Add(wizardHenchman);
