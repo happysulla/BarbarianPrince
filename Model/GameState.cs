@@ -9488,17 +9488,28 @@ namespace BarbarianPrince
             case "e123b": // defeated black knight
                if (0 < gi.EncounteredMembers.Count)
                {
-                  if (false == gi.EncounteredMembers[0].IsKilled)
+                  if (false == gi.EncounteredMembers[0].IsKilled) // black knight knocked unconscious - he can join the party
                   {
-                     gi.EventDisplayed = gi.EventActive = "e123c"; // black knight knocked unconscious
+                     gi.EventDisplayed = gi.EventActive = "e123c"; 
                      action = GameAction.UpdateEventViewerActive;
                      gi.DieRollAction = GameAction.DieRollActionNone;
                   }
+                  else
+                  {
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterLootStartEnd(): EncounterEnd() returned false w/ es=" + gi.EventStart);
+                        return false;
+                     }
+                  }
                }
-               if (false == EncounterEnd(gi, ref action))
+               else
                {
-                  Logger.Log(LogEnum.LE_ERROR, "EncounterLootStartEnd(): EncounterEnd() returned false w/ es=" + gi.EventStart);
-                  return false;
+                  if (false == EncounterEnd(gi, ref action))
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStartEnd(): EncounterEnd() returned false w/ es=" + gi.EventStart);
+                     return false;
+                  }
                }
                break;
             case "e130": // Robbery of High Lord on Travels
