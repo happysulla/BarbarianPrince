@@ -9486,24 +9486,19 @@ namespace BarbarianPrince
                gi.DieResults["e053"][0] = Utilities.NO_RESULT;
                break;
             case "e123b": // defeated black knight
-               if (1 != gi.EncounteredMembers.Count)
+               if (0 < gi.EncounteredMembers.Count)
                {
-                  Logger.Log(LogEnum.LE_ERROR, "EncounterLootStart(): invalid state gi.EncounteredMembers.Count=" + gi.EncounteredMembers.Count.ToString() + " w / es=" + gi.EventStart);
-                  return false;
-               }
-               else if (false == gi.EncounteredMembers[0].IsKilled)
-               {
-                  gi.EventDisplayed = gi.EventActive = "e123c";
-                  action = GameAction.UpdateEventViewerActive;
-                  gi.DieRollAction = GameAction.DieRollActionNone;
-               }
-               else
-               {
-                  if (false == EncounterEnd(gi, ref action))
+                  if (false == gi.EncounteredMembers[0].IsKilled)
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterLootStartEnd(): EncounterEnd() returned false w/ es=" + gi.EventStart);
-                     return false;
+                     gi.EventDisplayed = gi.EventActive = "e123c"; // black knight knocked unconscious
+                     action = GameAction.UpdateEventViewerActive;
+                     gi.DieRollAction = GameAction.DieRollActionNone;
                   }
+               }
+               if (false == EncounterEnd(gi, ref action))
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "EncounterLootStartEnd(): EncounterEnd() returned false w/ es=" + gi.EventStart);
+                  return false;
                }
                break;
             case "e130": // Robbery of High Lord on Travels

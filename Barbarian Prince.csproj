@@ -277,7 +277,6 @@
     </Compile>
     <Compile Include="View\EventViewer.cs" />
     <Compile Include="UnitTests\05ConfigFileMgrUnitTest.cs" />
-    <Compile Include="UnitTests\06MapItemSetupUnitTest.cs" />
     <Compile Include="UnitTests\14CombatUnitTest.cs" />
     <Compile Include="View\BannerDialog.xaml.cs">
       <DependentUpon>BannerDialog.xaml</DependentUpon>
@@ -648,7 +647,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="bin\Config\DiceRolls.xml" />
-    <Resource Include="bin\Config\MapItems.xml" />
     <Resource Include="bin\Config\Territories.xml" />
   </ItemGroup>
   <ItemGroup>

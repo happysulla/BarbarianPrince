@@ -87,14 +87,6 @@ namespace BarbarianPrince
          }
          gi.UnitTests.Add(ut5);
          //-----------------------------------------------------------------------------
-         IUnitTest ut6 = new MapItemSetupUnitTest(dp, gi, this);
-         if (true == ut6.CtorError)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): MapItemSetupUnitTest() ctor error");
-            return false;
-         }
-         gi.UnitTests.Add(ut6);
-         //-----------------------------------------------------------------------------
          IUnitTest ut7 = new DiceRollerUnitTest(dp, dr);
          if (true == ut7.CtorError)
          {
