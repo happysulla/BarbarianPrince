@@ -53,7 +53,7 @@ namespace BarbarianPrince
       [NonSerialized] private static BitmapImage theMia = theMapImages.GetBitmapImage("OUNC");
       [NonSerialized] private static BitmapImage theRunAway = theMapImages.GetBitmapImage("ORUNS");
       [NonSerialized] private static BitmapImage theKia = theMapImages.GetBitmapImage("OKIA");
-      [NonSerialized] private Random myRandom = new Random();
+      [NonSerialized] private static Random theRandom = new Random();
       //--------------------------------------------------
       public string Name { get; set; } = "";
       public string TopImageName { get; set; } = "";
@@ -496,7 +496,7 @@ namespace BarbarianPrince
          for (int spots = 0; spots < spotDelta; ++spots) // splatter the MapItem with random blood spots
          {
             int range = (int)(Utilities.theMapItemSize);
-            BloodSpot spot = new BloodSpot(range, myRandom);
+            BloodSpot spot = new BloodSpot(range, theRandom);
             myWoundSpots.Add(spot);
          }
          //------------------------------------------------
@@ -505,7 +505,7 @@ namespace BarbarianPrince
          for (int spots = 0; spots < spotDelta; ++spots) // splatter the MapItem with random blood spots
          {
             int range = (int)(Utilities.theMapItemSize);
-            BloodSpot spot = new BloodSpot(range, myRandom);
+            BloodSpot spot = new BloodSpot(range, theRandom);
             myPoisonSpots.Add(spot);
          }
          //------------------------------------------------
@@ -560,7 +560,7 @@ namespace BarbarianPrince
          {
             if (0 < myWoundSpots.Count)
             {
-               int i = myRandom.Next(myWoundSpots.Count);
+               int i = theRandom.Next(myWoundSpots.Count);
                myWoundSpots.RemoveAt(i);
             }
          }
@@ -571,7 +571,7 @@ namespace BarbarianPrince
          {
             if (0 < myPoisonSpots.Count)
             {
-               int i = myRandom.Next(myPoisonSpots.Count);
+               int i = theRandom.Next(myPoisonSpots.Count);
                myPoisonSpots.RemoveAt(i);
             }
          }

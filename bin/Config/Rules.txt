@@ -17,7 +17,7 @@ r013a	"<Bold>r013a Rich Peasant Family</Bold>
 <LineBreak/><LineBreak/>Family may sell horses. Roll one die, and a result of 4 plus means they do. If they have stables, roll again for the number of horses available for sale. Roll one die again and double it for the price per horse. They will sell horses at this rate and will also sell food at 2 food units per gold piece. An unlimited amount of food is available for sale.
 <LineBreak/>
 <LineBreak/>
-                        <InlineUIContainer><Image Source='../../Images/Lodging.gif'  Height='300' Width='300'></Image></InlineUIContainer>"
+                        <InlineUIContainer><Image Source='../bin/Images/Lodging.gif'  Height='300' Width='300'></Image></InlineUIContainer>"
 r018	"<Bold>r018 Priest</Bold>
 <LineBreak/><LineBreak/>
 You encounter a local priest riding a donkey. The Priest has combat skill 3, endurance 3, and wealth 25. 
@@ -30,7 +30,7 @@ In addition, all monks and priests in the future will recognize the mark and wil
  <InlineUIContainer><Button Content='r211' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  with the high priest of any temple marked on the map, but may with high priest of any secret unmarked temples that you find.
 <LineBreak/>
-                              <InlineUIContainer><Image Source='../../Images/Priest.gif'  Height='150' Width='150'></Image></InlineUIContainer>"
+                              <InlineUIContainer><Image Source='../bin/Images/Priest.gif'  Height='150' Width='150'></Image></InlineUIContainer>"
 r043	"<Bold>r043 Small Altar with Magic Spell</Bold>
 <LineBreak/><LineBreak/>There is  a magic spell shimmering around a small altar. If your party includes a magician, wizard, or witch; you can determine the nature of the spell before getting the item.
 <LineBreak/><LineBreak/>
@@ -52,12 +52,12 @@ r051	"<Bold>r051 Bandits</Bold>
 <LineBreak/><LineBreak/>The number of bandits exceeds the number of characters in your party by two.
 <LineBreak/><LineBreak/>One of the bandits is the leader with combat skill 6, endurance 6, and wealth 15. The rest have combat skill 5, endurance 4, and wealth 1.
 <LineBreak/><LineBreak/>
-                                 <InlineUIContainer><Image Source='../../Images/Bandit.gif' Height='300' Width='180'> </Image></InlineUIContainer>"
+                                 <InlineUIContainer><Image Source='../bin/Images/Bandit.gif' Height='300' Width='180'> </Image></InlineUIContainer>"
 r057	"<Bold>r057 Troll Skin</Bold>
 <LineBreak/><LineBreak/>A hugh stone-skinned troll was killed by your party. 
 <LineBreak/><LineBreak/>Since you killed the troll, its stone-skin is a valuble item. Whenever you have an opportunity to buy food at a town, castle, temple, or from merchants; you can sell the skin for 50 gold pieces. It is also known that Count Drogat of Drogat Castle will treasure the gift should you manage to get a personal audience with him.
 <LineBreak/><LineBreak/>
-                <InlineUIContainer><Image Source='../../Images/TrollSkin.gif' Height='300' Width='166'> </Image></InlineUIContainer>"
+                <InlineUIContainer><Image Source='../bin/Images/TrollSkin.gif' Height='300' Width='166'> </Image></InlineUIContainer>"
 r073a	"<Bold>r073a Hostile Witch</Bold>
 <LineBreak/><LineBreak/>Your party must escape
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
@@ -65,7 +65,7 @@ r073a	"<Bold>r073a Hostile Witch</Bold>
 <LineBreak/><LineBreak/>If a six occurs, the character is turned into a frog and is lost. If you are turned into a frog; any frog, lover, magician, or friendly witch surviving in your party can turn you back.
 <LineBreak/><LineBreak/>Otherwise, you remain a frog for years and lose the game. 
 <LineBreak/> <LineBreak/>
-                           <InlineUIContainer><Image Name='Witch' Source='../../Images/Witch.gif' Height='300' Width='240'></Image></InlineUIContainer>"
+                           <InlineUIContainer><Image Name='Witch' Source='../bin/Images/Witch.gif' Height='300' Width='240'></Image></InlineUIContainer>"
 r079	"<Bold>r079 Heavy Rains</Bold>
 <LineBreak/><LineBreak/>Cold, driving rains hinder man and beast. You must stop moving today. 
 <LineBreak/><LineBreak/>Roll one die for each character in your party. If the result is a 5 plus, the character catches a cold and suffers one wound.
@@ -82,7 +82,7 @@ r085	"<Bold>r085 Narrow Ledges</Bold>
 <LineBreak/><LineBreak/>If you personally slip or your mount falls over the edge, you are presumed to catch a ledge somewhere down the cliff and survive. 
 <LineBreak/><LineBreak/>Roll one die and add one for the number of wounds suffered in the fall. Also, roll one die to see if your party finds you. A 5 or higher indicates they do. Any lower roll means the rest of your party does not find you and disappears with all the mounts, possessions, and wealth they are carrying.
 <LineBreak/><LineBreak/>
-                              <InlineUIContainer><Image Source='../../Images/NarrowLedge.gif' Height='125'  Width='250'> </Image></InlineUIContainer>"
+                              <InlineUIContainer><Image Source='../bin/Images/NarrowLedge.gif' Height='125'  Width='250'> </Image></InlineUIContainer>"
 r088	"<Bold>r088 Rockfall</Bold>
 <LineBreak/><LineBreak/>As you travel along through a steep-sided gorge, a rockfall begins threatening the entire party. Roll one die for each character. Mounts without riders are rolled for separately.
 <LineBreak/>
@@ -90,7 +90,7 @@ r088	"<Bold>r088 Rockfall</Bold>
  <LineBreak/>5 - Character suffers one wound from flying rock chips. Mounts without a rider are caught by a rolling bolder, breaks a leg, and must be killed.
  <LineBreak/>6 - Character hit by heavy rock. Roll one die and add one for wounds suffered. Mounts without rider are hit and killed instantly. All of its load are buried beneath the rocks and are lost.
 <LineBreak/><LineBreak/>
-          <InlineUIContainer><Image Source='../../Images/LandSlide.gif' Height='250' Width='500'></Image></InlineUIContainer>"
+          <InlineUIContainer><Image Source='../bin/Images/LandSlide.gif' Height='250' Width='500'></Image></InlineUIContainer>"
 r090	"<Bold>r090 Quicksand</Bold>
 <LineBreak/><LineBreak/>Your party stumbles into quicksand. Roll one die for each character or mount. If a character is riding a mount, you can roll for both together as a character. Alternatively, you can sacrifice the mount and its load in order to jump from it to safety.
 <LineBreak/><LineBreak/>
@@ -99,18 +99,18 @@ r090	"<Bold>r090 Quicksand</Bold>
 5 - Character struggles outward using vines and tree routes, but a mount is lost with everything it carries.<LineBreak/>
 6 - Character or mount is trapped in deepest part. They cannot win freedom and are automatically lost with everything carried.
 <LineBreak/><LineBreak/>
-                                   <InlineUIContainer><Image Source='../../Images/Quicksand.gif' Height='150'  Width='150'> </Image></InlineUIContainer>"
+                                   <InlineUIContainer><Image Source='../bin/Images/Quicksand.gif' Height='150'  Width='150'> </Image></InlineUIContainer>"
 r091	"<Bold>r091 Poison Snake</Bold>
 <LineBreak/><LineBreak/>Your party unknowingly passes over the lair of a poison snake. 
 <LineBreak/><LineBreak/>One character
  <InlineUIContainer><Button Content='r343' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  suffers snakebit poison wounds. Roll one die for the number of poison wounds received.
 <LineBreak/><LineBreak/>
-              <InlineUIContainer><Image Source='../../Images/Snake.gif' Height='280'  Width='400'> </Image></InlineUIContainer>"
+              <InlineUIContainer><Image Source='../bin/Images/Snake.gif' Height='280'  Width='400'> </Image></InlineUIContainer>"
 r094a	"<Bold>e094a Crocodiles in River</Bold>
 <LineBreak/><LineBreak/>Your party is attacked by very large and very hungry crocodiles. They achieve surprise in combat  <InlineUIContainer><Button Content='r310' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. They have combat skill 4 and endurance of 6. Roll one die for the number fo crocs.
 <LineBreak/><LineBreak/>
-                 <InlineUIContainer><Image Source='../../Images/Crocs.gif' Height='200' Width='400'></Image></InlineUIContainer>"
+                 <InlineUIContainer><Image Source='../bin/Images/Crocs.gif' Height='200' Width='400'></Image></InlineUIContainer>"
 r095	"<Bold>r095 Mounts at Risk</Bold>
 <LineBreak/><LineBreak/>The strain of travelling is exhausting your mounts. Each mount requires a roll.
 <LineBreak/><LineBreak/>
@@ -118,7 +118,7 @@ r095	"<Bold>r095 Mounts at Risk</Bold>
 <LineBreak/> 5: Mount failing. Unless you rest <InlineUIContainer><Button Content='r203' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> , it  dies tomorrow.
 <LineBreak/> 6: Mount in serious condition. It dies immediately.
 <LineBreak/><LineBreak/>
-                 <InlineUIContainer><Image Source='../../Images/MountTired.gif' Height='200' Width='400'></Image></InlineUIContainer>"
+                 <InlineUIContainer><Image Source='../bin/Images/MountTired.gif' Height='200' Width='400'></Image></InlineUIContainer>"
 r096	"<Bold>r096 Mounts Sick</Bold>
 <LineBreak/><LineBreak/>The adverse conditions finally take their toll on your mounts. All the mounts, including winged ones, roll at the end of each day until they die or recover. Possible outcomes are:
 <LineBreak/><LineBreak/>
@@ -127,16 +127,16 @@ r096	"<Bold>r096 Mounts Sick</Bold>
  3: Mount still failing. Roll again at end of tomorrow.<LineBreak/>
  4,5,6: Mount dies now
 <LineBreak/><LineBreak/>
-                 <InlineUIContainer><Image Name='MountsDie' Source='../../Images/MountsDie.gif' Height='200' Width='400'></Image></InlineUIContainer>"
+                 <InlineUIContainer><Image Name='MountsDie' Source='../bin/Images/MountsDie.gif' Height='200' Width='400'></Image></InlineUIContainer>"
 r097	"<Bold>r097 Marsh Gas and Rot</Bold>
 <LineBreak/><LineBreak/>Your entire party has unwittingly travelled into an area full of flesh-rot disease and mind-destroying marsh gas. Roll one die for each character. If a one results, the character escapes. Any other result means the character dies a mindless and raving idiot while his flesh rots from his bones before his eyes.
 <LineBreak/><LineBreak/>
-         <InlineUIContainer><Image Source='../../Images/FleshRot.gif' Height='250' Width='500'></Image></InlineUIContainer>"
+         <InlineUIContainer><Image Source='../bin/Images/FleshRot.gif' Height='250' Width='500'></Image></InlineUIContainer>"
 r098	"<Bold>r098 Dragon Eye</Bold>
 <LineBreak/><LineBreak/>You encountered a huge, winged fire-breathing dragon.
 <LineBreak/><LineBreak/>Since you killed the dragon, you cut out its eyes. The dragon eyes are valued by High Priest and increases the chance of securing an audience with them.
 <LineBreak/><LineBreak/>
-    <InlineUIContainer><Image Source='../../Images/DragonEye.gif' Height='250' Width='500'></Image></InlineUIContainer>"
+    <InlineUIContainer><Image Source='../bin/Images/DragonEye.gif' Height='250' Width='500'></Image></InlineUIContainer>"
 r099	"<Bold>r099 Roc Beak</Bold>
 <LineBreak/><LineBreak/>You encountered the Roc, a giagantic bird which swoops down on your party. 
 <LineBreak/><LineBreak/>Since you killed the Roc, you cut off its beak.
@@ -145,33 +145,33 @@ Count Drogat  especially prizes the item, and it may help you gain an audience w
 <LineBreak/><LineBreak/>
 In addition, the beak can be sold to any merchant, or in any town/castle/temple whenever you buy food. The beak is worth 35gp.
 <LineBreak/><LineBreak/>
-         <InlineUIContainer><Image Source='../../Images/RocBeak.gif' Height='250' Width='500'></Image></InlineUIContainer>"
+         <InlineUIContainer><Image Source='../bin/Images/RocBeak.gif' Height='250' Width='500'></Image></InlineUIContainer>"
 r100	"<Bold>r100 Griffon Claws</Bold>
 <LineBreak/><LineBreak/>You killed a winged griffon.
 <LineBreak/><LineBreak/>You cut off its claws and carried them as an extra possession. They are especially valued by Lady Aeravir of Aeravir Castle, and it may help you gain audience with her.
 <LineBreak/><LineBreak/><LineBreak/>
-     <InlineUIContainer><Image Source='../../Images/GriffonClaw.gif' Height='250' Width='500'></Image></InlineUIContainer>"
+     <InlineUIContainer><Image Source='../bin/Images/GriffonClaw.gif' Height='250' Width='500'></Image></InlineUIContainer>"
 r106	"<Bold>r106 Heavy Overcast</Bold>
 <LineBreak/><LineBreak/>Thick, black clouds obscure your vision. You have become lost.
 <LineBreak/><LineBreak/>Roll one die for each character or unridden mount. A six means that the character or mount disppears into the overcast and is lost from your party.
 <LineBreak/><LineBreak/>Finally, the overcast will force you and the remainder of your party to land in the new hex. No futher travel is possible today. 
 <LineBreak/><LineBreak/>
-               <InlineUIContainer><Image Source='../../Images/Overcast.gif' Height='220' Width='480'></Image></InlineUIContainer>"
+               <InlineUIContainer><Image Source='../bin/Images/Overcast.gif' Height='220' Width='480'></Image></InlineUIContainer>"
 r107	"<Bold>r107 Falcon Scout</Bold>
 <LineBreak/><LineBreak/>At the evening meal each day, if you offer the falcon a food unit, roll the die. If you roll anyhing other than a six, the falcon will remain throughout tomorrow with your party as a guide.
 <LineBreak/><LineBreak/>
-                                        <InlineUIContainer><Image Source='../../Images/Falcon.gif' Height='188' Width='250'></Image></InlineUIContainer>"
+                                        <InlineUIContainer><Image Source='../bin/Images/Falcon.gif' Height='188' Width='250'></Image></InlineUIContainer>"
 r109	"<Bold>r109 Wild Pegasus</Bold>
 <LineBreak/><LineBreak/>You encounter a wild Pegasus. Each character in your party is allowed one attempt to capture it.
 <LineBreak/><LineBreak/>Roll one die. If the result is 5 plus, the character captures the Pegasus. You may add it as a winged mount to your party.
 <LineBreak/><LineBreak/>
-                                 <InlineUIContainer><Image Source='../../Images/Pegasus.gif' Height='300' Width='300'></Image></InlineUIContainer>"
+                                 <InlineUIContainer><Image Source='../bin/Images/Pegasus.gif' Height='300' Width='300'></Image></InlineUIContainer>"
 r111	"<Bold>r111 Storm Demon Attacks</Bold>
 <LineBreak/><LineBreak/>You encounter a powerful demon of storms which attacks your party. Since you have no magicians, wizards, witches, priests, or monks in your party, it cannot be repeled. 
 <LineBreak/><LineBreak/>You are unable to block the attack, and your entire party is blown away to be lost or killed. Your winged mount is killed, but your carried wealth and possessions are intact. The rest of your party is lost.
 <LineBreak/><LineBreak/>You crash in an adjacent hex. Roll one die for the number of wounds suffered.
 <LineBreak/><LineBreak/>
-                              <InlineUIContainer><Image Source='../../Images/StormDemon.gif' Height='300' Width='300'></Image></InlineUIContainer>"
+                              <InlineUIContainer><Image Source='../bin/Images/StormDemon.gif' Height='300' Width='300'></Image></InlineUIContainer>"
 r121	"<Bold>r121 Sunstroke</Bold>
 <LineBreak/><LineBreak/>The heat of the sun is unexpected. Roll one die for each character and mount in your party. A six means he or it collapses from the sunstroke. Mounts that collapse must be left to die.
 <LineBreak/><LineBreak/>Characters that collapse must be carried if possible even if that means other loads must be abandoned per
@@ -179,26 +179,26 @@ r121	"<Bold>r121 Sunstroke</Bold>
 <LineBreak/><LineBreak/>If you suffer sunstroke and are not carried, your party leaves you behind and disappear. You suffer wounds equal to one die roll. You revive in time for the evening meal
  <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. Click image to continue.
 <LineBreak/>
-                                    <InlineUIContainer><Image Source='../../Images/Sun5.gif' Height='250'  Width='250' > </Image></InlineUIContainer>"
+                                    <InlineUIContainer><Image Source='../bin/Images/Sun5.gif' Height='250'  Width='250' > </Image></InlineUIContainer>"
 r123a	"<Bold>r123a Knight at the Bridge Refusal</Bold>
 <LineBreak/><LineBreak/>You refused the combat and end travel for the day. Roll one die for each character in your party. A six means they desert you for cowardice.
 <LineBreak/><LineBreak/>
-                         <InlineUIContainer><Image Source='../../Images/BlackKnightRefuse.gif' Height='200'  Width='350' > </Image></InlineUIContainer>"
+                         <InlineUIContainer><Image Source='../bin/Images/BlackKnightRefuse.gif' Height='200'  Width='350' > </Image></InlineUIContainer>"
 r125	"<Bold>r125 Raft Overturns</Bold>
 <LineBreak/><LineBreak/>The raft is caught in an eddy, hits a rock, and overturns. Everyone in your party including mounts swims to shore. However, all wealth and all possessions are lost.
 <LineBreak/><LineBreak/>
-                   <InlineUIContainer><Image Source='../../Images/RaftWhiteWater5.gif' Height='225'  Width='400' > </Image></InlineUIContainer>"
+                   <InlineUIContainer><Image Source='../bin/Images/RaftWhiteWater5.gif' Height='225'  Width='400' > </Image></InlineUIContainer>"
 r126	"<Bold>r126 Raft Caught in Current</Bold>
 <LineBreak/><LineBreak/>Your raft is swept downriver. 
 <LineBreak/><LineBreak/>Roll one die for each mount and the characters in your party. A six indicates it is lost overboard and drowns. 
 <LineBreak/><LineBreak/>If you fall overboard, you can swim to shore, losing all your wealth, possessions, and mount. You party disppears downriver on the raft and is lost to you.
 <LineBreak/><LineBreak/>
-                   <InlineUIContainer><Image Source='../../Images/RaftWhiteWater3.gif' Height='225'  Width='400' > </Image></InlineUIContainer>"
+                   <InlineUIContainer><Image Source='../bin/Images/RaftWhiteWater3.gif' Height='225'  Width='400' > </Image></InlineUIContainer>"
 r127	"<Bold>r127 Raft in Rough Water</Bold>
 <LineBreak/><LineBreak/>Your raft hits white water. All food stores piled on it are lost overboard.
 <LineBreak/><LineBreak/>All characters, mounts, wealth, and possession are saved. Raft continues its journey safely.
 <LineBreak/><LineBreak/>
-                             <InlineUIContainer><Image Source='../../Images/RaftWhiteWater1.gif' Height='300'  Width='300' > </Image></InlineUIContainer>"
+                             <InlineUIContainer><Image Source='../bin/Images/RaftWhiteWater1.gif' Height='300'  Width='300' > </Image></InlineUIContainer>"
 r128	"<Bold>r128 Merchant</Bold>
 <LineBreak/><LineBreak/>
 You meet a friendly merchant. You can either ignore him and end this event, or you can stop and chat to barter. If you stop, roll two die and consult the chart below:
@@ -220,7 +220,7 @@ You meet a friendly merchant. You can either ignore him and end this event, or y
   12 - Learn unique secrets from the merchant. See
  <InlineUIContainer><Button Content='e162' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.<LineBreak/>
 <LineBreak/>
-                                          <InlineUIContainer><Image Source='../../Images/Merchant.gif' Height='150'  Width='93'> </Image></InlineUIContainer>"
+                                          <InlineUIContainer><Image Source='../bin/Images/Merchant.gif' Height='150'  Width='93'> </Image></InlineUIContainer>"
 r129	"<Bold>r129 Merchant Caravan</Bold>
 <LineBreak/><LineBreak/>You meet a merchant caravan camp for the night. You can ignore them, or roll two die: 
 <LineBreak/><LineBreak/>
@@ -245,7 +245,7 @@ r129	"<Bold>r129 Merchant Caravan</Bold>
  <InlineUIContainer><Button Content='e147' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.<LineBreak/>
   12 - Caravan passed a nearby ruins yesterday. Roll one die for which hex: 1-N,2-NE,3-SE, 4-S,5-SW,6-NW.<LineBreak/>
 <LineBreak/>
-                           <InlineUIContainer><Image Source='../../Images/Caravan.gif' Height='150'  Width='300'> </Image></InlineUIContainer>	"
+                           <InlineUIContainer><Image Source='../bin/Images/Caravan.gif' Height='150'  Width='300'> </Image></InlineUIContainer>	"
 r140	"<Bold>r140 Magic Box Found</Bold>
 <LineBreak/><LineBreak/>You find a magic box. You can open it only if you have a magician, wizard, or witch in your party. 
 <LineBreak/><LineBreak/>Until then, you  carry it with you since it is relatively light.
@@ -257,7 +257,7 @@ r140	"<Bold>r140 Magic Box Found</Bold>
  5 - Random Possession<LineBreak/>
  6 - Nothing but rubbish
 <LineBreak/><LineBreak/>
-                                 <InlineUIContainer><Image  Source='../../Images/BoxUnopened.gif' Name='BoxUnopened' Height='200'  Width='200'> </Image></InlineUIContainer> "
+                                 <InlineUIContainer><Image  Source='../bin/Images/BoxUnopened.gif' Name='BoxUnopened' Height='200'  Width='200'> </Image></InlineUIContainer> "
 r141	"<Bold>r141 Hydra's Teeth</Bold>
 <LineBreak/><LineBreak/>
 The magician/wizard/witch explains that whenever you scatter these teeth on the ground, that number of undead warriors will rise and fight in your party for one combat at your command.
@@ -266,7 +266,7 @@ These undead teeth-warriors have combat skill 5, endurance 4, and wealth 0. They
 <LineBreak/><LineBreak/>
 You can scatter the teeth at any instant to use them that one time including at the start or during any combat.
 <LineBreak/>
-                              <InlineUIContainer><Image  Source='../../Images/Teeth.gif' Height='200'  Width='200'> </Image></InlineUIContainer> "
+                              <InlineUIContainer><Image  Source='../bin/Images/Teeth.gif' Height='200'  Width='200'> </Image></InlineUIContainer> "
 r146	"<Bold>r146 The Secret of Count Dragot</Bold>
 <LineBreak/><LineBreak/>You learn that Count Drogat, lord of Drogat Castle, is acutally an undead creature who enjoys the suffering, pain, and death of others. This explains why he so often tortures and dismembers felons in his realm.
 <LineBreak/><LineBreak/>He often goes into rages that leave his lands in a reign of terror. 
@@ -281,35 +281,35 @@ r146	"<Bold>r146 The Secret of Count Dragot</Bold>
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  with wealth 110. However, you can never return to the castle hex due to the Count's anger. In the process of the theft, you might acquire magic items as part of the wealth 110 check. 
 <LineBreak/><LineBreak/>
-                                     <InlineUIContainer><Image Source='../../Images/FoulBane.gif' Name='EncounterEnd' Height='250' Width='200'></Image></InlineUIContainer>"
+                                     <InlineUIContainer><Image Source='../bin/Images/FoulBane.gif' Name='EncounterEnd' Height='250' Width='200'></Image></InlineUIContainer>"
 r180	"<Bold>r180 Healing Potion</Bold>
 <LineBreak/><LineBreak/>This potion can be applied once to any character including yourself at the end of the day after the evening meal
  <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 . The potion immediately cures all wounds except poison wounds.<LineBreak/><LineBreak/>
-          <InlineUIContainer><Image Source='../../Images/PotionHeal.gif' Name='Possession' Height='500' Width='400'></Image></InlineUIContainer>"
+          <InlineUIContainer><Image Source='../bin/Images/PotionHeal.gif' Name='Possession' Height='500' Width='400'></Image></InlineUIContainer>"
 r181	"<Bold>r181 Cure Poison Vial</Bold>
 <LineBreak/><LineBreak/>This vial can be drunk once by any character during the evening meal
  <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 . It will cure all poisoned wounds overnight. Only poison wounds are cured. It has no effect on regular wounds. 
 <LineBreak/><LineBreak/>
-          <InlineUIContainer><Image Source='../../Images/PotionCure.gif' Name='Possession' Height='500' Width='400'></Image></InlineUIContainer>"
+          <InlineUIContainer><Image Source='../bin/Images/PotionCure.gif' Name='Possession' Height='500' Width='400'></Image></InlineUIContainer>"
 r182	"<Bold>r182 Gift of Charm</Bold>
 <LineBreak/><LineBreak/>This is a small item of no real value, but it does have a magic aura. You can give this gift to any characters you encounter as part of any talk or negiotiaton.
 <LineBreak/><LineBreak/>When you use it, you can then roll a second and a third time of that option. You select the die result you want.
 <LineBreak/><LineBreak/>Once given away, the gift is gone and useless unless the receiver later fights you in combat and you kill the defenders. Then, you can recover the gift as part of the defender's possessions. 
 <LineBreak/><LineBreak/>
-                   <InlineUIContainer><Image Source='../../Images/CharmGift.gif' Name='Possession' Height='300' Width='300'></Image></InlineUIContainer>"
+                   <InlineUIContainer><Image Source='../bin/Images/CharmGift.gif' Name='Possession' Height='300' Width='300'></Image></InlineUIContainer>"
 r183	"<Bold>r183 Endurance Sash</Bold>
 <LineBreak/><LineBreak/>You wear this sash around your waist. It adds one to your normal endurance level.
 <LineBreak/><LineBreak/>The effect is permanet as long as you retain your possessions. 
 <LineBreak/><LineBreak/>You cannot wear more than one sash. Additional ones may be given to other characters in your party. 
 <LineBreak/><LineBreak/>
-        <InlineUIContainer><Image Source='../../Images/Sash.gif' Name='Possession' Height='30' Width='550'></Image></InlineUIContainer>"
+        <InlineUIContainer><Image Source='../bin/Images/Sash.gif' Name='Possession' Height='30' Width='550'></Image></InlineUIContainer>"
 r184	"<Bold>r184 Resistance Talisman</Bold>
 <LineBreak/><LineBreak/>The gold talisman allows you to resist all magic spells and attacks. Whenever magic is used, you can call upon the talisman to negate it.
 <LineBreak/><LineBreak/>However, the talisman may be unable to contain a strong spell. Each time it is used, roll one die. A result of 6 means the spell is stopped and the talisman is shuttered and broken in the process.
 <LineBreak/><LineBreak/>
-                   <InlineUIContainer><Image Source='../../Images/TalismanResistance.gif' Name='Possession' Height='300' Width='300'></Image></InlineUIContainer>"
+                   <InlineUIContainer><Image Source='../bin/Images/TalismanResistance.gif' Name='Possession' Height='300' Width='300'></Image></InlineUIContainer>"
 r185	"<Bold>r185 Poison Drug</Bold>
 <LineBreak/><LineBreak/>This drug can be applied to the weapons of any one character in your party. Its use means that whenever that character strikes in combat
  <InlineUIContainer><Button Content='r220' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
@@ -317,17 +317,17 @@ r185	"<Bold>r185 Poison Drug</Bold>
 <LineBreak/><LineBreak/>After a combat where the poisoned weapon is used, roll one die. A result of 6 means the poison has worn off and the weapon returns to normal.
 <LineBreak/><LineBreak/>Since a character often has multiple weapons, he has the option of using his poisoned weapon or a normal weapon as desired. 
 <LineBreak/><LineBreak/>
-                   <InlineUIContainer><Image Source='../../Images/PoisonDrug.gif' Name='Possession' Height='300' Width='300'></Image></InlineUIContainer>"
+                   <InlineUIContainer><Image Source='../bin/Images/PoisonDrug.gif' Name='Possession' Height='300' Width='300'></Image></InlineUIContainer>"
 r186	"<Bold>r186 Magic Sword</Bold>
 <LineBreak/><LineBreak/>A character can carry this special sword amoung his weapons. The magic sword adds one to the combat skill of the character with it.
 In addition, the blade's magic means that every wound it inflicts counts as a poisoned wound. 
 <LineBreak/><LineBreak/>
-                   <InlineUIContainer><Image Source='../../Images/Sword.gif' Name='Possession' Height='170' Width='500'></Image></InlineUIContainer>"
+                   <InlineUIContainer><Image Source='../bin/Images/Sword.gif' Name='Possession' Height='170' Width='500'></Image></InlineUIContainer>"
 r187	"<Bold>r187 Anti-poison Amulet</Bold>
 <LineBreak/><LineBreak/>This protects against all poisoned wounds. Any poison wound inflicted is ignored if the target has the amulet. Normal wounds still take effect. 
 <LineBreak/><LineBreak/>Each time a poison wound is prevented, roll two die. If the result is 12, the amulet has reached its limit. It cannot absorb more poison and must be discarded. 
 <LineBreak/><LineBreak/>
-         <InlineUIContainer><Image Source='../../Images/AmuletAntiPoison.gif' Name='Possession' Height='400' Width='400'></Image></InlineUIContainer>"
+         <InlineUIContainer><Image Source='../bin/Images/AmuletAntiPoison.gif' Name='Possession' Height='400' Width='400'></Image></InlineUIContainer>"
 r188	"<Bold>r188 Pegasus Mount</Bold>
 <LineBreak/><LineBreak/>
 You have acquired a Pegaus - a winged horse that allows you to travel airborne. 
@@ -341,7 +341,7 @@ The Pegasus is like a normal mount in all other respects including the same tran
 <LineBreak/><LineBreak/>
 You can use the Pegasus as a normal mount on the ground if desired. 
 <LineBreak/><LineBreak/>
-                   <InlineUIContainer><Image Source='../../Images/Pegasus.gif' Name='Possession' Height='400' Width='400'></Image></InlineUIContainer>"
+                   <InlineUIContainer><Image Source='../bin/Images/Pegasus.gif' Name='Possession' Height='400' Width='400'></Image></InlineUIContainer>"
 r188a	"<Bold>r188a Pegasus Talisman</Bold>
 <LineBreak/><LineBreak/>
 You have acquired a Pegaus Talisman. 
@@ -349,13 +349,13 @@ You have acquired a Pegaus Talisman.
 Whenever you have any magician, wizard, witch, priest, or monk in your party; they can help you use the talisman to call upon an actual Pegasus winged mount. It will immediately appear and serve as your mount
  <InlineUIContainer><Button Content='r188' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>
-                   <InlineUIContainer><Image Source='../../Images/TalismanPegasus.gif' Name='Possession' Height='400' Width='400'></Image></InlineUIContainer>"
+                   <InlineUIContainer><Image Source='../bin/Images/TalismanPegasus.gif' Name='Possession' Height='400' Width='400'></Image></InlineUIContainer>"
 r189	"<Bold>e189 Charisma Talisman</Bold>
 <LineBreak/><LineBreak/>The character who wears this talisman improves his stature and charisma in the eyes of others. If you wear it, add one to your wit and wiles in any event or option that involves results from talk or negotiations. 
 <LineBreak/><LineBreak/>This talisman does not improve your wit and wiles when trying to evade, hide, attack, or surprise. 
 <LineBreak/><LineBreak/>Like many magical devices, this talisman's spell may eventually wear out. After each use, roll two die. If the total is 12, it has worn out and must be discared. 
 <LineBreak/><LineBreak/>
-                        <InlineUIContainer><Image Source='../../Images/TalismanCharisma.gif' Name='Possession' Height='300' Width='300'></Image></InlineUIContainer>"
+                        <InlineUIContainer><Image Source='../bin/Images/TalismanCharisma.gif' Name='Possession' Height='300' Width='300'></Image></InlineUIContainer>"
 r190	"<Bold>r190 Nerve Gas Bomb</Bold>
 <LineBreak/><LineBreak/>This sealed jar is filled with a deadly and quick-acting gas created by a master alchemist. If you surprise an enemy in combat
  <InlineUIContainer><Button Content='r220' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>,
@@ -369,7 +369,7 @@ r190	"<Bold>r190 Nerve Gas Bomb</Bold>
 The jar with the gas is rather heavy. It counts as one load to transport
  <InlineUIContainer><Button Content='r206' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. 
 <LineBreak/><LineBreak/>
-                                   <InlineUIContainer><Image Source='../../Images/NerveGasBomb.gif' Name='Possession' Height='300' Width='200'></Image></InlineUIContainer>"
+                                   <InlineUIContainer><Image Source='../bin/Images/NerveGasBomb.gif' Name='Possession' Height='300' Width='200'></Image></InlineUIContainer>"
 r191	"<Bold>r191 Resistance Ring</Bold>
 <LineBreak/><LineBreak/>
 This ring creates a magic aura around the wearer. Every time the wearer is wounded, roll two die:
@@ -380,7 +380,7 @@ This ring creates a magic aura around the wearer. Every time the wearer is wound
 <LineBreak/><LineBreak/>
 The ring can be used to ward poison wounds like normal wounds. The ring can also be used to ward magic attacks against the wearer, but it will not protect others in the party. In a magic attack, two rolls must be made, and the single worst result to the wearer is applied.
 <LineBreak/><LineBreak/>
-                                  <InlineUIContainer><Image Source='../../Images/RingResistence.gif' Name='Possession' Height='200' Width='200'></Image></InlineUIContainer>"
+                                  <InlineUIContainer><Image Source='../bin/Images/RingResistence.gif' Name='Possession' Height='200' Width='200'></Image></InlineUIContainer>"
 r192	"<Bold>r192 Resurrection Necklace</Bold>
 <LineBreak/>
 This necklace of black opals and red rubies holds the secret of a second life. If the wearer dies for any reason, including voluntary suicide, at the end of the day, the character rises from the dead.
@@ -394,13 +394,13 @@ You learn that such appearances are favored at the Dragot Castle. You can add on
  <InlineUIContainer><Button Content='r211' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  with Count Dragot. 
 <LineBreak/><LineBreak/>
-                             <InlineUIContainer><Image Source='../../Images/Necklace.gif' Name='Possession' Height='200' Width='200'></Image></InlineUIContainer>"
+                             <InlineUIContainer><Image Source='../bin/Images/Necklace.gif' Name='Possession' Height='200' Width='200'></Image></InlineUIContainer>"
 r193	"<Bold>r193 Shield of Light</Bold>
 <LineBreak/><LineBreak/>This enchanted shield will flash and shine in the eyes of any attacker. When a character has this shield, any opponent in combat has his combat skill reduced by one. If a character dies with the shield, the shield will dull and die becoming useless. 
 <LineBreak/><LineBreak/>At the end of each combat where the shield is used, roll one die. If a 6 is rolled, the shield is so banged and damaged by battle that it is now useless.
 <LineBreak/><LineBreak/>To preserve the shield, you may elect to not use it in some combats. You can change your mind during the battle but must then check for damage after the battle. 
 <LineBreak/><LineBreak/>
-                                 <InlineUIContainer><Image Source='../../Images/Shield.gif' Name='Possession' Height='200' Width='200'></Image></InlineUIContainer>"
+                                 <InlineUIContainer><Image Source='../bin/Images/Shield.gif' Name='Possession' Height='200' Width='200'></Image></InlineUIContainer>"
 r194	"<Bold>r194 Royal Helm of Northlands</Bold>
 <LineBreak/><LineBreak/>This ancient and sacred treasure has long been lost. Myths and tales still relate the great exploits of its wearers. Now, you hold this treasure which gives you automatic and indisputable right to the Northlands throne.
 <LineBreak/><LineBreak/>If you return to either Ogon
@@ -410,7 +410,7 @@ r194	"<Bold>r194 Royal Helm of Northlands</Bold>
  towns with the helm, you will instantly be hailed as the rightful King of the Northlands and win the game!
 <LineBreak/><LineBreak/>In the meantime, possession of the helm increases your stature and self-confidence. Increase your wit and wiles by one.
 <LineBreak/><LineBreak/>
-                   <InlineUIContainer><Image Source='../../Images/Helmet.gif' Name='Possession' Height='300' Width='300'></Image></InlineUIContainer>"
+                   <InlineUIContainer><Image Source='../bin/Images/Helmet.gif' Name='Possession' Height='300' Width='300'></Image></InlineUIContainer>"
 r200	"<Bold>r200 How to Play</Bold>
 <LineBreak/><LineBreak/><Italic>Barbarian Prince</Italic> is a dungeon cawler, self-paced, solo game. You play the game in days. Each day starts with your selecting a daily action
  <InlineUIContainer><Button Name='myButtonR203' Content='r203' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
@@ -475,7 +475,7 @@ r203a	"<Bold>r203a Prison Escape Attempt</Bold>
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  to determine where you end up. The escape takes the entire day and after you must prepare for the evening meals
  <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. 
-<LineBreak/><LineBreak/>                                   <InlineUIContainer><Image Source='../../Images/JailBreak.gif' Height='250'  Width='250'> </Image></InlineUIContainer>
+<LineBreak/><LineBreak/>                                   <InlineUIContainer><Image Source='../bin/Images/JailBreak.gif' Height='250'  Width='250'> </Image></InlineUIContainer>
 "
 r204	"<Bold>r204 Travel</Bold>
 <LineBreak/><LineBreak/>You can travel to new hexes as a daily action
@@ -554,7 +554,7 @@ In addition, events where you talk or negotiate occur in only a few minutes. You
 r205	"<Bold>r205 Lost</Bold>
 <LineBreak/><LineBreak/>Each time you attempt to leave a hex, there is a danger of becoming lost. Consult the Travel Table
  <InlineUIContainer><Button Name='myButtonT207' Content='t207' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
- and find the terrain type you are leaving. Read across to the 'Lost' column entry. Roll two die. If the dice total equals or exceeds the chart's number, your party is lost. If you move more than one hex in a day, you must check for getting lost before each move, i.e., before you enter the new hex.
+ and find the terrain type you are leaving. Read across to the 'Lost"" column entry. Roll two die. If the dice total equals or exceeds the chart's number, your party is lost. If you move more than one hex in a day, you must check for getting lost before each move, i.e., before you enter the new hex.
 <LineBreak/><LineBreak/>If you get lost, you cannot move further that day. You are stuck in the hex you tried to leave. You must check for a travel event unless performing self-guiding moves
  <InlineUIContainer><Button Name='myButtonR205b' Content='r205b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
  The travel check is performed in the hex you tried to enter, as if you actually entered it. This reflects you wondering around the edges of the new hex and perhaps encountering something.
@@ -833,7 +833,7 @@ r212m	"<Bold>r212m Gods Declare Crusade</Bold>
 <LineBreak/><LineBreak/>The gods declare your cause a religious crusade and the Staff of Command is passed into your hands. 
 <LineBreak/><LineBreak/>If you bring this possession to any hex north of the, you will command instant obedience throughout the Norhlands, regain your throne, and win the game! 
 <LineBreak/><LineBreak/>
-              <InlineUIContainer><Image Source='../../Images/Staff.gif' Height='300' Width='400'></Image></InlineUIContainer>"
+              <InlineUIContainer><Image Source='../bin/Images/Staff.gif' Height='300' Width='400'></Image></InlineUIContainer>"
 r213	"<Bold>r213 Rafting the Rivers</Bold>
 <LineBreak/><LineBreak/>You have the special option of using raft travel along the river instead of normal travel each day. When raft travel is available, you ride the raft until you get off by selecting a daily action other than raft travel; or when you roll 12 with two die after each day's travel. The latter represents the raft reaching a stopping point for lengthy loading, unloading, or dismantling.
 <LineBreak/><LineBreak/>While on a raft, you travel on the river hexsides themselves. Your speed is either three hexsides per day downriver, or two hexsides per day upriver. 
@@ -882,7 +882,7 @@ r215a	"<Bold>r215a Food Units</Bold>
 r215b	"<Bold>r215b Hunting</Bold>
 <LineBreak/><LineBreak/>If you are in a farmland, country side, forest, hill, or swamp hex, you can hunt for food. Any one character in your party can be the hunter. 
 <LineBreak/><LineBreak/>Total his combat skill and half his current endurance minus wounds. Round fractions down and  subtract from the total value of the roll of two dice. The result is the number of food units gained by hunting. If the character can act as a guide, add one to the total. If the total is zero or less, the hunting was unsuccessful. 
-<LineBreak/><LineBreak/>If the dice roll was '12' , the hunter hurt himself regardless if the hunting was successful. Roll one die for the number of wounds he suffered. If knocked unconscious or killed, the hunt automatically fails unless hunting with others. 
+<LineBreak/><LineBreak/>If the dice roll was ""12"" , the hunter hurt himself regardless if the hunting was successful. Roll one die for the number of wounds he suffered. If knocked unconscious or killed, the hunt automatically fails unless hunting with others. 
 <LineBreak/><LineBreak/>If your party rested today in the hex, you can send additional characters to hunt. For each additional character hunting, add one to the skill+endurance level of your hunt. The actual skill and endurance of the additional hunters is not counted. However, if the additional hunters are gides, add one for each guide."
 r215c	"<Bold>r215c Populated Regions and Hunting</Bold>
 <LineBreak/><LineBreak/>If you must hunt in a farmland hex, each time you roll one die for a possible event, which occurs after the hunt is finished, but before the evening meal is eaten: 
@@ -903,7 +903,7 @@ r215e	"<Bold>r215e Food Stores</Bold>
  <InlineUIContainer><Button Name='myButtonR206' Content='r206' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  by yourself, other characters, and mounts. 
 <LineBreak/><LineBreak/>Food stores can be purchased in a town, castle, or villiage for one gold piece per food unit, but only if you spent the entire day in the hex. 
-<LineBreak/><LineBreak/>Each food unit is one 'load' to transport."
+<LineBreak/><LineBreak/>Each food unit is one ""load"" to transport."
 r215f	"<Bold>r215f Animal Fodder</Bold>
 <LineBreak/><LineBreak/>Animals can graze and eat fodder for themselves in any terrain where hunting is possible except swamps (i.e., in farmland, country side, forest, or hills). No hunting, stores or purchases are necessary. 
 <LineBreak/><LineBreak/>If you spend the entire day in a town, castle, or temple hex; you must stable your animals which cost one gold piece for food, unless you provide the stable with food stores (two units per animal) to feed them."

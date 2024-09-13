@@ -1175,7 +1175,7 @@ namespace BarbarianPrince
             case "WarriorOld": character= new MapItem(miName, 1.0, false, false, false, "c43OldWarrior", "c43OldWarrior", princeTerritory, 0, 0, 0); break;
             case "Witch": character= new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", princeTerritory, 3, 1, 5); break;
             case "Wizard": character= new MapItem(miName, 1.0, false, false, false, "c12Wizard", "c12Wizard", princeTerritory, 4, 4, 60); break;
-            case "WizardHenchman": character= new MapItem(miName, 1.0, false, false, false, "c49Henchman", "c49Henchman", princeTerritory, 4, 5, 4); break;
+            case "WHenchman": character= new MapItem(miName, 1.0, false, false, false, "c49Henchman", "c49Henchman", princeTerritory, 4, 5, 4); break;
             case "Wolf": character= new MapItem(miName, 1.0, false, false, false, "c71Wolf", "c71Wolf", princeTerritory, 3, 3, 0); break;
             case "Wraith": character= new MapItem(miName, 1.0, false, false, false, "c24Wraith", "c24Wraith", princeTerritory, 9, 6, 0); break;
             default:
@@ -2574,7 +2574,7 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
                }
                gi.MapItemMoves.Add(mimSearch1);
-               Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateSunriseChoice.PerformAction(SearchCacheCheck): oT=" + princeTerritory.Name + " nT=" + mimSearch1.NewTerritory.Name);
+               Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateSunriseChoice.PerformAction(SearchTreasure): oT=" + princeTerritory.Name + " nT=" + mimSearch1.NewTerritory.Name);
                break;
             case GameAction.ArchTravel:
                ResetDayForNonTravelChoice(gi, action);
@@ -3142,10 +3142,10 @@ namespace BarbarianPrince
          EnteredHex hex = new EnteredHex(gi, ColorActionEnum.CAE_JAIL);
          hex.IsEncounter = true;
          hex.JailDay++;
-         gi.EnteredHexes.Add(hex); // show staying in hex when in jail
          switch (gi.EventActive)
          {
             case "e203a":
+               gi.EnteredHexes.Add(hex); // show staying in hex when in jail
                if ((true == gi.IsInStructure(gi.NewHex)) && (false == gi.VisitedLocations.Contains(gi.NewHex)))
                   gi.VisitedLocations.Add(gi.NewHex);
                if (1 == dieRoll)
@@ -3171,6 +3171,7 @@ namespace BarbarianPrince
                }
                break;
             case "e203c":
+               gi.EnteredHexes.Add(hex); // show staying in hex when in jail
                if ((true == gi.IsInStructure(gi.NewHex)) && (false == gi.VisitedLocations.Contains(gi.NewHex)))
                   gi.VisitedLocations.Add(gi.NewHex);
                switch (dieRoll) // Based on the die roll, implement event
@@ -8017,8 +8018,7 @@ namespace BarbarianPrince
                   wizard.AddNewMount();
                gi.EncounteredMembers.Add(wizard);
                //--------------------------------
-               IMapItem wizardHenchman = CreateCharacter(gi, "WizardHenchman");
-               string henchmanName = "Henchman" + Utilities.MapItemNum.ToString();
+               IMapItem wizardHenchman = CreateCharacter(gi, "W6Henchman");
                if (3 < dieRoll)
                   wizardHenchman.AddNewMount();
                gi.EncounteredMembers.Add(wizardHenchman);
@@ -14172,6 +14172,7 @@ namespace BarbarianPrince
                         case 2:
                         case 3:
                         case 4:
+                           Logger.Log(LogEnum.LE_ADD_COIN, "EncounterRoll(): targetCache=" + targetCache.Coin.ToString() + " for t=" + princeTerritory.Name);
                            gi.AddCoins(targetCache.Coin, false);
                            gi.Caches.Remove(targetCache);
                            break;

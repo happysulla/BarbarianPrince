@@ -598,7 +598,7 @@ namespace BarbarianPrince
             myButtonTimeTrackDays[i].FontWeight = FontWeights.Normal;
             myButtonTimeTrackDays[i].IsEnabled = false;
          }
-         for (int j = 0; j < 10; ++j)
+         for (int j = 0; j < 15; ++j)
          {
             myButtonTimeTrackWeeks[j].ClearValue(Control.BackgroundProperty);
             myButtonTimeTrackWeeks[j].FontWeight = FontWeights.Normal;
@@ -608,7 +608,7 @@ namespace BarbarianPrince
             return;
          int week = gi.Days / 7; // round down to nearest integer
          if (14 < week)
-            week = 9;
+            week = 14;
          myButtonTimeTrackWeeks[week].Background = Utilities.theBrushControlButton;
          myButtonTimeTrackWeeks[week].FontWeight = FontWeights.Bold;
          myButtonTimeTrackWeeks[week].IsEnabled = true;

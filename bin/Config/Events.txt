@@ -2999,7 +2999,7 @@ e128c	"<Bold>e128c Merchant with Food for Sale</Bold>
 <LineBreak/><LineBreak/>
                                           <InlineUIContainer><Image Source='../bin/Images/Merchant.gif' Name='EncounterEnd' Height='200'  Width='125'></Image></InlineUIContainer>"
 e128d	"<Bold>e128d Merchant Game of Chance</Bold>
-<LineBreak/><LineBreak/>If the roll exceeds wit and wiles, you spend up to 10gp needlessly. 'Have you ever heard of Plato, Aristotle, Socrates? Morons!'
+<LineBreak/><LineBreak/>If the roll exceeds wit and wiles, you spend up to 10gp needlessly. ""Have you ever heard of Plato, Aristotle, Socrates? Morons!""
 <LineBreak/><LineBreak/> Roll one die:  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e128e	"<Bold>e128e Merchant Selling Healing Potion Sale</Bold>
 <LineBreak/><LineBreak/>Merchant has healing potions for sale. See
@@ -4416,7 +4416,7 @@ e212j	"<Bold>e212j  High Priest Request Audience</Bold>
 <LineBreak/><LineBreak/>
                    <InlineUIContainer><Image Source='../bin/Images/Temple.gif' Name='Temple' Height='300' Width='400'></Image></InlineUIContainer>"
 e212k	"<Bold>e212k High Priest Encounter</Bold>
-<LineBreak/><LineBreak/>The High Priest spends an afternoon talking with you.
+<LineBreak/><LineBreak/>The High Priest spends an afternoon talking with you. Choose an option.
 <LineBreak/><LineBreak/><InlineUIContainer><Button Content='Request' Name='e212l' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> clues for some secret information 
 <InlineUIContainer><Button Content='e212l' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/><InlineUIContainer><Button Content='  Use  ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> influence to add 3  in offering Tomorrow. 
@@ -4916,7 +4916,7 @@ e342a	"<Bold>e342a More Talking</Bold> <InlineUIContainer><Button Content='e341'
 <LineBreak/><LineBreak/>
 Characters reveal themself gradually. More talking is required to review their true nature.
 <LineBreak/><LineBreak/>
-<InlineUIContainer><Button Content='Talk ' FontFamily='Courier New'  FontSize='12' Name='e341'></Button></InlineUIContainer> further or<LineBreak/>
+<InlineUIContainer><Button Content='Talk ' FontFamily='Courier New'  FontSize='12' Name=""e341""></Button></InlineUIContainer> further or<LineBreak/>
 <InlineUIContainer><Button Content='Pass ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>  with dignity."
 e343	"<Bold>e343 Victim Selection</Bold>
 <LineBreak/><LineBreak/>One character in your party is the victim or target of an attack. If your party is just you, then you are the target.
