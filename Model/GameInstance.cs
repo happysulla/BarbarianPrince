@@ -2191,8 +2191,9 @@ namespace BarbarianPrince
          XmlTextReader reader = null;
          try
          {
-            // Load the reader with the data file and ignore all white space nodes.         
-            reader = new XmlTextReader("../Config/Territories.xml") { WhitespaceHandling = WhitespaceHandling.None };
+            // Load the reader with the data file and ignore all white space nodes.
+            string filename = ConfigFileReader.theConfigDirectory + "Territories.xml";
+            reader = new XmlTextReader(filename) { WhitespaceHandling = WhitespaceHandling.None };
             while (reader.Read())
             {
                if (reader.Name == "Territory")
@@ -2273,131 +2274,6 @@ namespace BarbarianPrince
          {
             Console.WriteLine("ReadTerritoriesXml(): Exception:  e.Message={0} while reading reader.Name={1}", e.Message, reader.Name);
             return territories;
-         }
-         finally
-         {
-            if (reader != null)
-               reader.Close();
-         }
-      }
-      public IMapItems ReadMapItemsXml(ITerritories territories)
-      {
-         IMapItems mapItems = new MapItems();
-         XmlTextReader reader = null;
-         try
-         {
-            // Load the reader with the data file and ignore all white space nodes.         
-            reader = new XmlTextReader("../Config/MapItems.xml") { WhitespaceHandling = WhitespaceHandling.None };
-            while (reader.Read())
-            {
-               if (reader.Name == "MapItem")
-               {
-                  if (reader.IsStartElement())
-                  {
-                     string name = reader.GetAttribute("value");
-                     //---------------------------------------------------------
-                     reader.Read();
-                     string zoomStr = reader.GetAttribute("value");
-                     Double zoom = Double.Parse(zoomStr);
-                     //---------------------------------------------------------
-                     reader.Read();
-                     string isHiddenStr = reader.GetAttribute("value");
-                     bool isHidden = Boolean.Parse(isHiddenStr);
-                     //---------------------------------------------------------
-                     reader.Read();
-                     string isAnimatedStr = reader.GetAttribute("value");
-                     bool isAnimated = Boolean.Parse(isAnimatedStr);
-                     //---------------------------------------------------------
-                     reader.Read();
-                     string isGuideStr = reader.GetAttribute("value");
-                     bool isGuide = Boolean.Parse(isGuideStr);
-                     //---------------------------------------------------------
-                     reader.Read();
-                     string enduranceStr = reader.GetAttribute("value");
-                     Int32 endurance = Int32.Parse(enduranceStr);
-                     //---------------------------------------------------------
-                     reader.Read();
-                     string movementStr = reader.GetAttribute("value");
-                     Int32 movement = Int32.Parse(movementStr);
-                     //---------------------------------------------------------
-                     reader.Read();
-                     string combatStr = reader.GetAttribute("value");
-                     Int32 combat = Int32.Parse(combatStr);
-                     //---------------------------------------------------------
-                     reader.Read();
-                     string coinStr = reader.GetAttribute("value");
-                     int coin = Int32.Parse(coinStr);
-                     //---------------------------------------------------------
-                     reader.Read();
-                     string topImageName = reader.GetAttribute("value");
-                     reader.Read();
-                     string bottomImageName = reader.GetAttribute("value");
-                     reader.Read();
-                     string overlapImageName = reader.GetAttribute("value");
-                     //---------------------------------------------------------
-                     reader.Read();
-                     string value = reader.GetAttribute("X");
-                     Double X = Double.Parse(value);
-                     value = reader.GetAttribute("Y");
-                     Double Y = Double.Parse(value);
-                     MapPoint location = new MapPoint(X, Y);
-                     //---------------------------------------------------------
-                     reader.Read();
-                     string enduranceUsedStr = reader.GetAttribute("value");
-                     Int32 enduranceUsed = Int32.Parse(enduranceUsedStr);
-                     reader.Read();
-                     string movementUsedStr = reader.GetAttribute("value");
-                     Int32 movementUsed = Int32.Parse(movementUsedStr);
-                     //---------------------------------------------------------
-                     reader.Read();
-                     string territoryName = reader.GetAttribute("value");
-                     ITerritory matchingTerritory = null;
-                     foreach (ITerritory t in territories)
-                     {
-                        if (territoryName == Utilities.RemoveSpaces(t.ToString()))
-                        {
-                           matchingTerritory = t;
-                           break;
-                        }
-                     }
-                     if (null == matchingTerritory)
-                     {
-                        Logger.Log(LogEnum.LE_ERROR, "ReadMapItemsXml(): matchingTerritory=null");
-                        return null;
-                     }
-                     //---------------------------------------------------------
-                     reader.Read();
-                     string territoryStartingName = reader.GetAttribute("value");
-                     ITerritory matchingTerritoryStarting = null;
-                     foreach (ITerritory t in territories)
-                     {
-                        if (territoryStartingName == Utilities.RemoveSpaces(t.ToString()))
-                        {
-                           matchingTerritoryStarting = t;
-                           break;
-                        }
-                     }
-                     if (null == matchingTerritoryStarting)
-                     {
-                        Logger.Log(LogEnum.LE_ERROR, "ReadMapItemsXml(): matchingTerritoryStarting=null");
-                        return null;
-                     }
-                     //---------------------------------------------------------
-                     reader.Read();
-                     string isKilledStr = reader.GetAttribute("value");
-                     bool isKilled = Boolean.Parse(isKilledStr);
-                     //---------------------------------------------------------
-                     MapItem mi= new MapItem(name, zoom, isHidden, isAnimated, isGuide, topImageName, bottomImageName, matchingTerritory, endurance, combat, coin);
-                     mapItems.Add(mi);
-                  } // end if
-               } // end if
-            } // end while
-            return mapItems;
-         } // try
-         catch (Exception e)
-         {
-            Console.WriteLine("ReadMapItemsXml(): Exception:  e.Message={0} while reading reader.Name={1}", e.Message, reader.Name);
-            return null;
          }
          finally
          {

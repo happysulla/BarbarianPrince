@@ -317,7 +317,8 @@ namespace BarbarianPrince
       {
          try
          {
-            ConfigFileReader cfr = new ConfigFileReader("../Config/Rules.txt");
+            string filename = ConfigFileReader.theConfigDirectory + "Rules.txt";
+            ConfigFileReader cfr = new ConfigFileReader(filename);
             if (true == cfr.CtorError)
             {
                Logger.Log(LogEnum.LE_ERROR, "CreateRules(): cfr.CtorError=true");
@@ -341,7 +342,8 @@ namespace BarbarianPrince
       {
          try
          {
-            ConfigFileReader cfr = new ConfigFileReader("../Config/Tables.txt");
+            string filename = ConfigFileReader.theConfigDirectory + "Tables.txt";
+            ConfigFileReader cfr = new ConfigFileReader(filename);
             if (true == cfr.CtorError)
             {
                Logger.Log(LogEnum.LE_ERROR, "CreateTables(): cfr.CtorError=true");

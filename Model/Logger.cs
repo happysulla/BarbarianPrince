@@ -69,7 +69,7 @@ namespace BarbarianPrince
    {
       const int NUM_LOG_LEVELS = (int)LogEnum.LE_END_ENUM;
       public static Boolean[] theLogLevel = new Boolean[NUM_LOG_LEVELS];
-      private static string theDirectoryName = "";
+      public static string theLogDirectory = "";        
       private static string theFileName = "";
       private static bool theIsLogFileCreated = false;
       private static Mutex theMutex = new Mutex();
@@ -85,96 +85,17 @@ namespace BarbarianPrince
          }
       }
       //--------------------------------------------------
-      static public void Log(LogEnum logLevel, String description)
-      {
-         if (true == theLogLevel[(int)logLevel])
-         {
-            theMutex.WaitOne();
-            Console.WriteLine("{0} {1}", logLevel.ToString(), description);
-            if (false == theIsLogFileCreated)
-            {
-               theMutex.ReleaseMutex();
-               return;
-            }
-
-            try
-            {
-               FileInfo file = new FileInfo(theFileName);
-               if (true == File.Exists(theFileName))
-               {
-                  StreamWriter swriter = File.AppendText(theFileName);
-                  swriter.Write(logLevel.ToString());
-                  swriter.Write(" ");
-                  swriter.Write(description);
-                  swriter.Write("\n");
-                  swriter.Close();
-               }
-            }
-            catch (FileNotFoundException fileException)
-            {
-               Console.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + fileException.ToString());
-            }
-            catch (IOException ioException)
-            {
-               Console.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + ioException.ToString());
-            }
-            catch (Exception ex)
-            {
-               Console.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + ex.ToString());
-            }
-            theMutex.ReleaseMutex();
-         }
-      }
-      static public void SetOn(LogEnum logLevel)
-      {
-         if ((int)logLevel < NUM_LOG_LEVELS)
-            theLogLevel[(int)logLevel] = true;
-      }
-      static public void SetOff(LogEnum logLevel)
-      {
-         if ((int)logLevel < NUM_LOG_LEVELS)
-            theLogLevel[(int)logLevel] = false;
-      }
       static public bool SetInitial()
       {
          //---------------------------------------------------------------------
-         try // create directory if it does not exists
-         {
-            if (true == string.IsNullOrEmpty(theDirectoryName)) // use the directory name as the place to load games. If none exists, create directory name
-               theDirectoryName = Directory.GetParent(Environment.CurrentDirectory.ToString()).ToString() + @"\Logs";
-            if (false == Directory.Exists(theDirectoryName)) // create directory if does not exists
-               Directory.CreateDirectory(theDirectoryName);
-            Directory.SetCurrentDirectory(theDirectoryName);
-         }
-         catch (DirectoryNotFoundException dirException)
-         {
-            Console.WriteLine("SetInitial(): create dir\n" + dirException.ToString());
-         }
-         catch (FileNotFoundException fileException)
-         {
-            Console.WriteLine("SetInitial(): create dir\n" + fileException.ToString());
-         }
-         catch (IOException ioException)
-         {
-            Console.WriteLine("SetInitial(): create dir\n" + ioException.ToString());
-         }
-         catch (Exception ex)
-         {
-            Console.WriteLine("SetInitial(): create dir\n" + ex.ToString());
-         }
-         //---------------------------------------------------------------------
          try // create the file
          {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(theDirectoryName);
-            sb.Append("/");
-            sb.Append(DateTime.Now.ToString("yyyyMMdd-HHmmss"));
-            sb.Append(".txt");
-            theFileName = sb.ToString();
+            if( false == Directory.Exists(theLogDirectory) )
+                Directory.CreateDirectory(theLogDirectory);
+            theFileName = theLogDirectory + DateTime.Now.ToString("yyyyMMdd-HHmmss") + ".txt";
             FileInfo f = new FileInfo(theFileName);
             f.Create();
             theIsLogFileCreated = true;
-            Directory.SetCurrentDirectory(AssemblyDirectory);
          }
          catch (DirectoryNotFoundException dirException)
          {
@@ -247,6 +168,55 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_LOADS);
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_HUNT);
          return true;
+      }
+      static public void SetOn(LogEnum logLevel)
+      {
+         if ((int)logLevel < NUM_LOG_LEVELS)
+            theLogLevel[(int)logLevel] = true;
+      }
+      static public void SetOff(LogEnum logLevel)
+      {
+         if ((int)logLevel < NUM_LOG_LEVELS)
+            theLogLevel[(int)logLevel] = false;
+      }
+      static public void Log(LogEnum logLevel, String description)
+      {
+         if (true == theLogLevel[(int)logLevel])
+         {
+            theMutex.WaitOne();
+            Console.WriteLine("{0} {1}", logLevel.ToString(), description);
+            if (false == theIsLogFileCreated)
+            {
+               theMutex.ReleaseMutex();
+               return;
+            }
+            try
+            {
+               FileInfo file = new FileInfo(theFileName);
+               if (true == File.Exists(theFileName))
+               {
+                  StreamWriter swriter = File.AppendText(theFileName);
+                  swriter.Write(logLevel.ToString());
+                  swriter.Write(" ");
+                  swriter.Write(description);
+                  swriter.Write("\n");
+                  swriter.Close();
+               }
+            }
+            catch (FileNotFoundException fileException)
+            {
+               Console.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + fileException.ToString());
+            }
+            catch (IOException ioException)
+            {
+               Console.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + ioException.ToString());
+            }
+            catch (Exception ex)
+            {
+               Console.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + ex.ToString());
+            }
+            theMutex.ReleaseMutex();
+         }
       }
    }
 }

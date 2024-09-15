@@ -104,6 +104,7 @@ namespace BarbarianPrince
       private IDieRoller myDieRoller = null;
       private EventViewer myEventViewer = null;
       private MainMenuViewer myMainMenuViewer = null;
+      private bool myExtendTimeGameOptionPrevious = false;
       private PartyDisplayDialog myPartyDisplayDialog = null;
       private EllipseDisplayDialog myEllipseDisplayDialog = null;
       private System.Windows.Input.Cursor myTargetCursor = null;
@@ -221,13 +222,7 @@ namespace BarbarianPrince
          CanvasImageViewer civ = new CanvasImageViewer(myCanvas);
          CreateRiversFromXml();
          //-----------------------------------------------------------------
-         Option option = gi.Options.Find("ExtendEndTime");
-         if (null == option)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "UpdateView(): gi.Options.Find(ExtendEndTime)");
-            option = new Option("ExtendEndTime", false);
-         }
-         CreateButtonTimeTrack(gi, option.IsEnabled);
+         CreateButtonTimeTrack(gi);
          CreateButtonFoodSupply();
          CreateButtonEndurance();
          CreateButtonDailyAction();
@@ -281,10 +276,19 @@ namespace BarbarianPrince
                   }
                }
             }
-            Logger.Log(LogEnum.LE_GAME_INIT, "GameViewerWindow.UpdateView(): a=" + action.ToString() + " gi=" + gi.ToString());
-            Option optionExtraTime = gi.Options.Find("ExtendEndTime");
-            if (true == optionExtraTime.IsEnabled)
-               CreateTimeTrackLongGame();
+
+         }
+         //-------------------------------------------------------
+         Option optionExtendTime = gi.Options.Find("ExtendEndTime");
+         if (null == optionExtendTime)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "UpdateView(): gi.Options.Find(ExtendEndTime)");
+            optionExtendTime = new Option("ExtendEndTime", false);
+         }
+         if (myExtendTimeGameOptionPrevious != optionExtendTime.IsEnabled ) // if there is change in this option, recreate the buttons
+         {
+            CreateButtonTimeTrack(gi);
+            myExtendTimeGameOptionPrevious = optionExtendTime.IsEnabled;
          }
          //-------------------------------------------------------
          UpdateStackPanelDailyActions(gi);
@@ -311,7 +315,7 @@ namespace BarbarianPrince
                if (null == option)
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): gi.Options.Find(ExtendEndTime)");
                else
-                  CreateButtonTimeTrack(gi,  option.IsEnabled);
+                  CreateButtonTimeTrack(gi);
                break;
             case GameAction.ShowAllRivers:
                UpdateCanvasRiver("Dienstal Branch", false);
@@ -381,7 +385,7 @@ namespace BarbarianPrince
          GameAction outAction = GameAction.RemoveSplashScreen;
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
       }
-      private void CreateButtonTimeTrack(IGameInstance gi, bool isGameExtended = false)
+      private void CreateButtonTimeTrack(IGameInstance gi)
       {
          myStackPanelTimeTrackDay.Children.Clear();
          Thickness thickness = new Thickness(0, 0, 180, 0);
@@ -394,9 +398,16 @@ namespace BarbarianPrince
             myButtonTimeTrackDays[i] = new Button { Height = Utilities.theMapItemSize, Width = Utilities.theMapItemSize, FontSize = 10, IsEnabled = false, Content = content };
             myStackPanelTimeTrackDay.Children.Add(myButtonTimeTrackDays[i]);
          }
+         //--------------------------------------
          myStackPanelTimeTrackWeek.Children.Clear();
+         Option option = gi.Options.Find("ExtendEndTime");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "UpdateView(): gi.Options.Find(ExtendEndTime)");
+            option = new Option("ExtendEndTime", false);
+         }
          int numWeeks = 10;
-         if (true == isGameExtended)
+         if (true == option.IsEnabled)
             numWeeks = 15;
          for (int i = 0; i < numWeeks; ++i)
          {
@@ -413,17 +424,6 @@ namespace BarbarianPrince
          myButtonTimeTrackDays[0].IsEnabled = true;
          myButtonTimeTrackWeeks[0].IsEnabled = true;
          UpdateTimeTrack(gi);
-      }
-      private void CreateTimeTrackLongGame()
-      {
-         myStackPanelTimeTrackWeek.Children.Clear();
-         for (int i = 0; i < 15; ++i)
-         {
-            int k = i + 1;
-            string content = "Week#" + k.ToString();
-            myButtonTimeTrackWeeks[i] = new Button { Height = Utilities.theMapItemSize, Width = Utilities.theMapItemSize, FontSize = 8, IsEnabled = false, Content = content };
-            myStackPanelTimeTrackWeek.Children.Add(myButtonTimeTrackWeeks[i]);
-         }
       }
       private void CreateButtonFoodSupply()
       {
@@ -518,7 +518,8 @@ namespace BarbarianPrince
          string name = null;
          try
          {
-            reader = new XmlTextReader("../Config/Rivers.xml") { WhitespaceHandling = WhitespaceHandling.None }; // Load the reader with the data file and ignore all white space nodes.    
+            string filename = ConfigFileReader.theConfigDirectory + "Rivers.xml";
+            reader = new XmlTextReader(filename) { WhitespaceHandling = WhitespaceHandling.None }; // Load the reader with the data file and ignore all white space nodes.    
             while (reader.Read())
             {
                if (reader.Name == "River")
@@ -592,13 +593,23 @@ namespace BarbarianPrince
       //---------------------------------------
       private void UpdateTimeTrack(IGameInstance gi)
       {
+         Option option = gi.Options.Find("ExtendEndTime");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "UpdateView(): gi.Options.Find(ExtendEndTime)");
+            option = new Option("ExtendEndTime", false);
+         }
+         int numWeeks = 10;
+         if (true == option.IsEnabled)
+            numWeeks = 15;
+         //---------------------------------------------------
          for (int i = 0; i < 7; ++i)
          {
             myButtonTimeTrackDays[i].ClearValue(Control.BackgroundProperty);
             myButtonTimeTrackDays[i].FontWeight = FontWeights.Normal;
             myButtonTimeTrackDays[i].IsEnabled = false;
          }
-         for (int j = 0; j < 15; ++j)
+         for (int j = 0; j < numWeeks; ++j)
          {
             myButtonTimeTrackWeeks[j].ClearValue(Control.BackgroundProperty);
             myButtonTimeTrackWeeks[j].FontWeight = FontWeights.Normal;
@@ -606,13 +617,15 @@ namespace BarbarianPrince
          }
          if (gi.Days < 0)
             return;
+         //---------------------------------------------------
          int week = gi.Days / 7; // round down to nearest integer
-         if (14 < week)
-            week = 14;
+         --numWeeks;
+         if (numWeeks < week)
+            week = numWeeks;
          myButtonTimeTrackWeeks[week].Background = Utilities.theBrushControlButton;
          myButtonTimeTrackWeeks[week].FontWeight = FontWeights.Bold;
          myButtonTimeTrackWeeks[week].IsEnabled = true;
-
+         //---------------------------------------------------
          int day = gi.Days - week * 7;
          if (6 < day)
             day = 6;

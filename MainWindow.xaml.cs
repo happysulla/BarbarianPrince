@@ -45,7 +45,9 @@ namespace BarbarianPrince
             string path = Uri.UnescapeDataString(uri.Path);
             string assemplyDirectory = System.IO.Path.GetDirectoryName(path);
             string parentDir = System.IO.Path.GetDirectoryName(assemplyDirectory);
-            MapImage.theImageDirectory = parentDir + @"\Images\";
+            MapImage.theImageDirectory = assemplyDirectory + @"\Images\";
+            Logger.theLogDirectory = assemplyDirectory + @"\Log\";
+            ConfigFileReader.theConfigDirectory = assemplyDirectory + @"\Config\";
             //--------------------------------------------
             Utilities.InitializeRandomNumGenerators();
             //--------------------------------------------

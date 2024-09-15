@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Data.Common;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,7 +14,7 @@ namespace BarbarianPrince
    [Serializable]
    public class MapImage : IMapImage
    {
-      public static string theImageDirectory = "";          // Assume we are in Config directory
+      public static string theImageDirectory = "";      
       public System.Windows.Media.Imaging.BitmapImage myBitmapImage = null;
       public string Name { get; set; } = "";
       public bool IsAnimated { get; set; } = false;
@@ -41,22 +42,22 @@ namespace BarbarianPrince
          }
          catch (DirectoryNotFoundException dirException)
          {
-            Console.WriteLine("MapImage(): 1 imageName=" + fullImagePath + "\n" + dirException.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "MapImage(): 1 imageName=" + fullImagePath + "\n" + dirException.ToString());
             return;
          }
          catch (FileNotFoundException fileException)
          {
-            Console.WriteLine("MapImage(): 2 imageName=" + fullImagePath + "\n" + fileException.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "MapImage(): 2  imageName=" + fullImagePath + "\n" + fileException.ToString());
             return;
          }
          catch (IOException ioException)
          {
-            Console.WriteLine("MapImage(): 3 imageName=" + fullImagePath + "\n" + ioException.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "MapImage(): 3 imageName=" + fullImagePath + "\n" + ioException.ToString());
             return;
          }
          catch ( Exception e )
          {
-            Console.WriteLine("MapImage(): 4 imageName=" + fullImagePath + "\n" + e.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "MapImage(): 4 imageName=" + fullImagePath + "\n" + e.ToString());
             return;
          }
       }
@@ -81,22 +82,22 @@ namespace BarbarianPrince
          }
          catch (DirectoryNotFoundException dirException)
          {
-            Console.WriteLine("ImageAnimationLoaded(): imageName=" + ImageControl.Name + "\n" + dirException.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "ImageAnimationLoaded(): 1 imageName=" + ImageControl.Name + "\n" + dirException.ToString());
             return;
          }
          catch (FileNotFoundException fileException)
          {
-            Console.WriteLine("ImageAnimationLoaded(): imageName=" + ImageControl.Name + "\n" + fileException.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "ImageAnimationLoaded(): 2 imageName=" + ImageControl.Name + "\n" + fileException.ToString());
             return;
          }
          catch (IOException ioException)
          {
-            Console.WriteLine("ImageAnimationLoaded(): imageName=" + ImageControl.Name + "\n" + ioException.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "ImageAnimationLoaded(): 3 imageName=" + ImageControl.Name + "\n" + ioException.ToString());
             return;
          }
          catch (Exception ex)
          {
-            Console.WriteLine("ImageAnimationLoaded(): imageName=" + ImageControl.Name + "\n" + ex.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "ImageAnimationLoaded(): 4 imageName=" + ImageControl.Name + "\n" + ex.ToString());
             return;
          }
       }

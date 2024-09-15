@@ -189,8 +189,9 @@ namespace BarbarianPrince
          XmlTextReader reader = null;
          try
          {
-            // Load the reader with the data file and ignore all white space nodes.         
-            reader = new XmlTextReader("../Config/DiceRolls.xml") { WhitespaceHandling = WhitespaceHandling.None };
+            // Load the reader with the data file and ignore all white space nodes.
+            string filename = ConfigFileReader.theConfigDirectory + "DiceRolls.xml";
+            reader = new XmlTextReader(filename) { WhitespaceHandling = WhitespaceHandling.None };
             while (reader.Read())
             {
                if (reader.Name == "DiceRoll")

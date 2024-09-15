@@ -117,7 +117,8 @@ namespace BarbarianPrince
       {
          try
          {
-            ConfigFileReader cfr = new ConfigFileReader("../Config/Events.txt");
+            string filename = ConfigFileReader.theConfigDirectory + "Events.txt";
+            ConfigFileReader cfr = new ConfigFileReader(filename);
             if (true == cfr.CtorError)
             {
                Logger.Log(LogEnum.LE_ERROR, "CreateEvents(): cfr.CtorError=true");

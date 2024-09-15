@@ -7,6 +7,7 @@ namespace BarbarianPrince
 {
    public class ConfigFileReader
    {
+      public static string theConfigDirectory = "";
       public bool CtorError { get; } = false;
       private Dictionary<string, string> myEntries = new Dictionary<string, string>();
       public Dictionary<string, string> Entries { get => myEntries; }
