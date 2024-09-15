@@ -1648,8 +1648,6 @@ namespace BarbarianPrince
                {
                   Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("MonkTraveling"), Width = 87, Height = 350 };
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
-                  myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run("Traveling Monks!"));
                }
                break;
             case "e020a":
@@ -1663,8 +1661,6 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                  "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(imgE021));
-                  myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run("Warrior Monks!"));
                }
                break;
             case "e021a":
@@ -1750,9 +1746,6 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                       "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(imgE050));
-                  myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run("Constabulary!"));
                }
                break;
             case "e050b":
@@ -1811,9 +1804,6 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new Run("                                      "));
                myTextBlock.Inlines.Add(new InlineUIContainer(img52));
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new Run("Goblins!"));
                break;
             case "e053":
                if (Utilities.NO_RESULT < myGameInstance.DieResults[key][0])
@@ -1832,25 +1822,16 @@ namespace BarbarianPrince
                {
                   Image img053b = new Image { Source = MapItem.theMapImages.GetBitmapImage("Goblin2"), Width = 53, Height = 80 };
                   myTextBlock.Inlines.Add(new InlineUIContainer(img053b));
-                  myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run("Goblins!"));
                }
                else if ("e055" == gi.EventStart)
                {
                   Image img053b = new Image { Source = MapItem.theMapImages.GetBitmapImage("Orc"), Width = 53, Height = 80 };
                   myTextBlock.Inlines.Add(new InlineUIContainer(img053b));
-                  myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run("Orcs!"));
                }
                else if ("e058a" == gi.EventStart)
                {
                   Image img053b = new Image { Source = MapItem.theMapImages.GetBitmapImage("Dwarfs"), Width = 80, Height = 80 };
                   myTextBlock.Inlines.Add(new InlineUIContainer(img053b));
-                  myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run("Dwarfs!"));
                }
                else
                {
@@ -1918,9 +1899,6 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new Run("                                             "));
                myTextBlock.Inlines.Add(new InlineUIContainer(img55));
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new Run("Orcs!"));
                break;
             case "e056a":
                if (Utilities.NO_RESULT < gi.DieResults["e056a"][0])
@@ -1938,9 +1916,6 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new Run("                                      "));
                myTextBlock.Inlines.Add(new InlineUIContainer(img57));
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new Run("Troll!"));
                break;
             case "e058":
                if (Utilities.NO_RESULT < myGameInstance.DieResults[key][0])
@@ -1962,9 +1937,6 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new Run("                                "));
                myTextBlock.Inlines.Add(new InlineUIContainer(img58c));
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new Run("Dwarf!"));
                break;
             case "e058e": // e058e
                ReplaceTextForLuckyCharm(gi); // e058e
@@ -1978,9 +1950,6 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("                                 "));
                   myTextBlock.Inlines.Add(new InlineUIContainer(imge059));
-                  myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run("Dwarf Mine!"));
                }
                else
                {
@@ -2946,6 +2915,32 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Days a Slave = " + gi.WanderingDayCount.ToString()));
                   myTextBlock.Inlines.Add(new Run(".  Another night as a slave. Click image to continue."));
+               }
+               break;
+            case "e203f":
+               myTextBlock.Inlines.Add(new LineBreak());
+               myTextBlock.Inlines.Add(new LineBreak());
+               if (true == gi.IsJailed)
+               {
+                  Image e203a1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Jail"), Name = "ReturnToJail", Width = 250, Height = 250 };
+                  myTextBlock.Inlines.Add(new Run("                                   "));
+                  myTextBlock.Inlines.Add(new InlineUIContainer(e203a1));
+               }
+               else if (true == gi.IsDungeon)
+               {
+                  Image e203a1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("DungeonJail"), Name = "ReturnToJail", Width = 400, Height = 280 };
+                  myTextBlock.Inlines.Add(new Run("                    "));
+                  myTextBlock.Inlines.Add(new InlineUIContainer(e203a1));
+               }
+               else if (true == gi.IsEnslaved)
+               {
+                  Image e203a1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("WizardWander"), Name = "ReturnToJail", Width = 160, Height = 225 };
+                  myTextBlock.Inlines.Add(new Run("                                          "));
+                  myTextBlock.Inlines.Add(new InlineUIContainer(e203a1));
+               }
+               else
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "AppendTextAtEnd(): reached default with ae=" + myGameInstance.EventActive);
                }
                break;
             case "e204u":
@@ -3922,7 +3917,10 @@ namespace BarbarianPrince
          if ((true == gi.Prince.IsRiding) && (true == isRidingEscapePossible))
          {
             myTextBlock.Inlines.Add(new LineBreak());
-            if (false == gi.IsEncounteredRiding())
+            bool isEncounteredRiding = false;
+            if (("e006" != gi.EventActive) && ("e007" != gi.EventActive)) // dwarf and elf encounters are not riding
+               isEncounteredRiding = gi.IsEncounteredRiding();
+            if (false == isEncounteredRiding) 
             {
                Button b = new Button() { Content = "Ride Away", FontFamily = myFontFam1, FontSize = 12 };
                b.Click += Button_Click;
@@ -4069,6 +4067,7 @@ namespace BarbarianPrince
          StringBuilder sb11 = new StringBuilder("     ######ShowResultsTravel() :");
          sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
          sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" as="); sb11.Append(myGameInstance.EventStart);
          sb11.Append(" a="); sb11.Append(outAction.ToString());
          Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
@@ -4877,6 +4876,10 @@ namespace BarbarianPrince
                               action = GameAction.EncounterEnd;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
+                           case "ReturnToJail":
+                              action = GameAction.UpdateLoadingGameReturnToJail;
+                              myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              break;
                            case "Caravan":
                               if (Utilities.NO_RESULT < myGameInstance.DieResults["e129"][0])
                               {

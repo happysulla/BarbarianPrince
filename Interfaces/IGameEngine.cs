@@ -100,6 +100,7 @@ namespace BarbarianPrince
       UpdateNewGame,  // Menu Options
       UpdateGameOptions, 
       UpdateLoadingGame,
+      UpdateLoadingGameReturnToJail,
       UpdateUndo,
 
       UnitTestStart,

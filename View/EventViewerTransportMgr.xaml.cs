@@ -1593,8 +1593,9 @@ namespace BarbarianPrince
                         else if ("Cache" == name)
                         {
                            myState = LoadEnum.LE_END;
-                           Logger.Log(LogEnum.LE_ADD_COIN, "EventViewerTransportMgr.Grid_MouseDown(): adding myUnassignedCoin=" + myUnassignedCoin.ToString() + " for t=" + myTerritory.Name);
                            myGameInstance.Caches.Add(myTerritory, myUnassignedCoin);
+                           Logger.Log(LogEnum.LE_MANAGE_CACHE, "EventViewerTransportMgr.Grid_MouseDown(): adding myUnassignedCoin=" + myUnassignedCoin.ToString() + " for t=" + myTerritory.Name);
+
                         }
                         else if ("Continue" == name)
                         {

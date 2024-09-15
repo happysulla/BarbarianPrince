@@ -991,6 +991,11 @@ namespace BarbarianPrince
          }
          if (true == isItemRemoved) // if item is held, determine if it is still held. If not, remove the benefit
          {
+            Logger.Log(LogEnum.LE_REMOVE_ITEM, "RemoveSpecialItem(): NOT FOUND in SpecialKeeps item=" + item.ToString() + " for mi=" + this.Name);
+         }
+         else
+         {
+            Logger.Log(LogEnum.LE_REMOVE_ITEM, "RemoveSpecialItem(): REMOVED from SpecialKeeps item=" + item.ToString() + " for mi=" + this.Name);
             bool isItemStillHeld = IsSpecialItemHeld(item);
             switch (item)
             {
@@ -1042,6 +1047,11 @@ namespace BarbarianPrince
          }
          if (true == isItemRemoved) // if item is held, determine if it is still held. If not, remove the benefit
          {
+            Logger.Log(LogEnum.LE_REMOVE_ITEM, "RemoveSpecialItem(): NOT FOUND in SpecialShares item=" + item.ToString() + " for mi=" + this.Name);
+         }
+         else
+         {
+            Logger.Log(LogEnum.LE_REMOVE_ITEM, "RemoveSpecialItem(): REMOVED from SpecialShares item=" + item.ToString() + " for mi=" + this.Name);
             bool isItemStillHeld = IsSpecialItemHeld(item);
             switch (item)
             {
@@ -1283,7 +1293,7 @@ namespace BarbarianPrince
          }
          loadCanCarry -= this.Food;
          if (loadCanCarry < 0)
-            Logger.Log(LogEnum.LE_ERROR, "GetFreeLoadWithoutModify(): name=" + this.Name + " lc=" + loadCanCarry.ToString() + " fl=" + Food.ToString() + " cl=" + coinLoads.ToString() + "(coins=" + this.Coin.ToString() + ") ml=" + mountCarry.ToString() + " kia?=" + this.IsKilled + " mia?=" + this.IsUnconscious);
+            Logger.Log(LogEnum.LE_FREE_LOAD, "GetFreeLoadWithoutModify(): name=" + this.Name + " lc=" + loadCanCarry.ToString() + " fl=" + Food.ToString() + " cl=" + coinLoads.ToString() + "(coins=" + this.Coin.ToString() + ") ml=" + mountCarry.ToString() + " kia?=" + this.IsKilled + " mia?=" + this.IsUnconscious);
          return loadCanCarry;
       }   // get free load - dismount if load does not support - but do not mount 
       public int GetFlyLoad()
@@ -1890,26 +1900,21 @@ namespace BarbarianPrince
       }
       public IMapItems SortOnFreeLoad()
       {
-         MapItems sortedMapItems = new MapItems();
+         MapItems sortedMapItems = new MapItems(); // return this with highest free load at beginning of list
          foreach (Object o in myList)
          {
             IMapItem mi1 = (IMapItem)o;
             bool isMapItemInserted = false;
-            if ((false == mi1.IsUnconscious) && (false == mi1.IsKilled))
+            if ((false == mi1.IsUnconscious) && (false == mi1.IsKilled) && (false == mi1.Name.Contains("Eagle")) && (false == mi1.Name.Contains("Falcon")) )
             {
-               int metric1 = mi1.GetFreeLoadWithoutModify();
+               int freeLoad1 = mi1.GetFreeLoadWithoutModify();
                int index = 0;
                foreach (IMapItem mi2 in sortedMapItems)
                {
-                  int metric2 = mi2.GetFreeLoadWithoutModify();
-                  if (metric2 < 0)
+                  int freeLoad2 = mi2.GetFreeLoadWithoutModify();
+                  if (freeLoad2 < freeLoad1)
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "SortOnFreeLoad(): returned 0 > metric2=" + metric2.ToString() + " for mi2=" + mi2.Name + " metric1=" + metric1.ToString() + " for mi1=" + mi1.Name);
-                     continue;
-                  }
-                  if (metric2 < metric1)
-                  {
-                     sortedMapItems.Insert(index, mi1);
+                     sortedMapItems.Insert(index, mi1); // insert mi1 in front of mi2 if free load greater
                      isMapItemInserted = true;
                      break;
                   }

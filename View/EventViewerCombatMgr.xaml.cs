@@ -5067,7 +5067,7 @@ namespace BarbarianPrince
          {
             IMapItem mi = myGridRows[i].myUnassignable;
             if (false == myGameInstance.RemoveSpecialItem(SpecialEnum.PoisonDrug, mi))
-               Logger.Log(LogEnum.LE_ERROR, "ShowDrugEndResults(): RemoveSpecialItem(PoisonDrug) return false w/ i=" + i.ToString());
+               Logger.Log(LogEnum.LE_ERROR, "ShowDrugEndResults(): RemoveSpecialItem(PoisonDrug) return false for mi=" + mi.Name + " row=" + i.ToString());
          }
          //----------------------------------------
          myGridRows[i].myResult = dieRoll;

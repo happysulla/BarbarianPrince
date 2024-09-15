@@ -786,7 +786,7 @@ namespace BarbarianPrince
                {
                   if ((0 < gi.NumMembersBeingFollowed) && (false == gi.IsFloodContinue))
                      myStackPanelDailyActions.Children.Add(myButtonDailyAcions[10]);
-                  if (null != gi.Arches.Find(t.Name))
+                  if ((null != gi.Arches.Find(t.Name)) && (true == gi.IsArchTravelKnown)) // arch travel needs to be known to use it
                      myStackPanelDailyActions.Children.Add(myButtonDailyAcions[9]);
                   if (null != gi.SecretClues.Find(t.Name))
                      myStackPanelDailyActions.Children.Add(myButtonDailyAcions[8]);

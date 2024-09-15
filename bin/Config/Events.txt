@@ -1290,7 +1290,7 @@ e045	"<Bold>e045 Arch of Travel</Bold>
  <InlineUIContainer><Button Content='e045b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  for the effects of traveling through the arch."
 e045a	"<Bold>e045a Arch of Travel With Unknown Runes</Bold>
-<LineBreak/><LineBreak/>You find a metal-banded archway inscribed with runes. Since your party does not have a magician, wizard, or witch; the runes are unknown.  Click image to continue.
+<LineBreak/><LineBreak/>You find a metal-banded archway inscribed with runes. Since your party does not have a magician, wizard, or witch; the runes are unknown.  When you add one to your party, this secret becomes known. Click image to continue.
 <LineBreak/><LineBreak/>
                                           <InlineUIContainer><Image Name='ArchSkip'  Source='../bin/Images/Arch.gif' Height='300' Width='220'> </Image></InlineUIContainer>"
 e045b	"<Bold>e045b Arch of Travel Effects</Bold>
@@ -2114,7 +2114,7 @@ e075	"<Bold>e075 Wolves</Bold>
 e075a	"<Bold>e075a Wolves Howling</Bold>
 <LineBreak/><LineBreak/>As you eat your evening meal, you hear wolves in the distant howling in hunger. You are glad you are safe. Click image to continue.
 <LineBreak/><LineBreak/>
-                         <InlineUIContainer><Image Name='EncounterEnd' Source='../bin/Images/WolvesHowling.gif' Height='300' Width='225'></Image></InlineUIContainer>"
+                                 <InlineUIContainer><Image Name='EncounterEnd' Source='../bin/Images/WolvesHowling.gif' Height='300' Width='225'></Image></InlineUIContainer>"
 e075b	"<Bold>e075b Wolves Attack Campfire</Bold>
 <LineBreak/><LineBreak/>
 At night, a hunting pack of wolves attacks your party. Each has a combat skill of 3 and endurance 3. Roll three die for the number of wolves: 
@@ -2375,7 +2375,7 @@ e092b	"<Bold>e092b Flood Continues</Bold>
 <LineBreak/><LineBreak/>Start of a new day! You remain stranded and are limited in your daily actions. Select action button from the Daily Actions panel. 
 <LineBreak/><LineBreak/>
           <InlineUIContainer><Image Source='../bin/Images/FloodContinues.gif' Height='155'  Width='500'> </Image></InlineUIContainer>"
-e093	"<Bold>e093  Poison Plants</Bold>
+e093	"<Bold>e093 Poison Plants</Bold>
 <LineBreak/><LineBreak/>You notice poison plants around you today, often a sign of a greater evil. You cannot hunt for food
  <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  today. 
@@ -4060,6 +4060,8 @@ e203e	"<Bold>e203e Wizard's Campfire</Bold>
  immediately. If the result is a one, you are caught trying to escape and suffer one wound as punishments. Any other result is no effect because no suitable escape opportunity has arisen.
 <LineBreak/><LineBreak/>Roll one die to determine your fate:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
+e203f	"<Bold>e203f Wakeup in Bad Straights</Bold>
+<LineBreak/><LineBreak/>The game is recovered with you in bad way. Click image to continue."
 e204u	"<Bold>e204u Unmounted Travel</Bold> <InlineUIContainer><Button Content='r204a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>Click one of the adjacent hexes highlighted blue to move.  "
 e204m	"<Bold>e204m Mounted Travel</Bold> <InlineUIContainer><Button Content='r204a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>

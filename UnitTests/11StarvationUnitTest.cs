@@ -22,6 +22,7 @@ namespace BarbarianPrince
       {
          myIndexName = 0;
          //------------------------------------------
+         myHeaderNames.Add("10-Henchmen alone no food or coin");
          myHeaderNames.Add("10-Henchmen no food or coin");
          myHeaderNames.Add("10-Henchmen w/ Giant & Eagles");
          myHeaderNames.Add("10-Party w/ Slaves & True Love");
@@ -77,6 +78,7 @@ namespace BarbarianPrince
          myCommandNames.Add("23-Feed");
          myCommandNames.Add("24-Feed");
          myCommandNames.Add("25-Feed");
+         myCommandNames.Add("26-Feed");
          myCommandNames.Add("Finish");
          //------------------------------------------
          if (null == ev)
@@ -108,7 +110,18 @@ namespace BarbarianPrince
          gi.Prince.AddSpecialItemToShare(SpecialEnum.HealingPoition);
          gi.Prince.AddSpecialItemToShare(SpecialEnum.CurePoisonVial);
          gi.PartyMembers.Add(gi.Prince);
+         //----------------------------------
          if (CommandName == myCommandNames[0])
+         {
+            gi.Prince.Reset();
+            string miName = "Mercenary" + Utilities.MapItemNum;
+            Utilities.MapItemNum++;
+            IMapItem companion1 = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            companion1.Wages = 2;
+            gi.PartyMembers.Add(companion1);
+            myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
+         }
+         else if (CommandName == myCommandNames[1])
          {
             string miName = "Mercenary" + Utilities.MapItemNum;
             Utilities.MapItemNum++;
@@ -117,7 +130,7 @@ namespace BarbarianPrince
             gi.PartyMembers.Add(companion1);
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[1]) 
+         else if (CommandName == myCommandNames[2]) 
          {
             gi.IsPartyFed = false;
             gi.IsMountsFed = false;
@@ -164,7 +177,7 @@ namespace BarbarianPrince
             gi.PartyMembers.Reverse();
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[2])
+         else if (CommandName == myCommandNames[3])
          {
             gi.Prince.Food = 6;
             gi.Prince.StarveDayNum = 0;
@@ -226,7 +239,7 @@ namespace BarbarianPrince
             //gi.AddCompanion(trueLove);
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[3]) //Henchmen
+         else if (CommandName == myCommandNames[4]) //Henchmen
          {
             gi.Prince.Coin = 10;
             gi.Prince.Food = 10;
@@ -253,7 +266,7 @@ namespace BarbarianPrince
             gi.IsMagicianProvideGift = true; // <<<<<<<<<<<<<<<<<<<<=================================
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[4]) //10-Henchmen Group - Witches Paid
+         else if (CommandName == myCommandNames[5]) //10-Henchmen Group - Witches Paid
          {
             gi.Prince.Coin = 10;
             gi.Prince.Food = 10;
@@ -307,7 +320,7 @@ namespace BarbarianPrince
             gi.PartyMembers.Reverse();
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[5]) //Henchmen Group w/ Minstrel Playing
+         else if (CommandName == myCommandNames[6]) //Henchmen Group w/ Minstrel Playing
          {
             gi.Prince.Coin = 10;
             gi.Prince.Food = 10;
@@ -369,7 +382,7 @@ namespace BarbarianPrince
             gi.PartyMembers.Reverse();
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[6]) //Henchmen Group w/ Minstrel
+         else if (CommandName == myCommandNames[7]) //Henchmen Group w/ Minstrel
          {
             gi.Prince.Coin = 10;
             gi.Prince.Food = 10;
@@ -430,7 +443,7 @@ namespace BarbarianPrince
             gi.IsMagicianProvideGift = true; // <<<<<<<<<<<<<<<<<<<<=================================
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[7]) 
+         else if (CommandName == myCommandNames[8]) 
          {
             gi.Prince.Food = 10;
             gi.Prince.StarveDayNum = 0;
@@ -453,7 +466,7 @@ namespace BarbarianPrince
             gi.PartyMembers.Reverse();
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[8])
+         else if (CommandName == myCommandNames[9])
          {
             gi.Prince.Food = 2;
             gi.Prince.StarveDayNum = 0;
@@ -480,7 +493,7 @@ namespace BarbarianPrince
             //--------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[9]) // 10-Party w/ 10 food, 5 Mounts
+         else if (CommandName == myCommandNames[10]) // 10-Party w/ 10 food, 5 Mounts
          {
             gi.Prince.Food = 4;
             gi.Prince.StarveDayNum = 0;
@@ -513,7 +526,7 @@ namespace BarbarianPrince
             //---------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[10])
+         else if (CommandName == myCommandNames[11])
          {
             gi.Prince.Food = 3;
             gi.Prince.StarveDayNum = 0;
@@ -545,7 +558,7 @@ namespace BarbarianPrince
             //--------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[11])
+         else if (CommandName == myCommandNames[12])
          {
             gi.Prince.Food = 3;
             gi.Prince.StarveDayNum = 0;
@@ -579,7 +592,7 @@ namespace BarbarianPrince
             gi.IsPartyFed = true; // <<<<<<<<<<<<<<<<<<<<=================================
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[12])
+         else if (CommandName == myCommandNames[13])
          {
             gi.Prince.Food = 3;
             gi.Prince.StarveDayNum = 0;
@@ -612,7 +625,7 @@ namespace BarbarianPrince
             gi.IsMountsFed = true; // <<<<<<<<<<<<<<<<<<<<=================================
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[13])
+         else if (CommandName == myCommandNames[14])
          {
             t = Territory.theTerritories.Find("0306"); // Mountains
             if (null == t)
@@ -651,14 +664,7 @@ namespace BarbarianPrince
             //---------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[14]) //<<<<<<<<<<<<<<<<<<<<<<<<<<<========================== PRINCE ONLY
-         {
-            gi.Prince.Food = 2;
-            gi.Prince.StarveDayNum = 0;
-            AddPrinceMounts(ref gi, 1);
-            myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
-         }
-         else if (CommandName == myCommandNames[15])
+         else if (CommandName == myCommandNames[15]) //<<<<<<<<<<<<<<<<<<<<<<<<<<<========================== PRINCE ONLY
          {
             gi.Prince.Food = 2;
             gi.Prince.StarveDayNum = 0;
@@ -667,33 +673,33 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[16])
          {
-            gi.Prince.Food = 5;
-            gi.Prince.StarveDayNum = 1;
+            gi.Prince.Food = 2;
+            gi.Prince.StarveDayNum = 0;
+            AddPrinceMounts(ref gi, 1);
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[17])
          {
             gi.Prince.Food = 5;
-            gi.Prince.StarveDayNum = 3;
+            gi.Prince.StarveDayNum = 1;
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[18])
+         {
+            gi.Prince.Food = 5;
+            gi.Prince.StarveDayNum = 3;
+            myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
+         }
+         else if (CommandName == myCommandNames[19])
          {
             gi.Prince.Food = 1;
             gi.Prince.StarveDayNum = 1;
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[19])
+         else if (CommandName == myCommandNames[20])
          {
             gi.Prince.Food = 0;
             gi.Prince.StarveDayNum = 1;
-            myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
-         }
-         else if (CommandName == myCommandNames[20])
-         {
-            gi.Prince.Food = 2;
-            gi.Prince.StarveDayNum = 0;
-            AddPrinceMounts(ref gi, 1); // 1 mount
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[21])
@@ -701,8 +707,6 @@ namespace BarbarianPrince
             gi.Prince.Food = 2;
             gi.Prince.StarveDayNum = 0;
             AddPrinceMounts(ref gi, 1); // 1 mount
-            gi.IsPartyFed = true;
-            gi.IsMountsFed = true;
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[22])
@@ -711,10 +715,19 @@ namespace BarbarianPrince
             gi.Prince.StarveDayNum = 0;
             AddPrinceMounts(ref gi, 1); // 1 mount
             gi.IsPartyFed = true;
-            gi.IsMountsFed = false;
+            gi.IsMountsFed = true;
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
          else if (CommandName == myCommandNames[23])
+         {
+            gi.Prince.Food = 2;
+            gi.Prince.StarveDayNum = 0;
+            AddPrinceMounts(ref gi, 1); // 1 mount
+            gi.IsPartyFed = true;
+            gi.IsMountsFed = false;
+            myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
+         }
+         else if (CommandName == myCommandNames[24])
          {
             gi.Prince.Food = 2;
             gi.Prince.StarveDayNum = 0;
@@ -723,14 +736,14 @@ namespace BarbarianPrince
             gi.IsMountsFed = true;
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[24])
+         else if (CommandName == myCommandNames[25])
          {
             gi.Prince.Food = 5;
             gi.Prince.StarveDayNum = 0;
             AddPrinceMounts(ref gi, 2);
             myEventViewer.UpdateView(ref gi, GameAction.CampfireStarvationCheck);
          }
-         else if (CommandName == myCommandNames[25])
+         else if (CommandName == myCommandNames[26])
          {
             gi.Prince.Food = 2;
             gi.Prince.StarveDayNum = 0;
@@ -843,6 +856,10 @@ namespace BarbarianPrince
             ++myIndexName;
          }
          else if (HeaderName == myHeaderNames[24])
+         {
+            ++myIndexName;
+         }
+         else if (HeaderName == myHeaderNames[26])
          {
             ++myIndexName;
          }

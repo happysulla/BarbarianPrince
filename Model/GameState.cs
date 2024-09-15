@@ -1231,20 +1231,29 @@ namespace BarbarianPrince
       protected bool LoadGame(ref IGameInstance gi, ref GameAction action)
       {
          gi.Stacks.Clear();
-         gi.GamePhase = GamePhase.Encounter;      // GameStateSetup.PerformAction()
-         gi.EventDisplayed = gi.EventActive = "e401"; // next screen to show
-         gi.DieRollAction = GameAction.DieRollActionNone;
-         if (0 == gi.MapItemMoves.Count)
+         if ( (true == gi.IsJailed) || (true == gi.IsDungeon) || (true == gi.IsEnslaved) )
          {
-            --gi.Prince.MovementUsed;
-            if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex
-            {
-               Logger.Log(LogEnum.LE_ERROR, "LoadGame(): AddMapItemMove() return false");
-               return false;
-            }
-            ++gi.Prince.MovementUsed;
+            gi.GamePhase = GamePhase.Campfire;
+            gi.EventDisplayed = gi.EventActive = "e203f";
+            gi.DieRollAction = GameAction.DieRollActionNone;
          }
-         gi.Prince.MovementUsed = gi.Prince.Movement; // no more movement when reverting to daybreak
+         else
+         {
+            gi.GamePhase = GamePhase.Encounter;      // GameStateSetup.PerformAction()
+            gi.EventDisplayed = gi.EventActive = "e401"; // next screen to show
+            gi.DieRollAction = GameAction.DieRollActionNone;
+            if (0 == gi.MapItemMoves.Count)
+            {
+               --gi.Prince.MovementUsed;
+               if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "LoadGame(): AddMapItemMove() return false");
+                  return false;
+               }
+               ++gi.Prince.MovementUsed;
+            }
+            gi.Prince.MovementUsed = gi.Prince.Movement; // no more movement when reverting to daybreak
+         }
          return true;
       }
       protected void UndoCommand(ref IGameInstance gi, ref GameAction action)
@@ -2249,9 +2258,9 @@ namespace BarbarianPrince
          //gi.ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt3);
          //---------------------
          //ITerritory arch1 = Territory.theTerritories.Find("0418");
-         //gi.Arches.Add(arch1);
+         //gi.Arches.Add(arch1); // AddStartingTestingOptions()
          //ITerritory arch2 = Territory.theTerritories.Find("0517");
-         //gi.Arches.Add(arch2);
+         //gi.Arches.Add(arch2); // AddStartingTestingOptions()
          //---------------------
          //gi.DayOfLastOffering = gi.Days - 4;
          //gi.IsSecretTempleKnown = true;
@@ -2934,6 +2943,11 @@ namespace BarbarianPrince
                      returnStatus = "LoadGame() returned false";
                      Logger.Log(LogEnum.LE_ERROR, "GameStateCampfire.PerformAction(): " + returnStatus);
                   }
+                  break;
+               case GameAction.UpdateLoadingGameReturnToJail:
+                  action = GameAction.CampfireWakeup;
+                  gi.EventDisplayed = gi.EventActive = "e203a";
+                  gi.DieRollAction = GameAction.E203NightInPrison;
                   break;
                case GameAction.CampfirePlagueDustEnd:
                   gi.ProcessIncapacitedPartyMembers("Plague Dust");
@@ -4984,15 +4998,15 @@ namespace BarbarianPrince
                      gi.VisitedLocations.Add(gi.NewHex);
                   if ((true == gi.IsExhausted) && ((true == gi.NewHex.IsOasis) || ("Desert" != gi.NewHex.Type))) // e120
                      gi.IsExhausted = false;
-                  if (false == gi.Arches.Contains(gi.NewHex))
-                     gi.Arches.Add(gi.NewHex);
+                  if (false == gi.Arches.Contains(gi.NewHex)) 
+                     gi.Arches.Add(gi.NewHex); // E045ArchOfTravelEnd
                   break;
                case GameAction.E045ArchOfTravelEndEncounter:
                   action = GameAction.UpdateEventViewerDisplay;
                   break;
                case GameAction.E045ArchOfTravelSkip: // Found an arch but skip traveling through it
                   if (false == gi.Arches.Contains(princeTerritory))
-                     gi.Arches.Add(princeTerritory);
+                     gi.Arches.Add(princeTerritory); // E045ArchOfTravelSkip
                   if (false == EncounterEnd(gi, ref action))
                   {
                      returnStatus = "EncounterEnd() returned false a=" + action.ToString();
@@ -5183,7 +5197,7 @@ namespace BarbarianPrince
                   warriorWounded.SetWounds(woundsToAdd, 0);
                   int freeLoad = 0;
                   foreach (IMapItem mi in gi.PartyMembers)
-                     freeLoad += mi.GetFreeLoadWithoutModify();
+                     freeLoad += mi.GetFreeLoadWithoutModify(); // E069WoundedWarriorCarry - Deteremine if can carry wounded warrior
                   if (freeLoad < Utilities.PersonBurden) // if unable to carry without dropping food, need to redistribute
                      action = GameAction.E069WoundedWarriorRedistribute;
                   if (false == EncounterEnd(gi, ref action))
@@ -8075,8 +8089,9 @@ namespace BarbarianPrince
             case "e045":  // arch of travel
                gi.EventDisplayed = gi.EventActive = "e045b";
                gi.DieRollAction = GameAction.EncounterRoll;
+               gi.IsArchTravelKnown = true;
                if (false == gi.Arches.Contains(princeTerritory)) // add arch icon to canvas when UpdateCanvas() is called in GameViewerWindow.cs
-                  gi.Arches.Add(princeTerritory);
+                  gi.Arches.Add(princeTerritory); // EncounterStart(e045)
                break;
             case "e046":  // gateway to darkness
                gi.EncounteredMembers.Clear();
@@ -10827,7 +10842,7 @@ namespace BarbarianPrince
                gi.Days += daysToAdvance;
                action = GameAction.E045ArchOfTravel;
                if (false == gi.Arches.Contains(gi.NewHex))
-                  gi.Arches.Add(gi.NewHex);
+                  gi.Arches.Add(gi.NewHex); // EncounterRoll(e045b)
                break;
             case "e046a": // gateway to darkness - finished combat against guardians
                gi.EnteredHexes.Last().EventNames.Add(key);
@@ -14177,13 +14192,14 @@ namespace BarbarianPrince
                         case 2:
                         case 3:
                         case 4:
-                           Logger.Log(LogEnum.LE_ADD_COIN, "EncounterRoll(): targetCache=" + targetCache.Coin.ToString() + " for t=" + princeTerritory.Name);
+                           Logger.Log(LogEnum.LE_MANAGE_CACHE, "EncounterRoll(): RETREIVE targetCache=" + targetCache.Coin.ToString() + " for t=" + princeTerritory.Name + " dr=" + dieRoll.ToString());
                            gi.AddCoins(targetCache.Coin, false);
                            gi.Caches.Remove(targetCache);
                            break;
                         case 5:
                            break;
                         case 6:
+                           Logger.Log(LogEnum.LE_MANAGE_CACHE, "EncounterRoll(): REMOVE targetCache=" + targetCache.Coin.ToString() + " for t=" + princeTerritory.Name + " dr=" + dieRoll.ToString());
                            gi.Caches.Remove(targetCache);
                            break;
                         default:

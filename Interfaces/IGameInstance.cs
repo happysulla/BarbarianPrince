@@ -65,6 +65,7 @@ namespace BarbarianPrince
       int WanderingDayCount { set; get; } // e035 - days wandering as idiot
       bool IsAlcoveOfSendingAudience { set; get; } // e042 - audience by sending
       bool IsBlessed { set; get; } // e044 gods have blessed Prince
+      bool IsArchTravelKnown { set; get; } // e045 - Need to have magician, wizard, or witch in party to read Arch Ruins
       int GuardianCount { set; get; }  // e046
       bool IsMerchantWithParty { set; get; }  // e048
       bool IsMinstrelPlaying { set; get; }  //e049 - Minstrel at dinner

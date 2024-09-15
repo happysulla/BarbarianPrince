@@ -1834,6 +1834,26 @@ namespace BarbarianPrince
                }
             }
          }
+         //-------------------------------------------------
+         if( StarveEnum.SE_STARVE == myState)
+         {
+            bool isAnyDieRollNeeded = false;
+            for (int k = 0; k < myMaxRowCount; ++k)
+            {
+               IMapItem mi1 = myGridRows[k].myMapItem;
+               if (Utilities.NO_RESULT == myGridRows[k].myResult)
+               {
+                  isAnyDieRollNeeded = true;
+                  break;
+               }
+            }
+            if( false == isAnyDieRollNeeded )
+            {
+               Logger.Log(LogEnum.LE_STARVATION_STATE_CHANGE, "SetStateStarvation(): set state " + myState.ToString() + "->SE_SHOW_FEED_RESULTS");
+               myState = StarveEnum.SE_SHOW_FEED_RESULTS;
+            }
+         }
+
       }
       private Button CreateButton(IMapItem mi, bool isAdornmentsShown)
       {
@@ -1930,7 +1950,6 @@ namespace BarbarianPrince
       //-----------------------------------------------------------------------------------------
       private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
       {
-
          if (StarveEnum.SE_SHOW_FEED_RESULTS == myState)
          {
             StarveEnum previousState = myState;

@@ -119,6 +119,7 @@ namespace BarbarianPrince
       public int WanderingDayCount { set; get; } = 1;
       public bool IsAlcoveOfSendingAudience { set; get; } = false;
       public bool IsBlessed { set; get; } = false;
+      public bool IsArchTravelKnown { set; get; } = false;
       public int GuardianCount { set; get; } = 0;
       public bool IsMerchantWithParty { set; get; } = false;
       public bool IsMinstrelPlaying { set; get; } = false;
@@ -321,7 +322,7 @@ namespace BarbarianPrince
          //--------------------------------
          if (true == companion.Name.Contains("TrueLove"))
          {
-            int numTrueLoves = 0;
+            int numTrueLoves = 0; // new true love added to party above step
             foreach (IMapItem member in PartyMembers)
             {
                if (true == member.Name.Contains("TrueLove"))
@@ -332,6 +333,8 @@ namespace BarbarianPrince
             else if (1 == numTrueLoves)  // add effects of true love
                ++this.WitAndWile;
          }
+         if( (0 < this.Arches.Count) && (true == IsMagicInParty()) ) // if there is magician, witch, or wizard added to party, adn arches exist, the secret becomes known 
+            this.IsArchTravelKnown = true;
          //--------------------------------
          if (true == companion.Name.Contains("Merchant"))
             IsMerchantWithParty = true;
@@ -669,7 +672,7 @@ namespace BarbarianPrince
                if (false == isHunt)
                   freeLoad = mi.GetFreeLoad();
                else
-                  freeLoad = 1000; // keep adding without regard to limit
+                  freeLoad = 1000; // keep adding without regard to limit when there is a hunt - it is fixed after the hunt is over
                if (freeLoad < 0)
                {
                   Logger.Log(LogEnum.LE_ERROR, "AddFoods(): GetFreeLoad() returned fl=" + freeLoad.ToString());
@@ -680,7 +683,7 @@ namespace BarbarianPrince
                {
                   ++mi.Food;
                   --foodStore;
-                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddFoods(): " + mi.Name + " ++++>>> f=" + mi.Food.ToString() + " foodStore=" + foodStore.ToString() + " fl=" + freeLoad.ToString());
+                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddFoods(): HUNT=" + isHunt.ToString() + " mi=" + mi.Name + " ++++>>> f=" + mi.Food.ToString() + " foodStore=" + foodStore.ToString() + " fl=" + freeLoad.ToString());
                   if (0 == foodStore)
                      return true;
                }
@@ -737,12 +740,9 @@ namespace BarbarianPrince
       }
       public bool AddCoins(int coins, bool isCoinsShared = true)
       {
-         Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): ++++++++++++++++++" + coins.ToString() + "++++++++++++++++++++++++++++++++++++++++++++" );
          if (0 == coins)
-         {
-            Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): coins=" + coins.ToString() );
             return true;
-         }
+         Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins():    ++++++++++++++++++" + coins.ToString() + "++++++++++++++++++++++++++++++++++++++++++++");
          //---------------------------------
          int looterShare = 1;
          if (true == isCoinsShared) // need to give equal share for each looter
@@ -796,9 +796,9 @@ namespace BarbarianPrince
          int hundreds = (int)((remainingCoins - remainder)/100.0);
          foreach (IMapItem mi in sortedMapItems) // take care of remainder first
          {
-            if ((true == mi.IsUnconscious) || (true == mi.IsKilled))
+            if ((true == mi.IsUnconscious) || (true == mi.IsKilled) || (true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")))
                continue;
-            int freeLoad = mi.GetFreeLoadWithoutModify();
+            int freeLoad = mi.GetFreeLoadWithoutModify(); // AddCoins() trying to add remainder of coins by subtracting a food
             if (0 < freeLoad)
             {
                mi.Coin += remainder;
@@ -816,7 +816,7 @@ namespace BarbarianPrince
          if (0 == hundreds)
             return true;
          //--------------------------------- 
-         int princeFreeLoad = Prince.GetFreeLoadWithoutModify();
+         int princeFreeLoad = Prince.GetFreeLoadWithoutModify(); // AddCoins() - Add to prince if prince free load over zero
          if ((0 < princeFreeLoad) && (false == Prince.IsUnconscious) && (false == Prince.IsKilled))
          {
             if (hundreds <= princeFreeLoad)
@@ -838,8 +838,8 @@ namespace BarbarianPrince
          //--------------------------------- 
          foreach (IMapItem mi in sortedMapItems) // take care of remainder first
          {
-            int freeLoad = mi.GetFreeLoadWithoutModify();
-            if ((0 < freeLoad) && (false == mi.IsUnconscious) && (false == mi.IsKilled))
+            int freeLoad = mi.GetFreeLoadWithoutModify(); // AddCoins() -  Add to others party members if free load over zero
+            if ((0 < freeLoad) && (false == mi.IsUnconscious) && (false == mi.IsKilled) && (false == mi.Name.Contains("Eagle")) && (false == mi.Name.Contains("Falcon")))
             {
                if (hundreds <= freeLoad)
                {
@@ -892,7 +892,6 @@ namespace BarbarianPrince
       }
       public void ReduceCoins(int coins)
       {
-         Logger.Log(LogEnum.LE_ADD_COIN, "ReduceCoins(): ------------------" + coins.ToString() + "--------------------------------------------");
          if (coins < 0)
          {
             Logger.Log(LogEnum.LE_ERROR, "ReduceCoins(): invalid parameter coins=" + coins.ToString());
@@ -900,6 +899,7 @@ namespace BarbarianPrince
          }
          if (0 == coins)
             return;
+         Logger.Log(LogEnum.LE_ADD_COIN, "ReduceCoins(): ------------------" + coins.ToString() + "--------------------------------------------");
          IMapItems sortedMapItems = PartyMembers.SortOnCoin();
          foreach (IMapItem mi in sortedMapItems)  // now from party members to get to 100 increments
          {
@@ -1513,7 +1513,7 @@ namespace BarbarianPrince
       {
          if (0 == EncounteredMembers.Count)
          {
-            Logger.Log(LogEnum.LE_ERROR, "IsEncounteredRiding() Invalid State b/c  EncounteredMembers is empty");
+            Logger.Log(LogEnum.LE_ERROR, "IsEncounteredRiding() Invalid State b/c  EncounteredMembers is empty for ae=" + EventActive + " es=" + EventStart);
             return false;
          }
          foreach (IMapItem mi in EncounteredMembers)
@@ -1781,7 +1781,7 @@ namespace BarbarianPrince
                killedMembers0.Add(mi);
             if (true == mi.IsKilled)
             {
-               Logger.Log(LogEnum.LE_REMOVE_KILLED, "ProcessIncapacitedPartyMembers(): ================"+mi.Name+"=KIA c=" + mi.Coin.ToString() + " f=" + mi.Food.ToString() + "=========================");
+               Logger.Log(LogEnum.LE_REMOVE_KIA, "ProcessIncapacitedPartyMembers(): ================"+mi.Name+"=KIA c=" + mi.Coin.ToString() + " f=" + mi.Food.ToString() + "=========================");
                isMemberKilled = true;
                killedMembers0.Add(mi);
                if( true == mi.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
@@ -1821,7 +1821,9 @@ namespace BarbarianPrince
             }
             if (true == mi.IsUnconscious)
             {
-               Logger.Log(LogEnum.LE_REMOVE_KILLED, "ProcessIncapacitedPartyMembers(): ----------------" + mi.Name + "=MIA c=" + mi.Coin.ToString() + " f=" + mi.Food.ToString() + "-------------------------");
+               if ((0 == mi.Mounts.Count) && (0 == mi.Food) && (0 == mi.Food) && (0 == mi.SpecialShares.Count)) // nothing to give away - nothing to process
+                  continue;
+               Logger.Log(LogEnum.LE_PROCESS_MIA, "ProcessIncapacitedPartyMembers(): ----------------" + mi.Name + "=MIA c=" + mi.Coin.ToString() + " f=" + mi.Food.ToString() + "-------------------------");
                if (false == isEscaping)
                {
                   TransferMounts(mi.Mounts);

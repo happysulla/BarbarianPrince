@@ -17,7 +17,9 @@ namespace BarbarianPrince
       LE_UNDO_COMMAND,
       LE_GAME_PARTYMEMBER_COUNT,
       LE_PARTYMEMBER_ADD,
-      LE_REMOVE_KILLED,
+      LE_REMOVE_KIA,
+      LE_PROCESS_MIA,
+      LE_REMOVE_ITEM,
       LE_END_GAME,
       LE_END_GAME_CHECK,
       LE_MOVE_STACKING,
@@ -33,9 +35,11 @@ namespace BarbarianPrince
       LE_GET_COIN,
       LE_BRIBE,
       LE_ADD_WEALTH_CODE,
+      LE_FREE_LOAD,
+      LE_ADD_FOOD,
       LE_ADD_COIN,
       LE_ADD_COIN_AUTO,
-      LE_ADD_FOOD,
+      LE_MANAGE_CACHE,
       LE_LODGING_COST,
       LE_MOUNT_CHANGE,
       LE_END_ENCOUNTER,
@@ -196,7 +200,8 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_UNDO_COMMAND);
          //Logger.SetOn(LogEnum.LE_GAME_PARTYMEMBER_COUNT);
          Logger.SetOn(LogEnum.LE_PARTYMEMBER_ADD);
-         Logger.SetOn(LogEnum.LE_REMOVE_KILLED);
+         Logger.SetOn(LogEnum.LE_REMOVE_KIA);
+         Logger.SetOn(LogEnum.LE_REMOVE_ITEM);
          //Logger.SetOn(LogEnum.LE_END_GAME);
          //Logger.SetOn(LogEnum.LE_END_GAME_CHECK);
          //Logger.SetOn(LogEnum.LE_MOVE_STACKING);
@@ -205,7 +210,10 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_GET_COIN);
          //Logger.SetOn(LogEnum.LE_BRIBE);
          //Logger.SetOn(LogEnum.LE_ADD_WEALTH_CODE);
-         Logger.SetOn(LogEnum.LE_ADD_COIN);
+         Logger.SetOn(LogEnum.LE_FREE_LOAD);
+         //Logger.SetOn(LogEnum.LE_ADD_FOOD);
+         //Logger.SetOn(LogEnum.LE_ADD_COIN);
+         //Logger.SetOn(LogEnum.LE_MANAGE_CACHE);
          //Logger.SetOn(LogEnum.LE_ADD_COIN_AUTO);
          //Logger.SetOn(LogEnum.LE_LODGING_COST);
          Logger.SetOn(LogEnum.LE_MOUNT_CHANGE);
