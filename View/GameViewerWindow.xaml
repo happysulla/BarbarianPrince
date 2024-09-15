@@ -14,7 +14,7 @@
         WindowState="Maximized" 
         SizeChanged="SizeChangedGameViewerWindow" 
         ContentRendered="ContentRenderedGameViewerWindow"
-        Closed="ClosedGameViewerWindow" Icon="/View/BarbarianPrince.ico" >
+        Closed="ClosedGameViewerWindow" >
    <DockPanel x:Name="myDockPanelTop">
       <Menu x:Name="myMainMenu" DockPanel.Dock="Top">
          <MenuItem Header="_File"  x:Name="myMenuItemTopLevel1" InputGestureText="Ctrl+F" Width="120" />

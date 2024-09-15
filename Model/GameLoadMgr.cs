@@ -29,8 +29,7 @@ namespace BarbarianPrince
          {
             if (true == string.IsNullOrEmpty(theDirectoryName)) // use the directory name as the place to load games. If none exists, create directory name
             {
-               string parent = Directory.GetParent(AssemblyDirectory).ToString();
-               theDirectoryName = parent + @"/Games";
+               theDirectoryName = AssemblyDirectory + @"\Games\";
             }
             if (false == Directory.Exists(theDirectoryName)) // create directory if does not exists
                Directory.CreateDirectory(theDirectoryName);
@@ -44,7 +43,7 @@ namespace BarbarianPrince
          FileStream fileStream = null;
          try
          {
-            string filename = theDirectoryName + @"\Checkpoint.bpg";
+            string filename = theDirectoryName + "Checkpoint.bpg";
             fileStream = new FileStream(filename, FileMode.Open);
             BinaryFormatter formatter = new BinaryFormatter();
             IGameInstance gi = (GameInstance)formatter.Deserialize(fileStream);

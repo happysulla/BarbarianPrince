@@ -99,6 +99,7 @@
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup />
+  <PropertyGroup />
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
@@ -1888,9 +1889,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="BarbarianPrince.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\BarbarianPrince.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

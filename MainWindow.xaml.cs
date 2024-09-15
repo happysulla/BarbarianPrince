@@ -51,6 +51,10 @@ namespace BarbarianPrince
             //--------------------------------------------
             Utilities.InitializeRandomNumGenerators();
             //--------------------------------------------
+            string iconFilename = MapImage.theImageDirectory + "BarbarianPrince.ico";
+            Uri iconUri = new Uri(iconFilename, UriKind.Absolute);
+            this.Icon = BitmapFrame.Create(iconUri); 
+            //--------------------------------------------
             IGameInstance gi = new GameInstance();
             if (true == gi.CtorError)
             {
@@ -66,6 +70,7 @@ namespace BarbarianPrince
                Application.Current.Shutdown();
                return;
             }
+            myGameViewerWindow.Icon = this.Icon;
             myGameViewerWindow.Show(); // Finished initializing so show the window
          }
          catch (Exception e)
