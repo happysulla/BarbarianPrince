@@ -158,7 +158,7 @@ r106	"<Bold>r106 Heavy Overcast</Bold>
 <LineBreak/><LineBreak/>
                <InlineUIContainer><Image Source='../bin/Images/Overcast.gif' Height='220' Width='480'></Image></InlineUIContainer>"
 r107	"<Bold>r107 Falcon Scout</Bold>
-<LineBreak/><LineBreak/>At the evening meal each day, if you offer the falcon a food unit, roll the die. If you roll anyhing other than a six, the falcon will remain throughout tomorrow with your party as a guide.
+<LineBreak/><LineBreak/>At the evening meal each day, if you offer the falcon a food unit, roll the die. If you roll anyhing other than a six, the falcon will remain throughout tomorrow with your party as a guide. You cannot get lost when you have the falcon.
 <LineBreak/><LineBreak/>
                                         <InlineUIContainer><Image Source='../bin/Images/Falcon.gif' Height='188' Width='250'></Image></InlineUIContainer>"
 r109	"<Bold>r109 Wild Pegasus</Bold>

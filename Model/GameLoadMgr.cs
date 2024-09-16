@@ -153,7 +153,7 @@ namespace BarbarianPrince
          try
          {
             if (true == string.IsNullOrEmpty(theDirectoryName)) // use the directory name as the place to load games. If none exists, create directory name
-               theDirectoryName = AssemblyDirectory + @"\Games";
+               theDirectoryName = AssemblyDirectory + @"\Games\";
             if (false == Directory.Exists(theDirectoryName)) // create directory if does not exists
                Directory.CreateDirectory(theDirectoryName);
             Directory.SetCurrentDirectory(theDirectoryName);
@@ -168,10 +168,13 @@ namespace BarbarianPrince
          try
          {
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.FileName = getCurrentTimeDate(gi);
+            string filename = GetFileName(gi);
+            dlg.FileName = filename;
+            dlg.InitialDirectory = theDirectoryName; 
+            dlg.RestoreDirectory = true;  
             if (true == dlg.ShowDialog())
             {
-               fileStream = File.OpenWrite(dlg.FileName);
+               fileStream = File.OpenWrite(filename);
                BinaryFormatter formatter = new BinaryFormatter();
                formatter.Serialize(fileStream, gi);
                fileStream.Close();
@@ -191,7 +194,7 @@ namespace BarbarianPrince
          return true;
       }
       //--------------------------------------------------
-      private static string getCurrentTimeDate(IGameInstance gi)
+      private static string GetFileName(IGameInstance gi)
       {
          StringBuilder sb = new StringBuilder();
          sb.Append(DateTime.Now.ToString("yyyyMMdd-HHmmss"));
