@@ -2508,7 +2508,7 @@ namespace BarbarianPrince
                   }
                   else
                   {
-                     gi.EventDisplayed = gi.EventActive = "e211b"; // treat audience in other castles as temple audience
+                     gi.EventDisplayed = gi.EventActive = "e211a"; // treat audience in other castles as town audience
                   }
                }
                else
