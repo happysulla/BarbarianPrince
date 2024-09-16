@@ -10620,11 +10620,7 @@ namespace BarbarianPrince
                      case 6:
                         ITerritory adjacent = FindRandomHexRangeAdjacent(gi);
                         gi.WizardAdviceLocations.Add(adjacent);
-                        if (false == EncounterEnd(gi, ref action))
-                        {
-                           Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false ae=" + action.ToString() + " dr=" + dieRoll.ToString());
-                           return false;
-                        }
+                        gi.EventDisplayed = gi.EventActive = "e026a";
                         break;          // nothing to see
                      default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
                   }
