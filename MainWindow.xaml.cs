@@ -46,7 +46,7 @@ namespace BarbarianPrince
             string assemplyDirectory = System.IO.Path.GetDirectoryName(path);
             string parentDir = System.IO.Path.GetDirectoryName(assemplyDirectory);
             MapImage.theImageDirectory = assemplyDirectory + @"\Images\";
-            Logger.theLogDirectory = assemplyDirectory + @"\Log\";
+            Logger.theLogDirectory = assemplyDirectory + @"\Logs\";
             ConfigFileReader.theConfigDirectory = assemplyDirectory + @"\Config\";
             //--------------------------------------------
             Utilities.InitializeRandomNumGenerators();

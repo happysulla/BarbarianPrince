@@ -4858,7 +4858,8 @@ namespace BarbarianPrince
                   gi.EventDisplayed = gi.EventActive = "e330";
                   break;
                case GameAction.E027AncientTreasure:
-                  gi.CapturedWealthCodes.Add(100);
+                  gi.PegasusTreasure = PegasusTreasureEnum.Mount;
+                  gi.CapturedWealthCodes.Add(110);
                   action = GameAction.EncounterLootStart;
                   break;
                case GameAction.E028CaveTombs:
@@ -9161,9 +9162,7 @@ namespace BarbarianPrince
                   }
                }
                break;
-            case "e027": // defeated golem or secret clue found treasure
-               gi.PegasusTreasure = PegasusTreasureEnum.Mount;
-               gi.CapturedWealthCodes.Add(110);
+            case "e027": // defeated golem or secret clue found treasure - Already added in E027AncientTreasure
                break;
             case "e032": // defeated ghosts
                gi.EventDisplayed = gi.EventActive = "e032a";
