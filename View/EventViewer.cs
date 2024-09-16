@@ -1931,7 +1931,7 @@ namespace BarbarianPrince
                AppendEscapeMethods(gi, true); // e058a, e058b
                break;
             case "e058c":
-               Image img58c = new Image { Source = MapItem.theMapImages.GetBitmapImage("Dwarves"), Width = 300, Height = 300 };
+               Image img58c = new Image { Source = MapItem.theMapImages.GetBitmapImage("Dwarfs"), Width = 300, Height = 300 };
                modifiedWitAndWile = gi.WitAndWile;
                myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
                myTextBlock.Inlines.Add(new LineBreak());

@@ -2062,7 +2062,7 @@ e072d	"<Bold>e072d Follow an Elven Band</Bold>
 <LineBreak/><LineBreak/>Roll one die to see where you end the day: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e165' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>  1 - Eleven Town<LineBreak/>
- <InlineUIContainer><Button Content='e166' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>  2 - Elven Castle<LineBreak/>
+ <InlineUIContainer><Button Content='e166' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>  2 - Elven Fortress<LineBreak/>
  <InlineUIContainer><Button Content='e053' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>  3,4,5,6 - Campsite<LineBreak/>
 <LineBreak/> <LineBreak/>
                                    <InlineUIContainer><Image Source='../bin/Images/Elf.gif' Height='300' Width='240'></Image></InlineUIContainer>"
