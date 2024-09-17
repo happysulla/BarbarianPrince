@@ -121,6 +121,8 @@
                   <CheckBox x:Name="myCheckBoxExtendTime"  Content="Extend End Time" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelGameOption_Click"/>
                   <CheckBox x:Name="myCheckBoxReducedLodgingCosts"  Content="Reduce Lodging Costs" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelGameOption_Click"/>
                   <CheckBox x:Name="myCheckBoxAddIncome"  Content="Income at end of day" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelGameOption_Click"/>
+                  <CheckBox x:Name="myCheckBoxEasyRoute"  Content="Easy Route Some Monsters" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelGameOption_Click"/>
+
                </StackPanel>
             </GroupBox>
          </StackPanel>

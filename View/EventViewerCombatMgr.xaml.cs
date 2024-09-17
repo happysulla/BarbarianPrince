@@ -181,6 +181,9 @@ namespace BarbarianPrince
       private int myWizardFireballRoundNum = 0;
       private bool myIsMirrorFight = false; // e047 - Fighting a mirror of the prince
       private bool myIsMinstelFight = false; // e049 - get in fight with mistrel
+      private bool myIsBanditFight = false;  // e051
+      private bool myIsGoblinFight = false;  // e052
+      private bool myIsOrcFight = false;  // e055
       private bool myIsSpiderFight = false; // e074
       private bool myIsWolvesFight = false; // e075
       private IMapItem myCatVictim = null;  // e076
@@ -342,6 +345,9 @@ namespace BarbarianPrince
          myIsMirrorFight = false;
          myIsBoarFight = false;
          myIsSpiderFight = false;
+         myIsBanditFight = false;
+         myIsGoblinFight = false;
+         myIsOrcFight = false;
          myIsWolvesFight = false;
          myIsMinstelFight = false;
          myCatVictim = null;
@@ -386,6 +392,7 @@ namespace BarbarianPrince
             case "e023": myIsWizardFight = true; break;
             case "e024c": myIsTalismanActivated = true; break; // Wizard Attack thwarted by resistance talisman
             case "e047": myIsMirrorFight = true; break;
+            case "e051": myIsBanditFight = true; break;
             case "e074":
                myIsSpiderFight = true;
                foreach (IMapItem mi in myGameInstance.PartyMembers)   // spiders reduce combat by one due to webs
@@ -491,6 +498,10 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "PerformCombat(): mi=null");
                return false;
             }
+            if (true == mi.Name.Contains("Goblin"))
+               myIsGoblinFight = true;
+            if (true == mi.Name.Contains("Orc"))
+               myIsOrcFight = true;
             if (true == mi.IsSpecialItemHeld(SpecialEnum.NerveGasBomb))
                myNerveGasOwner = mi;
             mi.IsShieldApplied = false;
@@ -4894,7 +4905,19 @@ namespace BarbarianPrince
       {
          myIsRouteOfEnemyPossible = false;   // ShowRouteResults()
          Logger.Log(LogEnum.LE_COMBAT_STATE_ROUTE, "ShowRouteResults(): s=" + myState.ToString() + " route?=" + myIsRouteOfEnemyPossible.ToString());
-         if (5 < dieRoll) // if 6+, route enemy
+         int routeRollValue = 5;
+         Option option = myGameInstance.Options.Find("EasyRoute");
+         if(null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "ShowRouteResults(): null=Options.Find(EasyRoute)");
+            option = new Option("EasyRead", false);
+         }
+         if (true == option.IsEnabled)
+         {
+            if ( (true == myIsWolvesFight) || (true == myIsBanditFight) || (true == myIsGoblinFight) || (true == myIsOrcFight) )
+               routeRollValue = 4;
+         }
+         if (routeRollValue < dieRoll) // if 6+, route enemy
          {
             myIsEscape = false;
             myIsRoute = true;

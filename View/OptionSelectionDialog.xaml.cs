@@ -64,13 +64,14 @@ namespace BarbarianPrince
          //--------------------
          myRadioButtonMonsterNormal.ToolTip = "Monsters start with original game attributes.";
          myRadioButtonMonsterLessEasy.ToolTip = "Monsters subtract 1 from endurance and combat.";
-         myRadioButtonMonsterEasy.ToolTip = "Monsters subtract 2 from endurance and 3 from combat.";
+         myRadioButtonMonsterEasy.ToolTip = "Monsters subtract 2 from endurance and combat.";
          myRadioButtonMonsterEasiest.ToolTip = "Monsters have one endurance and combat.";
          //--------------------
          myCheckBoxAutoLostIncrement.ToolTip = "Lost chance decreases on consecutive lost rolls.";
          myCheckBoxExtendTime.ToolTip = "Extend end time from 70 days to 105 days.";
          myCheckBoxReducedLodgingCosts.ToolTip = "Lodging in structures is half price.";
          myCheckBoxAddIncome.ToolTip = "Add 3-6gp at end of each day performing menial tasks during daily activities if not incapacitated.";
+         myCheckBoxEasyRoute.ToolTip = "Route on a 5 or 6 for bandits, wolves, goblins, and orcs";
          //--------------------
          myCheckBoxNoLostRoll.ToolTip = "Skip Lost Rolls.";
          myCheckBoxNoLostEvent.ToolTip = "Lost encounters never occur.";
@@ -1009,6 +1010,31 @@ namespace BarbarianPrince
          {
             isFunOption = false;
          }
+         name = "EasyRoute";
+         option = options.Find(name);
+         if (null == option)
+         {
+            option = new Option(name, false);
+            myOptions.Add(option);
+         }
+         myCheckBoxAddIncome.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+         {
+            isCustomConfig = true;
+         }
+         else
+         {
+            isFunOption = false;
+         }
+         myCheckBoxEasyRoute.IsChecked = option.IsEnabled;
+         if (true == option.IsEnabled)
+         {
+            isCustomConfig = true;
+         }
+         else
+         {
+            isFunOption = false;
+         }
          //++++++++++++++++++++++++++++++++++++++++++++++++
          name = "NoLostRoll";
          option = options.Find(name);
@@ -1588,6 +1614,11 @@ namespace BarbarianPrince
             option.IsEnabled = false;
          else
             Logger.Log(LogEnum.LE_ERROR, "ResetGameOptions(): not found SteadyIncome");
+         option = myOptions.Find("EasyRoute");
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            Logger.Log(LogEnum.LE_ERROR, "ResetGameOptions(): not found EasyRoute");
       }
       private void ResetEvents()
       {
@@ -1834,6 +1865,15 @@ namespace BarbarianPrince
             else
                option.IsEnabled = !option.IsEnabled;
          }
+         choice = Utilities.RandomGenerator.Next(2);
+         if (1 == choice)
+         {
+            Option option = myOptions.Find("EasyRoute");
+            if (null == option)
+               Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=EasyRoute");
+            else
+               option.IsEnabled = !option.IsEnabled;
+         }
       }
       private void SelectFunGameOptions()
       {
@@ -1855,6 +1895,11 @@ namespace BarbarianPrince
          option = myOptions.Find("SteadyIncome");
          if (null == option)
             Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=SteadyIncome");
+         else
+            option.IsEnabled = true;
+         option = myOptions.Find("EasyRoute");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=EasyRoute");
          else
             option.IsEnabled = true;
          option = myOptions.Find("EasyMonsters");
@@ -2072,6 +2117,7 @@ namespace BarbarianPrince
             case "myCheckBoxExtendTime": option = myOptions.Find("ExtendEndTime"); break;
             case "myCheckBoxReducedLodgingCosts": option = myOptions.Find("ReduceLodgingCosts"); break;
             case "myCheckBoxAddIncome": option = myOptions.Find("SteadyIncome"); break;
+            case "myCheckBoxEasyRoute": option = myOptions.Find("EasyRoute"); break;
             default: Logger.Log(LogEnum.LE_ERROR, "StackPanelGameOption_Click(): reached default name=" + cb.Name); return;
          }
          if (null == option)

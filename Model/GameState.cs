@@ -1214,7 +1214,7 @@ namespace BarbarianPrince
          {
             int newEndurance = character.Endurance - 2;
             character.Endurance = Math.Max(newEndurance, 1);
-            int newCombat = character.Combat - 3;
+            int newCombat = character.Combat - 2;
             character.Combat = Math.Max(newCombat, 1);
          }
          else if (true == isLessHardMonstersOption.IsEnabled)

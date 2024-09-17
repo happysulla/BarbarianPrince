@@ -24,7 +24,7 @@ namespace BarbarianPrince
    {
       [NonSerialized] public const int MEMBER_COUNT = 16;
       [NonSerialized]
-      public static string[] theDefaults = new string[74] // first 16 entries must be persons
+      public static string[] theDefaults = new string[75] // first 16 entries must be persons
       {
          "Dwarf",
          "Eagle",
@@ -87,6 +87,7 @@ namespace BarbarianPrince
          "ExtendEndTime",
          "ReduceLodgingCosts",
          "SteadyIncome",
+         "EasyRoute",
          "NoLostRoll",
          "ForceNoLostEvent",
          "ForceLostEvent",
