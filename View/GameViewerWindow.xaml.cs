@@ -176,7 +176,8 @@ namespace BarbarianPrince
          myMainMenuViewer.NewGameOptions = options;
          gi.Options = options; // use the new game options for setting up the first game
          //-------------------------------------------
-         GameLoadMgr.theDirectoryName = Settings.Default.GameDirectoryName; // remember the game directory name
+         if( false == String.IsNullOrEmpty(Settings.Default.GameDirectoryName) )
+            GameLoadMgr.theGamesDirectory = Settings.Default.GameDirectoryName; // remember the game directory name
          //-------------------------------------------
          Utilities.ZoomCanvas = Settings.Default.ZoomCanvas;
          myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas);
@@ -563,28 +564,31 @@ namespace BarbarianPrince
       private Options Deserialize(String s_xml)
       {
          Options options = new Options();
-         try // XML serializer does not work for Interfaces
+         if( false == String.IsNullOrEmpty(s_xml) )
          {
-            StringReader stringreader = new StringReader(s_xml);
-            XmlReader xmlReader = XmlReader.Create(stringreader);
-            XmlSerializer serializer = new XmlSerializer(typeof(Options)); // Sustem.IO.FileNotFoundException thrown but normal behavior - handled in XmlSerializer constructor
-            options = (Options)serializer.Deserialize(xmlReader);
-         }
-         catch (DirectoryNotFoundException dirException)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + "\ndirException=" + dirException.ToString());
-         }
-         catch (FileNotFoundException fileException)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + "\nfileException=" + fileException.ToString());
-         }
-         catch (IOException ioException)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + "\nioException=" + ioException.ToString());
-         }
-         catch (Exception ex)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + "\nex=" + ex.ToString());
+            try // XML serializer does not work for Interfaces
+            {
+               StringReader stringreader = new StringReader(s_xml);
+               XmlReader xmlReader = XmlReader.Create(stringreader);
+               XmlSerializer serializer = new XmlSerializer(typeof(Options)); // Sustem.IO.FileNotFoundException thrown but normal behavior - handled in XmlSerializer constructor
+               options = (Options)serializer.Deserialize(xmlReader);
+            }
+            catch (DirectoryNotFoundException dirException)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + "\ndirException=" + dirException.ToString());
+            }
+            catch (FileNotFoundException fileException)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + "\nfileException=" + fileException.ToString());
+            }
+            catch (IOException ioException)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + "\nioException=" + ioException.ToString());
+            }
+            catch (Exception ex)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + "\nex=" + ex.ToString());
+            }
          }
          if (0 == options.Count )
             options.SetDefaults();

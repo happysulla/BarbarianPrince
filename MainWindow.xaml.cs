@@ -48,6 +48,7 @@ namespace BarbarianPrince
             MapImage.theImageDirectory = assemplyDirectory + @"\Images\";
             Logger.theLogDirectory = assemplyDirectory + @"\Logs\";
             ConfigFileReader.theConfigDirectory = assemplyDirectory + @"\Config\";
+            GameLoadMgr.theGamesDirectory = assemplyDirectory + @"\Games\";
             //--------------------------------------------
             Utilities.InitializeRandomNumGenerators();
             //--------------------------------------------
