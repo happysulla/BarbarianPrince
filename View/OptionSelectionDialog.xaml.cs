@@ -1017,15 +1017,6 @@ namespace BarbarianPrince
             option = new Option(name, false);
             myOptions.Add(option);
          }
-         myCheckBoxAddIncome.IsChecked = option.IsEnabled;
-         if (true == option.IsEnabled)
-         {
-            isCustomConfig = true;
-         }
-         else
-         {
-            isFunOption = false;
-         }
          myCheckBoxEasyRoute.IsChecked = option.IsEnabled;
          if (true == option.IsEnabled)
          {
@@ -2111,19 +2102,26 @@ namespace BarbarianPrince
       {
          CheckBox cb = (CheckBox)sender;
          Option option = null;
+         string name = "";
          switch (cb.Name)
          {
-            case "myCheckBoxAutoLostIncrement": option = myOptions.Find("AutoLostDecrease"); break;
-            case "myCheckBoxExtendTime": option = myOptions.Find("ExtendEndTime"); break;
-            case "myCheckBoxReducedLodgingCosts": option = myOptions.Find("ReduceLodgingCosts"); break;
-            case "myCheckBoxAddIncome": option = myOptions.Find("SteadyIncome"); break;
-            case "myCheckBoxEasyRoute": option = myOptions.Find("EasyRoute"); break;
+            case "myCheckBoxAutoLostIncrement": name = "AutoLostDecrease"; break;
+            case "myCheckBoxExtendTime": name = "ExtendEndTime"; break;
+            case "myCheckBoxReducedLodgingCosts": name = "ReduceLodgingCosts"; break;
+            case "myCheckBoxAddIncome": name = "SteadyIncome"; break;
+            case "myCheckBoxEasyRoute": name = "EasyRoute"; break;
             default: Logger.Log(LogEnum.LE_ERROR, "StackPanelGameOption_Click(): reached default name=" + cb.Name); return;
          }
+         option = myOptions.Find(name);
          if (null == option)
+         {
             Logger.Log(LogEnum.LE_ERROR, "StackPanelGameOption_Click(): myOptions.Find() for name=" + cb.Name);
+            option = new Option(name, false);
+         }
          else
+         {
             option.IsEnabled = !option.IsEnabled;
+         }
          if (false == UpdateDisplay(myOptions))
             Logger.Log(LogEnum.LE_ERROR, "StackPanelGameOption_Click(): UpdateDisplay() returned false for name=" + cb.Name);
       }
