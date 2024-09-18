@@ -277,9 +277,20 @@ namespace BarbarianPrince
       }
       protected bool SetCampfireEncounterState(IGameInstance gi, ref GameAction action)
       {
+         
+         if ((true == gi.IsJailed) || (true == gi.IsDungeon) || (true == gi.IsEnslaved))  // short circuit and got o falcon check state if jailed or enslaved
+         {
+            if (false == SetCampfireFalconCheckState(gi, ref action))
+            {
+               Logger.Log(LogEnum.LE_ERROR, "SetCampfireEncounterState(): SetCampfireFinalConditionState() returned false");
+               return false;
+            }
+            return true;
+         }
+         //--------------------------------------------------------------
          // Characters joining party may have knowledge of other locations
-         if(false == gi.IsInMapItems("Wizard")) // Wizard still needs to be in party to provide advice
-            gi.IsWizardJoiningParty = false;
+         if (false == gi.IsInMapItems("Wizard")) // Wizard still needs to be in party to provide advice
+         gi.IsWizardJoiningParty = false;
          if (false == gi.IsInMapItems("DwarfWarrior")) // Dwarf Warrior still needs to be in party to provide advice
             gi.IsDwarfWarriorJoiningParty = false;
          if ( true == gi.IsWizardJoiningParty )
@@ -7363,7 +7374,7 @@ namespace BarbarianPrince
                      case 8:
                         if (false == gi.IsMarkOfCain)
                         {
-                           IMapItem monkGuide = CreateCharacter(gi, "Monk");
+                           IMapItem monkGuide = CreateCharacter(gi, "MonkGuide");
                            monkGuide.IsGuide = true;
                            if (false == AddGuideTerritories(gi, monkGuide, 1))
                            {

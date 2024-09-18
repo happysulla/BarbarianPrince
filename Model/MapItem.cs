@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using WpfAnimatedGif;
@@ -982,20 +983,20 @@ namespace BarbarianPrince
          bool isItemRemoved = false;
          foreach (SpecialEnum possession in this.SpecialKeeps) // first check if in the keeps list.
          {
-            if (possession == item)
+            if (possession.ToString() == item.ToString())
             {
                SpecialKeeps.Remove(possession);
                isItemRemoved = true;
                break;
             }
          }
-         if (true == isItemRemoved) // if item is held, determine if it is still held. If not, remove the benefit
+         if (false == isItemRemoved) // if item is held, determine if it is still held. If not, remove the benefit
          {
-            Logger.Log(LogEnum.LE_REMOVE_ITEM, "RemoveSpecialItem(): NOT FOUND in SpecialKeeps item=" + item.ToString() + " for mi=" + this.Name);
+            Logger.Log(LogEnum.LE_REMOVE_ITEM, "RemoveSpecialItem(): 1-NOT FOUND count=" + SpecialKeeps.Count.ToString() + " in SpecialKeeps item=" + item.ToString() + " for mi=" + this.Name);
          }
          else
          {
-            Logger.Log(LogEnum.LE_REMOVE_ITEM, "RemoveSpecialItem(): REMOVED from SpecialKeeps item=" + item.ToString() + " for mi=" + this.Name);
+            Logger.Log(LogEnum.LE_REMOVE_ITEM, "RemoveSpecialItem(): 1-REMOVED count=" + SpecialKeeps.Count.ToString() + " from SpecialKeeps item=" + item.ToString() + " for mi=" + this.Name);
             bool isItemStillHeld = IsSpecialItemHeld(item);
             switch (item)
             {
@@ -1038,20 +1039,20 @@ namespace BarbarianPrince
          //---------------------------------------------------------
          foreach (SpecialEnum possession in this.SpecialShares) // first check if in the keeps list.
          {
-            if (possession == item)
+            if (possession.ToString() == item.ToString())
             {
                SpecialShares.Remove(possession);
                isItemRemoved = true;
                break;
             }
          }
-         if (true == isItemRemoved) // if item is held, determine if it is still held. If not, remove the benefit
+         if (false == isItemRemoved) // if item is held, determine if it is still held. If not, remove the benefit
          {
-            Logger.Log(LogEnum.LE_REMOVE_ITEM, "RemoveSpecialItem(): NOT FOUND in SpecialShares item=" + item.ToString() + " for mi=" + this.Name);
+            Logger.Log(LogEnum.LE_REMOVE_ITEM, "RemoveSpecialItem(): 2-NOT FOUND count=" + SpecialShares.Count.ToString() + " in SpecialShares item=" + item.ToString() + " for mi=" + this.Name);
          }
          else
          {
-            Logger.Log(LogEnum.LE_REMOVE_ITEM, "RemoveSpecialItem(): REMOVED from SpecialShares item=" + item.ToString() + " for mi=" + this.Name);
+            Logger.Log(LogEnum.LE_REMOVE_ITEM, "RemoveSpecialItem(): 2-REMOVED count=" + SpecialShares.Count.ToString() + " from SpecialShares item=" + item.ToString() + " for mi=" + this.Name);
             bool isItemStillHeld = IsSpecialItemHeld(item);
             switch (item)
             {
@@ -1436,12 +1437,17 @@ namespace BarbarianPrince
          Food = 0;
          Mounts.Clear();
          CarriedMembers.Clear();
-         List<SpecialEnum> keepItems = new List<SpecialEnum>(mySpecialKeeps); // make a copy of the list in order to delete from SpecialKeep list -- cannot modify list when using foreach
-         foreach (SpecialEnum item in keepItems)
-            RemoveSpecialItem(item);
-         List<SpecialEnum> shareItems = new List<SpecialEnum>(mySpecialShares);
-         foreach (SpecialEnum item in shareItems)
-            RemoveSpecialItem(item);
+         List<SpecialEnum> specialItems = new List<SpecialEnum>();
+         foreach (SpecialEnum item in mySpecialKeeps)
+            specialItems.Add(item);
+         foreach (SpecialEnum item in mySpecialShares)
+            specialItems.Add(item);
+         foreach (SpecialEnum item in specialItems)
+         {
+            if (false == this.RemoveSpecialItem(item))
+               Logger.Log(LogEnum.LE_ERROR, "ResetPartial(): 1-cannot find item=" + item.ToString());
+         }
+         specialItems.Clear();
       }
       public void Flip()
       {
