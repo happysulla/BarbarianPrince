@@ -15169,8 +15169,8 @@ namespace BarbarianPrince
                }
                else if (true == gi.IsAirborne) // airborne and used up movement - check for lost encounter in landing hex
                {
-                  gi.IsShortHop = false;
                   gi.IsAirborne = false;
+                  gi.IsShortHop = false;
                   gi.IsAirborneEnd = true;
                   action = GameAction.TravelLostCheck;
                   gi.GamePhase = GamePhase.Travel;
@@ -15180,6 +15180,7 @@ namespace BarbarianPrince
                {
                   isEndOfDay = true;
                   gi.IsShortHop = false;
+                  gi.IsAirborneEnd = false;
                   foreach (IMapItem mi in gi.PartyMembers) // e151 - Cavalry departs at end of day after first day of travel
                   {
                      if (true == mi.Name.Contains("Cavalry"))
