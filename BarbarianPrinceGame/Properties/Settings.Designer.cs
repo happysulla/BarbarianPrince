@@ -37,6 +37,7 @@ namespace BarbarianPrince.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public double ScrollViewerHeight {
             get {
                 return ((double)(this["ScrollViewerHeight"]));
@@ -48,6 +49,7 @@ namespace BarbarianPrince.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public double ScrollViewerWidth {
             get {
                 return ((double)(this["ScrollViewerWidth"]));

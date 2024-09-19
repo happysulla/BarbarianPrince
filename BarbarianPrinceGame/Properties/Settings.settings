@@ -6,10 +6,10 @@
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="ScrollViewerHeight" Type="System.Double" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="ScrollViewerWidth" Type="System.Double" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="GameOptions" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
