@@ -2593,10 +2593,12 @@ namespace BarbarianPrince
       //-------------GameViewerWindow---------------------------------
       private void ContentRenderedGameViewerWindow(object sender, EventArgs e)
       {
+         Logger.Log(LogEnum.LE_GAME_INIT, "ContentRenderedGameViewerWindow(): myIsContentRendered=true");
          myIsContentRendered = true; // initial content rendered - start handling window resize actions
       }
       private void SizeChangedGameViewerWindow(object sender, SizeChangedEventArgs e)
       {
+         Logger.Log(LogEnum.LE_GAME_INIT, "SizeChangedGameViewerWindow(): myIsContentRendered=" + myIsContentRendered.ToString());
          if (true == myIsContentRendered) // only resize if the content is rendered for the first time
          {
             double mapPanelHeight = myDockPanelTop.ActualHeight - myMainMenu.ActualHeight - myStatusBar.ActualHeight;
