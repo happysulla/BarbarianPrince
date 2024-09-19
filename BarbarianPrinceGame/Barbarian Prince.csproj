@@ -123,7 +123,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="WpfAnimatedGif, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9e7cd3b544a090dc, processorArchitecture=MSIL">
-      <HintPath>packages\WpfAnimatedGif.2.0.2\lib\net40\WpfAnimatedGif.dll</HintPath>
+      <HintPath>..\packages\WpfAnimatedGif.2.0.2\lib\net40\WpfAnimatedGif.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +144,7 @@
     <Compile Include="Model\MapImage.cs" />
     <Compile Include="Model\Option.cs" />
     <Compile Include="Model\TreasureMgr.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="UnitTests\04PolylineCreateUnitTest.cs" />
     <Compile Include="UnitTests\08GameInstanceUnitTest.cs" />
     <Compile Include="UnitTests\09TravelCheckUnitTest.cs" />
@@ -591,6 +592,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">

@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("BarbarianPrince")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Wargaming Inc")]
+[assembly: AssemblyCompany("WargamingInc")]
 [assembly: AssemblyProduct("BarbarianPrince")]
 [assembly: AssemblyCopyright("Copyright © . 2024")]
 [assembly: AssemblyTrademark("")]

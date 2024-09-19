@@ -37,18 +37,7 @@ namespace BarbarianPrince.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string WindowPlacement {
-            get {
-                return ((string)(this["WindowPlacement"]));
-            }
-            set {
-                this["WindowPlacement"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public double ScrollViewerHeight {
             get {
                 return ((double)(this["ScrollViewerHeight"]));
@@ -60,6 +49,7 @@ namespace BarbarianPrince.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public double ScrollViewerWidth {
             get {
                 return ((double)(this["ScrollViewerWidth"]));
@@ -90,6 +80,19 @@ namespace BarbarianPrince.Properties {
             }
             set {
                 this["GameDirectoryName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?><WindowPlacement xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""><length>44</length><flags>2</flags><showCmd>3</showCmd><minPosition><X>-1</X><Y>-1</Y></minPosition><maxPosition><X>-1</X><Y>-1</Y></maxPosition><normalPosition><Left>260</Left><Top>260</Top><Right>2180</Right><Bottom>1340</Bottom></normalPosition></WindowPlacement>
+")]
+        public string WindowPlacement {
+            get {
+                return ((string)(this["WindowPlacement"]));
+            }
+            set {
+                this["WindowPlacement"] = value;
             }
         }
     }

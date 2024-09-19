@@ -2634,9 +2634,11 @@ namespace BarbarianPrince
                var hwnd = new WindowInteropHelper(this).Handle;
                if (false == SetWindowPlacement(hwnd, ref wp))
                   Logger.Log(LogEnum.LE_ERROR, "SetWindowPlacement() returned false");
-               myScollViewerInside.Height = Settings.Default.ScrollViewerHeight;
-               myScollViewerInside.Width = Settings.Default.ScrollViewerWidth;
             }
+            if (0.0 != Settings.Default.ScrollViewerHeight)
+               myScollViewerInside.Height = Settings.Default.ScrollViewerHeight;
+            if (0.0 != Settings.Default.ScrollViewerWidth)
+               myScollViewerInside.Width = Settings.Default.ScrollViewerWidth;
          }
          catch (Exception ex)
          {
