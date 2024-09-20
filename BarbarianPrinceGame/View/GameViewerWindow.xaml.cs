@@ -2593,24 +2593,18 @@ namespace BarbarianPrince
       //-------------GameViewerWindow---------------------------------
       private void ContentRenderedGameViewerWindow(object sender, EventArgs e)
       {
-         Logger.Log(LogEnum.LE_GAME_INIT, "ContentRenderedGameViewerWindow(): myIsContentRendered=true");
-         myIsContentRendered = true; // initial content rendered - start handling window resize actions
       }
       private void SizeChangedGameViewerWindow(object sender, SizeChangedEventArgs e)
       {
-         Logger.Log(LogEnum.LE_GAME_INIT, "SizeChangedGameViewerWindow(): myIsContentRendered=" + myIsContentRendered.ToString());
-         if (true == myIsContentRendered) // only resize if the content is rendered for the first time
+         double mapPanelHeight = myDockPanelTop.ActualHeight - myMainMenu.ActualHeight - myStatusBar.ActualHeight;
+         if (0 < mapPanelHeight) // Need to resize to take up panel content not taken by menu and status bar
          {
-            double mapPanelHeight = myDockPanelTop.ActualHeight - myMainMenu.ActualHeight - myStatusBar.ActualHeight;
-            if (0 < mapPanelHeight) // Need to resize to take up panel content not taken by menu and status bar
-            {
-               myDockPanelInside.Height = mapPanelHeight;
-               myScollViewerInside.Height = mapPanelHeight;
-            }
-            double mapPanelWidth = myDockPanelTop.ActualWidth - myDockPanelControls.ActualWidth - System.Windows.SystemParameters.VerticalScrollBarWidth;
-            if (0 < mapPanelWidth) // need to resize so that scrollbar takes up panel not allocated to Control's DockPanel, i.e. where app controls are shown
-               myScollViewerInside.Width = mapPanelWidth;
+            myDockPanelInside.Height = mapPanelHeight;
+            myScollViewerInside.Height = mapPanelHeight;
          }
+         double mapPanelWidth = myDockPanelTop.ActualWidth - myDockPanelControls.ActualWidth - System.Windows.SystemParameters.VerticalScrollBarWidth;
+         if (0 < mapPanelWidth) // need to resize so that scrollbar takes up panel not allocated to Control's DockPanel, i.e. where app controls are shown
+            myScollViewerInside.Width = mapPanelWidth;
       }
       private void ClosedGameViewerWindow(object sender, EventArgs e)
       {

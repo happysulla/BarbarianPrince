@@ -115,7 +115,7 @@ namespace BarbarianPrince
          }
          //---------------------------------------------------------------------
          Logger.SetOn(LogEnum.LE_ERROR);
-         Logger.SetOn(LogEnum.LE_GAME_INIT);
+         //Logger.SetOn(LogEnum.LE_GAME_INIT);
          Logger.SetOn(LogEnum.LE_USER_ACTION);
          Logger.SetOn(LogEnum.LE_NEXT_ACTION);
          //Logger.SetOn(LogEnum.LE_UNDO_COMMAND);
