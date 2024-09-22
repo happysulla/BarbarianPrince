@@ -437,7 +437,7 @@ namespace BarbarianPrince
          if (true == mi.Name.Contains("Freeman"))
          {
             mi.Endurance = 4;
-            mi.Combat = 4;
+            mi.Combat = 3;
             return;
          }
          if (true == mi.Name.Contains("Giant"))
