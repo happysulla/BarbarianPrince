@@ -1,11 +1,18 @@
 e000	"<LineBreak/><Bold>e000 Game Events Shown Here</Bold>
-<LineBreak/><LineBreak/>Active events show a green background. The game may only advance when a green background is displayed. However, the game lets you explore what may happen by showing inactive events. Inactive events have a gray background. To return to the current active event, select the active event button in the status bar per the image.
+<LineBreak/><LineBreak/>Active events show a green background. The game may only advance when a green background is displayed. Most often, the game advances by rolling die or clicking an image. However, the game lets you explore what may happen by showing inactive events. Inactive events have a gray background. To return to the current active event, select the active event button in the status bar per the image.
 <LineBreak/><LineBreak/>
                      <InlineUIContainer><Image Source='../bin/Images/Tutorial0.gif' Height='70'  Width='370'> </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button Name='Read_Rules' Content='Read Rules' FontFamily='Courier New'  FontSize='12'> </Button></InlineUIContainer> or <InlineUIContainer><Button Name='Begin' Content='Begin Game' FontFamily='Courier New'  FontSize='12'> </Button></InlineUIContainer>"
-e000a	"<Bold>e000a Cal Arath - Barbarian Prince</Bold>
-<LineBreak/><LineBreak/>Each character in the game has a endurance value, combat value, wounds, and starvation days. If endurance reaches zero, the character is dead. If the endurance reaches one, the character is unconscious. Wounds decrease endurance, and starvation days decrease the ability to carry loads. 
+e000a	"<Bold>e000a Cal Arath - Barbarian Prince</Bold> <InlineUIContainer><Button Content='r200' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+<LineBreak/><LineBreak/><Italic>Barbarian Prince</Italic> is a dungeon cawler, self-paced, solo game. You play the game in days. Each day starts with your selecting a daily action
+ <InlineUIContainer><Button Content='r203' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+, such as traveling to a new hex on the map. 
+<LineBreak/><LineBreak/>After all events are resolved for your daily action, you must eat your main evening meal as described in the food rules
+ <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+, and if in a town, castle, or temple hex; you must also purchase lodging
+ <InlineUIContainer><Button Content='r217' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
+<LineBreak/><LineBreak/>The game continues until either you are killed or 70 days (10 weeks) elapse. If you have not won before the 70 days ends, the game is automatically lost!
 <LineBreak/><LineBreak/>You are Cal Arath, rightful heir to the throne of the Northlands Kingdom. 
 <LineBreak/><LineBreak/>Few humans match your skill with trusty Bonebitter -- Combat=8
 <LineBreak/>Harsh northlands developed your powerful body -- Endurance=9. 
@@ -2999,7 +3006,7 @@ e128c	"<Bold>e128c Merchant with Food for Sale</Bold>
 <LineBreak/><LineBreak/>
                                           <InlineUIContainer><Image Source='../bin/Images/Merchant.gif' Name='EncounterEnd' Height='200'  Width='125'></Image></InlineUIContainer>"
 e128d	"<Bold>e128d Merchant Game of Chance</Bold>
-<LineBreak/><LineBreak/>If the roll exceeds wit and wiles, you spend up to 10gp needlessly. 'Have you ever heard of Plato, Aristotle, Socrates? Morons!'
+<LineBreak/><LineBreak/>If the roll exceeds wit and wiles, you spend up to 10gp needlessly. ""Have you ever heard of Plato, Aristotle, Socrates? Morons!""
 <LineBreak/><LineBreak/> Roll one die:  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e128e	"<Bold>e128e Merchant Selling Healing Potion Sale</Bold>
 <LineBreak/><LineBreak/>Merchant has healing potions for sale. See
@@ -4096,7 +4103,7 @@ e208	"<Bold>e208 Searching a Ruin</Bold> <InlineUIContainer><Button Content='r20
 e209	"<Bold>e209 Seeking News and Information</Bold> <InlineUIContainer><Button Content='r209' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>In a daily action, you spend the day in taverns, streets, and the market talking and learning. 
 <LineBreak/><LineBreak/>If you spend five gold pieces, you can add one to your die result. If your wit and wiles is 5 or higher, add one additional value to the die results. See
- <InlineUIContainer><Button Content='r209' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> for possible results.
+ <InlineUIContainer><Button Content='r209' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> for possible results. If you do not have enough money, you must click the no pay image.
 <LineBreak/><LineBreak/>Click to collect information without paying:
 <LineBreak/><InlineUIContainer><Image Name='SeekNewsNoPay' Source='../bin/Images/CoinsStackedDeny.gif' Height='100'  Width='100'> </Image></InlineUIContainer> "
 e209a	"<Bold>e209a Seeking News and Information Results</Bold>
@@ -4176,19 +4183,19 @@ e210	"<Bold>e210 Seeking to Hire Followers</Bold>
 11:  <InlineUIContainer><Button Content='e210h' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Runaway boy <LineBreak/>
 12: <InlineUIContainer><Button Content='e210i' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Porters and a local guide are available"
 e210a	"<Bold>e210a Freeman Available</Bold>
-<LineBreak/><LineBreak/>A freeman joins your party at no cost (except food and lodging). He has a combat skill 3 and endurance 4. 
+<LineBreak/><LineBreak/>A freeman joins your party at no cost (except food and lodging). He has a combat skill 3 and endurance 4. Choose image to click.
 <LineBreak/><LineBreak/>Click to not allow him to join:
 <LineBreak/><LineBreak/><InlineUIContainer><Image Name='EncounterEnd' Source='../bin/Images/FoodDeny.gif' Height='100'  Width='100'> </Image></InlineUIContainer> 
 <LineBreak/><LineBreak/>Click to not allow him to join:
 <LineBreak/><LineBreak/><InlineUIContainer><Image Name='HireFreeman' Source='../bin/Images/Food.gif' Height='100'  Width='100'> </Image></InlineUIContainer> "
 e210b	"<Bold>e210b Lancer Available</Bold>
-<LineBreak/><LineBreak/>A lancer with a horse can be hired for 3 gold per day. He  has a combat skill of 5 and endurance of 5. 
+<LineBreak/><LineBreak/>A lancer with a horse can be hired for 3 gold per day. He  has a combat skill of 5 and endurance of 5. Click one of images to continue.
 <LineBreak/><LineBreak/>Click to allow him to join:
 <LineBreak/><LineBreak/><InlineUIContainer><Image Name='EncounterEnd' Source='../bin/Images/CoinsStackedDeny.gif' Height='100'  Width='100'> </Image></InlineUIContainer> 
 <LineBreak/><LineBreak/>Click to allow him to join:
 <LineBreak/><LineBreak/><InlineUIContainer><Image Name='HireLancer' Source='../bin/Images/CoinsStacked.gif' Height='100'  Width='100'> </Image></InlineUIContainer> "
 e210c	"<Bold>e210c Mercenaries Available</Bold>
-<LineBreak/><LineBreak/>One or two mercenaries can be hired for 2 gold each day each. Each has a combat skill 4 and endurance 4.
+<LineBreak/><LineBreak/>One or two mercenaries can be hired for 2 gold each day each. Each has a combat skill 4 and endurance 4. Click one of images to continue.
 <LineBreak/><LineBreak/>Click to not allow them to join:
 <LineBreak/><LineBreak/><InlineUIContainer><Image Name='EncounterEnd' Source='../bin/Images/CoinsStackedDeny.gif' Height='100'  Width='100'> </Image></InlineUIContainer> 
 <LineBreak/><LineBreak/>Click to allow one to join:
@@ -4207,7 +4214,7 @@ e210d	"<Bold>e210d Horse Deal</Bold>
 e210e	"<Bold>e210e Local Guide Available</Bold>
 <LineBreak/><LineBreak/>Local guide available
  <InlineUIContainer><Button Content='r205' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
-. Hires for 2 gold per day. He has a combat skill of 2 and endurnace 3.
+. Hires for 2 gold per day. He has a combat skill of 2 and endurnace 3. Click one of images to continue.
 <LineBreak/><LineBreak/><InlineUIContainer><Image Name='EncounterEnd' Source='../bin/Images/CoinsStackedDeny.gif' Height='100'  Width='100'> </Image></InlineUIContainer> 
 <LineBreak/><LineBreak/>Click to allow him to join:
 <LineBreak/><LineBreak/><InlineUIContainer><Image Name='HireLocalGuide' Source='../bin/Images/CoinsStacked.gif' Height='100'  Width='100'> </Image></InlineUIContainer> "
@@ -4918,7 +4925,7 @@ e342a	"<Bold>e342a More Talking</Bold> <InlineUIContainer><Button Content='e341'
 <LineBreak/><LineBreak/>
 Characters reveal themself gradually. More talking is required to review their true nature.
 <LineBreak/><LineBreak/>
-<InlineUIContainer><Button Content='Talk ' FontFamily='Courier New'  FontSize='12' Name='e341'></Button></InlineUIContainer> further or<LineBreak/>
+<InlineUIContainer><Button Content='Talk ' FontFamily='Courier New'  FontSize='12' Name=""e341""></Button></InlineUIContainer> further or<LineBreak/>
 <InlineUIContainer><Button Content='Pass ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>  with dignity."
 e343	"<Bold>e343 Victim Selection</Bold>
 <LineBreak/><LineBreak/>One character in your party is the victim or target of an attack. If your party is just you, then you are the target.

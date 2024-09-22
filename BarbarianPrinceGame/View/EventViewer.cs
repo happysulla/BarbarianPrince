@@ -1012,6 +1012,13 @@ namespace BarbarianPrince
                   if (3 == gi.DieResults["e128"][0])
                      b.IsEnabled = true;
                }
+               else if ("Ignore" == content) // do not enable Ignore button if user rolled dice
+               {
+                  if (0 < gi.DieResults["e128"][0])
+                     b.IsEnabled = false;
+                  else
+                     b.IsEnabled = true;
+               }
                else
                {
                   b.IsEnabled = true;
@@ -2815,7 +2822,7 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new InlineUIContainer(e203a0));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run("Prison Escape! Roll for who escapes with you."));
+                  myTextBlock.Inlines.Add(new Run("Prison Escape! On next screen, roll for who escapes with you. Click image to continue."));
                }
                else
                {
