@@ -46,6 +46,7 @@ namespace BarbarianPrince
       private bool myIsFarmland = false;
       private int myFoodOriginal = 0;
       private int myFoodCurrent = 0;
+      private int myMaxFreeLoads = 0;
       private int myNumMounts = 0;
       private int myCoinNeededForParty = 0;
       private int myCoinSpentForParty = 0;
@@ -160,6 +161,7 @@ namespace BarbarianPrince
          myState = HuntEnum.LE_HUNT;
          myIsFarmland = false;
          myFoodOriginal = 0;
+         myMaxFreeLoads = 0;
          myNumMounts = 0;
          myCoinNeededForParty = 0;
          myCoinSpentForParty = 0;
@@ -255,6 +257,7 @@ namespace BarbarianPrince
                   continue;
                myFoodNeededByParty += 2;
             }
+            myMaxFreeLoads += mi.GetMaxFreeLoad(); // determine how many free loads are available
             ++i;
          }
          //--------------------------------------------------
@@ -303,17 +306,20 @@ namespace BarbarianPrince
                      myGameInstance.IsMountsFed = true;
                   }
                }
-               if( myFoodNeededByParty <= myGameInstance.GetFoods() )
+               if (myFoodNeededByParty <= myGameInstance.GetFoods()) // if have plenty of food, no need to hunt
                {
-                  myIsHeaderCheckBoxChecked = false;
-                  myGameInstance.IsPartyFed = false;
-                  myGameInstance.IsMountsFed = false;
-                  myFoodCurrent = myFoodOriginal;
-                  myCoinCurrent = myCoinOriginal;
-                  myCoinSpentForParty = 0;
-                  myCoinSpentForMounts = 0;
-                  myFoodAdded = 0;
-               }
+                  if( (myMaxFreeLoads < 5) || (true == myIsFarmland) ) // do not hunt if free loads is small or this is farmland - user has to explicitly choose to hunt
+                  {
+                     myIsHeaderCheckBoxChecked = false;
+                     myGameInstance.IsPartyFed = false;
+                     myGameInstance.IsMountsFed = false;
+                     myFoodCurrent = myFoodOriginal;
+                     myCoinCurrent = myCoinOriginal;
+                     myCoinSpentForParty = 0;
+                     myCoinSpentForMounts = 0;
+                     myFoodAdded = 0;
+                  }
+                }
             }
             else
             {
@@ -351,7 +357,7 @@ namespace BarbarianPrince
             myGridRows[0].myAssignable = myGameInstance.Prince;
             myGridRows[0].myAssignmentCount = GetAssignedCount();
             myMapItems.Remove(myGameInstance.Prince);
-            if ((6 < myGameInstance.Prince.Food) || (true == myIsFarmland))// if prince is by himself - force user to select hunt checkbox
+            if ((7 < myGameInstance.Prince.Food) || (true == myIsFarmland))// if prince is by himself - force user to select hunt checkbox
                myIsHeaderCheckBoxChecked = false;
             else
                myIsHeaderCheckBoxChecked = true;
