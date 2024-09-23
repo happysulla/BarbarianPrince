@@ -1237,6 +1237,15 @@ namespace BarbarianPrince
             myRadioButtonMaxFun.IsChecked = false;
             myRadioButtonCustom.IsChecked = true;
          }
+         else if ( (true == isRandomPartyConfig) && (true == isRandomHexConfig) )
+         {
+            myRadioButtonOriginal.IsChecked = false;
+            myRadioButtonRandomParty.IsChecked = false;
+            myRadioButtonRandomStart.IsChecked = false;
+            myRadioButtonAllRandom.IsChecked = true;
+            myRadioButtonMaxFun.IsChecked = false;
+            myRadioButtonCustom.IsChecked = false;
+         }
          else if (true == isRandomPartyConfig)
          {
             myRadioButtonOriginal.IsChecked = false;

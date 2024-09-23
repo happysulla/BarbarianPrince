@@ -306,7 +306,7 @@ namespace BarbarianPrince
                EventViewerE044HighAltarMgr aE044MgrViewer = new EventViewerE044HighAltarMgr(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);
                if (true == aE044MgrViewer.CtorError)
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): aE044MgrViewer.CtorError=true");
-               else if (false == aE044MgrViewer.CheckInvocation(ShowInvocationResult))
+               else if (false == aE044MgrViewer.CheckInvocation(ShowE044InvocationResult))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): CheckInvocation() returned false");
                break;
             //-------------------------------------
@@ -4268,6 +4268,23 @@ namespace BarbarianPrince
          myGameEngine.PerformAction(ref myGameInstance, ref outAction, dieRoll);
          return true;
       }
+      public bool ShowE044InvocationResult(bool isPrinceBlessed, bool isClueFound)
+      {
+         GameAction outAction = GameAction.Error;
+         if (true == isPrinceBlessed)
+            outAction = GameAction.E044HighAltarBlessed;
+         else if (true == isClueFound)
+            outAction = GameAction.E044HighAltarClue;
+         else
+            outAction = GameAction.E044HighAltarEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowE044InvocationResult() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
+         myGameEngine.PerformAction(ref myGameInstance, ref outAction);
+         return true;
+      }
       public bool ShowE060ReleasePrisonerResult()
       {
          GameAction outAction = GameAction.EncounterEnd;
@@ -4498,23 +4515,6 @@ namespace BarbarianPrince
       {
          GameAction outAction = GameAction.E043SmallAltarEnd;
          StringBuilder sb11 = new StringBuilder("     ######E043SmallAltarEnd() :");
-         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
-         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
-         sb11.Append(" a="); sb11.Append(outAction.ToString());
-         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
-         myGameEngine.PerformAction(ref myGameInstance, ref outAction);
-         return true;
-      }
-      public bool ShowInvocationResult(bool isPrinceBlessed, bool isClueFound)
-      {
-         GameAction outAction = GameAction.Error;
-         if (true == isPrinceBlessed)
-            outAction = GameAction.E044HighAltarBlessed;
-         else if (true == isClueFound)
-            outAction = GameAction.E044HighAltarClue;
-         else
-            outAction = GameAction.E044HighAltarEnd;
-         StringBuilder sb11 = new StringBuilder("     ######ShowInvocationResult() :");
          sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
          sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
          sb11.Append(" a="); sb11.Append(outAction.ToString());

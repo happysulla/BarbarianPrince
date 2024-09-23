@@ -290,7 +290,7 @@ namespace BarbarianPrince
          //--------------------------------------------------------------
          // Characters joining party may have knowledge of other locations
          if (false == gi.IsInMapItems("Wizard")) // Wizard still needs to be in party to provide advice
-         gi.IsWizardJoiningParty = false;
+            gi.IsWizardJoiningParty = false;
          if (false == gi.IsInMapItems("DwarfWarrior")) // Dwarf Warrior still needs to be in party to provide advice
             gi.IsDwarfWarriorJoiningParty = false;
          if ( true == gi.IsWizardJoiningParty )
@@ -4607,7 +4607,7 @@ namespace BarbarianPrince
                      else
                      {
                         gi.DwarfAdviceLocations.Add(tRamdom);
-                        if (false == SetCampfireFalconCheckState(gi, ref action))
+                        if (false == SetCampfireEncounterState(gi, ref action))
                         {
                            returnStatus = "SetCampfireFinalConditionState() returned false for a=" + action.ToString();
                            Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
@@ -4750,7 +4750,7 @@ namespace BarbarianPrince
                   gi.IsHuntedToday = true;
                   if (false == EncounterEnd(gi, ref action))
                   {
-                     returnStatus = "EncounterEnd() returned false for E044HighAltarEnd";
+                     returnStatus = "EncounterEnd() returned false for E013Lodging";
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
                   break;
@@ -4856,9 +4856,9 @@ namespace BarbarianPrince
                      else
                      {
                         gi.WizardAdviceLocations.Add(tRamdom);
-                        if (false == SetCampfireFalconCheckState(gi, ref action))
+                        if (false == SetCampfireEncounterState(gi, ref action))
                         {
-                           returnStatus = "SetCampfireFinalConditionState() returned false for a=" + action.ToString();
+                           returnStatus = "SetCampfireEncounterState() returned false for a=" + action.ToString();
                            Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                         }
                      }
