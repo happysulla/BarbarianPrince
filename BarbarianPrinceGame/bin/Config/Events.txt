@@ -2089,7 +2089,7 @@ e073a	"<Bold>e073a Hostile Witch</Bold>
 <LineBreak/><LineBreak/>Otherwise, you remain a frog for years and lose the game. Click image to continue.
 <LineBreak/> <LineBreak/>
                            <InlineUIContainer><Image Name='Witch' Source='../bin/Images/Witch.gif' Height='300' Width='240'></Image></InlineUIContainer>"
-e073b	"<Bold>e073b  Indifferent Witch</Bold>
+e073b	"<Bold>e073b Indifferent Witch</Bold>
 <LineBreak/><LineBreak/>You pass with no incident. Click image to continue.
 <LineBreak/> <LineBreak/>
                            <InlineUIContainer><Image Name='EncounterEnd' Source='../bin/Images/Witch.gif' Height='300' Width='240'></Image></InlineUIContainer>"
@@ -3529,7 +3529,7 @@ He prepares to march his army to the Northlands with you to help you regain your
 e153	"<Bold>e153 Master of Household</Bold>
 <LineBreak/><LineBreak/>You encounter the Master of the Household who prevents you from receiving an audience. 
 <LineBreak/><LineBreak/>If you bribe him, you can try for an audience on some future day.
-<LineBreak/><LineBreak/>Otherwise, he takes a dislike to you, and you can never attempt to seek audience in this hex again.
+<LineBreak/><LineBreak/>Otherwise, he takes a dislike to you, and you can never attempt to seek audience in this hex again. Click image to continue. If you cannot pay, your only choice is to click the do not pay image.
 <LineBreak/><LineBreak/>Click not to pay: 
 <LineBreak/><LineBreak/><InlineUIContainer><Image Name='MasterOfHouseholdDeny' Source='../bin/Images/CoinsStackedDeny.gif' Height='75'  Width='75'> </Image></InlineUIContainer> "
 e154	"<Bold>e154 Meet Lord's Daughter</Bold>
@@ -4167,6 +4167,10 @@ e209h	"<Bold>e209h Buy Valuable Information</Bold>
 <LineBreak/>   6 - <InlineUIContainer><Button Content='e146' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>
                                       <InlineUIContainer><Image Name='BuyInfoEnd' Source='../bin/Images/Nothing.gif' Height='150' Width='150'></Image></InlineUIContainer>"
+e209i	"<Bold>e209i Cheaper Lodgings Found</Bold>
+<LineBreak/><LineBreak/>Pay half normal price for food or lodgings while in this hex.
+<LineBreak/><LineBreak/>
+                                      <InlineUIContainer><Image Name='EncounterEnd' Source='../bin/Images/Nothing.gif' Height='150' Width='150'></Image></InlineUIContainer>"
 e210	"<Bold>e210 Seeking to Hire Followers</Bold>
 <LineBreak/><LineBreak/>In this daily action, you spend the day posting notices, visiting agents/merchants, and inquiring at taverns about the availability of hired help. Roll two die and consult the list below for results: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21'> </Image></InlineUIContainer>

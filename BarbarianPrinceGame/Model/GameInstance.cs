@@ -328,10 +328,18 @@ namespace BarbarianPrince
                if (true == member.Name.Contains("TrueLove"))
                   ++numTrueLoves;
             }
-            if (2 == numTrueLoves)  // remove effects of true love due to the eternal triangle
+            if ((2 == numTrueLoves) && (0 != this.Days)) // remove effects of true love due to the eternal triangle if not first day
+            {
+               int witandwile = this.WitAndWile;
                --this.WitAndWile;
+               Logger.Log(LogEnum.LE_WIT_AND_WILES_INIT, "AddCompanion(): numTrueLoves=2 original=" + witandwile.ToString() + " ww=" + this.WitAndWile.ToString());
+            }
             else if (1 == numTrueLoves)  // add effects of true love
+            {
+               int witandwile = this.WitAndWile;
                ++this.WitAndWile;
+               Logger.Log(LogEnum.LE_WIT_AND_WILES_INIT, "AddCompanion(): numTrueLoves=1 original=" + witandwile.ToString() + " ww=" + this.WitAndWile.ToString());
+            }
          }
          if( (0 < this.Arches.Count) && (true == IsMagicInParty()) ) // if there is magician, witch, or wizard added to party, adn arches exist, the secret becomes known 
             this.IsArchTravelKnown = true;
@@ -346,7 +354,10 @@ namespace BarbarianPrince
             IsDwarfWarriorJoiningParty = true;
          //--------------------------------
          if (true == companion.Name.Contains("ElfWarrior"))
-            WitAndWile += 1;
+         {
+            ++this.WitAndWile;
+            Logger.Log(LogEnum.LE_WIT_AND_WILES_INIT, "AddCompanion(): ElfWarrior ww+=" + this.WitAndWile.ToString());
+         }
       }
       private void RestoreMapItemAttribute(IMapItem mi)
       {

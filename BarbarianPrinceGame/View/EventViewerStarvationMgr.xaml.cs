@@ -181,6 +181,9 @@ namespace BarbarianPrince
          if( true == myGameInstance.IsFalconFed ) // If a falcon is with the party, show the rule for it, i.e. e107
             myButtonFalconRule.Visibility = Visibility.Visible;
          //--------------------------------------------------
+         if (true == myGameInstance.IsMinstrelInParty())// If a minstrel is with the party, show the rule for it, i.e. r049
+            myButtonMinstelPlaying.Visibility = Visibility.Visible;
+         //--------------------------------------------------
          int i = 0;
          foreach (IMapItem mi in myPartyMembers)
          {
@@ -622,6 +625,8 @@ namespace BarbarianPrince
          string clickOption = " campfire to continue.";
          if (true == myGameInstance.IsMinstrelPlaying)
             clickOption = " minstrel to continue.";
+         else if (true == myGameInstance.IsMinstrelInParty())
+            clickOption = " minstrel to play or campfire to continue.";
          if (true == myGameInstance.IsMagicianProvideGift)
             clickOption = " magician gift to continue.";
          bool isHealingPotion = IsPotionHealShown();

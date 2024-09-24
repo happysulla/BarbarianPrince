@@ -46,6 +46,12 @@ The item may be one of these possibilities:<LineBreak/>
  4 - Resurrection Necklass <InlineUIContainer><Button Content='r192' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  5 - Shield of Light <InlineUIContainer><Button Content='r193' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  6 - Royal Helm of the Northlands <InlineUIContainer><Button Content='r194' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>"
+r049	"<Bold>r049 Travelling Minstrel</Bold>
+<LineBreak/><LineBreak/>You have a musician that has joined your party.
+<LineBreak/><LineBreak/>If he is fed, he will sing a tale that night that prevents any of your party from deserting no matter what happened today.  This applies even if your followers are not properly fed or lodged.
+<LineBreak/><LineBreak/>When at the evening meal, click his image to start him singing to prevent desertions.
+<LineBreak/> <LineBreak/> 
+                                                   <InlineUIContainer><Image Source='../bin/Images/Minstrel.gif' Height='280' Width='140'></Image></InlineUIContainer>"
 r051	"<Bold>r051 Bandits</Bold>
 <LineBreak/><LineBreak/>You are ambushed by bandits who surprise you in combat
  <InlineUIContainer><Button Content='r220' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.

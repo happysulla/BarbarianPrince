@@ -74,7 +74,8 @@
             <Button Content='r215' FontFamily='Courier New' FontSize='12' Margin="5,0,0,0" Height="14" Click="ButtonRule_Click" />
             <Button Content='r216' FontFamily='Courier New' FontSize='12' Margin="5,0,0,0" Height="14" Click="ButtonRule_Click" />
             <Button Content='r107' FontFamily='Courier New' FontSize='12' Margin="5,0,0,0" Height="14" Click="ButtonRule_Click" Name="myButtonFalconRule" Visibility="Hidden" />
-        </StackPanel>
+            <Button Content='r049' FontFamily='Courier New' FontSize='12' Margin="5,0,0,0" Height="14" Click="ButtonRule_Click" Name="myButtonMinstelPlaying" Visibility="Hidden" />
+      </StackPanel>
         <Rectangle Grid.Row="1" Grid.ColumnSpan="8" Margin="5" Height="1" Fill="Black"/>
         <TextBlock Grid.Row="2" Grid.ColumnSpan="8" Name="myTextBlockInstructions" FontFamily='Georgia' FontSize="16" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Margin="2,0,0,5">
            If party is not fed, roll die for possible desertions.

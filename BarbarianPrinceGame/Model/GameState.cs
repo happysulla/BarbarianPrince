@@ -1476,10 +1476,12 @@ namespace BarbarianPrince
             case 6: gi.Prince.Coin += 4; break;
             default: Logger.Log(LogEnum.LE_ERROR, "PerformAutoSetup(): reached default dr=" + dr.ToString()); return false;
          }
-         gi.WitAndWile = Utilities.RandomGenerator.Next(6);
-         ++gi.WitAndWile;
+         dr = Utilities.RandomGenerator.Next(6);
+         ++dr;
+         gi.WitAndWile = dr;
          if (1 == gi.WitAndWile) // cannot start with one 
-            ++gi.WitAndWile;
+            gi.WitAndWile = 2;
+         Logger.Log(LogEnum.LE_WIT_AND_WILES_INIT, "PerformAutoSetup(): dr=" + dr.ToString() + " ww=" + gi.WitAndWile.ToString());
          dr = Utilities.RandomGenerator.Next(6);
          ++dr;
          if (false == SetStartingLocation(ref gi, dr))
@@ -13315,11 +13317,8 @@ namespace BarbarianPrince
                      case 7:
                         if (false == gi.CheapLodgings.Contains(princeTerritory))
                            gi.CheapLodgings.Add(princeTerritory);
-                        if (false == EncounterEnd(gi, ref action))
-                        {
-                           Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false w/ ae=" + gi.EventActive);
-                           return false;
-                        }
+                        gi.EventDisplayed = gi.EventActive = "e209i"; 
+                        gi.DieRollAction = GameAction.DieRollActionNone;
                         break;
                      case 8:
                         gi.Prince.Coin = (int)( (double)gi.Prince.Coin * 0.5 );
