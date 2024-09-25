@@ -1473,7 +1473,7 @@ e050d	"<Bold>e050d Fight Constabulary</Bold>
  <InlineUIContainer><Button Content='e303' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprise<LineBreak/>
  <InlineUIContainer><Button Content='e302' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7 Surprise<LineBreak/>
  <InlineUIContainer><Button Content='e301' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 8 Surprise"
-e050f	"<Bold>e050f Mercenary Royal Guardsmen</Bold>
+e050e	"<Bold>e050e Mercenary Royal Guardsmen</Bold>
 <LineBreak/><LineBreak/>Since you are within three hexes of Ogon
   <InlineUIContainer><Button Content='0101' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 
  or Weshor
