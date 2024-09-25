@@ -4302,7 +4302,7 @@ e211c	"<Bold>e211c Seeking an Audience with the Baron of Huldra Castle</Bold>
 <InlineUIContainer><Button Content='Dismiss' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> a random magic user from party to add one to die roll.
 <LineBreak/><LineBreak/>
 Roll two die and consult list for results:  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21'> </Image></InlineUIContainer>"
-e211d	"<Bold>r211d Seeking an Audience with the Count Drogat</Bold>
+e211d	"<Bold>r211d Seeking an Audience with the Count Drogat</Bold>  <InlineUIContainer><Button Content='r161a' FontFamily='Courier New' FontSize='12' Visibility='Hidden'></Button></InlineUIContainer> 
 <LineBreak/><LineBreak/>As a daily action, you spend the day trying to gain admission to see the Count Drogat. Roll two die and consult the list below for results: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21'> </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>

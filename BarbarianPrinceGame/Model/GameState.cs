@@ -1300,6 +1300,32 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateNewGame:
             case GameAction.RemoveSplashScreen:
+               Option option = gi.Options.Find("AutoSetup");
+               if (null == option)
+               {
+                  returnStatus = "gi.Options.Find(AutoSetup) returned null";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  if (true == option.IsEnabled)
+                  {
+                     if (false == PerformAutoSetup(ref gi, ref action))
+                     {
+                        returnStatus = "PerformAutoSetup() returned false";
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
+                     }
+                     gi.GamePhase = GamePhase.SunriseChoice;      // RemoveSplashScreen
+                     gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
+                     gi.DieRollAction = GameAction.DieRollActionNone;
+                  }
+                  else
+                  {
+                     gi.GamePhase = GamePhase.GameSetup;
+                     gi.EventDisplayed = gi.EventActive = "e000"; // next screen to show
+                     gi.DieRollAction = GameAction.DieRollActionNone;
+                  }
+               }
                if (false == AddStartingPrinceOption(gi))
                {
                   returnStatus = "AddStartingPrinceOption() returned false";
@@ -1310,36 +1336,7 @@ namespace BarbarianPrince
                   returnStatus = "AddStartingOptions() returned false";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
                }
-               else
-               {
-                  AddStartingTestingOptions(gi);
-                  Option option = gi.Options.Find("AutoSetup");
-                  if (null == option)
-                  {
-                     returnStatus = "gi.Options.Find(AutoSetup) returned null";
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
-                  }
-                  else
-                  {
-                     if (true == option.IsEnabled)
-                     {
-                        if (false == PerformAutoSetup(ref gi, ref action))
-                        {
-                           returnStatus = "PerformAutoSetup() returned false";
-                           Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
-                        }
-                        gi.GamePhase = GamePhase.SunriseChoice;      // RemoveSplashScreen
-                        gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
-                        gi.DieRollAction = GameAction.DieRollActionNone;
-                     }
-                     else
-                     {
-                        gi.GamePhase = GamePhase.GameSetup;
-                        gi.EventDisplayed = gi.EventActive = "e000"; // next screen to show
-                        gi.DieRollAction = GameAction.DieRollActionNone;
-                     }
-                  }
-               }
+               AddStartingTestingOptions(gi);
                break;
             case GameAction.SetupShowCalArath:
                gi.EventDisplayed = gi.EventActive = "e000a";
@@ -1357,24 +1354,22 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.SetupRollWitsWiles;
                break;
             case GameAction.SetupRollWitsWiles:
-               gi.WitAndWile = dieRoll;
+               if (dieRoll < 2)
+                  gi.WitAndWile = 2; // cannot be less than two
+               else
+                  gi.WitAndWile = dieRoll;
+               Logger.Log(LogEnum.LE_WIT_AND_WILES_INIT, "GameStateSetup.PerformAction(SetupRollWitsWiles): dr=" + dieRoll.ToString() + " ww=" + gi.WitAndWile.ToString());
                gi.EventDisplayed = gi.EventActive = "e000d"; // next screen to show
                break;
             case GameAction.SetupManualWitsWiles:
-               if (0 == gi.WitAndWile) // Die Roll for random wits and wiles handled here
-               {
-                  if (dieRoll < 2)
-                     gi.WitAndWile = 2; // cannot be less than two
-                  else
-                     gi.WitAndWile = dieRoll;
-               }
-               else
+               if (0 != gi.WitAndWile) // if zero, user selected no number - otherwise, user added or subtracted one from wit and wiles
                {
                   gi.WitAndWile += dieRoll; // manual changes to wits and wiles handled here
                   if (gi.WitAndWile < 2)
                      gi.WitAndWile = 2;
                   else if (6 < gi.WitAndWile)
                      gi.WitAndWile = 6;
+                  Logger.Log(LogEnum.LE_WIT_AND_WILES_INIT, "GameStateSetup.PerformAction(SetupManualWitsWiles): dr=" + dieRoll.ToString() + " ww=" + gi.WitAndWile.ToString());
                }
                gi.DieRollAction = GameAction.DieRollActionNone;
                break;

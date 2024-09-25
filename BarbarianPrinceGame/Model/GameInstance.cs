@@ -355,8 +355,9 @@ namespace BarbarianPrince
          //--------------------------------
          if (true == companion.Name.Contains("ElfWarrior"))
          {
+            int witandwile = this.WitAndWile;
             ++this.WitAndWile;
-            Logger.Log(LogEnum.LE_WIT_AND_WILES_INIT, "AddCompanion(): ElfWarrior ww+=" + this.WitAndWile.ToString());
+            Logger.Log(LogEnum.LE_WIT_AND_WILES_INIT, "AddCompanion(): ElfWarrior original=" + witandwile.ToString() + " ww=" + this.WitAndWile.ToString());
          }
       }
       private void RestoreMapItemAttribute(IMapItem mi)

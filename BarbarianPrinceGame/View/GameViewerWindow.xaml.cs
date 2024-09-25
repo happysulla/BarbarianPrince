@@ -2593,6 +2593,15 @@ namespace BarbarianPrince
       //-------------GameViewerWindow---------------------------------
       private void ContentRenderedGameViewerWindow(object sender, EventArgs e)
       {
+         double mapPanelHeight = myDockPanelTop.ActualHeight - myMainMenu.ActualHeight - myStatusBar.ActualHeight;
+         if (0 < mapPanelHeight) // Need to resize to take up panel content not taken by menu and status bar
+         {
+            myDockPanelInside.Height = mapPanelHeight;
+            myScollViewerInside.Height = mapPanelHeight;
+         }
+         double mapPanelWidth = myDockPanelTop.ActualWidth - myDockPanelControls.ActualWidth - System.Windows.SystemParameters.VerticalScrollBarWidth;
+         if (0 < mapPanelWidth) // need to resize so that scrollbar takes up panel not allocated to Control's DockPanel, i.e. where app controls are shown
+            myScollViewerInside.Width = mapPanelWidth;
       }
       private void SizeChangedGameViewerWindow(object sender, SizeChangedEventArgs e)
       {

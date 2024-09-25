@@ -1877,64 +1877,74 @@ namespace BarbarianPrince
       }
       private void SelectFunGameOptions()
       {
-         Option option = myOptions.Find("AutoLostDecrease");
+         Option option = myOptions.Find("AutoSetup");
          if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=AutoLostDecrease");
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=AutoSetup");
+         else
+            option.IsEnabled = true;
+         option = myOptions.Find("AutoWealthRollForUnderFive");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=AutoWealthRollForUnderFive");
+         else
+            option.IsEnabled = true;
+         option = myOptions.Find("AutoLostDecrease");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=AutoLostDecrease");
          else
             option.IsEnabled = true;
          option = myOptions.Find("ExtendEndTime");
          if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=ExtendEndTime");
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=ExtendEndTime");
          else
             option.IsEnabled = true;
          option = myOptions.Find("ReduceLodgingCosts");
          if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=ReduceLodgingCosts");
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=ReduceLodgingCosts");
          else
             option.IsEnabled = true;
          option = myOptions.Find("SteadyIncome");
          if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=SteadyIncome");
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=SteadyIncome");
          else
             option.IsEnabled = true;
          option = myOptions.Find("EasyRoute");
          if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=EasyRoute");
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=EasyRoute");
          else
             option.IsEnabled = true;
          option = myOptions.Find("EasyMonsters");
          if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=EasyMonsters");
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=EasyMonsters");
          else
             option.IsEnabled = true;
          option = myOptions.Find("PrinceFood");
          if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=PrinceFood");
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=PrinceFood");
          else
             option.IsEnabled = true;
          option = myOptions.Find("PrinceCoin");
          if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=PrinceCoin");
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=PrinceCoin");
          else
             option.IsEnabled = true;
          option = myOptions.Find("StartWithNerveGame");
          if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=StartWithNerveGame");
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=StartWithNerveGame");
          else
             option.IsEnabled = true;
          option = myOptions.Find("StartWithNecklass");
          if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=StartWithNecklass");
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=StartWithNecklass");
          else
             option.IsEnabled = true;
          option = myOptions.Find("RandomParty05");
          if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=RandomParty05");
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=RandomParty05");
          else
             option.IsEnabled = true;
          option = myOptions.Find("RandomHex");
          if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyOptionChoice(): myOptions.Find() for option=RandomHex");
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=RandomHex");
          else
             option.IsEnabled = true;
       }

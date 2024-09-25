@@ -288,6 +288,13 @@ r146	"<Bold>r146 The Secret of Count Dragot</Bold>
  with wealth 110. However, you can never return to the castle hex due to the Count's anger. In the process of the theft, you might acquire magic items as part of the wealth 110 check. 
 <LineBreak/><LineBreak/>
                                      <InlineUIContainer><Image Source='../bin/Images/FoulBane.gif' Name='EncounterEnd' Height='250' Width='200'></Image></InlineUIContainer>"
+r146a	"<Bold>e146a Stealing Count Drogat Jewels</Bold>
+<LineBreak/><LineBreak/>Using the foulbane in Drogat Castle, you can spend a day instead of a normal daily action in arranging for a special theft of the Count's personnel jewels.
+<LineBreak/><LineBreak/>At the end of the day, you escape from the hex
+ <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+ with wealth 110. However, you can never return to the castle hex due to the Count's anger. In the process of the theft, you might acquire magic items as part of the wealth 110 check. 
+<LineBreak/><LineBreak/>
+                      <InlineUIContainer><Image Source='../bin/Images/CountDrogatJewels.gif' Name='CountDrogatJewels' Height='300' Width='300'></Image></InlineUIContainer>"
 r180	"<Bold>r180 Healing Potion</Bold>
 <LineBreak/><LineBreak/>This potion can be applied once to any character including yourself at the end of the day after the evening meal
  <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
@@ -560,7 +567,7 @@ In addition, events where you talk or negotiate occur in only a few minutes. You
 r205	"<Bold>r205 Lost</Bold>
 <LineBreak/><LineBreak/>Each time you attempt to leave a hex, there is a danger of becoming lost. Consult the Travel Table
  <InlineUIContainer><Button Name='myButtonT207' Content='t207' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
- and find the terrain type you are leaving. Read across to the 'Lost"" column entry. Roll two die. If the dice total equals or exceeds the chart's number, your party is lost. If you move more than one hex in a day, you must check for getting lost before each move, i.e., before you enter the new hex.
+ and find the terrain type you are leaving. Read across to the 'Lost' column entry. Roll two die. If the dice total equals or exceeds the chart's number, your party is lost. If you move more than one hex in a day, you must check for getting lost before each move, i.e., before you enter the new hex.
 <LineBreak/><LineBreak/>If you get lost, you cannot move further that day. You are stuck in the hex you tried to leave. You must check for a travel event unless performing self-guiding moves
  <InlineUIContainer><Button Name='myButtonR205b' Content='r205b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
  The travel check is performed in the hex you tried to enter, as if you actually entered it. This reflects you wondering around the edges of the new hex and perhaps encountering something.
@@ -888,7 +895,7 @@ r215a	"<Bold>r215a Food Units</Bold>
 r215b	"<Bold>r215b Hunting</Bold>
 <LineBreak/><LineBreak/>If you are in a farmland, country side, forest, hill, or swamp hex, you can hunt for food. Any one character in your party can be the hunter. 
 <LineBreak/><LineBreak/>Total his combat skill and half his current endurance minus wounds. Round fractions down and  subtract from the total value of the roll of two dice. The result is the number of food units gained by hunting. If the character can act as a guide, add one to the total. If the total is zero or less, the hunting was unsuccessful. 
-<LineBreak/><LineBreak/>If the dice roll was ""12"" , the hunter hurt himself regardless if the hunting was successful. Roll one die for the number of wounds he suffered. If knocked unconscious or killed, the hunt automatically fails unless hunting with others. 
+<LineBreak/><LineBreak/>If the dice roll was '12' , the hunter hurt himself regardless if the hunting was successful. Roll one die for the number of wounds he suffered. If knocked unconscious or killed, the hunt automatically fails unless hunting with others. 
 <LineBreak/><LineBreak/>If your party rested today in the hex, you can send additional characters to hunt. For each additional character hunting, add one to the skill+endurance level of your hunt. The actual skill and endurance of the additional hunters is not counted. However, if the additional hunters are gides, add one for each guide."
 r215c	"<Bold>r215c Populated Regions and Hunting</Bold>
 <LineBreak/><LineBreak/>If you must hunt in a farmland hex, each time you roll one die for a possible event, which occurs after the hunt is finished, but before the evening meal is eaten: 
@@ -909,7 +916,7 @@ r215e	"<Bold>r215e Food Stores</Bold>
  <InlineUIContainer><Button Name='myButtonR206' Content='r206' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  by yourself, other characters, and mounts. 
 <LineBreak/><LineBreak/>Food stores can be purchased in a town, castle, or villiage for one gold piece per food unit, but only if you spent the entire day in the hex. 
-<LineBreak/><LineBreak/>Each food unit is one ""load"" to transport."
+<LineBreak/><LineBreak/>Each food unit is one 'load' to transport."
 r215f	"<Bold>r215f Animal Fodder</Bold>
 <LineBreak/><LineBreak/>Animals can graze and eat fodder for themselves in any terrain where hunting is possible except swamps (i.e., in farmland, country side, forest, or hills). No hunting, stores or purchases are necessary. 
 <LineBreak/><LineBreak/>If you spend the entire day in a town, castle, or temple hex; you must stable your animals which cost one gold piece for food, unless you provide the stable with food stores (two units per animal) to feed them."
