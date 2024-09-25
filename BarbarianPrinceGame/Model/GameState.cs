@@ -13372,7 +13372,6 @@ namespace BarbarianPrince
                   }
                   if (true == gi.FeelAtHomes.Contains(princeTerritory))
                      ++dieRoll;
-                  dieRoll = 9; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                break;
