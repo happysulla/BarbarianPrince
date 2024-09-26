@@ -289,7 +289,7 @@ r146	"<Bold>r146 The Secret of Count Dragot</Bold>
 <LineBreak/><LineBreak/>
                                      <InlineUIContainer><Image Source='../bin/Images/FoulBane.gif' Name='EncounterEnd' Height='250' Width='200'></Image></InlineUIContainer>"
 r146a	"<Bold>e146a Stealing Count Drogat Jewels</Bold>
-<LineBreak/><LineBreak/>Using the foulbane in Drogat Castle, you can spend a day instead of a normal daily action in arranging for a special theft of the Count's personnel jewels.
+<LineBreak/><LineBreak/>Using the foulbane in Drogat Castle, you can spend a <Bold>Steal Gems</Bold> action instead of a normal daily action in arranging for a special theft of the Count's personnel jewels.
 <LineBreak/><LineBreak/>At the end of the day, you escape from the hex
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  with wealth 110. However, you can never return to the castle hex due to the Count's anger. In the process of the theft, you might acquire magic items as part of the wealth 110 check. 

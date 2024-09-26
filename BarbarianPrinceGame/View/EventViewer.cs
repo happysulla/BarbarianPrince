@@ -1248,6 +1248,10 @@ namespace BarbarianPrince
                   }
                }
                break;
+            case "e203":
+               if ( (true == gi.IsSpecialItemHeld(SpecialEnum.Foulbane)) && ("r146a" == content) && ("0323" == gi.Prince.Territory.Name) )
+                  b.Visibility = Visibility.Visible;
+               break;
             case "e204a":
                if (0 < myGameInstance.Prince.MovementUsed)
                {
@@ -1375,6 +1379,10 @@ namespace BarbarianPrince
             case "e211c":
                if ( ("Dismiss" == content) && ( (false == myGameInstance.IsMagicInParty()) || (true == myGameInstance.IsMagicUserDismissed) || (0 < myGameInstance.DieResults["e211c"][0]) ) )
                   b.IsEnabled = false;
+               break;
+            case "e211d":
+               if ((true == gi.IsSpecialItemHeld(SpecialEnum.Foulbane)) && ("r146a" == content))
+                  b.Visibility = Visibility.Visible;
                break;
             case "e211g":
                if (("Continue" == content) && (0 < myGameInstance.DieResults["e211g"][0]))
