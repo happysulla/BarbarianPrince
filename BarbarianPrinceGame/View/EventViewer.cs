@@ -3964,7 +3964,28 @@ namespace BarbarianPrince
                     sbEndWon.Append("' in ");
                     sbEndWon.Append(gi.Prince.Territory.Name);
                     myTextBlock.Inlines.Add(new Run(sbEndWon.ToString()));
-                    Image imgEndGameWon = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("Star"), Width = 300, Height = 300 };
+                    Image imgEndGameWon = null;
+                    switch (Utilities.RandomGenerator.Next(8))
+                    {
+                        case 0:
+                            imgEndGameWon = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("QuicksandJump"), Width = 300, Height = 300 };
+                            break;
+                        case 1:
+                            imgEndGameWon = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("Gems"), Width = 300, Height = 300 };
+                            break;
+                        case 2:
+                            imgEndGameWon = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("Muscle"), Width = 300, Height = 300 };
+                            break;
+                        case 3:
+                            imgEndGameWon = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("Sword1"), Width = 300, Height = 300 };
+                            break;
+                        case 4:
+                            imgEndGameWon = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("Win"), Width = 300, Height = 300 };
+                            break;
+                        default:
+                            imgEndGameWon = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("Star"), Width = 300, Height = 300 };
+                            break;
+                    }
                     myTextBlock.Inlines.Add(new LineBreak());
                     myTextBlock.Inlines.Add(new LineBreak());
                     myTextBlock.Inlines.Add(new Run("                                  "));
@@ -3983,7 +4004,28 @@ namespace BarbarianPrince
                     sbEndLost.Append("' in ");
                     sbEndLost.Append(gi.Prince.Territory.Name);
                     myTextBlock.Inlines.Add(new Run(sbEndLost.ToString()));
-                    Image imgEndGameLost = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("Frown"), Width = 300, Height = 300 };
+                    Image imgEndGameLost = null;
+                    switch(Utilities.RandomGenerator.Next(8))
+                    {
+                        case 0:
+                            imgEndGameLost = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("Deny"), Width = 300, Height = 300 };
+                            break;
+                        case 1:
+                            imgEndGameLost = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("Idiot"), Width = 300, Height = 300 };
+                            break;
+                        case 2:
+                            imgEndGameLost = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("OBlood1"), Width = 300, Height = 300 };
+                            break;
+                        case 3:
+                            imgEndGameLost = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("FarmerDead"), Width = 300, Height = 300 };
+                            break;
+                        case 4:
+                            imgEndGameLost = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("Skulls"), Width = 300, Height = 300 };
+                            break;
+                        default:
+                            imgEndGameLost = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("Frown"), Width = 300, Height = 300 };
+                            break;
+                    }
                     myTextBlock.Inlines.Add(new LineBreak());
                     myTextBlock.Inlines.Add(new LineBreak());
                     myTextBlock.Inlines.Add(new Run("                                  "));
