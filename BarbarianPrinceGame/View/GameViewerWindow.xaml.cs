@@ -135,7 +135,7 @@ namespace BarbarianPrince
       private Button[] myButtonFoodSupply100s = new Button[5];
       private Button[] myButtonEndurances = new Button[12];
       private readonly List<Button> myButtonDailyAcions = new List<Button>();
-      private readonly string[] myButtonDailyContents = new string[MAX_DAILY_ACTIONS] { "Travel", "Rest", "News", "Hire", "Audience", "Offering", "Search Ruins", "Search Cache", "Search Clue", "Arch Travel", "Follow", "Rafting", "Air Travel", "Steal Gems", "Rescue","Attack" };
+      private readonly string[] myButtonDailyContents = new string[MAX_DAILY_ACTIONS] { "Travel", "Rest", "News", "Hire", "Audience", "Offering", "Search Ruins", "Search Cache", "Search Clue", "Arch Travel", "Follow", "Rafting", "Air Travel", "Steal Gems", "Rescue", "Attack" };
       //---------------------------------------------------------------------
       private ContextMenu myContextMenuButton = new ContextMenu();
       private readonly ContextMenu myContextMenuCanvas = new ContextMenu();
@@ -157,7 +157,7 @@ namespace BarbarianPrince
          mySplashScreen.Show();
          InitializeComponent();
          //-----------------------------------------------------------------
-         Image imageMap = new Image() { Name="Map", Width=810, Height=985, Stretch= Stretch.Fill, Source = MapItem.theMapImages.GetBitmapImage("Map") };
+         Image imageMap = new Image() { Name = "Map", Width = 810, Height = 985, Stretch = Stretch.Fill, Source = MapItem.theMapImages.GetBitmapImage("Map") };
          myCanvas.Children.Add(imageMap);
          Canvas.SetLeft(imageMap, 0);
          Canvas.SetTop(imageMap, 0);
@@ -176,7 +176,7 @@ namespace BarbarianPrince
          myMainMenuViewer.NewGameOptions = options;
          gi.Options = options; // use the new game options for setting up the first game
          //-------------------------------------------
-         if( false == String.IsNullOrEmpty(Settings.Default.GameDirectoryName) )
+         if (false == String.IsNullOrEmpty(Settings.Default.GameDirectoryName))
             GameLoadMgr.theGamesDirectory = Settings.Default.GameDirectoryName; // remember the game directory name
          //-------------------------------------------
          Utilities.ZoomCanvas = Settings.Default.ZoomCanvas;
@@ -286,7 +286,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "UpdateView(): gi.Options.Find(ExtendEndTime)");
             optionExtendTime = new Option("ExtendEndTime", false);
          }
-         if (myExtendTimeGameOptionPrevious != optionExtendTime.IsEnabled ) // if there is change in this option, recreate the buttons
+         if (myExtendTimeGameOptionPrevious != optionExtendTime.IsEnabled) // if there is change in this option, recreate the buttons
          {
             CreateButtonTimeTrack(gi);
             myExtendTimeGameOptionPrevious = optionExtendTime.IsEnabled;
@@ -564,7 +564,7 @@ namespace BarbarianPrince
       private Options Deserialize(String s_xml)
       {
          Options options = new Options();
-         if( false == String.IsNullOrEmpty(s_xml) )
+         if (false == String.IsNullOrEmpty(s_xml))
          {
             try // XML serializer does not work for Interfaces
             {
@@ -590,7 +590,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + "\nex=" + ex.ToString());
             }
          }
-         if (0 == options.Count )
+         if (0 == options.Count)
             options.SetDefaults();
          return options;
       }
@@ -744,7 +744,7 @@ namespace BarbarianPrince
                myStackPanelDailyActions.Children.Add(myButtonDailyAcions[15]);    // Sneak Attack in Huldra Castle
                myStackPanelDailyActions.Visibility = Visibility.Visible;
             }
-            if ((true == gi.IsSecretBaronHuldra) && ("1611" == gi.Prince.Territory.Name)) 
+            if ((true == gi.IsSecretBaronHuldra) && ("1611" == gi.Prince.Territory.Name))
             {
                myStackPanelDailyActions.Children.Add(myButtonDailyAcions[14]);    // Rescue True Heir to Huldra Castle
                myStackPanelDailyActions.Visibility = Visibility.Visible;
@@ -761,7 +761,7 @@ namespace BarbarianPrince
                {
                   if (true == partyMember.IsFlyingMountCarrier())  // mount cannot fly if starving or exhausted
                   {
-                     if( (0 == partyMember.StarveDayNum) && (false == partyMember.IsExhausted) && (false == partyMember.IsSunStroke) )
+                     if ((0 == partyMember.StarveDayNum) && (false == partyMember.IsExhausted) && (false == partyMember.IsSunStroke))
                      {
                         myStackPanelDailyActions.Children.Add(myButtonDailyAcions[12]);    // air travel
                         myStackPanelDailyActions.Visibility = Visibility.Visible;
@@ -999,10 +999,10 @@ namespace BarbarianPrince
                brush = mySolidColorBrushSkyBlue;
                break;
             case ColorActionEnum.CAE_TRAVEL_RAFT:
-               brush = mySolidColorBrushWaterBlue; 
+               brush = mySolidColorBrushWaterBlue;
                break;
             case ColorActionEnum.CAE_TRAVEL_DOWNRIVER:
-               brush = mySolidColorBrushWaterDark; 
+               brush = mySolidColorBrushWaterDark;
                break;
             case ColorActionEnum.CAE_ESCAPE:
                brush = mySolidColorBrushRed;
@@ -1715,7 +1715,7 @@ namespace BarbarianPrince
             {
                // do nothing
             }
-            else if((AudienceConstraintEnum.RELIGION == fa.Constraint) && (true == gi.IsReligionInParty()) ) // If religious constraint, but religion in party, ignore it
+            else if ((AudienceConstraintEnum.RELIGION == fa.Constraint) && (true == gi.IsReligionInParty())) // If religious constraint, but religion in party, ignore it
             {
                // do nothing
             }
@@ -1789,7 +1789,7 @@ namespace BarbarianPrince
             }
          }
          //-------------------------------------------------------
-         if( true == myMainMenuViewer.IsPathShown )
+         if (true == myMainMenuViewer.IsPathShown)
          {
             if (false == UpdateCanvasPath(gi))
             {
@@ -2022,6 +2022,21 @@ namespace BarbarianPrince
          }
          return true;
       }
+      private void UpdateCanvasHexToShowPolygon(ITerritory t)
+      {
+         if (null == t)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "UpdateCanvasHexToShowPolygon(): t=null");
+            return;
+         }
+         UpdateScrollbarThumbnails(t);
+         PointCollection points = new PointCollection();
+         foreach (IMapPoint mp1 in t.Points)
+            points.Add(new System.Windows.Point(mp1.X, mp1.Y));
+         Polygon aPolygon = new Polygon { Fill = Utilities.theBrushRegion, Points = points, Tag = t.ToString() };
+         myPolygons.Add(aPolygon);
+         myCanvas.Children.Add(aPolygon);
+      }
       private void UpdateScrollbarThumbnails(ITerritory t)
       {
          double percentHeight = (t.CenterPoint.Y / myCanvas.ActualHeight);
@@ -2070,15 +2085,6 @@ namespace BarbarianPrince
          Canvas.SetTop(myRectangleSelected, y);
          myRectangleSelected.Visibility = Visibility.Visible;
          return true;
-      }
-      private void UpdateCanvasHexToShowPolygon(ITerritory t)
-      {
-         PointCollection points = new PointCollection();
-         foreach (IMapPoint mp1 in t.Points)
-            points.Add(new System.Windows.Point(mp1.X, mp1.Y));
-         Polygon aPolygon = new Polygon { Fill = Utilities.theBrushRegion, Points = points, Tag = t.ToString() };
-         myPolygons.Add(aPolygon);
-         myCanvas.Children.Add(aPolygon);
       }
       private bool UpdateCanvasHexTravelToShowPolygons(IGameInstance gi)
       {
@@ -2177,7 +2183,7 @@ namespace BarbarianPrince
          if (null == oldStack)
          {
             oldStack = myGameInstance.Stacks.Find(gi.Prince.Territory);
-            if( null == oldStack)
+            if (null == oldStack)
                Logger.Log(LogEnum.LE_ERROR, "MoveToNewHexWhenJailed(): oldStack=null for t=" + oldT.ToString() + " bc Prince not found in any stacks");
             else
                Logger.Log(LogEnum.LE_ERROR, "MoveToNewHexWhenJailed(): oldStack=null for t=" + oldT.ToString() + " bc Prince in stack=" + oldStack.Territory.Name);
@@ -2417,7 +2423,7 @@ namespace BarbarianPrince
          }
          else if (s1 == myButtonDailyContents[13])
          {
-               outAction = GameAction.E146StealGems;
+            outAction = GameAction.E146StealGems;
          }
          else if (s1 == myButtonDailyContents[14])
          {
@@ -2484,7 +2490,7 @@ namespace BarbarianPrince
             outAction = GameAction.E110AirSpiritTravelEnd;
             myGameInstance.NewHex = myTerritorySelected;   // MouseDownPolygonTravel() - when air spirit moves party
          }
-         myGameEngine.PerformAction(ref myGameInstance, ref outAction); 
+         myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          Logger.Log(LogEnum.LE_USER_ACTION, "MouseDownPolygonTravel(): >>>>>>>>>>>>>>>>>>>>>>>>>ae=" + myGameInstance.EventActive + " c=" + myGameInstance.SunriseChoice.ToString() + " m=" + myGameInstance.Prince.MovementUsed + "/" + myGameInstance.Prince.Movement + " mim=" + myGameInstance.MapItemMoves[0].ToString());
       }
       private void MouseDownPolygonArchOfTravel(object sender, MouseButtonEventArgs e) // e045
@@ -2568,10 +2574,10 @@ namespace BarbarianPrince
          Ellipse mousedEllipse = (Ellipse)sender;
          if (null == mousedEllipse)
             return;
-         foreach( EnteredHex hex in myGameInstance.EnteredHexes)
+         foreach (EnteredHex hex in myGameInstance.EnteredHexes)
          {
             string name = (string)mousedEllipse.Tag;
-            if( hex.Identifer == name)
+            if (hex.Identifer == name)
             {
                myEllipseDisplayDialog = new EllipseDisplayDialog(hex, myEventViewer.myRulesMgr);
                myEllipseDisplayDialog.Show();

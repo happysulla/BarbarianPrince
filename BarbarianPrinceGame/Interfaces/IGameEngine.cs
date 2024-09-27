@@ -92,6 +92,7 @@ namespace BarbarianPrince
       // Each IUnitTest class may support one of the following actions
       RemoveSplashScreen,
       UpdateStatusBar,
+      UpdateShowRegion,
       UpdateEventViewerDisplay,
       UpdateEventViewerActive,
       DieRollActionNone, // The field in IGameInstance indicates what the roll apply. If none expected, it is set to this value.

@@ -771,6 +771,17 @@ namespace BarbarianPrince
          //--------------------------------
          if ("Tragoth River" == key) // show several hexes for Tragoth
          {
+            ITerritory tAnchor = myTerritories.Find("1101");
+            if (null == tAnchor)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "ShowRegion(): Unable to find name=1101");
+               return false;
+            }
+            if (false == SetThumbnailState(myCanvas, tAnchor))
+            {
+               Logger.Log(LogEnum.LE_ERROR, "ShowRegion(): SetThumbnailState returned false name=" + key);
+               return false;
+            }
             foreach (string s in Utilities.theNorthOfTragothHexes)
             {
                ITerritory t1 = myTerritories.Find(s);
@@ -794,6 +805,12 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "ShowRegion(): Unable to find name=" + key);
             return false;
          }
+         //--------------------------------
+         if( false == SetThumbnailState(myCanvas, t))
+         {
+            Logger.Log(LogEnum.LE_ERROR, "ShowRegion(): SetThumbnailState returned false name=" + key);
+            return false;
+         }
          PointCollection points = new PointCollection();
          foreach (IMapPoint mp1 in t.Points)
             points.Add(new System.Windows.Point(mp1.X, mp1.Y));
@@ -802,6 +819,36 @@ namespace BarbarianPrince
          return true;
       }
       //--------------------------------------------------------------------
+      private bool SetThumbnailState(Canvas c, ITerritory t)
+      {
+         ScrollViewer scrollViewer = (ScrollViewer)c.Parent; // set thumbnails of scroll viewer to find the target hex
+         if (null == scrollViewer)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetThumbnailState(): scrollViewer=null");
+            return false;
+         }
+         double percentHeight = (t.CenterPoint.Y / myCanvas.ActualHeight);
+         double percentToScroll = 0.0;
+         if (percentHeight < 0.25)
+            percentToScroll = 0.0;
+         else if (0.75 < percentHeight)
+            percentToScroll = 1.0;
+         else
+            percentToScroll = percentHeight / 0.5 - 0.5;
+         double amountToScroll = percentToScroll * scrollViewer.ScrollableHeight;
+         scrollViewer.ScrollToVerticalOffset(amountToScroll);
+         //--------------------------------------------------------------------
+         double percentWidth = (t.CenterPoint.X / myCanvas.ActualWidth);
+         if (percentWidth < 0.25)
+            percentToScroll = 0.0;
+         else if (0.75 < percentWidth)
+            percentToScroll = 1.0;
+         else
+            percentToScroll = percentWidth / 0.5 - 0.5;
+         amountToScroll = percentToScroll * scrollViewer.ScrollableWidth;
+         scrollViewer.ScrollToHorizontalOffset(amountToScroll);
+         return true;
+      }
       private void SetButtonState(IGameInstance gi, string key, Button b)
       {
          int cost = 0;

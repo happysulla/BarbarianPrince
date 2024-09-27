@@ -1697,6 +1697,8 @@ namespace BarbarianPrince
          }
          if (true == option.IsEnabled)
             Utilities.MaxDays = 105;
+         else
+            Utilities.MaxDays = 70;
          return true;
       }
       private bool AddStartingPartyMemberOption(IGameInstance gi, string partyMemberName)
