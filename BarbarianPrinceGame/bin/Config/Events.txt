@@ -4946,3 +4946,7 @@ e402	"<Bold>e402 Unable to Pay Wages</Bold>
                                 <Image Name='EncounterEnd' Source='../bin/Images/CoinsStackedDeny.gif' Height='75'  Width='75'> </Image></InlineUIContainer> "
 e500	"<Bold>>e500 Click Horde to continue</Bold><LineBreak/>
 <InlineUIContainer><Image Source='../bin/Images/CoinsFalling.gif' Name='Horde' Height='550' Width='550'></Image></InlineUIContainer>"
+e501	"<Bold>e501 Game Won!!</Bold>
+<LineBreak/><LineBreak/> "
+e502	"<Bold>e502 Game Lost</Bold>
+<LineBreak/><LineBreak/> "
