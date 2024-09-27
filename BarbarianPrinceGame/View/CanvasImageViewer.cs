@@ -64,5 +64,18 @@ namespace BarbarianPrince
             Canvas.SetTop(img, 0);
             Canvas.SetZIndex(img, 99999);
         }
-    }
+      private void ShowEndGameSuccess(Canvas c)
+      {
+         BitmapImage bmi2 = new BitmapImage();
+         bmi2.BeginInit();
+         bmi2.UriSource = new Uri(MapImage.theImageDirectory + "EngGameSuccess.gif", UriKind.Absolute);
+         bmi2.EndInit();
+         Image img = new Image { Source = bmi2, Height = c.ActualHeight, Width = c.ActualWidth, Stretch = Stretch.Fill };
+         ImageBehavior.SetAnimatedSource(img, bmi2);
+         c.Children.Add(img);
+         Canvas.SetLeft(img, 0);
+         Canvas.SetTop(img, 0);
+         Canvas.SetZIndex(img, 99999);
+      }
+   }
 }
