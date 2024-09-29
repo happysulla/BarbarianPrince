@@ -14,5 +14,3 @@ NOTE: This game is a digital version of the boardgame from 1981. It replicates t
 
 If a developer, I have placed design documentation in the Document folder that explains architecture. It is written in C# using WPF. If you download and compile, you will need to obtain the NuGet package: WpfAnimiatedGif per the design documentation.
 
-CURRENT STATE: Need to complete End Game, Stats, and Feats.
-
