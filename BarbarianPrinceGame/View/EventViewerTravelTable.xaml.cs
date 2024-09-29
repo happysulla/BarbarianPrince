@@ -1767,6 +1767,7 @@ namespace BarbarianPrince
                if (false == masterList.Contains(adjName))
                {
                   stringBuilder0.Append(adjName);
+                  stringBuilder0.Append(",");
                   masterList.Add(adjName);
                   visited[adjName] = false;
                }

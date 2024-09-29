@@ -1898,7 +1898,19 @@
     <Resource Include="bin\Images\BarbarianPrince.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="bin\Images\Star.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bin\Images\Frown.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bin\Images\Win.gif" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="bin\Images\EndGameSuccess.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bin\Images\EndGameFail.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

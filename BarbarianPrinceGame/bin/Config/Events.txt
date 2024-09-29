@@ -1135,7 +1135,7 @@ e035	"<Bold>e035 Spell of Chaos</Bold>
 <LineBreak/><LineBreak/>You wander all day. You have no traveling events while wandering and will not eat. Click image to continue.
 <LineBreak/>
                       <InlineUIContainer><Image Source='../bin/Images/Idiot.gif' Name='IdiotStart' Height='350'  Width='350'> </Image></InlineUIContainer>"
-e035a	"<Bold>e035a Spell of Chaos Morning</Bold>
+e035a	"<Bold>e035a Spell of Chaos In the Morning</Bold>
 <LineBreak/><LineBreak/>You do not eat an evening meal and begin to suffer the effects of starvation 
  <InlineUIContainer><Button Content='r216' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.  
 <LineBreak/><LineBreak/>Each morning, roll one die and subtact one for the number of days you have been mindless and wandering.
@@ -4944,5 +4944,10 @@ e402	"<Bold>e402 Unable to Pay Wages</Bold>
 <LineBreak/><LineBreak/> Unable to pay wages. Encounter ends. Click image to continue.
 <LineBreak/><InlineUIContainer>
                                 <Image Name='EncounterEnd' Source='../bin/Images/CoinsStackedDeny.gif' Height='75'  Width='75'> </Image></InlineUIContainer> "
-e500	"<Bold>>e500 Click Horde to continue</Bold><LineBreak/>
+e500	"<Bold>e500 Click Horde to continue</Bold>
+<LineBreak/>
 <InlineUIContainer><Image Source='../bin/Images/CoinsFalling.gif' Name='Horde' Height='550' Width='550'></Image></InlineUIContainer>"
+e501	"<Bold>e501 You Won!!!</Bold>
+<LineBreak/><LineBreak/>"
+e502	"<Bold>e502 You Lost</Bold>
+<LineBreak/><LineBreak/>"
