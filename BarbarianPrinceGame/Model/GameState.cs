@@ -1013,7 +1013,7 @@ namespace BarbarianPrince
          {
             gi.IsHighPass = false;
             ITerritory previousTerritory = GetPreviousHex(gi);
-            if (null == previousTerritory)
+            if ( null == previousTerritory)
             {
                Logger.Log(LogEnum.LE_ERROR, "SetSubstitutionEvent(): previousTerritory=null for t=" + gi.Prince.Territory.Name);
                previousTerritory = gi.Prince.Territory;
@@ -1030,7 +1030,7 @@ namespace BarbarianPrince
          gi.RaftStatePrevUndo = gi.RaftState;
          if (false == isTravel)
             gi.RaftState = RaftEnum.RE_NO_RAFT; // SetSubstitutionEvent() and not traveling
-                                                // if traveling and flying into eagle lairs, show e115. If not traveling and in eagle lair, assume already there.
+         // if traveling and flying into eagle lairs, show e115. If not traveling and in eagle lair, assume already there.
          if ((((true == gi.IsPartyFlying()) && (true == isTravel)) || (false == isTravel)) && (true == gi.EagleLairs.Contains(gi.NewHex))) // e115 - return to eagle lair for free food
          {
             gi.EventDisplayed = gi.EventActive = "e115";
@@ -1089,7 +1089,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "AddMapItemMove(): Invalid State Territories.Count=" + mim.BestPath.Territories.Count.ToString() + " for start=" + gi.Prince.TerritoryStarting.ToString() + " for newT=" + newT.Name);
             return false;
          }
-         gi.MapItemMoves.Insert(0, mim); // add at front
+         gi.MapItemMoves.Insert(0,mim); // add at front
          return true;
       }
       protected IMapItem CreateCharacter(IGameInstance gi, string cName)
@@ -1097,113 +1097,113 @@ namespace BarbarianPrince
          ITerritory princeTerritory = gi.Prince.Territory;
          string miName = cName + Utilities.MapItemNum.ToString();
          ++Utilities.MapItemNum;
-         IMapItem character = new MapItem(miName, 1.0, false, false, false, "c84Rat", "c84Rat", gi.Prince.Territory, 1, 1, 0); ; // default character if something does not work
-                                                                                                                                 //------------------------------------------------------------
-         switch (cName)
+         IMapItem character= new MapItem(miName, 1.0, false, false, false, "c84Rat", "c84Rat", gi.Prince.Territory, 1, 1, 0); ; // default character if something does not work
+         //------------------------------------------------------------
+         switch ( cName )
          {
-            case "Amazon": character = new MapItem(miName, 1.0, false, false, false, "c57Amazon", "c57Amazon", princeTerritory, 5, 6, 4); break;
-            case "Bandit": character = new MapItem(miName, 1.0, false, false, false, "c21Bandit", "c21Bandit", princeTerritory, 4, 5, 1); break;
-            case "BanditLeader": character = new MapItem(miName, 1.0, false, false, false, "c85BanditLead", "c85BanditLead", princeTerritory, 6, 6, 15); break;
-            case "Bear": character = new MapItem(miName, 1.0, false, false, false, "c72Bear", "c72Bear", princeTerritory, 5, 5, 0); break;
-            case "Boar": character = new MapItem(miName, 1.0, false, false, false, "c58Boar", "c58Boar", princeTerritory, 5, 8, 0); break;
-            case "Cavalry": character = new MapItem(miName, 1.0, false, false, false, "Cavalry", "Cavalry", princeTerritory, 0, 0, 0); break;
-            case "Cat": character = new MapItem(miName, 1.0, false, false, false, "c59HuntingCat", "c59HuntingCat", princeTerritory, 3, 6, 0); break;
-            case "Constabulary": character = new MapItem(miName, 1.0, false, false, false, "c45Constabulary", "c45Constabulary", princeTerritory, 4, 5, 4); break;
-            case "Croc": character = new MapItem(miName, 1.0, false, false, false, "c73Crocodile", "c73Crocodile", princeTerritory, 6, 4, 0); break;
-            case "Deserter": character = new MapItem(miName, 1.0, false, false, false, "c78Deserter", "c78Deserter", princeTerritory, 4, 4, 2); break;
-            case "Dragon": character = new MapItem(miName, 1.0, false, false, false, "c33Dragon", "c33Dragon", princeTerritory, 11, 10, 0); break;
-            case "Dwarf": character = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 6, 5, 10); break;
-            case "DwarfW": character = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 6, 5, 12); break;
-            case "DwarfLead": character = new MapItem(miName, 1.0, false, false, false, "c68DwarfLead", "c68DwarfLead", princeTerritory, 7, 6, 21); break;
-            case "Eagle": character = new MapItem(miName, 1.0, false, false, false, "c62Eagle", "c62Eagle", princeTerritory, 3, 4, 1); break;
-            case "Elf": character = new MapItem(miName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 4, 5, 7); break;
-            case "ElfAssistant": character = new MapItem(miName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 3, 3, 2); break;
-            case "ElfFriend": character = new MapItem(miName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 4, 4, 7); break;
-            case "ElfWarrior": character = new MapItem(miName, 1.0, false, false, false, "c69ElfLead", "c69ElfLead", princeTerritory, 5, 5, 15); break;
-            case "Falcon": character = new MapItem(miName, 1.0, false, false, false, "c82Falcon", "c82Falcon", princeTerritory, 0, 0, 0); break;
-            case "Farmer": character = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 7, 4, 1); break;
-            case "FarmerW": character = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 7, 4, 2); break;
-            case "FarmerBoy": character = new MapItem(miName, 1.0, false, false, false, "c35FarmerBoy", "c35FarmerBoy", princeTerritory, 4, 3, 0); break;
-            case "FarmerLeader": character = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 3, 2, 2); break;
-            case "FarmerMobLeader": character = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 3, 2, 0); break;
-            case "FarmerMob": character = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 2, 2, 0); break;
-            case "FarmerRetainer": character = new MapItem(miName, 1.0, false, false, false, "c40Retainer", "c40Retainer", princeTerritory, 4, 4, 1); break;
-            case "FarmerRich": character = new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 6, 5, 30); break;
-            case "Freeman": character = new MapItem(miName, 1.0, false, false, false, "c46Freeman", "c46Freeman", princeTerritory, 4, 3, 0); break;
-            case "Ghost": character = new MapItem(miName, 1.0, false, false, false, "c20Ghost", "c20Ghost", princeTerritory, 2, 4, 0); break;
-            case "Giant": character = new MapItem(miName, 1.0, false, false, false, "c61Giant", "c61Giant", princeTerritory, 8, 9, 10); break;
-            case "Goblin": character = new MapItem(miName, 1.0, false, false, false, "c22Goblin", "c22Goblin", princeTerritory, 3, 3, 1); break;
-            case "Golem": character = new MapItem(miName, 1.0, false, false, false, "c27Golem", "c27Golem", princeTerritory, 8, 6, 0); break;
-            case "Griffon": character = new MapItem(miName, 1.0, false, false, false, "c63Griffon", "c63Griffon", princeTerritory, 6, 7, 12); break;
-            case "Guard": character = new MapItem(miName, 1.0, false, false, false, "c66Guard", "c66Guard", princeTerritory, 5, 6, 4); break;
-            case "GuardBody": character = new MapItem(miName, 1.0, false, false, false, "c87BodyGuard", "c87BodyGuard", princeTerritory, 6, 6, 0); break;
-            case "GuardHeir": character = new MapItem(miName, 1.0, false, false, false, "c66Guard", "c66Guard", princeTerritory, 5, 4, 0); break;
-            case "GuardHostile": character = new MapItem(miName, 1.0, false, false, false, "c50GuardHostile", "c50GuardHostile", princeTerritory, 6, 5, 7); break;
-            case "Guardian": character = new MapItem(miName, 1.0, false, false, false, "c28Guardian", "c28Guardian", princeTerritory, 7, 7, 0); break;
-            case "Guide": character = new MapItem(miName, 1.0, false, false, false, "c48Guide", "c48Guide", princeTerritory, 3, 2, 0); break;
-            case "HalflingLead": character = new MapItem(miName, 1.0, false, false, false, "c70HalflingLead", "c70HalflingLead", princeTerritory, 6, 3, 4); break;
-            case "Harpy": character = new MapItem(miName, 1.0, false, false, false, "c83Harpy", "c83Harpy", princeTerritory, 4, 5, 4); break;
-            case "Hawkman": character = new MapItem(miName, 1.0, false, false, false, "c81Hawkman", "c81Hawkman", princeTerritory, 5, 7, 7); break;
-            case "Hobgoblin": character = new MapItem(miName, 1.0, false, false, false, "c23Hobgoblin", "c23Hobgoblin", princeTerritory, 5, 6, 4); break;
-            case "HobgoblinW": character = new MapItem(miName, 1.0, false, false, false, "c23Hobgoblin", "c23Hobgoblin", princeTerritory, 5, 6, 5); break;
-            case "Henchman": character = new MapItem(miName, 1.0, false, false, false, "c49Henchman", "c49Henchman", princeTerritory, 3, 2, 0); break;
-            case "Huldra": character = new MapItem(miName, 1.0, false, false, false, "c89Huldra", "c89Huldra", princeTerritory, 8, 6, 0); break;
-            case "Knight": character = new MapItem(miName, 1.0, false, false, false, "c52Knight", "c52Knight", princeTerritory, 6, 7, 0); break;
-            case "KnightBlack": character = new MapItem(miName, 1.0, false, false, false, "c80BlackKnight", "c80BlackKnight", princeTerritory, 8, 8, 30); break;
-            case "Lancer": character = new MapItem(miName, 1.0, false, false, false, "c47Lancer", "c47Lancer", princeTerritory, 5, 5, 0); break;
-            case "Lizard": character = new MapItem(miName, 1.0, false, false, false, "c67Lizard", "c67Lizard", princeTerritory, 12, 10, 0); break;
-            case "Magician": character = new MapItem(miName, 1.0, false, false, false, "c16Magician", "c16Magician", princeTerritory, 5, 3, 0); break;
-            case "MagicianWeak": character = new MapItem(miName, 1.0, false, false, false, "c16Magician", "c16Magician", princeTerritory, 2, 3, 5); break;
-            case "Mercenary": character = new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", princeTerritory, 4, 5, 4); break;
-            case "MercenaryLead": character = new MapItem(miName, 1.0, false, false, false, "c65MercLead", "c65MercLead", princeTerritory, 6, 6, 50); break;
-            case "Merchant": character = new MapItem(miName, 1.0, false, false, false, "Negotiator1", "c77Merchant", princeTerritory, 3, 2, 5); break;
-            case "Minstrel": character = new MapItem(miName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", princeTerritory, 0, 0, 0); break;
+            case "Amazon": character= new MapItem(miName, 1.0, false, false, false, "c57Amazon", "c57Amazon", princeTerritory, 5, 6, 4); break;
+            case "Bandit": character= new MapItem(miName, 1.0, false, false, false, "c21Bandit", "c21Bandit", princeTerritory, 4, 5, 1); break;
+            case "BanditLeader": character= new MapItem(miName, 1.0, false, false, false, "c85BanditLead", "c85BanditLead", princeTerritory, 6, 6, 15); break;
+            case "Bear": character= new MapItem(miName, 1.0, false, false, false, "c72Bear", "c72Bear", princeTerritory, 5, 5, 0); break;
+            case "Boar": character= new MapItem(miName, 1.0, false, false, false, "c58Boar", "c58Boar", princeTerritory, 5, 8, 0); break;
+            case "Cavalry": character= new MapItem(miName, 1.0, false, false, false, "Cavalry", "Cavalry", princeTerritory, 0, 0, 0); break;
+            case "Cat": character= new MapItem(miName, 1.0, false, false, false, "c59HuntingCat", "c59HuntingCat", princeTerritory, 3, 6, 0); break;
+            case "Constabulary": character= new MapItem(miName, 1.0, false, false, false, "c45Constabulary", "c45Constabulary", princeTerritory, 4, 5, 4); break;
+            case "Croc": character= new MapItem(miName, 1.0, false, false, false, "c73Crocodile", "c73Crocodile", princeTerritory, 6, 4, 0); break;
+            case "Deserter": character= new MapItem(miName, 1.0, false, false, false, "c78Deserter", "c78Deserter", princeTerritory, 4, 4, 2); break;
+            case "Dragon": character= new MapItem(miName, 1.0, false, false, false, "c33Dragon", "c33Dragon", princeTerritory, 11, 10, 0); break;
+            case "Dwarf": character= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 6, 5, 10); break;
+            case "DwarfW": character= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", princeTerritory, 6, 5, 12); break;
+            case "DwarfLead": character= new MapItem(miName, 1.0, false, false, false, "c68DwarfLead", "c68DwarfLead", princeTerritory, 7, 6, 21); break;
+            case "Eagle": character= new MapItem(miName, 1.0, false, false, false, "c62Eagle", "c62Eagle", princeTerritory, 3, 4, 1); break;
+            case "Elf": character= new MapItem(miName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 4, 5, 7); break;
+            case "ElfAssistant": character= new MapItem(miName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 3, 3, 2); break;
+            case "ElfFriend": character= new MapItem(miName, 1.0, false, false, false, "c56Elf", "c56Elf", princeTerritory, 4, 4, 7); break;
+            case "ElfWarrior": character= new MapItem(miName, 1.0, false, false, false, "c69ElfLead", "c69ElfLead", princeTerritory, 5, 5, 15); break;
+            case "Falcon": character= new MapItem(miName, 1.0, false, false, false, "c82Falcon", "c82Falcon", princeTerritory, 0, 0, 0); break;
+            case "Farmer": character= new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 7, 4, 1); break;
+            case "FarmerW": character= new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 7, 4, 2); break;
+            case "FarmerBoy": character= new MapItem(miName, 1.0, false, false, false, "c35FarmerBoy", "c35FarmerBoy", princeTerritory, 4, 3, 0); break;
+            case "FarmerLeader": character= new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 3, 2, 2); break;
+            case "FarmerMobLeader": character= new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 3, 2, 0); break;
+            case "FarmerMob": character= new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 2, 2, 0); break;
+            case "FarmerRetainer": character= new MapItem(miName, 1.0, false, false, false, "c40Retainer", "c40Retainer", princeTerritory, 4, 4, 1); break;
+            case "FarmerRich": character= new MapItem(miName, 1.0, false, false, false, "c17Farmer", "c17Farmer", princeTerritory, 6, 5, 30); break;
+            case "Freeman": character= new MapItem(miName, 1.0, false, false, false, "c46Freeman", "c46Freeman", princeTerritory, 4, 3, 0); break;
+            case "Ghost": character= new MapItem(miName, 1.0, false, false, false, "c20Ghost", "c20Ghost", princeTerritory, 2, 4, 0); break;
+            case "Giant": character= new MapItem(miName, 1.0, false, false, false, "c61Giant", "c61Giant", princeTerritory, 8, 9, 10); break;
+            case "Goblin": character= new MapItem(miName, 1.0, false, false, false, "c22Goblin", "c22Goblin", princeTerritory, 3, 3, 1); break;
+            case "Golem": character= new MapItem(miName, 1.0, false, false, false, "c27Golem", "c27Golem", princeTerritory, 8, 6, 0); break;
+            case "Griffon": character= new MapItem(miName, 1.0, false, false, false, "c63Griffon", "c63Griffon", princeTerritory, 6, 7, 12); break;
+            case "Guard": character= new MapItem(miName, 1.0, false, false, false, "c66Guard", "c66Guard", princeTerritory, 5, 6, 4); break;
+            case "GuardBody": character= new MapItem(miName, 1.0, false, false, false, "c87BodyGuard", "c87BodyGuard", princeTerritory, 6, 6, 0); break;
+            case "GuardHeir": character= new MapItem(miName, 1.0, false, false, false, "c66Guard", "c66Guard", princeTerritory, 5, 4, 0); break;
+            case "GuardHostile": character= new MapItem(miName, 1.0, false, false, false, "c50GuardHostile", "c50GuardHostile", princeTerritory, 6, 5, 7); break;
+            case "Guardian": character= new MapItem(miName, 1.0, false, false, false, "c28Guardian", "c28Guardian", princeTerritory, 7, 7, 0); break;
+            case "Guide": character= new MapItem(miName, 1.0, false, false, false, "c48Guide", "c48Guide", princeTerritory, 3, 2, 0); break;
+            case "HalflingLead": character= new MapItem(miName, 1.0, false, false, false, "c70HalflingLead", "c70HalflingLead", princeTerritory, 6, 3, 4); break;
+            case "Harpy": character= new MapItem(miName, 1.0, false, false, false, "c83Harpy", "c83Harpy", princeTerritory, 4, 5, 4); break;
+            case "Hawkman": character= new MapItem(miName, 1.0, false, false, false, "c81Hawkman", "c81Hawkman", princeTerritory, 5, 7, 7); break;
+            case "Hobgoblin": character= new MapItem(miName, 1.0, false, false, false, "c23Hobgoblin", "c23Hobgoblin", princeTerritory, 5, 6, 4); break;
+            case "HobgoblinW": character= new MapItem(miName, 1.0, false, false, false, "c23Hobgoblin", "c23Hobgoblin", princeTerritory, 5, 6, 5); break;
+            case "Henchman": character= new MapItem(miName, 1.0, false, false, false, "c49Henchman", "c49Henchman", princeTerritory, 3, 2, 0); break;
+            case "Huldra": character= new MapItem(miName, 1.0, false, false, false, "c89Huldra", "c89Huldra", princeTerritory, 8, 6, 0); break;
+            case "Knight": character= new MapItem(miName, 1.0, false, false, false, "c52Knight", "c52Knight", princeTerritory, 6, 7, 0); break;
+            case "KnightBlack": character= new MapItem(miName, 1.0, false, false, false, "c80BlackKnight", "c80BlackKnight", princeTerritory, 8, 8, 30); break;
+            case "Lancer": character= new MapItem(miName, 1.0, false, false, false, "c47Lancer", "c47Lancer", princeTerritory, 5, 5, 0); break;
+            case "Lizard": character= new MapItem(miName, 1.0, false, false, false, "c67Lizard", "c67Lizard", princeTerritory, 12, 10, 0); break;
+            case "Magician": character= new MapItem(miName, 1.0, false, false, false, "c16Magician", "c16Magician", princeTerritory, 5, 3, 0); break;
+            case "MagicianWeak": character= new MapItem(miName, 1.0, false, false, false, "c16Magician", "c16Magician", princeTerritory, 2, 3, 5); break;
+            case "Mercenary": character= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", princeTerritory, 4, 5, 4); break;
+            case "MercenaryLead": character= new MapItem(miName, 1.0, false, false, false, "c65MercLead", "c65MercLead", princeTerritory, 6, 6, 50); break;
+            case "Merchant": character= new MapItem(miName, 1.0, false, false, false, "Negotiator1", "c77Merchant", princeTerritory, 3, 2, 5); break;
+            case "Minstrel": character= new MapItem(miName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", princeTerritory, 0, 0, 0); break;
             case "Mirror":
-               character = new MapItem(gi.Prince);
+               character= new MapItem(gi.Prince);
                character.Name = "Mirror";
                character.TopImageName = "c34PrinceMirror";
                character.BottomImageName = "c34PrinceMirror";
                character.OverlayImageName = "";
                break;
-            case "Monk": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 5, 4, 4); break;
-            case "MonkGuide": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 3, 2, 0); break;
-            case "MonkHermit": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 6, 3, 0); break;
-            case "MonkTraveling": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 3, 2, 4); break;
-            case "MonkWarrior": character = new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 6, 6, 10); break;
-            case "Orc": character = new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 5, 5, 2); break;
-            case "OrcW": character = new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 5, 5, 2); break;
-            case "OrcWeak": character = new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 5, 4, 1); break;
-            case "OrcChief": character = new MapItem(miName, 1.0, false, false, false, "c64OrcChief", "c64OrcChief", princeTerritory, 6, 5, 7); break;
-            case "PatrolMounted": character = new MapItem(miName, 1.0, false, false, false, "c74MountedPatrol", "c74MountedPatrol", princeTerritory, 5, 6, 4); break;
-            case "PatrolMountedLead": character = new MapItem(miName, 1.0, false, false, false, "c75MountedPatrolLead", "c75MountedPatrolLead", princeTerritory, 5, 6, 10); break;
-            case "Priest": character = new MapItem(miName, 1.0, false, false, false, "c14Priest", "c14Priest", princeTerritory, 3, 3, 25); break;
-            case "Porter": character = new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", princeTerritory, 0, 0, 0); break;
-            case "PorterSlave": character = new MapItem(miName, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", princeTerritory, 0, 0, 0); break;
-            case "Reaver": character = new MapItem(miName, 1.0, false, false, false, "C36Reaver", "C36Reaver", princeTerritory, 4, 4, 4); break;
-            case "ReaverBoss": character = new MapItem(miName, 1.0, false, false, false, "C37ReaverBoss", "C37ReaverBoss", princeTerritory, 5, 5, 10); break;
-            case "ReaverLead": character = new MapItem(miName, 1.0, false, false, false, "C37ReaverBoss", "C37ReaverBoss", princeTerritory, 4, 5, 7); break;
-            case "Roc": character = new MapItem(miName, 1.0, false, false, false, "c55Roc", "c55Roc", princeTerritory, 8, 9, 10); break;
-            case "Runaway": character = new MapItem(miName, 1.0, false, false, false, "c09Runaway", "c09Runaway", princeTerritory, 4, 4, 0); break;
-            case "Spectre": character = new MapItem(miName, 1.0, false, false, false, "c25Spectre", "c25Spectre", princeTerritory, 3, 7, 0); break;
-            case "SlaveGirl": character = new MapItem(miName, 1.0, false, false, false, "c41SlaveGirl", "c41SlaveGirl", princeTerritory, 0, 0, 0); break;
-            case "Spider": character = new MapItem(miName, 1.0, false, false, false, "c54Spider", "c54Spider", princeTerritory, 3, 4, 0); break;
-            case "Swordsman": character = new MapItem(miName, 1.0, false, false, false, "c53Swordsman", "c53Swordsman", princeTerritory, 6, 6, 7); break;
-            case "Swordswoman": character = new MapItem(miName, 1.0, false, false, false, "c76Swordswoman", "c76Swordswoman", princeTerritory, 7, 7, 4); break;
-            case "Troll": character = new MapItem(miName, 1.0, false, false, false, "c31Troll", "c31Troll", princeTerritory, 8, 8, 15); break;
-            case "TrollDemi": character = new MapItem(miName, 1.0, false, false, false, "c29DemiTroll", "c29DemiTroll", princeTerritory, 7, 8, 10); break;
-            case "TrueLoveLordsDaughter": character = new MapItem(miName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", princeTerritory, 0, 0, 0); break;
-            case "TrueLovePriestDaughter": character = new MapItem(miName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", princeTerritory, 4, 2, 0); break;
-            case "TrueLoveSlave": character = new MapItem(miName, 1.0, false, false, false, "c44TrueLove", "SlaveWoman", princeTerritory, 4, 2, 0); break;
-            case "TrueLoveSwordwoman": character = new MapItem(miName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", princeTerritory, 7, 7, 4); break;
-            case "TrustedAssistant": character = new MapItem(miName, 1.0, false, false, false, "c51TrustedAssistant", "c51TrustedAssistant", princeTerritory, 4, 4, 0); break;
-            case "Warrior": character = new MapItem(miName, 1.0, false, false, false, "c79Warrior", "c79Warrior", princeTerritory, 6, 7, 0); break;
-            case "WarriorBoy": character = new MapItem(miName, 1.0, false, false, false, "c86WarriorBoy", "c86WarriorBoy", princeTerritory, 7, 5, 0); break;
-            case "WarriorOld": character = new MapItem(miName, 1.0, false, false, false, "c43OldWarrior", "c43OldWarrior", princeTerritory, 0, 0, 0); break;
-            case "Witch": character = new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", princeTerritory, 3, 1, 5); break;
-            case "Wizard": character = new MapItem(miName, 1.0, false, false, false, "c12Wizard", "c12Wizard", princeTerritory, 4, 4, 60); break;
-            case "WHenchman": character = new MapItem(miName, 1.0, false, false, false, "c49Henchman", "c49Henchman", princeTerritory, 4, 5, 4); break;
-            case "Wolf": character = new MapItem(miName, 1.0, false, false, false, "c71Wolf", "c71Wolf", princeTerritory, 3, 3, 0); break;
-            case "Wraith": character = new MapItem(miName, 1.0, false, false, false, "c24Wraith", "c24Wraith", princeTerritory, 9, 6, 0); break;
+            case "Monk": character= new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 5, 4, 4); break;
+            case "MonkGuide": character= new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 3, 2, 0); break;
+            case "MonkHermit": character= new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 6, 3, 0); break;
+            case "MonkTraveling": character= new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 3, 2, 4); break;
+            case "MonkWarrior": character= new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", princeTerritory, 6, 6, 10); break;
+            case "Orc": character= new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 5, 5, 2); break;
+            case "OrcW": character= new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 5, 5, 2); break;
+            case "OrcWeak": character= new MapItem(miName, 1.0, false, false, false, "c30Orc", "c30Orc", princeTerritory, 5, 4, 1); break;
+            case "OrcChief": character= new MapItem(miName, 1.0, false, false, false, "c64OrcChief", "c64OrcChief", princeTerritory, 6, 5, 7); break;
+            case "PatrolMounted": character= new MapItem(miName, 1.0, false, false, false, "c74MountedPatrol", "c74MountedPatrol", princeTerritory, 5, 6, 4); break;
+            case "PatrolMountedLead": character= new MapItem(miName, 1.0, false, false, false, "c75MountedPatrolLead", "c75MountedPatrolLead", princeTerritory, 5, 6, 10); break;
+            case "Priest": character= new MapItem(miName, 1.0, false, false, false, "c14Priest", "c14Priest", princeTerritory, 3, 3, 25); break;
+            case "Porter": character= new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", princeTerritory, 0, 0, 0); break;
+            case "PorterSlave": character= new MapItem(miName, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", princeTerritory, 0, 0, 0); break;
+            case "Reaver": character= new MapItem(miName, 1.0, false, false, false, "C36Reaver", "C36Reaver", princeTerritory, 4, 4, 4); break;
+            case "ReaverBoss": character= new MapItem(miName, 1.0, false, false, false, "C37ReaverBoss", "C37ReaverBoss", princeTerritory, 5, 5, 10); break;
+            case "ReaverLead": character= new MapItem(miName, 1.0, false, false, false, "C37ReaverBoss", "C37ReaverBoss", princeTerritory, 4, 5, 7); break;
+            case "Roc": character= new MapItem(miName, 1.0, false, false, false, "c55Roc", "c55Roc", princeTerritory, 8, 9, 10); break;
+            case "Runaway": character= new MapItem(miName, 1.0, false, false, false, "c09Runaway", "c09Runaway", princeTerritory, 4, 4, 0); break;
+            case "Spectre": character= new MapItem(miName, 1.0, false, false, false, "c25Spectre", "c25Spectre", princeTerritory, 3, 7, 0); break;
+            case "SlaveGirl": character= new MapItem(miName, 1.0, false, false, false, "c41SlaveGirl", "c41SlaveGirl", princeTerritory, 0, 0, 0); break;
+            case "Spider": character= new MapItem(miName, 1.0, false, false, false, "c54Spider", "c54Spider", princeTerritory, 3, 4, 0); break;
+            case "Swordsman": character= new MapItem(miName, 1.0, false, false, false, "c53Swordsman", "c53Swordsman", princeTerritory, 6, 6, 7); break;
+            case "Swordswoman": character= new MapItem(miName, 1.0, false, false, false, "c76Swordswoman", "c76Swordswoman", princeTerritory, 7, 7, 4); break;
+            case "Troll": character= new MapItem(miName, 1.0, false, false, false, "c31Troll", "c31Troll", princeTerritory, 8, 8, 15); break;
+            case "TrollDemi": character= new MapItem(miName, 1.0, false, false, false, "c29DemiTroll", "c29DemiTroll", princeTerritory, 7, 8, 10); break;
+            case "TrueLoveLordsDaughter": character= new MapItem(miName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", princeTerritory, 0, 0, 0); break;
+            case "TrueLovePriestDaughter": character= new MapItem(miName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", princeTerritory, 4, 2, 0); break;
+            case "TrueLoveSlave": character= new MapItem(miName, 1.0, false, false, false, "c44TrueLove", "SlaveWoman", princeTerritory, 4, 2, 0); break;
+            case "TrueLoveSwordwoman": character= new MapItem(miName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", princeTerritory, 7, 7, 4); break;
+            case "TrustedAssistant": character= new MapItem(miName, 1.0, false, false, false, "c51TrustedAssistant", "c51TrustedAssistant", princeTerritory, 4, 4, 0); break;
+            case "Warrior": character= new MapItem(miName, 1.0, false, false, false, "c79Warrior", "c79Warrior", princeTerritory, 6, 7, 0); break;
+            case "WarriorBoy": character= new MapItem(miName, 1.0, false, false, false, "c86WarriorBoy", "c86WarriorBoy", princeTerritory, 7, 5, 0); break;
+            case "WarriorOld": character= new MapItem(miName, 1.0, false, false, false, "c43OldWarrior", "c43OldWarrior", princeTerritory, 0, 0, 0); break;
+            case "Witch": character= new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", princeTerritory, 3, 1, 5); break;
+            case "Wizard": character= new MapItem(miName, 1.0, false, false, false, "c12Wizard", "c12Wizard", princeTerritory, 4, 4, 60); break;
+            case "WHenchman": character= new MapItem(miName, 1.0, false, false, false, "c49Henchman", "c49Henchman", princeTerritory, 4, 5, 4); break;
+            case "Wolf": character= new MapItem(miName, 1.0, false, false, false, "c71Wolf", "c71Wolf", princeTerritory, 3, 3, 0); break;
+            case "Wraith": character= new MapItem(miName, 1.0, false, false, false, "c24Wraith", "c24Wraith", princeTerritory, 9, 6, 0); break;
             default:
                Logger.Log(LogEnum.LE_ERROR, "CreateCharacter(): Reached default character=" + cName);
                break;
@@ -1257,7 +1257,7 @@ namespace BarbarianPrince
       protected bool LoadGame(ref IGameInstance gi, ref GameAction action)
       {
          gi.Stacks.Clear();
-         if ((true == gi.IsJailed) || (true == gi.IsDungeon) || (true == gi.IsEnslaved))
+         if ( (true == gi.IsJailed) || (true == gi.IsDungeon) || (true == gi.IsEnslaved) )
          {
             gi.GamePhase = GamePhase.Campfire;
             gi.EventDisplayed = gi.EventActive = "e203f";
@@ -1289,7 +1289,7 @@ namespace BarbarianPrince
          gi.SunriseChoice = GamePhase.StartGame;
          gi.GamePhase = GamePhase.SunriseChoice;
          gi.NewHex = gi.Prince.Territory;
-         if ((RaftEnum.RE_RAFT_CHOSEN == gi.RaftStatePrevUndo) || (RaftEnum.RE_RAFT_SHOWN == gi.RaftStatePrevUndo))
+         if( (RaftEnum.RE_RAFT_CHOSEN == gi.RaftStatePrevUndo) || (RaftEnum.RE_RAFT_SHOWN == gi.RaftStatePrevUndo) )
             gi.RaftState = RaftEnum.RE_RAFT_SHOWN;
          gi.EventDisplayed = gi.EventActive = "e203";
          Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "UndoCommand():  gi.MapItemMoves.Clear()  a=" + action.ToString());
@@ -1444,7 +1444,7 @@ namespace BarbarianPrince
             case 6: starting = Territory.theTerritories.Find("1801"); break;
             default: Logger.Log(LogEnum.LE_ERROR, "SetStartingLocation() reached default dr=" + dieRoll.ToString()); return false;
          }
-         if (false == SetStartingLocationOption(gi, ref starting))
+         if( false == SetStartingLocationOption(gi, ref starting) )
          {
             Logger.Log(LogEnum.LE_ERROR, "SetStartingLocation()  SetStartingLocationOption() returned false");
             return false;
@@ -1584,7 +1584,7 @@ namespace BarbarianPrince
          }
          if (true == option.IsEnabled)  // If this is a custom party, choose based on checked boxes in options
          {
-            for (int i = 0; i < Options.MEMBER_COUNT; i++)
+            for (int i= 0; i < Options.MEMBER_COUNT; i++)
             {
                string memberToAdd = Options.theDefaults[i];
                option = options.Find(memberToAdd);
@@ -1872,7 +1872,7 @@ namespace BarbarianPrince
                break;
             case "TrueLove":
                {
-                  IMapItem trueLove = CreateCharacter(gi, "TrueLovePriestDaughter");
+                  IMapItem trueLove = CreateCharacter(gi, "TrueLovePriestDaughter"); 
                   trueLove.Food = Utilities.RandomGenerator.Next(5);
                   trueLove.Coin = Utilities.RandomGenerator.Next(20);
                   gi.AddCompanion(trueLove);
@@ -1943,7 +1943,7 @@ namespace BarbarianPrince
             List<ITerritory> leftEdges = new List<ITerritory>();
             foreach (ITerritory t in Territory.theTerritories)
             {
-               if ("offboard" != t.Name)
+               if( "offboard" !=  t.Name)
                {
                   int colNum = Int32.Parse(t.Name.Substring(0, 2)); // (start index, length)
                   if (01 == colNum)
@@ -2177,8 +2177,7 @@ namespace BarbarianPrince
       private void AddStartingTestingOptions(IGameInstance gi)
       {
          //gi.Days = 40;
-         //gi.Prince.SetWounds(7, 0);
-         //gi.Prince.Coin = 600;
+         //gi.Prince.SetWounds(5, 0);
          //gi.Prince.PlagueDustWound = 1; 
          //gi.Prince.IsResurrected = true;
          //gi.AddUnitTestTiredMount(myPrince);
@@ -2189,7 +2188,7 @@ namespace BarbarianPrince
          //gi.AddSpecialItem(SpecialEnum.DragonEye);
          //gi.AddSpecialItem(SpecialEnum.RocBeak);
          //gi.AddSpecialItem(SpecialEnum.GriffonClaws);
-         //gi.Prince.AddSpecialItemToShare(SpecialEnum.Foulbane);
+         gi.Prince.AddSpecialItemToShare(SpecialEnum.Foulbane);
          //gi.AddSpecialItem(SpecialEnum.HealingPoition);
          //gi.AddSpecialItem(SpecialEnum.CurePoisonVial);
          //gi.AddSpecialItem(SpecialEnum.EnduranceSash);
@@ -2309,7 +2308,7 @@ namespace BarbarianPrince
       public override string PerformAction(ref IGameInstance gi, ref GameAction action, int dieRoll)
       {
          String returnStatus = "OK";
-         if (false == gi.IsNewDayChoiceMade)
+         if(false == gi.IsNewDayChoiceMade)
          {
             if (false == ResetDayAfterChoice(gi))
             {
@@ -2323,334 +2322,331 @@ namespace BarbarianPrince
          GameAction previousDieAction = gi.DieRollAction;
          string previousEvent = gi.EventActive;
          ITerritory princeTerritory = gi.Prince.Territory;
-         if( false == PerformEndCheck(gi, ref action))
+         switch (action)
          {
-            switch (action)
-            {
-               case GameAction.ShowInventory:
-               case GameAction.ShowAllRivers:
-               case GameAction.ShowRuleListing:
-               case GameAction.ShowEventListing:
-               case GameAction.ShowPartyPath:
-               case GameAction.ShowAboutDialog:
-               case GameAction.UpdateEventViewerDisplay:
-                  break;
-               case GameAction.UpdateEventViewerActive:
-                  gi.EventDisplayed = gi.EventActive;
-                  break;
-               case GameAction.UpdateUndo:
-                  UndoCommand(ref gi, ref action);
-                  break;
-               case GameAction.EndGameClose:
-                  gi.GamePhase = GamePhase.EndGame;
-                  break;
-               case GameAction.UpdateGameOptions:
-                  break;
-               case GameAction.UpdateLoadingGame:
-                  if (false == LoadGame(ref gi, ref action))
+            case GameAction.ShowInventory:
+            case GameAction.ShowAllRivers:
+            case GameAction.ShowRuleListing:
+            case GameAction.ShowEventListing:
+            case GameAction.ShowPartyPath:
+            case GameAction.ShowAboutDialog:
+            case GameAction.UpdateEventViewerDisplay:
+               break;
+            case GameAction.UpdateEventViewerActive:
+               gi.EventDisplayed = gi.EventActive;
+               break;
+            case GameAction.UpdateUndo:
+               UndoCommand(ref gi, ref action);
+               break;
+            case GameAction.EndGameClose:
+               gi.GamePhase = GamePhase.EndGame;
+               break;
+            case GameAction.UpdateGameOptions:
+               break;
+            case GameAction.UpdateLoadingGame:
+               if( false == LoadGame(ref gi, ref action))
+               {
+                  returnStatus = "LoadGame() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
+               }
+               break;
+            case GameAction.E079HeavyRainsStartDayCheck:
+               gi.IsAirborne = false;
+               gi.IsAirborneEnd = false;
+               gi.IsShortHop = false;
+               //----------------------------
+               gi.SunriseChoice = GamePhase.Travel;
+               gi.GamePhase = GamePhase.Encounter;
+               gi.EventAfterRedistribute = gi.EventDisplayed = gi.EventActive = "e079b";
+               gi.IsHeavyRainNextDay = true;
+               break;
+            case GameAction.E079HeavyRainsStartDayCheckInAir:
+               gi.IsAirborne = true;
+               gi.IsAirborneEnd = false;
+               gi.IsShortHop = false;
+               //----------------------------
+               gi.SunriseChoice = GamePhase.Travel;
+               gi.GamePhase = GamePhase.Encounter;
+               gi.EventAfterRedistribute = gi.EventDisplayed = gi.EventActive = "e079b";
+               gi.IsHeavyRainNextDay = true;
+               break;
+            case GameAction.E079HeavyRainsDismount:
+               gi.IsAirborne = false;
+               gi.IsHeavyRainDismount = true;
+               foreach (IMapItem mi in gi.PartyMembers)
+               {
+                  if (null != mi.Rider) // mi = griffon/harpy
                   {
-                     returnStatus = "LoadGame() returned false";
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
+                     mi.Rider.Mounts.Remove(mi);  // Griffon/Harpy Rider removed as mount
+                     mi.Rider = null;          
                   }
-                  break;
-               case GameAction.E079HeavyRainsStartDayCheck:
-                  gi.IsAirborne = false;
-                  gi.IsAirborneEnd = false;
-                  gi.IsShortHop = false;
-                  //----------------------------
-                  gi.SunriseChoice = GamePhase.Travel;
-                  gi.GamePhase = GamePhase.Encounter;
-                  gi.EventAfterRedistribute = gi.EventDisplayed = gi.EventActive = "e079b";
-                  gi.IsHeavyRainNextDay = true;
-                  break;
-               case GameAction.E079HeavyRainsStartDayCheckInAir:
-                  gi.IsAirborne = true;
-                  gi.IsAirborneEnd = false;
-                  gi.IsShortHop = false;
-                  //----------------------------
-                  gi.SunriseChoice = GamePhase.Travel;
-                  gi.GamePhase = GamePhase.Encounter;
-                  gi.EventAfterRedistribute = gi.EventDisplayed = gi.EventActive = "e079b";
-                  gi.IsHeavyRainNextDay = true;
-                  break;
-               case GameAction.E079HeavyRainsDismount:
-                  gi.IsAirborne = false;
-                  gi.IsHeavyRainDismount = true;
+                  if (true == mi.IsFlyer()) // flyers do not need to dismount
+                     continue;
+                  mi.IsRiding = false;
+                  mi.IsFlying = false;
+               }
+               action = GameAction.UpdateEventViewerDisplay;
+               break;
+            case GameAction.E144RescueHeir:
+               ResetDayForNonTravelChoice(gi, action);
+               gi.NumMembersBeingFollowed = 0;
+               gi.EventDisplayed = gi.EventActive = "e144a"; // next screen to show
+               gi.SunriseChoice = gi.GamePhase = GamePhase.Encounter;
+               gi.DieRollAction = GameAction.DieRollActionNone;
+               break;
+            case GameAction.E144SneakAttack:
+               ResetDayForNonTravelChoice(gi, action);
+               gi.NumMembersBeingFollowed = 0;
+               gi.EventDisplayed = gi.EventActive = "e144i"; // next screen to show
+               gi.SunriseChoice = gi.GamePhase = GamePhase.Encounter;
+               gi.DieRollAction = GameAction.DieRollActionNone;
+               break;
+            case GameAction.E146StealGems:
+               ResetDayForNonTravelChoice(gi, action);
+               gi.NumMembersBeingFollowed = 0;
+               gi.EventDisplayed = gi.EventActive = "e146a"; // next screen to show
+               gi.SunriseChoice = gi.GamePhase = GamePhase.Encounter;
+               gi.DieRollAction = GameAction.DieRollActionNone;
+               break;
+            case GameAction.RestEncounterCheck:
+               ResetDayForNonTravelChoice(gi, action);
+               gi.NumMembersBeingFollowed = 0;
+               gi.SunriseChoice = gi.GamePhase = GamePhase.Rest;
+               if (true == gi.IsInStructure(princeTerritory))
+               {
                   foreach (IMapItem mi in gi.PartyMembers)
                   {
-                     if (null != mi.Rider) // mi = griffon/harpy
-                     {
-                        mi.Rider.Mounts.Remove(mi);  // Griffon/Harpy Rider removed as mount
-                        mi.Rider = null;
-                     }
-                     if (true == mi.IsFlyer()) // flyers do not need to dismount
-                        continue;
-                     mi.IsRiding = false;
-                     mi.IsFlying = false;
+                     mi.HealWounds(1, 0); // RestEncounterCheck - InStructure()=true
+                     mi.IsExhausted = false;
                   }
-                  action = GameAction.UpdateEventViewerDisplay;
-                  break;
-               case GameAction.E144RescueHeir:
-                  ResetDayForNonTravelChoice(gi, action);
-                  gi.NumMembersBeingFollowed = 0;
-                  gi.EventDisplayed = gi.EventActive = "e144a"; // next screen to show
-                  gi.SunriseChoice = gi.GamePhase = GamePhase.Encounter;
-                  gi.DieRollAction = GameAction.DieRollActionNone;
-                  break;
-               case GameAction.E144SneakAttack:
-                  ResetDayForNonTravelChoice(gi, action);
-                  gi.NumMembersBeingFollowed = 0;
-                  gi.EventDisplayed = gi.EventActive = "e144i"; // next screen to show
-                  gi.SunriseChoice = gi.GamePhase = GamePhase.Encounter;
-                  gi.DieRollAction = GameAction.DieRollActionNone;
-                  break;
-               case GameAction.E146StealGems:
-                  ResetDayForNonTravelChoice(gi, action);
-                  gi.NumMembersBeingFollowed = 0;
-                  gi.EventDisplayed = gi.EventActive = "e146a"; // next screen to show
-                  gi.SunriseChoice = gi.GamePhase = GamePhase.Encounter;
-                  gi.DieRollAction = GameAction.DieRollActionNone;
-                  break;
-               case GameAction.RestEncounterCheck:
-                  ResetDayForNonTravelChoice(gi, action);
-                  gi.NumMembersBeingFollowed = 0;
-                  gi.SunriseChoice = gi.GamePhase = GamePhase.Rest;
-                  if (true == gi.IsInStructure(princeTerritory))
+                  if (false == SetHuntState(gi, ref action)) // Resting in same hex
                   {
-                     foreach (IMapItem mi in gi.PartyMembers)
-                     {
-                        mi.HealWounds(1, 0); // RestEncounterCheck - InStructure()=true
-                        mi.IsExhausted = false;
-                     }
-                     if (false == SetHuntState(gi, ref action)) // Resting in same hex
-                     {
-                        returnStatus = "SetHuntState() returned false";
-                        Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
-                     }
-                  }
-                  else // might have a travel encounter
-                  {
-                     action = GameAction.TravelLostCheck;
-                     gi.DieRollAction = GameAction.DieRollActionNone;
-                     Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateSunriseChoice.PerformAction(RestEncounterCheck): gi.MapItemMoves.Clear()");
-                     gi.MapItemMoves.Clear();
-                     MapItemMove mim = new MapItemMove(Territory.theTerritories, gi.Prince, princeTerritory);   // Travel to same hex if rest encounter
-                     if ((0 == mim.BestPath.Territories.Count) || (null == mim.NewTerritory))
-                     {
-                        returnStatus = "Unable to Find Path";
-                        Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
-                     }
-                     gi.MapItemMoves.Add(mim);
-                     Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateSunriseChoice.PerformAction(RestEncounterCheck): oT=" + princeTerritory.Name + " nT=" + mim.NewTerritory.Name);
-                  }
-                  break;
-               case GameAction.Travel:
-                  Logger.Log(LogEnum.LE_UNDO_COMMAND, "GameStateSunriseChoice.PerformAction(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->true  a=" + action.ToString());
-                  gi.IsUndoCommandAvailable = true;
-                  TravelAction(gi, ref action); // GameAction.Travel
-                  break;
-               case GameAction.TravelAir:
-                  gi.IsAirborne = true;
-                  gi.IsAirborneEnd = false;
-                  gi.IsShortHop = false;
-                  gi.RaftStatePrevUndo = gi.RaftState;
-                  gi.RaftState = RaftEnum.RE_NO_RAFT;    // e122
-                  Logger.Log(LogEnum.LE_UNDO_COMMAND, "GameStateSunriseChoice.PerformAction(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->true  a=" + action.ToString());
-                  gi.IsUndoCommandAvailable = true;
-                  if (true == gi.PartyReadyToFly()) // mount to fly returns false if anybody is left or possessions are left
-                  {
-                     TravelAction(gi, ref action); // GameAction.TravelAir
-                  }
-                  else
-                  {
-                     gi.EventAfterRedistribute = "";
-                     gi.DieRollAction = GameAction.DieRollActionNone;
-                     action = GameAction.TravelAirRedistribute;
-                  }
-                  break;
-               case GameAction.TransportRedistributeEnd:
-                  Logger.Log(LogEnum.LE_UNDO_COMMAND, "GameStateSunriseChoice.PerformAction(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->false for a=" + action.ToString());
-                  gi.IsUndoCommandAvailable = false; // cannot undo after redistribute happens
-                  if (false == gi.PartyReadyToFly()) // mount to fly returns false if anybody is left or possessions are left
-                  {
-                     gi.IsAirborne = false;
-                     returnStatus = "gi.PartyReadyToFly() returned false for " + action.ToString();
+                     returnStatus = "SetHuntState() returned false";
                      Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
                   }
-                  else
-                  {
-                     TravelAction(gi, ref action); // GameAction.TransportRedistributeEnd
-                  }
-                  break;
-               case GameAction.SeekNews:
-                  ResetDayForNonTravelChoice(gi, action);
-                  gi.NumMembersBeingFollowed = 0;
-                  gi.EventDisplayed = gi.EventActive = "e209"; // next screen to show
-                  gi.SunriseChoice = gi.GamePhase = GamePhase.SeekNews;
+               }
+               else // might have a travel encounter
+               {
+                  action = GameAction.TravelLostCheck;
                   gi.DieRollAction = GameAction.DieRollActionNone;
-                  break;
-               case GameAction.SeekHire:
-                  ResetDayForNonTravelChoice(gi, action);
-                  gi.NumMembersBeingFollowed = 0;
-                  gi.SunriseChoice = GamePhase.SeekHire;
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_HIRE));
-                  gi.EventDisplayed = gi.EventActive = "e210"; // next screen to show
-                  gi.GamePhase = GamePhase.Encounter;
-                  gi.DieRollAction = GameAction.EncounterRoll;
-                  break;
-               case GameAction.SeekAudience:
-                  ResetDayForNonTravelChoice(gi, action);
-                  gi.NumMembersBeingFollowed = 0;
-                  gi.SunriseChoice = GamePhase.SeekAudience;
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_AUDIENCE));
-                  if (true == gi.IsInTown(princeTerritory))
+                  Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateSunriseChoice.PerformAction(RestEncounterCheck): gi.MapItemMoves.Clear()");
+                  gi.MapItemMoves.Clear();
+                  MapItemMove mim = new MapItemMove(Territory.theTerritories, gi.Prince, princeTerritory);   // Travel to same hex if rest encounter
+                  if ((0 == mim.BestPath.Territories.Count) || (null == mim.NewTerritory))
                   {
-                     gi.EventDisplayed = gi.EventActive = "e211a";
-                  }
-                  else if (true == gi.IsInTemple(princeTerritory))
-                  {
-                     gi.EventStart = gi.EventDisplayed = gi.EventActive = "e211b";
-                     if (0 < gi.ChagaDrugCount)
-                        gi.EventDisplayed = gi.EventActive = "e143a";
-                  }
-                  else if (true == gi.IsInCastle(princeTerritory))
-                  {
-                     if ("1212" == princeTerritory.Name)
-                     {
-                        if (true == gi.IsInMapItems("WarriorBoy"))
-                           gi.EventStart = gi.EventDisplayed = gi.EventActive = "e211g";
-                        else
-                           gi.EventStart = gi.EventDisplayed = gi.EventActive = "e211c";
-                     }
-                     else if ("0323" == princeTerritory.Name)
-                     {
-                        gi.EventStart = gi.EventDisplayed = gi.EventActive = "e211d";
-                     }
-                     else if ("1923" == princeTerritory.Name)
-                     {
-                        gi.EventStart = gi.EventDisplayed = gi.EventActive = "e211e";
-                     }
-                     else if (true == gi.DwarvenMines.Contains(princeTerritory))
-                     {
-                        gi.EventStart = gi.EventDisplayed = gi.EventActive = "e211f";
-                     }
-                     else
-                     {
-                        gi.EventDisplayed = gi.EventActive = "e211a"; // treat audience in other castles as town audience
-                     }
-                  }
-                  else
-                  {
-                     returnStatus = "Reached Default ae=" + action.ToString() + " t=" + princeTerritory.ToString();
+                     returnStatus = "Unable to Find Path";
                      Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
                   }
-                  gi.GamePhase = GamePhase.Encounter;
-                  gi.DieRollAction = GameAction.EncounterRoll;
-                  break;
-               case GameAction.SeekOffering:
-                  ResetDayForNonTravelChoice(gi, action);
-                  gi.NumMembersBeingFollowed = 0;
-                  gi.SunriseChoice = GamePhase.SeekOffering;
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_OFFERING));
-                  gi.ReduceCoins(1); // must spend one gold to make offering
-                  gi.EventStart = gi.EventDisplayed = gi.EventActive = "e212";
+                  gi.MapItemMoves.Add(mim);
+                  Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateSunriseChoice.PerformAction(RestEncounterCheck): oT=" + princeTerritory.Name + " nT=" + mim.NewTerritory.Name);
+               }
+               break;
+            case GameAction.Travel:
+               Logger.Log(LogEnum.LE_UNDO_COMMAND, "GameStateSunriseChoice.PerformAction(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->true  a=" + action.ToString());
+               gi.IsUndoCommandAvailable = true;
+               TravelAction(gi, ref action); // GameAction.Travel
+               break;
+            case GameAction.TravelAir:
+               gi.IsAirborne = true;
+               gi.IsAirborneEnd = false;
+               gi.IsShortHop = false;
+               gi.RaftStatePrevUndo = gi.RaftState;
+               gi.RaftState = RaftEnum.RE_NO_RAFT;    // e122
+               Logger.Log(LogEnum.LE_UNDO_COMMAND, "GameStateSunriseChoice.PerformAction(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->true  a=" + action.ToString());
+               gi.IsUndoCommandAvailable = true;
+               if ( true == gi.PartyReadyToFly()) // mount to fly returns false if anybody is left or possessions are left
+               {
+                  TravelAction(gi, ref action); // GameAction.TravelAir
+               }
+               else
+               {
+                  gi.EventAfterRedistribute = "";
+                  gi.DieRollAction = GameAction.DieRollActionNone;
+                  action = GameAction.TravelAirRedistribute;
+               }
+               break;
+            case GameAction.TransportRedistributeEnd:
+               Logger.Log(LogEnum.LE_UNDO_COMMAND, "GameStateSunriseChoice.PerformAction(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->false for a=" + action.ToString());
+               gi.IsUndoCommandAvailable = false; // cannot undo after redistribute happens
+               if (false == gi.PartyReadyToFly()) // mount to fly returns false if anybody is left or possessions are left
+               {
+                  gi.IsAirborne = false;
+                  returnStatus = "gi.PartyReadyToFly() returned false for " + action.ToString();
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  TravelAction(gi, ref action); // GameAction.TransportRedistributeEnd
+               }
+               break;
+            case GameAction.SeekNews:
+               ResetDayForNonTravelChoice(gi, action);
+               gi.NumMembersBeingFollowed = 0;
+               gi.EventDisplayed = gi.EventActive = "e209"; // next screen to show
+               gi.SunriseChoice = gi.GamePhase = GamePhase.SeekNews;
+               gi.DieRollAction = GameAction.DieRollActionNone;
+               break;
+            case GameAction.SeekHire:
+               ResetDayForNonTravelChoice(gi, action);
+               gi.NumMembersBeingFollowed = 0;
+               gi.SunriseChoice = GamePhase.SeekHire;
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_HIRE));
+               gi.EventDisplayed = gi.EventActive = "e210"; // next screen to show
+               gi.GamePhase = GamePhase.Encounter;
+               gi.DieRollAction = GameAction.EncounterRoll;
+               break;
+            case GameAction.SeekAudience:
+               ResetDayForNonTravelChoice(gi, action);
+               gi.NumMembersBeingFollowed = 0;
+               gi.SunriseChoice = GamePhase.SeekAudience;
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_AUDIENCE));
+               if (true == gi.IsInTown(princeTerritory))
+               {
+                  gi.EventDisplayed = gi.EventActive = "e211a";
+               }
+               else if (true == gi.IsInTemple(princeTerritory))
+               {
+                  gi.EventStart = gi.EventDisplayed = gi.EventActive = "e211b";
                   if (0 < gi.ChagaDrugCount)
                      gi.EventDisplayed = gi.EventActive = "e143a";
-                  gi.GamePhase = GamePhase.Encounter;
-                  gi.DieRollAction = GameAction.EncounterRoll;
-                  break;
-               case GameAction.SearchRuins:
-                  gi.ProcessIncapacitedPartyMembers("e134");
-                  ResetDayForNonTravelChoice(gi, action);
-                  gi.NumMembersBeingFollowed = 0;
-                  gi.SunriseChoice = GamePhase.SearchRuins;
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_SEARCH_RUINS));
-                  if (true == gi.RuinsUnstable.Contains(princeTerritory)) // once a ruins is discovered to be unstable, it is always unstable
+               }
+               else if (true == gi.IsInCastle(princeTerritory))
+               {
+                  if ("1212" == princeTerritory.Name)
                   {
-                     gi.EventDisplayed = gi.EventActive = "e134";
-                     gi.GamePhase = GamePhase.Encounter;
-                     gi.DieRollAction = GameAction.EncounterRoll;
+                     if( true == gi.IsInMapItems("WarriorBoy"))
+                        gi.EventStart = gi.EventDisplayed = gi.EventActive = "e211g";
+                     else
+                        gi.EventStart = gi.EventDisplayed = gi.EventActive = "e211c";
+                  }
+                  else if ("0323" == princeTerritory.Name)
+                  {
+                     gi.EventStart = gi.EventDisplayed = gi.EventActive = "e211d";
+                  }
+                  else if ("1923" == princeTerritory.Name)
+                  {
+                     gi.EventStart = gi.EventDisplayed = gi.EventActive = "e211e";
+                  }
+                  else if (true == gi.DwarvenMines.Contains(princeTerritory))
+                  {
+                     gi.EventStart = gi.EventDisplayed = gi.EventActive = "e211f";
                   }
                   else
                   {
-                     gi.EventDisplayed = gi.EventActive = "e208";
-                     gi.GamePhase = GamePhase.Encounter;
-                     gi.DieRollAction = GameAction.EncounterRoll;
+                     gi.EventDisplayed = gi.EventActive = "e211a"; // treat audience in other castles as town audience
                   }
-                  break;
-               case GameAction.SearchCacheCheck:
-                  ResetDayForNonTravelChoice(gi, action);
-                  gi.NumMembersBeingFollowed = 0;
-                  gi.SunriseChoice = gi.GamePhase = GamePhase.SearchCache;
-                  action = GameAction.TravelLostCheck;
-                  gi.DieRollAction = GameAction.DieRollActionNone;
-                  Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateSunriseChoice.PerformAction(SearchCacheCheck): gi.MapItemMoves.Clear()");
-                  gi.MapItemMoves.Clear();
-                  MapItemMove mimSearch = new MapItemMove(Territory.theTerritories, gi.Prince, princeTerritory);   // Travel to same hex if search cache encounter
-                  if ((0 == mimSearch.BestPath.Territories.Count) || (null == mimSearch.NewTerritory))
-                  {
-                     returnStatus = "Unable to Find Path";
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
-                  }
-                  gi.MapItemMoves.Add(mimSearch);
-                  Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateSunriseChoice.PerformAction(SearchCacheCheck): oT=" + princeTerritory.Name + " nT=" + mimSearch.NewTerritory.Name);
-                  break;
-               case GameAction.SearchTreasure:
-                  ResetDayForNonTravelChoice(gi, action);
-                  gi.NumMembersBeingFollowed = 0;
-                  gi.SunriseChoice = gi.GamePhase = GamePhase.SearchTreasure;
-                  action = GameAction.TravelLostCheck;
-                  gi.DieRollAction = GameAction.DieRollActionNone;
-                  Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateSunriseChoice.PerformAction(SearchTreasure): gi.MapItemMoves.Clear()");
-                  gi.MapItemMoves.Clear();
-                  MapItemMove mimSearch1 = new MapItemMove(Territory.theTerritories, gi.Prince, princeTerritory);   // Travel to same hex if search treasure
-                  if ((0 == mimSearch1.BestPath.Territories.Count) || (null == mimSearch1.NewTerritory))
-                  {
-                     returnStatus = "Unable to Find Path";
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
-                  }
-                  gi.MapItemMoves.Add(mimSearch1);
-                  Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateSunriseChoice.PerformAction(SearchTreasure): oT=" + princeTerritory.Name + " nT=" + mimSearch1.NewTerritory.Name);
-                  break;
-               case GameAction.ArchTravel:
-                  ResetDayForNonTravelChoice(gi, action);
-                  gi.NumMembersBeingFollowed = 0;
-                  gi.SunriseChoice = GamePhase.Travel;
+               }
+               else
+               {
+                  returnStatus = "Reached Default ae=" + action.ToString() + " t=" + princeTerritory.ToString();
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
+               }
+               gi.GamePhase = GamePhase.Encounter;
+               gi.DieRollAction = GameAction.EncounterRoll;
+               break;
+            case GameAction.SeekOffering:
+               ResetDayForNonTravelChoice(gi, action);
+               gi.NumMembersBeingFollowed = 0;
+               gi.SunriseChoice = GamePhase.SeekOffering;
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_OFFERING));
+               gi.ReduceCoins(1); // must spend one gold to make offering
+               gi.EventStart = gi.EventDisplayed = gi.EventActive = "e212";
+               if (0 < gi.ChagaDrugCount)
+                  gi.EventDisplayed = gi.EventActive = "e143a";
+               gi.GamePhase = GamePhase.Encounter;
+               gi.DieRollAction = GameAction.EncounterRoll;
+               break;
+            case GameAction.SearchRuins:
+               gi.ProcessIncapacitedPartyMembers("e134");
+               ResetDayForNonTravelChoice(gi, action);
+               gi.NumMembersBeingFollowed = 0;
+               gi.SunriseChoice = GamePhase.SearchRuins;
+               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_SEARCH_RUINS));
+               if (true == gi.RuinsUnstable.Contains(princeTerritory)) // once a ruins is discovered to be unstable, it is always unstable
+               {
+                  gi.EventDisplayed = gi.EventActive = "e134";
                   gi.GamePhase = GamePhase.Encounter;
-                  gi.EventDisplayed = gi.EventActive = "e045b";
                   gi.DieRollAction = GameAction.EncounterRoll;
-                  action = GameAction.UpdateEventViewerActive;
-                  break;
-               case GameAction.EncounterFollow:
-                  Logger.Log(LogEnum.LE_UNDO_COMMAND, "GameStateSunriseChoice.PerformAction(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->true for a=" + action.ToString());
-                  gi.IsUndoCommandAvailable = true;
-                  gi.IsBadGoing = false;                 // e078
-                  gi.IsHeavyRain = false;                // e079
-                  gi.IsFloodContinue = false;            // e092
-                  gi.IsEagleHunt = false;                // e114
-                  gi.RaftStatePrevUndo = gi.RaftState;
-                  gi.RaftState = RaftEnum.RE_NO_RAFT;    // e122
-                  gi.IsCavalryEscort = false;            // e151
-                  if (false == EncounterFollow(gi, ref action)) // GameStateSunriseChoice
-                  {
-                     returnStatus = "EncounterFollow() returned false";
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
-                  }
-                  gi.SunriseChoice = gi.GamePhase = GamePhase.Encounter;
-                  gi.EventStart = gi.EventDisplayed = gi.EventActive = "e072d"; // follow elven band
+               }
+               else
+               {
+                  gi.EventDisplayed = gi.EventActive = "e208";
+                  gi.GamePhase = GamePhase.Encounter;
                   gi.DieRollAction = GameAction.EncounterRoll;
-                  //-------------------------------------------
-                  gi.EncounteredMembers.Clear();
-                  for (int i = 0; i < gi.NumMembersBeingFollowed; ++i) // if following elves, repopulate EncounterMembers container
-                  {
-                     IMapItem elf = CreateCharacter(gi, "Elf");
-                     gi.EncounteredMembers.Add(elf);
-                  }
-                  break;
-               default:
-                  returnStatus = "Reached Default ERROR with a=" + action.ToString();
-                  break;
-            }
+               }
+               break;
+            case GameAction.SearchCacheCheck:
+               ResetDayForNonTravelChoice(gi, action);
+               gi.NumMembersBeingFollowed = 0;
+               gi.SunriseChoice = gi.GamePhase = GamePhase.SearchCache;
+               action = GameAction.TravelLostCheck;
+               gi.DieRollAction = GameAction.DieRollActionNone;
+               Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateSunriseChoice.PerformAction(SearchCacheCheck): gi.MapItemMoves.Clear()");
+               gi.MapItemMoves.Clear();
+               MapItemMove mimSearch = new MapItemMove(Territory.theTerritories, gi.Prince, princeTerritory);   // Travel to same hex if search cache encounter
+               if ((0 == mimSearch.BestPath.Territories.Count) || (null == mimSearch.NewTerritory))
+               {
+                  returnStatus = "Unable to Find Path";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
+               }
+               gi.MapItemMoves.Add(mimSearch);
+               Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateSunriseChoice.PerformAction(SearchCacheCheck): oT=" + princeTerritory.Name + " nT=" + mimSearch.NewTerritory.Name);
+               break;
+            case GameAction.SearchTreasure:
+               ResetDayForNonTravelChoice(gi, action);
+               gi.NumMembersBeingFollowed = 0;
+               gi.SunriseChoice = gi.GamePhase = GamePhase.SearchTreasure;
+               action = GameAction.TravelLostCheck;
+               gi.DieRollAction = GameAction.DieRollActionNone;
+               Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateSunriseChoice.PerformAction(SearchTreasure): gi.MapItemMoves.Clear()");
+               gi.MapItemMoves.Clear();
+               MapItemMove mimSearch1 = new MapItemMove(Territory.theTerritories, gi.Prince, princeTerritory);   // Travel to same hex if search treasure
+               if ((0 == mimSearch1.BestPath.Territories.Count) || (null == mimSearch1.NewTerritory))
+               {
+                  returnStatus = "Unable to Find Path";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
+               }
+               gi.MapItemMoves.Add(mimSearch1);
+               Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateSunriseChoice.PerformAction(SearchTreasure): oT=" + princeTerritory.Name + " nT=" + mimSearch1.NewTerritory.Name);
+               break;
+            case GameAction.ArchTravel:
+               ResetDayForNonTravelChoice(gi, action);
+               gi.NumMembersBeingFollowed = 0;
+               gi.SunriseChoice = GamePhase.Travel;
+               gi.GamePhase = GamePhase.Encounter;
+               gi.EventDisplayed = gi.EventActive = "e045b";
+               gi.DieRollAction = GameAction.EncounterRoll;
+               action = GameAction.UpdateEventViewerActive;
+               break;
+            case GameAction.EncounterFollow:
+               Logger.Log(LogEnum.LE_UNDO_COMMAND, "GameStateSunriseChoice.PerformAction(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->true for a=" + action.ToString());
+               gi.IsUndoCommandAvailable = true;
+               gi.IsBadGoing = false;                 // e078
+               gi.IsHeavyRain = false;                // e079
+               gi.IsFloodContinue = false;            // e092
+               gi.IsEagleHunt = false;                // e114
+               gi.RaftStatePrevUndo = gi.RaftState;
+               gi.RaftState = RaftEnum.RE_NO_RAFT;    // e122
+               gi.IsCavalryEscort = false;            // e151
+               if (false == EncounterFollow(gi, ref action)) // GameStateSunriseChoice
+               {
+                  returnStatus = "EncounterFollow() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
+               }
+               gi.SunriseChoice = gi.GamePhase = GamePhase.Encounter;
+               gi.EventStart = gi.EventDisplayed = gi.EventActive = "e072d"; // follow elven band
+               gi.DieRollAction = GameAction.EncounterRoll;
+               //-------------------------------------------
+               gi.EncounteredMembers.Clear();
+               for (int i = 0; i < gi.NumMembersBeingFollowed; ++i) // if following elves, repopulate EncounterMembers container
+               {
+                  IMapItem elf = CreateCharacter(gi, "Elf");
+                  gi.EncounteredMembers.Add(elf);
+               }
+               break;
+            default:
+               returnStatus = "Reached Default ERROR with a=" + action.ToString();
+               break;
          }
          StringBuilder sb12 = new StringBuilder();
          if ("OK" != returnStatus)
@@ -3347,7 +3343,7 @@ namespace BarbarianPrince
                gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_REST));
                Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateRest.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
                gi.Prince.MovementUsed = gi.Prince.Movement; // End of the day
-               if (false == SetSubstitutionEvent(gi, princeTerritory))           // GameStateRest.PerformAction()      - RestHealingEncounter
+               if ( false == SetSubstitutionEvent(gi, princeTerritory))           // GameStateRest.PerformAction()      - RestHealingEncounter
                {
                   returnStatus = "SetSubstitutionEvent() returned false";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateRest.PerformAction(): " + returnStatus);
@@ -3401,7 +3397,8 @@ namespace BarbarianPrince
       public override string PerformAction(ref IGameInstance gi, ref GameAction action, int dieRoll)
       {
          String returnStatus = "OK";
-
+         if (true == PerformEndCheck(gi, ref action))  // GameStateTravel.PerformAction()
+            return returnStatus;
          GamePhase previousPhase = gi.GamePhase;
          GameAction previousAction = action;
          GameAction previousDieAction = gi.DieRollAction;
@@ -3410,248 +3407,246 @@ namespace BarbarianPrince
          ITerritory princeTerritory = gi.Prince.Territory;
          foreach (IMapItem mi in gi.PartyMembers)
             mi.IsCatchCold = false;
-         if (false == PerformEndCheck(gi, ref action))  // GameStateTravel.PerformAction()
+         switch (action)
          {
-            switch (action)
-            {
-               case GameAction.ShowInventory:
-               case GameAction.ShowAllRivers:
-               case GameAction.ShowRuleListing:
-               case GameAction.ShowEventListing:
-               case GameAction.ShowPartyPath:
-               case GameAction.ShowAboutDialog:
-               case GameAction.UpdateEventViewerDisplay:
-               case GameAction.ShowDienstalBranch:
-               case GameAction.ShowLargosRiver:
-               case GameAction.ShowNesserRiver:
-               case GameAction.ShowTrogothRiver:
-                  break;
-               case GameAction.UpdateEventViewerActive:
-                  gi.EventDisplayed = gi.EventActive;
-                  break;
-               case GameAction.UpdateUndo:
-                  UndoCommand(ref gi, ref action);
-                  break;
-               case GameAction.EndGameClose:
-                  gi.GamePhase = GamePhase.EndGame;
-                  break;
-               case GameAction.UpdateGameOptions:
-                  break;
-               case GameAction.UpdateLoadingGame:
-                  if (false == LoadGame(ref gi, ref action))
+            case GameAction.ShowInventory:
+            case GameAction.ShowAllRivers:
+            case GameAction.ShowRuleListing:
+            case GameAction.ShowEventListing:
+            case GameAction.ShowPartyPath:
+            case GameAction.ShowAboutDialog:
+            case GameAction.UpdateEventViewerDisplay:
+            case GameAction.ShowDienstalBranch:
+            case GameAction.ShowLargosRiver:
+            case GameAction.ShowNesserRiver:
+            case GameAction.ShowTrogothRiver:
+               break;
+            case GameAction.UpdateEventViewerActive:
+               gi.EventDisplayed = gi.EventActive;
+               break;
+            case GameAction.UpdateUndo:
+               UndoCommand(ref gi, ref action);
+               break;
+            case GameAction.EndGameClose:
+               gi.GamePhase = GamePhase.EndGame;
+               break;
+            case GameAction.UpdateGameOptions:
+               break;
+            case GameAction.UpdateLoadingGame:
+               if (false == LoadGame(ref gi, ref action))
+               {
+                  returnStatus = "LoadGame() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+               }
+               break;
+            case GameAction.TravelLostCheck:
+               gi.IsGridActive = false; // GameAction.TravelLostCheck
+               if (0 == gi.MapItemMoves.Count)
+               {
+                  returnStatus = "Invalid state: gi.MapItemMoves.Count for a=" + action.ToString();
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  if (null == gi.MapItemMoves[0].NewTerritory)
                   {
-                     returnStatus = "LoadGame() returned false";
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
-                  }
-                  break;
-               case GameAction.TravelLostCheck:
-                  gi.IsGridActive = false; // GameAction.TravelLostCheck
-                  if (0 == gi.MapItemMoves.Count)
-                  {
-                     returnStatus = "Invalid state: gi.MapItemMoves.Count for a=" + action.ToString();
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
-                  }
-                  else
-                  {
-                     if (null == gi.MapItemMoves[0].NewTerritory)
-                     {
-                        returnStatus = "Invalid state: gi.NewHex=null for a=" + action.ToString();
-                        Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
-                     }
-                     else
-                     {
-                        gi.NewHex = gi.MapItemMoves[0].NewTerritory;  // GameStateTravel.PerformAction(TravelLostCheck) - Not added to gi.EnteredHexes[]
-                     }
-                  }
-                  break;
-               case GameAction.TravelShortHop:
-                  gi.IsAirborne = false;
-                  gi.IsShortHop = true;
-                  if (false == gi.PartyReadyToFly()) // mount to fly returns false if anybody is left or possessions are left
-                  {
-                     returnStatus = "gi.PartyReadyToFly() returned false for " + action.ToString();
+                     returnStatus = "Invalid state: gi.NewHex=null for a=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
                   }
                   else
                   {
-                     TravelAction(gi, ref action); // GameAction.TravelShortHop
+                     gi.NewHex = gi.MapItemMoves[0].NewTerritory;  // GameStateTravel.PerformAction(TravelLostCheck) - Not added to gi.EnteredHexes[]
                   }
-                  break;
-               case GameAction.TravelShowLost:
-                  if (true == gi.IsAirborne)
-                  {
-                     gi.AtRiskMounts.Clear();
-                     gi.IsGridActive = false;
-                     gi.GamePhase = GamePhase.Encounter;
-                     gi.DieRollAction = GameAction.EncounterStart;
-                     gi.EventDisplayed = gi.EventActive = "e205c";
-                  }
-                  else
-                  {
-                     gi.NewHex = gi.Prince.Territory;
-                     gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_LOST)); // GameStateTravel.PerformAction(TravelShowLost)
-                     Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateTravel.PerformAction(): gi.MapItemMoves.Clear() a=TravelShowLost");
-                     gi.MapItemMoves.Clear();
-                     --gi.Prince.MovementUsed;
-                     if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex
-                     {
-                        returnStatus = " AddMapItemMove() return false";
-                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                     }
-                     else
-                     {
-                        Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateTravel.PerformAction(TravelShowLost): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
-                     }
-                     ++gi.Prince.MovementUsed;
-                     gi.IsGridActive = false; // GameAction.TravelShowLost
-                     Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateTravel.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
-                     gi.Prince.MovementUsed = gi.Prince.Movement; // End of the day
-                     Logger.Log(LogEnum.LE_MOVE_STACKING, "GameStateTravel.PerformAction(): a=TravelShowLost m=" + gi.Prince.Movement.ToString() + " mu=" + gi.Prince.MovementUsed.ToString());
-                     if (false == SetHuntState(gi, ref action)) // Lost in this hex
-                     {
-                        returnStatus = "SetHuntState() returned false for a=" + action.ToString();
-                        Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
-                     }
-                  }
-                  break;
-               case GameAction.TravelShowLostEncounter:
-                  if (0 == gi.MapItemMoves.Count)
-                  {
-                     returnStatus = "gi.MapItemMoves.Count=0 for a=" + action.ToString();
-                     Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateTravel.PerformAction(): " + returnStatus);
-                  }
-                  else
-                  {
-                     if (RiverCrossEnum.TC_CROSS_YES_SHOWN != gi.MapItemMoves[0].RiverCross)
-                     {
-                        gi.NewHex = gi.Prince.Territory;
-                        gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_LOST)); // GameStateTravel.PerformAction(TravelShowLostEncounter)
-                        Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateTravel.PerformAction(): gi.MapItemMoves.Clear() a=TravelShowLostEncounter");
-                        gi.MapItemMoves.Clear();
-                        --gi.Prince.MovementUsed;
-                        if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex - no longer moving to new territory unless this is check after river crossing
-                        {
-                           returnStatus = " AddMapItemMove() return false";
-                           Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
-                        }
-                        else
-                        {
-                           Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateTravel.PerformAction(TravelShowLostEncounter): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
-                        }
-                        ++gi.Prince.MovementUsed;
-                        Logger.Log(LogEnum.LE_VIEW_MIM, "GameStateTravel.PerformAction(): a=" + action.ToString() + " RESET mim=(" + gi.MapItemMoves[0].ToString() + " m=" + gi.Prince.MovementUsed + "/" + gi.Prince.Movement);
-                     }
-                  }
-                  gi.IsGridActive = false;   // GameAction.TravelShowLostEncounter
+               }
+               break;
+            case GameAction.TravelShortHop:
+               gi.IsAirborne = false;
+               gi.IsShortHop = true;
+               if (false == gi.PartyReadyToFly()) // mount to fly returns false if anybody is left or possessions are left
+               {
+                  returnStatus = "gi.PartyReadyToFly() returned false for " + action.ToString();
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  TravelAction(gi, ref action); // GameAction.TravelShortHop
+               }
+               break;
+            case GameAction.TravelShowLost:
+               if (true == gi.IsAirborne)
+               {
+                  gi.AtRiskMounts.Clear();
+                  gi.IsGridActive = false;
                   gi.GamePhase = GamePhase.Encounter;
                   gi.DieRollAction = GameAction.EncounterStart;
-                  Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateTravel.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
-                  gi.Prince.MovementUsed = gi.Prince.Movement; // End of the day
-                  if (0 < gi.AtRiskMounts.Count)  // e095 - if traveling -- at risk mounts die. Need to redistribute load
+                  gi.EventDisplayed = gi.EventActive = "e205c";
+               }
+               else
+               {
+                  gi.NewHex = gi.Prince.Territory;
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_LOST)); // GameStateTravel.PerformAction(TravelShowLost)
+                  Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateTravel.PerformAction(): gi.MapItemMoves.Clear() a=TravelShowLost");
+                  gi.MapItemMoves.Clear();
+                  --gi.Prince.MovementUsed;
+                  if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex
                   {
-                     gi.AtRiskMounts.Clear();
-                     action = GameAction.UpdateEventViewerActive;
-                     gi.EventAfterRedistribute = gi.EventActive; // encounter this event after risk mount check
-                     gi.EventDisplayed = gi.EventActive = "e095b";
-                  }
-                  else if (false == SetSubstitutionEvent(gi, princeTerritory))           // GameStateTravel.PerformAction()   - TravelShowLostEncounter
-                  {
-                     returnStatus = "SetSubstitutionEvent() returned false";
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
-                  }
-                  break;
-               case GameAction.TravelShowMovement:  // no encounter
-                  action = GameAction.Travel;
-                  gi.IsGridActive = false; // GameAction.TravelShowMovement
-                  gi.IsMustLeaveHex = false;
-                  gi.IsImpassable = false;
-                  gi.IsTrueLoveHeartBroken = false;
-                  gi.IsTempleGuardEncounteredThisHex = false;
-                  if ((true == gi.IsExhausted) && ((true == gi.NewHex.IsOasis) || ("Desert" != gi.NewHex.Type))) // e120
-                     gi.IsExhausted = false;
-                  ++gi.Prince.MovementUsed;
-                  Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateTravel(): ++MovementUsed=" + gi.Prince.MovementUsed.ToString() + " for a=" + action.ToString());
-                  //--------------------------------------------
-                  if (true == gi.DwarfAdviceLocations.Contains(gi.NewHex)) // this only applies when moving to a new hex
-                  {
-                     action = GameAction.UpdateEventViewerActive;
-                     gi.EventDisplayed = gi.EventActive = "e006g";
-                     gi.GamePhase = GamePhase.Encounter;
-                     gi.DieRollAction = GameAction.EncounterRoll;
-                     ShowMovementScreenViewer(gi); // show user instructions in the ScreenViewer
-                  }
-                  else if (true == gi.IsHighPass) // high pass event can happen even if no travel encounter
-                  {
-                     gi.IsHighPass = false;
-                     ITerritory previousTerritory = GetPreviousHex(gi);
-                     if (null == previousTerritory)
-                     {
-                        Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): GetPreviousHex() returned null for t=" + gi.Prince.Territory.Name);
-                        previousTerritory = gi.Prince.Territory;
-                     }
-                     if (gi.NewHex.Name == previousTerritory.Name)
-                     {
-                        ShowMovementScreenViewer(gi); // show user instructions in the ScreenViewer
-                     }
-                     else
-                     {
-                        gi.EventAfterRedistribute = gi.EventDisplayed = gi.EventActive = "e086a";
-                        gi.GamePhase = GamePhase.Encounter;
-                        gi.DieRollAction = GameAction.EncounterRoll;
-                     }
+                     returnStatus = " AddMapItemMove() return false";
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
                   else
                   {
-                     ShowMovementScreenViewer(gi);
+                     Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateTravel.PerformAction(TravelShowLost): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
                   }
-                  if (true == gi.IsAirborne)
+                  ++gi.Prince.MovementUsed;
+                  gi.IsGridActive = false; // GameAction.TravelShowLost
+                  Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateTravel.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
+                  gi.Prince.MovementUsed = gi.Prince.Movement; // End of the day
+                  Logger.Log(LogEnum.LE_MOVE_STACKING, "GameStateTravel.PerformAction(): a=TravelShowLost m=" + gi.Prince.Movement.ToString() + " mu=" + gi.Prince.MovementUsed.ToString());
+                  if (false == SetHuntState(gi, ref action)) // Lost in this hex
                   {
-                     gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR)); // TravelShowMovement 
+                     returnStatus = "SetHuntState() returned false for a=" + action.ToString();
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
                   }
-                  else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
+               }
+               break;
+            case GameAction.TravelShowLostEncounter:
+               if (0 == gi.MapItemMoves.Count)
+               {
+                  returnStatus = "gi.MapItemMoves.Count=0 for a=" + action.ToString();
+                  Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateTravel.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  if (RiverCrossEnum.TC_CROSS_YES_SHOWN != gi.MapItemMoves[0].RiverCross)
                   {
-                     gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT)); // TravelShowMovement()
+                     gi.NewHex = gi.Prince.Territory;
+                     gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_LOST)); // GameStateTravel.PerformAction(TravelShowLostEncounter)
+                     Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateTravel.PerformAction(): gi.MapItemMoves.Clear() a=TravelShowLostEncounter");
+                     gi.MapItemMoves.Clear();
+                     --gi.Prince.MovementUsed;
+                     if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex - no longer moving to new territory unless this is check after river crossing
+                     {
+                        returnStatus = " AddMapItemMove() return false";
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+                     }
+                     else
+                     {
+                        Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateTravel.PerformAction(TravelShowLostEncounter): gi.MapItemMoves.Add() mim=" + gi.MapItemMoves[0].ToString());
+                     }
+                     ++gi.Prince.MovementUsed;
+                     Logger.Log(LogEnum.LE_VIEW_MIM, "GameStateTravel.PerformAction(): a=" + action.ToString() + " RESET mim=(" + gi.MapItemMoves[0].ToString() + " m=" + gi.Prince.MovementUsed + "/" + gi.Prince.Movement);
+                  }
+               }
+               gi.IsGridActive = false;   // GameAction.TravelShowLostEncounter
+               gi.GamePhase = GamePhase.Encounter;
+               gi.DieRollAction = GameAction.EncounterStart;
+               Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateTravel.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
+               gi.Prince.MovementUsed = gi.Prince.Movement; // End of the day
+               if (0 < gi.AtRiskMounts.Count)  // e095 - if traveling -- at risk mounts die. Need to redistribute load
+               {
+                  gi.AtRiskMounts.Clear();
+                  action = GameAction.UpdateEventViewerActive;
+                  gi.EventAfterRedistribute = gi.EventActive; // encounter this event after risk mount check
+                  gi.EventDisplayed = gi.EventActive = "e095b";
+               }
+               else if (false == SetSubstitutionEvent(gi, princeTerritory))           // GameStateTravel.PerformAction()   - TravelShowLostEncounter
+               {
+                  returnStatus = "SetSubstitutionEvent() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+               }
+               break;
+            case GameAction.TravelShowMovement:  // no encounter
+               action = GameAction.Travel;
+               gi.IsGridActive = false; // GameAction.TravelShowMovement
+               gi.IsMustLeaveHex = false;
+               gi.IsImpassable = false;
+               gi.IsTrueLoveHeartBroken = false;
+               gi.IsTempleGuardEncounteredThisHex = false;
+               if ((true == gi.IsExhausted) && ((true == gi.NewHex.IsOasis) || ("Desert" != gi.NewHex.Type))) // e120
+                  gi.IsExhausted = false;
+               ++gi.Prince.MovementUsed;
+               Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateTravel(): ++MovementUsed=" + gi.Prince.MovementUsed.ToString() + " for a=" + action.ToString());
+               //--------------------------------------------
+               if (true == gi.DwarfAdviceLocations.Contains(gi.NewHex)) // this only applies when moving to a new hex
+               {
+                  action = GameAction.UpdateEventViewerActive;
+                  gi.EventDisplayed = gi.EventActive = "e006g";
+                  gi.GamePhase = GamePhase.Encounter;
+                  gi.DieRollAction = GameAction.EncounterRoll;
+                  ShowMovementScreenViewer(gi); // show user instructions in the ScreenViewer
+               }
+               else if ( true == gi.IsHighPass ) // high pass event can happen even if no travel encounter
+               {
+                  gi.IsHighPass = false;
+                  ITerritory previousTerritory = GetPreviousHex(gi);
+                  if (null == previousTerritory)
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): GetPreviousHex() returned null for t=" + gi.Prince.Territory.Name);
+                     previousTerritory = gi.Prince.Territory;
+                  }
+                  if (gi.NewHex.Name == previousTerritory.Name)
+                  {
+                     ShowMovementScreenViewer(gi); // show user instructions in the ScreenViewer
+                  }
+                  else
+                  {
+                     gi.EventAfterRedistribute = gi.EventDisplayed = gi.EventActive = "e086a";
+                     gi.GamePhase = GamePhase.Encounter;
+                     gi.DieRollAction = GameAction.EncounterRoll;
+                  }
+               }
+               else
+               {
+                  ShowMovementScreenViewer(gi);
+               }
+               if( true == gi.IsAirborne )
+               {
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR)); // TravelShowMovement 
+               }
+               else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
+               {
+                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT)); // TravelShowMovement()
+                  if ((true == gi.IsInStructure(gi.NewHex)) && (false == gi.VisitedLocations.Contains(gi.NewHex)))
+                     gi.VisitedLocations.Add(gi.NewHex);
+               }
+               else if (RaftEnum.RE_RAFT_ENDS_TODAY == gi.RaftState) // TravelShowMovement()
+               {
+                  //do nothing
+               }
+               else
+               {
+                  if( false == gi.IsAirborneEnd )
+                  {
+                     gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL)); // TravelShowMovement 
+                  }
+                  else
+                  {
                      if ((true == gi.IsInStructure(gi.NewHex)) && (false == gi.VisitedLocations.Contains(gi.NewHex)))
                         gi.VisitedLocations.Add(gi.NewHex);
                   }
-                  else if (RaftEnum.RE_RAFT_ENDS_TODAY == gi.RaftState) // TravelShowMovement()
-                  {
-                     //do nothing
-                  }
-                  else
-                  {
-                     if (false == gi.IsAirborneEnd)
-                     {
-                        gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL)); // TravelShowMovement 
-                     }
-                     else
-                     {
-                        if ((true == gi.IsInStructure(gi.NewHex)) && (false == gi.VisitedLocations.Contains(gi.NewHex)))
-                           gi.VisitedLocations.Add(gi.NewHex);
-                     }
-                  }
-                  break;
-               case GameAction.TravelShowRiverEncounter:
-                  gi.GamePhase = GamePhase.Encounter;
-                  gi.DieRollAction = GameAction.EncounterStart;
-                  break;
-               case GameAction.TravelShowMovementEncounter:
-                  gi.GamePhase = GamePhase.Encounter;
-                  gi.DieRollAction = GameAction.EncounterStart;
-                  gi.IsGridActive = false; // GameAction.TravelShowMovementEncounter
-                  gi.IsMustLeaveHex = false;
-                  gi.IsImpassable = false;
-                  gi.IsTrueLoveHeartBroken = false;
-                  gi.IsTempleGuardEncounteredThisHex = false;
-                  if ((true == gi.IsExhausted) && (true == gi.NewHex.IsOasis) || ("Desert" != gi.NewHex.Type)) // e120
-                     gi.IsExhausted = false;
-                  ++gi.Prince.MovementUsed;
-                  Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateTravel(): ++MovementUsed=" + gi.Prince.MovementUsed.ToString() + " for a=" + action.ToString());
-                  if (false == SetSubstitutionEvent(gi, princeTerritory, true))  // GameStateTravel.PerformAction()   - TravelShowMovementEncounter
-                  {
-                     returnStatus = "SetSubstitutionEvent() returned false";
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
-                  }
+               }
+               break;
+            case GameAction.TravelShowRiverEncounter:
+               gi.GamePhase = GamePhase.Encounter;
+               gi.DieRollAction = GameAction.EncounterStart;
+               break;
+            case GameAction.TravelShowMovementEncounter:
+               gi.GamePhase = GamePhase.Encounter;
+               gi.DieRollAction = GameAction.EncounterStart;
+               gi.IsGridActive = false; // GameAction.TravelShowMovementEncounter
+               gi.IsMustLeaveHex = false;
+               gi.IsImpassable = false;
+               gi.IsTrueLoveHeartBroken = false;
+               gi.IsTempleGuardEncounteredThisHex = false;
+               if ((true == gi.IsExhausted) && (true == gi.NewHex.IsOasis) || ("Desert" != gi.NewHex.Type)) // e120
+                  gi.IsExhausted = false;
+               ++gi.Prince.MovementUsed;
+               Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateTravel(): ++MovementUsed=" + gi.Prince.MovementUsed.ToString() + " for a=" + action.ToString());
+               if (false == SetSubstitutionEvent(gi, princeTerritory, true))  // GameStateTravel.PerformAction()   - TravelShowMovementEncounter
+               {
+                  returnStatus = "SetSubstitutionEvent() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+               }
 
                   if (true == gi.IsAirborne)
                   {
@@ -7436,219 +7431,219 @@ namespace BarbarianPrince
                            warriorMonk1.AddNewMount();
                            gi.AddCompanion(warriorMonk1);
 
-                           IMapItem warriorMonk2 = CreateCharacter(gi, "MonkWarrior");
-                           warriorMonk2.AddNewMount();
-                           gi.AddCompanion(warriorMonk2);
+                                    IMapItem warriorMonk2 = CreateCharacter(gi, "MonkWarrior");
+                                    warriorMonk2.AddNewMount();
+                                    gi.AddCompanion(warriorMonk2);
+                                }
+                                else
+                                {
+                                    action = GameAction.E018MarkOfCain;
+                                }
+                                break;
+                        }
+                        break;
+                    case GameAction.E212TempleTenGold:
+                        gi.EventDisplayed = gi.EventActive = "e212";
+                        gi.IsOfferingModifier = true;
+                        gi.ReduceCoins(10);
+                        break;
+                    case GameAction.E212TempleRequestClues:
+                        gi.EventDisplayed = gi.EventActive = "e212l";
+                        gi.DieRollAction = GameAction.EncounterRoll;
+                        break;
+                    case GameAction.E212TempleRequestInfluence:
+                        gi.IsInfluenceModifier = true;
+                        if (false == EncounterEnd(gi, ref action))
+                        {
+                            returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
+                            Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                        }
+                        break;
+                    case GameAction.E228ShowTrueLove:
+                        break;
+                    case GameAction.E331DenyFickle:
+                        gi.AddCoins(gi.FickleCoin, false);  // Return the fickle share to the party
+                        gi.FickleCoin = 0;
+                        IMapItems fickleMembers = new MapItems();
+                        foreach (IMapItem mi in gi.PartyMembers)
+                        {
+                            if (true == mi.IsFickle)
+                                fickleMembers.Add(mi);
+                        }
+                        foreach (IMapItem mi in fickleMembers) // the fickle members disappear
+                            gi.RemoveAbandonerInParty(mi);
+                        gi.EventDisplayed = gi.EventActive = "e331c";
+                        action = GameAction.UpdateEventViewerActive;
+                        gi.DieRollAction = GameAction.DieRollActionNone;
+                        break;
+                    case GameAction.E331PayFickle:
+                        if ("e331b" == gi.EventActive)
+                        {
+                            gi.FickleCoin = 0; // their share disappears forever
                         }
                         else
                         {
-                           action = GameAction.E018MarkOfCain;
+                            gi.ReduceCoins(gi.Bribe);
+                            foreach (IMapItem fickle in gi.EncounteredMembers) // add encountered members to party - reduce coin by bribe amount
+                            {
+                                fickle.IsFickle = true;
+                                gi.AddCompanion(fickle);
+                            }
+                            gi.EncounteredMembers.Clear();
+                        }
+                        if (false == EncounterEnd(gi, ref action))
+                        {
+                            returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
+                            Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                         }
                         break;
-                  }
-                  break;
-               case GameAction.E212TempleTenGold:
-                  gi.EventDisplayed = gi.EventActive = "e212";
-                  gi.IsOfferingModifier = true;
-                  gi.ReduceCoins(10);
-                  break;
-               case GameAction.E212TempleRequestClues:
-                  gi.EventDisplayed = gi.EventActive = "e212l";
-                  gi.DieRollAction = GameAction.EncounterRoll;
-                  break;
-               case GameAction.E212TempleRequestInfluence:
-                  gi.IsInfluenceModifier = true;
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                  }
-                  break;
-               case GameAction.E228ShowTrueLove:
-                  break;
-               case GameAction.E331DenyFickle:
-                  gi.AddCoins(gi.FickleCoin, false);  // Return the fickle share to the party
-                  gi.FickleCoin = 0;
-                  IMapItems fickleMembers = new MapItems();
-                  foreach (IMapItem mi in gi.PartyMembers)
-                  {
-                     if (true == mi.IsFickle)
-                        fickleMembers.Add(mi);
-                  }
-                  foreach (IMapItem mi in fickleMembers) // the fickle members disappear
-                     gi.RemoveAbandonerInParty(mi);
-                  gi.EventDisplayed = gi.EventActive = "e331c";
-                  action = GameAction.UpdateEventViewerActive;
-                  gi.DieRollAction = GameAction.DieRollActionNone;
-                  break;
-               case GameAction.E331PayFickle:
-                  if ("e331b" == gi.EventActive)
-                  {
-                     gi.FickleCoin = 0; // their share disappears forever
-                  }
-                  else
-                  {
-                     gi.ReduceCoins(gi.Bribe);
-                     foreach (IMapItem fickle in gi.EncounteredMembers) // add encountered members to party - reduce coin by bribe amount
-                     {
-                        fickle.IsFickle = true;
-                        gi.AddCompanion(fickle);
-                     }
-                     gi.EncounteredMembers.Clear();
-                  }
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                  }
-                  break;
-               case GameAction.E332PayGroup:
-                  if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
-                  {
-                     action = GameAction.E018MarkOfCain;
-                  }
-                  else
-                  {
-                     gi.ReduceCoins(gi.Bribe);
-                     int groupNum = Utilities.GroupNum;
-                     ++Utilities.GroupNum;
-                     foreach (IMapItem groupMember in gi.EncounteredMembers) // add encountered members to party - reduce coin by bribe amount
-                     {
-                        groupMember.GroupNum = groupNum;
-                        groupMember.PayDay = gi.Days + 1; // the group number is the day of the hire
-                        groupMember.Wages = 2;
-                        gi.AddCompanion(groupMember);
-                     }
-                     gi.EncounteredMembers.Clear();
-                     if (false == EncounterEnd(gi, ref action))
-                     {
-                        returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
-                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                     }
-                  }
-                  break;
-               case GameAction.E333DenyHirelings:
-                  gi.EventDisplayed = gi.EventActive = "e333a";
-                  gi.DieRollAction = GameAction.EncounterRoll;
-                  break;
-               case GameAction.E333PayHirelings:
-                  if (1 == gi.EncounteredMembers.Count)
-                  {
-                     if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
-                     {
-                        action = GameAction.E018MarkOfCain;
-                     }
-                     else
-                     {
-                        IMapItem hireling = gi.EncounteredMembers[0];
-                        hireling.Wages = 2;
-                        gi.AddCompanion(hireling);
-                        gi.ReduceCoins(2);
+                    case GameAction.E332PayGroup:
+                        if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
+                        {
+                            action = GameAction.E018MarkOfCain;
+                        }
+                        else
+                        {
+                            gi.ReduceCoins(gi.Bribe);
+                            int groupNum = Utilities.GroupNum;
+                            ++Utilities.GroupNum;
+                            foreach (IMapItem groupMember in gi.EncounteredMembers) // add encountered members to party - reduce coin by bribe amount
+                            {
+                                groupMember.GroupNum = groupNum;
+                                groupMember.PayDay = gi.Days + 1; // the group number is the day of the hire
+                                groupMember.Wages = 2;
+                                gi.AddCompanion(groupMember);
+                            }
+                            gi.EncounteredMembers.Clear();
+                            if (false == EncounterEnd(gi, ref action))
+                            {
+                                returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
+                                Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                            }
+                        }
+                        break;
+                    case GameAction.E333DenyHirelings:
+                        gi.EventDisplayed = gi.EventActive = "e333a";
+                        gi.DieRollAction = GameAction.EncounterRoll;
+                        break;
+                    case GameAction.E333PayHirelings:
+                        if (1 == gi.EncounteredMembers.Count)
+                        {
+                            if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
+                            {
+                                action = GameAction.E018MarkOfCain;
+                            }
+                            else
+                            {
+                                IMapItem hireling = gi.EncounteredMembers[0];
+                                hireling.Wages = 2;
+                                gi.AddCompanion(hireling);
+                                gi.ReduceCoins(2);
+                                gi.EncounteredMembers.Clear();
+                                if (false == EncounterEnd(gi, ref action))
+                                {
+                                    returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
+                                    Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            gi.EventDisplayed = gi.EventActive = "e333b";
+                            action = GameAction.UpdateEventViewerActive;
+                            gi.DieRollAction = GameAction.DieRollActionNone;
+                        }
+                        break;
+                    case GameAction.E333HirelingCount:
+                        if (gi.EncounteredMembers.Count < dieRoll)  // die roll is the selected button which corresponds to the count of hires
+                        {
+                            returnStatus = "Invalid state dr=" + dieRoll.ToString() + " > c=" + gi.EncounteredMembers.Count.ToString();
+                            Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                            break;
+                        }
+                        if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
+                        {
+                            action = GameAction.E018MarkOfCain;
+                        }
+                        else
+                        {
+                            IMapItems hiredMembers = new MapItems();
+                            for (int i = 0; i < dieRoll; ++i)
+                            {
+                                IMapItem hireling = gi.EncounteredMembers[i];
+                                hireling.Wages = 2;
+                                hireling.PayDay = gi.Days + 1;
+                                gi.AddCompanion(hireling);
+                                gi.ReduceCoins(2);
+                                hiredMembers.Add(hireling);
+                            }
+                            foreach (IMapItem mi in hiredMembers)
+                                gi.EncounteredMembers.Remove(mi);
+                            if (false == EncounterEnd(gi, ref action))
+                            {
+                                returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
+                                Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                            }
+                        }
+                        break;
+                    case GameAction.E334Ally:
+                        if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
+                        {
+                            action = GameAction.E018MarkOfCain;
+                        }
+                        else
+                        {
+                            foreach (IMapItem ally in gi.EncounteredMembers)
+                            {
+                                ally.IsAlly = true;
+                                gi.AddCompanion(ally);
+                            }
+                            gi.EncounteredMembers.Clear();
+                            if (false == EncounterEnd(gi, ref action))
+                            {
+                                returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
+                                Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                            }
+                        }
+                        break;
+                    case GameAction.E335Escapee:
+                        foreach (IMapItem escapee in gi.EncounteredMembers)
+                        {
+                            escapee.IsTownCastleTempleLeave = true;
+                            gi.AddCompanion(escapee);
+                        }
                         gi.EncounteredMembers.Clear();
                         if (false == EncounterEnd(gi, ref action))
                         {
-                           returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
-                           Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                            returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
+                            Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                         }
-                     }
-                  }
-                  else
-                  {
-                     gi.EventDisplayed = gi.EventActive = "e333b";
-                     action = GameAction.UpdateEventViewerActive;
-                     gi.DieRollAction = GameAction.DieRollActionNone;
-                  }
-                  break;
-               case GameAction.E333HirelingCount:
-                  if (gi.EncounteredMembers.Count < dieRoll)  // die roll is the selected button which corresponds to the count of hires
-                  {
-                     returnStatus = "Invalid state dr=" + dieRoll.ToString() + " > c=" + gi.EncounteredMembers.Count.ToString();
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                     break;
-                  }
-                  if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
-                  {
-                     action = GameAction.E018MarkOfCain;
-                  }
-                  else
-                  {
-                     IMapItems hiredMembers = new MapItems();
-                     for (int i = 0; i < dieRoll; ++i)
-                     {
-                        IMapItem hireling = gi.EncounteredMembers[i];
-                        hireling.Wages = 2;
-                        hireling.PayDay = gi.Days + 1;
-                        gi.AddCompanion(hireling);
-                        gi.ReduceCoins(2);
-                        hiredMembers.Add(hireling);
-                     }
-                     foreach (IMapItem mi in hiredMembers)
-                        gi.EncounteredMembers.Remove(mi);
-                     if (false == EncounterEnd(gi, ref action))
-                     {
-                        returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
-                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                     }
-                  }
-                  break;
-               case GameAction.E334Ally:
-                  if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
-                  {
-                     action = GameAction.E018MarkOfCain;
-                  }
-                  else
-                  {
-                     foreach (IMapItem ally in gi.EncounteredMembers)
-                     {
-                        ally.IsAlly = true;
-                        gi.AddCompanion(ally);
-                     }
-                     gi.EncounteredMembers.Clear();
-                     if (false == EncounterEnd(gi, ref action))
-                     {
-                        returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
-                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                     }
-                  }
-                  break;
-               case GameAction.E335Escapee:
-                  foreach (IMapItem escapee in gi.EncounteredMembers)
-                  {
-                     escapee.IsTownCastleTempleLeave = true;
-                     gi.AddCompanion(escapee);
-                  }
-                  gi.EncounteredMembers.Clear();
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                  }
-                  break;
-               case GameAction.E340DenyLooters:
-                  gi.EventStart = gi.EventDisplayed = gi.EventActive = "e340a";
-                  gi.DieRollAction = GameAction.EncounterRoll;
-                  gi.EncounteredMembers.Clear();
-                  foreach (IMapItem mi in gi.PartyMembers)
-                  {
-                     if (true == mi.IsLooter)
-                        gi.EncounteredMembers.Add(mi);
-                  }
-                  foreach (IMapItem mi in gi.EncounteredMembers)
-                     gi.PartyMembers.Remove(mi);
-                  break;
-               case GameAction.E340PayLooters:
-                  gi.LooterCoin = 0;
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                  }
-                  break;
-               default:
-                  returnStatus = "777 Reached Default ERROR for a=" + action.ToString() + " p=" + previousPhase.ToString() + " ae=" + gi.EventActive + " es=" + gi.EventStart + " ?? ";
-                  break;
+                        break;
+                    case GameAction.E340DenyLooters:
+                        gi.EventStart = gi.EventDisplayed = gi.EventActive = "e340a";
+                        gi.DieRollAction = GameAction.EncounterRoll;
+                        gi.EncounteredMembers.Clear();
+                        foreach (IMapItem mi in gi.PartyMembers)
+                        {
+                            if (true == mi.IsLooter)
+                                gi.EncounteredMembers.Add(mi);
+                        }
+                        foreach (IMapItem mi in gi.EncounteredMembers)
+                            gi.PartyMembers.Remove(mi);
+                        break;
+                    case GameAction.E340PayLooters:
+                        gi.LooterCoin = 0;
+                        if (false == EncounterEnd(gi, ref action))
+                        {
+                            returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
+                            Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                        }
+                        break;
+                    default:
+                        returnStatus = "777 Reached Default ERROR for a=" + action.ToString() + " p=" + previousPhase.ToString() + " ae=" + gi.EventActive + " es=" + gi.EventStart + " ?? ";
+                        break;
+                }
             }
-         }
 
          StringBuilder sb12 = new StringBuilder();
          if ("OK" != returnStatus)
@@ -7659,19 +7654,19 @@ namespace BarbarianPrince
          sb12.Append("===>p=");
          sb12.Append(previousPhase.ToString());
          if (previousPhase != gi.GamePhase)
-         { sb12.Append("=>"); sb12.Append(gi.GamePhase.ToString()); }
+            { sb12.Append("=>"); sb12.Append(gi.GamePhase.ToString()); }
          sb12.Append("\t\ta="); sb12.Append(previousAction.ToString());
          if (previousAction != action)
-         { sb12.Append("=>"); sb12.Append(action.ToString()); }
+            { sb12.Append("=>"); sb12.Append(action.ToString()); }
          sb12.Append("\t\tdra="); sb12.Append(previousDieAction.ToString());
          if (previousDieAction != gi.DieRollAction)
-         { sb12.Append("=>"); sb12.Append(gi.DieRollAction.ToString()); }
+            { sb12.Append("=>"); sb12.Append(gi.DieRollAction.ToString()); }
          sb12.Append("\t\te="); sb12.Append(previousEvent);
          if (previousEvent != gi.EventActive)
-         { sb12.Append("=>"); sb12.Append(gi.EventActive); }
+             { sb12.Append("=>"); sb12.Append(gi.EventActive); }
          sb12.Append("\t\tes="); sb12.Append(previousStartEvent);
          if (previousStartEvent != gi.EventStart)
-         { sb12.Append("=>"); sb12.Append(gi.EventStart); }
+             { sb12.Append("=>"); sb12.Append(gi.EventStart); }
          sb12.Append("\t\tdr="); sb12.Append(dieRoll.ToString());
          sb12.Append("\t\tm="); sb12.Append(gi.Prince.Movement.ToString());
          sb12.Append("\t\tmu="); sb12.Append(gi.Prince.MovementUsed.ToString());
@@ -7748,26 +7743,24 @@ namespace BarbarianPrince
                {
                   switch (gi.DieResults[key][0])
                   {
-                     case 1:
-                     case 2:
-                     case 3:
+                     case 1: case 2: case 3:
                         switch (gi.DwarvenChoice)
                         {
-                           case "Talk": gi.EventDisplayed = gi.EventActive = "e006c"; gi.DieRollAction = GameAction.EncounterRoll; break;
+                           case "Talk":  gi.EventDisplayed = gi.EventActive = "e006c"; gi.DieRollAction = GameAction.EncounterRoll; break;
                            case "Evade": gi.EventDisplayed = gi.EventActive = "e006d"; gi.DieRollAction = GameAction.EncounterRoll; break;
                            case "Fight": gi.EventDisplayed = gi.EventActive = "e006e"; gi.DieRollAction = GameAction.EncounterRoll; break;
                            default: Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): Reached default choice=" + gi.DwarvenChoice + " ae=" + gi.EventActive); return false;
                         }
                         break;
                      case 4:
-                        if (false == gi.IsDwarvenBandSizeSet)
+                        if( false == gi.IsDwarvenBandSizeSet)
                         {
                            IMapItem dwarfFriend = CreateCharacter(gi, "DwarfW");
                            gi.EncounteredMembers.Add(dwarfFriend);
                         }
                         switch (gi.DwarvenChoice)
                         {
-                           case "Talk": gi.EventDisplayed = gi.EventActive = "e006c"; gi.DieRollAction = GameAction.EncounterRoll; break;
+                           case "Talk":  gi.EventDisplayed = gi.EventActive = "e006c"; gi.DieRollAction = GameAction.EncounterRoll; break;
                            case "Evade": gi.EventDisplayed = gi.EventActive = "e006d"; gi.DieRollAction = GameAction.EncounterRoll; break;
                            case "Fight": gi.EventDisplayed = gi.EventActive = "e006e"; gi.DieRollAction = GameAction.EncounterRoll; break;
                            default: Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): Reached default choice=" + gi.DwarvenChoice + " ae=" + gi.EventActive); return false;
@@ -7776,14 +7769,14 @@ namespace BarbarianPrince
                      case 5:
                         if (false == gi.IsDwarvenBandSizeSet)
                         {
-                           gi.EventDisplayed = gi.EventActive = "e006b";
+                           gi.EventDisplayed = gi.EventActive = "e006b"; 
                            gi.DieRollAction = GameAction.EncounterRoll;
                         }
                         else
                         {
                            switch (gi.DwarvenChoice)
                            {
-                              case "Talk": gi.EventDisplayed = gi.EventActive = "e006c"; gi.DieRollAction = GameAction.EncounterRoll; break;
+                              case "Talk":  gi.EventDisplayed = gi.EventActive = "e006c"; gi.DieRollAction = GameAction.EncounterRoll; break;
                               case "Evade": gi.EventDisplayed = gi.EventActive = "e006d"; gi.DieRollAction = GameAction.EncounterRoll; break;
                               case "Fight": gi.EventDisplayed = gi.EventActive = "e006e"; gi.DieRollAction = GameAction.EncounterRoll; break;
                               default: Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): Reached default choice=" + gi.DwarvenChoice + " ae=" + gi.EventActive); return false;
@@ -7822,7 +7815,7 @@ namespace BarbarianPrince
                      case 3:
                         if (false == gi.IsElvenBandSizeSet)
                         {
-                           if (0 == gi.EncounteredMembers.Count)
+                           if ( 0 == gi.EncounteredMembers.Count )
                            {
                               Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): invalid state gi.EncounteredMembers.Count=0 with dr=" + gi.ElvenChoice + " ae=" + gi.EventActive);
                               return false;
@@ -8231,7 +8224,7 @@ namespace BarbarianPrince
                {
                   if (true == gi.VisitedLocations.Contains(princeTerritory))
                   {
-                     if (false == gi.EscapedLocations.Contains(princeTerritory))
+                     if (false == gi.EscapedLocations.Contains(princeTerritory)) 
                         theConstableRollModifier = 2;
                   }
                   else
@@ -8291,9 +8284,9 @@ namespace BarbarianPrince
                int numBandits = 1; // leader plus one extra exceeds party count by two
                foreach (IMapItem mi in gi.PartyMembers) // non-fighting party members do not bring more bandits
                {
-                  if ((true == mi.Name.Contains("TrueLove")) && (0 == mi.Combat))
+                  if ( (true == mi.Name.Contains("TrueLove")) && (0 == mi.Combat))
                      continue;
-                  if ((false == mi.Name.Contains("Slave")) && (false == mi.Name.Contains("Porter")) && (false == mi.Name.Contains("Minstrel")) && (false == mi.Name.Contains("Falcon")))
+                  if ((false == mi.Name.Contains("Slave")) && (false == mi.Name.Contains("Porter")) && (false == mi.Name.Contains("Minstrel")) && (false == mi.Name.Contains("Falcon")) )
                      numBandits++; // add a bandit for this party member
                }
                for (int i = 0; i < numBandits; ++i)
@@ -8430,7 +8423,7 @@ namespace BarbarianPrince
                            gi.EventDisplayed = gi.EventActive = "e045";                                                      // arch travel
                         else
                            gi.EventDisplayed = gi.EventActive = "e045a";
-                        break;
+                        break;  
                      case 5: case 6: gi.EventDisplayed = gi.EventActive = "e028"; break;                                      // cave tombs
                      default: Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): Reached default ae=" + gi.EventActive); return false;
                   }
@@ -8460,12 +8453,11 @@ namespace BarbarianPrince
                            gi.DieRollAction = GameAction.EncounterRoll;
                         }
                         break;  // wizard attack
-                     case 4:
-                        gi.EventDisplayed = gi.EventActive = "e068a";
-                        gi.DieRollAction = GameAction.EncounterRoll;
+                     case 4: 
+                        gi.EventDisplayed = gi.EventActive = "e068a"; 
+                        gi.DieRollAction = GameAction.EncounterRoll; 
                         break;
-                     case 5:
-                     case 6:
+                     case 5: case 6: 
                         gi.EventDisplayed = gi.EventActive = "e068b";
                         if (null == gi.WizardTowers.Find(princeTerritory.Name))
                            gi.WizardTowers.Add(princeTerritory);
@@ -8608,7 +8600,7 @@ namespace BarbarianPrince
                }
                break;
             case "e080":  // pixies
-               if (true == gi.IsPixieLoverInParty())
+               if( true == gi.IsPixieLoverInParty() )
                {
                   gi.EventDisplayed = gi.EventActive = "e080a";
                   gi.DieRollAction = GameAction.EncounterRoll;
@@ -8656,8 +8648,7 @@ namespace BarbarianPrince
                      case 2: gi.EventDisplayed = gi.EventActive = "e032"; gi.DieRollAction = GameAction.EncounterStart; break; // ghosts
                      case 3: gi.EventDisplayed = gi.EventActive = "e033"; gi.DieRollAction = GameAction.EncounterStart; break; // warrior wraiths
                      case 4: gi.EventDisplayed = gi.EventActive = "e074"; gi.DieRollAction = GameAction.EncounterStart; break; // spiders
-                     case 5:
-                     case 6:                                                                                           // nothing
+                     case 5: case 6:                                                                                           // nothing
                         if (false == EncounterEnd(gi, ref action))
                         {
                            Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): EncounterEnd() returned false ae=" + gi.EventActive);
@@ -8743,7 +8734,7 @@ namespace BarbarianPrince
                break;
             case "e105a":
                gi.DieRollAction = GameAction.EncounterStart;
-               if (Utilities.NO_RESULT == gi.DieResults[key][0])
+               if( Utilities.NO_RESULT == gi.DieResults[key][0] )
                   gi.DieResults[key][0] = dieRoll;
                else if (Utilities.NO_RESULT == gi.DieResults[key][1])
                   gi.DieResults[key][1] = dieRoll;
@@ -8793,7 +8784,7 @@ namespace BarbarianPrince
                gi.Prince.RemoveMountedMount();
                if (false == EncounterEscape(gi, ref action)) // move to random hex
                {
-                  Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): EncounterEscape() returned false ae=" + action.ToString());
+                  Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): EncounterEscape() returned false ae=" + action.ToString() );
                   return false;
                }
                if (false == EncounterEnd(gi, ref action))
