@@ -3992,7 +3992,7 @@ namespace BarbarianPrince
                     myTextBlock.Inlines.Add(new InlineUIContainer(imgEndGameWon));
                     myTextBlock.Inlines.Add(new LineBreak());
                     myTextBlock.Inlines.Add(new LineBreak());
-                    myTextBlock.Inlines.Add(new Run("Click image to close game."));
+                    myTextBlock.Inlines.Add(new Run("Click image to close game or select 'File|New Game' menu."));
                     break;
                 case "e502":
                     StringBuilder sbEndLost = new StringBuilder();
@@ -4032,7 +4032,7 @@ namespace BarbarianPrince
                     myTextBlock.Inlines.Add(new InlineUIContainer(imgEndGameLost));
                     myTextBlock.Inlines.Add(new LineBreak());
                     myTextBlock.Inlines.Add(new LineBreak());
-                    myTextBlock.Inlines.Add(new Run("Click image to close game."));
+                    myTextBlock.Inlines.Add(new Run("Click image to close game or select 'File|New Game' menu."));
                     break;
                 default:
                     break;

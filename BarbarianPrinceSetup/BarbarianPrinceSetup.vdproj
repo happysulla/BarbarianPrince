@@ -597,6 +597,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_3A4AEB0EB2214A8E8D13F625C07CA856"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_3A8E62A74E3945319E423D0E9B977165"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -628,6 +634,12 @@
         "Entry"
         {
         "MsmKey" = "8:_3D1BDA43A28F48C184D870539D1B139C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3D57F9F000104EC69578E0634AED73D2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1005,6 +1017,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_63F0F2B4E9C8F6F14A6A970EB886AEFA"
+        "OwnerKey" = "8:_B40BEF20FC854B338E3FAED3965B987F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_648BEF5F4AE94FEE996B994F3E8BBD8B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1078,6 +1096,12 @@
         "Entry"
         {
         "MsmKey" = "8:_69D4B4ACC96047FBB7DFB67A57D0A757"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6A6F87BF040941DFBBCB02B30ADD1D34"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1378,6 +1402,12 @@
         "Entry"
         {
         "MsmKey" = "8:_805A90D0A3814BD5B55E1AC7E226F86B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_80DEAB30532F4B658C3D7D3748ED9AB7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1929,12 +1959,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_B236F59D3E33D785CDC2E4AC83A2AA47"
-        "OwnerKey" = "8:_B40BEF20FC854B338E3FAED3965B987F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_B40BEF20FC854B338E3FAED3965B987F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2133,6 +2157,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_CBC569D47E6F4106949857E37D07D39C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CC37F0C993544836AA98005F2FE819B3"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_CD5902386E3041B2A80C6766E50B204F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2308,6 +2344,18 @@
         "Entry"
         {
         "MsmKey" = "8:_DABB84196B8949DBBB61857CE4F879A8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DAC45CA6BDF346DA9659F27817FDB159"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DAEBC0ABE2FA4307A6B40E0AD8B9A61F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2721,6 +2769,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_FB6337C42BEC4E9F8BF909C4321E6041"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_FC238ED2150448AF9DCF4D8E9668ED00"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2794,7 +2848,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B236F59D3E33D785CDC2E4AC83A2AA47"
+        "OwnerKey" = "8:_63F0F2B4E9C8F6F14A6A970EB886AEFA"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -4800,6 +4854,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3A4AEB0EB2214A8E8D13F625C07CA856"
+            {
+            "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\EndGameSuccess.gif"
+            "TargetName" = "8:EndGameSuccess.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3A8E62A74E3945319E423D0E9B977165"
             {
             "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\Harpy.gif"
@@ -4904,6 +4978,26 @@
             {
             "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\Mayor.gif"
             "TargetName" = "8:Mayor.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3D57F9F000104EC69578E0634AED73D2"
+            {
+            "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\Star.gif"
+            "TargetName" = "8:Star.gif"
             "Tag" = "8:"
             "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
             "Condition" = "8:"
@@ -6160,6 +6254,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_63F0F2B4E9C8F6F14A6A970EB886AEFA"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:WpfAnimatedGif, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9e7cd3b544a090dc, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_63F0F2B4E9C8F6F14A6A970EB886AEFA"
+                    {
+                    "Name" = "8:WpfAnimatedGif.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:WpfAnimatedGif.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_E950CECD612246C18600F1F09CC854E4"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_648BEF5F4AE94FEE996B994F3E8BBD8B"
             {
             "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\c74MountedPatrol.gif"
@@ -6404,6 +6529,26 @@
             {
             "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\Minstrel.gif"
             "TargetName" = "8:Minstrel.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6A6F87BF040941DFBBCB02B30ADD1D34"
+            {
+            "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\EndGameFail.gif"
+            "TargetName" = "8:EndGameFail.gif"
             "Tag" = "8:"
             "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
             "Condition" = "8:"
@@ -7404,6 +7549,26 @@
             {
             "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\SecretRites.gif"
             "TargetName" = "8:SecretRites.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_80DEAB30532F4B658C3D7D3748ED9AB7"
+            {
+            "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\ORest.gif"
+            "TargetName" = "8:ORest.gif"
             "Tag" = "8:"
             "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
             "Condition" = "8:"
@@ -9240,37 +9405,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B236F59D3E33D785CDC2E4AC83A2AA47"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:WpfAnimatedGif, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9e7cd3b544a090dc, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_B236F59D3E33D785CDC2E4AC83A2AA47"
-                    {
-                    "Name" = "8:WpfAnimatedGif.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:WpfAnimatedGif.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_E950CECD612246C18600F1F09CC854E4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B4F7E714F6584BF4AB3A4917DEF87A99"
             {
             "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\c52Knight.gif"
@@ -9911,6 +10045,46 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CBC569D47E6F4106949857E37D07D39C"
+            {
+            "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\Win.gif"
+            "TargetName" = "8:Win.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CC37F0C993544836AA98005F2FE819B3"
+            {
+            "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\Win.gif"
+            "TargetName" = "8:Win.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CD5902386E3041B2A80C6766E50B204F"
             {
             "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\c01die.gif"
@@ -10495,6 +10669,46 @@
             {
             "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\Fugitive.gif"
             "TargetName" = "8:Fugitive.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DAC45CA6BDF346DA9659F27817FDB159"
+            {
+            "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\ORest.gif"
+            "TargetName" = "8:ORest.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DAEBC0ABE2FA4307A6B40E0AD8B9A61F"
+            {
+            "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\EndGameFail.gif"
+            "TargetName" = "8:EndGameFail.gif"
             "Tag" = "8:"
             "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
             "Condition" = "8:"
@@ -11871,6 +12085,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FB6337C42BEC4E9F8BF909C4321E6041"
+            {
+            "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\EndGameSuccess.gif"
+            "TargetName" = "8:EndGameSuccess.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FC238ED2150448AF9DCF4D8E9668ED00"
             {
             "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\c68DwarfLead.gif"
@@ -12214,7 +12448,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:BarbarianPrince"
         "ProductCode" = "8:{FFCC2816-98D9-42FE-8374-8F24570EE47A}"
-        "PackageCode" = "8:{DAA4EA4F-AD1A-47E9-AC4A-B7A12D082589}"
+        "PackageCode" = "8:{95E9BBE9-B307-4D4D-B479-3B618B726DAC}"
         "UpgradeCode" = "8:{F2D782D1-6CB8-4ED6-A284-DA6732A9A9BE}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -12749,7 +12983,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B40BEF20FC854B338E3FAED3965B987F"
             {
-            "SourcePath" = "8:..\\BarbarianPrinceGame\\obj\\x64\\Release\\BarbarianPrince.exe"
+            "SourcePath" = "8:..\\BarbarianPrinceGame\\obj\\x64\\Debug\\BarbarianPrince.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E950CECD612246C18600F1F09CC854E4"
