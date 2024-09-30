@@ -125,7 +125,7 @@ namespace BarbarianPrince
          Logger.SetOn(LogEnum.LE_PARTYMEMBER_ADD);
          Logger.SetOn(LogEnum.LE_REMOVE_KIA);
          Logger.SetOn(LogEnum.LE_REMOVE_ITEM);
-         //Logger.SetOn(LogEnum.LE_END_GAME);
+         Logger.SetOn(LogEnum.LE_END_GAME);
          //Logger.SetOn(LogEnum.LE_END_GAME_CHECK);
          //Logger.SetOn(LogEnum.LE_MOVE_STACKING);
          //Logger.SetOn(LogEnum.LE_MOVE_COUNT);

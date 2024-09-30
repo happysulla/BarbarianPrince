@@ -3992,7 +3992,7 @@ namespace BarbarianPrince
                     myTextBlock.Inlines.Add(new InlineUIContainer(imgEndGameWon));
                     myTextBlock.Inlines.Add(new LineBreak());
                     myTextBlock.Inlines.Add(new LineBreak());
-                    myTextBlock.Inlines.Add(new Run("Click image to close game or select 'File|New Game' menu."));
+                    myTextBlock.Inlines.Add(new Run("Click image to close game or select 'File|New' to continue your wins."));
                     break;
                 case "e502":
                     StringBuilder sbEndLost = new StringBuilder();
@@ -4032,7 +4032,7 @@ namespace BarbarianPrince
                     myTextBlock.Inlines.Add(new InlineUIContainer(imgEndGameLost));
                     myTextBlock.Inlines.Add(new LineBreak());
                     myTextBlock.Inlines.Add(new LineBreak());
-                    myTextBlock.Inlines.Add(new Run("Click image to close game or select 'File|New Game' menu."));
+                    myTextBlock.Inlines.Add(new Run("Click image to close game or select 'File|New' to try again."));
                     break;
                 default:
                     break;
@@ -4735,6 +4735,7 @@ namespace BarbarianPrince
             sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
             sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
             sb11.Append(" a="); sb11.Append(outAction.ToString());
+            sb11.Append(" kia?="); sb11.Append(myGameInstance.Prince.IsKilled);
             Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
             myGameEngine.PerformAction(ref myGameInstance, ref outAction);
             myGameInstance.IsGridActive = false;  // ShowFindVictimResults() - Can show active event button in status bar
