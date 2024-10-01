@@ -398,3 +398,4 @@ FodyWeavers.xsd
 /Games/Checkpoint.bpg
 /BarbarianPrinceSetup/BarbarianPrinceSetup.msi
 /BarbarianPrinceSetup/setup.exe
+*.zip
