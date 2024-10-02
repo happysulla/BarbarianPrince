@@ -273,6 +273,9 @@
     <Compile Include="View\PartyDisplayDialog.xaml.cs">
       <DependentUpon>PartyDisplayDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ReturnToActiveEventDialog.xaml.cs">
+      <DependentUpon>ReturnToActiveEventDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RuleDialogViewer.cs" />
     <Compile Include="View\EventViewerStarvationMgr.xaml.cs">
       <DependentUpon>EventViewerStarvationMgr.xaml</DependentUpon>
@@ -550,6 +553,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PartyDisplayDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReturnToActiveEventDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

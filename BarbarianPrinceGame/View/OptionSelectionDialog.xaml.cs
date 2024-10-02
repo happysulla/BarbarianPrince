@@ -1698,11 +1698,11 @@ namespace BarbarianPrince
       }
       private void SelectRandomPartyChoice()
       {
-         int choice = Utilities.RandomGenerator.Next(6);
          Option option = null;
+         int choice = Utilities.RandomGenerator.Next(6);
          switch(choice)
          {
-            case 0:  break;
+            case 0: return; // Only Prince
             case 1: option = myOptions.Find("RandomParty10"); break;
             case 2: option = myOptions.Find("RandomParty08"); break;
             case 3: option = myOptions.Find("RandomParty05"); break;
@@ -1711,9 +1711,10 @@ namespace BarbarianPrince
             default: Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyChoice: reached default choice=" + choice.ToString()); return;
          }
          if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyChoice(): myOptions.Find() for choice=" + choice.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyChoice(): option=null");
          else
             option.IsEnabled = !option.IsEnabled;
+         return;
       }
       private void SelectRandomHexChoice()
       {

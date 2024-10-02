@@ -54,7 +54,7 @@ e001	"<Bold>e001 The Adventure Begins</Bold>
 <LineBreak/><LineBreak/>
 Evil events have overtaken your Northlands Kingdom. Your father, the old king, is dead - assassinated by rivals to the throne.  These usurpers now hold the place with their mercenary royal guard. 
 <LineBreak/><LineBreak/>
-You have escaped, and must collect 500 gold pieces to raise a force to smash them and retake your heritage. Furthermore, the usurpers have power friends overseas. If you can't return to take them out in ten weeks. Their allies will arrive and you will lose our kingdom forever. 
+You have escaped, and must collect 500 gold pieces to raise a force to smash them and retake your heritage. Furthermore, the usurpers have powerful friends overseas. If you can't return to take them out in ten weeks. Their allies will arrive and you will lose our kingdom forever. 
 <LineBreak/><LineBreak/>
 To escape the mercenary and royal guard, your loyal body servant Ogab smuggles you into a merchant caravan to the southern border. 
 Roll one die to see where the caravan takes you (while poor Ogab faces the wrath of the royal guards back home).

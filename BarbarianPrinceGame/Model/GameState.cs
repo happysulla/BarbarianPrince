@@ -3703,15 +3703,27 @@ namespace BarbarianPrince
                break;
          }
          StringBuilder sb12 = new StringBuilder();
+         if ("OK" != returnStatus)
+         {
+            sb12.Append("<<<<ERROR2::::::GameStateEncounter.PerformAction(): ");
+            sb12.Append(returnStatus);
+         }
+         sb12.Append("===>p=");
+         sb12.Append(previousPhase.ToString());
+         if (previousPhase != gi.GamePhase)
+         { sb12.Append("=>"); sb12.Append(gi.GamePhase.ToString()); }
+         sb12.Append("\t\ta="); sb12.Append(previousAction.ToString());
+         if (previousAction != action)
+         { sb12.Append("=>"); sb12.Append(action.ToString()); }
          sb12.Append("\t\tdra="); sb12.Append(previousDieAction.ToString());
          if (previousDieAction != gi.DieRollAction)
-            sb12.Append("=>"); sb12.Append(gi.DieRollAction.ToString());
+         { sb12.Append("=>"); sb12.Append(gi.DieRollAction.ToString()); }
          sb12.Append("\t\te="); sb12.Append(previousEvent);
          if (previousEvent != gi.EventActive)
-            sb12.Append("=>"); sb12.Append(gi.EventActive);
+         { sb12.Append("=>"); sb12.Append(gi.EventActive); }
          sb12.Append("\t\tes="); sb12.Append(previousStartEvent);
          if (previousStartEvent != gi.EventStart)
-            sb12.Append("=>"); sb12.Append(gi.EventStart);
+         { sb12.Append("=>"); sb12.Append(gi.EventStart); }
          sb12.Append("\t\tdr="); sb12.Append(dieRoll.ToString());
          sb12.Append("\t\tm="); sb12.Append(gi.Prince.Movement.ToString());
          sb12.Append("\t\tmu="); sb12.Append(gi.Prince.MovementUsed.ToString());
@@ -4397,7 +4409,8 @@ namespace BarbarianPrince
          if (GameAction.E192PrinceResurrected != action)    // if resurrected, game does not end
          {
             isGameEnded = PerformEndCheck(gi, ref action);  // check if game ended
-            Logger.Log(LogEnum.LE_END_GAME, "GameStateEncounter.PerformAction(): a=" + action.ToString() + " end?=" + isGameEnded.ToString());
+            if( true == isGameEnded)
+               Logger.Log(LogEnum.LE_END_GAME, "GameStateEncounter.PerformAction(): a=" + action.ToString() + " end?=" + isGameEnded.ToString());
          }
          if (false == isGameEnded) // GameStateEncounter.PerformAction()
          {
@@ -7688,7 +7701,7 @@ namespace BarbarianPrince
             case "e003a": // Swordsman
             case "e003b": // Swordsman
             case "e003c": // Swordsman
-               gi.EventStart = "e003";
+               gi.EventStart = "e003"; // set for EncounterLootStart()
                gi.EncounteredMembers.Clear();
                IMapItem swordsman = CreateCharacter(gi, "Swordsman");
                swordsman.AddNewMount();

@@ -781,7 +781,7 @@ namespace BarbarianPrince
                   bmi6.BeginInit();
                   bmi6.UriSource = new Uri(MapImage.theImageDirectory + "Food.gif", UriKind.Absolute);
                   bmi6.EndInit();
-                  Image img6 = new Image { Source = bmi6, Width = Utilities.theMapItemSize, Height = Utilities.theMapItemSize };
+                  Image img6 = new Image { Tag="Food", Source = bmi6, Width = Utilities.theMapItemSize, Height = Utilities.theMapItemSize };
                   myStackPanelAssignable.Children.Add(img6);
                   //--------------------------------------------
                   string sContent3 = "= " + myUnassignedFood.ToString();
@@ -795,7 +795,7 @@ namespace BarbarianPrince
                   bmi7.BeginInit();
                   bmi7.UriSource = new Uri(MapImage.theImageDirectory + "Coin.gif", UriKind.Absolute);
                   bmi7.EndInit();
-                  Image img7 = new Image { Source = bmi7, Width = Utilities.theMapItemSize, Height = Utilities.theMapItemSize };
+                  Image img7 = new Image { Tag = "Coin", Source = bmi7, Width = Utilities.theMapItemSize, Height = Utilities.theMapItemSize };
                   myStackPanelAssignable.Children.Add(img7);
                   //--------------------------------------------
                   string sContent4 = "= " + myUnassignedCoin.ToString();
@@ -1601,9 +1601,13 @@ namespace BarbarianPrince
                         {
                            myState = LoadEnum.LE_END;
                         }
+                        else if (("Food" == name) || ("Coin" == name) )
+                        {
+                           // do nothing
+                        }
                         else
                         {
-                           Logger.Log(LogEnum.LE_ERROR, "Grid_MouseDown(): Clicking Image - Reached default myState=" + myState.ToString() + " img=" + name);
+                           Logger.Log(LogEnum.LE_ERROR, "Grid_MouseDown(): Clicking Image - Reached default myState=" + myState.ToString() + " img.Tag=" + name);
                         }
                         break;
                      }

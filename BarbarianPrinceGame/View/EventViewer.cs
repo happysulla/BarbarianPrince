@@ -1502,7 +1502,7 @@ namespace BarbarianPrince
                     }
                     break;
                 case "e003": // swordsman has a fast horse
-                    AppendEscapeMethods(gi, false); // ridning escape not possible
+                    AppendEscapeMethods(gi, false); // riding escape not possible
                     break;
                 case "e004": // Mercenaries
                     AppendEscapeMethods(gi, false); // riding escape not possible
@@ -4058,7 +4058,7 @@ namespace BarbarianPrince
             {
                 myTextBlock.Inlines.Add(new LineBreak());
                 bool isEncounteredRiding = false;
-                if (("e006" != gi.EventActive) && ("e007" != gi.EventActive)) // dwarf and elf encounters are not riding
+                if (("e005" != gi.EventActive) && ("e006" != gi.EventActive) && ("e007" != gi.EventActive) && ("e058b" != gi.EventActive)) // dwarf and elf encounters are not riding
                     isEncounteredRiding = gi.IsEncounteredRiding();
                 if (false == isEncounteredRiding)
                 {
@@ -4756,7 +4756,18 @@ namespace BarbarianPrince
         private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
         {
             GameAction action = GameAction.Error;
-            System.Windows.Point p = e.GetPosition((UIElement)sender);
+         if (myGameInstance.EventActive != myGameInstance.EventDisplayed) // if an image is clicked, only take action if on active screen
+         {
+            ReturnToActiveEventDialog dialog = new ReturnToActiveEventDialog(); // Get the name from user
+            dialog.Topmost = true;
+            if (true == dialog.ShowDialog())
+            {
+               GameAction actionGoto = GameAction.UpdateEventViewerActive;
+               myGameEngine.PerformAction(ref myGameInstance, ref actionGoto);
+            }
+            return;
+         }
+         System.Windows.Point p = e.GetPosition((UIElement)sender);
             HitTestResult result = VisualTreeHelper.HitTest(myTextBlock, p);  // Get the Point where the hit test occurrs
             foreach (Inline item in myTextBlock.Inlines)
             {
@@ -4764,8 +4775,6 @@ namespace BarbarianPrince
                 {
                     if (ui.Child is Image)
                     {
-                        if (myGameInstance.EventActive != myGameInstance.EventDisplayed) // if an image is clicked, only take action if on active screen
-                            return;
                         Image img = (Image)ui.Child;
                         if (result.VisualHit == img)
                         {
