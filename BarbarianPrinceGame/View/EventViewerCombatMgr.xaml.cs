@@ -864,8 +864,22 @@ namespace BarbarianPrince
                   {
                      if (false == ResetGridForCombat(myGameInstance.PartyMembers, myGameInstance.EncounteredMembers)) // UpdateGrid() - NEXT_ROUND
                      {
-                        Logger.Log(LogEnum.LE_ERROR, "UpdateGrid(): ResetGridForCombat() returned false for CombatEnum.NEXT_ROUND");
-                        return false;
+                        Logger.Log(LogEnum.LE_ERROR, "UpdateGrid(): ResetGridForCombat() returned false for CombatEnum.NEXT_ROUND isEnd11=false myState=" + myState.ToString() + " fightCountBefore1=" + fightCountBefore1.ToString()  + " fightCountAfter1=" + fightCountAfter1.ToString());
+                        if (false == UpdateCombatEnd(ref isEnd11)) // combat can only end if a protector is not coming
+                        {
+                           Logger.Log(LogEnum.LE_ERROR, "UpdateGrid(): UpdateCombatEnd() returned false");
+                           return false;
+                        }
+                        if (true == isEnd11)
+                        {
+                           if ((CombatEnum.END_POISON != myState) && (CombatEnum.END_SHIELD != myState) && (CombatEnum.END_TALISMAN != myState))
+                              return true;
+                        }
+                        else
+                        {
+                           Logger.Log(LogEnum.LE_ERROR, "UpdateGrid(): isEnd11=false AGAIN fightCountBefore1=" + fightCountBefore1.ToString()  + " fightCountAfter1=" + fightCountAfter1.ToString());
+                           return false;
+                        }
                      }
                   }
                }
@@ -951,6 +965,179 @@ namespace BarbarianPrince
             default:
                Logger.Log(LogEnum.LE_ERROR, "UpdateGrid(): reached default for myState=" + myState.ToString());
                return false;
+         }
+         return true;
+      }
+      private bool UpdateCombatEnd(ref bool isEnd)
+      {
+         if (null == myCallback)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "CheckForEndOfCombat(): myCallback=null");
+            return false;
+         }
+         //--------------------------------------------------
+         isEnd = false;
+         bool isAnyPartyMemberAlive = false;
+         bool isAnyEncounteredMemberLeft = false;
+         foreach (IMapItem mi in myAssignables)
+         {
+            if (mi == null)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): myGridRows[i].myAssignable=null");
+               return false;
+            }
+            if (false == myIsPartyMembersAssignable)
+            {
+               if ((true == myIsWizardEscape) && (true == mi.Name.Contains("Wizard"))) // e023 - wizard escapes if damaged and sent fireball - being removed in RemoveCasualties()
+                  continue;
+            }
+            if ((false == mi.IsKilled) && (false == mi.IsUnconscious))
+            {
+               if (true == myIsPartyMembersAssignable)
+               {
+                  Logger.Log(LogEnum.LE_COMBAT_STATE_END, "UpdateCombatEnd(): myAssignables -> isAnyPartyMemberAlive=true");
+                  isAnyPartyMemberAlive = true;
+               }
+               else
+               {
+                  Logger.Log(LogEnum.LE_COMBAT_STATE_END, "UpdateCombatEnd(): myAssignables -> isAnyEncounteredMemberLeft=true");
+                  isAnyEncounteredMemberLeft = true;
+               }
+            }
+            else
+            {
+               if (false == myIsPartyMembersAssignable)
+                  myGameInstance.KilledLocations.Add(myGameInstance.Prince.Territory);
+            }
+         }
+         foreach (IMapItem mi1 in myUnassignables)
+         {
+            if (mi1 == null)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): myGridRows[i].myUnassignable=null");
+               return false;
+            }
+            if (true == myIsPartyMembersAssignable)
+            {
+               if ((true == myIsWizardEscape) && (true == mi1.Name.Contains("Wizard"))) // e023 - wizard escapes if damaged and sent fireball - being removed in RemoveCasualties()
+                  continue;
+            }
+            if ((false == mi1.IsKilled) && (false == mi1.IsUnconscious))
+            {
+               if (false == myIsPartyMembersAssignable)
+               {
+                  Logger.Log(LogEnum.LE_COMBAT_STATE_END, "UpdateCombatEnd(): myUnassignables -> isAnyPartyMemberAlive=true");
+                  isAnyPartyMemberAlive = true;
+               }
+               else
+               {
+                  Logger.Log(LogEnum.LE_COMBAT_STATE_END, "UpdateCombatEnd(): myUnassignables -> isAnyEncounteredMemberLeft=true");
+                  isAnyEncounteredMemberLeft = true;
+               }
+            }
+            else
+            {
+               if (true == myIsPartyMembersAssignable)
+                  myGameInstance.KilledLocations.Add(myGameInstance.Prince.Territory);
+            }
+         }
+         //--------------------------------------------------------
+         if (true == myGameInstance.Prince.IsRunAway)
+         {
+            Logger.Log(LogEnum.LE_COMBAT_STATE_END, "UpdateCombatEnd(): myGameInstance.Prince.IsRunAway=true return isEnd=true");
+            isEnd = true;
+            myIsEscape = true;
+            foreach (IMapItem mi in myGameInstance.PartyMembers)
+               mi.IsRunAway = false;
+            if (false == myCallback(myIsRoute, myIsEscape)) // UpdateCombatEnd() - Players lost combat
+            {
+               Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): lost combat and myCallback() returned false");
+               return false;
+            }
+         }
+         else if ((true == myGameInstance.Prince.IsKilled) || (false == isAnyPartyMemberAlive))
+         {
+            if ((true == myIsKnightOnBridge) && (true == myGameInstance.Prince.IsUnconscious))
+            {
+               myGameInstance.Prince.HealWounds(1, 0);
+               foreach (IMapItem mi in myNonCombatants) // UpdateCombatEnd() - return noncombatants to party
+                  myGameInstance.PartyMembers.Add(mi);
+               myIsEscape = true;
+               Logger.Log(LogEnum.LE_COMBAT_STATE_END, "UpdateCombatEnd(): myIsKnightOnBridge=true Prince.IsUnconscious=true myIsEscape=true isEnd=false");
+               if (false == SetStateIfItemUsed()) // UpdateGrid() performed in caller routine
+               {
+                  if (false == myCallback(myIsRoute, true)) // UpdateCombatEnd() - Prince lost combat against Black Knight
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): myCallback() returned false");
+                     return false;
+                  }
+               }
+               if (false == ResetGridForNonCombat(myGameInstance.PartyMembers))
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): ResetGridForNonCombat()=false");
+                  return false;
+               }
+            }
+            else
+            {
+               isEnd = true;
+               myGameInstance.Prince.IsKilled = true; // if prince is unconscious and nobody is left alive, kill him
+               Logger.Log(LogEnum.LE_COMBAT_STATE_END, "UpdateCombatEnd():  Prince.IsKilled=true isEnd=true");
+               if (false == myCallback(myIsRoute, myIsEscape)) // UpdateCombatEnd() - Players lost combat
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): lost combat and myCallback() returned false");
+                  return false;
+               }
+            }
+         }
+         else
+         {
+            if (null != myCatVictim)
+            {
+               if ((true == myCatVictim.IsKilled) || (true == myCatVictim.IsUnconscious))
+               {
+                  if (true == myCatVictim.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+                     myGameInstance.ResurrectedMembers.Add(myCatVictim);
+                  if (false == myGameInstance.RemoveVictimInParty(myCatVictim))
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): RemoveVictimInParty() returned false");
+                     return false;
+                  }
+                  Logger.Log(LogEnum.LE_COMBAT_STATE_END, "UpdateCombatEnd(): isAnyEncounteredMemberLeft=false myCatVictim.IsKilled=" + myCatVictim.IsKilled.ToString() + "myCatVictim.IsUnconscious=" + myCatVictim.IsUnconscious.ToString());
+                  isAnyEncounteredMemberLeft = false; // Hunting cat leaves combat taking victim with it
+               }
+            }
+            if (false == isAnyEncounteredMemberLeft) // Won combat - take end of combat actions
+            {
+               Logger.Log(LogEnum.LE_COMBAT_STATE_END, "UpdateCombatEnd(): Won Combat isAnyEncounteredMemberLeft=false myState=" + myState.ToString());
+               if (true == myIsSpiderFight)  // UpdateCombatEnd()
+               {
+                  foreach (IMapItem mi in myGameInstance.PartyMembers)   // spiders reduce combat by one due to webs - need to reset
+                     ++mi.Combat;
+               }
+               //-------------------------------
+               foreach (IMapItem mi in myNonCombatants) // UpdateCombatEnd() - return non combatants to party 
+                  myGameInstance.PartyMembers.Add(mi);
+               foreach (IMapItem mi in myEncounteredSlaveGirls) // return slave girls to party - ones given in negotiation
+                  myGameInstance.PartyMembers.Add(mi);
+               DistributeDeadWealth();
+               //-------------------------------
+               if (false == SetStateIfItemUsed()) // UpdateGrid() performed in caller routine
+               {
+                  Logger.Log(LogEnum.LE_COMBAT_STATE_END, "UpdateCombatEnd(): Won Combat isAnyEncounteredMemberLeft=false isEnd=true myState=" + myState.ToString());
+                  isEnd = true;
+                  if (false == myCallback(myIsRoute, myIsEscape)) // UpdateCombatEnd() - Players won combat
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): myCallback() returned false");
+                     return false;
+                  }
+               }
+               if (false == ResetGridForNonCombat(myGameInstance.PartyMembers))
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): ResetGridForNonCombat()=false");
+                  return false;
+               }
+            }
          }
          return true;
       }
@@ -1225,161 +1412,6 @@ namespace BarbarianPrince
             myGridRows[i] = new GridRow(mapItems[i]);
             myGridRows[i].myAssignable = myNerveGasOwner;
             myGridRows[i].myAssignmentCount = GetAssignedCount(myNerveGasOwner.Name);
-         }
-         return true;
-      }
-      private bool UpdateCombatEnd(ref bool isEnd)
-      {
-         if (null == myCallback)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "CheckForEndOfCombat(): myCallback=null");
-            return false;
-         }
-         //--------------------------------------------------
-         isEnd = false;
-         bool isAnyPartyMemberAlive = false;
-         bool isAnyEncounteredMemberLeft = false;
-         foreach (IMapItem mi in myAssignables)
-         {
-            if (mi == null)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): myGridRows[i].myAssignable=null");
-               return false;
-            }
-            if (false == myIsPartyMembersAssignable)
-            {
-               if ((true == myIsWizardEscape) && (true == mi.Name.Contains("Wizard"))) // e023 - wizard escapes if damaged and sent fireball - being removed in RemoveCasualties()
-                  continue;
-            }
-            if ((false == mi.IsKilled) && (false == mi.IsUnconscious))
-            {
-               if (true == myIsPartyMembersAssignable)
-                  isAnyPartyMemberAlive = true;
-               else
-                  isAnyEncounteredMemberLeft = true;
-            }
-            else
-            {
-               if (false == myIsPartyMembersAssignable)
-                  myGameInstance.KilledLocations.Add(myGameInstance.Prince.Territory);
-            }
-         }
-         foreach (IMapItem mi1 in myUnassignables)
-         {
-            if (mi1 == null)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): myGridRows[i].myUnassignable=null");
-               return false;
-            }
-            if (true == myIsPartyMembersAssignable)
-            {
-               if ((true == myIsWizardEscape) && (true == mi1.Name.Contains("Wizard"))) // e023 - wizard escapes if damaged and sent fireball - being removed in RemoveCasualties()
-                  continue;
-            }
-            if ((false == mi1.IsKilled) && (false == mi1.IsUnconscious))
-            {
-               if (false == myIsPartyMembersAssignable)
-                  isAnyPartyMemberAlive = true;
-               else
-                  isAnyEncounteredMemberLeft = true;
-            }
-            else
-            {
-               if (true == myIsPartyMembersAssignable)
-                  myGameInstance.KilledLocations.Add(myGameInstance.Prince.Territory);
-            }
-         }
-         //--------------------------------------------------------
-         if  (true == myGameInstance.Prince.IsRunAway) 
-         {
-            isEnd = true;
-            myIsEscape = true;
-            foreach (IMapItem mi in myGameInstance.PartyMembers)
-               mi.IsRunAway = false;
-            if (false == myCallback(myIsRoute, myIsEscape)) // UpdateCombatEnd() - Players lost combat
-            {
-               Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): lost combat and myCallback() returned false");
-               return false;
-            }
-         }
-         else if ((true == myGameInstance.Prince.IsKilled) || (false == isAnyPartyMemberAlive))
-         {
-            if( (true == myIsKnightOnBridge) && (true == myGameInstance.Prince.IsUnconscious) )
-            {
-               myGameInstance.Prince.HealWounds(1, 0);
-               foreach (IMapItem mi in myNonCombatants) // UpdateCombatEnd() - return noncombatants to party
-                  myGameInstance.PartyMembers.Add(mi);
-               myIsEscape = true;
-               if (false == SetStateIfItemUsed()) // UpdateGrid() performed in caller routine
-               {
-                  if (false == myCallback(myIsRoute, true)) // UpdateCombatEnd() - Prince lost combat against Black Knight
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): myCallback() returned false");
-                     return false;
-                  }
-               }
-               if (false == ResetGridForNonCombat(myGameInstance.PartyMembers))
-               {
-                  Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): ResetGridForNonCombat()=false");
-                  return false;
-               }
-            }
-            else
-            {
-               isEnd = true;
-               myGameInstance.Prince.IsKilled = true; // if prince is unconscious and nobody is left alive, kill him
-               if (false == myCallback(myIsRoute, myIsEscape)) // UpdateCombatEnd() - Players lost combat
-               {
-                  Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): lost combat and myCallback() returned false");
-                  return false;
-               }
-            }
-         }
-         else
-         {
-            if (null != myCatVictim)
-            {
-               if ((true == myCatVictim.IsKilled) || (true == myCatVictim.IsUnconscious))
-               {
-                  if (true == myCatVictim.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
-                     myGameInstance.ResurrectedMembers.Add(myCatVictim);
-                  if (false == myGameInstance.RemoveVictimInParty(myCatVictim))
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): RemoveVictimInParty() returned false");
-                     return false;
-                  }
-                  isAnyEncounteredMemberLeft = false; // Hunting cat leaves combat taking victim with it
-               }
-            }
-            if (false == isAnyEncounteredMemberLeft) // Won combat - take end of combat actions
-            {
-               if (true == myIsSpiderFight)  // UpdateCombatEnd()
-               {
-                  foreach (IMapItem mi in myGameInstance.PartyMembers)   // spiders reduce combat by one due to webs - need to reset
-                     ++mi.Combat;
-               }
-               //-------------------------------
-               foreach (IMapItem mi in myNonCombatants) // UpdateCombatEnd() - return non combatants to party 
-                  myGameInstance.PartyMembers.Add(mi);
-               foreach (IMapItem mi in myEncounteredSlaveGirls) // return slave girls to party - ones given in negotiation
-                  myGameInstance.PartyMembers.Add(mi);
-               DistributeDeadWealth();
-               //-------------------------------
-               if (false == SetStateIfItemUsed()) // UpdateGrid() performed in caller routine
-               {
-                  isEnd = true;
-                  if (false == myCallback(myIsRoute, myIsEscape)) // UpdateCombatEnd() - Players won combat
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): myCallback() returned false");
-                     return false;
-                  }
-               }
-               if (false == ResetGridForNonCombat(myGameInstance.PartyMembers))
-               {
-                  Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): ResetGridForNonCombat()=false");
-                  return false;
-               }
-            }
          }
          return true;
       }

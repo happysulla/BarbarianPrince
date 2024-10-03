@@ -27,6 +27,7 @@ namespace BarbarianPrince
       LE_MOVE_COUNT,
       LE_COMBAT_RESULT,
       LE_COMBAT_STATE,
+      LE_COMBAT_STATE_END,
       LE_COMBAT_STATE_ESCAPE,
       LE_COMBAT_STATE_ROUTE,
       LE_COMBAT_THREAD,
@@ -141,6 +142,7 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_LODGING_COST);
          Logger.SetOn(LogEnum.LE_MOUNT_CHANGE);
          //Logger.SetOn(LogEnum.LE_COMBAT_STATE);
+         Logger.SetOn(LogEnum.LE_COMBAT_STATE_END);
          //Logger.SetOn(LogEnum.LE_COMBAT_STATE_ESCAPE);
          //Logger.SetOn(LogEnum.LE_COMBAT_STATE_ROUTE);
          //Logger.SetOn(LogEnum.LE_COMBAT_RESULT);
