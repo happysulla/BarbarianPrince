@@ -11,6 +11,7 @@ namespace BarbarianPrince
    }
    class MainMenuViewer : IView
    {
+      private RuleDialogViewer myRulesMgr = null;
       private readonly Menu myMainMenu;                     // Top level menu items: File | View | Options | Help
       private readonly MenuItem myMenuItemTopLevel1 = null;
       private readonly MenuItem myMenuItemTopLevel2 = null;
@@ -102,10 +103,15 @@ namespace BarbarianPrince
                   subItem43.Click += MenuItemHelpIcons_Click;
                   myMenuItemTopLevel4.Items.Add(subItem43);
                   MenuItem subItem44 = new MenuItem();
-                  subItem44.Header = "_About...";
-                  subItem44.InputGestureText = "Ctrl+A";
-                  subItem44.Click += MenuItemHelpAbout_Click;
+                  subItem44.Header = "_Character Description...";
+                  subItem44.InputGestureText = "F4";
+                  subItem44.Click += MenuItemHelpCharacters_Click;
                   myMenuItemTopLevel4.Items.Add(subItem44);
+                  MenuItem subItem45 = new MenuItem();
+                  subItem45.Header = "_About...";
+                  subItem45.InputGestureText = "Ctrl+A";
+                  subItem45.Click += MenuItemHelpAbout_Click;
+                  myMenuItemTopLevel4.Items.Add(subItem45);
                }
             } // end foreach (Control item in myMainMenu.Items)
          } // end foreach (Control item in myMainMenu.Items)
@@ -302,6 +308,11 @@ namespace BarbarianPrince
       {
          IconDisplayDialog dialog = new IconDisplayDialog();
          dialog.Show();
+      }
+      public void MenuItemHelpCharacters_Click(object sender, RoutedEventArgs e)
+      {
+         GameAction action = GameAction.ShowCharacterDescription;
+         myGameEngine.PerformAction(ref myGameInstance, ref action);
       }
       public void MenuItemHelpAbout_Click(object sender, RoutedEventArgs e)
       {

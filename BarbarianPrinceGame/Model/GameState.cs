@@ -2327,6 +2327,7 @@ namespace BarbarianPrince
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
             case GameAction.ShowRuleListing:
+            case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
             case GameAction.ShowPartyPath:
             case GameAction.ShowAboutDialog:
@@ -2800,6 +2801,7 @@ namespace BarbarianPrince
                case GameAction.ShowInventory:
                case GameAction.ShowAllRivers:
                case GameAction.ShowRuleListing:
+               case GameAction.ShowCharacterDescription:
                case GameAction.ShowEventListing:
                case GameAction.ShowPartyPath:
                case GameAction.ShowAboutDialog:
@@ -2949,6 +2951,7 @@ namespace BarbarianPrince
                case GameAction.ShowInventory:
                case GameAction.ShowAllRivers:
                case GameAction.ShowRuleListing:
+               case GameAction.ShowCharacterDescription:
                case GameAction.ShowEventListing:
                case GameAction.ShowPartyPath:
                case GameAction.ShowAboutDialog:
@@ -3313,6 +3316,7 @@ namespace BarbarianPrince
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
             case GameAction.ShowRuleListing:
+            case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
             case GameAction.ShowPartyPath:
             case GameAction.ShowAboutDialog:
@@ -3412,6 +3416,7 @@ namespace BarbarianPrince
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
             case GameAction.ShowRuleListing:
+            case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
             case GameAction.ShowPartyPath:
             case GameAction.ShowAboutDialog:
@@ -3823,6 +3828,7 @@ namespace BarbarianPrince
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
             case GameAction.ShowRuleListing:
+            case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
             case GameAction.ShowPartyPath:
             case GameAction.ShowAboutDialog:
@@ -3913,6 +3919,7 @@ namespace BarbarianPrince
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
             case GameAction.ShowRuleListing:
+            case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
             case GameAction.ShowPartyPath:
             case GameAction.ShowAboutDialog:
@@ -3992,6 +3999,7 @@ namespace BarbarianPrince
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
             case GameAction.ShowRuleListing:
+            case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
             case GameAction.ShowPartyPath:
             case GameAction.ShowAboutDialog:
@@ -4058,6 +4066,7 @@ namespace BarbarianPrince
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
             case GameAction.ShowRuleListing:
+            case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
             case GameAction.ShowPartyPath:
             case GameAction.ShowAboutDialog:
@@ -4125,6 +4134,7 @@ namespace BarbarianPrince
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
             case GameAction.ShowRuleListing:
+            case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
             case GameAction.ShowPartyPath:
             case GameAction.ShowAboutDialog:
@@ -4289,6 +4299,7 @@ namespace BarbarianPrince
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
             case GameAction.ShowRuleListing:
+            case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
             case GameAction.ShowPartyPath:
             case GameAction.ShowAboutDialog:
@@ -4418,6 +4429,7 @@ namespace BarbarianPrince
             {
                case GameAction.ShowInventory:
                case GameAction.ShowRuleListing:
+               case GameAction.ShowCharacterDescription:
                case GameAction.ShowEventListing:
                case GameAction.ShowPartyPath:
                case GameAction.ShowAboutDialog:

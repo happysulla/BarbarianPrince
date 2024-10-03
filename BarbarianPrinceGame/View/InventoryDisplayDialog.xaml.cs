@@ -934,6 +934,7 @@ namespace BarbarianPrince
          b.BorderBrush = Brushes.Black;
          b.Background = new SolidColorBrush(Colors.Transparent);
          b.Foreground = new SolidColorBrush(Colors.Transparent);
+         b.Click += ButtonShowCharDesc_Click;
          MapItem.SetButtonContent(b, mi, true, false, false, false); 
          return b;
       }
@@ -945,6 +946,16 @@ namespace BarbarianPrince
          vb.Child = img;
          b.Content = vb;
          return b;
+      }
+      private void ButtonShowCharDesc_Click(object sender, RoutedEventArgs e)
+      {
+         ShowCounterHelpDialog dialogShowCharDesc = new ShowCounterHelpDialog(myRulesManager);
+         if (true == dialogShowCharDesc.CtorError)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "UpdateView(): dialogShowCharDesc CtorError=true");
+            return;
+         }
+         dialogShowCharDesc.Show();
       }
       private void ButtonShowRule_Click(object sender, RoutedEventArgs e)
       {

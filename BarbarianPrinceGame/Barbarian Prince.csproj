@@ -332,6 +332,9 @@
     <Compile Include="View\ShowAboutDialog.xaml.cs">
       <DependentUpon>ShowAboutDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ShowCounterHelpDialog.xaml.cs">
+      <DependentUpon>ShowCounterHelpDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SplashDialog.xaml.cs">
       <DependentUpon>SplashDialog.xaml</DependentUpon>
     </Compile>
@@ -565,6 +568,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ShowAboutDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShowCounterHelpDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

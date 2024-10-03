@@ -189,6 +189,7 @@ namespace BarbarianPrince
       ShowInventory,
       ShowRuleListing,
       ShowEventListing,
+      ShowCharacterDescription,
       ShowAboutDialog,
 
       EncounterStart,
