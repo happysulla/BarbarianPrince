@@ -108,6 +108,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_GAME_INIT, "OpenGameFromFile(): gi=" + gi.ToString());
                fileStream.Close();
                theGamesDirectory = Path.GetDirectoryName(dlg.FileName); // save off the directory user chosen
+               theGamesDirectory += "\\";
                Directory.SetCurrentDirectory(AssemblyDirectory);
                return gi;
             }
@@ -149,6 +150,7 @@ namespace BarbarianPrince
                formatter.Serialize(fileStream, gi);
                fileStream.Close();
                theGamesDirectory = Path.GetDirectoryName(dlg.FileName); // save off the directory user chosen
+               theGamesDirectory += "\\";
             }
          }
          catch (Exception ex)
