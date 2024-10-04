@@ -865,21 +865,7 @@ namespace BarbarianPrince
                      if (false == ResetGridForCombat(myGameInstance.PartyMembers, myGameInstance.EncounteredMembers)) // UpdateGrid() - NEXT_ROUND
                      {
                         Logger.Log(LogEnum.LE_ERROR, "UpdateGrid(): ResetGridForCombat() returned false for CombatEnum.NEXT_ROUND isEnd11=false myState=" + myState.ToString() + " fightCountBefore1=" + fightCountBefore1.ToString()  + " fightCountAfter1=" + fightCountAfter1.ToString());
-                        if (false == UpdateCombatEnd(ref isEnd11)) // combat can only end if a protector is not coming
-                        {
-                           Logger.Log(LogEnum.LE_ERROR, "UpdateGrid(): UpdateCombatEnd() returned false");
-                           return false;
-                        }
-                        if (true == isEnd11)
-                        {
-                           if ((CombatEnum.END_POISON != myState) && (CombatEnum.END_SHIELD != myState) && (CombatEnum.END_TALISMAN != myState))
-                              return true;
-                        }
-                        else
-                        {
-                           Logger.Log(LogEnum.LE_ERROR, "UpdateGrid(): isEnd11=false AGAIN fightCountBefore1=" + fightCountBefore1.ToString()  + " fightCountAfter1=" + fightCountAfter1.ToString());
-                           return false;
-                        }
+                        return false;
                      }
                   }
                }
@@ -994,13 +980,9 @@ namespace BarbarianPrince
             if ((false == mi.IsKilled) && (false == mi.IsUnconscious))
             {
                if (true == myIsPartyMembersAssignable)
-               {
                   isAnyPartyMemberAlive = true;
-               }
                else
-               {
                   isAnyEncounteredMemberLeft = true;
-               }
             }
             else
             {
@@ -1088,6 +1070,11 @@ namespace BarbarianPrince
          }
          else
          {
+            if((0 == myGameInstance.EncounteredMembers.Count) && (true == isAnyEncounteredMemberLeft) ) // something is wrong...
+            {
+               Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): EncounteredMembers.Count=0 but isAnyEncounteredMemberLeft=true");
+               isAnyEncounteredMemberLeft = false;
+            }
             if (null != myCatVictim)
             {
                if ((true == myCatVictim.IsKilled) || (true == myCatVictim.IsUnconscious))

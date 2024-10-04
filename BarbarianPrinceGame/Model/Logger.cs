@@ -136,7 +136,7 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_ADD_WEALTH_CODE);
          Logger.SetOn(LogEnum.LE_FREE_LOAD);
          //Logger.SetOn(LogEnum.LE_ADD_FOOD);
-         //Logger.SetOn(LogEnum.LE_ADD_COIN);
+         Logger.SetOn(LogEnum.LE_ADD_COIN);
          //Logger.SetOn(LogEnum.LE_MANAGE_CACHE);
          //Logger.SetOn(LogEnum.LE_ADD_COIN_AUTO);
          //Logger.SetOn(LogEnum.LE_LODGING_COST);

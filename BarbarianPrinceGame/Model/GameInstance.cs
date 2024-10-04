@@ -780,8 +780,9 @@ namespace BarbarianPrince
                }
             }
          }
-         remainingCoins = (int)Math.Ceiling((decimal)coins / (decimal)fickleShare); // fickle get equal share as Prince
-         this.FickleCoin += (coins - remainingCoins);
+         int afterLooterCoins = remainingCoins;
+         remainingCoins = (int)Math.Ceiling((decimal)afterLooterCoins / (decimal)fickleShare); // fickle get equal share as Prince
+         this.FickleCoin += (afterLooterCoins - remainingCoins);
          Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): remainingCoins=" + remainingCoins.ToString());
          //---------------------------------
          IMapItems sortedMapItems = PartyMembers.SortOnCoin();
