@@ -91,7 +91,7 @@ e002a	"<Bold>e002a Encounter Mercenary Royal Guardsmen</Bold>
 <LineBreak/><LineBreak/>
 Mercenary thugs, dressed by the usurpers as their royal guardsmen, are riding toward you! Roll one die for the number of men:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
-<LineBreak/><LineBreak/>Each has a combat skill 5, endurance 4, wealth 4. Your options are:
+<LineBreak/><LineBreak/>Each has a combat skill 5, endurance 4, wealth 4. To advance to next screen, select button labeled Talk, Evade, or Fight:
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e002b'></Button></InlineUIContainer>   ->  
  <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e002b'></Button></InlineUIContainer><LineBreak/>
@@ -133,7 +133,7 @@ e002d	"<Bold>e002d Fight Mercenary Royal Guardsmen</Bold>
  <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5: Attack<LineBreak/>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6: Attacked"
 e003	"<Bold>e003 Swordsman</Bold>
-<LineBreak/><LineBreak/>You meet a swordsman adverturer. He is mounted on a horse. He has a combat skill of 6, endurance 6, and wealth 7. Sitting there on his horse, he takes an active interest in your party. Your options are:
+<LineBreak/><LineBreak/>You meet a swordsman adverturer. He is mounted on a horse. He has a combat skill of 6, endurance 6, and wealth 7. Sitting there on his horse, he takes an active interest in your party. To advance to next screen, select button labeled Talk, Evade, or Fight:
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e003a'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e003a'></Button></InlineUIContainer><LineBreak/>
@@ -184,7 +184,7 @@ e004	"<Bold>e004 Mercenary Band</Bold>
 <LineBreak/><LineBreak/>You observe a small band of mercenaries approaching. The leader is mounted on a horse. He has a combat skill 6, endurance 6, and wealth of 50. 
 <LineBreak/><LineBreak/>He has some followers. Each has a combat skill 5, endurance 4, and wealth 4. If the number of Troopers is one or two, they are mounted. Otherwise, they are on foot. Roll one die for number of troopers: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
-<LineBreak/><LineBreak/>Your options are:
+<LineBreak/><LineBreak/>To advance to next screen, select button labeled Talk, Evade, or Fight:
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e004a'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e004a'></Button></InlineUIContainer><LineBreak/>
@@ -239,7 +239,7 @@ e005	"<Bold>e005 Amazons</Bold>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>All have a combat skill 6, endurance 5, and wealth 4. 
 <LineBreak/><LineBreak/>They are blood-sisters and will always hire out together and serve together. If any are abandoned or left behind, all will desert you. 
-<LineBreak/><LineBreak/>Your options are:
+<LineBreak/><LineBreak/>To advance to next screen, select button labeled Talk, Evade, or Fight:
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e005a'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e005a'></Button></InlineUIContainer><LineBreak/>
@@ -286,7 +286,7 @@ e005c	"<Bold>e005c Fight Amazon</Bold>
 <LineBreak/><LineBreak/>
                                        <InlineUIContainer><Image Source='../bin/Images/Amazon.gif' Height='280'  Width='170' > </Image></InlineUIContainer>"
 e006	"<Bold>e006 Dwarf Warrior</Bold>
-<LineBreak/><LineBreak/>You encounter a Dwarf Warrior with combat skill 6, endurance 7, and wealth 21. First select one of the three options below (talk, evade, fight).  Next determine how many dwarves are in the band per
+<LineBreak/><LineBreak/>You encounter a Dwarf Warrior with combat skill 6, endurance 7, and wealth 21. To advance to the next screen, select one of the three buttons below (talk, evade, fight).  On the next screen, determine how many dwarves are in the band per
  <InlineUIContainer><Button Content='e006a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. If the Dwarf joins your party, see <InlineUIContainer><Button Content='e006f' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e006c'></Button></InlineUIContainer>   ->  
@@ -372,7 +372,7 @@ You arrived at the dwarf's advice location. Roll one die for what you find: <Inl
 <LineBreak/><LineBreak/>
                                  <InlineUIContainer><Image Name='DwarfAdviceEnd' Source='../bin/Images/DwarfAdvice.gif' Height='250'  Width='250'> </Image></InlineUIContainer> "
 e007	"<Bold>e007 Elf</Bold>
-<LineBreak/><LineBreak/>You encounter an Elf on foot. He has combat skill 5, endurance 5, and wealth 15. In addition after you select your option below, roll one die to determine his additional characteristics. See <InlineUIContainer><Button Content='e007a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
+<LineBreak/><LineBreak/>You encounter an Elf on foot. He has combat skill 5, endurance 5, and wealth 15. To advance to the next screen, you select a button below (talk, evade, or fight). After the selection, you will roll one die to determine his additional characteristics. See <InlineUIContainer><Button Content='e007a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>Due to the greater wisdom of Elves, subtract one from your own wit and wiles throughout the event or encounter. However, if the Elf joins the party, add one to your wit and wiles while he is in the party due to his sage advice and extensive knowledge.
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e007c'></Button></InlineUIContainer>   ->  
@@ -439,6 +439,7 @@ e008	"<Bold>e008 Halfling</Bold>
 <LineBreak/><LineBreak/>
 You encounter a halfling with combat skill 3, endurance 6, and wealth 4. You can attack him, talk with him, or pass by and end the encounter. If you attack him, you strike first in combat.
 <LineBreak/><LineBreak/>If you attack, after each round, roll one die. A two plus means the halfling has escaped into the brush and the combat is finished.
+<LineBreak/><LineBreak/>To advance to next screen, select button labeled Talk, Evade, or Fight:
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e008a'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e008a'></Button></InlineUIContainer><LineBreak/>
@@ -696,7 +697,7 @@ You encounter a local priest riding a donkey. The Priest has combat skill 3, end
 <LineBreak/><LineBreak/>
 He seems aloof and not disposed to conversation, but he may be afraid of you. You can let him 
  <InlineUIContainer><Button Content='Pass' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
-, ending the encounter, or select one of the two options below:
+, ending the encounter, or select one of the two buttons below (either Talk or Fight):
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e018a'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e018a'></Button></InlineUIContainer><LineBreak/>
@@ -751,7 +752,7 @@ e018d	"<Bold>e018d Mark of Cain</Bold>
                                        <InlineUIContainer><Image Name='EncounterEnd' Source='../bin/Images/MarkOfCain.gif' Height='250'  Width='125' > </Image></InlineUIContainer>"
 e019	"<Bold>e019 Hermit Monk</Bold>
 <LineBreak/><LineBreak/>
-You encounter a hermit monk meditating in the wilderness with a combat skill of 3, endurance 6, and wealth 0. He seems to be ignoring you. Select one of the options below:
+You encounter a hermit monk meditating in the wilderness with a combat skill of 3, endurance 6, and wealth 0. He seems to be ignoring you. To advance to next screen, select button labeled Talk, Evade, or Fight:
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e019a'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e019a'></Button></InlineUIContainer><LineBreak/>
@@ -801,7 +802,7 @@ e020	"<Bold>e020 Traveling Monk(s)</Bold>
 <LineBreak/><LineBreak/>You encounter a traveling monk who has combat skill 4, endurance 5, and wealth 4. Roll one die. If the result is 5 or 6, he is accompanied by a companion monk with equal abilities. Roll one die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
-He seems eager to talk. After rolling, your options are:
+He seems eager to talk. After rolling and to advance to next screen, select button labeled Talk, Evade, or Fight::
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e020a'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e020a'></Button></InlineUIContainer><LineBreak/>
@@ -849,6 +850,8 @@ e021	"<Bold>e021 Warrior Monks</Bold>
 <LineBreak/><LineBreak/>
 Roll one die again. If the result is 4 plus, they are also mounted:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
+<LineBreak/><LineBreak/>
+After rolling and to advance to next screen, select button labeled Talk, Evade, or Fight:
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e021a'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e021a'></Button></InlineUIContainer><LineBreak/>
@@ -900,7 +903,7 @@ e023	"<Bold>e023 Wizard</Bold>
 <LineBreak/><LineBreak/>You meet a wizard with combat skill 4, endurance 4, and wealth 60. 
 <LineBreak/><LineBreak/>He is accompanied by henchmen with combat skill 5, endurance 4, and wealth 4. Roll one die. If the results is 3 plus, they are mounted on horses:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
-<LineBreak/><LineBreak/>The wizard seems old, but he is still active and perhaps quite powerful. Your options are:
+<LineBreak/><LineBreak/>The wizard seems old, but he is still active and perhaps quite powerful. To advance to next screen, select button labeled Talk, Evade, or Fight:
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e023a'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e023a'></Button></InlineUIContainer>*<LineBreak/>
@@ -1424,6 +1427,7 @@ e050	"<Bold>e050 Local Constabulary</Bold>
 <LineBreak/><LineBreak/>Next roll one die to see how many you encounter. Add one die to roll if they are mounted. Add three to the roll if they are on foot. Die Roll=
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>Each constable has combat skill 5, endurance 4, and wealth 4.
+<LineBreak/><LineBreak/>After rolling and to advance to next screen, select button labeled Talk, Evade, or Fight:
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e050b'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e050b'></Button></InlineUIContainer><LineBreak/>
@@ -1724,7 +1728,7 @@ e058a	"<Bold>e058a Band of Dwarves Spotted</Bold>
   <LineBreak/><InlineUIContainer><Button Name='Escape' Content='Escape' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> from the area or
   <LineBreak/><InlineUIContainer><Button Name='Follow' Content='Follow' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> the dwarves. 
 <LineBreak/><LineBreak/>
-Alternatively, you can meet them using one of the three options below:
+Alternatively, you can meet them using one of the three options by selecting either the Talk, Evade, or Fight labeled buttons:
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e058e'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e058e'></Button></InlineUIContainer><LineBreak/>
@@ -1733,7 +1737,7 @@ Alternatively, you can meet them using one of the three options below:
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='Fight' Name='e058g'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e058g'></Button></InlineUIContainer>"
 e058b	"<Bold>e058b Band of Dwarves Spotted You</Bold>
-<LineBreak/><LineBreak/>Since your party is equal in size or larger, they spot you first. You meet them and select one of options below.  
+<LineBreak/><LineBreak/>Since your party is equal in size or larger, they spot you first. You meet them. To advance to next screen, select one of the buttons labeled: Talk, Evade, Fight:
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e058e'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e058e'></Button></InlineUIContainer><LineBreak/>
@@ -1804,7 +1808,7 @@ e058h	"<Bold>e058h Band of Dwarves</Bold>
 <LineBreak/><LineBreak/>
                                      <InlineUIContainer><Image Name='DwarfWarriorBand' Source='../bin/Images/Dwarfs.gif'  Height='200' Width='200'> </Image></InlineUIContainer>"
 e058i	"<Bold>e058i Band of Dwarves</Bold>
-<LineBreak/><LineBreak/>The dwarven lead is a leader of a group of dwarves. Evade is not an option. Choose another.
+<LineBreak/><LineBreak/>The dwarven lead is a leader of a group of dwarves. Evade is not an option. Choose another labeled button (Talk or Fight):
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e058e'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e058e'></Button></InlineUIContainer><LineBreak/>
@@ -1963,7 +1967,7 @@ e070	"<Bold>e070 Halfling Town</Bold>
 e071	"<Bold>e071 Elven Band</Bold>
 <LineBreak/><LineBreak/>You encounter a band of elves. Roll one die and add one for the number of elves in the band. Die Roll=
 <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
-<LineBreak/><LineBreak/>Each elf has combat skill 5, endurance 4, and wealth 7. Your options:
+<LineBreak/><LineBreak/>Each elf has combat skill 5, endurance 4, and wealth 7. To advance to next screen, select one of the buttons labeled: Talk, Evade, Fight:
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e071a'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e071a'></Button></InlineUIContainer><LineBreak/>
@@ -2023,7 +2027,7 @@ e071d	"<Bold>e071d Elven Band</Bold>
 <LineBreak/> <LineBreak/>
                                    <InlineUIContainer><Image Name='ElfWarriorBand' Source='../bin/Images/Elf.gif' Height='300' Width='240'></Image></InlineUIContainer>"
 e071e	"<Bold>e071e Band of Elves</Bold>
-<LineBreak/><LineBreak/>The elven lead is a leader of a group of elves. Evade is not an option. Choose another.
+<LineBreak/><LineBreak/>The elven lead is a leader of a group of elves. Evade is not an option. Choose another labeled button (Talk or Fight):
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e071a'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e071a'></Button></InlineUIContainer><LineBreak/>
@@ -2212,7 +2216,7 @@ e080b	"<Bold>e080b Pixies</Bold>
 e081	"<Bold>e081 Mounted Patrol</Bold>
 <LineBreak/><LineBreak/>You encounter a mounted patrol of soldiers. Roll one die for the number in the patrol, each of which has combat skill 6, endurance 5, and wealth 4. One of the men is the leader and has wealth 10. 
 <LineBreak/><LineBreak/> Die roll: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
-<LineBreak/><LineBreak/>Your options are:
+<LineBreak/><LineBreak/>To advance to next screen, select one of the buttons labeled: Talk, Evade, Fight:
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e081a'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e081a'></Button></InlineUIContainer><LineBreak/>
@@ -2524,7 +2528,7 @@ e099b	"<Bold>e099b Fight Roc</Bold>
 e100	"<Bold>e100 Griffon</Bold>
 <LineBreak/><LineBreak/>You meet a winged griffon which has combat skill 7, endurance 5, and wealth 12.
 <LineBreak/><LineBreak/>The griffon is intelligent and could serve both as a member of your party and as a winged mount for other characters.
-<LineBreak/><LineBreak/>However, griffons are normally quite independent and ferrocious. This one looks especially unfriendly if not hostile!  Your options are:
+<LineBreak/><LineBreak/>However, griffons are normally quite independent and ferrocious. This one looks especially unfriendly if not hostile!  To advance to next screen, select one of the buttons labeled: Talk, Evade, Fight:
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e100a'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e100a'></Button></InlineUIContainer>*<LineBreak/>
@@ -2574,7 +2578,7 @@ e100c	"<Bold>e100c Fight Griffon</Bold>
                                   <InlineUIContainer><Image Source='../bin/Images/Griffon.gif' Height='250' Width='250'></Image></InlineUIContainer>"
 e101	"<Bold>e101 Harpy</Bold>
 <LineBreak/><LineBreak/>You encountered a Harpy, a bird-woman with combat skill 5, endurance 4, and wealth 4. Hapiers are known as dirty, nasty things. Occasionally, they have allied with human for mutual gain.
-<LineBreak/><LineBreak/>Your options are:
+<LineBreak/><LineBreak/>To advance to next screen, select one of the buttons labeled: Talk, Evade, Fight:
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e101a'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e101a'></Button></InlineUIContainer><LineBreak/>
@@ -2821,7 +2825,7 @@ e117	"<Bold>e117 Eagle Allies</Bold>
 <LineBreak/> <LineBreak/>
                 <InlineUIContainer><Image Name='EaglesAlly' Source='../bin/Images/Eagles.gif' Height='210' Width='400'></Image></InlineUIContainer>"
 e118	"<Bold>e118 Giant</Bold>
-<LineBreak/><LineBreak/>You encounter a 12-foot tall giant carrying a very big axe. He has combat skill 9 , endurance 8, and wealth 10. Your options are:
+<LineBreak/><LineBreak/>You encounter a 12-foot tall giant carrying a very big axe. He has combat skill 9 , endurance 8, and wealth 10. To advance to next screen, select one of the buttons labeled: Talk, Evade, Fight:
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e118a'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e118a'></Button></InlineUIContainer><LineBreak/>
@@ -3087,7 +3091,7 @@ Roll one die for identity:  <InlineUIContainer><Image Source='../bin/Images/dieR
  4 - High Priest of a Temple<LineBreak/>
  5,6 - Town Mayor
 <LineBreak/><LineBreak/>
-Your options are:
+To advance to next screen, select one of the buttons labeled: Talk, Evade, Fight:
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e130a'></Button></InlineUIContainer>   ->  
  <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e130a'></Button></InlineUIContainer><LineBreak/>

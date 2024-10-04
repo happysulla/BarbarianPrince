@@ -995,12 +995,10 @@ namespace BarbarianPrince
             {
                if (true == myIsPartyMembersAssignable)
                {
-                  Logger.Log(LogEnum.LE_COMBAT_STATE_END, "UpdateCombatEnd(): myAssignables -> isAnyPartyMemberAlive=true");
                   isAnyPartyMemberAlive = true;
                }
                else
                {
-                  Logger.Log(LogEnum.LE_COMBAT_STATE_END, "UpdateCombatEnd(): myAssignables -> isAnyEncounteredMemberLeft=true");
                   isAnyEncounteredMemberLeft = true;
                }
             }
@@ -1026,12 +1024,10 @@ namespace BarbarianPrince
             {
                if (false == myIsPartyMembersAssignable)
                {
-                  Logger.Log(LogEnum.LE_COMBAT_STATE_END, "UpdateCombatEnd(): myUnassignables -> isAnyPartyMemberAlive=true");
                   isAnyPartyMemberAlive = true;
                }
                else
                {
-                  Logger.Log(LogEnum.LE_COMBAT_STATE_END, "UpdateCombatEnd(): myUnassignables -> isAnyEncounteredMemberLeft=true");
                   isAnyEncounteredMemberLeft = true;
                }
             }
@@ -1124,7 +1120,6 @@ namespace BarbarianPrince
                //-------------------------------
                if (false == SetStateIfItemUsed()) // UpdateGrid() performed in caller routine
                {
-                  Logger.Log(LogEnum.LE_COMBAT_STATE_END, "UpdateCombatEnd(): Won Combat isAnyEncounteredMemberLeft=false isEnd=true myState=" + myState.ToString());
                   isEnd = true;
                   if (false == myCallback(myIsRoute, myIsEscape)) // UpdateCombatEnd() - Players won combat
                   {

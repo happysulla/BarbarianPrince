@@ -6442,6 +6442,8 @@ namespace BarbarianPrince
                   action = GameAction.EndGameWin;
                   gi.GamePhase = GamePhase.EndGame;
                   gi.EndGameReason = "Noble Ally marches on Northlands!";
+                  gi.EventDisplayed = gi.EventActive = "e501";
+                  gi.DieRollAction = GameAction.DieRollActionNone;
                   break;
                case GameAction.E153MasterOfHouseholdDeny:
                   gi.ForbiddenAudiences.AddTimeConstraint(princeTerritory, Utilities.FOREVER);
@@ -9419,6 +9421,8 @@ namespace BarbarianPrince
                action = GameAction.EndGameWin;
                gi.GamePhase = GamePhase.EndGame;
                gi.EndGameReason = "Restored Huldra's Heir to the Throne.";
+               gi.EventDisplayed = gi.EventActive = "e501";
+               gi.DieRollAction = GameAction.DieRollActionNone;
                return true; //<<<<<<<<<<<<<<<<<<<<<
             case "e154e": // lords daughter
                gi.CapturedWealthCodes.Add(100);
@@ -14069,6 +14073,8 @@ namespace BarbarianPrince
                      action = GameAction.EndGameWin;
                      gi.GamePhase = GamePhase.EndGame;
                      gi.EndGameReason = "Restore True Heir to Huldra Throne in Audience.";
+                     gi.EventDisplayed = gi.EventActive = "e501";
+                     gi.DieRollAction = GameAction.DieRollActionNone;
                   }
                   else
                   {
