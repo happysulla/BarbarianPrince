@@ -53,6 +53,7 @@ namespace BarbarianPrince
       LE_VIEW_APPEND_EVENT,
       LE_VIEW_SHOW_PARTY_DIALOG,
       LE_VIEW_DICE_MOVING,
+      LE_VIEW_DIALOG_PARTY,
       LE_VIEW_RESET_BATTLE_GRID,
       LE_VIEW_DEC_COUNT_GRID,
       LE_VIEW_UPDATE_MENU,
@@ -162,6 +163,7 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_ACTION_PANEL_CLEAR);
          //Logger.SetOn(LogEnum.LE_RETURN_TO_START);
          //Logger.SetOn(LogEnum.LE_VIEW_APPEND_EVENT);
+         Logger.SetOn(LogEnum.LE_VIEW_DIALOG_PARTY);
          //Logger.SetOn(LogEnum.LE_VIEW_DICE_MOVING);
          //Logger.SetOn(LogEnum.LE_VIEW_RESET_BATTLE_GRID);
          //Logger.SetOn(LogEnum.LE_VIEW_DEC_COUNT_GRID);

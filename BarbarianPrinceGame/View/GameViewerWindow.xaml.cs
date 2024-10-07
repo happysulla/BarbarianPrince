@@ -2442,6 +2442,7 @@ namespace BarbarianPrince
          if (1 < myGameInstance.PartyMembers.Count)
          {
             myPartyDisplayDialog = new PartyDisplayDialog(myGameInstance, myCanvas, b);
+            Logger.Log(LogEnum.LE_VIEW_DIALOG_PARTY, "MouseEnterMapItem(): Showing due to 1 > partyCount=" + myGameInstance.PartyMembers.Count.ToString());
             myPartyDisplayDialog.Show();
          }
       }
