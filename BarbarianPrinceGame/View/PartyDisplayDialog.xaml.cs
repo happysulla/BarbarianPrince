@@ -42,32 +42,38 @@ namespace BarbarianPrince
          double cw = c.ActualWidth;
          double delta = 0;
          if (cw < aw)
-            delta = (aw - cw - System.Windows.SystemParameters.VerticalScrollBarWidth) / (2*Utilities.ZoomCanvas);
+            delta = (aw - cw - System.Windows.SystemParameters.VerticalScrollBarWidth) / (2 * Utilities.ZoomCanvas);
+         Logger.Log(LogEnum.LE_VIEW_SHOW_PARTY_DIALOG, "PartyDisplayDialog(): aw=" + aw.ToString() + " ho=" + ho.ToString() + " cw=" + cw.ToString() + " delta=" + delta.ToString());
+
          //-----------------------------
          System.Windows.Point bottomRight = b.PointToScreen(new Point(princeSize, princeSize)); // bottom right of button
          double rw = (Canvas.GetLeft(b) + princeSize) * Utilities.ZoomCanvas + this.Width;
          double awho = (aw + ho);
+         Logger.Log(LogEnum.LE_VIEW_SHOW_PARTY_DIALOG, "PartyDisplayDialog(): bottomRight=" + bottomRight.ToString() + " rw=" + rw.ToString() + " awho=" + awho.ToString() );
          if ( rw < awho-delta )
          {
             this.Left = bottomRight.X;
+            Logger.Log(LogEnum.LE_VIEW_SHOW_PARTY_DIALOG, "PartyDisplayDialog(): Left=" + this.Left.ToString());
          }
          else
          {
             double d1 = rw - (awho-delta);
             this.Left = bottomRight.X - d1;
+            Logger.Log(LogEnum.LE_VIEW_SHOW_PARTY_DIALOG, "PartyDisplayDialog(): d1=" + d1.ToString()  + " Left=" + this.Left.ToString());
          }
          //-----------------------------
          double bw = (Canvas.GetTop(b) + princeSize) * Utilities.ZoomCanvas + this.Height;
          if (bw < c.ActualHeight)
          {
             this.Top = bottomRight.Y;
+            Logger.Log(LogEnum.LE_VIEW_SHOW_PARTY_DIALOG, "PartyDisplayDialog(): Top=" + this.Top.ToString());
          }
          else
          {
             System.Windows.Point topLeft = b.PointToScreen(new Point(0, 0)); // top left of button
             this.Top = topLeft.Y - this.Height;
+            Logger.Log(LogEnum.LE_VIEW_SHOW_PARTY_DIALOG, "PartyDisplayDialog(): topLeft=" + topLeft.ToString() + " Top=" + this.Top.ToString());
          }
-
       }
    }
 }
