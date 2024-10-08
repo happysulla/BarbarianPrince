@@ -862,6 +862,11 @@ namespace BarbarianPrince
       {
          int cost = 0;
          string content = (string)b.Content;
+         if( null == content )
+         {
+            Logger.Log(LogEnum.LE_ERROR, "SetButtonState(): content=null for key=" + key);
+            return;
+         }
          if ((key != myGameInstance.EventActive) && (false == content.StartsWith("e")))
          {
             b.IsEnabled = false;
@@ -5193,6 +5198,27 @@ namespace BarbarianPrince
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               }
                               break;
+                           case "E002EncounterTalk":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e002b"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E002EncounterEvade":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e002c"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E002EncounterFight":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e002d"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
                            case "EncounterEnd":
                               action = GameAction.EncounterEnd;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);

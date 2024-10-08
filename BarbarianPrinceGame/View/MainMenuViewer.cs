@@ -11,7 +11,6 @@ namespace BarbarianPrince
    }
    class MainMenuViewer : IView
    {
-      private RuleDialogViewer myRulesMgr = null;
       private readonly Menu myMainMenu;                     // Top level menu items: File | View | Options | Help
       private readonly MenuItem myMenuItemTopLevel1 = null;
       private readonly MenuItem myMenuItemTopLevel2 = null;

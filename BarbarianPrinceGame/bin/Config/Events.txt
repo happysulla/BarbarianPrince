@@ -110,7 +110,9 @@ e002b	"<Bold>e002b Talk to Mercenary Royal Guardsmen</Bold>
 <LineBreak/><LineBreak/> Roll die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
- <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>"
+ <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
+<LineBreak/>
+                             <InlineUIContainer><Image Name='E002EncounterTalk'  Source='../bin/Images/Mercenaries.gif' Height='300'  Width='225' > </Image></InlineUIContainer>"
 e002c	"<Bold>e002c Evade Mercenary Royal Guardsmen</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -119,9 +121,10 @@ e002c	"<Bold>e002c Evade Mercenary Royal Guardsmen</Bold>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2: Attack<LineBreak/>
  <InlineUIContainer><Button Content='e304' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3: Attack<LineBreak/>
  <InlineUIContainer><Button Content='e318' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4: Hide<LineBreak/>
- <InlineUIContainer><Button Content='e312' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5: Escape<LineBreak/>
- <InlineUIContainer><Button Content='e312' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6: Escape Mtd<LineBreak/>
- <InlineUIContainer><Button Content='e312' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7: Escape Mtd"
+ <InlineUIContainer><Button Content='e311' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5: Escape<LineBreak/>
+ <InlineUIContainer><Button Content='e312' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6, 7: Escape Mtd<LineBreak/>
+<LineBreak/>
+                                  <InlineUIContainer><Image Name='E002EncounterEvade'  Source='../bin/Images/Mercenaries.gif' Height='300'  Width='225' > </Image></InlineUIContainer>"
 e002d	"<Bold>e002d Fight Mercenary Royal Guardsmen</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -131,7 +134,9 @@ e002d	"<Bold>e002d Fight Mercenary Royal Guardsmen</Bold>
  <InlineUIContainer><Button Content='e303' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3: Surprise<LineBreak/>
  <InlineUIContainer><Button Content='e304' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4: Attack<LineBreak/>
  <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5: Attack<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6: Attacked"
+ <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6: Attacked
+<LineBreak/>
+                             <InlineUIContainer><Image Name='E002EncounterFight' Source='../bin/Images/Mercenaries.gif' Height='300'  Width='225' > </Image></InlineUIContainer>"
 e003	"<Bold>e003 Swordsman</Bold>
 <LineBreak/><LineBreak/>You meet a swordsman adverturer. He is mounted on a horse. He has a combat skill of 6, endurance 6, and wealth 7. Sitting there on his horse, he takes an active interest in your party. To advance to next screen, select button labeled Talk, Evade, or Fight:
 <LineBreak/><LineBreak/>

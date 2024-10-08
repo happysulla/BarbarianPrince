@@ -11,7 +11,6 @@ namespace BarbarianPrince
       public bool CtorError { get; } = false;
       private Canvas myCanvas = null;
       private Image myEndGameSuccessImage = null;
-      private Image myEndGameFailImage = null;
       //-------------------------------------------------
       public CanvasImageViewer(Canvas c)
       {
