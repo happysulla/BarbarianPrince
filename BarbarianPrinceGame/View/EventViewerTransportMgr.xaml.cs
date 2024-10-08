@@ -502,9 +502,9 @@ namespace BarbarianPrince
                else if (true == myIsSunStrokeInParty)
                   myTextBlockInstructions.Inlines.Add(new Run("Must assigned carriers for sunstroke victims before continuing."));
                else if (0 < myUnassignedMounts.Count)
-                  myTextBlockInstructions.Inlines.Add(new Run("Drag n Drop carriers, adjust loads, click mount to adjust, or click backpack to continue."));
+                  myTextBlockInstructions.Inlines.Add(new Run("Click carriers to assign them, adjust loads, click mount to adjust, or click backpack to continue."));
                else
-                  myTextBlockInstructions.Inlines.Add(new Run("Drag n Drop carriers, click mount to adjust, or click backpack to continue."));
+                  myTextBlockInstructions.Inlines.Add(new Run("Click carriers to assign them, click mount to adjust, or click backpack to continue."));
                break;
             case LoadEnum.LE_ASSIGN_FOOD_GOLD:
                if (0 < myUnassignedCoin)

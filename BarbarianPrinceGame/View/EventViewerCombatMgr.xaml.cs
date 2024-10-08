@@ -1545,22 +1545,22 @@ namespace BarbarianPrince
                   Button buttonEscape0 = new Button() { Content = "Escape", FontFamily = myFontFam1, FontSize = 12, Height = 16 };
                   buttonEscape0.Click += ButtonEscape_Click;
                   myTextBlockInstructions.Inlines.Add(new InlineUIContainer(buttonEscape0));
-                  myTextBlockInstructions.Inlines.Add(new Run(" or Drag and Drop. Each must be assigned at least once."));
+                  myTextBlockInstructions.Inlines.Add(new Run(" or Click to Select and Move. Each must be assigned at least once."));
                }
                else if ((true == myIsKnightOnBridge) && (true == isEndCombatButtonShown))
                {
                   Button buttonEnd0 = new Button() { Content = "End Combat", FontFamily = myFontFam1, FontSize = 12, Height = 16 };
                   buttonEnd0.Click += ButtonEndKnightCombat_Click;
                   myTextBlockInstructions.Inlines.Add(new InlineUIContainer(buttonEnd0));
-                  myTextBlockInstructions.Inlines.Add(new Run(" or Drag and Drop. Each must be assigned at least once."));
+                  myTextBlockInstructions.Inlines.Add(new Run(" or Click to Select and Move. Each must be assigned at least once."));
                }
                else
                {
-                  myTextBlockInstructions.Inlines.Add(new Run("Drag and Drop. Each must be assigned at least once."));
+                  myTextBlockInstructions.Inlines.Add(new Run("Click to Select and Move. Each must be assigned at least once."));
                }
                break;
             case CombatEnum.ASSIGN_AFTER_ESCAPE:
-               myTextBlockInstructions.Inlines.Add(new Run("Drag and Drop. Each must be assigned at least once."));
+               myTextBlockInstructions.Inlines.Add(new Run("Click to Select, Move, Click to Drop. Each must be assigned at least once."));
                break;
             case CombatEnum.ASSIGN_STRIKES:
                Logger.Log(LogEnum.LE_COMBAT_STATE_ROUTE, "UpdateUserInstructions(): s=" + myState.ToString() + " route?=" + myIsRouteOfEnemyPossible.ToString() + " firstCol?=" + isEscapeButtonShown.ToString());

@@ -598,7 +598,7 @@ namespace BarbarianPrince
                   myTextBlockInstructions.Inlines.Add(new Run("Click campfire to continue."));
                break;
             case StarveEnum.SE_SHOW_POTIONS:
-               myTextBlockInstructions.Inlines.Add(new Run("Drag n Drop potion from owned/shared column to drink box."));
+               myTextBlockInstructions.Inlines.Add(new Run("Click to Select and Move potion from owned/shared column to drink box."));
                myTextBlockInstructions.Inlines.Add(new LineBreak());
                myTextBlockInstructions.Inlines.Add(new Run("Owned can only be dropped on same row. Click" + clickOption));
                break;
@@ -769,7 +769,7 @@ namespace BarbarianPrince
                myTextBlockInstructions.Inlines.Add(new Run("Continue to roll for deserters."));
                break;
             case StarveEnum.SE_SHOW_POTIONS:
-               myTextBlockInstructions.Inlines.Add(new Run("Drag n Drop potion from owned/shared column to drink box."));
+               myTextBlockInstructions.Inlines.Add(new Run("Click to Select, Move, Click to Drop potion from owned/shared column to drink box."));
                myTextBlockInstructions.Inlines.Add(new LineBreak());
                myTextBlockInstructions.Inlines.Add(new Run("Owned can only be dropped on same row. Click" + clickOption));
                break;

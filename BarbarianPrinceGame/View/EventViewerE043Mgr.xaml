@@ -69,7 +69,7 @@
         </StackPanel>
         <Rectangle Grid.Row="1" Grid.ColumnSpan="2" Margin="5" Height="1" Fill="Black"/>
         <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Name="myTextBlockInstructions" FontFamily='Georgia' FontSize="16" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Margin="2,0,0,5">
-        You find a high alter of godly power. Drag and Drop Monk to grid row to perform invocation.
+        You find a high alter of godly power. Click to Select and Move Monk to grid row to perform invocation.
         <LineBreak/>or click campfire to skip event.
         </TextBlock>
         <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Name="myStackPanelAssignable" DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5,0,0,0">
