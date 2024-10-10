@@ -691,7 +691,8 @@ namespace BarbarianPrince
                         {
                            if (Utilities.NO_RESULT == eventDieRolls[dieNumIndex]) // if true, perform a one time insert b/c dieNumIndex increments by one
                            {
-                              img.Visibility = Visibility.Visible;
+                              if ((true == myGameInstance.IsGiftCharmActive) || (true == myGameInstance.IsSlaveGirlActive))
+                                 img.Visibility = Visibility.Visible;
                            }
                            else
                            {
@@ -1509,13 +1510,34 @@ namespace BarbarianPrince
                break;
             case "e002b":
                ReplaceTextForLuckyCharm(gi);  // e002b
+               if ((true == myGameInstance.IsGiftCharmActive) || (true == myGameInstance.IsSlaveGirlActive))
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Roll three times and choose one result."));
+               }
+               else if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
                break;
             case "e002c":
                if (true == gi.IsPartyRiding())
                {
                   myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Add one to die since party is riding."));
+               }
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
+               break;
+            case "e002d":
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
                break;
             case "e003": // swordsman has a fast horse
@@ -1534,15 +1556,37 @@ namespace BarbarianPrince
                   }
                }
                break;
-            case "e003a":
-            case "e004a":
-            case "e005a":
-               ReplaceTextForLuckyCharm(gi);  //e003a, e004a, e005a
-               break;
             case "e005": // Amazon with no horses
             case "e006": // Dwarf Warrior
                if (true == gi.IsEvadeActive)
                   AppendEscapeMethods(gi, true);
+               break;
+            case "e003a":
+            case "e004a":
+            case "e005a":
+               ReplaceTextForLuckyCharm(gi);  //e003a, e004a, e005a
+               if ((true == myGameInstance.IsGiftCharmActive) || (true == myGameInstance.IsSlaveGirlActive))
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Roll three times and choose one result."));
+               }
+               else if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
+               break;
+            case "e003b":
+            case "e004b":
+            case "e005b":
+            case "e003c":
+            case "e004c":
+            case "e005c":
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
                break;
             case "e006a": // Dwarf Warrior
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
@@ -1560,6 +1604,16 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Add one since dwarf is alone."));
                }
+               if ((true == myGameInstance.IsGiftCharmActive) || (true == myGameInstance.IsSlaveGirlActive))
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Roll three times and choose one result."));
+               }
+               else if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
                break;
             case "e006d": // Dwarf Warrior
             case "e006e": // Dwarf Warrior
@@ -1568,6 +1622,12 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Add one since dwarf is alone."));
+               }
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
                break;
             case "e006f":
@@ -1606,6 +1666,16 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Add two since elf is in forest."));
                }
+               if ((true == myGameInstance.IsGiftCharmActive) || (true == myGameInstance.IsSlaveGirlActive))
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Roll three times and choose one result."));
+               }
+               else if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
                break;
             case "e007d": // Elf Warrior
             case "e007e": // Elf Warrior
@@ -1615,9 +1685,25 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Add two since elf is in forest."));
                }
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
                break;
             case "e008a": // Halfling Warrior
                ReplaceTextForLuckyCharm(gi); // e008a
+               if ((true == myGameInstance.IsGiftCharmActive) || (true == myGameInstance.IsSlaveGirlActive))
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Roll three times and choose one result."));
+               }
+               else if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
                break;
             case "e009a":
             case "e009b":
@@ -4116,7 +4202,7 @@ namespace BarbarianPrince
                current = current.GetNextContextPosition(LogicalDirection.Forward);
             }
          }
-         else
+         else if(false == gi.IsTalkRoll)
          {
             bool isGiftOfCharmHeld = gi.IsSpecialItemHeld(SpecialEnum.GiftOfCharm);
             bool isSlaveGirlHeld = gi.IsFedSlaveGirlHeld();
@@ -5214,6 +5300,118 @@ namespace BarbarianPrince
                               return;
                            case "E002EncounterFight":
                               if (Utilities.NO_RESULT < myGameInstance.DieResults["e002d"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E003EncounterTalk":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e003a"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E003EncounterEvade":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e003b"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E003EncounterFight":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e003c"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E004EncounterTalk":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e004a"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E004EncounterEvade":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e004b"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E004EncounterFight":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e004c"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E005EncounterTalk":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e005a"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E005EncounterEvade":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e005b"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E005EncounterFight":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e005c"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E006EncounterTalk":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e006c"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E006EncounterEvade":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e006d"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E006EncounterFight":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e006e"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E007EncounterTalk":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e007c"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E007EncounterEvade":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e007d"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E007EncounterFight":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e007e"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E008EncounterTalk":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e008a"][0])
                               {
                                  action = GameAction.EncounterRoll;
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);

@@ -8,6 +8,7 @@ namespace BarbarianPrince
    public interface IGameInstance
    {
       bool CtorError { get; }
+      bool IsTalkRoll { get; set; }
       Options Options { get; set; }
       //----------------------------------------------
       IMapItem Prince { set; get; }

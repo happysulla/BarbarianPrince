@@ -111,7 +111,7 @@ e002b	"<Bold>e002b Talk to Mercenary Royal Guardsmen</Bold>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
-<LineBreak/>
+<LineBreak/><LineBreak/>
                              <InlineUIContainer><Image Name='E002EncounterTalk'  Source='../bin/Images/Mercenaries.gif' Height='300'  Width='225' > </Image></InlineUIContainer>"
 e002c	"<Bold>e002c Evade Mercenary Royal Guardsmen</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
@@ -122,8 +122,8 @@ e002c	"<Bold>e002c Evade Mercenary Royal Guardsmen</Bold>
  <InlineUIContainer><Button Content='e304' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3: Attack<LineBreak/>
  <InlineUIContainer><Button Content='e318' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4: Hide<LineBreak/>
  <InlineUIContainer><Button Content='e311' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5: Escape<LineBreak/>
- <InlineUIContainer><Button Content='e312' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6, 7: Escape Mtd<LineBreak/>
-<LineBreak/>
+ <InlineUIContainer><Button Content='e312' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6, 7: Escape Mtd
+<LineBreak/><LineBreak/>
                                   <InlineUIContainer><Image Name='E002EncounterEvade'  Source='../bin/Images/Mercenaries.gif' Height='300'  Width='225' > </Image></InlineUIContainer>"
 e002d	"<Bold>e002d Fight Mercenary Royal Guardsmen</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
@@ -135,7 +135,7 @@ e002d	"<Bold>e002d Fight Mercenary Royal Guardsmen</Bold>
  <InlineUIContainer><Button Content='e304' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4: Attack<LineBreak/>
  <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5: Attack<LineBreak/>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6: Attacked
-<LineBreak/>
+<LineBreak/><LineBreak/>
                              <InlineUIContainer><Image Name='E002EncounterFight' Source='../bin/Images/Mercenaries.gif' Height='300'  Width='225' > </Image></InlineUIContainer>"
 e003	"<Bold>e003 Swordsman</Bold>
 <LineBreak/><LineBreak/>You meet a swordsman adverturer. He is mounted on a horse. He has a combat skill of 6, endurance 6, and wealth 7. Sitting there on his horse, he takes an active interest in your party. To advance to next screen, select button labeled Talk, Evade, or Fight:
@@ -149,8 +149,7 @@ e003	"<Bold>e003 Swordsman</Bold>
 <LineBreak/><LineBreak/>*If your entire party has winged mounts or are able to fly, you can use a flying escape instead of rolling for the evade option."
 e003a	"<Bold>e003a Talk to Swordsman</Bold>
 <LineBreak/><LineBreak/>
- <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1: Converse<LineBreak/>
- <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2: Converse<LineBreak/>
+ <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 and 2: Converse<LineBreak/>
  <InlineUIContainer><Button Content='e340' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3: Looter<LineBreak/>
  <InlineUIContainer><Button Content='e339' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4: Hireling<LineBreak/>
  <InlineUIContainer><Button Content='e333' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5: Hireling<LineBreak/>
@@ -160,7 +159,7 @@ e003a	"<Bold>e003a Talk to Swordsman</Bold>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
 <LineBreak/>
-                             <InlineUIContainer><Image Source='../bin/Images/Swordsman.gif' Height='280'  Width='225' > </Image></InlineUIContainer>"
+                             <InlineUIContainer><Image Name='E003EncounterTalk' Source='../bin/Images/Swordsman.gif' Height='280'  Width='225' > </Image></InlineUIContainer>"
 e003b	"<Bold>e003b Evade Swordsman</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -169,10 +168,9 @@ e003b	"<Bold>e003b Evade Swordsman</Bold>
  <InlineUIContainer><Button Content='e315' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2: Escape<LineBreak/>
  <InlineUIContainer><Button Content='e317' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3: Hide<LineBreak/>
  <InlineUIContainer><Button Content='e322' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4: Bribe (5gp)<LineBreak/>
- <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5: Pass<LineBreak/>
- <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6: Pass
+ <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5, 6: Pass<LineBreak/>
 <LineBreak/><LineBreak/>
-                             <InlineUIContainer><Image Source='../bin/Images/Swordsman.gif' Height='280'  Width='225' > </Image></InlineUIContainer>"
+                             <InlineUIContainer><Image Name='E003EncounterEvade' Source='../bin/Images/Swordsman.gif' Height='280'  Width='225' > </Image></InlineUIContainer>"
 e003c	"<Bold>e003c Fight Swordsman</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -184,7 +182,7 @@ e003c	"<Bold>e003c Fight Swordsman</Bold>
  <InlineUIContainer><Button Content='e307' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5: Attacked<LineBreak/>
  <InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6: Surprised
 <LineBreak/><LineBreak/>
-                             <InlineUIContainer><Image Source='../bin/Images/Swordsman.gif' Height='280'  Width='225' > </Image></InlineUIContainer>"
+                             <InlineUIContainer><Image Name='E003EncounterFight' Source='../bin/Images/Swordsman.gif' Height='280'  Width='225' > </Image></InlineUIContainer>"
 e004	"<Bold>e004 Mercenary Band</Bold>
 <LineBreak/><LineBreak/>You observe a small band of mercenaries approaching. The leader is mounted on a horse. He has a combat skill 6, endurance 6, and wealth of 50. 
 <LineBreak/><LineBreak/>He has some followers. Each has a combat skill 5, endurance 4, and wealth 4. If the number of Troopers is one or two, they are mounted. Otherwise, they are on foot. Roll one die for number of troopers: 
@@ -198,7 +196,7 @@ e004	"<Bold>e004 Mercenary Band</Bold>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='Fight' Name='e004c'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e004c'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>
-*If your party has any mounts, add one to your die roll for evading. Results higher than 6 are considered 6. If your party has all have winged mounts or flying abilities, you can use escape flying
+*If your party has any mounts, add one to your die roll for evading. Results higher than 6 are considered 6. If your party all have winged mounts or flying abilities, you can use escape flying
  <InlineUIContainer><Button Content='r313' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  instead of rolling the die for the evade option."
 e004a	"<Bold>e004a Talk to Mercenary Band</Bold>
@@ -214,7 +212,7 @@ e004a	"<Bold>e004a Talk to Mercenary Band</Bold>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
 <LineBreak/>
-                             <InlineUIContainer><Image Source='../bin/Images/Mercenaries.gif' Height='300'  Width='225' > </Image></InlineUIContainer>"
+                             <InlineUIContainer><Image Name='E004EncounterTalk' Source='../bin/Images/Mercenaries.gif' Height='300'  Width='225' > </Image></InlineUIContainer>"
 e004b	"<Bold>e004b Evade Mercenary Band</Bold>
 <LineBreak/><LineBreak/>Roll for results:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -226,7 +224,7 @@ e004b	"<Bold>e004b Evade Mercenary Band</Bold>
  <InlineUIContainer><Button Content='e327' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5: Pass<LineBreak/>
  <InlineUIContainer><Button Content='e312' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6: Escape Mounted
 <LineBreak/><LineBreak/>
-                             <InlineUIContainer><Image Source='../bin/Images/Mercenaries.gif' Height='300'  Width='225' > </Image></InlineUIContainer>"
+                             <InlineUIContainer><Image Name='E004EncounterEvade' Source='../bin/Images/Mercenaries.gif' Height='300'  Width='225' > </Image></InlineUIContainer>"
 e004c	"<Bold>e004c Fight Mercenary Band</Bold>
 <LineBreak/><LineBreak/>Roll for results:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -238,7 +236,7 @@ e004c	"<Bold>e004c Fight Mercenary Band</Bold>
  <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5: Attack<LineBreak/>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6: Attack
 <LineBreak/><LineBreak/>
-                             <InlineUIContainer><Image Source='../bin/Images/Mercenaries.gif' Height='300'  Width='225' > </Image></InlineUIContainer>"
+                             <InlineUIContainer><Image Name='E004EncounterFight' Source='../bin/Images/Mercenaries.gif' Height='300'  Width='225' > </Image></InlineUIContainer>"
 e005	"<Bold>e005 Amazons</Bold>
 <LineBreak/><LineBreak/>You see a group of amazon warriors approaching all on foot. The number in the group is one die roll plus one. Die Roll=
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -265,7 +263,7 @@ e005a	"<Bold>e005a Talk to Amazons</Bold>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
-                                       <InlineUIContainer><Image Source='../bin/Images/Amazon.gif' Height='280'  Width='170' > </Image></InlineUIContainer>"
+                                       <InlineUIContainer><Image Name='E005EncounterTalk' Source='../bin/Images/Amazon.gif' Height='280'  Width='170' > </Image></InlineUIContainer>"
 e005b	"<Bold>e005b Evade Amazons</Bold>
 <LineBreak/><LineBreak/>Roll for results:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -277,7 +275,7 @@ e005b	"<Bold>e005b Evade Amazons</Bold>
  <InlineUIContainer><Button Content='e328' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Pass<LineBreak/>
  <InlineUIContainer><Button Content='e317' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Hide Easy
 <LineBreak/><LineBreak/>
-                                       <InlineUIContainer><Image Source='../bin/Images/Amazon.gif' Height='280'  Width='170' > </Image></InlineUIContainer>"
+                                       <InlineUIContainer><Image Name='E005EncounterEvade' Source='../bin/Images/Amazon.gif' Height='280'  Width='170' > </Image></InlineUIContainer>"
 e005c	"<Bold>e005c Fight Amazon</Bold>
 <LineBreak/><LineBreak/>Roll for results:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -289,7 +287,7 @@ e005c	"<Bold>e005c Fight Amazon</Bold>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5: Attacked<LineBreak/>
  <InlineUIContainer><Button Content='e330' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6: Battle
 <LineBreak/><LineBreak/>
-                                       <InlineUIContainer><Image Source='../bin/Images/Amazon.gif' Height='280'  Width='170' > </Image></InlineUIContainer>"
+                                       <InlineUIContainer><Image Name='E005EncounterFight' Source='../bin/Images/Amazon.gif' Height='280'  Width='170' > </Image></InlineUIContainer>"
 e006	"<Bold>e006 Dwarf Warrior</Bold>
 <LineBreak/><LineBreak/>You encounter a Dwarf Warrior with combat skill 6, endurance 7, and wealth 21. To advance to the next screen, select one of the three buttons below (talk, evade, fight).  On the next screen, determine how many dwarves are in the band per
  <InlineUIContainer><Button Content='e006a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. If the Dwarf joins your party, see <InlineUIContainer><Button Content='e006f' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
@@ -332,7 +330,9 @@ e006c	"<Bold>e006c Talk to Dwarf</Bold>
 <LineBreak/><LineBreak/>Roll die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
- <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>"
+ <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
+<LineBreak/>
+                                         <InlineUIContainer><Image Name='E006EncounterTalk' Source='../bin/Images/DwarfWarrior.gif' Height='250'  Width='200' > </Image></InlineUIContainer>"
 e006d	"<Bold>e006d Evade Dwarf</Bold>
 <LineBreak/><LineBreak/>Roll for results:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -341,20 +341,21 @@ e006d	"<Bold>e006d Evade Dwarf</Bold>
  <InlineUIContainer><Button Content='e328' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2: Pass<LineBreak/>
  <InlineUIContainer><Button Content='e314' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3: Escape<LineBreak/>
  <InlineUIContainer><Button Content='e315' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4: Escape<LineBreak/>
- <InlineUIContainer><Button Content='e311' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5: Escape<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6: Attacked<LineBreak/>
- <InlineUIContainer><Button Content='e311' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7: Escape"
+ <InlineUIContainer><Button Content='e311' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 and 7: Escape<LineBreak/>
+ <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6: Attacked
+<LineBreak/>
+                                         <InlineUIContainer><Image Name='E006EncounterEvade' Source='../bin/Images/DwarfWarrior.gif' Height='250'  Width='200' > </Image></InlineUIContainer>"
 e006e	"<Bold>e006e Fight Dwarf</Bold>
 <LineBreak/><LineBreak/>Roll for results:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1: Surprised<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2: Attacked<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3: Attacked<LineBreak/>
- <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4: Attack<LineBreak/>
- <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5: Attack<LineBreak/>
+ <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 and 3: Attacked<LineBreak/>
+ <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 and 5: Attack<LineBreak/>
  <InlineUIContainer><Button Content='e304' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6: Attack<LineBreak/>
- <InlineUIContainer><Button Content='e303' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7: Surprise"
+ <InlineUIContainer><Button Content='e303' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7: Surprise
+<LineBreak/>
+                                         <InlineUIContainer><Image Name='E006EncounterFight' Source='../bin/Images/DwarfWarrior.gif' Height='250'  Width='200' > </Image></InlineUIContainer>"
 e006f	"<Bold>e006f Dwarf's Advice</Bold>
 <LineBreak/><LineBreak/>The dwarf, who is now a member of your party, reveals the location of ancient mines.
 <LineBreak/><LineBreak/>Roll one die for direction: 1-N, 2-NE, 3-SE, 4-S, 5-SW, 6-NW.
@@ -404,10 +405,8 @@ Roll one die to determine the elf's additional characteristics: <InlineUIContain
                                          <InlineUIContainer><Image Name='ElfWarrior' Source='../bin/Images/ElfWarrior.gif' Height='200'  Width='136' > </Image></InlineUIContainer>"
 e007c	"<Bold>e007c Talk to Elf</Bold>
 <LineBreak/><LineBreak/>
- <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1: Inquiry<LineBreak/>
- <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2: Conversation<LineBreak/>
- <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3: Inquiry<LineBreak/>
- <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4: Conversation<LineBreak/>
+ <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 and 3: Inquiry<LineBreak/>
+ <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 and 4: Conversation<LineBreak/>
  <InlineUIContainer><Button Content='e335' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5: Escapee<LineBreak/>
  <InlineUIContainer><Button Content='e336' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6: Plead Comrades<LineBreak/>
  <InlineUIContainer><Button Content='e328' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7: Pass<LineBreak/>
@@ -415,7 +414,9 @@ e007c	"<Bold>e007c Talk to Elf</Bold>
 <LineBreak/><LineBreak/>Roll die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
- <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>"
+ <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
+<LineBreak/>
+                                         <InlineUIContainer><Image Name='E007EncounterTalk' Source='../bin/Images/ElfWarrior.gif' Height='200'  Width='136' > </Image></InlineUIContainer>"
 e007d	"<Bold>e007d Evade Elf</Bold>
 <LineBreak/><LineBreak/>Roll for results:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -423,23 +424,25 @@ e007d	"<Bold>e007d Evade Elf</Bold>
  <InlineUIContainer><Button Content='e317' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1: Hide<LineBreak/>
  <InlineUIContainer><Button Content='e318' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2: Hide<LineBreak/>
  <InlineUIContainer><Button Content='e314' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3: Escape<LineBreak/>
- <InlineUIContainer><Button Content='e315' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4: Escape<LineBreak/>
- <InlineUIContainer><Button Content='e315' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5: Escape<LineBreak/>
+ <InlineUIContainer><Button Content='e315' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 and 5: Escape<LineBreak/>
  <InlineUIContainer><Button Content='e326' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6: Pass<LineBreak/>
  <InlineUIContainer><Button Content='e329' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7: Pass<LineBreak/>
- <InlineUIContainer><Button Content='e310' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 8: Surprised"
+ <InlineUIContainer><Button Content='e310' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 8: Surprised
+<LineBreak/>
+                                         <InlineUIContainer><Image Name='E007EncounterEvade' Source='../bin/Images/ElfWarrior.gif' Height='200'  Width='136' > </Image></InlineUIContainer>"
 e007e	"<Bold>e007e Fight Elf</Bold>
 <LineBreak/><LineBreak/>Roll for results:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e302' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1: Surprise<LineBreak/>
  <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2: Attack<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3: Attacked<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4: Attacked<LineBreak/>
+ <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 and 4: Attacked<LineBreak/>
  <InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5: Surprised<LineBreak/>
  <InlineUIContainer><Button Content='e330' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6: Battle<LineBreak/>
  <InlineUIContainer><Button Content='e309' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7: Surprised<LineBreak/>
- <InlineUIContainer><Button Content='e310' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 8: Surprised"
+ <InlineUIContainer><Button Content='e310' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 8: Surprised
+<LineBreak/>
+                                         <InlineUIContainer><Image Name='E007EncounterFight' Source='../bin/Images/ElfWarrior.gif' Height='200'  Width='136' > </Image></InlineUIContainer>"
 e008	"<Bold>e008 Halfling</Bold>
 <LineBreak/><LineBreak/>
 You encounter a halfling with combat skill 3, endurance 6, and wealth 4. You can attack him, talk with him, or pass by and end the encounter. If you attack him, you strike first in combat.
@@ -462,12 +465,12 @@ e008a	"<Bold>e008a Talk to Halfling</Bold>
 <LineBreak/> 4 - Extended conversation results. See <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/> 5 - Same as 4.
 <LineBreak/> 6 - Halfling has choice gossip and very useful information. See <InlineUIContainer><Button Content='e008b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
-<LineBreak/><LineBreak/>
-                                                 <InlineUIContainer><Image Source='../bin/Images/HalflingWarrior.gif' Height='200'  Width='100' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>Roll die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
- <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>"
+ <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
+<LineBreak/><LineBreak/>
+                                                 <InlineUIContainer><Image Name='E008EncounterTalk'  Source='../bin/Images/HalflingWarrior.gif' Height='200'  Width='100' > </Image></InlineUIContainer>"
 e008b	"<Bold>e008b Halfling Gossip</Bold>
 <LineBreak/><LineBreak/>
 Halfling has choice gossip and very useful information. Roll one die:  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -493,33 +496,25 @@ If you select a raid and remain in this hex at the end of today, you may be atta
 e009a	"<Bold>e009a Farm Friendly Approach</Bold>
 <LineBreak/><LineBreak/> Roll two die: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
- <InlineUIContainer><Button Content='e012a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2<LineBreak/>
- <InlineUIContainer><Button Content='e012a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 <LineBreak/>
- <InlineUIContainer><Button Content='e011a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4<LineBreak/>
+ <InlineUIContainer><Button Content='e012a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2, 3, and 10<LineBreak/>
+ <InlineUIContainer><Button Content='e011a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 and 7<LineBreak/>
  <InlineUIContainer><Button Content='e014a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5<LineBreak/>
  <InlineUIContainer><Button Content='e010a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6<LineBreak/>
- <InlineUIContainer><Button Content='e011a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7<LineBreak/>
  <InlineUIContainer><Button Content='e013a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 8<LineBreak/>
  <InlineUIContainer><Button Content='e015a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 9<LineBreak/>
- <InlineUIContainer><Button Content='e012a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 10<LineBreak/>
- <InlineUIContainer><Button Content='e016a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 11<LineBreak/>
- <InlineUIContainer><Button Content='e016a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 12
+ <InlineUIContainer><Button Content='e016a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 11 and 12
 <LineBreak/>
         <InlineUIContainer><Image Source='../bin/Images/Farmland.gif' Name='FarmlandFriendly' Height='250' Width='500'></Image></InlineUIContainer>"
 e009b	"<Bold>e009b Farm Raid</Bold>
 <LineBreak/><LineBreak/> Roll two die: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
- <InlineUIContainer><Button Content='e012b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2<LineBreak/>
- <InlineUIContainer><Button Content='e012b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 <LineBreak/>
- <InlineUIContainer><Button Content='e011b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4<LineBreak/>
+ <InlineUIContainer><Button Content='e012b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2, 3, and 10<LineBreak/>
+ <InlineUIContainer><Button Content='e011b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 and 7<LineBreak/>
  <InlineUIContainer><Button Content='e014b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5<LineBreak/>
  <InlineUIContainer><Button Content='e010b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6<LineBreak/>
- <InlineUIContainer><Button Content='e011b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7<LineBreak/>
  <InlineUIContainer><Button Content='e013b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 8<LineBreak/>
  <InlineUIContainer><Button Content='e015b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 9<LineBreak/>
- <InlineUIContainer><Button Content='e012b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 10<LineBreak/>
- <InlineUIContainer><Button Content='e016b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 11<LineBreak/>
- <InlineUIContainer><Button Content='e016b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 12
+ <InlineUIContainer><Button Content='e016b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 11 and 12
 <LineBreak/>
         <InlineUIContainer><Image Source='../bin/Images/Farmland.gif' Name='FarmlandRaid'  Height='250' Width='500'></Image></InlineUIContainer>"
 e010a	"<Bold>e010a Starving Farmer Friendly Approach</Bold>

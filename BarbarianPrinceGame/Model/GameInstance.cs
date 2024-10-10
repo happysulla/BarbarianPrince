@@ -16,6 +16,7 @@ namespace BarbarianPrince
    public class GameInstance : IGameInstance
    {
       [NonSerialized] static public Logger Logger = new Logger();
+      public bool IsTalkRoll { get; set; } = false;
       public Options Options { get; set; } = new Options();
       //------------------------------------------------
       public bool CtorError { get; } = false;

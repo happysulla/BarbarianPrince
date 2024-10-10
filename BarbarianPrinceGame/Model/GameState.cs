@@ -9692,39 +9692,59 @@ namespace BarbarianPrince
          }
          ITerritory princeTerritory = gi.Prince.Territory;
          //--------------------------------------------------------
+         bool isResultsPerformed = false;
          gi.DieRollAction = GameAction.DieRollActionNone;
          string key = gi.EventActive;
          Logger.Log(LogEnum.LE_VIEW_APPEND_EVENT, "EncounterRoll(): k=" + key + " d0=" + gi.DieResults[key][0].ToString() + " d1=" + gi.DieResults[key][1].ToString() + " d2=" + gi.DieResults[key][2].ToString());
          switch (key)
          {
             case "e002b": // talk
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               switch (dieRoll) // Based on the die roll, implement the correct screen
+               isResultsPerformed = false;
+               if ((true == gi.IsGiftCharmActive) || (true == gi.IsSlaveGirlActive))
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e327"; gi.DieRollAction = GameAction.EncounterRoll; break; // pass dummies
-                  case 2: gi.EventDisplayed = gi.EventActive = "e328"; gi.DieRollAction = GameAction.EncounterRoll; break; // pass rough
-                  case 3: gi.EventDisplayed = gi.EventActive = "e329"; gi.DieRollAction = GameAction.EncounterRoll; break; // pass charm
-                  case 4:
-                     gi.DieRollAction = GameAction.EncounterRoll;
-                     gi.Bribe = 15;
-                     if (true == gi.IsMerchantWithParty)
-                        gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
-                     Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
-                     gi.EventDisplayed = gi.EventActive = "e323";
-                     break;
-                  case 5:
-                     gi.DieRollAction = GameAction.EncounterRoll;
-                     gi.Bribe = 25;
-                     if (true == gi.IsMerchantWithParty)
-                        gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
-                     Logger.Log(LogEnum.LE_BRIBE, "EncounterStart(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
-                     gi.EventDisplayed = gi.EventActive = "e323";
-                     break;
-                  case 6: gi.EventDisplayed = gi.EventActive = "e306"; break;
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  isResultsPerformed = true;
                }
-               for (int i = 0; i < 3; ++i)
-                  gi.DieResults[key][i] = Utilities.NO_RESULT;
+               else if( Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  dieRoll = gi.DieResults[key][0];
+                  gi.IsTalkRoll = false;
+                  isResultsPerformed = true;
+               }
+               else
+               {
+                  gi.DieResults[key][0] = dieRoll;
+                  gi.IsTalkRoll = true;
+               }
+               if( true == isResultsPerformed)
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  switch (dieRoll) // Based on the die roll, implement the correct screen
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e327"; gi.DieRollAction = GameAction.EncounterRoll; break; // pass dummies
+                     case 2: gi.EventDisplayed = gi.EventActive = "e328"; gi.DieRollAction = GameAction.EncounterRoll; break; // pass rough
+                     case 3: gi.EventDisplayed = gi.EventActive = "e329"; gi.DieRollAction = GameAction.EncounterRoll; break; // pass charm
+                     case 4:
+                        gi.DieRollAction = GameAction.EncounterRoll;
+                        gi.Bribe = 15;
+                        if (true == gi.IsMerchantWithParty)
+                           gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                        Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
+                        gi.EventDisplayed = gi.EventActive = "e323";
+                        break;
+                     case 5:
+                        gi.DieRollAction = GameAction.EncounterRoll;
+                        gi.Bribe = 25;
+                        if (true == gi.IsMerchantWithParty)
+                           gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                        Logger.Log(LogEnum.LE_BRIBE, "EncounterStart(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
+                        gi.EventDisplayed = gi.EventActive = "e323";
+                        break;
+                     case 6: gi.EventDisplayed = gi.EventActive = "e306"; break;
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
+                  for (int i = 0; i < 3; ++i)
+                     gi.DieResults[key][i] = Utilities.NO_RESULT;
+               }
                break;
             case "e002c": // Evade
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
@@ -9781,173 +9801,271 @@ namespace BarbarianPrince
                }
                break;
             case "e003a": // talk to swordsman
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               switch (dieRoll) // Based on the die roll, implement the correct screen
+               isResultsPerformed = false;
+               if ((true == gi.IsGiftCharmActive) || (true == gi.IsSlaveGirlActive))
                {
-                  case 1: case 2: gi.EventDisplayed = gi.EventActive = "e341"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e341"][0] = Utilities.NO_RESULT; break; // converse
-                  case 3: gi.EventDisplayed = gi.EventActive = "e340"; gi.DieRollAction = GameAction.EncounterRoll; break;  // looter
-                  case 4: gi.EventDisplayed = gi.EventActive = "e339"; break;                                               // convince to hire
-                  case 5: gi.EventDisplayed = gi.EventActive = "e333"; break;                                               // hirelings
-                  case 6:                                                                                                   // bride to hire
-                     gi.EventDisplayed = gi.EventActive = "e332";
-                     gi.Bribe = 10;
-                     if (true == gi.IsMerchantWithParty)
-                        gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
-                     Logger.Log(LogEnum.LE_BRIBE, "EncounterStart(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
-                     break;
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  isResultsPerformed = true;
                }
-               for (int i = 0; i < 3; ++i)
-                  gi.DieResults[key][i] = Utilities.NO_RESULT;
+               else if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  dieRoll = gi.DieResults[key][0];
+                  gi.IsTalkRoll = false;
+                  isResultsPerformed = true;
+               }
+               else
+               {
+                  gi.DieResults[key][0] = dieRoll;
+                  gi.IsTalkRoll = true;
+               }
+               if (true == isResultsPerformed)
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  switch (dieRoll) // Based on the die roll, implement the correct screen
+                  {
+                     case 1: case 2: gi.EventDisplayed = gi.EventActive = "e341"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e341"][0] = Utilities.NO_RESULT; break; // converse
+                     case 3: gi.EventDisplayed = gi.EventActive = "e340"; gi.DieRollAction = GameAction.EncounterRoll; break;  // looter
+                     case 4: gi.EventDisplayed = gi.EventActive = "e339"; break;                                               // convince to hire
+                     case 5: gi.EventDisplayed = gi.EventActive = "e333"; break;                                               // hirelings
+                     case 6:                                                                                                   // bride to hire
+                        gi.EventDisplayed = gi.EventActive = "e332";
+                        gi.Bribe = 10;
+                        if (true == gi.IsMerchantWithParty)
+                           gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                        Logger.Log(LogEnum.LE_BRIBE, "EncounterStart(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
+                        break;
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
+                  for (int i = 0; i < 3; ++i)
+                     gi.DieResults[key][i] = Utilities.NO_RESULT;
+               }
                break;
             case "e003b": // evade to swordsman
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               switch (dieRoll) // Based on the die roll, implement the correct screen
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1:
-                     if (0 == numRiding)                                 // no escape
-                        gi.EventDisplayed = gi.EventActive = "e312b";
-                     else if (numRiding < gi.PartyMembers.Count)         // partial escape
-                        gi.EventDisplayed = gi.EventActive = "e312a";
-                     else                                                // full escape
-                        gi.EventDisplayed = gi.EventActive = "e312";
-                     break;
-                  case 2: gi.EventDisplayed = gi.EventActive = "e315"; gi.DieRollAction = GameAction.EncounterRoll; break;  // escape begging
-                  case 3: gi.EventDisplayed = gi.EventActive = "e317"; gi.DieRollAction = GameAction.EncounterRoll; break;  // hide quickly
-                  case 4:                                                                                                   // bribe to pass
-                     gi.EventDisplayed = gi.EventActive = "e322";
-                     gi.Bribe = 5;
-                     if (true == gi.IsMerchantWithParty)
-                        gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
-                     Logger.Log(LogEnum.LE_BRIBE, "EncounterStart(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
-                     break;
-                  case 5: case 6: gi.EventDisplayed = gi.EventActive = "e325"; break;                 // pass with dignity
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  switch (gi.DieResults[key][0]) // Based on the die roll, implement the correct screen
+                  {
+                     case 1:
+                        if (0 == numRiding)                                 // no escape
+                           gi.EventDisplayed = gi.EventActive = "e312b";
+                        else if (numRiding < gi.PartyMembers.Count)         // partial escape
+                           gi.EventDisplayed = gi.EventActive = "e312a";
+                        else                                                // full escape
+                           gi.EventDisplayed = gi.EventActive = "e312";
+                        break;
+                     case 2: gi.EventDisplayed = gi.EventActive = "e315"; gi.DieRollAction = GameAction.EncounterRoll; break;  // escape begging
+                     case 3: gi.EventDisplayed = gi.EventActive = "e317"; gi.DieRollAction = GameAction.EncounterRoll; break;  // hide quickly
+                     case 4:                                                                                                   // bribe to pass
+                        gi.EventDisplayed = gi.EventActive = "e322";
+                        gi.Bribe = 5;
+                        if (true == gi.IsMerchantWithParty)
+                           gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                        Logger.Log(LogEnum.LE_BRIBE, "EncounterStart(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
+                        break;
+                     case 5: case 6: gi.EventDisplayed = gi.EventActive = "e325"; break;                 // pass with dignity
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
                }
                break;
             case "e003c": // fight swordsman
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               action = GameAction.UpdateEventViewerActive;
-               switch (dieRoll) // Based on the die roll, implement the attack case
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e303"; break;
-                  case 2: gi.EventDisplayed = gi.EventActive = "e304"; break;
-                  case 3: gi.EventDisplayed = gi.EventActive = "e305"; break;
-                  case 4: gi.EventDisplayed = gi.EventActive = "e306"; break;
-                  case 5: gi.EventDisplayed = gi.EventActive = "e307"; break;
-                  case 6: gi.EventDisplayed = gi.EventActive = "e308"; break;
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  action = GameAction.UpdateEventViewerActive;
+                  switch (gi.DieResults[key][0]) // Based on the die roll, implement the attack case
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e303"; break;
+                     case 2: gi.EventDisplayed = gi.EventActive = "e304"; break;
+                     case 3: gi.EventDisplayed = gi.EventActive = "e305"; break;
+                     case 4: gi.EventDisplayed = gi.EventActive = "e306"; break;
+                     case 5: gi.EventDisplayed = gi.EventActive = "e307"; break;
+                     case 6: gi.EventDisplayed = gi.EventActive = "e308"; break;
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
                }
                break;
             case "e004a": // talk to mercenaries
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               switch (dieRoll)
+               isResultsPerformed = false;
+               if ((true == gi.IsGiftCharmActive) || (true == gi.IsSlaveGirlActive))
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e341"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e341"][0] = Utilities.NO_RESULT; break; // converse
-                  case 2:
-                     gi.EventDisplayed = gi.EventActive = "e332";
-                     gi.Bribe = 10;
-                     if (true == gi.IsMerchantWithParty)
-                        gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
-                     Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
-                     break;
-                  case 3: gi.EventDisplayed = gi.EventActive = "e338"; break;  // convince to hire
-                  case 4: gi.EventDisplayed = gi.EventActive = "e339"; break;  // convince to hire
-                  case 5: gi.EventDisplayed = gi.EventActive = "e340"; gi.DieRollAction = GameAction.EncounterRoll; break;  // looter
-                  case 6: gi.EventDisplayed = gi.EventActive = "e306"; break;                                               // attacked
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  isResultsPerformed = true;
                }
-               gi.DieResults["e004"][0] = Utilities.NO_RESULT;
-               for (int i = 0; i < 3; ++i)
-                  gi.DieResults[key][i] = Utilities.NO_RESULT;
+               else if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  dieRoll = gi.DieResults[key][0];
+                  gi.IsTalkRoll = false;
+                  isResultsPerformed = true;
+               }
+               else
+               {
+                  gi.DieResults[key][0] = dieRoll;
+                  gi.IsTalkRoll = true;
+               }
+               if (true == isResultsPerformed)
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  switch (dieRoll)
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e341"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e341"][0] = Utilities.NO_RESULT; break; // converse
+                     case 2:
+                        gi.EventDisplayed = gi.EventActive = "e332";
+                        gi.Bribe = 10;
+                        if (true == gi.IsMerchantWithParty)
+                           gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                        Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
+                        break;
+                     case 3: gi.EventDisplayed = gi.EventActive = "e338"; break;  // convince to hire
+                     case 4: gi.EventDisplayed = gi.EventActive = "e339"; break;  // convince to hire
+                     case 5: gi.EventDisplayed = gi.EventActive = "e340"; gi.DieRollAction = GameAction.EncounterRoll; break;  // looter
+                     case 6: gi.EventDisplayed = gi.EventActive = "e306"; break;                                               // attacked
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
+                  gi.DieResults["e004"][0] = Utilities.NO_RESULT;
+                  for (int i = 0; i < 3; ++i)
+                     gi.DieResults[key][i] = Utilities.NO_RESULT;
+               }
                break;
             case "e004b": // evade mercenaries
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               foreach (IMapItem mi in gi.PartyMembers) // if there is at least one mount in party, add one to evade
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  if ((0 < mi.Mounts.Count) || (true == mi.IsFlyingMountCarrier()))
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  foreach (IMapItem mi in gi.PartyMembers) // if there is at least one mount in party, add one to evade
                   {
-                     dieRoll += 1;
-                     break;
+                     if ((0 < mi.Mounts.Count) || (true == mi.IsFlyingMountCarrier()))
+                     {
+                        gi.DieResults[key][0] += 1;
+                        break;
+                     }
                   }
+                  switch (gi.DieResults[key][0])
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e319"; gi.DieRollAction = GameAction.EncounterRoll; break;  // hide party size 
+                     case 2: gi.EventDisplayed = gi.EventActive = "e328"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass rough
+                     case 3: gi.EventDisplayed = gi.EventActive = "e329"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass charm
+                     case 4: gi.EventDisplayed = gi.EventActive = "e317"; gi.DieRollAction = GameAction.EncounterRoll; break;  // hide quickly
+                     case 5: gi.EventDisplayed = gi.EventActive = "e327"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass dummies
+                     case 6:
+                     case 7:                                                                                           // escape mounted
+                        if (0 == numRiding)                                 // no escape
+                           gi.EventDisplayed = gi.EventActive = "e312b";
+                        else if (numRiding < gi.PartyMembers.Count)         // partial escape
+                           gi.EventDisplayed = gi.EventActive = "e312a";
+                        else                                                // full escape
+                           gi.EventDisplayed = gi.EventActive = "e312";
+                        break;
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
+                  gi.DieResults["e004"][0] = Utilities.NO_RESULT;
                }
-               switch (dieRoll)
-               {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e319"; gi.DieRollAction = GameAction.EncounterRoll; break;  // hide party size 
-                  case 2: gi.EventDisplayed = gi.EventActive = "e328"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass rough
-                  case 3: gi.EventDisplayed = gi.EventActive = "e329"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass charm
-                  case 4: gi.EventDisplayed = gi.EventActive = "e317"; gi.DieRollAction = GameAction.EncounterRoll; break;  // hide quickly
-                  case 5: gi.EventDisplayed = gi.EventActive = "e327"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass dummies
-                  case 6:
-                  case 7:                                                                                           // escape mounted
-                     if (0 == numRiding)                                 // no escape
-                        gi.EventDisplayed = gi.EventActive = "e312b";
-                     else if (numRiding < gi.PartyMembers.Count)         // partial escape
-                        gi.EventDisplayed = gi.EventActive = "e312a";
-                     else                                                // full escape
-                        gi.EventDisplayed = gi.EventActive = "e312";
-                     break;
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
-               }
-               gi.DieResults["e004"][0] = Utilities.NO_RESULT;
                break;
             case "e004c": // fight mercenaries
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               switch (dieRoll)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e301"; break;
-                  case 2: gi.EventDisplayed = gi.EventActive = "e302"; break;
-                  case 3: gi.EventDisplayed = gi.EventActive = "e303"; break;
-                  case 4: gi.EventDisplayed = gi.EventActive = "e304"; break;
-                  case 5: gi.EventDisplayed = gi.EventActive = "e305"; break;
-                  case 6: gi.EventDisplayed = gi.EventActive = "e306"; break;
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  gi.DieResults[key][0] = dieRoll;
                }
-               gi.DieResults["e004"][0] = Utilities.NO_RESULT;
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  switch (gi.DieResults[key][0])
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e301"; break;
+                     case 2: gi.EventDisplayed = gi.EventActive = "e302"; break;
+                     case 3: gi.EventDisplayed = gi.EventActive = "e303"; break;
+                     case 4: gi.EventDisplayed = gi.EventActive = "e304"; break;
+                     case 5: gi.EventDisplayed = gi.EventActive = "e305"; break;
+                     case 6: gi.EventDisplayed = gi.EventActive = "e306"; break;
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
+                  gi.DieResults["e004"][0] = Utilities.NO_RESULT;
+               }
                break;
             case "e005a": // talk to amazon
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               switch (dieRoll)
+               isResultsPerformed = false;
+               if ((true == gi.IsGiftCharmActive) || (true == gi.IsSlaveGirlActive))
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e341"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e341"][0] = Utilities.NO_RESULT; break; // converse
-                  case 2: gi.EventDisplayed = gi.EventActive = "e338"; break;  // convince to hire
-                  case 3: gi.EventDisplayed = gi.EventActive = "e339"; break;  // convince to hire
-                  case 4: gi.EventDisplayed = gi.EventActive = "e340"; gi.DieRollAction = GameAction.EncounterRoll; break;  // looters
-                  case 5: gi.EventDisplayed = gi.EventActive = "e327"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass dummies
-                  case 6: gi.EventDisplayed = gi.EventActive = "e306"; break;                                               // attacked
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  isResultsPerformed = true;
                }
-               gi.DieResults["e005"][0] = Utilities.NO_RESULT;
-               for (int i = 0; i < 3; ++i)
-                  gi.DieResults[key][i] = Utilities.NO_RESULT;
+               else if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  dieRoll = gi.DieResults[key][0];
+                  gi.IsTalkRoll = false;
+                  isResultsPerformed = true;
+               }
+               else
+               {
+                  gi.DieResults[key][0] = dieRoll;
+                  gi.IsTalkRoll = true;
+               }
+               if (true == isResultsPerformed)
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  switch (dieRoll)
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e341"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e341"][0] = Utilities.NO_RESULT; break; // converse
+                     case 2: gi.EventDisplayed = gi.EventActive = "e338"; break;  // convince to hire
+                     case 3: gi.EventDisplayed = gi.EventActive = "e339"; break;  // convince to hire
+                     case 4: gi.EventDisplayed = gi.EventActive = "e340"; gi.DieRollAction = GameAction.EncounterRoll; break;  // looters
+                     case 5: gi.EventDisplayed = gi.EventActive = "e327"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass dummies
+                     case 6: gi.EventDisplayed = gi.EventActive = "e306"; break;                                               // attacked
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
+                  gi.DieResults["e005"][0] = Utilities.NO_RESULT;
+                  for (int i = 0; i < 3; ++i)
+                     gi.DieResults[key][i] = Utilities.NO_RESULT;
+               }
                break;
             case "e005b": // evade amazon
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               switch (dieRoll)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e311"; break;                                               // escape
-                  case 2: gi.EventDisplayed = gi.EventActive = "e314"; gi.DieRollAction = GameAction.EncounterRoll; break;  // escape talking
-                  case 3: gi.EventDisplayed = gi.EventActive = "e315"; gi.DieRollAction = GameAction.EncounterRoll; break;  // escape talking
-                  case 4: gi.EventDisplayed = gi.EventActive = "e319"; gi.DieRollAction = GameAction.EncounterRoll; break;  // hide party size
-                  case 5: gi.EventDisplayed = gi.EventActive = "e328"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass rough
-                  case 6: gi.EventDisplayed = gi.EventActive = "e317"; gi.DieRollAction = GameAction.EncounterRoll; break;  // hide quickly
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  gi.DieResults[key][0] = dieRoll;
                }
-               gi.DieResults["e005"][0] = Utilities.NO_RESULT;
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  switch (gi.DieResults[key][0])
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e311"; gi.DieResults["e005"][0] = Utilities.NO_RESULT; break;                                               // escape
+                     case 2: gi.EventDisplayed = gi.EventActive = "e314"; gi.DieResults["e005"][0] = Utilities.NO_RESULT; gi.DieRollAction = GameAction.EncounterRoll; break;  // escape talking
+                     case 3: gi.EventDisplayed = gi.EventActive = "e315"; gi.DieResults["e005"][0] = Utilities.NO_RESULT; gi.DieRollAction = GameAction.EncounterRoll; break;  // escape talking
+                     case 4: gi.EventDisplayed = gi.EventActive = "e319";                                                 gi.DieRollAction = GameAction.EncounterRoll; break;  // hide party size
+                     case 5: gi.EventDisplayed = gi.EventActive = "e328"; gi.DieResults["e005"][0] = Utilities.NO_RESULT; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass rough
+                     case 6: gi.EventDisplayed = gi.EventActive = "e317"; gi.DieResults["e005"][0] = Utilities.NO_RESULT; gi.DieRollAction = GameAction.EncounterRoll; break;  // hide quickly
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
+               }
                break;
             case "e005c": // fight amazon
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               switch (dieRoll)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e302"; break;
-                  case 2: gi.EventDisplayed = gi.EventActive = "e303"; break;
-                  case 3: gi.EventDisplayed = gi.EventActive = "e304"; break;
-                  case 4: gi.EventDisplayed = gi.EventActive = "e305"; break;
-                  case 5: gi.EventDisplayed = gi.EventActive = "e306"; break;
-                  case 6: gi.EventDisplayed = gi.EventActive = "e330"; gi.DieRollAction = GameAction.EncounterRoll; break;
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  gi.DieResults[key][0] = dieRoll;
                }
-               gi.DieResults["e005"][0] = Utilities.NO_RESULT;
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  switch (gi.DieResults[key][0])
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e302"; break;
+                     case 2: gi.EventDisplayed = gi.EventActive = "e303"; break;
+                     case 3: gi.EventDisplayed = gi.EventActive = "e304"; break;
+                     case 4: gi.EventDisplayed = gi.EventActive = "e305"; break;
+                     case 5: gi.EventDisplayed = gi.EventActive = "e306"; break;
+                     case 6: gi.EventDisplayed = gi.EventActive = "e330"; gi.DieRollAction = GameAction.EncounterRoll; break;
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
+                  gi.DieResults["e005"][0] = Utilities.NO_RESULT;
+               }
                break;
             case "e006b": // number of dwarf friends
                gi.EnteredHexes.Last().EventNames.Add(key);
@@ -9965,69 +10083,101 @@ namespace BarbarianPrince
                }
                break;
             case "e006c": // talk to dwarf warrior
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if (gi.DieResults["e006a"][0] < 4) // if alone add one to die roll
-                  ++dieRoll;
-               switch (dieRoll)
+               isResultsPerformed = false;
+               if ((true == gi.IsGiftCharmActive) || (true == gi.IsSlaveGirlActive))
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e308"; break;                                               // attacked
-                  case 2:                                                                                                   // bribe to pass
-                     gi.EventDisplayed = gi.EventActive = "e322";
-                     gi.Bribe = 10;
-                     if (true == gi.IsMerchantWithParty)
-                        gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
-                     Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
-                     break;
-                  case 3: gi.EventDisplayed = gi.EventActive = "e340"; gi.DieRollAction = GameAction.EncounterRoll; break;  // looters
-                  case 4: gi.EventDisplayed = gi.EventActive = "e339"; break;                                               // convince to hire
-                  case 5: gi.EventDisplayed = gi.EventActive = "e333"; break;                                               // hirelings
-                  case 6: gi.EventDisplayed = gi.EventActive = "e341"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e341"][0] = Utilities.NO_RESULT; break; // converse
-                  case 7: gi.EventDisplayed = gi.EventActive = "e334"; break;                                               // ally
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  isResultsPerformed = true;
                }
-               gi.DieResults["e006a"][0] = Utilities.NO_RESULT;
-               for (int i = 0; i < 3; ++i)
-                  gi.DieResults[key][i] = Utilities.NO_RESULT;
+               else if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  dieRoll = gi.DieResults[key][0];
+                  gi.IsTalkRoll = false;
+                  isResultsPerformed = true;
+               }
+               else
+               {
+                  gi.DieResults[key][0] = dieRoll;
+                  gi.IsTalkRoll = true;
+               }
+               if (true == isResultsPerformed)
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if (gi.DieResults["e006a"][0] < 4) // if alone add one to die roll
+                     ++dieRoll;
+                  switch (dieRoll)
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e308"; break;                                               // attacked
+                     case 2:                                                                                                   // bribe to pass
+                        gi.EventDisplayed = gi.EventActive = "e322";
+                        gi.Bribe = 10;
+                        if (true == gi.IsMerchantWithParty)
+                           gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                        Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
+                        break;
+                     case 3: gi.EventDisplayed = gi.EventActive = "e340"; gi.DieRollAction = GameAction.EncounterRoll; break;  // looters
+                     case 4: gi.EventDisplayed = gi.EventActive = "e339"; break;                                               // convince to hire
+                     case 5: gi.EventDisplayed = gi.EventActive = "e333"; break;                                               // hirelings
+                     case 6: gi.EventDisplayed = gi.EventActive = "e341"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e341"][0] = Utilities.NO_RESULT; break; // converse
+                     case 7: gi.EventDisplayed = gi.EventActive = "e334"; break;                                               // ally
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
+                  gi.DieResults["e006a"][0] = Utilities.NO_RESULT;
+                  for (int i = 0; i < 3; ++i)
+                     gi.DieResults[key][i] = Utilities.NO_RESULT;
+               }
                break;
             case "e006d": // evade dwarf warrior 
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if (gi.DieResults["e006a"][0] < 4) // if alone add one to die roll
-                  ++dieRoll;
-               switch (dieRoll)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1:                                                                                                   // bribe to pass
-                     gi.EventDisplayed = gi.EventActive = "e322";
-                     gi.Bribe = 5;
-                     if (true == gi.IsMerchantWithParty)
-                        gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
-                     Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
-                     break;
-                  case 2: gi.EventDisplayed = gi.EventActive = "e328"; gi.DieRollAction = GameAction.EncounterRoll; break; // pass rough
-                  case 3: gi.EventDisplayed = gi.EventActive = "e314"; gi.DieRollAction = GameAction.EncounterRoll; gi.EventStart = "e006"; break; // escape talking
-                  case 4: gi.EventDisplayed = gi.EventActive = "e315"; gi.DieRollAction = GameAction.EncounterRoll; gi.EventStart = "e006"; break; // escape begging 
-                  case 5: gi.EventDisplayed = gi.EventActive = "e311"; break;                                              // escape
-                  case 6: gi.EventDisplayed = gi.EventActive = "e306"; gi.DieRollAction = GameAction.EncounterRoll; break; // attacked
-                  case 7: gi.EventDisplayed = gi.EventActive = "e311"; break;                                              // escape
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  gi.DieResults[key][0] = dieRoll;
                }
-               gi.DieResults["e006a"][0] = Utilities.NO_RESULT;
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if (gi.DieResults["e006a"][0] < 4) // if alone add one to die roll
+                     ++gi.DieResults[key][0];
+                  switch (gi.DieResults[key][0])
+                  {
+                     case 1:                                                                                                   // bribe to pass
+                        gi.EventDisplayed = gi.EventActive = "e322";
+                        gi.Bribe = 5;
+                        if (true == gi.IsMerchantWithParty)
+                           gi.Bribe = (int)Math.Ceiling((double)gi.Bribe * 0.5);
+                        Logger.Log(LogEnum.LE_BRIBE, "EncounterRoll(): bribe=" + gi.Bribe.ToString() + " for ae=" + key + " a=" + action.ToString());
+                        break;
+                     case 2: gi.EventDisplayed = gi.EventActive = "e328"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e006a"][0] = Utilities.NO_RESULT; break; // pass rough
+                     case 3: gi.EventDisplayed = gi.EventActive = "e314"; gi.DieRollAction = GameAction.EncounterRoll; gi.EventStart = "e006"; break; // escape talking
+                     case 4: gi.EventDisplayed = gi.EventActive = "e315"; gi.DieRollAction = GameAction.EncounterRoll; gi.EventStart = "e006"; break; // escape begging 
+                     case 5: gi.EventDisplayed = gi.EventActive = "e311"; gi.DieResults["e006a"][0] = Utilities.NO_RESULT; break;                                              // escape
+                     case 6: gi.EventDisplayed = gi.EventActive = "e306"; gi.DieResults["e006a"][0] = Utilities.NO_RESULT; gi.DieRollAction = GameAction.EncounterRoll; break; // attacked
+                     case 7: gi.EventDisplayed = gi.EventActive = "e311"; gi.DieResults["e006a"][0] = Utilities.NO_RESULT; break;                                              // escape
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
+               }
                break;
             case "e006e": // fight dwarf warrior
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if (gi.DieResults["e006a"][0] < 4) // if alone add one to die roll
-                  ++dieRoll;
-               switch (dieRoll)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e308"; break;
-                  case 2: gi.EventDisplayed = gi.EventActive = "e306"; break;
-                  case 3: gi.EventDisplayed = gi.EventActive = "e306"; break;
-                  case 4: gi.EventDisplayed = gi.EventActive = "e305"; break;
-                  case 5: gi.EventDisplayed = gi.EventActive = "e305"; break;
-                  case 6: gi.EventDisplayed = gi.EventActive = "e304"; break;
-                  case 7: gi.EventDisplayed = gi.EventActive = "e303"; break;
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  gi.DieResults[key][0] = dieRoll;
                }
-               gi.DieResults["e006a"][0] = Utilities.NO_RESULT;
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if (gi.DieResults["e006a"][0] < 4) // if alone add one to die roll
+                     ++gi.DieResults[key][0];
+                  switch (gi.DieResults[key][0])
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e308"; break;
+                     case 2: gi.EventDisplayed = gi.EventActive = "e306"; break;
+                     case 3: gi.EventDisplayed = gi.EventActive = "e306"; break;
+                     case 4: gi.EventDisplayed = gi.EventActive = "e305"; break;
+                     case 5: gi.EventDisplayed = gi.EventActive = "e305"; break;
+                     case 6: gi.EventDisplayed = gi.EventActive = "e304"; break;
+                     case 7: gi.EventDisplayed = gi.EventActive = "e303"; break;
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
+                  gi.DieResults["e006a"][0] = Utilities.NO_RESULT;
+               }
                break;
             case "e006g": // Search for treasure
                gi.EnteredHexes.Last().EventNames.Add(key);
@@ -10054,92 +10204,143 @@ namespace BarbarianPrince
                }
                break;
             case "e007c": // talk to elf lead
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if ("Forest" == princeTerritory.Type) // if in forest, add two
-                  dieRoll += 2;
-               switch (dieRoll)
+               isResultsPerformed = false;
+               if ((true == gi.IsGiftCharmActive) || (true == gi.IsSlaveGirlActive))
                {
-                  case 1: case 3: gi.EventDisplayed = gi.EventActive = "e342"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e342"][0] = Utilities.NO_RESULT; break; // inquiry
-                  case 2: case 4: gi.EventDisplayed = gi.EventActive = "e341"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e341"][0] = Utilities.NO_RESULT; break; // converse
-                  case 5: gi.EventDisplayed = gi.EventActive = "e335"; break;                                               // escapee
-                  case 6: gi.EventDisplayed = gi.EventActive = "e336"; gi.DieRollAction = GameAction.EncounterRoll; break;  // please comrades - sympathetic
-                  case 7: gi.EventDisplayed = gi.EventActive = "e328"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass rough
-                  case 8: gi.EventDisplayed = gi.EventActive = "e329"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass charm
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  isResultsPerformed = true;
                }
-               gi.DieResults["e007a"][0] = Utilities.NO_RESULT;
-               for (int i = 0; i < 3; ++i)
-                  gi.DieResults[key][i] = Utilities.NO_RESULT;
+               else if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  dieRoll = gi.DieResults[key][0];
+                  gi.IsTalkRoll = false;
+                  isResultsPerformed = true;
+               }
+               else
+               {
+                  gi.DieResults[key][0] = dieRoll;
+                  gi.IsTalkRoll = true;
+               }
+               if (true == isResultsPerformed)
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if ("Forest" == princeTerritory.Type) // if in forest, add two
+                     dieRoll += 2;
+                  switch (dieRoll)
+                  {
+                     case 1: case 3: gi.EventDisplayed = gi.EventActive = "e342"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e342"][0] = Utilities.NO_RESULT; break; // inquiry
+                     case 2: case 4: gi.EventDisplayed = gi.EventActive = "e341"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e341"][0] = Utilities.NO_RESULT; break; // converse
+                     case 5: gi.EventDisplayed = gi.EventActive = "e335"; break;                                               // escapee
+                     case 6: gi.EventDisplayed = gi.EventActive = "e336"; gi.DieRollAction = GameAction.EncounterRoll; break;  // please comrades - sympathetic
+                     case 7: gi.EventDisplayed = gi.EventActive = "e328"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass rough
+                     case 8: gi.EventDisplayed = gi.EventActive = "e329"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass charm
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
+                  gi.DieResults["e007a"][0] = Utilities.NO_RESULT;
+                  for (int i = 0; i < 3; ++i)
+                     gi.DieResults[key][i] = Utilities.NO_RESULT;
+               }
                break;
             case "e007d": // evade elf lead 
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if ("Forest" == princeTerritory.Type) // if in forest, add two
-                  dieRoll += 2;
-               switch (dieRoll)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e317"; gi.DieRollAction = GameAction.EncounterRoll; gi.EventStart = "e007"; break;  // hide quickly
-                  case 2: gi.EventDisplayed = gi.EventActive = "e318"; gi.DieRollAction = GameAction.EncounterRoll; gi.EventStart = "e007"; break;  // hide
-                  case 3: gi.EventDisplayed = gi.EventActive = "e314"; gi.DieRollAction = GameAction.EncounterRoll; gi.EventStart = "e007"; break;  // escape talking
-                  case 4: case 5: gi.EventDisplayed = gi.EventActive = "e315"; gi.DieRollAction = GameAction.EncounterRoll; gi.EventStart = "e007"; break; // escape begging 
-                  case 6: gi.EventDisplayed = gi.EventActive = "e326"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass suspiciously
-                  case 7: gi.EventDisplayed = gi.EventActive = "e329"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass charm
-                  case 8: gi.EventDisplayed = gi.EventActive = "e310"; break;                                               // surprised
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  gi.DieResults[key][0] = dieRoll;
                }
-               gi.DieResults["e007a"][0] = Utilities.NO_RESULT;
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if ("Forest" == princeTerritory.Type) // if in forest, add two
+                     dieRoll += 2;
+                  switch (gi.DieResults[key][0])
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e317"; gi.DieRollAction = GameAction.EncounterRoll; gi.EventStart = "e007"; break;  // hide quickly
+                     case 2: gi.EventDisplayed = gi.EventActive = "e318"; gi.DieRollAction = GameAction.EncounterRoll; gi.EventStart = "e007"; break;  // hide
+                     case 3: gi.EventDisplayed = gi.EventActive = "e314"; gi.DieRollAction = GameAction.EncounterRoll; gi.EventStart = "e007"; break;  // escape talking
+                     case 4: case 5: gi.EventDisplayed = gi.EventActive = "e315"; gi.DieRollAction = GameAction.EncounterRoll; gi.EventStart = "e007"; break; // escape begging 
+                     case 6: gi.EventDisplayed = gi.EventActive = "e326"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e007a"][0] = Utilities.NO_RESULT; break;  // pass suspiciously
+                     case 7: gi.EventDisplayed = gi.EventActive = "e329"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e007a"][0] = Utilities.NO_RESULT; break;  // pass charm
+                     case 8: gi.EventDisplayed = gi.EventActive = "e310"; gi.DieResults["e007a"][0] = Utilities.NO_RESULT; break;                                               // surprised
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
+               }
                break;
             case "e007e": // fight elf lead
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if ("Forest" == princeTerritory.Type) // if in forest, add two
-                  dieRoll += 2;
-               switch (dieRoll)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e302"; break;
-                  case 2: gi.EventDisplayed = gi.EventActive = "e305"; break;
-                  case 3: gi.EventDisplayed = gi.EventActive = "e306"; break;
-                  case 4: gi.EventDisplayed = gi.EventActive = "e306"; break;
-                  case 5: gi.EventDisplayed = gi.EventActive = "e308"; break;
-                  case 6: gi.EventDisplayed = gi.EventActive = "e330"; gi.DieRollAction = GameAction.EncounterRoll; break;
-                  case 7: gi.EventDisplayed = gi.EventActive = "e309"; break;
-                  case 8: gi.EventDisplayed = gi.EventActive = "e310"; break;
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  gi.DieResults[key][0] = dieRoll;
                }
-               gi.DieResults["e007a"][0] = Utilities.NO_RESULT;
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if ("Forest" == princeTerritory.Type) // if in forest, add two
+                     dieRoll += 2;
+                  switch (gi.DieResults[key][0])
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e302"; break;
+                     case 2: gi.EventDisplayed = gi.EventActive = "e305"; break;
+                     case 3: gi.EventDisplayed = gi.EventActive = "e306"; break;
+                     case 4: gi.EventDisplayed = gi.EventActive = "e306"; break;
+                     case 5: gi.EventDisplayed = gi.EventActive = "e308"; break;
+                     case 6: gi.EventDisplayed = gi.EventActive = "e330"; gi.DieRollAction = GameAction.EncounterRoll; break;
+                     case 7: gi.EventDisplayed = gi.EventActive = "e309"; break;
+                     case 8: gi.EventDisplayed = gi.EventActive = "e310"; break;
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
+                  gi.DieResults["e007a"][0] = Utilities.NO_RESULT;
+               }
                break;
             case "e008a": // talk to halfling
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               gi.EventStart = "e008";
-               if (0 == gi.EncounteredMembers.Count)
+               isResultsPerformed = false;
+               if ((true == gi.IsGiftCharmActive) || (true == gi.IsSlaveGirlActive))
                {
-                  IMapItem halflingWarrior1 = CreateCharacter(gi, "HalflingLead");
-                  gi.EncounteredMembers.Add(halflingWarrior1);
+                  isResultsPerformed = true;
                }
-               switch (dieRoll)
+               else if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  case 1:
-                     if (false == EncounterEnd(gi, ref action))
-                     {
-                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false ae=" + action.ToString() + " dr=" + dieRoll.ToString());
-                        return false;
-                     }
-                     break;
-                  case 2:
-                     ITerritory adjacent = FindRandomHexRangeAdjacent(gi);
-                     if (false == gi.HalflingTowns.Contains(adjacent))
-                        gi.HalflingTowns.Add(adjacent);
-                     if (false == EncounterEnd(gi, ref action))
-                     {
-                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false ae=" + action.ToString() + " dr=" + dieRoll.ToString());
-                        return false;
-                     }
-                     break;
-                  case 3: gi.EventDisplayed = gi.EventActive = "e342"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e342"][0] = Utilities.NO_RESULT; break; // inquiry
-                  case 4: case 5: gi.EventDisplayed = gi.EventActive = "e341"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e341"][0] = Utilities.NO_RESULT; break; // converse
-                  case 6: gi.EventDisplayed = gi.EventActive = "e008b"; gi.DieRollAction = GameAction.EncounterRoll; break;  // choice gossip
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  dieRoll = gi.DieResults[key][0];
+                  gi.IsTalkRoll = false;
+                  isResultsPerformed = true;
                }
-               for (int i = 0; i < 3; ++i)
-                  gi.DieResults[key][i] = Utilities.NO_RESULT;
+               else
+               {
+                  gi.DieResults[key][0] = dieRoll;
+                  gi.IsTalkRoll = true;
+               }
+               if (true == isResultsPerformed)
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  gi.EventStart = "e008";
+                  if (0 == gi.EncounteredMembers.Count)
+                  {
+                     IMapItem halflingWarrior1 = CreateCharacter(gi, "HalflingLead");
+                     gi.EncounteredMembers.Add(halflingWarrior1);
+                  }
+                  switch (dieRoll)
+                  {
+                     case 1:
+                        if (false == EncounterEnd(gi, ref action))
+                        {
+                           Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false ae=" + action.ToString() + " dr=" + dieRoll.ToString());
+                           return false;
+                        }
+                        break;
+                     case 2:
+                        ITerritory adjacent = FindRandomHexRangeAdjacent(gi);
+                        if (false == gi.HalflingTowns.Contains(adjacent))
+                           gi.HalflingTowns.Add(adjacent);
+                        if (false == EncounterEnd(gi, ref action))
+                        {
+                           Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false ae=" + action.ToString() + " dr=" + dieRoll.ToString());
+                           return false;
+                        }
+                        break;
+                     case 3: gi.EventDisplayed = gi.EventActive = "e342"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e342"][0] = Utilities.NO_RESULT; break; // inquiry
+                     case 4: case 5: gi.EventDisplayed = gi.EventActive = "e341"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e341"][0] = Utilities.NO_RESULT; break; // converse
+                     case 6: gi.EventDisplayed = gi.EventActive = "e008b"; gi.DieRollAction = GameAction.EncounterRoll; break;  // choice gossip
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
+                  for (int i = 0; i < 3; ++i)
+                     gi.DieResults[key][i] = Utilities.NO_RESULT;
+               }
                break;
             case "e008b": // halfing gossip
                gi.EnteredHexes.Last().EventNames.Add(key);
