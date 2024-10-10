@@ -710,7 +710,7 @@ You must immediately roll once for each follower in your party, and any time the
 In addition, all monks and priests in the future will recognize the mark and will not join your party. You can never attempt an audience
  <InlineUIContainer><Button Content='r211' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  with the high priest of any temple marked on the map, but may with high priest of any secret unmarked temples that you find."
-e018a	"<Bold>e018a Talk with Priest</Bold>
+e018a	"<Bold>e018a Talk to Priest</Bold>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e336' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Plead comrade<LineBreak/>
  <InlineUIContainer><Button Content='e336' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Plead comrade <LineBreak/>
@@ -723,7 +723,7 @@ e018a	"<Bold>e018a Talk with Priest</Bold>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
 <LineBreak/>
-                                       <InlineUIContainer><Image Source='../bin/Images/Priest.gif' Height='280'  Width='160' > </Image></InlineUIContainer>"
+                                       <InlineUIContainer><Image Name='E018EncounterTalk' Source='../bin/Images/Priest.gif' Height='280'  Width='160' > </Image></InlineUIContainer>"
 e018b	"<Bold>e018b Fight Priest</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -735,7 +735,7 @@ e018b	"<Bold>e018b Fight Priest</Bold>
  <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Attack<LineBreak/>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Attack
 <LineBreak/><LineBreak/>
-                                       <InlineUIContainer><Image Source='../bin/Images/Priest.gif' Height='280'  Width='160' > </Image></InlineUIContainer>"
+                                       <InlineUIContainer><Image Name='E018EncounterFight' Source='../bin/Images/Priest.gif' Height='280'  Width='160' > </Image></InlineUIContainer>"
 e018c	"<Bold>e018c Priest Cast Mark of Cain</Bold>
 <LineBreak/><LineBreak/>Since you killed the priest, roll one die. If a 5 plus, he casts upon you the <Italic>Mark of Cain</Italic>.  
 <LineBreak/><LineBreak/>If you receive the mark, you roll once for each follower in your party, and any time the roll is greater than your wit and wiles, the follower will immediately desert you. 
@@ -761,8 +761,8 @@ You encounter a hermit monk meditating in the wilderness with a combat skill of 
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='Fight' Name='e019c'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e019c'></Button></InlineUIContainer>
 <LineBreak/>
-                                 <InlineUIContainer><Image Source='../bin/Images/MonkHermit.gif' Height='400' Width='250'></Image></InlineUIContainer>"
-e019a	"<Bold>e019a Talk with Hermit Monk</Bold>
+                                 <InlineUIContainer><Image Source='../bin/Images/MonkHermit.gif' Height='300' Width='200'></Image></InlineUIContainer>"
+e019a	"<Bold>e019a Talk to Hermit Monk</Bold>
 <LineBreak/><LineBreak/>
 *Temporarily reduce your wit and wiles by one unless a priest or monk is with you when resolving these events.
 <LineBreak/><LineBreak/>
@@ -775,7 +775,9 @@ e019a	"<Bold>e019a Talk with Hermit Monk</Bold>
 <LineBreak/><LineBreak/>Roll die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
- <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>"
+ <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
+<LineBreak/>
+                                         <InlineUIContainer><Image Name='E019EncounterTalk'  Source='../bin/Images/MonkHermit.gif' Height='250' Width='180'></Image></InlineUIContainer>"
 e019b	"<Bold>e019b Evade Hermit Monk</Bold>
 <LineBreak/><LineBreak/>Roll one die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -787,7 +789,9 @@ e019b	"<Bold>e019b Evade Hermit Monk</Bold>
 <InlineUIContainer><Button Content='e310' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 - Surprised<LineBreak/>
 <InlineUIContainer><Button Content='e022' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 - **Monk
 <LineBreak/><LineBreak/>
-**Monk is not what he seemed. See this event for what you really encountered. Select a new option and resolve the event accordingly."
+**Monk is not what he seemed. See this event for what you really encountered. Select a new option and resolve the event accordingly.
+<LineBreak/>
+                                 <InlineUIContainer><Image Name='E019EncounterEvade' Source='../bin/Images/MonkHermit.gif' Height='300' Width='200'></Image></InlineUIContainer>"
 e019c	"<Bold>e019c Fight Hermit Monk</Bold>
 <LineBreak/><LineBreak/>Roll for results:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -797,12 +801,14 @@ e019c	"<Bold>e019c Fight Hermit Monk</Bold>
 <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 - Attacked<LineBreak/>
 <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 - Attacked<LineBreak/>
 <InlineUIContainer><Button Content='e307' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 - Attacked<LineBreak/>
-<InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 - Attacked"
+<InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 - Attacked
+<LineBreak/>
+                                 <InlineUIContainer><Image Name='E019EncounterFight' Source='../bin/Images/MonkHermit.gif' Height='300' Width='200'></Image></InlineUIContainer>"
 e020	"<Bold>e020 Traveling Monk(s)</Bold>
 <LineBreak/><LineBreak/>You encounter a traveling monk who has combat skill 4, endurance 5, and wealth 4. Roll one die. If the result is 5 or 6, he is accompanied by a companion monk with equal abilities. Roll one die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
-He seems eager to talk. After rolling and to advance to next screen, select button labeled Talk, Evade, or Fight::
+He seems eager to talk. After rolling and to advance to next screen, select button labeled Talk, Evade, or Fight:
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Talk ' Name='e020a'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e020a'></Button></InlineUIContainer><LineBreak/>
@@ -811,8 +817,8 @@ He seems eager to talk. After rolling and to advance to next screen, select butt
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='Fight' Name='e020c'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e020c'></Button></InlineUIContainer>
 <LineBreak/>
-                                    <InlineUIContainer><Image Source='../bin/Images/MonkTraveling.gif' Height='350' Width='87'></Image></InlineUIContainer>"
-e020a	"<Bold>e020a Talk with Traveling Monk(s)</Bold>
+                                    <InlineUIContainer><Image Source='../bin/Images/MonkTraveling.gif' Height='250' Width='87'></Image></InlineUIContainer>"
+e020a	"<Bold>e020a Talk to Traveling Monk(s)</Bold>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Conversation<LineBreak/>
  <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Conversation <LineBreak/>
@@ -823,7 +829,9 @@ e020a	"<Bold>e020a Talk with Traveling Monk(s)</Bold>
 <LineBreak/><LineBreak/>Roll die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
- <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>"
+ <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
+<LineBreak/>
+                                    <InlineUIContainer><Image Name='E020EncounterTalk' Source='../bin/Images/MonkTraveling.gif' Height='250' Width='87'></Image></InlineUIContainer>"
 e020b	"<Bold>e020b Evade Traveling Monk(s)</Bold>
 <LineBreak/><LineBreak/>Roll one die to determine outcome:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -833,7 +841,9 @@ e020b	"<Bold>e020b Evade Traveling Monk(s)</Bold>
  <InlineUIContainer><Button Content='e326' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Pass<LineBreak/>
  <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Inquiry<LineBreak/>
  <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Inquiry<LineBreak/>
- <InlineUIContainer><Button Content='e311' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Escape"
+ <InlineUIContainer><Button Content='e311' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Escape
+<LineBreak/>
+                                    <InlineUIContainer><Image Name='E020EncounterEvade' Source='../bin/Images/MonkTraveling.gif' Height='250' Width='87'></Image></InlineUIContainer>"
 e020c	"<Bold>e020c Fight Traveling Monk(s)</Bold>
 <LineBreak/><LineBreak/>Roll one die to determine outcome:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -843,7 +853,9 @@ e020c	"<Bold>e020c Fight Traveling Monk(s)</Bold>
  <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Attack<LineBreak/>
  <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Attack<LineBreak/>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attacked<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Attacked"
+ <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Attacked
+<LineBreak/>
+                                    <InlineUIContainer><Image Name='E020EncounterFight' Source='../bin/Images/MonkTraveling.gif' Height='250' Width='87'></Image></InlineUIContainer>"
 e021	"<Bold>e021 Warrior Monks</Bold>
 <LineBreak/><LineBreak/>You encounter a party of Monks belonging to a powerful military order who have weapons and armor. Each monk has combat skill 6, endurance 6, and wealth 10. Roll two die and halve the total (rounding fractions up) for the number in the group. Die roll:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -859,7 +871,7 @@ After rolling and to advance to next screen, select button labeled Talk, Evade, 
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e021b'></Button></InlineUIContainer><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='Fight' Name='e021c'></Button></InlineUIContainer>   ->  
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e021c'></Button></InlineUIContainer>"
-e021a	"<Bold>e021a Talk with Warrior Monks</Bold>
+e021a	"<Bold>e021a Talk to Warrior Monks</Bold>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Conversation<LineBreak/>
  <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Inquiry <LineBreak/>
@@ -870,7 +882,9 @@ e021a	"<Bold>e021a Talk with Warrior Monks</Bold>
 <LineBreak/><LineBreak/>Roll die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
- <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>"
+ <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
+<LineBreak/>
+                                  <InlineUIContainer><Image Name='E021EncounterTalk' Source='../bin/Images/MonkWarrior.gif' Height='200'  Width='175' > </Image></InlineUIContainer>"
 e021b	"<Bold>e021b Evade Warrior Monks</Bold>
 <LineBreak/><LineBreak/>Roll one die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -880,7 +894,9 @@ e021b	"<Bold>e021b Evade Warrior Monks</Bold>
  <InlineUIContainer><Button Content='e319' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Hide<LineBreak/>
  <InlineUIContainer><Button Content='e315' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Escape<LineBreak/>
  <InlineUIContainer><Button Content='e324' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Bribe (10gp)<LineBreak/>
- <InlineUIContainer><Button Content='e329' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Pass"
+ <InlineUIContainer><Button Content='e329' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Pass
+<LineBreak/>
+                                  <InlineUIContainer><Image Name='E021EncounterEvade' Source='../bin/Images/MonkWarrior.gif' Height='200'  Width='175' > </Image></InlineUIContainer>"
 e021c	"<Bold>e021c Fight Warrior Monks</Bold>
 <LineBreak/><LineBreak/>Roll one die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -890,7 +906,10 @@ e021c	"<Bold>e021c Fight Warrior Monks</Bold>
  <InlineUIContainer><Button Content='e304' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Attack<LineBreak/>
  <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Attack<LineBreak/>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attacked<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Attacked"
+ <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Attacked
+ <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
+<LineBreak/>
+                                  <InlineUIContainer><Image Name='E021EncounterFight' Source='../bin/Images/MonkWarrior.gif' Height='200'  Width='175' > </Image></InlineUIContainer>"
 e022	"<Bold>e022 Monks are Here</Bold>
 <LineBreak/><LineBreak/>
 You have encountered a monk or monks. Roll one die for the event:
@@ -923,12 +942,12 @@ e023a	"<Bold>e023a Talk to Wizard</Bold>
  <InlineUIContainer><Button Content='e024' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Wizard Attack<LineBreak/>
  <InlineUIContainer><Button Content='e328' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Pass<LineBreak/>
  <InlineUIContainer><Button Content='e334' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Ally
-<LineBreak/>
-                                        <InlineUIContainer><Image Source='../bin/Images/Wizard.gif' Height='280'  Width='225' > </Image></InlineUIContainer>
 <LineBreak/>Roll die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
- <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>"
+ <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
+<LineBreak/>
+                                        <InlineUIContainer><Image Name='E023EncounterTalk' Source='../bin/Images/Wizard.gif' Height='280'  Width='225' > </Image></InlineUIContainer>"
 e023b	"<Bold>e023b Evade Wizard</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
 <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -940,7 +959,7 @@ e023b	"<Bold>e023b Evade Wizard</Bold>
  <InlineUIContainer><Button Content='e313' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Escape<LineBreak/>
  <InlineUIContainer><Button Content='e024' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Wizard Attack
 <LineBreak/><LineBreak/>
-                                        <InlineUIContainer><Image Source='../bin/Images/Wizard.gif' Height='280'  Width='225' > </Image></InlineUIContainer>"
+                                        <InlineUIContainer><Image Name='E023EncounterEvade'  Source='../bin/Images/Wizard.gif' Height='280'  Width='225' > </Image></InlineUIContainer>"
 e023c	"<Bold>e023c Fight Wizard</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
 <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -952,7 +971,7 @@ e023c	"<Bold>e023c Fight Wizard</Bold>
  <InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Surprised<LineBreak/>
  <InlineUIContainer><Button Content='e307' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Attacked
 <LineBreak/><LineBreak/>
-                                        <InlineUIContainer><Image Source='../bin/Images/Wizard.gif' Height='280'  Width='225' > </Image></InlineUIContainer>"
+                                        <InlineUIContainer><Image Name='E023EncounterFight'  Source='../bin/Images/Wizard.gif' Height='280'  Width='225' > </Image></InlineUIContainer>"
 e024	"<Bold>e024 Wizard Attack</Bold>
 <LineBreak/><LineBreak/>A wizard attempts to use magic and take control of you and your party. Roll one die and  If the result equals or exceeds your wit and wiles, his attack is successful. If successful, see
  <InlineUIContainer><Button Content='e024a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
