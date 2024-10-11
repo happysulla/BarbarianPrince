@@ -481,7 +481,7 @@ Halfling has choice gossip and very useful information. Roll one die:  <InlineUI
                                                  <InlineUIContainer><Image Source='../bin/Images/HalflingWarrior.gif' Height='200'  Width='100' > </Image></InlineUIContainer>"
 e009	"<Bold>e009 Farm</Bold>
 <LineBreak/><LineBreak/>You spot a small farm ahead. You may <InlineUIContainer><Button Content='Detour' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> around it but that will consume the rest of the day ending travel for today.
-<LineBreak/><LineBreak/>Alternately, you can go up to it. If you approach the farm, you must decide whether to make it a friendly approach or a raid. 
+<LineBreak/><LineBreak/>Alternately, you can go up to it. If you approach the farm, you must decide choice by selecting Friendly or Raid button. 
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Friendly' Name='e009a'></Button></InlineUIContainer>   ->  
  <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e009a'></Button></InlineUIContainer><LineBreak/>
@@ -647,7 +647,7 @@ e015c	"<Bold>e015c Friendly Reaver Clan Raid Fight</Bold>
 <LineBreak/>
                                        <InlineUIContainer><Image Source='../bin/Images/Reaver.gif' Name='ReaverFriendlyFight'  Height='300' Width='150'></Image></InlineUIContainer>"
 e016	"<Bold>e016 Magician's Home</Bold>
-<LineBreak/><LineBreak/>You spot a magician home. Choose the approach strategy.
+<LineBreak/><LineBreak/>You spot a magician home. Choose the approach strategy by selecting Friendly or Raid button.
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content='Friendly' Name='e016a'></Button></InlineUIContainer>   ->  
  <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e016a'></Button></InlineUIContainer><LineBreak/>
@@ -712,12 +712,11 @@ In addition, all monks and priests in the future will recognize the mark and wil
  with the high priest of any temple marked on the map, but may with high priest of any secret unmarked temples that you find."
 e018a	"<Bold>e018a Talk to Priest</Bold>
 <LineBreak/><LineBreak/>
- <InlineUIContainer><Button Content='e336' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Plead comrade<LineBreak/>
- <InlineUIContainer><Button Content='e336' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Plead comrade <LineBreak/>
- <InlineUIContainer><Button Content='e337' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Plead comrade<LineBreak/>
- <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Conversation<LineBreak/>
- <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Inquiry<LineBreak/>
- <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Pass
+ 1 and 2 -<InlineUIContainer><Button Content='e336' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Plead comrade<LineBreak/>
+3 - <InlineUIContainer><Button Content='e337' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Plead comrade<LineBreak/>
+ 4 - <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Conversation<LineBreak/>
+ 5 - <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Inquiry<LineBreak/>
+ 6 - <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Pass
 <LineBreak/><LineBreak/> Roll die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
@@ -728,12 +727,11 @@ e018b	"<Bold>e018b Fight Priest</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
- <InlineUIContainer><Button Content='e300' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Surprise<LineBreak/>
- <InlineUIContainer><Button Content='e303' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Surprise <LineBreak/>
- <InlineUIContainer><Button Content='e304' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Attack<LineBreak/>
- <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Attack<LineBreak/>
- <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Attack<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Attack
+1 - <InlineUIContainer><Button Content='e300' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Surprise<LineBreak/>
+2 - <InlineUIContainer><Button Content='e303' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Surprise <LineBreak/>
+3 - <InlineUIContainer><Button Content='e304' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Attack<LineBreak/>
+4 and 5 - <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Attack<LineBreak/>
+6 - <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Attack
 <LineBreak/><LineBreak/>
                                        <InlineUIContainer><Image Name='E018EncounterFight' Source='../bin/Images/Priest.gif' Height='280'  Width='160' > </Image></InlineUIContainer>"
 e018c	"<Bold>e018c Priest Cast Mark of Cain</Bold>
@@ -768,8 +766,7 @@ e019a	"<Bold>e019a Talk to Hermit Monk</Bold>
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 - Inquiry<LineBreak/>
 <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 - Conversation <LineBreak/>
-<InlineUIContainer><Button Content='e336' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 - Plead comrades*<LineBreak/>
-<InlineUIContainer><Button Content='e336' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 - Plead comrades*<LineBreak/>
+<InlineUIContainer><Button Content='e336' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 and 4 - Plead comrades*<LineBreak/>
 <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 - Pass<LineBreak/>
 <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 - Pass
 <LineBreak/><LineBreak/>Roll die:
@@ -782,9 +779,7 @@ e019b	"<Bold>e019b Evade Hermit Monk</Bold>
 <LineBreak/><LineBreak/>Roll one die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
-<InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 - Pass<LineBreak/>
-<InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 - Pass<LineBreak/>
-<InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 - Pass<LineBreak/>
+<InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1, 2, 3 - Pass<LineBreak/>
 <InlineUIContainer><Button Content='e326' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 - Pass or Combat<LineBreak/>
 <InlineUIContainer><Button Content='e310' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 - Surprised<LineBreak/>
 <InlineUIContainer><Button Content='e022' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 - **Monk
@@ -798,8 +793,7 @@ e019c	"<Bold>e019c Fight Hermit Monk</Bold>
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 - Attack<LineBreak/>
 <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 - Attack <LineBreak/>
-<InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 - Attacked<LineBreak/>
-<InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 - Attacked<LineBreak/>
+<InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 and 4 - Attacked<LineBreak/>
 <InlineUIContainer><Button Content='e307' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 - Attacked<LineBreak/>
 <InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 - Attacked
 <LineBreak/>
@@ -820,8 +814,7 @@ He seems eager to talk. After rolling and to advance to next screen, select butt
                                     <InlineUIContainer><Image Source='../bin/Images/MonkTraveling.gif' Height='250' Width='87'></Image></InlineUIContainer>"
 e020a	"<Bold>e020a Talk to Traveling Monk(s)</Bold>
 <LineBreak/><LineBreak/>
- <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Conversation<LineBreak/>
- <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Conversation <LineBreak/>
+ <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 and 2 - Conversation<LineBreak/>
  <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Inquiry<LineBreak/>
  <InlineUIContainer><Button Content='e336' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Plead comrades<LineBreak/>
  <InlineUIContainer><Button Content='e337' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Plead comrades<LineBreak/>
@@ -850,10 +843,8 @@ e020c	"<Bold>e020c Fight Traveling Monk(s)</Bold>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e302' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Surprise<LineBreak/>
  <InlineUIContainer><Button Content='e304' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Attack <LineBreak/>
- <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Attack<LineBreak/>
- <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Attack<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attacked<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Attacked
+ <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 and 4 - Attack<LineBreak/>
+ <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 and 6 - Attacked<LineBreak/>
 <LineBreak/>
                                     <InlineUIContainer><Image Name='E020EncounterFight' Source='../bin/Images/MonkTraveling.gif' Height='250' Width='87'></Image></InlineUIContainer>"
 e021	"<Bold>e021 Warrior Monks</Bold>
@@ -905,9 +896,7 @@ e021c	"<Bold>e021c Fight Warrior Monks</Bold>
  <InlineUIContainer><Button Content='e302' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Surprise <LineBreak/>
  <InlineUIContainer><Button Content='e304' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Attack<LineBreak/>
  <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Attack<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attacked<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Attacked
- <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
+ <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 and 6 - Attacked<LineBreak/>
 <LineBreak/>
                                   <InlineUIContainer><Image Name='E021EncounterFight' Source='../bin/Images/MonkWarrior.gif' Height='200'  Width='175' > </Image></InlineUIContainer>"
 e022	"<Bold>e022 Monks are Here</Bold>
@@ -936,8 +925,7 @@ e023	"<Bold>e023 Wizard</Bold>
  with the wizard, he may strike at your party with fireballs instead of making a normal strike. Before each strike, roll one die. If the result is 5 plus, he strikes with a fireball spell. When the spell strikes, roll one die to determine the number of wounds each character in the party suffers including youself. If the wizard has any wounds, he will automatically escape when the fireball strikes. Otherwise he will remain and allow the battle to continue."
 e023a	"<Bold>e023a Talk to Wizard</Bold>
 <LineBreak/><LineBreak/>
- <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Inquiry<LineBreak/>
- <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Inquiry <LineBreak/>
+ <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 and 2 - Inquiry<LineBreak/>
  <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Conversation<LineBreak/>
  <InlineUIContainer><Button Content='e024' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Wizard Attack<LineBreak/>
  <InlineUIContainer><Button Content='e328' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Pass<LineBreak/>
@@ -952,8 +940,7 @@ e023b	"<Bold>e023b Evade Wizard</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
 <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
- <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Pass<LineBreak/>
- <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Pass <LineBreak/>
+ <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 and 2 - Pass<LineBreak/>
  <InlineUIContainer><Button Content='e321' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Bribe to pass (5gp)<LineBreak/>
  <InlineUIContainer><Button Content='e314' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Escape<LineBreak/>
  <InlineUIContainer><Button Content='e313' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Escape<LineBreak/>
@@ -966,8 +953,7 @@ e023c	"<Bold>e023c Fight Wizard</Bold>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Surprise<LineBreak/>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Attacked <LineBreak/>
- <InlineUIContainer><Button Content='e024' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Wizard Attack<LineBreak/>
- <InlineUIContainer><Button Content='e024' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Wizard Attack<LineBreak/>
+ <InlineUIContainer><Button Content='e024' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 and 4 - Wizard Attack<LineBreak/>
  <InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Surprised<LineBreak/>
  <InlineUIContainer><Button Content='e307' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Attacked
 <LineBreak/><LineBreak/>
@@ -1484,8 +1470,7 @@ e050c	"<Bold>e050c Evade Constabulary</Bold>
  <InlineUIContainer><Button Content='e315' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Escape<LineBreak/>
  <InlineUIContainer><Button Content='e318' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Hide<LineBreak/>
  <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Attack<LineBreak/>
- <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7 Pass<LineBreak/>
- <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 8 Pass
+ <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7 and 8 - Pass<LineBreak/>
 <LineBreak/> 
                                        <InlineUIContainer><Image Name='E050EncounterEvade' Source='../bin/Images/Constabulary.gif' Height='250' Width='250'></Image></InlineUIContainer>"
 e050d	"<Bold>e050d Fight Constabulary</Bold>
@@ -1855,10 +1840,8 @@ e060	"<Bold>e060 Arrested</Bold>
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button Content='e061' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>   1 or less <LineBreak/>
 <InlineUIContainer><Button Content='e062' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>   2 <LineBreak/>
-<InlineUIContainer><Button Content='e063' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>   3 <LineBreak/>
-<InlineUIContainer><Button Content='e063' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>   4 <LineBreak/>
-<InlineUIContainer><Button Content='e060a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 5 <LineBreak/>
-<InlineUIContainer><Button Content='e060a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 6 
+<InlineUIContainer><Button Content='e063' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>   3 and 4  <LineBreak/>
+<InlineUIContainer><Button Content='e060a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 5 and 6  <LineBreak/>
 <LineBreak/><LineBreak/>Roll one die for the gravity of the offense: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e060a	"<Bold>e060a Arrested - Minor Offense</Bold>
 <LineBreak/><LineBreak/>You are held overnight along with your entire party. The jailers provide food and lodging for all.
@@ -1931,8 +1914,7 @@ e067	"<Bold>e067 Abandoned Mines</Bold>
  2 -  <InlineUIContainer><Button Content='e051' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  3 -  <InlineUIContainer><Button Content='e046' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  4 -  <InlineUIContainer><Button Content='e045' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
- 5 -  <InlineUIContainer><Button Content='e028' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
- 6 -  <InlineUIContainer><Button Content='e028' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+ 5 and 6 -  <InlineUIContainer><Button Content='e028' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
 <LineBreak/>
                                 <InlineUIContainer><Image Name='MineAbandoned' Source='../bin/Images/MineAbandoned.gif' Height='210' Width='300'></Image></InlineUIContainer>"
 e068	"<Bold>e068 Wizard's Abode</Bold>
@@ -2005,13 +1987,11 @@ e071	"<Bold>e071 Elven Band</Bold>
 e071a	"<Bold>e071a Talk Elven Band</Bold>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e072' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 0 Follow<LineBreak/>
- <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Inquiry<LineBreak/>
- <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Inquiry <LineBreak/>
+ <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 and 2 - Inquiry<LineBreak/>
  <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Conversation<LineBreak/>
  <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Pass<LineBreak/>
  <InlineUIContainer><Button Content='e072' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Follow<LineBreak/>
- <InlineUIContainer><Button Content='e309' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprised<LineBreak/>
- <InlineUIContainer><Button Content='e309' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7 Surprised
+ <InlineUIContainer><Button Content='e309' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 and 7 - Surprised<LineBreak/>
 <LineBreak/>Roll die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
@@ -2038,12 +2018,11 @@ e071c	"<Bold>e071c Fight Elven Band</Bold>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e301' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 0 Surprise<LineBreak/>
  <InlineUIContainer><Button Content='e302' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Surprise<LineBreak/>
- <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Attack <LineBreak/>
+ <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 and 7 - Attack <LineBreak/>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Attacked<LineBreak/>
  <InlineUIContainer><Button Content='e307' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Attacked<LineBreak/>
  <InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Surprised<LineBreak/>
  <InlineUIContainer><Button Content='e310' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprised<LineBreak/>
- <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7 Attack
 <LineBreak/> <LineBreak/>
                                    <InlineUIContainer><Image Name='E071EncounterFight' Source='../bin/Images/Elf.gif' Height='250' Width='200'></Image></InlineUIContainer>"
 e071d	"<Bold>e071d Elven Band</Bold>
@@ -2269,8 +2248,7 @@ e081b	"<Bold>e081b Evade Mounted Patrol</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
- <InlineUIContainer><Button Content='e312' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Escape-Mounted<LineBreak/>
- <InlineUIContainer><Button Content='e312' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Escape-Mounted <LineBreak/>
+ <InlineUIContainer><Button Content='e312' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 and 2 - Escape-Mounted<LineBreak/>
  <InlineUIContainer><Button Content='e314' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Escape<LineBreak/>
  <InlineUIContainer><Button Content='e318' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Hide<LineBreak/>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attacked<LineBreak/>
@@ -2282,10 +2260,8 @@ e081c	"<Bold>e081c Fight Mounted Patrol</Bold>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e302' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Surprise<LineBreak/>
- <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Attack <LineBreak/>
- <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Attack<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Attacked<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attacked<LineBreak/>
+ <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 and 3 - Attack <LineBreak/>
+ <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 and 5 - Attacked<LineBreak/>
  <InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprised
 <LineBreak/><LineBreak/>
                               <InlineUIContainer><Image Name='E081EncounterFight' Source='../bin/Images/MountedPatrol.gif' Height='250' Width='250'></Image></InlineUIContainer>"
@@ -2532,14 +2508,13 @@ e099a	"<Bold>e099a Evade Roc</Bold>
 <LineBreak/><LineBreak/>Roll one die and determine outcome below:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
- <InlineUIContainer><Button Content='r313' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Escape Flying<LineBreak/>
- <InlineUIContainer><Button Content='r313' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Escape Flying<LineBreak/>
+ <InlineUIContainer><Button Content='r313' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 and 2 - Escape Flying<LineBreak/>
  <InlineUIContainer><Button Content='r317' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Hide<LineBreak/>
  <InlineUIContainer><Button Content='r319' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Hide<LineBreak/>
  <InlineUIContainer><Button Content='r305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attacked<LineBreak/>
  <InlineUIContainer><Button Content='r308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surpised
 <LineBreak/><LineBreak/>
-                                  <InlineUIContainer><Image Source='../bin/Images/Roc.gif' Height='200' Width='300'></Image></InlineUIContainer>"
+                                  <InlineUIContainer><Image Name='E099EncounterEvade' Source='../bin/Images/Roc.gif' Height='200' Width='300'></Image></InlineUIContainer>"
 e099b	"<Bold>e099b Fight Roc</Bold>
 <LineBreak/><LineBreak/>Roll one die and determine outcome below:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -2551,7 +2526,7 @@ e099b	"<Bold>e099b Fight Roc</Bold>
  <InlineUIContainer><Button Content='r306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attacked<LineBreak/>
  <InlineUIContainer><Button Content='r308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surpised
 <LineBreak/><LineBreak/>
-                                  <InlineUIContainer><Image Source='../bin/Images/Roc.gif' Height='200' Width='300'></Image></InlineUIContainer>"
+                                  <InlineUIContainer><Image Name='E099EncounterFight' Source='../bin/Images/Roc.gif' Height='200' Width='300'></Image></InlineUIContainer>"
 e100	"<Bold>e100 Griffon</Bold>
 <LineBreak/><LineBreak/>You meet a winged griffon which has combat skill 7, endurance 5, and wealth 12.
 <LineBreak/><LineBreak/>The griffon is intelligent and could serve both as a member of your party and as a winged mount for other characters.
@@ -2596,10 +2571,9 @@ e100c	"<Bold>e100c Fight Griffon</Bold>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e303' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Surprise<LineBreak/>
- <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Attack<LineBreak/>
+ <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 and 3 - Attack<LineBreak/>
  <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Attack<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Attacked<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attacked<LineBreak/>
+ <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 and 5 - Attacked<LineBreak/>
  <InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprised
 <LineBreak/><LineBreak/>
                                   <InlineUIContainer><Image Name='E100EncounterFight' Source='../bin/Images/Griffon.gif' Height='250' Width='250'></Image></InlineUIContainer>"
@@ -2619,8 +2593,7 @@ e101a	"<Bold>e101a Talk to Harpy</Bold>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='r342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Inquiry<LineBreak/>
  <InlineUIContainer><Button Content='r329' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Pass<LineBreak/>
- <InlineUIContainer><Button Content='r340' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Looter<LineBreak/>
- <InlineUIContainer><Button Content='r340' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Looter<LineBreak/>
+ <InlineUIContainer><Button Content='r340' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 aand 4 - Looter<LineBreak/>
  <InlineUIContainer><Button Content='r308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Surprised<LineBreak/>
  <InlineUIContainer><Button Content='r310' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprised
 <LineBreak/><LineBreak/>Roll die:
@@ -2647,8 +2620,7 @@ e101c	"<Bold>e101c Fight Harpy</Bold>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='r302' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Surprise<LineBreak/>
  <InlineUIContainer><Button Content='r304' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Attack<LineBreak/>
- <InlineUIContainer><Button Content='r305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Attack<LineBreak/>
- <InlineUIContainer><Button Content='r305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Attack<LineBreak/>
+ <InlineUIContainer><Button Content='r305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 and 4 - Attack<LineBreak/>
  <InlineUIContainer><Button Content='r306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attack<LineBreak/>
  <InlineUIContainer><Button Content='r309' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprised
 <LineBreak/><LineBreak/>
@@ -2777,44 +2749,40 @@ e112a	"<Bold>e112a Follow Eagle Clan</Bold>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e113' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Ambush<LineBreak/>
- <InlineUIContainer><Button Content='e114' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Hunt<LineBreak/>
- <InlineUIContainer><Button Content='e114' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Hunt<LineBreak/>
+ <InlineUIContainer><Button Content='e114' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 and 3 - Hunt<LineBreak/>
  <InlineUIContainer><Button Content='e115' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Lair<LineBreak/>
  <InlineUIContainer><Button Content='e116' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Help<LineBreak/>
  <InlineUIContainer><Button Content='e117' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Allies
-<LineBreak/> <LineBreak/>
-                <InlineUIContainer><Image Source='../bin/Images/Eagle.gif' Height='210' Width='400'></Image></InlineUIContainer>"
+<LineBreak/>
+                <InlineUIContainer><Image Name='E112EncounterFollow' Source='../bin/Images/Eagle.gif' Height='210' Width='400'></Image></InlineUIContainer>"
 e112b	"<Bold>e112b Evade Eagle Clan</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
- <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Pass<LineBreak/>
- <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Pass<LineBreak/>
- <InlineUIContainer><Button Content='e326' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Pass<LineBreak/>
- <InlineUIContainer><Button Content='e326' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Pass<LineBreak/>
+ <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 and 2 - Pass<LineBreak/>
+ <InlineUIContainer><Button Content='e326' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 and 4 - Pass<LineBreak/>
  <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Conversation<LineBreak/>
  <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Inquiry
-<LineBreak/> <LineBreak/>
-                <InlineUIContainer><Image Source='../bin/Images/Eagle.gif' Height='210' Width='400'></Image></InlineUIContainer>"
+<LineBreak/>
+                <InlineUIContainer><Image Name='E112EncounterEvade' Source='../bin/Images/Eagle.gif' Height='210' Width='400'></Image></InlineUIContainer>"
 e112c	"<Bold>e112c Fight Eagle Clan</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/> 
  <InlineUIContainer><Button Content='e304' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Attack<LineBreak/>
  <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Attack<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Attacked<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Attacked<LineBreak/>
+ <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 and 4 - Attacked<LineBreak/>
  <InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Surpised<LineBreak/>
  <InlineUIContainer><Button Content='e309' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprised
-<LineBreak/> <LineBreak/>
-                <InlineUIContainer><Image Source='../bin/Images/Eagle.gif' Height='210' Width='400'></Image></InlineUIContainer>"
+<LineBreak/>
+                <InlineUIContainer><Image Name='E112EncounterFight' Source='../bin/Images/Eagle.gif' Height='210' Width='400'></Image></InlineUIContainer>"
 e113	"<Bold>e113 Eagle Ambush</Bold>
 <LineBreak/><LineBreak/>The eagles lead you to a craggy area when more eagles suddenly appear. 
 <LineBreak/><LineBreak/>Additional eagles arrive. All of these make a surprise attack on your party. See combat
  <InlineUIContainer><Button Content='r220' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
-<LineBreak/> <LineBreak/>
+<LineBreak/> 
                 <InlineUIContainer><Image Name='Eagles' Source='../bin/Images/Eagles.gif' Height='210' Width='400'></Image></InlineUIContainer>"
 e114	"<Bold>e114 Eagle Hunt</Bold>
 <LineBreak/><LineBreak/>Eagles are hunting and they join your party for the hunt. This ends all travel for today. For the evening meal
@@ -2825,7 +2793,7 @@ e114	"<Bold>e114 Eagle Hunt</Bold>
 , or you can leave the hex by travel
  <InlineUIContainer><Button Content='r204' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>If you leave the hex, instructions from the eagles act as if you had a guide for tomorrow. Click image to continue.
-<LineBreak/> <LineBreak/>
+<LineBreak/>
                                            <InlineUIContainer><Image Name='EncounterEnd' Source='../bin/Images/EagleNest.gif' Height='300' Width='200'></Image></InlineUIContainer>"
 e115	"<Bold>e115 Eagle Lair</Bold>
 <LineBreak/><LineBreak/>The eagles lead you to their lair where you meet family and friends.
@@ -2833,7 +2801,7 @@ e115	"<Bold>e115 Eagle Lair</Bold>
  <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 
  for your entire party. Do not roll for landing in this hex. The eagle lair replaces the normal landing event.
 <LineBreak/><LineBreak/>Later in the game, you can return to the eagle lair for free food but only if you make airborne travel into the lair hex. Do not make a normal landing but instead land in the lair. Click image to continue.
-<LineBreak/> <LineBreak/>
+<LineBreak/> 
                                            <InlineUIContainer><Image Name='EncounterEnd' Source='../bin/Images/EagleNest.gif' Height='300' Width='200'></Image></InlineUIContainer>"
 e116	"<Bold>e116 Eagle Help</Bold>
 <LineBreak/><LineBreak/>Same as
@@ -2843,13 +2811,13 @@ e116	"<Bold>e116 Eagle Help</Bold>
 The eagle is able to feed itself each day on the wing. 
 <LineBreak/><LineBreak/>
 It will leave you whenever you end a day in a town, castle, or temple. Click image to continue.
-<LineBreak/> <LineBreak/>
+<LineBreak/>
                                            <InlineUIContainer><Image Name='EncounterEnd' Source='../bin/Images/EagleNest.gif' Height='300' Width='200'></Image></InlineUIContainer>"
 e117	"<Bold>e117 Eagle Allies</Bold>
 <LineBreak/><LineBreak/>The eagles lead you to their high council; and after hearing your tale, decide to support your quest for the Northlands kingdom. 
 <LineBreak/><LineBreak/> They give you 50 gold to help with expenses.
 <LineBreak/> <LineBreak/>Additionally, they give a warrior band of eagles to your party.  Each eagle has combat skill 4 and endurance 3. Any may act as guides if you wish. Roll two die for the number of eagles in the warrior band: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DiceRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
-<LineBreak/> <LineBreak/>
+<LineBreak/> 
                 <InlineUIContainer><Image Name='EaglesAlly' Source='../bin/Images/Eagles.gif' Height='210' Width='400'></Image></InlineUIContainer>"
 e118	"<Bold>e118 Giant</Bold>
 <LineBreak/><LineBreak/>You encounter a 12-foot tall giant carrying a very big axe. He has combat skill 9 , endurance 8, and wealth 10. To advance to next screen, select one of the buttons labeled: Talk, Evade, Fight:
@@ -2895,8 +2863,7 @@ e118c	"<Bold>e118c Fight Giant</Bold>
  <InlineUIContainer><Button Content='e302' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Surprise<LineBreak/>
  <InlineUIContainer><Button Content='e304' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Attack<LineBreak/>
  <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Attack<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attacked<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Attacked
+ <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 and 6 - Attacked<LineBreak/>
 <LineBreak/><LineBreak/>
                                   <InlineUIContainer><Image Name='E118EncounterFight' Source='../bin/Images/Giant.gif' Height='280'  Width='280' > </Image></InlineUIContainer>"
 e119	"<Bold>e119 Flash Flood</Bold>
@@ -3141,7 +3108,7 @@ e130a	"<Bold>e130a Talk to High Lord</Bold>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
 <LineBreak/>
-                   <InlineUIContainer><Image Source='../bin/Images/HighLords.gif' Height='200'  Width='400' > </Image></InlineUIContainer>"
+                   <InlineUIContainer><Image Name='E130EncounterTalk' Source='../bin/Images/HighLords.gif' Height='200'  Width='400' > </Image></InlineUIContainer>"
 e130b	"<Bold>e130b Evade Body Guards</Bold>
 <LineBreak/><LineBreak/>Roll die: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
@@ -3152,18 +3119,17 @@ e130b	"<Bold>e130b Evade Body Guards</Bold>
  <InlineUIContainer><Button Content='e319' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Hide<LineBreak/>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Attacked
 <LineBreak/>
-                   <InlineUIContainer><Image Source='../bin/Images/HighLords.gif' Height='200'  Width='400' > </Image></InlineUIContainer>"
+                   <InlineUIContainer><Image Name='E130EncounterEvade' Source='../bin/Images/HighLords.gif' Height='200'  Width='400' > </Image></InlineUIContainer>"
 e130c	"<Bold>e130c Fight High Lord</Bold>
 <LineBreak/><LineBreak/>Roll die: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e303' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Surprise<LineBreak/>
  <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Attack<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Attacked<LineBreak/>
- <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Attacked<LineBreak/>
+ <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 and 4 - Attacked<LineBreak/>
  <InlineUIContainer><Button Content='e307' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attacked<LineBreak/>
  <InlineUIContainer><Button Content='e309' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprised
 <LineBreak/>
-                   <InlineUIContainer><Image Source='../bin/Images/HighLords.gif' Height='200'  Width='400' > </Image></InlineUIContainer>"
+                   <InlineUIContainer><Image Name='E130EncounterFight' Source='../bin/Images/HighLords.gif' Height='200'  Width='400' > </Image></InlineUIContainer>"
 e130d	"<Bold>e130d High Lord on Travels Arrest You</Bold>
 <LineBreak/><LineBreak/>
 You are arrested. You are jailed at the Lord's residence which is either the appropriate castle, nearest temple, or nearest town. Advance time by one day to represent the time spent reaching the jail. It may be by a magical means to travel in one day. Click image to continue.
@@ -3567,8 +3533,7 @@ e154	"<Bold>e154 Meet Lord's Daughter</Bold>
 <LineBreak/><LineBreak/>
 You meet the ruler's beautiful daughter. Roll one die for her attitude: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21'> </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
-<InlineUIContainer><Button Content='e154a' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> - 1 She hates you<LineBreak/>
-<InlineUIContainer><Button Content='e154a' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> - 2 She hates you<LineBreak/>
+<InlineUIContainer><Button Content='e154a' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> - 1 and 2 - She hates you<LineBreak/>
 <InlineUIContainer><Button Content='e154b' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> - 3 Dally with her<LineBreak/>
 <InlineUIContainer><Button Content='e154c' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> - 4 Reserved with her<LineBreak/>
 <InlineUIContainer><Button Content='e154d' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> - 5 She likes you<LineBreak/>
@@ -3807,12 +3772,9 @@ e162	"<Bold>e162 Learn Secrets</Bold>
 <LineBreak/><LineBreak/>You finally accumulate enough hints and bits of unrelated information to learn the important secrets of this region. Roll one die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
- 1 - <InlineUIContainer><Button Content='e143' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
- 2 - <InlineUIContainer><Button Content='e143' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
- 3 - <InlineUIContainer><Button Content='e144' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
- 4 - <InlineUIContainer><Button Content='e144' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
- 5 - <InlineUIContainer><Button Content='e145' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
- 6 - <InlineUIContainer><Button Content='e145' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+ 1 and 2 - <InlineUIContainer><Button Content='e143' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
+ 3 and 4 - <InlineUIContainer><Button Content='e144' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
+ 5 and 6 - <InlineUIContainer><Button Content='e145' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
 <LineBreak/>
                                <InlineUIContainer><Image Source='../bin/Images/Secrets.gif' Name='Secrets' Height='300' Width='350'></Image></InlineUIContainer>"
 e163	"<Bold>e163 Slave Market</Bold>
@@ -4120,7 +4082,7 @@ e208	"<Bold>e208 Searching a Ruin</Bold> <InlineUIContainer><Button Content='r20
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21'> </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='e133' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 <LineBreak/>
- <InlineUIContainer><Button Content='e135' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 <LineBreak/>
+ <InlineUIContainer><Button Content='e135' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 and 11<LineBreak/>
  <InlineUIContainer><Button Content='e136' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 <LineBreak/>
  <InlineUIContainer><Button Content='e137' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 <LineBreak/>
  <InlineUIContainer><Button Content='e139' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 <LineBreak/>
@@ -4128,7 +4090,6 @@ e208	"<Bold>e208 Searching a Ruin</Bold> <InlineUIContainer><Button Content='r20
  <InlineUIContainer><Button Content='e132' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 8 <LineBreak/>
  <InlineUIContainer><Button Content='e134' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 9 <LineBreak/>
  <InlineUIContainer><Button Content='e138' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 10 <LineBreak/>
- <InlineUIContainer><Button Content='e135' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 11 <LineBreak/>
  <InlineUIContainer><Button Content='e035' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 12
 <LineBreak/><LineBreak/>
                                                 <InlineUIContainer><Image Name='RuinsSearch' Source='../bin/Images/Ruins.gif'  Height='100' Width='100'> </Image></InlineUIContainer>"
@@ -4300,9 +4261,8 @@ e211a	"<Bold>e211a Seeking an Audience In Town</Bold>
   <InlineUIContainer><Button Content='e158' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 4 Meet hostile guards<LineBreak/>
   <InlineUIContainer><Button Content='e153' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 5 Encounter the Master of the Household<LineBreak/>
            6,7,8 - Audience refused today. You may try again later.<LineBreak/>
-  <InlineUIContainer><Button Content='e156' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 9,10 Audience permitted<LineBreak/>
-  <InlineUIContainer><Button Content='e154' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 11 Meet daughter of the mayor<LineBreak/>
-  <InlineUIContainer><Button Content='e156' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 12 plus - Audience permitted"
+  <InlineUIContainer><Button Content='e156' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 9, 10, 12 plus - Audience permitted<LineBreak/>
+  <InlineUIContainer><Button Content='e154' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 11 Meet daughter of the mayor<LineBreak/>"
 e211b	"<Bold>e211b Seeking an Audience at any Temple</Bold>
 <LineBreak/><LineBreak/>As a daily action, you spend the day trying to gain admission to the the temple. Roll two die and consult the list below for results: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21'> </Image></InlineUIContainer>
@@ -4311,12 +4271,11 @@ e211b	"<Bold>e211b Seeking an Audience at any Temple</Bold>
 <LineBreak/>  <InlineUIContainer><Button Content='e060' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 3 Priestess resents a lewd remark
 <LineBreak/>  <InlineUIContainer><Button Content='e158' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 4 Encounter hostile guards
 <LineBreak/>           5 Audience refused today. You may try again later
-<LineBreak/>  <InlineUIContainer><Button Content='e159' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 6 Must purify yourself
+<LineBreak/>  <InlineUIContainer><Button Content='e159' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 6 and 10 - Must purify yourself
 <LineBreak/>           7  Audience refused today. You may try again Tomorrow.
 <LineBreak/>  <InlineUIContainer><Button Content='e155' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 8a Audience allowed if you give the temple a Dragon's eye
 <LineBreak/>  <InlineUIContainer><Button Content='e153' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 8b Without Dragon's eye, see the Master of the Household
 <LineBreak/>  <InlineUIContainer><Button Content='e150' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 9 Permitted to pay your respects
-<LineBreak/>  <InlineUIContainer><Button Content='e159' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 10 Must purify yourself
 <LineBreak/>  <InlineUIContainer><Button Content='e155' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>  11 plus - Audience permitted"
 e211c	"<Bold>e211c Seeking an Audience with the Baron of Huldra Castle</Bold>
 <LineBreak/><LineBreak/>As a daily action, you spend the day trying to gain admission to see the Baron Huldra.<LineBreak/><LineBreak/>
@@ -4360,9 +4319,8 @@ e211e	"<Bold>r211e Seeking an Audience with Lady Aeravir</Bold>
   <InlineUIContainer><Button Content='e160' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 7 Gain audience if have griffon claw<LineBreak/>
            8 Audience refused today. You may try again Tomorrow<LineBreak/>
   <InlineUIContainer><Button Content='e148' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 9 Seneschal requires a bribe<LineBreak/>
-  <InlineUIContainer><Button Content='e160' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 10 Audience granted<LineBreak/>
-  <InlineUIContainer><Button Content='e154' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 11 Meet daughter of the Lady Aeravir<LineBreak/>
-  <InlineUIContainer><Button Content='e160' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 12 plus - Audience granted<LineBreak/>"
+  <InlineUIContainer><Button Content='e160' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 10 and 12plus - Audience granted<LineBreak/>
+  <InlineUIContainer><Button Content='e154' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 11 Meet daughter of the Lady Aeravir<LineBreak/>"
 e211f	"<Bold>e211f Seeking an Audience with the Dwarven King</Bold>
 <LineBreak/><LineBreak/>As a daily action, you spend the day trying to gain admission to see the Dwarven King. Roll two die and consult the list below for results: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21'> </Image></InlineUIContainer>
@@ -4842,8 +4800,7 @@ e337a	"<Bold>e337a Plead Comrades Failed</Bold>
 <LineBreak/> 1 - <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/> 2 - <InlineUIContainer><Button Content='e330' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/> 3 - <InlineUIContainer><Button Content='e340' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
-<LineBreak/> 4 - <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
-<LineBreak/> 5 - <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+<LineBreak/> 4 and 5 - <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/> 6 - <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>"
 e338	"<Bold>e338 Convince Hirelings</Bold>
 <LineBreak/><LineBreak/>Characters encountered look dubiously at you, but you try to convince them to join your party as henchmen. 
@@ -4959,7 +4916,7 @@ e342	"<Bold>e342 Inquiry</Bold>
  <InlineUIContainer><Button Content='e336' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>."
 e342a	"<Bold>e342a More Talking</Bold> <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>
-Characters reveal themself gradually. More talking is required to review their true nature.
+Characters reveal themself gradually. More talking is required to review their true nature. Select Talk or Pass button.
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button Content='Talk ' FontFamily='Courier New'  FontSize='12' Name='e341'></Button></InlineUIContainer> further or<LineBreak/>
 <InlineUIContainer><Button Content='Pass ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>  with dignity."
