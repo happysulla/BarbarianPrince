@@ -3103,7 +3103,7 @@ e130a	"<Bold>e130a Talk to High Lord</Bold>
  <InlineUIContainer><Button Content='e307' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Attacked
 <LineBreak/><LineBreak/>
 <Italic>*Note:</Italic> Any inquiry result that normally allows hiring a character instead permits you to bribe the bodyguards with 10gp for an audience. If you do not pay, encounter ends. Aternatively, you can perform a robbery for wealth class 100.
-<LineBreak/><LineBreak/>Roll die:
+<LineBreak/>Roll die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
@@ -4787,7 +4787,9 @@ e335	"<Bold>e335 Escapee</Bold>
 e336	"<Bold>e336 Plead Comrades</Bold>
 <LineBreak/><LineBreak/>You try to talk the encountered characters into joining your party as they seem sympathetic to your cause. 
 <LineBreak/><LineBreak/>If your wit and wiles equals or exceeds the roll, they will join. Otherwise, they leave and the event ends.
-<LineBreak/><LineBreak/>Roll one die: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
+<LineBreak/><LineBreak/>Roll one die: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='EncounterRoll' Source='../bin/Images/Plead.gif' Height='200' Width='200'></Image></InlineUIContainer>"
 e337	"<Bold>e337 Plead Comrades</Bold>
 <LineBreak/><LineBreak/>The encountered characters look unsavory, but willing to talk. You try to convince them to join your party. 
 <LineBreak/><LineBreak/>If your wit and wiles exceed the roll, they join as followers. 

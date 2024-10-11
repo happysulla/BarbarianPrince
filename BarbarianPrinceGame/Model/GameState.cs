@@ -8532,7 +8532,6 @@ namespace BarbarianPrince
             case "e073":  // witch
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  dieRoll = 0; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                else
@@ -10568,6 +10567,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  dieRoll = 1; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                   gi.IsTalkRoll = true;
                }
