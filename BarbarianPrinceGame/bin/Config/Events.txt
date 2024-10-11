@@ -1471,7 +1471,9 @@ e050b	"<Bold>e050b Negotiate with Constabulary</Bold>
 <LineBreak/><LineBreak/> Roll die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
- <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>"
+ <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
+<LineBreak/> 
+                                       <InlineUIContainer><Image Name='E050EncounterTalk' Source='../bin/Images/Constabulary.gif' Height='250' Width='250'></Image></InlineUIContainer>"
 e050c	"<Bold>e050c Evade Constabulary</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -1483,7 +1485,9 @@ e050c	"<Bold>e050c Evade Constabulary</Bold>
  <InlineUIContainer><Button Content='e318' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Hide<LineBreak/>
  <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Attack<LineBreak/>
  <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7 Pass<LineBreak/>
- <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 8 Pass"
+ <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 8 Pass
+<LineBreak/> 
+                                       <InlineUIContainer><Image Name='E050EncounterEvade' Source='../bin/Images/Constabulary.gif' Height='250' Width='250'></Image></InlineUIContainer>"
 e050d	"<Bold>e050d Fight Constabulary</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -1495,7 +1499,9 @@ e050d	"<Bold>e050d Fight Constabulary</Bold>
  <InlineUIContainer><Button Content='e304' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attack<LineBreak/>
  <InlineUIContainer><Button Content='e303' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprise<LineBreak/>
  <InlineUIContainer><Button Content='e302' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7 Surprise<LineBreak/>
- <InlineUIContainer><Button Content='e301' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 8 Surprise"
+ <InlineUIContainer><Button Content='e301' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 8 Surprise
+<LineBreak/> 
+                                       <InlineUIContainer><Image Name='E050EncounterFight' Source='../bin/Images/Constabulary.gif' Height='250' Width='250'></Image></InlineUIContainer>"
 e050e	"<Bold>e050e Mercenary Royal Guardsmen</Bold>
 <LineBreak/><LineBreak/>Since you are within three hexes of Ogon
   <InlineUIContainer><Button Content='0101' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 
@@ -1796,7 +1802,7 @@ e058e	"<Bold>e058e Talk with Dwarves</Bold>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
-                                          <InlineUIContainer><Image Source='../bin/Images/Dwarfs.gif'  Height='200' Width='200'> </Image></InlineUIContainer>"
+                                          <InlineUIContainer><Image Name='E058EncounterTalk' Source='../bin/Images/Dwarfs.gif'  Height='200' Width='200'> </Image></InlineUIContainer>"
 e058f	"<Bold>e058f Evade Dwarves</Bold>
 <LineBreak/><LineBreak/>Roll for results:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -1808,7 +1814,7 @@ e058f	"<Bold>e058f Evade Dwarves</Bold>
  <InlineUIContainer><Button Content='e319' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Hide<LineBreak/>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Attacked
 <LineBreak/><LineBreak/>
-                                          <InlineUIContainer><Image Source='../bin/Images/Dwarfs.gif'  Height='200' Width='200'> </Image></InlineUIContainer>"
+                                          <InlineUIContainer><Image Name='E058EncounterEvade' Source='../bin/Images/Dwarfs.gif'  Height='200' Width='200'> </Image></InlineUIContainer>"
 e058g	"<Bold>e058g Fight Dwarves</Bold>
 <LineBreak/><LineBreak/>Roll for results:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -1820,7 +1826,7 @@ e058g	"<Bold>e058g Fight Dwarves</Bold>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attacked<LineBreak/>
  <InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprised
 <LineBreak/><LineBreak/>
-                                          <InlineUIContainer><Image Source='../bin/Images/Dwarfs.gif'  Height='200' Width='200'> </Image></InlineUIContainer>"
+                                          <InlineUIContainer><Image Name='E058EncounterFight' Source='../bin/Images/Dwarfs.gif'  Height='200' Width='200'> </Image></InlineUIContainer>"
 e058h	"<Bold>e058h Band of Dwarves</Bold>
 <LineBreak/><LineBreak/>The dwarven lead is a leader of a group of dwarves. Each dwarf has combat skill 5, endurance 6, and wealth 10. Roll one die and add one for the number of dwarves in the band. Die Roll=
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -2006,12 +2012,12 @@ e071a	"<Bold>e071a Talk Elven Band</Bold>
  <InlineUIContainer><Button Content='e072' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Follow<LineBreak/>
  <InlineUIContainer><Button Content='e309' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprised<LineBreak/>
  <InlineUIContainer><Button Content='e309' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7 Surprised
-<LineBreak/>
-                                   <InlineUIContainer><Image Source='../bin/Images/Elf.gif' Height='250' Width='200'></Image></InlineUIContainer>
 <LineBreak/>Roll die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
- <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>"
+ <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
+<LineBreak/>
+                                   <InlineUIContainer><Image Name='E071EncounterTalk' Source='../bin/Images/Elf.gif' Height='250' Width='200'></Image></InlineUIContainer>"
 e071b	"<Bold>e071b Evade Elven Band</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -2025,7 +2031,7 @@ e071b	"<Bold>e071b Evade Elven Band</Bold>
  <InlineUIContainer><Button Content='e309' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprised<LineBreak/>
  <InlineUIContainer><Button Content='e313' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7 Escape-fly
 <LineBreak/> <LineBreak/>
-                                   <InlineUIContainer><Image Source='../bin/Images/Elf.gif' Height='250' Width='200'></Image></InlineUIContainer>"
+                                   <InlineUIContainer><Image Name='E071EncounterEvade' Source='../bin/Images/Elf.gif' Height='250' Width='200'></Image></InlineUIContainer>"
 e071c	"<Bold>e071c Fight Elven Band</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -2039,7 +2045,7 @@ e071c	"<Bold>e071c Fight Elven Band</Bold>
  <InlineUIContainer><Button Content='e310' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprised<LineBreak/>
  <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 7 Attack
 <LineBreak/> <LineBreak/>
-                                   <InlineUIContainer><Image Source='../bin/Images/Elf.gif' Height='250' Width='200'></Image></InlineUIContainer>"
+                                   <InlineUIContainer><Image Name='E071EncounterFight' Source='../bin/Images/Elf.gif' Height='250' Width='200'></Image></InlineUIContainer>"
 e071d	"<Bold>e071d Elven Band</Bold>
 <LineBreak/><LineBreak/>The elf leader is the leader of a band of elves. Each elf has combat skill 5, endurance 4, and wealth 7.  Roll one die and add one for the number of elves in the band. Die Roll=
 <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -2103,7 +2109,9 @@ See <InlineUIContainer><Button Content='e073a' FontFamily='Courier New'  FontSiz
 <LineBreak/>See <InlineUIContainer><Button Content='e073b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> if she ignores you.
 <LineBreak/>See <InlineUIContainer><Button Content='e073c' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> if she is friendly.
 <LineBreak/><LineBreak/>Roll one die. If it exeeds your wit and wiles, she is hostile. If the roll is equal, she ignores you. If the roll is less, she is friendly. Die Roll=
-<InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' ></Image></InlineUIContainer>"
+<InlineUIContainer><Image  Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' ></Image></InlineUIContainer>
+<LineBreak/> <LineBreak/>
+                           <InlineUIContainer><Image Name='WitchStart' Source='../bin/Images/Witch.gif' Height='300' Width='240'></Image></InlineUIContainer>"
 e073a	"<Bold>e073a Hostile Witch</Bold>
 <LineBreak/><LineBreak/>Your party must escape
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
@@ -2126,7 +2134,7 @@ e073c	"<Bold>e073c Friendly Witch</Bold>
  5,6 - She gives you a gift
  <InlineUIContainer><Button Content='e195' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/> <LineBreak/>
-                           <InlineUIContainer><Image Source='../bin/Images/Witch.gif' Height='300' Width='240'></Image></InlineUIContainer>"
+                           <InlineUIContainer><Image Name='WitchFriend' Source='../bin/Images/Witch.gif' Height='300' Width='240'></Image></InlineUIContainer>"
 e074	"<Bold>e074 Spiders</Bold>
 <LineBreak/><LineBreak/>You are trapped by giant spiders. Roll one die for number:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' ></Image></InlineUIContainer>
@@ -2251,12 +2259,12 @@ e081a	"<Bold>e081a Talk with Mounted Patrol</Bold>
  <InlineUIContainer><Button Content='e324' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Bribe to pass (8gp)<LineBreak/>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attacked<LineBreak/>
  <InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprised
-<LineBreak/>
-                              <InlineUIContainer><Image Source='../bin/Images/MountedPatrol.gif' Height='250' Width='250'></Image></InlineUIContainer>
 <LineBreak/>Roll die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
- <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>"
+ <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
+<LineBreak/>
+                              <InlineUIContainer><Image Name='E081EncounterTalk' Source='../bin/Images/MountedPatrol.gif' Height='250' Width='250'></Image></InlineUIContainer>"
 e081b	"<Bold>e081b Evade Mounted Patrol</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -2268,7 +2276,7 @@ e081b	"<Bold>e081b Evade Mounted Patrol</Bold>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attacked<LineBreak/>
  <InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surpised
 <LineBreak/><LineBreak/>
-                              <InlineUIContainer><Image Source='../bin/Images/MountedPatrol.gif' Height='250' Width='250'></Image></InlineUIContainer>"
+                              <InlineUIContainer><Image Name='E081EncounterEvade' Source='../bin/Images/MountedPatrol.gif' Height='250' Width='250'></Image></InlineUIContainer>"
 e081c	"<Bold>e081c Fight Mounted Patrol</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -2280,7 +2288,7 @@ e081c	"<Bold>e081c Fight Mounted Patrol</Bold>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attacked<LineBreak/>
  <InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprised
 <LineBreak/><LineBreak/>
-                              <InlineUIContainer><Image Source='../bin/Images/MountedPatrol.gif' Height='250' Width='250'></Image></InlineUIContainer>"
+                              <InlineUIContainer><Image Name='E081EncounterFight' Source='../bin/Images/MountedPatrol.gif' Height='250' Width='250'></Image></InlineUIContainer>"
 e082	"<Bold>e082 Spectre</Bold>
 <LineBreak/><LineBreak/>An unearthly spectre from the astal plan appears in the midst of your party casting a hideous miama in all directions.
 <LineBreak/><LineBreak/>One character in the party is the spectre's victim
@@ -2570,7 +2578,7 @@ e100a	"<Bold>e100a Talk to Griffon</Bold>B4
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
-                                  <InlineUIContainer><Image Source='../bin/Images/Griffon.gif' Height='250' Width='250'></Image></InlineUIContainer>"
+                                  <InlineUIContainer><Image Name='E100EncounterTalk' Source='../bin/Images/Griffon.gif' Height='250' Width='250'></Image></InlineUIContainer>"
 e100b	"<Bold>e100b Evade Griffon</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -2582,7 +2590,7 @@ e100b	"<Bold>e100b Evade Griffon</Bold>
  <InlineUIContainer><Button Content='e325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Pass<LineBreak/>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Attacked
 <LineBreak/><LineBreak/>
-                                  <InlineUIContainer><Image Source='../bin/Images/Griffon.gif' Height='250' Width='250'></Image></InlineUIContainer>"
+                                  <InlineUIContainer><Image Name='E100EncounterEvade' Source='../bin/Images/Griffon.gif' Height='250' Width='250'></Image></InlineUIContainer>"
 e100c	"<Bold>e100c Fight Griffon</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -2594,7 +2602,7 @@ e100c	"<Bold>e100c Fight Griffon</Bold>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attacked<LineBreak/>
  <InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprised
 <LineBreak/><LineBreak/>
-                                  <InlineUIContainer><Image Source='../bin/Images/Griffon.gif' Height='250' Width='250'></Image></InlineUIContainer>"
+                                  <InlineUIContainer><Image Name='E100EncounterFight' Source='../bin/Images/Griffon.gif' Height='250' Width='250'></Image></InlineUIContainer>"
 e101	"<Bold>e101 Harpy</Bold>
 <LineBreak/><LineBreak/>You encountered a Harpy, a bird-woman with combat skill 5, endurance 4, and wealth 4. Hapiers are known as dirty, nasty things. Occasionally, they have allied with human for mutual gain.
 <LineBreak/><LineBreak/>To advance to next screen, select one of the buttons labeled: Talk, Evade, Fight:
@@ -2607,7 +2615,7 @@ e101	"<Bold>e101 Harpy</Bold>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12' Content='e101c'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>
 If the Harpy joins your party, she has her own wings and can travel airborne without a winged mount. She also counts as travelling on a normal mount because the wings allow her to make long 'airlifted' hops as well."
-e101a	"<Bold>e101a Evade Harpy</Bold>
+e101a	"<Bold>e101a Talk to Harpy</Bold>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='r342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Inquiry<LineBreak/>
  <InlineUIContainer><Button Content='r329' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Pass<LineBreak/>
@@ -2620,8 +2628,8 @@ e101a	"<Bold>e101a Evade Harpy</Bold>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
 <LineBreak/>
-                             <InlineUIContainer><Image Source='../bin/Images/Harpy.gif' Height='300'  Width='265' > </Image></InlineUIContainer>"
-e101b	"<Bold>e101b Fight Harpy</Bold>
+                             <InlineUIContainer><Image Name='E101EncounterTalk' Source='../bin/Images/Harpy.gif' Height='300'  Width='265' > </Image></InlineUIContainer>"
+e101b	"<Bold>e101b Evade Harpy</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
@@ -2632,7 +2640,7 @@ e101b	"<Bold>e101b Fight Harpy</Bold>
  <InlineUIContainer><Button Content='r328' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Pass<LineBreak/>
  <InlineUIContainer><Button Content='r329' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Pass
 <LineBreak/><LineBreak/>
-                             <InlineUIContainer><Image Source='../bin/Images/Harpy.gif' Height='300'  Width='265' > </Image></InlineUIContainer>"
+                             <InlineUIContainer><Image Name='E101EncounterEvade' Source='../bin/Images/Harpy.gif' Height='300'  Width='265' > </Image></InlineUIContainer>"
 e101c	"<Bold>e101c Fight Harpy</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -2644,7 +2652,7 @@ e101c	"<Bold>e101c Fight Harpy</Bold>
  <InlineUIContainer><Button Content='r306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attack<LineBreak/>
  <InlineUIContainer><Button Content='r309' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprised
 <LineBreak/><LineBreak/>
-                             <InlineUIContainer><Image Source='../bin/Images/Harpy.gif' Height='300'  Width='265' > </Image></InlineUIContainer>"
+                             <InlineUIContainer><Image Name='E101EncounterFight' Source='../bin/Images/Harpy.gif' Height='300'  Width='265' > </Image></InlineUIContainer>"
 e102	"<Bold>e102 Light Rainstorm</Bold>
 <LineBreak/><LineBreak/>You must land immediately and cannot travel further today due to the low ceiling, heavy cloud cover, and bad weather. Click image to continue.
 <LineBreak/><LineBreak/>
@@ -2866,7 +2874,7 @@ e118a	"<Bold>e118a Talk to Giant</Bold>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21'  Width='21'  Visibility='Hidden'> </Image></InlineUIContainer>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll2' Height='21'  Width='21' Visibility='Hidden'> </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
-                                  <InlineUIContainer><Image Source='../bin/Images/Giant.gif' Height='280'  Width='280' > </Image></InlineUIContainer>"
+                                  <InlineUIContainer><Image Name='E118EncounterTalk' Source='../bin/Images/Giant.gif' Height='280'  Width='280' > </Image></InlineUIContainer>"
 e118b	"<Bold>e118b Follow Giant</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -2878,7 +2886,7 @@ e118b	"<Bold>e118b Follow Giant</Bold>
  <InlineUIContainer><Button Content='e319' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Hide<LineBreak/>
  <InlineUIContainer><Button Content='e320' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Hide
 <LineBreak/><LineBreak/>
-                                  <InlineUIContainer><Image Source='../bin/Images/Giant.gif' Height='280'  Width='280' > </Image></InlineUIContainer>"
+                                  <InlineUIContainer><Image Name='E118EncounterEvade' Source='../bin/Images/Giant.gif' Height='280'  Width='280' > </Image></InlineUIContainer>"
 e118c	"<Bold>e118c Fight Giant</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
@@ -2890,7 +2898,7 @@ e118c	"<Bold>e118c Fight Giant</Bold>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attacked<LineBreak/>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Attacked
 <LineBreak/><LineBreak/>
-                                  <InlineUIContainer><Image Source='../bin/Images/Giant.gif' Height='280'  Width='280' > </Image></InlineUIContainer>"
+                                  <InlineUIContainer><Image Name='E118EncounterFight' Source='../bin/Images/Giant.gif' Height='280'  Width='280' > </Image></InlineUIContainer>"
 e119	"<Bold>e119 Flash Flood</Bold>
 <LineBreak/><LineBreak/>Your party is traveling down a shallow depression, i.e., a wadi. Suddenly, there is a roaring, and a wall of water rushes toward you. Rains elsewhere have caused a flash flood.
 <LineBreak/><LineBreak/>Roll one die for each member of your party. A 5 plus means the character cannot scramble up the bank fast enough and is carried away by the flood. This includes the character, any mount, wealth, and any possessions. Those carried away are permanently lost.
