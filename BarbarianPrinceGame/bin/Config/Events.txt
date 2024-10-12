@@ -4724,7 +4724,9 @@ e331a	"<Bold>e331a Bribe to Join Fails</Bold>
 <LineBreak/>5 -
  <InlineUIContainer><Button Content='e322' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/>6 -
- <InlineUIContainer><Button Content='e323' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>"
+ <InlineUIContainer><Button Content='e323' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='E331aEncounterRoll' Source='../bin/Images/Deny.gif' Height='200' Width='200'></Image></InlineUIContainer>"
 e331b	"<Bold>e331b Pay Fickle Mercenaries?</Bold> <InlineUIContainer><Button Content='e331' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>
 Click to deny paying the mercenaries their share of the treasure:<LineBreak/>
@@ -4756,7 +4758,9 @@ e332a	"<Bold>e332a Bribe to Hire Fails</Bold>
 <LineBreak/>5 -
  <InlineUIContainer><Button Content='e323' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/>6 -
- <InlineUIContainer><Button Content='e324' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>"
+ <InlineUIContainer><Button Content='e324' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='E332aEncounterRoll' Source='../bin/Images/Deny.gif' Height='200' Width='200'></Image></InlineUIContainer>"
 e333	"<Bold>e333 Hirelings</Bold>
 <LineBreak/><LineBreak/>Characters encountered need a job! They will hire on with your party for two gold per day, provided you pay today's wages right now. 
 <LineBreak/><LineBreak/>The characters encountered will remain with your party as long as they are paid every day at the evening meal
@@ -4773,7 +4777,9 @@ e333a	"<Bold>e333a Hirelings Fail</Bold>
 <LineBreak/>5 -
  <InlineUIContainer><Button Content='e326' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/>6 -
- <InlineUIContainer><Button Content='e327' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>"
+ <InlineUIContainer><Button Content='e327' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='E333aEncounterRoll' Source='../bin/Images/Deny.gif' Height='200' Width='200'></Image></InlineUIContainer>"
 e333b	"<Bold>e333b Hirelings Count</Bold>
 <LineBreak/><LineBreak/>Determine how many hirelings to hire from the encountered party: "
 e334	"<Bold>e334 Ally</Bold>

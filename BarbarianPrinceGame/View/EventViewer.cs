@@ -3965,7 +3965,14 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new Run(costToPayS));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new InlineUIContainer(img1));
-                  myTextBlock.Inlines.Add(new LineBreak());
+               }
+               myTextBlock.Inlines.Add(new LineBreak());
+               myTextBlock.Inlines.Add(new LineBreak());
+               myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               break;
+            case "e331a":
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
@@ -4000,6 +4007,13 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
                break;
+            case "e332a":
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
+               break;
             case "e333":
                if (1 < gi.GetCoins())
                {
@@ -4009,7 +4023,14 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new LineBreak());
                   Image img333 = new Image { Source = MapItem.theMapImages.GetBitmapImage("CoinsStacked"), Width = 75, Height = 75, Name = "HirelingsPay" };
                   myTextBlock.Inlines.Add(new InlineUIContainer(img333));
-                  myTextBlock.Inlines.Add(new LineBreak());
+               }
+               myTextBlock.Inlines.Add(new LineBreak());
+               myTextBlock.Inlines.Add(new LineBreak());
+               myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               break;
+            case "e333a":
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
@@ -5964,8 +5985,22 @@ namespace BarbarianPrince
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               }
                               return;
-                           case "E336EncounterRoll":
-                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e336"][0])
+                           case "E331aEncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e331a"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E332aEncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e332a"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E333aEncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e333a"][0])
                               {
                                  action = GameAction.EncounterRoll;
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);

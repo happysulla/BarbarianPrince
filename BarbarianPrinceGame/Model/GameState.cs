@@ -9821,6 +9821,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  dieRoll = 5; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                   gi.IsTalkRoll = true;
                }
@@ -15270,36 +15271,60 @@ namespace BarbarianPrince
                break;
             // ========================Character Interaction================================
             case "e331a": // failed to bribe to join
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               switch (dieRoll) // Based on the die roll, implement event
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: case 2: case 3: gi.EventDisplayed = gi.EventActive = "e401"; break;
-                  case 4: gi.EventDisplayed = gi.EventActive = "e321"; break; // bribe to pass
-                  case 5: gi.EventDisplayed = gi.EventActive = "e322"; break; // bribe to pass 
-                  case 6: gi.EventDisplayed = gi.EventActive = "e323"; break; // bribe to pass
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  switch (gi.DieResults[key][0]) // Based on the die roll, implement event
+                  {
+                     case 1: case 2: case 3: gi.EventDisplayed = gi.EventActive = "e401"; break;
+                     case 4: gi.EventDisplayed = gi.EventActive = "e321"; break; // bribe to pass
+                     case 5: gi.EventDisplayed = gi.EventActive = "e322"; break; // bribe to pass 
+                     case 6: gi.EventDisplayed = gi.EventActive = "e323"; break; // bribe to pass
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + gi.DieResults[key][0].ToString()); return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e332a": // failed to bribe to hire
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               switch (dieRoll) // Based on the die roll, implement event
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: case 2: gi.EventDisplayed = gi.EventActive = "e401"; break;
-                  case 3: gi.EventDisplayed = gi.EventActive = "e321"; break;
-                  case 4: gi.EventDisplayed = gi.EventActive = "e322"; break; // bribe to pass
-                  case 5: gi.EventDisplayed = gi.EventActive = "e323"; break; // bribe to pass
-                  case 6: gi.EventDisplayed = gi.EventActive = "e324"; gi.DieRollAction = GameAction.EncounterRoll; break; // bribe to pass with their threat
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  switch (gi.DieResults[key][0]) // Based on the die roll, implement event
+                  {
+                     case 1: case 2: gi.EventDisplayed = gi.EventActive = "e401"; break;
+                     case 3: gi.EventDisplayed = gi.EventActive = "e321"; break;
+                     case 4: gi.EventDisplayed = gi.EventActive = "e322"; break; // bribe to pass
+                     case 5: gi.EventDisplayed = gi.EventActive = "e323"; break; // bribe to pass
+                     case 6: gi.EventDisplayed = gi.EventActive = "e324"; gi.DieRollAction = GameAction.EncounterRoll; break; // bribe to pass with their threat
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + gi.DieResults[key][0].ToString()); return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e333a": // failed to hire 
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               switch (dieRoll) // Based on the die roll, implement event
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: case 2: case 3: case 4: gi.EventDisplayed = gi.EventActive = "e325"; break;                      // pass with dignity
-                  case 5: gi.EventDisplayed = gi.EventActive = "e326"; gi.DieRollAction = GameAction.EncounterRoll; break;
-                  case 6: gi.EventDisplayed = gi.EventActive = "e327"; gi.DieRollAction = GameAction.EncounterRoll; break; // pass dummies
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  switch (gi.DieResults[key][0]) // Based on the die roll, implement event
+                  {
+                     case 1: case 2: case 3: case 4: gi.EventDisplayed = gi.EventActive = "e325"; break;                      // pass with dignity
+                     case 5: gi.EventDisplayed = gi.EventActive = "e326"; gi.DieRollAction = GameAction.EncounterRoll; break;
+                     case 6: gi.EventDisplayed = gi.EventActive = "e327"; gi.DieRollAction = GameAction.EncounterRoll; break; // pass dummies
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + gi.DieResults[key][0].ToString()); return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e336": // Plead Comrades
