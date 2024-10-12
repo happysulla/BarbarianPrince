@@ -10567,7 +10567,6 @@ namespace BarbarianPrince
                }
                else
                {
-                  dieRoll = 1; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                   gi.IsTalkRoll = true;
                }
@@ -15304,104 +15303,197 @@ namespace BarbarianPrince
                }
                break;
             case "e336": // Plead Comrades
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
-               {
-                  action = GameAction.E018MarkOfCain;
-               }
-               else
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
                   if (true == gi.IsCharismaTalismanActive)
                      --dieRoll;
                   if (true == gi.IsElfWitAndWileActive)
                      ++dieRoll;
-                  if (dieRoll <= (gi.WitAndWile + gi.MonkPleadModifier))
-                  {
-                     foreach (IMapItem comrade in gi.EncounteredMembers)
-                        gi.AddCompanion(comrade);
-                     gi.EncounteredMembers.Clear();
-                  }
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
-                     return false;
-                  }
-               }
-               break;
-            case "e337": // Plead Comrades
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
-               {
-                  action = GameAction.E018MarkOfCain;
+                  gi.DieResults[key][0] = dieRoll;
                }
                else
                {
-                  if (true == gi.IsCharismaTalismanActive)
-                     --dieRoll;
-                  if (true == gi.IsElfWitAndWileActive)
-                     ++dieRoll;
-                  if (dieRoll <= (gi.WitAndWile + gi.MonkPleadModifier))
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
                   {
-                     foreach (IMapItem comrade in gi.EncounteredMembers)
-                        gi.AddCompanion(comrade);
-                     gi.EncounteredMembers.Clear();
+                     action = GameAction.E018MarkOfCain;
+                  }
+                  else
+                  {
+                     if (gi.DieResults[key][0] <= (gi.WitAndWile + gi.MonkPleadModifier))
+                     {
+                        foreach (IMapItem comrade in gi.EncounteredMembers)
+                           gi.AddCompanion(comrade);
+                        gi.EncounteredMembers.Clear();
+                     }
                      if (false == EncounterEnd(gi, ref action))
                      {
                         Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
                         return false;
                      }
                   }
-                  else
-                  {
-                     action = GameAction.UpdateEventViewerActive;
-                     gi.EventDisplayed = gi.EventActive = "e337a";
-                     gi.DieRollAction = GameAction.EncounterRoll;
-                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
-            case "e337a": // Plead
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               switch (dieRoll) // Based on the die roll, implement event
+            case "e337": // Plead Comrades
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e325"; break;                                               // pass with dignity
-                  case 2: gi.EventDisplayed = gi.EventActive = "e330"; gi.DieRollAction = GameAction.EncounterRoll; break;  // combat
-                  case 3: gi.EventDisplayed = gi.EventActive = "e340"; gi.DieRollAction = GameAction.EncounterRoll; break;  // looters
-                  case 4: gi.EventDisplayed = gi.EventActive = "e341"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e341"][0] = Utilities.NO_RESULT; break; // conversation 
-                  case 5: gi.EventDisplayed = gi.EventActive = "e341"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e341"][0] = Utilities.NO_RESULT; break; // conversation       
-                  case 6: gi.EventDisplayed = gi.EventActive = "e342"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e342"][0] = Utilities.NO_RESULT; break; // inquiry
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  if (true == gi.IsCharismaTalismanActive)
+                     --dieRoll;
+                  if (true == gi.IsElfWitAndWileActive)
+                     ++dieRoll;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
+                  {
+                     action = GameAction.E018MarkOfCain;
+                  }
+                  else
+                  {
+                     if (gi.DieResults[key][0] <= (gi.WitAndWile + gi.MonkPleadModifier))
+                     {
+                        foreach (IMapItem comrade in gi.EncounteredMembers)
+                           gi.AddCompanion(comrade);
+                        gi.EncounteredMembers.Clear();
+                        if (false == EncounterEnd(gi, ref action))
+                        {
+                           Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
+                           return false;
+                        }
+                     }
+                     else
+                     {
+                        action = GameAction.UpdateEventViewerActive;
+                        gi.EventDisplayed = gi.EventActive = "e337a";
+                        gi.DieRollAction = GameAction.EncounterRoll;
+                     }
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
+               }
+               break;
+            case "e337a": // Plead Failed
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
+               {
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  switch (gi.DieResults[key][0]) // Based on the die roll, implement event
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e325"; break;                                               // pass with dignity
+                     case 2: gi.EventDisplayed = gi.EventActive = "e330"; gi.DieRollAction = GameAction.EncounterRoll; break;  // combat
+                     case 3: gi.EventDisplayed = gi.EventActive = "e340"; gi.DieRollAction = GameAction.EncounterRoll; break;  // looters
+                     case 4: gi.EventDisplayed = gi.EventActive = "e341"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e341"][0] = Utilities.NO_RESULT; break; // conversation 
+                     case 5: gi.EventDisplayed = gi.EventActive = "e341"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e341"][0] = Utilities.NO_RESULT; break; // conversation       
+                     case 6: gi.EventDisplayed = gi.EventActive = "e342"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e342"][0] = Utilities.NO_RESULT; break; // inquiry
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e338a": // convince hirelings
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if (true == gi.IsCharismaTalismanActive)
-                  --dieRoll;
-               if (true == gi.IsElfWitAndWileActive)
-                  ++dieRoll;
-               if (dieRoll <= gi.WitAndWile)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  int wage = 1;
-                  if (dieRoll == gi.WitAndWile)
-                     wage = 2;
-                  if (1 == gi.EncounteredMembers.Count)
+                  if (true == gi.IsCharismaTalismanActive)
+                     --dieRoll;
+                  if (true == gi.IsElfWitAndWileActive)
+                     ++dieRoll;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if (gi.DieResults[key][0] <= gi.WitAndWile)
                   {
+                     int wage = 1;
+                     if (dieRoll == gi.WitAndWile)
+                        wage = 2;
+                     if (1 == gi.EncounteredMembers.Count)
+                     {
+                        if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
+                        {
+                           action = GameAction.E018MarkOfCain;
+                        }
+                        else
+                        {
+                           if (gi.GetCoins() < wage)
+                           {
+                              gi.EventDisplayed = gi.EventActive = "e402";  // do not have enough money
+                           }
+                           else
+                           {
+                              IMapItem hireling = gi.EncounteredMembers[0];
+                              hireling.Wages = wage;
+                              hireling.PayDay = gi.Days + 1;
+                              gi.AddCompanion(hireling);
+                              gi.ReduceCoins(wage);
+                              gi.EncounteredMembers.Clear();
+                              if (false == EncounterEnd(gi, ref action))
+                              {
+                                 Logger.Log(LogEnum.LE_ERROR, "EncounterRoll: EncounterEnd() returned false for ae=" + gi.EventActive);
+                                 return false;
+                              }
+                           }
+                        }
+                     }
+                     else
+                     {
+                        gi.EventDisplayed = gi.EventActive = "e338b";
+                        action = GameAction.UpdateEventViewerActive;
+                        gi.DieRollAction = GameAction.DieRollActionNone;
+                     }
+                  }
+                  else
+                  {
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
+                        return false;
+                     }
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
+               }
+               break;
+            case "e338c": // convince hirelings
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
+               {
+                  if (true == gi.IsCharismaTalismanActive)
+                     --dieRoll;
+                  if (true == gi.IsElfWitAndWileActive)
+                     ++dieRoll;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if (gi.DieResults[key][0] <= gi.WitAndWile)
+                  {
+                     int wage = 1;
+                     if (dieRoll == gi.WitAndWile)
+                        wage = 2;
                      if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
                      {
                         action = GameAction.E018MarkOfCain;
                      }
                      else
                      {
-                        if (gi.GetCoins() < wage)
+                        if (gi.GetCoins() < wage * gi.EncounteredMembers.Count)
                         {
                            gi.EventDisplayed = gi.EventActive = "e402";  // do not have enough money
                         }
                         else
                         {
-                           IMapItem hireling = gi.EncounteredMembers[0];
-                           hireling.Wages = wage;
-                           hireling.PayDay = gi.Days + 1;
-                           gi.AddCompanion(hireling);
-                           gi.ReduceCoins(wage);
+                           foreach (IMapItem hireling in gi.EncounteredMembers)
+                           {
+                              hireling.Wages = wage;
+                              hireling.PayDay = gi.Days + 1;
+                              gi.AddCompanion(hireling);
+                              gi.ReduceCoins(wage);
+                           }
                            gi.EncounteredMembers.Clear();
                            if (false == EncounterEnd(gi, ref action))
                            {
@@ -15413,109 +15505,65 @@ namespace BarbarianPrince
                   }
                   else
                   {
-                     gi.EventDisplayed = gi.EventActive = "e338b";
-                     action = GameAction.UpdateEventViewerActive;
-                     gi.DieRollAction = GameAction.DieRollActionNone;
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
+                        return false;
+                     }
                   }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
+               }
+               break;
+            case "e339a": // convince hirelings acting as individuals
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
+               {
+                  if (true == gi.IsCharismaTalismanActive)
+                     --dieRoll;
+                  if (true == gi.IsElfWitAndWileActive)
+                     ++dieRoll;
+                  gi.DieResults[key][0] = dieRoll;
                }
                else
                {
-                  if (false == EncounterEnd(gi, ref action))
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+
+                  if (gi.DieResults[key][0] < gi.WitAndWile)
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
-                     return false;
-                  }
-               }
-               break;
-            case "e338c": // convince hirelings
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if (true == gi.IsCharismaTalismanActive)
-                  --dieRoll;
-               if (true == gi.IsElfWitAndWileActive)
-                  ++dieRoll;
-               if (dieRoll <= gi.WitAndWile)
-               {
-                  int wage = 1;
-                  if (dieRoll == gi.WitAndWile)
-                     wage = 2;
-                  if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
-                  {
-                     action = GameAction.E018MarkOfCain;
-                  }
-                  else
-                  {
-                     if (gi.GetCoins() < wage * gi.EncounteredMembers.Count)
+                     if (1 == gi.EncounteredMembers.Count)
                      {
-                        gi.EventDisplayed = gi.EventActive = "e402";  // do not have enough money
-                     }
-                     else
-                     {
-                        foreach (IMapItem hireling in gi.EncounteredMembers)
+                        if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
                         {
-                           hireling.Wages = wage;
+                           action = GameAction.E018MarkOfCain;
+                        }
+                        else
+                        {
+                           IMapItem hireling = gi.EncounteredMembers[0];
+                           hireling.Wages = 2;
                            hireling.PayDay = gi.Days + 1;
                            gi.AddCompanion(hireling);
-                           gi.ReduceCoins(wage);
+                           gi.ReduceCoins(2);
+                           gi.EncounteredMembers.Clear();
+                           if (false == EncounterEnd(gi, ref action))
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "EncounterRoll: EncounterEnd() returned false for ae=" + gi.EventActive);
+                              return false;
+                           }
                         }
-                        gi.EncounteredMembers.Clear();
-                        if (false == EncounterEnd(gi, ref action))
-                        {
-                           Logger.Log(LogEnum.LE_ERROR, "EncounterRoll: EncounterEnd() returned false for ae=" + gi.EventActive);
-                           return false;
-                        }
-                     }
-                  }
-               }
-               else
-               {
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
-                     return false;
-                  }
-               }
-               break;
-            case "e339a": // convince hirelings
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if (true == gi.IsCharismaTalismanActive)
-                  --dieRoll;
-               if (true == gi.IsElfWitAndWileActive)
-                  ++dieRoll;
-               if (dieRoll < gi.WitAndWile)
-               {
-                  if (1 == gi.EncounteredMembers.Count)
-                  {
-                     if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
-                     {
-                        action = GameAction.E018MarkOfCain;
                      }
                      else
                      {
-                        IMapItem hireling = gi.EncounteredMembers[0];
-                        hireling.Wages = 2;
-                        hireling.PayDay = gi.Days + 1;
-                        gi.AddCompanion(hireling);
-                        gi.ReduceCoins(2);
-                        gi.EncounteredMembers.Clear();
-                        if (false == EncounterEnd(gi, ref action))
-                        {
-                           Logger.Log(LogEnum.LE_ERROR, "EncounterRoll: EncounterEnd() returned false for ae=" + gi.EventActive);
-                           return false;
-                        }
+                        gi.EventDisplayed = gi.EventActive = "e339c";
+                        action = GameAction.UpdateEventViewerActive;
+                        gi.DieRollAction = GameAction.DieRollActionNone;
                      }
                   }
                   else
                   {
-                     gi.EventDisplayed = gi.EventActive = "e339c";
+                     gi.EventDisplayed = gi.EventActive = "e339b";
                      action = GameAction.UpdateEventViewerActive;
-                     gi.DieRollAction = GameAction.DieRollActionNone;
+                     gi.DieRollAction = GameAction.EncounterRoll;
                   }
-               }
-               else
-               {
-                  gi.EventDisplayed = gi.EventActive = "e339b";
-                  action = GameAction.UpdateEventViewerActive;
-                  gi.DieRollAction = GameAction.EncounterRoll;
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e339b": // failed to hire 
@@ -15527,109 +15575,133 @@ namespace BarbarianPrince
                   default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
                }
                break;
-            case "e339d": // convince hirelings
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if (true == gi.IsCharismaTalismanActive)
-                  --dieRoll;
-               if (true == gi.IsElfWitAndWileActive)
-                  ++dieRoll;
-               if (dieRoll < gi.WitAndWile)
+            case "e339d": // convince hirelings acting as group - Amazons
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
-                  {
-                     action = GameAction.E018MarkOfCain;
-                  }
-                  else
-                  {
-                     foreach (IMapItem hireling in gi.EncounteredMembers)
-                     {
-                        hireling.Wages = 2;
-                        hireling.PayDay = gi.Days + 1;
-                        gi.AddCompanion(hireling);
-                        gi.ReduceCoins(2);
-                     }
-                     gi.EncounteredMembers.Clear();
-                     if (false == EncounterEnd(gi, ref action))
-                     {
-                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll: EncounterEnd() returned false for ae=" + gi.EventActive);
-                        return false;
-                     }
-                  }
+                  if (true == gi.IsCharismaTalismanActive)
+                     --dieRoll;
+                  if (true == gi.IsElfWitAndWileActive)
+                     ++dieRoll;
+                  gi.DieResults[key][0] = dieRoll;
                }
                else
                {
-                  gi.EventDisplayed = gi.EventActive = "e339b";
-                  action = GameAction.UpdateEventViewerActive;
-                  gi.DieRollAction = GameAction.EncounterRoll;
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if (gi.DieResults[key][0] < gi.WitAndWile)
+                  {
+                     if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
+                     {
+                        action = GameAction.E018MarkOfCain;
+                     }
+                     else
+                     {
+                        foreach (IMapItem hireling in gi.EncounteredMembers)
+                        {
+                           hireling.Wages = 2;
+                           hireling.PayDay = gi.Days + 1;
+                           gi.AddCompanion(hireling);
+                           gi.ReduceCoins(2);
+                        }
+                        gi.EncounteredMembers.Clear();
+                        if (false == EncounterEnd(gi, ref action))
+                        {
+                           Logger.Log(LogEnum.LE_ERROR, "EncounterRoll: EncounterEnd() returned false for ae=" + gi.EventActive);
+                           return false;
+                        }
+                     }
+                  }
+                  else
+                  {
+                     gi.EventDisplayed = gi.EventActive = "e339b";
+                     action = GameAction.UpdateEventViewerActive;
+                     gi.DieRollAction = GameAction.EncounterRoll;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e340": // looters
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if (true == gi.IsCharismaTalismanActive)
-                  --dieRoll;
-               if (true == gi.IsElfWitAndWileActive)
-                  ++dieRoll;
-               if (dieRoll <= (gi.WitAndWile + gi.MonkPleadModifier))
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
-                  {
-                     action = GameAction.E018MarkOfCain;
-                  }
-                  else
-                  {
-                     foreach (IMapItem looter in gi.EncounteredMembers)
-                     {
-                        looter.IsLooter = true;
-                        gi.AddCompanion(looter);
-                     }
-                     gi.EncounteredMembers.Clear();
-                     if (false == EncounterEnd(gi, ref action))
-                     {
-                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
-                        return false;
-                     }
-                  }
+                  if (true == gi.IsCharismaTalismanActive)
+                     --dieRoll;
+                  if (true == gi.IsElfWitAndWileActive)
+                     ++dieRoll;
+                  gi.DieResults[key][0] = dieRoll;
                }
                else
                {
-                  gi.EventDisplayed = gi.EventActive = "e340a";
-                  gi.DieRollAction = GameAction.EncounterRoll;
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if (gi.DieResults[key][0] <= (gi.WitAndWile + gi.MonkPleadModifier))
+                  {
+                     if ((true == gi.IsMarkOfCain) && (true == gi.IsReligionInParty(gi.EncounteredMembers)))
+                     {
+                        action = GameAction.E018MarkOfCain;
+                     }
+                     else
+                     {
+                        foreach (IMapItem looter in gi.EncounteredMembers)
+                        {
+                           looter.IsLooter = true;
+                           gi.AddCompanion(looter);
+                        }
+                        gi.EncounteredMembers.Clear();
+                        if (false == EncounterEnd(gi, ref action))
+                        {
+                           Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
+                           return false;
+                        }
+                     }
+                  }
+                  else
+                  {
+                     gi.EventDisplayed = gi.EventActive = "e340a";
+                     gi.DieRollAction = GameAction.EncounterRoll;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e340a": // looters hostile
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               switch (dieRoll) // Based on the die roll, implement event
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1:
-                  case 2:
-                     foreach (IMapItem mi in gi.PartyMembers) // party members do not participate in fight against looters
-                     {
-                        if ("Prince" != mi.Name)
-                           gi.LostPartyMembers.Add(mi);
-                     }
-                     gi.PartyMembers.Clear();
-                     gi.PartyMembers.Add(gi.Prince);
-                     gi.EventDisplayed = gi.EventActive = "e330";
-                     action = GameAction.UpdateEventViewerActive;
-                     gi.DieRollAction = GameAction.EncounterRoll;
-                     break;
-                  case 3:
-                  case 4:
-                     gi.EventDisplayed = gi.EventActive = "e330";
-                     action = GameAction.UpdateEventViewerActive;
-                     gi.DieRollAction = GameAction.EncounterRoll;
-                     break;
-                  case 5:
-                  case 6: // did not fight. give over looted coin to party
-                     gi.AddCoins(gi.LooterCoin, false); // Steal looter coin and return back to fold
-                     gi.LooterCoin = 0;
-                     if (false == EncounterEnd(gi, ref action))
-                     {
-                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
-                        return false;
-                     }
-                     break;
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  switch (gi.DieResults[key][0]) // Based on the die roll, implement event
+                  {
+                     case 1:
+                     case 2:
+                        foreach (IMapItem mi in gi.PartyMembers) // party members do not participate in fight against looters
+                        {
+                           if ("Prince" != mi.Name)
+                              gi.LostPartyMembers.Add(mi);
+                        }
+                        gi.PartyMembers.Clear();
+                        gi.PartyMembers.Add(gi.Prince);
+                        gi.EventDisplayed = gi.EventActive = "e330";
+                        action = GameAction.UpdateEventViewerActive;
+                        gi.DieRollAction = GameAction.EncounterRoll;
+                        break;
+                     case 3:
+                     case 4:
+                        gi.EventDisplayed = gi.EventActive = "e330";
+                        action = GameAction.UpdateEventViewerActive;
+                        gi.DieRollAction = GameAction.EncounterRoll;
+                        break;
+                     case 5:
+                     case 6: // did not fight. give over looted coin to party
+                        gi.AddCoins(gi.LooterCoin, false); // Steal looter coin and return back to fold
+                        gi.LooterCoin = 0;
+                        if (false == EncounterEnd(gi, ref action))
+                        {
+                           Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
+                           return false;
+                        }
+                        break;
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + gi.DieResults[key][0].ToString()); return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e341": // Conversation

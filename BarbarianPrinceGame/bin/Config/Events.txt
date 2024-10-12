@@ -712,7 +712,7 @@ In addition, all monks and priests in the future will recognize the mark and wil
  with the high priest of any temple marked on the map, but may with high priest of any secret unmarked temples that you find."
 e018a	"<Bold>e018a Talk to Priest</Bold>
 <LineBreak/><LineBreak/>
- 1 and 2 -<InlineUIContainer><Button Content='e336' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Plead comrade<LineBreak/>
+ 1 and 2 - <InlineUIContainer><Button Content='e336' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Plead comrade<LineBreak/>
 3 - <InlineUIContainer><Button Content='e337' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Plead comrade<LineBreak/>
  4 - <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Conversation<LineBreak/>
  5 - <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Inquiry<LineBreak/>
@@ -4787,13 +4787,14 @@ e335	"<Bold>e335 Escapee</Bold>
 e336	"<Bold>e336 Plead Comrades</Bold>
 <LineBreak/><LineBreak/>You try to talk the encountered characters into joining your party as they seem sympathetic to your cause. 
 <LineBreak/><LineBreak/>If your wit and wiles equals or exceeds the roll, they will join. Otherwise, they leave and the event ends.
-<LineBreak/><LineBreak/>Roll one die: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/> <LineBreak/> 
-                                  <InlineUIContainer><Image Name='EncounterRoll' Source='../bin/Images/Plead.gif' Height='200' Width='200'></Image></InlineUIContainer>"
+                                  <InlineUIContainer><Image Name='E336EncounterRoll' Source='../bin/Images/Plead.gif' Height='200' Width='200'></Image></InlineUIContainer>
+<LineBreak/><LineBreak/>Roll one die: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e337	"<Bold>e337 Plead Comrades</Bold>
 <LineBreak/><LineBreak/>The encountered characters look unsavory, but willing to talk. You try to convince them to join your party. 
-<LineBreak/><LineBreak/>If your wit and wiles exceed the roll, they join as followers. 
-<LineBreak/><LineBreak/>Otherwise, see  <InlineUIContainer><Button Content='e337a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+<LineBreak/><LineBreak/>If your wit and wiles exceed the roll, they join as followers. Otherwise, see  <InlineUIContainer><Button Content='e337a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='E337EncounterRoll' Source='../bin/Images/Plead.gif' Height='200' Width='200'></Image></InlineUIContainer
 <LineBreak/><LineBreak/>Roll one die: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e337a	"<Bold>e337a Plead Comrades Failed</Bold>
 <LineBreak/><LineBreak/>As you talk with the unsavory encountered person(s), the talk failed to convince them to join your party. Roll for results:
@@ -4803,45 +4804,51 @@ e337a	"<Bold>e337a Plead Comrades Failed</Bold>
 <LineBreak/> 2 - <InlineUIContainer><Button Content='e330' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/> 3 - <InlineUIContainer><Button Content='e340' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/> 4 and 5 - <InlineUIContainer><Button Content='e341' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
-<LineBreak/> 6 - <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>"
+<LineBreak/> 6 - <InlineUIContainer><Button Content='e342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='E337aEncounterRoll' Source='../bin/Images/Deny.gif' Height='200' Width='200'></Image></InlineUIContainer>"
 e338	"<Bold>e338 Convince Hirelings</Bold>
 <LineBreak/><LineBreak/>Characters encountered look dubiously at you, but you try to convince them to join your party as henchmen. 
 <LineBreak/><LineBreak/>You must pay them one gold piece per day if your wit and wiles exceeded the die roll. You must pay them two gold pieces per day if your wit and wiles equaled the die roll.
 <LineBreak/><LineBreak/>Click not to pay: 
 <LineBreak/><LineBreak/><InlineUIContainer><Image Name='Nothing' Source='../bin/Images/CoinsStackedDeny.gif' Height='75'  Width='75'> </Image></InlineUIContainer> "
 e338a	"<Bold>e338a Talk to Convince Hirelings</Bold>
-<LineBreak/><LineBreak/>Characters encountered look dubiously at you, but you try to convince them to join your party as henchmen.
 <LineBreak/><LineBreak/>If you wit and wiles exceeds the die roll, they can join at two gold pieces per day. Otherwise they join at 1gp per day. Today's pay due right now. As you desire, you can hire some instead of all. 
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='E338aEncounterRoll' Source='../bin/Images/Muscle.gif' Height='200' Width='200'></Image></InlineUIContainer>
 <LineBreak/><LineBreak/>Roll one die: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e338b	"<Bold>e338b Hirelings Count</Bold>
 <LineBreak/><LineBreak/>Determine how many hirelings to hire from the encountered party: "
 e338c	"<Bold>e338c Talk to Convince Hirelings</Bold>
-<LineBreak/><LineBreak/>Characters encountered look dubiously at you, but you try to convince them to join your party as henchmen.
 <LineBreak/><LineBreak/>If you wit and wiles exceeds the die roll, they can join at two gold pieces per day. Otherwise they join at 1gp per day. Today's pay due right now. All must be hired as a group.
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='E338cEncounterRoll' Source='../bin/Images/Muscle.gif' Height='200' Width='200'></Image></InlineUIContainer>
 <LineBreak/><LineBreak/>Roll one die: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e339	"<Bold>e339 Convince Hirelings</Bold>
 <LineBreak/><LineBreak/>Characters encountered look askance at you and will pass you by unless you stop to talk. If you stop to talk, you decide you should convince them to join your party as henchmen. See
  <InlineUIContainer><Button Content='e339a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> for possible outcomes.
 <LineBreak/><LineBreak/>If you stop to talk but fail to convince them to join as hirelings, see
  <InlineUIContainer><Button Content='e339b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> for possible outcomes.
-<LineBreak/><LineBreak/>Click not to pay: 
+<LineBreak/><LineBreak/>Do not stop to talk - Encounter Ends: 
 <LineBreak/><InlineUIContainer><Image Name='Nothing' Source='../bin/Images/CoinsStackedDeny.gif' Height='75'  Width='75'> </Image></InlineUIContainer> "
 e339a	"<Bold>e339a Talk to Convince Hirelings</Bold>
-<LineBreak/><LineBreak/>Characters encountered look askance at you and will pass you by unless you stop to talk. If you stop to talk, you decide you should convince them to join your party as henchmen.
 <LineBreak/><LineBreak/>If you wit and wiles exeeds the die roll, they can join at two gold pieces per day with today's pay due right now. As you desire, you can hire some instead of all. 
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='E339aEncounterRoll' Source='../bin/Images/Muscle.gif' Height='200' Width='200'></Image></InlineUIContainer>
 <LineBreak/><LineBreak/>Roll one die: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e339b	"<Bold>e339b Convince Hirelings Failed</Bold>
 <LineBreak/><LineBreak/>You failed to convince them to join as hirelings. Roll one die to determine their attitude:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll1' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/> 1,2,3 -
- <InlineUIContainer><Button Content='r325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+ <InlineUIContainer><Button Content='r325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Pass with no further encounter
 <LineBreak/> 4,5,6 -
- <InlineUIContainer><Button Content='r330' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>"
+ <InlineUIContainer><Button Content='r330' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - Fight to steal your gold"
 e339c	"<Bold>e339c Hirelings Count</Bold>
 <LineBreak/><LineBreak/>Determine how many hirelings to hire from the encountered party: "
 e339d	"<Bold>e339d Talk to Convince Hirelings</Bold>
-<LineBreak/><LineBreak/>Characters encountered look askance at you and will pass you by unless you stop to talk. If you stop to talk, you decide you should convince them to join your party as henchmen.
 <LineBreak/><LineBreak/>If you wit and wiles exeeds the die roll, they can join at two gold pieces per day with today's pay due right now. All must be hired as a group.
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='E339dEncounterRoll' Source='../bin/Images/Muscle.gif' Height='200' Width='200'></Image></InlineUIContainer>
 <LineBreak/><LineBreak/>Roll one die: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e340	"<Bold>e340 Looters</Bold>
 <LineBreak/><LineBreak/>Characters encountered look like they are in need of money. You can let them
@@ -4849,14 +4856,18 @@ e340	"<Bold>e340 Looters</Bold>
 or try to convince them to join you. If your wit and wiles equals or exceeds the die roll, the looter(s) join your party.
 <LineBreak/><LineBreak/>The looter(s) remain as long as they get an equal share in any new gold you acquire. You can choose to take the looted gold from them in a fight during the evening meal. For details, see
  <InlineUIContainer><Button Content='e340a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
- If you try to convince them, roll one die: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21'> </Image></InlineUIContainer>"
+<LineBreak/> <LineBreak/> 
+                              <InlineUIContainer><Image Name='E340EncounterRoll' Source='../bin/Images/CoinPileSingle.gif' Height='150' Width='1500'></Image></InlineUIContainer>
+<LineBreak/> <LineBreak/>If you try to convince them, roll one die: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21'> </Image></InlineUIContainer>"
 e340a	"<Bold>e340a Looters Hostile</Bold>
 <LineBreak/><LineBreak/>You failed to convince them to join your party or are trying to deny their fair share. Roll one die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21'> </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
 <LineBreak/>  1,2 - Attack  you personally and have  first strike <InlineUIContainer><Button Name='myButtonR220' Content='r220' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> .
 <LineBreak/>  3,4 - Attack your party. See <InlineUIContainer><Button Content='e330' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
-<LineBreak/>  5,6 - They depart angry, but without fighting."
+<LineBreak/>  5,6 - They depart angry, but without fighting.
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='E340aEncounterRoll' Source='../bin/Images/Deny.gif' Height='200' Width='200'></Image></InlineUIContainer>"
 e340b	"<Bold>e340b Pay Looters?</Bold> <InlineUIContainer><Button Content='e340a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>
 Click to deny paying the looters:
