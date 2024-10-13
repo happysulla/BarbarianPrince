@@ -2644,15 +2644,19 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new Run("Click merchant image to stop buying."));
                break;
             case "e128d":
-               Image e128d = new Image { Source = MapItem.theMapImages.GetBitmapImage("MerchantOutwit"), Width = 400, Height = 200 };
+               Image e128d = new Image { Name="E128dEncounterRoll", Source = MapItem.theMapImages.GetBitmapImage("MerchantOutwit"), Width = 400, Height = 200 };
                modifiedWitAndWile = gi.WitAndWile + 1;
                myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new Run("               "));
                myTextBlock.Inlines.Add(new InlineUIContainer(e128d));
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               if( Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
                break;
             case "e128e":
                cost = 5;
@@ -6025,6 +6029,13 @@ namespace BarbarianPrince
                               return;
                            case "E118EncounterFight":
                               if (Utilities.NO_RESULT < myGameInstance.DieResults["e118c"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E128dEncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e128d"][0])
                               {
                                  action = GameAction.EncounterRoll;
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);

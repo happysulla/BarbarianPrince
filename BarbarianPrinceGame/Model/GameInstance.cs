@@ -319,6 +319,7 @@ namespace BarbarianPrince
                companion.IsSecretGatewayToDarknessKnown = false;
          }
          //--------------------------------
+         Logger.Log(LogEnum.LE_PARTYMEMBER_ADD, "AddCompanion(): mi=" + companion.ToString());
          PartyMembers.Add(companion);
          //--------------------------------
          if (true == companion.Name.Contains("TrueLove"))
