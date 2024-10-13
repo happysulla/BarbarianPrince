@@ -11010,30 +11010,38 @@ namespace BarbarianPrince
                }
                break;
             case "e024": // wizard attack
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               action = GameAction.UpdateEventViewerActive;
-               if (gi.WitAndWile <= dieRoll)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  gi.EventDisplayed = gi.EventActive = "e024a";
-                  gi.DieRollAction = GameAction.EncounterRoll;
-                  IMapItems abandonedPartyMembers = new MapItems();
-                  foreach (IMapItem mi in gi.PartyMembers)
-                     abandonedPartyMembers.Add(mi);
-                  foreach (IMapItem mi in abandonedPartyMembers)
-                     gi.RemoveAbandonedInParty(mi);
+                  gi.DieResults[key][0] = dieRoll;
                }
                else
                {
-                  if (false == EncounterEscape(gi, ref action))
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  action = GameAction.UpdateEventViewerActive;
+                  if (gi.WitAndWile <= gi.DieResults[key][0])
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll: EncounterEscape() returned false ae=" + gi.EventActive);
-                     return false;
+                     gi.EventDisplayed = gi.EventActive = "e024a";
+                     gi.DieRollAction = GameAction.EncounterRoll;
+                     IMapItems abandonedPartyMembers = new MapItems();
+                     foreach (IMapItem mi in gi.PartyMembers)
+                        abandonedPartyMembers.Add(mi);
+                     foreach (IMapItem mi in abandonedPartyMembers)
+                        gi.RemoveAbandonedInParty(mi);
                   }
-                  if (false == EncounterEnd(gi, ref action))
+                  else
                   {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
-                     return false;
+                     if (false == EncounterEscape(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll: EncounterEscape() returned false ae=" + gi.EventActive);
+                        return false;
+                     }
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
+                        return false;
+                     }
                   }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e024a": // wizard attack

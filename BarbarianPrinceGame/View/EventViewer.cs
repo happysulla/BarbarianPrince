@@ -5827,6 +5827,13 @@ namespace BarbarianPrince
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               }
                               return;
+                           case "E024EncounterFight":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e024"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
                            case "E050EncounterTalk":
                               if (Utilities.NO_RESULT < myGameInstance.DieResults["e050b"][0])
                               {

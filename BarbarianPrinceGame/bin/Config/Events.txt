@@ -962,7 +962,7 @@ e024	"<Bold>e024 Wizard Attack</Bold>
 <LineBreak/><LineBreak/>A wizard attempts to use magic and take control of you and your party. Roll one die and  If the result equals or exceeds your wit and wiles, his attack is successful. If successful, see
  <InlineUIContainer><Button Content='e024a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/>
-                   <InlineUIContainer><Image Source='../bin/Images/FireballAttack.gif' Height='400'  Width='400' > </Image></InlineUIContainer>
+                   <InlineUIContainer><Image Name='E024EncounterFight'  Source='../bin/Images/FireballAttack.gif' Height='400'  Width='400' > </Image></InlineUIContainer>
 <LineBreak/>DieRoll= <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e024a	"<Bold>e024a Wizard Attack Successful</Bold>
 <LineBreak/><LineBreak/>All your followers become slaves of the wizard and are lost to you. All their wealth, possessions, and mounts are also captured by him. Roll one die for your status. If the result exceeds your wit and wiles, you too are captured by the wizard. If not, you escape
