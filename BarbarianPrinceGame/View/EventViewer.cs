@@ -2469,6 +2469,8 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
                break;
+            case "e098a":
+            case "e098b":
             case "e099a":
             case "e099b":
                if (Utilities.NO_RESULT < myGameInstance.DieResults[key][0])
@@ -3817,73 +3819,112 @@ namespace BarbarianPrince
                }
                break;
             case "e314":
-               modifiedWitAndWile = gi.WitAndWile + 1;
-               myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
-               if (true == gi.IsSpecialItemHeld(SpecialEnum.CharismaTalisman))
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
-                  gi.IsCharismaTalismanActive = true;
-                  myTextBlock.Inlines.Add(new Run(" + "));
-                  myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
-               if (true == gi.IsElfWitAndWileActive)
+               else
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
-                  myTextBlock.Inlines.Add(new Run(" - "));
-                  myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+                  modifiedWitAndWile = gi.WitAndWile + 1;
+                  myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
+                  if (true == gi.IsSpecialItemHeld(SpecialEnum.CharismaTalisman))
+                  {
+                     Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
+                     gi.IsCharismaTalismanActive = true;
+                     myTextBlock.Inlines.Add(new Run(" + "));
+                     myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+                  }
+                  if (true == gi.IsElfWitAndWileActive)
+                  {
+                     Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
+                     myTextBlock.Inlines.Add(new Run(" - "));
+                     myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+                  }
                }
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new Run(" "));
                break;
             case "e315":
-               myTextBlock.Inlines.Add(new Run(" < " + gi.WitAndWile.ToString()));
-               if (true == gi.IsSpecialItemHeld(SpecialEnum.CharismaTalisman))
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
-                  gi.IsCharismaTalismanActive = true;
-                  myTextBlock.Inlines.Add(new Run(" + "));
-                  myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
-               if (true == gi.IsElfWitAndWileActive)
+               else
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
-                  myTextBlock.Inlines.Add(new Run(" - "));
-                  myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+                  myTextBlock.Inlines.Add(new Run(" < " + gi.WitAndWile.ToString()));
+                  if (true == gi.IsSpecialItemHeld(SpecialEnum.CharismaTalisman))
+                  {
+                     Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
+                     gi.IsCharismaTalismanActive = true;
+                     myTextBlock.Inlines.Add(new Run(" + "));
+                     myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+                  }
+                  if (true == gi.IsElfWitAndWileActive)
+                  {
+                     Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
+                     myTextBlock.Inlines.Add(new Run(" - "));
+                     myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+                  }
                }
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new Run(" "));
                break;
             case "e317":
-               modifiedWitAndWile = gi.WitAndWile + 1;
-               myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
-               if (true == gi.IsElfWitAndWileActive)
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
-                  myTextBlock.Inlines.Add(new Run(" - "));
-                  myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new Run(" "));
+               else
+               {
+                  modifiedWitAndWile = gi.WitAndWile + 1;
+                  myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
+                  if (true == gi.IsElfWitAndWileActive)
+                  {
+                     Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
+                     myTextBlock.Inlines.Add(new Run(" - "));
+                     myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+                  }
+               }
                break;
             case "e318":
-               myTextBlock.Inlines.Add(new Run(" < " + gi.WitAndWile.ToString()));
-               if (true == gi.IsElfWitAndWileActive)
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
-                  myTextBlock.Inlines.Add(new Run(" - "));
-                  myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
+               else
+               {
+                  myTextBlock.Inlines.Add(new Run(" < " + gi.WitAndWile.ToString()));
+                  if (true == gi.IsElfWitAndWileActive)
+                  {
+                     Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
+                     myTextBlock.Inlines.Add(new Run(" - "));
+                     myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+                  }
                }
                break;
             case "e319":
-               int partySize = gi.PartyMembers.Count - 1;
-               myTextBlock.Inlines.Add(new Run(" > " + partySize.ToString()));
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
+               else
+               {
+                  int partySize = gi.PartyMembers.Count - 1;
+                  myTextBlock.Inlines.Add(new Run(" > " + partySize.ToString()));
+               }
                break;
             case "e320":
-               int partySize1 = gi.PartyMembers.Count;
-               myTextBlock.Inlines.Add(new Run(" > " + partySize1.ToString()));
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
+               else
+               {
+                  int partySize1 = gi.PartyMembers.Count;
+                  myTextBlock.Inlines.Add(new Run(" > " + partySize1.ToString()));
+               }
                break;
             case "e321":
             case "e322":
@@ -3909,51 +3950,58 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new Run("                                        "));
                myTextBlock.Inlines.Add(new InlineUIContainer(swordsImg));
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new Run(" "));
                break;
             case "e326":
             case "e327":
-               modifiedWitAndWile = gi.WitAndWile + gi.MonkPleadModifier + 1;
-               myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
-               if (true == gi.IsSpecialItemHeld(SpecialEnum.CharismaTalisman))
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
-                  gi.IsCharismaTalismanActive = true;
-                  myTextBlock.Inlines.Add(new Run(" + "));
-                  myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
-               if (true == gi.IsElfWitAndWileActive)
+               else
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
-                  myTextBlock.Inlines.Add(new Run(" - "));
-                  myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+                  modifiedWitAndWile = gi.WitAndWile + gi.MonkPleadModifier + 1;
+                  myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
+                  if (true == gi.IsSpecialItemHeld(SpecialEnum.CharismaTalisman))
+                  {
+                     Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
+                     gi.IsCharismaTalismanActive = true;
+                     myTextBlock.Inlines.Add(new Run(" + "));
+                     myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+                  }
+                  if (true == gi.IsElfWitAndWileActive)
+                  {
+                     Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
+                     myTextBlock.Inlines.Add(new Run(" - "));
+                     myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+                  }
                }
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new Run(" "));
                break;
             case "e328":
             case "e329":
-               modifiedWitAndWile = gi.WitAndWile + gi.MonkPleadModifier;
-               myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
-               if (true == gi.IsSpecialItemHeld(SpecialEnum.CharismaTalisman))
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
-                  gi.IsCharismaTalismanActive = true;
-                  myTextBlock.Inlines.Add(new Run(" + "));
-                  myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
-               if (true == gi.IsElfWitAndWileActive)
+               else
                {
-                  Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
-                  myTextBlock.Inlines.Add(new Run(" - "));
-                  myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+                  modifiedWitAndWile = gi.WitAndWile + gi.MonkPleadModifier;
+                  myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
+                  if (true == gi.IsSpecialItemHeld(SpecialEnum.CharismaTalisman))
+                  {
+                     Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("TalismanCharismaSmall"), Width = 21, Height = 21, VerticalAlignment = VerticalAlignment.Bottom };
+                     gi.IsCharismaTalismanActive = true;
+                     myTextBlock.Inlines.Add(new Run(" + "));
+                     myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+                  }
+                  if (true == gi.IsElfWitAndWileActive)
+                  {
+                     Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("ElfWarriorSmall"), Width = theSmallElfImageWidth, Height = theSmallElfImageHeight, VerticalAlignment = VerticalAlignment.Bottom };
+                     myTextBlock.Inlines.Add(new Run(" - "));
+                     myTextBlock.Inlines.Add(new InlineUIContainer(img1));
+                  }
                }
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new Run(" "));
                break;
             case "e331":
                if (gi.Bribe <= gi.GetCoins())
@@ -4085,9 +4133,6 @@ namespace BarbarianPrince
                      myTextBlock.Inlines.Add(new Run(" - "));
                      myTextBlock.Inlines.Add(new InlineUIContainer(img1));
                   }
-                  myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run(" "));
                }
                break;
             case "e337":
@@ -5866,6 +5911,20 @@ namespace BarbarianPrince
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               }
                               return;
+                           case "E098EncounterEvade":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e098a"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E098EncounterFight":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e098b"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
                            case "E099EncounterEvade":
                               if (Utilities.NO_RESULT < myGameInstance.DieResults["e099a"][0])
                               {
@@ -5980,6 +6039,76 @@ namespace BarbarianPrince
                               return;
                            case "E130EncounterFight":
                               if (Utilities.NO_RESULT < myGameInstance.DieResults["e130c"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E314EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e314"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E315EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e315"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E317EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e317"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E318EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e318"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E319EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e319"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E320EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e320"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E326EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e326"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E327EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e327"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E328EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e328"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E329EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e329"][0])
                               {
                                  action = GameAction.EncounterRoll;
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);

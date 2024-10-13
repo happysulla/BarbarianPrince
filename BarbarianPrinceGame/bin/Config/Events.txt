@@ -2475,7 +2475,7 @@ e098a	"<Bold>e098a Evade Dragon</Bold>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Attacked<LineBreak/>
  <InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprised
 <LineBreak/><LineBreak/>
-                                       <InlineUIContainer><Image Source='../bin/Images/DragonEvade.gif' Height='125' Width='200'></Image></InlineUIContainer>"
+                                       <InlineUIContainer><Image Name='E098EncounterEvade' Source='../bin/Images/DragonEvade.gif' Height='125' Width='200'></Image></InlineUIContainer>"
 e098b	"<Bold>e098b Fight Dragon</Bold>
 <LineBreak/><LineBreak/>Roll one die and determine outcome below:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -2487,7 +2487,7 @@ e098b	"<Bold>e098b Fight Dragon</Bold>
  <InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Surprised<LineBreak/>
  <InlineUIContainer><Button Content='e309' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprised
 <LineBreak/><LineBreak/>
-           <InlineUIContainer><Image Source='../bin/Images/DragonFight.gif' Height='280' Width='500'></Image></InlineUIContainer>"
+           <InlineUIContainer><Image Name='E098EncounterFight'  Source='../bin/Images/DragonFight.gif' Height='280' Width='500'></Image></InlineUIContainer>"
 e099	"<Bold>e099 Roc</Bold>
 <LineBreak/><LineBreak/>You encounter the Roc, a giagantic bird which swoops down on your party. The Roc has combat skill 9, endurance 8, and wealth 10. Your options are:
 <LineBreak/><LineBreak/>
@@ -2607,11 +2607,11 @@ e101b	"<Bold>e101b Evade Harpy</Bold>
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='r313' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Escape-Fly<LineBreak/>
- <InlineUIContainer><Button Content='r325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Pass<LineBreak/>
- <InlineUIContainer><Button Content='r326' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Pass<LineBreak/>
- <InlineUIContainer><Button Content='r327' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Pass<LineBreak/>
- <InlineUIContainer><Button Content='r328' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Pass<LineBreak/>
- <InlineUIContainer><Button Content='r329' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Pass
+ <InlineUIContainer><Button Content='r325' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Pass with Dignity<LineBreak/>
+ <InlineUIContainer><Button Content='r326' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 Pass with Talk<LineBreak/>
+ <InlineUIContainer><Button Content='r327' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4 Pass Dummies<LineBreak/>
+ <InlineUIContainer><Button Content='r328' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Pass Rough<LineBreak/>
+ <InlineUIContainer><Button Content='r329' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Tough Pass
 <LineBreak/><LineBreak/>
                              <InlineUIContainer><Image Name='E101EncounterEvade' Source='../bin/Images/Harpy.gif' Height='300'  Width='265' > </Image></InlineUIContainer>"
 e101c	"<Bold>e101c Fight Harpy</Bold>
@@ -4609,12 +4609,16 @@ e314	"<Bold>e314 Talking Escape</Bold>
 <LineBreak/><LineBreak/>If you wit and wiles equals or exceeds the die roll, your party escapes to an adjacent hex
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
  Otherwise, return to the previous event section and select another option.
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='E314EncounterRoll' Source='../bin/Images/Talk.gif' Height='200' Width='200'></Image></InlineUIContainer>
 <LineBreak/><LineBreak/>Roll one die:  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21'> </Image></InlineUIContainer>"
 e315	"<Bold>e315 Begging Escape</Bold>
 <LineBreak/><LineBreak/>With a few well-chosen words, you might be able to throw them off. You decide it is worth a try.
 <LineBreak/><LineBreak/>If you wit and wiles exceeds the die roll, your party escapes to an adjacent hex
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
  Otherwise, return to the previous event section and select another option.
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='E315EncounterRoll' Source='../bin/Images/Plead.gif' Height='200' Width='200'></Image></InlineUIContainer>
 <LineBreak/><LineBreak/>Roll one die:  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21'> </Image></InlineUIContainer>"
 e316	"<Bold>e316 Strategic Hide</Bold>
 <LineBreak/><LineBreak/>Your party hides in this hex
@@ -4625,26 +4629,32 @@ e317	"<Bold>e317 Easy Quick Hide</Bold>
 <LineBreak/><LineBreak/>If you wit and wiles equals or exceeds the die roll, your party hides in the hex
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
  Otherwise, return to the previous event section and select another option - you could not think of a good hiding place fast enough!
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='E317EncounterRoll' Source='../bin/Images/Hide.gif' Height='200' Width='200'></Image></InlineUIContainer>
 <LineBreak/><LineBreak/>Roll one die:  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21'> </Image></InlineUIContainer>"
 e318	"<Bold>e318 Hard Quick Hide</Bold>
 <LineBreak/><LineBreak/>You decide to try hiding.
 <LineBreak/><LineBreak/>If you wit and wiles exceeds the die roll, your party hides in the hex
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
  Otherwise, return to the previous event section and select another option - you could not think of a good hiding place fast enough!
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='E318EncounterRoll' Source='../bin/Images/Hide.gif' Height='200' Width='200'></Image></InlineUIContainer>
 <LineBreak/><LineBreak/>Roll one die:  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21'> </Image></InlineUIContainer>"
 e319	"<Bold>e319 Easy Group Hide</Bold>
 <LineBreak/><LineBreak/>You look around for enough cover to hide your party. 
 <LineBreak/><LineBreak/>If the number of characters in your party is equal or less than the die roll, your party hides in the hex
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
-<LineBreak/><LineBreak/>Otherwise, return to the previous event section and select another option. 
-<LineBreak/><LineBreak/>You cannot adbandon members of your party to allow the rest to hide. Those adbandoned will certainly reveal your hiding place!
+<LineBreak/><LineBreak/>Otherwise, return to the previous event section and select another option. You cannot adbandon members of your party to allow the rest to hide. Those adbandoned will certainly reveal your hiding place!
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='E319EncounterRoll' Source='../bin/Images/Hide.gif' Height='200' Width='200'></Image></InlineUIContainer>
 <LineBreak/><LineBreak/>Roll one die:  Hide if <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21'> </Image></InlineUIContainer>"
 e320	"<Bold>e320 Hard Group Hide</Bold>
 <LineBreak/><LineBreak/>You look around for enough cover to hide your party. 
 <LineBreak/><LineBreak/>If the number of characters in your party is less than the die roll, your party hides in the hex
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
-<LineBreak/><LineBreak/>Otherwise, return to the previous event section and select another option.
-<LineBreak/><LineBreak/>You cannot adbandon members of your party to allow the rest to hide. Those adbandoned will certainly reveal your hiding place!
+<LineBreak/><LineBreak/>Otherwise, return to the previous event section and select another option. You cannot adbandon members of your party to allow the rest to hide. Those adbandoned will certainly reveal your hiding place!
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='E320EncounterRoll' Source='../bin/Images/Hide.gif' Height='200' Width='200'></Image></InlineUIContainer>
 <LineBreak/><LineBreak/>Roll one die:  Hide if <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21'> </Image></InlineUIContainer>"
 e321	"<Bold>e321 Bribe to Pass</Bold>
 <LineBreak/><LineBreak/>If you pay the amount of gold indicated, characters encountered will let you pass and the encounter ends.
@@ -4674,24 +4684,30 @@ e326	"<Bold>e326 Pass with Talk</Bold>
 <LineBreak/><LineBreak/>If your wit and wiles equals or exceeds the roll, the encountered characters let your party pass. The event ends. Otherwise, see
  <InlineUIContainer><Button Content='e330' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  and add one to the die roll there.
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='E326EncounterRoll' Source='../bin/Images/Talk.gif' Height='200' Width='200'></Image></InlineUIContainer>
 <LineBreak/><LineBreak/>Roll one die:  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e327	"<Bold>e327 Pass Dummies</Bold>
 <LineBreak/><LineBreak/>Characters encountered look nasty but slow on the uptake - you try to talk your way past.
-<LineBreak/><LineBreak/>If your wit and wiles equals or exceeds the roll, the encountered characters let your party pass. The event ends.
-<LineBreak/><LineBreak/>Otherwise, see
+<LineBreak/><LineBreak/>If your wit and wiles equals or exceeds the roll, the encountered characters let your party pass. The event ends. Otherwise, see
  <InlineUIContainer><Button Content='e330' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='E327EncounterRoll' Source='../bin/Images/Idiot.gif' Height='200' Width='200'></Image></InlineUIContainer>
 <LineBreak/><LineBreak/>Roll one die:  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21'> </Image></InlineUIContainer>"
 e328	"<Bold>e328 Pass Rough</Bold>
 <LineBreak/><LineBreak/>Characters encountered look rough, but you try to talk your way out of a fight.
-<LineBreak/><LineBreak/> If your wit and wiles exceeds the roll, they let your party pass and the event ends. Otherwise, see
+<LineBreak/><LineBreak/> If your wit and wiles exceeds the roll, they let your party pass and the event ends. Otherwise, see battle reference
  <InlineUIContainer><Button Content='e330' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='E328EncounterRoll' Source='../bin/Images/Talk.gif' Height='200' Width='200'></Image></InlineUIContainer>
 <LineBreak/><LineBreak/>Roll one die:  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21'> </Image></InlineUIContainer> "
 e329	"<Bold>e329 Pass Tough</Bold>
 <LineBreak/><LineBreak/>Characters encountered have an unpleasant gleem in their eyes. You try to create a favorable impression anyway.
-<LineBreak/><LineBreak/>If your wit and wiles exceeds the roll, they let your party pass and the event ends.
-<LineBreak/><LineBreak/>Otherwise, see
+<LineBreak/><LineBreak/>If your wit and wiles exceeds the roll, they let your party pass and the event ends. Otherwise, see battle reference
  <InlineUIContainer><Button Content='r330' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  and subtract one from the die roll there.
+<LineBreak/> <LineBreak/> 
+                                  <InlineUIContainer><Image Name='E329EncounterRoll' Source='../bin/Images/Talk.gif' Height='200' Width='200'></Image></InlineUIContainer>
 <LineBreak/><LineBreak/>Roll one die:  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21'> </Image></InlineUIContainer>"
 e330	"<Bold>e330 Battle Reference</Bold>
 <LineBreak/><LineBreak/>You are forced to fight with the characters encountered. 

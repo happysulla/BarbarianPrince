@@ -141,6 +141,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_0BE9479AB7CA4D75B39ABFE1225EA36F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_0BF884E779F4479E84B9EA985202206E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -562,6 +568,12 @@
         "Entry"
         {
         "MsmKey" = "8:_348E4DDB2C864CAFBC31857E4AAF4145"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_34E90B386536408A97E7A2ED098DD474"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2343,6 +2355,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_DB705238BAB0464C846A5282215BCCEE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_DBB95498130545E98B243DDB73F76405"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -3300,6 +3318,26 @@
             {
             "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\Pegasus.gif"
             "TargetName" = "8:Pegasus.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0BE9479AB7CA4D75B39ABFE1225EA36F"
+            {
+            "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\Talk.gif"
+            "TargetName" = "8:Talk.gif"
             "Tag" = "8:"
             "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
             "Condition" = "8:"
@@ -4720,6 +4758,26 @@
             {
             "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\Rope.gif"
             "TargetName" = "8:Rope.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_34E90B386536408A97E7A2ED098DD474"
+            {
+            "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\Plead.gif"
+            "TargetName" = "8:Plead.gif"
             "Tag" = "8:"
             "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
             "Condition" = "8:"
@@ -10647,6 +10705,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DB705238BAB0464C846A5282215BCCEE"
+            {
+            "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\Hide.gif"
+            "TargetName" = "8:Hide.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DBB95498130545E98B243DDB73F76405"
             {
             "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\SlaveGirlFace5.gif"
@@ -12905,7 +12983,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B40BEF20FC854B338E3FAED3965B987F"
             {
-            "SourcePath" = "8:..\\BarbarianPrinceGame\\obj\\x64\\Release\\BarbarianPrince.exe"
+            "SourcePath" = "8:..\\BarbarianPrinceGame\\obj\\x64\\Debug\\BarbarianPrince.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E950CECD612246C18600F1F09CC854E4"

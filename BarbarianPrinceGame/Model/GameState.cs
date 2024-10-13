@@ -9821,7 +9821,6 @@ namespace BarbarianPrince
                }
                else
                {
-                  dieRoll = 5; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                   gi.IsTalkRoll = true;
                }
@@ -10251,13 +10250,13 @@ namespace BarbarianPrince
             case "e007d": // evade elf lead 
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
+                  if ("Forest" == princeTerritory.Type) // if in forest, add two
+                     dieRoll += 2;
                   gi.DieResults[key][0] = dieRoll;
                }
                else
                {
                   gi.EnteredHexes.Last().EventNames.Add(key);
-                  if ("Forest" == princeTerritory.Type) // if in forest, add two
-                     dieRoll += 2;
                   switch (gi.DieResults[key][0])
                   {
                      case 1: gi.EventDisplayed = gi.EventActive = "e317"; gi.DieRollAction = GameAction.EncounterRoll; gi.EventStart = "e007"; break;  // hide quickly
@@ -10274,13 +10273,13 @@ namespace BarbarianPrince
             case "e007e": // fight elf lead
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
+                  if ("Forest" == princeTerritory.Type) // if in forest, add two
+                     dieRoll += 2;
                   gi.DieResults[key][0] = dieRoll;
                }
                else
                {
                   gi.EnteredHexes.Last().EventNames.Add(key);
-                  if ("Forest" == princeTerritory.Type) // if in forest, add two
-                     dieRoll += 2;
                   switch (gi.DieResults[key][0])
                   {
                      case 1: gi.EventDisplayed = gi.EventActive = "e302"; break;
@@ -12521,38 +12520,52 @@ namespace BarbarianPrince
                }
                break;
             case "e098a": // evade dragon
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               action = GameAction.UpdateEventViewerActive;
-               switch (dieRoll) // Based on the die roll, implement the correct screen
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1:
-                     if (0 == numFlying)                                 // no escape
-                        gi.EventDisplayed = gi.EventActive = "e313b";
-                     else if (numFlying < gi.PartyMembers.Count)         // partial escape
-                        gi.EventDisplayed = gi.EventActive = "e313a";
-                     else                                                // full escape
-                        gi.EventDisplayed = gi.EventActive = "e313c";
-                     break;
-                  case 2: gi.EventDisplayed = gi.EventActive = "e315"; gi.DieRollAction = GameAction.EncounterRoll; break;  // escape begging
-                  case 3: gi.EventDisplayed = gi.EventActive = "e318"; gi.DieRollAction = GameAction.EncounterRoll; break;
-                  case 4: gi.EventDisplayed = gi.EventActive = "e320"; gi.DieRollAction = GameAction.EncounterRoll; break;
-                  case 5: gi.EventDisplayed = gi.EventActive = "e306"; break;
-                  case 6: gi.EventDisplayed = gi.EventActive = "e308"; break;
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  action = GameAction.UpdateEventViewerActive;
+                  switch (gi.DieResults[key][0]) // Based on the die roll, implement the correct screen
+                  {
+                     case 1:
+                        if (0 == numFlying)                                 // no escape
+                           gi.EventDisplayed = gi.EventActive = "e313b";
+                        else if (numFlying < gi.PartyMembers.Count)         // partial escape
+                           gi.EventDisplayed = gi.EventActive = "e313a";
+                        else                                                // full escape
+                           gi.EventDisplayed = gi.EventActive = "e313c";
+                        break;
+                     case 2: gi.EventDisplayed = gi.EventActive = "e315"; gi.DieRollAction = GameAction.EncounterRoll; break;  // escape begging
+                     case 3: gi.EventDisplayed = gi.EventActive = "e318"; gi.DieRollAction = GameAction.EncounterRoll; break;
+                     case 4: gi.EventDisplayed = gi.EventActive = "e320"; gi.DieRollAction = GameAction.EncounterRoll; break;
+                     case 5: gi.EventDisplayed = gi.EventActive = "e306"; break;
+                     case 6: gi.EventDisplayed = gi.EventActive = "e308"; break;
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
                }
                break;
             case "e098b": // fight dragon
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               action = GameAction.UpdateEventViewerActive;
-               switch (dieRoll) // Based on the die roll, implement the correct screen
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e302"; break;
-                  case 2: gi.EventDisplayed = gi.EventActive = "e303"; break;
-                  case 3: gi.EventDisplayed = gi.EventActive = "e305"; break;
-                  case 4: gi.EventDisplayed = gi.EventActive = "e306"; break;
-                  case 5: gi.EventDisplayed = gi.EventActive = "e308"; break;
-                  case 6: gi.EventDisplayed = gi.EventActive = "e309"; break;
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  action = GameAction.UpdateEventViewerActive;
+                  switch (gi.DieResults[key][0]) // Based on the die roll, implement the correct screen
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e302"; break;
+                     case 2: gi.EventDisplayed = gi.EventActive = "e303"; break;
+                     case 3: gi.EventDisplayed = gi.EventActive = "e305"; break;
+                     case 4: gi.EventDisplayed = gi.EventActive = "e306"; break;
+                     case 5: gi.EventDisplayed = gi.EventActive = "e308"; break;
+                     case 6: gi.EventDisplayed = gi.EventActive = "e309"; break;
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
                }
                break;
             case "e099a": // evade roc
@@ -15012,136 +15025,183 @@ namespace BarbarianPrince
             case "e313b": action = GameAction.UpdateEventViewerActive; gi.EventDisplayed = gi.EventActive = "e330"; gi.DieRollAction = GameAction.EncounterRoll; break;
             // ========================Escape================================
             case "e314": // escape easy
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if (true == gi.IsCharismaTalismanActive)
-                  --dieRoll;
-               if (true == gi.IsElfWitAndWileActive)
-                  ++dieRoll;
-               if (dieRoll <= gi.WitAndWile)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  if (false == EncounterEscape(gi, ref action))
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEscape() return false for ae=" + gi.EventActive);
-                     return false;
-                  }
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
-                     return false;
-                  }
+                  if (true == gi.IsCharismaTalismanActive)
+                     --dieRoll;
+                  if (true == gi.IsElfWitAndWileActive)
+                     ++dieRoll;
+                  gi.DieResults[key][0] = dieRoll;
                }
                else
                {
-                  gi.IsEvadeActive = false;
-                  gi.EventDisplayed = gi.EventActive = gi.EventStart;
-                  action = GameAction.UpdateEventViewerActive;
-                  gi.DieRollAction = GameAction.EncounterRoll;
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if (gi.DieResults[key][0] <= gi.WitAndWile)
+                  {
+                     if (false == EncounterEscape(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEscape() return false for ae=" + gi.EventActive);
+                        return false;
+                     }
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
+                        return false;
+                     }
+                  }
+                  else
+                  {
+                     gi.IsEvadeActive = false;
+                     gi.EventDisplayed = gi.EventActive = gi.EventStart;
+                     action = GameAction.UpdateEventViewerActive;
+                     gi.DieRollAction = GameAction.EncounterRoll;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e315": // escape hard
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if (true == gi.IsCharismaTalismanActive)
-                  --dieRoll;
-               if (true == gi.IsElfWitAndWileActive)
-                  ++dieRoll;
-               if (dieRoll < gi.WitAndWile)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  if (false == EncounterEscape(gi, ref action))
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEscape() return false for ae=" + gi.EventActive);
-                     return false;
-                  }
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
-                     return false;
-                  }
+                  if (true == gi.IsCharismaTalismanActive)
+                     --dieRoll;
+                  if (true == gi.IsElfWitAndWileActive)
+                     ++dieRoll;
+                  gi.DieResults[key][0] = dieRoll;
                }
                else
                {
-                  gi.IsEvadeActive = false;
-                  gi.EventDisplayed = gi.EventActive = gi.EventStart;
-                  action = GameAction.UpdateEventViewerActive;
-                  gi.DieRollAction = GameAction.EncounterRoll;
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if (gi.DieResults[key][0] < gi.WitAndWile)
+                  {
+                     if (false == EncounterEscape(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEscape() return false for ae=" + gi.EventActive);
+                        return false;
+                     }
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
+                        return false;
+                     }
+                  }
+                  else
+                  {
+                     gi.IsEvadeActive = false;
+                     gi.EventDisplayed = gi.EventActive = gi.EventStart;
+                     action = GameAction.UpdateEventViewerActive;
+                     gi.DieRollAction = GameAction.EncounterRoll;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             // ========================Hiding================================
             case "e317": // Hiding
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if (true == gi.IsElfWitAndWileActive)
-                  ++dieRoll;
-               if (dieRoll <= gi.WitAndWile)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
-                     return false;
-                  }
+                  gi.DieResults[key][0] = dieRoll;
                }
                else
                {
-                  gi.IsEvadeActive = false;
-                  gi.EventDisplayed = gi.EventActive = gi.EventStart;
-                  action = GameAction.UpdateEventViewerActive;
-                  gi.DieRollAction = GameAction.DieRollActionNone;
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if (true == gi.IsElfWitAndWileActive)
+                     ++dieRoll;
+                  if (gi.DieResults[key][0] <= gi.WitAndWile)
+                  {
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
+                        return false;
+                     }
+                  }
+                  else
+                  {
+                     gi.IsEvadeActive = false;
+                     gi.EventDisplayed = gi.EventActive = gi.EventStart;
+                     action = GameAction.UpdateEventViewerActive;
+                     gi.DieRollAction = GameAction.DieRollActionNone;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e318": // Hiding
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if (true == gi.IsElfWitAndWileActive)
-                  ++dieRoll;
-               if (dieRoll < gi.WitAndWile)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
-                     return false;
-                  }
+                  if (true == gi.IsElfWitAndWileActive)
+                     ++dieRoll;
+                  gi.DieResults[key][0] = dieRoll;
                }
                else
                {
-                  gi.IsEvadeActive = false;
-                  gi.EventDisplayed = gi.EventActive = gi.EventStart;
-                  action = GameAction.UpdateEventViewerActive;
-                  gi.DieRollAction = GameAction.EncounterRoll;
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if (gi.DieResults[key][0] < gi.WitAndWile)
+                  {
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
+                        return false;
+                     }
+                  }
+                  else
+                  {
+                     gi.IsEvadeActive = false;
+                     gi.EventDisplayed = gi.EventActive = gi.EventStart;
+                     action = GameAction.UpdateEventViewerActive;
+                     gi.DieRollAction = GameAction.EncounterRoll;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e319": // Hiding
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if (gi.PartyMembers.Count <= dieRoll)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
-                     return false;
-                  }
+                  gi.DieResults[key][0] = dieRoll;
                }
                else
                {
-                  gi.IsEvadeActive = false;
-                  gi.EventDisplayed = gi.EventActive = gi.EventStart;
-                  action = GameAction.UpdateEventViewerActive;
-                  gi.DieRollAction = GameAction.EncounterRoll;
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if (gi.PartyMembers.Count <= gi.DieResults[key][0])
+                  {
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
+                        return false;
+                     }
+                  }
+                  else
+                  {
+                     gi.IsEvadeActive = false;
+                     gi.EventDisplayed = gi.EventActive = gi.EventStart;
+                     action = GameAction.UpdateEventViewerActive;
+                     gi.DieRollAction = GameAction.EncounterRoll;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e320": // Hiding
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if (gi.PartyMembers.Count < dieRoll)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
-                     return false;
-                  }
+                  gi.DieResults[key][0] = dieRoll;
                }
                else
                {
-                  gi.IsEvadeActive = false;
-                  gi.EventDisplayed = gi.EventActive = gi.EventStart;
-                  if ("e071" == gi.EventStart)
-                     gi.DieResults[gi.EventStart][0] = gi.EncounteredMembers.Count; // elf hide fails - repopulate the die roll 
-                  action = GameAction.UpdateEventViewerActive;
-                  gi.DieRollAction = GameAction.EncounterRoll;
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if (gi.PartyMembers.Count < gi.DieResults[key][0])
+                  {
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
+                        return false;
+                     }
+                  }
+                  else
+                  {
+                     gi.IsEvadeActive = false;
+                     gi.EventDisplayed = gi.EventActive = gi.EventStart;
+                     if ("e071" == gi.EventStart)
+                        gi.DieResults[gi.EventStart][0] = gi.EncounteredMembers.Count; // elf hide fails - repopulate the die roll 
+                     action = GameAction.UpdateEventViewerActive;
+                     gi.DieRollAction = GameAction.EncounterRoll;
+                  }
                }
                break;
             // ========================Bribe================================
@@ -15151,89 +15211,121 @@ namespace BarbarianPrince
             case "e324": gi.EnteredHexes.Last().EventNames.Add(key); action = GameAction.UpdateEventViewerActive; gi.EventDisplayed = gi.EventActive = "e307"; break;
             // ========================Pass================================
             case "e326": // Pass encounter
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if (true == gi.IsCharismaTalismanActive)
-                  --dieRoll;
-               if (true == gi.IsElfWitAndWileActive)
-                  ++dieRoll;
-               if (dieRoll <= gi.WitAndWile)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false ae=" + gi.EventActive + " dr=" + dieRoll.ToString());
-                     return false;
-                  }
+                  if (true == gi.IsCharismaTalismanActive)
+                     --dieRoll;
+                  if (true == gi.IsElfWitAndWileActive)
+                     ++dieRoll;
+                  gi.DieResults[key][0] = dieRoll;
                }
                else
                {
-                  theCombatModifer = 1;
-                  gi.EventDisplayed = gi.EventActive = "e330";
-                  action = GameAction.UpdateEventViewerActive;
-                  gi.DieRollAction = GameAction.EncounterRoll;
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if (gi.DieResults[key][0] <= gi.WitAndWile)
+                  {
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false ae=" + gi.EventActive + " dr=" + gi.DieResults[key][0].ToString());
+                        return false;
+                     }
+                  }
+                  else
+                  {
+                     theCombatModifer = 1;
+                     gi.EventDisplayed = gi.EventActive = "e330";
+                     action = GameAction.UpdateEventViewerActive;
+                     gi.DieRollAction = GameAction.EncounterRoll;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e327": // Pass encounter
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if (true == gi.IsCharismaTalismanActive)
-                  --dieRoll;
-               if (true == gi.IsElfWitAndWileActive)
-                  ++dieRoll;
-               if (dieRoll <= gi.WitAndWile)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false ae = " + gi.EventActive);
-                     return false;
-                  }
+                  if (true == gi.IsCharismaTalismanActive)
+                     --dieRoll;
+                  if (true == gi.IsElfWitAndWileActive)
+                     ++dieRoll;
+                  gi.DieResults[key][0] = dieRoll;
                }
                else
                {
-                  gi.EventDisplayed = gi.EventActive = "e330";
-                  action = GameAction.UpdateEventViewerActive;
-                  gi.DieRollAction = GameAction.EncounterRoll;
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if (gi.DieResults[key][0] <= gi.WitAndWile)
+                  {
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false ae = " + gi.EventActive);
+                        return false;
+                     }
+                  }
+                  else
+                  {
+                     gi.EventDisplayed = gi.EventActive = "e330";
+                     action = GameAction.UpdateEventViewerActive;
+                     gi.DieRollAction = GameAction.EncounterRoll;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e328": // Pass encounter
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if (true == gi.IsCharismaTalismanActive)
-                  --dieRoll;
-               if (true == gi.IsElfWitAndWileActive)
-                  ++dieRoll;
-               if (dieRoll < gi.WitAndWile)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): EncounterEnd() returned false for ae=" + gi.EventActive + " dr=" + dieRoll.ToString());
-                     return false;
-                  }
+                  if (true == gi.IsCharismaTalismanActive)
+                     --dieRoll;
+                  if (true == gi.IsElfWitAndWileActive)
+                     ++dieRoll;
+                  gi.DieResults[key][0] = dieRoll;
                }
                else
                {
-                  gi.EventDisplayed = gi.EventActive = "e330";
-                  action = GameAction.UpdateEventViewerActive;
-                  gi.DieRollAction = GameAction.EncounterRoll;
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if (gi.DieResults[key][0] < gi.WitAndWile)
+                  {
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): EncounterEnd() returned false for ae=" + gi.EventActive + " dr=" + gi.DieResults[key][0].ToString());
+                        return false;
+                     }
+                  }
+                  else
+                  {
+                     gi.EventDisplayed = gi.EventActive = "e330";
+                     action = GameAction.UpdateEventViewerActive;
+                     gi.DieRollAction = GameAction.EncounterRoll;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e329": // Pass encounter
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if (true == gi.IsCharismaTalismanActive)
-                  --dieRoll;
-               if (true == gi.IsElfWitAndWileActive)
-                  ++dieRoll;
-               if (dieRoll < gi.WitAndWile)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  if (false == EncounterEnd(gi, ref action))
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
-                     return false;
-                  }
+                  if (true == gi.IsCharismaTalismanActive)
+                     --dieRoll;
+                  if (true == gi.IsElfWitAndWileActive)
+                     ++dieRoll;
+                  gi.DieResults[key][0] = dieRoll;
                }
                else
                {
-                  theCombatModifer = -1;
-                  gi.EventDisplayed = gi.EventActive = "e330";
-                  action = GameAction.UpdateEventViewerActive;
-                  gi.DieRollAction = GameAction.EncounterRoll;
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if (gi.DieResults[key][0] < gi.WitAndWile)
+                  {
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
+                        return false;
+                     }
+                  }
+                  else
+                  {
+                     theCombatModifer = -1;
+                     gi.EventDisplayed = gi.EventActive = "e330";
+                     action = GameAction.UpdateEventViewerActive;
+                     gi.DieRollAction = GameAction.EncounterRoll;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             // ========================Roll for Fight================================
