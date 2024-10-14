@@ -8372,14 +8372,23 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case "e057": // troll
-               gi.EncounteredMembers.Clear();
-               IMapItem troll = CreateCharacter(gi, "Troll");
-               gi.EncounteredMembers.Add(troll);
-               gi.DieRollAction = GameAction.DieRollActionNone;
-               if (gi.WitAndWile < dieRoll)
-                  gi.EventDisplayed = gi.EventActive = "e307";
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
+               {
+                  gi.EncounteredMembers.Clear();
+                  gi.DieResults[key][0] = dieRoll;
+               }
                else
-                  gi.EventDisplayed = gi.EventActive = "e304";
+               {
+                  gi.EncounteredMembers.Clear();
+                  IMapItem troll = CreateCharacter(gi, "Troll");
+                  gi.EncounteredMembers.Add(troll);
+                  gi.DieRollAction = GameAction.DieRollActionNone;
+                  if (gi.WitAndWile < gi.DieResults[key][0])
+                     gi.EventDisplayed = gi.EventActive = "e307";
+                  else
+                     gi.EventDisplayed = gi.EventActive = "e304";
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
+               }
                break;
             case "e058": // Band of Dwarves
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
@@ -13447,21 +13456,29 @@ namespace BarbarianPrince
                }
                break;
             case "e137": // inhabitants
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               action = GameAction.UpdateEventViewerActive;
-               switch (dieRoll) // Based on the die roll, implement event
+               if( Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e032"; gi.DieRollAction = GameAction.EncounterStart; break; // ghosts
-                  case 2: gi.EventDisplayed = gi.EventActive = "e051"; break;                                               // bandits
-                  case 3: gi.EventDisplayed = gi.EventActive = "e052"; gi.DieRollAction = GameAction.EncounterStart; break; // goblins
-                  case 4:                                                                                                   // orc tower
-                     if (null == gi.OrcTowers.Find(princeTerritory.Name))
-                        gi.OrcTowers.Add(princeTerritory);
-                     gi.EventDisplayed = gi.EventActive = "e056";
-                     break;
-                  case 5: gi.EventDisplayed = gi.EventActive = "e057"; gi.DieRollAction = GameAction.EncounterStart; break;  // troll           
-                  case 6: gi.EventDisplayed = gi.EventActive = "e082"; gi.DieRollAction = GameAction.EncounterStart; break;  // unearthly spectre
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  action = GameAction.UpdateEventViewerActive;
+                  switch (gi.DieResults[key][0]) // Based on the die roll, implement event
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e032"; gi.DieRollAction = GameAction.EncounterStart; break; // ghosts
+                     case 2: gi.EventDisplayed = gi.EventActive = "e051"; break;                                               // bandits
+                     case 3: gi.EventDisplayed = gi.EventActive = "e052"; gi.DieRollAction = GameAction.EncounterStart; break; // goblins
+                     case 4:                                                                                                   // orc tower
+                        if (null == gi.OrcTowers.Find(princeTerritory.Name))
+                           gi.OrcTowers.Add(princeTerritory);
+                        gi.EventDisplayed = gi.EventActive = "e056";
+                        break;
+                     case 5: gi.EventDisplayed = gi.EventActive = "e057"; gi.DieRollAction = GameAction.EncounterStart; break;  // troll           
+                     case 6: gi.EventDisplayed = gi.EventActive = "e082"; gi.DieRollAction = GameAction.EncounterStart; break;  // unearthly spectre
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + gi.DieResults[key][0].ToString()); return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e138": // unclean creatures

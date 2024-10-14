@@ -2165,13 +2165,26 @@ namespace BarbarianPrince
                }
                break;
             case "e057":
-               Image img57 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Troll"), Width = 170, Height = 250 };
-               modifiedWitAndWile = gi.WitAndWile + 1;
-               myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new Run("                                      "));
-               myTextBlock.Inlines.Add(new InlineUIContainer(img57));
+               if (Utilities.NO_RESULT < myGameInstance.DieResults[key][0])
+               {
+                  Image img57a = new Image { Name="E057EncounterRoll", Source = MapItem.theMapImages.GetBitmapImage("Troll"), Width = 170, Height = 250 };
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("                                      "));
+                  myTextBlock.Inlines.Add(new InlineUIContainer(img57a));
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
+               else
+               {
+                  Image img57b = new Image { Source = MapItem.theMapImages.GetBitmapImage("Troll"), Width = 170, Height = 250 };
+                  modifiedWitAndWile = gi.WitAndWile + 1;
+                  myTextBlock.Inlines.Add(new Run(" < " + modifiedWitAndWile.ToString()));
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("                                      "));
+                  myTextBlock.Inlines.Add(new InlineUIContainer(img57b));
+               }
                break;
             case "e058":
                if (Utilities.NO_RESULT < myGameInstance.DieResults[key][0])
@@ -2779,9 +2792,9 @@ namespace BarbarianPrince
                break;
             case "e135":
             case "e136":
+            case "e137":
                if (Utilities.NO_RESULT < myGameInstance.DieResults[key][0])
                {
-                  myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
@@ -5859,6 +5872,13 @@ namespace BarbarianPrince
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               }
                               return;
+                           case "E057EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e057"][0])
+                              {
+                                 action = GameAction.EncounterStart;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
                            case "E058EncounterTalk":
                               if (Utilities.NO_RESULT < myGameInstance.DieResults["e058e"][0])
                               {
@@ -6062,6 +6082,13 @@ namespace BarbarianPrince
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               }
                               return;
+                           case "E137EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e137"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
                            case "E314EncounterRoll":
                               if (Utilities.NO_RESULT < myGameInstance.DieResults["e314"][0])
                               {
@@ -6148,6 +6175,13 @@ namespace BarbarianPrince
                               return;
                            case "E333aEncounterRoll":
                               if (Utilities.NO_RESULT < myGameInstance.DieResults["e333a"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E336EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e336"][0])
                               {
                                  action = GameAction.EncounterRoll;
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);

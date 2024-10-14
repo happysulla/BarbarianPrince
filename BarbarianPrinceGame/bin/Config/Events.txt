@@ -3236,7 +3236,7 @@ e137	"<Bold>e137 Inhabitants</Bold>
 <InlineUIContainer><Button Content='e056' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4<LineBreak/>
 <InlineUIContainer><Button Content='e057' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5<LineBreak/>
 <InlineUIContainer><Button Content='e082' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6<LineBreak/>
-                       <InlineUIContainer><Image  Source='../bin/Images/Inhabitant.gif' Height='350'  Width='350'> </Image></InlineUIContainer> "
+                       <InlineUIContainer><Image  Name='E137EncounterRoll' Source='../bin/Images/Inhabitant.gif' Height='350'  Width='350'> </Image></InlineUIContainer> "
 e138	"<Bold>e138 Unclean</Bold>
 <LineBreak/><LineBreak/>
 The ruins are unclean and have horrible, gruesome creatures populating them. Roll one die for what you encounter:
