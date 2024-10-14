@@ -1099,7 +1099,7 @@ namespace BarbarianPrince
                      myGameInstance.EventDisplayed = myGameInstance.EventActive = myEvents[key][i];
                      if( ("e044" == myEvents[key][i]) && (false == myGameInstance.IsReligionInParty()) )
                         myGameInstance.EventDisplayed = myGameInstance.EventActive = "e044a";
-                     else if (("e050" == myEvents[key][i]) && (true == IsStructureWithinRange(myGameInstance,3)) )
+                     else if (("e050" == myEvents[key][i]) && (false == IsStructureWithinRange(myGameInstance,3)) )
                         myGameInstance.EventDisplayed = myGameInstance.EventActive = "e050a";
                      else if (("e094" == myEvents[key][i]) && ("Cross River" == myKeyReference)) // crocs in river instead of swamp
                         myGameInstance.EventDisplayed = myGameInstance.EventActive = "e094a";
