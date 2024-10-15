@@ -1941,6 +1941,11 @@ namespace BarbarianPrince
                }
                break;
             case "e026":
+            case "e028a":
+            case "e029":
+            case "e032":
+            case "e032a":
+            case "e033":
                if (Utilities.NO_RESULT < myGameInstance.DieResults[key][0])
                {
                   myTextBlock.Inlines.Add(new LineBreak());
@@ -1950,6 +1955,15 @@ namespace BarbarianPrince
             case "e035a":
                int dieNeeded = gi.WanderingDayCount + 1;
                myTextBlock.Inlines.Add(new Run(" < " + dieNeeded.ToString()));
+               break;
+            case "e037":
+            case "e038":
+            case "e041":
+               if (Utilities.NO_RESULT < myGameInstance.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
                break;
             case "e048":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
@@ -2793,6 +2807,7 @@ namespace BarbarianPrince
             case "e135":
             case "e136":
             case "e137":
+            case "e138":
                if (Utilities.NO_RESULT < myGameInstance.DieResults[key][0])
                {
                   myTextBlock.Inlines.Add(new LineBreak());
@@ -5481,8 +5496,6 @@ namespace BarbarianPrince
                               action = GameAction.E028CaveTombs;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
-                           case "CaveTombs": // do nothing
-                              return;
                            case "ChagaDrugPay":
                               action = GameAction.E143ChagaDrugPay;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
@@ -5851,6 +5864,62 @@ namespace BarbarianPrince
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               }
                               return;
+                           case "E028aEncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e028a"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E029EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e029"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E032EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e032"][0])
+                              {
+                                 action = GameAction.EncounterStart;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E032aEncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e032a"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E033EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e033"][0])
+                              {
+                                 action = GameAction.EncounterStart;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E037EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e037"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E038EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e038"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E041EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e041"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
                            case "E050EncounterTalk":
                               if (Utilities.NO_RESULT < myGameInstance.DieResults["e050b"][0])
                               {
@@ -6084,6 +6153,13 @@ namespace BarbarianPrince
                               return;
                            case "E137EncounterRoll":
                               if (Utilities.NO_RESULT < myGameInstance.DieResults["e137"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E138EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e138"][0])
                               {
                                  action = GameAction.EncounterRoll;
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);

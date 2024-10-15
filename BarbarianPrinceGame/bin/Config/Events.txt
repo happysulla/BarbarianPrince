@@ -1045,7 +1045,7 @@ e028a	"<Bold>e028a Cave Tombs</Bold>
  <InlineUIContainer><Button Content='e034' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5<LineBreak/>
  <InlineUIContainer><Button Content='e035' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6
 <LineBreak/>
-  <InlineUIContainer><Image Name='CaveTombs' Source='../bin/Images/Cave.gif' Height='300'  Width='600'> </Image></InlineUIContainer> "
+  <InlineUIContainer><Image Name='E028aEncounterRoll' Source='../bin/Images/Cave.gif' Height='300'  Width='600'> </Image></InlineUIContainer> "
 e029	"<Bold>e029 Danger and Treasure</Bold>
 <LineBreak/><LineBreak/>You sense both danger and treasures near. 
 <LineBreak/><LineBreak/>
@@ -1057,7 +1057,9 @@ Roll one die and see that event:
  3 - <InlineUIContainer><Button Content='e036' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  4 - <InlineUIContainer><Button Content='e037' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  5 - <InlineUIContainer><Button Content='e038' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
- 6 - <InlineUIContainer><Button Content='e044' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>"
+ 6 - <InlineUIContainer><Button Content='e044' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+<LineBreak/><LineBreak/>
+                                  <InlineUIContainer><Image Name='E029EncounterRoll' Source='../bin/Images/Skulls.gif' Height='200'  Width='200'> </Image></InlineUIContainer> "
 e030	"<Bold>e030 Mummies</Bold>
 <LineBreak/><LineBreak/>You discover dried mummies of a long lost race. Although a scholar may be interested, you are not. Amid the dust and rot, you find only one gold piece.  Click image to continue.
 <LineBreak/><LineBreak/><InlineUIContainer><Image Name='EncounterEnd' Source='../bin/Images/Mummy.gif' Height='300'  Width='600'> </Image></InlineUIContainer> "
@@ -1088,7 +1090,7 @@ They are guarding an ancient altar. If you kill the ghosts, you can investigate 
  5 - <InlineUIContainer><Button Content='e044' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>   
  6 - Nothing
 <LineBreak/><LineBreak/>
-           <InlineUIContainer><Image Source='../bin/Images/Ghost1.gif' Height='333' Width='500' > </Image></InlineUIContainer>"
+           <InlineUIContainer><Image Name='E032EncounterRoll' Source='../bin/Images/Ghost1.gif' Height='333' Width='500' > </Image></InlineUIContainer>"
 e032a	"<Bold>e032a Ancient Altar</Bold>
 <LineBreak/><LineBreak/>The defeated ghosts guarding an ancient altar disappear. Roll one die to investigate the altar:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -1100,7 +1102,7 @@ e032a	"<Bold>e032a Ancient Altar</Bold>
  5 - <InlineUIContainer><Button Content='e044' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  6 - Nothing
 <LineBreak/><LineBreak/>
-                          <InlineUIContainer><Image Source='../bin/Images/AltarSimple.gif' Height='240' Width='400' > </Image></InlineUIContainer>"
+                          <InlineUIContainer><Image Name='E032aEncounterRoll' Source='../bin/Images/AltarSimple.gif' Height='240' Width='400' > </Image></InlineUIContainer>"
 e033	"<Bold>e033 Warrior Wraiths</Bold>
 <LineBreak/><LineBreak/>Wraiths of long dead superwarriors assault your party. They strike first in combat
  <InlineUIContainer><Button Content='r220' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
@@ -1111,7 +1113,7 @@ e033	"<Bold>e033 Warrior Wraiths</Bold>
  <InlineUIContainer><Button Content='e033a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  for details.
 <LineBreak/><LineBreak/>
-                            <InlineUIContainer><Image Source='../bin/Images/Wraith.gif' Height='200' Width='200' > </Image></InlineUIContainer>"
+                            <InlineUIContainer><Image Name='E033EncounterRoll' Source='../bin/Images/Wraith.gif' Height='200' Width='200' > </Image></InlineUIContainer>"
 e033a	"<Bold>e033a Warrior Wraiths Defeated</Bold>
 <LineBreak/><LineBreak/>You have defeated the long dead superwarriors. 
 <LineBreak/><LineBreak/>You find they are guarding plundered from an ancient battle. Wealth codes are based on a die roll per
@@ -1191,7 +1193,7 @@ e037	"<Bold>e037 Broken Chest</Bold>
 <InlineUIContainer><Button Content='e186' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5<LineBreak/>
 <InlineUIContainer><Button Content='e189' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6<LineBreak/>
 <LineBreak/>
-                                                <InlineUIContainer><Image Source='../bin/Images/Chest2.gif' Height='100'  Width='100'> </Image></InlineUIContainer>"
+                                                <InlineUIContainer><Image  Name='E037EncounterRoll' Source='../bin/Images/Chest2.gif' Height='100'  Width='100'> </Image></InlineUIContainer>"
 e038	"<Bold>e038 Cache under Stone</Bold>
 <LineBreak/><LineBreak/>By chance, you overturn a stone slab, As you jump back, it crashes to the ground. You see that it uncovers an old cache of rotting food  and other items. Roll one die:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -1202,7 +1204,7 @@ e038	"<Bold>e038 Cache under Stone</Bold>
  4 - <InlineUIContainer><Button Content='e185' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  5 - <InlineUIContainer><Button Content='e187' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  6 - <InlineUIContainer><Button Content='e190' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
-<LineBreak/><InlineUIContainer><Image Source='../bin/Images/Stone.gif' Height='320'  Width='600'> </Image></InlineUIContainer> "
+<LineBreak/><InlineUIContainer><Image Name='E038EncounterRoll' Source='../bin/Images/Stone.gif' Height='320'  Width='600'> </Image></InlineUIContainer> "
 e039	"<Bold>e039 Small Treasure Chest</Bold>
 <LineBreak/><LineBreak/>You find a locked chest. You know the lock may be booby trapped.
 <LineBreak/><LineBreak/><InlineUIContainer><Image Name='TreasureChest'  Source='../bin/Images/Chest.gif' Height='75'  Width='75'> </Image></InlineUIContainer> Click the chest to open.
@@ -1239,7 +1241,7 @@ e041	"<Bold>e041 Vision Gem</Bold>
  5 - <InlineUIContainer><Button Content='e147' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  6 - Nothing of value
 <LineBreak/><LineBreak/>
-                                 <InlineUIContainer><Image Source='../bin/Images/GemVision.gif' Height='300' Width='300'> </Image></InlineUIContainer>"
+                                 <InlineUIContainer><Image Name='E041EncounterRoll' Source='../bin/Images/GemVision.gif' Height='300' Width='300'> </Image></InlineUIContainer>"
 e042	"<Bold>e042 Alcove of Sending</Bold>
 <LineBreak/><LineBreak/>You find a small alcove inscribed with runes. Since your party includes a magician, wizard, or witch; the runes can be deciphered to determine the alcove's secret purpose.
 <LineBreak/><LineBreak/>The secret of the alcove is simple. You can command an audience with:
@@ -3235,8 +3237,9 @@ e137	"<Bold>e137 Inhabitants</Bold>
 <InlineUIContainer><Button Content='e052' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3<LineBreak/>
 <InlineUIContainer><Button Content='e056' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 4<LineBreak/>
 <InlineUIContainer><Button Content='e057' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5<LineBreak/>
-<InlineUIContainer><Button Content='e082' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6<LineBreak/>
-                       <InlineUIContainer><Image  Name='E137EncounterRoll' Source='../bin/Images/Inhabitant.gif' Height='350'  Width='350'> </Image></InlineUIContainer> "
+<InlineUIContainer><Button Content='e082' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6
+<LineBreak/>
+                       <InlineUIContainer><Image  Name='E137EncounterRoll'  Source='../bin/Images/Inhabitant.gif' Height='350'  Width='350'> </Image></InlineUIContainer> "
 e138	"<Bold>e138 Unclean</Bold>
 <LineBreak/><LineBreak/>
 The ruins are unclean and have horrible, gruesome creatures populating them. Roll one die for what you encounter:
@@ -3247,8 +3250,9 @@ The ruins are unclean and have horrible, gruesome creatures populating them. Rol
  3 -  <InlineUIContainer><Button Content='e034' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  4 -  <InlineUIContainer><Button Content='e056' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  5 -  <InlineUIContainer><Button Content='e082' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
- 6 -  <InlineUIContainer><Button Content='e098' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
-                       <InlineUIContainer><Image  Source='../bin/Images/RuinsRat.gif' Name='RuinsRat' Height='300'  Width='300'> </Image></InlineUIContainer>"
+ 6 -  <InlineUIContainer><Button Content='e098' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+<LineBreak/>
+                       <InlineUIContainer><Image  Name='E138EncounterRoll'  Source='../bin/Images/RuinsRat.gif' Height='300'  Width='300'> </Image></InlineUIContainer>"
 e138a	"<Bold>e138a Unclean Survived</Bold>
 <LineBreak/><LineBreak/>You survived the encounter in the unclean ruins. Consult
  <InlineUIContainer><Button Content='r208' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>

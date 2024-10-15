@@ -8098,26 +8098,43 @@ namespace BarbarianPrince
                gi.EventStart = "e023";
                break;
             case "e032":  // ghosts
-               gi.EncounteredMembers.Clear();
-               int numGhosts = dieRoll + 1;
-               for (int i = 0; i < numGhosts; ++i)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  IMapItem ghost = CreateCharacter(gi, "Ghost");
-                  gi.EncounteredMembers.Add(ghost);
+                  dieRoll = 0; // <cgs> TEST
+                  gi.DieResults[key][0] = dieRoll;
                }
-               gi.EventDisplayed = gi.EventActive = "e310";  // party is surprised
+               else
+               {
+                  gi.EncounteredMembers.Clear();
+                  int numGhosts = gi.DieResults[key][0] + 1;
+                  for (int i = 0; i < numGhosts; ++i)
+                  {
+                     IMapItem ghost = CreateCharacter(gi, "Ghost");
+                     gi.EncounteredMembers.Add(ghost);
+                  }
+                  gi.EventDisplayed = gi.EventActive = "e310";  // party is surprised
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
+               }
                break;
             case "e033":  // Warrior Wraiths
-               gi.EncounteredMembers.Clear();
-               int numWraiths = dieRoll;
-               if (1 == numWraiths) // always at least two
-                  ++numWraiths;
-               for (int i = 0; i < numWraiths; ++i)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  IMapItem wraith = CreateCharacter(gi, "Wraith");
-                  gi.EncounteredMembers.Add(wraith);
+                  gi.DieResults[key][0] = dieRoll;
                }
-               gi.EventDisplayed = gi.EventActive = "e307"; // wraiths attack first
+               else
+               {
+                  gi.EncounteredMembers.Clear();
+                  int numWraiths = gi.DieResults[key][0];
+                  if (1 == numWraiths) // always at least two
+                     ++numWraiths;
+                  for (int i = 0; i < numWraiths; ++i)
+                  {
+                     IMapItem wraith = CreateCharacter(gi, "Wraith");
+                     gi.EncounteredMembers.Add(wraith);
+                  }
+                  gi.EventDisplayed = gi.EventActive = "e307"; // wraiths attack first
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
+               }
                break;
             case "e034":  // Spectre of Inner Tomb
                gi.EncounteredMembers.Clear();
@@ -11108,59 +11125,86 @@ namespace BarbarianPrince
                }
                break;
             case "e028a": // Cave Tombs
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               action = GameAction.UpdateEventViewerActive;
-               switch (dieRoll)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e030"; gi.AddCoins(1); break;                               // 1 gold with mummies
-                  case 2: gi.EventDisplayed = gi.EventActive = "e031"; gi.DieRollAction = GameAction.EncounterRoll; break; // looted tomb
-                  case 3: gi.EventDisplayed = gi.EventActive = "e032"; gi.DieRollAction = GameAction.EncounterStart; break; // ghosts
-                  case 4: gi.EventDisplayed = gi.EventActive = "e033"; gi.DieRollAction = GameAction.EncounterStart; break; // warrior wraiths
-                  case 5: gi.EventDisplayed = gi.EventActive = "e034"; break;                                               // spectre of the inner tomb
-                  case 6: gi.EventDisplayed = gi.EventActive = "e029"; gi.DieRollAction = GameAction.EncounterRoll; break;  // danger and treasure
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  dieRoll = 6; // <cgs> TEST
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  action = GameAction.UpdateEventViewerActive;
+                  switch (gi.DieResults[key][0])
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e030"; gi.AddCoins(1); break;                               // 1 gold with mummies
+                     case 2: gi.EventDisplayed = gi.EventActive = "e031"; gi.DieRollAction = GameAction.EncounterRoll; break;  // looted tomb
+                     case 3: gi.EventDisplayed = gi.EventActive = "e032"; gi.DieRollAction = GameAction.EncounterStart; break; // ghosts
+                     case 4: gi.EventDisplayed = gi.EventActive = "e033"; gi.DieRollAction = GameAction.EncounterStart; break; // warrior wraiths
+                     case 5: gi.EventDisplayed = gi.EventActive = "e034"; break;                                               // spectre of the inner tomb
+                     case 6: gi.EventDisplayed = gi.EventActive = "e029"; gi.DieRollAction = GameAction.EncounterRoll; break;  // danger and treasure
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e029": // danger and treasure
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               action = GameAction.UpdateEventViewerActive;
-               switch (dieRoll)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e028"; break;                                               // cave tomb
-                  case 2: gi.EventDisplayed = gi.EventActive = "e032"; gi.DieRollAction = GameAction.EncounterStart; break; // ghosts
-                  case 3: gi.EventDisplayed = gi.EventActive = "e036"; gi.DieRollAction = GameAction.EncounterStart; break; // golem at the gate
-                  case 4: gi.EventDisplayed = gi.EventActive = "e037"; gi.DieRollAction = GameAction.EncounterRoll; break;  // broken chest
-                  case 5: gi.EventDisplayed = gi.EventActive = "e038"; gi.DieRollAction = GameAction.EncounterRoll; break;  // cache under stone
-                  case 6:                                                                                                   // high altar
-                     if (true == gi.IsReligionInParty())
-                        gi.EventDisplayed = gi.EventActive = "e044";
-                     else
-                        gi.EventDisplayed = gi.EventActive = "e044a";
-                     break;
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  dieRoll = 4; // <cgs> TEST
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  action = GameAction.UpdateEventViewerActive;
+                  switch (gi.DieResults[key][0])
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e028"; break;                                               // cave tomb
+                     case 2: gi.EventDisplayed = gi.EventActive = "e032"; gi.DieRollAction = GameAction.EncounterStart; break; // ghosts
+                     case 3: gi.EventDisplayed = gi.EventActive = "e036"; gi.DieRollAction = GameAction.EncounterStart; break; // golem at the gate
+                     case 4: gi.EventDisplayed = gi.EventActive = "e037"; gi.DieRollAction = GameAction.EncounterRoll; break;  // broken chest
+                     case 5: gi.EventDisplayed = gi.EventActive = "e038"; gi.DieRollAction = GameAction.EncounterRoll; break;  // cache under stone
+                     case 6:                                                                                                   // high altar
+                        if (true == gi.IsReligionInParty())
+                           gi.EventDisplayed = gi.EventActive = "e044";
+                        else
+                           gi.EventDisplayed = gi.EventActive = "e044a";
+                        break;
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e032a": // hidden altar 
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               switch (dieRoll) // Based on the die roll, implement the attack case
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e037"; gi.DieRollAction = GameAction.EncounterRoll; break; // broken chest
-                  case 2: gi.EventStart = gi.EventDisplayed = gi.EventActive = "e039"; break;                              // Small Treasure Chest
-                  case 3: gi.EventDisplayed = gi.EventActive = "e041"; gi.DieRollAction = GameAction.EncounterRoll; break; // Vision Gem
-                  case 4:                                                                                                  // Alcove of Sending
-                     if (true == gi.IsMagicInParty())
-                        gi.EventDisplayed = gi.EventActive = "e042";
-                     else
-                        gi.EventDisplayed = gi.EventActive = "e042a";
-                     break;
-                  case 5:                                                     // High Altar
-                     if (true == gi.IsReligionInParty())
-                        gi.EventDisplayed = gi.EventActive = "e044";
-                     else
-                        gi.EventDisplayed = gi.EventActive = "e044a";
-                     break;
-                  case 6: gi.EventDisplayed = gi.EventActive = "e401"; break; // nothing
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  dieRoll = 3; // <cgs> TEST
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  switch (gi.DieResults[key][0]) // Based on the die roll, implement the attack case
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e037"; gi.DieRollAction = GameAction.EncounterRoll; break; // broken chest
+                     case 2: gi.EventStart = gi.EventDisplayed = gi.EventActive = "e039"; break;                              // Small Treasure Chest
+                     case 3: gi.EventDisplayed = gi.EventActive = "e041"; gi.DieRollAction = GameAction.EncounterRoll; break; // Vision Gem
+                     case 4:                                                                                                  // Alcove of Sending
+                        if (true == gi.IsMagicInParty())
+                           gi.EventDisplayed = gi.EventActive = "e042";
+                        else
+                           gi.EventDisplayed = gi.EventActive = "e042a";
+                        break;
+                     case 5:                                                     // High Altar
+                        if (true == gi.IsReligionInParty())
+                           gi.EventDisplayed = gi.EventActive = "e044";
+                        else
+                           gi.EventDisplayed = gi.EventActive = "e044a";
+                        break;
+                     case 6: gi.EventDisplayed = gi.EventActive = "e401"; break; // nothing
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + gi.DieResults[key][0].ToString()); return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e033a": // defeated warrior wraiths
@@ -11253,55 +11297,79 @@ namespace BarbarianPrince
                }
                break;
             case "e037": // broken chest
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               action = GameAction.UpdateEventViewerActive;
-               switch (dieRoll) // Based on the die roll, give the artifact
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e180"; gi.AddSpecialItem(SpecialEnum.HealingPoition); break; // healing potion
-                  case 2: gi.EventDisplayed = gi.EventActive = "e181"; gi.AddSpecialItem(SpecialEnum.CurePoisonVial); break; // cure vial
-                  case 3: gi.EventDisplayed = gi.EventActive = "e182"; gi.AddSpecialItem(SpecialEnum.GiftOfCharm); break; // lucky charm
-                  case 4: gi.EventDisplayed = gi.EventActive = "e184"; gi.AddSpecialItem(SpecialEnum.ResistanceTalisman); break; // resistence talisman
-                  case 5: gi.EventDisplayed = gi.EventActive = "e186"; gi.AddSpecialItem(SpecialEnum.MagicSword); break; // magic sword
-                  case 6: gi.EventDisplayed = gi.EventActive = "e189"; gi.AddSpecialItem(SpecialEnum.CharismaTalisman); break; // charisma talisman
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  action = GameAction.UpdateEventViewerActive;
+                  switch (gi.DieResults[key][0]) // Based on the die roll, give the artifact
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e180"; gi.AddSpecialItem(SpecialEnum.HealingPoition); break; // healing potion
+                     case 2: gi.EventDisplayed = gi.EventActive = "e181"; gi.AddSpecialItem(SpecialEnum.CurePoisonVial); break; // cure vial
+                     case 3: gi.EventDisplayed = gi.EventActive = "e182"; gi.AddSpecialItem(SpecialEnum.GiftOfCharm); break; // lucky charm
+                     case 4: gi.EventDisplayed = gi.EventActive = "e184"; gi.AddSpecialItem(SpecialEnum.ResistanceTalisman); break; // resistence talisman
+                     case 5: gi.EventDisplayed = gi.EventActive = "e186"; gi.AddSpecialItem(SpecialEnum.MagicSword); break; // magic sword
+                     case 6: gi.EventDisplayed = gi.EventActive = "e189"; gi.AddSpecialItem(SpecialEnum.CharismaTalisman); break; // charisma talisman
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + gi.DieResults[key][0].ToString()); return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e038": // cache under stone
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               action = GameAction.UpdateEventViewerActive;
-               switch (dieRoll) // Based on the die roll, give the artifact
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e180"; gi.AddSpecialItem(SpecialEnum.HealingPoition); break; // healing potion
-                  case 2: gi.EventDisplayed = gi.EventActive = "e181"; gi.AddSpecialItem(SpecialEnum.CurePoisonVial); break; // cure vial
-                  case 3: gi.EventDisplayed = gi.EventActive = "e182"; gi.AddSpecialItem(SpecialEnum.GiftOfCharm); break; // lucky charm
-                  case 4: gi.EventDisplayed = gi.EventActive = "e185"; gi.AddSpecialItem(SpecialEnum.EnduranceSash); break; // sash
-                  case 5: gi.EventDisplayed = gi.EventActive = "e187"; gi.AddSpecialItem(SpecialEnum.AntiPoisonAmulet); break; // anti-poison amulet
-                  case 6: gi.EventDisplayed = gi.EventActive = "e190"; gi.AddSpecialItem(SpecialEnum.NerveGasBomb); break; // Nerve gas bomb
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  action = GameAction.UpdateEventViewerActive;
+                  switch (gi.DieResults[key][0]) // Based on the die roll, give the artifact
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e180"; gi.AddSpecialItem(SpecialEnum.HealingPoition); break; // healing potion
+                     case 2: gi.EventDisplayed = gi.EventActive = "e181"; gi.AddSpecialItem(SpecialEnum.CurePoisonVial); break; // cure vial
+                     case 3: gi.EventDisplayed = gi.EventActive = "e182"; gi.AddSpecialItem(SpecialEnum.GiftOfCharm); break; // lucky charm
+                     case 4: gi.EventDisplayed = gi.EventActive = "e185"; gi.AddSpecialItem(SpecialEnum.EnduranceSash); break; // sash
+                     case 5: gi.EventDisplayed = gi.EventActive = "e187"; gi.AddSpecialItem(SpecialEnum.AntiPoisonAmulet); break; // anti-poison amulet
+                     case 6: gi.EventDisplayed = gi.EventActive = "e190"; gi.AddSpecialItem(SpecialEnum.NerveGasBomb); break; // Nerve gas bomb
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + gi.DieResults[key][0].ToString()); return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e041": // vision gem
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               action = GameAction.UpdateEventViewerActive;
-               switch (dieRoll)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e143"; gi.IsSecretTempleKnown = true; break; // Secret of Temples
-                  case 2:                                                                                    // Secret of Baron Huldra
-                     if (true == gi.IsHuldraHeirKilled)
-                     {
-                        gi.EventDisplayed = gi.EventActive = "e144e";
-                     }
-                     else
-                     {
-                        gi.EventDisplayed = gi.EventActive = "e144";
-                        gi.IsSecretBaronHuldra = true;
-                     }
-                     break;
-                  case 3: gi.EventDisplayed = gi.EventActive = "e145"; gi.IsSecretLadyAeravir = true; break; // Secret of Lady Aeravir
-                  case 4: gi.EventDisplayed = gi.EventActive = "e146"; gi.IsSecretCountDrogat = true; break; // Secret of Count Drogat
-                  case 5: gi.EventDisplayed = gi.EventActive = "e147"; gi.DieRollAction = GameAction.E147ClueToTreasure; break; // Clue to Treasure
-                  case 6: gi.EventDisplayed = gi.EventActive = "e401"; break; // nothing
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  action = GameAction.UpdateEventViewerActive;
+                  switch (gi.DieResults[key][0])
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e143"; gi.IsSecretTempleKnown = true; break; // Secret of Temples
+                     case 2:                                                                                    // Secret of Baron Huldra
+                        if (true == gi.IsHuldraHeirKilled)
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e144e";
+                        }
+                        else
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e144";
+                           gi.IsSecretBaronHuldra = true;
+                        }
+                        break;
+                     case 3: gi.EventDisplayed = gi.EventActive = "e145"; gi.IsSecretLadyAeravir = true; break; // Secret of Lady Aeravir
+                     case 4: gi.EventDisplayed = gi.EventActive = "e146"; gi.IsSecretCountDrogat = true; break; // Secret of Count Drogat
+                     case 5: gi.EventDisplayed = gi.EventActive = "e147"; gi.DieRollAction = GameAction.E147ClueToTreasure; break; // Clue to Treasure
+                     case 6: gi.EventDisplayed = gi.EventActive = "e401"; break; // nothing
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + gi.DieResults[key][0].ToString()); return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e045b":
@@ -13408,9 +13476,9 @@ namespace BarbarianPrince
                         else
                            gi.EventDisplayed = gi.EventActive = "e044a";
                         break;
-                     case 4:                                                     // arch of travel
+                     case 4:                                                       // arch of travel
                         if (true == gi.IsMagicInParty())
-                           gi.EventDisplayed = gi.EventActive = "e045"; // broken columns in ruins
+                           gi.EventDisplayed = gi.EventActive = "e045";           // broken columns in ruins
                         else
                            gi.EventDisplayed = gi.EventActive = "e045a";
                         break;
@@ -13424,6 +13492,7 @@ namespace BarbarianPrince
             case "e136": // hidden treasures
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
+                  dieRoll = 1; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                else
@@ -13458,6 +13527,7 @@ namespace BarbarianPrince
             case "e137": // inhabitants
                if( Utilities.NO_RESULT == gi.DieResults[key][0])
                {
+                  dieRoll = 1; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                else
@@ -13482,21 +13552,30 @@ namespace BarbarianPrince
                }
                break;
             case "e138": // unclean creatures
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               action = GameAction.UpdateEventViewerActive;
-               switch (dieRoll) // Based on the die roll, implement event
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e032"; gi.DieRollAction = GameAction.EncounterStart; break; // ghosts
-                  case 2: gi.EventDisplayed = gi.EventActive = "e033"; gi.DieRollAction = GameAction.EncounterStart; break; // warrior wraiths
-                  case 3: gi.EventDisplayed = gi.EventActive = "e034"; gi.DieRollAction = GameAction.EncounterStart; break; // spectre of inner tomb
-                  case 4:                                                                                                   // orc tower
-                     if (null == gi.OrcTowers.Find(princeTerritory.Name))
-                        gi.OrcTowers.Add(princeTerritory);
-                     gi.EventDisplayed = gi.EventActive = "e056";
-                     break;                                               // orc tower
-                  case 5: gi.EventDisplayed = gi.EventActive = "e082"; gi.DieRollAction = GameAction.EncounterStart; break; // unearthly spectre           
-                  case 6: gi.EventDisplayed = gi.EventActive = "e098"; gi.DieRollAction = GameAction.EncounterStart; break; // dragon
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  dieRoll = 1; // <cgs> TEST
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  action = GameAction.UpdateEventViewerActive;
+                  switch (gi.DieResults[key][0]) // Based on the die roll, implement event
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e032"; gi.DieRollAction = GameAction.EncounterStart; break; // ghosts
+                     case 2: gi.EventDisplayed = gi.EventActive = "e033"; gi.DieRollAction = GameAction.EncounterStart; break; // warrior wraiths
+                     case 3: gi.EventDisplayed = gi.EventActive = "e034"; gi.DieRollAction = GameAction.EncounterStart; break; // spectre of inner tomb
+                     case 4:                                                                                                   // orc tower
+                        if (null == gi.OrcTowers.Find(princeTerritory.Name))
+                           gi.OrcTowers.Add(princeTerritory);
+                        gi.EventDisplayed = gi.EventActive = "e056";
+                        break;                                               // orc tower
+                     case 5: gi.EventDisplayed = gi.EventActive = "e082"; gi.DieRollAction = GameAction.EncounterStart; break; // unearthly spectre           
+                     case 6: gi.EventDisplayed = gi.EventActive = "e098"; gi.DieRollAction = GameAction.EncounterStart; break; // dragon
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + gi.DieResults[key][0].ToString()); return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e139": // minor treasures
@@ -14101,6 +14180,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  dieRoll = 5; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                break;
