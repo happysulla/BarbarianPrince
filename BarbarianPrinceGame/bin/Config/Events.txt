@@ -1000,7 +1000,7 @@ e025b	"<Bold>e025b Pixie Advice</Bold>
  <InlineUIContainer><Button Content='e026' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  for how to find the treasure.
 <LineBreak/>
-                   <InlineUIContainer><Image Name='WizardAdvice' Source='../bin/Images/WizardAdvice.gif' Height='300'  Width='300'> </Image></InlineUIContainer> "
+                                             <InlineUIContainer><Image Name='PixieAdvice'  Source='../bin/Images/Pixie.gif' Height='200'  Width='150' > </Image></InlineUIContainer>"
 e026	"<Bold>e026 Search for Treasure</Bold>
 <LineBreak/><LineBreak/>You believe you have found the proper location of a treasure. You now must spend one day searching for the precise spot as if you are trying to find a cache
  <InlineUIContainer><Button Content='r214' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
@@ -1012,9 +1012,7 @@ e026	"<Bold>e026 Search for Treasure</Bold>
  3 - <InlineUIContainer><Button Content='e029' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  4 - Bogus information. Nothing found.<LineBreak/>
  5 - Bogus information. Nothing found.<LineBreak/>
- 6 - <InlineUIContainer><Button Content='e026a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
-<LineBreak/>
-                             <InlineUIContainer><Image Name='WizardAdviceEnd' Source='../bin/Images/WizardAdvice.gif' Height='200'  Width='200'> </Image></InlineUIContainer> "
+ 6 - <InlineUIContainer><Button Content='e026a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>"
 e026a	"<Bold>e026a Search for Treasure One More Time</Bold>
 <LineBreak/><LineBreak/>
 Clues suggest the treasure is in adjacent hext. 
@@ -1181,7 +1179,9 @@ e036a	"<Bold>e036a Golem at the Gate Defeated</Bold>
 If you survive the subsequent events without making an escape
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 , you will rejoin your party at the evening meal
- <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>."
+ <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
+<LineBreak/>
+                           <InlineUIContainer><Image Source='../bin/Images/Golem.gif' Name='GolemEnd' Height='150'  Width='150'> </Image></InlineUIContainer>"
 e037	"<Bold>e037 Broken Chest</Bold>
 <LineBreak/><LineBreak/>You find a chest with a broken and cracked lid. Sorting through old moldering cloths, you find something. Roll one die:
   <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -2212,7 +2212,7 @@ e080a	"<Bold>e080a Pixies Gift</Bold>
  2 - Pixie advice. See <InlineUIContainer><Button Content='e025' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.<LineBreak/>
  3 - Lead you to ancient cache. See <InlineUIContainer><Button Content='e038' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.<LineBreak/>
  4 - Provide a magic gift. See  <InlineUIContainer><Button Content='e195' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.<LineBreak/>
- 5 - Same as #4
+ 5 - Same as #4<LineBreak/>
  6 - Give you a winged Pegasus mount. See <InlineUIContainer><Button Content='e188' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>
                                              <InlineUIContainer><Image Name='PixieGift' Source='../bin/Images/Pixie.gif' Height='200'  Width='150' > </Image></InlineUIContainer>"

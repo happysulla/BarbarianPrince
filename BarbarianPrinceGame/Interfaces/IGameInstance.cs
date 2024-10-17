@@ -181,6 +181,7 @@ namespace BarbarianPrince
       ITerritories HiddenTemples { get; } // e066
       ITerritories KilledLocations { get; } // e066
       ITerritories WizardTowers { get; }  // e068b
+      ITerritories PixieAdviceLocations { get; } // e080
       ITerritories HalflingTowns { get; }  // e165
       ITerritories EagleLairs { get; } // e115
       ITerritories SecretClues { get; } // e147

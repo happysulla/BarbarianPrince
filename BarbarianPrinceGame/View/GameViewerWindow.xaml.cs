@@ -807,9 +807,7 @@ namespace BarbarianPrince
                      myStackPanelDailyActions.Children.Add(myButtonDailyAcions[10]);
                   if ((null != gi.Arches.Find(t.Name)) && (true == gi.IsArchTravelKnown)) // arch travel needs to be known to use it
                      myStackPanelDailyActions.Children.Add(myButtonDailyAcions[9]);
-                  if (null != gi.SecretClues.Find(t.Name))
-                     myStackPanelDailyActions.Children.Add(myButtonDailyAcions[8]);
-                  if (null != gi.WizardAdviceLocations.Find(t.Name))
+                  if ((null != gi.SecretClues.Find(t.Name)) || (null != gi.WizardAdviceLocations.Find(t.Name)) || (null != gi.PixieAdviceLocations.Find(t.Name)) )
                      myStackPanelDailyActions.Children.Add(myButtonDailyAcions[8]);
                   if (null != gi.Caches.Find(t.Name))
                      myStackPanelDailyActions.Children.Add(myButtonDailyAcions[7]);
@@ -1552,6 +1550,15 @@ namespace BarbarianPrince
          {
             double size = 1.3 * Utilities.theMapItemOffset;
             Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("WizardAdvice"), Width = size, Height = size };
+            Canvas.SetLeft(img1, t.CenterPoint.X - size / 2);
+            Canvas.SetTop(img1, t.CenterPoint.Y - size / 2);
+            myCanvas.Children.Add(img1);
+         }
+         //-------------------------------------------------------
+         foreach (ITerritory t in gi.PixieAdviceLocations)
+         {
+            double size = 1.6 * Utilities.theMapItemOffset;
+            Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Pixie"), Width = size, Height = size };
             Canvas.SetLeft(img1, t.CenterPoint.X - size / 2);
             Canvas.SetTop(img1, t.CenterPoint.Y - size / 2);
             myCanvas.Children.Add(img1);

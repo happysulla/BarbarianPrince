@@ -239,6 +239,8 @@ namespace BarbarianPrince
       public ITerritories OrcTowers { get => myOrcTowers; }
       private ITerritories myWizardTowers = new Territories();
       public ITerritories WizardTowers { get => myWizardTowers; }
+      private ITerritories myPixiedviceLocations = new Territories();
+      public ITerritories PixieAdviceLocations { get => myPixiedviceLocations; }
       private ITerritories myHalflingTowns = new Territories();
       public ITerritories HalflingTowns { get => myHalflingTowns; } // e070
       private ITerritories myRuinsUnstable = new Territories();

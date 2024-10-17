@@ -2247,6 +2247,9 @@ namespace BarbarianPrince
          //ITerritory wizardAdviceHex2 = Territory.theTerritories.Find("0406");
          //gi.WizardAdviceLocations.Add(wizardAdviceHex2);
          ////---------------------
+         //ITerritory pixieAdviceHex = Territory.theTerritories.Find("0406");
+         //gi.PixieAdviceLocations.Add(pixieAdviceHex);
+         ////---------------------
          //ITerritory t11 = Territory.theTerritories.Find("0306"); // e114 - verify that eagle hunt can happen in structure
          //gi.HiddenTemples.Add(t11);
          //t11 = Territory.theTerritories.Find("0307"); // e114 - verify that eagle hunt can happen in structure
@@ -4184,7 +4187,7 @@ namespace BarbarianPrince
                gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_SEARCH));
                if (true == gi.SecretClues.Contains(princeTerritory))
                   gi.EventDisplayed = gi.EventActive = "e147a";
-               else if (true == gi.WizardAdviceLocations.Contains(princeTerritory))
+               else if ((true == gi.WizardAdviceLocations.Contains(princeTerritory)) || (true == gi.PixieAdviceLocations.Contains(princeTerritory)) )
                   gi.EventDisplayed = gi.EventActive = "e026";
                else
                   returnStatus = "invald state - p.t=" + princeTerritory.Name;
@@ -4883,21 +4886,29 @@ namespace BarbarianPrince
                   }
                   else
                   {
-                     int directionAdvice = gi.DieResults["e025"][0];
-                     ITerritory tRamdom = FindRandomHexRangeDirectionAndRange(gi, directionAdvice, dieRoll);// Find a random hex at the range set by die roll
-                     if (null == tRamdom)
+                     if(Utilities.NO_RESULT == gi.DieResults["e025"][1])
                      {
-                        returnStatus = "tRamdom=null for a=" + action.ToString();
-                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                        gi.DieResults["e025"][1] = dieRoll;
                      }
                      else
                      {
-                        gi.WizardAdviceLocations.Add(tRamdom);
-                        if (false == SetCampfireEncounterState(gi, ref action))
+                        ITerritory tRamdom = FindRandomHexRangeDirectionAndRange(gi, gi.DieResults["e025"][0], gi.DieResults["e025"][1]);// Find a random hex at the range set by die roll
+                        if (null == tRamdom)
                         {
-                           returnStatus = "SetCampfireEncounterState() returned false for a=" + action.ToString();
+                           returnStatus = "tRamdom=null for a=" + action.ToString();
                            Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                         }
+                        else
+                        {
+                           gi.WizardAdviceLocations.Add(tRamdom);
+                           if (false == SetCampfireEncounterState(gi, ref action))
+                           {
+                              returnStatus = "SetCampfireEncounterState() returned false for a=" + action.ToString();
+                              Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                           }
+                        }
+                        gi.DieResults["e025"][0] = Utilities.NO_RESULT;
+                        gi.DieResults["e025"][1] = Utilities.NO_RESULT;
                      }
                   }
                   break;
@@ -5425,22 +5436,30 @@ namespace BarbarianPrince
                   }
                   else
                   {
-                     int directionPixie = gi.DieResults["e025b"][0];
-                     ITerritory tRamdom = FindRandomHexRangeDirectionAndRange(gi, directionPixie, dieRoll);// Find a random hex at the range set by die roll
-                     if (null == tRamdom)
+                     if (Utilities.NO_RESULT == gi.DieResults["e025b"][1])
                      {
-                        returnStatus = "tRamdom=null for a=" + action.ToString();
-                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                        gi.DieResults["e025b"][1] = dieRoll;
                      }
                      else
                      {
-                        gi.WizardAdviceLocations.Add(tRamdom);
-                        if (false == EncounterEnd(gi, ref action))
+                        ITerritory tRamdom = FindRandomHexRangeDirectionAndRange(gi, gi.DieResults["e025b"][0], gi.DieResults["e025b"][0]);// Find a random hex at the range set by die roll
+                        if (null == tRamdom)
                         {
-                           returnStatus = "EncounterEnd() returned false for a=" + action.ToString();
+                           returnStatus = "tRamdom=null for a=" + action.ToString();
                            Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                         }
+                        else
+                        {
+                           gi.PixieAdviceLocations.Add(tRamdom);
+                           if (false == EncounterEnd(gi, ref action))
+                           {
+                              returnStatus = "EncounterEnd() returned false for a=" + action.ToString();
+                              Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                           }
+                        }
                      }
+                     gi.DieResults["e025b"][0] = Utilities.NO_RESULT;
+                     gi.DieResults["e025b"][1] = Utilities.NO_RESULT;
                   }
                   break;
                case GameAction.E082SpectreMagic:
@@ -7664,7 +7683,6 @@ namespace BarbarianPrince
                   break;
             }
          }
-
          StringBuilder sb12 = new StringBuilder();
          if ("OK" != returnStatus)
          {
@@ -8100,7 +8118,6 @@ namespace BarbarianPrince
             case "e032":  // ghosts
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  dieRoll = 0; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                else
@@ -9989,7 +10006,7 @@ namespace BarbarianPrince
                      case 2: gi.EventDisplayed = gi.EventActive = "e328"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass rough
                      case 3: gi.EventDisplayed = gi.EventActive = "e329"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass charm
                      case 4: gi.EventDisplayed = gi.EventActive = "e317"; gi.DieRollAction = GameAction.EncounterRoll; break;  // hide quickly
-                     case 5: gi.EventDisplayed = gi.EventActive = "e327"; gi.DieRollAction = GameAction.EncounterRoll; break;  // pass dummies
+                     case 5: gi.EventDisplayed = gi.EventActive = "e327"; gi.DieRollAction = GameAction.EncounterRoll; gi.DieResults["e004"][0] = Utilities.NO_RESULT;  break;  // pass dummies
                      case 6:
                      case 7:                                                                                           // escape mounted
                         if (0 == numRiding)                                 // no escape
@@ -10001,7 +10018,8 @@ namespace BarbarianPrince
                         break;
                      default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
                   }
-                  gi.DieResults["e004"][0] = Utilities.NO_RESULT;
+                  for (int i = 0; i < 3; ++i)
+                     gi.DieResults[key][i] = Utilities.NO_RESULT;
                }
                break;
             case "e004c": // fight mercenaries
@@ -10023,6 +10041,8 @@ namespace BarbarianPrince
                      default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
                   }
                   gi.DieResults["e004"][0] = Utilities.NO_RESULT;
+                  for (int i = 0; i < 3; ++i)
+                     gi.DieResults[key][i] = Utilities.NO_RESULT;
                }
                break;
             case "e005a": // talk to amazon
@@ -11104,7 +11124,11 @@ namespace BarbarianPrince
                {
                   gi.EnteredHexes.Last().EventNames.Add(key);
                   action = GameAction.UpdateEventViewerActive;
-                  gi.WizardAdviceLocations.Remove(princeTerritory);
+                  bool isWizardAdvice = gi.WizardAdviceLocations.Contains(princeTerritory);
+                  if( true == isWizardAdvice)
+                     gi.WizardAdviceLocations.Remove(princeTerritory);
+                  else
+                     gi.PixieAdviceLocations.Remove(princeTerritory);
                   switch (gi.DieResults[key][0]) // Based on the die roll, implement the attack case
                   {
                      case 1: gi.EventStart = gi.EventDisplayed = gi.EventActive = "e027"; break;  // ancient treasure
@@ -11113,7 +11137,10 @@ namespace BarbarianPrince
                      case 4: case 5: gi.EventDisplayed = gi.EventActive = "e401"; break;          // nothing to see
                      case 6:
                         ITerritory adjacent = FindRandomHexRangeAdjacent(gi);
-                        gi.WizardAdviceLocations.Add(adjacent);
+                        if (true == isWizardAdvice)
+                           gi.WizardAdviceLocations.Add(adjacent);
+                        else
+                           gi.PixieAdviceLocations.Remove(adjacent);
                         gi.EventDisplayed = gi.EventActive = "e026a";
                         break;          // nothing to see
                      default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
@@ -11127,7 +11154,6 @@ namespace BarbarianPrince
             case "e028a": // Cave Tombs
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  dieRoll = 6; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                else
@@ -11150,7 +11176,6 @@ namespace BarbarianPrince
             case "e029": // danger and treasure
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  dieRoll = 4; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                else
@@ -11178,7 +11203,6 @@ namespace BarbarianPrince
             case "e032a": // hidden altar 
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  dieRoll = 3; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                else
@@ -11271,29 +11295,37 @@ namespace BarbarianPrince
                }
                break;
             case "e036a": // golem defeated
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               action = GameAction.UpdateEventViewerActive;
-               switch (dieRoll)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e038"; gi.DieRollAction = GameAction.EncounterRoll; break;  // stone slabe
-                  case 2: gi.EventDisplayed = gi.EventActive = "e040"; gi.DieRollAction = GameAction.EncounterStart; break; // treasure chest
-                  case 3: gi.EventDisplayed = gi.EventActive = "e043"; break; // small altar
-                  case 4:                                                     // high altar
-                     if (true == gi.IsReligionInParty())
-                        gi.EventDisplayed = gi.EventActive = "e044";
-                     else
-                        gi.EventDisplayed = gi.EventActive = "e044a";
-                     break;
-                  case 5:                                                    // gateway to darkness
-                     gi.EventDisplayed = gi.EventActive = "e046b";
-                     foreach (IMapItem mi in gi.PartyMembers)
-                     {
-                        if (true == mi.IsSecretGatewayToDarknessKnown)
-                           gi.EventDisplayed = gi.EventActive = "e046";
-                     }
-                     break;
-                  case 6: gi.EventStart = gi.EventDisplayed = gi.EventActive = "e027"; break;  // ancient treasure    
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  action = GameAction.UpdateEventViewerActive;
+                  switch (gi.DieResults[key][0])
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e038"; gi.DieRollAction = GameAction.EncounterRoll; break;  // stone slabe
+                     case 2: gi.EventDisplayed = gi.EventActive = "e040"; gi.DieRollAction = GameAction.EncounterStart; break; // treasure chest
+                     case 3: gi.EventDisplayed = gi.EventActive = "e043"; break; // small altar
+                     case 4:                                                     // high altar
+                        if (true == gi.IsReligionInParty())
+                           gi.EventDisplayed = gi.EventActive = "e044";
+                        else
+                           gi.EventDisplayed = gi.EventActive = "e044a";
+                        break;
+                     case 5:                                                    // gateway to darkness
+                        gi.EventDisplayed = gi.EventActive = "e046b";
+                        foreach (IMapItem mi in gi.PartyMembers)
+                        {
+                           if (true == mi.IsSecretGatewayToDarknessKnown)
+                              gi.EventDisplayed = gi.EventActive = "e046";
+                        }
+                        break;
+                     case 6: gi.EventStart = gi.EventDisplayed = gi.EventActive = "e027"; break;  // ancient treasure    
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e037": // broken chest
@@ -13492,7 +13524,6 @@ namespace BarbarianPrince
             case "e136": // hidden treasures
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  dieRoll = 1; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                else
@@ -13527,7 +13558,6 @@ namespace BarbarianPrince
             case "e137": // inhabitants
                if( Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  dieRoll = 1; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                else
@@ -13554,7 +13584,6 @@ namespace BarbarianPrince
             case "e138": // unclean creatures
                if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  dieRoll = 1; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                else
@@ -14180,7 +14209,6 @@ namespace BarbarianPrince
                }
                else
                {
-                  dieRoll = 5; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                break;
@@ -16311,7 +16339,7 @@ namespace BarbarianPrince
                {
                   gi.EventDisplayed = gi.EventActive = "e147a";
                }
-               else if (true == gi.WizardAdviceLocations.Contains(princeTerritory))
+               else if ( (true == gi.WizardAdviceLocations.Contains(princeTerritory)) || (true == gi.PixieAdviceLocations.Contains(princeTerritory)) )
                {
                   gi.EventDisplayed = gi.EventActive = "e026";
                }

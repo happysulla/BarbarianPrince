@@ -1576,8 +1576,23 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
                break;
-            case "e003b":
             case "e004b":
+               foreach (IMapItem mi in gi.PartyMembers) // if there is at least one mount in party, add one to evade
+               {
+                  if ((0 < mi.Mounts.Count) || (true == mi.IsFlyingMountCarrier()))
+                  {
+                     myTextBlock.Inlines.Add(new LineBreak());
+                     myTextBlock.Inlines.Add(new Run("Add 1 since there is a mount in party"));
+                     break;
+                  }
+               }
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
+               break;
+            case "e003b":
             case "e005b":
             case "e003c":
             case "e004c":
@@ -1941,6 +1956,20 @@ namespace BarbarianPrince
                }
                break;
             case "e026":
+               myTextBlock.Inlines.Add(new LineBreak());
+               Image imge026 = null;
+               if ( true == myGameInstance.WizardAdviceLocations.Contains(myGameInstance.Prince.Territory) )
+                  imge026 = new Image { Source = MapItem.theMapImages.GetBitmapImage("WizardAdvice"), Width = 200, Height = 200, Name = "SearchAdviceEnd" };
+               else
+                  imge026 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Pixie"), Width = 200, Height = 200, Name = "SearchAdviceEnd" };
+               myTextBlock.Inlines.Add(new Run("                           "));
+               myTextBlock.Inlines.Add(new InlineUIContainer(imge026));
+               if (Utilities.NO_RESULT < myGameInstance.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
+               break;
             case "e028a":
             case "e029":
             case "e032":
@@ -1956,6 +1985,7 @@ namespace BarbarianPrince
                int dieNeeded = gi.WanderingDayCount + 1;
                myTextBlock.Inlines.Add(new Run(" < " + dieNeeded.ToString()));
                break;
+            case "e036a":
             case "e037":
             case "e038":
             case "e041":
@@ -6427,6 +6457,13 @@ namespace BarbarianPrince
                               action = GameAction.EncounterStart;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
+                           case "GolemEnd":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e036a"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
                            case "GuardBribe":
                               action = GameAction.E130BribeGuard;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
@@ -7045,11 +7082,11 @@ namespace BarbarianPrince
                            case "WizardAdvice":
                               if (Utilities.NO_RESULT < myGameInstance.DieResults["e025"][1])
                               {
-                                 action = GameAction.EncounterEnd;
+                                 action = GameAction.E023WizardAdvice;
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               }
                               return;
-                           case "WizardAdviceEnd":
+                           case "SearchAdviceEnd":
                               if (Utilities.NO_RESULT < myGameInstance.DieResults["e026"][0])
                               {
                                  action = GameAction.EncounterRoll;
