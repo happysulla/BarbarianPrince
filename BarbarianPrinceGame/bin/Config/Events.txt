@@ -1241,7 +1241,7 @@ e041	"<Bold>e041 Vision Gem</Bold>
  5 - <InlineUIContainer><Button Content='e147' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  6 - Nothing of value
 <LineBreak/><LineBreak/>
-                                 <InlineUIContainer><Image Name='E041EncounterRoll' Source='../bin/Images/GemVision.gif' Height='300' Width='300'> </Image></InlineUIContainer>"
+                                 <InlineUIContainer><Image Name='E041EncounterRoll' Source='../bin/Images/GemVision.gif' Height='200' Width='200'> </Image></InlineUIContainer>"
 e042	"<Bold>e042 Alcove of Sending</Bold>
 <LineBreak/><LineBreak/>You find a small alcove inscribed with runes. Since your party includes a magician, wizard, or witch; the runes can be deciphered to determine the alcove's secret purpose.
 <LineBreak/><LineBreak/>The secret of the alcove is simple. You can command an audience with:
@@ -3267,7 +3267,9 @@ e139	"<Bold>e139 Minor Treasures</Bold>
  3 -  <InlineUIContainer><Button Content='e038' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  4 -  <InlineUIContainer><Button Content='e039' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  5 -  <InlineUIContainer><Button Content='e040' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
- 6 -  <InlineUIContainer><Button Content='e140' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>"
+ 6 -  <InlineUIContainer><Button Content='e140' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+<LineBreak/>
+                                   <InlineUIContainer><Image Name='E139EncounterRoll'  Source='../bin/Images/Chest.gif' Height='200'  Width='200'> </Image></InlineUIContainer>"
 e140	"<Bold>e140 Magic Box</Bold>
 <LineBreak/><LineBreak/>You find a magic box. You can  open it since you have a magician, wizard, or witch in your party. 
 <LineBreak/><LineBreak/>Roll one die for contents:
@@ -3280,14 +3282,14 @@ e140	"<Bold>e140 Magic Box</Bold>
  5 - <InlineUIContainer><Button Content='e195' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  6 - Nothing but rubbish
 <LineBreak/><LineBreak/>
-                                 <InlineUIContainer><Image  Source='../bin/Images/BoxOpened.gif' Height='200'  Width='200'> </Image></InlineUIContainer> "
+                                 <InlineUIContainer><Image  Name='E140EncounterRoll' Source='../bin/Images/BoxOpened.gif' Height='200'  Width='200'> </Image></InlineUIContainer> "
 e140a	"<Bold>e140a Magic Box Found</Bold>
 <LineBreak/><LineBreak/>You find a magic box. You can open it only if you have a magician, wizard, or witch in your party. 
 <LineBreak/><LineBreak/>Until then, you  carry it with you since it is relatively light.
 <LineBreak/><LineBreak/>Once such a person is in you party, you can open it and examine the contents.
 <LineBreak/><LineBreak/>See <InlineUIContainer><Button Content='e140' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> for contents. Click image to continue.
 <LineBreak/><LineBreak/>
-                                 <InlineUIContainer><Image  Source='../bin/Images/BoxUnopened.gif' Name='BoxUnopened' Height='200'  Width='200'> </Image></InlineUIContainer> "
+                                 <InlineUIContainer><Image  Name='BoxUnopened' Source='../bin/Images/BoxUnopened.gif' Height='200'  Width='200'> </Image></InlineUIContainer> "
 e140b	"<Bold>e140b Magic Box Contents</Bold>
 <LineBreak/><LineBreak/>You open a magic box. Roll one die for contents:
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
@@ -3299,7 +3301,7 @@ e140b	"<Bold>e140b Magic Box Contents</Bold>
  5 - <InlineUIContainer><Button Content='e195' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  6 - Nothing but rubbish
 <LineBreak/><LineBreak/>
-                                 <InlineUIContainer><Image  Source='../bin/Images/BoxOpened.gif' Height='200'  Width='200'> </Image></InlineUIContainer> "
+                                 <InlineUIContainer><Image Name='E140bEncounterRoll' Source='../bin/Images/BoxOpened.gif' Height='200'  Width='200'> </Image></InlineUIContainer> "
 e141	"<Bold>e141 Hydra's Teeth</Bold>
 <LineBreak/><LineBreak/>
 Roll two dice for the number of hydra teeth inside: 
@@ -3313,7 +3315,7 @@ These undead teeth-warriors have combat skill 5, endurance 4, and wealth 0. They
 <LineBreak/><LineBreak/>
 You can scatter the teeth at any instant to use them that one time including at the start or during any combat.
 <LineBreak/>
-                                      <InlineUIContainer><Image  Source='../bin/Images/Teeth.gif' Height='200'  Width='200'> </Image></InlineUIContainer> "
+                                      <InlineUIContainer><Image Name='E141EncounterRoll' Source='../bin/Images/Teeth.gif' Height='200'  Width='200'> </Image></InlineUIContainer> "
 e142	"<Bold>e142 Gems</Bold>
 <LineBreak/><LineBreak/>
 The box contains a horde of gems worth wealth 200. Consult the 100 row twice on the treasure table. 
@@ -3464,7 +3466,9 @@ e147	"<Bold>e147 Clue to Secret</Bold>
 <LineBreak/><LineBreak/>
 When you reach that hex, you must spend a day searching for it like a cache
  <InlineUIContainer><Button Content='r214' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
- Select the 'Search Clue' action when you arrive in the hex."
+ Select the 'Search Clue' action when you arrive in the hex.
+<LineBreak/>
+                               <InlineUIContainer><Image Source='../bin/Images/Secrets.gif' Name='E147EncounterRoll' Height='200' Width='200'></Image></InlineUIContainer>"
 e147a	"<Bold>e147a Secret Found</Bold>
 <LineBreak/><LineBreak/>
 Roll two die to see what you find:

@@ -2202,6 +2202,7 @@ namespace BarbarianPrince
          //gi.AddSpecialItem(SpecialEnum.ResurrectionNecklace);
          //gi.AddSpecialItem(SpecialEnum.ShieldOfLight);
          //gi.AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
+         gi.Prince.AddSpecialItemToShare(SpecialEnum.MagicBox);
          //gi.Prince.AddSpecialItemToShare(SpecialEnum.HydraTeeth);
          //gi.HydraTeethCount = 5;
          //gi.Prince.AddSpecialItemToShare(SpecialEnum.StaffOfCommand);
@@ -4884,32 +4885,29 @@ namespace BarbarianPrince
                   {
                      gi.DieResults["e025"][0] = dieRoll;
                   }
-                  else
+                  else if (Utilities.NO_RESULT == gi.DieResults["e025"][1])
                   {
-                     if(Utilities.NO_RESULT == gi.DieResults["e025"][1])
+                     gi.DieResults["e025"][1] = dieRoll;
+                     ITerritory tRamdom = FindRandomHexRangeDirectionAndRange(gi, gi.DieResults["e025"][0], gi.DieResults["e025"][1]);// Find a random hex at the range set by die roll
+                     if (null == tRamdom)
                      {
-                        gi.DieResults["e025"][1] = dieRoll;
+                        returnStatus = "tRamdom=null for a=" + action.ToString();
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                      }
                      else
                      {
-                        ITerritory tRamdom = FindRandomHexRangeDirectionAndRange(gi, gi.DieResults["e025"][0], gi.DieResults["e025"][1]);// Find a random hex at the range set by die roll
-                        if (null == tRamdom)
-                        {
-                           returnStatus = "tRamdom=null for a=" + action.ToString();
-                           Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                        }
-                        else
-                        {
-                           gi.WizardAdviceLocations.Add(tRamdom);
-                           if (false == SetCampfireEncounterState(gi, ref action))
-                           {
-                              returnStatus = "SetCampfireEncounterState() returned false for a=" + action.ToString();
-                              Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                           }
-                        }
-                        gi.DieResults["e025"][0] = Utilities.NO_RESULT;
-                        gi.DieResults["e025"][1] = Utilities.NO_RESULT;
+                        gi.WizardAdviceLocations.Add(tRamdom);
                      }
+                  }
+                  else
+                  {
+                     if (false == SetCampfireEncounterState(gi, ref action))
+                     {
+                        returnStatus = "SetCampfireEncounterState() returned false for a=" + action.ToString();
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                     }
+                     gi.DieResults["e025"][0] = Utilities.NO_RESULT;
+                     gi.DieResults["e025"][1] = Utilities.NO_RESULT;
                   }
                   break;
                case GameAction.E024WizardFight:
@@ -6419,10 +6417,10 @@ namespace BarbarianPrince
                   {
                      gi.DieResults["e147"][0] = dieRoll;
                   }
-                  else
+                  else if (Utilities.NO_RESULT == gi.DieResults["e147"][1])
                   {
-                     int directionClue = gi.DieResults["e147"][0];
-                     ITerritory tRamdom = FindRandomHexRangeDirectionAndRange(gi, directionClue, dieRoll);// Find a random hex at the range set by die roll
+                     gi.DieResults["e147"][1] = dieRoll;
+                     ITerritory tRamdom = FindRandomHexRangeDirectionAndRange(gi, gi.DieResults["e147"][0], gi.DieResults["e147"][1]);// Find a random hex at the range set by die roll
                      if (null == tRamdom)
                      {
                         returnStatus = "tRamdom=null for a=" + action.ToString();
@@ -6431,12 +6429,17 @@ namespace BarbarianPrince
                      else
                      {
                         gi.SecretClues.Add(tRamdom);
-                        if (false == EncounterEnd(gi, ref action))
-                        {
-                           returnStatus = "EncounterEnd() returned false for a=" + action.ToString();
-                           Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
-                        }
                      }
+                  }
+                  else
+                  {
+                     if (false == EncounterEnd(gi, ref action))
+                     {
+                        returnStatus = "EncounterEnd() returned false for a=" + action.ToString();
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                     }
+                     gi.DieResults["e147"][0] = Utilities.NO_RESULT;
+                     gi.DieResults["e147"][1] = Utilities.NO_RESULT;
                   }
                   break;
                case GameAction.E148SeneschalDeny:
@@ -13608,53 +13611,77 @@ namespace BarbarianPrince
                }
                break;
             case "e139": // minor treasures
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               action = GameAction.UpdateEventViewerActive;
-               switch (dieRoll) // Based on the die roll, implement event
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.CapturedWealthCodes.Add(25); action = GameAction.EncounterLoot; break;
-                  case 2: gi.CapturedWealthCodes.Add(60); action = GameAction.EncounterLoot; gi.PegasusTreasure = PegasusTreasureEnum.Reroll; break;
-                  case 3: gi.EventDisplayed = gi.EventActive = "e038"; gi.DieRollAction = GameAction.EncounterRoll; break;   // cache under stone
-                  case 4: gi.EventStart = gi.EventDisplayed = gi.EventActive = "e039"; break;                                // treasure chest    
-                  case 5: gi.EventDisplayed = gi.EventActive = "e040"; gi.DieRollAction = GameAction.EncounterStart; break;  // treasure chest           
-                  case 6:
-                     if (true == gi.IsMagicInParty())
-                     {
-                        gi.EventDisplayed = gi.EventActive = "e140";
-                        gi.DieRollAction = GameAction.EncounterRoll;
-                     }
-                     else
-                     {
-                        gi.EventDisplayed = gi.EventActive = "e140a";
-                        gi.AddSpecialItem(SpecialEnum.MagicBox);
-                     }
-                     break;   // magic box
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  action = GameAction.UpdateEventViewerActive;
+                  switch (gi.DieResults[key][0]) // Based on the die roll, implement event
+                  {
+                     case 1: gi.CapturedWealthCodes.Add(25); action = GameAction.EncounterLoot; break;
+                     case 2: gi.CapturedWealthCodes.Add(60); action = GameAction.EncounterLoot; gi.PegasusTreasure = PegasusTreasureEnum.Reroll; break;
+                     case 3: gi.EventDisplayed = gi.EventActive = "e038"; gi.DieRollAction = GameAction.EncounterRoll; break;   // cache under stone
+                     case 4: gi.EventStart = gi.EventDisplayed = gi.EventActive = "e039"; break;                                // treasure chest    
+                     case 5: gi.EventDisplayed = gi.EventActive = "e040"; gi.DieRollAction = GameAction.EncounterStart; break;  // treasure chest           
+                     case 6:
+                        if (true == gi.IsMagicInParty())
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e140";
+                           gi.DieRollAction = GameAction.EncounterRoll;
+                        }
+                        else
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e140a";
+                           gi.AddSpecialItem(SpecialEnum.MagicBox);
+                        }
+                        break;   // magic box
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + gi.DieResults[key][0].ToString()); return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e140":  // magic box
             case "e140b": // magic box
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               action = GameAction.UpdateEventViewerActive;
-               switch (dieRoll) // Based on the die roll, implement event
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: gi.EventDisplayed = gi.EventActive = "e141"; gi.DieRollAction = GameAction.EncounterRoll; break;                               // hydra teeth
-                  case 2: gi.EventStart = gi.EventDisplayed = gi.EventActive = "e142"; break;                                                            // gems
-                  case 3: gi.CapturedWealthCodes.Add(60); action = GameAction.EncounterLoot; gi.PegasusTreasure = PegasusTreasureEnum.Talisman; break;   // treasure
-                  case 4: gi.CapturedWealthCodes.Add(110); action = GameAction.EncounterLoot; gi.PegasusTreasure = PegasusTreasureEnum.Talisman; break;  // treasure 
-                  case 5: gi.EventDisplayed = gi.EventActive = "e195"; gi.DieRollAction = GameAction.EncounterRoll; break;                               // roll for possessions
-                  case 6: gi.EventDisplayed = gi.EventActive = "e401"; break;                                                                            // nothing
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); return false;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  action = GameAction.UpdateEventViewerActive;
+                  switch (gi.DieResults[key][0]) // Based on the die roll, implement event
+                  {
+                     case 1: gi.EventDisplayed = gi.EventActive = "e141"; gi.DieRollAction = GameAction.EncounterRoll; break;                               // hydra teeth
+                     case 2: gi.EventStart = gi.EventDisplayed = gi.EventActive = "e142"; break;                                                            // gems
+                     case 3: gi.CapturedWealthCodes.Add(60); action = GameAction.EncounterLoot; gi.PegasusTreasure = PegasusTreasureEnum.Talisman; break;   // treasure
+                     case 4: gi.CapturedWealthCodes.Add(110); action = GameAction.EncounterLoot; gi.PegasusTreasure = PegasusTreasureEnum.Talisman; break;  // treasure 
+                     case 5: gi.EventDisplayed = gi.EventActive = "e195"; gi.DieRollAction = GameAction.EncounterRoll; break;                               // roll for possessions
+                     case 6: gi.EventDisplayed = gi.EventActive = "e401"; break;                                                                            // nothing
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive + " dr=" + gi.DieResults[key][0].ToString()); return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e141": // hydra teeth
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               gi.AddSpecialItem(SpecialEnum.HydraTeeth);
-               gi.HydraTeethCount += dieRoll;
-               if (false == EncounterEnd(gi, ref action))
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false w/ ae=" + gi.EventActive);
-                  return false;
+                  gi.DieResults[key][0] = dieRoll;
+                  gi.AddSpecialItem(SpecialEnum.HydraTeeth);
+                  gi.HydraTeethCount += dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if (false == EncounterEnd(gi, ref action))
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false ae=" + action.ToString());
+                     return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e147a": // found treasure from clues
@@ -16218,6 +16245,12 @@ namespace BarbarianPrince
          {
             action = GameAction.UpdateEventViewerActive;
             gi.EventDisplayed = gi.EventActive = "e140b";
+            gi.DieRollAction = GameAction.EncounterRoll;
+            if( false == gi.RemoveSpecialItem(SpecialEnum.MagicBox) )
+            {
+               Logger.Log(LogEnum.LE_ERROR, "EncounterEnd(): gi.RemoveSpecialItem(SpecialEnum.MagicBox) for " + gi.EventStart + " sc=" + gi.SunriseChoice);
+               return false;
+            }
             return true;
          }
          //---------------------------------------------------

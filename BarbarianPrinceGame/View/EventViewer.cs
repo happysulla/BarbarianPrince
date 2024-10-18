@@ -2838,6 +2838,10 @@ namespace BarbarianPrince
             case "e136":
             case "e137":
             case "e138":
+            case "e139":
+            case "e140":
+            case "e140b":
+            case "e141":
                if (Utilities.NO_RESULT < myGameInstance.DieResults[key][0])
                {
                   myTextBlock.Inlines.Add(new LineBreak());
@@ -2852,6 +2856,13 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new Run("Click to give Chaga drug:"));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new InlineUIContainer(imgE143a));
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
+               break;
+            case "e147":
+               if (Utilities.NO_RESULT < myGameInstance.DieResults[key][1])
+               {
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
@@ -6192,6 +6203,41 @@ namespace BarbarianPrince
                               if (Utilities.NO_RESULT < myGameInstance.DieResults["e138"][0])
                               {
                                  action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E139EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e139"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E140EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e140"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E140bEncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e140b"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E141EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e141"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E147EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e147"][1])
+                              {
+                                 action = GameAction.E147ClueToTreasure;
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               }
                               return;
