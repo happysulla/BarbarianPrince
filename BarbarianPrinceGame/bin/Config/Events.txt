@@ -12,7 +12,7 @@ e000a	"<Bold>e000a Cal Arath - Barbarian Prince</Bold> <InlineUIContainer><Butto
  <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 , and if in a town, castle, or temple hex; you must also purchase lodging
  <InlineUIContainer><Button Content='r217' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
-<LineBreak/><LineBreak/>The game continues until either you are killed or 70 days (10 weeks) elapse. If you have not won before the 70 days ends, the game is automatically lost! You win if you collect 500gp and return North of <InlineUIContainer><Button Content='Tragoth River' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
+<LineBreak/><LineBreak/>The game continues until either you are killed or 70 days (10 weeks) elapse. If you have not won before the 70 days ends, the game is automatically lost! You win if you collect 500gp.
 <LineBreak/><LineBreak/>You are Cal Arath, rightful heir to the throne of the Northlands Kingdom. 
 <LineBreak/><LineBreak/>Few humans match your skill with trusty Bonebitter -- Combat=8
 <LineBreak/>Harsh northlands developed your powerful body -- Endurance=9. 
@@ -4285,7 +4285,7 @@ e211b	"<Bold>e211b Seeking an Audience at any Temple</Bold>
 <LineBreak/>  <InlineUIContainer><Button Content='e153' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 8b Without Dragon's eye, see the Master of the Household
 <LineBreak/>  <InlineUIContainer><Button Content='e150' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 9 Permitted to pay your respects
 <LineBreak/>  <InlineUIContainer><Button Content='e155' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>  11 plus - Audience permitted"
-e211c	"<Bold>e211c Seeking an Audience with the Baron of Huldra Castle</Bold>
+e211c	"<Bold>e211c Seeking an Audience with the Baron of Huldra Castle</Bold> <InlineUIContainer><Button Content='r144i' FontFamily='Courier New' FontSize='12' Visibility='Hidden'></Button></InlineUIContainer> 
 <LineBreak/><LineBreak/>As a daily action, you spend the day trying to gain admission to see the Baron Huldra.<LineBreak/><LineBreak/>
            2 Audience permanently refused. You cannot try again<LineBreak/>
   <InlineUIContainer><Button Content='e154' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 3 Meet Baron's Daughter<LineBreak/>
@@ -4593,7 +4593,7 @@ e312b	"<Bold>e312b Unable to Perform Mounted Escape</Bold> <InlineUIContainer><B
 <LineBreak/><LineBreak/>You cannot ride away since there are no mounts
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>Click anywhere to continue."
-e312c	"<Bold>e312c Mounted Escape</Bold>  <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+e312c	"<Bold>e312c Mounted Escape</Bold>  <InlineUIContainer><Button Content='r312'  FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>You may ride away to an adjacent hex per
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>However, any party members not riding are abandoned. Click anywhere to continue."

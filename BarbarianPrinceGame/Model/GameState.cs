@@ -575,6 +575,13 @@ namespace BarbarianPrince
             gi.EndGameReason = "Time Limit Reached";
             isGameEnd = true;
          }
+         else if (499 < gi.GetCoins())
+         {
+            action = GameAction.EndGameWin;
+            gi.GamePhase = GamePhase.EndGame;
+            gi.EndGameReason = "500+ gold and North of Tragoth River";
+            isGameEnd = true;
+         }
          else if (true == IsNorthofTragothRiver(gi.Prince.Territory))
          {
             if (true == gi.IsBlessed)
@@ -589,13 +596,6 @@ namespace BarbarianPrince
                action = GameAction.EndGameWin;
                gi.GamePhase = GamePhase.EndGame;
                gi.EndGameReason = "Hold the Staff of Command North of Tragoth River";
-               isGameEnd = true;
-            }
-            else if (499 < gi.GetCoins())
-            {
-               action = GameAction.EndGameWin;
-               gi.GamePhase = GamePhase.EndGame;
-               gi.EndGameReason = "500+ gold and North of Tragoth River";
                isGameEnd = true;
             }
             else if (true == gi.IsSpecialItemHeld(SpecialEnum.RoyalHelmOfNorthlands))
@@ -9663,6 +9663,10 @@ namespace BarbarianPrince
                gi.AddCompanion(trueLoveLordsDaughter);
                foreach (IMapItem e154Mi in gi.PartyMembers) // if no mount, add a mount
                {
+                  if (true == e154Mi.IsFlyer())
+                     continue;
+                  if (true == e154Mi.Name.Contains("Giant"))
+                     continue;
                   if (0 == e154Mi.Mounts.Count)
                      e154Mi.AddNewMount();
                }

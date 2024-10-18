@@ -273,6 +273,11 @@ These undead teeth-warriors have combat skill 5, endurance 4, and wealth 0. They
 You can scatter the teeth at any instant to use them that one time including at the start or during any combat.
 <LineBreak/>
                               <InlineUIContainer><Image  Source='../bin/Images/Teeth.gif' Height='200'  Width='200'> </Image></InlineUIContainer> "
+r144i	"<Bold>r144i Baron Hauldra Sneak Attack</Bold>
+<LineBreak/><LineBreak/>
+You can make a sneak attack on the Baron at night suprising his traditional six bodyguards <InlineUIContainer> <Button Content='r220' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. Each has combat skill 6 and endurance 6. Once you kill the bodyguards, you can attack the Baron who has combat skill 6 and endurance 8. The Baron strikes first in combat. 
+<LineBreak/><LineBreak/>
+                           <InlineUIContainer><Image Source='../bin/Images/BodyGuard.gif' Height='350' Width='350'></Image></InlineUIContainer>"
 r146	"<Bold>r146 The Secret of Count Dragot</Bold>
 <LineBreak/><LineBreak/>You learn that Count Drogat, lord of Drogat Castle, is acutally an undead creature who enjoys the suffering, pain, and death of others. This explains why he so often tortures and dismembers felons in his realm.
 <LineBreak/><LineBreak/>He often goes into rages that leave his lands in a reign of terror. 

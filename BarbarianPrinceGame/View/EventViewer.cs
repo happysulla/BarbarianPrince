@@ -865,7 +865,7 @@ namespace BarbarianPrince
          string content = (string)b.Content;
          if( null == content )
          {
-            Logger.Log(LogEnum.LE_ERROR, "SetButtonState(): content=null for key=" + key);
+            Logger.Log(LogEnum.LE_ERROR, "EventViewer.SetButtonState(): content=null for key=" + key);
             return;
          }
          if ((key != myGameInstance.EventActive) && (false == content.StartsWith("e")))
@@ -1441,6 +1441,8 @@ namespace BarbarianPrince
             case "e211c":
                if (("Dismiss" == content) && ((false == myGameInstance.IsMagicInParty()) || (true == myGameInstance.IsMagicUserDismissed) || (0 < myGameInstance.DieResults["e211c"][0])))
                   b.IsEnabled = false;
+               if ((true == gi.IsInMapItems("WarriorBoy")) && ("r144i" == content))
+                  b.Visibility = Visibility.Visible;
                break;
             case "e211d":
                if ((true == gi.IsSpecialItemHeld(SpecialEnum.Foulbane)) && ("r146a" == content))
