@@ -478,7 +478,7 @@ Halfling has choice gossip and very useful information. Roll one die:  <InlineUI
 1,2,3: <InlineUIContainer><Button Content='e147' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
 4,5,6: <InlineUIContainer><Button Content='e162' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
 <LineBreak/><LineBreak/>
-                                                 <InlineUIContainer><Image Source='../bin/Images/HalflingWarrior.gif' Height='200'  Width='100' > </Image></InlineUIContainer>"
+                                                 <InlineUIContainer><Image Name='E008bEncounterRoll' Source='../bin/Images/HalflingWarrior.gif' Height='200'  Width='100' > </Image></InlineUIContainer>"
 e009	"<Bold>e009 Farm</Bold>
 <LineBreak/><LineBreak/>You spot a small farm ahead. You may <InlineUIContainer><Button Content='Detour' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> around it but that will consume the rest of the day ending travel for today.
 <LineBreak/><LineBreak/>Alternately, you can go up to it. If you approach the farm, you must decide choice by selecting Friendly or Raid button. 
@@ -3784,7 +3784,7 @@ e162	"<Bold>e162 Learn Secrets</Bold>
  3 and 4 - <InlineUIContainer><Button Content='e144' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  5 and 6 - <InlineUIContainer><Button Content='e145' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
 <LineBreak/>
-                               <InlineUIContainer><Image Source='../bin/Images/Secrets.gif' Name='Secrets' Height='300' Width='350'></Image></InlineUIContainer>"
+                               <InlineUIContainer><Image Name='E162EncounterRoll' Source='../bin/Images/Secrets.gif' Height='300' Width='350'></Image></InlineUIContainer>"
 e163	"<Bold>e163 Slave Market</Bold>
 <LineBreak/><LineBreak/>You can purchase slaves at the auction block.
 <LineBreak/><LineBreak/>Porters <InlineUIContainer><Button Content='e163b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>: Roll one die for cost. Die Roll=<InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer><LineBreak/>

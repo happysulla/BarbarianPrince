@@ -1720,6 +1720,7 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
                break;
+            case "e008b":
             case "e009a":
             case "e009b":
                if (Utilities.NO_RESULT < myGameInstance.DieResults[key][0])
@@ -3132,6 +3133,13 @@ namespace BarbarianPrince
                      myTextBlock.Inlines.Add(new LineBreak());
                      myTextBlock.Inlines.Add(new Run("Add 1 for troll skin."));
                   }
+               }
+               break;
+            case "e162":
+               if (Utilities.NO_RESULT < myGameInstance.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
                break;
             case "e163":
@@ -5800,6 +5808,13 @@ namespace BarbarianPrince
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               }
                               return;
+                           case "E008bEncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e008b"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
                            case "E018EncounterTalk":
                               if (Utilities.NO_RESULT < myGameInstance.DieResults["e018a"][0])
                               {
@@ -6238,6 +6253,13 @@ namespace BarbarianPrince
                               if (Utilities.NO_RESULT < myGameInstance.DieResults["e147"][1])
                               {
                                  action = GameAction.E147ClueToTreasure;
+                                 myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              }
+                              return;
+                           case "E162EncounterRoll":
+                              if (Utilities.NO_RESULT < myGameInstance.DieResults["e162"][0])
+                              {
+                                 action = GameAction.EncounterRoll;
                                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               }
                               return;

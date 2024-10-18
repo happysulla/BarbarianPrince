@@ -2202,7 +2202,7 @@ namespace BarbarianPrince
          //gi.AddSpecialItem(SpecialEnum.ResurrectionNecklace);
          //gi.AddSpecialItem(SpecialEnum.ShieldOfLight);
          //gi.AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
-         gi.Prince.AddSpecialItemToShare(SpecialEnum.MagicBox);
+         //gi.Prince.AddSpecialItemToShare(SpecialEnum.MagicBox);
          //gi.Prince.AddSpecialItemToShare(SpecialEnum.HydraTeeth);
          //gi.HydraTeethCount = 5;
          //gi.Prince.AddSpecialItemToShare(SpecialEnum.StaffOfCommand);
@@ -10400,16 +10400,24 @@ namespace BarbarianPrince
                }
                break;
             case "e008b": // halfing gossip
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               if (dieRoll < 4)
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  gi.EventDisplayed = gi.EventActive = "e147"; // secret clue
-                  gi.DieRollAction = GameAction.E147ClueToTreasure;
+                  gi.DieResults[key][0] = dieRoll;
                }
                else
                {
-                  gi.EventDisplayed = gi.EventActive = "e162"; // secrets
-                  gi.DieRollAction = GameAction.EncounterRoll;
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  if (gi.DieResults[key][0] < 4)
+                  {
+                     gi.EventDisplayed = gi.EventActive = "e147"; // secret clue
+                     gi.DieRollAction = GameAction.E147ClueToTreasure;
+                  }
+                  else
+                  {
+                     gi.EventDisplayed = gi.EventActive = "e162"; // secrets
+                     gi.DieRollAction = GameAction.EncounterRoll;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e009a": // farm friendly approach
@@ -14019,26 +14027,34 @@ namespace BarbarianPrince
                }
                break;
             case "e162": //learn secrets
-               gi.EnteredHexes.Last().EventNames.Add(key);
-               action = GameAction.UpdateEventViewerActive;
-               switch (dieRoll) // Based on the die roll, implement the correct screen
+               if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
-                  case 1: case 2: gi.EventDisplayed = gi.EventActive = "e143"; break;
-                  case 3:
-                  case 4:
-                     if (true == gi.IsHuldraHeirKilled)
-                     {
-                        gi.EventDisplayed = gi.EventActive = "e144e";
-                     }
-                     else
-                     {
-                        gi.EventDisplayed = gi.EventActive = "e144";
-                        gi.IsSecretBaronHuldra = true;
-                     }
-                     break;
-                  case 5: gi.EventDisplayed = gi.EventActive = "e145"; gi.IsSecretLadyAeravir = true; break;
-                  case 6: gi.EventDisplayed = gi.EventActive = "e146"; gi.IsSecretCountDrogat = true; break;
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  gi.DieResults[key][0] = dieRoll;
+               }
+               else
+               {
+                  gi.EnteredHexes.Last().EventNames.Add(key);
+                  action = GameAction.UpdateEventViewerActive;
+                  switch (gi.DieResults[key][0]) // Based on the die roll, implement the correct screen
+                  {
+                     case 1: case 2: gi.EventDisplayed = gi.EventActive = "e143"; break;
+                     case 3:
+                     case 4:
+                        if (true == gi.IsHuldraHeirKilled)
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e144e";
+                        }
+                        else
+                        {
+                           gi.EventDisplayed = gi.EventActive = "e144";
+                           gi.IsSecretBaronHuldra = true;
+                        }
+                        break;
+                     case 5: gi.EventDisplayed = gi.EventActive = "e145"; gi.IsSecretLadyAeravir = true; break;
+                     case 6: gi.EventDisplayed = gi.EventActive = "e146"; gi.IsSecretCountDrogat = true; break;
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default ae=" + gi.EventActive); return false;
+                  }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
             case "e163": //coffle
