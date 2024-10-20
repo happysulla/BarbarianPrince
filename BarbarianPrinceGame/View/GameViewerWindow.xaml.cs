@@ -1926,7 +1926,7 @@ namespace BarbarianPrince
                case GameAction.CampfireLoadTransport:
                case GameAction.CampfireTrueLoveCheck:
                case GameAction.CampfireLodgingCheck:
-               case GameAction.CampfireStarvationCheck: // ?????? causing runtime error b/c button was changing while it was moving ?????
+               case GameAction.CampfireStarvationCheck: 
                case GameAction.TravelShowLost:
                   if (0 < gi.MapItemMoves.Count)
                   {
@@ -1950,14 +1950,6 @@ namespace BarbarianPrince
                         Logger.Log(LogEnum.LE_ERROR, "UpdateCanvas():  UpdateCanvasMovement() returned false");
                         return false;
                      }
-                  }
-                  else
-                  {
-                     //if (false == UpdateMapItemRectangle(gi))
-                     //{
-                     //   Logger.Log(LogEnum.LE_ERROR, "UpdateCanvas():  UpdateMapItemRectangle() returned false");
-                     //   return false;
-                     //}
                   }
                   if (gi.Prince.MovementUsed < gi.Prince.Movement)
                   {

@@ -4463,7 +4463,7 @@ namespace BarbarianPrince
                sbEndWon.Append(gi.Prince.Territory.Name);
                myTextBlock.Inlines.Add(new Run(sbEndWon.ToString()));
                Image imgEndGameWon = null;
-               switch (Utilities.RandomGenerator.Next(8))
+               switch (Utilities.RandomGenerator.Next(10))
                {
                   case 0:
                      imgEndGameWon = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("QuicksandJump"), Width = 300, Height = 300 };
@@ -4490,7 +4490,7 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new InlineUIContainer(imgEndGameWon));
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new Run("Click image to close game or select 'File|New' to continue your wins."));
+               myTextBlock.Inlines.Add(new Run("Click image to continue or select 'File|New' to continue your wins."));
                break;
             case "e502":
                StringBuilder sbEndLost = new StringBuilder();
@@ -4503,7 +4503,7 @@ namespace BarbarianPrince
                sbEndLost.Append(gi.Prince.Territory.Name);
                myTextBlock.Inlines.Add(new Run(sbEndLost.ToString()));
                Image imgEndGameLost = null;
-               switch (Utilities.RandomGenerator.Next(8))
+               switch (Utilities.RandomGenerator.Next(11))
                {
                   case 0:
                      imgEndGameLost = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("Deny"), Width = 300, Height = 300 };
@@ -4530,7 +4530,7 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new InlineUIContainer(imgEndGameLost));
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new Run("Click image to close game or select 'File|New' to try again."));
+               myTextBlock.Inlines.Add(new Run("Click image to continue or select 'File|New' to try again."));
                break;
             default:
                break;
@@ -6427,10 +6427,14 @@ namespace BarbarianPrince
                               action = GameAction.EncounterRoll;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
+                            case "EndGameExit":
+                              action = GameAction.EndGameExit;
+                              myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              return;
                            case "EndGameShowStats":
-                              GameAction outAction = GameAction.EndGameExit;
-                              myGameEngine.PerformAction(ref myGameInstance, ref outAction);
-                              break;
+                              action = GameAction.EndGameShowStats;
+                              myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              return;
                            case "Exhausted":
                               action = GameAction.E120Exhausted;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);

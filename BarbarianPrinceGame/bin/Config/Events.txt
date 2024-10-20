@@ -26,7 +26,7 @@ Alas, in making your escape, you could only grab a few coins.
 You have a wealth code
  <InlineUIContainer><Button Content='t226' FontFamily='Courier New'  FontSize='12'> </Button></InlineUIContainer> of two.
 <LineBreak/><LineBreak/>
- The results of your roll are shown in the status bar at the bottom. Click image to continue.
+The results of your roll are shown in the status bar at the bottom. Click image to continue.
 <LineBreak/><LineBreak/>
                                           <InlineUIContainer><Image Name='Coin' Source='../bin/Images/Coin.gif' Height='200'  Width='200'> </Image></InlineUIContainer>"
 e000c	"<Bold>e000c Random Wits and Wiles</Bold>
@@ -57,7 +57,7 @@ Evil events have overtaken your Northlands Kingdom. Your father, the old king, i
 You have escaped, and must collect 500 gold pieces to raise a force to smash them and retake your heritage. Furthermore, the usurpers have powerful friends overseas. If you can't return to take them out in ten weeks. Their allies will arrive and you will lose our kingdom forever. 
 <LineBreak/><LineBreak/>
 To escape the mercenary and royal guard, your loyal body servant Ogab smuggles you into a merchant caravan to the southern border. 
-Roll one die to see where the caravan takes you (while poor Ogab faces the wrath of the royal guards back home).
+Roll one die to see where the caravan takes you (while poor Ogab faces the wrath of the royal guards back home):
  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/>
 <LineBreak/> <InlineUIContainer><Button Content='0101' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 1 - Ogon
@@ -4982,3 +4982,8 @@ e501	"<Bold>e501 Game Won!!!</Bold>
 <LineBreak/><LineBreak/>"
 e502	"<Bold>e502 Game Lost</Bold>
 <LineBreak/><LineBreak/>"
+e503	"<Bold>e503 End Game Statistics and Feats</Bold>
+<LineBreak/><LineBreak/>To be completed in next revision.
+<LineBreak/><LineBreak/>Click image to close game or select 'File|New' to try again.
+<LineBreak/><LineBreak/>
+                                             <InlineUIContainer><Image Name='EndGameExit' Source='../bin/Images/Nothing.gif' Height='100' Width='100'></Image></InlineUIContainer>"

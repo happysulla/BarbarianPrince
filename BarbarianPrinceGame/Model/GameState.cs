@@ -2178,7 +2178,7 @@ namespace BarbarianPrince
       private void AddStartingTestingOptions(IGameInstance gi)
       {
          //gi.Days = 40;
-         //gi.Prince.SetWounds(5, 0);
+         //gi.Prince.SetWounds(7, 0);
          //gi.Prince.PlagueDustWound = 1; 
          //gi.Prince.IsResurrected = true;
          //gi.AddUnitTestTiredMount(myPrince);
@@ -4244,6 +4244,9 @@ namespace BarbarianPrince
             case GameAction.EndGameLost:
                gi.EventDisplayed = gi.EventActive = "e502";
                gi.DieRollAction = GameAction.DieRollActionNone;
+               break;
+            case GameAction.EndGameShowStats:
+               gi.EventDisplayed = gi.EventActive = "e503";
                break;
             case GameAction.EndGameClose:
                break;

@@ -10,7 +10,7 @@ namespace BarbarianPrince
 {
    public partial class RuleListingDialog : Window
    {
-      private const int STARTING_RULE_ROW = 52;
+      private const int STARTING_RULE_ROW = 53;
       private const int STARTING_EVENT_ROW = 5;
       public bool CtorError = false;
       private RuleDialogViewer myRulesManager = null;
