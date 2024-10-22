@@ -535,6 +535,8 @@ namespace BarbarianPrince
             if (true == isNecklass)
             {
                action = GameAction.EndGameResurrect;  // PerformEndCheck()
+               gi.EventDisplayed = gi.EventActive = "e192a";
+               gi.DieRollAction = GameAction.DieRollActionNone;
                isGameEnd = true;
             }
             else
@@ -557,6 +559,8 @@ namespace BarbarianPrince
             if (true == gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
             {
                action = GameAction.EndGameResurrect;  // PerformEndCheck()
+               gi.EventDisplayed = gi.EventActive = "e192a";
+               gi.DieRollAction = GameAction.DieRollActionNone;
                isGameEnd = true;
             }
             else
@@ -577,7 +581,7 @@ namespace BarbarianPrince
          }
          else if (499 < gi.GetCoins())
          {
-            action = GameAction.EndGameWin;
+            action = GameAction.EndGameWin; // PerformEndCheck()
             gi.GamePhase = GamePhase.EndGame;
             gi.EndGameReason = "500+ gold and North of Tragoth River";
             isGameEnd = true;
@@ -586,14 +590,14 @@ namespace BarbarianPrince
          {
             if (true == gi.IsBlessed)
             {
-               action = GameAction.EndGameWin;
+               action = GameAction.EndGameWin; // PerformEndCheck()
                gi.GamePhase = GamePhase.EndGame;
                gi.EndGameReason = "Blessed by Gods and North of Tragoth River";
                isGameEnd = true;
             }
             else if (true == gi.IsSpecialItemHeld(SpecialEnum.StaffOfCommand))
             {
-               action = GameAction.EndGameWin;
+               action = GameAction.EndGameWin; // PerformEndCheck()
                gi.GamePhase = GamePhase.EndGame;
                gi.EndGameReason = "Hold the Staff of Command North of Tragoth River";
                isGameEnd = true;
@@ -602,14 +606,14 @@ namespace BarbarianPrince
             {
                if ("0101" == gi.Prince.Territory.Name)  // In Ogon 
                {
-                  action = GameAction.EndGameWin;
+                  action = GameAction.EndGameWin; // PerformEndCheck()
                   gi.GamePhase = GamePhase.EndGame;
                   gi.EndGameReason = "Hold the Royal Helm of Northlands when in Ogon";
                   isGameEnd = true;
                }
                else if ("1501" == gi.Prince.Territory.Name) // In Weshor
                {
-                  action = GameAction.EndGameWin;
+                  action = GameAction.EndGameWin; // PerformEndCheck()
                   gi.GamePhase = GamePhase.EndGame;
                   gi.EndGameReason = "Hold the Royal Helm of Northlands when in Weshor";
                   isGameEnd = true;
@@ -3256,12 +3260,16 @@ namespace BarbarianPrince
                      if (true == gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
                      {
                         action = GameAction.EndGameResurrect;  // wizard slave
+                        gi.EventDisplayed = gi.EventActive = "e192a";
+                        gi.DieRollAction = GameAction.DieRollActionNone;
                      }
                      else
                      {
                         Logger.Log(LogEnum.LE_END_GAME, "PerformJailBreak(): EndGameLost-1 ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString());
                         action = GameAction.EndGameLost; // wizard slave
                         gi.EndGameReason = "Prince starves to dead as Wizard's slave";
+                        gi.EventDisplayed = gi.EventActive = "e502";
+                        gi.DieRollAction = GameAction.DieRollActionNone;
                      }
                      return true;
                   }
@@ -3283,12 +3291,16 @@ namespace BarbarianPrince
                         if (true == gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
                         {
                            action = GameAction.EndGameResurrect;  // wizard slave
+                           gi.EventDisplayed = gi.EventActive = "e192a";
+                           gi.DieRollAction = GameAction.DieRollActionNone;
                         }
                         else
                         {
                            Logger.Log(LogEnum.LE_END_GAME, "PerformJailBreak(): EndGameLost-2 ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString());
                            action = GameAction.EndGameLost; // wizard slave
                            gi.EndGameReason = "Prince beaten to death as Wizard's slave";
+                           gi.EventDisplayed = gi.EventActive = "e502";
+                           gi.DieRollAction = GameAction.DieRollActionNone;
                         }
                         return true;
                      }
@@ -4304,6 +4316,7 @@ namespace BarbarianPrince
          string previousStartEvent = gi.EventStart;
          switch (action)
          {
+            case GameAction.RemoveSplashScreen:
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
             case GameAction.ShowRuleListing:
@@ -4345,8 +4358,6 @@ namespace BarbarianPrince
             case GameAction.EncounterLootStartEnd:
                action = GameAction.UpdateEventViewerActive;
                gi.EventDisplayed = gi.EventActive = "e000a";
-               break;
-            case GameAction.UnitTestStart: // do nothing...the unit test is updated in GameViewerWindow:updateView()
                break;
             case GameAction.UnitTestCommand: // call the unit test's Command() function
                IUnitTest ut = gi.UnitTests[gi.GameTurn];
@@ -4429,7 +4440,7 @@ namespace BarbarianPrince
          {
             isGameEnded = PerformEndCheck(gi, ref action);  // check if game ended
             if( true == isGameEnded)
-               Logger.Log(LogEnum.LE_END_GAME, "GameStateEncounter.PerformAction(): a=" + action.ToString() + " end?=" + isGameEnded.ToString());
+               Logger.Log(LogEnum.LE_END_GAME, "GameStateEncounter.PerformAction(): a=" + action.ToString() + " end?=" + isGameEnded.ToString() + " ae=" + gi.EventActive);
          }
          if (false == isGameEnded) // GameStateEncounter.PerformAction()
          {
@@ -5334,6 +5345,8 @@ namespace BarbarianPrince
                      action = GameAction.EndGameLost; // turned into frog
                      gi.GamePhase = GamePhase.EndGame;
                      gi.EndGameReason = "Prince is a Frog";
+                     gi.EventDisplayed = gi.EventActive = "e502";
+                     gi.DieRollAction = GameAction.DieRollActionNone;
                   }
                   break;
                case GameAction.E075WolvesEncounter:
@@ -5812,11 +5825,15 @@ namespace BarbarianPrince
                      if (true == gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
                      {
                         action = GameAction.EndGameResurrect;  // E105ViolentWeather
+                        gi.EventDisplayed = gi.EventActive = "e192a";
+                        gi.DieRollAction = GameAction.DieRollActionNone;
                      }
                      else
                      {
                         action = GameAction.EndGameLost;  // E105ViolentWeather
                         gi.EndGameReason = "Prince died in violent crash to ground due to weather";
+                        gi.EventDisplayed = gi.EventActive = "e502";
+                        gi.DieRollAction = GameAction.DieRollActionNone;
                      }
                   }
                   else
@@ -6465,7 +6482,7 @@ namespace BarbarianPrince
                   }
                   break;
                case GameAction.E152NobleAlly:
-                  action = GameAction.EndGameWin;
+                  action = GameAction.EndGameWin;   // GameAction.E152NobleAlly
                   gi.GamePhase = GamePhase.EndGame;
                   gi.EndGameReason = "Noble Ally marches on Northlands!";
                   gi.EventDisplayed = gi.EventActive = "e501";
@@ -9476,7 +9493,7 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.DieRollActionNone;
                return true; //<<<<<<<<<<<<<<<<<<<<<
             case "e144j": // defeated Huldra
-               action = GameAction.EndGameWin;
+               action = GameAction.EndGameWin; // defeated Huldra in battle
                gi.GamePhase = GamePhase.EndGame;
                gi.EndGameReason = "Restored Huldra's Heir to the Throne.";
                gi.EventDisplayed = gi.EventActive = "e501";
@@ -12619,11 +12636,15 @@ namespace BarbarianPrince
                      if (true == gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
                      {
                         action = GameAction.EndGameResurrect;  // High Pass
+                        gi.EventDisplayed = gi.EventActive = "e192a";
+                        gi.DieRollAction = GameAction.DieRollActionNone;
                      }
                      else
                      {
                         action = GameAction.EndGameLost;  // High Pass
                         gi.EndGameReason = "Prince died in gory fall off cliff";
+                        gi.EventDisplayed = gi.EventActive = "e502";
+                        gi.DieRollAction = GameAction.DieRollActionNone;
                      }
                   }
                   else if ((true == isMemberIncapacited) || (8 < gi.DieResults[key][0])) // if anybody is incapacitied or the mounts are lost, redistribute belongings
@@ -14997,7 +15018,7 @@ namespace BarbarianPrince
                   gi.EnteredHexes.Last().EventNames.Add(key);
                   if (9 < gi.DieResults[key][0])
                   {
-                     action = GameAction.EndGameWin;
+                     action = GameAction.EndGameWin; // Dispose Huldra with real heir
                      gi.GamePhase = GamePhase.EndGame;
                      gi.EndGameReason = "Restore True Heir to Huldra Throne in Audience.";
                      gi.EventDisplayed = gi.EventActive = "e501";

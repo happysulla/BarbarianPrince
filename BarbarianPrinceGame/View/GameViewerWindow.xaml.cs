@@ -376,6 +376,10 @@ namespace BarbarianPrince
                if (false == UpdateCanvasHexTravelToShowPolygons(gi))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvasHexTravelToShowPolygons() returned error ");
                break;
+            case GameAction.EndGameShowStats:
+               if (false == UpdateCanvasShowStats(gi))
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvas() returned error ");
+               break;
             default:
                if (false == UpdateCanvas(gi, action))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvas() returned error ");
@@ -1517,7 +1521,10 @@ namespace BarbarianPrince
             if (ui is Polyline polyline)
                elements.Add(ui);
             if (ui is Ellipse ellipse)
-               elements.Add(ui);
+            {
+               if("CenterPoint" != ellipse.Name) // CenterPoint is a unit test ellipse
+                  elements.Add(ui);
+            }
             if (ui is Image img)
             {
                if ("Map" == img.Name)
@@ -2161,6 +2168,25 @@ namespace BarbarianPrince
             myPolygons.Add(aPolygon);
             myCanvas.Children.Add(aPolygon);
          }
+         return true;
+      }
+      private bool UpdateCanvasShowStats(IGameInstance gi)
+      {   
+         // Clean the Canvas of all marks
+         List<UIElement> elements = new List<UIElement>();
+         foreach (UIElement ui in myCanvas.Children)
+         {
+            if (ui is Polygon polygon)
+               elements.Add(ui);
+            if (ui is Polyline polyline)
+               elements.Add(ui);
+            if (ui is Ellipse ellipse)
+               elements.Add(ui);
+            if (ui is Image img)
+               elements.Add(ui);
+         }
+         foreach (UIElement ui1 in elements)
+            myCanvas.Children.Remove(ui1);
          return true;
       }
       private bool MoveToNewHexWhenJailed(IGameInstance gi)

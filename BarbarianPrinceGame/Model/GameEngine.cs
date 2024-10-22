@@ -47,14 +47,6 @@ namespace BarbarianPrince
       public bool CreateUnitTests(IGameInstance gi, DockPanel dp, EventViewer ev, IDieRoller dr)
       {
          //-----------------------------------------------------------------------------
-         IUnitTest ut14 = new CombatUnitTest(dp, gi, ev, dr);
-         if (true == ut14.CtorError)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): CombatUnitTest() ctor error");
-            return false;
-         }
-         gi.UnitTests.Add(ut14);
-         //-----------------------------------------------------------------------------
          IUnitTest ut1 = new GameViewerCreateUnitTest(dp);
          if (true == ut1.CtorError)
          {
@@ -150,6 +142,14 @@ namespace BarbarianPrince
             return false;
          }
          gi.UnitTests.Add(ut13);
+         //-----------------------------------------------------------------------------
+         IUnitTest ut14 = new CombatUnitTest(dp, gi, ev, dr);
+         if (true == ut14.CtorError)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "CreateUnitTests(): CombatUnitTest() ctor error");
+            return false;
+         }
+         gi.UnitTests.Add(ut14);
          //-----------------------------------------------------------------------------
          IUnitTest ut15 = new TreasureTableUnitTest(ev);
          if (true == ut15.CtorError)

@@ -148,7 +148,6 @@ namespace BarbarianPrince
          gi.IsGridActive = true;
          switch (action)
          {
-            case GameAction.UnitTestStart:
             case GameAction.UnitTestCommand:
             case GameAction.UnitTestNext:
                break;

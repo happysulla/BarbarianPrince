@@ -116,7 +116,6 @@ namespace BarbarianPrince
          } // end foreach (Control item in myMainMenu.Items)
 #if UT1
             myMenuItemTopLevel1.Width = 300;
-            myMenuItemTopLevel1.Click += MenuItemStart_Click;
             myMenuItemTopLevel2.Visibility = Visibility.Hidden;
             myMenuItemTopLevel3.Visibility = Visibility.Hidden;
             myMenuItemTopLevel4.Visibility = Visibility.Hidden;
