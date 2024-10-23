@@ -33,12 +33,12 @@ e000c	"<Bold>e000c Random Wits and Wiles</Bold>
 <LineBreak/><LineBreak/>
 In addition, you have a <Bold>wit and wiles</Bold> rating reflecting your ability to react quickly to situations, think your way out of trouble, and convince people to support your cause. 
 <LineBreak/><LineBreak/>
-Roll one die to determine this wit and wiles rating. If the result is one, consider it a two instead. Roll to determine your wit and wiles value:
- <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll'  Height='21'  Width='21' > </Image></InlineUIContainer>
+You wit and wiles will be shown in the status bar at the bottom.
 <LineBreak/><LineBreak/>
-You wit and wiles are shown in the status bar at the bottom.
+                                  <InlineUIContainer><Image Source='../bin/Images/Brain.gif' Height='240'  Width='240'> </Image></InlineUIContainer>	
 <LineBreak/><LineBreak/>
-                                  <InlineUIContainer><Image Source='../bin/Images/Brain.gif' Height='240'  Width='240'> </Image></InlineUIContainer>	"
+Roll one die to determine this wit and wiles rating. If the result is one, consider it a two instead:
+ <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll'  Height='21'  Width='21' > </Image></InlineUIContainer>"
 e000d	"<Bold>e000d Manual Wits and Wiles</Bold>
 <LineBreak/><LineBreak/>
 If you have played the game before and won, you may wish an extra challenge by using a wits and wiles rating one less than the previous value; if you lost in the previous game, use a wit and wiles one higher than the previous value.  
@@ -52,29 +52,23 @@ Change your wit and wiles by selecting buttons:
                                   <InlineUIContainer><Image Name='Brain' Source='../bin/Images/Brain.gif' Height='240'  Width='240' > </Image></InlineUIContainer>"
 e001	"<Bold>e001 The Adventure Begins</Bold>
 <LineBreak/><LineBreak/>
-Evil events have overtaken your Northlands Kingdom. Your father, the old king, is dead - assassinated by rivals to the throne.  These usurpers now hold the place with their mercenary royal guard. 
+Evil events have overtaken your Northlands Kingdom. Your father, the old king, is dead - assassinated by rivals to the throne.  These usurpers now hold the place with their mercenary royal guard. You have escaped, and must collect 500 gold pieces to raise a force to smash them and retake your heritage. Furthermore, the usurpers have powerful friends overseas. If you can't return to take them out in ten weeks. Their allies will arrive and you will lose your kingdom forever. 
 <LineBreak/><LineBreak/>
-You have escaped, and must collect 500 gold pieces to raise a force to smash them and retake your heritage. Furthermore, the usurpers have powerful friends overseas. If you can't return to take them out in ten weeks. Their allies will arrive and you will lose our kingdom forever. 
+At dawn, you roll out of the merchant wagons into a ditch, dust off your clothes, loosen your swordbelt, and get ready to start the first day of your adventure <InlineUIContainer><Button Content='r203' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>
-To escape the mercenary and royal guard, your loyal body servant Ogab smuggles you into a merchant caravan to the southern border. 
-Roll one die to see where the caravan takes you (while poor Ogab faces the wrath of the royal guards back home):
- <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
-<LineBreak/>
+<Italic>Important Note:</Italic> If you finish actions for a day on any hex north of the 
+ <InlineUIContainer><Button Content='Tragoth River' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>, 
+you may be found. See
+ <InlineUIContainer><Button Content='e002' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 
+after normal events are concluded for the day, but before you take your evening meal.
+ <LineBreak/><LineBreak/>
+Roll one die to see where you start: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/> <InlineUIContainer><Button Content='0101' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 1 - Ogon
 <LineBreak/> <InlineUIContainer><Button Content='0701' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 2 
 <LineBreak/> <InlineUIContainer><Button Content='0801' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 3 - Ruins of Jakor's Keep
 <LineBreak/> <InlineUIContainer><Button Content='1301' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 4 
 <LineBreak/> <InlineUIContainer><Button Content='1501' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 5 - Weshor
-<LineBreak/> <InlineUIContainer><Button Content='1801' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 6 
- <LineBreak/><LineBreak/>
-Now, at dawn you roll out of the merchant wagons into a ditch, dust off your clothes, loosen your swordbelt, and get ready to start the first day of your adventure
- <InlineUIContainer><Button Content='r203' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
-<LineBreak/><LineBreak/>
-<Italic>Important Note:</Italic> If you finish actions for a day on any hex north of the 
- <InlineUIContainer><Button Content='Tragoth River' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>, 
-the mercenary royal guardsmen may find you. See
- <InlineUIContainer><Button Content='e002' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 
-after normal events are concluded for the day, but before you take your evening meal."
+<LineBreak/> <InlineUIContainer><Button Content='1801' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 6 "
 e002	"<Bold>e002 Mercenary Royal Guardsmen</Bold>
 <LineBreak/><LineBreak/>
 As you prepare to rest for the night, you see mercenary royal guardsmen attempting to find you. Roll one die, subtract three, then add one if you are in Ogon 
@@ -1878,7 +1872,7 @@ e065	"<Bold>e065 Hidden Town</Bold>
 <LineBreak/><LineBreak/>You discover a previously unknown town. 
 <LineBreak/><LineBreak/>You can undertake any normal actions there as if it were a town on the map <InlineUIContainer><Button Content='r203' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. 
 <LineBreak/><LineBreak/>
-You are also an town for food <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> and lodging <InlineUIContainer><Button Content='r217' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. However, due to the isolation of this town, you cannot seek news and information <InlineUIContainer><Button Content='r209' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> here. Click image to continue.
+Since you are in a town, you require food <InlineUIContainer><Button Content='r215' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> and lodging <InlineUIContainer><Button Content='r217' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. However, due to the isolation of this town, you cannot seek news and information <InlineUIContainer><Button Content='r209' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> here. Click image to continue.
 <LineBreak/><LineBreak/>
                              <InlineUIContainer><Image  Name='HiddenTown'  Source='../bin/Images/Town2.gif'  Height='300' Width='300'> </Image></InlineUIContainer>"
 e066	"<Bold>e066 Secret Temple</Bold>

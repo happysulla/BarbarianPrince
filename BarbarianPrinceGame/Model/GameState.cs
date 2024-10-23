@@ -1395,10 +1395,17 @@ namespace BarbarianPrince
                break;
             case GameAction.SetupStartingLocation:
                gi.EventDisplayed = gi.EventActive = "e001"; // next screen to show
-               gi.DieRollAction = GameAction.SetupFinalize;
+               gi.DieRollAction = GameAction.SetupLocationRoll;
+               break;
+            case GameAction.SetupLocationRoll:
+               if (Utilities.NO_RESULT == gi.DieResults["e001"][0])
+               {
+                  gi.DieResults["e001"][0] = dieRoll;
+                  gi.DieRollAction = GameAction.DieRollActionNone;
+               }
                break;
             case GameAction.SetupFinalize:
-               if (false == SetStartingLocation(ref gi, dieRoll))
+               if (false == SetStartingLocation(ref gi, gi.DieResults["e001"][0]))
                {
                   returnStatus = "SetStartingLocation() returned error";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
@@ -2186,6 +2193,7 @@ namespace BarbarianPrince
          //gi.Prince.PlagueDustWound = 1; 
          //gi.Prince.IsResurrected = true;
          //gi.AddUnitTestTiredMount(myPrince);
+         //gi.Prince.Coin = 497;
          //---------------------
          //gi.AddSpecialItem(SpecialEnum.GiftOfCharm);
          //gi.AddSpecialItem(SpecialEnum.ResistanceTalisman);

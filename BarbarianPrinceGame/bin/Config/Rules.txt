@@ -497,8 +497,8 @@ r203a	"<Bold>r203a Prison Escape Attempt</Bold>
 "
 r204	"<Bold>r204 Travel</Bold>
 <LineBreak/><LineBreak/>You can travel to new hexes as a daily action
- <InlineUIContainer><Button Name='myButtonR203' Content='r203' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
-. You travel by moving your the party across the map, hex by hex. You cannot skip or jump any hex unless a special event allows it.
+ <InlineUIContainer><Button Content='r203' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+. You travel by moving your party across the map, hex by hex. You cannot skip or jump any hex unless a special event allows it.
 <LineBreak/>
 <LineBreak/> <InlineUIContainer><Button Name='myButtonR204a' Content='r204a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> Travel Speeds
 <LineBreak/> <InlineUIContainer><Button Name='myButtonR205' Content='r205' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>  Getting Lost

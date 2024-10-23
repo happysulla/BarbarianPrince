@@ -11,6 +11,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -28,6 +29,7 @@ namespace BarbarianPrince
    public partial class GameViewerWindow : Window, IView
    {
       private const int MAX_DAILY_ACTIONS = 16;
+      private const Double MARQUEE_SCROLL_ANMINATION_TIME = 12;
       public bool CtorError { get; } = false;
       //---------------------------------------------------------------------
       [Serializable]
@@ -109,6 +111,7 @@ namespace BarbarianPrince
       private EllipseDisplayDialog myEllipseDisplayDialog = null;
       private System.Windows.Input.Cursor myTargetCursor = null;
       private Dictionary<string, Polyline> myRivers = new Dictionary<string, Polyline>();
+      private readonly FontFamily myFontFam = new FontFamily("Tahoma");
       //---------------------------------------------------------------------
       private readonly SolidColorBrush mySolidColorBrushClear = new SolidColorBrush();
       private readonly SolidColorBrush mySolidColorBrushBlack = new SolidColorBrush();
@@ -2171,8 +2174,7 @@ namespace BarbarianPrince
          return true;
       }
       private bool UpdateCanvasShowStats(IGameInstance gi)
-      {   
-         // Clean the Canvas of all marks
+      {
          List<UIElement> elements = new List<UIElement>();
          foreach (UIElement ui in myCanvas.Children)
          {
@@ -2183,10 +2185,33 @@ namespace BarbarianPrince
             if (ui is Ellipse ellipse)
                elements.Add(ui);
             if (ui is Image img)
+            {
+               if ("Map" == img.Name)
+               {
+                  continue;
+               }
+               elements.Add(ui);
+            }
+            if (ui is TextBlock tb)
+               elements.Add(ui);
+            if (ui is Button b)
                elements.Add(ui);
          }
          foreach (UIElement ui1 in elements)
             myCanvas.Children.Remove(ui1);
+         //-------------------------------
+         TextBlock tbMarquee = new TextBlock() { Foreground = Brushes.Blue, FontFamily = myFontFam, FontSize = 24 };
+         tbMarquee.Inlines.Add(new Run("Current Game Statistics:") { FontWeight = FontWeights.Bold, FontStyle = FontStyles.Italic, TextDecorations = TextDecorations.Underline });
+         tbMarquee.Inlines.Add(new LineBreak());
+         myCanvas.ClipToBounds = true;
+         myCanvas.Children.Add(tbMarquee);
+         //-------------------------------
+         DoubleAnimation doubleAnimation = new DoubleAnimation();
+         doubleAnimation.From = -tbMarquee.ActualHeight;
+         doubleAnimation.To = myCanvas.ActualHeight;
+         doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
+         doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(MARQUEE_SCROLL_ANMINATION_TIME));
+         tbMarquee.BeginAnimation(Canvas.BottomProperty, doubleAnimation);
          return true;
       }
       private bool MoveToNewHexWhenJailed(IGameInstance gi)

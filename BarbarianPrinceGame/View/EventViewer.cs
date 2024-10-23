@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Xml;
 using WpfAnimatedGif;
+using Button = System.Windows.Controls.Button;
 using Point = System.Windows.Point;
 
 namespace BarbarianPrince
@@ -1492,6 +1493,14 @@ namespace BarbarianPrince
          int modifiedWitAndWile = 0;
          switch (key)
          {
+            case "e001":
+               if (Utilities.NO_RESULT < gi.DieResults[key][0])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click anywhere to continue."));
+               }
+               break;
             case "e002a":
                AppendEscapeMethods(gi, false); // false = cannot make riding escape
                myTextBlock.Inlines.Add(new LineBreak());
@@ -7222,6 +7231,13 @@ namespace BarbarianPrince
          // Click anywhere to continue
          switch (myGameInstance.EventActive)
          {
+            case "e001":
+               if (Utilities.NO_RESULT < myGameInstance.DieResults["e001"][0])
+               {
+                  action = GameAction.SetupFinalize;
+                  myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               }
+               break;
             case "e033a": // Warrior Wraiths
                if (Utilities.NO_RESULT != myGameInstance.DieResults["e033a"][0]) // if treasure already rolled, click anywhere to continue
                {

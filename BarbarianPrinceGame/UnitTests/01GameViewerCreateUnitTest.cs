@@ -98,7 +98,7 @@ namespace BarbarianPrince
          else if (HeaderName == myHeaderNames[1])
          {
             ++myIndexName;
-            //-----------------------------------------------------------------
+            // Add Map back to Canvas
             Image imageMap = new Image() { Name = "Map", Width = 810, Height = 985, Stretch = Stretch.Fill, Source = MapItem.theMapImages.GetBitmapImage("Map") };
             myCanvas.Children.Add(imageMap);
             Canvas.SetLeft(imageMap, 0);

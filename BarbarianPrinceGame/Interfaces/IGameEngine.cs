@@ -122,6 +122,7 @@ namespace BarbarianPrince
       SetupRollWitsWiles,
       SetupManualWitsWiles,
       SetupStartingLocation,
+      SetupLocationRoll,
       SetupFinalize,
 
       Hunt,                            // Hunt for Food
