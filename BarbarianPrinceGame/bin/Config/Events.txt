@@ -18,7 +18,7 @@ e000a	"<Bold>e000a Cal Arath - Barbarian Prince</Bold> <InlineUIContainer><Butto
 <LineBreak/>Harsh northlands developed your powerful body -- Endurance=9. 
 <LineBreak/><LineBreak/>Counter Description is found by selecting <Bold>Help | Counter Description...</Bold> menu. Click image to continue.
 <LineBreak/><LineBreak/>
-                                          <InlineUIContainer><Image Name='SetupShowStartingWealth' Source='../bin/Images/Tutorial1.gif' Height='200'  Width='200'> </Image></InlineUIContainer>"
+                                                <InlineUIContainer><Image Name='SetupShowStartingWealth' Source='../bin/Images/Tutorial1.gif' Height='150'  Width='150'> </Image></InlineUIContainer>"
 e000b	"<Bold>e000b Starting Wealth</Bold>
 <LineBreak/><LineBreak/>
 Alas, in making your escape, you could only grab a few coins. 
@@ -52,7 +52,7 @@ Change your wit and wiles by selecting buttons:
                                   <InlineUIContainer><Image Name='Brain' Source='../bin/Images/Brain.gif' Height='240'  Width='240' > </Image></InlineUIContainer>"
 e001	"<Bold>e001 The Adventure Begins</Bold>
 <LineBreak/><LineBreak/>
-Evil events have overtaken your Northlands Kingdom. Your father, the old king, is dead - assassinated by rivals to the throne.  These usurpers now hold the place with their mercenary royal guard. You have escaped, and must collect 500 gold pieces to raise a force to smash them and retake your heritage. Furthermore, the usurpers have powerful friends overseas. If you can't return to take them out in ten weeks. Their allies will arrive and you will lose your kingdom forever. 
+Evil events have overtaken your Northlands Kingdom. Your father, the old king, is dead - assassinated by rivals to the throne.  These usurpers now hold the place with their mercenary royal guard. You have escaped, and must collect 500 gold pieces to raise a force to smash them and retake your heritage. Furthermore, the usurpers have powerful friends overseas. If you can't return to take them out in ten weeks, their allies will arrive and you lose your kingdom forever. 
 <LineBreak/><LineBreak/>
 At dawn, you roll out of the merchant wagons into a ditch, dust off your clothes, loosen your swordbelt, and get ready to start the first day of your adventure <InlineUIContainer><Button Content='r203' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>

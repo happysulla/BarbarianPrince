@@ -9,6 +9,7 @@ namespace BarbarianPrince
    {
       bool CtorError { get; }
       bool IsTalkRoll { get; set; }
+      GameOptionType OptionsType { get; set; }
       Options Options { get; set; }
       //----------------------------------------------
       IMapItem Prince { set; get; }

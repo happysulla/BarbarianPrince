@@ -17,6 +17,7 @@ namespace BarbarianPrince
    {
       [NonSerialized] static public Logger Logger = new Logger();
       public bool IsTalkRoll { get; set; } = false;
+      public GameOptionType OptionsType { get; set; } = GameOptionType.GO_ORIGINAL; // Set when Options are set
       public Options Options { get; set; } = new Options();
       //------------------------------------------------
       public bool CtorError { get; } = false;

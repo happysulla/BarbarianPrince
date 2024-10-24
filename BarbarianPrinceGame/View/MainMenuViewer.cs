@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Drawing.Drawing2D;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -240,8 +241,14 @@ namespace BarbarianPrince
          }
          if (true == dialog.ShowDialog())
          {
+            GameOptionType existingType = myGameInstance.OptionsType;
             this.NewGameOptions = dialog.NewOptions;
-            myGameInstance.Options = dialog.NewOptions;
+            myGameInstance.Options = dialog.NewOptions;    // new games start with new game type
+            if(GameOptionType.GO_ORIGINAL != existingType) // from original game, can go to any other game type
+            {
+               if (GameOptionType.GO_CUSTOM != dialog.NewGameOptionType) // can only drop to custom for existing game type
+                  myGameInstance.OptionsType = existingType; // Set Game Type to existing game type
+            }
             GameAction action = GameAction.UpdateGameOptions;
             myGameEngine.PerformAction(ref myGameInstance, ref action);
          }

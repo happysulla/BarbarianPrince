@@ -1534,6 +1534,8 @@ namespace BarbarianPrince
                   continue;
                elements.Add(ui);
             }
+            if (ui is TextBlock tb)
+               elements.Add(ui);
          }
          foreach (UIElement ui1 in elements)
             myCanvas.Children.Remove(ui1);

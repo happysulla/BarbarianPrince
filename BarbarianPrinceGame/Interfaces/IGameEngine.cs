@@ -7,6 +7,16 @@ using System.Windows.Controls;
 namespace BarbarianPrince
 {
    [Serializable]
+   public enum GameOptionType
+   {
+      GO_ORIGINAL,  
+      GO_RAND_PARTY,         
+      GO_RAND_HEX,   
+      GO_RAND_ALL,
+      GO_FUN_MAX,
+      GO_CUSTOM 
+   };
+   [Serializable]
    public enum PegasusTreasureEnum
    {
       Mount,

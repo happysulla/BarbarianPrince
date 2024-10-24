@@ -20,6 +20,8 @@ namespace BarbarianPrince
    {
       public bool CtorError { get; }
       public IGameInstance myGameInstance = null;
+      private GameOptionType myGameOptionType = GameOptionType.GO_ORIGINAL;
+      public GameOptionType NewGameOptionType { get => myGameOptionType; }
       private Options myOptions { get; set; } = null;
       public Options NewOptions { get => myOptions; }
       private bool myIsRandomGame = false;
@@ -1212,6 +1214,7 @@ namespace BarbarianPrince
          // Summary Selection
          if (true == isFunOption)
          {
+            myGameOptionType = GameOptionType.GO_FUN_MAX;
             myRadioButtonOriginal.IsChecked = false;
             myRadioButtonRandomParty.IsChecked = false;
             myRadioButtonRandomStart.IsChecked = false;
@@ -1221,6 +1224,7 @@ namespace BarbarianPrince
          }
          else if (true == myIsRandomGame)
          {
+            myGameOptionType = GameOptionType.GO_RAND_ALL;
             myRadioButtonOriginal.IsChecked = false;
             myRadioButtonRandomParty.IsChecked = false;
             myRadioButtonRandomStart.IsChecked = false;
@@ -1230,6 +1234,7 @@ namespace BarbarianPrince
          }
          else if ((true == isCustomConfig) || (true == isCustomPartyConfig) || (true == isCustomHexConfig))
          {
+            myGameOptionType = GameOptionType.GO_CUSTOM;
             myRadioButtonOriginal.IsChecked = false;
             myRadioButtonRandomParty.IsChecked = false;
             myRadioButtonRandomStart.IsChecked = false;
@@ -1239,6 +1244,7 @@ namespace BarbarianPrince
          }
          else if ( (true == isRandomPartyConfig) && (true == isRandomHexConfig) )
          {
+            myGameOptionType = GameOptionType.GO_RAND_ALL;
             myRadioButtonOriginal.IsChecked = false;
             myRadioButtonRandomParty.IsChecked = false;
             myRadioButtonRandomStart.IsChecked = false;
@@ -1248,6 +1254,7 @@ namespace BarbarianPrince
          }
          else if (true == isRandomPartyConfig)
          {
+            myGameOptionType = GameOptionType.GO_RAND_PARTY;
             myRadioButtonOriginal.IsChecked = false;
             myRadioButtonRandomParty.IsChecked = true;
             myRadioButtonRandomStart.IsChecked = false;
@@ -1257,6 +1264,7 @@ namespace BarbarianPrince
          }
          else if (true == isRandomHexConfig)
          {
+            myGameOptionType = GameOptionType.GO_RAND_HEX;
             myRadioButtonOriginal.IsChecked = false;
             myRadioButtonRandomParty.IsChecked = false;
             myRadioButtonRandomStart.IsChecked = true;
@@ -1266,6 +1274,7 @@ namespace BarbarianPrince
          }
          else
          {
+            myGameOptionType = GameOptionType.GO_ORIGINAL;
             myRadioButtonOriginal.IsChecked = true;
             myRadioButtonRandomParty.IsChecked = false;
             myRadioButtonRandomStart.IsChecked = false;
