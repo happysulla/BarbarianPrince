@@ -2194,6 +2194,7 @@ namespace BarbarianPrince
          //gi.Prince.IsResurrected = true;
          //gi.AddUnitTestTiredMount(myPrince);
          //gi.Prince.Coin = 497;
+         //gi.Prince.Food = 9;
          //---------------------
          //gi.AddSpecialItem(SpecialEnum.GiftOfCharm);
          //gi.AddSpecialItem(SpecialEnum.ResistanceTalisman);

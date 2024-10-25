@@ -2918,7 +2918,7 @@ namespace BarbarianPrince
                {
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run("Click Image to continue."));
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
                break;
             case "e153":
@@ -2936,7 +2936,7 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new InlineUIContainer(img209));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run("Click Image to continue."));
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
                break;
             case "e154":
@@ -2949,7 +2949,7 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new InlineUIContainer(imgE154));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run("Click Image to continue."));
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
                break;
             case "e154a":
@@ -2976,7 +2976,7 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new InlineUIContainer(imgE154x));
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new Run("Click Image to continue."));
+               myTextBlock.Inlines.Add(new Run("Click image to continue."));
                break;
             case "e154e":
                ITerritory t154e = gi.Prince.Territory;
@@ -2999,7 +2999,7 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new InlineUIContainer(imgE154e));
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new Run("Click Image to continue."));
+               myTextBlock.Inlines.Add(new Run("Click image to continue."));
                break;
             case "e155":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
@@ -3011,7 +3011,7 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new InlineUIContainer(imgE155));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run("Click Image to continue."));
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
                break;
             case "e156":
@@ -3024,7 +3024,7 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new InlineUIContainer(imgE156));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run("Click Image to continue."));
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
                break;
             case "e156a":
@@ -3048,7 +3048,7 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new InlineUIContainer(imgE156x));
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new Run("Click Image to continue."));
+               myTextBlock.Inlines.Add(new Run("Click image to continue."));
                break;
             case "e157":
                myTextBlock.Inlines.Add(new LineBreak());
@@ -3079,7 +3079,7 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new InlineUIContainer(imgE158));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run("Click Image to continue."));
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
                break;
             case "e160":
@@ -3092,7 +3092,7 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new InlineUIContainer(imgE160));
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());
-                  myTextBlock.Inlines.Add(new Run("Click Image to continue."));
+                  myTextBlock.Inlines.Add(new Run("Click image to continue."));
                }
                break;
             case "e160e":
@@ -3132,7 +3132,7 @@ namespace BarbarianPrince
                      myTextBlock.Inlines.Add(new InlineUIContainer(imgE161a));
                      myTextBlock.Inlines.Add(new LineBreak());
                      myTextBlock.Inlines.Add(new LineBreak());
-                     myTextBlock.Inlines.Add(new Run("Click Image to continue."));
+                     myTextBlock.Inlines.Add(new Run("Click image to continue."));
                   }
                }
                else
