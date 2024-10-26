@@ -139,6 +139,7 @@
     <Compile Include="Model\ConfigFileReader.cs" />
     <Compile Include="Model\DieRoller.cs" />
     <Compile Include="Model\EnteredHex.cs" />
+    <Compile Include="Model\GameStatsAndFeats.cs" />
     <Compile Include="Model\GameLoadMgr.cs" />
     <Compile Include="Model\ForbiddenAudience.cs" />
     <Compile Include="Model\MapImage.cs" />
@@ -1934,6 +1935,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="bin\Images\Hide.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bin\Images\EndGameSuccess2.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

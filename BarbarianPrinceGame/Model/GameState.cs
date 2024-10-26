@@ -511,8 +511,18 @@ namespace BarbarianPrince
                int dailyCoin = 3 + Utilities.RandomGenerator.Next(3);
                gi.AddCoins(dailyCoin);
             }
-            gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
             gi.DieRollAction = GameAction.DieRollActionNone;
+            if (499 < gi.GetCoins())
+            {
+               action = GameAction.EndGameWin; // PerformEndCheck()
+               gi.GamePhase = GamePhase.EndGame;
+               gi.EndGameReason = "500+ gold";
+               gi.EventDisplayed = gi.EventActive = "e501";
+            }
+            else
+            {
+               gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
+            }
          }
          if (false == GameLoadMgr.SaveGameToFile(gi))
          {
@@ -583,7 +593,7 @@ namespace BarbarianPrince
          {
             action = GameAction.EndGameWin; // PerformEndCheck()
             gi.GamePhase = GamePhase.EndGame;
-            gi.EndGameReason = "500+ gold and North of Tragoth River";
+            gi.EndGameReason = "500+ gold";
             isGameEnd = true;
          }
          else if (true == IsNorthofTragothRiver(gi.Prince.Territory))
@@ -2193,7 +2203,7 @@ namespace BarbarianPrince
          //gi.Prince.PlagueDustWound = 1; 
          //gi.Prince.IsResurrected = true;
          //gi.AddUnitTestTiredMount(myPrince);
-         //gi.Prince.Coin = 497;
+         gi.Prince.Coin = 497;
          //gi.Prince.Food = 9;
          //---------------------
          //gi.AddSpecialItem(SpecialEnum.GiftOfCharm);

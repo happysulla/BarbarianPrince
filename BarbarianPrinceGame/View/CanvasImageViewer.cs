@@ -10,7 +10,6 @@ namespace BarbarianPrince
    {
       public bool CtorError { get; } = false;
       private Canvas myCanvas = null;
-      private Image myEndGameSuccessImage = null;
       //-------------------------------------------------
       public CanvasImageViewer(Canvas c)
       {
@@ -21,13 +20,6 @@ namespace BarbarianPrince
             return;
          }
          myCanvas = c;
-         //--------------------------
-         BitmapImage bmi2 = new BitmapImage();
-         bmi2.BeginInit();
-         bmi2.UriSource = new Uri(MapImage.theImageDirectory + "EndGameSuccess.gif", UriKind.Absolute);
-         bmi2.EndInit();
-         myEndGameSuccessImage = new Image { Source = bmi2 };
-         ImageBehavior.SetAnimatedSource(myEndGameSuccessImage, bmi2);
       }
       //-------------------------------------------------
       public void UpdateView(ref IGameInstance gi, GameAction action)
@@ -81,8 +73,12 @@ namespace BarbarianPrince
       {
          c.LayoutTransform = new ScaleTransform(1.0, 1.0);
          BitmapImage bmi1 = new BitmapImage();
+         int randomNum = Utilities.RandomGenerator.Next(5);
          bmi1.BeginInit();
-         bmi1.UriSource = new Uri(MapImage.theImageDirectory + "EndGameSuccess.gif", UriKind.Absolute);
+         if (0 == randomNum)
+            bmi1.UriSource = new Uri(MapImage.theImageDirectory + "EndGameSuccess.gif", UriKind.Absolute);
+         else
+            bmi1.UriSource = new Uri(MapImage.theImageDirectory + "EndGameSuccess2.gif", UriKind.Absolute);
          bmi1.EndInit();
          Image img = new Image { Source = bmi1, Height = c.ActualHeight, Width = c.ActualWidth, Stretch = Stretch.Fill };
          ImageBehavior.SetAnimatedSource(img, bmi1);
