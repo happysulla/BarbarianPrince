@@ -112,6 +112,8 @@ namespace BarbarianPrince
       private System.Windows.Input.Cursor myTargetCursor = null;
       private Dictionary<string, Polyline> myRivers = new Dictionary<string, Polyline>();
       private readonly FontFamily myFontFam = new FontFamily("Tahoma");
+      private double myPreviousScrollHeight = 0.0;
+      private double myPreviousScrollWidth = 0.0;
       //---------------------------------------------------------------------
       private readonly SolidColorBrush mySolidColorBrushClear = new SolidColorBrush();
       private readonly SolidColorBrush mySolidColorBrushBlack = new SolidColorBrush();
@@ -147,7 +149,7 @@ namespace BarbarianPrince
       private readonly List<Brush> myBrushes = new List<Brush>();
       private readonly List<Rectangle> myRectangles = new List<Rectangle>();
       private readonly List<Polygon> myPolygons = new List<Polygon>();
-      private Rectangle myRectangleMoving = null;               // Rentable that is moving with button
+      private Rectangle myRectangleMoving = null;               // Not used - Rectangle that is moving with button
       private Rectangle myRectangleSelected = new Rectangle(); // Player has manually selected this button
       private ITerritory myTerritorySelected = null;
       private bool myIsTravelThroughGateActive = false;  // e045
@@ -279,7 +281,7 @@ namespace BarbarianPrince
                   }
                }
             }
-
+            myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas);
          }
          //-------------------------------------------------------
          Option optionExtendTime = gi.Options.Find("ExtendEndTime");
@@ -2046,7 +2048,12 @@ namespace BarbarianPrince
             percentToScroll = 1.0;
          else
             percentToScroll = percentHeight / 0.5 - 0.5;
-         double amountToScroll = percentToScroll * myScollViewerInside.ScrollableHeight;
+         double scrollHeight = myScollViewerInside.ScrollableHeight;
+         if (0.0 == scrollHeight)
+            scrollHeight = myPreviousScrollHeight;
+         else
+            myPreviousScrollHeight = myScollViewerInside.ScrollableHeight;
+         double amountToScroll = percentToScroll * scrollHeight;
          myScollViewerInside.ScrollToVerticalOffset(amountToScroll);
          //--------------------------------------------------------------------
          double percentWidth = (t.CenterPoint.X / myCanvas.ActualWidth);
@@ -2056,7 +2063,12 @@ namespace BarbarianPrince
             percentToScroll = 1.0;
          else
             percentToScroll = percentWidth / 0.5 - 0.5;
-         amountToScroll = percentToScroll * myScollViewerInside.ScrollableWidth;
+         double scrollWidth = myScollViewerInside.ScrollableWidth;
+         if (0.0 == scrollWidth)
+            scrollWidth = myPreviousScrollWidth;
+         else
+            myPreviousScrollWidth = myScollViewerInside.ScrollableWidth;
+         amountToScroll = percentToScroll * scrollWidth;
          myScollViewerInside.ScrollToHorizontalOffset(amountToScroll);
       }
       private bool UpdateMapItemRectangle(IGameInstance gi)
@@ -2177,6 +2189,7 @@ namespace BarbarianPrince
       }
       private bool UpdateCanvasShowStats(IGameInstance gi)
       {
+         myButtonMapItems.Clear();
          List<UIElement> elements = new List<UIElement>();
          foreach (UIElement ui in myCanvas.Children)
          {
@@ -2197,10 +2210,15 @@ namespace BarbarianPrince
             if (ui is TextBlock tb)
                elements.Add(ui);
             if (ui is Button b)
-               elements.Add(ui);
+            {
+               if( false == b.Name.Contains("Die"))
+                  elements.Add(ui);
+            }
          }
          foreach (UIElement ui1 in elements)
             myCanvas.Children.Remove(ui1);
+         //-------------------------------
+         myDieRoller.HideDie();
          //-------------------------------
          TextBlock tbMarquee = new TextBlock() { Foreground = Brushes.Blue, FontFamily = myFontFam, FontSize = 24 };
          tbMarquee.Inlines.Add(new Run("Current Game Statistics:") { FontWeight = FontWeights.Bold, FontStyle = FontStyles.Italic, TextDecorations = TextDecorations.Underline });

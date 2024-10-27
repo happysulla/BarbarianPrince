@@ -4486,10 +4486,10 @@ namespace BarbarianPrince
                      imgEndGameWon = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("Sword1"), Width = 300, Height = 300 };
                      break;
                   case 4:
-                     imgEndGameWon = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("Win"), Width = 300, Height = 300 };
+                     imgEndGameWon = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("Star"), Width = 300, Height = 300 };
                      break;
                   default:
-                     imgEndGameWon = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("Star"), Width = 300, Height = 300 };
+                     imgEndGameWon = new Image { Name = "EndGameShowStats", Source = MapItem.theMapImages.GetBitmapImage("Win"), Width = 300, Height = 300 };
                      break;
                }
                myTextBlock.Inlines.Add(new LineBreak());
@@ -4498,7 +4498,7 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new InlineUIContainer(imgEndGameWon));
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new Run("Click image to continue or select 'File|New' to continue your wins."));
+               myTextBlock.Inlines.Add(new Run("Click image to continue show game statistics and feats."));
                break;
             case "e502":
                StringBuilder sbEndLost = new StringBuilder();
@@ -4538,7 +4538,7 @@ namespace BarbarianPrince
                myTextBlock.Inlines.Add(new InlineUIContainer(imgEndGameLost));
                myTextBlock.Inlines.Add(new LineBreak());
                myTextBlock.Inlines.Add(new LineBreak());
-               myTextBlock.Inlines.Add(new Run("Click image to continue or select 'File|New' to try again."));
+               myTextBlock.Inlines.Add(new Run("Click image to continue show game statistics and feats."));
                break;
             default:
                break;
