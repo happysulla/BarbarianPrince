@@ -4688,29 +4688,63 @@ namespace BarbarianPrince
       {
          GameAction outAction = GameAction.Error;
          if ((GamePhase.Rest == myGameInstance.GamePhase) && (false == isEncounter))
+         {
+            ++myGameInstance.Statistic.myNumOfRestDays;
             outAction = GameAction.RestHealing;
+         }
          else if ((GamePhase.Rest == myGameInstance.GamePhase) && (true == isEncounter))
+         {
+            ++myGameInstance.Statistic.myNumOfRestDays;
+            ++myGameInstance.Statistic.myNumEncounters;
             outAction = GameAction.RestHealingEncounter;
+         }
          else if ((GamePhase.SearchCache == myGameInstance.GamePhase) && (false == isEncounter))
+         {
             outAction = GameAction.SearchCache;
+         }
          else if ((GamePhase.SearchCache == myGameInstance.GamePhase) && (true == isEncounter))
+         {
+            ++myGameInstance.Statistic.myNumEncounters;
             outAction = GameAction.SearchEncounter;
+         }
          else if ((GamePhase.SearchTreasure == myGameInstance.GamePhase) && (false == isEncounter))
+         {
             outAction = GameAction.SearchTreasure;
+         }
          else if ((GamePhase.SearchTreasure == myGameInstance.GamePhase) && (true == isEncounter))
+         {
+            ++myGameInstance.Statistic.myNumEncounters;
             outAction = GameAction.SearchEncounter;
+         }
          else if ((true == isLost) && (false == isEncounter))
+         {
+            ++myGameInstance.Statistic.myDaysLost;
             outAction = GameAction.TravelShowLost;
+         }
          else if ((true == isRiverCrossing) && (true == isEncounter))
+         {
+            ++myGameInstance.Statistic.myNumEncounters;
             outAction = GameAction.TravelShowRiverEncounter;
+         }
          else if ((true == isLost) && (true == isEncounter))
+         {
+            ++myGameInstance.Statistic.myDaysLost;
+            ++myGameInstance.Statistic.myNumEncounters;
             outAction = GameAction.TravelShowLostEncounter;
+         }
          else if (true == isEncounter)
+         {
+            ++myGameInstance.Statistic.myNumEncounters;
             outAction = GameAction.TravelShowMovementEncounter;
+         }
          else if (true == isRiverCrossing)
+         {
             outAction = GameAction.TravelLostCheck;
+         }
          else
+         {
             outAction = GameAction.TravelShowMovement;
+         }
          StringBuilder sb11 = new StringBuilder("     ######ShowResultsTravel() :");
          sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
          sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);

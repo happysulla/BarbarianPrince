@@ -139,7 +139,8 @@
     <Compile Include="Model\ConfigFileReader.cs" />
     <Compile Include="Model\DieRoller.cs" />
     <Compile Include="Model\EnteredHex.cs" />
-    <Compile Include="Model\GameStatsAndFeats.cs" />
+    <Compile Include="Model\GameFeat.cs" />
+    <Compile Include="Model\GameStat.cs" />
     <Compile Include="Model\GameLoadMgr.cs" />
     <Compile Include="Model\ForbiddenAudience.cs" />
     <Compile Include="Model\MapImage.cs" />

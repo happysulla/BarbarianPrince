@@ -98,7 +98,6 @@ namespace BarbarianPrince
    [Serializable]
    public enum GameAction
    {
-
       // Each IUnitTest class may support one of the following actions
       RemoveSplashScreen,
       UpdateStatusBar,

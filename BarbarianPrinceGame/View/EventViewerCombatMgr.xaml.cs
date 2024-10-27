@@ -1037,7 +1037,7 @@ namespace BarbarianPrince
          {
             if ((true == myIsKnightOnBridge) && (true == myGameInstance.Prince.IsUnconscious))
             {
-               myGameInstance.Prince.HealWounds(1, 0);
+               myGameInstance.Prince.HealWounds(1, 0);  // Fight with Knight on Bridge ends with Prince knocked unconscious
                foreach (IMapItem mi in myNonCombatants) // UpdateCombatEnd() - return noncombatants to party
                   myGameInstance.PartyMembers.Add(mi);
                myIsEscape = true;
@@ -5584,7 +5584,7 @@ namespace BarbarianPrince
                {
                   if ((false == mi.IsKilled) && (true == mi.Name.Contains("Troll")))  // e057 - Trolls heal one wound every even round
                   {
-                     mi.HealWounds(1, 0);
+                     mi.HealWounds(1, 0); // Troll heals one wound every even round
                      Logger.Log(LogEnum.LE_COMBAT_TROLL_HEAL, "Grid_MouseDown(): troll=" + mi.Wound.ToString());
                   }
                }

@@ -630,6 +630,8 @@ namespace BarbarianPrince
                }
             }
          }
+         if (true == gi.Prince.IsUnconscious)
+            ++gi.Statistic.myNumOfUncounscious;
          if (GameAction.EndGameWin == action)
          {
             gi.EventDisplayed = gi.EventActive = "e501";
@@ -2445,7 +2447,14 @@ namespace BarbarianPrince
                {
                   foreach (IMapItem mi in gi.PartyMembers)
                   {
-                     mi.HealWounds(1, 0); // RestEncounterCheck - InStructure()=true
+                     if (0 < mi.Wound)
+                     {
+                        if (true == mi.Name.Contains("Prince"))
+                           gi.Statistic.myNumOfPrinceHeal++;
+                        else
+                           gi.Statistic.myNumOfPartyHeal++;
+                     }
+                     mi.HealWounds(1, 0); // RestEncounterCheck - InStructure()=true - Resting cures one wound
                      mi.IsExhausted = false;
                   }
                   if (false == SetHuntState(gi, ref action)) // Resting in same hex
@@ -2529,6 +2538,7 @@ namespace BarbarianPrince
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = GamePhase.SeekAudience;
                gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_AUDIENCE));
+               ++gi.Statistic.myNumOfAudienceAttempt;
                if (true == gi.IsInTown(princeTerritory))
                {
                   gi.EventDisplayed = gi.EventActive = "e211a";
@@ -3211,6 +3221,7 @@ namespace BarbarianPrince
          EnteredHex hex = new EnteredHex(gi, ColorActionEnum.CAE_JAIL);
          hex.IsEncounter = true;
          hex.JailDay++;
+         ++gi.Statistic.myDaysInJailorDungeon;
          switch (gi.EventActive)
          {
             case "e203a":
@@ -3233,7 +3244,7 @@ namespace BarbarianPrince
                   {
                      if (false == SetEndOfDayState(gi, ref action)) // no hunting in prison so go straight to plague state
                      {
-                        Logger.Log(LogEnum.LE_ERROR, "SetHuntState(): SetEndOfDayState() returned false");
+                        Logger.Log(LogEnum.LE_ERROR, "PerformJailBreak(): SetEndOfDayState() returned false");
                         return false;
                      }
                   }
@@ -3278,14 +3289,14 @@ namespace BarbarianPrince
                      gi.GamePhase = GamePhase.EndGame;
                      if (true == gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
                      {
-                        action = GameAction.EndGameResurrect;  // wizard slave
+                        action = GameAction.EndGameResurrect;  // wizard slave - overworked and starved
                         gi.EventDisplayed = gi.EventActive = "e192a";
                         gi.DieRollAction = GameAction.DieRollActionNone;
                      }
                      else
                      {
                         Logger.Log(LogEnum.LE_END_GAME, "PerformJailBreak(): EndGameLost-1 ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString());
-                        action = GameAction.EndGameLost; // wizard slave
+                        action = GameAction.EndGameLost; // wizard slave - overworked and starved
                         gi.EndGameReason = "Prince starves to dead as Wizard's slave";
                         gi.EventDisplayed = gi.EventActive = "e502";
                         gi.DieRollAction = GameAction.DieRollActionNone;
@@ -3309,14 +3320,14 @@ namespace BarbarianPrince
                         gi.GamePhase = GamePhase.EndGame;
                         if (true == gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
                         {
-                           action = GameAction.EndGameResurrect;  // wizard slave
+                           action = GameAction.EndGameResurrect;  // wizard slave - beaten for escaping
                            gi.EventDisplayed = gi.EventActive = "e192a";
                            gi.DieRollAction = GameAction.DieRollActionNone;
                         }
                         else
                         {
                            Logger.Log(LogEnum.LE_END_GAME, "PerformJailBreak(): EndGameLost-2 ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString());
-                           action = GameAction.EndGameLost; // wizard slave
+                           action = GameAction.EndGameLost; // wizard slave - beaten for escaping
                            gi.EndGameReason = "Prince beaten to death as Wizard's slave";
                            gi.EventDisplayed = gi.EventActive = "e502";
                            gi.DieRollAction = GameAction.DieRollActionNone;
@@ -3394,6 +3405,13 @@ namespace BarbarianPrince
                gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_REST));
                foreach (IMapItem mi in gi.PartyMembers)
                {
+                  if( 0 < mi.Wound )
+                  {
+                     if (true == mi.Name.Contains("Prince"))
+                        gi.Statistic.myNumOfPrinceHeal++;
+                     else
+                        gi.Statistic.myNumOfPartyHeal++;
+                  }
                   mi.HealWounds(1, 0);  // RestHealing 
                   mi.IsExhausted = false;
                }
@@ -4265,6 +4283,7 @@ namespace BarbarianPrince
          switch (action)
          {
             case GameAction.EndGameResurrect:
+               ++gi.Statistic.myNumOfResurrection;
                gi.EventDisplayed = gi.EventActive = "e192a";
                gi.DieRollAction = GameAction.DieRollActionNone;
                break;
@@ -13867,6 +13886,7 @@ namespace BarbarianPrince
             case "e156": // audience with town mayor
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  ++gi.Statistic.myNumOfAudience;
                   gi.EnteredHexes.Last().EventNames.Add(key);
                   action = GameAction.UpdateEventViewerActive;
                   switch (gi.DieResults[key][0]) // Based on the die roll, implement event
@@ -13935,6 +13955,7 @@ namespace BarbarianPrince
             case "e160": // audience with lady 
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  ++gi.Statistic.myNumOfAudience;
                   gi.EnteredHexes.Last().EventNames.Add(key);
                   action = GameAction.UpdateEventViewerActive;
                   switch (gi.DieResults[key][0]) // Based on the die roll, implement event
@@ -13953,7 +13974,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][0] = dieRoll;
                }
                break;
-            case "e160e": // audience with lady
+            case "e160e": // Lady Aeravier Seduction
                gi.EnteredHexes.Last().EventNames.Add(key);
                gi.DieResults[key][0] = dieRoll;
                break;
@@ -13974,9 +13995,13 @@ namespace BarbarianPrince
                         e160Mi.PlagueDustWound = 0; // assume that healers cure any plague dust
                         int wound = e160Mi.Wound;
                         int poision = e160Mi.Poison;
-                        e160Mi.HealWounds(wound, poision);
+                        e160Mi.HealWounds(wound, poision); // e160f - Lady A cures all wounds - nominal path
                         if (0 == e160Mi.Mounts.Count)  // add mount if do not have one
                            e160Mi.AddNewMount();
+                        if (true == e160Mi.Name.Contains("Prince"))
+                           gi.Statistic.myNumOfPrinceHeal += (wound + poision);
+                        else
+                           gi.Statistic.myNumOfPartyHeal += (wound + poision); 
                      }
                      //-----------------------------------------------
                      if (false == gi.AddNewMountToParty()) // add a spare pack horse
@@ -13999,11 +14024,12 @@ namespace BarbarianPrince
                   }
                   else
                   {
-                     gi.Prince.PlagueDustWound = 0; // assume that healers cure any plague dust - Heal all words for Prince
+                     gi.Prince.PlagueDustWound = 0; // assume that healers cure any plague dust - Heal all wounds for Prince
                      int wound = gi.Prince.Wound;
                      int poision = gi.Prince.Poison;
-                     gi.Prince.HealWounds(wound, poision);
+                     gi.Prince.HealWounds(wound, poision); // e160f - Lady A cures all wounds - Alcove path
                      gi.EventDisplayed = gi.EventActive = "e042b";
+                     gi.Statistic.myNumOfPrinceHeal += (wound + poision);
                   }
                }
                else
@@ -14041,6 +14067,7 @@ namespace BarbarianPrince
             case "e161": // audience with count drogat
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  ++gi.Statistic.myNumOfAudience;
                   gi.EnteredHexes.Last().EventNames.Add(key);
                   action = GameAction.UpdateEventViewerActive;
                   switch (gi.DieResults[key][0]) // Based on the die roll, implement event
@@ -14498,7 +14525,7 @@ namespace BarbarianPrince
                         }
                         break;
                      case 9:
-                     case 10:                           // audience permitted
+                     case 10: // audience permitted
                         ITerritory e211a1 = FindClosestTown(gi); // this territory is updated by user selecting a castle or temple
                         if ((true == gi.IsReligionInParty()) && (true == gi.ForbiddenAudiences.IsReligiousConstraint(e211a1)))
                         {
@@ -14584,6 +14611,7 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerActive;
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  ++gi.Statistic.myNumOfAudienceAttempt;
                   gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
@@ -15096,6 +15124,7 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerActive;
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  ++gi.Statistic.myNumOfOffering;
                   gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
@@ -15162,7 +15191,7 @@ namespace BarbarianPrince
                   gi.DayOfLastOffering = gi.Days;
                }
                break;
-            case "e212l": //learn secrets
+            case "e212l": // learn secrets
                gi.EnteredHexes.Last().EventNames.Add(key);
                action = GameAction.UpdateEventViewerActive;
                switch (dieRoll) // Based on the die roll, implement the correct screen
@@ -16418,7 +16447,14 @@ namespace BarbarianPrince
                {
                   foreach (IMapItem mi in gi.PartyMembers)
                   {
-                     mi.HealWounds(1, 0); // EncounterEnd()
+                     if (0 < mi.Wound)
+                     {
+                        if (true == mi.Name.Contains("Prince"))
+                           gi.Statistic.myNumOfPrinceHeal++;
+                        else
+                           gi.Statistic.myNumOfPartyHeal++;
+                     }
+                     mi.HealWounds(1, 0); // EncounterEnd() - Resting heals one wound
                      mi.IsExhausted = false;
                   }
                }

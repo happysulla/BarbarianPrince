@@ -2167,27 +2167,59 @@ namespace BarbarianPrince
                   {
                      case DragStateEnum.KEEPER_HEAL:
                         if ((rowNum == myDragStateRowNum) && (6 == colNum))
-                           mi.HealWounds(mi.Wound, 0);
+                        {
+                           if (true == mi.Name.Contains("Prince"))
+                              myGameInstance.Statistic.myNumOfPrinceHeal += mi.Wound;
+                           else
+                              myGameInstance.Statistic.myNumOfPartyHeal += mi.Wound;
+                           mi.HealWounds(mi.Wound, 0); // healing potion at night
+                        }
                         else
+                        {
                            miReturn.AddSpecialItemToKeep(SpecialEnum.HealingPoition);
+                        }
                         break;
                      case DragStateEnum.KEEPER_CURE:
                         if ((rowNum == myDragStateRowNum) && (6 == colNum))
-                           mi.HealWounds(0, mi.Poison);
+                        {
+                           if (true == mi.Name.Contains("Prince"))
+                              myGameInstance.Statistic.myNumOfPrinceHeal += mi.Poison;
+                           else
+                              myGameInstance.Statistic.myNumOfPartyHeal += mi.Poison;
+                           mi.HealWounds(0, mi.Poison); // poison cure at night
+                        }
                         else
+                        {
                            miReturn.AddSpecialItemToKeep(SpecialEnum.CurePoisonVial);
+                        }
                         break;
                      case DragStateEnum.SHARER_HEAL:
                         if (6 == colNum)
-                           mi.HealWounds(mi.Wound, 0);
+                        {
+                           if (true == mi.Name.Contains("Prince"))
+                              myGameInstance.Statistic.myNumOfPrinceHeal += mi.Wound;
+                           else
+                              myGameInstance.Statistic.myNumOfPartyHeal += mi.Wound;
+                           mi.HealWounds(mi.Wound, 0); // healing potion at night
+                        }
                         else
+                        {
                            miReturn.AddSpecialItemToShare(SpecialEnum.HealingPoition);
+                        }
                         break;
                      case DragStateEnum.SHARER_CURE:
                         if (6 == colNum)
-                           mi.HealWounds(0, mi.Poison);
+                        {
+                           if (true == mi.Name.Contains("Prince"))
+                              myGameInstance.Statistic.myNumOfPrinceHeal += mi.Poison;
+                           else
+                              myGameInstance.Statistic.myNumOfPartyHeal += mi.Poison;
+                           mi.HealWounds(0, mi.Poison); // poison cure at night
+                        }
                         else
+                        {
                            miReturn.AddSpecialItemToShare(SpecialEnum.CurePoisonVial);
+                        }
                         break;
                      default:
                         Logger.Log(LogEnum.LE_ERROR, "Grid_MouseDown(): reached default myDragState=" + myDragState.ToString());

@@ -20,6 +20,7 @@ namespace BarbarianPrince
       public bool IsTalkRoll { get; set; } = false;
       public GameOptionType OptionsType { get; set; } = GameOptionType.GO_ORIGINAL; // Set when Options are set
       public Options Options { get; set; } = new Options();
+      public GameStat Statistic { get; set; } = new GameStat();
       //------------------------------------------------
       public bool CtorError { get; } = false;
       public GameInstance() // Constructor - set log levels
@@ -325,6 +326,20 @@ namespace BarbarianPrince
          //--------------------------------
          Logger.Log(LogEnum.LE_PARTYMEMBER_ADD, "AddCompanion(): mi=" + companion.ToString());
          PartyMembers.Add(companion);
+         //--------------------------------
+         if (PartyMembers.Count < this.Statistic.myMaxPartySize)
+            this.Statistic.myMaxPartySize = PartyMembers.Count;
+         int partyEndurance = 0;
+         int partyCombat = 0;
+         foreach (IMapItem mi in PartyMembers)
+         {
+            partyEndurance += mi.Endurance;
+            partyCombat += mi.Combat;
+         }
+         if (partyEndurance < this.Statistic.myMaxPartyEndurance)
+            this.Statistic.myMaxPartyEndurance = partyEndurance;
+         if (partyCombat < this.Statistic.myMaxPartyCombat)
+            this.Statistic.myMaxPartyCombat = partyCombat;
          //--------------------------------
          if (true == companion.Name.Contains("TrueLove"))
          {

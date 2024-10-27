@@ -11,6 +11,7 @@ namespace BarbarianPrince
       bool IsTalkRoll { get; set; }
       GameOptionType OptionsType { get; set; }
       Options Options { get; set; }
+      GameStat Statistic { get; set; }
       //----------------------------------------------
       IMapItem Prince { set; get; }
       IMapItem ActiveMember { set; get; } // active member is one that springs the trap

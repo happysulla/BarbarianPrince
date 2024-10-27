@@ -2202,9 +2202,7 @@ namespace BarbarianPrince
             if (ui is Image img)
             {
                if ("Map" == img.Name)
-               {
                   continue;
-               }
                elements.Add(ui);
             }
             if (ui is TextBlock tb)
@@ -2221,8 +2219,8 @@ namespace BarbarianPrince
          myDieRoller.HideDie();
          //-------------------------------
          TextBlock tbMarquee = new TextBlock() { Foreground = Brushes.Blue, FontFamily = myFontFam, FontSize = 24 };
-         tbMarquee.Inlines.Add(new Run("Current Game Statistics:") { FontWeight = FontWeights.Bold, FontStyle = FontStyles.Italic, TextDecorations = TextDecorations.Underline });
-         tbMarquee.Inlines.Add(new LineBreak());
+         UpdateCanvasShowStatsText(gi, tbMarquee);
+
          myCanvas.ClipToBounds = true;
          myCanvas.Children.Add(tbMarquee);
          //-------------------------------
@@ -2233,6 +2231,12 @@ namespace BarbarianPrince
          doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(MARQUEE_SCROLL_ANMINATION_TIME));
          tbMarquee.BeginAnimation(Canvas.BottomProperty, doubleAnimation);
          return true;
+      }
+      private void UpdateCanvasShowStatsText(IGameInstance gi, TextBlock tb)
+      {
+         tb.Inlines.Add(new Run("Current Game Statistics:") { FontWeight = FontWeights.Bold, FontStyle = FontStyles.Italic, TextDecorations = TextDecorations.Underline });
+         tb.Inlines.Add(new LineBreak());
+         tb.Inlines.Add(new Run("Options Game Type = " + gi.OptionsType));
       }
       private bool MoveToNewHexWhenJailed(IGameInstance gi)
       {
