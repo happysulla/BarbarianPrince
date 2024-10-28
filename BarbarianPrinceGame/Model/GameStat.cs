@@ -40,5 +40,9 @@ namespace BarbarianPrince
       public int myFoodAtEnd;                   // Food at end of game
       public int myPartyCountEnd;               // Party member count at end of game
       public int myNumDaysEnd;
+      public int myMaxNumDaysEnd;
+      public int myMinNumDaysEnd;
+      public int myMinNumCoinEnd;
+      public int myMaxNumCoinEnd;
    };
 }
