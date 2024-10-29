@@ -4108,6 +4108,11 @@ namespace BarbarianPrince
          {
             if ((true == mi.IsKilled) || (true == mi.IsUnconscious))
             {
+               //---------------------------------
+               ++myGameInstance.Statistic.myNumOfPartyKill;
+               myGameInstance.Statistic.myNumOfPartyKillEndurance += mi.Endurance;
+               myGameInstance.Statistic.myNumOfPartyKillCombat += mi.Combat;
+               //---------------------------------
                Logger.Log(LogEnum.LE_ADD_WEALTH_CODE, "DistributeDeadWealth(): mi=" + mi.Name + " coffs up wc=" +  mi.WealthCode.ToString());
                if (0 < mi.WealthCode)
                   myCapturedWealthCodes.Add(mi.WealthCode);
@@ -4131,7 +4136,7 @@ namespace BarbarianPrince
          {
             if ((true == mi.IsKilled) || (true == mi.IsUnconscious))
             {
-               if( (true == mi.IsKilled ) && (0 < mi.WealthCode) ) // add dead companions wealth to wealthcodes
+               if ( (true == mi.IsKilled ) && (0 < mi.WealthCode) ) // add dead companions wealth to wealthcodes
                   myCapturedWealthCodes.Add(mi.WealthCode);
                myDeadPartyMemberCoin += mi.Coin;
                foreach (IMapItem mount in mi.Mounts)
@@ -4148,6 +4153,9 @@ namespace BarbarianPrince
                      mi.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
                      myGameInstance.ResurrectedMembers.Add(mi);
                   }
+                  //---------------------------------
+                  ++myGameInstance.Statistic.myNumOfPartyKilled;
+                  //---------------------------------
                   killedMembers.Add(mi);
                   foreach (SpecialEnum possession in mi.SpecialKeeps)
                      myCapturedPossessions.Add(possession);
@@ -4181,6 +4189,9 @@ namespace BarbarianPrince
                {
                   isPartyMemberDied = true;
                   results1.Add(mi);
+                  //---------------------------------
+                  ++myGameInstance.Statistic.myNumOfPartyKilled;
+                  //---------------------------------
                   if (true == mi.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
                   {
                      mi.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
@@ -4213,6 +4224,11 @@ namespace BarbarianPrince
                if (true == mi.IsKilled)
                {
                   results2.Add(mi);
+                  //---------------------------------
+                  ++myGameInstance.Statistic.myNumOfPartyKill;
+                  myGameInstance.Statistic.myNumOfPartyKillEndurance += mi.Endurance;
+                  myGameInstance.Statistic.myNumOfPartyKillCombat += mi.Combat;
+                  //---------------------------------
                   foreach (IMapItem mount in mi.Mounts)
                      myCapturedMounts.Add(mount);
                   foreach (SpecialEnum possession in mi.SpecialKeeps)
@@ -4249,6 +4265,9 @@ namespace BarbarianPrince
                {
                   isPartyMemberDied = true;
                   results2.Add(mi);
+                  //---------------------------------
+                  ++myGameInstance.Statistic.myNumOfPartyKilled;
+                  //---------------------------------
                   if (true == mi.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
                   {
                      mi.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
@@ -4281,6 +4300,11 @@ namespace BarbarianPrince
                if (true == mi.IsKilled)
                {
                   results1.Add(mi);
+                  //---------------------------------
+                  ++myGameInstance.Statistic.myNumOfPartyKill;
+                  myGameInstance.Statistic.myNumOfPartyKillEndurance += mi.Endurance;
+                  myGameInstance.Statistic.myNumOfPartyKillCombat += mi.Combat;
+                  //---------------------------------
                   foreach (IMapItem mount in mi.Mounts)
                      myCapturedMounts.Add(mount);
                   foreach (SpecialEnum possession in mi.SpecialKeeps)
@@ -4526,6 +4550,7 @@ namespace BarbarianPrince
             }
             else if (("Prince" == attacker.Name) && (true == defender.IsKilled))
             {
+               ++myGameInstance.Statistic.myNumOfPrinceKill;
                ++myGameInstance.NumMonsterKill; // e161e - need to kill 5 monsters to seek audience with count
             }
          }

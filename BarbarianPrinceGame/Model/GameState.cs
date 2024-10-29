@@ -114,15 +114,27 @@ namespace BarbarianPrince
             gi.IsGridActive = true; // case GameAction.Travel
             gi.DieRollAction = GameAction.DieRollActionNone;
             if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
+            {
+               ++gi.Statistic.myNumDaysOnRaft;
                gi.EventDisplayed = gi.EventActive = "e213"; // next screen to show
+            }
             else if (true == gi.IsShortHop)
+            {
                gi.EventDisplayed = gi.EventActive = "e204s"; // next screen to show
+            }
             else if (true == gi.IsAirborne)
+            {
+               ++gi.Statistic.myNumDaysAirborne;
                gi.EventDisplayed = gi.EventActive = "e204a"; // next screen to show
+            }
             else if (true == gi.IsPartyRiding())
+            {
                gi.EventDisplayed = gi.EventActive = "e204m"; // next screen to show
+            }
             else
+            {
                gi.EventDisplayed = gi.EventActive = "e204u"; // next screen to show
+            }
          }
       }
       protected bool SetHuntState(IGameInstance gi, ref GameAction action)
@@ -535,7 +547,10 @@ namespace BarbarianPrince
       {
          Logger.Log(LogEnum.LE_END_GAME_CHECK, "PerformEndCheck(): ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString());
          if ((6 == gi.DieResults["e203a"][0]) && ("e061" == gi.EventStart)) // need to show the battle axe chopping off head before ending game
+         {
+            ++gi.Statistic.myNumAxeDeath;
             return false;
+         }
          bool isGameEnd = false;
          if (true == gi.Prince.IsKilled)
          {
@@ -2650,6 +2665,7 @@ namespace BarbarianPrince
                break;
             case GameAction.ArchTravel:
                ResetDayForNonTravelChoice(gi, action);
+               gi.Statistic.myNumDaysArchTravel++;
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = GamePhase.Travel;
                gi.GamePhase = GamePhase.Encounter;
@@ -4986,6 +5002,7 @@ namespace BarbarianPrince
                   gi.RemoveLeaderlessInParty(); // keep possessions and mounts
                   gi.WanderingDayCount = 1;
                   ++gi.Prince.StarveDayNum;
+                  ++gi.Statistic.myNumPrinceStarveDays;
                   IMapItems deadMounts = new MapItems();
                   foreach (IMapItem mount in gi.Prince.Mounts)
                   {
@@ -6313,6 +6330,7 @@ namespace BarbarianPrince
                         mi.IsKilled = true;
                   }
                   ++gi.Prince.StarveDayNum;
+                  ++gi.Statistic.myNumPrinceStarveDays;
                   gi.Prince.IsRiding = false;
                   gi.Prince.IsFlying = false;
                   gi.Prince.IsPlagued = false;
@@ -11340,6 +11358,7 @@ namespace BarbarianPrince
                if (gi.WanderingDayCount < dieRoll)
                {
                   ++gi.Prince.StarveDayNum;
+                  ++gi.Statistic.myNumPrinceStarveDays;
                   IMapItems deadMounts = new MapItems();
                   foreach (IMapItem mount in gi.Prince.Mounts)
                   {

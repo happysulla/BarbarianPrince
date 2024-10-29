@@ -4716,13 +4716,14 @@ namespace BarbarianPrince
             ++myGameInstance.Statistic.myNumEncounters;
             outAction = GameAction.SearchEncounter;
          }
-         else if ((true == isLost) && (false == isEncounter))
+         else if ((true == isLost) && (false == isEncounter)) // this is also the code block when river crossing fails
          {
             ++myGameInstance.Statistic.myDaysLost;
             outAction = GameAction.TravelShowLost;
          }
          else if ((true == isRiverCrossing) && (true == isEncounter))
          {
+            ++myGameInstance.Statistic.myNumRiverCrossingSuccess;
             ++myGameInstance.Statistic.myNumEncounters;
             outAction = GameAction.TravelShowRiverEncounter;
          }
@@ -4739,6 +4740,7 @@ namespace BarbarianPrince
          }
          else if (true == isRiverCrossing)
          {
+            ++myGameInstance.Statistic.myNumRiverCrossingSuccess;
             outAction = GameAction.TravelLostCheck;
          }
          else

@@ -29,7 +29,7 @@ namespace BarbarianPrince
       public int myNumOfPartyKillEndurance;     // Total endurance of all killed monsters
       public int myNumOfPartyKillCombat;        // Total endurance of all killed monsters
       public int myNumOfPartyKilled;
-      public int myNumStarvationDay;
+      public int myNumPrinceStarveDays;
       public int myNumAxeDeath;                 // Times Prince Killed by execution
       public int myNumRiverCrossingSuccess;
       public int myNumRiverCrossingFailure;

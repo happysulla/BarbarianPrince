@@ -205,7 +205,7 @@ namespace BarbarianPrince
             if ((true == myGameInstance.IsPartyFed) || (true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")) || (true == mi.IsUnconscious)) // Party if Fed if they are in a town and money was paid to feed them during the hunting phase
                mi.StarveDayNumOld = mi.StarveDayNum;
             else
-               mi.StarveDayNumOld = mi.StarveDayNum + 1;
+               mi.StarveDayNumOld = mi.StarveDayNum + 1; 
             if (mi.Food < 0)
             {
                Logger.Log(LogEnum.LE_ERROR, "FeedParty(): mi=" + mi.Name + " food=" + mi.Food.ToString() + " < 0 ");
@@ -402,6 +402,8 @@ namespace BarbarianPrince
                }
                if ((true == mi.Name.Contains("Slave")) && (5 < mi.StarveDayNum))
                   mi.IsKilled = true;
+               if ((true == mi.Name.Contains("Prince")) && (false == myGameInstance.IsPartyFed) && (mi.StarveDayNumOld == mi.StarveDayNum)) // should be less than old starve days if fed
+                  ++myGameInstance.Statistic.myNumPrinceStarveDays;
             }
             myGameInstance.ProcessIncapacitedPartyMembers("Starvation");
             if (false == myCallback())
@@ -2452,6 +2454,8 @@ namespace BarbarianPrince
                {
                   myGridRows[i].myIsDoubleMeal = false;
                   IMapItem mi = myGridRows[i].myMapItem;
+                  if ((true == mi.Name.Contains("Prince")) && (mi.StarveDayNum != mi.StarveDayNumOld))
+                     --myGameInstance.Statistic.myNumPrinceStarveDays;
                   mi.StarveDayNum = mi.StarveDayNumOld;
                   foreach (IMapItem mount in mi.Mounts)
                      mount.StarveDayNum = mount.StarveDayNumOld;

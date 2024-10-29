@@ -1356,6 +1356,7 @@ namespace BarbarianPrince
                   myTextBlockCol6.Text = "Desert?";
                   return EnumR204.TC_DESERTION_ROLL;
                }
+               ++myGameInstance.Statistic.myNumRiverCrossingFailure;
                return EnumR204.TC_LOST_SHOW_CROSS_RESULT;   // GetLostResult() - attempting to cross river fails, so show river crossing failure
             }
             theConsecutiveLostCount = 0;
