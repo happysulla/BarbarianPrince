@@ -548,7 +548,7 @@ namespace BarbarianPrince
          Logger.Log(LogEnum.LE_END_GAME_CHECK, "PerformEndCheck(): ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString());
          if ((6 == gi.DieResults["e203a"][0]) && ("e061" == gi.EventStart)) // need to show the battle axe chopping off head before ending game
          {
-            ++gi.Statistic.myNumAxeDeath;
+            ++gi.Statistic.myNumOfPrinceAxeDeath;
             return false;
          }
          bool isGameEnd = false;
@@ -646,7 +646,7 @@ namespace BarbarianPrince
             }
          }
          if (true == gi.Prince.IsUnconscious)
-            ++gi.Statistic.myNumOfUncounscious;
+            ++gi.Statistic.myNumOfPrinceUncounscious;
          if (GameAction.EndGameWin == action)
          {
             gi.EventDisplayed = gi.EventActive = "e501";
@@ -2220,7 +2220,7 @@ namespace BarbarianPrince
          //gi.Prince.PlagueDustWound = 1; 
          //gi.Prince.IsResurrected = true;
          //gi.AddUnitTestTiredMount(myPrince);
-         gi.Prince.Coin = 497;
+         gi.Prince.Coin = 501;
          //gi.Prince.Food = 9;
          //---------------------
          //gi.AddSpecialItem(SpecialEnum.GiftOfCharm);
@@ -4299,7 +4299,7 @@ namespace BarbarianPrince
          switch (action)
          {
             case GameAction.EndGameResurrect:
-               ++gi.Statistic.myNumOfResurrection;
+               ++gi.Statistic.myNumOfPrinceResurrection;
                gi.EventDisplayed = gi.EventActive = "e192a";
                gi.DieRollAction = GameAction.DieRollActionNone;
                break;
@@ -5002,7 +5002,7 @@ namespace BarbarianPrince
                   gi.RemoveLeaderlessInParty(); // keep possessions and mounts
                   gi.WanderingDayCount = 1;
                   ++gi.Prince.StarveDayNum;
-                  ++gi.Statistic.myNumPrinceStarveDays;
+                  ++gi.Statistic.myNumOfPrinceStarveDays;
                   IMapItems deadMounts = new MapItems();
                   foreach (IMapItem mount in gi.Prince.Mounts)
                   {
@@ -6330,7 +6330,7 @@ namespace BarbarianPrince
                         mi.IsKilled = true;
                   }
                   ++gi.Prince.StarveDayNum;
-                  ++gi.Statistic.myNumPrinceStarveDays;
+                  ++gi.Statistic.myNumOfPrinceStarveDays;
                   gi.Prince.IsRiding = false;
                   gi.Prince.IsFlying = false;
                   gi.Prince.IsPlagued = false;
@@ -11358,7 +11358,7 @@ namespace BarbarianPrince
                if (gi.WanderingDayCount < dieRoll)
                {
                   ++gi.Prince.StarveDayNum;
-                  ++gi.Statistic.myNumPrinceStarveDays;
+                  ++gi.Statistic.myNumOfPrinceStarveDays;
                   IMapItems deadMounts = new MapItems();
                   foreach (IMapItem mount in gi.Prince.Mounts)
                   {

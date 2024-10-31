@@ -29,7 +29,7 @@ namespace BarbarianPrince
    public partial class GameViewerWindow : Window, IView
    {
       private const int MAX_DAILY_ACTIONS = 16;
-      private const Double MARQUEE_SCROLL_ANMINATION_TIME = 12;
+      private const Double MARQUEE_SCROLL_ANMINATION_TIME = 15;
       public bool CtorError { get; } = false;
       //---------------------------------------------------------------------
       [Serializable]
@@ -2219,10 +2219,10 @@ namespace BarbarianPrince
          myDieRoller.HideDie();
          //-------------------------------
          TextBlock tbMarquee = new TextBlock() { Foreground = Brushes.Blue, FontFamily = myFontFam, FontSize = 24 };
-         UpdateCanvasShowStatsText(gi, tbMarquee);
-
+         int numLines = UpdateCanvasShowStatsText(gi, tbMarquee);
          myCanvas.ClipToBounds = true;
          myCanvas.Children.Add(tbMarquee);
+         tbMarquee.UpdateLayout();
          //-------------------------------
          DoubleAnimation doubleAnimation = new DoubleAnimation();
          doubleAnimation.From = -tbMarquee.ActualHeight;
@@ -2232,11 +2232,159 @@ namespace BarbarianPrince
          tbMarquee.BeginAnimation(Canvas.BottomProperty, doubleAnimation);
          return true;
       }
-      private void UpdateCanvasShowStatsText(IGameInstance gi, TextBlock tb)
+      private int UpdateCanvasShowStatsText(IGameInstance gi, TextBlock tb)
       {
          tb.Inlines.Add(new Run("Current Game Statistics:") { FontWeight = FontWeights.Bold, FontStyle = FontStyles.Italic, TextDecorations = TextDecorations.Underline });
          tb.Inlines.Add(new LineBreak());
-         tb.Inlines.Add(new Run("Options Game Type = " + gi.OptionsType));
+         tb.Inlines.Add(new Run("Game Type = " + gi.OptionsType) { FontWeight = FontWeights.Bold }) ;
+         tb.Inlines.Add(new LineBreak());
+         tb.Inlines.Add(new Run("Number of Coins at End = " + gi.Statistic.myCoinAtEnd.ToString()) { FontWeight = FontWeights.Bold });
+         tb.Inlines.Add(new LineBreak());
+         tb.Inlines.Add(new Run("Number of Food Units at End = " + gi.Statistic.myFoodAtEnd.ToString()) { FontWeight = FontWeights.Bold });
+         tb.Inlines.Add(new LineBreak());
+         tb.Inlines.Add(new Run("Party Size at End = " + gi.Statistic.myPartyCountEnd.ToString()) { FontWeight = FontWeights.Bold });
+         int numLines = 4;
+         if (0 < gi.Statistic.myDaysLost)
+         {
+            ++numLines;
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Number of Days Lost = " + gi.Statistic.myDaysLost.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myNumEncounters)
+         {
+            ++numLines;
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Number of Encounters = " + gi.Statistic.myNumEncounters.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myNumOfRestDays)
+         {
+            ++numLines;
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Number of Days Resting = " + gi.Statistic.myNumOfRestDays.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myNumOfAudienceAttempt)
+         {
+            ++numLines;
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Number of Audience Attempts = " + gi.Statistic.myNumOfAudienceAttempt.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myNumOfAudience)
+         {
+            ++numLines;
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Number of Audience Attempts = " + gi.Statistic.myNumOfAudience.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myNumOfOffering)
+         {
+            ++numLines;
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Number of Offerings = " + gi.Statistic.myNumOfOffering.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myDaysInJailorDungeon)
+         {
+            ++numLines;
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Number of Days in Jail, Dungeon, or Wondering = " + gi.Statistic.myDaysInJailorDungeon.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myNumRiverCrossingSuccess)
+         {
+            ++numLines;
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Number of River Crossings = " + gi.Statistic.myNumRiverCrossingSuccess.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myNumRiverCrossingFailure)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Number of Failed River Crossings = " + gi.Statistic.myNumRiverCrossingFailure.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myNumDaysOnRaft)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Number of Raft Days = " + gi.Statistic.myNumDaysOnRaft.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myNumDaysAirborne)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Number of Airbourne Days = " + gi.Statistic.myNumDaysAirborne.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myNumDaysArchTravel)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Number Arch Travel Days = " + gi.Statistic.myNumDaysArchTravel.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         //-------------------------------------
+         if (0 < gi.Statistic.myMaxPartySize)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Maximum Party Size = " + gi.Statistic.myMaxPartySize.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myMaxPartyEndurance)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Maximum Party Endurance = " + gi.Statistic.myMaxPartyEndurance.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myMaxPartyCombat)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Maximum Party Combat = " + gi.Statistic.myMaxPartyCombat.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myNumOfPartyKilled)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Total Killed Monsters = " + gi.Statistic.myNumOfPartyKilled.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myNumOfPartyHeal)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Number of Wounds Healed in Party = " + gi.Statistic.myNumOfPartyHeal.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myNumOfPartyKill)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Number of Party Kills = " + gi.Statistic.myNumOfPartyKill.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myNumOfPartyKillEndurance)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Total Endurance Value Killed = " + gi.Statistic.myNumOfPartyKillEndurance.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myNumOfPartyKillCombat)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Total Combat Value Killed = " + gi.Statistic.myNumOfPartyKillCombat.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         //-------------------------------------
+         if (0 < gi.Statistic.myNumOfPrinceKill)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Number of Prince Kills = " + gi.Statistic.myNumOfPrinceKill.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myNumOfPrinceHeal)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Number of Prince Endurance Healed = " + gi.Statistic.myNumOfPrinceHeal.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myNumOfPrinceStarveDays)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Number of Prince Starvation Days = " + gi.Statistic.myNumOfPrinceStarveDays.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myNumOfPrinceUncounscious)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Number of Prince Unconscious Days = " + gi.Statistic.myNumOfPrinceUncounscious.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myNumOfPrinceResurrection)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Number of Prince Resurrections = " + gi.Statistic.myNumOfPrinceResurrection.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < gi.Statistic.myNumOfPrinceAxeDeath)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Number of Prince Executions = " + gi.Statistic.myNumOfPrinceAxeDeath.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         return numLines;
       }
       private bool MoveToNewHexWhenJailed(IGameInstance gi)
       {

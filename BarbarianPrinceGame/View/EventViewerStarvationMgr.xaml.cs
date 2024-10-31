@@ -403,7 +403,7 @@ namespace BarbarianPrince
                if ((true == mi.Name.Contains("Slave")) && (5 < mi.StarveDayNum))
                   mi.IsKilled = true;
                if ((true == mi.Name.Contains("Prince")) && (false == myGameInstance.IsPartyFed) && (mi.StarveDayNumOld == mi.StarveDayNum)) // should be less than old starve days if fed
-                  ++myGameInstance.Statistic.myNumPrinceStarveDays;
+                  ++myGameInstance.Statistic.myNumOfPrinceStarveDays;
             }
             myGameInstance.ProcessIncapacitedPartyMembers("Starvation");
             if (false == myCallback())
@@ -2455,7 +2455,7 @@ namespace BarbarianPrince
                   myGridRows[i].myIsDoubleMeal = false;
                   IMapItem mi = myGridRows[i].myMapItem;
                   if ((true == mi.Name.Contains("Prince")) && (mi.StarveDayNum != mi.StarveDayNumOld))
-                     --myGameInstance.Statistic.myNumPrinceStarveDays;
+                     --myGameInstance.Statistic.myNumOfPrinceStarveDays;
                   mi.StarveDayNum = mi.StarveDayNumOld;
                   foreach (IMapItem mount in mi.Mounts)
                      mount.StarveDayNum = mount.StarveDayNumOld;
