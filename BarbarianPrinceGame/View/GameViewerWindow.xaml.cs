@@ -29,7 +29,7 @@ namespace BarbarianPrince
    public partial class GameViewerWindow : Window, IView
    {
       private const int MAX_DAILY_ACTIONS = 16;
-      private const Double MARQUEE_SCROLL_ANMINATION_TIME = 15;
+      private const Double MARQUEE_SCROLL_ANMINATION_TIME = 20;
       public bool CtorError { get; } = false;
       //---------------------------------------------------------------------
       [Serializable]

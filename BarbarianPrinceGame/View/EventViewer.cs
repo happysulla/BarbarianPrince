@@ -1460,7 +1460,7 @@ namespace BarbarianPrince
                   cost = 10;
                   if (true == gi.IsMerchantWithParty)
                      cost = (int)Math.Ceiling((double)cost * 0.5);
-                  if (cost <= gi.GetCoins()) // can only sell two horses
+                  if (cost <= gi.GetCoins()) 
                      b.IsEnabled = true;
                   else
                      b.IsEnabled = false;
@@ -3821,15 +3821,20 @@ namespace BarbarianPrince
                   //----------------------------------
                   if (false == myGameInstance.IsOfferingModifier) // ask if want to spend 10 gold to add one to die roll
                   {
-                     myTextBlock.Inlines.Add(new LineBreak());
-                     myTextBlock.Inlines.Add(new Run("If you "));
-                     Button b1 = new Button() { Content = "Spend", FontFamily = myFontFam1, FontSize = 12 };
-                     b1.Click += Button_Click;
-                     myTextBlock.Inlines.Add(new InlineUIContainer(b1));
-                     if (true == myGameInstance.IsMerchantWithParty)
-                        myTextBlock.Inlines.Add(new Run(" 5gp, add one to your die result."));
-                     else
-                        myTextBlock.Inlines.Add(new Run(" 10gp, add one to your die result."));
+                     cost = 10;
+                     cost = (int)Math.Ceiling((double)cost * 0.5);
+                     if (cost <= gi.GetCoins())
+                     {
+                        myTextBlock.Inlines.Add(new LineBreak());
+                        myTextBlock.Inlines.Add(new Run("If you "));
+                        Button b1 = new Button() { Content = "Spend", FontFamily = myFontFam1, FontSize = 12 };
+                        b1.Click += Button_Click;
+                        myTextBlock.Inlines.Add(new InlineUIContainer(b1));
+                        if (true == myGameInstance.IsMerchantWithParty)
+                           myTextBlock.Inlines.Add(new Run(" 5gp, add one to your die result."));
+                        else
+                           myTextBlock.Inlines.Add(new Run(" 10gp, add one to your die result."));
+                     }
                   }
                   else
                   {
