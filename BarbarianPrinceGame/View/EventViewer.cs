@@ -6471,8 +6471,12 @@ namespace BarbarianPrince
                               action = GameAction.EncounterRoll;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
-                            case "EndGameExit":
+                           case "EndGameExit":
                               action = GameAction.EndGameExit;
+                              myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                              return;
+                           case "EndGameFinal":
+                              action = GameAction.EndGameFinal;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
                            case "EndGameShowStats":

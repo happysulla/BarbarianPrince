@@ -530,6 +530,10 @@ namespace BarbarianPrince
                gi.GamePhase = GamePhase.EndGame;
                gi.EndGameReason = "500+ gold";
                gi.EventDisplayed = gi.EventActive = "e501";
+               gi.Statistic.myEndDaysCount = gi.Days;
+               gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
+               gi.Statistic.myEndCoinCount = gi.GetCoins();
+               gi.Statistic.myEndFoodCount = gi.GetFoods();
             }
             else
             {
@@ -651,11 +655,19 @@ namespace BarbarianPrince
          {
             gi.EventDisplayed = gi.EventActive = "e501";
             gi.DieRollAction = GameAction.DieRollActionNone;
+            gi.Statistic.myEndDaysCount = gi.Days;
+            gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
+            gi.Statistic.myEndCoinCount = gi.GetCoins();
+            gi.Statistic.myEndFoodCount = gi.GetFoods();
          }
          else if (GameAction.EndGameLost == action)
          {
             gi.EventDisplayed = gi.EventActive = "e502";
             gi.DieRollAction = GameAction.DieRollActionNone;
+            gi.Statistic.myEndDaysCount = gi.Days;
+            gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
+            gi.Statistic.myEndCoinCount = gi.GetCoins();
+            gi.Statistic.myEndFoodCount = gi.GetFoods();
          }
          return isGameEnd;
       }
@@ -2220,7 +2232,7 @@ namespace BarbarianPrince
          //gi.Prince.PlagueDustWound = 1; 
          //gi.Prince.IsResurrected = true;
          //gi.AddUnitTestTiredMount(myPrince);
-         gi.Prince.Coin = 501;
+         //gi.Prince.Coin = 501;
          //gi.Prince.Food = 9;
          //---------------------
          //gi.AddSpecialItem(SpecialEnum.GiftOfCharm);
@@ -3316,6 +3328,10 @@ namespace BarbarianPrince
                         gi.EndGameReason = "Prince starves to dead as Wizard's slave";
                         gi.EventDisplayed = gi.EventActive = "e502";
                         gi.DieRollAction = GameAction.DieRollActionNone;
+                        gi.Statistic.myEndDaysCount = gi.Days;
+                        gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
+                        gi.Statistic.myEndCoinCount = gi.GetCoins();
+                        gi.Statistic.myEndFoodCount = gi.GetFoods();
                      }
                      return true;
                   }
@@ -3347,6 +3363,10 @@ namespace BarbarianPrince
                            gi.EndGameReason = "Prince beaten to death as Wizard's slave";
                            gi.EventDisplayed = gi.EventActive = "e502";
                            gi.DieRollAction = GameAction.DieRollActionNone;
+                           gi.Statistic.myEndDaysCount = gi.Days;
+                           gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
+                           gi.Statistic.myEndCoinCount = gi.GetCoins();
+                           gi.Statistic.myEndFoodCount = gi.GetFoods();
                         }
                         return true;
                      }
@@ -4306,10 +4326,18 @@ namespace BarbarianPrince
             case GameAction.EndGameWin:
                gi.EventDisplayed = gi.EventActive = "e501";
                gi.DieRollAction = GameAction.DieRollActionNone;
+               gi.Statistic.myEndDaysCount = gi.Days;
+               gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
+               gi.Statistic.myEndCoinCount = gi.GetCoins();
+               gi.Statistic.myEndFoodCount = gi.GetFoods();
                break;
             case GameAction.EndGameLost:
                gi.EventDisplayed = gi.EventActive = "e502";
                gi.DieRollAction = GameAction.DieRollActionNone;
+               gi.Statistic.myEndDaysCount = gi.Days;
+               gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
+               gi.Statistic.myEndCoinCount = gi.GetCoins();
+               gi.Statistic.myEndFoodCount = gi.GetFoods();
                break;
             case GameAction.EndGameShowStats:
                gi.EventDisplayed = gi.EventActive = "e503";
@@ -4317,6 +4345,9 @@ namespace BarbarianPrince
             case GameAction.EndGameClose:
                break;
             case GameAction.UpdateGameOptions:
+               break;
+            case GameAction.EndGameFinal:
+               gi.EventDisplayed = gi.EventActive = "e504";
                break;
             case GameAction.UpdateLoadingGame:
                if (false == LoadGame(ref gi, ref action))
@@ -5402,6 +5433,10 @@ namespace BarbarianPrince
                      gi.EndGameReason = "Prince is a Frog";
                      gi.EventDisplayed = gi.EventActive = "e502";
                      gi.DieRollAction = GameAction.DieRollActionNone;
+                     gi.Statistic.myEndDaysCount = gi.Days;
+                     gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
+                     gi.Statistic.myEndCoinCount = gi.GetCoins();
+                     gi.Statistic.myEndFoodCount = gi.GetFoods();
                   }
                   break;
                case GameAction.E075WolvesEncounter:
@@ -5889,6 +5924,10 @@ namespace BarbarianPrince
                         gi.EndGameReason = "Prince died in violent crash to ground due to weather";
                         gi.EventDisplayed = gi.EventActive = "e502";
                         gi.DieRollAction = GameAction.DieRollActionNone;
+                        gi.Statistic.myEndDaysCount = gi.Days;
+                        gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
+                        gi.Statistic.myEndCoinCount = gi.GetCoins();
+                        gi.Statistic.myEndFoodCount = gi.GetFoods();
                      }
                   }
                   else
@@ -6543,6 +6582,10 @@ namespace BarbarianPrince
                   gi.EndGameReason = "Noble Ally marches on Northlands!";
                   gi.EventDisplayed = gi.EventActive = "e501";
                   gi.DieRollAction = GameAction.DieRollActionNone;
+                  gi.Statistic.myEndDaysCount = gi.Days;
+                  gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
+                  gi.Statistic.myEndCoinCount = gi.GetCoins();
+                  gi.Statistic.myEndFoodCount = gi.GetFoods();
                   break;
                case GameAction.E153MasterOfHouseholdDeny:
                   gi.ForbiddenAudiences.AddTimeConstraint(princeTerritory, Utilities.FOREVER);
@@ -9554,6 +9597,10 @@ namespace BarbarianPrince
                gi.EndGameReason = "Restored Huldra's Heir to the Throne.";
                gi.EventDisplayed = gi.EventActive = "e501";
                gi.DieRollAction = GameAction.DieRollActionNone;
+               gi.Statistic.myEndDaysCount = gi.Days;
+               gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
+               gi.Statistic.myEndCoinCount = gi.GetCoins();
+               gi.Statistic.myEndFoodCount = gi.GetFoods();
                return true; //<<<<<<<<<<<<<<<<<<<<<
             case "e154e": // lords daughter
                gi.CapturedWealthCodes.Add(100);
@@ -12702,6 +12749,10 @@ namespace BarbarianPrince
                         gi.EndGameReason = "Prince died in gory fall off cliff";
                         gi.EventDisplayed = gi.EventActive = "e502";
                         gi.DieRollAction = GameAction.DieRollActionNone;
+                        gi.Statistic.myEndDaysCount = gi.Days;
+                        gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
+                        gi.Statistic.myEndCoinCount = gi.GetCoins();
+                        gi.Statistic.myEndFoodCount = gi.GetFoods();
                      }
                   }
                   else if ((true == isMemberIncapacited) || (8 < gi.DieResults[key][0])) // if anybody is incapacitied or the mounts are lost, redistribute belongings
@@ -15089,6 +15140,10 @@ namespace BarbarianPrince
                      gi.EndGameReason = "Restore True Heir to Huldra Throne in Audience.";
                      gi.EventDisplayed = gi.EventActive = "e501";
                      gi.DieRollAction = GameAction.DieRollActionNone;
+                     gi.Statistic.myEndDaysCount = gi.Days;
+                     gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
+                     gi.Statistic.myEndCoinCount = gi.GetCoins();
+                     gi.Statistic.myEndFoodCount = gi.GetFoods();
                   }
                   else
                   {

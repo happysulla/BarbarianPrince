@@ -10,10 +10,10 @@ namespace BarbarianPrince
    [Serializable]
    public class GameStat
    {
-      public int myNumDaysEnd;
-      public int myCoinAtEnd;                   // Coin at end of game
-      public int myFoodAtEnd;                   // Food at end of game
-      public int myPartyCountEnd;               // Party member count at end of game
+      public int myEndDaysCount;
+      public int myEndCoinCount;                   // Coin at end of game
+      public int myEndFoodCount;                   // Food at end of game
+      public int myEndPartyCount;               // Party member count at end of game
 
       public int myDaysLost;
       public int myNumEncounters;

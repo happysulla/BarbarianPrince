@@ -124,6 +124,7 @@ namespace BarbarianPrince
       EndGameResurrect,
       EndGameShowStats,
       EndGameClose,
+      EndGameFinal,      // Show the final location on map with final path
       EndGameExit,
 
       SetupShowCalArath,

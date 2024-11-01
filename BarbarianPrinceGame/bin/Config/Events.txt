@@ -4977,7 +4977,17 @@ e501	"<Bold>e501 Game Won!!!</Bold>
 e502	"<Bold>e502 Game Lost</Bold>
 <LineBreak/><LineBreak/>"
 e503	"<Bold>e503 End Game Statistics and Feats</Bold>
-<LineBreak/><LineBreak/>To be completed in next revision.
-<LineBreak/><LineBreak/>Click image to close game or select 'File|New' to try again.
 <LineBreak/><LineBreak/>
-                                             <InlineUIContainer><Image Name='EndGameExit' Source='../bin/Images/Nothing.gif' Height='100' Width='100'></Image></InlineUIContainer>"
+Select 'File | New' menu option to play again.
+<LineBreak/><LineBreak/>
+Click image to review map: 
+<LineBreak/><InlineUIContainer><Image Name='EndGameFinal' Source='../bin/Images/Map.gif' Height='100' Width='100'></Image></InlineUIContainer>
+<LineBreak/><LineBreak/>
+Click image to exit game:
+<LineBreak/>   <InlineUIContainer><Image Name='EndGameExit' Source='../bin/Images/DoorClosing.gif' Height='150' Width='75'></Image></InlineUIContainer>"
+e504	"<Bold>e504 Play Again?</Bold>
+<LineBreak/><LineBreak/>
+Select 'File | New' menu option to play again.
+<LineBreak/><LineBreak/>
+Click image to exit game:
+<LineBreak/>   <InlineUIContainer><Image Name='EndGameExit' Source='../bin/Images/DoorClosing.gif' Height='150' Width='75'></Image></InlineUIContainer>"

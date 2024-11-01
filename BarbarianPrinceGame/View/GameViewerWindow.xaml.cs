@@ -266,7 +266,7 @@ namespace BarbarianPrince
             this.myCanvas.Cursor = myTargetCursor;
          }
          //-------------------------------------------------------
-         else if ((GameAction.UpdateLoadingGame == action) || (GameAction.UpdateNewGame == action))
+         else if ((GameAction.UpdateLoadingGame == action) || (GameAction.UpdateNewGame == action) )
          {
             myGameInstance = gi;
             myButtonMapItems.Clear();
@@ -332,6 +332,13 @@ namespace BarbarianPrince
                UpdateCanvasRiver("Greater Nesser River", false);
                UpdateCanvasRiver("Lesser Nesser River", false);
                UpdateCanvasRiver("Trogoth River", false);
+               break;
+            case GameAction.EndGameFinal:
+               myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas);
+               if (false == UpdateCanvasPath(gi))
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateCanvas(): UpdateCanvasPath() returned false");
+               if (false == UpdateCanvas(gi, action))
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvas() returned error ");
                break;
             case GameAction.ShowPartyPath:
                if (true == myMainMenuViewer.IsPathShown)
@@ -2236,13 +2243,36 @@ namespace BarbarianPrince
       {
          tb.Inlines.Add(new Run("Current Game Statistics:") { FontWeight = FontWeights.Bold, FontStyle = FontStyles.Italic, TextDecorations = TextDecorations.Underline });
          tb.Inlines.Add(new LineBreak());
-         tb.Inlines.Add(new Run("Game Type = " + gi.OptionsType) { FontWeight = FontWeights.Bold }) ;
+         string gameType = "";
+         switch(gi.OptionsType)
+         {
+            case GameOptionType.GO_ORIGINAL:
+               gameType = "Original";
+               break;
+            case GameOptionType.GO_RAND_PARTY:
+               gameType = "Random Party";
+               break;
+            case GameOptionType.GO_RAND_HEX:
+               gameType = "Random Hex";
+               break;
+            case GameOptionType.GO_FUN_MAX:
+               gameType = "Maximum Fun";
+               break;
+            case GameOptionType.GO_CUSTOM:
+               gameType = "Custom";
+               break;
+            default:
+               Logger.Log(LogEnum.LE_ERROR, "UpdateCanvasShowStatsText(): reached default=" + gi.OptionsType.ToString());
+               gameType = "Unknown";
+               break; 
+         }
+         tb.Inlines.Add(new Run("Game Type = " + gameType) { FontWeight = FontWeights.Bold }) ;
          tb.Inlines.Add(new LineBreak());
-         tb.Inlines.Add(new Run("Number of Coins at End = " + gi.Statistic.myCoinAtEnd.ToString()) { FontWeight = FontWeights.Bold });
+         tb.Inlines.Add(new Run("Number of Coins at End = " + gi.Statistic.myEndCoinCount.ToString()) { FontWeight = FontWeights.Bold });
          tb.Inlines.Add(new LineBreak());
-         tb.Inlines.Add(new Run("Number of Food Units at End = " + gi.Statistic.myFoodAtEnd.ToString()) { FontWeight = FontWeights.Bold });
+         tb.Inlines.Add(new Run("Number of Food Units at End = " + gi.Statistic.myEndFoodCount.ToString()) { FontWeight = FontWeights.Bold });
          tb.Inlines.Add(new LineBreak());
-         tb.Inlines.Add(new Run("Party Size at End = " + gi.Statistic.myPartyCountEnd.ToString()) { FontWeight = FontWeights.Bold });
+         tb.Inlines.Add(new Run("Party Size at End = " + gi.Statistic.myEndPartyCount.ToString()) { FontWeight = FontWeights.Bold });
          int numLines = 4;
          if (0 < gi.Statistic.myDaysLost)
          {
