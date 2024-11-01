@@ -4976,7 +4976,7 @@ e501	"<Bold>e501 Game Won!!!</Bold>
 <LineBreak/><LineBreak/>"
 e502	"<Bold>e502 Game Lost</Bold>
 <LineBreak/><LineBreak/>"
-e503	"<Bold>e503 End Game Statistics and Feats</Bold>
+e503	"<Bold>e503 End Game Statistics and Feats </Bold>
 <LineBreak/><LineBreak/>
 Select 'File | New' menu option to play again.
 <LineBreak/><LineBreak/>
