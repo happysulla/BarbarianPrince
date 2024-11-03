@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace BarbarianPrince
@@ -20,8 +21,6 @@ namespace BarbarianPrince
    {
       public bool CtorError { get; }
       public IGameInstance myGameInstance = null;
-      private GameOptionType myGameOptionType = GameOptionType.GO_ORIGINAL;
-      public GameOptionType NewGameOptionType { get => myGameOptionType; }
       private Options myOptions { get; set; } = null;
       public Options NewOptions { get => myOptions; }
       private bool myIsRandomGame = false;
@@ -1214,7 +1213,14 @@ namespace BarbarianPrince
          // Summary Selection
          if (true == isFunOption)
          {
-            myGameOptionType = GameOptionType.GO_FUN_MAX;
+            name = "MaxFunGame";
+            option = options.Find(name);
+            if (null == option)
+            {
+               option = new Option(name, false);
+               myOptions.Add(option);
+            }
+            option.IsEnabled = true;
             myRadioButtonOriginal.IsChecked = false;
             myRadioButtonRandomParty.IsChecked = false;
             myRadioButtonRandomStart.IsChecked = false;
@@ -1224,7 +1230,14 @@ namespace BarbarianPrince
          }
          else if (true == myIsRandomGame)
          {
-            myGameOptionType = GameOptionType.GO_RAND_ALL;
+            name = "RandomGame";
+            option = options.Find(name);
+            if (null == option)
+            {
+               option = new Option(name, false);
+               myOptions.Add(option);
+            }
+            option.IsEnabled = true;
             myRadioButtonOriginal.IsChecked = false;
             myRadioButtonRandomParty.IsChecked = false;
             myRadioButtonRandomStart.IsChecked = false;
@@ -1234,7 +1247,14 @@ namespace BarbarianPrince
          }
          else if ((true == isCustomConfig) || (true == isCustomPartyConfig) || (true == isCustomHexConfig))
          {
-            myGameOptionType = GameOptionType.GO_CUSTOM;
+            name = "CustomGame";
+            option = options.Find(name);
+            if (null == option)
+            {
+               option = new Option(name, false);
+               myOptions.Add(option);
+            }
+            option.IsEnabled = true;
             myRadioButtonOriginal.IsChecked = false;
             myRadioButtonRandomParty.IsChecked = false;
             myRadioButtonRandomStart.IsChecked = false;
@@ -1244,7 +1264,14 @@ namespace BarbarianPrince
          }
          else if ( (true == isRandomPartyConfig) && (true == isRandomHexConfig) )
          {
-            myGameOptionType = GameOptionType.GO_RAND_ALL;
+            name = "RandomGame";
+            option = options.Find(name);
+            if (null == option)
+            {
+               option = new Option(name, false);
+               myOptions.Add(option);
+            }
+            option.IsEnabled = true;
             myRadioButtonOriginal.IsChecked = false;
             myRadioButtonRandomParty.IsChecked = false;
             myRadioButtonRandomStart.IsChecked = false;
@@ -1254,7 +1281,14 @@ namespace BarbarianPrince
          }
          else if (true == isRandomPartyConfig)
          {
-            myGameOptionType = GameOptionType.GO_RAND_PARTY;
+            name = "RandomPartyGame";
+            option = options.Find(name);
+            if (null == option)
+            {
+               option = new Option(name, false);
+               myOptions.Add(option);
+            }
+            option.IsEnabled = true;
             myRadioButtonOriginal.IsChecked = false;
             myRadioButtonRandomParty.IsChecked = true;
             myRadioButtonRandomStart.IsChecked = false;
@@ -1264,7 +1298,14 @@ namespace BarbarianPrince
          }
          else if (true == isRandomHexConfig)
          {
-            myGameOptionType = GameOptionType.GO_RAND_HEX;
+            name = "RandomHexGame";
+            option = options.Find(name);
+            if (null == option)
+            {
+               option = new Option(name, false);
+               myOptions.Add(option);
+            }
+            option.IsEnabled = true;
             myRadioButtonOriginal.IsChecked = false;
             myRadioButtonRandomParty.IsChecked = false;
             myRadioButtonRandomStart.IsChecked = true;
@@ -1274,7 +1315,14 @@ namespace BarbarianPrince
          }
          else
          {
-            myGameOptionType = GameOptionType.GO_ORIGINAL;
+            name = "OriginalGame";
+            option = options.Find(name);
+            if (null == option)
+            {
+               option = new Option(name, false);
+               myOptions.Add(option);
+            }
+            option.IsEnabled = true;
             myRadioButtonOriginal.IsChecked = true;
             myRadioButtonRandomParty.IsChecked = false;
             myRadioButtonRandomStart.IsChecked = false;
@@ -1284,6 +1332,52 @@ namespace BarbarianPrince
          }
          //++++++++++++++++++++++++++++++++++++++++++++++++
          return true;
+      }
+      private void ResetGameType()
+      {
+         Option option = null;
+         string name = "";
+         name = "OriginalGame";
+         option = myOptions.Find(name);
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            option = new Option(name, false);
+         //------------------------
+         name = "RandomPartyGame";
+         option = myOptions.Find(name);
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            option = new Option(name, false);
+         //------------------------
+         name = "RandomHexGame";
+         option = myOptions.Find(name);
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            option = new Option(name, false);
+         //------------------------
+         name = "RandomGame";
+         option = myOptions.Find(name);
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            option = new Option(name, false);
+         //------------------------
+         name = "MaxFunGame";
+         option = myOptions.Find(name);
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            option = new Option(name, false);
+         //------------------------
+         name = "CustomGame";
+         option = myOptions.Find(name);
+         if (null != option)
+            option.IsEnabled = false;
+         else
+            option = new Option(name, false);
       }
       private void ResetPrince()
       {
@@ -1970,6 +2064,7 @@ namespace BarbarianPrince
       private void StackPanelSummary_Click(object sender, RoutedEventArgs e)
       {
          RadioButton rb = (RadioButton)sender;
+         ResetGameType();
          ResetPrince();
          ResetParty();
          ResetPartyMembers();

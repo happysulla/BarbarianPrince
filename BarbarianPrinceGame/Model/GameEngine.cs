@@ -9,8 +9,15 @@ namespace BarbarianPrince
    {
       //---------------------------------------------------------------------
       static public TreasureMgr theTreasureMgr = new TreasureMgr();
+      public const int MAX_GAME_TYPE = 6;
       //---------------------------------------------------------------------
       private readonly MainWindow myMainWindow = null;
+      private GameStat[] myStatistics = new GameStat[MAX_GAME_TYPE+1];
+      public GameStat[] Statistics
+      {
+         set { myStatistics = value; }
+         get { return myStatistics; }
+      }
       private readonly List<IView> myViews = new List<IView>();
       public List<IView> Views
       {
@@ -19,6 +26,8 @@ namespace BarbarianPrince
       //---------------------------------------------------------------
       public GameEngine(MainWindow mainWindow)
       {
+         for(int i=0; i< MAX_GAME_TYPE+1; i++)
+            myStatistics[i] = new GameStat();
          myMainWindow = mainWindow;
       }
       public void RegisterForUpdates(IView view)

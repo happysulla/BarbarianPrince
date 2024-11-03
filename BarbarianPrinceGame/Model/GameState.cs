@@ -530,6 +530,7 @@ namespace BarbarianPrince
                gi.GamePhase = GamePhase.EndGame;
                gi.EndGameReason = "500+ gold";
                gi.EventDisplayed = gi.EventActive = "e501";
+               gi.Statistic.myNumWins++;
                gi.Statistic.myEndDaysCount = gi.Days;
                gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
                gi.Statistic.myEndCoinCount = gi.GetCoins();
@@ -655,6 +656,7 @@ namespace BarbarianPrince
          {
             gi.EventDisplayed = gi.EventActive = "e501";
             gi.DieRollAction = GameAction.DieRollActionNone;
+            gi.Statistic.myNumWins++;
             gi.Statistic.myEndDaysCount = gi.Days;
             gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
             gi.Statistic.myEndCoinCount = gi.GetCoins();
@@ -1359,6 +1361,9 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateNewGame:
             case GameAction.RemoveSplashScreen:
+               gi.Statistic.Clear();         // Clear any current statitics
+               gi.Statistic.myNumGames = 1;  // Set played games to 1
+               
                Option option = gi.Options.Find("AutoSetup");
                if (null == option)
                {
@@ -2232,7 +2237,7 @@ namespace BarbarianPrince
          //gi.Prince.PlagueDustWound = 1; 
          //gi.Prince.IsResurrected = true;
          //gi.AddUnitTestTiredMount(myPrince);
-         //gi.Prince.Coin = 501;
+         gi.Prince.Coin = 501;
          //gi.Prince.Food = 9;
          //---------------------
          //gi.AddSpecialItem(SpecialEnum.GiftOfCharm);
@@ -2565,7 +2570,6 @@ namespace BarbarianPrince
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = GamePhase.SeekAudience;
                gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_AUDIENCE));
-               ++gi.Statistic.myNumOfAudienceAttempt;
                if (true == gi.IsInTown(princeTerritory))
                {
                   gi.EventDisplayed = gi.EventActive = "e211a";
@@ -4326,6 +4330,7 @@ namespace BarbarianPrince
             case GameAction.EndGameWin:
                gi.EventDisplayed = gi.EventActive = "e501";
                gi.DieRollAction = GameAction.DieRollActionNone;
+               gi.Statistic.myNumWins++;
                gi.Statistic.myEndDaysCount = gi.Days;
                gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
                gi.Statistic.myEndCoinCount = gi.GetCoins();
@@ -6581,6 +6586,7 @@ namespace BarbarianPrince
                   gi.GamePhase = GamePhase.EndGame;
                   gi.EndGameReason = "Noble Ally marches on Northlands!";
                   gi.EventDisplayed = gi.EventActive = "e501";
+                  gi.Statistic.myNumWins++;
                   gi.DieRollAction = GameAction.DieRollActionNone;
                   gi.Statistic.myEndDaysCount = gi.Days;
                   gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
@@ -9597,6 +9603,7 @@ namespace BarbarianPrince
                gi.EndGameReason = "Restored Huldra's Heir to the Throne.";
                gi.EventDisplayed = gi.EventActive = "e501";
                gi.DieRollAction = GameAction.DieRollActionNone;
+               gi.Statistic.myNumWins++;
                gi.Statistic.myEndDaysCount = gi.Days;
                gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
                gi.Statistic.myEndCoinCount = gi.GetCoins();
@@ -14596,6 +14603,7 @@ namespace BarbarianPrince
                         break;
                      case 9:
                      case 10: // audience permitted
+                        ++gi.Statistic.myNumOfAudience;
                         ITerritory e211a1 = FindClosestTown(gi); // this territory is updated by user selecting a castle or temple
                         if ((true == gi.IsReligionInParty()) && (true == gi.ForbiddenAudiences.IsReligiousConstraint(e211a1)))
                         {
@@ -14631,6 +14639,7 @@ namespace BarbarianPrince
                      case 14:
                      case 15:
                      case 16:                                                              //  audience permitted
+                        ++gi.Statistic.myNumOfAudience;
                         ITerritory e211a2 = FindClosestTown(gi); // this territory is updated by user selecting a castle or temple
                         if ((true == gi.IsReligionInParty()) && (true == gi.ForbiddenAudiences.IsReligiousConstraint(e211a2)))
                         {
@@ -14665,6 +14674,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  ++gi.Statistic.myNumOfAudienceAttempt;
                   if (true == gi.FeelAtHomes.Contains(princeTerritory))
                      ++dieRoll;
                   //--------------------------------
@@ -14681,7 +14691,6 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerActive;
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  ++gi.Statistic.myNumOfAudienceAttempt;
                   gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
@@ -14711,6 +14720,7 @@ namespace BarbarianPrince
                               Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): RemoveSpecialItem() returned false ae=" + action.ToString() + " dr=" + gi.DieResults["e211b"][0].ToString());
                               return false;
                            }
+                           ++gi.Statistic.myNumOfAudience;
                            gi.EventStart = gi.EventDisplayed = gi.EventActive = "e155";
                            gi.DieRollAction = GameAction.EncounterRoll;
                         }
@@ -14729,11 +14739,12 @@ namespace BarbarianPrince
                         gi.ForbiddenAudiences.AddTimeConstraint(princeTerritory, gi.Days + 1);
                         break;
                      case 10: gi.EventDisplayed = gi.EventActive = "e159"; gi.ForbiddenAudiences.AddPurifyConstaint(princeTerritory); break;   // purify self
-                     default: gi.EventStart = gi.EventDisplayed = gi.EventActive = "e155"; gi.DieRollAction = GameAction.EncounterRoll; break; //  audience permitted
+                     default: gi.EventStart = gi.EventDisplayed = gi.EventActive = "e155"; gi.DieRollAction = GameAction.EncounterRoll; ++gi.Statistic.myNumOfAudience; break; //  audience permitted
                   }
                }
                else
                {
+                  ++gi.Statistic.myNumOfAudienceAttempt;
                   if (true == gi.IsChagaDrugProvided)
                      dieRoll += 1;  // Chaga Drug adds one
                   gi.IsChagaDrugProvided = false;
@@ -14818,6 +14829,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  ++gi.Statistic.myNumOfAudienceAttempt;
                   List<ITerritory> letters = new List<ITerritory>();
                   foreach (ITerritory t in gi.LetterOfRecommendations)
                   {
@@ -14870,6 +14882,7 @@ namespace BarbarianPrince
                               Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): RemoveSpecialItem() returned false ae=" + action.ToString() + " dr=" + gi.DieResults[key][0].ToString());
                               return false;
                            }
+                           ++gi.Statistic.myNumOfAudience;
                            gi.EventStart = gi.EventDisplayed = gi.EventActive = "e161";
                            gi.DieRollAction = GameAction.EncounterRoll;
                         }
@@ -14896,12 +14909,13 @@ namespace BarbarianPrince
                         }
                         break;
                      case 9: gi.EventDisplayed = gi.EventActive = "e149"; gi.ForbiddenAudiences.AddClothesConstraint(princeTerritory); break;      // learn court manners
-                     case 10: gi.EventDisplayed = gi.EventActive = "e151"; gi.DieRollAction = GameAction.EncounterRoll; break;                     // find favor
-                     default: gi.EventDisplayed = gi.EventActive = "e161"; gi.DieRollAction = GameAction.EncounterRoll; break;                     // gain audience
+                     case 10: gi.EventDisplayed = gi.EventActive = "e151"; gi.DieRollAction = GameAction.EncounterRoll; ++gi.Statistic.myNumOfAudience; break;  // find favor
+                     default: gi.EventDisplayed = gi.EventActive = "e161"; gi.DieRollAction = GameAction.EncounterRoll; ++gi.Statistic.myNumOfAudience; break;  // gain audience
                   }
                }
                else
                {
+                  ++gi.Statistic.myNumOfAudienceAttempt;
                   List<ITerritory> letters = new List<ITerritory>();
                   foreach (ITerritory t in gi.LetterOfRecommendations)
                   {
@@ -14992,6 +15006,7 @@ namespace BarbarianPrince
                         }
                         break;
                      case 10:
+                        ++gi.Statistic.myNumOfAudience;
                         if (false == gi.IsSecretLadyAeravir)
                         {
                            gi.EventStart = gi.EventDisplayed = gi.EventActive = "e160";
@@ -15005,6 +15020,7 @@ namespace BarbarianPrince
                         break;                     // gain audience
                      case 11: gi.EventDisplayed = gi.EventActive = "e154"; gi.DieRollAction = GameAction.EncounterRoll; break;                     // meet lord's daughter
                      default:                                                                                                                      // gain audience
+                        ++gi.Statistic.myNumOfAudience;
                         if (false == gi.IsSecretLadyAeravir)
                         {
                            gi.EventStart = gi.EventDisplayed = gi.EventActive = "e160";
@@ -15020,6 +15036,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  ++gi.Statistic.myNumOfAudienceAttempt;
                   List<ITerritory> letters = new List<ITerritory>();
                   foreach (ITerritory t in gi.LetterOfRecommendations)
                   {
@@ -15056,7 +15073,7 @@ namespace BarbarianPrince
                   gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
-                     case 2:                                                                                                                       // no audience ever
+                     case 2:                                                                                                                   // no audience ever
                         gi.ForbiddenAudiences.AddTimeConstraint(princeTerritory, Utilities.FOREVER);
                         if (false == EncounterEnd(gi, ref action))
                         {
@@ -15102,12 +15119,13 @@ namespace BarbarianPrince
                         }
                         gi.ForbiddenAudiences.AddTimeConstraint(princeTerritory, gi.Days + 1);
                         break;
-                     case 12: gi.EventDisplayed = gi.EventActive = "e151"; gi.DieRollAction = GameAction.EncounterRoll; break;                     // find favor
-                     default: gi.EventDisplayed = gi.EventActive = "e152"; gi.IsNobleAlly = true; break;                    // ally                       
+                     case 12: gi.EventDisplayed = gi.EventActive = "e151"; gi.DieRollAction = GameAction.EncounterRoll; ++gi.Statistic.myNumOfAudience; break; // find favor
+                     default: gi.EventDisplayed = gi.EventActive = "e152"; gi.IsNobleAlly = true; ++gi.Statistic.myNumOfAudience; break;                       // ally                       
                   }
                }
                else
                {
+                  ++gi.Statistic.myNumOfAudienceAttempt;
                   List<ITerritory> letters = new List<ITerritory>();
                   foreach (ITerritory t in gi.LetterOfRecommendations)
                   {
@@ -15132,6 +15150,7 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerActive;
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
+                  ++gi.Statistic.myNumOfAudience;
                   gi.EnteredHexes.Last().EventNames.Add(key);
                   if (9 < gi.DieResults[key][0])
                   {
@@ -15140,6 +15159,7 @@ namespace BarbarianPrince
                      gi.EndGameReason = "Restore True Heir to Huldra Throne in Audience.";
                      gi.EventDisplayed = gi.EventActive = "e501";
                      gi.DieRollAction = GameAction.DieRollActionNone;
+                     gi.Statistic.myNumWins++;
                      gi.Statistic.myEndDaysCount = gi.Days;
                      gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
                      gi.Statistic.myEndCoinCount = gi.GetCoins();
@@ -15168,6 +15188,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  ++gi.Statistic.myNumOfAudienceAttempt;
                   List<ITerritory> letters = new List<ITerritory>();
                   foreach (ITerritory t in gi.LetterOfRecommendations)
                   {
@@ -15198,7 +15219,6 @@ namespace BarbarianPrince
                action = GameAction.UpdateEventViewerActive;
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  ++gi.Statistic.myNumOfOffering;
                   gi.EnteredHexes.Last().EventNames.Add(key);
                   switch (gi.DieResults[key][0])
                   {
@@ -15225,6 +15245,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  ++gi.Statistic.myNumOfOffering;
                   if (true == gi.IsOfferingModifier)
                      dieRoll += 1;
                   gi.IsOfferingModifier = false;

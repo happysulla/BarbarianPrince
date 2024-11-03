@@ -18,7 +18,6 @@ namespace BarbarianPrince
    {
       [NonSerialized] static public Logger Logger = new Logger();
       public bool IsTalkRoll { get; set; } = false;
-      public GameOptionType OptionsType { get; set; } = GameOptionType.GO_ORIGINAL; // Set when Options are set
       public Options Options { get; set; } = new Options();
       public GameStat Statistic { get; set; } = new GameStat();
       //------------------------------------------------
@@ -336,9 +335,9 @@ namespace BarbarianPrince
             partyEndurance += mi.Endurance;
             partyCombat += mi.Combat;
          }
-         if (partyEndurance < this.Statistic.myMaxPartyEndurance)
+         if (this.Statistic.myMaxPartyEndurance < partyEndurance)
             this.Statistic.myMaxPartyEndurance = partyEndurance;
-         if (partyCombat < this.Statistic.myMaxPartyCombat)
+         if ( this.Statistic.myMaxPartyCombat < partyCombat)
             this.Statistic.myMaxPartyCombat = partyCombat;
          //--------------------------------
          if (true == companion.Name.Contains("TrueLove"))

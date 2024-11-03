@@ -95,5 +95,89 @@ namespace BarbarianPrince.Properties {
                 this["WindowPlacement"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string GameTypeOriginal {
+            get {
+                return ((string)(this["GameTypeOriginal"]));
+            }
+            set {
+                this["GameTypeOriginal"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string GameTypeRandParty {
+            get {
+                return ((string)(this["GameTypeRandParty"]));
+            }
+            set {
+                this["GameTypeRandParty"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string GameTypeRandHex {
+            get {
+                return ((string)(this["GameTypeRandHex"]));
+            }
+            set {
+                this["GameTypeRandHex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string GameTypeRand {
+            get {
+                return ((string)(this["GameTypeRand"]));
+            }
+            set {
+                this["GameTypeRand"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string GameTypeFun {
+            get {
+                return ((string)(this["GameTypeFun"]));
+            }
+            set {
+                this["GameTypeFun"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string GameTypeCustom {
+            get {
+                return ((string)(this["GameTypeCustom"]));
+            }
+            set {
+                this["GameTypeCustom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string GameTypeTotal {
+            get {
+                return ((string)(this["GameTypeTotal"]));
+            }
+            set {
+                this["GameTypeTotal"] = value;
+            }
+        }
     }
 }

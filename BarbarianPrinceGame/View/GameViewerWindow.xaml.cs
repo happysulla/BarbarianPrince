@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
@@ -20,6 +21,8 @@ using System.Windows.Shapes;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using static System.Windows.Forms.AxHost;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using Button = System.Windows.Controls.Button;
 using MenuItem = System.Windows.Controls.MenuItem;
 using Point = System.Windows.Point;
@@ -29,7 +32,7 @@ namespace BarbarianPrince
    public partial class GameViewerWindow : Window, IView
    {
       private const int MAX_DAILY_ACTIONS = 16;
-      private const Double MARQUEE_SCROLL_ANMINATION_TIME = 20;
+      private const Double MARQUEE_SCROLL_ANMINATION_TIME = 30;
       public bool CtorError { get; } = false;
       //---------------------------------------------------------------------
       [Serializable]
@@ -153,9 +156,18 @@ namespace BarbarianPrince
       private Rectangle myRectangleSelected = new Rectangle(); // Player has manually selected this button
       private ITerritory myTerritorySelected = null;
       private bool myIsTravelThroughGateActive = false;  // e045
+      private Storyboard myStoryboard = new Storyboard();    // Show Statistics Marquee at end of game 
+      private TextBlock myTextBoxMarquee; // Displayed at end to show Statistics of games
+      private Double mySpeedRatioMarquee = 1.0;
       //-----------------------CONSTRUCTOR--------------------
       public GameViewerWindow(IGameEngine ge, IGameInstance gi)
       {
+         NameScope.SetNameScope(this, new NameScope());
+         myTextBoxMarquee = new TextBlock() { Foreground = Brushes.Red, FontFamily = myFontFam, FontSize = 24 };
+         myTextBoxMarquee.MouseLeftButtonDown += MouseLeftButtonDownMarquee;
+         myTextBoxMarquee.MouseLeftButtonUp += MouseLeftButtonUpMarquee;
+         myTextBoxMarquee.MouseRightButtonDown += MouseRightButtonDownMarquee;
+         this.RegisterName("tbMarquee", myTextBoxMarquee);
          //-----------------------------------------------------------------
          mySplashScreen = new SplashDialog(); // show splash screen waiting for finish initializing
          mySplashScreen.Show();
@@ -186,6 +198,21 @@ namespace BarbarianPrince
          Utilities.ZoomCanvas = Settings.Default.ZoomCanvas;
          myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas);
          StatusBarViewer sbv = new StatusBarViewer(myStatusBar, ge, gi, myCanvas);
+         //-------------------------------------------
+         if (false == String.IsNullOrEmpty(Settings.Default.GameTypeOriginal))
+            myGameEngine.Statistics[0] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeOriginal);
+         if (false == String.IsNullOrEmpty(Settings.Default.GameTypeRandParty))
+            myGameEngine.Statistics[1] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeRandParty);
+         if (false == String.IsNullOrEmpty(Settings.Default.GameTypeRandHex))
+            myGameEngine.Statistics[2] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeRandHex);
+         if (false == String.IsNullOrEmpty(Settings.Default.GameTypeRand))
+            myGameEngine.Statistics[3] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeRand);
+         if (false == String.IsNullOrEmpty(Settings.Default.GameTypeFun))
+            myGameEngine.Statistics[4] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeFun);
+         if (false == String.IsNullOrEmpty(Settings.Default.GameTypeCustom))
+            myGameEngine.Statistics[5] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeCustom);
+         if (false == String.IsNullOrEmpty(Settings.Default.GameTypeTotal))
+            myGameEngine.Statistics[6] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeTotal);
          //-----------------------------------------------------------------
          Utilities.theBrushBlood.Color = Color.FromArgb(0xFF, 0xA4, 0x07, 0x07);
          Utilities.theBrushRegion.Color = Color.FromArgb(0x7F, 0x11, 0x09, 0xBB); // nearly transparent but slightly colored
@@ -282,6 +309,7 @@ namespace BarbarianPrince
                }
             }
             myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas);
+            this.Title = UpdateTitle(gi.Options);
          }
          //-------------------------------------------------------
          Option optionExtendTime = gi.Options.Find("ExtendEndTime");
@@ -313,12 +341,14 @@ namespace BarbarianPrince
             case GameAction.EndGameLost:
                break;
             case GameAction.RemoveSplashScreen:
+               this.Title = UpdateTitle(gi.Options);
                if (false == UpdateCanvas(gi, action))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvas() returned error ");
                mySplashScreen.Close();
                UpdateScrollbarThumbnails(gi.Prince.Territory);
                break;
             case GameAction.UpdateGameOptions:
+               this.Title = UpdateTitle(gi.Options);
                Option option = gi.Options.Find("ExtendEndTime");
                if (null == option)
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): gi.Options.Find(ExtendEndTime)");
@@ -578,7 +608,7 @@ namespace BarbarianPrince
                reader.Close();
          }
       }
-      //-----------------------------------------------------------------------
+      //---------------------------------------
       private Options Deserialize(String s_xml)
       {
          Options options = new Options();
@@ -613,6 +643,40 @@ namespace BarbarianPrince
          return options;
       }
       //---------------------------------------
+      private string UpdateTitle(Options options)
+      {
+         string name = "CustomGame";
+         Option option = options.Find(name);
+         if (null == option)
+            option = new Option(name, false);
+         if (true == option.IsEnabled)
+            return "Barbarian Prince - Custom Game";
+         name = "MaxFunGame";
+         option = options.Find(name);
+         if (null == option)
+            option = new Option(name, false);
+         if (true == option.IsEnabled)
+            return "Barbarian Prince - Fun Game";
+         name = "RandomGame";
+         option = options.Find(name);
+         if (null == option)
+            option = new Option(name, false);
+         if (true == option.IsEnabled)
+            return "Barbarian Prince - All Random Options Game";
+         name = "RandomHexGame";
+         option = options.Find(name);
+         if (null == option)
+            option = new Option(name, false);
+         if (true == option.IsEnabled)
+            return "Barbarian Prince - Random Hex Game";
+         name = "RandomPartyGame";
+         option = options.Find(name);
+         if (null == option)
+            option = new Option(name, false);
+         if (true == option.IsEnabled)
+            return "Barbarian Prince - Random Party Game";
+         return "Barbarian Prince - Orginal Game";
+      }
       private void UpdateTimeTrack(IGameInstance gi)
       {
          Option option = gi.Options.Find("ExtendEndTime");
@@ -2200,12 +2264,6 @@ namespace BarbarianPrince
          List<UIElement> elements = new List<UIElement>();
          foreach (UIElement ui in myCanvas.Children)
          {
-            if (ui is Polygon polygon)
-               elements.Add(ui);
-            if (ui is Polyline polyline)
-               elements.Add(ui);
-            if (ui is Ellipse ellipse)
-               elements.Add(ui);
             if (ui is Image img)
             {
                if ("Map" == img.Name)
@@ -2224,197 +2282,432 @@ namespace BarbarianPrince
             myCanvas.Children.Remove(ui1);
          //-------------------------------
          myDieRoller.HideDie();
+         gi.Statistic.myEndDaysCount++;  // add one to get rid of zero index
          //-------------------------------
-         TextBlock tbMarquee = new TextBlock() { Foreground = Brushes.Blue, FontFamily = myFontFam, FontSize = 24 };
-         int numLines = UpdateCanvasShowStatsText(gi, tbMarquee);
+         int index = UpdateCanvasShowStatGetIndex(gi.Options);
+         string gametype = UpdateCanvasShowStateGetName(index);
+         bool isMultipleGameTypesPlayed = UpdateCanvasShowStatsAdds(index, gi.Statistic);
+         Settings.Default.GameTypeOriginal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[0]);
+         Settings.Default.GameTypeRandParty = Utilities.Serialize<GameStat>(myGameEngine.Statistics[1]);
+         Settings.Default.GameTypeRandHex = Utilities.Serialize<GameStat>(myGameEngine.Statistics[2]);
+         Settings.Default.GameTypeRand = Utilities.Serialize<GameStat>(myGameEngine.Statistics[3]);
+         Settings.Default.GameTypeFun = Utilities.Serialize<GameStat>(myGameEngine.Statistics[4]);
+         Settings.Default.GameTypeCustom = Utilities.Serialize<GameStat>(myGameEngine.Statistics[5]);
+         Settings.Default.GameTypeTotal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[6]);
+         //-------------------------------------------
+         Settings.Default.Save();
+         //-------------------------------
+         myTextBoxMarquee.Inlines.Clear();
+         myTextBoxMarquee.Inlines.Add(new Run("Current Game Statistics:") { FontWeight = FontWeights.Bold, FontStyle = FontStyles.Italic, TextDecorations = TextDecorations.Underline });
+         UpdateCanvasShowStatsText(myTextBoxMarquee, gi.Statistic);
+         //-------------------------------
+         if ( 1 < myGameEngine.Statistics[index].myNumGames)
+         {
+            myTextBoxMarquee.Inlines.Add(new LineBreak());
+            myTextBoxMarquee.Inlines.Add(new LineBreak());
+            string title1 = "All '" + gametype + "' Statistics:";
+            myTextBoxMarquee.Inlines.Add(new Run(title1) { FontWeight = FontWeights.Bold, FontStyle = FontStyles.Italic, TextDecorations = TextDecorations.Underline });
+            UpdateCanvasShowStatsText(myTextBoxMarquee, myGameEngine.Statistics[index]);
+         }
+         //-------------------------------
+         if( true == isMultipleGameTypesPlayed )
+         {
+            myTextBoxMarquee.Inlines.Add(new LineBreak());
+            myTextBoxMarquee.Inlines.Add(new LineBreak());
+            string title2 = "All Games Statistics:";
+            myTextBoxMarquee.Inlines.Add(new Run(title2) { FontWeight = FontWeights.Bold, FontStyle = FontStyles.Italic, TextDecorations = TextDecorations.Underline });
+            UpdateCanvasShowStatsText(myTextBoxMarquee, myGameEngine.Statistics[6]);
+         }
+         //-------------------------------
          myCanvas.ClipToBounds = true;
-         myCanvas.Children.Add(tbMarquee);
-         tbMarquee.UpdateLayout();
+         myCanvas.Children.Add(myTextBoxMarquee);
+         myTextBoxMarquee.UpdateLayout();
          //-------------------------------
          DoubleAnimation doubleAnimation = new DoubleAnimation();
-         doubleAnimation.From = -tbMarquee.ActualHeight;
+         doubleAnimation.From = -myTextBoxMarquee.ActualHeight;
          doubleAnimation.To = myCanvas.ActualHeight;
          doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
          doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(MARQUEE_SCROLL_ANMINATION_TIME));
-         tbMarquee.BeginAnimation(Canvas.BottomProperty, doubleAnimation);
+         Storyboard.SetTargetName(doubleAnimation, "tbMarquee");
+         Storyboard.SetTargetProperty(doubleAnimation, new PropertyPath(Canvas.BottomProperty));
+         myStoryboard.Children.Add(doubleAnimation);
+         myStoryboard.Begin(this, true);
          return true;
       }
-      private int UpdateCanvasShowStatsText(IGameInstance gi, TextBlock tb)
+      private int UpdateCanvasShowStatGetIndex(Options options)
       {
-         tb.Inlines.Add(new Run("Current Game Statistics:") { FontWeight = FontWeights.Bold, FontStyle = FontStyles.Italic, TextDecorations = TextDecorations.Underline });
-         tb.Inlines.Add(new LineBreak());
+         string name = "CustomGame";
+         Option option = options.Find(name);
+         if (null == option)
+            option = new Option(name, false);
+         if (true == option.IsEnabled)
+            return 5;
+         name = "MaxFunGame";
+         option = options.Find(name);
+         if (null == option)
+            option = new Option(name, false);
+         if (true == option.IsEnabled)
+            return 4;
+         name = "RandomGame";
+         option = options.Find(name);
+         if (null == option)
+            option = new Option(name, false);
+         if (true == option.IsEnabled)
+            return 3;
+         name = "RandomHexGame";
+         option = options.Find(name);
+         if (null == option)
+            option = new Option(name, false);
+         if (true == option.IsEnabled)
+            return 2;
+         name = "RandomPartyGame";
+         option = options.Find(name);
+         if (null == option)
+            option = new Option(name, false);
+         if (true == option.IsEnabled)
+            return 1;
+         return 0;
+      }
+      private string UpdateCanvasShowStateGetName(int index)
+      {
          string gameType = "";
-         switch(gi.OptionsType)
+         switch (index)
          {
-            case GameOptionType.GO_ORIGINAL:
-               gameType = "Original";
+            case 0:
+               gameType = "Original Game";
                break;
-            case GameOptionType.GO_RAND_PARTY:
-               gameType = "Random Party";
+            case 1:
+               gameType = "Random Party Game";
                break;
-            case GameOptionType.GO_RAND_HEX:
-               gameType = "Random Hex";
+            case 2:
+               gameType = "Random Hex Game";
                break;
-            case GameOptionType.GO_FUN_MAX:
-               gameType = "Maximum Fun";
+            case 3:
+               gameType = "All Random Game";
                break;
-            case GameOptionType.GO_CUSTOM:
-               gameType = "Custom";
+            case 4:
+               gameType = "Maximum Fun Game";
+               break;
+            case 5:
+               gameType = "Custom Game";
                break;
             default:
-               Logger.Log(LogEnum.LE_ERROR, "UpdateCanvasShowStatsText(): reached default=" + gi.OptionsType.ToString());
-               gameType = "Unknown";
-               break; 
+               gameType = "Total";
+               break;
          }
-         tb.Inlines.Add(new Run("Game Type = " + gameType) { FontWeight = FontWeights.Bold }) ;
-         tb.Inlines.Add(new LineBreak());
-         tb.Inlines.Add(new Run("Number of Coins at End = " + gi.Statistic.myEndCoinCount.ToString()) { FontWeight = FontWeights.Bold });
-         tb.Inlines.Add(new LineBreak());
-         tb.Inlines.Add(new Run("Number of Food Units at End = " + gi.Statistic.myEndFoodCount.ToString()) { FontWeight = FontWeights.Bold });
-         tb.Inlines.Add(new LineBreak());
-         tb.Inlines.Add(new Run("Party Size at End = " + gi.Statistic.myEndPartyCount.ToString()) { FontWeight = FontWeights.Bold });
-         int numLines = 4;
-         if (0 < gi.Statistic.myDaysLost)
+         return gameType;
+      }
+      private bool UpdateCanvasShowStatsAdds(int index, GameStat stat)
+      {
+         myGameEngine.Statistics[index].myNumGames++;
+         myGameEngine.Statistics[index].myNumWins += stat.myNumWins;
+         myGameEngine.Statistics[index].myEndDaysCount += stat.myEndDaysCount;
+         myGameEngine.Statistics[index].myEndCoinCount += stat.myEndCoinCount;
+         myGameEngine.Statistics[index].myEndFoodCount += stat.myEndFoodCount;
+         myGameEngine.Statistics[index].myEndPartyCount += stat.myEndPartyCount;
+         myGameEngine.Statistics[index].myDaysLost += stat.myDaysLost;
+         myGameEngine.Statistics[index].myNumEncounters += stat.myNumEncounters;
+         myGameEngine.Statistics[index].myNumOfRestDays += stat.myNumOfRestDays;
+         myGameEngine.Statistics[index].myNumOfAudienceAttempt += stat.myNumOfAudienceAttempt;
+         myGameEngine.Statistics[index].myNumOfAudience += stat.myNumOfAudience;
+         myGameEngine.Statistics[index].myNumOfOffering += stat.myNumOfOffering;
+         myGameEngine.Statistics[index].myDaysInJailorDungeon += stat.myDaysInJailorDungeon;
+         myGameEngine.Statistics[index].myNumRiverCrossingSuccess += stat.myNumRiverCrossingSuccess;
+         myGameEngine.Statistics[index].myNumRiverCrossingFailure += stat.myNumRiverCrossingFailure;
+         myGameEngine.Statistics[index].myNumDaysOnRaft += stat.myNumDaysOnRaft;
+         myGameEngine.Statistics[index].myNumDaysAirborne += stat.myNumDaysAirborne;
+         myGameEngine.Statistics[index].myNumDaysArchTravel += stat.myNumDaysArchTravel;
+         myGameEngine.Statistics[index].myNumOfPartyKilled += stat.myNumOfPartyKilled;
+         myGameEngine.Statistics[index].myNumOfPartyHeal += stat.myNumOfPartyHeal;
+         myGameEngine.Statistics[index].myNumOfPartyKill += stat.myNumOfPartyKill;
+         myGameEngine.Statistics[index].myNumOfPartyKillEndurance += stat.myNumOfPartyKillEndurance;
+         myGameEngine.Statistics[index].myNumOfPartyKillCombat += stat.myNumOfPartyKillCombat;
+         myGameEngine.Statistics[index].myNumOfPrinceKill += stat.myNumOfPrinceKill;
+         myGameEngine.Statistics[index].myNumOfPrinceHeal += stat.myNumOfPrinceHeal;
+         myGameEngine.Statistics[index].myNumOfPrinceStarveDays += stat.myNumOfPrinceStarveDays;
+         myGameEngine.Statistics[index].myNumOfPrinceUncounscious += stat.myNumOfPrinceUncounscious;
+         myGameEngine.Statistics[index].myNumOfPrinceResurrection += stat.myNumOfPrinceResurrection;
+         myGameEngine.Statistics[index].myNumOfPrinceAxeDeath += stat.myNumOfPrinceAxeDeath;
+         if (myGameEngine.Statistics[index].myMaxPartySize < stat.myMaxPartySize)
+            myGameEngine.Statistics[index].myMaxPartySize = stat.myMaxPartySize;
+         if (myGameEngine.Statistics[index].myMaxPartyEndurance < stat.myMaxPartyEndurance)
+            myGameEngine.Statistics[index].myMaxPartyEndurance = stat.myMaxPartyEndurance;
+         if (myGameEngine.Statistics[index].myMaxPartyCombat < stat.myMaxPartyCombat)
+            myGameEngine.Statistics[index].myMaxPartyCombat = stat.myMaxPartyCombat;
+         //-----------------------------------------
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumGames++;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumWins += stat.myNumWins;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myEndDaysCount += stat.myEndDaysCount;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myEndCoinCount += stat.myEndCoinCount;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myEndFoodCount += stat.myEndFoodCount;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myEndPartyCount += stat.myEndPartyCount;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myDaysLost += stat.myDaysLost;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumEncounters += stat.myNumEncounters;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumOfRestDays += stat.myNumOfRestDays;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumOfAudienceAttempt += stat.myNumOfAudienceAttempt;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumOfAudience += stat.myNumOfAudience;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumOfOffering += stat.myNumOfOffering;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myDaysInJailorDungeon += stat.myDaysInJailorDungeon;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumRiverCrossingSuccess += stat.myNumRiverCrossingSuccess;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumRiverCrossingFailure += stat.myNumRiverCrossingFailure;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumDaysOnRaft += stat.myNumDaysOnRaft;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumDaysAirborne += stat.myNumDaysAirborne;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumDaysArchTravel += stat.myNumDaysArchTravel;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumOfPartyKilled += stat.myNumOfPartyKilled;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumOfPartyHeal += stat.myNumOfPartyHeal;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumOfPartyKill += stat.myNumOfPartyKill;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumOfPartyKillEndurance += stat.myNumOfPartyKillEndurance;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumOfPartyKillCombat += stat.myNumOfPartyKillCombat;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumOfPrinceKill += stat.myNumOfPrinceKill;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumOfPrinceHeal += stat.myNumOfPrinceHeal;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumOfPrinceStarveDays += stat.myNumOfPrinceStarveDays;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumOfPrinceUncounscious += stat.myNumOfPrinceUncounscious;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumOfPrinceResurrection += stat.myNumOfPrinceResurrection;
+         myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myNumOfPrinceAxeDeath += stat.myNumOfPrinceAxeDeath;
+         if (myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myMaxPartySize < stat.myMaxPartySize)
+            myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myMaxPartySize = stat.myMaxPartySize;
+         if (myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myMaxPartyEndurance < stat.myMaxPartyEndurance)
+            myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myMaxPartyEndurance = stat.myMaxPartyEndurance;
+         if (myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myMaxPartyCombat < stat.myMaxPartyCombat)
+            myGameEngine.Statistics[GameEngine.MAX_GAME_TYPE].myMaxPartyCombat = stat.myMaxPartyCombat;
+         //-----------------------------------------
+         bool isMultipleGameTypesPlayed = false;
+         for (int i = 0; i < GameEngine.MAX_GAME_TYPE; ++i)
          {
-            ++numLines;
-            tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Number of Days Lost = " + gi.Statistic.myDaysLost.ToString()) { FontWeight = FontWeights.Bold });
+            if (index == i) // do not look at current game type
+               continue;
+            if (0 < myGameEngine.Statistics[i].myNumGames)
+               isMultipleGameTypesPlayed = true;
          }
-         if (0 < gi.Statistic.myNumEncounters)
+         return isMultipleGameTypesPlayed;
+      }
+      private void UpdateCanvasShowStatsText(TextBlock tb, GameStat stat)
+      {
+         if( 1 < stat.myNumGames )
          {
-            ++numLines;
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Number of Encounters = " + gi.Statistic.myNumEncounters.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Games = " + stat.myNumGames.ToString()) { FontWeight = FontWeights.Bold });
+            int winRatio = (int)Math.Round(100.0 * ((double)stat.myNumWins / (double)stat.myNumGames));
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("% Wins = " + winRatio.ToString()) { FontWeight = FontWeights.Bold });
          }
-         if (0 < gi.Statistic.myNumOfRestDays)
+         if (1 < stat.myNumGames)
          {
-            ++numLines;
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Number of Days Resting = " + gi.Statistic.myNumOfRestDays.ToString()) { FontWeight = FontWeights.Bold });
+            int average = stat.myEndDaysCount / stat.myNumGames;
+            tb.Inlines.Add(new Run("Average Days = " + average.ToString()) { FontWeight = FontWeights.Bold });
          }
-         if (0 < gi.Statistic.myNumOfAudienceAttempt)
+         else
          {
-            ++numLines;
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Number of Audience Attempts = " + gi.Statistic.myNumOfAudienceAttempt.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Days = " + stat.myEndDaysCount.ToString()) { FontWeight = FontWeights.Bold });
          }
-         if (0 < gi.Statistic.myNumOfAudience)
+         if( 1 < stat.myNumGames )
          {
-            ++numLines;
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Number of Audience Attempts = " + gi.Statistic.myNumOfAudience.ToString()) { FontWeight = FontWeights.Bold });
+            int average = stat.myEndCoinCount / stat.myNumGames;
+            tb.Inlines.Add(new Run("Average Coins = " + average.ToString()) { FontWeight = FontWeights.Bold });
          }
-         if (0 < gi.Statistic.myNumOfOffering)
+         else
          {
-            ++numLines;
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Number of Offerings = " + gi.Statistic.myNumOfOffering.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Coins = " + stat.myEndCoinCount.ToString()) { FontWeight = FontWeights.Bold });
          }
-         if (0 < gi.Statistic.myDaysInJailorDungeon)
+         if (1 < stat.myNumGames)
          {
-            ++numLines;
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Number of Days in Jail, Dungeon, or Wondering = " + gi.Statistic.myDaysInJailorDungeon.ToString()) { FontWeight = FontWeights.Bold });
+            int average = stat.myEndFoodCount / stat.myNumGames;
+            tb.Inlines.Add(new Run("Average Food = " + average.ToString()) { FontWeight = FontWeights.Bold });
          }
-         if (0 < gi.Statistic.myNumRiverCrossingSuccess)
+         else
          {
-            ++numLines;
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Number of River Crossings = " + gi.Statistic.myNumRiverCrossingSuccess.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Food = " + stat.myEndFoodCount.ToString()) { FontWeight = FontWeights.Bold });
          }
-         if (0 < gi.Statistic.myNumRiverCrossingFailure)
+         if (1 < stat.myNumGames)
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Number of Failed River Crossings = " + gi.Statistic.myNumRiverCrossingFailure.ToString()) { FontWeight = FontWeights.Bold });
+            int average = stat.myEndPartyCount / stat.myNumGames;
+            tb.Inlines.Add(new Run("Average Party Count = " + average.ToString()) { FontWeight = FontWeights.Bold });
          }
-         if (0 < gi.Statistic.myNumDaysOnRaft)
+         else
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Number of Raft Days = " + gi.Statistic.myNumDaysOnRaft.ToString()) { FontWeight = FontWeights.Bold });
-         }
-         if (0 < gi.Statistic.myNumDaysAirborne)
-         {
-            tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Number of Airbourne Days = " + gi.Statistic.myNumDaysAirborne.ToString()) { FontWeight = FontWeights.Bold });
-         }
-         if (0 < gi.Statistic.myNumDaysArchTravel)
-         {
-            tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Number Arch Travel Days = " + gi.Statistic.myNumDaysArchTravel.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Party Count = " + stat.myEndPartyCount.ToString()) { FontWeight = FontWeights.Bold });
          }
          //-------------------------------------
-         if (0 < gi.Statistic.myMaxPartySize)
+         if (0 < stat.myMaxPartySize)
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Maximum Party Size = " + gi.Statistic.myMaxPartySize.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Maximum Party Size = " + stat.myMaxPartySize.ToString()) { FontWeight = FontWeights.Bold });
          }
-         if (0 < gi.Statistic.myMaxPartyEndurance)
+         if (0 < stat.myMaxPartyEndurance)
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Maximum Party Endurance = " + gi.Statistic.myMaxPartyEndurance.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Maximum Party Endurance = " + stat.myMaxPartyEndurance.ToString()) { FontWeight = FontWeights.Bold });
          }
-         if (0 < gi.Statistic.myMaxPartyCombat)
+         if (0 < stat.myMaxPartyCombat)
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Maximum Party Combat = " + gi.Statistic.myMaxPartyCombat.ToString()) { FontWeight = FontWeights.Bold });
-         }
-         if (0 < gi.Statistic.myNumOfPartyKilled)
-         {
-            tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Total Killed Monsters = " + gi.Statistic.myNumOfPartyKilled.ToString()) { FontWeight = FontWeights.Bold });
-         }
-         if (0 < gi.Statistic.myNumOfPartyHeal)
-         {
-            tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Number of Wounds Healed in Party = " + gi.Statistic.myNumOfPartyHeal.ToString()) { FontWeight = FontWeights.Bold });
-         }
-         if (0 < gi.Statistic.myNumOfPartyKill)
-         {
-            tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Number of Party Kills = " + gi.Statistic.myNumOfPartyKill.ToString()) { FontWeight = FontWeights.Bold });
-         }
-         if (0 < gi.Statistic.myNumOfPartyKillEndurance)
-         {
-            tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Total Endurance Value Killed = " + gi.Statistic.myNumOfPartyKillEndurance.ToString()) { FontWeight = FontWeights.Bold });
-         }
-         if (0 < gi.Statistic.myNumOfPartyKillCombat)
-         {
-            tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Total Combat Value Killed = " + gi.Statistic.myNumOfPartyKillCombat.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Maximum Party Combat = " + stat.myMaxPartyCombat.ToString()) { FontWeight = FontWeights.Bold });
          }
          //-------------------------------------
-         if (0 < gi.Statistic.myNumOfPrinceKill)
+         if (0 < stat.myDaysLost)
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Number of Prince Kills = " + gi.Statistic.myNumOfPrinceKill.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Lost = " + stat.myDaysLost.ToString()) { FontWeight = FontWeights.Bold });
+            int percent = (int)Math.Round(100.0 * ((double)stat.myDaysLost / (double)stat.myEndDaysCount));
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("% Lost = " + percent.ToString()) { FontWeight = FontWeights.Bold });
          }
-         if (0 < gi.Statistic.myNumOfPrinceHeal)
+         if (0 < stat.myNumEncounters)
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Number of Prince Endurance Healed = " + gi.Statistic.myNumOfPrinceHeal.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Encounters = " + stat.myNumEncounters.ToString()) { FontWeight = FontWeights.Bold });
+            int percent = (int)Math.Round(100.0 * ((double)stat.myNumEncounters / (double)stat.myEndDaysCount));
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("% Encounters = " + percent.ToString()) { FontWeight = FontWeights.Bold });
          }
-         if (0 < gi.Statistic.myNumOfPrinceStarveDays)
+         if (0 < stat.myNumOfRestDays)
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Number of Prince Starvation Days = " + gi.Statistic.myNumOfPrinceStarveDays.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Resting = " + stat.myNumOfRestDays.ToString()) { FontWeight = FontWeights.Bold });
+            int percent = (int)Math.Round(100.0 * ((double)stat.myNumOfRestDays / (double)stat.myEndDaysCount));
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("% Resting = " + percent.ToString()) { FontWeight = FontWeights.Bold });
          }
-         if (0 < gi.Statistic.myNumOfPrinceUncounscious)
+         if (0 < stat.myNumOfAudienceAttempt)
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Number of Prince Unconscious Days = " + gi.Statistic.myNumOfPrinceUncounscious.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Audiences Attempts = " + stat.myNumOfAudienceAttempt.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Audiences = " + stat.myNumOfAudience.ToString()) { FontWeight = FontWeights.Bold });
+            int percent = (int)Math.Round(100.0 * ((double)stat.myNumOfAudience / (double)stat.myNumOfAudienceAttempt));
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("% Audience = " + percent.ToString()) { FontWeight = FontWeights.Bold });
          }
-         if (0 < gi.Statistic.myNumOfPrinceResurrection)
+         if (0 < stat.myNumOfOffering)
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Number of Prince Resurrections = " + gi.Statistic.myNumOfPrinceResurrection.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Offerings = " + stat.myNumOfOffering.ToString()) { FontWeight = FontWeights.Bold });
          }
-         if (0 < gi.Statistic.myNumOfPrinceAxeDeath)
+         if (0 < stat.myDaysInJailorDungeon)
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Number of Prince Executions = " + gi.Statistic.myNumOfPrinceAxeDeath.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Jail = " + stat.myDaysInJailorDungeon.ToString()) { FontWeight = FontWeights.Bold });
+            int percent = (int)Math.Round(100.0 * ((double)stat.myDaysInJailorDungeon / (double)stat.myEndDaysCount));
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("% Jail = " + percent.ToString()) { FontWeight = FontWeights.Bold });
          }
-         return numLines;
+         if (0 < stat.myNumRiverCrossingSuccess)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Crossings = " + stat.myNumRiverCrossingSuccess.ToString()) { FontWeight = FontWeights.Bold });
+            int total = stat.myNumRiverCrossingFailure + stat.myNumRiverCrossingSuccess;
+            int percent = (int)Math.Round(100.0 * ((double)stat.myNumRiverCrossingSuccess / (double)total));
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("% Crossing = " + percent.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < stat.myNumDaysOnRaft)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Raft Days = " + stat.myNumDaysOnRaft.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < stat.myNumDaysAirborne)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Airbourne Days = " + stat.myNumDaysAirborne.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < stat.myNumDaysArchTravel)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Arch Days = " + stat.myNumDaysArchTravel.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         //-------------------------------------
+         if (0 < stat.myNumOfPartyKill)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Monsters Killed = " + stat.myNumOfPartyKilled.ToString()) { FontWeight = FontWeights.Bold });
+            int average = stat.myEndDaysCount / stat.myNumOfPartyKill;
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Days/Monster Kill= " + average.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < stat.myNumOfPartyKillEndurance)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Killed Endurance = " + stat.myNumOfPartyKillEndurance.ToString()) { FontWeight = FontWeights.Bold });
+            if (1 < stat.myNumGames)
+            {
+               int average = stat.myNumOfPartyKillEndurance / stat.myNumGames;
+               tb.Inlines.Add(new LineBreak());
+               tb.Inlines.Add(new Run("Average Killed Endurance = " + average.ToString()) { FontWeight = FontWeights.Bold });
+            }
+         }
+         if (0 < stat.myNumOfPartyKillCombat)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Killed Combat = " + stat.myNumOfPartyKillCombat.ToString()) { FontWeight = FontWeights.Bold });
+            if (1 < stat.myNumGames)
+            {
+               int average = stat.myNumOfPartyKillCombat / stat.myNumGames;
+               tb.Inlines.Add(new LineBreak());
+               tb.Inlines.Add(new Run("Average Killed Combat = " + average.ToString()) { FontWeight = FontWeights.Bold });
+            }
+         }
+         //-------------------------------------
+         if (0 < stat.myNumOfPartyKilled)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Party Killed = " + stat.myNumOfPartyKill.ToString()) { FontWeight = FontWeights.Bold });
+            int average = stat.myEndDaysCount / stat.myNumOfPartyKilled;
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Days/Party Killed = " + average.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < stat.myNumOfPartyHeal)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Healed Wounds = " + stat.myNumOfPartyHeal.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         //-------------------------------------
+         if (0 < stat.myNumOfPrinceHeal)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Prince Endurance Healed = " + stat.myNumOfPrinceHeal.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < stat.myNumOfPrinceKill)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Prince Kills = " + stat.myNumOfPrinceKill.ToString()) { FontWeight = FontWeights.Bold });
+            int average = stat.myEndDaysCount / stat.myNumOfPrinceKill;
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Days/Prince Kills = " + average.ToString()) { FontWeight = FontWeights.Bold });
+            if (1 < stat.myNumGames)
+            {
+               int average1 = stat.myNumOfPrinceKill / stat.myNumGames;
+               tb.Inlines.Add(new LineBreak());
+               tb.Inlines.Add(new Run("Average Prince Kills = " + average1.ToString()) { FontWeight = FontWeights.Bold });
+            }
+         }
+         if (0 < stat.myNumOfPrinceStarveDays)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Prince Starvation = " + stat.myNumOfPrinceStarveDays.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < stat.myNumOfPrinceUncounscious)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Prince Unconscious = " + stat.myNumOfPrinceUncounscious.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < stat.myNumOfPrinceResurrection)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Prince Resurrections = " + stat.myNumOfPrinceResurrection.ToString()) { FontWeight = FontWeights.Bold });
+         }
+         if (0 < stat.myNumOfPrinceAxeDeath)
+         {
+            tb.Inlines.Add(new LineBreak());
+            tb.Inlines.Add(new Run("Prince Executions = " + stat.myNumOfPrinceAxeDeath.ToString()) { FontWeight = FontWeights.Bold });
+         }
       }
       private bool MoveToNewHexWhenJailed(IGameInstance gi)
       {
@@ -2837,6 +3130,24 @@ namespace BarbarianPrince
          myEllipseDisplayDialog = null;
          e.Handled = true;
       }
+      private void MouseLeftButtonDownMarquee(object sender, MouseEventArgs e)
+      {
+         myStoryboard.Pause(this);
+      }
+      private void MouseLeftButtonUpMarquee(object send, MouseEventArgs e)
+      {
+         myStoryboard.Resume(this);
+      }
+      private void MouseRightButtonDownMarquee(object send, MouseEventArgs e)
+      {
+         if ((0.5 < mySpeedRatioMarquee) && (mySpeedRatioMarquee < 2.0))
+            mySpeedRatioMarquee = 2.0;
+         else if (1.5 < mySpeedRatioMarquee)
+            mySpeedRatioMarquee = 0.5;
+         else
+            mySpeedRatioMarquee = 1.0;
+         myStoryboard.SetSpeedRatio(this, mySpeedRatioMarquee);
+      }
       //-------------GameViewerWindow---------------------------------
       private void ContentRenderedGameViewerWindow(object sender, EventArgs e)
       {
@@ -2915,6 +3226,14 @@ namespace BarbarianPrince
          //-------------------------------------------
          string sOptions = Utilities.Serialize<Options>(myGameInstance.Options);
          Settings.Default.GameOptions = sOptions;
+         //-------------------------------------------
+         Settings.Default.GameTypeOriginal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[0]);
+         Settings.Default.GameTypeRandParty = Utilities.Serialize<GameStat>(myGameEngine.Statistics[1]);
+         Settings.Default.GameTypeRandHex = Utilities.Serialize<GameStat>(myGameEngine.Statistics[2]);
+         Settings.Default.GameTypeRand = Utilities.Serialize<GameStat>(myGameEngine.Statistics[3]);
+         Settings.Default.GameTypeFun = Utilities.Serialize<GameStat>(myGameEngine.Statistics[4]);
+         Settings.Default.GameTypeCustom = Utilities.Serialize<GameStat>(myGameEngine.Statistics[5]);
+         Settings.Default.GameTypeTotal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[6]);
          //-------------------------------------------
          Settings.Default.Save();
          //-------------------------------------------

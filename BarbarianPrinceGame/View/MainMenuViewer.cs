@@ -195,7 +195,7 @@ namespace BarbarianPrince
          if (null == NewGameOptions)
             myGameInstance = new GameInstance();
          else
-            myGameInstance = new GameInstance(NewGameOptions);
+            myGameInstance = new GameInstance(this.NewGameOptions);
          if (true == myGameInstance.CtorError)
          {
             Logger.Log(LogEnum.LE_ERROR, "MenuItemNew_Click(): myGameInstance.CtorError = true");
@@ -241,17 +241,15 @@ namespace BarbarianPrince
          }
          if (true == dialog.ShowDialog())
          {
-            GameOptionType existingType = myGameInstance.OptionsType;
             this.NewGameOptions = dialog.NewOptions;
-            myGameInstance.Options = dialog.NewOptions;    // new games start with new game type
-            if(GameOptionType.GO_ORIGINAL != existingType) // from original game, can go to any other game type
-            {
-               if (GameOptionType.GO_CUSTOM != dialog.NewGameOptionType) // can only drop to custom for existing game type
-                  myGameInstance.OptionsType = existingType; // Set Game Type to existing game type
-            }
             GameAction action = GameAction.UpdateGameOptions;
             myGameEngine.PerformAction(ref myGameInstance, ref action);
          }
+         //if (GameOptionType.GO_ORIGINAL != existingType) // from original game, can go to any other game type
+         //{
+         //   if (GameOptionType.GO_CUSTOM != dialog.NewGameOptionType) // can only drop to custom for existing game type
+         //      this.NewGameOptionType = existingType; // Set Game Type to existing game type
+         //}
       }
       public void MenuItemEditUndo_Click(object sender, RoutedEventArgs e)
       {

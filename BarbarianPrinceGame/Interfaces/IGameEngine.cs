@@ -7,16 +7,6 @@ using System.Windows.Controls;
 namespace BarbarianPrince
 {
    [Serializable]
-   public enum GameOptionType
-   {
-      GO_ORIGINAL,  
-      GO_RAND_PARTY,         
-      GO_RAND_HEX,   
-      GO_RAND_ALL,
-      GO_FUN_MAX,
-      GO_CUSTOM 
-   };
-   [Serializable]
    public enum PegasusTreasureEnum
    {
       Mount,
@@ -446,6 +436,7 @@ namespace BarbarianPrince
    };
    public interface IGameEngine
    {
+      GameStat[] Statistics { set;  get; }
       List<IView> Views { get; }
       void RegisterForUpdates(IView view);
       void PerformAction(ref IGameInstance gi, ref GameAction action, int dieRoll = 0);

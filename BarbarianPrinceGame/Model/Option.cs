@@ -24,7 +24,7 @@ namespace BarbarianPrince
    {
       [NonSerialized] public const int MEMBER_COUNT = 16;
       [NonSerialized]
-      public static string[] theDefaults = new string[75] // first 16 entries must be persons
+      public static string[] theDefaults = new string[81] // first 16 entries must be persons
       {
          "Dwarf",
          "Eagle",
@@ -100,8 +100,14 @@ namespace BarbarianPrince
          "ForceCrossEvent",
          "ForceLostAfterCrossEvent",
          "ForceNoRaftEvent",
-         "ForceRaftEvent"
-};
+         "ForceRaftEvent",
+         "OriginalGame",
+         "RandomPartyGame",
+         "RandomHexGame",
+         "RandomGame",
+         "MaxFunGame",
+         "CustomGame"
+      };
       private readonly ArrayList myList;
       public Options() { myList = new ArrayList(); }
       public int Count { get => myList.Count; }

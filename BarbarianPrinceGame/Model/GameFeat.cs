@@ -19,6 +19,10 @@ namespace BarbarianPrince
       public bool myIsAirTravel;
       public bool myIsRaftTravel;
       public bool myIsArchTravel;
+      public bool myIsMinstelAdded;
+      public bool myIsEagleAdded;
+      public bool myIsFalconAdded;
+      public bool myIsMerchantAdded;
       public bool myIsDragonKiller;            // kill a dragon
       public bool myIsBanditKiller;            // kill 20 bandits
       public bool myIsOrcKiller;               // kill 30 orcs
