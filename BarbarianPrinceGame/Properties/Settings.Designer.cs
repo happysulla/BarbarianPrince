@@ -179,5 +179,17 @@ namespace BarbarianPrince.Properties {
                 this["GameTypeTotal"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string theGameFeat {
+            get {
+                return ((string)(this["theGameFeat"]));
+            }
+            set {
+                this["theGameFeat"] = value;
+            }
+        }
     }
 }

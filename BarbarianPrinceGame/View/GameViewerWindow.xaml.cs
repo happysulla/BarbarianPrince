@@ -213,6 +213,9 @@ namespace BarbarianPrince
             myGameEngine.Statistics[5] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeCustom);
          if (false == String.IsNullOrEmpty(Settings.Default.GameTypeTotal))
             myGameEngine.Statistics[6] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeTotal);
+         //-------------------------------------------
+         if (false == String.IsNullOrEmpty(Settings.Default.theGameFeat))
+            GameEngine.theFeatsInGame = Utilities.Deserialize<GameFeat>(Settings.Default.theGameFeat);
          //-----------------------------------------------------------------
          Utilities.theBrushBlood.Color = Color.FromArgb(0xFF, 0xA4, 0x07, 0x07);
          Utilities.theBrushRegion.Color = Color.FromArgb(0x7F, 0x11, 0x09, 0xBB); // nearly transparent but slightly colored
@@ -2294,6 +2297,7 @@ namespace BarbarianPrince
          Settings.Default.GameTypeFun = Utilities.Serialize<GameStat>(myGameEngine.Statistics[4]);
          Settings.Default.GameTypeCustom = Utilities.Serialize<GameStat>(myGameEngine.Statistics[5]);
          Settings.Default.GameTypeTotal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[6]);
+         Settings.Default.theGameFeat = Utilities.Serialize<GameFeat>(GameEngine.theFeatsInGame);
          //-------------------------------------------
          Settings.Default.Save();
          //-------------------------------
@@ -3234,6 +3238,7 @@ namespace BarbarianPrince
          Settings.Default.GameTypeFun = Utilities.Serialize<GameStat>(myGameEngine.Statistics[4]);
          Settings.Default.GameTypeCustom = Utilities.Serialize<GameStat>(myGameEngine.Statistics[5]);
          Settings.Default.GameTypeTotal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[6]);
+         Settings.Default.theGameFeat = Utilities.Serialize<GameFeat>(GameEngine.theFeatsInGame);
          //-------------------------------------------
          Settings.Default.Save();
          //-------------------------------------------

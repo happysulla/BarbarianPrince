@@ -608,6 +608,7 @@ namespace BarbarianPrince
             gi.GamePhase = GamePhase.EndGame;
             gi.EndGameReason = "Time Limit Reached";
             isGameEnd = true;
+            GameEngine.theFeatsInGame.myIsLostOnTime = true;   
          }
          else if (499 < gi.GetCoins())
          {
@@ -615,6 +616,7 @@ namespace BarbarianPrince
             gi.GamePhase = GamePhase.EndGame;
             gi.EndGameReason = "500+ gold";
             isGameEnd = true;
+            GameEngine.theFeatsInGame.myIs500GoldWin = true;
          }
          else if (true == IsNorthofTragothRiver(gi.Prince.Territory))
          {
@@ -624,6 +626,7 @@ namespace BarbarianPrince
                gi.GamePhase = GamePhase.EndGame;
                gi.EndGameReason = "Blessed by Gods and North of Tragoth River";
                isGameEnd = true;
+               GameEngine.theFeatsInGame.myIsBlessedWin = true;
             }
             else if (true == gi.IsSpecialItemHeld(SpecialEnum.StaffOfCommand))
             {
@@ -631,6 +634,7 @@ namespace BarbarianPrince
                gi.GamePhase = GamePhase.EndGame;
                gi.EndGameReason = "Hold the Staff of Command North of Tragoth River";
                isGameEnd = true;
+               GameEngine.theFeatsInGame.myIsStaffOfCommandWin = true;
             }
             else if (true == gi.IsSpecialItemHeld(SpecialEnum.RoyalHelmOfNorthlands))
             {
@@ -640,6 +644,7 @@ namespace BarbarianPrince
                   gi.GamePhase = GamePhase.EndGame;
                   gi.EndGameReason = "Hold the Royal Helm of Northlands when in Ogon";
                   isGameEnd = true;
+                  GameEngine.theFeatsInGame.myIsRoyalHelmWin = true;
                }
                else if ("1501" == gi.Prince.Territory.Name) // In Weshor
                {
@@ -647,6 +652,7 @@ namespace BarbarianPrince
                   gi.GamePhase = GamePhase.EndGame;
                   gi.EndGameReason = "Hold the Royal Helm of Northlands when in Weshor";
                   isGameEnd = true;
+                  GameEngine.theFeatsInGame.myIsRoyalHelmWin = true;
                }
             }
          }

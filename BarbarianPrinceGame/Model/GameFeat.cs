@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace BarbarianPrince
 {
-   public class GameFeats
+   public class GameFeat
    {
       public bool myIs500GoldWin;              // Nominal 
       public bool myIsNobleAllyWin;            // E152NobleAlly
-      public bool myIsBlessedWin;             // E044HighAltarBlessed
-      public bool myIsStaffOfCommandWin;      // E212Temple - Roll 12+1 on e212
+      public bool myIsBlessedWin;              // E044HighAltarBlessed
+      public bool myIsStaffOfCommandWin;       // E212Temple - Roll 12+1 on e212
       public bool myIsRoyalHelmWin;            // Treasure Table -  Row C:6 - Row Ca:6
       public bool myIsHuldraDefeatedInBattle;  // e144j
       public bool myIsHuldraDesposedWin;       // e211g
-      public bool myHydraTeethVictory;         // use hydra teeth
+      public bool myIsHydraTeethUsed;          // use hydra teeth
+      public bool myIsLostOnTime;              // lose game on time
       public bool myIsAirTravel;
       public bool myIsRaftTravel;
       public bool myIsArchTravel;

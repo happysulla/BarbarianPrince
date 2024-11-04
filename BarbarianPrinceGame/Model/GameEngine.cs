@@ -9,10 +9,11 @@ namespace BarbarianPrince
    {
       //---------------------------------------------------------------------
       static public TreasureMgr theTreasureMgr = new TreasureMgr();
+      static public GameFeat theFeatsInGame = new GameFeat();
       public const int MAX_GAME_TYPE = 6;
       //---------------------------------------------------------------------
       private readonly MainWindow myMainWindow = null;
-      private GameStat[] myStatistics = new GameStat[MAX_GAME_TYPE+1];
+      private GameStat[] myStatistics = new GameStat[MAX_GAME_TYPE + 1];
       public GameStat[] Statistics
       {
          set { myStatistics = value; }
