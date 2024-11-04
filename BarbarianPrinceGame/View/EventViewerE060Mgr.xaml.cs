@@ -79,7 +79,7 @@ namespace BarbarianPrince
          //--------------------------------------------------
          if (null == gi) // check parameter inputs
          {
-            Logger.Log(LogEnum.LE_ERROR, "EventViewerPlagueDustMgr(): gi=null");
+            Logger.Log(LogEnum.LE_ERROR, "EventViewerE060Mgr(): gi=null");
             CtorError = true;
             return;
          }
@@ -87,7 +87,7 @@ namespace BarbarianPrince
          //--------------------------------------------------
          if (null == c) // check parameter inputs
          {
-            Logger.Log(LogEnum.LE_ERROR, "EventViewerPlagueDustMgr(): c=null");
+            Logger.Log(LogEnum.LE_ERROR, "EventViewerE060Mgr(): c=null");
             CtorError = true;
             return;
          }
@@ -95,7 +95,7 @@ namespace BarbarianPrince
          //--------------------------------------------------
          if (null == sv)
          {
-            Logger.Log(LogEnum.LE_ERROR, "EventViewerPlagueDustMgr(): sv=null");
+            Logger.Log(LogEnum.LE_ERROR, "EventViewerE060Mgr(): sv=null");
             CtorError = true;
             return;
          }
@@ -103,7 +103,7 @@ namespace BarbarianPrince
          //--------------------------------------------------
          if (null == rdv)
          {
-            Logger.Log(LogEnum.LE_ERROR, "EventViewerPlagueDustMgr(): rdv=null");
+            Logger.Log(LogEnum.LE_ERROR, "EventViewerE060Mgr(): rdv=null");
             CtorError = true;
             return;
          }

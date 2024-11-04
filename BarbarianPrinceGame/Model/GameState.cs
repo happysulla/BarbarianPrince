@@ -2368,6 +2368,10 @@ namespace BarbarianPrince
          //---------------------
          //foreach (IMapItem mi in gi.PartyMembers)
          //   mi.AddSpecialItemToKeep(SpecialEnum.ResurrectionNecklace);
+         //---------------------
+         //IMapItem mi = this.CreateCharacter(gi, "Porter");
+         //mi.PlagueDustWound = 2;
+         //gi.AddCompanion(mi);
       }
    }
    //-----------------------------------------------------

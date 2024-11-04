@@ -16,6 +16,7 @@ namespace BarbarianPrince
       public delegate bool EndPlagueDustCallback();
       private const int STARTING_ASSIGNED_ROW = 6;
       private const int NO_PLAGUE = 100;
+      private const int KILLED = 101;
       //---------------------------------------------
       public struct GridRow
       {
@@ -138,18 +139,27 @@ namespace BarbarianPrince
             if (0 < mi.PlagueDustWound)
             {
                myGridRows[i].myNumOfWounds = mi.PlagueDustWound;
-               mi.SetWounds(1, 0);
+               mi.SetWounds(mi.PlagueDustWound, 0);
             }
             else
             {
                myGridRows[i].myDieRoll = NO_PLAGUE;
             }
+            if (true == myGridRows[i].myMapItem.IsKilled)
+               myGridRows[i].myDieRoll = KILLED;
             ++i;
          }
          if (null == prince)
          {
             Logger.Log(LogEnum.LE_ERROR, "OpenChest(): prince=null");
             return false;
+         }
+         //--------------------------------------------------
+         myState = PlagueEnum.SHOW_RESULTS;
+         for (int j = 0; j < myMaxRowCount; ++j)
+         {
+            if (Utilities.NO_RESULT == myGridRows[j].myDieRoll)
+               myState = PlagueEnum.TRAP_PLAGUE_DUST;
          }
          //--------------------------------------------------
          // Add the unassignable mapitems that never move or change to the Grid Rows
@@ -276,6 +286,7 @@ namespace BarbarianPrince
             IMapItem mi = myGridRows[i].myMapItem;
             if (NO_PLAGUE == myGridRows[i].myDieRoll)
                continue;
+
             //------------------------------------
             Button b = CreateButton(mi);
             myGrid.Children.Add(b);
@@ -287,27 +298,24 @@ namespace BarbarianPrince
             Grid.SetRow(labelWounds, rowNum);
             Grid.SetColumn(labelWounds, 1);
             //--------------------------------
-            if (Utilities.NO_RESULT == myGridRows[i].myDieRoll)
+            if (KILLED == myGridRows[i].myDieRoll)
             {
-               if (true == mi.IsKilled)
-               {
-                  Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = "KIA" };
-                  myGrid.Children.Add(label);
-                  Grid.SetRow(label, rowNum);
-                  Grid.SetColumn(label, 2);
-               }
-               else
-               {
-                  BitmapImage bmi = new BitmapImage();
-                  bmi.BeginInit();
-                  bmi.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
-                  bmi.EndInit();
-                  Image img = new Image { Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
-                  ImageBehavior.SetAnimatedSource(img, bmi);
-                  myGrid.Children.Add(img);
-                  Grid.SetRow(img, rowNum);
-                  Grid.SetColumn(img, 2);
-               }
+               Label label = new Label() { FontFamily = myFontFam, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = "KIA" };
+               myGrid.Children.Add(label);
+               Grid.SetRow(label, rowNum);
+               Grid.SetColumn(label, 2);
+            }
+            else if (Utilities.NO_RESULT == myGridRows[i].myDieRoll)
+            {
+               BitmapImage bmi = new BitmapImage();
+               bmi.BeginInit();
+               bmi.UriSource = new Uri(MapImage.theImageDirectory + "dieRoll.gif", UriKind.Absolute);
+               bmi.EndInit();
+               Image img = new Image { Source = bmi, Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
+               ImageBehavior.SetAnimatedSource(img, bmi);
+               myGrid.Children.Add(img);
+               Grid.SetRow(img, rowNum);
+               Grid.SetColumn(img, 2);
             }
             else
             {
@@ -352,10 +360,6 @@ namespace BarbarianPrince
          {
             mi.PlagueDustWound = 0;
             mi.OverlayImageName = "";
-         }
-         else
-         {
-            ++mi.PlagueDustWound;
          }
          //-----------------------------------------------------------------
          myState = PlagueEnum.SHOW_RESULTS;

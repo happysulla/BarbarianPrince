@@ -1091,7 +1091,7 @@ r227	"<Bold>r227 Trap Locks</Bold>
 r227a	"<Bold>r227a Plague Dust</Bold>
 <LineBreak/><LineBreak/>Roll one die and halve the results rounding upward.
 <LineBreak/><LineBreak/>You suffer these many wounds at the end of the day. You will continue to suffer the same number after every day.
-<LineBreak/><LineBreak/>To determine recovery, roll one die after the sickness wounds are inflicted. If this second roll is 4+, you recover. Otherwsie sickness continues."
+<LineBreak/><LineBreak/>To determine recovery, roll one die after the sickness wounds are inflicted. If this second roll is 4+, you recover. Otherwise sickness continues."
 r228	"<Bold>r228 True Love</Bold>
 <LineBreak/><LineBreak/>You may fall in love with a female and vice versa. This is 'true love', a rare but wonderful situation.
 <LineBreak/><LineBreak/>Your true love will always accompany you in your party, until death or unavoidable circumstances parts you. Your true love will never desert you regardless of whether money or food is properly paid, etc. You can never voluntarily abandon her, and she will not leave even if you order her to go!
