@@ -15,20 +15,26 @@ namespace BarbarianPrince
       public bool myIsRoyalHelmWin;            // Treasure Table -  Row C:6 - Row Ca:6
       public bool myIsHuldraDefeatedInBattle;  // e144j
       public bool myIsHuldraDesposedWin;       // e211g
-      public bool myIsHydraTeethUsed;          // use hydra teeth
       public bool myIsLostOnTime;              // lose game on time
+      //-------------------------------------
       public bool myIsAirTravel;
       public bool myIsRaftTravel;
       public bool myIsArchTravel;
       public bool myIsMinstelAdded;
       public bool myIsEagleAdded;
       public bool myIsFalconAdded;
+      //-------------------------------------
       public bool myIsMerchantAdded;
       public bool myIsDragonKiller;            // kill a dragon
       public bool myIsBanditKiller;            // kill 20 bandits
+      public int myNumBanditKill;            
       public bool myIsOrcKiller;               // kill 30 orcs
+      public int myNumOrcKill;            
       public bool myIsGoblinKiller;            // kill 40 goblins
+      public int myNumGoblinKill;            
       public bool myIsWolfKiller;              // kill 50 wolves
+      public int myNumWolfKill;            
+      //-------------------------------------
       public string[] myVisitedTowns;
       public string[] myVisitedTemples;
       public string[] myVisitedCastles;
@@ -36,5 +42,11 @@ namespace BarbarianPrince
       public bool myIsVisitAllTowns;
       public bool myIsVisitAllCastles;
       public bool myIsVisitAllTemples;
+      //-------------------------------------
+      public bool myIsHydraTeethUsed;          // use hydra teeth
+      public bool myIsRescueHier;              // Rescue Huldra Heir from Hill Tribe
+      public bool myIsSneakAttack;             // Perform sneak attack on Huldra
+      public bool myIsPurchaseFoulbane;        // Purchase foulbane
+      public bool myIsStealGems;               // Steal Gems from Dragot using Foulbane
    };
 }

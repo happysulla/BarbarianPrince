@@ -115,6 +115,7 @@ namespace BarbarianPrince
             gi.DieRollAction = GameAction.DieRollActionNone;
             if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
             {
+               GameEngine.theFeatsInGame.myIsRaftTravel = true;
                ++gi.Statistic.myNumDaysOnRaft;
                gi.EventDisplayed = gi.EventActive = "e213"; // next screen to show
             }
@@ -124,6 +125,7 @@ namespace BarbarianPrince
             }
             else if (true == gi.IsAirborne)
             {
+               GameEngine.theFeatsInGame.myIsAirTravel = true;
                ++gi.Statistic.myNumDaysAirborne;
                gi.EventDisplayed = gi.EventActive = "e204a"; // next screen to show
             }
@@ -535,6 +537,7 @@ namespace BarbarianPrince
                gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
                gi.Statistic.myEndCoinCount = gi.GetCoins();
                gi.Statistic.myEndFoodCount = gi.GetFoods();
+               GameEngine.theFeatsInGame.myIs500GoldWin = true;
             }
             else
             {
@@ -658,7 +661,7 @@ namespace BarbarianPrince
          }
          if (true == gi.Prince.IsUnconscious)
             ++gi.Statistic.myNumOfPrinceUncounscious;
-         if (GameAction.EndGameWin == action)
+         if (GameAction.EndGameWin == action)  // PerformEndCheck()
          {
             gi.EventDisplayed = gi.EventActive = "e501";
             gi.DieRollAction = GameAction.DieRollActionNone;
@@ -4340,11 +4343,6 @@ namespace BarbarianPrince
             case GameAction.EndGameWin:
                gi.EventDisplayed = gi.EventActive = "e501";
                gi.DieRollAction = GameAction.DieRollActionNone;
-               gi.Statistic.myNumWins++;
-               gi.Statistic.myEndDaysCount = gi.Days;
-               gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
-               gi.Statistic.myEndCoinCount = gi.GetCoins();
-               gi.Statistic.myEndFoodCount = gi.GetFoods();
                break;
             case GameAction.EndGameLost:
                gi.EventDisplayed = gi.EventActive = "e502";
@@ -5155,6 +5153,7 @@ namespace BarbarianPrince
                case GameAction.E045ArchOfTravel:
                   break;
                case GameAction.E045ArchOfTravelEnd:
+                  GameEngine.theFeatsInGame.myIsArchTravel = true;
                   gi.DieResults["e045b"][0] = Utilities.NO_RESULT;
                   Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateEncounter.PerformAction(E045ArchOfTravelEnd): gi.MapItemMoves.Clear()");
                   gi.MapItemMoves.Clear();
@@ -6592,7 +6591,7 @@ namespace BarbarianPrince
                   }
                   break;
                case GameAction.E152NobleAlly:
-                  action = GameAction.EndGameWin;   // GameAction.E152NobleAlly
+                  action = GameAction.EndGameWin;  // GameAction.E152NobleAlly
                   gi.GamePhase = GamePhase.EndGame;
                   gi.EndGameReason = "Noble Ally marches on Northlands!";
                   gi.EventDisplayed = gi.EventActive = "e501";
@@ -6602,6 +6601,7 @@ namespace BarbarianPrince
                   gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
                   gi.Statistic.myEndCoinCount = gi.GetCoins();
                   gi.Statistic.myEndFoodCount = gi.GetFoods();
+                  GameEngine.theFeatsInGame.myIsNobleAllyWin = true;
                   break;
                case GameAction.E153MasterOfHouseholdDeny:
                   gi.ForbiddenAudiences.AddTimeConstraint(princeTerritory, Utilities.FOREVER);
@@ -9608,7 +9608,7 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.DieRollActionNone;
                return true; //<<<<<<<<<<<<<<<<<<<<<
             case "e144j": // defeated Huldra
-               action = GameAction.EndGameWin; // defeated Huldra in battle
+               action = GameAction.EndGameWin; // Defeated Huldra in battle
                gi.GamePhase = GamePhase.EndGame;
                gi.EndGameReason = "Restored Huldra's Heir to the Throne.";
                gi.EventDisplayed = gi.EventActive = "e501";
@@ -9618,6 +9618,7 @@ namespace BarbarianPrince
                gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
                gi.Statistic.myEndCoinCount = gi.GetCoins();
                gi.Statistic.myEndFoodCount = gi.GetFoods();
+               GameEngine.theFeatsInGame.myIsHuldraDefeatedInBattle = true;
                return true; //<<<<<<<<<<<<<<<<<<<<<
             case "e154e": // lords daughter
                gi.CapturedWealthCodes.Add(100);
@@ -15174,6 +15175,7 @@ namespace BarbarianPrince
                      gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
                      gi.Statistic.myEndCoinCount = gi.GetCoins();
                      gi.Statistic.myEndFoodCount = gi.GetFoods();
+                     GameEngine.theFeatsInGame.myIsHuldraDesposedWin = true;
                   }
                   else
                   {

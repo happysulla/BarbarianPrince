@@ -379,6 +379,15 @@ namespace BarbarianPrince
             ++this.WitAndWile;
             Logger.Log(LogEnum.LE_WIT_AND_WILES_INIT, "AddCompanion(): ElfWarrior original=" + witandwile.ToString() + " ww=" + this.WitAndWile.ToString());
          }
+         //--------------------------------
+         if ((true == companion.Name.Contains("Minstrel")) && (1 < Days) )
+            GameEngine.theFeatsInGame.myIsMinstelAdded = true;
+         if ((true == companion.Name.Contains("Eagle")) && (1 < Days))
+            GameEngine.theFeatsInGame.myIsEagleAdded = true;
+         if ((true == companion.Name.Contains("Falcon")) && (1 < Days))
+            GameEngine.theFeatsInGame.myIsFalconAdded = true;
+         if ((true == companion.Name.Contains("Merchant")) && (1 < Days))
+            GameEngine.theFeatsInGame.myIsMerchantAdded = true;
       }
       private void RestoreMapItemAttribute(IMapItem mi)
       {

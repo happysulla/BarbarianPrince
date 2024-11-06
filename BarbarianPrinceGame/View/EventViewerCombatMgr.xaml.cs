@@ -4112,6 +4112,7 @@ namespace BarbarianPrince
                ++myGameInstance.Statistic.myNumOfPartyKill;
                myGameInstance.Statistic.myNumOfPartyKillEndurance += mi.Endurance;
                myGameInstance.Statistic.myNumOfPartyKillCombat += mi.Combat;
+               AddKillsForFeats(mi);
                //---------------------------------
                Logger.Log(LogEnum.LE_ADD_WEALTH_CODE, "DistributeDeadWealth(): mi=" + mi.Name + " coffs up wc=" +  mi.WealthCode.ToString());
                if (0 < mi.WealthCode)
@@ -4228,6 +4229,7 @@ namespace BarbarianPrince
                   ++myGameInstance.Statistic.myNumOfPartyKill;
                   myGameInstance.Statistic.myNumOfPartyKillEndurance += mi.Endurance;
                   myGameInstance.Statistic.myNumOfPartyKillCombat += mi.Combat;
+                  AddKillsForFeats(mi);
                   //---------------------------------
                   foreach (IMapItem mount in mi.Mounts)
                      myCapturedMounts.Add(mount);
@@ -4304,6 +4306,7 @@ namespace BarbarianPrince
                   ++myGameInstance.Statistic.myNumOfPartyKill;
                   myGameInstance.Statistic.myNumOfPartyKillEndurance += mi.Endurance;
                   myGameInstance.Statistic.myNumOfPartyKillCombat += mi.Combat;
+                  AddKillsForFeats(mi);
                   //---------------------------------
                   foreach (IMapItem mount in mi.Mounts)
                      myCapturedMounts.Add(mount);
@@ -4788,6 +4791,27 @@ namespace BarbarianPrince
          }
          myFireballDamage = 0;
          return true;
+      }
+      private void AddKillsForFeats(IMapItem mi)
+      {
+         if (true == mi.Name.Contains("Dragon"))
+            GameEngine.theFeatsInGame.myIsDragonKiller = true;
+         if (true == mi.Name.Contains("Bandit"))
+            GameEngine.theFeatsInGame.myNumBanditKill++;
+         if (19 < GameEngine.theFeatsInGame.myNumBanditKill)
+            GameEngine.theFeatsInGame.myIsBanditKiller = true;
+         if (true == mi.Name.Contains("Orc"))
+            GameEngine.theFeatsInGame.myNumOrcKill++;
+         if (29 < GameEngine.theFeatsInGame.myNumOrcKill)
+            GameEngine.theFeatsInGame.myIsOrcKiller = true;
+         if (true == mi.Name.Contains("Goblin"))
+            GameEngine.theFeatsInGame.myNumGoblinKill++;
+         if (39 < GameEngine.theFeatsInGame.myNumGoblinKill)
+            GameEngine.theFeatsInGame.myIsGoblinKiller = true;
+         if (true == mi.Name.Contains("Wolf"))
+            GameEngine.theFeatsInGame.myNumWolfKill++;
+         if (49 < GameEngine.theFeatsInGame.myNumWolfKill)
+            GameEngine.theFeatsInGame.myIsGoblinKiller = true;
       }
       //-----------------------------------------------------------------------------------------
       public void ShowCombatResults(int dieRoll)
@@ -5809,6 +5833,7 @@ namespace BarbarianPrince
                            }
                            else if ("Teeth" == name)
                            {
+                              GameEngine.theFeatsInGame.myIsHydraTeethUsed = true;
                               if (false == myGameInstance.RemoveSpecialItem(SpecialEnum.HydraTeeth))
                                  Logger.Log(LogEnum.LE_ERROR, "Grid_MouseDown(): RemoveSpecialItem(SpecialEnum.HydraTeeth) returned false");
                               for (int k = 0; k < myGameInstance.HydraTeethCount; ++k)
