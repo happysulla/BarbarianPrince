@@ -213,6 +213,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_123515AE6DDC4D408EF1C2D06FD5E59D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_12ECF80C91544D62AB4B87D074FCAD8A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -3570,6 +3576,26 @@
             {
             "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\Helmet.gif"
             "TargetName" = "8:Helmet.gif"
+            "Tag" = "8:"
+            "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_123515AE6DDC4D408EF1C2D06FD5E59D"
+            {
+            "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\StarReward.gif"
+            "TargetName" = "8:StarReward.gif"
             "Tag" = "8:"
             "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
             "Condition" = "8:"

@@ -38,10 +38,13 @@ namespace BarbarianPrince
       public string[] myVisitedTowns;
       public string[] myVisitedTemples;
       public string[] myVisitedCastles;
-      public int[] myVisitedSidesofBoard;      // visit each side of the board in any hex
+      public string[] myVisitedRuins;
+      public string[] myVisitedOasises;
       public bool myIsVisitAllTowns;
       public bool myIsVisitAllCastles;
       public bool myIsVisitAllTemples;
+      public bool myIsVisitAllRuins;
+      public bool myIsVisitAllOasis;
       //-------------------------------------
       public bool myIsHydraTeethUsed;          // use hydra teeth
       public bool myIsRescueHier;              // Rescue Huldra Heir from Hill Tribe

@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
@@ -16,7 +17,9 @@ namespace BarbarianPrince
    {
       public bool CtorError { get; } = false;
       private bool myIsDragging = false;
-      private System.Windows.Point myPreviousLocation;
+      private System.Windows.Point myOffsetInBannerWindow;
+      private System.Drawing.Point myPreviousScreenPoint;
+      private int myInitialScreen;
       private string myKey = "";
       public string Key { get => myKey; }
       public TextBlock TextBoxDiplay { get => myTextBlockDisplay; }
@@ -45,6 +48,18 @@ namespace BarbarianPrince
             return;
          }
       }
+      private int ConvertMousePointToScreenIndex(System.Drawing.Point mousePoint)
+      {
+         System.Drawing.Rectangle ret;
+         int numScreens = System.Windows.Forms.Screen.AllScreens.Length;
+         for (int i = 1; i <= numScreens; i++)
+         {
+            ret = Screen.AllScreens[i - 1].Bounds;
+            if (ret.Contains(mousePoint))
+               return i - 1;
+         }
+         return 0;
+      }
       //-------------------------------------------------------------------------
       private void BannerLoaded(object sender, EventArgs e)
       {
@@ -57,7 +72,19 @@ namespace BarbarianPrince
       }
       private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
       {
-         myPreviousLocation = e.GetPosition(this);
+         myIsDragging = true;
+         myOffsetInBannerWindow = e.GetPosition(this);
+         System.Windows.Point newPoint1 = this.PointToScreen(e.GetPosition(this));
+         myPreviousScreenPoint = new System.Drawing.Point((int)newPoint1.X, (int)newPoint1.Y);
+         myInitialScreen = ConvertMousePointToScreenIndex(myPreviousScreenPoint);
+         //---------------------
+         StringBuilder sb = new StringBuilder();
+         sb.Append(" pt=");
+         sb.Append(myPreviousScreenPoint.ToString());
+         sb.Append("\nis=");
+         sb.Append(myInitialScreen.ToString());
+         Console.WriteLine(sb.ToString());
+         //---------------------
          myIsDragging = true;
          e.Handled = true;
       }
@@ -81,9 +108,18 @@ namespace BarbarianPrince
          if (true == myIsDragging)
          {
             System.Windows.Point newPoint = this.PointToScreen(e.GetPosition(this));  // Find the current mouse position in screen coordinates.
-            newPoint.Offset(-myPreviousLocation.X, -myPreviousLocation.Y); // Compensate for the position the control was clicked.
-            this.Left = newPoint.X; // Move the window.
-            this.Top = newPoint.Y;
+            System.Drawing.Point pt = new System.Drawing.Point((int)newPoint.X, (int)newPoint.Y);
+            int newScreen = ConvertMousePointToScreenIndex(pt);
+            if (newScreen != myInitialScreen)
+            {
+
+            }
+            else
+            {
+               newPoint.Offset(-myOffsetInBannerWindow.X, -myOffsetInBannerWindow.Y); // Compensate for the position the control was clicked.
+               this.Left = newPoint.X; // Move the window.
+               this.Top = newPoint.Y;
+            }
          }
          base.OnMouseMove(e);
       }

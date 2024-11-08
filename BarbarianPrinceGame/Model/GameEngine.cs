@@ -10,6 +10,7 @@ namespace BarbarianPrince
       //---------------------------------------------------------------------
       static public TreasureMgr theTreasureMgr = new TreasureMgr();
       static public GameFeat theFeatsInGame = new GameFeat();
+      static public GameFeat theFeatsInGameStarting = new GameFeat();
       public const int MAX_GAME_TYPE = 6;
       //---------------------------------------------------------------------
       private readonly MainWindow myMainWindow = null;
