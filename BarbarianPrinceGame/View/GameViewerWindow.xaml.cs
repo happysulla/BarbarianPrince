@@ -215,10 +215,10 @@ namespace BarbarianPrince
             myGameEngine.Statistics[6] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeTotal);
          //-------------------------------------------
          if (false == String.IsNullOrEmpty(Settings.Default.theGameFeat))
-         {
             GameEngine.theFeatsInGame = Utilities.Deserialize<GameFeat>(Settings.Default.theGameFeat);
-            GameEngine.theFeatsInGameStarting = GameEngine.theFeatsInGame; // need to know difference between starting feats and feats that happen in this game
-         }
+         else
+            GameEngine.theFeatsInGame = new GameFeat();
+         GameEngine.theFeatsInGameStarting = GameEngine.theFeatsInGame; // need to know difference between starting feats and feats that happen in this game
          //-----------------------------------------------------------------
          Utilities.theBrushBlood.Color = Color.FromArgb(0xFF, 0xA4, 0x07, 0x07);
          Utilities.theBrushRegion.Color = Color.FromArgb(0x7F, 0x11, 0x09, 0xBB); // nearly transparent but slightly colored

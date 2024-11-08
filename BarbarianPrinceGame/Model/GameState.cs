@@ -1352,17 +1352,19 @@ namespace BarbarianPrince
       {
          if (true == gi.NewHex.IsRuin)
          {
-            if (false == GameEngine.theFeatsInGame.myVisitedRuins.Contains(gi.NewHex.Name))
+            if (false == GameEngine.theFeatsInGame.myVisitedRuins.Contains(gi.NewHex))
             {
-               if (2 <= GameEngine.theFeatsInGame.myVisitedRuins.Count())
+               GameEngine.theFeatsInGame.myVisitedRuins.Add(gi.NewHex);
+               if (2 <= GameEngine.theFeatsInGame.myVisitedRuins.Count)
                   GameEngine.theFeatsInGame.myIsVisitAllRuins = true;
             }
          }
          if (true == gi.NewHex.IsOasis)
          {
-            if (false == GameEngine.theFeatsInGame.myVisitedOasises.Contains(gi.NewHex.Name))
+            if (false == GameEngine.theFeatsInGame.myVisitedOasises.Contains(gi.NewHex))
             {
-               if (4 <= GameEngine.theFeatsInGame.myVisitedOasises.Count())
+               GameEngine.theFeatsInGame.myVisitedOasises.Add(gi.NewHex);
+               if (4 <= GameEngine.theFeatsInGame.myVisitedOasises.Count)
                   GameEngine.theFeatsInGame.myIsVisitAllOasis = true;
             }
          }
@@ -1371,25 +1373,28 @@ namespace BarbarianPrince
             gi.VisitedLocations.Add(gi.NewHex);
             if( true == gi.NewHex.IsCastle )
             {
-               if( false == GameEngine.theFeatsInGame.myVisitedCastles.Contains(gi.NewHex.Name))
+               if( false == GameEngine.theFeatsInGame.myVisitedCastles.Contains(gi.NewHex))
                {
-                  if( 3 <= GameEngine.theFeatsInGame.myVisitedCastles.Count() )
+                  GameEngine.theFeatsInGame.myVisitedCastles.Add(gi.NewHex);
+                  if ( 3 <= GameEngine.theFeatsInGame.myVisitedCastles.Count)
                      GameEngine.theFeatsInGame.myIsVisitAllCastles = true; 
                }
             }
             else if (true == gi.NewHex.IsTemple)
             {
-               if (false == GameEngine.theFeatsInGame.myVisitedTemples.Contains(gi.NewHex.Name))
+               if (false == GameEngine.theFeatsInGame.myVisitedTemples.Contains(gi.NewHex))
                {
-                  if (6 <= GameEngine.theFeatsInGame.myVisitedTemples.Count())
+                  GameEngine.theFeatsInGame.myVisitedTemples.Add(gi.NewHex);
+                  if (6 <= GameEngine.theFeatsInGame.myVisitedTemples.Count)
                      GameEngine.theFeatsInGame.myIsVisitAllTemples = true;
                }
             }
             else if (true == gi.NewHex.IsTown)
             {
-               if (false == GameEngine.theFeatsInGame.myVisitedTowns.Contains(gi.NewHex.Name))
+               GameEngine.theFeatsInGame.myVisitedTowns.Add(gi.NewHex);
+               if (false == GameEngine.theFeatsInGame.myVisitedTowns.Contains(gi.NewHex))
                {
-                  if (12 <= GameEngine.theFeatsInGame.myVisitedTowns.Count())
+                  if (12 <= GameEngine.theFeatsInGame.myVisitedTowns.Count)
                      GameEngine.theFeatsInGame.myIsVisitAllTowns = true;
                }
             }

@@ -35,11 +35,11 @@ namespace BarbarianPrince
       public bool myIsWolfKiller;              // kill 50 wolves
       public int myNumWolfKill;            
       //-------------------------------------
-      public string[] myVisitedTowns;
-      public string[] myVisitedTemples;
-      public string[] myVisitedCastles;
-      public string[] myVisitedRuins;
-      public string[] myVisitedOasises;
+      public Territories myVisitedTowns = new Territories();
+      public Territories myVisitedTemples = new Territories();
+      public Territories myVisitedCastles = new Territories();
+      public Territories myVisitedRuins = new Territories();
+      public Territories myVisitedOasises = new Territories();
       public bool myIsVisitAllTowns;
       public bool myIsVisitAllCastles;
       public bool myIsVisitAllTemples;
