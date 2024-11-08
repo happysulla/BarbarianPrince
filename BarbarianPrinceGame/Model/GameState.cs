@@ -776,7 +776,7 @@ namespace BarbarianPrince
          gi.Prince.TerritoryStarting = gi.Prince.Territory;
          gi.NewHex = adjacentTerritory;         // EncounterEscape()
          gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_ESCAPE)); // EncounterEscape()
-         this.AddVisitedLocation(gi);
+         this.AddVisitedLocation(gi); // EncounterEscape()
          if (false == AddMapItemMove(gi, adjacentTerritory))
          {
             Logger.Log(LogEnum.LE_ERROR, "EncounterEscape(): AddMapItemMove() return false");
@@ -831,7 +831,7 @@ namespace BarbarianPrince
          gi.Prince.TerritoryStarting = gi.Prince.Territory;
          gi.NewHex = adjacentTerritory;         // EncounterFollow()
          gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_FOLLOW)); // EncounterFollow()
-         this.AddVisitedLocation(gi);
+         this.AddVisitedLocation(gi); // EncounterFollow()
          if (false == AddMapItemMove(gi, adjacentTerritory))
          {
             Logger.Log(LogEnum.LE_ERROR, "EncounterFollow(): AddMapItemMove() return false");
@@ -1352,18 +1352,18 @@ namespace BarbarianPrince
       {
          if (true == gi.NewHex.IsRuin)
          {
-            if (false == GameEngine.theFeatsInGame.myVisitedRuins.Contains(gi.NewHex))
+            if (false == GameEngine.theFeatsInGame.myVisitedRuins.Contains(gi.NewHex.Name))
             {
-               GameEngine.theFeatsInGame.myVisitedRuins.Add(gi.NewHex);
+               GameEngine.theFeatsInGame.myVisitedRuins.Add(gi.NewHex.Name);
                if (2 <= GameEngine.theFeatsInGame.myVisitedRuins.Count)
                   GameEngine.theFeatsInGame.myIsVisitAllRuins = true;
             }
          }
          if (true == gi.NewHex.IsOasis)
          {
-            if (false == GameEngine.theFeatsInGame.myVisitedOasises.Contains(gi.NewHex))
+            if (false == GameEngine.theFeatsInGame.myVisitedOasises.Contains(gi.NewHex.Name))
             {
-               GameEngine.theFeatsInGame.myVisitedOasises.Add(gi.NewHex);
+               GameEngine.theFeatsInGame.myVisitedOasises.Add(gi.NewHex.Name);
                if (4 <= GameEngine.theFeatsInGame.myVisitedOasises.Count)
                   GameEngine.theFeatsInGame.myIsVisitAllOasis = true;
             }
@@ -1373,27 +1373,27 @@ namespace BarbarianPrince
             gi.VisitedLocations.Add(gi.NewHex);
             if( true == gi.NewHex.IsCastle )
             {
-               if( false == GameEngine.theFeatsInGame.myVisitedCastles.Contains(gi.NewHex))
+               if( false == GameEngine.theFeatsInGame.myVisitedCastles.Contains(gi.NewHex.Name))
                {
-                  GameEngine.theFeatsInGame.myVisitedCastles.Add(gi.NewHex);
+                  GameEngine.theFeatsInGame.myVisitedCastles.Add(gi.NewHex.Name);
                   if ( 3 <= GameEngine.theFeatsInGame.myVisitedCastles.Count)
                      GameEngine.theFeatsInGame.myIsVisitAllCastles = true; 
                }
             }
             else if (true == gi.NewHex.IsTemple)
             {
-               if (false == GameEngine.theFeatsInGame.myVisitedTemples.Contains(gi.NewHex))
+               if (false == GameEngine.theFeatsInGame.myVisitedTemples.Contains(gi.NewHex.Name))
                {
-                  GameEngine.theFeatsInGame.myVisitedTemples.Add(gi.NewHex);
+                  GameEngine.theFeatsInGame.myVisitedTemples.Add(gi.NewHex.Name);
                   if (6 <= GameEngine.theFeatsInGame.myVisitedTemples.Count)
                      GameEngine.theFeatsInGame.myIsVisitAllTemples = true;
                }
             }
             else if (true == gi.NewHex.IsTown)
             {
-               GameEngine.theFeatsInGame.myVisitedTowns.Add(gi.NewHex);
-               if (false == GameEngine.theFeatsInGame.myVisitedTowns.Contains(gi.NewHex))
+               if (false == GameEngine.theFeatsInGame.myVisitedTowns.Contains(gi.NewHex.Name))
                {
+                  GameEngine.theFeatsInGame.myVisitedTowns.Add(gi.NewHex.Name);
                   if (12 <= GameEngine.theFeatsInGame.myVisitedTowns.Count)
                      GameEngine.theFeatsInGame.myIsVisitAllTowns = true;
                }
@@ -1571,7 +1571,7 @@ namespace BarbarianPrince
          }
          gi.NewHex = gi.Prince.Territory = gi.Prince.TerritoryStarting = starting;
          gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_START));
-         this.AddVisitedLocation(gi);
+         this.AddVisitedLocation(gi); // SetStartingLocation()
          IStack newStack = new Stack(starting) as IStack;
          gi.Stacks.Add(newStack);
          newStack.MapItems.Add(gi.Prince);
@@ -3321,7 +3321,7 @@ namespace BarbarianPrince
          {
             case "e203a":
                gi.EnteredHexes.Add(hex); // show staying in hex when in jail
-               this.AddVisitedLocation(gi);
+               this.AddVisitedLocation(gi); // PerformJailBreak(e203a)
                if (1 == dieRoll)
                {
                   gi.IsJailed = false;
@@ -3346,7 +3346,7 @@ namespace BarbarianPrince
                break;
             case "e203c":
                gi.EnteredHexes.Add(hex); // show staying in hex when in jail
-               this.AddVisitedLocation(gi);
+               this.AddVisitedLocation(gi); // PerformJailBreak(e203c)
                switch (dieRoll) // Based on the die roll, implement event
                {
                   case 2:
@@ -3363,7 +3363,6 @@ namespace BarbarianPrince
                   case 10:
                   case 11:
                   case 12:
-                     gi.EnteredHexes.Add(hex); // staying in dungeon
                      gi.NightsInDungeon++;
                      if (0 == (gi.NightsInDungeon % 7))
                         gi.Prince.SetWounds(0, 1);
@@ -3766,7 +3765,7 @@ namespace BarbarianPrince
                else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
                {
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT)); // TravelShowMovement()
-                  this.AddVisitedLocation(gi);
+                  this.AddVisitedLocation(gi);  // GameStateTravel.PerformAction(TravelShowMovement) - RaftEnum.RE_RAFT_CHOSEN 
                }
                else if (RaftEnum.RE_RAFT_ENDS_TODAY == gi.RaftState) // TravelShowMovement()
                {
@@ -3776,8 +3775,7 @@ namespace BarbarianPrince
                {
                   if (false == gi.IsAirborneEnd)
                      gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL)); // TravelShowMovement 
-                  else
-                     this.AddVisitedLocation(gi);
+                  this.AddVisitedLocation(gi);  // GameStateTravel.PerformAction(TravelShowMovement)  
                }
                break;
             case GameAction.TravelShowRiverEncounter:
@@ -3808,7 +3806,7 @@ namespace BarbarianPrince
                else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
                {
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT)); // TravelShowMovementEncounter()
-                  this.AddVisitedLocation(gi);
+                  this.AddVisitedLocation(gi);  // GameStateTravel.PerformAction()   - TravelShowMovementEncounter - RE_RAFT_CHOSEN
                }
                else if (RaftEnum.RE_RAFT_ENDS_TODAY == gi.RaftState)
                {
@@ -3825,7 +3823,7 @@ namespace BarbarianPrince
                   {
                      EnteredHex enteredHex = gi.EnteredHexes.Last();
                      enteredHex.EventNames.Add(gi.EventActive);
-                     this.AddVisitedLocation(gi);
+                     this.AddVisitedLocation(gi);  // GameStateTravel.PerformAction()   - TravelShowMovementEncounter
                   }
                }
                break;
@@ -5205,7 +5203,7 @@ namespace BarbarianPrince
                   gi.Prince.MovementUsed = gi.Prince.Movement;
                   gi.NewHex = princeTerritory; // GameStateEncounter.PerformAction(E045ArchOfTravelEnd)
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL)); // GameStateEncounter.PerformAction(E045ArchOfTravelEnd)
-                  this.AddVisitedLocation(gi);
+                  this.AddVisitedLocation(gi); // GameStateEncounter.PerformAction(E045ArchOfTravelEnd)
                   if ((true == gi.IsExhausted) && ((true == gi.NewHex.IsOasis) || ("Desert" != gi.NewHex.Type))) // e120
                      gi.IsExhausted = false;
                   if (false == gi.Arches.Contains(gi.NewHex))
@@ -5928,7 +5926,7 @@ namespace BarbarianPrince
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
                   rangevw = (int)Math.Ceiling((double)rangevw * 0.5); // half rounded up
-                                                                      //--------------------------------------------------------
+                  //--------------------------------------------------------
                   Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateEncounter.PerformAction(): gi.MapItemMoves.Clear() for a=" + action.ToString());
                   gi.MapItemMoves.Clear();
                   ITerritory blowToTerritory = FindRandomHexRangeDirectionAndRange(gi, directionvw, rangevw);// Find a random hex at random direction and range 1
@@ -13150,7 +13148,7 @@ namespace BarbarianPrince
                   gi.Prince.TerritoryStarting = gi.NewHex;
                   gi.NewHex = blowToTerritory;
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR));
-                  this.AddVisitedLocation(gi);
+                  this.AddVisitedLocation(gi); // EncounterRoll() - air spirit - fail - blown off course
                   if (false == AddMapItemMove(gi, blowToTerritory))
                   {
                      Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddMapItemMove() return false for a=" + action.ToString());
