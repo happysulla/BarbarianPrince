@@ -4372,6 +4372,15 @@ namespace BarbarianPrince
          string previousEvent = gi.EventActive;
          switch (action)
          {
+            case GameAction.ShowInventory:
+            case GameAction.ShowAllRivers:
+            case GameAction.ShowRuleListing:
+            case GameAction.ShowCharacterDescription:
+            case GameAction.ShowEventListing:
+            case GameAction.ShowPartyPath:
+            case GameAction.ShowAboutDialog:
+            case GameAction.UpdateEventViewerDisplay:
+               break;
             case GameAction.EndGameResurrect:
                ++gi.Statistic.myNumOfPrinceResurrection;
                gi.EventDisplayed = gi.EventActive = "e192a";

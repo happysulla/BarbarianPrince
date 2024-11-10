@@ -1010,10 +1010,9 @@ e026	"<Bold>e026 Search for Treasure</Bold>
 e026a	"<Bold>e026a Search for Treasure One More Time</Bold>
 <LineBreak/><LineBreak/>
 Clues suggest the treasure is in adjacent hext. 
-<LineBreak/><LineBreak/>Roll one die (1-N, 2-NE, 3-SE- 4-S, 5-SW, 6-NW):
- <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21'> </Image></InlineUIContainer>
+See <InlineUIContainer><Button Content='e026' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> when you arrive. Click image to continue.
 <LineBreak/><LineBreak/>
-See <InlineUIContainer><Button Content='e026' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> when you arrive."
+                                  <InlineUIContainer><Image Name='EncounterEnd' Source='../bin/Images/Nothing.gif' Height='200' Width='200'></Image></InlineUIContainer>"
 e027	"<Bold>e027 Ancient Treasure</Bold>
 <LineBreak/><LineBreak/>You find an ancient treasure that was long lost. It has wealth code 110. See
  <InlineUIContainer><Button Content='r225' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.  Click image to continue.

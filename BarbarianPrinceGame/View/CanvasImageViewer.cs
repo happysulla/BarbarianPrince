@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -104,19 +105,23 @@ namespace BarbarianPrince
       }
       private void ShowNewFeat(Canvas c)
       {
-         //IMapPoint center = GetCanvasCenter(c);
-         //c.LayoutTransform = new ScaleTransform(1.0, 1.0);
-         //double sizeOfImage = Math.Min(c.ActualHeight, c.ActualWidth);
-         //BitmapImage bmi1 = new BitmapImage();
-         //bmi1.BeginInit();
-         //bmi1.UriSource = new Uri(MapImage.theImageDirectory + "StarReward.gif", UriKind.Absolute);
-         //bmi1.EndInit();
-         //Image img = new Image { Source = bmi1, Height = sizeOfImage, Width = sizeOfImage };
-         //ImageBehavior.SetAnimatedSource(img, bmi1);
-         //c.Children.Add(img);
-         //Canvas.SetLeft(img, -sizeOfImage / 2.0);
-         //Canvas.SetTop(img, -sizeOfImage / 2.0);
-         //Canvas.SetZIndex(img, 99999);
+         string featChange = GameFeat.IsFeatChange();
+         if (false == String.IsNullOrEmpty(featChange))
+         {
+            IMapPoint center = GetCanvasCenter(c);
+            c.LayoutTransform = new ScaleTransform(1.0, 1.0);
+            double sizeOfImage = Math.Min(c.ActualHeight, c.ActualWidth);
+            BitmapImage bmi1 = new BitmapImage();
+            bmi1.BeginInit();
+            bmi1.UriSource = new Uri(MapImage.theImageDirectory + "StarReward.gif", UriKind.Absolute);
+            bmi1.EndInit();
+            Image img = new Image { Source = bmi1, Height = sizeOfImage, Width = sizeOfImage };
+            ImageBehavior.SetAnimatedSource(img, bmi1);
+            c.Children.Add(img);
+            Canvas.SetLeft(img, -sizeOfImage / 2.0);
+            Canvas.SetTop(img, -sizeOfImage / 2.0);
+            Canvas.SetZIndex(img, 99999);
+         }
       }
    }
 }

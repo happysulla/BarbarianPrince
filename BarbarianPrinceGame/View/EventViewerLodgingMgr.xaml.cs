@@ -431,6 +431,8 @@ namespace BarbarianPrince
                GameEngine.theFeatsInGame.myIsPurchaseFoulbane = true;
                myGameInstance.AddSpecialItem(SpecialEnum.Foulbane);
             }
+            if(0 < myGameInstance.ChagaDrugCount)
+               GameEngine.theFeatsInGame.myIsPurchaseChaga = true;
             //--------------------------------------------
             int diffTrollSkins = myTrollSkinsInPartyOriginal - myTrollSkinsInPartyCurrent;
             for (int k = 0; k < diffTrollSkins; ++k )
