@@ -4984,6 +4984,10 @@ Click image to review map:
 <LineBreak/><LineBreak/>
 Click image to exit game:
 <LineBreak/>   <InlineUIContainer><Image Name='EndGameExit' Source='../bin/Images/DoorClosing.gif' Height='150' Width='75'></Image></InlineUIContainer>"
+e503a	"<Bold>e503a Game Feats </Bold>
+<LineBreak/><LineBreak/>You completed an achievement that requires great courage, skill, and persistence.
+<LineBreak/><LineBreak/>Congratulations!
+<LineBreak/><LineBreak/>Click start to continue."
 e504	"<Bold>e504 Play Again?</Bold>
 <LineBreak/><LineBreak/>
 Select 'File | New' menu option to play again.

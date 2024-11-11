@@ -335,7 +335,6 @@ namespace BarbarianPrince
             if (true == isStructure)
                myState = EnumR204.TC_EVENT_ROLL;
             //--------------------------------------------------
-
             foreach (String river in myMapItemMove.OldTerritory.Rivers) // Check for crossing rivers
             {
                if (river == myMapItemMove.NewTerritory.Name)
@@ -365,6 +364,7 @@ namespace BarbarianPrince
             }
             if (RaftEnum.RE_RAFT_ENDS_TODAY == myGameInstance.RaftState) // PerformTravel() - If rafting ended, only perform travel check in ending hex
             {
+               isRiverCrossing = false; // already across the river
                myMapItemMove.RiverCross = RiverCrossEnum.TC_NO_RIVER;
                myState = EnumR204.TC_EVENT_ROLL;
             }
@@ -1614,7 +1614,7 @@ namespace BarbarianPrince
             return state;
          }
          //-------------------------------------------------------
-         if(RiverCrossEnum.TC_CROSS_YES_SHOWN != myMapItemMove.RiverCross ) // if already accross river, do not check for river crossing
+         if((RiverCrossEnum.TC_CROSS_YES_SHOWN != myMapItemMove.RiverCross) && (RiverCrossEnum.TC_NO_RIVER != myMapItemMove.RiverCross) ) // if already accross river, do not check for river crossing
          {
             foreach (String riverHex in mim.OldTerritory.Rivers) // Check for crossing rivers
             {

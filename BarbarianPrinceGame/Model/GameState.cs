@@ -293,8 +293,8 @@ namespace BarbarianPrince
       }
       protected bool SetCampfireEncounterState(IGameInstance gi, ref GameAction action)
       {
-
-         if ((true == gi.IsJailed) || (true == gi.IsDungeon) || (true == gi.IsEnslaved))  // short circuit and got o falcon check state if jailed or enslaved
+         // This function perform encounter checks that happen in the Campfire state
+         if ((true == gi.IsJailed) || (true == gi.IsDungeon) || (true == gi.IsEnslaved))  // short circuit and got to falcon check state if jailed or enslaved
          {
             if (false == SetCampfireFalconCheckState(gi, ref action))
             {
@@ -396,9 +396,28 @@ namespace BarbarianPrince
          }
          else
          {
+            if (false == CampfireShowFeatState(gi, ref action))
+            {
+               Logger.Log(LogEnum.LE_ERROR, "SetCampfireEncounterState(): CampfireShowFeatState() returned false");
+               return false;
+            }
+         }
+         return true;
+      }
+      protected bool CampfireShowFeatState(IGameInstance gi, ref GameAction action)
+      {
+         if (false == GameEngine.theFeatsInGame.IsEqual(GameEngine.theFeatsInGameStarting))  // If feats exist to be shown
+         {
+            action = GameAction.CampfireShowFeat;
+            gi.GamePhase = GamePhase.Campfire;
+            gi.DieRollAction = GameAction.DieRollActionNone;
+            gi.EventDisplayed = gi.EventActive = "e503a";
+         }
+         else
+         {
             if (false == SetCampfireFinalConditionState(gi, ref action))
             {
-               Logger.Log(LogEnum.LE_ERROR, "SetCampfireEncounterState(): SetCampfireFinalConditionState() returned false");
+               Logger.Log(LogEnum.LE_ERROR, "CampfireShowFeatState(): SetCampfireFinalConditionState() returned false");
                return false;
             }
          }
@@ -406,6 +425,7 @@ namespace BarbarianPrince
       }
       protected bool SetCampfireFinalConditionState(IGameInstance gi, ref GameAction action)
       {
+         // Perform different action if jailed.
          if (true == gi.IsJailed)
          {
             action = GameAction.UpdateEventViewerActive;
@@ -448,6 +468,7 @@ namespace BarbarianPrince
             action = GameAction.CampfireLodgingCheck;
             return true;
          }
+         // True Love returns at start of new day. Otherwise wake up and arrange transport options for new day.
          if ((0 < gi.LostTrueLoves.Count) && (false == gi.IsTrueLoveHeartBroken)) // true love does not return until no longer heartbroken
             action = GameAction.CampfireTrueLoveCheck;
          else
@@ -2423,6 +2444,10 @@ namespace BarbarianPrince
          //IMapItem mi = this.CreateCharacter(gi, "Porter");
          //mi.PlagueDustWound = 2;
          //gi.AddCompanion(mi);
+         //---------------------
+         GameEngine.theFeatsInGame.myIsEagleAdded = true;
+         GameEngine.theFeatsInGame.myIsPurchaseFoulbane = true;
+         GameEngine.theFeatsInGame.myIsRescueHier = true;
       }
    }
    //-----------------------------------------------------
@@ -3213,7 +3238,17 @@ namespace BarbarianPrince
                   }
                   break;
                case GameAction.CampfireFalconCheckEnd:
-                  if (false == SetCampfireFinalConditionState(gi, ref action))
+                  if (false == CampfireShowFeatState(gi, ref action)) 
+                  {
+                     returnStatus = "CampfireShowFeatState() return false";
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateCampfire.PerformAction(): " + returnStatus);
+                  }
+                  break;
+               case GameAction.CampfireShowFeat:
+                  gi.EventDisplayed = gi.EventActive = "e503a";
+                  break;
+               case GameAction.CampfireShowFeatEnd:
+                  if (false == SetCampfireFinalConditionState(gi, ref action)) 
                   {
                      returnStatus = "SetCampfireFinalConditionState() return false";
                      Logger.Log(LogEnum.LE_ERROR, "GameStateCampfire.PerformAction(): " + returnStatus);

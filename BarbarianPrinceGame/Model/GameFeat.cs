@@ -370,7 +370,7 @@ namespace BarbarianPrince
          if (starting.myIsPurchaseFoulbane != this.myIsPurchaseFoulbane)
          {
             starting.myIsPurchaseFoulbane = this.myIsPurchaseFoulbane;
-            return "Purchased Foulbane from ";
+            return "Purchased Foulbane";
          }
          if (starting.myIsPurchaseChaga != this.myIsPurchaseChaga)
          {

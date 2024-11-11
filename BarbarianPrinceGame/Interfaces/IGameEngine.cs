@@ -140,6 +140,8 @@ namespace BarbarianPrince
       CampfireMountDieCheckEnd,
       CampfireFalconCheck,         // e107 falcon may leave if not fed or on dr=6
       CampfireFalconCheckEnd,
+      CampfireShowFeat,
+      CampfireShowFeatEnd,
       CampfireStarvationCheck,
       CampfireStarvationEnd,
       CampfireLodgingCheck,      // go to sleep at night

@@ -166,16 +166,16 @@ namespace BarbarianPrince
          myTextBoxMarquee.MouseLeftButtonUp += MouseLeftButtonUpMarquee;
          myTextBoxMarquee.MouseRightButtonDown += MouseRightButtonDownMarquee;
          this.RegisterName("tbMarquee", myTextBoxMarquee);
-         //-----------------------------------------------------------------
+         //---------------------------------------------------------------
          mySplashScreen = new SplashDialog(); // show splash screen waiting for finish initializing
          mySplashScreen.Show();
          InitializeComponent();
-         //-----------------------------------------------------------------
+         //---------------------------------------------------------------
          Image imageMap = new Image() { Name = "Map", Width = 810, Height = 985, Stretch = Stretch.Fill, Source = MapItem.theMapImages.GetBitmapImage("Map") };
          myCanvas.Children.Add(imageMap);
          Canvas.SetLeft(imageMap, 0);
          Canvas.SetTop(imageMap, 0);
-         //-----------------------------------------------------------------
+         //---------------------------------------------------------------
          myGameEngine = ge;
          myGameInstance = gi;
          gi.GamePhase = GamePhase.GameSetup;
@@ -189,14 +189,14 @@ namespace BarbarianPrince
          Options options = Deserialize(Settings.Default.GameOptions);
          myMainMenuViewer.NewGameOptions = options;
          gi.Options = options; // use the new game options for setting up the first game
-         //-------------------------------------------
+         //---------------------------------------------------------------
          if (false == String.IsNullOrEmpty(Settings.Default.GameDirectoryName))
             GameLoadMgr.theGamesDirectory = Settings.Default.GameDirectoryName; // remember the game directory name
-         //-------------------------------------------
+         //---------------------------------------------------------------
          Utilities.ZoomCanvas = Settings.Default.ZoomCanvas;
          myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas); // Constructor - revert to save zoom
          StatusBarViewer sbv = new StatusBarViewer(myStatusBar, ge, gi, myCanvas);
-         //-------------------------------------------
+         //---------------------------------------------------------------
          if (false == String.IsNullOrEmpty(Settings.Default.GameTypeOriginal))
             myGameEngine.Statistics[0] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeOriginal);
          if (false == String.IsNullOrEmpty(Settings.Default.GameTypeRandParty))
@@ -211,20 +211,21 @@ namespace BarbarianPrince
             myGameEngine.Statistics[5] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeCustom);
          if (false == String.IsNullOrEmpty(Settings.Default.GameTypeTotal))
             myGameEngine.Statistics[6] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeTotal);
-         //-------------------------------------------
+         //---------------------------------------------------------------
          if (false == String.IsNullOrEmpty(Settings.Default.theGameFeat))
             GameEngine.theFeatsInGame = Utilities.Deserialize<GameFeat>(Settings.Default.theGameFeat);
          else
             GameEngine.theFeatsInGame = new GameFeat();
-         GameEngine.theFeatsInGameStarting = GameEngine.theFeatsInGame.Clone(); // need to know difference between starting feats and feats that happen in this game
-         //-----------------------------------------------------------------
+         GameEngine.theFeatsInGameStarting = new GameFeat();
+         //GameEngine.theFeatsInGameStarting = GameEngine.theFeatsInGame.Clone(); // need to know difference between starting feats and feats that happen in this game
+         //---------------------------------------------------------------
          Utilities.theBrushBlood.Color = Color.FromArgb(0xFF, 0xA4, 0x07, 0x07);
          Utilities.theBrushRegion.Color = Color.FromArgb(0x7F, 0x11, 0x09, 0xBB); // nearly transparent but slightly colored
          Utilities.theBrushRegionClear.Color = Color.FromArgb(0, 0, 0x01, 0x0); // nearly transparent but slightly colored
          Utilities.theBrushControlButton.Color = Color.FromArgb(0xFF, 0x43, 0x33, 0xFF); // menu blue
          Utilities.theBrushScrollViewerActive.Color = Color.FromArgb(0xFF, 0xB9, 0xEA, 0x9E); // light green 
          Utilities.theBrushScrollViewerInActive.Color = Color.FromArgb(0x17, 0x00, 0x00, 0x00); // gray
-         //-----------------------------------------------------------------                                                                          
+         //---------------------------------------------------------------                                                                         
          mySolidColorBrushClear.Color = Color.FromArgb(0, 0, 1, 0); // Create standard color brushes
          mySolidColorBrushBlack.Color = Colors.Black;
          mySolidColorBrushGray.Color = Colors.Ivory;
@@ -233,7 +234,7 @@ namespace BarbarianPrince
          mySolidColorBrushOrange.Color = Colors.Orange;
          mySolidColorBrushPurple.Color = Colors.Purple;
          mySolidColorBrushRosyBrown.Color = Colors.RosyBrown;
-         //---------------------------------------------------------------------
+         //---------------------------------------------------------------
          // Create a container of brushes for painting paths.
          // The first brush is the alien color.
          // The second brush is the townspeople color.
@@ -245,7 +246,7 @@ namespace BarbarianPrince
          myBrushes.Add(Brushes.Orange);
          myDashArray.Add(4);  // used for dotted lines
          myDashArray.Add(2);  // used for dotted lines
-         //-----------------------------------------------------------------
+         //---------------------------------------------------------------
          myDieRoller = new DieRoller(myCanvas, CloseSplashScreen); // Close the splash screen when die resources are loaded
          if (true == myDieRoller.CtorError)
          {
@@ -253,16 +254,16 @@ namespace BarbarianPrince
             CtorError = true;
             return;
          }
-         //-----------------------------------------------------------------
+         //---------------------------------------------------------------
          myEventViewer = new EventViewer(myGameEngine, myGameInstance, myCanvas, myScrollViewerTextBlock, myStackPanelEndurance, Territory.theTerritories, myDieRoller);
          CanvasImageViewer civ = new CanvasImageViewer(myCanvas);
          CreateRiversFromXml();
-         //-----------------------------------------------------------------
+         //---------------------------------------------------------------
          CreateButtonTimeTrack(gi);
          CreateButtonFoodSupply();
          CreateButtonEndurance();
          CreateButtonDailyAction();
-         //-----------------------------------------------------------------------
+         //---------------------------------------------------------------
          // Implement the Model View Controller (MVC) pattern by registering views with
          // the game engine such that when the model data is changed, the views are updated.
          ge.RegisterForUpdates(civ);
@@ -426,6 +427,7 @@ namespace BarbarianPrince
                if (false == UpdateCanvasShowStats(gi))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvasShowStats() returned error ");
                break;
+            case GameAction.CampfireShowFeat:
             case GameAction.EndGameShowFeats:
                if (false == UpdateCanvasShowFeats())
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvasShowFeats() returned error ");
@@ -715,7 +717,7 @@ namespace BarbarianPrince
             option = new Option(name, false);
          if (true == option.IsEnabled)
          {
-            sb.Append("Easiest");
+            sb.Append("Easiest Monsters");
          }
          else
          {
@@ -725,7 +727,7 @@ namespace BarbarianPrince
                option = new Option(name, false);
             if (true == option.IsEnabled)
             {
-               sb.Append("Easier");
+               sb.Append("Easy Monsters");
             }
             else
             {
@@ -734,7 +736,7 @@ namespace BarbarianPrince
                if (null == option)
                   option = new Option(name, false);
                if (true == option.IsEnabled)
-                  sb.Append("Difficult");
+                  sb.Append("Difficult Monsters");
                else
                   sb.Append("Brutally Difficult");
             }
@@ -2361,7 +2363,7 @@ namespace BarbarianPrince
             return false;
          }
          //------------------------------------
-         double sizeOfImage = Math.Min(1.25*myCanvas.ActualHeight, 1.25*myCanvas.ActualWidth);
+         double sizeOfImage = Math.Min(myCanvas.ActualHeight, myCanvas.ActualWidth);
          BitmapImage bmi1 = new BitmapImage();
          bmi1.BeginInit();
          bmi1.UriSource = new Uri(MapImage.theImageDirectory + "StarReward.gif", UriKind.Absolute);
@@ -2374,18 +2376,24 @@ namespace BarbarianPrince
          Canvas.SetLeft(imgFeat, X);
          Canvas.SetTop(imgFeat, Y);
          Canvas.SetZIndex(imgFeat, 99998);
-         myCanvas.MouseDown += MouseDownCanvas;
+         myCanvas.MouseDown += MouseDownGameFeat;
          //-------------------------------------
-         System.Windows.Controls.Label labelTitle= new System.Windows.Controls.Label() { Content = "Game Feat Completed!", FontStyle=FontStyles.Italic, FontSize = 24, FontWeight = FontWeights.Bold, FontFamily = myFontFam1, Padding = new Thickness(0), VerticalContentAlignment = VerticalAlignment.Center, HorizontalContentAlignment = HorizontalAlignment.Center };
+         System.Windows.Controls.Label labelTitle= new System.Windows.Controls.Label() { Content = "Game Feat Completed!", FontStyle=FontStyles.Italic, FontSize = 24, FontWeight = FontWeights.Bold, FontFamily = myFontFam1, VerticalContentAlignment = VerticalAlignment.Center, HorizontalContentAlignment = HorizontalAlignment.Center };
          myCanvas.Children.Add(labelTitle);
-         System.Windows.Controls.Label labelForFeat = new System.Windows.Controls.Label() { Content = featChange, FontSize = 24, FontWeight = FontWeights.Bold, FontFamily = myFontFam1, Padding = new Thickness(0), VerticalContentAlignment = VerticalAlignment.Center, HorizontalContentAlignment = HorizontalAlignment.Center };
+         System.Windows.Controls.Label labelForFeat = new System.Windows.Controls.Label() { Content = featChange, FontSize = 24, FontWeight = FontWeights.Bold, FontFamily = myFontFam1, VerticalContentAlignment = VerticalAlignment.Center, HorizontalContentAlignment = HorizontalAlignment.Center };
          myCanvas.Children.Add(labelForFeat);
+         System.Windows.Controls.Label labelClick = new System.Windows.Controls.Label() { Content = "Click to continue", FontStyle = FontStyles.Italic, FontSize = 24, FontWeight = FontWeights.Bold, FontFamily = myFontFam1,  VerticalContentAlignment = VerticalAlignment.Center, HorizontalContentAlignment = HorizontalAlignment.Center };
+         myCanvas.Children.Add(labelClick);
          labelTitle.UpdateLayout();
+         labelForFeat.UpdateLayout();
+         labelClick.UpdateLayout();
          //-------------------------------------
          double X1 = centerX - labelTitle.ActualWidth * 0.5;
          double Y1 = centerY - labelTitle.ActualHeight * 0.5;
          double X2 = centerX - labelForFeat.ActualWidth * 0.5;
-         double Y2 = centerY + labelTitle.ActualHeight;
+         double Y2 = centerY + labelTitle.ActualHeight * 0.5;
+         double X3 = centerX - labelClick.ActualWidth * 0.5;
+         double Y3 = centerY + labelTitle.ActualHeight * 0.5 + labelForFeat.ActualHeight;
          //-------------------------------------
          Canvas.SetLeft(labelTitle, X1);
          Canvas.SetTop(labelTitle, Y1);
@@ -2393,6 +2401,9 @@ namespace BarbarianPrince
          Canvas.SetLeft(labelForFeat, X2);
          Canvas.SetTop(labelForFeat, Y2);
          Canvas.SetZIndex(labelForFeat, 99999);
+         Canvas.SetLeft(labelClick, X3);
+         Canvas.SetTop(labelClick, Y3);
+         Canvas.SetZIndex(labelClick, 99999);
          //-------------------------------------
          return true;
       }
@@ -3293,7 +3304,7 @@ namespace BarbarianPrince
             mySpeedRatioMarquee = 0.5;
          myStoryboard.SetSpeedRatio(this, mySpeedRatioMarquee);
       }
-      private void MouseDownCanvas(object send, MouseEventArgs e)
+      private void MouseDownGameFeat(object send, MouseEventArgs e)
       {
          System.Windows.Point p = e.GetPosition((UIElement)send);
          HitTestResult result = VisualTreeHelper.HitTest(myCanvas, p);  // Get the Point where the hit test occurrs
@@ -3306,10 +3317,25 @@ namespace BarbarianPrince
                   if ("Feat" == img1.Name)
                   {
                      GameAction action = GameAction.Error;
-                     if (false == GameEngine.theFeatsInGame.IsEqual(GameEngine.theFeatsInGameStarting))
-                        action = GameAction.EndGameShowFeats;
+                     if (GamePhase.Campfire == myGameInstance.GamePhase)
+                     {
+                        if (false == GameEngine.theFeatsInGame.IsEqual(GameEngine.theFeatsInGameStarting))
+                        {
+                           action = GameAction.CampfireShowFeat;
+                        }
+                        else
+                        {
+                           action = GameAction.CampfireShowFeatEnd;
+                           myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas);
+                        }
+                     }
                      else
-                        action = GameAction.EndGameShowStats;
+                     {
+                        if (false == GameEngine.theFeatsInGame.IsEqual(GameEngine.theFeatsInGameStarting))
+                           action = GameAction.EndGameShowFeats;
+                        else
+                           action = GameAction.EndGameShowStats;
+                     }
                      myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                      e.Handled = true;
                      return;
