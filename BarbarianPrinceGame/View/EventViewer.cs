@@ -181,6 +181,10 @@ namespace BarbarianPrince
                if (false == OpenEvent(gi, gi.EventActive))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): OpenEvent() returned false ae=" + myGameInstance.EventActive + " a=" + action.ToString());
                break;
+            case GameAction.ShowReportErrorDialog:
+               ShowReportErrorDialog dialogReportError = new ShowReportErrorDialog();
+               dialogReportError.Show();
+               break;
             case GameAction.ShowAboutDialog:
                ShowAboutDialog dialogAbout = new ShowAboutDialog();
                dialogAbout.Show();
@@ -195,6 +199,18 @@ namespace BarbarianPrince
                if (true == dialogInventory.ShowDialog())
                {
                }
+               break;
+            case GameAction.ShowGameFeats:
+               FeatDisplayDialog dialogShowFeats = new FeatDisplayDialog(myRulesMgr);
+               if (true == dialogShowFeats.CtorError)
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): FeatDisplayDialog CtorError=true");
+                  return;
+               }
+               if (true == dialogShowFeats.ShowDialog())
+               {
+               }
+               break;
                break;
             case GameAction.ShowRuleListing:
                RuleListingDialog dialogRuleListing = new RuleListingDialog(myRulesMgr);

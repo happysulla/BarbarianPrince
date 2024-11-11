@@ -2500,11 +2500,13 @@ namespace BarbarianPrince
          switch (action)
          {
             case GameAction.ShowInventory:
+            case GameAction.ShowGameFeats:
             case GameAction.ShowAllRivers:
             case GameAction.ShowRuleListing:
             case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
             case GameAction.ShowPartyPath:
+            case GameAction.ShowReportErrorDialog:
             case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
                break;
@@ -2984,11 +2986,13 @@ namespace BarbarianPrince
             switch (action)
             {
                case GameAction.ShowInventory:
+               case GameAction.ShowGameFeats:
                case GameAction.ShowAllRivers:
                case GameAction.ShowRuleListing:
                case GameAction.ShowCharacterDescription:
                case GameAction.ShowEventListing:
                case GameAction.ShowPartyPath:
+               case GameAction.ShowReportErrorDialog:
                case GameAction.ShowAboutDialog:
                case GameAction.UpdateEventViewerDisplay:
                   break;
@@ -3134,11 +3138,13 @@ namespace BarbarianPrince
             switch (action)
             {
                case GameAction.ShowInventory:
+               case GameAction.ShowGameFeats:
                case GameAction.ShowAllRivers:
                case GameAction.ShowRuleListing:
                case GameAction.ShowCharacterDescription:
                case GameAction.ShowEventListing:
                case GameAction.ShowPartyPath:
+               case GameAction.ShowReportErrorDialog:
                case GameAction.ShowAboutDialog:
                case GameAction.UpdateEventViewerDisplay:
                   break;
@@ -3523,11 +3529,13 @@ namespace BarbarianPrince
          switch (action)
          {
             case GameAction.ShowInventory:
+            case GameAction.ShowGameFeats:
             case GameAction.ShowAllRivers:
             case GameAction.ShowRuleListing:
             case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
             case GameAction.ShowPartyPath:
+            case GameAction.ShowReportErrorDialog:
             case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
                break;
@@ -3630,11 +3638,13 @@ namespace BarbarianPrince
          switch (action)
          {
             case GameAction.ShowInventory:
+            case GameAction.ShowGameFeats:
             case GameAction.ShowAllRivers:
             case GameAction.ShowRuleListing:
             case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
             case GameAction.ShowPartyPath:
+            case GameAction.ShowReportErrorDialog:
             case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
             case GameAction.ShowDienstalBranch:
@@ -4032,11 +4042,13 @@ namespace BarbarianPrince
          switch (action)
          {
             case GameAction.ShowInventory:
+            case GameAction.ShowGameFeats:
             case GameAction.ShowAllRivers:
             case GameAction.ShowRuleListing:
             case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
             case GameAction.ShowPartyPath:
+            case GameAction.ShowReportErrorDialog:
             case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
                break;
@@ -4123,11 +4135,13 @@ namespace BarbarianPrince
          switch (action)
          {
             case GameAction.ShowInventory:
+            case GameAction.ShowGameFeats:
             case GameAction.ShowAllRivers:
             case GameAction.ShowRuleListing:
             case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
             case GameAction.ShowPartyPath:
+            case GameAction.ShowReportErrorDialog:
             case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
                break;
@@ -4203,11 +4217,13 @@ namespace BarbarianPrince
          switch (action)
          {
             case GameAction.ShowInventory:
+            case GameAction.ShowGameFeats:
             case GameAction.ShowAllRivers:
             case GameAction.ShowRuleListing:
             case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
             case GameAction.ShowPartyPath:
+            case GameAction.ShowReportErrorDialog:
             case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
                break;
@@ -4270,11 +4286,13 @@ namespace BarbarianPrince
          switch (action)
          {
             case GameAction.ShowInventory:
+            case GameAction.ShowGameFeats:
             case GameAction.ShowAllRivers:
             case GameAction.ShowRuleListing:
             case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
             case GameAction.ShowPartyPath:
+            case GameAction.ShowReportErrorDialog:
             case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
                break;
@@ -4338,11 +4356,13 @@ namespace BarbarianPrince
          switch (action)
          {
             case GameAction.ShowInventory:
+            case GameAction.ShowGameFeats:
             case GameAction.ShowAllRivers:
             case GameAction.ShowRuleListing:
             case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
             case GameAction.ShowPartyPath:
+            case GameAction.ShowReportErrorDialog:
             case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
                break;
@@ -4435,11 +4455,13 @@ namespace BarbarianPrince
          switch (action)
          {
             case GameAction.ShowInventory:
+            case GameAction.ShowGameFeats:
             case GameAction.ShowAllRivers:
             case GameAction.ShowRuleListing:
             case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
             case GameAction.ShowPartyPath:
+            case GameAction.ShowReportErrorDialog:
             case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
             case GameAction.EndGameShowFeats:
@@ -4524,12 +4546,14 @@ namespace BarbarianPrince
          switch (action)
          {
             case GameAction.RemoveSplashScreen:
+            case GameAction.ShowGameFeats:
             case GameAction.ShowInventory:
             case GameAction.ShowAllRivers:
             case GameAction.ShowRuleListing:
             case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
             case GameAction.ShowPartyPath:
+            case GameAction.ShowReportErrorDialog:
             case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
                break;
@@ -4654,10 +4678,12 @@ namespace BarbarianPrince
             switch (action)
             {
                case GameAction.ShowInventory:
+               case GameAction.ShowGameFeats:
                case GameAction.ShowRuleListing:
                case GameAction.ShowCharacterDescription:
                case GameAction.ShowEventListing:
                case GameAction.ShowPartyPath:
+               case GameAction.ShowReportErrorDialog:
                case GameAction.ShowAboutDialog:
                case GameAction.ShowAllRivers:
                case GameAction.ShowDienstalBranch:

@@ -340,6 +340,7 @@ namespace BarbarianPrince
             case GameAction.ShowRuleListing:
             case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
+            case GameAction.ShowReportErrorDialog:
             case GameAction.ShowAboutDialog:
             case GameAction.E228ShowTrueLove:
                break;
@@ -3504,6 +3505,11 @@ namespace BarbarianPrince
             CommandBindings.Add(new CommandBinding(command, mmv.MenuItemViewInventory_Click));
             //------------------------------------------------
             command = new RoutedCommand();
+            keyGesture = new KeyGesture(Key.G, ModifierKeys.Control);
+            InputBindings.Add(new KeyBinding(command, keyGesture));
+            CommandBindings.Add(new CommandBinding(command, mmv.MenuItemViewFeats_Click));
+            //------------------------------------------------
+            command = new RoutedCommand();
             keyGesture = new KeyGesture(Key.F1, ModifierKeys.None);
             InputBindings.Add(new KeyBinding(command, keyGesture));
             CommandBindings.Add(new CommandBinding(command, mmv.MenuItemHelpRules_Click));
@@ -3522,6 +3528,11 @@ namespace BarbarianPrince
             keyGesture = new KeyGesture(Key.F4, ModifierKeys.None);
             InputBindings.Add(new KeyBinding(command, keyGesture));
             CommandBindings.Add(new CommandBinding(command, mmv.MenuItemHelpCharacters_Click));
+            //------------------------------------------------
+            command = new RoutedCommand();
+            keyGesture = new KeyGesture(Key.F5, ModifierKeys.None);
+            InputBindings.Add(new KeyBinding(command, keyGesture));
+            CommandBindings.Add(new CommandBinding(command, mmv.MenuItemHelpReportError_Click));
             //------------------------------------------------
             command = new RoutedCommand();
             keyGesture = new KeyGesture(Key.A, ModifierKeys.Control);

@@ -264,6 +264,9 @@
     <Compile Include="View\EventViewerTreasureTable.xaml.cs">
       <DependentUpon>EventViewerTreasureTable.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\FeatDisplayDialog.xaml.cs">
+      <DependentUpon>FeatDisplayDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\GameFeatDialog.xaml.cs">
       <DependentUpon>GameFeatDialog.xaml</DependentUpon>
     </Compile>
@@ -340,6 +343,9 @@
     </Compile>
     <Compile Include="View\ShowCounterHelpDialog.xaml.cs">
       <DependentUpon>ShowCounterHelpDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ShowReportErrorDialog.xaml.cs">
+      <DependentUpon>ShowReportErrorDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SplashDialog.xaml.cs">
       <DependentUpon>SplashDialog.xaml</DependentUpon>
@@ -537,6 +543,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\FeatDisplayDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\GameFeatDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -584,6 +594,10 @@
     <Page Include="View\ShowCounterHelpDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShowReportErrorDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\SplashDialog.xaml">
       <SubType>Designer</SubType>

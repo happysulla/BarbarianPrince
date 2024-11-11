@@ -80,6 +80,11 @@ namespace BarbarianPrince
                   subItem33.InputGestureText = "Ctrl+I";
                   subItem33.Click += MenuItemViewInventory_Click;
                   myMenuItemTopLevel3.Items.Add(subItem33);
+                  MenuItem subItem34 = new MenuItem();
+                  subItem34.Header = "_Game Feats...";
+                  subItem34.InputGestureText = "Ctrl+G";
+                  subItem34.Click += MenuItemViewFeats_Click;
+                  myMenuItemTopLevel3.Items.Add(subItem34);
                }
                //------------------------------------------------
                if (menuItem.Name == "myMenuItemTopLevel4")
@@ -108,10 +113,15 @@ namespace BarbarianPrince
                   subItem44.Click += MenuItemHelpCharacters_Click;
                   myMenuItemTopLevel4.Items.Add(subItem44);
                   MenuItem subItem45 = new MenuItem();
-                  subItem45.Header = "_About...";
-                  subItem45.InputGestureText = "Ctrl+A";
-                  subItem45.Click += MenuItemHelpAbout_Click;
+                  subItem45.Header = "Report Error...";
+                  subItem45.InputGestureText = "F5";
+                  subItem45.Click += MenuItemHelpReportError_Click;
                   myMenuItemTopLevel4.Items.Add(subItem45);
+                  MenuItem subItem46 = new MenuItem();
+                  subItem46.Header = "_About...";
+                  subItem46.InputGestureText = "Ctrl+A";
+                  subItem46.Click += MenuItemHelpAbout_Click;
+                  myMenuItemTopLevel4.Items.Add(subItem46);
                }
             } // end foreach (Control item in myMainMenu.Items)
          } // end foreach (Control item in myMainMenu.Items)
@@ -297,6 +307,11 @@ namespace BarbarianPrince
          GameAction action = GameAction.ShowInventory;
          myGameEngine.PerformAction(ref myGameInstance, ref action);
       }
+      public void MenuItemViewFeats_Click(object sender, RoutedEventArgs e)
+      {
+         GameAction action = GameAction.ShowGameFeats;
+         myGameEngine.PerformAction(ref myGameInstance, ref action);
+      }
       public void MenuItemHelpRules_Click(object sender, RoutedEventArgs e)
       {
          GameAction action = GameAction.ShowRuleListing;
@@ -315,6 +330,11 @@ namespace BarbarianPrince
       public void MenuItemHelpCharacters_Click(object sender, RoutedEventArgs e)
       {
          GameAction action = GameAction.ShowCharacterDescription;
+         myGameEngine.PerformAction(ref myGameInstance, ref action);
+      }
+      public void MenuItemHelpReportError_Click(object sender, RoutedEventArgs e)
+      {
+         GameAction action = GameAction.ShowReportErrorDialog;
          myGameEngine.PerformAction(ref myGameInstance, ref action);
       }
       public void MenuItemHelpAbout_Click(object sender, RoutedEventArgs e)
