@@ -264,6 +264,9 @@
     <Compile Include="View\EventViewerTreasureTable.xaml.cs">
       <DependentUpon>EventViewerTreasureTable.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\GameFeatDialog.xaml.cs">
+      <DependentUpon>GameFeatDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\IconDisplayDialog.xaml.cs">
       <DependentUpon>IconDisplayDialog.xaml</DependentUpon>
     </Compile>
@@ -531,6 +534,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EventViewerTreasureTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GameFeatDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

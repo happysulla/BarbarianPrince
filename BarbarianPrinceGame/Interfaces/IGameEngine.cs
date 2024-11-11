@@ -112,6 +112,7 @@ namespace BarbarianPrince
       EndGameWin,
       EndGameLost,
       EndGameResurrect,
+      EndGameShowFeats,
       EndGameShowStats,
       EndGameClose,
       EndGameFinal,      // Show the final location on map with final path

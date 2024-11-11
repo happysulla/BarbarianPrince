@@ -37,27 +37,10 @@ namespace BarbarianPrince
                ShowEndGameFail(myCanvas);
                break;
             default:
-               ShowNewFeat(myCanvas);
                break;
          }
       }
       //-------------------------------------------------
-      private IMapPoint GetCanvasCenter(Canvas c)
-      {
-         ScrollViewer sv = (ScrollViewer)c.Parent;
-         double x = 0.0;
-         if (c.ActualWidth < sv.ActualWidth / Utilities.ZoomCanvas)
-            x = c.ActualWidth / 2 + sv.HorizontalOffset;
-         else
-            x = sv.ActualWidth / (2 * Utilities.ZoomCanvas) + sv.HorizontalOffset / Utilities.ZoomCanvas;
-         double y = 0.0;
-         if (c.ActualHeight < sv.ActualHeight / Utilities.ZoomCanvas)
-            y = c.ActualHeight / 2 + sv.VerticalOffset;
-         else
-            y = sv.ActualHeight / (2 * Utilities.ZoomCanvas) + sv.VerticalOffset / Utilities.ZoomCanvas;
-         IMapPoint mp = (IMapPoint)new MapPoint(x, y);
-         return mp;
-      }
       private void ShowTrueLove(Canvas c)
       {
          BitmapImage bmi2 = new BitmapImage();
@@ -102,26 +85,6 @@ namespace BarbarianPrince
          Canvas.SetLeft(img, 0);
          Canvas.SetTop(img, 0);
          Canvas.SetZIndex(img, 99999);
-      }
-      private void ShowNewFeat(Canvas c)
-      {
-         string featChange = GameFeat.IsFeatChange();
-         if (false == String.IsNullOrEmpty(featChange))
-         {
-            IMapPoint center = GetCanvasCenter(c);
-            c.LayoutTransform = new ScaleTransform(1.0, 1.0);
-            double sizeOfImage = Math.Min(c.ActualHeight, c.ActualWidth);
-            BitmapImage bmi1 = new BitmapImage();
-            bmi1.BeginInit();
-            bmi1.UriSource = new Uri(MapImage.theImageDirectory + "StarReward.gif", UriKind.Absolute);
-            bmi1.EndInit();
-            Image img = new Image { Source = bmi1, Height = sizeOfImage, Width = sizeOfImage };
-            ImageBehavior.SetAnimatedSource(img, bmi1);
-            c.Children.Add(img);
-            Canvas.SetLeft(img, -sizeOfImage / 2.0);
-            Canvas.SetTop(img, -sizeOfImage / 2.0);
-            Canvas.SetZIndex(img, 99999);
-         }
       }
    }
 }

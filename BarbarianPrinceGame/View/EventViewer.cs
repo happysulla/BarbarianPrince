@@ -6485,7 +6485,10 @@ namespace BarbarianPrince
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
                            case "EndGameShowStats":
-                              action = GameAction.EndGameShowStats;
+                              if( false == GameEngine.theFeatsInGame.IsEqual(GameEngine.theFeatsInGameStarting) )
+                                 action = GameAction.EndGameShowFeats;
+                              else
+                                 action = GameAction.EndGameShowStats;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
                            case "Exhausted":

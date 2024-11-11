@@ -57,163 +57,324 @@ namespace BarbarianPrince
       public bool myIsPurchaseFoulbane;        // Purchase foulbane
       public bool myIsPurchaseChaga;           // Purchase Chaga Drug from temple
       //-------------------------------------
-      public static string IsFeatChange()
+      public GameFeat()
       {
-         GameFeat starting = GameEngine.theFeatsInGameStarting;
-         GameFeat current = GameEngine.theFeatsInGame;
-         if ( starting.myIs500GoldWin != current.myIs500GoldWin )
+         myIs500GoldWin = false;
+         myIsNobleAllyWin = false;
+         myIsBlessedWin = false;
+         myIsStaffOfCommandWin = false;
+         myIsRoyalHelmWin = false;
+         myIsHuldraDefeatedInBattle = false;
+         myIsHuldraDesposedWin = false;
+         myIsLostOnTime = false;
+         //-------------------------------------
+         myIsAirTravel = false;
+         myIsRaftTravel = false;
+         myIsArchTravel = false;
+         //-------------------------------------
+         myIsMinstelAdded = false;
+         myIsEagleAdded = false;
+         myIsFalconAdded = false;
+         myIsMerchantAdded = false;
+         //-------------------------------------
+         myIsHydraTeethUsed = false;
+         myIsRescueHier = false;
+         myIsSneakAttack = false;
+         myIsStealGems = false;
+         //-------------------------------------
+         myIsDragonKiller = false;
+         myIsBanditKiller = false;
+         myNumBanditKill = 0;
+         myIsOrcKiller = false;
+         myNumOrcKill = 0;
+         myIsGoblinKiller = false;
+         myNumGoblinKill = 0;
+         myIsWolfKiller = false;
+         myNumWolfKill = 0;
+         //-------------------------------------
+         myVisitedTowns = new List<String>();
+         myVisitedTemples = new List<String>();
+         myVisitedCastles = new List<String>();
+         myVisitedRuins = new List<String>();
+         myVisitedOasises = new List<String>();
+         myIsVisitAllTowns = false;
+         myIsVisitAllCastles = false;
+         myIsVisitAllTemples = false;
+         myIsVisitAllRuins = false;
+         myIsVisitAllOasis = false;
+         //-------------------------------------
+         myIsPurchaseFoulbane = false;
+         myIsPurchaseChaga = false;
+      }
+      public GameFeat Clone()
+      {
+         GameFeat starting = new GameFeat();
+         starting.myIs500GoldWin = this.myIs500GoldWin;
+         starting.myIsNobleAllyWin = this.myIsNobleAllyWin;
+         starting.myIsBlessedWin = this.myIsBlessedWin;
+         starting.myIsStaffOfCommandWin = this.myIsStaffOfCommandWin;
+         starting.myIsStaffOfCommandWin = this.myIsStaffOfCommandWin;
+         starting.myIsHuldraDefeatedInBattle = this.myIsHuldraDefeatedInBattle;
+         starting.myIsLostOnTime = this.myIsLostOnTime;
+         starting.myIsAirTravel = this.myIsAirTravel;
+         starting.myIsRaftTravel = this.myIsRaftTravel;
+         starting.myIsArchTravel = this.myIsArchTravel;
+         starting.myIsMinstelAdded = this.myIsMinstelAdded;
+         starting.myIsEagleAdded = this.myIsEagleAdded;
+         starting.myIsFalconAdded = this.myIsFalconAdded;
+         starting.myIsMerchantAdded = this.myIsMerchantAdded;
+         starting.myIsDragonKiller = this.myIsDragonKiller;
+         starting.myIsBanditKiller = this.myIsBanditKiller;
+         starting.myIsOrcKiller = this.myIsOrcKiller;
+         starting.myIsGoblinKiller = this.myIsGoblinKiller;
+         starting.myIsWolfKiller = this.myIsWolfKiller;
+         starting.myIsVisitAllTowns = this.myIsVisitAllTowns;
+         starting.myIsVisitAllCastles = this.myIsVisitAllCastles;
+         starting.myIsVisitAllTemples = this.myIsVisitAllTemples;
+         starting.myIsVisitAllRuins = this.myIsVisitAllRuins;
+         starting.myIsVisitAllOasis = this.myIsVisitAllOasis;
+         starting.myIsHydraTeethUsed = this.myIsHydraTeethUsed;
+         starting.myIsRescueHier = this.myIsRescueHier;
+         starting.myIsSneakAttack = this.myIsSneakAttack;
+         starting.myIsStealGems = this.myIsStealGems;
+         starting.myIsPurchaseFoulbane = this.myIsPurchaseFoulbane;
+         starting.myIsPurchaseChaga = this.myIsPurchaseChaga;
+         foreach(string s in this.myVisitedTowns)
+            starting.myVisitedTowns.Add(s);
+         foreach (string s in this.myVisitedTemples)
+            starting.myVisitedTemples.Add(s);
+         foreach (string s in this.myVisitedCastles)
+            starting.myVisitedCastles.Add(s);
+         foreach (string s in this.myVisitedRuins)
+            starting.myVisitedRuins.Add(s);
+         foreach (string s in this.myVisitedOasises)
+            starting.myVisitedOasises.Add(s);
+         return starting;
+      }
+      public bool IsEqual(GameFeat starting)
+      {
+         if (this.myIs500GoldWin != starting.myIs500GoldWin)
+            return false;
+         if (this.myIsNobleAllyWin != starting.myIsNobleAllyWin)
+            return false;
+         if (this.myIsBlessedWin != starting.myIsBlessedWin)
+            return false;
+         if (this.myIsStaffOfCommandWin != starting.myIsStaffOfCommandWin)
+            return false;
+         if (this.myIsRoyalHelmWin != starting.myIsRoyalHelmWin)
+            return false;
+         if (this.myIsHuldraDefeatedInBattle != starting.myIsHuldraDefeatedInBattle)
+            return false;
+         if (this.myIsLostOnTime != starting.myIsLostOnTime)
+            return false;
+         //--------------------------------------
+         if (this.myIsAirTravel != starting.myIsAirTravel)
+            return false;
+         if (this.myIsRaftTravel != starting.myIsRaftTravel)
+            return false;
+         if (this.myIsArchTravel != starting.myIsArchTravel)
+            return false;
+         //--------------------------------------
+         if (this.myIsMinstelAdded != starting.myIsMinstelAdded)
+            return false;
+         if (this.myIsEagleAdded != starting.myIsEagleAdded)
+            return false;
+         if (this.myIsFalconAdded != starting.myIsFalconAdded)
+            return false;
+         if (this.myIsMerchantAdded != starting.myIsMerchantAdded)
+            return false;
+         //--------------------------------------
+         if (this.myIsDragonKiller != starting.myIsDragonKiller)
+            return false;
+         if (this.myIsBanditKiller != starting.myIsBanditKiller)
+            return false;
+         if (this.myIsOrcKiller != starting.myIsOrcKiller)
+            return false;
+         if (this.myIsGoblinKiller != starting.myIsGoblinKiller)
+            return false;
+         if (this.myIsWolfKiller != starting.myIsWolfKiller)
+            return false;
+         //--------------------------------------
+         if (this.myIsVisitAllTowns != starting.myIsVisitAllTowns)
+            return false;
+         if (this.myIsVisitAllCastles != starting.myIsVisitAllCastles)
+            return false;
+         if (this.myIsVisitAllTemples != starting.myIsVisitAllTemples)
+            return false;
+         if (this.myIsVisitAllRuins != starting.myIsVisitAllRuins)
+            return false;
+         if (this.myIsVisitAllOasis != starting.myIsVisitAllOasis)
+            return false;
+         //--------------------------------------
+         if (this.myIsHydraTeethUsed != starting.myIsHydraTeethUsed)
+            return false;
+         if (this.myIsRescueHier != starting.myIsRescueHier)
+            return false;
+         if (this.myIsSneakAttack != starting.myIsSneakAttack)
+            return false;
+         if (this.myIsStealGems != starting.myIsStealGems)
+            return false;
+         if (this.myIsPurchaseFoulbane != starting.myIsPurchaseFoulbane)
+            return false;
+         if (this.myIsPurchaseChaga != starting.myIsPurchaseChaga)
+            return false;
+         return true;
+      }
+      public string GetFeatChange(GameFeat starting)
+      {
+         if ( starting.myIs500GoldWin != this.myIs500GoldWin )
          {
-            current.myIs500GoldWin = starting.myIs500GoldWin;
+            starting.myIs500GoldWin = this.myIs500GoldWin;
             return "Win with 500 gp";
          }
-         if (starting.myIsNobleAllyWin != current.myIsNobleAllyWin)
+         if (starting.myIsNobleAllyWin != this.myIsNobleAllyWin)
          {
-            current.myIsNobleAllyWin = starting.myIsNobleAllyWin;
+            starting.myIsNobleAllyWin = this.myIsNobleAllyWin;
             return "Win with noble ally";
          }
-         if (starting.myIsBlessedWin != current.myIsBlessedWin)
+         if (starting.myIsBlessedWin != this.myIsBlessedWin)
          {
-            current.myIsBlessedWin = starting.myIsBlessedWin;
+            starting.myIsBlessedWin = this.myIsBlessedWin;
             return "Win being blessed by the gods";
          }
-         if (starting.myIsStaffOfCommandWin != current.myIsStaffOfCommandWin)
+         if (starting.myIsStaffOfCommandWin != this.myIsStaffOfCommandWin)
          {
-            current.myIsStaffOfCommandWin = starting.myIsStaffOfCommandWin;
+            starting.myIsStaffOfCommandWin = this.myIsStaffOfCommandWin;
             return "Win with the staff of command";
          }
-         if (starting.myIsRoyalHelmWin != current.myIsRoyalHelmWin)
+         if (starting.myIsRoyalHelmWin != this.myIsRoyalHelmWin)
          {
-            current.myIsStaffOfCommandWin = starting.myIsStaffOfCommandWin;
+            starting.myIsStaffOfCommandWin = this.myIsStaffOfCommandWin;
             return "Win with the Royal Helm ";
          }
-         if (starting.myIsHuldraDefeatedInBattle != current.myIsHuldraDefeatedInBattle)
+         if (starting.myIsHuldraDefeatedInBattle != this.myIsHuldraDefeatedInBattle)
          {
-            current.myIsHuldraDefeatedInBattle = starting.myIsHuldraDefeatedInBattle;
+            starting.myIsHuldraDefeatedInBattle = this.myIsHuldraDefeatedInBattle;
             return "Win defeating Huldra in battle";
          }
-         if (starting.myIsLostOnTime != current.myIsLostOnTime)
+         if (starting.myIsLostOnTime != this.myIsLostOnTime)
          {
-            current.myIsLostOnTime = starting.myIsLostOnTime;
+            starting.myIsLostOnTime = this.myIsLostOnTime;
             return "Lost due to time expiring";
          }
          //--------------------------------------
-         if (starting.myIsAirTravel != current.myIsAirTravel)
+         if (starting.myIsAirTravel != this.myIsAirTravel)
          {
-            current.myIsAirTravel = starting.myIsAirTravel;
+            starting.myIsAirTravel = this.myIsAirTravel;
             return "Traveled by air";
          }
-         if (starting.myIsRaftTravel != current.myIsRaftTravel)
+         if (starting.myIsRaftTravel != this.myIsRaftTravel)
          {
-            current.myIsRaftTravel = starting.myIsRaftTravel;
+            starting.myIsRaftTravel = this.myIsRaftTravel;
             return "Traveled by raft";
          }
-         if (starting.myIsArchTravel != current.myIsArchTravel)
+         if (starting.myIsArchTravel != this.myIsArchTravel)
          {
-            current.myIsArchTravel = starting.myIsArchTravel;
+            starting.myIsArchTravel = this.myIsArchTravel;
             return "Traveled by arch";
          }
          //--------------------------------------
-         if (starting.myIsMinstelAdded != current.myIsMinstelAdded)
+         if (starting.myIsMinstelAdded != this.myIsMinstelAdded)
          {
-            current.myIsMinstelAdded = starting.myIsMinstelAdded;
+            starting.myIsMinstelAdded = this.myIsMinstelAdded;
             return "Minstrel joins your party";
          }
-         if (starting.myIsEagleAdded != current.myIsEagleAdded)
+         if (starting.myIsEagleAdded != this.myIsEagleAdded)
          {
-            current.myIsEagleAdded = starting.myIsEagleAdded;
+            starting.myIsEagleAdded = this.myIsEagleAdded;
             return "Eagle joins your party";
          }
-         if (starting.myIsFalconAdded != current.myIsFalconAdded)
+         if (starting.myIsFalconAdded != this.myIsFalconAdded)
          {
-            current.myIsFalconAdded = starting.myIsFalconAdded;
+            starting.myIsFalconAdded = this.myIsFalconAdded;
             return "Falcon joins your party";
          }
-         if (starting.myIsMerchantAdded != current.myIsMerchantAdded)
+         if (starting.myIsMerchantAdded != this.myIsMerchantAdded)
          {
-            current.myIsMerchantAdded = starting.myIsMerchantAdded;
+            starting.myIsMerchantAdded = this.myIsMerchantAdded;
             return "Merchant joins your party";
          }
          //--------------------------------------
-         if (starting.myIsDragonKiller != current.myIsDragonKiller)
+         if (starting.myIsDragonKiller != this.myIsDragonKiller)
          {
-            current.myIsDragonKiller = starting.myIsDragonKiller;
+            starting.myIsDragonKiller = this.myIsDragonKiller;
             return "Killed a dragon";
          }
-         if (starting.myIsBanditKiller != current.myIsBanditKiller)
+         if (starting.myIsBanditKiller != this.myIsBanditKiller)
          {
-            current.myIsBanditKiller = starting.myIsBanditKiller;
+            starting.myIsBanditKiller = this.myIsBanditKiller;
             return "Killed 20 bandits";
          }
-         if (starting.myIsOrcKiller != current.myIsOrcKiller)
+         if (starting.myIsOrcKiller != this.myIsOrcKiller)
          {
-            current.myIsOrcKiller = starting.myIsOrcKiller;
+            starting.myIsOrcKiller = this.myIsOrcKiller;
             return "Killed 30 orcs";
          }
-         if (starting.myIsGoblinKiller != current.myIsGoblinKiller)
+         if (starting.myIsGoblinKiller != this.myIsGoblinKiller)
          {
-            current.myIsGoblinKiller = starting.myIsGoblinKiller;
+            starting.myIsGoblinKiller = this.myIsGoblinKiller;
             return "Killed 40 goblins";
          }
-         if (starting.myIsWolfKiller != current.myIsWolfKiller)
+         if (starting.myIsWolfKiller != this.myIsWolfKiller)
          {
-            current.myIsWolfKiller = starting.myIsWolfKiller;
+            starting.myIsWolfKiller = this.myIsWolfKiller;
             return "Killed 50 wolves";
          }
          //--------------------------------------
-         if (starting.myIsVisitAllTowns != current.myIsVisitAllTowns)
+         if (starting.myIsVisitAllTowns != this.myIsVisitAllTowns)
          {
-            current.myIsVisitAllTowns = starting.myIsVisitAllTowns;
+            starting.myIsVisitAllTowns = this.myIsVisitAllTowns;
             return "Visited all towns";
          }
-         if (starting.myIsVisitAllCastles != current.myIsVisitAllCastles)
+         if (starting.myIsVisitAllCastles != this.myIsVisitAllCastles)
          {
-            current.myIsVisitAllCastles = starting.myIsVisitAllCastles;
+            starting.myIsVisitAllCastles = this.myIsVisitAllCastles;
             return "Visited all castles";
          }
-         if (starting.myIsVisitAllTemples != current.myIsVisitAllTemples)
+         if (starting.myIsVisitAllTemples != this.myIsVisitAllTemples)
          {
-            current.myIsVisitAllTemples = starting.myIsVisitAllTemples;
+            starting.myIsVisitAllTemples = this.myIsVisitAllTemples;
             return "Visited all temples";
          }
-         if (starting.myIsVisitAllRuins != current.myIsVisitAllRuins)
+         if (starting.myIsVisitAllRuins != this.myIsVisitAllRuins)
          {
-            current.myIsVisitAllRuins = starting.myIsVisitAllRuins;
+            starting.myIsVisitAllRuins = this.myIsVisitAllRuins;
             return "Visited all ruins";
          }
-         if (starting.myIsVisitAllOasis != current.myIsVisitAllOasis)
+         if (starting.myIsVisitAllOasis != this.myIsVisitAllOasis)
          {
-            current.myIsVisitAllOasis = starting.myIsVisitAllOasis;
+            starting.myIsVisitAllOasis = this.myIsVisitAllOasis;
             return "Visited all oasis";
          }
          //--------------------------------------
-         if (starting.myIsHydraTeethUsed != current.myIsHydraTeethUsed)
+         if (starting.myIsHydraTeethUsed != this.myIsHydraTeethUsed)
          {
-            current.myIsHydraTeethUsed = starting.myIsHydraTeethUsed;
+            starting.myIsHydraTeethUsed = this.myIsHydraTeethUsed;
             return "Used Hydra teeth in battle";
          }
-         if (starting.myIsRescueHier != current.myIsRescueHier)
+         if (starting.myIsRescueHier != this.myIsRescueHier)
          {
-            current.myIsRescueHier = starting.myIsRescueHier;
+            starting.myIsRescueHier = this.myIsRescueHier;
             return "Rescued true hier from hill tribe";
          }
-         if (starting.myIsSneakAttack != current.myIsSneakAttack)
+         if (starting.myIsSneakAttack != this.myIsSneakAttack)
          {
-            current.myIsSneakAttack = starting.myIsSneakAttack;
+            starting.myIsSneakAttack = this.myIsSneakAttack;
             return "Sneak attack on Count Dragot";
          }
-         if (starting.myIsStealGems != current.myIsStealGems)
+         if (starting.myIsStealGems != this.myIsStealGems)
          {
-            current.myIsStealGems = starting.myIsStealGems;
+            starting.myIsStealGems = this.myIsStealGems;
             return "Steal Count Dragot's jewels";
          }
-         if (starting.myIsPurchaseFoulbane != current.myIsPurchaseFoulbane)
+         if (starting.myIsPurchaseFoulbane != this.myIsPurchaseFoulbane)
          {
-            current.myIsPurchaseFoulbane = starting.myIsPurchaseFoulbane;
+            starting.myIsPurchaseFoulbane = this.myIsPurchaseFoulbane;
             return "Purchased Foulbane from ";
          }
-         if (starting.myIsPurchaseChaga != current.myIsPurchaseChaga)
+         if (starting.myIsPurchaseChaga != this.myIsPurchaseChaga)
          {
-            current.myIsPurchaseChaga = starting.myIsPurchaseChaga;
+            starting.myIsPurchaseChaga = this.myIsPurchaseChaga;
             return "Purchased chaga drug from temple";
          }
          return "";

@@ -3,13 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -17,12 +13,12 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using static System.Windows.Forms.AxHost;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using WpfAnimatedGif;
 using Button = System.Windows.Controls.Button;
 using MenuItem = System.Windows.Controls.MenuItem;
 using Point = System.Windows.Point;
@@ -115,6 +111,7 @@ namespace BarbarianPrince
       private System.Windows.Input.Cursor myTargetCursor = null;
       private Dictionary<string, Polyline> myRivers = new Dictionary<string, Polyline>();
       private readonly FontFamily myFontFam = new FontFamily("Tahoma");
+      private readonly FontFamily myFontFam1 = new FontFamily("Old English Text MT");
       private double myPreviousScrollHeight = 0.0;
       private double myPreviousScrollWidth = 0.0;
       //---------------------------------------------------------------------
@@ -218,7 +215,8 @@ namespace BarbarianPrince
             GameEngine.theFeatsInGame = Utilities.Deserialize<GameFeat>(Settings.Default.theGameFeat);
          else
             GameEngine.theFeatsInGame = new GameFeat();
-         GameEngine.theFeatsInGameStarting = GameEngine.theFeatsInGame; // need to know difference between starting feats and feats that happen in this game
+         //GameEngine.theFeatsInGameStarting = GameEngine.theFeatsInGame.Clone(); // need to know difference between starting feats and feats that happen in this game
+         GameEngine.theFeatsInGameStarting = new GameFeat(); // <cgs> TEST
          //-----------------------------------------------------------------
          Utilities.theBrushBlood.Color = Color.FromArgb(0xFF, 0xA4, 0x07, 0x07);
          Utilities.theBrushRegion.Color = Color.FromArgb(0x7F, 0x11, 0x09, 0xBB); // nearly transparent but slightly colored
@@ -426,7 +424,11 @@ namespace BarbarianPrince
                break;
             case GameAction.EndGameShowStats:
                if (false == UpdateCanvasShowStats(gi))
-                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvas() returned error ");
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvasShowStats() returned error ");
+               break;
+            case GameAction.EndGameShowFeats:
+               if (false == UpdateCanvasShowFeats())
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvasShowFeats() returned error ");
                break;
             default:
                if (false == UpdateCanvas(gi, action))
@@ -647,6 +649,22 @@ namespace BarbarianPrince
          if (0 == options.Count)
             options.SetDefaults();
          return options;
+      }
+      private IMapPoint GetCanvasCenter(Canvas c)
+      {
+         ScrollViewer sv = (ScrollViewer)c.Parent;
+         double x = 0.0;
+         if (c.ActualWidth < sv.ActualWidth / Utilities.ZoomCanvas)
+            x = c.ActualWidth / 2 + sv.HorizontalOffset;
+         else
+            x = sv.ActualWidth / (2 * Utilities.ZoomCanvas) + sv.HorizontalOffset / Utilities.ZoomCanvas;
+         double y = 0.0;
+         if (c.ActualHeight < sv.ActualHeight / Utilities.ZoomCanvas)
+            y = c.ActualHeight / 2 + sv.VerticalOffset;
+         else
+            y = sv.ActualHeight / (2 * Utilities.ZoomCanvas) + sv.VerticalOffset / Utilities.ZoomCanvas;
+         IMapPoint mp = (IMapPoint)new MapPoint(x, y);
+         return mp;
       }
       //---------------------------------------
       private string UpdateTitle(Options options)
@@ -2264,6 +2282,78 @@ namespace BarbarianPrince
          }
          return true;
       }
+      private bool UpdateCanvasShowFeats()
+      {
+         myButtonMapItems.Clear();
+         List<UIElement> elements = new List<UIElement>();
+         foreach (UIElement ui in myCanvas.Children)
+         {
+            if (ui is Image img)
+            {
+               if ("Map" == img.Name)
+                  continue;
+               elements.Add(ui);
+            }
+            if (ui is TextBlock tb)
+               elements.Add(ui);
+            if (ui is Label label)
+               elements.Add(ui);
+            if (ui is Button b)
+            {
+               if (false == b.Name.Contains("Die"))
+                  elements.Add(ui);
+            }
+         }
+         foreach (UIElement ui1 in elements)
+            myCanvas.Children.Remove(ui1);
+         //------------------------------------
+         myCanvas.LayoutTransform = new ScaleTransform(1.0, 1.0);
+         myDieRoller.HideDie();
+         double centerX = myCanvas.ActualWidth * 0.5;
+         double centerY = myCanvas.ActualHeight * 0.5;
+         //------------------------------------
+         string featChange = GameEngine.theFeatsInGame.GetFeatChange(GameEngine.theFeatsInGameStarting);
+         if (true == String.IsNullOrEmpty(featChange))
+         {
+            Logger.Log(LogEnum.LE_ERROR, "UpdateCanvasShowFeats(): No feats found");
+            return false;
+         }
+         //------------------------------------
+         double sizeOfImage = Math.Min(1.25*myCanvas.ActualHeight, 1.25*myCanvas.ActualWidth);
+         BitmapImage bmi1 = new BitmapImage();
+         bmi1.BeginInit();
+         bmi1.UriSource = new Uri(MapImage.theImageDirectory + "StarReward.gif", UriKind.Absolute);
+         bmi1.EndInit();
+         Image imgFeat = new Image { Source = bmi1, Height = sizeOfImage, Width = sizeOfImage, Name = "Feat" };
+         ImageBehavior.SetAnimatedSource(imgFeat, bmi1);
+         myCanvas.Children.Add(imgFeat);
+         double X = centerX - (sizeOfImage * 0.5);
+         double Y = centerY - (sizeOfImage * 0.5);
+         Canvas.SetLeft(imgFeat, X);
+         Canvas.SetTop(imgFeat, Y);
+         Canvas.SetZIndex(imgFeat, 99998);
+         myCanvas.MouseDown += MouseDownCanvas;
+         //-------------------------------------
+         System.Windows.Controls.Label labelTitle= new System.Windows.Controls.Label() { Content = "Game Feat Completed!", FontStyle=FontStyles.Italic, FontSize = 24, FontWeight = FontWeights.Bold, FontFamily = myFontFam1, Padding = new Thickness(0), VerticalContentAlignment = VerticalAlignment.Center, HorizontalContentAlignment = HorizontalAlignment.Center };
+         myCanvas.Children.Add(labelTitle);
+         System.Windows.Controls.Label labelForFeat = new System.Windows.Controls.Label() { Content = featChange, FontSize = 24, FontWeight = FontWeights.Bold, FontFamily = myFontFam1, Padding = new Thickness(0), VerticalContentAlignment = VerticalAlignment.Center, HorizontalContentAlignment = HorizontalAlignment.Center };
+         myCanvas.Children.Add(labelForFeat);
+         labelTitle.UpdateLayout();
+         //-------------------------------------
+         double X1 = centerX - labelTitle.ActualWidth * 0.5;
+         double Y1 = centerY - labelTitle.ActualHeight * 0.5;
+         double X2 = centerX - labelForFeat.ActualWidth * 0.5;
+         double Y2 = centerY + labelTitle.ActualHeight;
+         //-------------------------------------
+         Canvas.SetLeft(labelTitle, X1);
+         Canvas.SetTop(labelTitle, Y1);
+         Canvas.SetZIndex(labelTitle, 99999);
+         Canvas.SetLeft(labelForFeat, X2);
+         Canvas.SetTop(labelForFeat, Y2);
+         Canvas.SetZIndex(labelForFeat, 99999);
+         //-------------------------------------
+         return true;
+      }
       private bool UpdateCanvasShowStats(IGameInstance gi)
       {
          myButtonMapItems.Clear();
@@ -2277,6 +2367,8 @@ namespace BarbarianPrince
                elements.Add(ui);
             }
             if (ui is TextBlock tb)
+               elements.Add(ui);
+            if (ui is Label label)
                elements.Add(ui);
             if (ui is Button b)
             {
@@ -3147,13 +3239,42 @@ namespace BarbarianPrince
       }
       private void MouseRightButtonDownMarquee(object send, MouseEventArgs e)
       {
-         if ((0.5 < mySpeedRatioMarquee) && (mySpeedRatioMarquee < 2.0))
+         if (2.5 < mySpeedRatioMarquee)
+            mySpeedRatioMarquee = 0.25;
+         else if ((1.8 < mySpeedRatioMarquee) && (mySpeedRatioMarquee < 2.2))
+            mySpeedRatioMarquee = 3.0;
+         else if ((0.8 < mySpeedRatioMarquee) && (mySpeedRatioMarquee < 1.2))
             mySpeedRatioMarquee = 2.0;
-         else if (1.5 < mySpeedRatioMarquee)
-            mySpeedRatioMarquee = 0.5;
-         else
+         else if ((0.3 < mySpeedRatioMarquee) && (mySpeedRatioMarquee < 0.6))
             mySpeedRatioMarquee = 1.0;
+         else
+            mySpeedRatioMarquee = 0.5;
          myStoryboard.SetSpeedRatio(this, mySpeedRatioMarquee);
+      }
+      private void MouseDownCanvas(object send, MouseEventArgs e)
+      {
+         System.Windows.Point p = e.GetPosition((UIElement)send);
+         HitTestResult result = VisualTreeHelper.HitTest(myCanvas, p);  // Get the Point where the hit test occurrs
+         foreach (UIElement ui in myCanvas.Children)
+         {
+            if (ui is Image img1) 
+            {
+               if (result.VisualHit == img1)
+               {
+                  if ("Feat" == img1.Name)
+                  {
+                     GameAction action = GameAction.Error;
+                     if (false == GameEngine.theFeatsInGame.IsEqual(GameEngine.theFeatsInGameStarting))
+                        action = GameAction.EndGameShowFeats;
+                     else
+                        action = GameAction.EndGameShowStats;
+                     myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+                     e.Handled = true;
+                     return;
+                  }
+               }
+            }
+         }
       }
       //-------------GameViewerWindow---------------------------------
       private void ContentRenderedGameViewerWindow(object sender, EventArgs e)
