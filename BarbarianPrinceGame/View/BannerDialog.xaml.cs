@@ -52,11 +52,11 @@ namespace BarbarianPrince
       {
          System.Drawing.Rectangle ret;
          int numScreens = System.Windows.Forms.Screen.AllScreens.Length;
-         for (int i = 1; i <= numScreens; i++)
+         for (int i = 0; i < numScreens; i++)
          {
-            ret = Screen.AllScreens[i - 1].Bounds;
+            ret = Screen.AllScreens[i].Bounds;
             if (ret.Contains(mousePoint))
-               return i - 1;
+               return i;
          }
          return 0;
       }
@@ -88,21 +88,6 @@ namespace BarbarianPrince
          myIsDragging = true;
          e.Handled = true;
       }
-      private void Window_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-      {
-         StringBuilder sb = new StringBuilder();
-         sb.Append("w=");
-         sb.Append(myBannerDialog.ActualHeight.ToString());
-         sb.Append(" dp=");
-         sb.Append(myDockPanel.ActualHeight.ToString());
-         sb.Append(" sv=");
-         sb.Append(myScrollViewerTextBlock.ActualHeight.ToString());
-         sb.Append(" tb=");
-         sb.Append(myTextBlockDisplay.ActualHeight.ToString());
-         System.Windows.MessageBox.Show(sb.ToString());
-         myBannerDialog.Height = myTextBlockDisplay.ActualHeight;
-         myDockPanel.Height = myTextBlockDisplay.ActualHeight;
-      }
       private void Window_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
       {
          if (true == myIsDragging)
@@ -112,7 +97,8 @@ namespace BarbarianPrince
             int newScreen = ConvertMousePointToScreenIndex(pt);
             if (newScreen != myInitialScreen)
             {
-
+               // Stop moving the window when mouse shows up on new screen
+               // Allows user to move to new screen by grabbing on new screen
             }
             else
             {

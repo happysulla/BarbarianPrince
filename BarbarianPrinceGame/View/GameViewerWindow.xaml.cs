@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -193,7 +194,7 @@ namespace BarbarianPrince
             GameLoadMgr.theGamesDirectory = Settings.Default.GameDirectoryName; // remember the game directory name
          //-------------------------------------------
          Utilities.ZoomCanvas = Settings.Default.ZoomCanvas;
-         myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas);
+         myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas); // Constructor - revert to save zoom
          StatusBarViewer sbv = new StatusBarViewer(myStatusBar, ge, gi, myCanvas);
          //-------------------------------------------
          if (false == String.IsNullOrEmpty(Settings.Default.GameTypeOriginal))
@@ -215,8 +216,7 @@ namespace BarbarianPrince
             GameEngine.theFeatsInGame = Utilities.Deserialize<GameFeat>(Settings.Default.theGameFeat);
          else
             GameEngine.theFeatsInGame = new GameFeat();
-         //GameEngine.theFeatsInGameStarting = GameEngine.theFeatsInGame.Clone(); // need to know difference between starting feats and feats that happen in this game
-         GameEngine.theFeatsInGameStarting = new GameFeat(); // <cgs> TEST
+         GameEngine.theFeatsInGameStarting = GameEngine.theFeatsInGame.Clone(); // need to know difference between starting feats and feats that happen in this game
          //-----------------------------------------------------------------
          Utilities.theBrushBlood.Color = Color.FromArgb(0xFF, 0xA4, 0x07, 0x07);
          Utilities.theBrushRegion.Color = Color.FromArgb(0x7F, 0x11, 0x09, 0xBB); // nearly transparent but slightly colored
@@ -312,7 +312,7 @@ namespace BarbarianPrince
                   }
                }
             }
-            myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas);
+            myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas); // UploadNewGame - Return to previous saved zoom level
             this.Title = UpdateTitle(gi.Options);
          }
          //-------------------------------------------------------
@@ -368,7 +368,7 @@ namespace BarbarianPrince
                UpdateCanvasRiver("Trogoth River", false);
                break;
             case GameAction.EndGameFinal:
-               myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas);
+               myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas);  // EndGameFinal - show map for last time
                if (false == UpdateCanvasPath(gi))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateCanvas(): UpdateCanvasPath() returned false");
                if (false == UpdateCanvas(gi, action))
@@ -650,56 +650,96 @@ namespace BarbarianPrince
             options.SetDefaults();
          return options;
       }
-      private IMapPoint GetCanvasCenter(Canvas c)
-      {
-         ScrollViewer sv = (ScrollViewer)c.Parent;
-         double x = 0.0;
-         if (c.ActualWidth < sv.ActualWidth / Utilities.ZoomCanvas)
-            x = c.ActualWidth / 2 + sv.HorizontalOffset;
-         else
-            x = sv.ActualWidth / (2 * Utilities.ZoomCanvas) + sv.HorizontalOffset / Utilities.ZoomCanvas;
-         double y = 0.0;
-         if (c.ActualHeight < sv.ActualHeight / Utilities.ZoomCanvas)
-            y = c.ActualHeight / 2 + sv.VerticalOffset;
-         else
-            y = sv.ActualHeight / (2 * Utilities.ZoomCanvas) + sv.VerticalOffset / Utilities.ZoomCanvas;
-         IMapPoint mp = (IMapPoint)new MapPoint(x, y);
-         return mp;
-      }
       //---------------------------------------
       private string UpdateTitle(Options options)
       {
+         StringBuilder sb = new StringBuilder();
+         sb.Append("Barbarian Prince - ");
+         //--------------------------------
          string name = "CustomGame";
          Option option = options.Find(name);
          if (null == option)
             option = new Option(name, false);
          if (true == option.IsEnabled)
-            return "Barbarian Prince - Custom Game";
-         name = "MaxFunGame";
+         {
+            sb.Append("Custom Game - ");
+         }
+         else
+         {
+            name = "MaxFunGame";
+            option = options.Find(name);
+            if (null == option)
+               option = new Option(name, false);
+            if (true == option.IsEnabled)
+            {
+               sb.Append("Fun Game - ");
+            }
+            else
+            {
+               name = "RandomGame";
+               option = options.Find(name);
+               if (null == option)
+                  option = new Option(name, false);
+               if (true == option.IsEnabled)
+               {
+                  sb.Append(" All Random Options Game - ");
+               }
+               else
+               {
+                  name = "RandomHexGame";
+                  option = options.Find(name);
+                  if (null == option)
+                     option = new Option(name, false);
+                  if (true == option.IsEnabled)
+                  {
+                     sb.Append("Random Starting Hex Game - ");
+                  }
+                  else
+                  {
+                     name = "RandomPartyGame";
+                     option = options.Find(name);
+                     if (null == option)
+                        option = new Option(name, false);
+                     if (true == option.IsEnabled)
+                        sb.Append("Random Starting Party Game - ");
+                     else
+                        sb.Append("Orginal Game - ");
+                  }
+               }
+            }
+         }
+         //----------------------------------
+         name = "EasiestMonsters";
          option = options.Find(name);
          if (null == option)
             option = new Option(name, false);
          if (true == option.IsEnabled)
-            return "Barbarian Prince - Fun Game";
-         name = "RandomGame";
-         option = options.Find(name);
-         if (null == option)
-            option = new Option(name, false);
-         if (true == option.IsEnabled)
-            return "Barbarian Prince - All Random Options Game";
-         name = "RandomHexGame";
-         option = options.Find(name);
-         if (null == option)
-            option = new Option(name, false);
-         if (true == option.IsEnabled)
-            return "Barbarian Prince - Random Hex Game";
-         name = "RandomPartyGame";
-         option = options.Find(name);
-         if (null == option)
-            option = new Option(name, false);
-         if (true == option.IsEnabled)
-            return "Barbarian Prince - Random Party Game";
-         return "Barbarian Prince - Orginal Game";
+         {
+            sb.Append("Easiest");
+         }
+         else
+         {
+            name = "EasyMonsters";
+            option = options.Find(name);
+            if (null == option)
+               option = new Option(name, false);
+            if (true == option.IsEnabled)
+            {
+               sb.Append("Easier");
+            }
+            else
+            {
+               name = "LessHardMonsters";
+               option = options.Find(name);
+               if (null == option)
+                  option = new Option(name, false);
+               if (true == option.IsEnabled)
+                  sb.Append("Difficult");
+               else
+                  sb.Append("Brutally Difficult");
+            }
+         }
+         return sb.ToString();
       }
       private void UpdateTimeTrack(IGameInstance gi)
       {
@@ -1625,6 +1665,8 @@ namespace BarbarianPrince
                if("CenterPoint" != ellipse.Name) // CenterPoint is a unit test ellipse
                   elements.Add(ui);
             }
+            if (ui is Label label)  // A Game Feat Label
+               elements.Add(ui);
             if (ui is Image img)
             {
                if ("Map" == img.Name)

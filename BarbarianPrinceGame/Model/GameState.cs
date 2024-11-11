@@ -2294,7 +2294,7 @@ namespace BarbarianPrince
          //gi.Prince.PlagueDustWound = 1; 
          //gi.Prince.IsResurrected = true;
          //gi.AddUnitTestTiredMount(myPrince);
-         gi.Prince.Coin = 501;
+         //gi.Prince.Coin = 501;
          //gi.Prince.Food = 9;
          //---------------------
          //gi.AddSpecialItem(SpecialEnum.GiftOfCharm);
@@ -4380,6 +4380,7 @@ namespace BarbarianPrince
             case GameAction.ShowPartyPath:
             case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
+            case GameAction.EndGameShowFeats:
                break;
             case GameAction.EndGameResurrect:
                ++gi.Statistic.myNumOfPrinceResurrection;
