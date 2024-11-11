@@ -1493,7 +1493,7 @@ namespace BarbarianPrince
          int modifiedWitAndWile = 0;
          switch (key)
          {
-            case "e001":
+            case "e001a":
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
                   myTextBlock.Inlines.Add(new LineBreak());
@@ -5483,7 +5483,7 @@ namespace BarbarianPrince
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
                            case "Brain":
-                              action = GameAction.SetupStartingLocation;
+                              action = GameAction.SetupGameOptionChoice;
                               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                               return;
                            case "BribeToHireEnd":
@@ -7279,8 +7279,8 @@ namespace BarbarianPrince
          // Click anywhere to continue
          switch (myGameInstance.EventActive)
          {
-            case "e001":
-               if (Utilities.NO_RESULT < myGameInstance.DieResults["e001"][0])
+            case "e001a":
+               if (Utilities.NO_RESULT < myGameInstance.DieResults["e001a"][0])
                {
                   action = GameAction.SetupFinalize;
                   myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
@@ -7689,26 +7689,8 @@ namespace BarbarianPrince
                myGameInstance.DieRollAction = GameAction.EncounterRoll;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
-            case "Friendly":
-               myGameInstance.EventDisplayed = myGameInstance.EventActive = name;
-               action = GameAction.UpdateEventViewerActive;
-               myGameInstance.DieRollAction = GameAction.EncounterRoll;
-               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
-               break;
             case "Feed":
                action = GameAction.E107FalconAdd;
-               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
-               break;
-            case "Fly":
-               action = GameAction.EncounterEscape;
-               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
-               break;
-            case " Fly ":
-               action = GameAction.EncounterFollow;
-               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
-               break;
-            case "Fly Away ":
-               action = GameAction.EncounterEscapeFly;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
             case "Fight":
@@ -7763,8 +7745,30 @@ namespace BarbarianPrince
                action = GameAction.E144RescueFight;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
+            case "Fly":
+               action = GameAction.EncounterEscape;
+               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
+            case " Fly ":
+               action = GameAction.EncounterFollow;
+               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
+            case "Fly Away ":
+               action = GameAction.EncounterEscapeFly;
+               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
             case "Follow":
                action = GameAction.EncounterFollow;
+               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
+            case "Friendly":
+               myGameInstance.EventDisplayed = myGameInstance.EventActive = name;
+               action = GameAction.UpdateEventViewerActive;
+               myGameInstance.DieRollAction = GameAction.EncounterRoll;
+               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
+            case " Fun Options ":
+               action = GameAction.SetupChooseFunOptions;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
             case "Give":
@@ -7823,6 +7827,10 @@ namespace BarbarianPrince
                break;
             case "Mayor of Town":
                action = GameAction.E042MayorAudience;
+               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
+            case "Original Game":
+               action = GameAction.SetupStartingLocation;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
             case "Pass ":

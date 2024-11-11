@@ -216,8 +216,8 @@ namespace BarbarianPrince
             GameEngine.theFeatsInGame = Utilities.Deserialize<GameFeat>(Settings.Default.theGameFeat);
          else
             GameEngine.theFeatsInGame = new GameFeat();
-         GameEngine.theFeatsInGameStarting = new GameFeat();
-         //GameEngine.theFeatsInGameStarting = GameEngine.theFeatsInGame.Clone(); // need to know difference between starting feats and feats that happen in this game
+         //GameEngine.theFeatsInGameStarting = new GameFeat(); // <cgs> TEST
+         GameEngine.theFeatsInGameStarting = GameEngine.theFeatsInGame.Clone(); // need to know difference between starting feats and feats that happen in this game
          //---------------------------------------------------------------
          Utilities.theBrushBlood.Color = Color.FromArgb(0xFF, 0xA4, 0x07, 0x07);
          Utilities.theBrushRegion.Color = Color.FromArgb(0x7F, 0x11, 0x09, 0xBB); // nearly transparent but slightly colored
@@ -342,14 +342,17 @@ namespace BarbarianPrince
             case GameAction.ShowEventListing:
             case GameAction.ShowAboutDialog:
             case GameAction.E228ShowTrueLove:
+               break;
             case GameAction.EndGameWin:
             case GameAction.EndGameLost:
+               SaveDefaultsToSettings();
                break;
             case GameAction.RemoveSplashScreen:
                this.Title = UpdateTitle(gi.Options);
                if (false == UpdateCanvas(gi, action))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvas() returned error ");
                mySplashScreen.Close();
+               myScollViewerInside.UpdateLayout();
                UpdateScrollbarThumbnails(gi.Prince.Territory);
                break;
             case GameAction.UpdateGameOptions:
@@ -359,6 +362,7 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): gi.Options.Find(ExtendEndTime)");
                else
                   CreateButtonTimeTrack(gi);
+               SaveDefaultsToSettings();
                break;
             case GameAction.ShowAllRivers:
                UpdateCanvasRiver("Dienstal Branch", false);
@@ -431,6 +435,15 @@ namespace BarbarianPrince
             case GameAction.EndGameShowFeats:
                if (false == UpdateCanvasShowFeats())
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvasShowFeats() returned error ");
+               break;
+            case GameAction.SetupChooseFunOptions:
+            case GameAction.SetupFinalize:
+               this.Title = UpdateTitle(gi.Options);
+               if ( 1.0 == Utilities.ZoomCanvas)
+                  Utilities.ZoomCanvas = 2.0;
+               myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas);
+               if (false == UpdateCanvas(gi, action))
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvas() returned error ");
                break;
             default:
                if (false == UpdateCanvas(gi, action))
@@ -649,7 +662,7 @@ namespace BarbarianPrince
             }
          }
          if (0 == options.Count)
-            options.SetDefaults();
+            options.SetOriginalGameOptions();
          return options;
       }
       //---------------------------------------
@@ -664,7 +677,7 @@ namespace BarbarianPrince
             option = new Option(name, false);
          if (true == option.IsEnabled)
          {
-            sb.Append("Custom Game - ");
+            sb.Append("Custom Game");
          }
          else
          {
@@ -674,7 +687,7 @@ namespace BarbarianPrince
                option = new Option(name, false);
             if (true == option.IsEnabled)
             {
-               sb.Append("Fun Game - ");
+               sb.Append("Fun Game");
             }
             else
             {
@@ -703,9 +716,9 @@ namespace BarbarianPrince
                      if (null == option)
                         option = new Option(name, false);
                      if (true == option.IsEnabled)
-                        sb.Append("Random Starting Party Game - ");
+                        sb.Append("Random Starting Party Game");
                      else
-                        sb.Append("Orginal Game - ");
+                        sb.Append("Orginal Game");
                   }
                }
             }
@@ -717,7 +730,7 @@ namespace BarbarianPrince
             option = new Option(name, false);
          if (true == option.IsEnabled)
          {
-            sb.Append("Easiest Monsters");
+            sb.Append(" - Easiest");
          }
          else
          {
@@ -727,7 +740,7 @@ namespace BarbarianPrince
                option = new Option(name, false);
             if (true == option.IsEnabled)
             {
-               sb.Append("Easy Monsters");
+               sb.Append("");
             }
             else
             {
@@ -736,9 +749,9 @@ namespace BarbarianPrince
                if (null == option)
                   option = new Option(name, false);
                if (true == option.IsEnabled)
-                  sb.Append("Difficult Monsters");
+                  sb.Append(" - Difficult Monsters");
                else
-                  sb.Append("Brutally Difficult");
+                  sb.Append(" - Brutally Difficult");
             }
          }
          return sb.ToString();
@@ -3406,34 +3419,7 @@ namespace BarbarianPrince
       protected override void OnClosing(CancelEventArgs e) //  // WARNING - Not fired when Application.SessionEnding is fired
       {
          base.OnClosing(e);
-         WindowPlacement wp; // Persist window placement details to application settings
-         var hwnd = new WindowInteropHelper(this).Handle;
-         if (false == GetWindowPlacement(hwnd, out wp))
-            Logger.Log(LogEnum.LE_ERROR, "OnClosing(): GetWindowPlacement() returned false");
-         string sWinPlace = Utilities.Serialize<WindowPlacement>(wp);
-         Settings.Default.WindowPlacement = sWinPlace;
-         //-------------------------------------------
-         Settings.Default.ZoomCanvas = Utilities.ZoomCanvas;
-         //-------------------------------------------
-         Settings.Default.ScrollViewerHeight = myScollViewerInside.Height;
-         Settings.Default.ScrollViewerWidth = myScollViewerInside.Width;
-         //-------------------------------------------
-         Settings.Default.GameDirectoryName = Settings.Default.GameDirectoryName;
-         //-------------------------------------------
-         string sOptions = Utilities.Serialize<Options>(myGameInstance.Options);
-         Settings.Default.GameOptions = sOptions;
-         //-------------------------------------------
-         Settings.Default.GameTypeOriginal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[0]);
-         Settings.Default.GameTypeRandParty = Utilities.Serialize<GameStat>(myGameEngine.Statistics[1]);
-         Settings.Default.GameTypeRandHex = Utilities.Serialize<GameStat>(myGameEngine.Statistics[2]);
-         Settings.Default.GameTypeRand = Utilities.Serialize<GameStat>(myGameEngine.Statistics[3]);
-         Settings.Default.GameTypeFun = Utilities.Serialize<GameStat>(myGameEngine.Statistics[4]);
-         Settings.Default.GameTypeCustom = Utilities.Serialize<GameStat>(myGameEngine.Statistics[5]);
-         Settings.Default.GameTypeTotal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[6]);
-         Settings.Default.theGameFeat = Utilities.Serialize<GameFeat>(GameEngine.theFeatsInGame);
-         //-------------------------------------------
-         Settings.Default.Save();
-         //-------------------------------------------
+         SaveDefaultsToSettings();
          if (false == GameLoadMgr.SaveGameToFile(myGameInstance))
             Logger.Log(LogEnum.LE_ERROR, "OnClosing(): SaveGameToFile() returned false");
       }
@@ -3548,6 +3534,37 @@ namespace BarbarianPrince
             return false;
          }
          return true;
+      }
+      private void SaveDefaultsToSettings()
+      {
+         WindowPlacement wp; // Persist window placement details to application settings
+         var hwnd = new WindowInteropHelper(this).Handle;
+         if (false == GetWindowPlacement(hwnd, out wp))
+            Logger.Log(LogEnum.LE_ERROR, "OnClosing(): GetWindowPlacement() returned false");
+         string sWinPlace = Utilities.Serialize<WindowPlacement>(wp);
+         Settings.Default.WindowPlacement = sWinPlace;
+         //-------------------------------------------
+         Settings.Default.ZoomCanvas = Utilities.ZoomCanvas;
+         //-------------------------------------------
+         Settings.Default.ScrollViewerHeight = myScollViewerInside.Height;
+         Settings.Default.ScrollViewerWidth = myScollViewerInside.Width;
+         //-------------------------------------------
+         Settings.Default.GameDirectoryName = Settings.Default.GameDirectoryName;
+         //-------------------------------------------
+         string sOptions = Utilities.Serialize<Options>(myGameInstance.Options);
+         Settings.Default.GameOptions = sOptions;
+         //-------------------------------------------
+         Settings.Default.GameTypeOriginal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[0]);
+         Settings.Default.GameTypeRandParty = Utilities.Serialize<GameStat>(myGameEngine.Statistics[1]);
+         Settings.Default.GameTypeRandHex = Utilities.Serialize<GameStat>(myGameEngine.Statistics[2]);
+         Settings.Default.GameTypeRand = Utilities.Serialize<GameStat>(myGameEngine.Statistics[3]);
+         Settings.Default.GameTypeFun = Utilities.Serialize<GameStat>(myGameEngine.Statistics[4]);
+         Settings.Default.GameTypeCustom = Utilities.Serialize<GameStat>(myGameEngine.Statistics[5]);
+         Settings.Default.GameTypeTotal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[6]);
+         //-------------------------------------------
+         Settings.Default.theGameFeat = Utilities.Serialize<GameFeat>(GameEngine.theFeatsInGame);
+         //-------------------------------------------
+         Settings.Default.Save();
       }
       //-----------------------------------------------------------------------
       #region Win32 API declarations to set and get window placement

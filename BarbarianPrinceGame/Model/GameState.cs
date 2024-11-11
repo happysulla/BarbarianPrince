@@ -1443,7 +1443,6 @@ namespace BarbarianPrince
             case GameAction.RemoveSplashScreen:
                gi.Statistic.Clear();         // Clear any current statitics
                gi.Statistic.myNumGames = 1;  // Set played games to 1
-               
                Option option = gi.Options.Find("AutoSetup");
                if (null == option)
                {
@@ -1465,6 +1464,7 @@ namespace BarbarianPrince
                   }
                   else
                   {
+                     gi.Options.SetOriginalGameOptions();
                      gi.GamePhase = GamePhase.GameSetup;
                      gi.EventDisplayed = gi.EventActive = "e000"; // next screen to show
                      gi.DieRollAction = GameAction.DieRollActionNone;
@@ -1517,19 +1517,45 @@ namespace BarbarianPrince
                }
                gi.DieRollAction = GameAction.DieRollActionNone;
                break;
-            case GameAction.SetupStartingLocation:
+            case GameAction.SetupGameOptionChoice:
                gi.EventDisplayed = gi.EventActive = "e001"; // next screen to show
+               gi.DieRollAction = GameAction.DieRollActionNone;
+               break;
+            case GameAction.SetupStartingLocation:
+               gi.EventDisplayed = gi.EventActive = "e001a"; // next screen to show
                gi.DieRollAction = GameAction.SetupLocationRoll;
                break;
-            case GameAction.SetupLocationRoll:
-               if (Utilities.NO_RESULT == gi.DieResults["e001"][0])
+            case GameAction.SetupChooseFunOptions:
+               gi.Options.SelectFunGameOptions();
+               if (false == SetStartingLocation(ref gi, 100))
                {
-                  gi.DieResults["e001"][0] = dieRoll;
+                  returnStatus = "SetStartingLocation() returned error";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
+               }
+               if (false == AddStartingPrinceOption(gi))
+               {
+                  returnStatus = "AddStartingPrinceOption() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
+               }
+               else if (false == AddStartingOptions(gi))
+               {
+                  returnStatus = "AddStartingOptions() returned false";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
+               }
+               AddStartingTestingOptions(gi);
+               gi.GamePhase = GamePhase.SunriseChoice;      // GameStateSetup.PerformAction()
+               gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
+               gi.DieRollAction = GameAction.DieRollActionNone;
+               break;
+            case GameAction.SetupLocationRoll:
+               if (Utilities.NO_RESULT == gi.DieResults["e001a"][0])
+               {
+                  gi.DieResults["e001a"][0] = dieRoll;
                   gi.DieRollAction = GameAction.DieRollActionNone;
                }
                break;
             case GameAction.SetupFinalize:
-               if (false == SetStartingLocation(ref gi, gi.DieResults["e001"][0]))
+               if (false == SetStartingLocation(ref gi, gi.DieResults["e001a"][0]))
                {
                   returnStatus = "SetStartingLocation() returned error";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
@@ -1578,6 +1604,7 @@ namespace BarbarianPrince
             case 4: starting = Territory.theTerritories.Find("1301"); break;
             case 5: starting = Territory.theTerritories.Find("1501"); break;
             case 6: starting = Territory.theTerritories.Find("1801"); break;
+            case 100: break; // when skipping to Fun Game Options instead of Original Setup
             default: Logger.Log(LogEnum.LE_ERROR, "SetStartingLocation() reached default dr=" + dieRoll.ToString()); return false;
          }
          if (false == SetStartingLocationOption(gi, ref starting))

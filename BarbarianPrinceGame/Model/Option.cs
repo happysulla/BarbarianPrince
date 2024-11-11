@@ -141,7 +141,7 @@ namespace BarbarianPrince
          get { return (Option)(myList[index]); }
          set { myList[index] = value; }
       }
-      public Options GetDeepCopy()
+      public Options Clone()
       {
          Options copy = new Options();
          foreach (Object o in myList)
@@ -152,10 +152,85 @@ namespace BarbarianPrince
          }
          return copy;
       }
-      public void SetDefaults()
+      public void SetOriginalGameOptions()
       {
+         Clear();
          foreach (string s in theDefaults)
             this.Add(new Option(s, false));
+      }
+      public void SelectFunGameOptions()
+      {
+         Option option = null;
+         option = this.Find("MaxFunGame");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=MaxFunGame");
+         else
+            option.IsEnabled = true;
+         option = this.Find("AutoWealthRollForUnderFive");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=AutoWealthRollForUnderFive");
+         else
+            option.IsEnabled = true;
+         option = this.Find("AutoLostDecrease");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=AutoLostDecrease");
+         else
+            option.IsEnabled = true;
+         option = this.Find("ExtendEndTime");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=ExtendEndTime");
+         else
+            option.IsEnabled = true;
+         option = this.Find("ReduceLodgingCosts");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=ReduceLodgingCosts");
+         else
+            option.IsEnabled = true;
+         option = this.Find("SteadyIncome");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=SteadyIncome");
+         else
+            option.IsEnabled = true;
+         option = this.Find("EasyRoute");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=EasyRoute");
+         else
+            option.IsEnabled = true;
+         option = this.Find("EasyMonsters");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=EasyMonsters");
+         else
+            option.IsEnabled = true;
+         option = this.Find("PrinceFood");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=PrinceFood");
+         else
+            option.IsEnabled = true;
+         option = this.Find("PrinceCoin");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=PrinceCoin");
+         else
+            option.IsEnabled = true;
+         option = this.Find("StartWithNerveGame");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=StartWithNerveGame");
+         else
+            option.IsEnabled = true;
+         option = this.Find("StartWithNecklass");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=StartWithNecklass");
+         else
+            option.IsEnabled = true;
+         option = this.Find("RandomParty05");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=RandomParty05");
+         else
+            option.IsEnabled = true;
+         option = this.Find("RandomHex");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=RandomHex");
+         else
+            option.IsEnabled = true;
       }
    }
 }

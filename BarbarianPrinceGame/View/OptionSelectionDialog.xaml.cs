@@ -27,7 +27,7 @@ namespace BarbarianPrince
       public OptionSelectionDialog(Options options)
       {
          InitializeComponent();
-         myOptions = options.GetDeepCopy(); // make copy b/c do not want to change unless OK button selected by user
+         myOptions = options.Clone(); // make copy b/c do not want to change unless OK button selected by user
          myRadioButtonOriginal.ToolTip = "Play the game as God Intended. Be prepared to lose often.";
          myRadioButtonRandomParty.ToolTip = "Choose random party members.";
          myRadioButtonRandomStart.ToolTip = "Choose random starting hex.";

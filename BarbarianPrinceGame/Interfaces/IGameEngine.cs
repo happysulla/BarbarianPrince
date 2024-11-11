@@ -122,6 +122,8 @@ namespace BarbarianPrince
       SetupShowStartingWealth,
       SetupRollWitsWiles,
       SetupManualWitsWiles,
+      SetupGameOptionChoice,
+      SetupChooseFunOptions,
       SetupStartingLocation,
       SetupLocationRoll,
       SetupFinalize,

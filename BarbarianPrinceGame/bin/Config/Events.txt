@@ -55,13 +55,18 @@ e001	"<Bold>e001 The Adventure Begins</Bold>
 Evil events have overtaken your Northlands Kingdom. Your father, the old king, is dead - assassinated by rivals to the throne.  These usurpers now hold the place with their mercenary royal guard. You have escaped, and must collect 500 gold pieces to raise a force to smash them and retake your heritage. Furthermore, the usurpers have powerful friends overseas. If you can't return to take them out in ten weeks, their allies will arrive and you lose your kingdom forever. 
 <LineBreak/><LineBreak/>
 At dawn, you roll out of the merchant wagons into a ditch, dust off your clothes, loosen your swordbelt, and get ready to start the first day of your adventure <InlineUIContainer><Button Content='r203' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
+<LineBreak/><LineBreak/>The original game is brutally difficult to win. Recommended: The fun game provides a random starting party, a random starting hex, food, and coins. Details can be viewed on the <Bold>File | Options...</Bold> menu where other game options can be selected.
+<LineBreak/><LineBreak/>
+<InlineUIContainer><Button Content='Original Game' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+    or    
+<InlineUIContainer><Button Content=' Fun Options ' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>"
+e001a	"<Bold>e001a Original Game Starting Location</Bold>
 <LineBreak/><LineBreak/>
 <Italic>Important Note:</Italic> If you finish actions for a day on any hex north of the 
  <InlineUIContainer><Button Content='Tragoth River' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>, 
-you may be found. See
- <InlineUIContainer><Button Content='e002' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 
+you may be found. See <InlineUIContainer><Button Content='e002' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 
 after normal events are concluded for the day, but before you take your evening meal.
- <LineBreak/><LineBreak/>
+<LineBreak/><LineBreak/>
 Roll one die to see where you start: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/> <InlineUIContainer><Button Content='0101' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 1 - Ogon
 <LineBreak/> <InlineUIContainer><Button Content='0701' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 2 

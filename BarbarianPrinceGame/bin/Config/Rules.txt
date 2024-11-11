@@ -443,7 +443,7 @@ r200	"<Bold>r200 How to Play</Bold>
 . You may also have additional characters
  <InlineUIContainer><Button Content='r201' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  join your party. These additinal characters are especially useful in fights, although some may have special knowleddge or abiliities useful in certain events. Magicians, wizards, witches, priests, and monks are especially useful people to have in your party. 
-<LineBreak/><LineBreak/>All events are self explanatory, and refer to the main rules dialogs that describes how they are resolved."
+<LineBreak/><LineBreak/>All events are self explanatory. Click the rules button that brings up dialogs on details. "
 r201	"<Bold>r201 Characters</Bold>
 <LineBreak/><LineBreak/>Each character in the game has a combat skill, an endurance value, and a wealth code. Each is rated numerically, with higher numbers being better. If no wealth code is given, it is presumed to be zero.
 <LineBreak/><LineBreak/>Your party includes yourself
