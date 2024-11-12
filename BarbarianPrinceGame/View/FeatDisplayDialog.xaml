@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BarbarianPrince"
         mc:Ignorable="d"
-        Title="Show Game Feats" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-   <ScrollViewer Name="myScollViewer" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
+        Title="Show Game Feats" Height="450" Width="500" WindowStartupLocation="CenterScreen">
+   <ScrollViewer Name="myScollViewer" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0" Padding="10
+                 ">
       <Grid x:Name="myGrid">
          <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" Name="myFirstRow"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -49,12 +50,12 @@
             <RowDefinition Height="Auto"></RowDefinition>
          </Grid.RowDefinitions>
          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" Name="myFirstCol"/>
+            <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="10*"/>
          </Grid.ColumnDefinitions>
-         <TextBlock Grid.Row="0" Grid.Column="0" Name="myTextBlock0" FontFamily='Georgia' FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center">Completed?</TextBlock>
-         <TextBlock Grid.Row="0" Grid.Column="1" Name="myTextBlock1" FontFamily='Georgia' FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center">Description</TextBlock>
-         <Rectangle Grid.Row="1" Grid.ColumnSpan="2" Margin="5" Height="1" Fill="Black"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Name="myTextBlock0" FontFamily='Georgia' FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center">Completed?</TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="1" Name="myTextBlock1" FontFamily='Georgia' FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0">Description</TextBlock>
+            <Rectangle Grid.Row="1" Grid.ColumnSpan="2" Margin="5" Height="1" Fill="Black"/>
          <CheckBox x:Name="myFeat0" Grid.Row="2" Grid.Column="0" IsEnabled="false" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,5,5,5"/>
          <CheckBox x:Name="myFeat1" Grid.Row="3" Grid.Column="0" IsEnabled="false" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,5,5,5"/>
          <CheckBox x:Name="myFeat2" Grid.Row="4" Grid.Column="0" IsEnabled="false" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,5,5,5"/>

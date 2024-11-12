@@ -267,9 +267,6 @@
     <Compile Include="View\FeatDisplayDialog.xaml.cs">
       <DependentUpon>FeatDisplayDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\GameFeatDialog.xaml.cs">
-      <DependentUpon>GameFeatDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\IconDisplayDialog.xaml.cs">
       <DependentUpon>IconDisplayDialog.xaml</DependentUpon>
     </Compile>
@@ -544,10 +541,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FeatDisplayDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\GameFeatDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

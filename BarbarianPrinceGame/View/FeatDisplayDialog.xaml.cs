@@ -19,9 +19,9 @@ namespace BarbarianPrince
    {
       public bool CtorError = false;
       private RuleDialogViewer myRulesManager = null;
-      private readonly FontFamily myFontFam1 = new FontFamily("Courier New");
+      private readonly FontFamily myFontFam1 = new FontFamily("Georgia");
       private bool myIsAllFeatsShown = false;
-      private bool myIsFeat0Shown = false;
+      private GameFeat myGameFeatToShow = new GameFeat();
       //-----------------------------------------------
       public FeatDisplayDialog(RuleDialogViewer rm)
       {
@@ -38,21 +38,64 @@ namespace BarbarianPrince
       //-----------------------------------------------
       private void UpdateGridRows()
       {
-         if( (false == GameEngine.theFeatsInGame.myIs500GoldWin) && (false == myIsAllFeatsShown) && (false == myIsFeat0Shown))
+         //------------------------------------------------------------
+         // Clear out existing Grid Row data
+         List<UIElement> results = new List<UIElement>();
+         foreach (UIElement ui in myGrid.Children)
          {
-            System.Windows.Controls.Button b = new Button { Name="myFeat0", FontFamily = myFontFam1, FontSize = 12, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show" };
+            int row = Grid.GetRow(ui);
+            if (1 < row)
+               results.Add(ui);
+         }
+         foreach (UIElement ui1 in results)
+            myGrid.Children.Remove(ui1);
+         //------------------------------------------------------------
+         int rowNum = 2;
+         CheckBox cb = new CheckBox() { IsEnabled = false, IsChecked = false, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center , Margin=new Thickness(5)};
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == myGameFeatToShow.myIs500GoldWin) && (false == GameEngine.theFeatsInGame.myIs500GoldWin))
+         {
+            System.Windows.Controls.Button b = new Button { Name= "myIs500GoldWinShown", FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show" , Margin = new Thickness(5) };
             b.Click += ButtonShowFeat_Click;
             myGrid.Children.Add(b);
             Grid.SetColumn(b, 1);
-            Grid.SetRow(b, 2);
+            Grid.SetRow(b, rowNum);
          }
          else
          {
-            TextBlock tb = new TextBlock();
+            if(true == GameEngine.theFeatsInGame.myIs500GoldWin)
+               cb.IsChecked = true;
+            TextBlock tb = new TextBlock(){ FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run("Win the Game by accumulating 500 or more gold."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
-            Grid.SetRow(tb, 2 );
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         cb = new CheckBox() { IsEnabled = false, IsChecked = false, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == myGameFeatToShow.myIsNobleAllyWin) && (false == GameEngine.theFeatsInGame.myIsNobleAllyWin))
+         {
+            System.Windows.Controls.Button b = new Button { Name = "myIsNobleAllyWin", FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            if (true == GameEngine.theFeatsInGame.myIsNobleAllyWin)
+               cb.IsChecked = true;
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run("Win the Game by gaining an Ally during an audience."));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
          }
       }
       //-----------------------------------------------
@@ -69,10 +112,10 @@ namespace BarbarianPrince
          Button b = (Button)sender;
          switch (b.Name)
          {
-            case "myFeat0":
-               myIsFeat0Shown = true;
-               break;
+            case "myIs500GoldWin": myGameFeatToShow.myIs500GoldWin = true; break;
+            case "myIsNobleAllyWin": myGameFeatToShow.myIsNobleAllyWin = true; break;
             default:
+               Logger.Log(LogEnum.LE_ERROR, "ButtonShowFeat_Click(): Reached Default b.Name=" + b.Name);
                break;
          }
          UpdateGridRows();
