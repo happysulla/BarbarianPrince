@@ -10,6 +10,7 @@ namespace BarbarianPrince
    [Serializable]
    public class GameFeat
    {
+      public bool myIsOriginalGameWin;         // Win the original game 
       public bool myIs500GoldWin;              // Nominal 
       public bool myIsNobleAllyWin;            // E152NobleAlly
       public bool myIsBlessedWin;              // E044HighAltarBlessed
@@ -222,6 +223,11 @@ namespace BarbarianPrince
       }
       public string GetFeatChange(GameFeat starting)
       {
+         if (starting.myIsOriginalGameWin != this.myIsOriginalGameWin)
+         {
+            starting.myIsOriginalGameWin = this.myIsOriginalGameWin;
+            return "Win the original game";
+         }
          if ( starting.myIs500GoldWin != this.myIs500GoldWin )
          {
             starting.myIs500GoldWin = this.myIs500GoldWin;

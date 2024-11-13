@@ -49,15 +49,21 @@ namespace BarbarianPrince
          }
          foreach (UIElement ui1 in results)
             myGrid.Children.Remove(ui1);
+         if( true == myIsAllFeatsShown )
+            myButtonShowAll.Visibility = Visibility.Hidden;
          //------------------------------------------------------------
          int rowNum = 2;
-         CheckBox cb = new CheckBox() { IsEnabled = false, IsChecked = false, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center , Margin=new Thickness(5)};
+         bool isFeatDisplayed = myGameFeatToShow.myIsOriginalGameWin;
+         bool isFeatChecked = GameEngine.theFeatsInGame.myIsOriginalGameWin;
+         string featName = "myIsOriginalGameWin";
+         string featDesc = "Win the brutally difficult original game.";
+         CheckBox cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center , Margin=new Thickness(5)};
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
          Grid.SetRow(cb, rowNum);
-         if ((false == myIsAllFeatsShown) && (false == myGameFeatToShow.myIs500GoldWin) && (false == GameEngine.theFeatsInGame.myIs500GoldWin))
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
          {
-            System.Windows.Controls.Button b = new Button { Name= "myIs500GoldWinShown", FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show" , Margin = new Thickness(5) };
+            System.Windows.Controls.Button b = new Button { Name=featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show" , Margin = new Thickness(5) };
             b.Click += ButtonShowFeat_Click;
             myGrid.Children.Add(b);
             Grid.SetColumn(b, 1);
@@ -65,23 +71,25 @@ namespace BarbarianPrince
          }
          else
          {
-            if(true == GameEngine.theFeatsInGame.myIs500GoldWin)
-               cb.IsChecked = true;
             TextBlock tb = new TextBlock(){ FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
-            tb.Inlines.Add(new Run("Win the Game by accumulating 500 or more gold."));
+            tb.Inlines.Add(new Run(featDesc));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
          }
          //------------------------------------------------------------
          ++rowNum;
-         cb = new CheckBox() { IsEnabled = false, IsChecked = false, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         isFeatDisplayed = myGameFeatToShow.myIs500GoldWin;
+         isFeatChecked = GameEngine.theFeatsInGame.myIs500GoldWin;
+         featName = "myIs500GoldWin";
+         featDesc = "Win the game by accumulating 500 or more gold.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
          Grid.SetRow(cb, rowNum);
-         if ((false == myIsAllFeatsShown) && (false == myGameFeatToShow.myIsNobleAllyWin) && (false == GameEngine.theFeatsInGame.myIsNobleAllyWin))
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
          {
-            System.Windows.Controls.Button b = new Button { Name = "myIsNobleAllyWin", FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
             b.Click += ButtonShowFeat_Click;
             myGrid.Children.Add(b);
             Grid.SetColumn(b, 1);
@@ -89,10 +97,788 @@ namespace BarbarianPrince
          }
          else
          {
-            if (true == GameEngine.theFeatsInGame.myIsNobleAllyWin)
-               cb.IsChecked = true;
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
-            tb.Inlines.Add(new Run("Win the Game by gaining an Ally during an audience."));
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsNobleAllyWin;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsNobleAllyWin;
+         featName = "myIsNobleAllyWin";
+         featDesc = "Win the game by gaining noble ally.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsBlessedWin;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsBlessedWin;
+         featName = "myIsBlessedWin";
+         featDesc = "Win the game by being blessed by the gods.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsStaffOfCommandWin;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsStaffOfCommandWin;
+         featName = "myIsStaffOfCommandWin";
+         featDesc = "Win the game by holding the staff of command.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsRoyalHelmWin;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsRoyalHelmWin;
+         featName = "myIsRoyalHelmWin";
+         featDesc = "Win the game by holding the Royal Helm North of the Tragoth River.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsHuldraDefeatedInBattle;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsHuldraDefeatedInBattle;
+         featName = "myIsHuldraDefeatedInBattle";
+         featDesc = "Win the game by defeating Huldra in battle after securing royal hier.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsHuldraDesposedWin;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsHuldraDesposedWin;
+         featName = "myIsHuldraDesposedWin";
+         featDesc = "Win the game by disposing Huldra and replacing with royal heir.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsLostOnTime;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsLostOnTime;
+         featName = "myIsLostOnTime";
+         featDesc = "Lost the game by running out of time.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsAirTravel;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsAirTravel;
+         featName = "myIsAirTravel";
+         featDesc = "As a daily action, perform air travel.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsRaftTravel;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsRaftTravel;
+         featName = "myIsRaftTravel";
+         featDesc = "As a daily action, perform raft travel.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsArchTravel;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsArchTravel;
+         featName = "myIsArchTravel";
+         featDesc = "As a daily action, perform arch way travel.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsMinstelAdded;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsMinstelAdded;
+         featName = "myIsMinstelAdded";
+         featDesc = "A minstrel joins your party other than in starting party.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsEagleAdded;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsEagleAdded;
+         featName = "myIsEagleAdded";
+         featDesc = "An eagle joins your party other than in starting party.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsFalconAdded;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsFalconAdded;
+         featName = "myIsFalconAdded";
+         featDesc = "A falcon joins your party other than in starting party.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsMerchantAdded;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsMerchantAdded;
+         featName = "myIsMerchantAdded";
+         featDesc = "A merchant joins your party other than in starting party.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsHydraTeethUsed;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsHydraTeethUsed;
+         featName = "myIsHydraTeethUsed";
+         featDesc = "Use magical hydra teeth in battle.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsRescueHier;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsRescueHier;
+         featName = "myIsRescueHier";
+         featDesc = "Rescue the royal and true hier of Huldra castle.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsSneakAttack;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsSneakAttack;
+         featName = "myIsSneakAttack";
+         featDesc = "Using foulbane, perform a sneak attack on Count Dragot.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsStealGems;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsStealGems;
+         featName = "myIsStealGems";
+         featDesc = "Using foulbane, steal Count Dragot's jewels.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsDragonKiller;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsDragonKiller;
+         featName = "myIsDragonKiller";
+         featDesc = "Kill a dragon in battle.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsBanditKiller;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsBanditKiller;
+         featName = "myIsBanditKiller";
+         featDesc = "Kill 20 bandits in battle.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsOrcKiller;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsOrcKiller;
+         featName = "myIsOrcKiller";
+         featDesc = "Kill 30 orcs in battle.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsGoblinKiller;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsGoblinKiller;
+         featName = "myIsGoblinKiller";
+         featDesc = "Kill 40 goblins in battle.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsWolfKiller;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsWolfKiller;
+         featName = "myIsWolfKiller";
+         featDesc = "Kill 50 wolves in battle.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsVisitAllTowns;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsVisitAllTowns;
+         featName = "myIsVisitAllTowns";
+         featDesc = "Visit all towns on the map.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsVisitAllCastles;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsVisitAllCastles;
+         featName = "myIsVisitAllCastles";
+         featDesc = "Visit all castles on the map.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsVisitAllTemples;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsVisitAllTemples;
+         featName = "myIsVisitAllTemples";
+         featDesc = "Visit all temples on the map.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsVisitAllRuins;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsVisitAllRuins;
+         featName = "myIsVisitAllRuins";
+         featDesc = "Visit all ruins on the map.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsVisitAllOasis;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsVisitAllOasis;
+         featName = "myIsVisitAllOasis";
+         featDesc = "Visit all oasis on the map.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsPurchaseFoulbane;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsPurchaseFoulbane;
+         featName = "myIsPurchaseFoulbane";
+         featDesc = "Purchase foulbane in Temple of Duffyd.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsPurchaseChaga;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsPurchaseChaga;
+         featName = "myIsPurchaseChaga";
+         featDesc = "Purchase Chaga drug in town.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -112,8 +898,38 @@ namespace BarbarianPrince
          Button b = (Button)sender;
          switch (b.Name)
          {
+            case "myIsOriginalGameWin": myGameFeatToShow.myIsOriginalGameWin = true; break;
             case "myIs500GoldWin": myGameFeatToShow.myIs500GoldWin = true; break;
             case "myIsNobleAllyWin": myGameFeatToShow.myIsNobleAllyWin = true; break;
+            case "myIsBlessedWin": myGameFeatToShow.myIsBlessedWin = true; break;
+            case "myIsStaffOfCommandWin": myGameFeatToShow.myIsStaffOfCommandWin = true; break;
+            case "myIsRoyalHelmWin": myGameFeatToShow.myIsRoyalHelmWin = true; break;
+            case "myIsHuldraDefeatedInBattle": myGameFeatToShow.myIsHuldraDefeatedInBattle = true; break;
+            case "myIsHuldraDesposedWin": myGameFeatToShow.myIsHuldraDesposedWin = true; break;
+            case "myIsLostOnTime": myGameFeatToShow.myIsLostOnTime = true; break;
+            case "myIsAirTravel": myGameFeatToShow.myIsAirTravel = true; break;
+            case "myIsRaftTravel": myGameFeatToShow.myIsRaftTravel = true; break;
+            case "myIsArchTravel": myGameFeatToShow.myIsArchTravel = true; break;
+            case "myIsMinstelAdded": myGameFeatToShow.myIsMinstelAdded = true; break;
+            case "myIsEagleAdded": myGameFeatToShow.myIsEagleAdded = true; break;
+            case "myIsFalconAdded": myGameFeatToShow.myIsFalconAdded = true; break;
+            case "myIsMerchantAdded": myGameFeatToShow.myIsMerchantAdded = true; break;
+            case "myIsHydraTeethUsed": myGameFeatToShow.myIsHydraTeethUsed = true; break;
+            case "myIsRescueHier": myGameFeatToShow.myIsRescueHier = true; break;
+            case "myIsSneakAttack": myGameFeatToShow.myIsSneakAttack = true; break;
+            case "myIsStealGems": myGameFeatToShow.myIsStealGems = true; break;
+            case "myIsDragonKiller": myGameFeatToShow.myIsDragonKiller = true; break;
+            case "myIsBanditKiller": myGameFeatToShow.myIsBanditKiller = true; break;
+            case "myIsOrcKiller": myGameFeatToShow.myIsOrcKiller = true; break;
+            case "myIsGoblinKiller": myGameFeatToShow.myIsGoblinKiller = true; break;
+            case "myIsWolfKiller": myGameFeatToShow.myIsWolfKiller = true; break;
+            case "myIsVisitAllTowns": myGameFeatToShow.myIsVisitAllTowns = true; break;
+            case "myIsVisitAllCastles": myGameFeatToShow.myIsVisitAllCastles = true; break;
+            case "myIsVisitAllTemples": myGameFeatToShow.myIsVisitAllTemples = true; break;
+            case "myIsVisitAllRuins": myGameFeatToShow.myIsVisitAllRuins = true; break;
+            case "myIsVisitAllOasis": myGameFeatToShow.myIsVisitAllOasis = true; break;
+            case "myIsPurchaseFoulbane": myGameFeatToShow.myIsPurchaseFoulbane = true; break;
+            case "myIsPurchaseChaga": myGameFeatToShow.myIsPurchaseChaga = true; break;
             default:
                Logger.Log(LogEnum.LE_ERROR, "ButtonShowFeat_Click(): Reached Default b.Name=" + b.Name);
                break;
@@ -122,11 +938,8 @@ namespace BarbarianPrince
       }
       private void ButtonShowAll_Click(object sender, RoutedEventArgs e)
       {
-         Button b = (Button)sender;
-         if (null == myRulesManager)
-            Logger.Log(LogEnum.LE_ERROR, "ButtonShowRule_Click(): myRulesMgr=null");
-         else if (false == myRulesManager.ShowRule(b.Name))
-            Logger.Log(LogEnum.LE_ERROR, "ButtonShowRule_Click(): myRulesMgr.ShowRule() returned false for c=" + b.Name);
+         myIsAllFeatsShown = true;
+         UpdateGridRows();
       }
    }
 }

@@ -2472,9 +2472,9 @@ namespace BarbarianPrince
          //mi.PlagueDustWound = 2;
          //gi.AddCompanion(mi);
          //---------------------
-         GameEngine.theFeatsInGame.myIsEagleAdded = true;
-         GameEngine.theFeatsInGame.myIsPurchaseFoulbane = true;
-         GameEngine.theFeatsInGame.myIsRescueHier = true;
+         //GameEngine.theFeatsInGame.myIsEagleAdded = true;
+         //GameEngine.theFeatsInGame.myIsPurchaseFoulbane = true;
+         //GameEngine.theFeatsInGame.myIsRescueHier = true;
       }
    }
    //-----------------------------------------------------
@@ -4472,6 +4472,8 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.DieRollActionNone;
                break;
             case GameAction.EndGameWin:
+               if (0 == gi.Options.GetGameIndex())
+                  GameEngine.theFeatsInGame.myIsOriginalGameWin = true;
                gi.EventDisplayed = gi.EventActive = "e501";
                gi.DieRollAction = GameAction.DieRollActionNone;
                break;

@@ -232,5 +232,68 @@ namespace BarbarianPrince
          else
             option.IsEnabled = true;
       }
+      public int GetGameIndex()
+      {
+         string name = "CustomGame";
+         Option option = this.Find(name);
+         if (null == option)
+            option = new Option(name, false);
+         if (true == option.IsEnabled)
+            return 5;
+         name = "MaxFunGame";
+         option = this.Find(name);
+         if (null == option)
+            option = new Option(name, false);
+         if (true == option.IsEnabled)
+            return 4;
+         name = "RandomGame";
+         option = this.Find(name);
+         if (null == option)
+            option = new Option(name, false);
+         if (true == option.IsEnabled)
+            return 3;
+         name = "RandomHexGame";
+         option = this.Find(name);
+         if (null == option)
+            option = new Option(name, false);
+         if (true == option.IsEnabled)
+            return 2;
+         name = "RandomPartyGame";
+         option = this.Find(name);
+         if (null == option)
+            option = new Option(name, false);
+         if (true == option.IsEnabled)
+            return 1;
+         return 0;
+      }
+      public string GetGameName(int index)
+      {
+         string gameType = "";
+         switch (index)
+         {
+            case 0:
+               gameType = "Original Game";
+               break;
+            case 1:
+               gameType = "Random Party Game";
+               break;
+            case 2:
+               gameType = "Random Hex Game";
+               break;
+            case 3:
+               gameType = "All Random Game";
+               break;
+            case 4:
+               gameType = "Maximum Fun Game";
+               break;
+            case 5:
+               gameType = "Custom Game";
+               break;
+            default:
+               gameType = "Total";
+               break;
+         }
+         return gameType;
+      }
    }
 }

@@ -5,9 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BarbarianPrince"
         mc:Ignorable="d"
-        Title="Show Game Feats" Height="450" Width="500" WindowStartupLocation="CenterScreen">
-   <ScrollViewer Name="myScollViewer" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0" Padding="10
-                 ">
+        Title="Show Game Feats" Height="950" Width="700" WindowStartupLocation="CenterScreen">
+   <ScrollViewer Name="myScollViewer" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0" Padding="10">
       <Grid x:Name="myGrid">
          <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -53,9 +52,12 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="10*"/>
          </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" Name="myTextBlock0" FontFamily='Georgia' FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center">Completed?</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="1" Name="myTextBlock1" FontFamily='Georgia' FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0">Description</TextBlock>
-            <Rectangle Grid.Row="1" Grid.ColumnSpan="2" Margin="5" Height="1" Fill="Black"/>
+         <TextBlock Grid.Row="0" Grid.Column="0" FontFamily='Georgia' FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center">Completed?</TextBlock>
+         <StackPanel Name="myStackPanelButtons" Grid.Row="0" Grid.Column="1"  Orientation="Horizontal" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="10,10,0,10">
+            <TextBlock  FontFamily='Georgia' FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0">Descriptions</TextBlock>
+            <Button x:Name="myButtonShowAll" HorizontalAlignment="Center" Margin="10,0,0,0" FontSize="12" Click="ButtonShowAll_Click">Show All</Button>
+         </StackPanel>
+         <Rectangle Grid.Row="1" Grid.ColumnSpan="2" Margin="5" Height="1" Fill="Black"/>
          <CheckBox x:Name="myFeat0" Grid.Row="2" Grid.Column="0" IsEnabled="false" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,5,5,5"/>
          <CheckBox x:Name="myFeat1" Grid.Row="3" Grid.Column="0" IsEnabled="false" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,5,5,5"/>
          <CheckBox x:Name="myFeat2" Grid.Row="4" Grid.Column="0" IsEnabled="false" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,5,5,5"/>
@@ -91,9 +93,6 @@
          <CheckBox x:Name="myFeat32" Grid.Row="34" Grid.Column="0" IsEnabled="false" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,5,5,5"/>
          <CheckBox x:Name="myFeat33" Grid.Row="35" Grid.Column="0" IsEnabled="false" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,5,5,5"/>
          <CheckBox x:Name="myFeat34" Grid.Row="36" Grid.Column="0" IsEnabled="false" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,5,5,5"/>
-         <StackPanel Name="myStackPanelButtons" Grid.Row="37" Grid.ColumnSpan="2"  Orientation="Horizontal" VerticalAlignment="Center"  HorizontalAlignment="Center" Margin="10,10,0,10">
-            <Button x:Name="myButtonShowAll" HorizontalAlignment="Center" Width="70" Height="30" Margin="0,10,0,0" FontSize="14" Click="ButtonShowAll_Click">Show All</Button>
-         </StackPanel>
       </Grid>
    </ScrollViewer>
 </Window>
