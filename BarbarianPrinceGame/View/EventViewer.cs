@@ -211,7 +211,6 @@ namespace BarbarianPrince
                {
                }
                break;
-               break;
             case GameAction.ShowRuleListing:
                RuleListingDialog dialogRuleListing = new RuleListingDialog(myRulesMgr);
                if (true == dialogRuleListing.CtorError)

@@ -5,9 +5,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Xml;
 using Point = System.Windows.Point;
 
@@ -60,6 +62,26 @@ namespace BarbarianPrince
          }
          return 0;
       }
+      public System.Drawing.Point TransformToPixels(Visual visual, System.Drawing.Point pt)
+      {
+         Matrix matrix;
+         var source = PresentationSource.FromVisual(visual);
+         if (source != null)
+         {
+            matrix = source.CompositionTarget.TransformToDevice;
+         }
+         else
+         {
+            using (var src = new HwndSource(new HwndSourceParameters()))
+            {
+               matrix = src.CompositionTarget.TransformToDevice;
+            }
+         }
+         int pixelX = (int)(matrix.M11 * pt.X);
+         int pixelY = (int)(matrix.M22 * pt.Y);
+         System.Drawing.Point newPt = new System.Drawing.Point(pixelX, pixelY);
+         return newPt;
+      }
       //-------------------------------------------------------------------------
       private void BannerLoaded(object sender, EventArgs e)
       {
@@ -79,9 +101,11 @@ namespace BarbarianPrince
          myInitialScreen = ConvertMousePointToScreenIndex(myPreviousScreenPoint);
          //---------------------
          StringBuilder sb = new StringBuilder();
+         sb.Append(" offset=");
+         sb.Append(myOffsetInBannerWindow.ToString());
          sb.Append(" pt=");
          sb.Append(myPreviousScreenPoint.ToString());
-         sb.Append("\nis=");
+         sb.Append(" is=");
          sb.Append(myInitialScreen.ToString());
          Console.WriteLine(sb.ToString());
          //---------------------
@@ -92,8 +116,34 @@ namespace BarbarianPrince
       {
          if (true == myIsDragging)
          {
-            System.Windows.Point newPoint = this.PointToScreen(e.GetPosition(this));  // Find the current mouse position in screen coordinates.
-            System.Drawing.Point pt = new System.Drawing.Point((int)newPoint.X, (int)newPoint.Y);
+            System.Windows.Point currentPt = this.PointToScreen(e.GetPosition(this));  // Find the current mouse position in screen coordinates.
+            Matrix matrix;
+            PresentationSource source = PresentationSource.FromVisual(this);
+            if (source != null)
+            {
+               matrix = source.CompositionTarget.TransformToDevice;
+            }
+            else
+            {
+               using (var src = new HwndSource(new HwndSourceParameters()))
+               {
+                  matrix = src.CompositionTarget.TransformToDevice;
+               }
+            }
+            int pixelX = (int)(matrix.M11 * currentPt.X);
+            int pixelY = (int)(matrix.M22 * currentPt.Y);
+            //----------------------------------
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" currentPt=");
+            sb.Append(currentPt.ToString());
+            sb.Append(" pixelX=");
+            sb.Append(pixelX.ToString());
+            sb.Append(" pixelY=");
+            sb.Append(pixelY.ToString());
+            sb.Append(" offset=");
+            sb.Append(myOffsetInBannerWindow.ToString());
+            //----------------------------------
+            System.Drawing.Point pt = new System.Drawing.Point((int)currentPt.X, (int)currentPt.Y);
             int newScreen = ConvertMousePointToScreenIndex(pt);
             if (newScreen != myInitialScreen)
             {
@@ -102,10 +152,15 @@ namespace BarbarianPrince
             }
             else
             {
-               newPoint.Offset(-myOffsetInBannerWindow.X, -myOffsetInBannerWindow.Y); // Compensate for the position the control was clicked.
-               this.Left = newPoint.X; // Move the window.
-               this.Top = newPoint.Y;
+               currentPt.Offset(-myOffsetInBannerWindow.X, -myOffsetInBannerWindow.Y); // Compensate for the position the control was clicked.
+               this.Left = currentPt.X; // Move the window.
+               this.Top = currentPt.Y;
+               sb.Append(" newPoint=");
+               sb.Append(currentPt.ToString());
             }
+            sb.Append(" ns=");
+            sb.Append(newScreen.ToString());
+            Console.WriteLine(sb.ToString());
          }
          base.OnMouseMove(e);
       }
