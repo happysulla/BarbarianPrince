@@ -93,7 +93,7 @@ namespace BarbarianPrince
             CtorError = true;
          }
       }
-      //----------------------------------------------------------------
+      //----------------------------------
       private bool UpdateDisplay(Options options)
       {
          bool isCustomConfig = false;
@@ -1799,6 +1799,7 @@ namespace BarbarianPrince
          else
             Logger.Log(LogEnum.LE_ERROR, "ResetHex(): not found ForceNoAirEvent");
       }
+      //----------------------------------
       private void SelectRandomPartyChoice()
       {
          Option option = null;
@@ -1817,6 +1818,16 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "SelectRandomPartyChoice(): option=null");
          else
             option.IsEnabled = !option.IsEnabled;
+         option = myOptions.Find("AutoSetup");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=AutoSetup");
+         else
+            option.IsEnabled = true;
+         option = myOptions.Find("AutoWealthRollForUnderFive");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=AutoWealthRollForUnderFive");
+         else
+            option.IsEnabled = true;
          return;
       }
       private void SelectRandomHexChoice()
@@ -1852,6 +1863,16 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "SelectRandomHexChoice(): myOptions.Find() for choice=" + choice.ToString());
          else
             option.IsEnabled = !option.IsEnabled;
+         option = myOptions.Find("AutoSetup");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=AutoSetup");
+         else
+            option.IsEnabled = true;
+         option = myOptions.Find("AutoWealthRollForUnderFive");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=AutoWealthRollForUnderFive");
+         else
+            option.IsEnabled = true;
       }
       private void SelectRandomPrinceChoice()
       {
@@ -1981,11 +2002,7 @@ namespace BarbarianPrince
       }
       private void SelectFunGameOptions()
       {
-         Option option = myOptions.Find("AutoSetup");
-         if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=AutoSetup");
-         else
-            option.IsEnabled = true;
+         Option option = null;
          option = myOptions.Find("AutoWealthRollForUnderFive");
          if (null == option)
             Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=AutoWealthRollForUnderFive");
@@ -2074,6 +2091,7 @@ namespace BarbarianPrince
          ResetGameOptions();
          ResetEvents();
          myIsRandomGame = false;
+         Option option = null;
          switch (rb.Name)
          {
             case "myRadioButtonOriginal":
@@ -2096,6 +2114,16 @@ namespace BarbarianPrince
                SelectFunGameOptions();
                break;
             case "myRadioButtonCustom":
+               option = myOptions.Find("AutoSetup");
+               if (null == option)
+                  Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=AutoSetup");
+               else
+                  option.IsEnabled = true;
+               option = myOptions.Find("AutoWealthRollForUnderFive");
+               if (null == option)
+                  Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): myOptions.Find() for option=AutoWealthRollForUnderFive");
+               else
+                  option.IsEnabled = true;
                break;
             default: Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): reached default name=" + rb.Name); return;
          }
