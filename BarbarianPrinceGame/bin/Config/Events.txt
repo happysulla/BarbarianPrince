@@ -3157,7 +3157,7 @@ Roll one die:  <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name
 <LineBreak/>   5 - <InlineUIContainer><Button Content='e151' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/>   6 - <InlineUIContainer><Button Content='e152' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>
-                     <InlineUIContainer><Image Name='EncounterRoll' Source='../bin/Images/BaronDrogat.gif' Height='350' Width='300'></Image></InlineUIContainer>"
+                                <InlineUIContainer><Image Source='../bin/Images/BaronHuldra1.gif' Height='250' Width='200'></Image></InlineUIContainer>"
 e130g	"<Bold>e130g High Lord Inquiry Bribe/Robbery</Bold>
 <LineBreak/><LineBreak/>
 You may bribe the bodyguard for an audience. If you pay this, see <InlineUIContainer><Button Content='e130e' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. However, you must still suffer any adverse results from the audience. Presumably, this is due to additional guards in the area, magic protection, or power of the Lord/Lady. 
@@ -3994,7 +3994,7 @@ The resurrection necklass resurrects the Prince. Prior to resurrection, the Prin
 <LineBreak/><LineBreak/>
 The Prince revived by the necklace has a somewhat ghoulish cast and is a bit weaker. Endurance is reduced by one.  You learn that such appearances are favored at the Drogat Castle. You can add one if seeking an audience
  <InlineUIContainer><Button Content='r211' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
- with Count Dragot. Click image when ready to continue.
+ with Count Drogat. Click image when ready to continue.
 <LineBreak/><LineBreak/>
                                      <InlineUIContainer><Image Source='../bin/Images/Necklace.gif' Name='PrinceResurrected' Height='200' Width='200'></Image></InlineUIContainer>"
 e193	"<Bold>e193 Shield of Light</Bold>

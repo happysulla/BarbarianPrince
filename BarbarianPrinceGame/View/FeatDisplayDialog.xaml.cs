@@ -82,7 +82,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIs500GoldWin;
          isFeatChecked = GameEngine.theFeatsInGame.myIs500GoldWin;
          featName = "myIs500GoldWin";
-         featDesc = "Win the game by accumulating 500 or more gold.";
+         featDesc = "Win the game by accumulating 500 or more gold ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -99,6 +99,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e001", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -108,7 +112,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsNobleAllyWin;
          isFeatChecked = GameEngine.theFeatsInGame.myIsNobleAllyWin;
          featName = "myIsNobleAllyWin";
-         featDesc = "Win the game by gaining noble ally.";
+         featDesc = "Win the game by gaining noble ally ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -125,6 +129,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e152", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -134,7 +142,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsBlessedWin;
          isFeatChecked = GameEngine.theFeatsInGame.myIsBlessedWin;
          featName = "myIsBlessedWin";
-         featDesc = "Win the game by being blessed by the gods.";
+         featDesc = "Win the game by being blessed by the gods ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -151,6 +159,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e044b", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -160,7 +172,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsStaffOfCommandWin;
          isFeatChecked = GameEngine.theFeatsInGame.myIsStaffOfCommandWin;
          featName = "myIsStaffOfCommandWin";
-         featDesc = "Win the game by holding the staff of command.";
+         featDesc = "Win the game by holding the staff of command ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -177,6 +189,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e212m", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -186,7 +202,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsRoyalHelmWin;
          isFeatChecked = GameEngine.theFeatsInGame.myIsRoyalHelmWin;
          featName = "myIsRoyalHelmWin";
-         featDesc = "Win the game by holding the Royal Helm North of the Tragoth River.";
+         featDesc = "Win the game by holding the Royal Helm North of the Tragoth River ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -203,6 +219,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e194", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -212,7 +232,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsHuldraDefeatedInBattle;
          isFeatChecked = GameEngine.theFeatsInGame.myIsHuldraDefeatedInBattle;
          featName = "myIsHuldraDefeatedInBattle";
-         featDesc = "Win the game by defeating Huldra in battle after securing royal hier.";
+         featDesc = "Win the game by defeating Huldra in battle after securing royal hier ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -229,6 +249,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e144i", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -238,7 +262,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsHuldraDesposedWin;
          isFeatChecked = GameEngine.theFeatsInGame.myIsHuldraDesposedWin;
          featName = "myIsHuldraDesposedWin";
-         featDesc = "Win the game by disposing Huldra and replacing with royal heir.";
+         featDesc = "Win the game by disposing Huldra and replacing with royal heir ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -255,6 +279,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e144f", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -368,7 +396,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsMinstelAdded;
          isFeatChecked = GameEngine.theFeatsInGame.myIsMinstelAdded;
          featName = "myIsMinstelAdded";
-         featDesc = "A minstrel joins your party other than in starting party.";
+         featDesc = "A minstrel joins your party other than in starting party ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -385,6 +413,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e049", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -394,7 +426,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsEagleAdded;
          isFeatChecked = GameEngine.theFeatsInGame.myIsEagleAdded;
          featName = "myIsEagleAdded";
-         featDesc = "An eagle joins your party other than in starting party.";
+         featDesc = "An eagle joins your party other than in starting party ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -411,6 +443,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e117", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -420,7 +456,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsFalconAdded;
          isFeatChecked = GameEngine.theFeatsInGame.myIsFalconAdded;
          featName = "myIsFalconAdded";
-         featDesc = "A falcon joins your party other than in starting party.";
+         featDesc = "A falcon joins your party other than in starting party ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -437,6 +473,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e107", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -446,7 +486,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsMerchantAdded;
          isFeatChecked = GameEngine.theFeatsInGame.myIsMerchantAdded;
          featName = "myIsMerchantAdded";
-         featDesc = "A merchant joins your party other than in starting party.";
+         featDesc = "A merchant joins your party other than in starting party ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -463,6 +503,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e048e", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -472,7 +516,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsHydraTeethUsed;
          isFeatChecked = GameEngine.theFeatsInGame.myIsHydraTeethUsed;
          featName = "myIsHydraTeethUsed";
-         featDesc = "Use magical hydra teeth in battle.";
+         featDesc = "Use magical hydra teeth in battle ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -489,6 +533,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e140b", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -498,7 +546,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsRescueHier;
          isFeatChecked = GameEngine.theFeatsInGame.myIsRescueHier;
          featName = "myIsRescueHier";
-         featDesc = "Rescue the royal and true hier of Huldra castle.";
+         featDesc = "Rescue the royal and true hier of Huldra castle ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -515,6 +563,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e144a", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -524,7 +576,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsSneakAttack;
          isFeatChecked = GameEngine.theFeatsInGame.myIsSneakAttack;
          featName = "myIsSneakAttack";
-         featDesc = "Using foulbane, perform a sneak attack on Count Dragot.";
+         featDesc = "Using foulbane, perform a sneak attack on Baron Huldra ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -541,6 +593,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e144d", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -550,7 +606,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsStealGems;
          isFeatChecked = GameEngine.theFeatsInGame.myIsStealGems;
          featName = "myIsStealGems";
-         featDesc = "Using foulbane, steal Count Dragot's jewels.";
+         featDesc = "Using foulbane, steal Count Dragot's jewels ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -567,6 +623,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e146a", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -576,7 +636,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsDragonKiller;
          isFeatChecked = GameEngine.theFeatsInGame.myIsDragonKiller;
          featName = "myIsDragonKiller";
-         featDesc = "Kill a dragon in battle.";
+         featDesc = "Kill a dragon in battle ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -593,6 +653,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e098", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -602,7 +666,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsBanditKiller;
          isFeatChecked = GameEngine.theFeatsInGame.myIsBanditKiller;
          featName = "myIsBanditKiller";
-         featDesc = "Kill 20 bandits in battle.";
+         featDesc = "Kill 20 bandits in battle ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -619,6 +683,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e051", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -628,7 +696,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsOrcKiller;
          isFeatChecked = GameEngine.theFeatsInGame.myIsOrcKiller;
          featName = "myIsOrcKiller";
-         featDesc = "Kill 30 orcs in battle.";
+         featDesc = "Kill 30 orcs in battle ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -645,6 +713,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e055", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -654,7 +726,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsGoblinKiller;
          isFeatChecked = GameEngine.theFeatsInGame.myIsGoblinKiller;
          featName = "myIsGoblinKiller";
-         featDesc = "Kill 40 goblins in battle.";
+         featDesc = "Kill 40 goblins in battle ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -671,6 +743,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e052", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -680,7 +756,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsWolfKiller;
          isFeatChecked = GameEngine.theFeatsInGame.myIsWolfKiller;
          featName = "myIsWolfKiller";
-         featDesc = "Kill 50 wolves in battle.";
+         featDesc = "Kill 50 wolves in battle ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -697,6 +773,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e075", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -836,7 +916,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsPurchaseFoulbane;
          isFeatChecked = GameEngine.theFeatsInGame.myIsPurchaseFoulbane;
          featName = "myIsPurchaseFoulbane";
-         featDesc = "Purchase foulbane in Temple of Duffyd.";
+         featDesc = "Purchase foulbane in Temple of Duffyd ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -853,6 +933,10 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e146", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
@@ -862,7 +946,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsPurchaseChaga;
          isFeatChecked = GameEngine.theFeatsInGame.myIsPurchaseChaga;
          featName = "myIsPurchaseChaga";
-         featDesc = "Purchase Chaga drug in town.";
+         featDesc = "Purchase Chaga drug in town ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -879,19 +963,24 @@ namespace BarbarianPrince
          {
             TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
             tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e143", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
             Grid.SetRow(tb, rowNum);
          }
       }
       //-----------------------------------------------
-      private void ButtonShowRule_Click(object sender, RoutedEventArgs e)
+      private void ButtonShowEventDialog_Click(object sender, RoutedEventArgs e)
       {
          Button b = (Button)sender;
+         string key = (string)b.Content;
          if (null == myRulesManager)
             Logger.Log(LogEnum.LE_ERROR, "ButtonShowRule_Click(): myRulesMgr=null");
-         else if (false == myRulesManager.ShowRule(b.Name))
-            Logger.Log(LogEnum.LE_ERROR, "ButtonShowRule_Click(): myRulesMgr.ShowRule() returned false for c=" + b.Name);
+         else if (false == myRulesManager.ShowEventDialog(key))
+            Logger.Log(LogEnum.LE_ERROR, "ButtonShowRule_Click(): myRulesMgr.ShowRule() returned false for c=" + key);
       }
       private void ButtonShowFeat_Click(object sender, RoutedEventArgs e)
       {
