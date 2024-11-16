@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 using System.Xml;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Point = System.Windows.Point;
 
 namespace BarbarianPrince
@@ -21,9 +22,11 @@ namespace BarbarianPrince
       private bool myIsDragging = false;
       private System.Windows.Point myOffsetInBannerWindow;
       private System.Drawing.Point myPreviousScreenPoint;
-      private int myInitialScreen;
-      private double myM11Previous;
-      private double myM22Previous;
+      private Screen myPreviousScreen;
+      private int myPreviousScreenIndex;
+      private string myPreviousMonitor;
+      private double myPreviousRatio;
+      private System.Windows.Media.Matrix myPreviousMatrix;
       private string myKey = "";
       public string Key { get => myKey; }
       public TextBlock TextBoxDiplay { get => myTextBlockDisplay; }
@@ -52,63 +55,18 @@ namespace BarbarianPrince
             return;
          }
       }
-      private int ConvertMousePointToScreenIndex(System.Drawing.Point mousePoint)
-      {
-         System.Drawing.Rectangle ret;
-         int numScreens = System.Windows.Forms.Screen.AllScreens.Length;
-         for (int i = 0; i < numScreens; i++)
-         {
-            ret = Screen.AllScreens[i].Bounds;
-            StringBuilder sb = new StringBuilder();
-            sb.Append("s[");
-            sb.Append(i.ToString());
-            sb.Append("]={");
-            sb.Append(ret.X.ToString());
-            sb.Append(",");
-            sb.Append(ret.Y.ToString());
-            sb.Append(",");
-            sb.Append((ret.X+ret.Width).ToString());
-            sb.Append(",");
-            sb.Append((ret.Y + ret.Height).ToString());
-            sb.Append("}");
-            if (ret.Contains(mousePoint))
-            {
-               sb.Append(" CONTAINS p=(");
-               sb.Append(mousePoint.X.ToString());
-               sb.Append(",");
-               sb.Append(mousePoint.Y.ToString());
-               sb.Append(")");
-               Console.WriteLine(sb.ToString());
-               return i;
-            }
-         }
-         return 0;
-      }
-      public System.Drawing.Point TransformToPixels(Visual visual, System.Drawing.Point pt)
-      {
-         Matrix matrix;
-         var source = PresentationSource.FromVisual(visual);
-         if (source != null)
-         {
-            matrix = source.CompositionTarget.TransformToDevice;
-         }
-         else
-         {
-            using (var src = new HwndSource(new HwndSourceParameters()))
-            {
-               matrix = src.CompositionTarget.TransformToDevice;
-            }
-         }
-         int pixelX = (int)(matrix.M11 * pt.X);
-         int pixelY = (int)(matrix.M22 * pt.Y);
-         System.Drawing.Point newPt = new System.Drawing.Point(pixelX, pixelY);
-         return newPt;
-      }
       //-------------------------------------------------------------------------
       private void BannerLoaded(object sender, EventArgs e)
       {
          myScrollViewerTextBlock.Height = myDockPanel.ActualHeight - myButtonClose.Height - 50;
          myTextBlockDisplay.Height = myTextBlockDisplay.ActualHeight;
+         //----------------------------------------
+         myPreviousMonitor = ScreenExtensions.GetMonitor(this);
+         myPreviousMatrix = ScreenExtensions.GetMatrixFromVisual(this);
+         uint dpiX = 0;
+         uint dpiY = 0;
+         ScreenExtensions.GetDpi(myPreviousScreen, ScreenExtensions.DpiType.Effective, out dpiX, out dpiY);
+         myPreviousRatio = 96.0 / dpiX;
       }
       private void ButtonClose_Click(object sender, RoutedEventArgs e)
       {
@@ -118,33 +76,25 @@ namespace BarbarianPrince
       {
          myIsDragging = true;
          myOffsetInBannerWindow = e.GetPosition(this);
+         myOffsetInBannerWindow = new System.Windows.Point(100, 100);
          System.Windows.Point newPoint1 = this.PointToScreen(e.GetPosition(this));
          myPreviousScreenPoint = new System.Drawing.Point((int)newPoint1.X, (int)newPoint1.Y);
-         myInitialScreen = ConvertMousePointToScreenIndex(myPreviousScreenPoint);
-         System.Windows.Point currentPt = this.PointToScreen(e.GetPosition(this));  // Find the current mouse position in screen coordinates.
-         Matrix matrix;
-         PresentationSource source = PresentationSource.FromVisual(this);
-         if (source != null)
-         {
-            myM11Previous = source.CompositionTarget.TransformToDevice.M11;
-            myM22Previous = source.CompositionTarget.TransformToDevice.M22;
-         }
-         else
-         {
-            using (var src = new HwndSource(new HwndSourceParameters()))
-            {
-               myM11Previous = src.CompositionTarget.TransformToDevice.M11;
-               myM22Previous = src.CompositionTarget.TransformToDevice.M22;
-            }
-         }
+         myPreviousScreen = ScreenExtensions.GetScreenFromPoint(myPreviousScreenPoint);
+         myPreviousScreenIndex = ScreenExtensions.GetScreenIndexFromPoint(myPreviousScreenPoint);
+
          //---------------------
          StringBuilder sb = new StringBuilder();
-         sb.Append(" offset=");
-         sb.Append(myOffsetInBannerWindow.ToString());
-         sb.Append(" pt=");
-         sb.Append(myPreviousScreenPoint.ToString());
-         sb.Append(" is=");
-         sb.Append(myInitialScreen.ToString());
+         sb.Append(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+         sb.Append(ScreenExtensions.GetScreenBounds());
+         sb.Append(" pt(");
+         sb.Append(myPreviousScreenPoint.X.ToString());
+         sb.Append(") screenIndex=(");
+         sb.Append(myPreviousScreenIndex.ToString());
+         sb.Append(") mon=(");
+         sb.Append(myPreviousMonitor);
+         sb.Append(") ratio=(");
+         sb.Append(myPreviousRatio.ToString());
+         sb.Append(")");
          Console.WriteLine(sb.ToString());
          //---------------------
          myIsDragging = true;
@@ -158,74 +108,116 @@ namespace BarbarianPrince
          }
          else
          {
-            System.Windows.Point currentPt = this.PointToScreen(e.GetPosition(this));  // Find the current mouse position in screen coordinates.
-            Matrix matrix;
-            PresentationSource source = PresentationSource.FromVisual(this);
-            if (source != null)
-            {
-               matrix = source.CompositionTarget.TransformToDevice;
-            }
-            else
-            {
-               using (var src = new HwndSource(new HwndSourceParameters()))
-               {
-                  matrix = src.CompositionTarget.TransformToDevice;
-               }
-            }
-            //----------------------------------
             StringBuilder sb = new StringBuilder();
-            sb.Append(" currentPt=");
-            sb.Append(currentPt.ToString());
-            sb.Append(" M11=");
-            sb.Append(matrix.M11.ToString());
-            sb.Append(" M22=");
-            sb.Append(matrix.M22.ToString());
-            sb.Append(" offset=");
-            sb.Append(myOffsetInBannerWindow.X.ToString("00"));
-            sb.Append(",");
-            sb.Append(myOffsetInBannerWindow.Y.ToString("00"));
-            //----------------------------------
-            System.Drawing.Point pt = new System.Drawing.Point((int)currentPt.X, (int)currentPt.Y);
-            int newScreen = ConvertMousePointToScreenIndex(pt);
-            if (newScreen != myInitialScreen)
+            System.Windows.Point newPoint1 = this.PointToScreen(e.GetPosition(this));
+            System.Drawing.Point currentScreenPt = new System.Drawing.Point((int)newPoint1.X, (int)newPoint1.Y);
+            Screen currentScreen = ScreenExtensions.GetScreenFromPoint(currentScreenPt);
+            int currentScreenIndex = ScreenExtensions.GetScreenIndexFromPoint(currentScreenPt);
+            string currentMonitor = ScreenExtensions.GetMonitor(this); ;
+            System.Windows.Media.Matrix currentMatrix = ScreenExtensions.GetMatrixFromVisual(this);
+            uint dpiX = 0;
+            uint dpiY = 0;
+            ScreenExtensions.GetDpi(currentScreen, ScreenExtensions.DpiType.Effective, out dpiX, out dpiY);
+            double ratio = 96.0 / dpiX;
+            //----------------------
+            if (myPreviousScreenIndex != currentScreenIndex)
             {
-               // Stop moving the window when mouse shows up on new screen
-               // Allows user to move to new screen by grabbing on new screen
-               myIsDragging = false;
-               sb.Append(" !!!!!!!!!!!!!!!ns=");
-               sb.Append(newScreen.ToString());
-               myIsDragging = false;
+               currentScreenPt.X = (int)(currentScreenPt.X * myPreviousRatio);
+               currentScreenPt.Y = (int)(currentScreenPt.Y * myPreviousRatio);
+               this.Left = currentScreenPt.X - myOffsetInBannerWindow.X; // Move the window.
+               this.Top = currentScreenPt.Y - myOffsetInBannerWindow.Y;
+               sb.Append("\nsssssssssssssssssssssssss");
+               sb.Append(ScreenExtensions.GetScreenBounds());
+               sb.Append(" pt(");
+               sb.Append(myPreviousScreenPoint.X.ToString());
+               sb.Append("=>");
+               sb.Append(currentScreenPt.X.ToString());
+               sb.Append(") scn(");
+               sb.Append(myPreviousScreenIndex.ToString());
+               sb.Append("=>");
+               sb.Append(currentScreenIndex.ToString());
+               sb.Append(") mon(");
+               sb.Append(myPreviousMonitor);
+               sb.Append("=>");
+               sb.Append(currentMonitor);
+               sb.Append(") ratio(");
+               sb.Append(myPreviousRatio.ToString());
+               sb.Append("=>");
+               sb.Append(ratio.ToString());
+               sb.Append(") this.Left(");
+               sb.Append(this.Left.ToString());
+               sb.Append(") dpiX(");
+               sb.Append(dpiX.ToString());
+               sb.Append(")");
+               Console.WriteLine(sb.ToString());
+               if(myPreviousRatio != ratio)
+                  myIsDragging = false;
             }
-            else if (myM11Previous != matrix.M11)
+            else if (myPreviousMonitor != currentMonitor)
             {
-               myM11Previous = matrix.M11;   
-               myM22Previous = matrix.M22;   
-               currentPt.X = currentPt.X / myM11Previous;
-               currentPt.Y = currentPt.Y / myM22Previous;
-               sb.Append(" ***************myM11P=");
-               sb.Append(myM11Previous.ToString("0.0"));
-               myIsDragging = false;
-               sb.Append(" newPoint=");
-               sb.Append(currentPt.X.ToString("00"));
-               sb.Append(",");
-               sb.Append(currentPt.Y.ToString("00"));
-               this.Left = currentPt.X - myOffsetInBannerWindow.X; // Move the window.
-               this.Top = currentPt.Y - myOffsetInBannerWindow.Y;
-               myIsDragging = false;
+               currentScreenPt.X = (int)(currentScreenPt.X * myPreviousRatio);
+               currentScreenPt.Y = (int)(currentScreenPt.Y * myPreviousRatio);
+               this.Left = currentScreenPt.X - myOffsetInBannerWindow.X; // Move the window.
+               this.Top = currentScreenPt.Y - myOffsetInBannerWindow.Y;
+               sb.Append("\nmmmmmmmmmmmmmmmmmmmmmmmmm");
+               sb.Append(ScreenExtensions.GetScreenBounds());
+               sb.Append(" pt(");
+               sb.Append(myPreviousScreenPoint.X.ToString());
+               sb.Append("=>");
+               sb.Append(currentScreenPt.X.ToString());
+               sb.Append(") scn(");
+               sb.Append(myPreviousScreenIndex.ToString());
+               sb.Append("=>");
+               sb.Append(currentScreenIndex.ToString());
+               sb.Append(") mon(");
+               sb.Append(myPreviousMonitor);
+               sb.Append("=>");
+               sb.Append(currentMonitor);
+               sb.Append(") ratio(");
+               sb.Append(myPreviousRatio.ToString());
+               sb.Append("=>");
+               sb.Append(ratio.ToString());
+               sb.Append(") this.Left(");
+               sb.Append(this.Left.ToString());
+               sb.Append(") dpiX(");
+               sb.Append(dpiX.ToString());
+               sb.Append(")");
+               Console.WriteLine(sb.ToString());
+               if (myPreviousRatio != ratio)
+                  myIsDragging = false;
             }
             else
             {
-               //currentPt.Offset(-myOffsetInBannerWindow.X, -myOffsetInBannerWindow.Y); // Compensate for the position the control was clicked.
-               currentPt.X = currentPt.X / matrix.M11;
-               currentPt.Y = currentPt.Y / matrix.M22;
-               this.Left = currentPt.X - myOffsetInBannerWindow.X; // Move the window.
-               this.Top = currentPt.Y - myOffsetInBannerWindow.Y;
-               sb.Append(" newPoint=");
-               sb.Append(currentPt.X.ToString("00"));
-               sb.Append(",");
-               sb.Append(currentPt.Y.ToString("00"));
+               currentScreenPt.X = (int)(currentScreenPt.X * myPreviousRatio);
+               currentScreenPt.Y = (int)(currentScreenPt.Y * myPreviousRatio);
+               this.Left = currentScreenPt.X - myOffsetInBannerWindow.X; // Move the window.
+               this.Top = currentScreenPt.Y - myOffsetInBannerWindow.Y;
+               sb.Append(" pt(");
+               sb.Append(myPreviousScreenPoint.X.ToString());
+               sb.Append("=>");
+               sb.Append(currentScreenPt.X.ToString());
+               sb.Append(") scn(");
+               sb.Append(myPreviousScreenIndex.ToString());
+               sb.Append("=>");
+               sb.Append(currentScreenIndex.ToString());
+               sb.Append(") mon(");
+               sb.Append(myPreviousMonitor);
+               sb.Append("=>");
+               sb.Append(currentMonitor);
+               sb.Append(") ratio(");
+               sb.Append(myPreviousRatio.ToString());
+               sb.Append("=>");
+               sb.Append(ratio.ToString());
+               sb.Append(") this.Left(");
+               sb.Append(this.Left.ToString());
+               sb.Append(") dpiX(");
+               sb.Append(dpiX.ToString());
+               sb.Append(")");
+               Console.WriteLine(sb.ToString());
+               sb.Append(this.Left.ToString());
             }
-            Console.WriteLine(sb.ToString());
+            myPreviousMonitor = currentMonitor;
+            myPreviousScreenIndex = currentScreenIndex;
             e.Handled = true;
          }
 

@@ -4824,7 +4824,7 @@ e337	"<Bold>e337 Plead Comrades</Bold>
 <LineBreak/><LineBreak/>The encountered characters look unsavory, but willing to talk. You try to convince them to join your party. 
 <LineBreak/><LineBreak/>If your wit and wiles exceed the roll, they join as followers. Otherwise, see  <InlineUIContainer><Button Content='e337a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/> <LineBreak/> 
-                                  <InlineUIContainer><Image Name='E337EncounterRoll' Source='../bin/Images/Plead.gif' Height='200' Width='200'></Image></InlineUIContainer
+                                  <InlineUIContainer><Image Name='E337EncounterRoll' Source='../bin/Images/Plead.gif' Height='200' Width='200'></Image></InlineUIContainer>
 <LineBreak/><LineBreak/>Roll one die: <InlineUIContainer><Image Source='../bin/Images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
 e337a	"<Bold>e337a Plead Comrades Failed</Bold>
 <LineBreak/><LineBreak/>As you talk with the unsavory encountered person(s), the talk failed to convince them to join your party. Roll for results:

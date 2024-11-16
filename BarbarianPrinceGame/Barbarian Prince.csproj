@@ -146,6 +146,7 @@
     <Compile Include="Model\ForbiddenAudience.cs" />
     <Compile Include="Model\MapImage.cs" />
     <Compile Include="Model\Option.cs" />
+    <Compile Include="Model\ScreenExtensions.cs" />
     <Compile Include="Model\TreasureMgr.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="UnitTests\04PolylineCreateUnitTest.cs" />
