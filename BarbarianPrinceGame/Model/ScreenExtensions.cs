@@ -24,6 +24,12 @@ namespace BarbarianPrince
       //-----------------------------------------------------------------------------------
       public static void GetDpi(this System.Windows.Forms.Screen screen, DpiType dpiType, out uint dpiX, out uint dpiY)
       {
+         if (null == screen)
+         {
+            dpiX = 96;
+            dpiY = 96;
+            return;
+         }
          var pnt = new System.Drawing.Point(screen.Bounds.Left + 1, screen.Bounds.Top + 1);
          var mon = MonitorFromPoint(pnt, 2/*MONITOR_DEFAULTTONEAREST*/);
          GetDpiForMonitor(mon, dpiType, out dpiX, out dpiY);
