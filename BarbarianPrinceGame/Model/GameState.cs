@@ -1441,29 +1441,26 @@ namespace BarbarianPrince
                Option option = gi.Options.Find("AutoSetup");
                if (null == option)
                {
-                  returnStatus = "gi.Options.Find(AutoSetup) returned null";
-                  Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
+                  option = new Option("AutoSetup", false);
+                  gi.Options.Add(option);
+               }
+               if (true == option.IsEnabled)
+               {
+                  if (false == PerformAutoSetup(ref gi, ref action))
+                  {
+                     returnStatus = "PerformAutoSetup() returned false";
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
+                  }
+                  gi.GamePhase = GamePhase.SunriseChoice;      // RemoveSplashScreen
+                  gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
+                  gi.DieRollAction = GameAction.DieRollActionNone;
                }
                else
                {
-                  if (true == option.IsEnabled)
-                  {
-                     if (false == PerformAutoSetup(ref gi, ref action))
-                     {
-                        returnStatus = "PerformAutoSetup() returned false";
-                        Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
-                     }
-                     gi.GamePhase = GamePhase.SunriseChoice;      // RemoveSplashScreen
-                     gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
-                     gi.DieRollAction = GameAction.DieRollActionNone;
-                  }
-                  else
-                  {
-                     gi.Options.SetOriginalGameOptions();
-                     gi.GamePhase = GamePhase.GameSetup;
-                     gi.EventDisplayed = gi.EventActive = "e000"; // next screen to show
-                     gi.DieRollAction = GameAction.DieRollActionNone;
-                  }
+                  gi.Options.SetOriginalGameOptions();
+                  gi.GamePhase = GamePhase.GameSetup;
+                  gi.EventDisplayed = gi.EventActive = "e000"; // next screen to show
+                  gi.DieRollAction = GameAction.DieRollActionNone;
                }
                if (false == AddStartingPrinceOption(gi))
                {

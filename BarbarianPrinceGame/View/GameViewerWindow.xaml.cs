@@ -316,24 +316,6 @@ namespace BarbarianPrince
             myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas); // UploadNewGame - Return to previous saved zoom level
             this.Title = UpdateTitle(gi.Options);
          }
-         //-------------------------------------------------------
-         Option optionExtendTime = gi.Options.Find("ExtendEndTime");
-         if (null == optionExtendTime)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "UpdateView(): gi.Options.Find(ExtendEndTime)");
-            optionExtendTime = new Option("ExtendEndTime", false);
-         }
-         if (myExtendTimeGameOptionPrevious != optionExtendTime.IsEnabled) // if there is change in this option, recreate the buttons
-         {
-            CreateButtonTimeTrack(gi);
-            myExtendTimeGameOptionPrevious = optionExtendTime.IsEnabled;
-         }
-         //-------------------------------------------------------
-         UpdateStackPanelDailyActions(gi);
-         UpdateTimeTrack(gi);
-         UpdateFoodSupply(gi);
-         UpdatePrinceEnduranceStatus(gi);
-         UpdateScrollbarThumbnails(gi.Prince.Territory);
          switch (action)
          {
             case GameAction.ShowInventory:
@@ -349,6 +331,7 @@ namespace BarbarianPrince
                SaveDefaultsToSettings();
                break;
             case GameAction.RemoveSplashScreen:
+               CreateButtonTimeTrack(gi);
                this.Title = UpdateTitle(gi.Options);
                if (false == UpdateCanvas(gi, action))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvas() returned error ");
@@ -451,6 +434,24 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvas() returned error ");
                break;
          }
+         //-------------------------------------------------------
+         Option optionExtendTime = gi.Options.Find("ExtendEndTime");
+         if (null == optionExtendTime)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "UpdateView(): gi.Options.Find(ExtendEndTime)");
+            optionExtendTime = new Option("ExtendEndTime", false);
+         }
+         if (myExtendTimeGameOptionPrevious != optionExtendTime.IsEnabled) // if there is change in this option, recreate the buttons
+         {
+            CreateButtonTimeTrack(gi);
+            myExtendTimeGameOptionPrevious = optionExtendTime.IsEnabled;
+         }
+         //-------------------------------------------------------
+         UpdateStackPanelDailyActions(gi);
+         UpdateTimeTrack(gi);
+         UpdateFoodSupply(gi);
+         UpdatePrinceEnduranceStatus(gi);
+         UpdateScrollbarThumbnails(gi.Prince.Territory);
       }
       //-----------------------SUPPORTING FUNCTIONS--------------------
       private void CloseSplashScreen() // callback function that removes splash screen when dice are loaded
