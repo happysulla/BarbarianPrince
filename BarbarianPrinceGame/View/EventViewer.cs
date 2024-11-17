@@ -4808,6 +4808,7 @@ namespace BarbarianPrince
       }
       public bool ShowResultsOfHunt(bool isMobPursit, bool isConstabularyPursuit)
       {
+         myGameInstance.Prince.SetWounds(10, 0); // <cgs> TEST
          myGameInstance.GamePhase = GamePhase.Hunt;
          GameAction outAction = GameAction.Error;
          if (true == isMobPursit)

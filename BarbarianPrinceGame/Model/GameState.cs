@@ -585,45 +585,40 @@ namespace BarbarianPrince
          {
             gi.GamePhase = GamePhase.EndGame;
             bool isNecklass = gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace);
-            Logger.Log(LogEnum.LE_END_GAME_CHECK, "PerformEndCheck(): 1-isNecklass=" + isNecklass.ToString());
+            Logger.Log(LogEnum.LE_END_GAME, "PerformEndCheck(): 1-EndGameLost ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString() + "isNecklass=" + isNecklass.ToString());
             if (true == isNecklass)
             {
                action = GameAction.EndGameResurrect;  // PerformEndCheck()
                gi.EventDisplayed = gi.EventActive = "e192a";
                gi.DieRollAction = GameAction.DieRollActionNone;
-               isGameEnd = true;
             }
             else
             {
-               Logger.Log(LogEnum.LE_END_GAME, "PerformEndCheck(): EndGameLost-0 ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString());
-               action = GameAction.EndGameLost;  // PerformEndCheck() - Killed
+               action = GameAction.EndGameLost;  // PerformEndCheck() - Prince Killed
                if ("e203b" == gi.EventActive)
                   gi.EndGameReason = "Beheaded in gory execution";
                else
                   gi.EndGameReason = "Prince killed";
-               isGameEnd = true;
             }
+            isGameEnd = true;
          }
          else if ((true == gi.Prince.IsUnconscious) && (1 == gi.PartyMembers.Count))
          {
-            Logger.Log(LogEnum.LE_END_GAME, "PerformEndCheck(): EndGameLost-1 ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString());
             gi.GamePhase = GamePhase.EndGame;
             bool isNecklass = gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace);
-            Logger.Log(LogEnum.LE_END_GAME_CHECK, "PerformEndCheck(): 2-isNecklass=" + isNecklass.ToString());
-            if (true == gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+            Logger.Log(LogEnum.LE_END_GAME, "PerformEndCheck(): 2-EndGameLost ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString() + "isNecklass=" + isNecklass.ToString());
+            if (true == isNecklass)
             {
                action = GameAction.EndGameResurrect;  // PerformEndCheck()
                gi.EventDisplayed = gi.EventActive = "e192a";
                gi.DieRollAction = GameAction.DieRollActionNone;
-               isGameEnd = true;
             }
             else
             {
                action = GameAction.EndGameLost; // PerformEndCheck() - Unconscious and alone
                gi.EndGameReason = "Prince unconscious and alone to die";
-               isGameEnd = true;
             }
-            return true;
+            isGameEnd = true;
          }
          else if (Utilities.MaxDays < gi.Days)
          {
