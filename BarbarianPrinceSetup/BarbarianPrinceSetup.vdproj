@@ -831,6 +831,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_516A014C5887445A87FC91A6C9484BC1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_516E3AE251C84568A08AFC3E3D92F201"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2223,6 +2229,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_CF1977193FA7408EA134B02DD9D76C19"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_CF77BE4044F84E86B8E63AB2530608DC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -2512,6 +2524,12 @@
         "Entry"
         {
         "MsmKey" = "8:_E46E65CE456E4245BB08E1B38D4CD45C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E49B9A2D4D0346DCAF0D00788ABE342E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -5638,6 +5656,26 @@
             "TargetName" = "8:TrapPin.gif"
             "Tag" = "8:"
             "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_516A014C5887445A87FC91A6C9484BC1"
+            {
+            "SourcePath" = "8:..\\Documentation\\20240506-PermissionsToRelease.txt"
+            "TargetName" = "8:20240506-PermissionsToRelease.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_D299DD984EF742AAB7D6A05A28E91FD3"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -10283,6 +10321,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CF1977193FA7408EA134B02DD9D76C19"
+            {
+            "SourcePath" = "8:..\\Documentation\\20240506-PermissionToRelease.eml"
+            "TargetName" = "8:20240506-PermissionToRelease.eml"
+            "Tag" = "8:"
+            "Folder" = "8:_D299DD984EF742AAB7D6A05A28E91FD3"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CF77BE4044F84E86B8E63AB2530608DC"
             {
             "SourcePath" = "8:..\\BarbarianPrinceGame\\bin\\Images\\c33Dragon.gif"
@@ -11249,6 +11307,26 @@
             "TargetName" = "8:StormCloud.gif"
             "Tag" = "8:"
             "Folder" = "8:_BDEC5D03496E46F09F4D582248D6F207"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E49B9A2D4D0346DCAF0D00788ABE342E"
+            {
+            "SourcePath" = "8:..\\Documentation\\BP2-rulesbook_singleA4.pdf"
+            "TargetName" = "8:BP2-rulesbook_singleA4.pdf"
+            "Tag" = "8:"
+            "Folder" = "8:_D299DD984EF742AAB7D6A05A28E91FD3"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -12526,7 +12604,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:BarbarianPrince"
         "ProductCode" = "8:{FFCC2816-98D9-42FE-8374-8F24570EE47A}"
-        "PackageCode" = "8:{D4D063A3-D52F-4E08-874A-FBB0EF7E51C0}"
+        "PackageCode" = "8:{62C143F9-3E18-4523-8C3D-C00CB9164081}"
         "UpgradeCode" = "8:{F2D782D1-6CB8-4ED6-A284-DA6732A9A9BE}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -13061,7 +13139,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B40BEF20FC854B338E3FAED3965B987F"
             {
-            "SourcePath" = "8:..\\BarbarianPrinceGame\\obj\\x64\\Debug\\BarbarianPrince.exe"
+            "SourcePath" = "8:..\\BarbarianPrinceGame\\obj\\x64\\Release\\BarbarianPrince.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_E950CECD612246C18600F1F09CC854E4"
