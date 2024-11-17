@@ -3130,7 +3130,7 @@ namespace BarbarianPrince
             myGameInstance.NewHex = myTerritorySelected;   // MouseDownPolygonTravel() - when air spirit moves party
          }
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
-         Logger.Log(LogEnum.LE_USER_ACTION, "MouseDownPolygonTravel(): >>>>>>>>>>>>>>>>>>>>>>>>>ae=" + myGameInstance.EventActive + " c=" + myGameInstance.SunriseChoice.ToString() + " m=" + myGameInstance.Prince.MovementUsed + "/" + myGameInstance.Prince.Movement + " mim=" + myGameInstance.MapItemMoves[0].ToString());
+         Logger.Log(LogEnum.LE_USER_ACTION, "MouseDownPolygonTravel(): >>>>>>>>>>>>>>>>>>>>>>>>>ae=" + myGameInstance.EventActive + " c=" + myGameInstance.SunriseChoice.ToString() + " a?=" + myGameInstance.IsAirborne.ToString() + " m=" + myGameInstance.Prince.MovementUsed + "/" + myGameInstance.Prince.Movement + " mim=" + myGameInstance.MapItemMoves[0].ToString());
       }
       private void MouseDownPolygonArchOfTravel(object sender, MouseButtonEventArgs e) // e045
       {

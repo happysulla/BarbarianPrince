@@ -1355,6 +1355,7 @@ namespace BarbarianPrince
       {
          Logger.Log(LogEnum.LE_UNDO_COMMAND, "UndoCommand(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->false  a=" + action.ToString());
          gi.IsUndoCommandAvailable = false;
+         gi.IsAirborne = false;
          gi.SunriseChoice = GamePhase.StartGame;
          gi.GamePhase = GamePhase.SunriseChoice;
          gi.NewHex = gi.Prince.Territory;

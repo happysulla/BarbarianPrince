@@ -180,7 +180,7 @@ namespace BarbarianPrince
                }
                if (true == mi.IsFlyer())
                {
-                  if( (true == mi.IsExhausted ) || (false == mi.IsSunStroke) )
+                  if( (true == mi.IsExhausted ) || (true == mi.IsSunStroke) )
                   {
                      mi.IsFlying = false;
                   }
@@ -225,9 +225,9 @@ namespace BarbarianPrince
                {
                   mi.IsRiding = true;
                   mi.IsFlying = true;
-                  if ((0 != mi.StarveDayNum) && (false == mi.Name.Contains("Eagle")) && (false == mi.Name.Contains("Eagle")))
+                  if ((0 != mi.StarveDayNum) && (false == mi.Name.Contains("Eagle")) && (false == mi.Name.Contains("Falcon")))
                      mi.IsFlying = false;
-                  if ( (false==mi.IsExhausted) || (false == mi.IsSunStroke) )
+                  if ( (true==mi.IsExhausted) || (true == mi.IsSunStroke) )
                      mi.IsFlying = false;
                }
             }
