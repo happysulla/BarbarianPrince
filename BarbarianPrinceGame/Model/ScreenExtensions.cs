@@ -97,7 +97,7 @@ namespace BarbarianPrince
          return 0;
       }
       //-----------------------------------------------------------------------------------
-      public static string GetScreenBounds()
+      public static string PrintScreenBounds()
       {
          StringBuilder sb = new StringBuilder();
          int numScreens = System.Windows.Forms.Screen.AllScreens.Length;
