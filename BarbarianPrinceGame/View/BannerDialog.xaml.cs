@@ -124,6 +124,7 @@ namespace BarbarianPrince
             uint dpiY = 1;
             ScreenExtensions.GetDpi(currentScreen, ScreenExtensions.DpiType.Effective, out dpiX, out dpiY);
             double ratio = 96.0 / dpiX;
+            double ratioResolution = System.Windows.SystemParameters.PrimaryScreenWidth / ScreenExtensions.GetScreenResolutionWidthFromPoint(currentScreenPt);
             //----------------------
             StringBuilder sb = new StringBuilder();
             if (myPreviousScreenIndex != currentScreenIndex)
@@ -143,9 +144,13 @@ namespace BarbarianPrince
                sb.Append("=>");
                sb.Append(currentMonitor);
                sb.Append(") ratio(");
-               sb.Append(myPreviousRatio.ToString());
+               sb.Append(myPreviousRatio.ToString("0.00"));
                sb.Append("=>");
-               sb.Append(ratio.ToString());
+               sb.Append(ratio.ToString("0.00"));
+               sb.Append(") r1(");
+               sb.Append(ratioResolution.ToString("0.00"));
+               sb.Append(") sw(");
+               sb.Append(SystemParameters.PrimaryScreenWidth.ToString());
                sb.Append(") this.Left(");
                sb.Append(this.Left.ToString());
                sb.Append(") dpiX(");
@@ -170,22 +175,27 @@ namespace BarbarianPrince
                sb.Append("=>");
                sb.Append(currentMonitor);
                sb.Append(") ratio(");
-               sb.Append(myPreviousRatio.ToString());
+               sb.Append(myPreviousRatio.ToString("0.00"));
                sb.Append("=>");
-               sb.Append(ratio.ToString());
+               sb.Append(ratio.ToString("0.00"));
+               sb.Append(") r1(");
+               sb.Append(ratioResolution.ToString("0.00"));
+               sb.Append(") sw(");
+               sb.Append(SystemParameters.PrimaryScreenWidth.ToString());
                sb.Append(") this.Left(");
                sb.Append(this.Left.ToString());
                sb.Append(") dpiX(");
                sb.Append(dpiX.ToString());
+
                sb.Append(")");
                Console.WriteLine(sb.ToString());
             }
             else
             {
-               currentScreenPt.X = (int)(currentScreenPt.X);
-               currentScreenPt.Y = (int)(currentScreenPt.Y);
+               currentScreenPt.X = (int)(currentScreenPt.X * ratio/ratioResolution);
+               currentScreenPt.Y = 0;
                this.Left = currentScreenPt.X - myOffsetInBannerWindow.X * ratio;
-               this.Top = currentScreenPt.Y - myOffsetInBannerWindow.Y * ratio;
+               this.Top = 0;
                sb.Append(" pt(");
                sb.Append(myPreviousScreenPoint.X.ToString());
                sb.Append("=>");
@@ -199,9 +209,13 @@ namespace BarbarianPrince
                sb.Append("=>");
                sb.Append(currentMonitor);
                sb.Append(") ratio(");
-               sb.Append(myPreviousRatio.ToString());
+               sb.Append(myPreviousRatio.ToString("0.00"));
                sb.Append("=>");
-               sb.Append(ratio.ToString());
+               sb.Append(ratio.ToString("0.00"));
+               sb.Append(") r1(");
+               sb.Append(ratioResolution.ToString("0.00"));
+               sb.Append(") sw(");
+               sb.Append(SystemParameters.PrimaryScreenWidth.ToString());
                sb.Append(") this.Left(");
                sb.Append(this.Left.ToString());
                sb.Append(") dpiX(");

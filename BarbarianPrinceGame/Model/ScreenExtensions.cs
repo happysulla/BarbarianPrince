@@ -84,6 +84,19 @@ namespace BarbarianPrince
          return null;
       }
       //-----------------------------------------------------------------------------------
+      public static double GetScreenResolutionWidthFromPoint(System.Drawing.Point mousePoint)
+      {
+         System.Drawing.Rectangle ret;
+         int numScreens = System.Windows.Forms.Screen.AllScreens.Length;
+         for (int i = 0; i < numScreens; i++)
+         {
+            ret = Screen.AllScreens[i].Bounds;
+            if (ret.Contains(mousePoint))
+               return ret.Width;
+         }
+         return 1920;
+      }
+      //-----------------------------------------------------------------------------------
       public static int GetScreenIndexFromPoint(System.Drawing.Point mousePoint)
       {
          System.Drawing.Rectangle ret;
