@@ -140,7 +140,10 @@ namespace BarbarianPrince
                return false;
             }
             StringBuilder sb = new StringBuilder();
-            sb.Append(@"<TextBlock xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Name='myTextBlockDisplay' xml:space='preserve' Width='555' Height='690' FontFamily='Old English Text MT' FontSize='20' TextWrapping='WrapWithOverflow' IsHyphenationEnabled='true' HorizontalAlignment='Left' VerticalAlignment='Top' Margin='15,0,0,0'>");
+            if( true == BannerDialog.theIsCheckBoxChecked)
+               sb.Append(@"<TextBlock xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Name='myTextBlockDisplay' xml:space='preserve' Width='555' Height='690' FontFamily='Georgia' FontSize='20' TextWrapping='WrapWithOverflow' IsHyphenationEnabled='true' HorizontalAlignment='Left' VerticalAlignment='Top' Margin='15,0,0,0'>");
+            else
+               sb.Append(@"<TextBlock xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Name='myTextBlockDisplay' xml:space='preserve' Width='555' Height='690' FontFamily='Old English Text MT' FontSize='20' TextWrapping='WrapWithOverflow' IsHyphenationEnabled='true' HorizontalAlignment='Left' VerticalAlignment='Top' Margin='15,0,0,0'>");
             sb.Append(myRules[key]);
             sb.Append(@"</TextBlock>");
             StringReader sr = new StringReader(sb.ToString());
@@ -282,7 +285,10 @@ namespace BarbarianPrince
                return false;
             }
             StringBuilder sb = new StringBuilder();
-            sb.Append(@"<TextBlock xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Name='myTextBlockDisplay' xml:space='preserve' Width='555' Height='690' FontFamily='Old English Text MT' FontSize='20' TextWrapping='WrapWithOverflow' IsHyphenationEnabled='true' HorizontalAlignment='Left' VerticalAlignment='Top' Margin='15,0,0,0'>");
+            if (true == BannerDialog.theIsCheckBoxChecked)
+               sb.Append(@"<TextBlock xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Name='myTextBlockDisplay' xml:space='preserve' Width='555' Height='690' FontFamily='Georgia' FontSize='20' TextWrapping='WrapWithOverflow' IsHyphenationEnabled='true' HorizontalAlignment='Left' VerticalAlignment='Top' Margin='15,0,0,0'>");
+            else
+               sb.Append(@"<TextBlock xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Name='myTextBlockDisplay' xml:space='preserve' Width='555' Height='690' FontFamily='Old English Text MT' FontSize='20' TextWrapping='WrapWithOverflow' IsHyphenationEnabled='true' HorizontalAlignment='Left' VerticalAlignment='Top' Margin='15,0,0,0'>");
             sb.Append(myEvents[key]);
             sb.Append(@"</TextBlock>");
             StringReader sr = new StringReader(sb.ToString());
@@ -292,7 +298,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "ShowEventDialog(): BannerDialog() returned false");
                return false;
             }
-            dialog.Closed += BannerDialog_Closed;
+            dialog.Closed += EventDialog_Closed;
             foreach (Inline inline in dialog.TextBoxDiplay.Inlines)
             {
                if (inline is InlineUIContainer)
@@ -428,6 +434,8 @@ namespace BarbarianPrince
             }
          }
          myBannerDialogs[dialog.Key] = null;
+         if (true == dialog.IsReopen)
+            this.ShowRule(dialog.Key);
       }
       private void EventDialog_Closed(object sender, EventArgs e)
       {
@@ -442,6 +450,9 @@ namespace BarbarianPrince
             }
          }
          myEventDialogs[dialog.Key] = null;
+         myBannerDialogs[dialog.Key] = null;
+         if (true == dialog.IsReopen)
+            this.ShowEventDialog(dialog.Key);
       }
       private void TableDialog_Closed(object sender, EventArgs e)
       {

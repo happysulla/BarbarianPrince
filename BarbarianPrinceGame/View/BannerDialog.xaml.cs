@@ -20,6 +20,14 @@ namespace BarbarianPrince
    public partial class BannerDialog : System.Windows.Window
    {
       public bool CtorError { get; } = false;
+      private string myKey = "";
+      public string Key { get => myKey; }
+      private TextBlock myTextBlockDisplay = null;
+      public TextBlock TextBoxDiplay { get => myTextBlockDisplay; }
+      public static bool theIsCheckBoxChecked = false;
+      private bool myIsReopen = false;
+      public bool IsReopen { get => myIsReopen; }
+      //------------------------------------
       private bool myIsDragging = false;
       private System.Windows.Point myOffsetInBannerWindow;
       private System.Drawing.Point myPreviousScreenPoint;
@@ -27,29 +35,25 @@ namespace BarbarianPrince
       private int myPreviousScreenIndex;
       private string myPreviousMonitor;
       private double myPreviousRatio;
-      private System.Drawing.Rectangle[] myScreenBounds = new System.Drawing.Rectangle[4];
       private System.Windows.Media.Matrix myPreviousMatrix;
-      private string myKey = "";
-      public string Key { get => myKey; }
-      public TextBlock TextBoxDiplay { get => myTextBlockDisplay; }
+      //-------------------------------------------------------------------------------------
       public BannerDialog(string key, StringReader sr)
       {
          InitializeComponent();
+         myIsReopen = false; // Tell parent to reopen on font change
          BitmapImage img = MapItem.theMapImages.GetBitmapImage("Parchment");
          ImageBrush brush = new ImageBrush(img);
          this.Background = brush;
          //-------------------------------
          Image imageAxes = new Image() { Source = MapItem.theMapImages.GetBitmapImage("CrossedAxes") };
          myButtonClose.Content = imageAxes;
-         //----------------------------------
-         int numScreens = System.Windows.Forms.Screen.AllScreens.Length;
-         for (int i = 0; i < numScreens; i++)
-            myScreenBounds[i] = Screen.AllScreens[i].Bounds;
+         //-------------------------------
+         myCheckBoxFont.IsChecked = theIsCheckBoxChecked;
          //-------------------------------
          try
          {
             XmlTextReader xr = new XmlTextReader(sr);
-            myTextBlockDisplay = (TextBlock)XamlReader.Load(xr);
+            myTextBlockDisplay = (TextBlock)XamlReader.Load(xr); // TextBox created in RuleManager.ShowRule()
             myScrollViewerTextBlock.Content = myTextBlockDisplay;
             myTextBlockDisplay.MouseLeftButtonDown += Window_MouseLeftButtonDown;
             myTextBlockDisplay.MouseLeave += TextBlockDisplay_MouseLeave;
@@ -239,6 +243,18 @@ namespace BarbarianPrince
       private void TextBlockDisplay_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
       {
          myIsDragging = false;
+      }
+      private void myCheckBoxFont_Unchecked(object sender, RoutedEventArgs e)
+      {
+         theIsCheckBoxChecked = false;
+         myIsReopen = true;
+         Close();
+      }
+      private void myCheckBoxFont_Click(object sender, RoutedEventArgs e)
+      {
+         theIsCheckBoxChecked = true;
+         myIsReopen = true;
+         Close();
       }
    }
 }
