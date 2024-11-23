@@ -81,6 +81,7 @@ namespace BarbarianPrince
       {
          myIsDragging = true;
          myOffsetInBannerWindow = e.GetPosition(this);
+#if UT3
          System.Windows.Point newPoint1 = this.PointToScreen(e.GetPosition(this));
          myPreviousScreenPoint = new System.Drawing.Point((int)newPoint1.X, (int)newPoint1.Y);
          myPreviousScreen = ScreenExtensions.GetScreenFromPoint(myPreviousScreenPoint);
@@ -109,6 +110,7 @@ namespace BarbarianPrince
          sb.Append(this.Left.ToString());
          sb.Append(")");
          Console.WriteLine(sb.ToString());
+#endif
          //---------------------
          myIsDragging = true;
          e.Handled = true;
@@ -118,130 +120,133 @@ namespace BarbarianPrince
          if (false == myIsDragging)
          {
             base.OnMouseMove(e);
+            return;
+         }
+         System.Windows.Point newPoint1 = this.PointToScreen(e.GetPosition(this));
+#if UT3
+         System.Drawing.Point currentScreenPt = new System.Drawing.Point((int)newPoint1.X, (int)newPoint1.Y);
+         Screen currentScreen = ScreenExtensions.GetScreenFromPoint(currentScreenPt);
+         int currentScreenIndex = ScreenExtensions.GetScreenIndexFromPoint(currentScreenPt);
+         string currentMonitor = ScreenExtensions.GetMonitor(this);
+         System.Windows.Media.Matrix currentMatrix = ScreenExtensions.GetMatrixFromVisual(this);
+         uint dpiX = 1;
+         uint dpiY = 1;
+         ScreenExtensions.GetDpi(currentScreen, ScreenExtensions.DpiType.Effective, out dpiX, out dpiY);
+         double scaleRatio = 96.0 / dpiX;
+         double screenRatio = System.Windows.SystemParameters.PrimaryScreenWidth / ScreenExtensions.GetScreenResolutionWidthFromPoint(currentScreenPt);
+         //----------------------
+         StringBuilder sb = new StringBuilder();
+         if (myPreviousScreenIndex != currentScreenIndex)
+         {
+            sb.Append("sssssssssssssssssssssssss\n");
+            sb.Append(ScreenExtensions.PrintScreenBounds());
+            sb.Append(" pt(");
+            sb.Append(myPreviousScreenPoint.X.ToString());
+            sb.Append("=>");
+            sb.Append(currentScreenPt.X.ToString());
+            sb.Append(") scn(");
+            sb.Append(myPreviousScreenIndex.ToString());
+            sb.Append("=>");
+            sb.Append(currentScreenIndex.ToString());
+            sb.Append(") mon(");
+            sb.Append(myPreviousMonitor);
+            sb.Append("=>");
+            sb.Append(currentMonitor);
+            sb.Append(") scaleratio(");
+            sb.Append(myPreviousScaleRatio.ToString("0.00"));
+            sb.Append("=>");
+            sb.Append(scaleRatio.ToString("0.00"));
+            sb.Append(") r1(");
+            sb.Append(myPreviousScreenRatio.ToString("0.00"));
+            sb.Append("=>");
+            sb.Append(screenRatio.ToString("0.00"));
+            sb.Append(") psw(");
+            sb.Append(SystemParameters.PrimaryScreenWidth.ToString());
+            sb.Append(") this.Left(");
+            sb.Append(this.Left.ToString());
+            sb.Append(") dpiX(");
+            sb.Append(dpiX.ToString());
+            sb.Append(")");
+            Console.WriteLine(sb.ToString());
+         }
+         else if (myPreviousMonitor != currentMonitor)
+         {
+            sb.Append("mmmmmmmmmmmmmmmmmmmmmmmmm\n");
+            sb.Append(ScreenExtensions.PrintScreenBounds());
+            sb.Append(" pt(");
+            sb.Append(myPreviousScreenPoint.X.ToString());
+            sb.Append("=>");
+            sb.Append(currentScreenPt.X.ToString());
+            sb.Append(") scn(");
+            sb.Append(myPreviousScreenIndex.ToString());
+            sb.Append("=>");
+            sb.Append(currentScreenIndex.ToString());
+            sb.Append(") mon(");
+            sb.Append(myPreviousMonitor);
+            sb.Append("=>");
+            sb.Append(currentMonitor);
+            sb.Append(") scaleRatio(");
+            sb.Append(myPreviousScaleRatio.ToString("0.00"));
+            sb.Append("=>");
+            sb.Append(scaleRatio.ToString("0.00"));
+            sb.Append(") r1(");
+            sb.Append(myPreviousScreenRatio.ToString("0.00"));
+            sb.Append("=>");
+            sb.Append(screenRatio.ToString("0.00"));
+            sb.Append(") psw(");
+            sb.Append(SystemParameters.PrimaryScreenWidth.ToString());
+            sb.Append(") this.Left(");
+            sb.Append(this.Left.ToString());
+            sb.Append(") dpiX(");
+            sb.Append(dpiX.ToString());
+            sb.Append(")");
+            Console.WriteLine(sb.ToString());
          }
          else
          {
-            System.Windows.Point newPoint1 = this.PointToScreen(e.GetPosition(this));
-            System.Drawing.Point currentScreenPt = new System.Drawing.Point((int)newPoint1.X, (int)newPoint1.Y);
-            Screen currentScreen = ScreenExtensions.GetScreenFromPoint(currentScreenPt);
-            int currentScreenIndex = ScreenExtensions.GetScreenIndexFromPoint(currentScreenPt);
-            string currentMonitor = ScreenExtensions.GetMonitor(this);
-            System.Windows.Media.Matrix currentMatrix = ScreenExtensions.GetMatrixFromVisual(this);
-            uint dpiX = 1;
-            uint dpiY = 1;
-            ScreenExtensions.GetDpi(currentScreen, ScreenExtensions.DpiType.Effective, out dpiX, out dpiY);
-            double scaleRatio = 96.0 / dpiX;
-            double screenRatio = System.Windows.SystemParameters.PrimaryScreenWidth / ScreenExtensions.GetScreenResolutionWidthFromPoint(currentScreenPt);
-            //----------------------
-            StringBuilder sb = new StringBuilder();
-            if (myPreviousScreenIndex != currentScreenIndex)
-            {
-               sb.Append("sssssssssssssssssssssssss\n");
-               sb.Append(ScreenExtensions.PrintScreenBounds());
-               sb.Append(" pt(");
-               sb.Append(myPreviousScreenPoint.X.ToString());
-               sb.Append("=>");
-               sb.Append(currentScreenPt.X.ToString());
-               sb.Append(") scn(");
-               sb.Append(myPreviousScreenIndex.ToString());
-               sb.Append("=>");
-               sb.Append(currentScreenIndex.ToString());
-               sb.Append(") mon(");
-               sb.Append(myPreviousMonitor);
-               sb.Append("=>");
-               sb.Append(currentMonitor);
-               sb.Append(") scaleratio(");
-               sb.Append(myPreviousScaleRatio.ToString("0.00"));
-               sb.Append("=>");
-               sb.Append(scaleRatio.ToString("0.00"));
-               sb.Append(") r1(");
-               sb.Append(myPreviousScreenRatio.ToString("0.00"));
-               sb.Append("=>");
-               sb.Append(screenRatio.ToString("0.00"));
-               sb.Append(") psw(");
-               sb.Append(SystemParameters.PrimaryScreenWidth.ToString());
-               sb.Append(") this.Left(");
-               sb.Append(this.Left.ToString());
-               sb.Append(") dpiX(");
-               sb.Append(dpiX.ToString());
-               sb.Append(")");
-               Console.WriteLine(sb.ToString());
-            }
-            else if (myPreviousMonitor != currentMonitor)
-            {
-               sb.Append("mmmmmmmmmmmmmmmmmmmmmmmmm\n");
-               sb.Append(ScreenExtensions.PrintScreenBounds());
-               sb.Append(" pt(");
-               sb.Append(myPreviousScreenPoint.X.ToString());
-               sb.Append("=>");
-               sb.Append(currentScreenPt.X.ToString());
-               sb.Append(") scn(");
-               sb.Append(myPreviousScreenIndex.ToString());
-               sb.Append("=>");
-               sb.Append(currentScreenIndex.ToString());
-               sb.Append(") mon(");
-               sb.Append(myPreviousMonitor);
-               sb.Append("=>");
-               sb.Append(currentMonitor);
-               sb.Append(") scaleRatio(");
-               sb.Append(myPreviousScaleRatio.ToString("0.00"));
-               sb.Append("=>");
-               sb.Append(scaleRatio.ToString("0.00"));
-               sb.Append(") r1(");
-               sb.Append(myPreviousScreenRatio.ToString("0.00"));
-               sb.Append("=>");
-               sb.Append(screenRatio.ToString("0.00"));
-               sb.Append(") psw(");
-               sb.Append(SystemParameters.PrimaryScreenWidth.ToString());
-               sb.Append(") this.Left(");
-               sb.Append(this.Left.ToString());
-               sb.Append(") dpiX(");
-               sb.Append(dpiX.ToString());
-               sb.Append(")");
-               Console.WriteLine(sb.ToString());
-            }
-            else
-            {
-               currentScreenPt.X = (int)(currentScreenPt.X);
-               currentScreenPt.Y = 0;
-               this.Left = currentScreenPt.X - myOffsetInBannerWindow.X;
-               this.Top = 0;
-               sb.Append(" pt(");
-               sb.Append(myPreviousScreenPoint.X.ToString());
-               sb.Append("=>");
-               sb.Append(currentScreenPt.X.ToString());
-               sb.Append(") scn(");
-               sb.Append(myPreviousScreenIndex.ToString());
-               sb.Append("=>");
-               sb.Append(currentScreenIndex.ToString());
-               sb.Append(") mon(");
-               sb.Append(myPreviousMonitor);
-               sb.Append("=>");
-               sb.Append(currentMonitor);
-               sb.Append(") scaleRatio(");
-               sb.Append(myPreviousScaleRatio.ToString("0.00"));
-               sb.Append("=>");
-               sb.Append(scaleRatio.ToString("0.00"));
-               sb.Append(") r1(");
-               sb.Append(myPreviousScreenRatio.ToString("0.00"));
-               sb.Append("=>");
-               sb.Append(screenRatio.ToString("0.00"));
-               sb.Append(") psw(");
-               sb.Append(SystemParameters.PrimaryScreenWidth.ToString());
-               sb.Append(") this.Left(");
-               sb.Append(this.Left.ToString());
-               sb.Append(") dpiX(");
-               sb.Append(dpiX.ToString());
-               sb.Append(")");
-               Console.WriteLine(sb.ToString());
-               sb.Append(this.Left.ToString());
-            }
-            myPreviousScreenRatio = screenRatio;
-            myPreviousScaleRatio = scaleRatio;
-            myPreviousMonitor = currentMonitor;
-            myPreviousScreenIndex = currentScreenIndex;
-            myPreviousScreenPoint = currentScreenPt;
+            currentScreenPt.X = (int)(currentScreenPt.X);
+            currentScreenPt.Y = 0;
+            this.Left = currentScreenPt.X - myOffsetInBannerWindow.X;
+            this.Top = 0;
+            sb.Append(" pt(");
+            sb.Append(myPreviousScreenPoint.X.ToString());
+            sb.Append("=>");
+            sb.Append(currentScreenPt.X.ToString());
+            sb.Append(") scn(");
+            sb.Append(myPreviousScreenIndex.ToString());
+            sb.Append("=>");
+            sb.Append(currentScreenIndex.ToString());
+            sb.Append(") mon(");
+            sb.Append(myPreviousMonitor);
+            sb.Append("=>");
+            sb.Append(currentMonitor);
+            sb.Append(") scaleRatio(");
+            sb.Append(myPreviousScaleRatio.ToString("0.00"));
+            sb.Append("=>");
+            sb.Append(scaleRatio.ToString("0.00"));
+            sb.Append(") r1(");
+            sb.Append(myPreviousScreenRatio.ToString("0.00"));
+            sb.Append("=>");
+            sb.Append(screenRatio.ToString("0.00"));
+            sb.Append(") psw(");
+            sb.Append(SystemParameters.PrimaryScreenWidth.ToString());
+            sb.Append(") this.Left(");
+            sb.Append(this.Left.ToString());
+            sb.Append(") dpiX(");
+            sb.Append(dpiX.ToString());
+            sb.Append(")");
+            Console.WriteLine(sb.ToString());
+            sb.Append(this.Left.ToString());
          }
+         myPreviousScreenRatio = screenRatio;
+         myPreviousScaleRatio = scaleRatio;
+         myPreviousMonitor = currentMonitor;
+         myPreviousScreenIndex = currentScreenIndex;
+         myPreviousScreenPoint = currentScreenPt;
+#else
+         this.Left = newPoint1.X - myOffsetInBannerWindow.X;
+         this.Top = newPoint1.Y - myOffsetInBannerWindow.Y;
+#endif
          e.Handled = true;
       }
       private void Window_MouseUp(object sender, MouseButtonEventArgs e)
