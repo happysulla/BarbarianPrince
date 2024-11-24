@@ -49,6 +49,7 @@ namespace BarbarianPrince
             string appDataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             Logger.theLogDirectory = appDataDir + @"\BarbarianPrince\Logs\";
             GameLoadMgr.theGamesDirectory = appDataDir + @"\BarbarianPrince\Games\";
+            string docsDirectory = appDataDir + @"\BarbarianPrince\Docs\";
             //--------------------------------------------
             Utilities.InitializeRandomNumGenerators();
             //--------------------------------------------

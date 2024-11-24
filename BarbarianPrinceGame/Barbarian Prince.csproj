@@ -631,12 +631,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="BP2-eventsbook_singleA4.pdf" />
-    <None Include="BP2-rulesbook_singleA4.pdf" />
-    <Content Include="docs\BP2-eventsbook_singleA4.pdf">
+    <Content Include="Docs\BP2-eventsbook_singleA4.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="docs\BP2-rulesbook_singleA4.pdf">
+    <Content Include="Docs\BP2-rulesbook_singleA4.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
