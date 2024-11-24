@@ -43,13 +43,12 @@ namespace BarbarianPrince
             string codeBase = Assembly.GetExecutingAssembly().CodeBase;
             UriBuilder uri = new UriBuilder(codeBase);
             string path = Uri.UnescapeDataString(uri.Path);
-            string assemplyDirectory = System.IO.Path.GetDirectoryName(path);
-            MapImage.theImageDirectory = assemplyDirectory + @"\images\";
-            ConfigFileReader.theConfigDirectory = assemplyDirectory + @"\config\";
+            string assemblyDir = System.IO.Path.GetDirectoryName(path);
+            MapImage.theImageDirectory = assemblyDir + @"\images\";
+            ConfigFileReader.theConfigDirectory = assemblyDir + @"\config\";
             string appDataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             Logger.theLogDirectory = appDataDir + @"\BarbarianPrince\Logs\";
             GameLoadMgr.theGamesDirectory = appDataDir + @"\BarbarianPrince\Games\";
-            string docsDirectory = appDataDir + @"\BarbarianPrince\Docs\";
             //--------------------------------------------
             Utilities.InitializeRandomNumGenerators();
             //--------------------------------------------
@@ -74,6 +73,25 @@ namespace BarbarianPrince
             }
             myGameViewerWindow.Icon = this.Icon;
             myGameViewerWindow.Show(); // Finished initializing so show the window
+            //--------------------------------------------
+            try // copy user documentation to folder where user data is kept
+            {
+               string docs1Src = assemblyDir + @"\Docs\BP2-eventsbook_singleA4.pdf";
+               string docs2Src = assemblyDir + @"\Docs\BP2-rulesbook_singleA4.pdf";
+               string docsDir = appDataDir + @"\BarbarianPrince\Docs\";
+               if (false == Directory.Exists(docsDir))
+                  Directory.CreateDirectory(docsDir);
+               string docs1Dest = assemblyDir + @"\Docs\BP2-eventsbook_singleA4.pdf";
+               if ( false == File.Exists(docs1Dest))
+                  File.Copy(docs1Src, docs1Dest);
+               string docs2Dest = assemblyDir + @"\Docs\BP2-rulesbook_singleA4.pdf";
+               if (false == File.Exists(docs2Dest))
+                  File.Copy(docs1Src, docs2Dest);
+            }
+            catch (Exception e)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "MainWindow(): Copying docs to new folder caused exception e=" + e.ToString());
+            }
          }
          catch (Exception e)
          {
