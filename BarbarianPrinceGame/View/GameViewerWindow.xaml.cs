@@ -2501,7 +2501,6 @@ namespace BarbarianPrince
          myStoryboard.Begin(this, true);
          return true;
       }
-
       private bool UpdateCanvasShowStatsAdds(int index, GameStat stat)
       {
          myGameEngine.Statistics[index].myNumGames++;
@@ -3499,7 +3498,7 @@ namespace BarbarianPrince
          Settings.Default.ScrollViewerHeight = myScollViewerInside.Height;
          Settings.Default.ScrollViewerWidth = myScollViewerInside.Width;
          //-------------------------------------------
-         Settings.Default.GameDirectoryName = Settings.Default.GameDirectoryName;
+         Settings.Default.GameDirectoryName = GameLoadMgr.theGamesDirectory;
          //-------------------------------------------
          string sOptions = Utilities.Serialize<Options>(myGameInstance.Options);
          Settings.Default.GameOptions = sOptions;
