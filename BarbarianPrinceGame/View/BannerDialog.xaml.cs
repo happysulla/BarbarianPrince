@@ -204,10 +204,6 @@ namespace BarbarianPrince
          }
          else
          {
-            currentScreenPt.X = (int)(currentScreenPt.X);
-            currentScreenPt.Y = 0;
-            this.Left = currentScreenPt.X - myOffsetInBannerWindow.X;
-            this.Top = 0;
             sb.Append(" pt(");
             sb.Append(myPreviousScreenPoint.X.ToString());
             sb.Append("=>");
@@ -238,6 +234,8 @@ namespace BarbarianPrince
             Console.WriteLine(sb.ToString());
             sb.Append(this.Left.ToString());
          }
+         this.Left = currentScreenPt.X - myOffsetInBannerWindow.X;
+         this.Top = currentScreenPt.Y - myOffsetInBannerWindow.Y;
          myPreviousScreenRatio = screenRatio;
          myPreviousScaleRatio = scaleRatio;
          myPreviousMonitor = currentMonitor;

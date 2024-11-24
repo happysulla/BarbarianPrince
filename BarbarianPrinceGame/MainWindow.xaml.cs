@@ -44,11 +44,11 @@ namespace BarbarianPrince
             UriBuilder uri = new UriBuilder(codeBase);
             string path = Uri.UnescapeDataString(uri.Path);
             string assemplyDirectory = System.IO.Path.GetDirectoryName(path);
-            string parentDir = System.IO.Path.GetDirectoryName(assemplyDirectory);
-            MapImage.theImageDirectory = assemplyDirectory + @"\Images\";
-            Logger.theLogDirectory = assemplyDirectory + @"\Logs\";
-            ConfigFileReader.theConfigDirectory = assemplyDirectory + @"\Config\";
-            GameLoadMgr.theGamesDirectory = assemplyDirectory + @"\Games\";
+            MapImage.theImageDirectory = assemplyDirectory + @"\images\";
+            ConfigFileReader.theConfigDirectory = assemplyDirectory + @"\config\";
+            string appDataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            Logger.theLogDirectory = appDataDir + @"\BarbarianPrince\Logs\";
+            GameLoadMgr.theGamesDirectory = appDataDir + @"\BarbarianPrince\Games\";
             //--------------------------------------------
             Utilities.InitializeRandomNumGenerators();
             //--------------------------------------------

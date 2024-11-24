@@ -17,7 +17,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Setup\</PublishUrl>
+    <PublishUrl>C:\Setup\BarbarianPrince\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -27,10 +27,12 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>5</ApplicationRevision>
-    <ApplicationVersion>1.0.4.%2a</ApplicationVersion>
+    <ProductName>Barbarian Prince</ProductName>
+    <PublisherName>Wargaming Inc</PublisherName>
+    <ApplicationRevision>23</ApplicationRevision>
+    <ApplicationVersion>1.6.8.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -89,7 +91,7 @@
     <ManifestKeyFile>Barbarian Prince_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>false</GenerateManifests>
+    <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -638,1257 +640,1448 @@
     <None Include="packages\WpfAnimatedGif.2.0.2.nupkg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="bin\Images\Map.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\OBlood1.gif" />
-    <Resource Include="bin\Images\OBlood.gif" />
-    <Resource Include="bin\Images\OKIA.gif" />
-    <Resource Include="bin\Images\OMIA.gif" />
-    <Resource Include="bin\Images\c10Mercenary.gif" />
-    <Resource Include="bin\Images\c11Porter.gif" />
-    <Resource Include="bin\Images\c12Wizard.gif" />
-    <Resource Include="bin\Images\c13Witch.gif" />
-    <Resource Include="bin\Images\c14Priest.gif" />
-    <Resource Include="bin\Images\c15Freeman.gif" />
-    <Resource Include="bin\Images\c16Magician.gif" />
-    <Resource Include="bin\Images\c17Farmer.gif" />
-    <Resource Include="bin\Images\c09Runaway.gif" />
-    <Resource Include="bin\Images\GameBox.gif" />
-    <Resource Include="bin\Images\c01dieRoll2.gif" />
-    <Resource Include="bin\Images\c02dieRoll2.gif" />
-    <Resource Include="bin\Images\c03dieRoll2.gif" />
-    <Resource Include="bin\Images\c04dieRoll2.gif" />
-    <Resource Include="bin\Images\c05dieRoll2.gif" />
-    <Resource Include="bin\Images\c06dieRoll2.gif" />
-    <Resource Include="bin\Images\c01die.gif" />
-    <Resource Include="bin\Images\c02die.gif" />
-    <Resource Include="bin\Images\c03die.gif" />
-    <Resource Include="bin\Images\c04die.gif" />
-    <Resource Include="bin\Images\c05die.gif" />
-    <Resource Include="bin\Images\c06die.gif" />
-    <Resource Include="bin\Images\dieRoll.gif" />
-    <Resource Include="bin\Images\c01dieRoll.gif" />
-    <Resource Include="bin\Images\c02dieRoll.gif" />
-    <Resource Include="bin\Images\c03dieRoll.gif" />
-    <Resource Include="bin\Images\c04dieRoll.gif" />
-    <Resource Include="bin\Images\c05dieRoll.gif" />
-    <Resource Include="bin\Images\c06dieRoll.gif" />
-    <Resource Include="bin\Images\c08Dwarf.gif" />
-    <Resource Include="bin\Images\c07Prince.gif" />
-    <Resource Include="bin\Images\Parchment.gif" />
-    <Resource Include="bin\Images\CrossedAxes.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\Debug\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Config\DiceRolls.xml" />
-    <Resource Include="bin\Config\Territories.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Coin.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Brain.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Brain1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Campfire0.gif" />
-    <Resource Include="bin\Images\Campfire1.gif" />
-    <Resource Include="bin\Images\Campfire2.gif" />
-    <Resource Include="bin\Images\Fireball.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Food.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\MHorse.gif" />
-    <Resource Include="bin\Images\MPegasus.gif" />
-    <Resource Include="bin\Images\MUnicorn.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Sun3.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Cache.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\sun1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\CarryingMan.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Backpack.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Mount.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\OUNC.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Lodging.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Lodging2.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Lodging3.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\OStolen.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\OParty.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\ShakyWalls.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c19Monk.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Foam.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\CoinsFalling.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Invocation.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\EngulfedInFlames.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Chest.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Chest1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\PotionHeal.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\CharmGift.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Sash.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\PoisonDrug.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\TalismanResistance.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\OPoison.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\PotionCure.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\CrossedSwords.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\CrossedSwordsPoisoned.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\PoisonDrugEmpty.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\lightening.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\TalismanResistanceDestroy.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\TrapAcid.gif" />
-    <Resource Include="bin\Images\TrapFlyingKnives.gif" />
-    <Resource Include="bin\Images\TrapPin.gif" />
-    <Resource Include="bin\Images\TrapPlague.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\TrapGas.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\OPlagueDust.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Stone.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\AmuletAntiPoison.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\NerveGasBomb.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Sword.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Sword1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Chest2.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\RingResistence.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Necklace.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Helmet.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Shield.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\TalismanCharisma.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\TalismanPegasus.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\ORUNS.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\TalismanChrismaDestroy.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c20Ghost.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Ghost.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\GemVision.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\AltarSimple.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\LightningScene.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\DrugChaga.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\WarriorBoy.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\WarriorsHillTribe.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\BaronDrogat.gif" />
-    <Resource Include="bin\Images\BaronHuldra1.gif" />
-    <Resource Include="bin\Images\LadyAeravir.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\FoulBane.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Bandit.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c21Bandit.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c22Goblin.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Goblin2.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Goblin.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c23Hobgoblin.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\AltarSmall.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Ruins.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Cave1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Cave.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Mummy.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\LootedTomb.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\CharmGiftDestroyed.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c24Wraith.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Wraith.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Follow.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c25Spectre.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\CoinsPile.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Spectre.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c27Golem.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Golem.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Pegasus.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c28Guardian.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\BlackPortal.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\BrushHook.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Magic.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\CampsiteSmall.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Nothing.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\MagicDouble.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Arch.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Target.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\CoinsStacked.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\CoinsStackedDeny.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\CoinPileSingle.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Ally.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Muscle.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\HandWave.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\CoinBar.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\CoinBarDeny.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\StructureDeny.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Group.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\EscapeLock.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\MonkHermit.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\MonkWarrior.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\MonkTraveling.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Inhabitant.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\DecisionHide.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\DecisionFight.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\TalismanCharismaSmall.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\TowerGoblin.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c01dieRoll3.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c02dieRoll3.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c03dieRoll3.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c04dieRoll3.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c05dieRoll3.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c06dieRoll3.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Prisoner.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Headsman.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Jail.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\JailBreak.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\JailNight.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\TowerOrc.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c29DemiTroll.gif" />
-    <Resource Include="bin\Images\c30Orc.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\OrcLeader.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Orc.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c31Troll.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Troll.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\TrollSkin.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Spectre1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Luck.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Smoke.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\BoxOpened.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\BoxUnopened.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Teeth.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c32UndeadWarrior.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Gems.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\RuinsRat.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c33Dragon.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Dragon.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\DragonFight.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\DragonEvade.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\God.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\BrokenColumns.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Mirror.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c34PrinceMirror.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\ShieldDull.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Idiot.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\CoinBag.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\HappyFace.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\SecretRites.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Caravan.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Secrets.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Farmland.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\FarmerBoy.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c35FarmerBoy.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\C36Reaver.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Reaver.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\C37ReaverBoss.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\FoodDeny.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\FarmerSelling.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Magician.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Gift.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\BarredDoor.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\BoltDoor.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\C38ProtectorBoss.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\C39Protector.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Protector.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\FarmerPeaceful.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\FarmerDead.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\FarmlandRich.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c40Retainer.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Merchant.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c41SlaveGirl.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c42SlavePorter.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c43OldWarrior.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c44TrueLove.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\TrueLove.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\FallingHearts.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Porter.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c45Constabulary.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Constabulary.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\ThievesGuild.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c46Freeman.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c47Lancer.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c48Guide.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c49Henchman.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Dungeon.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\DungeonJail.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\DungeonJailBreak.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Arrested.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\JailOvernight.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c50GuardHostile.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Deny.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c18Mercenary.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Coffle.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\MerchantOutwit.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\OldMan.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Skulls.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\SlaveGirlFace0.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\SlaveGirlFace1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\SlaveGirlFace2.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\SlaveGirlFace3.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\SlaveGirlFace4.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\SlaveGirlFace5.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\SlaveGirlFace6.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\HillTribeWarriors.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Castle.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\DenyAudience.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c51TrustedAssistant.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Letter.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\MayorDaughter.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Mayor.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Purify.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\HighPriest.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\DrugChagaDeny.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\DragonEye.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\FineClothes.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\AllyNoble.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Cavalry.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\RocBeak.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\GriffonClaw.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\BrokenLove.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c52Knight.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\PriestDaughter.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\LordDaughter1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Temple.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\DenyHire.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\DenyTemple.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Staff.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\TempleIcon.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\MonksWarrior.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\TrapPlagueDeny.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c53Swordsman.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Swordsman.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Priest.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\MarkOfCain.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Spider.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c54Spider.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Roc.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c55Roc.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Elves.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Elf.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c56Elf.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\DecisionShare.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Escape.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\ElvenTown.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\ElvenCastle.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c57Amazon.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Amazon.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Herd.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Boar.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c58Boar.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\BoarCooked.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\HuntingCat.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c59HuntingCat.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\MountainsView.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\MountainPath.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Snake.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Minstrel.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c60Minstrel.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Mob.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Giant.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c61Giant.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Unpassable.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\NarrowLedge.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Eagle.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c62Eagle.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Eagles.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\EagleNest.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c63Griffon.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Griffon.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Witch.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Frog.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Wizard.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\WizardAdvice.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\WizardPrisoner.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\WizardWander.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\FireballAttack.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\WizardEscape.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c64OrcChief.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\TowerWizard.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Mercenaries.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c65MercLead.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\HighLords.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c66Guard.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Exhausted.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Dwarfs.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\DwarfPrincess.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\DwarfKing.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\DwarfMines.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c67Lizard.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Lizard.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c68DwarfLead.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\DwarfWarrior.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\DwarfAdvice.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\HalflingTown.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Halfling.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\HalflingDaughter.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\MayorHalfling.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\MayorElf.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\ElfDaughter.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\ElfWarrior.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c69ElfLead.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\ElfWarriorSmall.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Pixie.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\MineAbandoned.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\HalflingWarrior.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c70HalflingLead.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c71Wolf.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Wolves.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\WolvesHowling.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\WolvesAttack.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\MountDeny.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c72Bear.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\BearAttack.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\BearStory.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\HalflingTown1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\HeavyRain.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\HeavyRainSick.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\HeavyRainDrops.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\HeavyRainContinues.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c73Crocodile.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Crocs.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\LandSlide.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\LandSlide1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Flood.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\FloodContinues.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\MountedPatrol.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c74MountedPatrol.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c75MountedPatrolLead.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\HiddenTown.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Town2.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Fugitive.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c76Swordswoman.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c77Merchant.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c78Deserter.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\SwordsWoman.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\SlaveWoman.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Negotiator.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Negotiator1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\FugitiveDeserter.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\FugitiveMerchant.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Ghost1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\HighPass.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\SnowShoes.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Sun5.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Quicksand.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Rope.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\QuicksandDeath.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\QuicksandSave.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\QuicksandJump.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\WarriorWounded.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c79Warrior.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\MountTired.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\MountsTiredDie.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\PoisonPlant.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\MountsDie.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\FleshRot.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Config\Rivers.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Raft.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\RaftDeny.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\RaftWhiteWater1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\RaftWhiteWater3.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\RaftWhitewater5.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\BlackKnightFight.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\BlackKnightRefuse.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\BlackKnight.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c80BlackKnight.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\BlackKnightDefeated.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\BlackKnightThumb.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\BlackKnightThumbDeny.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\LostHigh.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\AirLowClouds.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\AirHeadWinds.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c81Hawkman.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Hawkman.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Overcast.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\StormCloud.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\ViolentWeather.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Falcon.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c82Falcon.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c83Harpy.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Harpy.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\C84Rat.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\AirSpirit.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\StormDemon.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\StormDemonDeny.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Tutorial1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Config\Events.txt" />
-    <Resource Include="bin\Config\Rules.txt" />
-    <Resource Include="bin\Config\Tables.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Tutorial0.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c85BanditLead.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\TreasureRoomDoor.gif" />
+    <Content Include="config\DiceRolls.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\Events.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\Rivers.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\Rules.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\Tables.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\Territories.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\AirHeadWinds.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\AirLowClouds.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\AirSpirit.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Ally.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\AllyNoble.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\AltarSimple.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\AltarSmall.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Amazon.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\AmuletAntiPoison.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Arch.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Arrested.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Backpack.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Bandit.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BarbarianPrince.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BaronDrogat.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BaronHuldra1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BarredDoor.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BearAttack.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BearStory.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BlackKnight.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BlackKnightDefeated.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BlackKnightFight.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BlackKnightRefuse.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BlackKnightThumb.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BlackKnightThumbDeny.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BlackPortal.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Boar.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BoarCooked.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BodyGuard.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BoltDoor.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BoxOpened.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BoxUnopened.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Brain.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Brain1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BrokenColumns.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BrokenLove.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\BrushHook.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c01die.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c01dieRoll.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c01dieRoll2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c01dieRoll3.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c02die.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c02dieRoll.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c02dieRoll2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c02dieRoll3.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c03die.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c03dieRoll.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c03dieRoll2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c03dieRoll3.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c04die.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c04dieRoll.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c04dieRoll2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c04dieRoll3.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c05die.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c05dieRoll.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c05dieRoll2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c05dieRoll3.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c06die.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c06dieRoll.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c06dieRoll2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c06dieRoll3.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c07Prince.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c08Dwarf.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c09Runaway.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c10Mercenary.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c11Porter.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c12Wizard.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c13Witch.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c14Priest.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c15Freeman.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c16Magician.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c17Farmer.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c18Mercenary.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c19Monk.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c20Ghost.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c21Bandit.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c22Goblin.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c23Hobgoblin.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c24Wraith.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c25Spectre.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c27Golem.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c28Guardian.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c29DemiTroll.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c30Orc.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c31Troll.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c32UndeadWarrior.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c33Dragon.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c34PrinceMirror.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c35FarmerBoy.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\C36Reaver.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\C37ReaverBoss.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\C38ProtectorBoss.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\C39Protector.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c40Retainer.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c41SlaveGirl.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c42SlavePorter.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c43OldWarrior.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c44TrueLove.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c45Constabulary.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c46Freeman.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c47Lancer.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c48Guide.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c49Henchman.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c50GuardHostile.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c51TrustedAssistant.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c52Knight.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c53Swordsman.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c54Spider.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c55Roc.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c56Elf.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c57Amazon.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c58Boar.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c59HuntingCat.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c60Minstrel.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c61Giant.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c62Eagle.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c63Griffon.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c64OrcChief.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c65MercLead.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c66Guard.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c67Lizard.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c68DwarfLead.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c69ElfLead.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c70HalflingLead.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c71Wolf.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c72Bear.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c73Crocodile.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c74MountedPatrol.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c75MountedPatrolLead.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c76Swordswoman.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c77Merchant.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c78Deserter.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c79Warrior.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c80BlackKnight.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c81Hawkman.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c82Falcon.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c83Harpy.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\C84Rat.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c85BanditLead.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c86WarriorBoy.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c87BodyGuard.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\c89Huldra.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Cache.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Campfire0.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Campfire1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Campfire2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\CampsiteSmall.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Caravan.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\CarryingMan.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Castle.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Cavalry.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Cave.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Cave1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\CharmGift.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\CharmGiftDestroyed.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Chest.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Chest1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Chest2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Coffle.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Coin.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\CoinBag.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\CoinBar.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\CoinBarDeny.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\CoinPileSingle.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\CoinsFalling.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\CoinsPile.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\CoinsStacked.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\CoinsStackedDeny.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Constabulary.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\CountDrogatJewels.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Crocs.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\CrossedAxes.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\CrossedSwords.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\CrossedSwordsPoisoned.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\DecisionFight.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\DecisionHide.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\DecisionShare.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Deny.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\DenyAudience.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\DenyHire.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\DenyTemple.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\dieRoll.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\DoorClosing.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Dragon.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\DragonEvade.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\DragonEye.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\DragonFight.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\DrugChaga.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\DrugChagaDeny.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Dungeon.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\DungeonJail.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\DungeonJailBreak.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\DwarfAdvice.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\DwarfKing.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\DwarfMines.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\DwarfPrincess.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Dwarfs.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\DwarfWarrior.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Eagle.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\EagleNest.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Eagles.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Elf.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\ElfDaughter.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\ElfWarrior.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\ElfWarriorSmall.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\ElvenCastle.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\ElvenTown.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Elves.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\EndGameFail.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\EndGameSuccess.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\EndGameSuccess2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\EngulfedInFlames.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Escape.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\EscapeLock.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Exhausted.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Falcon.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\FallingHearts.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\FarmerBoy.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\FarmerDead.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\FarmerPeaceful.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\FarmerSelling.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Farmland.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\FarmlandRich.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\FineClothes.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Fireball.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\FireballAttack.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\FleshRot.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Flood.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\FloodContinues.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Foam.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Follow.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Food.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\FoodDeny.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\FoulBane.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Frog.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Frown.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Fugitive.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\FugitiveDeserter.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\FugitiveMerchant.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\GameBox.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Gems.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\GemVision.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Ghost.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Ghost1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Giant.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Gift.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Goblin.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Goblin2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\God.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Golem.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Griffon.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\GriffonClaw.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Group.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Halfling.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\HalflingDaughter.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\HalflingTown.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\HalflingTown1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\HalflingWarrior.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\HandWave.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\HappyFace.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Harpy.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Hawkman.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Headsman.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\HeavyRain.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\HeavyRainContinues.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\HeavyRainDrops.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\HeavyRainSick.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Helmet.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Herd.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\HiddenTown.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Hide.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\HighLords.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\HighPass.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\HighPriest.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\HillTribeWarriors.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\HuntingCat.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Idiot.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Inhabitant.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Invocation.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Jail.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\JailBreak.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\JailNight.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\JailOvernight.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\LadyAeravir.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\LandSlide.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\LandSlide1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Letter.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\lightening.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\LightningScene.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Lizard.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Lodging.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Lodging2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Lodging3.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\LootedTomb.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\LordDaughter1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\LostHigh.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Luck.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Magic.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MagicDouble.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Magician.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Map.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MarkOfCain.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Mayor.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MayorDaughter.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MayorElf.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MayorHalfling.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Mercenaries.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Merchant.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MerchantOutwit.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MHorse.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MineAbandoned.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Minstrel.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Mirror.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Mob.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MonkHermit.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MonksWarrior.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MonkTraveling.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MonkWarrior.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Mount.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MountainPath.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MountainsView.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MountDeny.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MountedPatrol.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MountsDie.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MountsTiredDie.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MountTired.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MPegasus.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Mummy.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MUnicorn.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Muscle.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\NarrowLedge.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Necklace.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Negotiator.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Negotiator1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\NerveGasBomb.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Nothing.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\OBlood.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\OBlood1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\OKIA.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\OldMan.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\OMIA.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\OParty.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\OPlagueDust.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\OPoison.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Orc.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\OrcLeader.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\ORest.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\ORUNS.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\OStolen.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\OUNC.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Overcast.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Parchment.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Pegasus.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Pixie.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Plead.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\PoisonDrug.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\PoisonDrugEmpty.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\PoisonPlant.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Porter.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\PotionCure.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\PotionHeal.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Priest.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\PriestDaughter.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Prisoner.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Protector.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Purify.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Quicksand.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\QuicksandDeath.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\QuicksandJump.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\QuicksandSave.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Raft.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\RaftDeny.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\RaftWhiteWater1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\RaftWhiteWater3.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\RaftWhitewater5.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Reaver.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Resurrected.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\RingResistence.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Robbery.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Roc.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\RocBeak.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Rope.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Ruins.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\RuinsRat.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Sash.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\SecretRites.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Secrets.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\ShakyWalls.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Shield.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\ShieldDull.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Skulls.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\SlaveGirlFace0.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\SlaveGirlFace1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\SlaveGirlFace2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\SlaveGirlFace3.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\SlaveGirlFace4.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\SlaveGirlFace5.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\SlaveGirlFace6.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\SlaveWoman.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Smoke.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Snake.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\SnowShoes.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Spectre.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Spectre1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Spider.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Staff.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Star.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\StarReward.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Stone.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\StormCloud.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\StormDemon.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\StormDemonDeny.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\StructureDeny.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\sun1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Sun3.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Sun5.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Sword.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Sword1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Swordsman.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\SwordsWoman.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\TalismanCharisma.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\TalismanCharismaSmall.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\TalismanChrismaDestroy.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\TalismanPegasus.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\TalismanResistance.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\TalismanResistanceDestroy.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Talk.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Target.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Teeth.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Temple.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\TempleIcon.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\ThievesGuild.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\TowerGoblin.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\TowerOrc.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\TowerWizard.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Town2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\TrapAcid.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\TrapFlyingKnives.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\TrapGas.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\TrapPin.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\TrapPlague.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\TrapPlagueDeny.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\TreasureRoomDoor.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Troll.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\TrollSkin.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\TrueLove.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Tutorial0.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Tutorial1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Unpassable.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\ViolentWeather.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\WarriorBoy.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\WarriorsHillTribe.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\WarriorWounded.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Win.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Witch.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Wizard.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\WizardAdvice.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\WizardEscape.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\WizardPrisoner.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\WizardWander.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Wolves.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\WolvesAttack.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\WolvesHowling.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Wraith.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="config\DiceRolls.xml">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="config\Rivers.xml">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="config\Territories.xml">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
@@ -1903,67 +2096,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="bin\Images\Resurrected.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\CountDrogatJewels.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c86WarriorBoy.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c87BodyGuard.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\BodyGuard.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\c89Huldra.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Robbery.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="BarbarianPrince.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\ORest.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\BarbarianPrince.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Star.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Frown.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Win.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\EndGameSuccess.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\EndGameFail.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Plead.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Talk.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\Hide.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\EndGameSuccess2.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\DoorClosing.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bin\Images\StarReward.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

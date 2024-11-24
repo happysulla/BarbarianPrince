@@ -78,17 +78,6 @@ namespace BarbarianPrince
       private static bool theIsLogFileCreated = false;
       private static Mutex theMutex = new Mutex();
       //--------------------------------------------------
-      public static string AssemblyDirectory
-      {
-         get
-         {
-            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
-            UriBuilder uri = new UriBuilder(codeBase);
-            string path = Uri.UnescapeDataString(uri.Path);
-            return System.IO.Path.GetDirectoryName(path);
-         }
-      }
-      //--------------------------------------------------
       static public bool SetInitial()
       {
          //---------------------------------------------------------------------

@@ -160,7 +160,7 @@ namespace BarbarianPrince
       //-----------------------CONSTRUCTOR--------------------
       public GameViewerWindow(IGameEngine ge, IGameInstance gi)
       {
-         NameScope.SetNameScope(this, new NameScope());
+         NameScope.SetNameScope(this, new NameScope()); // TextBox Marquee is end game condtion - display Game Statistics
          myTextBoxMarquee = new TextBlock() { Foreground = Brushes.Red, FontFamily = myFontFam, FontSize = 24 };
          myTextBoxMarquee.MouseLeftButtonDown += MouseLeftButtonDownMarquee;
          myTextBoxMarquee.MouseLeftButtonUp += MouseLeftButtonUpMarquee;
