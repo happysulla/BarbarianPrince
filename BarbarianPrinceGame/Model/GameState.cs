@@ -1922,6 +1922,7 @@ namespace BarbarianPrince
                {
                   IMapItem member = CreateCharacter(gi, "ElfWarrior");
                   member.AddNewMount(MountEnum.Horse);
+                  member.Coin = Utilities.RandomGenerator.Next(50) + 100; // <cgs>
                   gi.AddCompanion(member);
                }
                break;
@@ -1932,6 +1933,7 @@ namespace BarbarianPrince
                   member.IsRiding = true;
                   member.IsGuide = true;
                   member.GuideTerritories = Territory.theTerritories;
+                  member.Coin = Utilities.RandomGenerator.Next(50) + 20; // <cgs>
                   gi.AddCompanion(member);
                   gi.IsFalconFed = true;
                }
@@ -1971,6 +1973,7 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + rider.Name + " coin=" + rider.Coin);
                   rider.IsRiding = true;
                   rider.IsFlying = true;
+                  rider.Coin = Utilities.RandomGenerator.Next(50) + 20; // <cgs>
                   gi.AddCompanion(rider);
                }
                break;
@@ -7149,7 +7152,7 @@ namespace BarbarianPrince
                            {
                               if (false == MarkedForDeath(gi))
                               {
-                                 returnStatus = "ResetDieResultsForAudience() returned false ae=" + action.ToString();
+                                 returnStatus = "MarkedForDeath() returned false ae=" + action.ToString();
                                  Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                               }
                            }
@@ -13794,7 +13797,7 @@ namespace BarbarianPrince
                            return false;
                         }
                         break;
-                     case 3: case 4: gi.EventDisplayed = gi.EventActive = "e150"; gi.DieRollAction = GameAction.EncounterRoll; break;
+                     case 3: case 4: gi.EventDisplayed = gi.EventActive = "e150"; gi.DieRollAction = GameAction.EncounterRoll; ++gi.Statistic.myNumOfAudience; break;
                      case 5: gi.EventDisplayed = gi.EventActive = "e151"; gi.DieRollAction = GameAction.EncounterRoll; break;
                      case 6: gi.EventDisplayed = gi.EventActive = "e152"; gi.DieRollAction = GameAction.EncounterRoll; break;
                      default: Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): Reached default dr=" + gi.DieResults["e130"][1].ToString() + " ae=" + gi.EventActive); return false;
@@ -14064,6 +14067,7 @@ namespace BarbarianPrince
                break;
             case "e151": // lord finds favor
                gi.EnteredHexes.Last().EventNames.Add(key);
+               ++gi.Statistic.myNumOfAudience;
                gi.DieResults[key][0] = dieRoll;
                if (false == gi.AddCoins("EncounterRoll(e151)", dieRoll * 100))
                {
@@ -14906,6 +14910,7 @@ namespace BarbarianPrince
                         }
                         break;
                      case 9:                                                                                                   // pay your respect
+                        ++gi.Statistic.myNumOfAudience;
                         gi.EventDisplayed = gi.EventActive = "e150";
                         if (false == gi.AddCoins("EncounterRoll(e211b)", 50))
                         {
@@ -14991,6 +14996,7 @@ namespace BarbarianPrince
                         break;
                      case 10:
                      case 11:                                                                                                             // pay your respects
+                        ++gi.Statistic.myNumOfAudience;
                         gi.EventDisplayed = gi.EventActive = "e150";
                         if (false == gi.AddCoins("EncounterRoll(e211c)", 50))
                         {
@@ -15000,7 +15006,7 @@ namespace BarbarianPrince
                         gi.ForbiddenAudiences.AddTimeConstraint(princeTerritory, gi.Days + 1);
                         break;
                      case 12: gi.EventDisplayed = gi.EventActive = "e151"; gi.DieRollAction = GameAction.EncounterRoll; break;             // find favor
-                     default: gi.EventDisplayed = gi.EventActive = "e152"; gi.IsNobleAlly = true; break;                                   // ally                       
+                     default: gi.EventDisplayed = gi.EventActive = "e152"; gi.IsNobleAlly = true; ++gi.Statistic.myNumOfAudience; break;                                   // ally                       
                   }
                }
                else
@@ -15287,6 +15293,7 @@ namespace BarbarianPrince
                         break;
                      case 10:
                      case 11:                                                                                                             // pay your respects
+                        ++gi.Statistic.myNumOfAudience;
                         gi.EventDisplayed = gi.EventActive = "e150";
                         if (false == gi.AddCoins("EncounterRoll(e211f)", 50))
                         {
@@ -15295,7 +15302,7 @@ namespace BarbarianPrince
                         }
                         gi.ForbiddenAudiences.AddTimeConstraint(princeTerritory, gi.Days + 1);
                         break;
-                     case 12: gi.EventDisplayed = gi.EventActive = "e151"; gi.DieRollAction = GameAction.EncounterRoll; ++gi.Statistic.myNumOfAudience; break; // find favor
+                     case 12: gi.EventDisplayed = gi.EventActive = "e151"; gi.DieRollAction = GameAction.EncounterRoll; break; // find favor
                      default: gi.EventDisplayed = gi.EventActive = "e152"; gi.IsNobleAlly = true; ++gi.Statistic.myNumOfAudience; break;                       // ally                       
                   }
                }
@@ -16838,6 +16845,7 @@ namespace BarbarianPrince
       protected bool ResetDieResultsForAudience(IGameInstance gi)
       {
          ITerritory t = gi.Prince.Territory;
+         ++gi.Statistic.myNumOfAudience;
          gi.DieRollAction = GameAction.EncounterRoll;
          if (true == gi.IsInTown(t))
          {

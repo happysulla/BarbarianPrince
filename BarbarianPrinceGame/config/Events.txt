@@ -4994,7 +4994,7 @@ Click image to exit game:
 e503a	"<Bold>e503a Game Feats </Bold>
 <LineBreak/><LineBreak/>You completed an achievement that requires great courage, skill, and persistence.
 <LineBreak/><LineBreak/>Congratulations!
-<LineBreak/><LineBreak/>Click start to continue."
+<LineBreak/><LineBreak/>Click star to continue."
 e504	"<Bold>e504 Play Again?</Bold>
 <LineBreak/><LineBreak/>
 Select 'File | New' menu option to play again.

@@ -542,6 +542,12 @@ namespace BarbarianPrince
             mi.Combat = 3;
             return;
          }
+         if (true == mi.Name.Contains("Magician"))
+         {
+            mi.Endurance = 5;
+            mi.Combat = 3;
+            return;
+         }
          if (true == mi.Name.Contains("Lancer"))
          {
             mi.Endurance = 5;

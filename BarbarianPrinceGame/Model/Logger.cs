@@ -164,7 +164,7 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_VIEW_MIM);
          //Logger.SetOn(LogEnum.LE_VIEW_MIM_ADD);
          //Logger.SetOn(LogEnum.LE_VIEW_MIM_CLEAR);
-         //Logger.SetOn(LogEnum.LE_VIEW_SHOW_LOADS);
+         Logger.SetOn(LogEnum.LE_VIEW_SHOW_LOADS);
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_HUNT);
          return true;
       }
