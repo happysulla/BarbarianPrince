@@ -567,10 +567,10 @@ namespace BarbarianPrince
                myState = E031Enum.OPEN_COMPARTMENT_SUCCESS;
                break;
             case E031Enum.OPEN_COMPARTMENT_SUCCESS:
-               myDieRollAssignPanel = dieRoll;
+               myDieRollAssignPanel = dieRoll;  
                if (dieRoll < 5)
                   myGameInstance.AddSpecialItem(SpecialEnum.GiftOfCharm, mi);
-               if (false == myGameInstance.AddCoins(50))
+               if (false == myGameInstance.AddCoins("EventViewerE031Mgr", 50))
                   Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): AddCoins() returned false for myState=" + myState.ToString());
                myState = E031Enum.SHOW_RESULTS;
                break;

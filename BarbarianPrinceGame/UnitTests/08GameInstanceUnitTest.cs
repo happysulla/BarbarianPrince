@@ -389,17 +389,17 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[10])  // Add Coin
          {
-            gi.AddCoins(355);
+            gi.AddCoins("GameInstanceUnitTest", 355);
             myDialog.UpdateGridRows(gi);
          }
          else if (CommandName == myCommandNames[11])
          {
-            gi.ReduceCoins(25);
+            gi.ReduceCoins("GameInstanceUnitTest", 25);
             myDialog.UpdateGridRows(gi);
          }
          else if (CommandName == myCommandNames[12])
          {
-            gi.AddCoins(110);
+            gi.AddCoins("GameInstanceUnitTest", 110);
             myDialog.UpdateGridRows(gi);
          }
          else if (CommandName == myCommandNames[13])
@@ -409,17 +409,17 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[14])
          {
-            gi.ReduceCoins(166);
+            gi.ReduceCoins("GameInstanceUnitTest", 166);
             myDialog.UpdateGridRows(gi);
          }
          else if (CommandName == myCommandNames[15])
          {
-            gi.AddCoins(152);
+            gi.AddCoins("GameInstanceUnitTest", 152);
             myDialog.UpdateGridRows(gi);
          }
          else if (CommandName == myCommandNames[16])
          {
-            gi.AddCoins(500);
+            gi.AddCoins("GameInstanceUnitTest", 500);
             myDialog.UpdateGridRows(gi);
          }
          else if (CommandName == myCommandNames[17]) // kill party members
@@ -454,7 +454,7 @@ namespace BarbarianPrince
          else if (CommandName == myCommandNames[20])
          {
             gi.AddFoods(12);
-            gi.AddCoins(733);
+            gi.AddCoins("GameInstanceUnitTest", 733);
             myDialog.UpdateGridRows(gi);
          }
          else if (CommandName == myCommandNames[21])

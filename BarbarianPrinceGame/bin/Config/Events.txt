@@ -5,7 +5,7 @@ e000	"<LineBreak/><Bold>e000 Game Events Shown Here</Bold>
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button Name='Read_Rules' Content='Read Rules' FontFamily='Courier New'  FontSize='12'> </Button></InlineUIContainer> or <InlineUIContainer><Button Name='Begin' Content='Begin Game' FontFamily='Courier New'  FontSize='12'> </Button></InlineUIContainer>"
 e000a	"<Bold>e000a Cal Arath - Barbarian Prince</Bold> <InlineUIContainer><Button Content='r200' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> <InlineUIContainer><Button Content='r201' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
-<LineBreak/><LineBreak/><Italic>Barbarian Prince</Italic> is a dungeon cawler, self-paced, solo game. You play the game in days. Each day starts with your selecting a daily action
+<LineBreak/><LineBreak/><Italic>Barbarian Prince</Italic> is a dungeon crawler, self-paced, solo game. You play the game in days. Each day starts with your selecting a daily action
  <InlineUIContainer><Button Content='r203' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 , such as traveling to a new hex on the map. 
 <LineBreak/><LineBreak/>After all events are resolved for your daily action, you must eat your main evening meal as described in the food rules
@@ -14,7 +14,7 @@ e000a	"<Bold>e000a Cal Arath - Barbarian Prince</Bold> <InlineUIContainer><Butto
  <InlineUIContainer><Button Content='r217' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>The game continues until either you are killed or 70 days (10 weeks) elapse. If you have not won before the 70 days ends, the game is automatically lost! You win if you collect 500gp.
 <LineBreak/><LineBreak/>You are Cal Arath, rightful heir to the throne of the Northlands Kingdom. 
-<LineBreak/><LineBreak/>Few humans match your skill with trusty Bonebitter -- Combat=8
+<LineBreak/><LineBreak/>Few humans match your skill with trusty Bonebiter -- Combat=8
 <LineBreak/>Harsh northlands developed your powerful body -- Endurance=9. 
 <LineBreak/><LineBreak/>Counter Description is found by selecting <Bold>Help | Counter Description...</Bold> menu. Click image to continue.
 <LineBreak/><LineBreak/>
@@ -1720,7 +1720,7 @@ e056a	"<Bold>e056a Orc Tower Fight</Bold>
 <LineBreak/><LineBreak/>
                                   <InlineUIContainer><Image Source='../images/OrcLeader.gif'  Height='350' Width='250'> </Image></InlineUIContainer>"
 e057	"<Bold>e057 Troll</Bold>
-<LineBreak/><LineBreak/>A hugh stone-skinned troll confonts your party. The troll has combat skill 8, endurance 8, and wealth 15. Furthermore, the troll skin's has regenerative properties. If automatically cures one wound at the end of every other combat round <InlineUIContainer><Button Content='r220' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
+<LineBreak/><LineBreak/>A huge stone-skinned troll confonts your party. The troll has combat skill 8, endurance 8, and wealth 15. Furthermore, the troll skin's has regenerative properties. If automatically cures one wound at the end of every other combat round <InlineUIContainer><Button Content='r220' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>If you kill the troll, its stone-skin is a valuble item. Whenever you have an opportunity to buy food at a town, castle, temple, or from merchants; you can sell the skin for 50 gold pieces. It is also known that Count Drogat of Drogat Castle will treasure the gift should you manage to get a personal audience with him.
 <LineBreak/><LineBreak/>Roll one die. If the roll less or equal to your wit and wiles, you strikes first in combat:
  <InlineUIContainer><Image Source='../images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>"
@@ -2277,7 +2277,7 @@ e082	"<Bold>e082 Spectre</Bold>
 <LineBreak/>
   <InlineUIContainer><Image Source='../images/Spectre1.gif' Height='275'  Width='550' Name='SpectreMagic'> </Image></InlineUIContainer>"
 e083	"<Bold>e083 Wild Boar Charges</Bold>
-<LineBreak/><LineBreak/>A hugh wide boar charges toward your party. It has surprised you in combat
+<LineBreak/><LineBreak/>A huge wild boar charges toward your party. It has surprised you in combat
  <InlineUIContainer><Button Content='r220' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
  The boar normally has combat skill 5 and endurance 5, but its surprise strike is made with combat skill 8 because of its fearsome charge. 
 <LineBreak/><LineBreak/> Randomly determine which character in your party is the target of this charge.
@@ -3836,7 +3836,7 @@ e164	"<Bold>e164 Giant Lizard</Bold>
                   <InlineUIContainer><Image Source='../images/Lizard.gif' Name='Lizard' Height='240' Width='400'></Image></InlineUIContainer>"
 e165	"<Bold>e165 Elven Town</Bold>
 <LineBreak/><LineBreak/>You discover a hidden town inhabited by elves. Roll one die, subtracting one if you party includes an elf, magician, wizard, or witch. Add one if your party includes a dwarf. 
-<LineBreak/><LineBreak/>If the roll exeeds your wit and wiles, the elves decide you are untrustworthy. You are immediately arrested
+<LineBreak/><LineBreak/>If the roll exceeds your wit and wiles, the elves decide you are untrustworthy. You are immediately arrested
  <InlineUIContainer><Button Content='e060' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 . Otherwise, the elves allow you to visit the town.
 <LineBreak/><LineBreak/>If you are given permission to visit the town, treat it just like a normal town marked on the map for all purposes, including selection fo daily activities

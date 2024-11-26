@@ -3,6 +3,7 @@ using Microsoft.Win32.SafeHandles;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -779,11 +780,22 @@ namespace BarbarianPrince
             coins += mi.Coin;
          return coins;
       }
-      public bool AddCoins(int coins, bool isCoinsShared = true)
+      public bool AddCoins(string caller, int coins, bool isCoinsShared = true)
       {
          if (0 == coins)
             return true;
-         Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins():    ++++++++++++++++++" + coins.ToString() + "++++++++++++++++++++++++++++++++++++++++++++");
+         Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): " + caller + ":++++++++++++++++++" + coins.ToString() + "++++++++++++++++++++++++++++++++++++++++++++");
+         StringBuilder sb = new StringBuilder("AddCoins():");
+         foreach ( IMapItem mi in PartyMembers)
+         {
+            sb.Append("\n     mi.Name=");
+            sb.Append(mi.Name);
+            sb.Append(" c=");
+            sb.Append(mi.Coin.ToString());
+            sb.Append(" f=");
+            sb.Append(mi.Food.ToString());
+         }
+         Logger.Log(LogEnum.LE_ADD_COIN, sb.ToString());
          //---------------------------------
          int looterShare = 1;
          if (true == isCoinsShared) // need to give equal share for each looter
@@ -796,6 +808,7 @@ namespace BarbarianPrince
          }
          int remainingCoins = (int)Math.Ceiling((decimal)coins / (decimal)looterShare); // looters get their share and it disappears forever
          LooterCoin += (coins - remainingCoins);
+         Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): ls=" + looterShare.ToString() + " rc=" + remainingCoins.ToString());
          //---------------------------------
          int fickleShare = 1;
          if (true == isCoinsShared) // need to give equal share for each looter
@@ -812,11 +825,11 @@ namespace BarbarianPrince
          int afterLooterCoins = remainingCoins;
          remainingCoins = (int)Math.Ceiling((decimal)afterLooterCoins / (decimal)fickleShare); // fickle get equal share as Prince
          this.FickleCoin += (afterLooterCoins - remainingCoins);
-         Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 0 remainingCoins=" + remainingCoins.ToString());
+         Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): fs=" + fickleShare.ToString()+ " rc=" + remainingCoins.ToString());
          //---------------------------------
          IMapItems sortedMapItems = PartyMembers.SortOnCoin();
          sortedMapItems.Reverse();
-         foreach (IMapItem mi in sortedMapItems) // add to party members to get to 100 increment
+         foreach (IMapItem mi in sortedMapItems) // add to party members to get to 100 increment - starting with most poor
          {
             int miRemainder = mi.Coin % 100;
             if ( (0 != miRemainder) && (false == mi.IsUnconscious) && (false == mi.IsKilled) && (false == mi.Name.Contains("Eagle")) && (false == mi.Name.Contains("Falcon")))
@@ -826,17 +839,20 @@ namespace BarbarianPrince
                int diffToGetTo100 = 100 - miRemainder;
                if (remainingCoins <= diffToGetTo100)
                {
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 1 " + mi.Name + " ++++>>> " + mi.Coin.ToString() + " + " + remainingCoins.ToString());
+                  int miCoin = mi.Coin;
                   mi.Coin += remainingCoins;
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): returning after add to poorest " + mi.Name + "++++>>>" + miCoin.ToString() + " + " + remainingCoins.ToString() + " = " + mi.Coin.ToString());
                   return true;
                }
                remainingCoins -= diffToGetTo100;  // remainingCoins reduced by how much added to this MapItem
-               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 2 " + mi.Name + " ++++>>> " + mi.Coin.ToString() + " + " + diffToGetTo100.ToString() + " rc=" + remainingCoins.ToString());
+               int miCoin1 = mi.Coin;
                mi.Coin += diffToGetTo100;
+               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): add to poorest first to reach 100 " + mi.Name + "++++>>>" + miCoin1.ToString() + " + " + diffToGetTo100.ToString() + " = " + mi.Coin.ToString() + " rc=" + remainingCoins.ToString());
+
             }
          }
          //--------------------------------- 
-         int remainder = remainingCoins % 100;
+         int remainder = remainingCoins % 100; // First try to get remainder removed
          int hundreds = (int)((remainingCoins - remainder)/100.0);
          foreach (IMapItem mi in sortedMapItems) // take care of remainder first
          {
@@ -846,20 +862,22 @@ namespace BarbarianPrince
             if (0 < freeLoad)
             {
                remainingCoins -= remainder;
-               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 3 remainder-->" + mi.Name + " ++++>>> " + mi.Coin.ToString() + " + " + remainder.ToString() + " rc=" + remainingCoins.ToString());
+               int miCoin = mi.Coin;
                mi.Coin += remainder;
+               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 3 remainder=" + remainder.ToString() + "-->" + mi.Name + "++++>>>" + miCoin.ToString() + " + " + remainder.ToString() + " = " + mi.Coin.ToString() + " rc=" + remainingCoins.ToString());
                remainder = 0;
             }
             else if( 0 < mi.Food )
             {
-               mi.Food -= 1; // remove one food to add one coin
+               mi.Food -= 1; // remove one food to add one load of coins
                remainingCoins -= remainder;
-               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 4 remainder-->" + mi.Name + " ++++>>> " + mi.Coin.ToString() + " + " + remainder.ToString() + " remove one food rc=" + remainingCoins.ToString());
+               int miCoin = mi.Coin;
                mi.Coin += remainder;
+               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 4 remainder=" + remainder.ToString() + "-->" + mi.Name + "++++>>>" + miCoin.ToString() + " + " + remainder.ToString() + " = " + mi.Coin.ToString() + " remove one food rc=" + remainingCoins.ToString());
                remainder = 0;
             }
          }
-         if (0 == hundreds)
+         if ((0 == hundreds) || (0 == remainingCoins) ) // at this point, only left with 100s
             return true;
          //--------------------------------- 
          int princeFreeLoad = Prince.GetFreeLoadWithoutModify(); // AddCoins() - Add to prince if prince free load over zero
@@ -868,22 +886,25 @@ namespace BarbarianPrince
             int c100 = (hundreds * 100);
             if (hundreds <= princeFreeLoad)
             {
-               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 5 100s--> Prince ++++>>> " + Prince.Coin.ToString() + " + " + c100.ToString());
+               int miPrinceCoin = Prince.Coin;
                Prince.Coin += c100;
+               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): return after 100s--> Prince++++>>>" + miPrinceCoin.ToString() + " + " + c100.ToString() + " = " + Prince.Coin.ToString());
                return true;
             }
             int diff = hundreds - princeFreeLoad; // prince Free load greater than new coin load
             if (diff <= Prince.Food)
             {
-               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 6 100s--> Prince ++++>>> " + Prince.Coin.ToString() + " + " + c100.ToString() + " minus food=" + diff.ToString());
+               int miPrinceCoin = Prince.Coin;
                Prince.Coin += c100;
                Prince.Food -= diff;
+               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): return after 100s--> Prince++++>>>" + miPrinceCoin.ToString() + " + " + c100.ToString() + " = " + Prince.Coin.ToString() + " minus food=" + diff.ToString());
                return true;
             }
             c100 = (diff * 100);
-            Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 7 100s--> Prince ++++>>> " + Prince.Coin.ToString() + " + " + c100.ToString() + " minus all food");
             Prince.Food = 0;
+            int miPrinceCoin1 = Prince.Coin;
             Prince.Coin += c100; // prince removes all food and gets a portion of the remaining coins
+            Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 7 100s--> Prince++++>>>" + miPrinceCoin1.ToString() + " + " + c100.ToString() + " = " + Prince.Coin.ToString() + " minus all food");
             hundreds -= diff;
          }
          //--------------------------------- 
@@ -895,22 +916,25 @@ namespace BarbarianPrince
                int c100 = (hundreds * 100);
                if (hundreds <= freeLoad)
                {
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 8 100s--> mi=" + mi.Name + " ++++>>> " + mi.Coin.ToString() + " + " + c100.ToString());
+                  int miCoin = mi.Coin;
                   mi.Coin += c100;
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 8 100s--> mi=" + mi.Name + "++++>>>" + mi.Coin.ToString() + " + " + c100.ToString() + " = " + mi.Coin.ToString());
                   return true;
                }
                int diff = hundreds - freeLoad;
                if (diff <= mi.Food)
                {
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 9 100s--> mi=" + mi.Name + " ++++>>> " + mi.Coin.ToString() + " + " + c100.ToString() + " minus food=1");
+                  int miCoin = mi.Coin;
                   mi.Coin += c100;
                   mi.Food -= diff;
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 9 100s--> mi=" + mi.Name + "++++>>>" + miCoin.ToString() + " + " + c100.ToString() + " = " + mi.Coin.ToString() + " minus food=1");
                   return true;
                }
                c100 = (diff * 100);
-               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 10 100s--> mi=" + mi.Name + " ++++>>> " + mi.Coin.ToString() + " + " + c100.ToString() + " minus all food");
                mi.Food = 0;
+               int miCoin1 = mi.Coin;
                mi.Coin += c100; // mi removes all food and gets a portion of the remaining coins
+               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 10 100s--> mi=" + mi.Name + "++++>>>" + miCoin1.ToString() + " + " + c100.ToString() + " = " + mi.Coin.ToString() + " minus all food");
                hundreds -= diff;
             }
          }
@@ -923,7 +947,7 @@ namespace BarbarianPrince
                int diff = mi.Food - hundreds;
                if (hundreds < diff)
                {
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 11 100s--> mi=" + mi.Name + " ++++>>> " + mi.Coin.ToString() + " + " + c100.ToString() + " minus food=" + diff.ToString());
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 11 100s--> mi=" + mi.Name + "++++>>>" + mi.Coin.ToString() + " + " + c100.ToString() + " minus food=" + diff.ToString());
                   mi.Coin += (hundreds * 100);
                   mi.Food -= hundreds;
                   return true;
@@ -931,7 +955,7 @@ namespace BarbarianPrince
                else
                {
                   c100 = (mi.Food * 100);
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 12 100s--> mi=" + mi.Name + " ++++>>> " + mi.Coin.ToString() + " + " + c100.ToString() + " minus all food=" + mi.Food.ToString());
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 12 100s--> mi=" + mi.Name + "++++>>>" + mi.Coin.ToString() + " + " + c100.ToString() + " minus all food=" + mi.Food.ToString());
                   mi.Food = 0;
                   mi.Coin += c100; // mi removes all food and gets a portion of the remaining coins
                   hundreds -= mi.Food;
@@ -962,7 +986,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ADD_COIN_AUTO, "AddCoinsAuto(): coin=" + coin.ToString() +  " capturedCoins=" + capturedCoins.ToString());
             }
          }
-         if (false == AddCoins(capturedCoins))
+         if (false == AddCoins("AddCoinsAuto", capturedCoins))
          {
             Logger.Log(LogEnum.LE_ERROR, "AddCoinsAuto(): AddCoins()=" + capturedCoins.ToString());
             return false;
@@ -970,7 +994,7 @@ namespace BarbarianPrince
          CapturedWealthCodes = wealthCodes;
          return true;
       }
-      public void ReduceCoins(int coins)
+      public void ReduceCoins(string caller, int coins)
       {
          if (coins < 0)
          {
@@ -979,7 +1003,7 @@ namespace BarbarianPrince
          }
          if (0 == coins)
             return;
-         Logger.Log(LogEnum.LE_ADD_COIN, "ReduceCoins(): ------------------" + coins.ToString() + "--------------------------------------------");
+         Logger.Log(LogEnum.LE_REDUCE_COIN, "ReduceCoins(): " + caller + " ------------------" + coins.ToString() + "--------------------------------------------");
          IMapItems sortedMapItems = PartyMembers.SortOnCoin();
          foreach (IMapItem mi in sortedMapItems)  // now from party members to get to 100 increments
          {
@@ -990,13 +1014,28 @@ namespace BarbarianPrince
                int remainder = mi.Coin % 100;
                if (coins <= remainder)
                {
+                  int miCoin0 = mi.Coin;
                   mi.Coin -= coins;
+                  Logger.Log(LogEnum.LE_REDUCE_COIN, "ReduceCoins(): return reduce from rich " + mi.Name + " ++++>>> " + miCoin0.ToString() + " - " + coins.ToString() + " = " + mi.Coin.ToString());
                   if (mi.Coin < 0)
                      Logger.Log(LogEnum.LE_ERROR, "ReduceCoins(): e - invalid state (mi.Coin=" + mi.Coin.ToString() + ")<0 coins=" + coins.ToString());
+                  StringBuilder sb = new StringBuilder("ReduceCoins():");
+                  foreach (IMapItem mi11 in PartyMembers)
+                  {
+                     sb.Append("\n     mi.Name=");
+                     sb.Append(mi11.Name);
+                     sb.Append(" c=");
+                     sb.Append(mi11.Coin.ToString());
+                     sb.Append(" f=");
+                     sb.Append(mi11.Food.ToString());
+                  }
+                  Logger.Log(LogEnum.LE_REDUCE_COIN, sb.ToString());
                   return;
                }
                coins -= remainder;
+               int miCoin = mi.Coin;
                mi.Coin -= remainder;
+               Logger.Log(LogEnum.LE_REDUCE_COIN, "ReduceCoins(): reduce from rich " + mi.Name + " ++++>>> " + miCoin.ToString() + " - " + remainder.ToString() + " = " + mi.Coin.ToString() + " coins=" + coins.ToString());
                if (mi.Coin < 0)
                   Logger.Log(LogEnum.LE_ERROR, "ReduceCoins(): f - invalid state (mi.Coin=" + mi.Coin.ToString() + ")<0 coins=" + remainder.ToString());
             }
@@ -1015,12 +1054,27 @@ namespace BarbarianPrince
                      remainder2 = 100;
                   if (coins <= remainder2)
                   {
+                     int miCoin = mi.Coin;
                      mi.Coin -= coins;
+                     Logger.Log(LogEnum.LE_REDUCE_COIN, "ReduceCoins(): reduce from rich " + mi.Name + " ---->>> " + miCoin.ToString() + " - " + coins.ToString() + " = " + mi.Coin.ToString());
                      if (mi.Coin < 0)
                         Logger.Log(LogEnum.LE_ERROR, "ReduceCoins(): a - invalid state (mi.Coin=" + mi.Coin.ToString() + ")<0 coins=" + coins.ToString());
+                     StringBuilder sb = new StringBuilder("ReduceCoins():");
+                     foreach (IMapItem mi11 in PartyMembers)
+                     {
+                        sb.Append("\n     mi.Name=");
+                        sb.Append(mi11.Name);
+                        sb.Append(" c=");
+                        sb.Append(mi11.Coin.ToString());
+                        sb.Append(" f=");
+                        sb.Append(mi11.Food.ToString());
+                     }
+                     Logger.Log(LogEnum.LE_REDUCE_COIN, sb.ToString());
                      return;
                   }
+                  int miCoin3 = mi.Coin;
                   mi.Coin -= remainder2;
+                  Logger.Log(LogEnum.LE_REDUCE_COIN, "ReduceCoins(): reduce from rich " + mi.Name + " ---->>> " + miCoin3.ToString() + " - " + remainder2.ToString() + " = " + mi.Coin.ToString() + " coins=" + coins.ToString());
                   if (mi.Coin < 0)
                      Logger.Log(LogEnum.LE_ERROR, "ReduceCoins(): b - invalid state (mi.Coin=" + mi.Coin.ToString() + ")<0 coins=" + remainder2.ToString());
                   coins -= remainder2;
@@ -1035,12 +1089,27 @@ namespace BarbarianPrince
             int remainder1 = myPrince.Coin % 100; // now remove from prince
             if (coins <= remainder1)
             {
+               int miCoinPrince = myPrince.Coin;
                myPrince.Coin -= coins;
+               Logger.Log(LogEnum.LE_REDUCE_COIN, "ReduceCoins(): reduce mi=Prince ***>>> " + miCoinPrince.ToString() + " - " + coins.ToString() + " = " + myPrince.Coin.ToString() );
                if (myPrince.Coin < 0)
                   Logger.Log(LogEnum.LE_ERROR, "ReduceCoins(): c - invalid state (myPrince.Coin=" + myPrince.Coin.ToString() + ")<0 coins=" + coins.ToString());
+               StringBuilder sb = new StringBuilder("ReduceCoins():");
+               foreach (IMapItem mi11 in PartyMembers)
+               {
+                  sb.Append("\n     mi.Name=");
+                  sb.Append(mi11.Name);
+                  sb.Append(" c=");
+                  sb.Append(mi11.Coin.ToString());
+                  sb.Append(" f=");
+                  sb.Append(mi11.Food.ToString());
+               }
+               Logger.Log(LogEnum.LE_REDUCE_COIN, sb.ToString());
                return;
             }
+            int miCoinPrince1 = myPrince.Coin;
             myPrince.Coin -= remainder1;
+            Logger.Log(LogEnum.LE_ADD_COIN, "ReduceCoins(): reduce mi=Prince ***>>> " + miCoinPrince1.ToString() + " - " + remainder1.ToString() + " = " + myPrince.Coin.ToString() + " coins=" + coins.ToString());
             if (myPrince.Coin < 0)
                Logger.Log(LogEnum.LE_ERROR, "ReduceCoins(): d - invalid state (myPrince.Coin=" + myPrince.Coin.ToString() + ")<0 coins=" + coins.ToString());
             coins -= remainder1;
@@ -1053,11 +1122,28 @@ namespace BarbarianPrince
             {
                if (0 < mi.Coin)
                {
+                  int miCoinL = mi.Coin;
                   --mi.Coin;
+                  Logger.Log(LogEnum.LE_REDUCE_COIN, "ReduceCoins(): mi=" + mi.Name + ">>>>>> " + miCoinL.ToString() + " - 1 = " + myPrince.Coin.ToString() + " coins=" + coins.ToString());
                   --coins;
                }
                if (coins <= 0 )
+               {
+                  if (count < 0)
+                     Logger.Log(LogEnum.LE_ERROR, "ReduceCoins(): 1 - invalid state count<0 coins=" + coins.ToString());
+                  StringBuilder sb = new StringBuilder("ReduceCoins():");
+                  foreach (IMapItem mi11 in PartyMembers)
+                  {
+                     sb.Append("\n     mi.Name=");
+                     sb.Append(mi11.Name);
+                     sb.Append(" c=");
+                     sb.Append(mi11.Coin.ToString());
+                     sb.Append(" f=");
+                     sb.Append(mi11.Food.ToString());
+                  }
+                  Logger.Log(LogEnum.LE_REDUCE_COIN, sb.ToString());
                   return;
+               }
             }
          }
          if (count < 0)
@@ -1887,7 +1973,7 @@ namespace BarbarianPrince
                   }
                   Logger.Log(LogEnum.LE_ADD_COIN, "ProcessIncapacitedPartyMembers(): Wealth Code Dead Companion=" + coin.ToString());
                   mi.Coin += coin;
-                  if ( false == AddCoins(mi.Coin, false))
+                  if ( false == AddCoins("ProcessIncapacitedPartyMembers-0", mi.Coin, false))
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ProcessIncapacitedPartyMembers(): AddCoins() returned false");
                      return;
@@ -1913,7 +1999,7 @@ namespace BarbarianPrince
                      Logger.Log(LogEnum.LE_ERROR, "ProcessIncapacitedPartyMembers(): AddFoods() returned false");
                      return;
                   }
-                  if (false == AddCoins(mi.Coin, false))
+                  if (false == AddCoins("ProcessIncapacitedPartyMembers-1",mi.Coin, false))
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ProcessIncapacitedPartyMembers(): AddCoins() returned false");
                      return;
@@ -2008,7 +2094,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "RemoveVictimInParty(): AddFoods() returned false");
             return false;
          }
-         if (false == AddCoins(victim.Coin, false))
+         if (false == AddCoins("RemoveVictimInParty", victim.Coin, false))
          {
             Logger.Log(LogEnum.LE_ERROR, "RemoveVictimInParty(): AddCoins() returned false");
             return false;
@@ -2202,7 +2288,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "RemoveAbandonerInParty(): AddFoods() returned false");
             return;
          }
-         if (false == AddCoins(mi.Coin, false))
+         if (false == AddCoins("RemoveAbandonerInParty", mi.Coin, false))
          {
             Logger.Log(LogEnum.LE_ERROR, "RemoveAbandonerInParty(): AddCoins() returned false");
             return;

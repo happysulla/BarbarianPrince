@@ -212,8 +212,8 @@ namespace BarbarianPrince
       bool AddFoods(int foodStore,bool isHunt= false); // if is hunt, all food is added. In Transport Manager, it is winnowed down to what can be carried.
       void ReduceFoods(int foodStore);
       int GetCoins();
-      bool AddCoins(int coins, bool isLooterShareIncluded = true);
-      void ReduceCoins(int coins);
+      bool AddCoins(string caller, int coins, bool isLooterShareIncluded = true);
+      void ReduceCoins(string caller, int coins);
       bool AddCoinsAuto();
       int GetNonSpecialMountCount(bool isHorseOnly = false);
       bool AddNewMountToParty(MountEnum mount = MountEnum.Horse);

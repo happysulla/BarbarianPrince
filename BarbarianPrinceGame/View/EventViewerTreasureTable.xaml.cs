@@ -253,7 +253,7 @@ namespace BarbarianPrince
          if (TreasureTableEnum.TT_END == myState)
          {
             //------------------------------------------
-            myGameInstance.AddCoins(myCoin);
+            myGameInstance.AddCoins("EventViewerTreasureTable", myCoin);
             if (SpecialEnum.None != myItem)
             {
                if (SpecialEnum.PegasusMount == myItem)

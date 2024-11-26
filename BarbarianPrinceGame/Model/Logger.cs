@@ -40,6 +40,7 @@ namespace BarbarianPrince
       LE_FREE_LOAD,
       LE_ADD_FOOD,
       LE_ADD_COIN,
+      LE_REDUCE_COIN,
       LE_ADD_COIN_AUTO,
       LE_MANAGE_CACHE,
       LE_LODGING_COST,
@@ -128,6 +129,7 @@ namespace BarbarianPrince
          Logger.SetOn(LogEnum.LE_FREE_LOAD);
          //Logger.SetOn(LogEnum.LE_ADD_FOOD);
          Logger.SetOn(LogEnum.LE_ADD_COIN);
+         Logger.SetOn(LogEnum.LE_REDUCE_COIN);
          //Logger.SetOn(LogEnum.LE_MANAGE_CACHE);
          //Logger.SetOn(LogEnum.LE_ADD_COIN_AUTO);
          //Logger.SetOn(LogEnum.LE_LODGING_COST);

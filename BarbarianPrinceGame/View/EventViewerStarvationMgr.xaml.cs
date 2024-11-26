@@ -374,7 +374,7 @@ namespace BarbarianPrince
             myGameInstance.ReduceFoods(diffFood);
             //---------------------------------------------
             int diffCoin = myCoinOriginal - myCoinCurrent;
-            myGameInstance.ReduceCoins(diffCoin);
+            myGameInstance.ReduceCoins("EventViewerStarvationMgr.UpdateEndState", diffCoin);
             //---------------------------------------------
             for (int i = 0; i < myMaxRowCount; ++i) // check for run aways
             {

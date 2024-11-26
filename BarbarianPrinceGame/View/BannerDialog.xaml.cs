@@ -30,6 +30,7 @@ namespace BarbarianPrince
       //------------------------------------
       private bool myIsDragging = false;
       private System.Windows.Point myOffsetInBannerWindow;
+#if UT3
       private System.Drawing.Point myPreviousScreenPoint;
       private Screen myPreviousScreen;
       private int myPreviousScreenIndex;
@@ -37,6 +38,7 @@ namespace BarbarianPrince
       private double myPreviousScaleRatio;
       private double myPreviousScreenRatio;
       private System.Windows.Media.Matrix myPreviousMatrix;
+#endif
       //-------------------------------------------------------------------------------------
       public BannerDialog(string key, StringReader sr)
       {

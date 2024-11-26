@@ -398,12 +398,12 @@ namespace BarbarianPrince
             if (myCoinCurrent < myCoinOriginal)
             {
                int diffCoin = myCoinOriginal - myCoinCurrent;
-               myGameInstance.ReduceCoins(diffCoin);
+               myGameInstance.ReduceCoins("EventViewerLodgingMgr.UpdateEndState", diffCoin);
             }
             else
             {
                int diffCoin = myCoinCurrent - myCoinOriginal;
-               myGameInstance.AddCoins(diffCoin);
+               myGameInstance.AddCoins("EventViewerLodgingMgr", diffCoin);
             }
             //--------------------------------------------
             myGameInstance.AddFoods(myFoodPurchasedAtFarm);

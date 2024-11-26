@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -152,7 +153,14 @@ namespace BarbarianPrince
                   break;
             }
             if( null == title )
+            {
                title = myRulesMgr.GetEventTitle(eventName);
+               if( null == title )
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "EllipseDisplayDialog(): GetEventTitle() returned null for key=" + eventName);
+                  title = "unknown";
+               }
+            }
             myTextBlock.Inlines.Add(new Run(eventName + ": " + title));
             myTextBlock.Inlines.Add(new LineBreak());
          }

@@ -69,7 +69,7 @@ namespace BarbarianPrince
          //----------------------------------------------
          gi.RaftStatePrevUndo = gi.RaftState;
          if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
-            gi.ReduceCoins(1); // pay one to raftsmen
+            gi.ReduceCoins("TravelAction(pay rafsman)", 1); // pay one to raftsmen
          else                  // e122 - if travel some other way other than raft
             gi.RaftState = RaftEnum.RE_NO_RAFT; // TravelAction() with no money
                                                 //----------------------------------------------
@@ -544,7 +544,7 @@ namespace BarbarianPrince
             if (true == optionSteadyIncome.IsEnabled)
             {
                int dailyCoin = 3 + Utilities.RandomGenerator.Next(3);
-               gi.AddCoins(dailyCoin);
+               gi.AddCoins("Wakeup", dailyCoin);
             }
             gi.DieRollAction = GameAction.DieRollActionNone;
             if (499 < gi.GetCoins())
@@ -1325,6 +1325,14 @@ namespace BarbarianPrince
       }
       protected bool LoadGame(ref IGameInstance gi, ref GameAction action)
       {
+         foreach( IMapItem mi in gi.PartyMembers ) // If loading game with bad content, fix it
+         {
+            if (mi.Coin < 0)
+               mi.Coin = 0;
+            if (mi.Food < 0)
+               mi.Food = 0;
+         }
+         //---------------------------------------------------------
          gi.Stacks.Clear();
          if ((true == gi.IsJailed) || (true == gi.IsDungeon) || (true == gi.IsEnslaved))
          {
@@ -1882,6 +1890,8 @@ namespace BarbarianPrince
                   member.IsRiding = true;
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
+                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddStartingPartyMemberOption(): mi=" + member.Name + " food=" + member.Food);
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
                   member.IsFickle = true;
                   member.AddNewMount(); // riding
                   gi.AddCompanion(member);
@@ -1902,6 +1912,8 @@ namespace BarbarianPrince
                   IMapItem member = CreateCharacter(gi, "Elf");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
+                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddStartingPartyMemberOption(): mi=" + member.Name + " food=" + member.Food);
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
                   member.AddNewMount(MountEnum.Horse);
                   gi.AddCompanion(member);
                }
@@ -1936,6 +1948,8 @@ namespace BarbarianPrince
                   rider.Mounts.Insert(0, griffon);
                   rider.Food = Utilities.RandomGenerator.Next(5);
                   rider.Coin = Utilities.RandomGenerator.Next(20);
+                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddStartingPartyMemberOption(): mi=" + rider.Name + " food=" + rider.Food);
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + rider.Name + " coin=" + rider.Coin);
                   rider.IsRiding = true;
                   rider.IsFlying = true;
                   gi.AddCompanion(rider);
@@ -1953,6 +1967,8 @@ namespace BarbarianPrince
                   rider.Mounts.Insert(0, harpy);
                   rider.Food = Utilities.RandomGenerator.Next(5);
                   rider.Coin = Utilities.RandomGenerator.Next(20);
+                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddStartingPartyMemberOption(): mi=" + rider.Name + " food=" + rider.Food);
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + rider.Name + " coin=" + rider.Coin);
                   rider.IsRiding = true;
                   rider.IsFlying = true;
                   gi.AddCompanion(rider);
@@ -1963,6 +1979,8 @@ namespace BarbarianPrince
                   IMapItem member = CreateCharacter(gi, "Magician");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
+                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddStartingPartyMemberOption(): mi=" + member.Name + " food=" + member.Food);
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
                   gi.AddCompanion(member);
                }
                break;
@@ -1975,6 +1993,8 @@ namespace BarbarianPrince
                   member.IsGuide = true;
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
+                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddStartingPartyMemberOption(): mi=" + member.Name + " food=" + member.Food);
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
                   foreach (string adj in gi.Prince.TerritoryStarting.Adjacents)
                   {
                      ITerritory t = Territory.theTerritories.Find(adj);
@@ -1988,6 +2008,8 @@ namespace BarbarianPrince
                   IMapItem member = CreateCharacter(gi, "Merchant");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
                   gi.AddCompanion(member);
                   gi.IsMerchantWithParty = true;
                }
@@ -1997,6 +2019,8 @@ namespace BarbarianPrince
                   IMapItem member = CreateCharacter(gi, "Minstrel");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
                   gi.AddCompanion(member);
                   gi.IsMinstrelPlaying = true; // e049 - minstrel
                }
@@ -2006,6 +2030,8 @@ namespace BarbarianPrince
                   IMapItem member = CreateCharacter(gi, "Monk");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
+                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddStartingPartyMemberOption(): mi=" + member.Name + " food=" + member.Food);
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
                   gi.AddCompanion(member);
                }
                break;
@@ -2014,6 +2040,8 @@ namespace BarbarianPrince
                   IMapItem member = CreateCharacter(gi, "PorterSlave");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
+                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddStartingPartyMemberOption(): mi=" + member.Name + " food=" + member.Food);
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
                   gi.AddCompanion(member);
                }
                break;
@@ -2022,6 +2050,8 @@ namespace BarbarianPrince
                   IMapItem member = CreateCharacter(gi, "Priest");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
+                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddStartingPartyMemberOption(): mi=" + member.Name + " food=" + member.Food);
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
                   gi.AddCompanion(member);
                }
                break;
@@ -2030,6 +2060,8 @@ namespace BarbarianPrince
                   IMapItem trueLove = CreateCharacter(gi, "TrueLovePriestDaughter");
                   trueLove.Food = Utilities.RandomGenerator.Next(5);
                   trueLove.Coin = Utilities.RandomGenerator.Next(20);
+                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddStartingPartyMemberOption(): mi=" + trueLove.Name + " food=" + trueLove.Food);
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + trueLove.Name + " coin=" + trueLove.Coin);
                   gi.AddCompanion(trueLove);
                }
                break;
@@ -2038,6 +2070,8 @@ namespace BarbarianPrince
                   IMapItem member = CreateCharacter(gi, "Wizard");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
                   gi.AddCompanion(member);
                }
                break;
@@ -2729,7 +2763,7 @@ namespace BarbarianPrince
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = GamePhase.SeekOffering;
                gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_OFFERING));
-               gi.ReduceCoins(1); // must spend one gold to make offering
+               gi.ReduceCoins("SeekOffering", 1); // must spend one gold to make offering
                gi.EventStart = gi.EventDisplayed = gi.EventActive = "e212";
                if (0 < gi.ChagaDrugCount)
                   gi.EventDisplayed = gi.EventActive = "e143a";
@@ -4073,7 +4107,7 @@ namespace BarbarianPrince
                break;
             case GameAction.SeekNewsWithPay:
                gi.IsSeekNewModifier = true;
-               gi.ReduceCoins(5);
+               gi.ReduceCoins("SeekNewsWithPay", 5);
                gi.EventStart = gi.EventDisplayed = gi.EventActive = "e209a";
                gi.SunriseChoice = GamePhase.SeekNews;
                gi.GamePhase = GamePhase.Encounter;
@@ -4713,7 +4747,7 @@ namespace BarbarianPrince
                   }
                   break;
                case GameAction.EncounterBribe:
-                  gi.ReduceCoins(gi.Bribe);
+                  gi.ReduceCoins("EncounterBribe", gi.Bribe);
                   if (false == EncounterEnd(gi, ref action))
                   {
                      returnStatus = "EncounterEnd(EncounterBribe) returned false";
@@ -4949,7 +4983,7 @@ namespace BarbarianPrince
                   {
                      if ("e011a" == gi.EventActive)
                      {
-                        gi.AddCoins(1, false);
+                        gi.AddCoins("GameStateEncounter(E012FoodChange)-e011a", 1, false);
                         int food = 4;
                         if (true == gi.IsMerchantWithParty)
                            food = (int)Math.Ceiling((double)food * 2);
@@ -4958,7 +4992,7 @@ namespace BarbarianPrince
                      }
                      else if ("e012a" == gi.EventActive)
                      {
-                        gi.AddCoins(1, false);
+                        gi.AddCoins("GameStateEncounter(E012FoodChange)-e012a", 1, false);
                         int food = 2;
                         if (true == gi.IsMerchantWithParty)
                            food = (int)Math.Ceiling((double)food * 2);
@@ -4967,7 +5001,7 @@ namespace BarbarianPrince
                      }
                      else if (("e015b" == gi.EventActive) || ("e128c" == gi.EventActive))
                      {
-                        gi.AddCoins(1, false);
+                        gi.AddCoins("GameStateEncounter(E012FoodChange)-e015b", 1, false);
                         int food = 2;
                         if (true == gi.IsMerchantWithParty)
                            food = (int)Math.Ceiling((double)food * 2);
@@ -4984,7 +5018,7 @@ namespace BarbarianPrince
                   {
                      if ("e011a" == gi.EventActive)
                      {
-                        gi.ReduceCoins(1);
+                        gi.ReduceCoins("GameStateEncounter(e011a)", 1);
                         int food = 4;
                         if (true == gi.IsMerchantWithParty)
                            food = (int)Math.Ceiling((double)food * 2);
@@ -4997,7 +5031,7 @@ namespace BarbarianPrince
                      }
                      else if ("e012a" == gi.EventActive)
                      {
-                        gi.ReduceCoins(1);
+                        gi.ReduceCoins("GameStateEncounter(e012a)", 1);
                         int food = 2;
                         if (true == gi.IsMerchantWithParty)
                            food = (int)Math.Ceiling((double)food * 2);
@@ -5010,7 +5044,7 @@ namespace BarbarianPrince
                      }
                      else if (("e015b" == gi.EventActive) || ("e128c" == gi.EventActive))
                      {
-                        gi.ReduceCoins(1);
+                        gi.ReduceCoins("GameStateEncounter(e015b)", 1);
                         int food = 2;
                         if (true == gi.IsMerchantWithParty)
                            food = (int)Math.Ceiling((double)food * 2);
@@ -5047,21 +5081,21 @@ namespace BarbarianPrince
                         int cost = 6;
                         if (true == gi.IsMerchantWithParty)
                            cost = (int)Math.Ceiling((double)cost * 0.5);
-                        gi.AddCoins(cost, false);
+                        gi.AddCoins("GameStateEncounter(E015MountChange)-e015b", cost, false);
                      }
                      else if (("e129c" == gi.EventActive) || ("e210g" == gi.EventActive))
                      {
                         int cost = 7;
                         if (true == gi.IsMerchantWithParty)
                            cost = (int)Math.Ceiling((double)cost * 0.5);
-                        gi.AddCoins(cost, false);
+                        gi.AddCoins("GameStateEncounter(E015MountChange)-e129c", cost, false);
                      }
                      else if ("e210d" == gi.EventActive)
                      {
                         int cost = 10;
                         if (true == gi.IsMerchantWithParty)
                            cost = (int)Math.Ceiling((double)cost * 0.5);
-                        gi.AddCoins(cost, false);
+                        gi.AddCoins("GameStateEncounter(E015MountChange)-e210d", cost, false);
                      }
                      else
                      {
@@ -5082,21 +5116,21 @@ namespace BarbarianPrince
                         int cost = 6;
                         if (true == gi.IsMerchantWithParty)
                            cost = (int)Math.Ceiling((double)cost * 0.5);
-                        gi.ReduceCoins(cost);
+                        gi.ReduceCoins("GameStateEncounter(E015MountChange-e015b)", cost);
                      }
                      else if (("e129c" == gi.EventActive) || ("e210g" == gi.EventActive))
                      {
                         int cost = 7;
                         if (true == gi.IsMerchantWithParty)
                            cost = (int)Math.Ceiling((double)cost * 0.5);
-                        gi.ReduceCoins(cost);
+                        gi.ReduceCoins("GameStateEncounter(E015MountChange-e129c)", cost);
                      }
                      else if ("e210d" == gi.EventActive)
                      {
                         int cost = 10;
                         if (true == gi.IsMerchantWithParty)
                            cost = (int)Math.Ceiling((double)cost * 0.5);
-                        gi.ReduceCoins(cost);
+                        gi.ReduceCoins("GameStateEncounter(E015MountChange-e210d)", cost);
                      }
                      else
                      {
@@ -5223,7 +5257,7 @@ namespace BarbarianPrince
                      action = GameAction.E156MayorTerritorySelection;
                      gi.EventDisplayed = gi.EventActive = "e156g";
                      gi.ForbiddenAudiences.AddLetterConstraint(t156b);
-                     if (false == gi.AddCoins(100))
+                     if (false == gi.AddCoins("PerformAction(E042MayorAudience)", 100))
                      {
                         returnStatus = "EncounterRoll(): AddCoins()=false ae=" + gi.EventActive + " dr=" + dieRoll.ToString();
                         Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
@@ -5332,14 +5366,14 @@ namespace BarbarianPrince
                            ++randomWealthRoll;
                            switch (randomWealthRoll) // priest gives half his wealth code = 10
                            {
-                              case 1: gi.AddCoins(3, false); break;
-                              case 2: gi.AddCoins(4, false); break;
-                              case 3: gi.AddCoins(5, false); break;
-                              case 4: gi.AddCoins(6, false); break;
-                              case 5: gi.AddCoins(6, false); break;
-                              case 6: gi.AddCoins(7, false); break;
+                              case 1: gi.AddCoins("GameStateEncounter(E048FugitiveAlly)-1", 3, false); break;
+                              case 2: gi.AddCoins("GameStateEncounter(E048FugitiveAlly)-2", 4, false); break;
+                              case 3: gi.AddCoins("GameStateEncounter(E048FugitiveAlly)-3", 5, false); break;
+                              case 4: gi.AddCoins("GameStateEncounter(E048FugitiveAlly)-4", 6, false); break;
+                              case 5: gi.AddCoins("GameStateEncounter(E048FugitiveAlly)-5", 6, false); break;
+                              case 6: gi.AddCoins("GameStateEncounter(E048FugitiveAlly)-6", 7, false); break;
                               default:
-                                 returnStatus = "EncounterRoll(): reached default randomWealthRoll=" + randomWealthRoll.ToString() + " for ae=" + gi.EventActive;
+                                 returnStatus = "E048FugitiveAlly(): reached default randomWealthRoll=" + randomWealthRoll.ToString() + " for ae=" + gi.EventActive;
                                  Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                                  break;
                            }
@@ -5399,7 +5433,7 @@ namespace BarbarianPrince
                   }
                   break;
                case GameAction.E049MinstrelStart:
-                  gi.AddCoins(gi.FickleCoin, false);  // do not need to pay coin if you play a song
+                  gi.AddCoins("GameStateEncounter(E049MinstrelStart)", gi.FickleCoin, false);  // do not need to pay coin if you play a song
                   gi.FickleCoin = 0;
                   if (false == gi.IsMinstrelPlaying)
                      gi.MinstrelStart();
@@ -5451,7 +5485,7 @@ namespace BarbarianPrince
                   }
                   else
                   {
-                     gi.ReduceCoins(10);
+                     gi.ReduceCoins("E060JailOvernight", 10);
                      if (1 == gi.PartyMembers.Count) // if only yourself, encounter ends with you let out of jail paying your fine
                      {
                         action = GameAction.UpdateEventViewerActive;
@@ -6254,7 +6288,7 @@ namespace BarbarianPrince
                   }
                   break;
                case GameAction.E122RaftsmenCross:
-                  gi.ReduceCoins(1);
+                  gi.ReduceCoins("GameStateEncounter(E122RaftsmenCross)", 1);
                   if (false == EncounterEnd(gi, ref action))
                   {
                      returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
@@ -6381,7 +6415,7 @@ namespace BarbarianPrince
                   int pegasusCost = 50;
                   if (true == gi.IsMerchantWithParty)
                      pegasusCost = (int)Math.Ceiling((double)pegasusCost * 0.5);
-                  gi.ReduceCoins(pegasusCost);
+                  gi.ReduceCoins("E128aBuyPegasus", pegasusCost);
                   gi.EventDisplayed = gi.EventActive = "e188";
                   break;
                case GameAction.E128bPotionCureChange:
@@ -6390,7 +6424,7 @@ namespace BarbarianPrince
                      costCurePotion = (int)Math.Ceiling((double)costCurePotion * 0.5);
                   if (dieRoll < 0)
                   {
-                     gi.AddCoins(costCurePotion, false);
+                     gi.AddCoins("GameStateEncounter(E128bPotionCureChange)", costCurePotion, false);
                      if (false == gi.RemoveSpecialItem(SpecialEnum.CurePoisonVial))
                      {
                         returnStatus = "RemoveSpecialItem() returned false a=" + action.ToString();
@@ -6400,7 +6434,7 @@ namespace BarbarianPrince
                   }
                   else
                   {
-                     gi.ReduceCoins(costCurePotion);
+                     gi.ReduceCoins("E128bPotionCureChange", costCurePotion);
                      gi.AddSpecialItem(SpecialEnum.CurePoisonVial);
                      ++gi.PurchasedPotionCure;
                   }
@@ -6417,7 +6451,7 @@ namespace BarbarianPrince
                      costHealingPotion = (int)Math.Ceiling((double)costHealingPotion * 0.5);
                   if (dieRoll < 0)
                   {
-                     gi.AddCoins(costHealingPotion, false);
+                     gi.AddCoins("GameStateEncounter(E128ePotionHealChange)", costHealingPotion, false);
                      if (false == gi.RemoveSpecialItem(SpecialEnum.HealingPoition))
                      {
                         returnStatus = "RemoveSpecialItem() returned false a=" + action.ToString();
@@ -6427,7 +6461,7 @@ namespace BarbarianPrince
                   }
                   else
                   {
-                     gi.ReduceCoins(costHealingPotion);
+                     gi.ReduceCoins("E128ePotionHealChange", costHealingPotion);
                      gi.AddSpecialItem(SpecialEnum.HealingPoition);
                      ++gi.PurchasedPotionHeal;
                   }
@@ -6437,7 +6471,7 @@ namespace BarbarianPrince
                   if (true == gi.IsMerchantWithParty)
                      costAmulet = (int)Math.Ceiling((double)costAmulet * 0.5);
                   gi.AddSpecialItem(SpecialEnum.AntiPoisonAmulet);
-                  gi.ReduceCoins(costAmulet);
+                  gi.ReduceCoins("E129aBuyAmulet", costAmulet);
                   gi.EventDisplayed = gi.EventActive = "e187";
                   break;
                case GameAction.E130JailedOnTravels:
@@ -6484,7 +6518,7 @@ namespace BarbarianPrince
                   int costBribeGard = 10;
                   if (true == gi.IsMerchantWithParty)
                      costBribeGard = (int)Math.Ceiling((double)costBribeGard * 0.5);
-                  gi.ReduceCoins(costBribeGard);
+                  gi.ReduceCoins("E130BribeGuard", costBribeGard);
                   gi.EventDisplayed = gi.EventActive = "e130e";
                   break;
                case GameAction.E130RobGuard:
@@ -6582,7 +6616,7 @@ namespace BarbarianPrince
                   gi.DieRollAction = GameAction.EncounterRoll;
                   break;
                case GameAction.E136FallingCoins:
-                  if (false == gi.AddCoins(500))
+                  if (false == gi.AddCoins("GameStateEncounter(E136FallingCoins)", 500))
                   {
                      returnStatus = "AddCoins() returned false for a=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
@@ -6712,7 +6746,7 @@ namespace BarbarianPrince
                   }
                   break;
                case GameAction.E148SeneschalPay:
-                  gi.ReduceCoins(gi.Bribe);
+                  gi.ReduceCoins("E148SeneschalPay", gi.Bribe);
                   gi.Bribe = 0;
                   gi.SeneschalRollModifier = 10;
                   gi.DieResults["e148"][0] = Utilities.NO_RESULT;
@@ -6744,7 +6778,7 @@ namespace BarbarianPrince
                   }
                   break;
                case GameAction.E153MasterOfHouseholdPay:
-                  gi.ReduceCoins(10);
+                  gi.ReduceCoins("E153MasterOfHouseholdPay", 10);
                   if (false == EncounterEnd(gi, ref action))
                   {
                      returnStatus = "EncounterEnd() returned false for a=" + action.ToString();
@@ -6852,7 +6886,7 @@ namespace BarbarianPrince
                         break;
                      case 5:                                                                             // letter of recommendation nearest castle
                         gi.EventDisplayed = gi.EventActive = "e157";
-                        if (false == gi.AddCoins(50))
+                        if (false == gi.AddCoins("GameStateEncounter(E156MayorAudienceApplyResults)", 50))
                         {
                            returnStatus = "gi.AddCoins() returned false for action=" + action.ToString();
                            Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
@@ -6966,7 +7000,7 @@ namespace BarbarianPrince
                      case 6:
                         if (true == gi.IsInTemple(t155))
                            gi.ForbiddenAudiences.AddTimeConstraint(t155, Utilities.FOREVER);
-                        if (false == gi.AddCoins(200))
+                        if (false == gi.AddCoins("GameStateEncounter(E155HighPriestAudienceApplyResults)", 200))
                         {
                            returnStatus = "gi.AddCoins() returned false for action=" + action.ToString();
                            Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
@@ -7000,7 +7034,7 @@ namespace BarbarianPrince
                   }
                   break;
                case GameAction.E158HostileGuardPay:
-                  gi.ReduceCoins(20);
+                  gi.ReduceCoins("E158HostileGuardPay", 20);
                   if (false == ResetDieResultsForAudience(gi))
                   {
                      returnStatus = "ResetDieResultsForAudience() returned false ae=" + action.ToString();
@@ -7152,7 +7186,7 @@ namespace BarbarianPrince
                         }
                         break;
                      case 4:                                                                                                          // interested
-                        if (false == gi.AddCoins(100))
+                        if (false == gi.AddCoins("PerformAction(E161CountAudienceApplyResults)", 100))
                         {
                            returnStatus = "AddCoins() returned false for action=" + action.ToString();
                            Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
@@ -7176,7 +7210,7 @@ namespace BarbarianPrince
                                  Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                               }
                            }
-                           if (false == gi.AddCoins(500))
+                           if (false == gi.AddCoins("GameStateEncounter(E161CountAudienceApplyResults)", 500))
                            {
                               returnStatus = "AddCoins() returned false for action=" + action.ToString();
                               Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
@@ -7225,7 +7259,7 @@ namespace BarbarianPrince
                         if (porterCost < 0)
                            porterCost = 0;
                      }
-                     gi.AddCoins(porterCost, false);
+                     gi.AddCoins("RemoveVictimInParty", porterCost, false);
                      --gi.PurchasedSlavePorter;
                   }
                   else
@@ -7237,7 +7271,7 @@ namespace BarbarianPrince
                         else
                            porterCost -= 2;
                      }
-                     gi.ReduceCoins(porterCost);
+                     gi.ReduceCoins("E163SlavePorterChange", porterCost);
                      ++gi.PurchasedSlavePorter;
                   }
                   break;
@@ -7256,7 +7290,7 @@ namespace BarbarianPrince
                         if (girlCost < 0)
                            girlCost = 0;
                      }
-                     gi.AddCoins(girlCost, false);
+                     gi.AddCoins("GameStateEncounter(E128ePotionHealChange)", girlCost, false);
                      --gi.PurchasedSlaveGirl;
                   }
                   else
@@ -7268,7 +7302,7 @@ namespace BarbarianPrince
                         else
                            girlCost -= 2;
                      }
-                     gi.ReduceCoins(girlCost);
+                     gi.ReduceCoins("E163SlaveGirlChange", girlCost);
                      ++gi.PurchasedSlaveGirl;
                   }
                   break;
@@ -7285,12 +7319,12 @@ namespace BarbarianPrince
                   }
                   if (dieRoll < 0)
                   {
-                     gi.AddCoins(warriorCost, false);
+                     gi.AddCoins("GameStateEncounter(E163SlaveWarriorChange)", warriorCost, false);
                      --gi.PurchasedSlaveWarrior;
                   }
                   else
                   {
-                     gi.ReduceCoins(warriorCost);
+                     gi.ReduceCoins("GameStateEncounter(E163SlaveWarriorChange)", warriorCost);
                      ++gi.PurchasedSlaveWarrior;
                   }
                   break;
@@ -7393,7 +7427,7 @@ namespace BarbarianPrince
                case GameAction.E209ThievesGuiildNoPay:
                   if (false == gi.ForbiddenHexes.Contains(princeTerritory)) // cannot return to this hex
                      gi.ForbiddenHexes.Add(princeTerritory);
-                  if (false == gi.AddCoins(20))
+                  if (false == gi.AddCoins("GameStateEncounter(E209ThievesGuiildNoPay)", 20))
                   {
                      returnStatus = "gi.AddCoins() returned false for action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
@@ -7754,7 +7788,7 @@ namespace BarbarianPrince
                case GameAction.E212TempleTenGold:
                   gi.EventDisplayed = gi.EventActive = "e212";
                   gi.IsOfferingModifier = true;
-                  gi.ReduceCoins(10);
+                  gi.ReduceCoins("E212TempleTenGold", 10);
                   break;
                case GameAction.E212TempleRequestClues:
                   gi.EventDisplayed = gi.EventActive = "e212l";
@@ -7771,7 +7805,7 @@ namespace BarbarianPrince
                case GameAction.E228ShowTrueLove:
                   break;
                case GameAction.E331DenyFickle:
-                  gi.AddCoins(gi.FickleCoin, false);  // Return the fickle share to the party
+                  gi.AddCoins("EncounterEnd(E331DenyFickle)", gi.FickleCoin, false);  // Return the fickle share to the party
                   gi.FickleCoin = 0;
                   IMapItems fickleMembers = new MapItems();
                   foreach (IMapItem mi in gi.PartyMembers)
@@ -7792,7 +7826,7 @@ namespace BarbarianPrince
                   }
                   else
                   {
-                     gi.ReduceCoins(gi.Bribe);
+                     gi.ReduceCoins("E331PayFickle", gi.Bribe);
                      foreach (IMapItem fickle in gi.EncounteredMembers) // add encountered members to party - reduce coin by bribe amount
                      {
                         fickle.IsFickle = true;
@@ -7813,7 +7847,7 @@ namespace BarbarianPrince
                   }
                   else
                   {
-                     gi.ReduceCoins(gi.Bribe);
+                     gi.ReduceCoins("E332PayGroup", gi.Bribe);
                      int groupNum = Utilities.GroupNum;
                      ++Utilities.GroupNum;
                      foreach (IMapItem groupMember in gi.EncounteredMembers) // add encountered members to party - reduce coin by bribe amount
@@ -7847,7 +7881,7 @@ namespace BarbarianPrince
                         IMapItem hireling = gi.EncounteredMembers[0];
                         hireling.Wages = 2;
                         gi.AddCompanion(hireling);
-                        gi.ReduceCoins(2);
+                        gi.ReduceCoins("E333PayHirelings", 2);
                         gi.EncounteredMembers.Clear();
                         if (false == EncounterEnd(gi, ref action))
                         {
@@ -7883,7 +7917,7 @@ namespace BarbarianPrince
                         hireling.Wages = 2;
                         hireling.PayDay = gi.Days + 1;
                         gi.AddCompanion(hireling);
-                        gi.ReduceCoins(2);
+                        gi.ReduceCoins("E333HirelingCount", 2);
                         hiredMembers.Add(hireling);
                      }
                      foreach (IMapItem mi in hiredMembers)
@@ -9592,7 +9626,7 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.EncounterRoll;
                return true; //<<<<<<<<<<<<<<<<<<<<<
             case "e047": // defeated mirror
-               gi.AddCoins(gi.Prince.Coin); // double coins - possesions and mounts are already doubled
+               gi.AddCoins("EncounterLootStart(e047)", gi.Prince.Coin); // double coins - possesions and mounts are already doubled
                gi.HydraTeethCount = theNumHydraTeeth; // return number of Hydrateeth to proper number
                theNumHydraTeeth = 0;
                gi.CapturedWealthCodes.Clear();
@@ -9808,7 +9842,7 @@ namespace BarbarianPrince
                gi.CapturedWealthCodes.Clear();
                break;
             case "e340a":
-               gi.AddCoins(gi.LooterCoin, false); // Steal looter coin and return back to fold
+               gi.AddCoins("EncounterLootStart(e340a)", gi.LooterCoin, false); // Steal looter coin and return back to fold
                gi.LooterCoin = 0;
                gi.CapturedWealthCodes.Clear();
                break;
@@ -11450,7 +11484,7 @@ namespace BarbarianPrince
                   action = GameAction.UpdateEventViewerActive;
                   switch (gi.DieResults[key][0])
                   {
-                     case 1: gi.EventDisplayed = gi.EventActive = "e030"; gi.AddCoins(1); break;                               // 1 gold with mummies
+                     case 1: gi.EventDisplayed = gi.EventActive = "e030"; gi.AddCoins("EncounterRoll(e028a)", 1); break;       // 1 gold with mummies
                      case 2: gi.EventDisplayed = gi.EventActive = "e031"; gi.DieRollAction = GameAction.EncounterRoll; break;  // looted tomb
                      case 3: gi.EventDisplayed = gi.EventActive = "e032"; gi.DieRollAction = GameAction.EncounterStart; break; // ghosts
                      case 4: gi.EventDisplayed = gi.EventActive = "e033"; gi.DieRollAction = GameAction.EncounterStart; break; // warrior wraiths
@@ -13387,7 +13421,7 @@ namespace BarbarianPrince
                   gi.EnteredHexes.Last().EventNames.Add(key);
                   gi.IsPartyFed = true;
                   gi.IsMountsFed = true;
-                  if (false == gi.AddCoins(50))
+                  if (false == gi.AddCoins("EncounterRoll(e117)", 50))
                   {
                      Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddCoins() return false for ae=" + gi.EventActive);
                      return false;
@@ -13573,7 +13607,7 @@ namespace BarbarianPrince
                   if (gi.WitAndWile < gi.DieResults[key][0])
                   {
                      int maxLoss = Math.Min(gi.GetCoins(), 10);
-                     gi.ReduceCoins(maxLoss);
+                     gi.ReduceCoins("EncounterRoll(e128d)", maxLoss);
                   }
                   if (false == EncounterEnd(gi, ref action))
                   {
@@ -13727,7 +13761,7 @@ namespace BarbarianPrince
                         gi.AddCompanion(trustedAssistant);
                         ITerritory t156a = FindClosestTown(gi); // this territory is updated by user selecting a castle or temple
                         gi.ForbiddenAudiences.AddAssistantConstraint(t156a, trustedAssistant);
-                        if (false == gi.AddCoins(100))
+                        if (false == gi.AddCoins("EncounterRoll(e130e)", 100))
                         {
                            Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddCoins()=false ae=" + gi.EventActive + " dr=" + dieRoll.ToString());
                            return false;
@@ -13990,7 +14024,7 @@ namespace BarbarianPrince
                      case 4: gi.EventDisplayed = gi.EventActive = "e038"; gi.DieRollAction = GameAction.EncounterRoll; break;   // cache under stone
                      case 5: gi.EventStart = gi.EventDisplayed = gi.EventActive = "e039"; break;                                // Small Treasure Chest        
                      case 6: gi.EventDisplayed = gi.EventActive = "e040"; gi.DieRollAction = GameAction.EncounterStart; break;  // treasure chest
-                     case 7: gi.EventDisplayed = gi.EventActive = "e030"; gi.AddCoins(1); break;                                // 1 gold with mummies
+                     case 7: gi.EventDisplayed = gi.EventActive = "e030"; gi.AddCoins("EncounterRoll(e147a)", 1); break;                                // 1 gold with mummies
                      case 8: gi.CapturedWealthCodes.Add(110); action = GameAction.EncounterLootStart; break;
                      case 9: gi.EventDisplayed = gi.EventActive = "e139"; gi.DieRollAction = GameAction.EncounterRoll; break;   // minor treasure
                      case 10:                                                                                                   // magic box
@@ -14031,9 +14065,9 @@ namespace BarbarianPrince
             case "e151": // lord finds favor
                gi.EnteredHexes.Last().EventNames.Add(key);
                gi.DieResults[key][0] = dieRoll;
-               if (false == gi.AddCoins(dieRoll * 100))
+               if (false == gi.AddCoins("EncounterRoll(e151)", dieRoll * 100))
                {
-                  Logger.Log(LogEnum.LE_ERROR, "EncounterEnd(): AddCoins() returned false for ae=" + gi.EventActive);
+                  Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddCoins() returned false for ae=" + gi.EventActive);
                   return false;
                }
                gi.IsPartyFed = true;
@@ -14150,7 +14184,7 @@ namespace BarbarianPrince
                               ITerritory t156b = FindClosestTown(gi); // this territory is updated by user selecting a castle
                               gi.ForbiddenAudiences.AddLetterConstraint(t156b);
                            }
-                           if (false == gi.AddCoins(100))
+                           if (false == gi.AddCoins("EncounterRoll(e156)", 100))
                            {
                               Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddCoins()=false ae=" + gi.EventActive + " dr=" + dieRoll.ToString());
                               return false;
@@ -14201,7 +14235,7 @@ namespace BarbarianPrince
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
                   gi.EnteredHexes.Last().EventNames.Add(key);
-                  gi.AddCoins(gi.DieResults[key][0] * 150);
+                  gi.AddCoins("EncounterRoll(e160f)", gi.DieResults[key][0] * 150);
                   if (false == gi.IsAlcoveOfSendingAudience)
                   {
                      gi.IsPartyFed = true;
@@ -14562,7 +14596,7 @@ namespace BarbarianPrince
                            return false;
                         }
                         break;
-                     case 3: gi.EventDisplayed = gi.EventActive = "e209b"; gi.AddCoins(50); break;
+                     case 3: gi.EventDisplayed = gi.EventActive = "e209b"; gi.AddCoins("EncounterRoll(e209a)", 50); break;
                      case 4:
                         gi.EventDisplayed = gi.EventActive = "e209c";
                         if (false == gi.FeelAtHomes.Contains(princeTerritory))
@@ -14644,7 +14678,7 @@ namespace BarbarianPrince
                break;
             case "e209f":
                gi.EnteredHexes.Last().EventNames.Add(key);
-               if (false == gi.AddCoins(180))
+               if (false == gi.AddCoins("EncounterRoll(e209f)", 180))
                {
                   Logger.Log(LogEnum.LE_ERROR, "EncounterRoll: AddCoins() returned false for action=" + action.ToString());
                   return false;
@@ -14660,7 +14694,7 @@ namespace BarbarianPrince
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
                   gi.EnteredHexes.Last().EventNames.Add(key);
-                  gi.ReduceCoins(10);
+                  gi.ReduceCoins("EncounterRoll(e209h)", 10);
                   switch (gi.DieResults[key][0])
                   {
                      case 1: gi.EventDisplayed = gi.EventActive = "e401"; break; // nothing
@@ -14763,7 +14797,7 @@ namespace BarbarianPrince
                            {
                               gi.ForbiddenAudiences.AddLetterConstraint(e211a1);
                            }
-                           if (false == gi.AddCoins(100))
+                           if (false == gi.AddCoins("EncounterRoll(e211a)-10", 100))
                            {
                               Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddCoins()=false ae=" + gi.EventActive + " dr=" + dieRoll.ToString());
                               return false;
@@ -14799,7 +14833,7 @@ namespace BarbarianPrince
                            {
                               gi.ForbiddenAudiences.AddLetterConstraint(e211a2); // this territory is updated by user selecting a castle
                            }
-                           if (false == gi.AddCoins(100))
+                           if (false == gi.AddCoins("EncounterRoll(e211a)", 100))
                            {
                               Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddCoins()=false ae=" + gi.EventActive + " dr=" + dieRoll.ToString());
                               return false;
@@ -14873,7 +14907,7 @@ namespace BarbarianPrince
                         break;
                      case 9:                                                                                                   // pay your respect
                         gi.EventDisplayed = gi.EventActive = "e150";
-                        if (false == gi.AddCoins(50))
+                        if (false == gi.AddCoins("EncounterRoll(e211b)", 50))
                         {
                            Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddCoins() return false for ae=" + gi.EventActive);
                            return false;
@@ -14958,7 +14992,7 @@ namespace BarbarianPrince
                      case 10:
                      case 11:                                                                                                             // pay your respects
                         gi.EventDisplayed = gi.EventActive = "e150";
-                        if (false == gi.AddCoins(50))
+                        if (false == gi.AddCoins("EncounterRoll(e211c)", 50))
                         {
                            Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddCoins() return false for ae=" + gi.EventActive);
                            return false;
@@ -15254,7 +15288,7 @@ namespace BarbarianPrince
                      case 10:
                      case 11:                                                                                                             // pay your respects
                         gi.EventDisplayed = gi.EventActive = "e150";
-                        if (false == gi.AddCoins(50))
+                        if (false == gi.AddCoins("EncounterRoll(e211f)", 50))
                         {
                            Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddCoins() return false for ae=" + gi.EventActive);
                            return false;
@@ -15494,7 +15528,7 @@ namespace BarbarianPrince
                         case 3:
                         case 4:
                            Logger.Log(LogEnum.LE_MANAGE_CACHE, "EncounterRoll(): RETREIVE targetCache=" + targetCache.Coin.ToString() + " for t=" + princeTerritory.Name + " dr=" + dieRoll.ToString());
-                           gi.AddCoins(targetCache.Coin, false);
+                           gi.AddCoins("EncounterRoll(e214)", targetCache.Coin, false);
                            gi.Caches.Remove(targetCache);
                            break;
                         case 5:
@@ -16046,7 +16080,7 @@ namespace BarbarianPrince
                               hireling.Wages = wage;
                               hireling.PayDay = gi.Days + 1;
                               gi.AddCompanion(hireling);
-                              gi.ReduceCoins(wage);
+                              gi.ReduceCoins("EncounterRoll(e338a)", wage);
                               gi.EncounteredMembers.Clear();
                               if (false == EncounterEnd(gi, ref action))
                               {
@@ -16108,7 +16142,7 @@ namespace BarbarianPrince
                               hireling.Wages = wage;
                               hireling.PayDay = gi.Days + 1;
                               gi.AddCompanion(hireling);
-                              gi.ReduceCoins(wage);
+                              gi.ReduceCoins("EncounterRoll(e338c)", wage);
                            }
                            gi.EncounteredMembers.Clear();
                            if (false == EncounterEnd(gi, ref action))
@@ -16157,7 +16191,7 @@ namespace BarbarianPrince
                            hireling.Wages = 2;
                            hireling.PayDay = gi.Days + 1;
                            gi.AddCompanion(hireling);
-                           gi.ReduceCoins(2);
+                           gi.ReduceCoins("EncounterRoll(e339a)", 2);
                            gi.EncounteredMembers.Clear();
                            if (false == EncounterEnd(gi, ref action))
                            {
@@ -16216,7 +16250,7 @@ namespace BarbarianPrince
                            hireling.Wages = 2;
                            hireling.PayDay = gi.Days + 1;
                            gi.AddCompanion(hireling);
-                           gi.ReduceCoins(2);
+                           gi.ReduceCoins("EncounterRoll(e339d)", 2);
                         }
                         gi.EncounteredMembers.Clear();
                         if (false == EncounterEnd(gi, ref action))
@@ -16307,7 +16341,7 @@ namespace BarbarianPrince
                         break;
                      case 5:
                      case 6: // did not fight. give over looted coin to party
-                        gi.AddCoins(gi.LooterCoin, false); // Steal looter coin and return back to fold
+                        gi.AddCoins("EncounterRoll(e340a)", gi.LooterCoin, false); // Steal looter coin and return back to fold
                         gi.LooterCoin = 0;
                         if (false == EncounterEnd(gi, ref action))
                         {
@@ -16547,8 +16581,7 @@ namespace BarbarianPrince
                }
                capturedCoin += coin;
             }
-            gi.AddCoins(capturedCoin);
-            if (false == gi.AddCoins(capturedCoin))
+            if (false == gi.AddCoins("EncounterEnd", capturedCoin))
             {
                Logger.Log(LogEnum.LE_ERROR, "EncounterEnd(): AddCoins() returned false for es=" + gi.EventStart);
                return false;

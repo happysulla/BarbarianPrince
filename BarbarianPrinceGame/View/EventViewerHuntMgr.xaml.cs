@@ -152,7 +152,7 @@ namespace BarbarianPrince
          Option option = myGameInstance.Options.Find("ReduceLodgingCosts");
          if (null == option)
          {
-            Logger.Log(LogEnum.LE_ERROR, "FeedParty(): gi.Options.Find(ReduceLodgingCosts) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "PerformHunt(): gi.Options.Find(ReduceLodgingCosts) returned null");
             return false;
          }
          myIsHalfLodging = option.IsEnabled;
@@ -425,7 +425,7 @@ namespace BarbarianPrince
             int diffFood = myFoodCurrent - myFoodOriginal;  // allocate new food to party members
             myGameInstance.AddFoods(diffFood, true);
             int diffCoin = myCoinOriginal - myCoinCurrent;  // decrease coin from party members evenly
-            myGameInstance.ReduceCoins(diffCoin);
+            myGameInstance.ReduceCoins("EventViewerHuntMgr.UpdateEndState", diffCoin);
             myGameInstance.Prince.OverlayImageName = "";
             if (null == myCallback)
             {

@@ -4167,7 +4167,7 @@ namespace BarbarianPrince
             myGameInstance.PartyMembers.Remove(mi);
          //---------------------------------------------
          myGameInstance.CapturedWealthCodes = myCapturedWealthCodes;
-         myGameInstance.AddCoins(myDeadPartyMemberCoin, false); // looters do not get share of this pile
+         myGameInstance.AddCoins("DistributeDeadWealth", myDeadPartyMemberCoin, false); // looters do not get share of this pile
          myGameInstance.TransferMounts(myCapturedMounts);
          myGameInstance.AddSpecialItems(myCapturedPossessions);
          Logger.Log(LogEnum.LE_ADD_WEALTH_CODE, "DistributeDeadWealth(): CapturedWealthCodes.Count=" + myGameInstance.CapturedWealthCodes.Count.ToString());
