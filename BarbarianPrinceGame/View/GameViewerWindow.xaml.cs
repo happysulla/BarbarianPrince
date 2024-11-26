@@ -2610,18 +2610,18 @@ namespace BarbarianPrince
          {
             tb.Inlines.Add(new LineBreak());
             int average = stat.myEndCoinCount / stat.myNumGames;
-            tb.Inlines.Add(new Run("Average Coins = " + average.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Average Coins at End = " + average.ToString()) { FontWeight = FontWeights.Bold });
          }
          else
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Coins = " + stat.myEndCoinCount.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Coins at End = " + stat.myEndCoinCount.ToString()) { FontWeight = FontWeights.Bold });
          }
          if (1 < stat.myNumGames)
          {
             tb.Inlines.Add(new LineBreak());
             int average = stat.myEndFoodCount / stat.myNumGames;
-            tb.Inlines.Add(new Run("Average Food = " + average.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Average Food at End = " + average.ToString()) { FontWeight = FontWeights.Bold });
          }
          else
          {
@@ -2632,12 +2632,12 @@ namespace BarbarianPrince
          {
             tb.Inlines.Add(new LineBreak());
             int average = stat.myEndPartyCount / stat.myNumGames;
-            tb.Inlines.Add(new Run("Average Party Count = " + average.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Average Party Size at End = " + average.ToString()) { FontWeight = FontWeights.Bold });
          }
          else
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Party Count = " + stat.myEndPartyCount.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Party Size at End = " + stat.myEndPartyCount.ToString()) { FontWeight = FontWeights.Bold });
          }
          //-------------------------------------
          if (0 < stat.myMaxPartySize)
@@ -2659,7 +2659,7 @@ namespace BarbarianPrince
          if (0 < stat.myDaysLost)
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Lost = " + stat.myDaysLost.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Lost Days = " + stat.myDaysLost.ToString()) { FontWeight = FontWeights.Bold });
             int percent = (int)Math.Round(100.0 * ((double)stat.myDaysLost / (double)stat.myEndDaysCount));
             tb.Inlines.Add(new LineBreak());
             tb.Inlines.Add(new Run("% Lost = " + percent.ToString()) { FontWeight = FontWeights.Bold });
@@ -2667,7 +2667,7 @@ namespace BarbarianPrince
          if (0 < stat.myNumEncounters)
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Encounters = " + stat.myNumEncounters.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("# Encounters = " + stat.myNumEncounters.ToString()) { FontWeight = FontWeights.Bold });
             int percent = (int)Math.Round(100.0 * ((double)stat.myNumEncounters / (double)stat.myEndDaysCount));
             tb.Inlines.Add(new LineBreak());
             tb.Inlines.Add(new Run("% Encounters = " + percent.ToString()) { FontWeight = FontWeights.Bold });
@@ -2675,7 +2675,7 @@ namespace BarbarianPrince
          if (0 < stat.myNumOfRestDays)
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Resting = " + stat.myNumOfRestDays.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Rest Days = " + stat.myNumOfRestDays.ToString()) { FontWeight = FontWeights.Bold });
             int percent = (int)Math.Round(100.0 * ((double)stat.myNumOfRestDays / (double)stat.myEndDaysCount));
             tb.Inlines.Add(new LineBreak());
             tb.Inlines.Add(new Run("% Resting = " + percent.ToString()) { FontWeight = FontWeights.Bold });
@@ -2683,9 +2683,9 @@ namespace BarbarianPrince
          if (0 < stat.myNumOfAudienceAttempt)
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Audiences Attempts = " + stat.myNumOfAudienceAttempt.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("# Audiences Attempts = " + stat.myNumOfAudienceAttempt.ToString()) { FontWeight = FontWeights.Bold });
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Audiences = " + stat.myNumOfAudience.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("# Audiences = " + stat.myNumOfAudience.ToString()) { FontWeight = FontWeights.Bold });
             int percent = (int)Math.Round(100.0 * ((double)stat.myNumOfAudience / (double)stat.myNumOfAudienceAttempt));
             tb.Inlines.Add(new LineBreak());
             tb.Inlines.Add(new Run("% Audience = " + percent.ToString()) { FontWeight = FontWeights.Bold });
@@ -2693,12 +2693,12 @@ namespace BarbarianPrince
          if (0 < stat.myNumOfOffering)
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Offerings = " + stat.myNumOfOffering.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("# Offerings = " + stat.myNumOfOffering.ToString()) { FontWeight = FontWeights.Bold });
          }
          if (0 < stat.myDaysInJailorDungeon)
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Jail Days= " + stat.myDaysInJailorDungeon.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Jail Days = " + stat.myDaysInJailorDungeon.ToString()) { FontWeight = FontWeights.Bold });
             int percent = (int)Math.Round(100.0 * ((double)stat.myDaysInJailorDungeon / (double)stat.myEndDaysCount));
             tb.Inlines.Add(new LineBreak());
             tb.Inlines.Add(new Run("% Jail = " + percent.ToString()) { FontWeight = FontWeights.Bold });
@@ -2731,7 +2731,7 @@ namespace BarbarianPrince
          if (0 < stat.myNumOfPartyKill)
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("# Encountered Killed = " + stat.myNumOfPartyKilled.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("# Encountered Killed = " + stat.myNumOfPartyKill.ToString()) { FontWeight = FontWeights.Bold });
             int average = stat.myEndDaysCount / stat.myNumOfPartyKill;
             tb.Inlines.Add(new LineBreak());
             tb.Inlines.Add(new Run("Days/Encountered Killed= " + average.ToString()) { FontWeight = FontWeights.Bold });
@@ -2750,7 +2750,7 @@ namespace BarbarianPrince
          if (0 < stat.myNumOfPartyKillCombat)
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("Encountred Killed Combat = " + stat.myNumOfPartyKillCombat.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("Encountered Killed Combat = " + stat.myNumOfPartyKillCombat.ToString()) { FontWeight = FontWeights.Bold });
             if (1 < stat.myNumGames)
             {
                int average = stat.myNumOfPartyKillCombat / stat.myNumGames;
@@ -2762,7 +2762,7 @@ namespace BarbarianPrince
          if (0 < stat.myNumOfPartyKilled)
          {
             tb.Inlines.Add(new LineBreak());
-            tb.Inlines.Add(new Run("# Party Member Killed = " + stat.myNumOfPartyKill.ToString()) { FontWeight = FontWeights.Bold });
+            tb.Inlines.Add(new Run("# Party Member Killed = " + stat.myNumOfPartyKilled.ToString()) { FontWeight = FontWeights.Bold });
             int average = stat.myEndDaysCount / stat.myNumOfPartyKilled;
             tb.Inlines.Add(new LineBreak());
             tb.Inlines.Add(new Run("Days/Member Killed = " + average.ToString()) { FontWeight = FontWeights.Bold });

@@ -26,7 +26,7 @@
       <TextBlock  x:Name="myTextBlock" Grid.Row="1" TextWrapping="Wrap" Width="Auto" Padding="10">
          1.) If the game hangs, you may be able to recover by selecting  <Bold>Edit | Revert to Daybreak</Bold> menu. This menu option is only available after the first turn.
          <LineBreak/><LineBreak/>
-         2.) If you discover an error, save a copy of the latest log file. The log files are automatically saved in the <Bold>Logs</Bold> directory with latest time tag representing the last game played.
+         2.) If you discover an error, save a copy of the latest log file. The log files are automatically saved in the <Bold><Italic>user</Italic>/AppData/BarbarianPrince/Logs</Bold> directory with latest time tag representing the last game played.
          <LineBreak/><LineBreak/>
          3.) Attempt to save the game state using the <Bold>File | Save As...</Bold> menu. 
          <LineBreak/><LineBreak/>

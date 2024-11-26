@@ -572,7 +572,7 @@ In addition, events where you talk or negotiate occur in only a few minutes. You
 r205	"<Bold>r205 Lost</Bold>
 <LineBreak/><LineBreak/>Each time you attempt to leave a hex, there is a danger of becoming lost. Consult the Travel Table
  <InlineUIContainer><Button Name='myButtonT207' Content='t207' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
- and find the terrain type you are leaving. Read across to the 'Lost"" column entry. Roll two die. If the dice total equals or exceeds the chart's number, your party is lost. If you move more than one hex in a day, you must check for getting lost before each move, i.e., before you enter the new hex.
+ and find the terrain type you are leaving. Read across to the 'Lost' column entry. Roll two die. If the dice total equals or exceeds the chart's number, your party is lost. If you move more than one hex in a day, you must check for getting lost before each move, i.e., before you enter the new hex.
 <LineBreak/><LineBreak/>If you get lost, you cannot move further that day. You are stuck in the hex you tried to leave. You must check for a travel event unless performing self-guiding moves
  <InlineUIContainer><Button Name='myButtonR205b' Content='r205b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
  The travel check is performed in the hex you tried to enter, as if you actually entered it. This reflects you wondering around the edges of the new hex and perhaps encountering something.

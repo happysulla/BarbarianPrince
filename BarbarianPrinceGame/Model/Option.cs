@@ -284,7 +284,7 @@ namespace BarbarianPrince
                gameType = "All Random Game";
                break;
             case 4:
-               gameType = "Maximum Fun Game";
+               gameType = "Fun Game";
                break;
             case 5:
                gameType = "Custom Game";
