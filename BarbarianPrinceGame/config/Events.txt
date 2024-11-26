@@ -4589,7 +4589,7 @@ e312a	"<Bold>e312a Partial Mounted Escape</Bold>  <InlineUIContainer><Button Fon
 <LineBreak/><LineBreak/>However, since some of your party is not mounted, they must be adbandoned:
  <InlineUIContainer><Button Content='Abandon' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>Click anywhere to continue without escaping."
-e312b	"<Bold>e312b Unable to Perform Mounted Escape</Bold> <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+e312b	"<Bold>e312b Unable to Perform Mounted Escape</Bold> <InlineUIContainer><Button Content='r312' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 <LineBreak/><LineBreak/>You cannot ride away since there are no mounts
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
 <LineBreak/><LineBreak/>Click anywhere to continue."

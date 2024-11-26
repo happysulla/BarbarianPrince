@@ -695,7 +695,8 @@ namespace BarbarianPrince
                   InlineUIContainer ui = (InlineUIContainer)inline;
                   if (ui.Child is Button b)
                   {
-                     SetButtonState(gi, key, b);
+                     if (false == SetButtonState(gi, key, b))
+                        Logger.Log(LogEnum.LE_ERROR, "OpenEvent(): SetButtonState() returned false");
                   }
                   else if (ui.Child is Image img)
                   {
@@ -874,19 +875,19 @@ namespace BarbarianPrince
          scrollViewer.ScrollToHorizontalOffset(amountToScroll);
          return true;
       }
-      private void SetButtonState(IGameInstance gi, string key, Button b)
+      private bool SetButtonState(IGameInstance gi, string key, Button b)
       {
          int cost = 0;
          string content = (string)b.Content;
          if( null == content )
          {
             Logger.Log(LogEnum.LE_ERROR, "EventViewer.SetButtonState(): content=null for key=" + key);
-            return;
+            return false;
          }
          if ((key != myGameInstance.EventActive) && (false == content.StartsWith("e")))
          {
             b.IsEnabled = false;
-            return;
+            return true;
          }
          switch (key)
          {
@@ -897,7 +898,7 @@ namespace BarbarianPrince
                {
                   if (("Talk " == content) || ("Evade" == content) || ("Fight" == content))
                      b.IsEnabled = false;
-                  return;
+                  return true;
                }
                break;
             case "e011a":
@@ -913,7 +914,7 @@ namespace BarbarianPrince
                {
                   if ("Inquiries" == content)
                      b.IsEnabled = false;
-                  return;
+                  return true;
                }
                break;
             case "e015b":
@@ -942,7 +943,7 @@ namespace BarbarianPrince
                {
                   if (("Talk " == content) || ("Evade" == content) || ("Fight" == content))
                      b.IsEnabled = false;
-                  return;
+                  return true;
                }
                break;
             case "e021":
@@ -950,7 +951,7 @@ namespace BarbarianPrince
                {
                   if (("Talk " == content) || ("Evade" == content) || ("Fight" == content))
                      b.IsEnabled = false;
-                  return;
+                  return true;
                }
                break;
             case "e023":
@@ -958,7 +959,7 @@ namespace BarbarianPrince
                {
                   if (("Talk " == content) || ("Evade" == content) || ("Fight" == content))
                      b.IsEnabled = false;
-                  return;
+                  return true;
                }
                break;
             case "e049": // travelling minstrel
@@ -972,7 +973,7 @@ namespace BarbarianPrince
                {
                   if (("Talk " == content) || ("Evade" == content) || ("Fight" == content))
                      b.IsEnabled = false;
-                  return;
+                  return true;
                }
                break;
             case "e052": // goblins
@@ -986,7 +987,7 @@ namespace BarbarianPrince
                   b.IsEnabled = true;
                   b.Click += Button_Click;
                }
-               return;
+               return true;
             case "e058a":
                if ((false == gi.IsEvadeActive) && (("Escape" == content) || ("Follow" == content)))
                {
@@ -1013,7 +1014,7 @@ namespace BarbarianPrince
                {
                   if (("Talk " == content) || ("Evade" == content) || ("Fight" == content))
                      b.IsEnabled = false;
-                  return;
+                  return true;
                }
                break;
             case "e079b":
@@ -1027,7 +1028,7 @@ namespace BarbarianPrince
                {
                   if ("Dismount" == content)
                      b.IsEnabled = false;
-                  return;
+                  return true;
                }
                break;
             case "e081":
@@ -1035,7 +1036,7 @@ namespace BarbarianPrince
                {
                   if (("Talk " == content) || ("Evade" == content) || ("Fight" == content))
                      b.IsEnabled = false;
-                  return;
+                  return true;
                }
                break;
             case "e098": // dragon
@@ -1055,7 +1056,7 @@ namespace BarbarianPrince
                {
                   if ((" Fly " == content) || ("Evade" == content) || ("Fight" == content))
                      b.IsEnabled = false;
-                  return;
+                  return true;
                }
                else // follow button only enabled if no horses and no non-human/elf party members
                {
@@ -1075,7 +1076,7 @@ namespace BarbarianPrince
                      b.IsEnabled = false;
                   else
                      b.Click += Button_Click;
-                  return;
+                  return true;
                }
             case "e128": // Merchant 
                b.IsEnabled = false;
@@ -1223,7 +1224,7 @@ namespace BarbarianPrince
                   if (("Talk " == content) || ("Evade" == content) || ("Fight" == content))
                   {
                      b.IsEnabled = false;
-                     return;
+                     return true;
                   }
                }
                break;
@@ -1334,7 +1335,7 @@ namespace BarbarianPrince
                {
                   if ("Short Hop" == content)
                      b.IsEnabled = false;
-                  return;
+                  return true;
                }
                break;
             case "e210d": // Seek Hire - Horse Deal
@@ -1500,6 +1501,7 @@ namespace BarbarianPrince
                b.Visibility = Visibility.Visible;
             b.Click += Button_Click;
          }
+         return true;
       }
       private void AppendAtEnd(IGameInstance gi, string key)
       {
