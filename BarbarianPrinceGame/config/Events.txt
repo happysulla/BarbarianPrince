@@ -2181,7 +2181,7 @@ e078b	"<Bold>e078b Majestic Peaks With No Horses</Bold>
 <LineBreak/><LineBreak/>
                           <InlineUIContainer><Image Name='EncounterEnd' Source='../images/MountainsView.gif' Height='350' Width='350'></Image></InlineUIContainer>"
 e078c	"<Bold>e078c Bad Going For Horses</Bold>
-<LineBreak/><LineBreak/>Terrain is difficult on horses.  If you choose Travel for the daily action tomorrow, you will risk losing horses. Any other activity will nullify this event. Click Image to continue.
+<LineBreak/><LineBreak/>Terrain is difficult on horses.  If you choose Travel for the daily action tomorrow, you will risk losing horses. Any other activity will nullify this event. Click image to continue.
 <LineBreak/><LineBreak/>
                           <InlineUIContainer><Image Name='MountainPath' Source='../images/MountainPath.gif' Height='258' Width='280'></Image></InlineUIContainer>"
 e079	"<Bold>e079 Heavy Rains</Bold>

@@ -324,7 +324,7 @@ namespace BarbarianPrince
                companion.IsSecretGatewayToDarknessKnown = false;
          }
          //--------------------------------
-         Logger.Log(LogEnum.LE_PARTYMEMBER_ADD, "AddCompanion(): mi=" + companion.ToString());
+         Logger.Log(LogEnum.LE_PARTYMEMBER_ADD, "AddCompanion(): mi=[" + companion.ToString() + "]");
          PartyMembers.Add(companion);
          //--------------------------------
          if (PartyMembers.Count < this.Statistic.myMaxPartySize)
@@ -894,7 +894,7 @@ namespace BarbarianPrince
             {
                int miPrinceCoin = Prince.Coin;
                Prince.Coin += c100;
-               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): return after 100s--> Prince++++>>>" + miPrinceCoin.ToString() + " + " + c100.ToString() + " = " + Prince.Coin.ToString());
+               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): return after 100s--> Prince++++>>>" + miPrinceCoin.ToString() + " + " + c100.ToString() + " = " + Prince.Coin.ToString() + "rc=" + remainingCoins.ToString());
                return true;
             }
             int diff = hundreds - princeFreeLoad; // prince Free load greater than new coin load
@@ -903,7 +903,7 @@ namespace BarbarianPrince
                int miPrinceCoin = Prince.Coin;
                Prince.Coin += c100;
                Prince.Food -= diff;
-               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): return after 100s--> Prince++++>>>" + miPrinceCoin.ToString() + " + " + c100.ToString() + " = " + Prince.Coin.ToString() + " minus food=" + diff.ToString());
+               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): return after 100s--> Prince++++>>>" + miPrinceCoin.ToString() + " + " + c100.ToString() + " = " + Prince.Coin.ToString() + "rc=" + remainingCoins.ToString() + " minus food=" + diff.ToString());
                return true;
             }
             c100 = (diff * 100);

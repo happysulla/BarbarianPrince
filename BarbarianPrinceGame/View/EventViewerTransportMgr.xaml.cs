@@ -1242,7 +1242,7 @@ namespace BarbarianPrince
          }
          else
          {
-            Logger.Log(LogEnum.LE_VIEW_SHOW_LOADS, "GetLoadCanCarry(): " + partyMember.Name + " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + partyMember.Food.ToString() + " " + partyMember.Coin.ToString());
+            Logger.Log(LogEnum.LE_VIEW_SHOW_LOADS, "GetLoadCanCarry(): " + partyMember.Name + " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> f=" + partyMember.Food.ToString() + " c=" + partyMember.Coin.ToString());
             foreach (IMapItem mount in partyMember.Mounts)
             {
                int maxMountLoad = Utilities.MaxMountLoad;
@@ -1324,24 +1324,15 @@ namespace BarbarianPrince
             else if (loadCanCarry < coinLoad)
             {
                Logger.Log(LogEnum.LE_VIEW_SHOW_LOADS, "GetLoadCanCarry(): 4a=> lc=" + loadCanCarry.ToString() + " ml=" + mountLoad.ToString() + " pl=" + personLoad.ToString() + " cl=" + coinLoad.ToString());
-               if ( 0 < loadCanCarry )
+               myUnassignedCoin += remainder; // guaranteed to get rid of remainder
+               partyMember.Coin -= remainder;
+               if (1 < coinLoad)
                {
-                  if (0 < remainder)
-                  {
-                     myUnassignedCoin += remainder;
-                     partyMember.Coin -= remainder;
-                     --loadCanCarry;
-                  }
-                  int loadCannotCarry = hundredsLoad - loadCanCarry;
-                  int coinsCannotCarry = loadCannotCarry * 100;
-                  myUnassignedCoin += coinsCannotCarry;
-                  partyMember.Coin -= coinsCannotCarry;
-                  Logger.Log(LogEnum.LE_VIEW_SHOW_LOADS, "GetLoadCanCarry(): 4b=> lc=" + loadCanCarry.ToString() + " ml=" + mountLoad.ToString() + " pl=" + personLoad.ToString() + " cl!=" + coinsCannotCarry.ToString() + " c=" + partyMember.Coin.ToString());
-               }
-               else
-               {
-                  myUnassignedCoin += partyMember.Coin;
-                  partyMember.Coin = 0;
+                  int diffCoin100Load = hundredsLoad - loadCanCarry;
+                  int diffCoin100 = diffCoin100Load * 100;
+                  myUnassignedCoin += diffCoin100;
+                  partyMember.Coin -= loadCanCarry * 100;
+                  Logger.Log(LogEnum.LE_VIEW_SHOW_LOADS, "GetLoadCanCarry(): 4b=> lc=" + loadCanCarry.ToString() + " ml=" + mountLoad.ToString() + " pl=" + personLoad.ToString() + " cl!=" + diffCoin100.ToString() + " c=" + partyMember.Coin.ToString());
                }
                myUnassignedFood += partyMember.Food;
                partyMember.Food = 0;
@@ -1359,9 +1350,8 @@ namespace BarbarianPrince
             if (loadCanCarry < partyMember.Food)
             {
                int diffFood = partyMember.Food - loadCanCarry;
-               partyMember.Food = loadCanCarry;
                myUnassignedFood += diffFood;
-               partyMember.Food -= diffFood;
+               partyMember.Food = loadCanCarry;
                Logger.Log(LogEnum.LE_VIEW_SHOW_LOADS, "GetLoadCanCarry(): 6=> lc=" + loadCanCarry.ToString() + " f=" + partyMember.Food.ToString() + " df=" + diffFood.ToString() + " after food burden");
                return 0;
             }
@@ -1371,7 +1361,7 @@ namespace BarbarianPrince
             }
          }
          //------------------------------------------
-         Logger.Log(LogEnum.LE_VIEW_SHOW_LOADS, "GetLoadCanCarry(): " + partyMember.Name + " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< " + partyMember.Food.ToString() + " " + partyMember.Coin.ToString() + " lc=" + loadCanCarry.ToString());
+         Logger.Log(LogEnum.LE_VIEW_SHOW_LOADS, "GetLoadCanCarry(): " + partyMember.Name + " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< f=" + partyMember.Food.ToString() + " c=" + partyMember.Coin.ToString() + " lc=" + loadCanCarry.ToString());
          return loadCanCarry;
       }
       private int GetRemainingLoad(IMapItem unconscious)

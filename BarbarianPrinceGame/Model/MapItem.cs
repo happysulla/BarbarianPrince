@@ -1471,7 +1471,7 @@ namespace BarbarianPrince
       }
       public override String ToString()
       {
-         StringBuilder sb = new StringBuilder("Name=<");
+         StringBuilder sb = new StringBuilder("<");
          sb.Append(this.Name);
          sb.Append(">T=<");
          sb.Append(this.Territory.Name);

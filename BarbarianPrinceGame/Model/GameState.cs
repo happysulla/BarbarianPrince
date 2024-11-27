@@ -1320,7 +1320,7 @@ namespace BarbarianPrince
             character.Combat = Math.Max(newCombat, 1);
          }
          //------------------------------------------------------------
-         Logger.Log(LogEnum.LE_PARTYMEMBER_ADD, "CreateCharacter(): mi=" + character.ToString());
+         Logger.Log(LogEnum.LE_PARTYMEMBER_ADD, "CreateCharacter(): mi=[" + character.ToString() + "]");
          return character;
       }
       protected bool LoadGame(ref IGameInstance gi, ref GameAction action)
@@ -1476,12 +1476,25 @@ namespace BarbarianPrince
                   returnStatus = "AddStartingPrinceOption() returned false";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
                }
-               else if (false == AddStartingOptions(gi))
+               if (false == AddStartingOptions(gi))
                {
                   returnStatus = "AddStartingOptions() returned false";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateSetup.PerformAction(): " + returnStatus);
                }
                AddStartingTestingOptions(gi);
+               //------------------------------------------
+               StringBuilder sb = new StringBuilder();
+               sb.Append("GameStateSetup(): castles=");
+               sb.Append(GameEngine.theFeatsInGame.myVisitedCastles.Count);
+               sb.Append(" towns=");
+               sb.Append(GameEngine.theFeatsInGame.myVisitedTowns.Count);
+               sb.Append(" ruins=");
+               sb.Append(GameEngine.theFeatsInGame.myVisitedRuins.Count);
+               sb.Append(" temples=");
+               sb.Append(GameEngine.theFeatsInGame.myVisitedTemples.Count);
+               sb.Append(" oasis=");
+               sb.Append(GameEngine.theFeatsInGame.myVisitedOasises.Count);
+               Logger.Log(LogEnum.LE_SERIALIZE_FEATS, sb.ToString());
                break;
             case GameAction.SetupShowCalArath:
                gi.EventDisplayed = gi.EventActive = "e000a";
@@ -1890,8 +1903,6 @@ namespace BarbarianPrince
                   member.IsRiding = true;
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
-                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddStartingPartyMemberOption(): mi=" + member.Name + " food=" + member.Food);
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
                   member.IsFickle = true;
                   member.AddNewMount(); // riding
                   gi.AddCompanion(member);
@@ -1912,8 +1923,6 @@ namespace BarbarianPrince
                   IMapItem member = CreateCharacter(gi, "Elf");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
-                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddStartingPartyMemberOption(): mi=" + member.Name + " food=" + member.Food);
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
                   member.AddNewMount(MountEnum.Horse);
                   gi.AddCompanion(member);
                }
@@ -1922,7 +1931,6 @@ namespace BarbarianPrince
                {
                   IMapItem member = CreateCharacter(gi, "ElfWarrior");
                   member.AddNewMount(MountEnum.Horse);
-                  member.Coin = Utilities.RandomGenerator.Next(50) + 100; // <cgs>
                   gi.AddCompanion(member);
                }
                break;
@@ -1933,7 +1941,6 @@ namespace BarbarianPrince
                   member.IsRiding = true;
                   member.IsGuide = true;
                   member.GuideTerritories = Territory.theTerritories;
-                  member.Coin = Utilities.RandomGenerator.Next(50) + 20; // <cgs>
                   gi.AddCompanion(member);
                   gi.IsFalconFed = true;
                }
@@ -1950,8 +1957,6 @@ namespace BarbarianPrince
                   rider.Mounts.Insert(0, griffon);
                   rider.Food = Utilities.RandomGenerator.Next(5);
                   rider.Coin = Utilities.RandomGenerator.Next(20);
-                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddStartingPartyMemberOption(): mi=" + rider.Name + " food=" + rider.Food);
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + rider.Name + " coin=" + rider.Coin);
                   rider.IsRiding = true;
                   rider.IsFlying = true;
                   gi.AddCompanion(rider);
@@ -1969,11 +1974,8 @@ namespace BarbarianPrince
                   rider.Mounts.Insert(0, harpy);
                   rider.Food = Utilities.RandomGenerator.Next(5);
                   rider.Coin = Utilities.RandomGenerator.Next(20);
-                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddStartingPartyMemberOption(): mi=" + rider.Name + " food=" + rider.Food);
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + rider.Name + " coin=" + rider.Coin);
                   rider.IsRiding = true;
                   rider.IsFlying = true;
-                  rider.Coin = Utilities.RandomGenerator.Next(50) + 20; // <cgs>
                   gi.AddCompanion(rider);
                }
                break;
@@ -1982,8 +1984,6 @@ namespace BarbarianPrince
                   IMapItem member = CreateCharacter(gi, "Magician");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
-                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddStartingPartyMemberOption(): mi=" + member.Name + " food=" + member.Food);
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
                   gi.AddCompanion(member);
                }
                break;
@@ -1996,8 +1996,6 @@ namespace BarbarianPrince
                   member.IsGuide = true;
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
-                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddStartingPartyMemberOption(): mi=" + member.Name + " food=" + member.Food);
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
                   foreach (string adj in gi.Prince.TerritoryStarting.Adjacents)
                   {
                      ITerritory t = Territory.theTerritories.Find(adj);
@@ -2011,8 +2009,6 @@ namespace BarbarianPrince
                   IMapItem member = CreateCharacter(gi, "Merchant");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
                   gi.AddCompanion(member);
                   gi.IsMerchantWithParty = true;
                }
@@ -2022,8 +2018,6 @@ namespace BarbarianPrince
                   IMapItem member = CreateCharacter(gi, "Minstrel");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
                   gi.AddCompanion(member);
                   gi.IsMinstrelPlaying = true; // e049 - minstrel
                }
@@ -2033,8 +2027,6 @@ namespace BarbarianPrince
                   IMapItem member = CreateCharacter(gi, "Monk");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
-                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddStartingPartyMemberOption(): mi=" + member.Name + " food=" + member.Food);
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
                   gi.AddCompanion(member);
                }
                break;
@@ -2043,8 +2035,6 @@ namespace BarbarianPrince
                   IMapItem member = CreateCharacter(gi, "PorterSlave");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
-                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddStartingPartyMemberOption(): mi=" + member.Name + " food=" + member.Food);
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
                   gi.AddCompanion(member);
                }
                break;
@@ -2053,8 +2043,6 @@ namespace BarbarianPrince
                   IMapItem member = CreateCharacter(gi, "Priest");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
-                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddStartingPartyMemberOption(): mi=" + member.Name + " food=" + member.Food);
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
                   gi.AddCompanion(member);
                }
                break;
@@ -2063,8 +2051,6 @@ namespace BarbarianPrince
                   IMapItem trueLove = CreateCharacter(gi, "TrueLovePriestDaughter");
                   trueLove.Food = Utilities.RandomGenerator.Next(5);
                   trueLove.Coin = Utilities.RandomGenerator.Next(20);
-                  Logger.Log(LogEnum.LE_ADD_FOOD, "AddStartingPartyMemberOption(): mi=" + trueLove.Name + " food=" + trueLove.Food);
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + trueLove.Name + " coin=" + trueLove.Coin);
                   gi.AddCompanion(trueLove);
                }
                break;
@@ -2073,8 +2059,6 @@ namespace BarbarianPrince
                   IMapItem member = CreateCharacter(gi, "Wizard");
                   member.Food = Utilities.RandomGenerator.Next(5);
                   member.Coin = Utilities.RandomGenerator.Next(20);
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddStartingPartyMemberOption(): mi=" + member.Name + " coin=" + member.Coin);
                   gi.AddCompanion(member);
                }
                break;

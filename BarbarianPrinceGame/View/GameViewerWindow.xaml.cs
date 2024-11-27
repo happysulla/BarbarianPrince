@@ -300,6 +300,7 @@ namespace BarbarianPrince
          //-------------------------------------------------------
          else if ((GameAction.UpdateLoadingGame == action) || (GameAction.UpdateNewGame == action) )
          {
+            SaveDefaultsToSettings(); // UpdateView() - UpdateGameOptions
             myGameInstance = gi;
             myButtonMapItems.Clear();
             foreach (UIElement ui in myCanvas.Children) // remove all buttons on map
@@ -328,7 +329,7 @@ namespace BarbarianPrince
                break;
             case GameAction.EndGameWin:
             case GameAction.EndGameLost:
-               SaveDefaultsToSettings();
+               SaveDefaultsToSettings(); // EndGameWin or EndGameLost
                break;
             case GameAction.RemoveSplashScreen:
                CreateButtonTimeTrack(gi);
@@ -346,7 +347,7 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): gi.Options.Find(ExtendEndTime)");
                else
                   CreateButtonTimeTrack(gi);
-               SaveDefaultsToSettings();
+               SaveDefaultsToSettings(); // UpdateView() - UpdateGameOptions
                break;
             case GameAction.ShowAllRivers:
                UpdateCanvasRiver("Dienstal Branch", false);
@@ -805,6 +806,7 @@ namespace BarbarianPrince
          int foodSum = 0;
          foreach (IMapItem mi in gi.PartyMembers)
             foodSum += mi.Food;
+         bool isFoodResetRequired = false;
          for (int i = 0; i < 10; ++i)
          {
             myButtonFoodSupply1s[i].ClearValue(Control.BackgroundProperty);
@@ -822,37 +824,66 @@ namespace BarbarianPrince
          }
          int remainder100s = foodSum % 100;
          int hundreds = foodSum - remainder100s;
-         int k = hundreds / 100;
-         if (k < 0 || 4 < k)
+         int k100 = hundreds / 100;
+         if (4 < k100)
          {
-            Logger.Log(LogEnum.LE_ERROR, "UpdateFoodSupply() 4 < k=" + k.ToString());
-            return;
+            Logger.Log(LogEnum.LE_ERROR, "UpdateFoodSupply() 4 < k100=" + k100.ToString());
+            k100 = 4;
+            isFoodResetRequired = true;
          }
-         myButtonFoodSupply100s[k].Background = Utilities.theBrushControlButton;
-         myButtonFoodSupply100s[k].FontWeight = FontWeights.Bold;
-         myButtonFoodSupply100s[k].IsEnabled = true;
+         if (k100 < 0)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "UpdateFoodSupply() 0 > k100=" + k100.ToString());
+            k100 = 0;
+            isFoodResetRequired = true;
+         }
+         myButtonFoodSupply100s[k100].Background = Utilities.theBrushControlButton;
+         myButtonFoodSupply100s[k100].FontWeight = FontWeights.Bold;
+         myButtonFoodSupply100s[k100].IsEnabled = true;
          foodSum -= hundreds;
          int remainder10s = remainder100s % 10;
          int tens = foodSum - remainder10s;
-         k = tens / 10;
-         if (k < 0 || 9 < k)
+         int k10 = tens / 10;
+         if ( 9 < k10)
          {
-            Logger.Log(LogEnum.LE_ERROR, "UpdateFoodSupply() 1 -> 9 < k=" + k.ToString());
-            return;
+            Logger.Log(LogEnum.LE_ERROR, "UpdateFoodSupply() 9 < k10=" + k10.ToString());
+            k10 = 9;
+            isFoodResetRequired = true;
          }
-         myButtonFoodSupply10s[k].Background = Utilities.theBrushControlButton;
-         myButtonFoodSupply10s[k].FontWeight = FontWeights.Bold;
-         myButtonFoodSupply10s[k].IsEnabled = true;
+         if (k10 < 0)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "UpdateFoodSupply() 0 > k10=" + k10.ToString());
+            k10 = 0;
+            isFoodResetRequired = true;
+         }
+         myButtonFoodSupply10s[k10].Background = Utilities.theBrushControlButton;
+         myButtonFoodSupply10s[k10].FontWeight = FontWeights.Bold;
+         myButtonFoodSupply10s[k10].IsEnabled = true;
          foodSum -= tens;
-         k = foodSum;
-         if (k < 0 || 9 < k)
+         int k1 = foodSum;
+         if (9 < k1)
          {
-            Logger.Log(LogEnum.LE_ERROR, "UpdateFoodSupply() 2 -> 9 < k=" + k.ToString());
-            return;
+            Logger.Log(LogEnum.LE_ERROR, "UpdateFoodSupply() 9 < k1=" + k1.ToString());
+            k1 = 9;
+            isFoodResetRequired = true;
          }
-         myButtonFoodSupply1s[k].Background = Utilities.theBrushControlButton;
-         myButtonFoodSupply1s[k].FontWeight = FontWeights.Bold;
-         myButtonFoodSupply1s[k].IsEnabled = true;
+         if (k1 < 0 )
+         {
+            Logger.Log(LogEnum.LE_ERROR, "UpdateFoodSupply() 0 > k1=" + k1.ToString());
+            k1 = 0;
+            isFoodResetRequired = true;
+         }
+         myButtonFoodSupply1s[k1].Background = Utilities.theBrushControlButton;
+         myButtonFoodSupply1s[k1].FontWeight = FontWeights.Bold;
+         myButtonFoodSupply1s[k1].IsEnabled = true;
+
+         if( true == isFoodResetRequired )
+         {
+            foreach (IMapItem mi in gi.PartyMembers)
+               mi.Food = 0;
+            int totalFood = k100*100 + k10*10 + k1;
+            myGameInstance.AddFoods(totalFood);
+         }
       }
       private void UpdatePrinceEnduranceStatus(IGameInstance gi)
       {
@@ -2460,6 +2491,18 @@ namespace BarbarianPrince
          Settings.Default.GameTypeFun = Utilities.Serialize<GameStat>(myGameEngine.Statistics[4]);
          Settings.Default.GameTypeCustom = Utilities.Serialize<GameStat>(myGameEngine.Statistics[5]);
          Settings.Default.GameTypeTotal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[6]);
+         StringBuilder sb = new StringBuilder();
+         sb.Append("UpdateCanvasShowStats(): Serialization castles=");
+         sb.Append(GameEngine.theFeatsInGame.myVisitedCastles.Count);
+         sb.Append(" towns=");
+         sb.Append(GameEngine.theFeatsInGame.myVisitedTowns.Count);
+         sb.Append(" ruins=");
+         sb.Append(GameEngine.theFeatsInGame.myVisitedRuins.Count);
+         sb.Append(" temples=");
+         sb.Append(GameEngine.theFeatsInGame.myVisitedTemples.Count);
+         sb.Append(" oasis=");
+         sb.Append(GameEngine.theFeatsInGame.myVisitedOasises.Count);
+         Logger.Log(LogEnum.LE_SERIALIZE_FEATS, sb.ToString());
          Settings.Default.theGameFeat = Utilities.Serialize<GameFeat>(GameEngine.theFeatsInGame);
          //-------------------------------------------
          Settings.Default.Save();
@@ -3358,7 +3401,7 @@ namespace BarbarianPrince
       protected override void OnClosing(CancelEventArgs e) //  // WARNING - Not fired when Application.SessionEnding is fired
       {
          base.OnClosing(e);
-         SaveDefaultsToSettings();
+         SaveDefaultsToSettings(); // OnClosing
          if (false == GameLoadMgr.SaveGameToFile(myGameInstance))
             Logger.Log(LogEnum.LE_ERROR, "OnClosing(): SaveGameToFile() returned false");
       }
@@ -3511,6 +3554,18 @@ namespace BarbarianPrince
          Settings.Default.GameTypeCustom = Utilities.Serialize<GameStat>(myGameEngine.Statistics[5]);
          Settings.Default.GameTypeTotal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[6]);
          //-------------------------------------------
+         StringBuilder sb = new StringBuilder();
+         sb.Append("SaveDefaultsToSettings(): Serialization castles=");
+         sb.Append(GameEngine.theFeatsInGame.myVisitedCastles.Count);
+         sb.Append(" towns=");
+         sb.Append(GameEngine.theFeatsInGame.myVisitedTowns.Count);
+         sb.Append(" ruins=");
+         sb.Append(GameEngine.theFeatsInGame.myVisitedRuins.Count);
+         sb.Append(" temples=");
+         sb.Append(GameEngine.theFeatsInGame.myVisitedTemples.Count);
+         sb.Append(" oasis=");
+         sb.Append(GameEngine.theFeatsInGame.myVisitedOasises.Count);
+         Logger.Log(LogEnum.LE_SERIALIZE_FEATS, sb.ToString());
          Settings.Default.theGameFeat = Utilities.Serialize<GameFeat>(GameEngine.theFeatsInGame);
          //-------------------------------------------
          Settings.Default.Save();

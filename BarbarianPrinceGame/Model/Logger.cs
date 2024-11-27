@@ -51,6 +51,7 @@ namespace BarbarianPrince
       LE_MAPITEM_MOVING_COUNT,
       LE_MAPITEM_WOUND,
       LE_MAPITEM_POISION,
+      LE_SERIALIZE_FEATS,
       LE_VIEW_APPEND_EVENT,
       LE_VIEW_SHOW_PARTY_DIALOG,
       LE_VIEW_DICE_MOVING,
@@ -128,8 +129,8 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_ADD_WEALTH_CODE);
          Logger.SetOn(LogEnum.LE_FREE_LOAD);
          //Logger.SetOn(LogEnum.LE_ADD_FOOD);
-         Logger.SetOn(LogEnum.LE_ADD_COIN);
-         Logger.SetOn(LogEnum.LE_REDUCE_COIN);
+         //Logger.SetOn(LogEnum.LE_ADD_COIN);
+         //Logger.SetOn(LogEnum.LE_REDUCE_COIN);
          //Logger.SetOn(LogEnum.LE_MANAGE_CACHE);
          //Logger.SetOn(LogEnum.LE_ADD_COIN_AUTO);
          //Logger.SetOn(LogEnum.LE_LODGING_COST);
@@ -146,6 +147,7 @@ namespace BarbarianPrince
          Logger.SetOn(LogEnum.LE_END_ENCOUNTER);
          //Logger.SetOn(LogEnum.LE_HEX_WITHIN_RANGE);
          //Logger.SetOn(LogEnum.LE_STARVATION_STATE_CHANGE);
+         Logger.SetOn(LogEnum.LE_SERIALIZE_FEATS);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_WINDOW);
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_PARTY_DIALOG);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_MENU);
