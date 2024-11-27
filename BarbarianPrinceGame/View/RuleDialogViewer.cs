@@ -188,7 +188,6 @@ namespace BarbarianPrince
          catch (System.Collections.Generic.KeyNotFoundException e1)
          {
             // do nothing. This is expected first time dialog is created
-            Logger.Log(LogEnum.LE_GAME_INIT, "ShowTable(): Unable to find key=" + key + " e=" + e1.ToString());
          }
          try
          {

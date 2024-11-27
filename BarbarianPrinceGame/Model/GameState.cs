@@ -2382,6 +2382,7 @@ namespace BarbarianPrince
          //gi.AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
          //gi.Prince.AddSpecialItemToShare(SpecialEnum.MagicBox);
          //gi.Prince.AddSpecialItemToShare(SpecialEnum.HydraTeeth);
+         ////---------------------
          //gi.HydraTeethCount = 5;
          //gi.Prince.AddSpecialItemToShare(SpecialEnum.StaffOfCommand);
          //ITerritory visited = Territory.theTerritories.Find("0109");

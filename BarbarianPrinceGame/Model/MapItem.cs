@@ -884,13 +884,20 @@ namespace BarbarianPrince
       {
          foreach (SpecialEnum item2 in SpecialKeeps)
          {
-            if (item == item2)
+            if (item.ToString() == item2.ToString())
+            {
+               Logger.Log(LogEnum.LE_GET_ITEM, "IsSpecialItemHeld(): Keep mi=" + this.Name + " has item=" + item.ToString());
                return true;
+            }
+
          }
          foreach (SpecialEnum item2 in mySpecialShares)
          {
-            if (item == item2)
+            if (item.ToString() == item2.ToString())
+            {
+               Logger.Log(LogEnum.LE_GET_ITEM, "IsSpecialItemHeld(): Keep mi=" + this.Name + " has item=" + item.ToString());
                return true;
+            }
          }
          return false;
       }
@@ -933,6 +940,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "AddSpecialItemToKeep(): reached default possession=" + item.ToString());
                return false;
          }
+         Logger.Log(LogEnum.LE_ADD_ITEM, "AddSpecialItemToKeep(): Keep mi=" + this.Name + " adding item=" + item.ToString());
          this.SpecialKeeps.Add(item);
          return true;
       }
@@ -975,6 +983,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "AddSpecialItemToShare(): reached default possession=" + item.ToString());
                return false;
          }
+         Logger.Log(LogEnum.LE_ADD_ITEM, "AddSpecialItemToKeep(): Share mi=" + this.Name + " adding item=" + item.ToString());
          this.mySpecialShares.Add(item);
          return true;
       }

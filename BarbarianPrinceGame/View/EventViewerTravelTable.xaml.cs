@@ -555,8 +555,12 @@ namespace BarbarianPrince
          myTextBlockHeader.Inlines.Clear();
          Button b1 = new Button() { Content = "r205", FontFamily = myFontFam1, FontSize = 12, Margin = new Thickness(5, 0, 0, 0), Height = 14 };
          Button b2 = new Button() { Content = "t207", FontFamily = myFontFam1, FontSize = 12, Margin = new Thickness(5, 0, 0, 0), Height = 14 };
+         Button b4 = new Button() { Content = "e205a", FontFamily = myFontFam1, FontSize = 12, Margin = new Thickness(5, 0, 0, 0), Height = 14, Visibility=Visibility.Hidden};
+         if( 0 < myLocalGuides.Count )
+            b4.Visibility = Visibility.Visible;
          b1.Click += ButtonRule_Click;
          b2.Click += ButtonRule_Click;
+         b4.Click += ButtonRule_Click;
          myStackPanelCheckMarks.Children.Clear();
          CheckBox cb1 = new CheckBox() { FontSize = 12, IsEnabled = false, IsChecked = myIsLost, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5, 0, 0, 0), Content = "Party Lost" };
          CheckBox cb2 = new CheckBox() { FontSize = 12, IsEnabled = false, IsChecked = myIsEncounter, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5, 0, 0, 0), Content = "Encounter" };
@@ -642,6 +646,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "UpdateHeader(): reached default s=" + myState.ToString());
                return false;
          }
+         myTextBlockHeader.Inlines.Add(new InlineUIContainer(b4));
          myStackPanelCheckMarks.Children.Add(cb1);
          myStackPanelCheckMarks.Children.Add(cb2);
          return true;
@@ -783,6 +788,17 @@ namespace BarbarianPrince
                label.Content = GetLabelForLostCheck(myGameInstance.MapItemMoves[0]);
                myStackPanelAssignable.Children.Add(label);
                myStackPanelAssignable.Children.Add(img1);
+               if( 0 < myLocalGuides.Count )
+               {
+                  string content = "    -1 for ";
+                  Label labelGuide = new Label() { FontFamily = myFontFam2, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = content };
+                  myStackPanelAssignable.Children.Add(labelGuide);
+                  foreach (IMapItem mi in myLocalGuides)
+                  {
+                     Button b = CreateButton(mi);
+                     myStackPanelAssignable.Children.Add(b);
+                  }
+               }
                if (true == myGameInstance.IsEagleHunt) // they act as guides
                {
                   Label label1 = new Label() { FontFamily = myFontFam2, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = " -1 for " };

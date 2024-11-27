@@ -4694,11 +4694,11 @@ namespace BarbarianPrince
          }
       }
       //--------------------------------------------------------------------
-      public void ShowDieResult(int dieRoll)
+      public void ShowEventViewerDieResult(int dieRoll)
       {
          myGameInstance.EventActive = myGameInstance.EventDisplayed; // As soon as you roll the die, the current event becomes the active event
          GameAction action = myGameInstance.DieRollAction;
-         StringBuilder sb11 = new StringBuilder("      ######ShowDieResult() :");
+         StringBuilder sb11 = new StringBuilder("      ######ShowEventViewerDieResult() :");
          sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
          sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
          sb11.Append(" a="); sb11.Append(action.ToString());
@@ -5342,7 +5342,7 @@ namespace BarbarianPrince
                   Image img = (Image)ui.Child;
                   if (result.VisualHit == img)
                   {
-                     RollEndCallback rollEndCallback = ShowDieResult;
+                     RollEndCallback rollEndCallback = ShowEventViewerDieResult;
                      if (true == img.Name.Contains("DieRoll"))
                      {
                         myDieRoller.RollMovingDie(myCanvas, rollEndCallback);

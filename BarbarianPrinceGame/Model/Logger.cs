@@ -20,7 +20,6 @@ namespace BarbarianPrince
       LE_PARTYMEMBER_ADD,
       LE_REMOVE_KIA,
       LE_PROCESS_MIA,
-      LE_REMOVE_ITEM,
       LE_END_GAME,
       LE_END_GAME_CHECK,
       LE_MOVE_STACKING,
@@ -42,6 +41,9 @@ namespace BarbarianPrince
       LE_ADD_COIN,
       LE_REDUCE_COIN,
       LE_ADD_COIN_AUTO,
+      LE_GET_ITEM,
+      LE_ADD_ITEM,
+      LE_REMOVE_ITEM,
       LE_MANAGE_CACHE,
       LE_LODGING_COST,
       LE_MOUNT_CHANGE,
@@ -55,6 +57,7 @@ namespace BarbarianPrince
       LE_VIEW_APPEND_EVENT,
       LE_VIEW_SHOW_PARTY_DIALOG,
       LE_VIEW_DICE_MOVING,
+      LE_VIEW_DICE_RESULT,
       LE_VIEW_DIALOG_PARTY,
       LE_VIEW_RESET_BATTLE_GRID,
       LE_VIEW_DEC_COUNT_GRID,
@@ -118,7 +121,6 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_GAME_PARTYMEMBER_COUNT);
          Logger.SetOn(LogEnum.LE_PARTYMEMBER_ADD);
          Logger.SetOn(LogEnum.LE_REMOVE_KIA);
-         Logger.SetOn(LogEnum.LE_REMOVE_ITEM);
          Logger.SetOn(LogEnum.LE_END_GAME);
          //Logger.SetOn(LogEnum.LE_END_GAME_CHECK);
          //Logger.SetOn(LogEnum.LE_MOVE_STACKING);
@@ -133,6 +135,9 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_REDUCE_COIN);
          //Logger.SetOn(LogEnum.LE_MANAGE_CACHE);
          //Logger.SetOn(LogEnum.LE_ADD_COIN_AUTO);
+         Logger.SetOn(LogEnum.LE_GET_ITEM);
+         Logger.SetOn(LogEnum.LE_ADD_ITEM);
+         Logger.SetOn(LogEnum.LE_REMOVE_ITEM);
          //Logger.SetOn(LogEnum.LE_LODGING_COST);
          Logger.SetOn(LogEnum.LE_MOUNT_CHANGE);
          //Logger.SetOn(LogEnum.LE_COMBAT_STATE);
@@ -148,16 +153,17 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_HEX_WITHIN_RANGE);
          //Logger.SetOn(LogEnum.LE_STARVATION_STATE_CHANGE);
          Logger.SetOn(LogEnum.LE_SERIALIZE_FEATS);
+         //Logger.SetOn(LogEnum.LE_RETURN_TO_START);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_WINDOW);
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_PARTY_DIALOG);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_MENU);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_STATUS_BAR);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_ACTION_PANEL);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_ACTION_PANEL_CLEAR);
-         //Logger.SetOn(LogEnum.LE_RETURN_TO_START);
          //Logger.SetOn(LogEnum.LE_VIEW_APPEND_EVENT);
          //Logger.SetOn(LogEnum.LE_VIEW_DIALOG_PARTY);
          //Logger.SetOn(LogEnum.LE_VIEW_DICE_MOVING);
+         //Logger.SetOn(LogEnum.LE_VIEW_DICE_RESULT);
          //Logger.SetOn(LogEnum.LE_VIEW_RESET_BATTLE_GRID);
          //Logger.SetOn(LogEnum.LE_VIEW_DEC_COUNT_GRID);
          Logger.SetOn(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER);
@@ -166,7 +172,7 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_VIEW_MIM);
          //Logger.SetOn(LogEnum.LE_VIEW_MIM_ADD);
          //Logger.SetOn(LogEnum.LE_VIEW_MIM_CLEAR);
-         Logger.SetOn(LogEnum.LE_VIEW_SHOW_LOADS);
+         //Logger.SetOn(LogEnum.LE_VIEW_SHOW_LOADS);
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_HUNT);
          return true;
       }

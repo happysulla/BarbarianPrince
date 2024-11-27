@@ -44,6 +44,13 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "DiceRoller() ReadDiceXml() return false");
                CtorError = true;
             }
+            int i = 0;
+            foreach( Button b in theDice )
+            {
+               Logger.Log(LogEnum.LE_VIEW_DICE_RESULT, "DiceRoller(): button[" + i.ToString() + "]=" + b.Name);
+               ++i;
+            }
+
          }
       }
       //-----------------------------------------------------------
@@ -123,25 +130,27 @@ namespace BarbarianPrince
          HideDie();
          IMapPoint mp = GetCanvasCenter(sv, c);
          IMapPoint mp1 = new MapPoint(mp.X, mp.Y - 0.65 * Utilities.theMapItemSize / Utilities.ZoomCanvas);
-         int randomNum = Utilities.RandomGenerator.Next(0, 6);
-         int die1 = RollMovingDie(sv, c, mp1, randomNum);
+         int randomNum1 = Utilities.RandomGenerator.Next(0, 6);
+         int die1 = RollMovingDie(sv, c, mp1, randomNum1);
          if (0 == die1)
          {
-            Logger.Log(LogEnum.LE_ERROR, "RollStationaryDice(): 1-RollMovingDice() returned 0");
+            Logger.Log(LogEnum.LE_ERROR, "RollMovingDice(): 1-RollMovingDice() returned 0");
             return 0;
          }
          //--------------------------------------------------------
          myDieRollResults = 0;
          myCallbackEndRoll = cb;
          IMapPoint mp2 = new MapPoint(mp.X, mp.Y + 0.65 * Utilities.theMapItemSize / Utilities.ZoomCanvas);
-         randomNum = Utilities.RandomGenerator.Next(6, 12);
-         int die2 = RollMovingDie(sv, c, mp2, randomNum);
+         int randomNum2 = Utilities.RandomGenerator.Next(6, 12);
+         int die2 = RollMovingDie(sv, c, mp2, randomNum2);
          if (0 == die2)
          {
-            Logger.Log(LogEnum.LE_ERROR, "RollStationaryDice(): 2-RollMovingDice() returned 0");
+            Logger.Log(LogEnum.LE_ERROR, "RollMovingDice(): 2-RollMovingDice() returned 0");
             return 0;
          }
          myDieRollResults = die1 + die2;
+         int dieRollRandomNum = randomNum1 + randomNum2 - 4;
+         Logger.Log(LogEnum.LE_VIEW_DICE_RESULT, "\t!!!!!RollMovingDice(): r1=" + randomNum1.ToString() + " r2=" + randomNum2 + " d1=" + die1.ToString() + " d2=" + die2.ToString());
          return myDieRollResults;
       }
       public int Roll3MovingDice(Canvas c, RollEndCallback cb)
@@ -198,10 +207,10 @@ namespace BarbarianPrince
                {
                   if (reader.IsStartElement())
                   {
-                     string imageName = reader.GetAttribute("value");
+                     string imageName = reader.GetAttribute("value"); // Die1
                      reader.Read();
-                     string zoomStr = reader.GetAttribute("value");
-                     Double zoom = Double.Parse(zoomStr);
+                     string zoomStr = reader.GetAttribute("value"); // zoom
+                     Double zoom = Double.Parse(zoomStr); 
                      reader.Read();
                      string topImageName = reader.GetAttribute("value");
                      //------------------------------------------------

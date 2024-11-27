@@ -73,7 +73,6 @@ namespace BarbarianPrince
          try
          {
             ImageControl = (Image)sender;
-            // Logger.Log(LogEnum.LE_GAME_INIT, "ImageAnimationLoaded(): name=" + ImageControl.Name);
             AnimationController = ImageBehavior.GetAnimationController(ImageControl);
             if (null == AnimationController)
                Logger.Log(LogEnum.LE_ERROR, "ImageAnimationCompleted(): controller=null");
