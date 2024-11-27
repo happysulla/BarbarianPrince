@@ -323,6 +323,7 @@ namespace BarbarianPrince
          switch (action)
          {
             case GameAction.ShowInventory:
+            case GameAction.ShowGameFeats:
             case GameAction.ShowRuleListing:
             case GameAction.ShowCharacterDescription:
             case GameAction.ShowEventListing:
