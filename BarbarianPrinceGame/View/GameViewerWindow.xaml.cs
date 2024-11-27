@@ -674,12 +674,11 @@ namespace BarbarianPrince
       private void SetDisplayIconForUninstall()
       {
 #if !DEBUG // Only do this for release version
-         if (true == Properties.Settings.Default.theIsFirstRun)
+         if (true == Properties.Settings.Default.theIsFirstRun) // only do once - must set it in registry
          {
             try
             {
                string iconSourcePath = System.IO.Path.Combine(MapImage.theImageDirectory, "BarbarianPrince.ico");
-               //DisplayIcon == "dfshim.dll,2" => 
                var myUninstallKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall");
                string[] mySubKeyNames = myUninstallKey.GetSubKeyNames();
                for (int i = 0; i < mySubKeyNames.Length; i++)
