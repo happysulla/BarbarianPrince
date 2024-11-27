@@ -26,6 +26,7 @@ using System.Reflection;
 using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
+using Microsoft.Win32;
 
 namespace BarbarianPrince
 {
@@ -59,11 +60,10 @@ namespace BarbarianPrince
             IGameInstance gi = new GameInstance();
             if (true == gi.CtorError)
             {
-               Logger.Log(LogEnum.LE_ERROR, "MainWindow(): GameInstance() ctor error");
                Application.Current.Shutdown();
                return;
             }
-            myGameEngine = new GameEngine(this);
+            myGameEngine = new GameEngine(this);                         // GameEngine initiates logger
             myGameViewerWindow = new GameViewerWindow(myGameEngine, gi); // Start the main view
             if (true == myGameViewerWindow.CtorError)
             {

@@ -1,10 +1,12 @@
 ﻿using BarbarianPrince.Properties;
+using Microsoft.Win32;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
@@ -218,6 +220,7 @@ namespace BarbarianPrince
             GameEngine.theFeatsInGame = new GameFeat();
          //GameEngine.theFeatsInGameStarting = new GameFeat(); // <cgs> TEST
          GameEngine.theFeatsInGameStarting = GameEngine.theFeatsInGame.Clone(); // need to know difference between starting feats and feats that happen in this game
+         SetDisplayIconForUninstall();
          //---------------------------------------------------------------
          Utilities.theBrushBlood.Color = Color.FromArgb(0xFF, 0xA4, 0x07, 0x07);
          Utilities.theBrushRegion.Color = Color.FromArgb(0x7F, 0x11, 0x09, 0xBB); // nearly transparent but slightly colored
@@ -667,6 +670,41 @@ namespace BarbarianPrince
          if (0 == options.Count)
             options.SetOriginalGameOptions();
          return options;
+      }
+      private void SetDisplayIconForUninstall()
+      {
+#if !DEBUG // Only do this for release version
+         if (true == Properties.Settings.Default.theIsFirstRun)
+         {
+            try
+            {
+               string iconSourcePath = System.IO.Path.Combine(MapImage.theImageDirectory, "BarbarianPrince.ico");
+               //DisplayIcon == "dfshim.dll,2" => 
+               var myUninstallKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall");
+               string[] mySubKeyNames = myUninstallKey.GetSubKeyNames();
+               for (int i = 0; i < mySubKeyNames.Length; i++)
+               {
+                  RegistryKey aKey = myUninstallKey.OpenSubKey(mySubKeyNames[i], true);
+                  // ClickOnce(Publish)
+                  // Publish -> Settings -> Options 
+                  // Publish Options -> Description -> Product Name (is your DisplayName)
+                  string displayName = (string)aKey.GetValue("DisplayName");
+                  if (true == displayName.Contains("Barbarian Prince"))
+                  {
+                     Logger.Log(LogEnum.LE_GAME_INIT, "SetDisplayIconForUninstall(): iconSourcePath=" + iconSourcePath);
+                     aKey.SetValue("DisplayIcon", iconSourcePath);
+                     break;
+                  }
+               }
+               Properties.Settings.Default.theIsFirstRun = false;
+               Properties.Settings.Default.Save();
+            }
+            catch (Exception ex)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "SetDisplayIconForUninstall(): e=" + ex.ToString());
+            }
+         }
+#endif
       }
       //---------------------------------------
       private string UpdateTitle(Options options)
