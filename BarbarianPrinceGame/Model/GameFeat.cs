@@ -60,6 +60,7 @@ namespace BarbarianPrince
       //-------------------------------------
       public GameFeat()
       {
+         myIsOriginalGameWin = false;
          myIs500GoldWin = false;
          myIsNobleAllyWin = false;
          myIsBlessedWin = false;
@@ -110,6 +111,7 @@ namespace BarbarianPrince
       public GameFeat Clone()
       {
          GameFeat starting = new GameFeat();
+         starting.myIsOriginalGameWin = this.myIsOriginalGameWin;
          starting.myIs500GoldWin = this.myIs500GoldWin;
          starting.myIsNobleAllyWin = this.myIsNobleAllyWin;
          starting.myIsBlessedWin = this.myIsBlessedWin;
@@ -154,6 +156,8 @@ namespace BarbarianPrince
       }
       public bool IsEqual(GameFeat starting)
       {
+         if (this.myIsOriginalGameWin != starting.myIsOriginalGameWin)
+            return false;
          if (this.myIs500GoldWin != starting.myIs500GoldWin)
             return false;
          if (this.myIsNobleAllyWin != starting.myIsNobleAllyWin)

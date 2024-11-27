@@ -686,6 +686,8 @@ namespace BarbarianPrince
             gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
             gi.Statistic.myEndCoinCount = gi.GetCoins();
             gi.Statistic.myEndFoodCount = gi.GetFoods();
+            if (0 == gi.Options.GetGameIndex())
+               GameEngine.theFeatsInGame.myIsOriginalGameWin = true;
          }
          else if (GameAction.EndGameLost == action)
          {

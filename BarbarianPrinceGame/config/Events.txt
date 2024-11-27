@@ -57,7 +57,8 @@ Evil events have overtaken your Northlands Kingdom. Your father, the old king, i
 You have escaped, and must collect 500 gold pieces to raise a force to smash them and retake your heritage. Furthermore, the usurpers have powerful friends overseas. If you can't return to take them out in ten weeks, their allies will arrive and you lose your kingdom forever. 
 <LineBreak/><LineBreak/>
 At dawn, you roll out of the merchant wagons into a ditch, dust off your clothes, loosen your swordbelt, and get ready to start the first day of your adventure <InlineUIContainer><Button Content='r203' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.
-<LineBreak/><LineBreak/>The original game is brutally difficult to win. The <Bold>recommended</Bold> fun game provides a random starting party, a random starting hex, food, and coins. Details can be viewed on the <Bold>File | Options...</Bold> menu where other game options can be selected. If you choose different options, you must select <Bold>File | New</Bold> menu to start a new game with those options.
+<LineBreak/><LineBreak/>The original game is brutally difficult to win. The <Bold>recommended</Bold> fun game provides a random starting party, a random starting hex, food, and coins. Details can be viewed on the <Bold>File | Options...</Bold> menu where other game options can be selected. 
+<LineBreak/><LineBreak/>If you want different options, you must open the Options Dialog with <Bold>File | Options...</Bold> menu, and check the <Bold>AutoSetup</Bold> checkbox. Then, select <Bold>File | New</Bold> menu to start a new game with those options.
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button Content='Original Game' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
     or    

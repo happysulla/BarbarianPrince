@@ -7439,6 +7439,29 @@ namespace BarbarianPrince
                action = GameAction.EncounterEnd;
                myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
                break;
+            case "e503a":
+               action = GameAction.Error;
+               if (GamePhase.Campfire == myGameInstance.GamePhase)
+               {
+                  if (false == GameEngine.theFeatsInGame.IsEqual(GameEngine.theFeatsInGameStarting))
+                  {
+                     action = GameAction.CampfireShowFeat;
+                  }
+                  else
+                  {
+                     action = GameAction.CampfireShowFeatEnd;
+                     myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas);
+                  }
+               }
+               else
+               {
+                  if (false == GameEngine.theFeatsInGame.IsEqual(GameEngine.theFeatsInGameStarting))
+                     action = GameAction.EndGameShowFeats;
+                  else
+                     action = GameAction.EndGameShowStats;
+               }
+               myGameEngine.PerformAction(ref myGameInstance, ref action, 0);
+               break;
             default:
                break;
          }
