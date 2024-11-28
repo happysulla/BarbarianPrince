@@ -205,16 +205,12 @@ namespace BarbarianPrince
       }
       protected bool SetResurrectionStateCheck(IGameInstance gi, ref GameAction action)
       {
-         if (true == gi.IsResurrectedThisTurn)
+         foreach (IMapItem mi in gi.ResurrectedMembers)
          {
-            gi.IsResurrectedThisTurn = false;
-            foreach (IMapItem mi in gi.ResurrectedMembers)
-            {
-               mi.Reset();
-               gi.AddCompanion(mi);
-               mi.Endurance = Math.Max(1, mi.Endurance - 1);
-               mi.IsResurrected = true;
-            }
+            mi.Reset();
+            gi.AddCompanion(mi);
+            mi.Endurance = Math.Max(1, mi.Endurance - 1);
+            mi.IsResurrected = true;
          }
          if (false == SetPlagueStateCheck(gi, ref action))
          {
@@ -631,6 +627,7 @@ namespace BarbarianPrince
          }
          else if (499 < gi.GetCoins())
          {
+            Logger.Log(LogEnum.LE_END_GAME, "PerformEndCheck(): EndGameWon 500+ gold ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString());
             action = GameAction.EndGameWin; // PerformEndCheck()
             gi.GamePhase = GamePhase.EndGame;
             gi.EndGameReason = "500+ gold";
@@ -641,6 +638,7 @@ namespace BarbarianPrince
          {
             if (true == gi.IsBlessed)
             {
+               Logger.Log(LogEnum.LE_END_GAME, "PerformEndCheck(): EndGameWon Blessed ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString());
                action = GameAction.EndGameWin; // PerformEndCheck()
                gi.GamePhase = GamePhase.EndGame;
                gi.EndGameReason = "Blessed by Gods and North of Tragoth River";
@@ -649,6 +647,7 @@ namespace BarbarianPrince
             }
             else if (true == gi.IsSpecialItemHeld(SpecialEnum.StaffOfCommand))
             {
+               Logger.Log(LogEnum.LE_END_GAME, "PerformEndCheck(): EndGameWon Staff ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString());
                action = GameAction.EndGameWin; // PerformEndCheck()
                gi.GamePhase = GamePhase.EndGame;
                gi.EndGameReason = "Hold the Staff of Command North of Tragoth River";
@@ -659,6 +658,7 @@ namespace BarbarianPrince
             {
                if ("0101" == gi.Prince.Territory.Name)  // In Ogon 
                {
+                  Logger.Log(LogEnum.LE_END_GAME, "PerformEndCheck(): EndGameWon Helm1 ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString());
                   action = GameAction.EndGameWin; // PerformEndCheck()
                   gi.GamePhase = GamePhase.EndGame;
                   gi.EndGameReason = "Hold the Royal Helm of Northlands when in Ogon";
@@ -667,6 +667,7 @@ namespace BarbarianPrince
                }
                else if ("1501" == gi.Prince.Territory.Name) // In Weshor
                {
+                  Logger.Log(LogEnum.LE_END_GAME, "PerformEndCheck(): EndGameWon Helm2 ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString());
                   action = GameAction.EndGameWin; // PerformEndCheck()
                   gi.GamePhase = GamePhase.EndGame;
                   gi.EndGameReason = "Hold the Royal Helm of Northlands when in Weshor";
@@ -688,6 +689,7 @@ namespace BarbarianPrince
             gi.Statistic.myEndFoodCount = gi.GetFoods();
             if (0 == gi.Options.GetGameIndex())
                GameEngine.theFeatsInGame.myIsOriginalGameWin = true;
+            Logger.Log(LogEnum.LE_SERIALIZE_FEATS, "PerformEndCheck(): 1-feats=" + GameEngine.theFeatsInGame.ToString());
          }
          else if (GameAction.EndGameLost == action)
          {
@@ -697,6 +699,7 @@ namespace BarbarianPrince
             gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
             gi.Statistic.myEndCoinCount = gi.GetCoins();
             gi.Statistic.myEndFoodCount = gi.GetFoods();
+            Logger.Log(LogEnum.LE_SERIALIZE_FEATS, "PerformEndCheck(): 2-feats=" + GameEngine.theFeatsInGame.ToString());
          }
          return isGameEnd;
       }
@@ -1485,18 +1488,7 @@ namespace BarbarianPrince
                }
                AddStartingTestingOptions(gi);
                //------------------------------------------
-               StringBuilder sb = new StringBuilder();
-               sb.Append("GameStateSetup(): castles=");
-               sb.Append(GameEngine.theFeatsInGame.myVisitedCastles.Count);
-               sb.Append(" towns=");
-               sb.Append(GameEngine.theFeatsInGame.myVisitedTowns.Count);
-               sb.Append(" ruins=");
-               sb.Append(GameEngine.theFeatsInGame.myVisitedRuins.Count);
-               sb.Append(" temples=");
-               sb.Append(GameEngine.theFeatsInGame.myVisitedTemples.Count);
-               sb.Append(" oasis=");
-               sb.Append(GameEngine.theFeatsInGame.myVisitedOasises.Count);
-               Logger.Log(LogEnum.LE_SERIALIZE_FEATS, sb.ToString());
+               Logger.Log(LogEnum.LE_SERIALIZE_FEATS, "GameStateSetup.PerformAction(RemoveSplashScreen): \n feats=" + GameEngine.theFeatsInGame.ToString() + "\nsfeats=" + GameEngine.theFeatsInGameStarting.ToString());
                break;
             case GameAction.SetupShowCalArath:
                gi.EventDisplayed = gi.EventActive = "e000a";
@@ -2491,7 +2483,7 @@ namespace BarbarianPrince
          //---------------------
          //GameEngine.theFeatsInGame.myIsEagleAdded = true;
          //GameEngine.theFeatsInGame.myIsPurchaseFoulbane = true;
-         //GameEngine.theFeatsInGame.myIsRescueHier = true;
+         //GameEngine.theFeatsInGame.myIsRescueHeir = true;
       }
    }
    //-----------------------------------------------------
@@ -6635,7 +6627,7 @@ namespace BarbarianPrince
                   break;
                case GameAction.E144RescueCast:
                case GameAction.E144RescueImpress:
-                  GameEngine.theFeatsInGame.myIsRescueHier = true;
+                  GameEngine.theFeatsInGame.myIsRescueHeir = true;
                   gi.EventDisplayed = gi.EventActive = "e144c";
                   gi.IsSecretBaronHuldra = false;
                   if (false == EncounterEscape(gi, ref action)) // move to random hex
@@ -6647,7 +6639,7 @@ namespace BarbarianPrince
                   gi.AddCompanion(trueHeir);
                   break;
                case GameAction.E144RescueCharm:
-                  GameEngine.theFeatsInGame.myIsRescueHier = true;
+                  GameEngine.theFeatsInGame.myIsRescueHeir = true;
                   gi.EventDisplayed = gi.EventActive = "e144c";
                   gi.IsSecretBaronHuldra = false;
                   if (false == EncounterEscape(gi, ref action)) // move to random hex
@@ -6660,7 +6652,7 @@ namespace BarbarianPrince
                   gi.IsCharismaTalismanActive = true;
                   break;
                case GameAction.E144RescueKill:
-                  GameEngine.theFeatsInGame.myIsRescueHier = true;
+                  GameEngine.theFeatsInGame.myIsRescueHeir = true;
                   gi.EventStart = gi.EventDisplayed = gi.EventActive = "e144c";
                   gi.IsSecretBaronHuldra = false;
                   if (false == EncounterEscape(gi, ref action)) // move to random hex

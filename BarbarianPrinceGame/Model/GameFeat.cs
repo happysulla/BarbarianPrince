@@ -30,7 +30,7 @@ namespace BarbarianPrince
       public bool myIsMerchantAdded;
       //-------------------------------------
       public bool myIsHydraTeethUsed;          // use hydra teeth
-      public bool myIsRescueHier;              // Rescue Huldra Heir from Hill Tribe
+      public bool myIsRescueHeir;              // Rescue Huldra Heir from Hill Tribe
       public bool myIsSneakAttack;             // Perform sneak attack on Huldra
       public bool myIsStealGems;               // Steal Gems from Dragot using Foulbane
       //-------------------------------------
@@ -80,7 +80,7 @@ namespace BarbarianPrince
          myIsMerchantAdded = false;
          //-------------------------------------
          myIsHydraTeethUsed = false;
-         myIsRescueHier = false;
+         myIsRescueHeir = false;
          myIsSneakAttack = false;
          myIsStealGems = false;
          //-------------------------------------
@@ -137,7 +137,7 @@ namespace BarbarianPrince
          starting.myIsVisitAllRuins = this.myIsVisitAllRuins;
          starting.myIsVisitAllOasis = this.myIsVisitAllOasis;
          starting.myIsHydraTeethUsed = this.myIsHydraTeethUsed;
-         starting.myIsRescueHier = this.myIsRescueHier;
+         starting.myIsRescueHeir = this.myIsRescueHeir;
          starting.myIsSneakAttack = this.myIsSneakAttack;
          starting.myIsStealGems = this.myIsStealGems;
          starting.myIsPurchaseFoulbane = this.myIsPurchaseFoulbane;
@@ -213,7 +213,7 @@ namespace BarbarianPrince
          //--------------------------------------
          if (this.myIsHydraTeethUsed != starting.myIsHydraTeethUsed)
             return false;
-         if (this.myIsRescueHier != starting.myIsRescueHier)
+         if (this.myIsRescueHeir != starting.myIsRescueHeir)
             return false;
          if (this.myIsSneakAttack != starting.myIsSneakAttack)
             return false;
@@ -362,9 +362,9 @@ namespace BarbarianPrince
             starting.myIsHydraTeethUsed = this.myIsHydraTeethUsed;
             return "Used Hydra teeth in battle";
          }
-         if (starting.myIsRescueHier != this.myIsRescueHier)
+         if (starting.myIsRescueHeir != this.myIsRescueHeir)
          {
-            starting.myIsRescueHier = this.myIsRescueHier;
+            starting.myIsRescueHeir = this.myIsRescueHeir;
             return "Rescued true hier from hill tribe";
          }
          if (starting.myIsSneakAttack != this.myIsSneakAttack)
@@ -388,6 +388,122 @@ namespace BarbarianPrince
             return "Purchased chaga drug from temple";
          }
          return "";
+      }
+      public override String ToString()
+      {
+         StringBuilder sb = new StringBuilder();
+         sb.Append("{ ");
+         sb.Append("wOrg=");
+         sb.Append(myIsOriginalGameWin.ToString());
+         sb.Append(", w500=");
+         sb.Append(myIsOriginalGameWin.ToString());
+         sb.Append(", wAlly=");
+         sb.Append(myIsNobleAllyWin.ToString());
+         sb.Append(", wBless=");
+         sb.Append(myIsBlessedWin.ToString());
+         sb.Append(", wStaff=");
+         sb.Append(myIsStaffOfCommandWin.ToString());
+         sb.Append(", wHelm=");
+         sb.Append(myIsRoyalHelmWin.ToString());
+         sb.Append(", wHuldra1=");
+         sb.Append(myIsHuldraDefeatedInBattle.ToString());
+         sb.Append(", wHuldra2=");
+         sb.Append(myIsHuldraDesposedWin.ToString());
+         sb.Append(", tAir=");
+         sb.Append(myIsAirTravel.ToString());
+         sb.Append(", tRaft=");
+         sb.Append(myIsRaftTravel.ToString());
+         sb.Append(", tArch=");
+         sb.Append(myIsArchTravel.ToString());
+         sb.Append(", kDragon=");
+         sb.Append(myIsDragonKiller.ToString());
+         sb.Append(", #bandits=");
+         sb.Append(myNumBanditKill.ToString());
+         sb.Append(", kBandit=");
+         sb.Append(myIsBanditKiller.ToString());
+         sb.Append(", #orcs=");
+         sb.Append(myNumOrcKill.ToString());
+         sb.Append(", kOrc=");
+         sb.Append(myIsOrcKiller.ToString());
+         sb.Append(", #golins=");
+         sb.Append(myNumGoblinKill.ToString());
+         sb.Append(", kGoblin=");
+         sb.Append(myIsGoblinKiller.ToString());
+         sb.Append(", #wolfs=");
+         sb.Append(myNumWolfKill.ToString());
+         sb.Append(", kWolf=");
+         sb.Append(myIsWolfKiller.ToString());
+         sb.Append(", foul=");
+         sb.Append(myIsPurchaseFoulbane.ToString());
+         sb.Append(", chaga=");
+         sb.Append(myIsPurchaseChaga.ToString());
+         if ( 0 < myVisitedTowns.Count )
+         {
+            sb.Append(", vTowns=[");
+            for( int i=0; i<myVisitedTowns.Count; ++i)
+            {
+               sb.Append(myVisitedTowns[i]);
+               if( i != myVisitedTowns.Count - 1 )
+                  sb.Append(',');
+            }
+            sb.Append("]");
+         }
+         sb.Append(", town?=");
+         sb.Append(myIsVisitAllTowns.ToString());
+         if (0 < myVisitedCastles.Count)
+         {
+            sb.Append(", vCastles=[");
+            for (int i = 0; i < myVisitedCastles.Count; ++i)
+            {
+               sb.Append(myVisitedCastles[i]);
+               if (i != myVisitedCastles.Count - 1)
+                  sb.Append(',');
+            }
+            sb.Append("]");
+         }
+         sb.Append(", castle?=");
+         sb.Append(myIsVisitAllCastles.ToString());
+         if (0 < myVisitedTemples.Count)
+         {
+            sb.Append(", vTemples=[");
+            for (int i = 0; i < myVisitedTemples.Count; ++i)
+            {
+               sb.Append(myVisitedTemples[i]);
+               if (i != myVisitedTemples.Count - 1)
+                  sb.Append(',');
+            }
+            sb.Append("]");
+         }
+         sb.Append(", temple?=");
+         sb.Append(myIsVisitAllTemples.ToString());
+         if (0 < myVisitedRuins.Count)
+         {
+            sb.Append(", vRuins=[");
+            for (int i = 0; i < myVisitedRuins.Count; ++i)
+            {
+               sb.Append(myVisitedRuins[i]);
+               if (i != myVisitedRuins.Count - 1)
+                  sb.Append(',');
+            }
+            sb.Append("]");
+         }
+         sb.Append(", ruin?=");
+         sb.Append(myIsVisitAllRuins.ToString());
+         if (0 < myVisitedRuins.Count)
+         {
+            sb.Append(", vOasis=[");
+            for (int i = 0; i < myVisitedOasises.Count; ++i)
+            {
+               sb.Append(myVisitedOasises[i]);
+               if (i != myVisitedOasises.Count - 1)
+                  sb.Append(',');
+            }
+            sb.Append("]");
+         }
+         sb.Append(", oasis?=");
+         sb.Append(myIsVisitAllOasis.ToString());
+         sb.Append(" }");
+         return sb.ToString();
       }
    };
 

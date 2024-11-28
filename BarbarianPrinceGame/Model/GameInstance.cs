@@ -188,7 +188,6 @@ namespace BarbarianPrince
       public bool IsSlaveGirlActive { set; get; } = false;
       public bool IsGiftCharmActive { set; get; } = false;
       public bool IsPegasusSkip { set; get; } = false;
-      public bool IsResurrectedThisTurn { get; set; } = false;
       public bool IsCharismaTalismanActive { set; get; } = false;
       public bool IsSeekNewModifier { set; get; } = false;
       public int PurchasedHenchman { set; get; } = 0;// e210f - Amount  of henchmen hired  
@@ -1889,9 +1888,7 @@ namespace BarbarianPrince
       public void ProcessIncapacitedPartyMembers(string reason, bool isEscaping = false)
       {
          if (true == Prince.IsKilled) // If prince killed, no need to look at other members
-         {
             return;
-         }
          //--------------------------------
          int numTrueLovesBefore = 0;
          bool isMemberKilled = false;
@@ -1959,7 +1956,7 @@ namespace BarbarianPrince
                if( true == mi.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
                {
                   mi.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
-                  this.ResurrectedMembers.Add(mi);
+                  this.ResurrectedMembers.Add(mi); // ProcessIncapacitedPartyMembers()
                }
                if (false == isEscaping)
                {
@@ -2123,7 +2120,7 @@ namespace BarbarianPrince
          if (true == victim.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
          {
             victim.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
-            this.ResurrectedMembers.Add(victim);
+            this.ResurrectedMembers.Add(victim); // RemoveVictimInParty()
          }
          return true;
       }

@@ -453,7 +453,7 @@ r201	"<Bold>r201 Characters</Bold>
 <LineBreak/><LineBreak/>To determine your own personal characteristics at the start of the game, see
  <InlineUIContainer><Button Content='r202' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>"
 r202	"<Bold>r202 The Barbarian Prince</Bold>
-<LineBreak/><LineBreak/>You begin play as Cal Arath, rightful hier to the throne of the Northlands Kingdom. 
+<LineBreak/><LineBreak/>You begin play as Cal Arath, rightful heir to the throne of the Northlands Kingdom. 
 <LineBreak/><LineBreak/> - Few humans can match your skill with trusty Bonebitter, your broadsword -- you have a combat skill of eight. 
 <LineBreak/> - Life is the harsh northlands has developed your powerful body and magnificent physique -- you have endurance nine. 
 <LineBreak/> - Alas, in making your escape, you could only grab a few coins -- your wealth code is two. See

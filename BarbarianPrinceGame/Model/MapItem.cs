@@ -895,7 +895,7 @@ namespace BarbarianPrince
          {
             if (item.ToString() == item2.ToString())
             {
-               Logger.Log(LogEnum.LE_GET_ITEM, "IsSpecialItemHeld(): Keep mi=" + this.Name + " has item=" + item.ToString());
+               Logger.Log(LogEnum.LE_GET_ITEM, "IsSpecialItemHeld(): Share mi=" + this.Name + " has item=" + item.ToString());
                return true;
             }
          }

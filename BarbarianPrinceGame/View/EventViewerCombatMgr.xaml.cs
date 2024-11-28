@@ -1079,7 +1079,7 @@ namespace BarbarianPrince
             {
                if ((true == myCatVictim.IsKilled) || (true == myCatVictim.IsUnconscious))
                {
-                  if (true == myCatVictim.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+                  if ( (true == myCatVictim.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace)) && (false == myCatVictim.Name.Contains("Prince")) )
                      myGameInstance.ResurrectedMembers.Add(myCatVictim);
                   if (false == myGameInstance.RemoveVictimInParty(myCatVictim))
                   {
@@ -4149,7 +4149,7 @@ namespace BarbarianPrince
                }
                if (true == mi.IsKilled) // If party member is killed, can have the special possessions that they own
                {
-                  if (true == mi.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+                  if ( (true == mi.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace)) && (false == mi.Name.Contains("Prince")) )
                   {
                      mi.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
                      myGameInstance.ResurrectedMembers.Add(mi);
@@ -4193,7 +4193,7 @@ namespace BarbarianPrince
                   //---------------------------------
                   ++myGameInstance.Statistic.myNumOfPartyKilled;
                   //---------------------------------
-                  if (true == mi.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+                  if ( (true == mi.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace)) && (false == mi.Name.Contains("Prince")) )
                   {
                      mi.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
                      myGameInstance.ResurrectedMembers.Add(mi);
@@ -4270,7 +4270,7 @@ namespace BarbarianPrince
                   //---------------------------------
                   ++myGameInstance.Statistic.myNumOfPartyKilled;
                   //---------------------------------
-                  if (true == mi.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
+                  if ( (true == mi.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace)) && (false == mi.Name.Contains("Prince")) )
                   {
                      mi.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
                      myGameInstance.ResurrectedMembers.Add(mi);

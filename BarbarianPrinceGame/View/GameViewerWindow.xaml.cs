@@ -214,12 +214,12 @@ namespace BarbarianPrince
          if (false == String.IsNullOrEmpty(Settings.Default.GameTypeTotal))
             myGameEngine.Statistics[6] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeTotal);
          //---------------------------------------------------------------
+         //GameEngine.theFeatsInGameStarting = new GameFeat(); // <cgs> TEST
+         GameEngine.theFeatsInGame = new GameFeat();
          if (false == String.IsNullOrEmpty(Settings.Default.theGameFeat))
             GameEngine.theFeatsInGame = Utilities.Deserialize<GameFeat>(Settings.Default.theGameFeat);
-         else
-            GameEngine.theFeatsInGame = new GameFeat();
-         //GameEngine.theFeatsInGameStarting = new GameFeat(); // <cgs> TEST
          GameEngine.theFeatsInGameStarting = GameEngine.theFeatsInGame.Clone(); // need to know difference between starting feats and feats that happen in this game
+         //---------------------------------------------------------------
          SetDisplayIconForUninstall();
          //---------------------------------------------------------------
          Utilities.theBrushBlood.Color = Color.FromArgb(0xFF, 0xA4, 0x07, 0x07);
@@ -303,7 +303,6 @@ namespace BarbarianPrince
          //-------------------------------------------------------
          else if ((GameAction.UpdateLoadingGame == action) || (GameAction.UpdateNewGame == action) )
          {
-            SaveDefaultsToSettings(); // UpdateView() - UpdateGameOptions
             myGameInstance = gi;
             myButtonMapItems.Clear();
             foreach (UIElement ui in myCanvas.Children) // remove all buttons on map
@@ -705,6 +704,42 @@ namespace BarbarianPrince
             }
          }
 #endif
+      }
+      private void SaveDefaultsToSettings(bool isWindowPlacementSaved = true)
+      {
+         if( true == isWindowPlacementSaved)
+         {
+            WindowPlacement wp; // Persist window placement details to application settings
+            var hwnd = new WindowInteropHelper(this).Handle;
+            if (false == GetWindowPlacement(hwnd, out wp))
+               Logger.Log(LogEnum.LE_ERROR, "OnClosing(): GetWindowPlacement() returned false");
+            string sWinPlace = Utilities.Serialize<WindowPlacement>(wp);
+            Settings.Default.WindowPlacement = sWinPlace;
+         }
+         //-------------------------------------------
+         Settings.Default.ZoomCanvas = Utilities.ZoomCanvas;
+         //-------------------------------------------
+         Settings.Default.ScrollViewerHeight = myScollViewerInside.Height;
+         Settings.Default.ScrollViewerWidth = myScollViewerInside.Width;
+         //-------------------------------------------
+         Settings.Default.GameDirectoryName = GameLoadMgr.theGamesDirectory;
+         //-------------------------------------------
+         string sOptions = Utilities.Serialize<Options>(myGameInstance.Options);
+         Settings.Default.GameOptions = sOptions;
+         //-------------------------------------------
+         Settings.Default.GameTypeOriginal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[0]);
+         Settings.Default.GameTypeRandParty = Utilities.Serialize<GameStat>(myGameEngine.Statistics[1]);
+         Settings.Default.GameTypeRandHex = Utilities.Serialize<GameStat>(myGameEngine.Statistics[2]);
+         Settings.Default.GameTypeRand = Utilities.Serialize<GameStat>(myGameEngine.Statistics[3]);
+         Settings.Default.GameTypeFun = Utilities.Serialize<GameStat>(myGameEngine.Statistics[4]);
+         Settings.Default.GameTypeCustom = Utilities.Serialize<GameStat>(myGameEngine.Statistics[5]);
+         Settings.Default.GameTypeTotal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[6]);
+         //-------------------------------------------
+         Logger.Log(LogEnum.LE_SERIALIZE_FEATS, "GameViewerWindow(): BEFORE:\n feats=" + GameEngine.theFeatsInGame.ToString() );
+         Settings.Default.theGameFeat = Utilities.Serialize<GameFeat>(GameEngine.theFeatsInGame);
+         Logger.Log(LogEnum.LE_SERIALIZE_FEATS, "GameViewerWindow(): AFTER:\n feats=" + GameEngine.theFeatsInGame.ToString());
+         //-------------------------------------------
+         Settings.Default.Save();
       }
       //---------------------------------------
       private string UpdateTitle(Options options)
@@ -2529,18 +2564,6 @@ namespace BarbarianPrince
          Settings.Default.GameTypeFun = Utilities.Serialize<GameStat>(myGameEngine.Statistics[4]);
          Settings.Default.GameTypeCustom = Utilities.Serialize<GameStat>(myGameEngine.Statistics[5]);
          Settings.Default.GameTypeTotal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[6]);
-         StringBuilder sb = new StringBuilder();
-         sb.Append("UpdateCanvasShowStats(): Serialization castles=");
-         sb.Append(GameEngine.theFeatsInGame.myVisitedCastles.Count);
-         sb.Append(" towns=");
-         sb.Append(GameEngine.theFeatsInGame.myVisitedTowns.Count);
-         sb.Append(" ruins=");
-         sb.Append(GameEngine.theFeatsInGame.myVisitedRuins.Count);
-         sb.Append(" temples=");
-         sb.Append(GameEngine.theFeatsInGame.myVisitedTemples.Count);
-         sb.Append(" oasis=");
-         sb.Append(GameEngine.theFeatsInGame.myVisitedOasises.Count);
-         Logger.Log(LogEnum.LE_SERIALIZE_FEATS, sb.ToString());
          Settings.Default.theGameFeat = Utilities.Serialize<GameFeat>(GameEngine.theFeatsInGame);
          //-------------------------------------------
          Settings.Default.Save();
@@ -3404,6 +3427,7 @@ namespace BarbarianPrince
       }
       private void ClosedGameViewerWindow(object sender, EventArgs e)
       {
+         SaveDefaultsToSettings(false); // ClosedGameViewerWindow()
          Application app = Application.Current;
          app.Shutdown();
       }
@@ -3439,7 +3463,6 @@ namespace BarbarianPrince
       protected override void OnClosing(CancelEventArgs e) //  // WARNING - Not fired when Application.SessionEnding is fired
       {
          base.OnClosing(e);
-         SaveDefaultsToSettings(); // OnClosing
          if (false == GameLoadMgr.SaveGameToFile(myGameInstance))
             Logger.Log(LogEnum.LE_ERROR, "OnClosing(): SaveGameToFile() returned false");
       }
@@ -3564,49 +3587,6 @@ namespace BarbarianPrince
             return false;
          }
          return true;
-      }
-      private void SaveDefaultsToSettings()
-      {
-         WindowPlacement wp; // Persist window placement details to application settings
-         var hwnd = new WindowInteropHelper(this).Handle;
-         if (false == GetWindowPlacement(hwnd, out wp))
-            Logger.Log(LogEnum.LE_ERROR, "OnClosing(): GetWindowPlacement() returned false");
-         string sWinPlace = Utilities.Serialize<WindowPlacement>(wp);
-         Settings.Default.WindowPlacement = sWinPlace;
-         //-------------------------------------------
-         Settings.Default.ZoomCanvas = Utilities.ZoomCanvas;
-         //-------------------------------------------
-         Settings.Default.ScrollViewerHeight = myScollViewerInside.Height;
-         Settings.Default.ScrollViewerWidth = myScollViewerInside.Width;
-         //-------------------------------------------
-         Settings.Default.GameDirectoryName = GameLoadMgr.theGamesDirectory;
-         //-------------------------------------------
-         string sOptions = Utilities.Serialize<Options>(myGameInstance.Options);
-         Settings.Default.GameOptions = sOptions;
-         //-------------------------------------------
-         Settings.Default.GameTypeOriginal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[0]);
-         Settings.Default.GameTypeRandParty = Utilities.Serialize<GameStat>(myGameEngine.Statistics[1]);
-         Settings.Default.GameTypeRandHex = Utilities.Serialize<GameStat>(myGameEngine.Statistics[2]);
-         Settings.Default.GameTypeRand = Utilities.Serialize<GameStat>(myGameEngine.Statistics[3]);
-         Settings.Default.GameTypeFun = Utilities.Serialize<GameStat>(myGameEngine.Statistics[4]);
-         Settings.Default.GameTypeCustom = Utilities.Serialize<GameStat>(myGameEngine.Statistics[5]);
-         Settings.Default.GameTypeTotal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[6]);
-         //-------------------------------------------
-         StringBuilder sb = new StringBuilder();
-         sb.Append("SaveDefaultsToSettings(): Serialization castles=");
-         sb.Append(GameEngine.theFeatsInGame.myVisitedCastles.Count);
-         sb.Append(" towns=");
-         sb.Append(GameEngine.theFeatsInGame.myVisitedTowns.Count);
-         sb.Append(" ruins=");
-         sb.Append(GameEngine.theFeatsInGame.myVisitedRuins.Count);
-         sb.Append(" temples=");
-         sb.Append(GameEngine.theFeatsInGame.myVisitedTemples.Count);
-         sb.Append(" oasis=");
-         sb.Append(GameEngine.theFeatsInGame.myVisitedOasises.Count);
-         Logger.Log(LogEnum.LE_SERIALIZE_FEATS, sb.ToString());
-         Settings.Default.theGameFeat = Utilities.Serialize<GameFeat>(GameEngine.theFeatsInGame);
-         //-------------------------------------------
-         Settings.Default.Save();
       }
       //-----------------------------------------------------------------------
       #region Win32 API declarations to set and get window placement

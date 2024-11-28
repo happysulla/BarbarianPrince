@@ -543,9 +543,9 @@ namespace BarbarianPrince
          }
          //------------------------------------------------------------
          ++rowNum;
-         isFeatDisplayed = myGameFeatToShow.myIsRescueHier;
-         isFeatChecked = GameEngine.theFeatsInGame.myIsRescueHier;
-         featName = "myIsRescueHier";
+         isFeatDisplayed = myGameFeatToShow.myIsRescueHeir;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsRescueHeir;
+         featName = "myIsRescueHeir";
          featDesc = "Rescue the royal and true hier of Huldra castle ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
@@ -576,7 +576,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsSneakAttack;
          isFeatChecked = GameEngine.theFeatsInGame.myIsSneakAttack;
          featName = "myIsSneakAttack";
-         featDesc = "Using foulbane, perform a sneak attack on Baron Huldra ";
+         featDesc = " With Heir to throne, perform a sneak attack on Baron Huldra ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -1004,7 +1004,7 @@ namespace BarbarianPrince
             case "myIsFalconAdded": myGameFeatToShow.myIsFalconAdded = true; break;
             case "myIsMerchantAdded": myGameFeatToShow.myIsMerchantAdded = true; break;
             case "myIsHydraTeethUsed": myGameFeatToShow.myIsHydraTeethUsed = true; break;
-            case "myIsRescueHier": myGameFeatToShow.myIsRescueHier = true; break;
+            case "myIsRescueHeir": myGameFeatToShow.myIsRescueHeir = true; break;
             case "myIsSneakAttack": myGameFeatToShow.myIsSneakAttack = true; break;
             case "myIsStealGems": myGameFeatToShow.myIsStealGems = true; break;
             case "myIsDragonKiller": myGameFeatToShow.myIsDragonKiller = true; break;
