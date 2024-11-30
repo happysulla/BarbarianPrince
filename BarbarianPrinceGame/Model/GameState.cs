@@ -1369,6 +1369,12 @@ namespace BarbarianPrince
          Logger.Log(LogEnum.LE_UNDO_COMMAND, "UndoCommand(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->false  a=" + action.ToString());
          gi.IsUndoCommandAvailable = false;
          gi.IsAirborne = false;
+         foreach(IMapItem mi in gi.PartyMembers) // return mounts left on ground
+         {
+            foreach( IMapItem mount in mi.LeftOnGroundMounts)
+               mi.AddMount(mount);
+            mi.LeftOnGroundMounts.Clear();
+         }
          gi.SunriseChoice = GamePhase.StartGame;
          gi.GamePhase = GamePhase.SunriseChoice;
          gi.NewHex = gi.Prince.Territory;

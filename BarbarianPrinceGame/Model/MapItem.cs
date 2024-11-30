@@ -82,6 +82,7 @@ namespace BarbarianPrince
       //--------------------------------------------------
       public IMapItem Rider { get; set; } = null;
       public IMapItems Mounts { get; set; } = new MapItems();
+      public IMapItems LeftOnGroundMounts { get; set; } = new MapItems();
       public Dictionary<IMapItem, int> CarriedMembers { get; set; } = new Dictionary<IMapItem, int>();
       //--------------------------------------------------
       public ITerritory Territory { get; set; } = null;
@@ -830,6 +831,7 @@ namespace BarbarianPrince
       }
       public bool RemoveNonFlyingMounts()
       {
+         this.LeftOnGroundMounts.Clear();
          IMapItems adbandonedMounts = new MapItems();
          foreach (IMapItem mount in this.Mounts)
          {
@@ -837,7 +839,10 @@ namespace BarbarianPrince
                adbandonedMounts.Add(mount);
          }
          foreach (IMapItem mount in adbandonedMounts)
+         {
+            this.LeftOnGroundMounts.Add(mount);
             this.Mounts.Remove(mount.Name);
+         }
          this.IsFlying = false;
          this.IsRiding = false;
          if (0 < this.Mounts.Count)

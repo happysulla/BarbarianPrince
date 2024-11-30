@@ -74,6 +74,7 @@ namespace BarbarianPrince
       //----------------------------------------
       IMapItem Rider { get; set; } // griffon/harpy can have a rider
       IMapItems Mounts { get; set; }
+      IMapItems LeftOnGroundMounts { set; get; } // horses left when air travel...if undo, need to revert these back to party
       Dictionary<IMapItem, int> CarriedMembers { get; set; } // This mapitem carries this much load (CarriedMembers.Value) of this MapItem (CaarriedMembers.Key)
       //----------------------------------------
       ITerritory Territory { get; set; }
