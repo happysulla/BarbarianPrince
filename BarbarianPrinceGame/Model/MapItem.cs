@@ -884,7 +884,6 @@ namespace BarbarianPrince
       {
          foreach (SpecialEnum item1 in SpecialKeeps)
          {
-            Logger.Log(LogEnum.LE_GET_ITEM, "IsSpecialItemHeld(): keep mi=" + this.Name + " looking for item=" + item.ToString());
             if (item == item1)
             {
                Logger.Log(LogEnum.LE_GET_ITEM, "IsSpecialItemHeld(): Keep mi=" + this.Name + " has item=" + item.ToString());
@@ -894,7 +893,6 @@ namespace BarbarianPrince
          }
          foreach (SpecialEnum item2 in mySpecialShares)
          {
-            Logger.Log(LogEnum.LE_GET_ITEM, "IsSpecialItemHeld(): share mi=" + this.Name + " looking for item=" + item.ToString());
             if (item == item2)
             {
                Logger.Log(LogEnum.LE_GET_ITEM, "IsSpecialItemHeld(): Share mi=" + this.Name + " has item=" + item.ToString());

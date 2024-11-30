@@ -3724,10 +3724,10 @@ The Lady decides to support your cause fully. She gives you one die roll times 1
                                         <InlineUIContainer><Image Source='../images/LadyAeravir.gif' Name='LadyAeravirSupport' Height='350' Width='140'></Image></InlineUIContainer>"
 e160g	"<Bold>e160g Audience with Lady Aeravir Knowing Her Secret</Bold>
 <LineBreak/><LineBreak/>
-You are allowed a semi-private interview with the ruler of Aeravir Castle. Since you know her secret, see  <InlineUIContainer><Button Content='e145' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. You roll twice and pick the result you want.
+You are allowed a semi-private interview with the ruler of Aeravir Castle. Since you know her secret, see  <InlineUIContainer><Button Content='e145' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. 
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button Content='e160a' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> - 1 - Shows No Interest<LineBreak/>
-<InlineUIContainer><Button Content='e160b' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> - 2 -Distracted <LineBreak/>
+<InlineUIContainer><Button Content='e160b' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> - 2 - Distracted <LineBreak/>
 <InlineUIContainer><Button Content='e160c' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> - 3 - Shows Pity<LineBreak/>
 <InlineUIContainer><Button Content='e160d' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> - 4 - Finds Virtue <LineBreak/>
 <InlineUIContainer><Button Content='e160e' FontFamily='Courier New' FontSize='12'></Button></InlineUIContainer> - 5 - Seduction<LineBreak/>
@@ -4317,7 +4317,7 @@ e211d	"<Bold>e211d Seeking an Audience with the Count Drogat</Bold>  <InlineUICo
   <InlineUIContainer><Button Content='e149' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 9 Must learn court manners<LineBreak/>
   <InlineUIContainer><Button Content='e151' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 10 Find favor in Count's eye<LineBreak/>
   <InlineUIContainer><Button Content='e161' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 11 plus - Audience granted<LineBreak/>"
-e211e	"<Bold>r211e Seeking an Audience with Lady Aeravir</Bold>
+e211e	"<Bold>e211e Seeking an Audience with Lady Aeravir</Bold>
 <LineBreak/><LineBreak/>As a daily action, you spend the day trying to gain admission to see the Lady Aeravir. Roll two die and consult the list below for results: 
  <InlineUIContainer><Image Source='../images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21'> </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>

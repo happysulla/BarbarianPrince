@@ -2477,11 +2477,12 @@ namespace BarbarianPrince
             //gi.ChagaDrugCount = 2;
             //gi.IsMarkOfCain = true; // e018
             //gi.NumMonsterKill = 5; // e161e - kill 5 monsters
-            gi.IsSecretBaronHuldra = true; // e144
-            //gi.IsSecretLadyAeravir = true; // e145
+            //---------------------
+            //gi.IsSecretBaronHuldra = true; // e144
+            gi.IsSecretLadyAeravir = true; // e145
             //gi.IsSecretCountDrogat = true; // e146
-            IMapItem trueHeir = CreateCharacter(gi, "WarriorBoy");
-            gi.AddCompanion(trueHeir);
+            //IMapItem trueHeir = CreateCharacter(gi, "WarriorBoy");
+            //gi.AddCompanion(trueHeir);
             //---------------------
             //foreach (IMapItem mi in gi.PartyMembers)
             //   mi.AddSpecialItemToKeep(SpecialEnum.ResurrectionNecklace);
@@ -14288,7 +14289,7 @@ namespace BarbarianPrince
                {
                   gi.EnteredHexes.Last().EventNames.Add(key);
                   action = GameAction.UpdateEventViewerActive;
-                  gi.DieResults[key][0] = dieRoll; // when applying results, gi.DieResults[key][0] is what is looked at
+                  gi.DieResults["e160"][0] = dieRoll; // when applying results, gi.DieResults["e160"][0] is what is looked at
                   switch (dieRoll) // Based on the die roll, implement event
                   {
                      case 1: gi.EventDisplayed = gi.EventActive = "e160a"; break;        // not interested
@@ -15234,6 +15235,7 @@ namespace BarbarianPrince
                   if (true == gi.IsSecretLadyAeravir) // know the secret of Lady Aeravir
                      ++dieRoll;
                   //--------------------------------
+                  dieRoll = 10; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                break;

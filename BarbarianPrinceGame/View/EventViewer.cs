@@ -707,7 +707,7 @@ namespace BarbarianPrince
                         {
                            if (Utilities.NO_RESULT == eventDieRolls[dieNumIndex]) // if true, perform a one time insert b/c dieNumIndex increments by one
                            {
-                              if ((true == myGameInstance.IsGiftCharmActive) || (true == myGameInstance.IsSlaveGirlActive))
+                              if ((true == myGameInstance.IsGiftCharmActive) || (true == myGameInstance.IsSlaveGirlActive) || (true == gi.IsLadyAeravirRerollActive))
                                  img.Visibility = Visibility.Visible;
                            }
                            else
@@ -3127,6 +3127,16 @@ namespace BarbarianPrince
                {
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new Run("Click image to continue."));
+               }
+               break;
+            case "e160g":
+               myTextBlock.Inlines.Add(new LineBreak());
+               myTextBlock.Inlines.Add(new LineBreak());
+               myTextBlock.Inlines.Add(new Run("Roll two times and choose one result."));
+               if (Utilities.NO_RESULT < gi.DieResults[key][1])
+               {
+                  myTextBlock.Inlines.Add(new LineBreak());
+                  myTextBlock.Inlines.Add(new Run("Click one button to continue."));
                }
                break;
             case "e161":
