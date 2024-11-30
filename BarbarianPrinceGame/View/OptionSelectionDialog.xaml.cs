@@ -2152,6 +2152,9 @@ namespace BarbarianPrince
                break;
             default: Logger.Log(LogEnum.LE_ERROR, "StackPanelOptions_Click(): reached default name=" + cb.Name); return;
          }
+         //----------------------------------
+         if (false == UpdateDisplay(myOptions))
+            Logger.Log(LogEnum.LE_ERROR, "StackPanelPrince_Click(): UpdateDisplay() returned false for name=" + cb.Name);
       }
       private void StackPanelPrince_Click(object sender, RoutedEventArgs e)
       {
@@ -2172,6 +2175,12 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "StackPanelPrince_Click(): myOptions.Find() for name=" + cb.Name);
          else 
             option.IsEnabled = !option.IsEnabled;
+         //----------------------------------
+         option = myOptions.Find("AutoSetup");
+         if (null == option)
+            option = new Option("AutoSetup", false);
+         option.IsEnabled = true;
+         //----------------------------------
          if ( false == UpdateDisplay(myOptions) )
             Logger.Log(LogEnum.LE_ERROR, "StackPanelPrince_Click(): UpdateDisplay() returned false for name=" + cb.Name);
       }
@@ -2195,6 +2204,12 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): myOptions.Find() for name=" + rb.Name);
          else
             option.IsEnabled = true;
+         //----------------------------------
+         option = myOptions.Find("AutoSetup");
+         if (null == option)
+            option = new Option("AutoSetup", false);
+         option.IsEnabled = true;
+         //----------------------------------
          if (false == UpdateDisplay(myOptions))
             Logger.Log(LogEnum.LE_ERROR, "StackPanelParty_Click(): UpdateDisplay() returned false for name=" + rb.Name);
       }
@@ -2230,6 +2245,12 @@ namespace BarbarianPrince
             myOptions.Add(option);
          }
          option.IsEnabled = !option.IsEnabled;
+         //----------------------------------
+         option = myOptions.Find("AutoSetup");
+         if (null == option)
+            option = new Option("AutoSetup", false);
+         option.IsEnabled = true;
+         //----------------------------------
          if (false == UpdateDisplay(myOptions))
             Logger.Log(LogEnum.LE_ERROR, "StackPanelPartyMember_Click(): UpdateDisplay() returned false for name=" + cb.Name);
       }
@@ -2247,6 +2268,12 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "StackPanelPartyOption_Click(): myOptions.Find() for name=" + cb.Name);
          else
             option.IsEnabled = !option.IsEnabled;
+         //----------------------------------
+         option = myOptions.Find("AutoSetup");
+         if (null == option)
+            option = new Option("AutoSetup", false);
+         option.IsEnabled = true;
+         //----------------------------------
          if (false == UpdateDisplay(myOptions))
             Logger.Log(LogEnum.LE_ERROR, "StackPanelPartyOption_Click(): UpdateDisplay() returned false for name=" + cb.Name);
       }
@@ -2274,6 +2301,12 @@ namespace BarbarianPrince
          {
             option.IsEnabled = !option.IsEnabled;
          }
+         //----------------------------------
+         option = myOptions.Find("AutoSetup");
+         if (null == option)
+            option = new Option("AutoSetup", false);
+         option.IsEnabled = true;
+         //----------------------------------
          if (false == UpdateDisplay(myOptions))
             Logger.Log(LogEnum.LE_ERROR, "StackPanelGameOption_Click(): UpdateDisplay() returned false for name=" + cb.Name);
       }
@@ -2316,6 +2349,12 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "StackPanelHex_Click(): myOptions.Find() for name=" + rb.Name);
          else
             option.IsEnabled = true;
+         //----------------------------------
+         option = myOptions.Find("AutoSetup");
+         if (null == option)
+            option = new Option("AutoSetup", false);
+         option.IsEnabled = true;
+         //----------------------------------
          if (false == UpdateDisplay(myOptions))
             Logger.Log(LogEnum.LE_ERROR, "StackPanelHex_Click(): UpdateDisplay() returned false for name=" + rb.Name);
       }
@@ -2340,6 +2379,12 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "StackPanelMonster_Click(): myOptions.Find() for name=" + rb.Name);
          else
             option.IsEnabled = true;
+         //----------------------------------
+         option = myOptions.Find("AutoSetup");
+         if (null == option)
+            option = new Option("AutoSetup", false);
+         option.IsEnabled = true;
+         //----------------------------------
          if (false == UpdateDisplay(myOptions))
             Logger.Log(LogEnum.LE_ERROR, "StackPanelMonster_Click(): UpdateDisplay() returned false for name=" + rb.Name);
       }

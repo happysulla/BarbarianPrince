@@ -891,6 +891,13 @@ namespace BarbarianPrince
          }
          switch (key)
          {
+            case "e000d":
+               b.IsEnabled = true;
+               if (("  +  " == content) && ( 5 < gi.WitAndWile))
+                  b.IsEnabled = false;
+               if (("  -  " == content) && (gi.WitAndWile < 3))
+                  b.IsEnabled = false;
+               break;
             case "e002a":
             case "e004":
             case "e005":
@@ -1328,6 +1335,8 @@ namespace BarbarianPrince
                break;
             case "e203":
                if ((true == gi.IsSpecialItemHeld(SpecialEnum.Foulbane)) && ("r146a" == content) && ("0323" == gi.Prince.Territory.Name))
+                  b.Visibility = Visibility.Visible;
+               if ((true == gi.IsInMapItems("WarriorBoy") && ("r144i" == content) && ("1212" == gi.Prince.Territory.Name)))
                   b.Visibility = Visibility.Visible;
                break;
             case "e204a":

@@ -2355,7 +2355,7 @@ namespace BarbarianPrince
          {
             theIsGameSetup = true;
             //gi.Days = 40;
-            gi.Prince.SetWounds(7, 0);
+            //gi.Prince.SetWounds(7, 0);
             //gi.Prince.PlagueDustWound = 1; 
             //gi.Prince.IsResurrected = true;
             //gi.AddUnitTestTiredMount(myPrince);
@@ -2477,11 +2477,11 @@ namespace BarbarianPrince
             //gi.ChagaDrugCount = 2;
             //gi.IsMarkOfCain = true; // e018
             //gi.NumMonsterKill = 5; // e161e - kill 5 monsters
-            //gi.IsSecretCountDrogat = true; // e146
+            gi.IsSecretBaronHuldra = true; // e144
             //gi.IsSecretLadyAeravir = true; // e145
-            //gi.IsSecretBaronHuldra = true; // e144
-            //IMapItem trueHeir = CreateCharacter(gi, "WarriorBoy");
-            //gi.AddCompanion(trueHeir);
+            //gi.IsSecretCountDrogat = true; // e146
+            IMapItem trueHeir = CreateCharacter(gi, "WarriorBoy");
+            gi.AddCompanion(trueHeir);
             //---------------------
             //foreach (IMapItem mi in gi.PartyMembers)
             //   mi.AddSpecialItemToKeep(SpecialEnum.ResurrectionNecklace);
@@ -2490,9 +2490,9 @@ namespace BarbarianPrince
             //mi.PlagueDustWound = 2;
             //gi.AddCompanion(mi);
             //---------------------
-            //GameEngine.theFeatsInGame.myIsEagleAdded = true;
-            //GameEngine.theFeatsInGame.myIsPurchaseFoulbane = true;
-            //GameEngine.theFeatsInGame.myIsRescueHeir = true;
+            GameEngine.theFeatsInGame.myIsEagleAdded = true;
+            GameEngine.theFeatsInGame.myIsPurchaseFoulbane = true;
+            GameEngine.theFeatsInGame.myIsRescueHeir = true;
          }
       }
    }
