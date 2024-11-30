@@ -5458,7 +5458,7 @@
     <isOasis value="False" />
     <DownRiver value="" />
     <adjacent value="1021" />
-    <adjacent value="1125" />
+    <adjacent value="1121" />
     <adjacent value="1120" />
     <adjacent value="1019" />
     <adjacent value="0920" />
@@ -5482,8 +5482,8 @@
     <road value="0921" />
     <adjacent value="0922" />
     <adjacent value="1022" />
-    <adjacent value="1126" />
-    <adjacent value="1125" />
+    <adjacent value="1122" />
+    <adjacent value="1121" />
     <adjacent value="1020" />
     <adjacent value="0921" />
     <regionPoint X="429.267227346717" Y="871.166315789474" />
@@ -5505,7 +5505,7 @@
     <adjacent value="0923" />
     <adjacent value="0922" />
     <adjacent value="1021" />
-    <adjacent value="1126" />
+    <adjacent value="1122" />
     <adjacent value="1123" />
     <regionPoint X="429.267227346717" Y="914.271578947368" />
     <regionPoint X="441.688279978296" Y="935.324210526316" />
@@ -6030,7 +6030,7 @@
     <DownRiver value="1220" />
     <river value="1219" />
     <adjacent value="1020" />
-    <adjacent value="1125" />
+    <adjacent value="1121" />
     <adjacent value="1220" />
     <adjacent value="1219" />
     <adjacent value="1119" />
@@ -6048,7 +6048,7 @@
     <regionPoint X="429.477753662507" Y="828.64" />
     <regionPoint X="442.109332609875" Y="807.587368421053" />
   </Territory>
-  <Territory value="1125">
+  <Territory value="1121">
     <type value="Mountains" />
     <point X="454.181818181818" Y="871.650909090909" />
     <isTown value="False" />
@@ -6060,7 +6060,7 @@
     <adjacent value="1120" />
     <adjacent value="1220" />
     <adjacent value="1221" />
-    <adjacent value="1126" />
+    <adjacent value="1122" />
     <adjacent value="1021" />
     <adjacent value="1020" />
     <regionPoint X="466.218529571351" Y="850.061052631579" />
@@ -6070,7 +6070,7 @@
     <regionPoint X="429.267227346717" Y="871.166315789474" />
     <regionPoint X="442.319858925665" Y="849.903157894737" />
   </Territory>
-  <Territory value="1126">
+  <Territory value="1122">
     <type value="Mountains" />
     <point X="453.818181818182" Y="914.454545454546" />
     <isTown value="False" />
@@ -6081,7 +6081,7 @@
     <DownRiver value="" />
     <adjacent value="1022" />
     <adjacent value="1021" />
-    <adjacent value="1125" />
+    <adjacent value="1121" />
     <adjacent value="1221" />
     <adjacent value="1222" />
     <adjacent value="1123" />
@@ -6102,7 +6102,7 @@
     <isOasis value="False" />
     <DownRiver value="" />
     <adjacent value="1022" />
-    <adjacent value="1126" />
+    <adjacent value="1122" />
     <adjacent value="1222" />
     <regionPoint X="467.060634834509" Y="935.534736842105" />
     <regionPoint X="478.218529571351" Y="957.218947368421" />
@@ -6600,12 +6600,12 @@
     <isTemple value="False" />
     <isOasis value="False" />
     <DownRiver value="" />
-    <adjacent value="1126" />
+    <adjacent value="1122" />
     <adjacent value="1222" />
     <adjacent value="1322" />
     <adjacent value="1321" />
     <adjacent value="1220" />
-    <adjacent value="1125" />
+    <adjacent value="1121" />
     <regionPoint X="503.060634834509" Y="871.113684210526" />
     <regionPoint X="515.481687466088" Y="893.008421052632" />
     <regionPoint X="503.481687466088" Y="914.061052631579" />
@@ -6623,7 +6623,7 @@
     <isOasis value="False" />
     <DownRiver value="" />
     <adjacent value="1123" />
-    <adjacent value="1126" />
+    <adjacent value="1122" />
     <adjacent value="1221" />
     <adjacent value="1322" />
     <adjacent value="1323" />
@@ -6645,7 +6645,7 @@
     <DownRiver value="1321" />
     <river value="1219" />
     <river value="1320" />
-    <adjacent value="1125" />
+    <adjacent value="1121" />
     <adjacent value="1221" />
     <adjacent value="1321" />
     <adjacent value="1320" />
@@ -9807,9 +9807,6 @@
     <isTemple value="False" />
     <isOasis value="False" />
     <DownRiver value="" />
-          <river value="1814" />
-     <river value="1715" />
-     <river value="1716" />
     <adjacent value="1817" />
     <adjacent value="1717" />
     <adjacent value="1716" />

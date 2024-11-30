@@ -329,6 +329,10 @@ namespace BarbarianPrince
             case GameAction.ShowReportErrorDialog:
             case GameAction.ShowAboutDialog:
             case GameAction.E228ShowTrueLove:
+            case GameAction.UnitTestStart:
+            case GameAction.UnitTestCommand:
+            case GameAction.UnitTestNext:
+            case GameAction.UnitTestCleanup:
                break;
             case GameAction.EndGameWin:
             case GameAction.EndGameLost:

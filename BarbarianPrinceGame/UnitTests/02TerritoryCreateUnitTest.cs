@@ -52,9 +52,9 @@ namespace BarbarianPrince
          myHeaderNames.Add("02-Final");
          //------------------------------------
          myCommandNames.Add("00-Delete File");
-         myCommandNames.Add("01- ");
-         myCommandNames.Add("02- ");
-         myCommandNames.Add("03- ");
+         myCommandNames.Add("01-Click Center of Hex");
+         myCommandNames.Add("02-Click Elispse to Move");
+         myCommandNames.Add("03-Click Ellispe to Verify");
          myCommandNames.Add("04-Verify Roads");
          myCommandNames.Add("05-Verify Rivers");
          myCommandNames.Add("06-Verify Adjacents");
@@ -87,7 +87,7 @@ namespace BarbarianPrince
       }
       public bool Command(ref IGameInstance gi) // Performs function based on CommandName string
       {
-         if (CommandName == myCommandNames[0])
+         if (CommandName == myCommandNames[0]) // Delete
          {
             string filename = ConfigFileReader.theConfigDirectory + "Territories.xml";
             System.IO.File.Delete(filename);  // delete old file
@@ -97,11 +97,19 @@ namespace BarbarianPrince
                return false;
             }
          }
+         else if (CommandName == myCommandNames[1]) //  Create territories
+         {
+
+         }
+         else if (CommandName == myCommandNames[2]) // set centerpoints
+         {
+
+         }
          else if (CommandName == myCommandNames[3])
          {
             myXColumn = 0.0; // When set to zero, it indicates that use existing value instead of value from previous entry
          }
-         else if (CommandName == myCommandNames[4])
+         else if (CommandName == myCommandNames[4]) // Show Roads
          {
             if (false == ShowRoads(Territory.theTerritories))
             {
@@ -109,7 +117,7 @@ namespace BarbarianPrince
                return false;
             }
          }
-         else if (CommandName == myCommandNames[5])
+         else if (CommandName == myCommandNames[5]) // Show Rivers
          {
             if (false == ShowRivers(Territory.theTerritories))
             {
@@ -117,7 +125,7 @@ namespace BarbarianPrince
                return false;
             }
          }
-         else if (CommandName == myCommandNames[6])
+         else if (CommandName == myCommandNames[6])  // Show Adjacents
          {
             if (false == ShowAdjacents(Territory.theTerritories))
             {
@@ -125,7 +133,7 @@ namespace BarbarianPrince
                return false;
             }
          }
-         else if (CommandName == myCommandNames[7])
+         else if (CommandName == myCommandNames[7]) // Show Raft Territories
          {
             if (false == ShowRaftTerritories(Territory.theTerritories))
             {
@@ -136,7 +144,7 @@ namespace BarbarianPrince
             if (Territory.theTerritories.Count <= myIndexRaft)
                myIndexRaft = 0;
          }
-         else if (CommandName == myCommandNames[8])
+         else if (CommandName == myCommandNames[8]) // SHow downriver territory
          {
             if (false == ShowDownRiverTerritory(Territory.theTerritories))
             {
@@ -147,7 +155,7 @@ namespace BarbarianPrince
             if (Territory.theTerritories.Count <= myIndexDownRiver)
                myIndexDownRiver = 0;
          }
-         else if (CommandName == myCommandNames[9])
+         else if (CommandName == myCommandNames[9]) // Finish - delete existing file and add new one
          {
             if (false == Cleanup(ref gi))
             {
@@ -167,6 +175,7 @@ namespace BarbarianPrince
          }
          else if (HeaderName == myHeaderNames[1])
          {
+            CreateEllipses(Territory.theTerritories);
             myCanvas.MouseLeftButtonDown -= this.MouseLeftButtonDownCreateTerritory;
             myCanvas.MouseLeftButtonDown += this.MouseDownSetCenterPoint;
             myCanvas.MouseMove += MouseMove;
@@ -175,6 +184,7 @@ namespace BarbarianPrince
          }
          else if (HeaderName == myHeaderNames[2])
          {
+            CreateEllipses(Territory.theTerritories);
             myCanvas.MouseMove -= MouseMove;
             myCanvas.MouseUp -= MouseUp;
             myCanvas.MouseLeftButtonDown -= this.MouseDownSetCenterPoint;
@@ -184,6 +194,7 @@ namespace BarbarianPrince
          }
          else if (HeaderName == myHeaderNames[3])
          {
+            CreateEllipses(Territory.theTerritories);
             myCanvas.MouseLeftButtonDown -= this.MouseLeftButtonDownVerifyTerritory;
             myCanvas.MouseLeftButtonDown += this.MouseLeftButtonDownSetRoads;
             myAnchorTerritory = null;
@@ -191,6 +202,7 @@ namespace BarbarianPrince
          }
          else if (HeaderName == myHeaderNames[4])
          {
+            CreateEllipses(Territory.theTerritories);
             myCanvas.MouseLeftButtonDown -= this.MouseLeftButtonDownSetRoads;
             myCanvas.MouseLeftButtonDown += this.MouseLeftButtonDownSetRivers;
             myAnchorTerritory = null;
@@ -198,6 +210,7 @@ namespace BarbarianPrince
          }
          else if (HeaderName == myHeaderNames[5])
          {
+            CreateEllipses(Territory.theTerritories);
             myCanvas.MouseLeftButtonDown -= this.MouseLeftButtonDownSetRivers;
             myCanvas.MouseLeftButtonDown += this.MouseLeftButtonDownSetAdjacents;
             myAnchorTerritory = null;
@@ -205,6 +218,7 @@ namespace BarbarianPrince
          }
          else if (HeaderName == myHeaderNames[6])
          {
+            CreateEllipses(Territory.theTerritories);
             if (0 == myIndexRaft)
             {
                myCanvas.MouseLeftButtonDown -= this.MouseLeftButtonDownSetAdjacents;
@@ -236,6 +250,7 @@ namespace BarbarianPrince
          }
          else if (HeaderName == myHeaderNames[7])
          {
+            CreateEllipses(Territory.theTerritories);
             SolidColorBrush aSolidColorBrushClear = new SolidColorBrush { Color = Color.FromArgb(010, 255, 100, 0) }; // almost clear
             SolidColorBrush aSolidColorBrushBlue = new SolidColorBrush { Color = Colors.Blue };
             foreach (Territory t in Territory.theTerritories) // Clear out all previous results
@@ -274,6 +289,7 @@ namespace BarbarianPrince
          }
          else if (HeaderName == myHeaderNames[8])
          {
+            CreateEllipses(Territory.theTerritories);
             myCanvas.MouseLeftButtonDown -= this.MouseLeftDownSetDownRiverTerritory;
             myAnchorTerritory = null;
             ++myIndexName;
@@ -374,29 +390,38 @@ namespace BarbarianPrince
             Height = theEllipseDiameter
          };
          System.Windows.Point p = new System.Windows.Point(territory.CenterPoint.X, territory.CenterPoint.Y);
-         Canvas.SetLeft(aEllipse, p.X);
-         Canvas.SetTop(aEllipse, p.Y);
          p.X -= theEllipseOffset;
          p.Y -= theEllipseOffset;
+         Canvas.SetLeft(aEllipse, p.X);
+         Canvas.SetTop(aEllipse, p.Y);
          myCanvas.Children.Add(aEllipse);
          myEllipses.Add(aEllipse);
       }
       public void CreateEllipses(ITerritories territories)
       {
+         //--------------------------------------------------
+         // Remove any existing UI elements from the Canvas
+         List<UIElement> results = new List<UIElement>();
+         foreach (UIElement ui in myCanvas.Children)
+         {
+            if (ui is Ellipse)
+               results.Add(ui);
+         }
+         foreach (UIElement ui1 in results)
+            myCanvas.Children.Remove(ui1);
+         //--------------------------------------------------
          SolidColorBrush aSolidColorBrush0 = new SolidColorBrush { Color = Color.FromArgb(100, 100, 100, 0) }; // nearly transparent but slightly colored
          foreach (Territory t in territories)
          {
-            Ellipse aEllipse = new Ellipse { Tag = Utilities.RemoveSpaces(t.ToString()) };
+            Ellipse aEllipse = new Ellipse { Tag = Utilities.RemoveSpaces(t.ToString()), Stroke = Brushes.Red, Width = theEllipseDiameter, Height = theEllipseDiameter, StrokeThickness = 1 };
             aEllipse.Fill = aSolidColorBrush0;
-            aEllipse.StrokeThickness = 1;
-            aEllipse.Stroke = Brushes.Red;
-            aEllipse.Width = theEllipseDiameter;
-            aEllipse.Height = theEllipseDiameter;
+            aEllipse.Visibility = Visibility.Visible;
             System.Windows.Point p = new System.Windows.Point(t.CenterPoint.X, t.CenterPoint.Y);
             p.X -= theEllipseOffset;
             p.Y -= theEllipseOffset;
             Canvas.SetLeft(aEllipse, p.X);
             Canvas.SetTop(aEllipse, p.Y);
+            Canvas.SetZIndex(aEllipse, 99999);
             myCanvas.Children.Add(aEllipse);
             myEllipses.Add(aEllipse);
          }
@@ -609,14 +634,14 @@ namespace BarbarianPrince
                   MessageBox.Show("Not Found s=" + s);
                   return false;
                }
-               string riverName = Utilities.RemoveSpaces(riverTerritory.ToString());
+               string adjacentName = Utilities.RemoveSpaces(riverTerritory.ToString());
                Ellipse riverEllipse = null; // Find the corresponding ellipse for this River territory
                foreach (UIElement ui in myCanvas.Children)
                {
                   if (ui is Ellipse)
                   {
                      Ellipse ellipse = (Ellipse)ui;
-                     if (riverName == ellipse.Tag.ToString())
+                     if (adjacentName == ellipse.Tag.ToString())
                      {
                         riverEllipse = ellipse;
                         break;
@@ -625,12 +650,12 @@ namespace BarbarianPrince
                }
                if (null == riverEllipse)
                {
-                  Logger.Log(LogEnum.LE_ERROR, riverName);
+                  Logger.Log(LogEnum.LE_ERROR, adjacentName);
                   MessageBox.Show(anchorTerritory.ToString());
                   return false;
                }
                // Search the Adajance River Territory Rivers List to make sure the 
-               // anchor territory is in that list. It shoudl be bi directional.
+               // anchor territory is in that list. It should be bi-directional.
                bool isReturnFound = false;
                foreach (String s1 in riverTerritory.Rivers)
                {
@@ -646,7 +671,7 @@ namespace BarbarianPrince
                {
                   anchorEllipse.Fill = aSolidColorBrush3; // change color of two ellipses to signify error
                   riverEllipse.Fill = aSolidColorBrush2;
-                  StringBuilder sb = new StringBuilder("anchor="); sb.Append(anchorName); sb.Append(" NOT in list for River="); sb.Append(riverName);
+                  StringBuilder sb = new StringBuilder("This red territory ="); sb.Append(anchorName); sb.Append(" NOT in river list of adjacent black territory="); sb.Append(adjacentName);
                   MessageBox.Show(sb.ToString());
                   return false;
                }
