@@ -602,7 +602,7 @@ namespace BarbarianPrince
          {
             gi.GamePhase = GamePhase.EndGame;
             bool isNecklass = gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace);
-            Logger.Log(LogEnum.LE_END_GAME, "PerformEndCheck(): 2-EndGameLost ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString() + "isNecklass=" + isNecklass.ToString());
+            Logger.Log(LogEnum.LE_END_GAME, "PerformEndCheck(): 2-EndGameLost ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString() + " isNecklass=" + isNecklass.ToString());
             if (true == isNecklass)
             {
                action = GameAction.EndGameResurrect;  // PerformEndCheck()

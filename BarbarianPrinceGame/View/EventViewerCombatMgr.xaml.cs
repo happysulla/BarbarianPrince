@@ -1080,7 +1080,11 @@ namespace BarbarianPrince
                if ((true == myCatVictim.IsKilled) || (true == myCatVictim.IsUnconscious))
                {
                   if ( (true == myCatVictim.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace)) && (false == myCatVictim.Name.Contains("Prince")) )
+                  {
                      myGameInstance.ResurrectedMembers.Add(myCatVictim);
+                     myCatVictim.RemoveSpecialItem(SpecialEnum.ResurrectionNecklace);
+                  }
+
                   if (false == myGameInstance.RemoveVictimInParty(myCatVictim))
                   {
                      Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): RemoveVictimInParty() returned false");
