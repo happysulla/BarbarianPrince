@@ -229,9 +229,9 @@ namespace BarbarianPrince
          }
          //------------------------------------------------------------
          ++rowNum;
-         isFeatDisplayed = myGameFeatToShow.myIsHuldraDefeatedInBattle;
-         isFeatChecked = GameEngine.theFeatsInGame.myIsHuldraDefeatedInBattle;
-         featName = "myIsHuldraDefeatedInBattle";
+         isFeatDisplayed = myGameFeatToShow.myIsHuldraDefeatedInBattleWin;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsHuldraDefeatedInBattleWin;
+         featName = "myIsHuldraDefeatedInBattleWin";
          featDesc = "Win the game by defeating Huldra in battle after securing royal hier ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
@@ -993,7 +993,7 @@ namespace BarbarianPrince
             case "myIsBlessedWin": myGameFeatToShow.myIsBlessedWin = true; break;
             case "myIsStaffOfCommandWin": myGameFeatToShow.myIsStaffOfCommandWin = true; break;
             case "myIsRoyalHelmWin": myGameFeatToShow.myIsRoyalHelmWin = true; break;
-            case "myIsHuldraDefeatedInBattle": myGameFeatToShow.myIsHuldraDefeatedInBattle = true; break;
+            case "myIsHuldraDefeatedInBattleWin": myGameFeatToShow.myIsHuldraDefeatedInBattleWin = true; break;
             case "myIsHuldraDesposedWin": myGameFeatToShow.myIsHuldraDesposedWin = true; break;
             case "myIsLostOnTime": myGameFeatToShow.myIsLostOnTime = true; break;
             case "myIsAirTravel": myGameFeatToShow.myIsAirTravel = true; break;

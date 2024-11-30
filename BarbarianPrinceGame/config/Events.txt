@@ -4033,6 +4033,7 @@ e195	"<Bold>e195 Possessions Reference</Bold>
 e203	"<Bold>e203 Daily Actions</Bold>
  <InlineUIContainer> <Button Content='r203' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  <InlineUIContainer><Button Content='r146a' FontFamily='Courier New' FontSize='12' Visibility='Hidden'></Button></InlineUIContainer> 
+ <InlineUIContainer><Button Content='r144f' FontFamily='Courier New' FontSize='12' Visibility='Hidden'></Button></InlineUIContainer> 
  <InlineUIContainer><Button Content='r144i' FontFamily='Courier New' FontSize='12' Visibility='Hidden'></Button></InlineUIContainer> 
 <LineBreak/><LineBreak/>Start of a new day! Select action button from the Daily Actions panel. 
 <LineBreak/><LineBreak/>After all actions, events, food, and lodging are resolved, the day ends. This continues until the end of the 10th week, which ends the game.

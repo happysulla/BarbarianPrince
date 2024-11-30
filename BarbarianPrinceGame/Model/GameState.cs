@@ -9777,7 +9777,7 @@ namespace BarbarianPrince
                gi.Statistic.myEndPartyCount = gi.PartyMembers.Count;
                gi.Statistic.myEndCoinCount = gi.GetCoins();
                gi.Statistic.myEndFoodCount = gi.GetFoods();
-               GameEngine.theFeatsInGame.myIsHuldraDefeatedInBattle = true;
+               GameEngine.theFeatsInGame.myIsHuldraDefeatedInBattleWin = true;
                return true; //<<<<<<<<<<<<<<<<<<<<<
             case "e154e": // lords daughter
                gi.CapturedWealthCodes.Add(100);

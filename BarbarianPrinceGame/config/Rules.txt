@@ -273,6 +273,12 @@ These undead teeth-warriors have combat skill 5, endurance 4, and wealth 0. They
 You can scatter the teeth at any instant to use them that one time including at the start or during any combat.
 <LineBreak/>
                               <InlineUIContainer><Image  Source='../images/Teeth.gif' Height='200'  Width='200'> </Image></InlineUIContainer> "
+r144f	"<Bold>r144f Baron Hauldra Exposed as a Fraud</Bold>
+<LineBreak/><LineBreak/>
+After seeking an audience with Baron Hauldra with the true heir in tow, you attempt to expose Baron Hauldra as a fraud. If you roll a 10 plus, you can reveal the true heir at the audience and despose the current Baron instantly. 
+Die Roll= <InlineUIContainer><Image Source='../images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21' > </Image></InlineUIContainer>
+<LineBreak/><LineBreak/>
+                                <InlineUIContainer><Image Source='../images/BaronHuldra1.gif' Height='250' Width='200'></Image></InlineUIContainer>"
 r144i	"<Bold>r144i Baron Hauldra Sneak Attack</Bold>
 <LineBreak/><LineBreak/>
 You can make a sneak attack on the Baron at night suprising his traditional six bodyguards <InlineUIContainer> <Button Content='r220' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. Each has combat skill 6 and endurance 6. Once you kill the bodyguards, you can attack the Baron who has combat skill 6 and endurance 8. The Baron strikes first in combat. 

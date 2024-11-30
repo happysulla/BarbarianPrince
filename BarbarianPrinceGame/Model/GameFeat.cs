@@ -21,7 +21,7 @@ namespace BarbarianPrince
       public bool myIsBlessedWin;              // E044HighAltarBlessed
       public bool myIsStaffOfCommandWin;       // E212Temple - Roll 12+1 on e212
       public bool myIsRoyalHelmWin;            // Treasure Table -  Row C:6 - Row Ca:6
-      public bool myIsHuldraDefeatedInBattle;  // e144j
+      public bool myIsHuldraDefeatedInBattleWin;  // e144j
       public bool myIsHuldraDesposedWin;       // e211g
       public bool myIsLostOnTime;              // lose game on time
       //-------------------------------------
@@ -71,7 +71,7 @@ namespace BarbarianPrince
          myIsBlessedWin = false;
          myIsStaffOfCommandWin = false;
          myIsRoyalHelmWin = false;
-         myIsHuldraDefeatedInBattle = false;
+         myIsHuldraDefeatedInBattleWin = false;
          myIsHuldraDesposedWin = false;
          myIsLostOnTime = false;
          //-------------------------------------
@@ -122,7 +122,8 @@ namespace BarbarianPrince
          starting.myIsBlessedWin = this.myIsBlessedWin;
          starting.myIsStaffOfCommandWin = this.myIsStaffOfCommandWin;
          starting.myIsStaffOfCommandWin = this.myIsStaffOfCommandWin;
-         starting.myIsHuldraDefeatedInBattle = this.myIsHuldraDefeatedInBattle;
+         starting.myIsHuldraDefeatedInBattleWin = this.myIsHuldraDefeatedInBattleWin;
+         starting.myIsHuldraDesposedWin = this.myIsHuldraDesposedWin;
          starting.myIsLostOnTime = this.myIsLostOnTime;
          starting.myIsAirTravel = this.myIsAirTravel;
          starting.myIsRaftTravel = this.myIsRaftTravel;
@@ -173,7 +174,9 @@ namespace BarbarianPrince
             return false;
          if (this.myIsRoyalHelmWin != starting.myIsRoyalHelmWin)
             return false;
-         if (this.myIsHuldraDefeatedInBattle != starting.myIsHuldraDefeatedInBattle)
+         if (this.myIsHuldraDefeatedInBattleWin != starting.myIsHuldraDefeatedInBattleWin)
+            return false;
+         if (this.myIsHuldraDesposedWin != starting.myIsHuldraDesposedWin)
             return false;
          if (this.myIsLostOnTime != starting.myIsLostOnTime)
             return false;
@@ -262,10 +265,15 @@ namespace BarbarianPrince
             starting.myIsStaffOfCommandWin = this.myIsStaffOfCommandWin;
             return "Win with the Royal Helm ";
          }
-         if (starting.myIsHuldraDefeatedInBattle != this.myIsHuldraDefeatedInBattle)
+         if (starting.myIsHuldraDefeatedInBattleWin != this.myIsHuldraDefeatedInBattleWin)
          {
-            starting.myIsHuldraDefeatedInBattle = this.myIsHuldraDefeatedInBattle;
+            starting.myIsHuldraDefeatedInBattleWin = this.myIsHuldraDefeatedInBattleWin;
             return "Win defeating Huldra in battle";
+         }
+         if (starting.myIsHuldraDesposedWin != this.myIsHuldraDesposedWin)
+         {
+            starting.myIsHuldraDesposedWin = this.myIsHuldraDesposedWin;
+            return "Win desposing Huldra from throne during an audience";
          }
          if (starting.myIsLostOnTime != this.myIsLostOnTime)
          {
@@ -411,7 +419,7 @@ namespace BarbarianPrince
          sb.Append(", wHelm=");
          sb.Append(myIsRoyalHelmWin.ToString());
          sb.Append(", wHuldra1=");
-         sb.Append(myIsHuldraDefeatedInBattle.ToString());
+         sb.Append(myIsHuldraDefeatedInBattleWin.ToString());
          sb.Append(", wHuldra2=");
          sb.Append(myIsHuldraDesposedWin.ToString());
          sb.Append(", tAir=");

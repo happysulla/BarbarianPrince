@@ -1336,6 +1336,8 @@ namespace BarbarianPrince
             case "e203":
                if ((true == gi.IsSpecialItemHeld(SpecialEnum.Foulbane)) && ("r146a" == content) && ("0323" == gi.Prince.Territory.Name))
                   b.Visibility = Visibility.Visible;
+               if ((true == gi.IsInMapItems("WarriorBoy") && ("r144f" == content) && ("1212" == gi.Prince.Territory.Name)))
+                  b.Visibility = Visibility.Visible;
                if ((true == gi.IsInMapItems("WarriorBoy") && ("r144i" == content) && ("1212" == gi.Prince.Territory.Name)))
                   b.Visibility = Visibility.Visible;
                break;
