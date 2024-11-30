@@ -875,7 +875,7 @@ r214	"<Bold>r214 Cache</Bold>
 <LineBreak/>5: You are unable to find the cache because landmarks have disappeared. You can try again tommorrow.
 <LineBreak/>6: You find the cache, but it has been looted. There is nothing in it."
 r215	"<Bold>r215 Food</Bold>
-<LineBreak/><LineBreak/>After the actions, events and encounters for the day are finished; you and your party must eat their main meal.
+<LineBreak/><LineBreak/>After the actions, events and encounters for the day are finished, you and your party must eat their main meal.
 <LineBreak/><LineBreak/>This may include hunting for food, using food stores, or purchasing a meal (if in a town, castle or temple). Any mounts with your party may also require food. 
 <LineBreak/><LineBreak/>If you cannot feed any followers or animals, consult the starvation
  <InlineUIContainer><Button Name='myButtonR216' Content='r216' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
