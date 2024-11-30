@@ -739,9 +739,8 @@ namespace BarbarianPrince
          Settings.Default.GameTypeCustom = Utilities.Serialize<GameStat>(myGameEngine.Statistics[5]);
          Settings.Default.GameTypeTotal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[6]);
          //-------------------------------------------
-         Logger.Log(LogEnum.LE_SERIALIZE_FEATS, "GameViewerWindow(): BEFORE:\n feats=" + GameEngine.theFeatsInGame.ToString() );
          Settings.Default.theGameFeat = Utilities.Serialize<GameFeat>(GameEngine.theFeatsInGame);
-         Logger.Log(LogEnum.LE_SERIALIZE_FEATS, "GameViewerWindow(): AFTER:\n feats=" + GameEngine.theFeatsInGame.ToString());
+         Logger.Log(LogEnum.LE_SERIALIZE_FEATS, "SaveDefaultsToSettings(): \n feats=" + GameEngine.theFeatsInGame.ToString());
          //-------------------------------------------
          Settings.Default.Save();
       }

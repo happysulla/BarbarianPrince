@@ -881,8 +881,8 @@ r214	"<Bold>r214 Cache</Bold>
 <LineBreak/>5: You are unable to find the cache because landmarks have disappeared. You can try again tommorrow.
 <LineBreak/>6: You find the cache, but it has been looted. There is nothing in it."
 r215	"<Bold>r215 Food</Bold>
-<LineBreak/><LineBreak/>After the actons, events, and encounters for the day are finished, you and your party must eat their main meal. 
-<LineBreak/><LineBreak/>This may include hunting for good, using food stores, or purchasing a meal if in a town, castle, or temple. Any mounts with your party may also require food. 
+<LineBreak/><LineBreak/>After the actions, events, and encounters for the day are finished, you and your party must eat their main meal. 
+<LineBreak/><LineBreak/>This may include hunting for food, using food stores, or purchasing a meal (if in a town, castle, or temple). Any mounts with your party may also require food. 
 <LineBreak/><LineBreak/>If you cannot feed any followers or animals, consult the starvation
  <InlineUIContainer><Button Name='myButtonR216' Content='r216' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  rules. <LineBreak/><LineBreak/>
@@ -898,7 +898,7 @@ r215	"<Bold>r215 Food</Bold>
  Food Stores<LineBreak/>
  <InlineUIContainer><Button Name='myButtonR215f' Content='r215f' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  Animal Fodder
-<LineBreak/><LineBreak/><Italic>Note:</Italic> The cost of food is separate from the cost of lodging. In towns, castles, and temples; you must also pay for lodging
+<LineBreak/><LineBreak/><Italic>Note:</Italic> The cost of food is separate from the cost of lodging. In towns, castles, and temples, you must also pay for lodging
  <InlineUIContainer><Button Name='myButtonR217' Content='r217' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>."
 r215a	"<Bold>r215a Food Units</Bold>
 <LineBreak/><LineBreak/>For convenience, food is counted in 'units.'  Each unit is sufficient to feed one person for one day. Mounts require two units per day if they are unable to forage for their own fodder. 
