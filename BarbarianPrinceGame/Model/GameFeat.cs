@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 namespace BarbarianPrince
 {
-
    [Serializable]
    public class GameFeat
    {
+      [NonSerialized] public const int LOCATIONS_TEMPLE = 5;
+      [NonSerialized] public const int LOCATIONS_TOWN = 12;
+      [NonSerialized] public const int LOCATIONS_CASTLE= 3;
+      [NonSerialized] public const int LOCATIONS_RUIN= 3;
+      [NonSerialized] public const int LOCATIONS_OASIS = 4;
+      //----------------------------------------------------
       public bool myIsOriginalGameWin;         // Win the original game 
       public bool myIs500GoldWin;              // Nominal 
       public bool myIsNobleAllyWin;            // E152NobleAlly

@@ -1385,7 +1385,7 @@ namespace BarbarianPrince
             if (false == GameEngine.theFeatsInGame.myVisitedRuins.Contains(gi.NewHex.Name))
             {
                GameEngine.theFeatsInGame.myVisitedRuins.Add(gi.NewHex.Name);
-               if (2 <= GameEngine.theFeatsInGame.myVisitedRuins.Count)
+               if (GameFeat.LOCATIONS_RUIN <= GameEngine.theFeatsInGame.myVisitedRuins.Count)
                   GameEngine.theFeatsInGame.myIsVisitAllRuins = true;
             }
          }
@@ -1394,7 +1394,7 @@ namespace BarbarianPrince
             if (false == GameEngine.theFeatsInGame.myVisitedOasises.Contains(gi.NewHex.Name))
             {
                GameEngine.theFeatsInGame.myVisitedOasises.Add(gi.NewHex.Name);
-               if (4 <= GameEngine.theFeatsInGame.myVisitedOasises.Count)
+               if (GameFeat.LOCATIONS_OASIS <= GameEngine.theFeatsInGame.myVisitedOasises.Count)
                   GameEngine.theFeatsInGame.myIsVisitAllOasis = true;
             }
          }
@@ -1406,7 +1406,7 @@ namespace BarbarianPrince
                if( false == GameEngine.theFeatsInGame.myVisitedCastles.Contains(gi.NewHex.Name))
                {
                   GameEngine.theFeatsInGame.myVisitedCastles.Add(gi.NewHex.Name);
-                  if ( 3 <= GameEngine.theFeatsInGame.myVisitedCastles.Count)
+                  if (GameFeat.LOCATIONS_CASTLE <= GameEngine.theFeatsInGame.myVisitedCastles.Count)
                      GameEngine.theFeatsInGame.myIsVisitAllCastles = true; 
                }
             }
@@ -1415,7 +1415,7 @@ namespace BarbarianPrince
                if (false == GameEngine.theFeatsInGame.myVisitedTemples.Contains(gi.NewHex.Name))
                {
                   GameEngine.theFeatsInGame.myVisitedTemples.Add(gi.NewHex.Name);
-                  if (6 <= GameEngine.theFeatsInGame.myVisitedTemples.Count)
+                  if (GameFeat.LOCATIONS_TEMPLE <= GameEngine.theFeatsInGame.myVisitedTemples.Count)
                      GameEngine.theFeatsInGame.myIsVisitAllTemples = true;
                }
             }
@@ -1424,7 +1424,7 @@ namespace BarbarianPrince
                if (false == GameEngine.theFeatsInGame.myVisitedTowns.Contains(gi.NewHex.Name))
                {
                   GameEngine.theFeatsInGame.myVisitedTowns.Add(gi.NewHex.Name);
-                  if (12 <= GameEngine.theFeatsInGame.myVisitedTowns.Count)
+                  if (GameFeat.LOCATIONS_TOWN <= GameEngine.theFeatsInGame.myVisitedTowns.Count)
                      GameEngine.theFeatsInGame.myIsVisitAllTowns = true;
                }
             }

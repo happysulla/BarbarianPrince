@@ -10715,8 +10715,8 @@
     <point X="778.909090909091" Y="380.636363636364" />
     <isTown value="False" />
     <isCastle value="False" />
-    <isRuin value="False" />
-    <isTemple value="True" />
+    <isRuin value="True" />
+    <isTemple value="False" />
     <isOasis value="False" />
     <DownRiver value="" />
     <adjacent value="1909" />
