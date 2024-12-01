@@ -121,32 +121,41 @@ namespace BarbarianPrince
          starting.myIsNobleAllyWin = this.myIsNobleAllyWin;
          starting.myIsBlessedWin = this.myIsBlessedWin;
          starting.myIsStaffOfCommandWin = this.myIsStaffOfCommandWin;
-         starting.myIsStaffOfCommandWin = this.myIsStaffOfCommandWin;
+         starting.myIsRoyalHelmWin = this.myIsRoyalHelmWin;
          starting.myIsHuldraDefeatedInBattleWin = this.myIsHuldraDefeatedInBattleWin;
          starting.myIsHuldraDesposedWin = this.myIsHuldraDesposedWin;
          starting.myIsLostOnTime = this.myIsLostOnTime;
+         //-------------------------------------
          starting.myIsAirTravel = this.myIsAirTravel;
          starting.myIsRaftTravel = this.myIsRaftTravel;
          starting.myIsArchTravel = this.myIsArchTravel;
+         //-------------------------------------
          starting.myIsMinstelAdded = this.myIsMinstelAdded;
          starting.myIsEagleAdded = this.myIsEagleAdded;
          starting.myIsFalconAdded = this.myIsFalconAdded;
          starting.myIsMerchantAdded = this.myIsMerchantAdded;
-         starting.myIsDragonKiller = this.myIsDragonKiller;
-         starting.myIsBanditKiller = this.myIsBanditKiller;
-         starting.myIsOrcKiller = this.myIsOrcKiller;
-         starting.myIsGoblinKiller = this.myIsGoblinKiller;
-         starting.myIsWolfKiller = this.myIsWolfKiller;
-         starting.myIsVisitAllTowns = this.myIsVisitAllTowns;
-         starting.myIsVisitAllCastles = this.myIsVisitAllCastles;
-         starting.myIsVisitAllTemples = this.myIsVisitAllTemples;
-         starting.myIsVisitAllRuins = this.myIsVisitAllRuins;
-         starting.myIsVisitAllOasis = this.myIsVisitAllOasis;
+         //-------------------------------------
          starting.myIsHydraTeethUsed = this.myIsHydraTeethUsed;
          starting.myIsRescueHeir = this.myIsRescueHeir;
          starting.myIsSneakAttack = this.myIsSneakAttack;
          starting.myIsStealGems = this.myIsStealGems;
          starting.myIsPurchaseFoulbane = this.myIsPurchaseFoulbane;
+         //-------------------------------------
+         starting.myIsDragonKiller = this.myIsDragonKiller;
+         starting.myIsBanditKiller = this.myIsBanditKiller;
+         starting.myNumBanditKill = this.myNumBanditKill;
+         starting.myIsOrcKiller = this.myIsOrcKiller;
+         starting.myNumOrcKill = this.myNumOrcKill;
+         starting.myIsGoblinKiller = this.myIsGoblinKiller;
+         starting.myNumGoblinKill = this.myNumGoblinKill;
+         starting.myIsWolfKiller = this.myIsWolfKiller;
+         starting.myNumWolfKill = this.myNumWolfKill;
+         //-------------------------------------
+         starting.myIsVisitAllTowns = this.myIsVisitAllTowns;
+         starting.myIsVisitAllCastles = this.myIsVisitAllCastles;
+         starting.myIsVisitAllTemples = this.myIsVisitAllTemples;
+         starting.myIsVisitAllRuins = this.myIsVisitAllRuins;
+         starting.myIsVisitAllOasis = this.myIsVisitAllOasis;;
          starting.myIsPurchaseChaga = this.myIsPurchaseChaga;
          foreach(string s in this.myVisitedTowns)
             starting.myVisitedTowns.Add(s);
@@ -326,22 +335,22 @@ namespace BarbarianPrince
          if (starting.myIsBanditKiller != this.myIsBanditKiller)
          {
             starting.myIsBanditKiller = this.myIsBanditKiller;
-            return "Killed 20 bandits";
+            return "Killed " + this.myNumBanditKill + " bandits";
          }
          if (starting.myIsOrcKiller != this.myIsOrcKiller)
          {
             starting.myIsOrcKiller = this.myIsOrcKiller;
-            return "Killed 30 orcs";
+            return "Killed " + this.myNumOrcKill + " orcs";
          }
          if (starting.myIsGoblinKiller != this.myIsGoblinKiller)
          {
             starting.myIsGoblinKiller = this.myIsGoblinKiller;
-            return "Killed 40 goblins";
+            return "Killed " + this.myNumGoblinKill + " goblins";
          }
          if (starting.myIsWolfKiller != this.myIsWolfKiller)
          {
             starting.myIsWolfKiller = this.myIsWolfKiller;
-            return "Killed 50 wolves";
+            return "Killed " + this.myNumWolfKill + " wolves";
          }
          //--------------------------------------
          if (starting.myIsVisitAllTowns != this.myIsVisitAllTowns)

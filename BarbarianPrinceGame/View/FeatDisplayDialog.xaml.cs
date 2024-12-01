@@ -25,6 +25,7 @@ namespace BarbarianPrince
       //-----------------------------------------------
       public FeatDisplayDialog(RuleDialogViewer rm)
       {
+         Logger.Log(LogEnum.LE_SERIALIZE_FEATS, "FeatDisplayDialog(): \n feats=" + GameEngine.theFeatsInGame.ToString() );
          InitializeComponent();
          if (null == rm)
          {
@@ -536,6 +537,10 @@ namespace BarbarianPrince
             Button buttonRule = new Button() { Content = "e140b", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
             buttonRule.Click += ButtonShowEventDialog_Click;
             tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run(" "));
+            Button buttonRule1 = new Button() { Content = "e141", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule1.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule1));
             tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
@@ -686,6 +691,8 @@ namespace BarbarianPrince
             Button buttonRule = new Button() { Content = "e051", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
             buttonRule.Click += ButtonShowEventDialog_Click;
             tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run(". # killed = "));
+            tb.Inlines.Add(new Run(GameEngine.theFeatsInGame.myNumBanditKill.ToString()));
             tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
@@ -716,6 +723,8 @@ namespace BarbarianPrince
             Button buttonRule = new Button() { Content = "e055", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
             buttonRule.Click += ButtonShowEventDialog_Click;
             tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run(". # killed = "));
+            tb.Inlines.Add(new Run(GameEngine.theFeatsInGame.myNumOrcKill.ToString()));
             tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
@@ -746,6 +755,8 @@ namespace BarbarianPrince
             Button buttonRule = new Button() { Content = "e052", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
             buttonRule.Click += ButtonShowEventDialog_Click;
             tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run(". # killed = "));
+            tb.Inlines.Add(new Run(GameEngine.theFeatsInGame.myNumGoblinKill.ToString()));
             tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
@@ -776,6 +787,8 @@ namespace BarbarianPrince
             Button buttonRule = new Button() { Content = "e075", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
             buttonRule.Click += ButtonShowEventDialog_Click;
             tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run(". # killed = "));
+            tb.Inlines.Add(new Run(GameEngine.theFeatsInGame.myNumWolfKill.ToString()));
             tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
@@ -786,7 +799,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsVisitAllTowns;
          isFeatChecked = GameEngine.theFeatsInGame.myIsVisitAllTowns;
          featName = "myIsVisitAllTowns";
-         featDesc = "Visit all towns on the map.";
+         featDesc = "Visit all towns. # visited = " + GameEngine.theFeatsInGame.myVisitedTowns.Count.ToString() + " out of 12.";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -812,7 +825,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsVisitAllCastles;
          isFeatChecked = GameEngine.theFeatsInGame.myIsVisitAllCastles;
          featName = "myIsVisitAllCastles";
-         featDesc = "Visit all castles on the map.";
+         featDesc = "Visit all castles. # visited = " + GameEngine.theFeatsInGame.myVisitedCastles.Count.ToString() + " out of 3.";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -838,7 +851,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsVisitAllTemples;
          isFeatChecked = GameEngine.theFeatsInGame.myIsVisitAllTemples;
          featName = "myIsVisitAllTemples";
-         featDesc = "Visit all temples on the map.";
+         featDesc = "Visit all temples. # visited = " + GameEngine.theFeatsInGame.myVisitedTemples.Count.ToString() + " out of 5.";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -864,7 +877,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsVisitAllRuins;
          isFeatChecked = GameEngine.theFeatsInGame.myIsVisitAllRuins;
          featName = "myIsVisitAllRuins";
-         featDesc = "Visit all ruins on the map.";
+         featDesc = "Visit all ruins. # visited = " + GameEngine.theFeatsInGame.myVisitedRuins.Count.ToString() + " out of 3.";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -890,7 +903,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsVisitAllOasis;
          isFeatChecked = GameEngine.theFeatsInGame.myIsVisitAllOasis;
          featName = "myIsVisitAllOasis";
-         featDesc = "Visit all oasis on the map.";
+         featDesc = "Visit all oasis. # visited = " + GameEngine.theFeatsInGame.myVisitedOasises.Count.ToString() + " out of 4.";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);

@@ -2485,7 +2485,7 @@ namespace BarbarianPrince
             //gi.NumMonsterKill = 5; // e161e - kill 5 monsters
             //---------------------
             //gi.IsSecretBaronHuldra = true; // e144
-            gi.IsSecretLadyAeravir = true; // e145
+            //gi.IsSecretLadyAeravir = true; // e145
             //gi.IsSecretCountDrogat = true; // e146
             //IMapItem trueHeir = CreateCharacter(gi, "WarriorBoy");
             //gi.AddCompanion(trueHeir);
@@ -2497,9 +2497,9 @@ namespace BarbarianPrince
             //mi.PlagueDustWound = 2;
             //gi.AddCompanion(mi);
             //---------------------
-            GameEngine.theFeatsInGame.myIsEagleAdded = true;
-            GameEngine.theFeatsInGame.myIsPurchaseFoulbane = true;
-            GameEngine.theFeatsInGame.myIsRescueHeir = true;
+            //GameEngine.theFeatsInGame.myIsEagleAdded = true;
+            //GameEngine.theFeatsInGame.myIsPurchaseFoulbane = true;
+            //GameEngine.theFeatsInGame.myIsRescueHeir = true;
          }
       }
    }
@@ -2883,8 +2883,6 @@ namespace BarbarianPrince
          if (previousEvent != gi.EventActive)
          { sb12.Append("=>"); sb12.Append(gi.EventActive); }
          sb12.Append("\t\tdr="); sb12.Append(dieRoll.ToString());
-         sb12.Append("\t\tm="); sb12.Append(gi.Prince.Movement.ToString());
-         sb12.Append("\t\tmu="); sb12.Append(gi.Prince.MovementUsed.ToString());
          if ("OK" == returnStatus)
             Logger.Log(LogEnum.LE_NEXT_ACTION, sb12.ToString());
          else
@@ -3972,8 +3970,6 @@ namespace BarbarianPrince
          if (previousStartEvent != gi.EventStart)
          { sb12.Append("=>"); sb12.Append(gi.EventStart); }
          sb12.Append("\t\tdr="); sb12.Append(dieRoll.ToString());
-         sb12.Append("\t\tm="); sb12.Append(gi.Prince.Movement.ToString());
-         sb12.Append("\t\tmu="); sb12.Append(gi.Prince.MovementUsed.ToString());
          if ("OK" == returnStatus)
             Logger.Log(LogEnum.LE_NEXT_ACTION, sb12.ToString());
          else
@@ -8009,8 +8005,6 @@ namespace BarbarianPrince
          if (previousStartEvent != gi.EventStart)
          { sb12.Append("=>"); sb12.Append(gi.EventStart); }
          sb12.Append("\t\tdr="); sb12.Append(dieRoll.ToString());
-         sb12.Append("\t\tm="); sb12.Append(gi.Prince.Movement.ToString());
-         sb12.Append("\t\tmu="); sb12.Append(gi.Prince.MovementUsed.ToString());
          if ("OK" == returnStatus)
             Logger.Log(LogEnum.LE_NEXT_ACTION, sb12.ToString());
          else
@@ -15122,7 +15116,6 @@ namespace BarbarianPrince
                break;
             case "e211e": // Seeking audience with Lady Aeravir
                action = GameAction.UpdateEventViewerActive;
-               int resultOfDie2 = gi.DieResults["e211e"][0];
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
                   gi.EnteredHexes.Last().EventNames.Add(key);
@@ -15138,7 +15131,7 @@ namespace BarbarianPrince
                         {
                            if (false == gi.RemoveSpecialItem(SpecialEnum.GriffonClaws))
                            {
-                              Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): RemoveSpecialItem() returned false ae=" + action.ToString() + " dr=" + resultOfDie2.ToString());
+                              Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): RemoveSpecialItem() returned false ae=" + action.ToString() + " dr=" + gi.DieResults[key][0].ToString());
                               return false;
                            }
                            if (false == gi.IsSecretLadyAeravir)
@@ -15156,7 +15149,7 @@ namespace BarbarianPrince
                         {
                            if (false == EncounterEnd(gi, ref action))
                            {
-                              Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false ae=" + action.ToString() + " dr=" + resultOfDie2.ToString());
+                              Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults[key][0].ToString());
                               return false;
                            }
                         }
@@ -15164,7 +15157,7 @@ namespace BarbarianPrince
                      case 8:                                                                                                                        // do nothing   
                         if (false == EncounterEnd(gi, ref action))
                         {
-                           Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false ae=" + action.ToString() + " dr=" + resultOfDie2.ToString());
+                           Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() returned false ae=" + action.ToString() + " dr=" + gi.DieResults[key][0].ToString());
                            return false;
                         }
                         break;
@@ -15242,7 +15235,6 @@ namespace BarbarianPrince
                   if (true == gi.IsSecretLadyAeravir) // know the secret of Lady Aeravir
                      ++dieRoll;
                   //--------------------------------
-                  dieRoll = 10; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                break;

@@ -8488,7 +8488,7 @@
     <isCastle value="False" />
     <isRuin value="False" />
     <isTemple value="False" />
-    <isOasis value="True" />
+    <isOasis value="False" />
     <DownRiver value="" />
     <adjacent value="1509" />
     <adjacent value="1609" />
@@ -8510,7 +8510,7 @@
     <isCastle value="False" />
     <isRuin value="False" />
     <isTemple value="False" />
-    <isOasis value="False" />
+    <isOasis value="True" />
     <DownRiver value="" />
     <adjacent value="1510" />
     <adjacent value="1610" />

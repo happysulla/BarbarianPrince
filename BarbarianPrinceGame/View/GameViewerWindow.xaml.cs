@@ -809,7 +809,7 @@ namespace BarbarianPrince
             option = new Option(name, false);
          if (true == option.IsEnabled)
          {
-            sb.Append(" - Easiest");
+            sb.Append(" - Easiest Monsters");
          }
          else
          {
@@ -819,7 +819,7 @@ namespace BarbarianPrince
                option = new Option(name, false);
             if (true == option.IsEnabled)
             {
-               sb.Append("");
+               sb.Append(" - Normal Monsters");
             }
             else
             {
