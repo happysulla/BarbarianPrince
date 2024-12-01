@@ -12618,9 +12618,9 @@ namespace BarbarianPrince
                      ++gi.DieResults[key][0];
                   switch (gi.DieResults[key][0]) // Based on the die roll, implement the correct screen
                   {
-                     case 0: gi.EventDisplayed = gi.EventActive = "e325"; break;                               // pass with dignity
+                     case 0: gi.EventDisplayed = gi.EventActive = "e325"; break;                                // pass with dignity
                      case 1:
-                     case 7:                                                                            // escape fly
+                     case 7:                                                                                    // escape fly
                         if (0 == numFlying)                                                                     // no escape
                            gi.EventDisplayed = gi.EventActive = "e313b";
                         else if (numFlying < gi.PartyMembers.Count)                                             // partial escape
@@ -12644,6 +12644,7 @@ namespace BarbarianPrince
                }
                else
                {
+                  gi.NumMembersBeingFollowed = 0;
                   gi.EnteredHexes.Last().EventNames.Add(key);
                   if (true == gi.IsInMapItems("Elf"))
                      --gi.DieResults[key][0];
