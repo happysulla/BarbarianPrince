@@ -5153,11 +5153,11 @@ namespace BarbarianPrince
          }
          //----------------------------------------
          // If six is rolled, need to find a Poison Drug to remove
-         if (6 == dieRoll)
+         if (6 != dieRoll)
          {
             IMapItem mi = myGridRows[i].myUnassignable;
-            if (false == myGameInstance.RemoveSpecialItem(SpecialEnum.PoisonDrug, mi))
-               Logger.Log(LogEnum.LE_ERROR, "ShowDrugEndResults(): RemoveSpecialItem(PoisonDrug) return false for mi=" + mi.Name + " row=" + i.ToString());
+            mi.AddSpecialItemToShare(SpecialEnum.PoisonDrug);
+            Logger.Log(LogEnum.LE_ADD_ITEM, "ShowDrugEndResults(): Share mi=" + mi.Name + " add item=SpecialEnum.PoisonDrug");
          }
          //----------------------------------------
          myGridRows[i].myResult = dieRoll;
@@ -5176,11 +5176,11 @@ namespace BarbarianPrince
          }
          //----------------------------------------
          // If six is rolled, need to find a Poison Drug to remove
-         if (6 == dieRoll)
+         if (6 != dieRoll)
          {
             IMapItem mi = myGridRows[i].myUnassignable;
-            if (false == myGameInstance.RemoveSpecialItem(SpecialEnum.ShieldOfLight, mi))
-               Logger.Log(LogEnum.LE_ERROR, "ShowShieldEndResults(): RemoveSpecialItem(ShieldOfLight) return false w/ i=" + i.ToString());
+            mi.AddSpecialItemToShare(SpecialEnum.ShieldOfLight);
+            Logger.Log(LogEnum.LE_ADD_ITEM, "ShowShieldEndResults(): Share mi=" + mi.Name + " add item=SpecialEnum.ShieldOfLight");
          }
          //----------------------------------------
          myGridRows[i].myResult = dieRoll;
@@ -5931,17 +5931,18 @@ namespace BarbarianPrince
                            }
                            if (2 == myDragStateColNum)
                            {
+                              Logger.Log(LogEnum.LE_REMOVE_ITEM, "Grid_MouseDown(): Keep mi=" + mi.Name + " remove item=SpecialEnum.PoisonDrug");
                               mi.SpecialKeeps.Remove(SpecialEnum.PoisonDrug);
                               myDragState = DragStateEnum.KEEPER_DRUG;
                            }
                            else if (3 == myDragStateColNum)
                            {
+                              Logger.Log(LogEnum.LE_REMOVE_ITEM, "Grid_MouseDown(): Share mi=" + mi.Name + " remove item=SpecialEnum.PoisonDrug");
                               mi.SpecialShares.Remove(SpecialEnum.PoisonDrug);
                               myDragState = DragStateEnum.SHARER_DRUG;
                            }
                            else
                            {
-                              Logger.Log(LogEnum.LE_ERROR, "Grid_MouseDown(): invalid col=" + myDragStateColNum.ToString());
                               return;
                            }
                            myGrid.Cursor = myCursors["PoisonDrug"]; // change cursor of button being dragged
@@ -5972,11 +5973,13 @@ namespace BarbarianPrince
                            }
                            if (2 == myDragStateColNum)
                            {
+                              Logger.Log(LogEnum.LE_REMOVE_ITEM, "Grid_MouseDown(): Keep mi=" + mi.Name + " remove item=SpecialEnum.ShieldOfLight");
                               mi.SpecialKeeps.Remove(SpecialEnum.ShieldOfLight);
                               myDragState = DragStateEnum.KEEPER_SHIELD;
                            }
                            else if (3 == myDragStateColNum)
                            {
+                              Logger.Log(LogEnum.LE_REMOVE_ITEM, "Grid_MouseDown(): Share mi=" + mi.Name + " remove item=SpecialEnum.ShieldOfLight");
                               mi.SpecialShares.Remove(SpecialEnum.ShieldOfLight);
                               myDragState = DragStateEnum.SHARER_SHIELD;
                            }
@@ -6095,30 +6098,50 @@ namespace BarbarianPrince
                         if (DragStateEnum.KEEPER_DRUG == myDragState)
                         {
                            if ((rowNum == myDragStateRowNum) && (5 == colNum))
+                           {
                               mi.IsPoisonApplied = true;
+                           }
                            else
+                           {
+                              Logger.Log(LogEnum.LE_ADD_ITEM, "Grid_MouseDown(): Keep mi=" + mi.Name + " add item=SpecialEnum.PoisonDrug");
                               miReturn.AddSpecialItemToKeep(SpecialEnum.PoisonDrug);
+                           }
                         }
                         else if (DragStateEnum.SHARER_DRUG == myDragState)
                         {
                            if (5 == colNum)
+                           {
                               mi.IsPoisonApplied = true;
+                           }
                            else
+                           { 
+                              Logger.Log(LogEnum.LE_ADD_ITEM, "Grid_MouseDown(): Share mi=" + mi.Name + " add item=SpecialEnum.PoisonDrug");
                               miReturn.AddSpecialItemToShare(SpecialEnum.PoisonDrug);
+                           }
                         }
                         else if (DragStateEnum.KEEPER_SHIELD == myDragState)
                         {
                            if ((rowNum == myDragStateRowNum) && (5 == colNum))
+                           {
                               mi.IsShieldApplied = true;
+                           }
                            else
+                           {
+                              Logger.Log(LogEnum.LE_ADD_ITEM, "Grid_MouseDown(): Keep mi=" + mi.Name + " add item=SpecialEnum.ShieldOfLight");
                               miReturn.AddSpecialItemToKeep(SpecialEnum.ShieldOfLight);
+                           }
                         }
                         else if (DragStateEnum.SHARER_SHIELD == myDragState)
                         {
                            if (5 == colNum)
+                           {
                               mi.IsShieldApplied = true;
+                           }
                            else
+                           {
+                              Logger.Log(LogEnum.LE_ADD_ITEM, "Grid_MouseDown(): Share mi=" + mi.Name + " add item=SpecialEnum.ShieldOfLight");
                               miReturn.AddSpecialItemToShare(SpecialEnum.ShieldOfLight);
+                           }
                         }
                         else
                         {

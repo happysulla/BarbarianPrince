@@ -69,7 +69,18 @@ namespace BarbarianPrince
       }
       public IEnumerator GetEnumerator() { return myList.GetEnumerator(); }
       public int IndexOf(ITerritory t) { return myList.IndexOf(t); }
-      public void Remove(ITerritory t) { myList.Remove(t); }
+      public void Remove(ITerritory t) 
+      {
+         foreach (Object o in myList)
+         {
+            ITerritory t1 = (ITerritory)o;
+            if (t.Name == Utilities.RemoveSpaces(t1.Name))
+            {
+               myList.Remove(t1);
+               return;
+            }
+         }
+      }
       public ITerritory Find(string tName)
       {
          foreach (Object o in myList)

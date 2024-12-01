@@ -1445,7 +1445,8 @@ namespace BarbarianPrince
          }
          if (null == firstConsciousMapItem) // if there is no conscious member to assign mounts, mount disappears
          {
-            Logger.Log(LogEnum.LE_MOUNT_CHANGE, "TransferMounts(): Nobody conscious to receive mount. Lose mount as it wonders off to feed.");
+            if( (0 < horses.Count) || (0 < pegasuses.Count) )
+               Logger.Log(LogEnum.LE_MOUNT_CHANGE, "TransferMounts(): Nobody conscious to receive mount. Lose mount as it wonders off to feed.");
             return; 
          }
          //---------------------------------------
@@ -1590,12 +1591,16 @@ namespace BarbarianPrince
       }
       public bool RemoveSpecialItem(SpecialEnum possession, IMapItem mi = null)
       {
+         Logger.Log(LogEnum.LE_REMOVE_ITEM, "gi.RemoveSpecialItem(): item=" + possession.ToString());
          bool IsRoyalHelmHeldStart = IsSpecialItemHeld(SpecialEnum.RoyalHelmOfNorthlands);
          bool isPossessionRemoved = false;
          if (null != mi)
          {
             if (true == mi.RemoveSpecialItem(possession))
+            {
                isPossessionRemoved = true;
+               Logger.Log(LogEnum.LE_REMOVE_ITEM, "gi.RemoveSpecialItem(): mi=" + mi.Name + " item=" + possession.ToString());
+            }
          }
          else
          {
@@ -1604,6 +1609,7 @@ namespace BarbarianPrince
                if (true == member.RemoveSpecialItem(possession))
                {
                   isPossessionRemoved = true;
+                  Logger.Log(LogEnum.LE_REMOVE_ITEM, "gi.RemoveSpecialItem(): member=" + member.Name + " item=" + possession.ToString());
                   break;
                }
             }

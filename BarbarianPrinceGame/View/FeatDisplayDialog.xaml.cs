@@ -581,7 +581,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsSneakAttack;
          isFeatChecked = GameEngine.theFeatsInGame.myIsSneakAttack;
          featName = "myIsSneakAttack";
-         featDesc = " With Heir to throne, perform a sneak attack on Baron Huldra ";
+         featDesc = "With Heir to throne, perform a sneak attack on Baron Huldra ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);

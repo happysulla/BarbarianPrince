@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Xml.Linq;
 using WpfAnimatedGif;
 using Button = System.Windows.Controls.Button;
 using Label = System.Windows.Controls.Label;
@@ -890,7 +891,7 @@ namespace BarbarianPrince
       {
          foreach (SpecialEnum item1 in SpecialKeeps)
          {
-            if (item == item1)
+            if (item.ToString() == item1.ToString())
             {
                Logger.Log(LogEnum.LE_GET_ITEM, "IsSpecialItemHeld(): Keep mi=" + this.Name + " has item=" + item.ToString());
                return true;
@@ -899,7 +900,7 @@ namespace BarbarianPrince
          }
          foreach (SpecialEnum item2 in mySpecialShares)
          {
-            if (item == item2)
+            if (item.ToString() == item2.ToString())
             {
                Logger.Log(LogEnum.LE_GET_ITEM, "IsSpecialItemHeld(): Share mi=" + this.Name + " has item=" + item.ToString());
                return true;
@@ -1868,10 +1869,30 @@ namespace BarbarianPrince
       public int Count { get { return myList.Count; } }
       public void Reverse() { myList.Reverse(); }
       public void Clear() { myList.Clear(); }
-      public bool Contains(IMapItem mi) { return myList.Contains(mi); }
+      public bool Contains(IMapItem mi) 
+      {
+         foreach (Object o in myList)
+         {
+            IMapItem mi1 = (IMapItem)o;
+            if (mi.Name == Utilities.RemoveSpaces(mi1.Name))
+               return true;
+         }
+         return false;
+      }
       public IEnumerator GetEnumerator() { return myList.GetEnumerator(); }
       public int IndexOf(IMapItem mi) { return myList.IndexOf(mi); }
-      public void Remove(IMapItem mi) { myList.Remove(mi); }
+      public void Remove(IMapItem mi) 
+      {
+         foreach (Object o in myList)
+         {
+            IMapItem mi1 = (IMapItem)o;
+            if (mi.Name == mi1.Name)
+            {
+               myList.Remove(mi1);
+               return;
+            }
+         }
+      }
       public IMapItem Find(string miName)
       {
          foreach (Object o in myList)

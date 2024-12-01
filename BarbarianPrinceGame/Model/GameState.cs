@@ -1593,16 +1593,16 @@ namespace BarbarianPrince
          sb12.Append(previousPhase.ToString());
          if (previousPhase != gi.GamePhase)
          { sb12.Append("=>"); sb12.Append(gi.GamePhase.ToString()); }
-         sb12.Append("\t\ta="); sb12.Append(previousAction.ToString());
+         sb12.Append("  a="); sb12.Append(previousAction.ToString());
          if (previousAction != action)
          { sb12.Append("=>"); sb12.Append(action.ToString()); }
-         sb12.Append("\t\tdra="); sb12.Append(previousDieAction.ToString());
+         sb12.Append("  dra="); sb12.Append(previousDieAction.ToString());
          if (previousDieAction != gi.DieRollAction)
          { sb12.Append("=>"); sb12.Append(gi.DieRollAction.ToString()); }
-         sb12.Append("\t\te="); sb12.Append(previousEvent);
+         sb12.Append("  e="); sb12.Append(previousEvent);
          if (previousEvent != gi.EventActive)
          { sb12.Append("=>"); sb12.Append(gi.EventActive); }
-         sb12.Append("\t\tdr="); sb12.Append(dieRoll.ToString());
+         sb12.Append("  dr="); sb12.Append(dieRoll.ToString());
          if ("OK" == returnStatus)
             Logger.Log(LogEnum.LE_NEXT_ACTION, sb12.ToString());
          else
@@ -2378,7 +2378,7 @@ namespace BarbarianPrince
             //gi.AddSpecialItem(SpecialEnum.HealingPoition);
             //gi.AddSpecialItem(SpecialEnum.CurePoisonVial);
             //gi.AddSpecialItem(SpecialEnum.EnduranceSash);
-            //gi.AddSpecialItem(SpecialEnum.PoisonDrug);
+            gi.AddSpecialItem(SpecialEnum.PoisonDrug); // <cgs> TEST
             //gi.AddSpecialItem(SpecialEnum.MagicSword);
             //gi.AddSpecialItem(SpecialEnum.AntiPoisonAmulet);
             //gi.AddSpecialItem(SpecialEnum.PegasusMountTalisman);
@@ -2522,6 +2522,7 @@ namespace BarbarianPrince
          GameAction previousAction = action;
          GameAction previousDieAction = gi.DieRollAction;
          string previousEvent = gi.EventActive;
+         string previousStartEvent = gi.EventStart;
          ITerritory princeTerritory = gi.Prince.Territory;
          switch (action)
          {
@@ -2873,16 +2874,19 @@ namespace BarbarianPrince
          sb12.Append(previousPhase.ToString());
          if (previousPhase != gi.GamePhase)
          { sb12.Append("=>"); sb12.Append(gi.GamePhase.ToString()); }
-         sb12.Append("\t\ta="); sb12.Append(previousAction.ToString());
+         sb12.Append("  a="); sb12.Append(previousAction.ToString());
          if (previousAction != action)
          { sb12.Append("=>"); sb12.Append(action.ToString()); }
-         sb12.Append("\t\tdra="); sb12.Append(previousDieAction.ToString());
+         sb12.Append("  dra="); sb12.Append(previousDieAction.ToString());
          if (previousDieAction != gi.DieRollAction)
          { sb12.Append("=>"); sb12.Append(gi.DieRollAction.ToString()); }
-         sb12.Append("\t\te="); sb12.Append(previousEvent);
+         sb12.Append("  e="); sb12.Append(previousEvent);
          if (previousEvent != gi.EventActive)
          { sb12.Append("=>"); sb12.Append(gi.EventActive); }
-         sb12.Append("\t\tdr="); sb12.Append(dieRoll.ToString());
+         sb12.Append("  es="); sb12.Append(previousStartEvent);
+         if (previousStartEvent != gi.EventStart)
+         { sb12.Append("=>"); sb12.Append(gi.EventStart); }
+         sb12.Append("  dr="); sb12.Append(dieRoll.ToString());
          if ("OK" == returnStatus)
             Logger.Log(LogEnum.LE_NEXT_ACTION, sb12.ToString());
          else
@@ -3005,6 +3009,8 @@ namespace BarbarianPrince
          GameAction previousAction = action;
          GameAction previousDieAction = gi.DieRollAction;
          string previousEvent = gi.EventActive;
+         string previousStartEvent = gi.EventStart;
+         ITerritory princeTerritory = gi.Prince.Territory;
          if (false == PerformEndCheck(gi, ref action)) // GameStateHunt.PerformAction()
          {
             switch (action)
@@ -3128,16 +3134,19 @@ namespace BarbarianPrince
          sb12.Append(previousPhase.ToString());
          if (previousPhase != gi.GamePhase)
          { sb12.Append("=>"); sb12.Append(gi.GamePhase.ToString()); }
-         sb12.Append("\t\ta="); sb12.Append(previousAction.ToString());
+         sb12.Append("  a="); sb12.Append(previousAction.ToString());
          if (previousAction != action)
          { sb12.Append("=>"); sb12.Append(action.ToString()); }
-         sb12.Append("\t\tdra="); sb12.Append(previousDieAction.ToString());
+         sb12.Append("  dra="); sb12.Append(previousDieAction.ToString());
          if (previousDieAction != gi.DieRollAction)
          { sb12.Append("=>"); sb12.Append(gi.DieRollAction.ToString()); }
-         sb12.Append("\t\te="); sb12.Append(previousEvent);
+         sb12.Append("  e="); sb12.Append(previousEvent);
          if (previousEvent != gi.EventActive)
          { sb12.Append("=>"); sb12.Append(gi.EventActive); }
-         sb12.Append("\t\tdr="); sb12.Append(dieRoll.ToString());
+         sb12.Append("  es="); sb12.Append(previousStartEvent);
+         if (previousStartEvent != gi.EventStart)
+         { sb12.Append("=>"); sb12.Append(gi.EventStart); }
+         sb12.Append("  dr="); sb12.Append(dieRoll.ToString());
          if ("OK" == returnStatus)
             Logger.Log(LogEnum.LE_NEXT_ACTION, sb12.ToString());
          else
@@ -3155,6 +3164,8 @@ namespace BarbarianPrince
          GameAction previousAction = action;
          GameAction previousDieAction = gi.DieRollAction;
          string previousEvent = gi.EventActive;
+         string previousStartEvent = gi.EventStart;
+         ITerritory princeTerritory = gi.Prince.Territory;
          Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateCampfire.PerformAction(): gi.MapItemMoves.Clear()");
          gi.MapItemMoves.Clear();
          if (false == PerformEndCheck(gi, ref action)) // GameStateCampfire.PerformAction()
@@ -3385,16 +3396,19 @@ namespace BarbarianPrince
          sb12.Append(previousPhase.ToString());
          if (previousPhase != gi.GamePhase)
          { sb12.Append("=>"); sb12.Append(gi.GamePhase.ToString()); }
-         sb12.Append("\t\ta="); sb12.Append(previousAction.ToString());
+         sb12.Append("  a="); sb12.Append(previousAction.ToString());
          if (previousAction != action)
          { sb12.Append("=>"); sb12.Append(action.ToString()); }
-         sb12.Append("\t\tdra="); sb12.Append(previousDieAction.ToString());
+         sb12.Append("  dra="); sb12.Append(previousDieAction.ToString());
          if (previousDieAction != gi.DieRollAction)
          { sb12.Append("=>"); sb12.Append(gi.DieRollAction.ToString()); }
-         sb12.Append("\t\te="); sb12.Append(previousEvent);
+         sb12.Append("  e="); sb12.Append(previousEvent);
          if (previousEvent != gi.EventActive)
          { sb12.Append("=>"); sb12.Append(gi.EventActive); }
-         sb12.Append("\t\tdr="); sb12.Append(dieRoll.ToString());
+         sb12.Append("  es="); sb12.Append(previousStartEvent);
+         if (previousStartEvent != gi.EventStart)
+         { sb12.Append("=>"); sb12.Append(gi.EventStart); }
+         sb12.Append("  dr="); sb12.Append(dieRoll.ToString());
          if ("OK" == returnStatus)
             Logger.Log(LogEnum.LE_NEXT_ACTION, sb12.ToString());
          else
@@ -3549,6 +3563,7 @@ namespace BarbarianPrince
          GameAction previousAction = action;
          GameAction previousDieAction = gi.DieRollAction;
          string previousEvent = gi.EventActive;
+         string previousStartEvent = gi.EventStart;
          ITerritory princeTerritory = gi.Prince.Territory;
          switch (action)
          {
@@ -3626,16 +3641,19 @@ namespace BarbarianPrince
          sb12.Append(previousPhase.ToString());
          if (previousPhase != gi.GamePhase)
          { sb12.Append("=>"); sb12.Append(gi.GamePhase.ToString()); }
-         sb12.Append("\t\ta="); sb12.Append(previousAction.ToString());
+         sb12.Append("  a="); sb12.Append(previousAction.ToString());
          if (previousAction != action)
          { sb12.Append("=>"); sb12.Append(action.ToString()); }
-         sb12.Append("\t\tdra="); sb12.Append(previousDieAction.ToString());
+         sb12.Append("  dra="); sb12.Append(previousDieAction.ToString());
          if (previousDieAction != gi.DieRollAction)
          { sb12.Append("=>"); sb12.Append(gi.DieRollAction.ToString()); }
-         sb12.Append("\t\te="); sb12.Append(previousEvent);
+         sb12.Append("  e="); sb12.Append(previousEvent);
          if (previousEvent != gi.EventActive)
          { sb12.Append("=>"); sb12.Append(gi.EventActive); }
-         sb12.Append("\t\tdr="); sb12.Append(dieRoll.ToString());
+         sb12.Append("  es="); sb12.Append(previousStartEvent);
+         if (previousStartEvent != gi.EventStart)
+         { sb12.Append("=>"); sb12.Append(gi.EventStart); }
+         sb12.Append("  dr="); sb12.Append(dieRoll.ToString());
          if ("OK" == returnStatus)
             Logger.Log(LogEnum.LE_NEXT_ACTION, sb12.ToString());
          else
@@ -4123,19 +4141,19 @@ namespace BarbarianPrince
          sb12.Append(previousPhase.ToString());
          if (previousPhase != gi.GamePhase)
          { sb12.Append("=>"); sb12.Append(gi.GamePhase.ToString()); }
-         sb12.Append("\t\ta="); sb12.Append(previousAction.ToString());
+         sb12.Append("  a="); sb12.Append(previousAction.ToString());
          if (previousAction != action)
          { sb12.Append("=>"); sb12.Append(action.ToString()); }
-         sb12.Append("\t\tdra="); sb12.Append(previousDieAction.ToString());
+         sb12.Append("  dra="); sb12.Append(previousDieAction.ToString());
          if (previousDieAction != gi.DieRollAction)
          { sb12.Append("=>"); sb12.Append(gi.DieRollAction.ToString()); }
-         sb12.Append("\t\te="); sb12.Append(previousEvent);
+         sb12.Append("  e="); sb12.Append(previousEvent);
          if (previousEvent != gi.EventActive)
          { sb12.Append("=>"); sb12.Append(gi.EventActive); }
-         sb12.Append("\t\tes="); sb12.Append(previousStartEvent);
+         sb12.Append("  es="); sb12.Append(previousStartEvent);
          if (previousStartEvent != gi.EventStart)
          { sb12.Append("=>"); sb12.Append(gi.EventStart); }
-         sb12.Append("\t\tdr="); sb12.Append(dieRoll.ToString());
+         sb12.Append("  dr="); sb12.Append(dieRoll.ToString());
          if ("OK" == returnStatus)
             Logger.Log(LogEnum.LE_NEXT_ACTION, sb12.ToString());
          else
@@ -4206,19 +4224,19 @@ namespace BarbarianPrince
          sb12.Append(previousPhase.ToString());
          if (previousPhase != gi.GamePhase)
          { sb12.Append("=>"); sb12.Append(gi.GamePhase.ToString()); }
-         sb12.Append("\t\ta="); sb12.Append(previousAction.ToString());
+         sb12.Append("  a="); sb12.Append(previousAction.ToString());
          if (previousAction != action)
          { sb12.Append("=>"); sb12.Append(action.ToString()); }
-         sb12.Append("\t\tdra="); sb12.Append(previousDieAction.ToString());
+         sb12.Append("  dra="); sb12.Append(previousDieAction.ToString());
          if (previousDieAction != gi.DieRollAction)
          { sb12.Append("=>"); sb12.Append(gi.DieRollAction.ToString()); }
-         sb12.Append("\t\te="); sb12.Append(previousEvent);
+         sb12.Append("  e="); sb12.Append(previousEvent);
          if (previousEvent != gi.EventActive)
          { sb12.Append("=>"); sb12.Append(gi.EventActive); }
-         sb12.Append("\t\tes="); sb12.Append(previousStartEvent);
+         sb12.Append("  es="); sb12.Append(previousStartEvent);
          if (previousStartEvent != gi.EventStart)
          { sb12.Append("=>"); sb12.Append(gi.EventStart); }
-         sb12.Append("\t\tdr="); sb12.Append(dieRoll.ToString());
+         sb12.Append("  dr="); sb12.Append(dieRoll.ToString());
          if ("OK" == returnStatus)
             Logger.Log(LogEnum.LE_NEXT_ACTION, sb12.ToString());
          else
@@ -4236,6 +4254,7 @@ namespace BarbarianPrince
          GameAction previousAction = action;
          GameAction previousDieAction = gi.DieRollAction;
          string previousEvent = gi.EventActive;
+         string previousStartEvent = gi.EventStart;
          switch (action)
          {
             case GameAction.ShowInventory:
@@ -4278,16 +4297,19 @@ namespace BarbarianPrince
          sb12.Append(previousPhase.ToString());
          if (previousPhase != gi.GamePhase)
          { sb12.Append("=>"); sb12.Append(gi.GamePhase.ToString()); }
-         sb12.Append("\t\ta="); sb12.Append(previousAction.ToString());
+         sb12.Append("  a="); sb12.Append(previousAction.ToString());
          if (previousAction != action)
          { sb12.Append("=>"); sb12.Append(action.ToString()); }
-         sb12.Append("\t\tdra="); sb12.Append(previousDieAction.ToString());
+         sb12.Append("  dra="); sb12.Append(previousDieAction.ToString());
          if (previousDieAction != gi.DieRollAction)
          { sb12.Append("=>"); sb12.Append(gi.DieRollAction.ToString()); }
-         sb12.Append("\t\te="); sb12.Append(previousEvent);
+         sb12.Append("  e="); sb12.Append(previousEvent);
          if (previousEvent != gi.EventActive)
          { sb12.Append("=>"); sb12.Append(gi.EventActive); }
-         sb12.Append("\t\tdr="); sb12.Append(dieRoll.ToString());
+         sb12.Append("  es="); sb12.Append(previousStartEvent);
+         if (previousStartEvent != gi.EventStart)
+         { sb12.Append("=>"); sb12.Append(gi.EventStart); }
+         sb12.Append("  dr="); sb12.Append(dieRoll.ToString());
          if ("OK" == returnStatus)
             Logger.Log(LogEnum.LE_NEXT_ACTION, sb12.ToString());
          else
@@ -4305,6 +4327,7 @@ namespace BarbarianPrince
          GameAction previousAction = action;
          GameAction previousDieAction = gi.DieRollAction;
          string previousEvent = gi.EventActive;
+         string previousStartEvent = gi.EventStart;
          switch (action)
          {
             case GameAction.ShowInventory:
@@ -4347,16 +4370,19 @@ namespace BarbarianPrince
          sb12.Append(previousPhase.ToString());
          if (previousPhase != gi.GamePhase)
          { sb12.Append("=>"); sb12.Append(gi.GamePhase.ToString()); }
-         sb12.Append("\t\ta="); sb12.Append(previousAction.ToString());
+         sb12.Append("  a="); sb12.Append(previousAction.ToString());
          if (previousAction != action)
          { sb12.Append("=>"); sb12.Append(action.ToString()); }
-         sb12.Append("\t\tdra="); sb12.Append(previousDieAction.ToString());
+         sb12.Append("  dra="); sb12.Append(previousDieAction.ToString());
          if (previousDieAction != gi.DieRollAction)
          { sb12.Append("=>"); sb12.Append(gi.DieRollAction.ToString()); }
-         sb12.Append("\t\te="); sb12.Append(previousEvent);
+         sb12.Append("  e="); sb12.Append(previousEvent);
          if (previousEvent != gi.EventActive)
          { sb12.Append("=>"); sb12.Append(gi.EventActive); }
-         sb12.Append("\t\tdr="); sb12.Append(dieRoll.ToString());
+         sb12.Append("  es="); sb12.Append(previousStartEvent);
+         if (previousStartEvent != gi.EventStart)
+         { sb12.Append("=>"); sb12.Append(gi.EventStart); }
+         sb12.Append("  dr="); sb12.Append(dieRoll.ToString());
          if ("OK" == returnStatus)
             Logger.Log(LogEnum.LE_NEXT_ACTION, sb12.ToString());
          else
@@ -4374,6 +4400,7 @@ namespace BarbarianPrince
          GameAction previousAction = action;
          GameAction previousDieAction = gi.DieRollAction;
          string previousEvent = gi.EventActive;
+         string previousStartEvent = gi.EventStart;
          ITerritory princeTerritory = gi.Prince.Territory;
          switch (action)
          {
@@ -4447,16 +4474,19 @@ namespace BarbarianPrince
          sb12.Append(previousPhase.ToString());
          if (previousPhase != gi.GamePhase)
          { sb12.Append("=>"); sb12.Append(gi.GamePhase.ToString()); }
-         sb12.Append("\t\ta="); sb12.Append(previousAction.ToString());
+         sb12.Append("  a="); sb12.Append(previousAction.ToString());
          if (previousAction != action)
          { sb12.Append("=>"); sb12.Append(action.ToString()); }
-         sb12.Append("\t\tdra="); sb12.Append(previousDieAction.ToString());
+         sb12.Append("  dra="); sb12.Append(previousDieAction.ToString());
          if (previousDieAction != gi.DieRollAction)
          { sb12.Append("=>"); sb12.Append(gi.DieRollAction.ToString()); }
-         sb12.Append("\t\te="); sb12.Append(previousEvent);
+         sb12.Append("  e="); sb12.Append(previousEvent);
          if (previousEvent != gi.EventActive)
          { sb12.Append("=>"); sb12.Append(gi.EventActive); }
-         sb12.Append("\t\tdr="); sb12.Append(dieRoll.ToString());
+         sb12.Append("  es="); sb12.Append(previousStartEvent);
+         if (previousStartEvent != gi.EventStart)
+         { sb12.Append("=>"); sb12.Append(gi.EventStart); }
+         sb12.Append("  dr="); sb12.Append(dieRoll.ToString());
          if ("OK" == returnStatus)
             Logger.Log(LogEnum.LE_NEXT_ACTION, sb12.ToString());
          else
@@ -4474,6 +4504,7 @@ namespace BarbarianPrince
          GameAction previousAction = action;
          GameAction previousDieAction = gi.DieRollAction;
          string previousEvent = gi.EventActive;
+         string previousStartEvent = gi.EventStart;
          switch (action)
          {
             case GameAction.ShowInventory:
@@ -4539,16 +4570,19 @@ namespace BarbarianPrince
          sb12.Append(previousPhase.ToString());
          if (previousPhase != gi.GamePhase)
          { sb12.Append("=>"); sb12.Append(gi.GamePhase.ToString()); }
-         sb12.Append("\t\ta="); sb12.Append(previousAction.ToString());
+         sb12.Append("  a="); sb12.Append(previousAction.ToString());
          if (previousAction != action)
          { sb12.Append("=>"); sb12.Append(action.ToString()); }
-         sb12.Append("\t\tdra="); sb12.Append(previousDieAction.ToString());
+         sb12.Append("  dra="); sb12.Append(previousDieAction.ToString());
          if (previousDieAction != gi.DieRollAction)
          { sb12.Append("=>"); sb12.Append(gi.DieRollAction.ToString()); }
-         sb12.Append("\t\te="); sb12.Append(previousEvent);
+         sb12.Append("  e="); sb12.Append(previousEvent);
          if (previousEvent != gi.EventActive)
          { sb12.Append("=>"); sb12.Append(gi.EventActive); }
-         sb12.Append("\t\tdr="); sb12.Append(dieRoll.ToString());
+         sb12.Append("  es="); sb12.Append(previousStartEvent);
+         if (previousStartEvent != gi.EventStart)
+         { sb12.Append("=>"); sb12.Append(gi.EventStart); }
+         sb12.Append("  dr="); sb12.Append(dieRoll.ToString());
          if ("OK" == returnStatus)
             Logger.Log(LogEnum.LE_NEXT_ACTION, sb12.ToString());
          else
@@ -4653,19 +4687,19 @@ namespace BarbarianPrince
          sb12.Append(previousPhase.ToString());
          if (previousPhase != gi.GamePhase)
          { sb12.Append("=>"); sb12.Append(gi.GamePhase.ToString()); }
-         sb12.Append("\t\ta="); sb12.Append(previousAction.ToString());
+         sb12.Append("  a="); sb12.Append(previousAction.ToString());
          if (previousAction != action)
          { sb12.Append("=>"); sb12.Append(action.ToString()); }
-         sb12.Append("\t\tdra="); sb12.Append(previousDieAction.ToString());
+         sb12.Append("  dra="); sb12.Append(previousDieAction.ToString());
          if (previousDieAction != gi.DieRollAction)
          { sb12.Append("=>"); sb12.Append(gi.DieRollAction.ToString()); }
-         sb12.Append("\t\te="); sb12.Append(previousEvent);
+         sb12.Append("  e="); sb12.Append(previousEvent);
          if (previousEvent != gi.EventActive)
          { sb12.Append("=>"); sb12.Append(gi.EventActive); }
-         sb12.Append("\t\tes="); sb12.Append(previousStartEvent);
+         sb12.Append("  es="); sb12.Append(previousStartEvent);
          if (previousStartEvent != gi.EventStart)
          { sb12.Append("=>"); sb12.Append(gi.EventStart); }
-         sb12.Append("\t\tdr="); sb12.Append(dieRoll.ToString());
+         sb12.Append("  dr="); sb12.Append(dieRoll.ToString());
          if ("OK" == returnStatus)
             Logger.Log(LogEnum.LE_NEXT_ACTION, sb12.ToString());
          else
@@ -7992,19 +8026,19 @@ namespace BarbarianPrince
          sb12.Append(previousPhase.ToString());
          if (previousPhase != gi.GamePhase)
          { sb12.Append("=>"); sb12.Append(gi.GamePhase.ToString()); }
-         sb12.Append("\t\ta="); sb12.Append(previousAction.ToString());
+         sb12.Append("  a="); sb12.Append(previousAction.ToString());
          if (previousAction != action)
          { sb12.Append("=>"); sb12.Append(action.ToString()); }
-         sb12.Append("\t\tdra="); sb12.Append(previousDieAction.ToString());
+         sb12.Append("  dra="); sb12.Append(previousDieAction.ToString());
          if (previousDieAction != gi.DieRollAction)
          { sb12.Append("=>"); sb12.Append(gi.DieRollAction.ToString()); }
-         sb12.Append("\t\te="); sb12.Append(previousEvent);
+         sb12.Append("  e="); sb12.Append(previousEvent);
          if (previousEvent != gi.EventActive)
          { sb12.Append("=>"); sb12.Append(gi.EventActive); }
-         sb12.Append("\t\tes="); sb12.Append(previousStartEvent);
+         sb12.Append("  es="); sb12.Append(previousStartEvent);
          if (previousStartEvent != gi.EventStart)
          { sb12.Append("=>"); sb12.Append(gi.EventStart); }
-         sb12.Append("\t\tdr="); sb12.Append(dieRoll.ToString());
+         sb12.Append("  dr="); sb12.Append(dieRoll.ToString());
          if ("OK" == returnStatus)
             Logger.Log(LogEnum.LE_NEXT_ACTION, sb12.ToString());
          else

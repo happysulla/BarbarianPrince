@@ -251,7 +251,7 @@ namespace BarbarianPrince
                bool isTrueLoveReturning = false;
                for (int i = 0; i < myMaxRowCount; i++)
                {
-                  if ((10 == myGridRows[i].myReuniteDieRoll) || (10 == myGridRows[i].myReuniteDieRoll))
+                  if ((10 == myGridRows[i].myReuniteDieRoll) || (11 == myGridRows[i].myReuniteDieRoll))
                      isTrueLoveReturning = true;
                }
                if (true == isTrueLoveReturning)

@@ -8532,7 +8532,7 @@
     <isCastle value="False" />
     <isRuin value="False" />
     <isTemple value="False" />
-    <isOasis value="True" />
+    <isOasis value="False" />
     <DownRiver value="" />
     <adjacent value="1611" />
     <adjacent value="1711" />

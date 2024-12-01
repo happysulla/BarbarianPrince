@@ -271,7 +271,7 @@ namespace BarbarianPrince
          }
          if (starting.myIsRoyalHelmWin != this.myIsRoyalHelmWin)
          {
-            starting.myIsStaffOfCommandWin = this.myIsStaffOfCommandWin;
+            starting.myIsRoyalHelmWin = this.myIsRoyalHelmWin;
             return "Win with the Royal Helm ";
          }
          if (starting.myIsHuldraDefeatedInBattleWin != this.myIsHuldraDefeatedInBattleWin)
@@ -418,7 +418,7 @@ namespace BarbarianPrince
          sb.Append("wOrg=");
          sb.Append(myIsOriginalGameWin.ToString());
          sb.Append(", w500=");
-         sb.Append(myIsOriginalGameWin.ToString());
+         sb.Append(myIs500GoldWin.ToString());
          sb.Append(", wAlly=");
          sb.Append(myIsNobleAllyWin.ToString());
          sb.Append(", wBless=");
@@ -447,7 +447,7 @@ namespace BarbarianPrince
          sb.Append(myNumOrcKill.ToString());
          sb.Append(", kOrc=");
          sb.Append(myIsOrcKiller.ToString());
-         sb.Append(", #golins=");
+         sb.Append(", #goblins=");
          sb.Append(myNumGoblinKill.ToString());
          sb.Append(", kGoblin=");
          sb.Append(myIsGoblinKiller.ToString());
