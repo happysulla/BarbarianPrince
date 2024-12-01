@@ -1623,7 +1623,7 @@ namespace BarbarianPrince
       }
       private bool IsLodgingRequiredForMembers()
       {
-         while(myGameInstance.IsDuplicateMount()) // remove all duplicate mounts
+         while(myGameInstance.IsDuplicateMount()) // IsLodgingRequiredForMembers()
          {
             Logger.Log(LogEnum.LE_ERROR, "IsLodgingRequiredForMembers(): IsDuplicateMount() returned false - Duplicate Removed");
          }
@@ -1806,10 +1806,8 @@ namespace BarbarianPrince
          IMapItem mi = myGridRows[i].myMapItem;
          mi.Mounts[0].IsExposedToUser = true;
          mi.Mounts.Rotate(1);
-         while (myGameInstance.IsDuplicateMount()) // remove all duplicate mounts
-         {
-            Logger.Log(LogEnum.LE_ERROR, "ButtonMount_Click(): IsDuplicateMount() returned false - Duplicate Removed");
-         }
+         while (myGameInstance.IsDuplicateMount()) // ButtonMount_Click()
+            Logger.Log(LogEnum.LE_ERROR, "ButtonMount_Click(): IsDuplicateMount() returned false - Duplicate Removed"); // should never return true
          if (false == UpdateGrid())
             Logger.Log(LogEnum.LE_ERROR, "CheckBox_Click(): UpdateGrid() return false");
       }

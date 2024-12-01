@@ -1826,13 +1826,13 @@ namespace BarbarianPrince
             duplicates.Remove(mount);
             if (null != duplicates.Find(mount.Name))
             {
-               Logger.Log(LogEnum.LE_ERROR, "IsDuplicateMapItem(): duplicate=" + mount.Name + " in mounts=" + mounts.ToString());
                foreach(IMapItem partyMember in PartyMembers)
                {
                   foreach(IMapItem mount1 in partyMember.Mounts)
                   {
                      if( mount.Name == mount1.Name )
                      {
+                        Logger.Log(LogEnum.LE_ERROR, "IsDuplicateMapItem(): mi=" + partyMember.Name + " duplicate=" + mount.Name + " in mounts=" + mounts.ToString());
                         partyMember.Mounts.Remove(mount1); // remove the duplicate mount
                         return true;
                      }

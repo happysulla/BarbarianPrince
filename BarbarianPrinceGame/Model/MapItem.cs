@@ -404,6 +404,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "AddMount(): name=" + this.Name + " cannot have mounts");
             return false;
          }
+         Logger.Log(LogEnum.LE_MOUNT_CHANGE, "AddMount(): adding mount=" + mount.Name + " to " + this.Name);
          this.Mounts.Add(mount);                    // add the mount to the list
          if (false == this.Name.Contains("Giant"))  // mounts cannot carry giants
          {
