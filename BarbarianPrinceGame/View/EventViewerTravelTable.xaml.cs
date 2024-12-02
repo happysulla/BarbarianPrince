@@ -1143,6 +1143,8 @@ namespace BarbarianPrince
       {
          Logger.Log(LogEnum.LE_UNDO_COMMAND, "EventViewerTravelTable.ShowDieResults(): cmd=" + myGameInstance.IsUndoCommandAvailable.ToString() + "-->false");
          myGameInstance.IsUndoCommandAvailable = false;
+         myGameInstance.UndoHeal.Clear();
+         myGameInstance.UndoExhaust.Clear();
          Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): s=" + myState.ToString() + " dr=" + dieRoll.ToString());
          switch (myState)
          {

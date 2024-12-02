@@ -1383,6 +1383,19 @@ namespace BarbarianPrince
          gi.EventDisplayed = gi.EventActive = "e203";
          Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "UndoCommand():  gi.MapItemMoves.Clear()  a=" + action.ToString());
          gi.MapItemMoves.Clear();
+         //-----------------------------
+         foreach(string s in gi.UndoHeal) // undo rest when in structure
+         {
+            IMapItem mi = gi.PartyMembers.Find(s);
+            mi.SetWounds(1, 0); 
+         }
+         gi.UndoHeal.Clear();
+         foreach (string s in gi.UndoExhaust)
+         {
+            IMapItem mi = gi.PartyMembers.Find(s);
+            mi.IsExhausted = true;
+         }
+         gi.UndoExhaust.Clear();
       }
       protected void AddVisitedLocation(IGameInstance gi)
       {
@@ -2362,7 +2375,7 @@ namespace BarbarianPrince
             theIsGameSetup = true;
             //gi.Prince.Territory = Territory.theTerritories.Find("1722"); // 
             //gi.Days = 40;
-            //gi.Prince.SetWounds(7, 0);
+            //gi.Prince.SetWounds(2, 0); // 
             //gi.Prince.PlagueDustWound = 1; 
             //gi.Prince.IsResurrected = true;
             //gi.AddUnitTestTiredMount(myPrince);
@@ -2630,9 +2643,14 @@ namespace BarbarianPrince
                            gi.Statistic.myNumOfPrinceHeal++;
                         else
                            gi.Statistic.myNumOfPartyHeal++;
+                        mi.HealWounds(1, 0); // RestEncounterCheck - InStructure()=true - Resting cures one wound
+                        gi.UndoHeal.Add(mi.Name);
                      }
-                     mi.HealWounds(1, 0); // RestEncounterCheck - InStructure()=true - Resting cures one wound
-                     mi.IsExhausted = false;
+                     if( true == mi.IsExhausted)
+                     {
+                        mi.IsExhausted = false;
+                        gi.UndoExhaust.Add(mi.Name);
+                     }
                   }
                   if (false == SetHuntState(gi, ref action)) // Resting in same hex
                   {
@@ -2683,6 +2701,8 @@ namespace BarbarianPrince
             case GameAction.TransportRedistributeEnd:
                Logger.Log(LogEnum.LE_UNDO_COMMAND, "GameStateSunriseChoice.PerformAction(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->false for a=" + action.ToString());
                gi.IsUndoCommandAvailable = false; // cannot undo after redistribute happens
+               gi.UndoHeal.Clear();
+               gi.UndoExhaust.Clear();
                if (false == gi.PartyReadyToFly()) // mount to fly returns false if anybody is left or possessions are left
                {
                   gi.IsAirborne = false;
@@ -4720,6 +4740,8 @@ namespace BarbarianPrince
       {
          Logger.Log(LogEnum.LE_UNDO_COMMAND, "GameStateEncounter.PerformAction(): cmd=" + gi.IsUndoCommandAvailable.ToString() + "-->false for a=" + action.ToString());
          gi.IsUndoCommandAvailable = false;
+         gi.UndoHeal.Clear();
+         gi.UndoExhaust.Clear();
          String returnStatus = "OK";
          GamePhase previousPhase = gi.GamePhase;
          GameAction previousAction = action;

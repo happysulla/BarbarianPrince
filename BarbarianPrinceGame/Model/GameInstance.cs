@@ -77,6 +77,8 @@ namespace BarbarianPrince
       public int GameTurn { get; set; } = 0;
       public bool IsNewDayChoiceMade { set; get; } = false;
       public bool IsUndoCommandAvailable { set; get; } = false;
+      public List<string> UndoHeal { get; } = new List<string>(); // track mi names when undo command happens in structure
+      public List<string> UndoExhaust { get; } = new List<string>(); // track mi names when undo command happens in structure
       public GamePhase GamePhase { get; set; } = GamePhase.GameSetup;
       public GamePhase SunriseChoice { set; get; } = GamePhase.StartGame;
       public GameAction DieRollAction { get; set; } = GameAction.DieRollActionNone;

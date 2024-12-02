@@ -39,6 +39,8 @@ namespace BarbarianPrince
       String EndGameReason { set; get; }
       //----------------------------------------------
       bool IsUndoCommandAvailable { set; get; } // Allow user to back up if selected wrong daily action or travel hex
+      List<string> UndoHeal { get; } // track mi names when undo command happens in structure
+      List<string> UndoExhaust { get; } // track mi names when undo command happens in structure
       bool IsPartyRested { set; get; }
       bool IsMountsFed { set; get; } // hunt manager
       bool IsMountsStabled { set; get; } // lodge manager
