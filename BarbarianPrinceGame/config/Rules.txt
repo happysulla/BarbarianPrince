@@ -999,7 +999,7 @@ r220	"<Bold>r220 Combat</Bold>
 <LineBreak/><LineBreak/>When your character and your party must fight characters encounted, these rules are used. 
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='r220a' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> Combat Procedure<LineBreak/>
- <InlineUIContainer><Button Content='r220b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>  Selecting Opponents<LineBreak/>
+ <InlineUIContainer><Button Content='r220b' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> Selecting Opponents<LineBreak/>
  <InlineUIContainer><Button Content='r220c' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> Strikes<LineBreak/>
  <InlineUIContainer><Button Content='r220d' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> Combat Table<LineBreak/>
  <InlineUIContainer><Button Content='r220e' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> Surprise<LineBreak/>
@@ -1043,7 +1043,7 @@ r220g	"<Bold>r220g Routes</Bold>
 <LineBreak/><LineBreak/>If you wish, you can attempt to frighten your enemy into running away from the combat. 
 <LineBreak/><LineBreak/>Roll one die each time you kill one character in the enemy group and after you finish all strikes.
 <LineBreak/><LineBreak/>If a six occurs, the enemy routes and the battle ends.
-<LineBreak/><LineBreak/>All surviving enemy characters flee and disapper so you cannot take their wealth. Otherwise, it is just as if you killed them all. 
+<LineBreak/><LineBreak/>All surviving enemy characters flee and disappear so you cannot take their wealth. Otherwise, it is just as if you killed them all. 
 <LineBreak/><LineBreak/>Opposing characters with a combat skill or endurance of 9+ are never subject to route. They will always fight to the death. "
 r221	"<Bold>r221 Wounds and Endurance</Bold>
 <LineBreak/><LineBreak/>Every character has an endurance value. This is the number of wounds needed to kill that character. Wounds are caused by combat and other events.
@@ -1061,7 +1061,7 @@ r221b	"<Bold>r221b Unconsciousness</Bold>
  apply with the Prince counting at 20 loads.
 <LineBreak/><LineBreak/>If less than 4, they desert him. When deserting him, they take all his money and possessions in the process since they think he is dead."
 r221c	"<Bold>r221c Death</Bold>
-<LineBreak/><LineBreak/>When the number of wounds finally equals the endurance value fo the character, or exceeds it, the character dies. If the Barbarian Prince dies, the game is lost!"
+<LineBreak/><LineBreak/>When the number of wounds finally equals the endurance value of the character, or exceeds it, the character dies. If the Barbarian Prince dies, the game is lost!"
 r222	"<Bold>r222 Rest and Heal Wounds</Bold>
 <LineBreak/><LineBreak/>You and your party can rest during a day. You must check for an encounter as if traveling into the hex you occupy while resting 
 <InlineUIContainer><Button Name='myButtonT207' Content='t207' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>.

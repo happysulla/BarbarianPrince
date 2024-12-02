@@ -256,7 +256,7 @@ namespace BarbarianPrince
                   EventViewerTreasureTable aTreasureTableViewer = new EventViewerTreasureTable(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);
                   if (true == aTreasureTableViewer.CtorError)
                      Logger.Log(LogEnum.LE_ERROR, "UpdateView(): aTreasureTableViewer.CtorError=true");
-                  else if (false == aTreasureTableViewer.GetTreasure(ShowResultsTreasurce, wealthCode, gi.ActiveMember, gi.PegasusTreasure))
+                  else if (false == aTreasureTableViewer.GetTreasure(ShowResultsTreasure, wealthCode, gi.ActiveMember, gi.PegasusTreasure))
                      Logger.Log(LogEnum.LE_ERROR, "UpdateView(): GetTreasure() returned false wc=" + wealthCode.ToString());
                }
                else
@@ -4814,14 +4814,14 @@ namespace BarbarianPrince
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          return true;
       }
-      public bool ShowResultsTreasurce()
+      public bool ShowResultsTreasure()
       {
          GameAction outAction = GameAction.Error;
          if (0 == myGameInstance.CapturedWealthCodes.Count)
             outAction = GameAction.EncounterLootStartEnd;
          else
             outAction = GameAction.EncounterLoot;
-         StringBuilder sb11 = new StringBuilder("     ######ShowResultsTreasurce() :");
+         StringBuilder sb11 = new StringBuilder("     ######ShowResultsTreasure() :");
          sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
          sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
          sb11.Append(" a="); sb11.Append(outAction.ToString());

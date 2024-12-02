@@ -211,7 +211,7 @@ namespace BarbarianPrince
             {
                string name = "Pegasus" + Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               MapItem pegasus= new MapItem(name, 1.0, false, false, false, "MPegasus", "MPegasus", gi.Prince.Territory, 0, 0, 0);
+               MapItem pegasus = new MapItem(name, 1.0, false, false, false, "MPegasus", "MPegasus", gi.Prince.Territory, 0, 0, 0);
                mounts.Add(pegasus);
             }
             gi.TransferMounts(mounts);

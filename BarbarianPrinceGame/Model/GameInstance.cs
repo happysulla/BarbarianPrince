@@ -1461,9 +1461,6 @@ namespace BarbarianPrince
             partyMember.AddMount(griffons[assignedGriffonCount]); // Griffon gets assigned a rider
             assignedGriffonCount++;
          }
-         int unassignedCount = maxGriffonCount - assignedGriffonCount; // Any unassigned got to first conscious member which is hopefully Prince
-         for (int i = 0; i < unassignedCount; i++)
-            firstConsciousMapItem.AddMount(griffons[i]);
          //---------------------------------------
          int assignedHarpyCount = 0;
          int maxHarpyCount = harpies.Count;
@@ -1476,9 +1473,6 @@ namespace BarbarianPrince
             partyMember.AddMount(harpies[assignedHarpyCount]); // Griffon gets assigned a rider
             assignedHarpyCount++;
          }
-         unassignedCount = maxHarpyCount - assignedHarpyCount; // Any unassigned got to first conscious member which is hopefully Prince
-         for (int i = 0; i < unassignedCount; i++)
-            firstConsciousMapItem.AddMount(harpies[i]);
          //---------------------------------------
          int assignedPegasusCount = 0;
          int maxPegasusCount = pegasuses.Count;
@@ -1491,24 +1485,28 @@ namespace BarbarianPrince
             partyMember.AddMount(pegasuses[assignedPegasusCount]);
             assignedPegasusCount++;
          }
-         unassignedCount = maxPegasusCount - assignedPegasusCount; // Any unassigned got to first conscious member which is hopefully Prince
-         for (int i = 0; i < unassignedCount; i++)
+         for (int i = assignedPegasusCount; i < maxPegasusCount; i++)  // Any unassigned got to first conscious member which is hopefully Prince
             firstConsciousMapItem.AddMount(pegasuses[i]);
          //---------------------------------------
          int assignedHorseCount = 0;
          int maxHorseCount = horses.Count;
-         foreach (IMapItem partyMember in PartyMembers)
+         foreach (IMapItem partyMember in PartyMembers) // try to assign horses to each party member
          {
             if (assignedHorseCount == maxHorseCount)
                break;
             if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.IsFlyer()) || (0 < partyMember.Mounts.Count))
                continue;
-            partyMember.AddMount(horses[assignedHorseCount]);
+            IMapItem horse = horses[assignedHorseCount];
+            partyMember.AddMount(horse);
             assignedHorseCount++;
          }
-         unassignedCount = maxHorseCount - assignedHorseCount;
-         for (int i = 0; i < unassignedCount; i++)
-            firstConsciousMapItem.AddMount(horses[i]);
+         for (int i = assignedHorseCount; i < maxHorseCount; i++) // assign remaining horses to first conscious partymember
+         {
+            IMapItem horse = horses[i];
+            firstConsciousMapItem.AddMount(horse);
+         }
+         if (true == IsDuplicateMount())
+            Logger.Log(LogEnum.LE_ERROR, "TransferMounts(): IsDuplicateMount() returned false");
       }
       //---------------------------------------------------------------
       public bool IsSpecialItemHeld(SpecialEnum item)
