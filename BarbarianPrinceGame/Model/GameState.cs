@@ -3192,6 +3192,9 @@ namespace BarbarianPrince
                   break;
                case GameAction.UpdateGameOptions:
                   break;
+               case GameAction.UpdateUndo:
+                  UndoCommand(ref gi, ref action);
+                  break;
                case GameAction.UpdateLoadingGame:
                   if (false == LoadGame(ref gi, ref action))
                   {
