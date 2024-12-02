@@ -214,7 +214,6 @@ namespace BarbarianPrince
          if (false == String.IsNullOrEmpty(Settings.Default.GameTypeTotal))
             myGameEngine.Statistics[6] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeTotal);
          //---------------------------------------------------------------
-         //GameEngine.theFeatsInGameStarting = new GameFeat(); // <cgs> TEST
          GameEngine.theFeatsInGame = new GameFeat();
          if (false == String.IsNullOrEmpty(Settings.Default.theGameFeat))
             GameEngine.theFeatsInGame = Utilities.Deserialize<GameFeat>(Settings.Default.theGameFeat);

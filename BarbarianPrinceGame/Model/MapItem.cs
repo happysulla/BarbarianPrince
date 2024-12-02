@@ -411,6 +411,11 @@ namespace BarbarianPrince
          {
             if (true == mount.IsFlyingMountCarrier())
             {
+               if( null != mount.Rider ) // remove existing rider
+               {
+                  this.Mounts.Remove(mount.Name);
+                  mount.Rider = null;
+               }
                this.IsRiding = true;                   // assume to be riding until the first night regardless of load
                this.IsFlying = true;
                mount.Rider = this;

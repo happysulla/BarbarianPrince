@@ -1456,7 +1456,7 @@ namespace BarbarianPrince
          {
             if (assignedGriffonCount == maxGriffonCount)
                break;
-            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.IsFlyer()) )
+            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.IsFlyer()) || (true == partyMember.Name.Contains("Giant")) )
                continue;
             partyMember.AddMount(griffons[assignedGriffonCount]); // Griffon gets assigned a rider
             assignedGriffonCount++;
@@ -1468,7 +1468,7 @@ namespace BarbarianPrince
          {
             if (assignedHarpyCount == maxHarpyCount)
                break;
-            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.IsFlyer()))
+            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.IsFlyer()) || (true == partyMember.Name.Contains("Giant")) )
                continue;
             partyMember.AddMount(harpies[assignedHarpyCount]); // Griffon gets assigned a rider
             assignedHarpyCount++;
