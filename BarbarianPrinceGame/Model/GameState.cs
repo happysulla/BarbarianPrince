@@ -1496,7 +1496,7 @@ namespace BarbarianPrince
                }
                AddStartingTestingOptions(gi); // RemoveSplashScreen
                //------------------------------------------
-               Logger.Log(LogEnum.LE_SERIALIZE_FEATS, "GameStateSetup.PerformAction(RemoveSplashScreen): \n feats=" + GameEngine.theFeatsInGame.ToString() + "\nsfeats=" + GameEngine.theFeatsInGameStarting.ToString());
+               Logger.Log(LogEnum.LE_SERIALIZE_FEATS, "GameStateSetup.PerformAction(RemoveSplashScreen): \n feats=" + GameEngine.theFeatsInGame.ToString() );
                break;
             case GameAction.SetupShowCalArath:
                gi.EventDisplayed = gi.EventActive = "e000a";
@@ -1616,7 +1616,7 @@ namespace BarbarianPrince
          {
             case 1: starting = Territory.theTerritories.Find("0101"); break;
             case 2: starting = Territory.theTerritories.Find("0701"); break;
-            case 3: starting = Territory.theTerritories.Find("0801"); break;
+            case 3: starting = Territory.theTerritories.Find("0901"); break;
             case 4: starting = Territory.theTerritories.Find("1301"); break;
             case 5: starting = Territory.theTerritories.Find("1501"); break;
             case 6: starting = Territory.theTerritories.Find("1801"); break;
@@ -2360,6 +2360,7 @@ namespace BarbarianPrince
          if( false == theIsGameSetup) //This function can be run twice if user selects fun option
          {
             theIsGameSetup = true;
+            //gi.Prince.Territory = Territory.theTerritories.Find("1722"); // 
             //gi.Days = 40;
             //gi.Prince.SetWounds(7, 0);
             //gi.Prince.PlagueDustWound = 1; 
@@ -2378,7 +2379,7 @@ namespace BarbarianPrince
             //gi.AddSpecialItem(SpecialEnum.HealingPoition);
             //gi.AddSpecialItem(SpecialEnum.CurePoisonVial);
             //gi.AddSpecialItem(SpecialEnum.EnduranceSash);
-            gi.AddSpecialItem(SpecialEnum.PoisonDrug); // <cgs> TEST
+            //gi.AddSpecialItem(SpecialEnum.PoisonDrug); 
             //gi.AddSpecialItem(SpecialEnum.MagicSword);
             //gi.AddSpecialItem(SpecialEnum.AntiPoisonAmulet);
             //gi.AddSpecialItem(SpecialEnum.PegasusMountTalisman);

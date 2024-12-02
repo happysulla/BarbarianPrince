@@ -21,8 +21,9 @@ namespace BarbarianPrince
       public PartyDisplayDialog(IGameInstance gi, Canvas c, Button b)
       {
          InitializeComponent();
-         double princeSize = gi.Prince.Zoom * Utilities.theMapItemSize;
-         double partyMemberSize = Utilities.ZOOM * Utilities.theMapItemSize;
+         System.Windows.Media.Matrix currentMatrix = ScreenExtensions.GetMatrixFromVisual(this);
+         double princeSize = (gi.Prince.Zoom * Utilities.theMapItemSize);
+         double partyMemberSize = (Utilities.ZOOM * Utilities.theMapItemSize);
          //-----------------------------
          foreach (IMapItem mi in gi.PartyMembers) // set contents of WrapPanel
          {
@@ -33,8 +34,8 @@ namespace BarbarianPrince
             this.myWrapPanel.Children.Add(newButton);
          }
          //-----------------------------
-         this.Width = partyMemberSize * (gi.PartyMembers.Count - 1) + 2; // not showing prince
-         this.Height = partyMemberSize + 2;
+         this.Width = (partyMemberSize * (gi.PartyMembers.Count - 1) + 2); // not showing prince
+         this.Height = (partyMemberSize + 2);
          //-----------------------------
          myScrollViewer = (ScrollViewer)c.Parent;
          double aw = myScrollViewer.ActualWidth;
@@ -47,31 +48,34 @@ namespace BarbarianPrince
 
          //-----------------------------
          System.Windows.Point bottomRight = b.PointToScreen(new Point(princeSize, princeSize)); // bottom right of button
+         double bottomRightRight = bottomRight.X * currentMatrix.M11;
+         double bottomRightBottom = bottomRight.Y * currentMatrix.M22;   
          double rw = (Canvas.GetLeft(b) + princeSize) * Utilities.ZoomCanvas + this.Width;
          double awho = (aw + ho);
-         Logger.Log(LogEnum.LE_VIEW_SHOW_PARTY_DIALOG, "PartyDisplayDialog(): bottomRight=" + bottomRight.ToString() + " rw=" + rw.ToString() + " awho=" + awho.ToString() );
+         Logger.Log(LogEnum.LE_VIEW_SHOW_PARTY_DIALOG, "PartyDisplayDialog(): br=" + bottomRight.X.ToString() + " rw=" + rw.ToString() + " awho=" + awho.ToString() );
          if ( rw < awho-delta )
          {
-            this.Left = bottomRight.X;
+            this.Left = bottomRightRight;
             Logger.Log(LogEnum.LE_VIEW_SHOW_PARTY_DIALOG, "PartyDisplayDialog(): Left=" + this.Left.ToString());
          }
          else
          {
             double d1 = rw - (awho-delta);
-            this.Left = bottomRight.X - d1;
+            this.Left = bottomRightRight - d1;
             Logger.Log(LogEnum.LE_VIEW_SHOW_PARTY_DIALOG, "PartyDisplayDialog(): d1=" + d1.ToString()  + " Left=" + this.Left.ToString());
          }
          //-----------------------------
-         double bw = (Canvas.GetTop(b) + princeSize) * Utilities.ZoomCanvas + this.Height;
+         double bw = ((Canvas.GetTop(b) + princeSize) * Utilities.ZoomCanvas) + this.Height;
+         Logger.Log(LogEnum.LE_VIEW_SHOW_PARTY_DIALOG, "PartyDisplayDialog(): bb=" + bottomRight.Y.ToString());
          if (bw < c.ActualHeight)
          {
-            this.Top = bottomRight.Y;
+            this.Top = bottomRightBottom;
             Logger.Log(LogEnum.LE_VIEW_SHOW_PARTY_DIALOG, "PartyDisplayDialog(): Top=" + this.Top.ToString());
          }
          else
          {
             System.Windows.Point topLeft = b.PointToScreen(new Point(0, 0)); // top left of button
-            this.Top = topLeft.Y - this.Height;
+            this.Top = topLeft.Y * currentMatrix.M22 - this.Height;
             Logger.Log(LogEnum.LE_VIEW_SHOW_PARTY_DIALOG, "PartyDisplayDialog(): topLeft=" + topLeft.ToString() + " Top=" + this.Top.ToString());
          }
       }

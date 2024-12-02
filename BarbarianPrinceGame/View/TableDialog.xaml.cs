@@ -54,10 +54,10 @@ namespace BarbarianPrince
         {
             if (true == myIsDragging)
             {
-                System.Windows.Point newPoint = this.PointToScreen(e.GetPosition(this));  // Find the current mouse position in screen coordinates.
-                newPoint.Offset(-myPreviousLocation.X, -myPreviousLocation.Y); // Compensate for the position the control was clicked.
-                this.Left = newPoint.X; // Move the window.
-                this.Top = newPoint.Y;
+               System.Windows.Media.Matrix currentMatrix = ScreenExtensions.GetMatrixFromVisual(this);
+               System.Windows.Point newPoint = this.PointToScreen(e.GetPosition(this));  // Find the current mouse position in screen coordinates.
+               this.Left = (newPoint.X - myPreviousLocation.X) / currentMatrix.M11; // Move the window.
+               this.Top = (newPoint.Y - myPreviousLocation.Y) / currentMatrix.M22;
             }
             base.OnMouseMove(e);
         }

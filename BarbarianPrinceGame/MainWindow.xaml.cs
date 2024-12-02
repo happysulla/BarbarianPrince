@@ -76,15 +76,21 @@ namespace BarbarianPrince
             //--------------------------------------------
             try // copy user documentation to folder where user data is kept
             {
+#if DEBUG
+               System.IO.DirectoryInfo parentDir = Directory.GetParent(assemblyDir);
+               string docs1Src = parentDir.FullName + @"\Docs\BP2-eventsbook_singleA4.pdf";
+               string docs2Src = parentDir.FullName + @"\Docs\BP2-rulesbook_singleA4.pdf";
+#else
                string docs1Src = assemblyDir + @"\Docs\BP2-eventsbook_singleA4.pdf";
                string docs2Src = assemblyDir + @"\Docs\BP2-rulesbook_singleA4.pdf";
+#endif
                string docsDir = appDataDir + @"\BarbarianPrince\Docs\";
                if (false == Directory.Exists(docsDir))
                   Directory.CreateDirectory(docsDir);
-               string docs1Dest = assemblyDir + @"\Docs\BP2-eventsbook_singleA4.pdf";
+               string docs1Dest = docsDir + @"BP2-eventsbook_singleA4.pdf";
                if ( false == File.Exists(docs1Dest))
                   File.Copy(docs1Src, docs1Dest);
-               string docs2Dest = assemblyDir + @"\Docs\BP2-rulesbook_singleA4.pdf";
+               string docs2Dest = docsDir + @"BP2-rulesbook_singleA4.pdf";
                if (false == File.Exists(docs2Dest))
                   File.Copy(docs1Src, docs2Dest);
             }

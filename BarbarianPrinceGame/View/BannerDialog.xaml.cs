@@ -125,12 +125,12 @@ namespace BarbarianPrince
             return;
          }
          System.Windows.Point newPoint1 = this.PointToScreen(e.GetPosition(this));
+         System.Windows.Media.Matrix currentMatrix = ScreenExtensions.GetMatrixFromVisual(this);
 #if UT3
          System.Drawing.Point currentScreenPt = new System.Drawing.Point((int)newPoint1.X, (int)newPoint1.Y);
          Screen currentScreen = ScreenExtensions.GetScreenFromPoint(currentScreenPt);
          int currentScreenIndex = ScreenExtensions.GetScreenIndexFromPoint(currentScreenPt);
          string currentMonitor = ScreenExtensions.GetMonitor(this);
-         System.Windows.Media.Matrix currentMatrix = ScreenExtensions.GetMatrixFromVisual(this);
          uint dpiX = 1;
          uint dpiY = 1;
          ScreenExtensions.GetDpi(currentScreen, ScreenExtensions.DpiType.Effective, out dpiX, out dpiY);
@@ -236,16 +236,16 @@ namespace BarbarianPrince
             Console.WriteLine(sb.ToString());
             sb.Append(this.Left.ToString());
          }
-         this.Left = currentScreenPt.X - myOffsetInBannerWindow.X;
-         this.Top = currentScreenPt.Y - myOffsetInBannerWindow.Y;
+         this.Left = (currentScreenPt.X - myOffsetInBannerWindow.X) / currentMatrix.M11;
+         this.Top = (currentScreenPt.Y - myOffsetInBannerWindow.Y) / currentMatrix.M22;
          myPreviousScreenRatio = screenRatio;
          myPreviousScaleRatio = scaleRatio;
          myPreviousMonitor = currentMonitor;
          myPreviousScreenIndex = currentScreenIndex;
          myPreviousScreenPoint = currentScreenPt;
 #else
-         this.Left = newPoint1.X - myOffsetInBannerWindow.X;
-         this.Top = newPoint1.Y - myOffsetInBannerWindow.Y;
+         this.Left = (newPoint1.X - myOffsetInBannerWindow.X) / currentMatrix.M11;
+         this.Top = (newPoint1.Y - myOffsetInBannerWindow.Y) / currentMatrix.M22;
 #endif
          e.Handled = true;
       }
