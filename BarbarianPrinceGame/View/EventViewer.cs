@@ -1468,7 +1468,9 @@ namespace BarbarianPrince
             case "e211c":
                if (("Dismiss" == content) && ((false == myGameInstance.IsMagicInParty()) || (true == myGameInstance.IsMagicUserDismissed) || (0 < myGameInstance.DieResults["e211c"][0])))
                   b.IsEnabled = false;
-               if ((true == gi.IsInMapItems("WarriorBoy")) && ("r144i" == content))
+               if ((true == gi.IsInMapItems("WarriorBoy") && ("r144f" == content) && ("1212" == gi.Prince.Territory.Name)))
+                  b.Visibility = Visibility.Visible;
+               if ((true == gi.IsInMapItems("WarriorBoy") && ("r144i" == content) && ("1212" == gi.Prince.Territory.Name)))
                   b.Visibility = Visibility.Visible;
                break;
             case "e211d":

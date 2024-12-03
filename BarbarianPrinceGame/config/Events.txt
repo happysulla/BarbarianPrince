@@ -4288,7 +4288,9 @@ e211b	"<Bold>e211b Seeking an Audience at any Temple</Bold>
 <LineBreak/>  <InlineUIContainer><Button Content='e153' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 8b Without Dragon's eye, see the Master of the Household
 <LineBreak/>  <InlineUIContainer><Button Content='e150' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 9 Permitted to pay your respects
 <LineBreak/>  <InlineUIContainer><Button Content='e155' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>  11 plus - Audience permitted"
-e211c	"<Bold>e211c Seeking an Audience with the Baron of Huldra Castle</Bold> <InlineUIContainer><Button Content='r144i' FontFamily='Courier New' FontSize='12' Visibility='Hidden'></Button></InlineUIContainer> 
+e211c	"<Bold>e211c Seeking an Audience with the Baron of Huldra Castle</Bold>
+ <InlineUIContainer><Button Content='r144f' FontFamily='Courier New' FontSize='12' Visibility='Hidden'></Button></InlineUIContainer> 
+ <InlineUIContainer><Button Content='r144i' FontFamily='Courier New' FontSize='12' Visibility='Hidden'></Button></InlineUIContainer> 
 <LineBreak/><LineBreak/>As a daily action, you spend the day trying to gain admission to see the Baron Huldra.<LineBreak/><LineBreak/>
            2 Audience permanently refused. You cannot try again<LineBreak/>
   <InlineUIContainer><Button Content='e154' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 3 Meet Baron's Daughter<LineBreak/>

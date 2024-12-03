@@ -731,17 +731,23 @@ r211b	"<Bold>r211b Seeking an Audience at any Temple</Bold>
   <InlineUIContainer><Button Content='e155' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  11+ - Audience permitted<LineBreak/>"
 r211c	"<Bold>r211c Seeking an Audience with the Baron of Huldra Castle</Bold>
+ <InlineUIContainer><Button Content='r144f' FontFamily='Courier New' FontSize='12' Visibility='Hidden'></Button></InlineUIContainer> 
+ <InlineUIContainer><Button Content='r144i' FontFamily='Courier New' FontSize='12' Visibility='Hidden'></Button></InlineUIContainer> 
+<LineBreak/><LineBreak/>As a daily action, you spend the day trying to gain admission to see the Baron Huldra.<LineBreak/><LineBreak/>
+           2 Audience permanently refused. You cannot try again<LineBreak/>
+  <InlineUIContainer><Button Content='e154' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 3 Meet Baron's Daughter<LineBreak/>
+  <InlineUIContainer><Button Content='e149' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 4 Must learn court manners<LineBreak/>
+  <InlineUIContainer><Button Content='e158' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 5 Confonted by hostile guards<LineBreak/>
+           6,7  Audience refused today. You may try again Tomorrow<LineBreak/>
+  <InlineUIContainer><Button Content='e153' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 8 Encounter the Master of the Household<LineBreak/>
+  <InlineUIContainer><Button Content='e148' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 9 Seneschal requires a bribe<LineBreak/>
+  <InlineUIContainer><Button Content='e150' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 10,11 Pay your respects to the Baron<LineBreak/>
+  <InlineUIContainer><Button Content='e151' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 12 Find favor in the eyes of the Baron<LineBreak/>
+  <InlineUIContainer><Button Content='e152' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 13 plus - Baron becomes your Noble ally
 <LineBreak/><LineBreak/>
-           2 - Audience permantently refused. You cannot try again.<LineBreak/>
-  <InlineUIContainer><ButtonContent='e154' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 3- Meet Baron's Daughter<LineBreak/>
-  <InlineUIContainer><ButtonContent='e149' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 4 - Must learn court manners<LineBreak/>
-  <InlineUIContainer><Button Content='e158' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 5 - Confonted by hostile guards<LineBreak/>
-           6,7 - Audience refused today. You may try again tommorrow.<LineBreak/>
-  <InlineUIContainer><Button Content='e153' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 8 - Encounter the Master of the Household<LineBreak/>
-  <InlineUIContainer><Button Content='e148' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 9 - Seneschal requires a bribe<LineBreak/>
-  <InlineUIContainer><Button Content='e150' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 10,11 - Pay your respects to the Baron<LineBreak/>
-  <InlineUIContainer><Button Content='e151' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 12 - Find favor in the eyes of the Baron<LineBreak/>
-  <InlineUIContainer><Button Content='e152' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> 13+ - Baron becomes your Noble ally<LineBreak/>"
+<InlineUIContainer><Button Content='Dismiss' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> a random magic user from party to add one to die roll.
+<LineBreak/><LineBreak/>
+Roll two die and consult list for results:  <InlineUIContainer><Image Source='../images/dieRoll.gif' Name='DiceRoll' Height='21' Width='21'> </Image></InlineUIContainer>"
 r211d	"<Bold>r211d Seeking an Audience with Count Droga of Dragot Castle</Bold>
 <LineBreak/><LineBreak/>
   <InlineUIContainer><Button Name='myButtonE061' Content='e061' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
