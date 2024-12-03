@@ -1892,7 +1892,10 @@ namespace BarbarianPrince
                case 1: possession = SpecialEnum.HealingPoition; break;
                case 2: possession = SpecialEnum.MagicSword; break;
                case 3: possession = SpecialEnum.AntiPoisonAmulet; break;
-               case 4: possession = SpecialEnum.PegasusMount; break;
+               case 4:
+                  if (false == myGameInstance.AddNewMountToParty(MountEnum.Pegasus))
+                     Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): AddNewMountToParty(Pegasus) returned false for dieRoll=" + dieRoll.ToString());
+                  break;
                case 5: possession = SpecialEnum.NerveGasBomb; break;
                case 6: possession = SpecialEnum.ShieldOfLight; break;
                default: Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): dieRoll=" + dieRoll.ToString()); break;
