@@ -3361,6 +3361,20 @@ namespace BarbarianPrince
                case GameAction.CampfireLoadTransport:
                   break;
                case GameAction.CampfireWakeup:
+                  if (true == gi.IsSpecialItemHeld(SpecialEnum.PegasusMount)) // if character has a Pegasus possession, convert to mount
+                  {
+                     if (false == gi.RemoveSpecialItem(SpecialEnum.PegasusMount))
+                     {
+                        returnStatus = "RemoveSpecialItem(PegasusMount) returned false for ae=" + gi.EventActive + " action=" + action.ToString();
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateCampfire.PerformAction(): " + returnStatus);
+                     }
+                     else if (false == gi.Prince.AddNewMount(MountEnum.Pegasus))
+                     {
+                        returnStatus = "AddMount(Pegasus) returned false for ae=" + gi.EventActive + " action=" + action.ToString();
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateCampfire.PerformAction(): " + returnStatus);
+                     }
+                  }
+                  //--------------------------------------
                   bool isPartySizeOne = gi.IsPartySizeOne();
                   if ((true == gi.IsPartyDisgusted) && (false == isPartySizeOne)) // e010 - party is disgusted if ignore starving farmer
                   {

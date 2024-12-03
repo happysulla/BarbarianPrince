@@ -30,7 +30,7 @@
     <ProductName>Barbarian Prince</ProductName>
     <PublisherName>Wargaming Inc</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>45</ApplicationRevision>
+    <ApplicationRevision>47</ApplicationRevision>
     <ApplicationVersion>1.11.13.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
