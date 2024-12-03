@@ -3368,7 +3368,7 @@ namespace BarbarianPrince
                         returnStatus = "RemoveSpecialItem(PegasusMount) returned false for ae=" + gi.EventActive + " action=" + action.ToString();
                         Logger.Log(LogEnum.LE_ERROR, "GameStateCampfire.PerformAction(): " + returnStatus);
                      }
-                     else if (false == gi.Prince.AddNewMount(MountEnum.Pegasus))
+                     else if (false == gi.AddNewMountToParty(MountEnum.Pegasus))
                      {
                         returnStatus = "AddMount(Pegasus) returned false for ae=" + gi.EventActive + " action=" + action.ToString();
                         Logger.Log(LogEnum.LE_ERROR, "GameStateCampfire.PerformAction(): " + returnStatus);
@@ -3398,7 +3398,7 @@ namespace BarbarianPrince
                      returnStatus = "RemoveSpecialItem(PegasusMountTalisman) returned false for ae=" + gi.EventActive;
                      Logger.Log(LogEnum.LE_ERROR, "GameStateCampfire.PerformAction(): " + returnStatus);
                   }
-                  if (false == gi.Prince.AddNewMount(MountEnum.Pegasus))
+                  if (false == gi.AddNewMountToParty(MountEnum.Pegasus))
                   {
                      returnStatus = "AddMount(Pegasus) returned false for ae=" + gi.EventActive;
                      Logger.Log(LogEnum.LE_ERROR, "GameStateCampfire.PerformAction(): " + returnStatus);
@@ -7469,7 +7469,7 @@ namespace BarbarianPrince
                      returnStatus = "RemoveSpecialItem(PegasusMountTalisman) returned false for ae=" + gi.EventActive;
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
-                  if (false == gi.Prince.AddNewMount(MountEnum.Pegasus))
+                  if (false == gi.AddNewMountToParty(MountEnum.Pegasus))
                   {
                      returnStatus = "AddMount(Pegasus) returned false for ae=" + gi.EventActive;
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
