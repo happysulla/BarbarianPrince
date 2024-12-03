@@ -4422,7 +4422,7 @@ e212i	"<Bold>e212i Fall in Love with Priestess</Bold>
 <LineBreak/><LineBreak/>You immediately escape
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  with her and can never return to this hex. She has a combat skill 2 and endurance 4. Her wealth is 100 wealth code
- <InlineUIContainer><Button Content='r226' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+ <InlineUIContainer><Button Content='t226' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  which she has stolen from the temple treasure! Click image to continue.
 <LineBreak/><LineBreak/>
                                   <InlineUIContainer><Image Source='../images/PriestDaughter.gif' Name='LordsDaughterLove' Height='250' Width='200'></Image></InlineUIContainer>"

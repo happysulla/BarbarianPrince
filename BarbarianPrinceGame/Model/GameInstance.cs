@@ -2039,7 +2039,7 @@ namespace BarbarianPrince
       }
       public bool RemoveVictimInParty(IMapItem victim)
       {
-         if ("Prince" == victim.Name)
+         if (true == victim.Name.Contains("Prince"))
          {
             int remainingHealth = victim.Endurance - victim.Wound - victim.Poison;
             victim.SetWounds(remainingHealth, 0);
@@ -2095,6 +2095,7 @@ namespace BarbarianPrince
          IMapItems mounts = new MapItems();
          foreach (IMapItem mount in victim.Mounts)
             mounts.Add(mount);
+         Logger.Log(LogEnum.LE_REMOVE_KIA, "RemoveVictimInParty(): ================" + victim.Name + "=KIA c=" + victim.Coin.ToString() + " f=" + victim.Food.ToString() + "=========================");
          PartyMembers.Remove(victim);
          victim.Mounts.Clear();
          TransferMounts(mounts);
@@ -2210,7 +2211,7 @@ namespace BarbarianPrince
          int numTrueLovesBefore = 0;
          foreach (IMapItem mi in PartyMembers)
          {
-            if ("Prince" != mi.Name)
+            if (false == mi.Name.Contains("Prince"))
                partyMembers.Add(mi);
             if (true == mi.Name.Contains("TrueLove"))
                ++numTrueLovesBefore;
@@ -2230,6 +2231,7 @@ namespace BarbarianPrince
                IsHuldraHeirKilled = true;
             if (true == mi.Name.Contains("TrueLove"))
                LostTrueLoves.Add(mi);
+            Logger.Log(LogEnum.LE_REMOVE_KIA, "RemoveLeaderlessInParty(): ================" + mi.Name + "=KIA c=" + mi.Coin.ToString() + " f=" + mi.Food.ToString() + "=========================");
             PartyMembers.Remove(mi);
          }
          return count;
@@ -2281,6 +2283,7 @@ namespace BarbarianPrince
          if (true == mi.Name.Contains("Minstel"))
             IsMinstrelPlaying = false;
          //--------------------------------
+         Logger.Log(LogEnum.LE_REMOVE_KIA, "RemoveAbandonerInParty(): ================" + mi.Name + " c=" + mi.Coin.ToString() + " f=" + mi.Food.ToString() + "=========================");
          PartyMembers.Remove(mi);
          //--------------------------------
          IsMerchantWithParty = false; // remove the effects of merchant unless one still exists
@@ -2350,6 +2353,7 @@ namespace BarbarianPrince
          if (true == mi.Name.Contains("Minstel"))
             IsMinstrelPlaying = false;
          //--------------------------------
+         Logger.Log(LogEnum.LE_REMOVE_KIA, "RemoveAbandonedInParty(): ================" + mi.Name + " c=" + mi.Coin.ToString() + " f=" + mi.Food.ToString() + "=========================");
          PartyMembers.Remove(mi);
          //--------------------------------
          IsMerchantWithParty = false; // remove the effects of merchant unless one still exists

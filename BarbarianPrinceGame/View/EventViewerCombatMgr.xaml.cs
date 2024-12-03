@@ -1060,7 +1060,7 @@ namespace BarbarianPrince
             {
                isEnd = true;
                myGameInstance.Prince.IsKilled = true; // if prince is unconscious and nobody is left alive, kill him
-               Logger.Log(LogEnum.LE_COMBAT_STATE_END, "UpdateCombatEnd():  Prince.IsKilled=true isEnd=true");
+               Logger.Log(LogEnum.LE_COMBAT_STATE_END, "UpdateCombatEnd():  Prince.IsKilled=true isEnd=true partycount=" + myGameInstance.PartyMembers.Count.ToString());
                if (false == myCallback(myIsRoute, myIsEscape)) // UpdateCombatEnd() - Players lost combat
                {
                   Logger.Log(LogEnum.LE_ERROR, "UpdateCombatEnd(): lost combat and myCallback() returned false");

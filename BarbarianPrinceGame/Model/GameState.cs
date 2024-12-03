@@ -1144,7 +1144,7 @@ namespace BarbarianPrince
          if (0 == gi.PartyMembers.Count)
          {
             Logger.Log(LogEnum.LE_ERROR, "AddMapItemMove(): gi.PartyMembers.Count=0");
-            return false;
+            gi.PartyMembers.Add(gi.Prince);
          }
          gi.Prince.TerritoryStarting = gi.Prince.Territory;
          MapItemMove mim = new MapItemMove(Territory.theTerritories, gi.Prince, newT);
@@ -2375,7 +2375,7 @@ namespace BarbarianPrince
             theIsGameSetup = true;
             //gi.Prince.Territory = Territory.theTerritories.Find("1722"); // 
             //gi.Days = 40;
-            //gi.Prince.SetWounds(2, 0); // 
+            //gi.Prince.SetWounds(6, 0); // 
             //gi.Prince.PlagueDustWound = 1; 
             //gi.Prince.IsResurrected = true;
             //gi.AddUnitTestTiredMount(myPrince);
@@ -3787,7 +3787,7 @@ namespace BarbarianPrince
                   --gi.Prince.MovementUsed;
                   if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex
                   {
-                     returnStatus = " AddMapItemMove() return false";
+                     returnStatus = " AddMapItemMove() return false for action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
                   else
@@ -4790,14 +4790,14 @@ namespace BarbarianPrince
                case GameAction.UpdateLoadingGame:
                   if (false == LoadGame(ref gi, ref action))
                   {
-                     returnStatus = "LoadGame() returned false";
+                     returnStatus = "LoadGame() returned false for action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
                   break;
                case GameAction.EncounterAbandon: // Remove all party members that are not riding
                   if (false == EncounterAbandon(gi, ref action))
                   {
-                     returnStatus = "EncounterAbandon() returned false";
+                     returnStatus = "EncounterAbandon() returned false for action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
                   break;
@@ -4805,7 +4805,7 @@ namespace BarbarianPrince
                   gi.ReduceCoins("EncounterBribe", gi.Bribe);
                   if (false == EncounterEnd(gi, ref action))
                   {
-                     returnStatus = "EncounterEnd(EncounterBribe) returned false";
+                     returnStatus = "EncounterEnd(EncounterBribe) returned false for action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
                   break;
@@ -4814,7 +4814,7 @@ namespace BarbarianPrince
                case GameAction.EncounterEnd:
                   if (false == EncounterEnd(gi, ref action))
                   {
-                     returnStatus = "EncounterEnd() returned false";
+                     returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(EncounterEnd): " + returnStatus);
                   }
                   break;
@@ -4822,7 +4822,7 @@ namespace BarbarianPrince
                   gi.ProcessIncapacitedPartyMembers("Escape", true);
                   if (false == EncounterEscape(gi, ref action))
                   {
-                     returnStatus = "EncounterEscape() returned false";
+                     returnStatus = "EncounterEscape() returned false for action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
                   action = GameAction.UpdateEventViewerActive;
@@ -4832,7 +4832,7 @@ namespace BarbarianPrince
                case GameAction.EncounterEscapeFly:
                   if (false == EncounterEscape(gi, ref action))
                   {
-                     returnStatus = "EncounterEscape() returned false";
+                     returnStatus = "EncounterEscape() returned false for action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
                   if ("e313c" != gi.EventActive)
@@ -4843,14 +4843,14 @@ namespace BarbarianPrince
                   }
                   if (false == EncounterEnd(gi, ref action))
                   {
-                     returnStatus = "EncounterEnd() returned false";
+                     returnStatus = "EncounterEnd() returned false for action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
                   break;
                case GameAction.EncounterEscapeMounted:
                   if (false == EncounterEscape(gi, ref action))
                   {
-                     returnStatus = "EncounterEscape() returned false";
+                     returnStatus = "EncounterEscape() returned false for action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
                   action = GameAction.UpdateEventViewerActive;
@@ -4862,14 +4862,14 @@ namespace BarbarianPrince
                   gi.RaftState = RaftEnum.RE_NO_RAFT;    // e122 - GameStateEncounter(GameAction.EncounterFollow)
                   if (false == EncounterFollow(gi, ref action))
                   {
-                     returnStatus = "EncounterFollow() returned false";
+                     returnStatus = "EncounterFollow() returned false for action = " + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
                   break;
                case GameAction.EncounterHide:
                   if (false == SetEndOfDayState(gi, ref action)) // Hiding so cannot hunt
                   {
-                     returnStatus = "SetEndOfDayState() returned false";
+                     returnStatus = "SetEndOfDayState() returned false for action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): SetEndOfDayState() returned false");
                   }
                   break;
@@ -4899,7 +4899,7 @@ namespace BarbarianPrince
                case GameAction.EncounterLootStart:
                   if (false == EncounterLootStart(gi, ref action, dieRoll))
                   {
-                     returnStatus = "EncounterLootStart() returned false";
+                     returnStatus = "EncounterLootStart() returned false for action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(EncounterLootStart): " + returnStatus);
                   }
                   break;
@@ -4908,21 +4908,21 @@ namespace BarbarianPrince
                case GameAction.EncounterLootStartEnd:
                   if (false == EncounterLootStartEnd(gi, ref action))
                   {
-                     returnStatus = "EncounterLootStartEnd() returned false";
+                     returnStatus = "EncounterLootStartEnd() returned false for action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(EncounterLootStartEnd): " + returnStatus);
                   }
                   break;
                case GameAction.EncounterRoll:
                   if (false == EncounterRoll(gi, ref action, dieRoll))
                   {
-                     returnStatus = "EncounterRoll() returned false";
+                     returnStatus = "EncounterRoll() returned false for action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
                   break;
                case GameAction.EncounterStart:
                   if (false == EncounterStart(gi, ref action, dieRoll))
                   {
-                     returnStatus = "EncounterStart() returned false";
+                     returnStatus = "EncounterStart() returned false for action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
                   break;
@@ -4931,13 +4931,13 @@ namespace BarbarianPrince
                   {
                      if (false == MoveToClosestGoblinKeep(gi))  // return back to keep 
                      {
-                        returnStatus = "MoveToClosestGoblinKeep() returned false";
+                        returnStatus = "MoveToClosestGoblinKeep() returned false for action=" + action.ToString();
                         Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                      }
                   }
                   if (false == MarkedForDeath(gi))
                   {
-                     returnStatus = "MarkedForDeath() returned false";
+                     returnStatus = "MarkedForDeath() returned false for action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
                   break;
@@ -6133,7 +6133,7 @@ namespace BarbarianPrince
                   //--------------------------------------------------------
                   Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateEncounter.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
                   gi.Prince.MovementUsed = gi.Prince.Movement; // end movement after being blown off course
-                                                               //--------------------------------------------------------
+                  //--------------------------------------------------------
                   int woundsvw = gi.DieResults["e105a"][2];
                   if ((woundsvw < 1) || (6 < woundsvw))
                   {
@@ -7431,9 +7431,11 @@ namespace BarbarianPrince
                   gi.Prince.Reset();
                   gi.Prince.Endurance = Math.Max(1, gi.Prince.Endurance - 1);
                   gi.Prince.IsResurrected = true;
+                  if (0 == gi.PartyMembers.Count) // if prince is removed due to combat and all alone
+                     gi.PartyMembers.Add(gi.Prince);
                   if (false == AddMapItemMove(gi, gi.Prince.Territory)) // move to same hex
                   {
-                     returnStatus = "AddMapItemMove() returned false ae=" + gi.EventActive;
+                     returnStatus = "AddMapItemMove() returned false ae=" + gi.EventActive + " action=" + action.ToString();
                      Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
                   }
                   else
@@ -8527,8 +8529,7 @@ namespace BarbarianPrince
                }
                gi.PartyMembers.Clear();
                gi.PartyMembers.Add(gi.Prince);
-               gi.EventDisplayed = gi.EventActive = "e330";
-               gi.DieRollAction = GameAction.EncounterRoll;
+               gi.EventDisplayed = gi.EventActive = "e307"; // encountered strike first in combat
                break;
             case "e045":  // arch of travel
                gi.EventDisplayed = gi.EventActive = "e045b";
@@ -8560,7 +8561,7 @@ namespace BarbarianPrince
                   IMapItem guardian1 = CreateCharacter(gi, "Guardian");
                   gi.EncounteredMembers.Add(guardian1);
                }
-               gi.EventDisplayed = gi.EventActive = "e307";
+               gi.EventDisplayed = gi.EventActive = "e307"; // attacked - encounter strike first
                break;
             case "e047":  // mirror of reversal
                gi.EncounteredMembers.Clear();
