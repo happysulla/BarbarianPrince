@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Navigation;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace BarbarianPrince
 {
@@ -1337,6 +1338,17 @@ namespace BarbarianPrince
             if (mi.Food < 0)
                mi.Food = 0;
          }
+         //---------------------------------------------------------
+         Option option = gi.Options.Find("ExtendEndTime");
+         if (null == option)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "LoadGame(): Options.Find(ExtendEndTime) returned null");
+            option = new Option("ExtendEndTime", false);
+         }
+         if (true == option.IsEnabled)
+            Utilities.MaxDays = 105;
+         else
+            Utilities.MaxDays = 70;
          //---------------------------------------------------------
          gi.Stacks.Clear();
          if ((true == gi.IsJailed) || (true == gi.IsDungeon) || (true == gi.IsEnslaved))
