@@ -1265,7 +1265,7 @@ namespace BarbarianPrince
             case "Swordsman": character = new MapItem(miName, 1.0, false, false, false, "c53Swordsman", "c53Swordsman", princeTerritory, 6, 6, 7); break;
             case "Swordswoman": character = new MapItem(miName, 1.0, false, false, false, "c76Swordswoman", "c76Swordswoman", princeTerritory, 7, 7, 4); break;
             case "Troll": character = new MapItem(miName, 1.0, false, false, false, "c31Troll", "c31Troll", princeTerritory, 8, 8, 15); break;
-            case "TrollDemi": character = new MapItem(miName, 1.0, false, false, false, "c29DemiTroll", "c29DemiTroll", princeTerritory, 7, 8, 10); break;
+            case "OrcDemi": character = new MapItem(miName, 1.0, false, false, false, "c29DemiTroll", "c29DemiTroll", princeTerritory, 7, 8, 10); break;
             case "TrueLoveLordsDaughter": character = new MapItem(miName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", princeTerritory, 0, 0, 0); break;
             case "TrueLovePriestDaughter": character = new MapItem(miName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", princeTerritory, 4, 2, 0); break;
             case "TrueLoveSlave": character = new MapItem(miName, 1.0, false, false, false, "c44TrueLove", "SlaveWoman", princeTerritory, 4, 2, 0); break;
@@ -8778,7 +8778,7 @@ namespace BarbarianPrince
                if (null == gi.OrcTowers.Find(gi.NewHex.Name))
                   gi.OrcTowers.Add(princeTerritory);
                gi.EncounteredMembers.Clear();
-               IMapItem demiTroll = CreateCharacter(gi, "TrollDemi");
+               IMapItem demiTroll = CreateCharacter(gi, "OrcDemi");
                gi.EncounteredMembers.Add(demiTroll);
                gi.DieResults["e056a"][0] = dieRoll;
                int numOrcs = dieRoll + 1;
