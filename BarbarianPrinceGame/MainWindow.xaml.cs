@@ -50,6 +50,9 @@ namespace BarbarianPrince
             string appDataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             Logger.theLogDirectory = appDataDir + @"\BarbarianPrince\Logs\";
             GameLoadMgr.theGamesDirectory = appDataDir + @"\BarbarianPrince\Games\";
+            GameFeat.theGameFeatDirectory = appDataDir + @"\BarbarianPrince\GameFeat\";
+            if (false == Directory.Exists(GameFeat.theGameFeatDirectory)) // create directory if does not exists
+               Directory.CreateDirectory(GameFeat.theGameFeatDirectory);
             //--------------------------------------------
             Utilities.InitializeRandomNumGenerators();
             //--------------------------------------------

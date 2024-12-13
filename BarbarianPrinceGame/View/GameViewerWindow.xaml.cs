@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -188,9 +189,13 @@ namespace BarbarianPrince
             CtorError = true;
             return;
          }
-         Options options = Deserialize(Settings.Default.GameOptions);
+         //---------------------------------------------------------------
+         Options options = DeserializeOptions(Settings.Default.GameOptions);
          myMainMenuViewer.NewGameOptions = options;
          gi.Options = options; // use the new game options for setting up the first game
+         //---------------------------------------------------------------
+         GameEngine.theFeatsInGame = DeserializeGameFeat();
+         GameEngine.theFeatsInGameStarting = GameEngine.theFeatsInGame.Clone(); // need to know difference between starting feats and feats that happen in this game
          //---------------------------------------------------------------
          if (false == String.IsNullOrEmpty(Settings.Default.GameDirectoryName))
             GameLoadMgr.theGamesDirectory = Settings.Default.GameDirectoryName; // remember the game directory name
@@ -213,11 +218,6 @@ namespace BarbarianPrince
             myGameEngine.Statistics[5] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeCustom);
          if (false == String.IsNullOrEmpty(Settings.Default.GameTypeTotal))
             myGameEngine.Statistics[6] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeTotal);
-         //---------------------------------------------------------------
-         GameEngine.theFeatsInGame = new GameFeat();
-         if (false == String.IsNullOrEmpty(Settings.Default.theGameFeat))
-            GameEngine.theFeatsInGame = Utilities.Deserialize<GameFeat>(Settings.Default.theGameFeat);
-         GameEngine.theFeatsInGameStarting = GameEngine.theFeatsInGame.Clone(); // need to know difference between starting feats and feats that happen in this game
          //---------------------------------------------------------------
          SetDisplayIconForUninstall();
          //---------------------------------------------------------------
@@ -641,7 +641,7 @@ namespace BarbarianPrince
          }
       }
       //---------------------------------------
-      private Options Deserialize(String s_xml)
+      private Options DeserializeOptions(String s_xml)
       {
          Options options = new Options();
          if (false == String.IsNullOrEmpty(s_xml))
@@ -655,25 +655,57 @@ namespace BarbarianPrince
             }
             catch (DirectoryNotFoundException dirException)
             {
-               Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + "\ndirException=" + dirException.ToString());
+               Logger.Log(LogEnum.LE_ERROR, "DeserializeOptions s=" + s_xml + "\ndirException=" + dirException.ToString());
             }
             catch (FileNotFoundException fileException)
             {
-               Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + "\nfileException=" + fileException.ToString());
+               Logger.Log(LogEnum.LE_ERROR, "DeserializeOptions(): s=" + s_xml + "\nfileException=" + fileException.ToString());
             }
             catch (IOException ioException)
             {
-               Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + "\nioException=" + ioException.ToString());
+               Logger.Log(LogEnum.LE_ERROR, "DeserializeOptions(): s=" + s_xml + "\nioException=" + ioException.ToString());
             }
             catch (Exception ex)
             {
-               Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + "\nex=" + ex.ToString());
+               Logger.Log(LogEnum.LE_ERROR, "DeserializeOptions(): s=" + s_xml + "\nex=" + ex.ToString());
             }
          }
          if (0 == options.Count)
             options.SetOriginalGameOptions();
          return options;
       }
+      private GameFeat DeserializeGameFeat()
+      {
+         GameFeat gameFeat = new GameFeat();
+         string filename = GameFeat.theGameFeatDirectory + "feats.xml";
+         if (false == String.IsNullOrEmpty(filename))
+         {
+            try // XML serializer does not work for Interfaces
+            {
+               XmlSerializer serializer = new XmlSerializer(typeof(GameFeat));
+               FileStream fileStream = new FileStream(filename, FileMode.Open);
+               gameFeat = (GameFeat)serializer.Deserialize(fileStream);
+            }
+            catch (DirectoryNotFoundException dirException)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "DeserializeGameFeat(): s=" + filename + "\ndirException=" + dirException.ToString());
+            }
+            catch (FileNotFoundException fileException)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "DeserializeGameFeat(): s=" + filename + "\nfileException=" + fileException.ToString());
+            }
+            catch (IOException ioException)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "DeserializeGameFeat(): s=" + filename + "\nioException=" + ioException.ToString());
+            }
+            catch (Exception ex)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "DeserializeGameFeat(): s=" + filename + "\nex=" + ex.ToString());
+            }
+         }
+         return gameFeat;
+      }
+      //---------------------------------------
       private void SetDisplayIconForUninstall()
       {
 #if !DEBUG // Only do this for release version
@@ -738,7 +770,9 @@ namespace BarbarianPrince
          Settings.Default.GameTypeCustom = Utilities.Serialize<GameStat>(myGameEngine.Statistics[5]);
          Settings.Default.GameTypeTotal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[6]);
          //-------------------------------------------
-         Settings.Default.theGameFeat = Utilities.Serialize<GameFeat>(GameEngine.theFeatsInGame);
+         XmlSerializer serializer = new XmlSerializer(typeof(GameFeat));
+         TextWriter writer = new StreamWriter(GameFeat.theGameFeatDirectory + "feats.xml");
+         serializer.Serialize(writer, GameEngine.theFeatsInGame);
          Logger.Log(LogEnum.LE_SERIALIZE_FEATS, "SaveDefaultsToSettings(): \n feats=" + GameEngine.theFeatsInGame.ToString());
          //-------------------------------------------
          Settings.Default.Save();

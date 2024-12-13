@@ -31,7 +31,7 @@
     <PublisherName>Wargaming Inc</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>49</ApplicationRevision>
-    <ApplicationVersion>1.13.15.%2a</ApplicationVersion>
+    <ApplicationVersion>2.0.16.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>

@@ -14,6 +14,7 @@ namespace BarbarianPrince
       [NonSerialized] public const int LOCATIONS_CASTLE= 3;
       [NonSerialized] public const int LOCATIONS_RUIN= 3;
       [NonSerialized] public const int LOCATIONS_OASIS = 4;
+      public static string theGameFeatDirectory = "";
       //----------------------------------------------------
       public bool myIsOriginalGameWin;         // Win the original game 
       public bool myIs500GoldWin;              // Nominal 
