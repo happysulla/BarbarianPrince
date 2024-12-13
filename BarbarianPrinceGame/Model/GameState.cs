@@ -491,12 +491,24 @@ namespace BarbarianPrince
             return true;
          if (true == gi.IsJailed)
          {
+            GameEngine.theFeatsInGame.myNumNightsInJail++;
+            if (0 == (GameEngine.theFeatsInGame.myNumNightsInJail % 40)) // report every 40 times
+            {
+               GameEngine.theFeatsInGame.myIsNightsInJail = true;
+               GameEngine.theFeatsInGameStarting.myIsNightsInJail = false;
+            }
             gi.GamePhase = GamePhase.Campfire;
             gi.EventDisplayed = gi.EventActive = "e203a"; // next screen to show
             gi.DieRollAction = GameAction.E203NightInPrison;
          }
          else if (true == gi.IsDungeon)
          {
+            GameEngine.theFeatsInGame.myNumNightsInJail++;
+            if (0 == (GameEngine.theFeatsInGame.myNumNightsInJail % 40)) // report every 40 times
+            {
+               GameEngine.theFeatsInGame.myIsNightsInJail = true;
+               GameEngine.theFeatsInGameStarting.myIsNightsInJail = false;
+            }
             gi.GamePhase = GamePhase.Campfire;
             gi.EventDisplayed = gi.EventActive = "e203c"; // next screen to show
             gi.DieRollAction = GameAction.E203NightInDungeon;
@@ -593,9 +605,14 @@ namespace BarbarianPrince
             {
                action = GameAction.EndGameLost;  // PerformEndCheck() - Prince Killed
                if ("e203b" == gi.EventActive)
+               {
+                  GameEngine.theFeatsInGame.myIsLostAxeDeath = true;
                   gi.EndGameReason = "Beheaded in gory execution";
+               }
                else
+               {
                   gi.EndGameReason = "Prince killed";
+               }
             }
             isGameEnd = true;
          }
@@ -690,6 +707,8 @@ namespace BarbarianPrince
             gi.Statistic.myEndFoodCount = gi.GetFoods();
             if (0 == gi.Options.GetGameIndex())
                GameEngine.theFeatsInGame.myIsOriginalGameWin = true;
+            if (2 == gi.WitAndWile)
+               GameEngine.theFeatsInGame.myIsLowWitWin = true;
             Logger.Log(LogEnum.LE_SERIALIZE_FEATS, "PerformEndCheck(): 1-feats=" + GameEngine.theFeatsInGame.ToString());
          }
          else if (GameAction.EndGameLost == action)
@@ -4577,6 +4596,8 @@ namespace BarbarianPrince
             case GameAction.EndGameWin:
                if (0 == gi.Options.GetGameIndex())
                   GameEngine.theFeatsInGame.myIsOriginalGameWin = true;
+               if (2 == gi.WitAndWile)
+                  GameEngine.theFeatsInGame.myIsLowWitWin = true;
                gi.EventDisplayed = gi.EventActive = "e501";
                gi.DieRollAction = GameAction.DieRollActionNone;
                break;
@@ -14391,6 +14412,7 @@ namespace BarbarianPrince
                }
                else if (Utilities.NO_RESULT == gi.DieResults[key][0])
                {
+                  GameEngine.theFeatsInGame.myIsLadyAeravirAccused = true;
                   gi.DieResults[key][0] = dieRoll;
                   gi.DieRollAction = GameAction.EncounterRoll;
                }

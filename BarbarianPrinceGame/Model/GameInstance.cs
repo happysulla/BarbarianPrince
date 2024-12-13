@@ -390,6 +390,8 @@ namespace BarbarianPrince
             GameEngine.theFeatsInGame.myIsFalconAdded = true;
          if ((true == companion.Name.Contains("Merchant")) && (1 < Days))
             GameEngine.theFeatsInGame.myIsMerchantAdded = true;
+         if ((true == companion.Name.Contains("TrueLove")) && (1 < Days))
+            GameEngine.theFeatsInGame.myIsTrueLoveAdded = true;
       }
       private void RestoreMapItemAttribute(IMapItem mi)
       {

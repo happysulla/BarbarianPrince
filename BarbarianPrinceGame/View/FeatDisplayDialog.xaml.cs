@@ -80,6 +80,36 @@ namespace BarbarianPrince
          }
          //------------------------------------------------------------
          ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsLowWitWin;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsLowWitWin;
+         featName = "myIsLowWitWin";
+         featDesc = "Win the game with a Wit and Wiles equal to two ";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e000c", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
          isFeatDisplayed = myGameFeatToShow.myIs500GoldWin;
          isFeatChecked = GameEngine.theFeatsInGame.myIs500GoldWin;
          featName = "myIs500GoldWin";
@@ -316,6 +346,36 @@ namespace BarbarianPrince
          }
          //------------------------------------------------------------
          ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsLostAxeDeath;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsLostAxeDeath;
+         featName = "myIsLostAxeDeath";
+         featDesc = "Lost the game by losing your head ";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e203b", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
          isFeatDisplayed = myGameFeatToShow.myIsAirTravel;
          isFeatChecked = GameEngine.theFeatsInGame.myIsAirTravel;
          featName = "myIsAirTravel";
@@ -514,6 +574,74 @@ namespace BarbarianPrince
          }
          //------------------------------------------------------------
          ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsTrueLoveAdded;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsTrueLoveAdded;
+         featName = "myIsTrueLoveAdded";
+         featDesc = "You found your true love ";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e228", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run(" "));
+            Button buttonRule1a = new Button() { Content = "e163c", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule1a.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule1a));
+            tb.Inlines.Add(new Run(" "));
+            Button buttonRule1 = new Button() { Content = "e212i", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule1.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule1));
+            tb.Inlines.Add(new Run("."));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsResistenceRingUsed;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsResistenceRingUsed;
+         featName = "myIsResistenceRingUsed";
+         featDesc = "Use Resistence Ring in battle ";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule1 = new Button() { Content = "e191", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule1.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule1));
+            tb.Inlines.Add(new Run("."));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
          isFeatDisplayed = myGameFeatToShow.myIsHydraTeethUsed;
          isFeatChecked = GameEngine.theFeatsInGame.myIsHydraTeethUsed;
          featName = "myIsHydraTeethUsed";
@@ -638,6 +766,36 @@ namespace BarbarianPrince
          }
          //------------------------------------------------------------
          ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsLadyAeravirAccused;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsLadyAeravirAccused;
+         featName = "myIsLadyAeravirAccused";
+         featDesc = "Accuse Lady Aeravir of indecency ";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e145", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run("."));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
          isFeatDisplayed = myGameFeatToShow.myIsDragonKiller;
          isFeatChecked = GameEngine.theFeatsInGame.myIsDragonKiller;
          featName = "myIsDragonKiller";
@@ -703,7 +861,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsOrcKiller;
          isFeatChecked = GameEngine.theFeatsInGame.myIsOrcKiller;
          featName = "myIsOrcKiller";
-         featDesc = "Kill 30 orcs in battle ";
+         featDesc = "Kill 25 orcs in battle ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -735,7 +893,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsGoblinKiller;
          isFeatChecked = GameEngine.theFeatsInGame.myIsGoblinKiller;
          featName = "myIsGoblinKiller";
-         featDesc = "Kill 40 goblins in battle ";
+         featDesc = "Kill 30 goblins in battle ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -767,7 +925,7 @@ namespace BarbarianPrince
          isFeatDisplayed = myGameFeatToShow.myIsWolfKiller;
          isFeatChecked = GameEngine.theFeatsInGame.myIsWolfKiller;
          featName = "myIsWolfKiller";
-         featDesc = "Kill 50 wolves in battle ";
+         featDesc = "Kill 35 wolves in battle ";
          cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
          myGrid.Children.Add(cb);
          Grid.SetColumn(cb, 0);
@@ -789,6 +947,38 @@ namespace BarbarianPrince
             tb.Inlines.Add(new InlineUIContainer(buttonRule));
             tb.Inlines.Add(new Run(". # killed = "));
             tb.Inlines.Add(new Run(GameEngine.theFeatsInGame.myNumWolfKill.ToString()));
+            tb.Inlines.Add(new Run("."));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsNightsInJail;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsNightsInJail;
+         featName = "myIsNightsInJail";
+         featDesc = "Spend 40 nights in jail ";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            Button buttonRule = new Button() { Content = "e060", FontFamily = myFontFam1, FontSize = 12, VerticalAlignment = VerticalAlignment.Bottom };
+            buttonRule.Click += ButtonShowEventDialog_Click;
+            tb.Inlines.Add(new InlineUIContainer(buttonRule));
+            tb.Inlines.Add(new Run(". # nights = "));
+            tb.Inlines.Add(new Run(GameEngine.theFeatsInGame.myNumNightsInJail.ToString()));
             tb.Inlines.Add(new Run("."));
             myGrid.Children.Add(tb);
             Grid.SetColumn(tb, 1);
@@ -1001,6 +1191,7 @@ namespace BarbarianPrince
          switch (b.Name)
          {
             case "myIsOriginalGameWin": myGameFeatToShow.myIsOriginalGameWin = true; break;
+            case "myIsLowWitWin": myGameFeatToShow.myIsLowWitWin = true; break;
             case "myIs500GoldWin": myGameFeatToShow.myIs500GoldWin = true; break;
             case "myIsNobleAllyWin": myGameFeatToShow.myIsNobleAllyWin = true; break;
             case "myIsBlessedWin": myGameFeatToShow.myIsBlessedWin = true; break;
@@ -1009,6 +1200,7 @@ namespace BarbarianPrince
             case "myIsHuldraDefeatedInBattleWin": myGameFeatToShow.myIsHuldraDefeatedInBattleWin = true; break;
             case "myIsHuldraDesposedWin": myGameFeatToShow.myIsHuldraDesposedWin = true; break;
             case "myIsLostOnTime": myGameFeatToShow.myIsLostOnTime = true; break;
+            case "myIsLostAxeDeath": myGameFeatToShow.myIsLostAxeDeath = true; break;
             case "myIsAirTravel": myGameFeatToShow.myIsAirTravel = true; break;
             case "myIsRaftTravel": myGameFeatToShow.myIsRaftTravel = true; break;
             case "myIsArchTravel": myGameFeatToShow.myIsArchTravel = true; break;
@@ -1016,15 +1208,19 @@ namespace BarbarianPrince
             case "myIsEagleAdded": myGameFeatToShow.myIsEagleAdded = true; break;
             case "myIsFalconAdded": myGameFeatToShow.myIsFalconAdded = true; break;
             case "myIsMerchantAdded": myGameFeatToShow.myIsMerchantAdded = true; break;
+            case "myIsTrueLoveAdded": myGameFeatToShow.myIsTrueLoveAdded = true; break;
+            case "myIsResistenceRingUsed": myGameFeatToShow.myIsResistenceRingUsed = true; break;
             case "myIsHydraTeethUsed": myGameFeatToShow.myIsHydraTeethUsed = true; break;
             case "myIsRescueHeir": myGameFeatToShow.myIsRescueHeir = true; break;
             case "myIsSneakAttack": myGameFeatToShow.myIsSneakAttack = true; break;
             case "myIsStealGems": myGameFeatToShow.myIsStealGems = true; break;
+            case "myIsLadyAeravirAccused": myGameFeatToShow.myIsLadyAeravirAccused = true; break;
             case "myIsDragonKiller": myGameFeatToShow.myIsDragonKiller = true; break;
             case "myIsBanditKiller": myGameFeatToShow.myIsBanditKiller = true; break;
             case "myIsOrcKiller": myGameFeatToShow.myIsOrcKiller = true; break;
             case "myIsGoblinKiller": myGameFeatToShow.myIsGoblinKiller = true; break;
             case "myIsWolfKiller": myGameFeatToShow.myIsWolfKiller = true; break;
+            case "myIsNightsInJail": myGameFeatToShow.myIsNightsInJail = true; break;
             case "myIsVisitAllTowns": myGameFeatToShow.myIsVisitAllTowns = true; break;
             case "myIsVisitAllCastles": myGameFeatToShow.myIsVisitAllCastles = true; break;
             case "myIsVisitAllTemples": myGameFeatToShow.myIsVisitAllTemples = true; break;

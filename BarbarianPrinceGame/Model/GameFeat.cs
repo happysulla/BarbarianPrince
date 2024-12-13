@@ -17,6 +17,7 @@ namespace BarbarianPrince
       public static string theGameFeatDirectory = "";
       //----------------------------------------------------
       public bool myIsOriginalGameWin;         // Win the original game 
+      public bool myIsLowWitWin;               // Win game with Wit and Wiles equal 2 
       public bool myIs500GoldWin;              // Nominal 
       public bool myIsNobleAllyWin;            // E152NobleAlly
       public bool myIsBlessedWin;              // E044HighAltarBlessed
@@ -25,6 +26,7 @@ namespace BarbarianPrince
       public bool myIsHuldraDefeatedInBattleWin;  // e144j
       public bool myIsHuldraDesposedWin;       // e211g
       public bool myIsLostOnTime;              // lose game on time
+      public bool myIsLostAxeDeath;            // lose game with execution
       //-------------------------------------
       public bool myIsAirTravel;
       public bool myIsRaftTravel;
@@ -34,21 +36,26 @@ namespace BarbarianPrince
       public bool myIsEagleAdded;
       public bool myIsFalconAdded;
       public bool myIsMerchantAdded;
+      public bool myIsTrueLoveAdded;
       //-------------------------------------
+      public bool myIsResistenceRingUsed;    // find a resistence ring
       public bool myIsHydraTeethUsed;          // use hydra teeth
       public bool myIsRescueHeir;              // Rescue Huldra Heir from Hill Tribe
       public bool myIsSneakAttack;             // Perform sneak attack on Huldra
       public bool myIsStealGems;               // Steal Gems from Dragot using Foulbane
+      public bool myIsLadyAeravirAccused;      // Use secret knowledge to accuses Lady A of promiscuity
       //-------------------------------------
       public bool myIsDragonKiller;            // kill a dragon
-      public bool myIsBanditKiller;            // kill 20 bandits
+      public bool myIsBanditKiller;         
       public int myNumBanditKill;
-      public bool myIsOrcKiller;               // kill 30 orcs
+      public bool myIsOrcKiller;          
       public int myNumOrcKill;
-      public bool myIsGoblinKiller;            // kill 40 goblins
+      public bool myIsGoblinKiller;          
       public int myNumGoblinKill;
-      public bool myIsWolfKiller;              // kill 50 wolves
+      public bool myIsWolfKiller;             
       public int myNumWolfKill;
+      public bool myIsNightsInJail;           
+      public int myNumNightsInJail;
       //-------------------------------------
       public List<String> myVisitedTowns = new List<String>();
       public List<String> myVisitedTemples = new List<String>();
@@ -67,6 +74,7 @@ namespace BarbarianPrince
       public GameFeat()
       {
          myIsOriginalGameWin = false;
+         myIsLowWitWin = false;
          myIs500GoldWin = false;
          myIsNobleAllyWin = false;
          myIsBlessedWin = false;
@@ -84,13 +92,16 @@ namespace BarbarianPrince
          myIsEagleAdded = false;
          myIsFalconAdded = false;
          myIsMerchantAdded = false;
+         myIsTrueLoveAdded = false;
          //-------------------------------------
+         myIsResistenceRingUsed = false;
          myIsHydraTeethUsed = false;
          myIsRescueHeir = false;
          myIsSneakAttack = false;
          myIsStealGems = false;
          //-------------------------------------
          myIsDragonKiller = false;
+         myIsNightsInJail = false;
          myIsBanditKiller = false;
          myNumBanditKill = 0;
          myIsOrcKiller = false;
@@ -118,6 +129,7 @@ namespace BarbarianPrince
       {
          GameFeat starting = new GameFeat();
          starting.myIsOriginalGameWin = this.myIsOriginalGameWin;
+         starting.myIsLowWitWin = this.myIsLowWitWin;
          starting.myIs500GoldWin = this.myIs500GoldWin;
          starting.myIsNobleAllyWin = this.myIsNobleAllyWin;
          starting.myIsBlessedWin = this.myIsBlessedWin;
@@ -135,7 +147,9 @@ namespace BarbarianPrince
          starting.myIsEagleAdded = this.myIsEagleAdded;
          starting.myIsFalconAdded = this.myIsFalconAdded;
          starting.myIsMerchantAdded = this.myIsMerchantAdded;
+         starting.myIsTrueLoveAdded = this.myIsTrueLoveAdded;
          //-------------------------------------
+         starting.myIsResistenceRingUsed = this.myIsResistenceRingUsed;
          starting.myIsHydraTeethUsed = this.myIsHydraTeethUsed;
          starting.myIsRescueHeir = this.myIsRescueHeir;
          starting.myIsSneakAttack = this.myIsSneakAttack;
@@ -151,6 +165,8 @@ namespace BarbarianPrince
          starting.myNumGoblinKill = this.myNumGoblinKill;
          starting.myIsWolfKiller = this.myIsWolfKiller;
          starting.myNumWolfKill = this.myNumWolfKill;
+         starting.myIsNightsInJail = this.myIsNightsInJail;
+         starting.myNumNightsInJail = this.myNumNightsInJail;
          //-------------------------------------
          starting.myIsVisitAllTowns = this.myIsVisitAllTowns;
          starting.myIsVisitAllCastles = this.myIsVisitAllCastles;
@@ -173,6 +189,8 @@ namespace BarbarianPrince
       public bool IsEqual(GameFeat starting)
       {
          if (this.myIsOriginalGameWin != starting.myIsOriginalGameWin)
+            return false;
+         if (this.myIsLowWitWin != starting.myIsLowWitWin)
             return false;
          if (this.myIs500GoldWin != starting.myIs500GoldWin)
             return false;
@@ -206,6 +224,8 @@ namespace BarbarianPrince
             return false;
          if (this.myIsMerchantAdded != starting.myIsMerchantAdded)
             return false;
+         if (this.myIsTrueLoveAdded != starting.myIsTrueLoveAdded)
+            return false;
          //--------------------------------------
          if (this.myIsDragonKiller != starting.myIsDragonKiller)
             return false;
@@ -216,6 +236,8 @@ namespace BarbarianPrince
          if (this.myIsGoblinKiller != starting.myIsGoblinKiller)
             return false;
          if (this.myIsWolfKiller != starting.myIsWolfKiller)
+            return false;
+         if (this.myIsNightsInJail != starting.myIsNightsInJail)
             return false;
          //--------------------------------------
          if (this.myIsVisitAllTowns != starting.myIsVisitAllTowns)
@@ -229,6 +251,8 @@ namespace BarbarianPrince
          if (this.myIsVisitAllOasis != starting.myIsVisitAllOasis)
             return false;
          //--------------------------------------
+         if (this.myIsResistenceRingUsed != starting.myIsResistenceRingUsed)
+            return false;
          if (this.myIsHydraTeethUsed != starting.myIsHydraTeethUsed)
             return false;
          if (this.myIsRescueHeir != starting.myIsRescueHeir)
@@ -249,6 +273,11 @@ namespace BarbarianPrince
          {
             starting.myIsOriginalGameWin = this.myIsOriginalGameWin;
             return "Win the original game";
+         }
+         if (starting.myIsLowWitWin != this.myIsLowWitWin)
+         {
+            starting.myIsLowWitWin = this.myIsLowWitWin;
+            return "Win with a Wit and Wiles equal to two";
          }
          if ( starting.myIs500GoldWin != this.myIs500GoldWin )
          {
@@ -327,6 +356,11 @@ namespace BarbarianPrince
             starting.myIsMerchantAdded = this.myIsMerchantAdded;
             return "Merchant joins your party";
          }
+         if (starting.myIsTrueLoveAdded != this.myIsTrueLoveAdded)
+         {
+            starting.myIsTrueLoveAdded = this.myIsTrueLoveAdded;
+            return "You found your true love";
+         }
          //--------------------------------------
          if (starting.myIsDragonKiller != this.myIsDragonKiller)
          {
@@ -352,6 +386,11 @@ namespace BarbarianPrince
          {
             starting.myIsWolfKiller = this.myIsWolfKiller;
             return "Killed " + this.myNumWolfKill + " wolves";
+         }
+         if (starting.myIsNightsInJail != this.myIsNightsInJail)
+         {
+            starting.myIsNightsInJail = this.myIsNightsInJail;
+            return "Spend " + this.myNumNightsInJail + " in jail";
          }
          //--------------------------------------
          if (starting.myIsVisitAllTowns != this.myIsVisitAllTowns)
@@ -380,6 +419,11 @@ namespace BarbarianPrince
             return "Visited all oasis";
          }
          //--------------------------------------
+         if (starting.myIsResistenceRingUsed != this.myIsResistenceRingUsed)
+         {
+            starting.myIsResistenceRingUsed = this.myIsResistenceRingUsed;
+            return "Use Resistence Ring in battle";
+         }
          if (starting.myIsHydraTeethUsed != this.myIsHydraTeethUsed)
          {
             starting.myIsHydraTeethUsed = this.myIsHydraTeethUsed;
@@ -400,6 +444,11 @@ namespace BarbarianPrince
             starting.myIsStealGems = this.myIsStealGems;
             return "Steal Count Dragot's jewels";
          }
+         if (starting.myIsLadyAeravirAccused != this.myIsLadyAeravirAccused)
+         {
+            starting.myIsLadyAeravirAccused = this.myIsLadyAeravirAccused;
+            return "Accuse Lady Aeravir of promiscuous behavior"; // e145
+         }
          if (starting.myIsPurchaseFoulbane != this.myIsPurchaseFoulbane)
          {
             starting.myIsPurchaseFoulbane = this.myIsPurchaseFoulbane;
@@ -418,6 +467,8 @@ namespace BarbarianPrince
          sb.Append("{ ");
          sb.Append("wOrg=");
          sb.Append(myIsOriginalGameWin.ToString());
+         sb.Append("wWW=");
+         sb.Append(myIsLowWitWin.ToString());
          sb.Append(", w500=");
          sb.Append(myIs500GoldWin.ToString());
          sb.Append(", wAlly=");
@@ -456,6 +507,10 @@ namespace BarbarianPrince
          sb.Append(myNumWolfKill.ToString());
          sb.Append(", kWolf=");
          sb.Append(myIsWolfKiller.ToString());
+         sb.Append(", #nights=");
+         sb.Append(myNumNightsInJail.ToString());
+         sb.Append(", knights=");
+         sb.Append(myIsNightsInJail.ToString());
          sb.Append(", foul=");
          sb.Append(myIsPurchaseFoulbane.ToString());
          sb.Append(", chaga=");
