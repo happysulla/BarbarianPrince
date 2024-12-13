@@ -9873,6 +9873,7 @@ namespace BarbarianPrince
                gi.CapturedWealthCodes.Add(100);
                break;
             case "e144b": // defeated Hill Tribe
+               GameEngine.theFeatsInGame.myIsRescueHeir = true;
                gi.EventDisplayed = gi.EventActive = "e144c";
                gi.DieRollAction = GameAction.DieRollActionNone;
                gi.IsSecretBaronHuldra = false;

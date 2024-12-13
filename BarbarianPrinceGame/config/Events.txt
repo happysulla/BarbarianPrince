@@ -3376,7 +3376,7 @@ Die Roll=<InlineUIContainer><Image Source='../images/dieRoll.gif' Name='Die3Roll
 <LineBreak/><LineBreak/>
                    <InlineUIContainer><Image Source='../images/CrossedSwords.gif' Name='HeirRescue' Height='400' Width='400'></Image></InlineUIContainer>"
 e144c	"<Bold>e144c Escape with True Heir to Huldra Castle</Bold>
-<LineBreak/><LineBreak/>After either using the an item or killing the guards, you can escape
+<LineBreak/><LineBreak/>After either using an item or killing the guards, you can escape
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  from the hill tribe in
  <InlineUIContainer><Button Content='1611' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>. You escape
