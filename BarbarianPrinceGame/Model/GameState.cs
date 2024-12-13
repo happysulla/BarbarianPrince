@@ -15037,8 +15037,8 @@ namespace BarbarianPrince
                         letters.Add(t);
                   }
                   dieRoll += (letters.Count * 2);
-                  foreach (ITerritory t in letters)
-                     gi.LetterOfRecommendations.Remove(t);
+                  //foreach (ITerritory t in letters)
+                  //   gi.LetterOfRecommendations.Remove(t);
                   gi.ForbiddenAudiences.RemoveLetterConstraints(princeTerritory);
                   //--------------------------------
                   if (true == gi.Purifications.Contains(princeTerritory)) // can only be one purification territory in this container
@@ -15119,8 +15119,8 @@ namespace BarbarianPrince
                         letters.Add(t);
                   }
                   dieRoll += (letters.Count * 2);
-                  foreach (ITerritory t in letters)
-                     gi.LetterOfRecommendations.Remove(t);
+                  //foreach (ITerritory t in letters)
+                  //   gi.LetterOfRecommendations.Remove(t);
                   gi.ForbiddenAudiences.RemoveLetterConstraints(princeTerritory);
                   //--------------------------------
                   dieRoll += gi.DaughterRollModifier;
@@ -15205,8 +15205,8 @@ namespace BarbarianPrince
                         letters.Add(t);
                   }
                   dieRoll += (letters.Count * 2);
-                  foreach (ITerritory t in letters)
-                     gi.LetterOfRecommendations.Remove(t);
+                  //foreach (ITerritory t in letters)
+                  //   gi.LetterOfRecommendations.Remove(t);
                   gi.ForbiddenAudiences.RemoveLetterConstraints(princeTerritory);
                   //--------------------------------
                   dieRoll += gi.DaughterRollModifier;
@@ -15325,8 +15325,8 @@ namespace BarbarianPrince
                         letters.Add(t);
                   }
                   dieRoll += (letters.Count * 2);
-                  foreach (ITerritory t in letters)
-                     gi.LetterOfRecommendations.Remove(t);
+                  //foreach (ITerritory t in letters)
+                  //   gi.LetterOfRecommendations.Remove(t);
                   gi.ForbiddenAudiences.RemoveLetterConstraints(princeTerritory);
                   //--------------------------------
                   if (true == gi.Purifications.Contains(princeTerritory)) // can only be one purification territory in this container
@@ -15415,8 +15415,8 @@ namespace BarbarianPrince
                         letters.Add(t);
                   }
                   dieRoll += (letters.Count * 2);
-                  foreach (ITerritory t in letters)
-                     gi.LetterOfRecommendations.Remove(t);
+                  //foreach (ITerritory t in letters)
+                  //   gi.LetterOfRecommendations.Remove(t);
                   gi.ForbiddenAudiences.RemoveLetterConstraints(princeTerritory);
                   //--------------------------------
                   dieRoll += gi.DaughterRollModifier;
@@ -15479,8 +15479,8 @@ namespace BarbarianPrince
                         letters.Add(t);
                   }
                   dieRoll += (letters.Count * 2);
-                  foreach (ITerritory t in letters)
-                     gi.LetterOfRecommendations.Remove(t);
+                  //foreach (ITerritory t in letters)
+                  //   gi.LetterOfRecommendations.Remove(t);
                   gi.ForbiddenAudiences.RemoveLetterConstraints(princeTerritory);
                   //--------------------------------
                   dieRoll += gi.DaughterRollModifier;
@@ -15555,8 +15555,8 @@ namespace BarbarianPrince
                         letters.Add(t);
                   }
                   dieRoll += (letters.Count * 2);
-                  foreach (ITerritory t in letters)
-                     gi.LetterOfRecommendations.Remove(t);
+                  //foreach (ITerritory t in letters)
+                  //   gi.LetterOfRecommendations.Remove(t);
                   gi.ForbiddenAudiences.RemoveLetterConstraints(princeTerritory);
                   //--------------------------------
                   bool isOfferingConstraint = gi.ForbiddenAudiences.IsOfferingsConstraint(princeTerritory, gi.Days);
