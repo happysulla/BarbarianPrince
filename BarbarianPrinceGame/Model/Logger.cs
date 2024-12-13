@@ -152,7 +152,7 @@ namespace BarbarianPrince
          Logger.SetOn(LogEnum.LE_END_ENCOUNTER);
          //Logger.SetOn(LogEnum.LE_HEX_WITHIN_RANGE);
          //Logger.SetOn(LogEnum.LE_STARVATION_STATE_CHANGE);
-         Logger.SetOn(LogEnum.LE_SERIALIZE_FEATS);
+         //Logger.SetOn(LogEnum.LE_SERIALIZE_FEATS);
          //Logger.SetOn(LogEnum.LE_RETURN_TO_START);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_WINDOW);
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_PARTY_DIALOG);
