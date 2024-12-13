@@ -80,6 +80,110 @@ namespace BarbarianPrince
          }
          //------------------------------------------------------------
          ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsRandomPartyGameWin;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsRandomPartyGameWin;
+         featName = "myIsRandomPartyGameWin";
+         featDesc = "Win the game with random starting party.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsRandomHexGameWin;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsRandomHexGameWin;
+         featName = "myIsRandomHexGameWin";
+         featDesc = "Win the game with random starting hex.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsRandomGameWin;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsRandomGameWin;
+         featName = "myIsRandomGameWin";
+         featDesc = "Win the game with random options.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
+         isFeatDisplayed = myGameFeatToShow.myIsFunGameWin;
+         isFeatChecked = GameEngine.theFeatsInGame.myIsFunGameWin;
+         featName = "myIsFunGameWin";
+         featDesc = "Win the game using fun options.";
+         cb = new CheckBox() { IsEnabled = false, IsChecked = isFeatChecked, FontSize = 14, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+         myGrid.Children.Add(cb);
+         Grid.SetColumn(cb, 0);
+         Grid.SetRow(cb, rowNum);
+         if ((false == myIsAllFeatsShown) && (false == isFeatDisplayed) && (false == isFeatChecked))
+         {
+            System.Windows.Controls.Button b = new Button { Name = featName, FontFamily = myFontFam1, FontSize = 10, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Content = "Show", Margin = new Thickness(5) };
+            b.Click += ButtonShowFeat_Click;
+            myGrid.Children.Add(b);
+            Grid.SetColumn(b, 1);
+            Grid.SetRow(b, rowNum);
+         }
+         else
+         {
+            TextBlock tb = new TextBlock() { FontFamily = myFontFam1, FontSize = 14, HorizontalAlignment = System.Windows.HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(5) };
+            tb.Inlines.Add(new Run(featDesc));
+            myGrid.Children.Add(tb);
+            Grid.SetColumn(tb, 1);
+            Grid.SetRow(tb, rowNum);
+         }
+         //------------------------------------------------------------
+         ++rowNum;
          isFeatDisplayed = myGameFeatToShow.myIsLowWitWin;
          isFeatChecked = GameEngine.theFeatsInGame.myIsLowWitWin;
          featName = "myIsLowWitWin";
@@ -1191,6 +1295,10 @@ namespace BarbarianPrince
          switch (b.Name)
          {
             case "myIsOriginalGameWin": myGameFeatToShow.myIsOriginalGameWin = true; break;
+            case "myIsRandomPartyGameWin": myGameFeatToShow.myIsRandomPartyGameWin = true; break;
+            case "myIsRandomHexGameWin": myGameFeatToShow.myIsRandomHexGameWin = true; break;
+            case "myIsRandomGameWin": myGameFeatToShow.myIsRandomGameWin = true; break;
+            case "myIsFunGameWin": myGameFeatToShow.myIsFunGameWin = true; break;
             case "myIsLowWitWin": myGameFeatToShow.myIsLowWitWin = true; break;
             case "myIs500GoldWin": myGameFeatToShow.myIs500GoldWin = true; break;
             case "myIsNobleAllyWin": myGameFeatToShow.myIsNobleAllyWin = true; break;

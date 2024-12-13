@@ -16,7 +16,12 @@ namespace BarbarianPrince
       [NonSerialized] public const int LOCATIONS_OASIS = 4;
       public static string theGameFeatDirectory = "";
       //----------------------------------------------------
-      public bool myIsOriginalGameWin;         // Win the original game 
+      public bool myIsOriginalGameWin;         // Win the original game
+      public bool myIsRandomPartyGameWin;
+      public bool myIsRandomHexGameWin;
+      public bool myIsRandomGameWin;
+      public bool myIsFunGameWin;
+      //-------------------------------------
       public bool myIsLowWitWin;               // Win game with Wit and Wiles equal 2 
       public bool myIs500GoldWin;              // Nominal 
       public bool myIsNobleAllyWin;            // E152NobleAlly
@@ -74,6 +79,10 @@ namespace BarbarianPrince
       public GameFeat()
       {
          myIsOriginalGameWin = false;
+         myIsRandomPartyGameWin = false;
+         myIsRandomHexGameWin = false;
+         myIsRandomGameWin = false;
+         myIsFunGameWin = false;
          myIsLowWitWin = false;
          myIs500GoldWin = false;
          myIsNobleAllyWin = false;
@@ -129,6 +138,11 @@ namespace BarbarianPrince
       {
          GameFeat starting = new GameFeat();
          starting.myIsOriginalGameWin = this.myIsOriginalGameWin;
+         starting.myIsRandomPartyGameWin = this.myIsRandomPartyGameWin;
+         starting.myIsRandomHexGameWin = this.myIsRandomHexGameWin;
+         starting.myIsRandomGameWin = this.myIsRandomGameWin;
+         starting.myIsFunGameWin = this.myIsFunGameWin;
+         //-------------------------------------
          starting.myIsLowWitWin = this.myIsLowWitWin;
          starting.myIs500GoldWin = this.myIs500GoldWin;
          starting.myIsNobleAllyWin = this.myIsNobleAllyWin;
@@ -189,6 +203,14 @@ namespace BarbarianPrince
       public bool IsEqual(GameFeat starting)
       {
          if (this.myIsOriginalGameWin != starting.myIsOriginalGameWin)
+            return false;
+         if (this.myIsRandomPartyGameWin != starting.myIsRandomPartyGameWin)
+            return false;
+         if (this.myIsRandomHexGameWin != starting.myIsRandomHexGameWin)
+            return false;
+         if (this.myIsRandomGameWin != starting.myIsRandomGameWin)
+            return false;
+         if (this.myIsFunGameWin != starting.myIsFunGameWin)
             return false;
          if (this.myIsLowWitWin != starting.myIsLowWitWin)
             return false;
@@ -273,6 +295,26 @@ namespace BarbarianPrince
          {
             starting.myIsOriginalGameWin = this.myIsOriginalGameWin;
             return "Win the original game";
+         }
+         if (starting.myIsRandomPartyGameWin != this.myIsRandomPartyGameWin)
+         {
+            starting.myIsRandomPartyGameWin = this.myIsRandomPartyGameWin;
+            return "Win the random starting party game";
+         }
+         if (starting.myIsRandomHexGameWin != this.myIsRandomHexGameWin)
+         {
+            starting.myIsRandomHexGameWin = this.myIsRandomHexGameWin;
+            return "Win the random starting hex game";
+         }
+         if (starting.myIsRandomGameWin != this.myIsRandomGameWin)
+         {
+            starting.myIsRandomGameWin = this.myIsRandomGameWin;
+            return "Win the random starting options game";
+         }
+         if (starting.myIsFunGameWin != this.myIsFunGameWin)
+         {
+            starting.myIsFunGameWin = this.myIsFunGameWin;
+            return "Win the fun options game";
          }
          if (starting.myIsLowWitWin != this.myIsLowWitWin)
          {

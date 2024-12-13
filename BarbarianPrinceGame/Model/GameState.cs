@@ -707,6 +707,14 @@ namespace BarbarianPrince
             gi.Statistic.myEndFoodCount = gi.GetFoods();
             if (0 == gi.Options.GetGameIndex())
                GameEngine.theFeatsInGame.myIsOriginalGameWin = true;
+            else if (1 == gi.Options.GetGameIndex())
+               GameEngine.theFeatsInGame.myIsRandomPartyGameWin = true;
+            else if (2 == gi.Options.GetGameIndex())
+               GameEngine.theFeatsInGame.myIsRandomHexGameWin = true;
+            else if (3 == gi.Options.GetGameIndex())
+               GameEngine.theFeatsInGame.myIsRandomGameWin = true;
+            else if (4 == gi.Options.GetGameIndex())
+               GameEngine.theFeatsInGame.myIsFunGameWin = true;
             if (2 == gi.WitAndWile)
                GameEngine.theFeatsInGame.myIsLowWitWin = true;
             Logger.Log(LogEnum.LE_SERIALIZE_FEATS, "PerformEndCheck(): 1-feats=" + GameEngine.theFeatsInGame.ToString());
@@ -4596,6 +4604,14 @@ namespace BarbarianPrince
             case GameAction.EndGameWin:
                if (0 == gi.Options.GetGameIndex())
                   GameEngine.theFeatsInGame.myIsOriginalGameWin = true;
+               else if (1 == gi.Options.GetGameIndex())
+                  GameEngine.theFeatsInGame.myIsRandomPartyGameWin = true;
+               else if (2 == gi.Options.GetGameIndex())
+                  GameEngine.theFeatsInGame.myIsRandomHexGameWin = true;
+               else if (3 == gi.Options.GetGameIndex())
+                  GameEngine.theFeatsInGame.myIsRandomGameWin = true;
+               else if (4 == gi.Options.GetGameIndex())
+                  GameEngine.theFeatsInGame.myIsFunGameWin = true;
                if (2 == gi.WitAndWile)
                   GameEngine.theFeatsInGame.myIsLowWitWin = true;
                gi.EventDisplayed = gi.EventActive = "e501";
