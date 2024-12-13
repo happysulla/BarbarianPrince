@@ -3083,7 +3083,7 @@ e130	"<Bold>e130 Meet the High Lord</Bold>
 Roll one die for identity:  <InlineUIContainer><Image Source='../images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
 <LineBreak/>
  1 - Baron of Huldra Castle<LineBreak/>
- 2 - Count Drogatt of Drogat Castle<LineBreak/>
+ 2 - Count Drogat of Drogat Castle<LineBreak/>
  3 - Lady Aeravir of Aeravir Castle<LineBreak/>
  4 - High Priest of a Temple<LineBreak/>
  5,6 - Town Mayor

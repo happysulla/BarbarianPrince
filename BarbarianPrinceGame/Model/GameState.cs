@@ -492,7 +492,7 @@ namespace BarbarianPrince
          if (true == gi.IsJailed)
          {
             GameEngine.theFeatsInGame.myNumNightsInJail++;
-            if (0 == (GameEngine.theFeatsInGame.myNumNightsInJail % 40)) // report every 40 times
+            if ((0 < GameEngine.theFeatsInGame.myNumNightsInJail) && (0 == (GameEngine.theFeatsInGame.myNumNightsInJail % 40))) // report every 40 times
             {
                GameEngine.theFeatsInGame.myIsNightsInJail = true;
                GameEngine.theFeatsInGameStarting.myIsNightsInJail = false;
@@ -504,7 +504,7 @@ namespace BarbarianPrince
          else if (true == gi.IsDungeon)
          {
             GameEngine.theFeatsInGame.myNumNightsInJail++;
-            if (0 == (GameEngine.theFeatsInGame.myNumNightsInJail % 40)) // report every 40 times
+            if ((0 < GameEngine.theFeatsInGame.myNumNightsInJail) && (0 == (GameEngine.theFeatsInGame.myNumNightsInJail % 40)) ) // report every 40 times
             {
                GameEngine.theFeatsInGame.myIsNightsInJail = true;
                GameEngine.theFeatsInGameStarting.myIsNightsInJail = false;

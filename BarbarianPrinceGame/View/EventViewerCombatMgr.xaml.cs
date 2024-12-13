@@ -4802,28 +4802,28 @@ namespace BarbarianPrince
             GameEngine.theFeatsInGame.myIsDragonKiller = true;
          if (true == mi.Name.Contains("Bandit"))
             GameEngine.theFeatsInGame.myNumBanditKill++;
-         if (0 == (GameEngine.theFeatsInGame.myNumBanditKill%20)) // report every 20 times
+         if ( (0 < GameEngine.theFeatsInGame.myNumBanditKill) && (0 == (GameEngine.theFeatsInGame.myNumBanditKill%20)) )// report every 20 times
          {
             GameEngine.theFeatsInGame.myIsBanditKiller = true;
             GameEngine.theFeatsInGameStarting.myIsBanditKiller = false;
          }
          if (true == mi.Name.Contains("Orc"))
             GameEngine.theFeatsInGame.myNumOrcKill++;
-         if (0 == (GameEngine.theFeatsInGame.myNumOrcKill%25))
+         if ((0 < GameEngine.theFeatsInGame.myNumOrcKill) && (0 == (GameEngine.theFeatsInGame.myNumOrcKill%25)))
          {
             GameEngine.theFeatsInGame.myIsOrcKiller = true;
             GameEngine.theFeatsInGameStarting.myIsOrcKiller = false;
          }
          if (true == mi.Name.Contains("Goblin"))
             GameEngine.theFeatsInGame.myNumGoblinKill++;
-         if (0 ==  (GameEngine.theFeatsInGame.myNumGoblinKill%30))
+         if ((0 < GameEngine.theFeatsInGame.myNumGoblinKill) && (0 ==  (GameEngine.theFeatsInGame.myNumGoblinKill%30)))
          {
             GameEngine.theFeatsInGame.myIsGoblinKiller = true;
             GameEngine.theFeatsInGameStarting.myIsGoblinKiller = false;
          }
          if (true == mi.Name.Contains("Wolf"))
             GameEngine.theFeatsInGame.myNumWolfKill++;
-         if (0 == (GameEngine.theFeatsInGame.myNumWolfKill%35))
+         if ((0 < GameEngine.theFeatsInGame.myNumWolfKill) && (0 == (GameEngine.theFeatsInGame.myNumWolfKill%35)))
          {
             GameEngine.theFeatsInGame.myIsWolfKiller = true;
             GameEngine.theFeatsInGameStarting.myIsWolfKiller = false;
