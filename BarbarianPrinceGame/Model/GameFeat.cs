@@ -92,6 +92,7 @@ namespace BarbarianPrince
          myIsHuldraDefeatedInBattleWin = false;
          myIsHuldraDesposedWin = false;
          myIsLostOnTime = false;
+         myIsLostAxeDeath = false;
          //-------------------------------------
          myIsAirTravel = false;
          myIsRaftTravel = false;
@@ -152,6 +153,7 @@ namespace BarbarianPrince
          starting.myIsHuldraDefeatedInBattleWin = this.myIsHuldraDefeatedInBattleWin;
          starting.myIsHuldraDesposedWin = this.myIsHuldraDesposedWin;
          starting.myIsLostOnTime = this.myIsLostOnTime;
+         starting.myIsLostAxeDeath = this.myIsLostAxeDeath;
          //-------------------------------------
          starting.myIsAirTravel = this.myIsAirTravel;
          starting.myIsRaftTravel = this.myIsRaftTravel;
@@ -229,6 +231,8 @@ namespace BarbarianPrince
          if (this.myIsHuldraDesposedWin != starting.myIsHuldraDesposedWin)
             return false;
          if (this.myIsLostOnTime != starting.myIsLostOnTime)
+            return false;
+         if (this.myIsLostAxeDeath != starting.myIsLostAxeDeath)
             return false;
          //--------------------------------------
          if (this.myIsAirTravel != starting.myIsAirTravel)
@@ -360,6 +364,11 @@ namespace BarbarianPrince
          {
             starting.myIsLostOnTime = this.myIsLostOnTime;
             return "Lost due to time expiring";
+         }
+         if (starting.myIsLostAxeDeath != this.myIsLostAxeDeath)
+         {
+            starting.myIsLostAxeDeath = this.myIsLostAxeDeath;
+            return "Lost due to head chopped off";
          }
          //--------------------------------------
          if (starting.myIsAirTravel != this.myIsAirTravel)
