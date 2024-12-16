@@ -1003,7 +1003,7 @@ namespace BarbarianPrince
             myButtonEndurances[i].IsEnabled = false;
             myButtonEndurances[i].Visibility = Visibility.Visible;
          }
-         if (8 == gi.Prince.Endurance) // Sash can increase endurance as well as special event
+         if (8 == gi.Prince.Endurance) // Resurrection can reduce endurance
          {
             myButtonEndurances[9].Visibility = Visibility.Hidden;
             myButtonEndurances[10].Visibility = Visibility.Hidden;
@@ -1019,11 +1019,20 @@ namespace BarbarianPrince
             myButtonEndurances[11].Visibility = Visibility.Hidden;
          }
          int healthRemaining = gi.Prince.Endurance - gi.Prince.Wound - gi.Prince.Poison;
-         if ((healthRemaining < 0) || (11 < healthRemaining))
+         if (11 < healthRemaining)
          {
-            Logger.Log(LogEnum.LE_ERROR, "UpdatePrinceEnduranceStatus(): healthRemaining=" + healthRemaining.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "UpdatePrinceEnduranceStatus(): healthRemaining=" + healthRemaining.ToString() + " e=" + gi.Prince.Endurance.ToString() + " w=" + gi.Prince.Wound.ToString() + " p=" + gi.Prince.Poison.ToString());
+            gi.Prince.Endurance = 9;
+            gi.Prince.Wound = 0;
+            gi.Prince.Poison = 0;
+            healthRemaining = 9;
+         }
+         if (healthRemaining < 0) 
+         {
+            Logger.Log(LogEnum.LE_ERROR, "UpdatePrinceEnduranceStatus(): healthRemaining=" + healthRemaining.ToString() + " e=" + gi.Prince.Endurance.ToString() + " w=" + gi.Prince.Wound.ToString() + " p=" + gi.Prince.Poison.ToString());
+            gi.Prince.Wound = gi.Prince.Endurance;
+            gi.Prince.Poison = 0;
             healthRemaining = 0;
-            return;
          }
          myButtonEndurances[healthRemaining].Background = Utilities.theBrushControlButton;
          myButtonEndurances[healthRemaining].FontWeight = FontWeights.Bold;

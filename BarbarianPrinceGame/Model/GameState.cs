@@ -594,7 +594,7 @@ namespace BarbarianPrince
          {
             gi.GamePhase = GamePhase.EndGame;
             bool isNecklass = gi.Prince.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace);
-            Logger.Log(LogEnum.LE_END_GAME, "PerformEndCheck(): 1-EndGameLost ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString() + "isNecklass=" + isNecklass.ToString());
+            Logger.Log(LogEnum.LE_END_GAME, "PerformEndCheck(): 1-EndGameLost ae=" + gi.EventActive + " gp=" + gi.GamePhase.ToString() + " a=" + action.ToString() + " k?=" + gi.Prince.IsKilled.ToString() + " u?=" + gi.Prince.IsUnconscious.ToString() + " pc=" + gi.PartyMembers.Count.ToString() + " isNecklass=" + isNecklass.ToString());
             if (true == isNecklass)
             {
                action = GameAction.EndGameResurrect;  // PerformEndCheck()
@@ -3514,8 +3514,7 @@ namespace BarbarianPrince
                   if (("e061" == gi.EventStart) && (6 == dieRoll)) // only e061 does die roll = 6 cause death
                   {
                      gi.DieResults["e203a"][0] = 6;
-                     gi.Prince.IsKilled = true;
-                     gi.Prince.Wound = gi.Prince.Endurance;
+                     gi.Prince.SetWounds(gi.Prince.Endurance - gi.Prince.Poison, 0); // kill the prince
                   }
                   else
                   {

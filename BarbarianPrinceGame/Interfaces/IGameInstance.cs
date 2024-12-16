@@ -219,7 +219,7 @@ namespace BarbarianPrince
       int GetNonSpecialMountCount(bool isHorseOnly = false);
       bool AddNewMountToParty(MountEnum mount = MountEnum.Horse);
       void ReduceMount(MountEnum mountType);
-      void TransferMounts(IMapItems mounts);
+      bool TransferMounts(IMapItems mounts);
       //----------------------------------------------
       bool IsSpecialItemHeld(SpecialEnum item);
       int GetCountSpecialItem(SpecialEnum possession);

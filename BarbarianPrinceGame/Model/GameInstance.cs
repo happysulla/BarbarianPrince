@@ -793,7 +793,7 @@ namespace BarbarianPrince
       {
          if (0 == coins)
             return true;
-         Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): " + caller + ":++++++++++++++++++" + coins.ToString() + "++++++++++++++++++++++++++++++++++++++++++++");
+         Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): " + caller + ": ++++++++++++++++++" + coins.ToString() + "++++++++++++++++++++++++++++++++++++++++++++");
          StringBuilder sb = new StringBuilder("AddCoins():");
          foreach ( IMapItem mi in PartyMembers)
          {
@@ -1415,19 +1415,13 @@ namespace BarbarianPrince
          }
          Logger.Log(LogEnum.LE_ERROR, "ReduceMount() - unable to remove mount");
       }
-      public void TransferMounts(IMapItems mounts)
+      public bool TransferMounts(IMapItems mounts)
       {
-         List<IMapItem> griffons = new List<IMapItem>();
-         List<IMapItem> harpies = new List<IMapItem>();
          List<IMapItem> pegasuses = new List<IMapItem>();
          List<IMapItem> horses = new List<IMapItem>();
          foreach (IMapItem mount in mounts)
          {
-            if (true == mount.Name.Contains("Griffon"))
-               griffons.Add(mount);
-            else if (true == mount.Name.Contains("Harpy"))
-               harpies.Add(mount);
-            else if (true == mount.Name.Contains("Pegasus"))
+            if (true == mount.Name.Contains("Pegasus"))
                pegasuses.Add(mount);
             else if (true == mount.Name.Contains("Horse"))
                horses.Add(mount);
@@ -1451,66 +1445,43 @@ namespace BarbarianPrince
          {
             if( (0 < horses.Count) || (0 < pegasuses.Count) )
                Logger.Log(LogEnum.LE_MOUNT_CHANGE, "TransferMounts(): Nobody conscious to receive mount. Lose mount as it wonders off to feed.");
-            return; 
+            return true; 
          }
          //---------------------------------------
-         int assignedGriffonCount = 0;
-         int maxGriffonCount = griffons.Count;
-         foreach (IMapItem partyMember in PartyMembers) 
+         foreach (IMapItem pegasus in pegasuses)
          {
-            if (assignedGriffonCount == maxGriffonCount)
-               break;
-            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.IsFlyer()) || (true == partyMember.Name.Contains("Giant")) )
-               continue;
-            partyMember.AddMount(griffons[assignedGriffonCount]); // Griffon gets assigned a rider
-            assignedGriffonCount++;
+            bool isMountAssigned = false;
+            foreach (IMapItem partyMember in PartyMembers)
+            {
+               if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.IsFlyer()) || (0 < partyMember.Mounts.Count))
+                  continue;
+               partyMember.AddMount(pegasus);
+               isMountAssigned = true;
+            }
+            if (false == isMountAssigned)
+               firstConsciousMapItem.AddMount(pegasus);
          }
          //---------------------------------------
-         int assignedHarpyCount = 0;
-         int maxHarpyCount = harpies.Count;
-         foreach (IMapItem partyMember in PartyMembers) 
+         foreach( IMapItem horse in horses)
          {
-            if (assignedHarpyCount == maxHarpyCount)
-               break;
-            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.IsFlyer()) || (true == partyMember.Name.Contains("Giant")) )
-               continue;
-            partyMember.AddMount(harpies[assignedHarpyCount]); // Griffon gets assigned a rider
-            assignedHarpyCount++;
+            bool isMountAssigned = false;
+            foreach(IMapItem partyMember in PartyMembers)
+            {
+               if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.IsFlyer()) || (0 < partyMember.Mounts.Count))
+                  continue;
+               partyMember.AddMount(horse);
+               isMountAssigned = true;
+            }
+            if( false == isMountAssigned)
+               firstConsciousMapItem.AddMount(horse);
          }
          //---------------------------------------
-         int assignedPegasusCount = 0;
-         int maxPegasusCount = pegasuses.Count;
-         foreach (IMapItem partyMember in PartyMembers) 
-         {
-            if (assignedPegasusCount == maxPegasusCount)
-               break;
-            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.IsFlyer()) || (0 < partyMember.Mounts.Count))
-               continue;
-            partyMember.AddMount(pegasuses[assignedPegasusCount]);
-            assignedPegasusCount++;
-         }
-         for (int i = assignedPegasusCount; i < maxPegasusCount; i++)  // Any unassigned got to first conscious member which is hopefully Prince
-            firstConsciousMapItem.AddMount(pegasuses[i]);
-         //---------------------------------------
-         int assignedHorseCount = 0;
-         int maxHorseCount = horses.Count;
-         foreach (IMapItem partyMember in PartyMembers) // try to assign horses to each party member
-         {
-            if (assignedHorseCount == maxHorseCount)
-               break;
-            if ((true == partyMember.IsUnconscious) || (true == partyMember.IsKilled) || (true == partyMember.IsFlyer()) || (0 < partyMember.Mounts.Count))
-               continue;
-            IMapItem horse = horses[assignedHorseCount];
-            partyMember.AddMount(horse);
-            assignedHorseCount++;
-         }
-         for (int i = assignedHorseCount; i < maxHorseCount; i++) // assign remaining horses to first conscious partymember
-         {
-            IMapItem horse = horses[i];
-            firstConsciousMapItem.AddMount(horse);
-         }
          if (true == IsDuplicateMount())
+         {
             Logger.Log(LogEnum.LE_ERROR, "TransferMounts(): IsDuplicateMount() returned false");
+            return false;
+         }
+         return true;
       }
       //---------------------------------------------------------------
       public bool IsSpecialItemHeld(SpecialEnum item)
@@ -1840,7 +1811,7 @@ namespace BarbarianPrince
                   {
                      if( mount.Name == mount1.Name )
                      {
-                        Logger.Log(LogEnum.LE_ERROR, "IsDuplicateMapItem(): mi=" + partyMember.Name + " duplicate=" + mount.Name + " in mounts=" + mounts.ToString());
+                        Logger.Log(LogEnum.LE_ERROR, "IsDuplicateMapItem(): mi=" + partyMember.Name + " removing duplicate=" + mount.Name + " in mounts=" + mounts.ToString());
                         partyMember.Mounts.Remove(mount1); // remove the duplicate mount
                         return true;
                      }
@@ -1968,7 +1939,19 @@ namespace BarbarianPrince
                }
                if (false == isEscaping)
                {
-                  TransferMounts(mi.Mounts);
+                  if( false == TransferMounts(mi.Mounts) )
+                  {
+                     StringBuilder sb = new StringBuilder();
+                     sb.Append("ProcessIncapacitedPartyMembers(): TransferMounts() returned false for killed mi=");
+                     sb.Append(mi.Name);
+                     sb.Append("mounts=");
+                     foreach(IMapItem mount in mi.Mounts)
+                     {
+                        sb.Append(mount.Name);
+                        sb.Append(' ');
+                     }
+                     Logger.Log(LogEnum.LE_ERROR, sb.ToString());
+                  }
                   AddSpecialItems(mi.SpecialKeeps);  // ProcessIncapacitedPartyMembers() - IsKilled
                   AddSpecialItems(mi.SpecialShares); // ProcessIncapacitedPartyMembers() - IsKilled
                   if (false == AddFoods(mi.Food))
@@ -2003,7 +1986,19 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_PROCESS_MIA, "ProcessIncapacitedPartyMembers(): ----------------" + mi.Name + "=MIA c=" + mi.Coin.ToString() + " f=" + mi.Food.ToString() + "-------------------------");
                if (false == isEscaping)
                {
-                  TransferMounts(mi.Mounts);
+                  if (false == TransferMounts(mi.Mounts))
+                  {
+                     StringBuilder sb = new StringBuilder();
+                     sb.Append("ProcessIncapacitedPartyMembers(): TransferMounts() returned false for unconscious mi=");
+                     sb.Append(mi.Name);
+                     sb.Append("mounts=");
+                     foreach (IMapItem mount in mi.Mounts)
+                     {
+                        sb.Append(mount.Name);
+                        sb.Append(' ');
+                     }
+                     Logger.Log(LogEnum.LE_ERROR, sb.ToString());
+                  }
                   AddSpecialItems(mi.SpecialShares); // ProcessIncapacitedPartyMembers() - IsUnconscious
                   if (false == AddFoods(mi.Food))
                   {
@@ -2100,7 +2095,19 @@ namespace BarbarianPrince
          Logger.Log(LogEnum.LE_REMOVE_KIA, "RemoveVictimInParty(): ================" + victim.Name + "=KIA c=" + victim.Coin.ToString() + " f=" + victim.Food.ToString() + "=========================");
          PartyMembers.Remove(victim);
          victim.Mounts.Clear();
-         TransferMounts(mounts);
+         if (false == TransferMounts(victim.Mounts))
+         {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("RemoveVictimInParty(): TransferMounts() returned false for  victim=");
+            sb.Append(victim.Name);
+            sb.Append("mounts=");
+            foreach (IMapItem mount in victim.Mounts)
+            {
+               sb.Append(mount.Name);
+               sb.Append(' ');
+            }
+            Logger.Log(LogEnum.LE_ERROR, sb.ToString());
+         }
          if (false == AddFoods(victim.Food)) // all other food, coin, mounts transfer to other party members
          {
             Logger.Log(LogEnum.LE_ERROR, "RemoveVictimInParty(): AddFoods() returned false");
@@ -2296,7 +2303,19 @@ namespace BarbarianPrince
          }
          //--------------------------------
          AddSpecialItems(mi.SpecialShares); // RemoveAbandonerInParty()
-         TransferMounts(mi.Mounts);
+         if (false == TransferMounts(mi.Mounts))
+         {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("RemoveAbandonerInParty(): TransferMounts() returned false for  mi=");
+            sb.Append(mi.Name);
+            sb.Append("mounts=");
+            foreach (IMapItem mount in mi.Mounts)
+            {
+               sb.Append(mount.Name);
+               sb.Append(' ');
+            }
+            Logger.Log(LogEnum.LE_ERROR, sb.ToString());
+         }
          if (false == AddFoods(mi.Food))
          {
             Logger.Log(LogEnum.LE_ERROR, "RemoveAbandonerInParty(): AddFoods() returned false");

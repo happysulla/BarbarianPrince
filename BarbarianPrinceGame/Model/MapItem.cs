@@ -405,7 +405,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "AddMount(): name=" + this.Name + " cannot have mounts");
             return false;
          }
-         Logger.Log(LogEnum.LE_MOUNT_CHANGE, "AddMount(): adding mount=" + mount.Name + " to " + this.Name);
+         Logger.Log(LogEnum.LE_MOUNT_CHANGE, "AddMount(): adding mount=" + mount.Name + " to " + this.Name + " kia?=" + this.IsKilled.ToString() + " unconsc?=" + this.IsUnconscious.ToString());
          this.Mounts.Add(mount);                    // add the mount to the list
          if (false == this.Name.Contains("Giant"))  // mounts cannot carry giants
          {
@@ -1315,7 +1315,7 @@ namespace BarbarianPrince
          }
          loadCanCarry -= this.Food;
          if (loadCanCarry < 0)
-            Logger.Log(LogEnum.LE_FREE_LOAD, "GetFreeLoadWithoutModify(): name=" + this.Name + " lc=" + loadCanCarry.ToString() + " fl=" + Food.ToString() + " cl=" + coinLoads.ToString() + "(coins=" + this.Coin.ToString() + ") ml=" + mountCarry.ToString() + " kia?=" + this.IsKilled + " mia?=" + this.IsUnconscious);
+            Logger.Log(LogEnum.LE_FREE_LOAD, "GetFreeLoadWithoutModify(): name=" + this.Name + " lc=" + loadCanCarry.ToString() + " fl=" + Food.ToString() + " cl=" + coinLoads.ToString() + "(coins=" + this.Coin.ToString() + ") ml=" + mountCarry.ToString() + " kia?=" + this.IsKilled + " uncons?=" + this.IsUnconscious);
          return loadCanCarry;
       }   // get free load - dismount if load does not support - but do not mount 
       public int GetFlyLoad()

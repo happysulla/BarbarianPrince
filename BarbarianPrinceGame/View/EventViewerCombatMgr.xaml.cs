@@ -4127,6 +4127,9 @@ namespace BarbarianPrince
                   myCapturedPossessions.Add(possession);
                foreach (IMapItem mount in mi.Mounts)
                   myCapturedMounts.Add(mount);
+               mi.SpecialKeeps.Clear();
+               mi.SpecialShares.Clear();
+               mi.Mounts.Clear();
                if (true == mi.Name.Contains("Troll"))    // e057 - Trolls skins are worth money
                   myCapturedPossessions.Add(SpecialEnum.TrollSkin);
                if (true == mi.Name.Contains("Roc"))      // e099 - Roc Beaks worth money
@@ -4146,11 +4149,13 @@ namespace BarbarianPrince
                myDeadPartyMemberCoin += mi.Coin;
                foreach (IMapItem mount in mi.Mounts)
                   myCapturedMounts.Add(mount);
+               mi.Mounts.Clear();
                foreach (SpecialEnum possession in mi.SpecialShares)
                {
                   if( SpecialEnum.ResurrectionNecklace != possession)
                      myCapturedPossessions.Add(possession);
                }
+               mi.SpecialShares.Clear();
                if (true == mi.IsKilled) // If party member is killed, can have the special possessions that they own
                {
                   if ( (true == mi.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace)) && (false == mi.Name.Contains("Prince")) )
@@ -4164,6 +4169,7 @@ namespace BarbarianPrince
                   killedMembers.Add(mi);
                   foreach (SpecialEnum possession in mi.SpecialKeeps)
                      myCapturedPossessions.Add(possession);
+                  mi.SpecialKeeps.Clear();
                }
             }
          }
@@ -4173,6 +4179,17 @@ namespace BarbarianPrince
          myGameInstance.CapturedWealthCodes = myCapturedWealthCodes;
          myGameInstance.AddCoins("DistributeDeadWealth", myDeadPartyMemberCoin, false); // looters do not get share of this pile
          myGameInstance.TransferMounts(myCapturedMounts);
+         if (false == myGameInstance.TransferMounts(myCapturedMounts))
+         {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("DistributeDeadWealth(): TransferMounts() returned false for mounts=");
+            foreach (IMapItem mount in myCapturedMounts)
+            {
+               sb.Append(mount.Name);
+               sb.Append(' ');
+            }
+            Logger.Log(LogEnum.LE_ERROR, sb.ToString());
+         }
          myGameInstance.AddSpecialItems(myCapturedPossessions);
          Logger.Log(LogEnum.LE_ADD_WEALTH_CODE, "DistributeDeadWealth(): CapturedWealthCodes.Count=" + myGameInstance.CapturedWealthCodes.Count.ToString());
       }
@@ -4213,6 +4230,9 @@ namespace BarbarianPrince
                      myCapturedWealthCodes.Add(mi.WealthCode);
                   if (true == mi.Name.Contains("Griffon"))  // e100 - griffon claws helps with Lady Aeravir
                      myCapturedPossessions.Add(SpecialEnum.GriffonClaws);
+                  mi.SpecialKeeps.Clear();
+                  mi.SpecialShares.Clear();
+                  mi.Mounts.Clear();
                }
                else if ((true == mi.IsRunAway) && (false == myGameInstance.Prince.IsRunAway)) // e007 - runaways are caused by nerve gas
                {
@@ -4241,6 +4261,9 @@ namespace BarbarianPrince
                      myCapturedPossessions.Add(possession);
                   foreach (SpecialEnum possession in mi.SpecialShares)
                      myCapturedPossessions.Add(possession);
+                  mi.SpecialKeeps.Clear();
+                  mi.SpecialShares.Clear();
+                  mi.Mounts.Clear();
                   Logger.Log(LogEnum.LE_ADD_WEALTH_CODE, "RemoveCasualties(): mi=" + mi.Name + " coffs up wc=" + mi.WealthCode.ToString());
                   if (0 < mi.WealthCode)
                      myCapturedWealthCodes.Add(mi.WealthCode);
@@ -4290,6 +4313,9 @@ namespace BarbarianPrince
                      myCapturedWealthCodes.Add(mi.WealthCode);
                   if (true == mi.Name.Contains("Griffon"))  // e100 - griffon claws helps with Lady Aeravir
                      myCapturedPossessions.Add(SpecialEnum.GriffonClaws);
+                  mi.SpecialKeeps.Clear();
+                  mi.SpecialShares.Clear();
+                  mi.Mounts.Clear();
                }
                else if ((true == mi.IsRunAway) && (false == myGameInstance.Prince.IsRunAway)) // e007 - runaways are caused by nerve gas
                {
@@ -4318,6 +4344,9 @@ namespace BarbarianPrince
                      myCapturedPossessions.Add(possession);
                   foreach (SpecialEnum possession in mi.SpecialShares)
                      myCapturedPossessions.Add(possession);
+                  mi.SpecialKeeps.Clear();
+                  mi.SpecialShares.Clear();
+                  mi.Mounts.Clear();
                   Logger.Log(LogEnum.LE_ADD_WEALTH_CODE, "RemoveCasualties(): mi=" + mi.Name + " coffs up wc=" + mi.WealthCode.ToString());
                   if (0 < mi.WealthCode)
                      myCapturedWealthCodes.Add(mi.WealthCode);
