@@ -1733,7 +1733,9 @@ namespace BarbarianPrince
       }
       private bool AddStartingPrinceOption(IGameInstance gi)
       {
+         int coin = gi.Prince.Coin;
          gi.Prince.Reset(); // clear if this is run twice as party of setup - user selects Fun Options
+         gi.Prince.Coin = coin;
          Options options = gi.Options;
          Option option = null;
          String itemToAdd = "";

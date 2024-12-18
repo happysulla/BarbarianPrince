@@ -344,7 +344,7 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvas() returned error ");
                mySplashScreen.Close();
                myScollViewerInside.UpdateLayout();
-               UpdateScrollbarThumbnails(gi.Prince.Territory);
+               UpdateScrollbarThumbnails(gi.Prince.Territory);  // GameAction.RemoveSplashScreen
                break;
             case GameAction.UpdateGameOptions:
                this.Title = UpdateTitle(gi.Options);
@@ -458,7 +458,7 @@ namespace BarbarianPrince
          UpdateTimeTrack(gi);
          UpdateFoodSupply(gi);
          UpdatePrinceEnduranceStatus(gi);
-         UpdateScrollbarThumbnails(gi.Prince.Territory);
+         UpdateScrollbarThumbnails(gi.Prince.Territory); // UpdateView()
       }
       //-----------------------SUPPORTING FUNCTIONS--------------------
       private void CloseSplashScreen() // callback function that removes splash screen when dice are loaded
@@ -2333,7 +2333,7 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "UpdateCanvasHexToShowPolygon(): t=null");
             return;
          }
-         UpdateScrollbarThumbnails(t);
+         UpdateScrollbarThumbnails(t);  // UpdateCanvasHexToShowPolygon()
          PointCollection points = new PointCollection();
          foreach (IMapPoint mp1 in t.Points)
             points.Add(new System.Windows.Point(mp1.X, mp1.Y));
