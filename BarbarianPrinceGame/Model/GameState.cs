@@ -15652,8 +15652,12 @@ namespace BarbarianPrince
                         case 3:
                         case 4:
                            Logger.Log(LogEnum.LE_MANAGE_CACHE, "EncounterRoll(): RETREIVE targetCache=" + targetCache.Coin.ToString() + " for t=" + princeTerritory.Name + " dr=" + dieRoll.ToString());
-                           gi.AddCoins("EncounterRoll(e214)", targetCache.Coin, false);
                            gi.Caches.Remove(targetCache);
+                           if ( false == gi.AddCoins("EncounterRoll(e214)", targetCache.Coin, false))
+                           {
+                              Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(e214): AddCoins() returned false");
+                              return false;
+                           }
                            break;
                         case 5:
                            break;

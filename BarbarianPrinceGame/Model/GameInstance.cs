@@ -886,91 +886,98 @@ namespace BarbarianPrince
                remainder = 0;
             }
          }
-         if ((0 == hundreds) || (0 == remainingCoins) ) // at this point, only left with 100s
+         if ((0 == hundreds) || (0 == remainingCoins) ) // at this point, only left with 100s unless unable to store remainder
             return true;
          //--------------------------------- 
-         int princeFreeLoad = Prince.GetFreeLoadWithoutModify(); // AddCoins() - Add to prince if prince free load over zero
-         if ((0 < princeFreeLoad) && (false == Prince.IsUnconscious) && (false == Prince.IsKilled))
+         if( 0 == remainder )
          {
-            int c100 = (hundreds * 100);
-            if (hundreds <= princeFreeLoad)
-            {
-               int miPrinceCoin = Prince.Coin;
-               Prince.Coin += c100;
-               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): return after 100s--> Prince++++>>>" + miPrinceCoin.ToString() + " + " + c100.ToString() + " = " + Prince.Coin.ToString() + "rc=" + remainingCoins.ToString());
-               return true;
-            }
-            int diff = hundreds - princeFreeLoad; // prince Free load greater than new coin load
-            if (diff <= Prince.Food)
-            {
-               int miPrinceCoin = Prince.Coin;
-               Prince.Coin += c100;
-               Prince.Food -= diff;
-               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): return after 100s--> Prince++++>>>" + miPrinceCoin.ToString() + " + " + c100.ToString() + " = " + Prince.Coin.ToString() + "rc=" + remainingCoins.ToString() + " minus food=" + diff.ToString());
-               return true;
-            }
-            c100 = (diff * 100);
-            Prince.Food = 0;
-            int miPrinceCoin1 = Prince.Coin;
-            Prince.Coin += c100; // prince removes all food and gets a portion of the remaining coins
-            Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 7 100s--> Prince++++>>>" + miPrinceCoin1.ToString() + " + " + c100.ToString() + " = " + Prince.Coin.ToString() + " minus all food");
-            hundreds -= diff;
-         }
-         //--------------------------------- 
-         foreach (IMapItem mi in sortedMapItems) 
-         {
-            int freeLoad = mi.GetFreeLoadWithoutModify(); // AddCoins() -  Add to others party members if free load over zero
-            if ((0 < freeLoad) && (false == mi.IsUnconscious) && (false == mi.IsKilled) && (false == mi.Name.Contains("Eagle")) && (false == mi.Name.Contains("Falcon")))
+            int princeFreeLoad = Prince.GetFreeLoadWithoutModify(); // AddCoins() - Add to prince if prince free load over zero
+            if ((0 < princeFreeLoad) && (false == Prince.IsUnconscious) && (false == Prince.IsKilled))
             {
                int c100 = (hundreds * 100);
-               if (hundreds <= freeLoad)
+               if (hundreds <= princeFreeLoad)
                {
-                  int miCoin = mi.Coin;
-                  mi.Coin += c100;
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 8 100s--> mi=" + mi.Name + "++++>>>" + mi.Coin.ToString() + " + " + c100.ToString() + " = " + mi.Coin.ToString());
+                  int miPrinceCoin = Prince.Coin;
+                  Prince.Coin += c100;
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): return after 100s--> Prince++++>>>" + miPrinceCoin.ToString() + " + " + c100.ToString() + " = " + Prince.Coin.ToString() + "rc=" + remainingCoins.ToString());
                   return true;
                }
-               int diff = hundreds - freeLoad;
-               if (diff <= mi.Food)
+               int diff = hundreds - princeFreeLoad; // prince Free load greater than new coin load
+               if (diff <= Prince.Food)
                {
-                  int miCoin = mi.Coin;
-                  mi.Coin += c100;
-                  mi.Food -= diff;
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 9 100s--> mi=" + mi.Name + "++++>>>" + miCoin.ToString() + " + " + c100.ToString() + " = " + mi.Coin.ToString() + " minus food=1");
+                  int miPrinceCoin = Prince.Coin;
+                  Prince.Coin += c100;
+                  Prince.Food -= diff;
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): return after 100s--> Prince++++>>>" + miPrinceCoin.ToString() + " + " + c100.ToString() + " = " + Prince.Coin.ToString() + "rc=" + remainingCoins.ToString() + " minus food=" + diff.ToString());
                   return true;
                }
                c100 = (diff * 100);
-               mi.Food = 0;
-               int miCoin1 = mi.Coin;
-               mi.Coin += c100; // mi removes all food and gets a portion of the remaining coins
-               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 10 100s--> mi=" + mi.Name + "++++>>>" + miCoin1.ToString() + " + " + c100.ToString() + " = " + mi.Coin.ToString() + " minus all food");
+               Prince.Food = 0;
+               int miPrinceCoin1 = Prince.Coin;
+               Prince.Coin += c100; // prince removes all food and gets a portion of the remaining coins
+               Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 7 100s--> Prince++++>>>" + miPrinceCoin1.ToString() + " + " + c100.ToString() + " = " + Prince.Coin.ToString() + " minus all food");
                hundreds -= diff;
+            }
+            //--------------------------------- 
+            foreach (IMapItem mi in sortedMapItems)
+            {
+               int freeLoad = mi.GetFreeLoadWithoutModify(); // AddCoins() -  Add to others party members if free load over zero
+               if ((0 < freeLoad) && (false == mi.IsUnconscious) && (false == mi.IsKilled) && (false == mi.Name.Contains("Eagle")) && (false == mi.Name.Contains("Falcon")))
+               {
+                  int c100 = (hundreds * 100);
+                  if (hundreds <= freeLoad)
+                  {
+                     int miCoin = mi.Coin;
+                     mi.Coin += c100;
+                     Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 8 100s--> mi=" + mi.Name + "++++>>>" + mi.Coin.ToString() + " + " + c100.ToString() + " = " + mi.Coin.ToString());
+                     return true;
+                  }
+                  int diff = hundreds - freeLoad;
+                  if (diff <= mi.Food)
+                  {
+                     int miCoin = mi.Coin;
+                     mi.Coin += c100;
+                     mi.Food -= diff;
+                     Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 9 100s--> mi=" + mi.Name + "++++>>>" + miCoin.ToString() + " + " + c100.ToString() + " = " + mi.Coin.ToString() + " minus food=1");
+                     return true;
+                  }
+                  c100 = (diff * 100);
+                  mi.Food = 0;
+                  int miCoin1 = mi.Coin;
+                  mi.Coin += c100; // mi removes all food and gets a portion of the remaining coins
+                  Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 10 100s--> mi=" + mi.Name + "++++>>>" + miCoin1.ToString() + " + " + c100.ToString() + " = " + mi.Coin.ToString() + " minus all food");
+                  hundreds -= diff;
+               }
+            }
+            //--------------------------------- 
+            foreach (IMapItem mi in sortedMapItems)
+            {
+               if ((0 < hundreds) && (false == mi.IsUnconscious) && (false == mi.IsKilled) && (false == mi.Name.Contains("Eagle")) && (false == mi.Name.Contains("Falcon")))
+               {
+                  int c100 = (hundreds * 100);
+                  int diff = mi.Food - hundreds;
+                  if (hundreds < diff)
+                  {
+                     Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 11 100s--> mi=" + mi.Name + "++++>>>" + mi.Coin.ToString() + " + " + c100.ToString() + " minus food=" + diff.ToString());
+                     mi.Coin += (hundreds * 100);
+                     mi.Food -= hundreds;
+                     return true;
+                  }
+                  else
+                  {
+                     c100 = (mi.Food * 100);
+                     Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 12 100s--> mi=" + mi.Name + "++++>>>" + mi.Coin.ToString() + " + " + c100.ToString() + " minus all food=" + mi.Food.ToString());
+                     mi.Food = 0;
+                     mi.Coin += c100; // mi removes all food and gets a portion of the remaining coins
+                     hundreds -= mi.Food;
+                  }
+               }
             }
          }
          //--------------------------------- 
-         foreach (IMapItem mi in sortedMapItems)
-         {
-            if ((0 < hundreds) && (false == mi.IsUnconscious) && (false == mi.IsKilled) && (false == mi.Name.Contains("Eagle")) && (false == mi.Name.Contains("Falcon")))
-            {
-               int c100 = (hundreds * 100);
-               int diff = mi.Food - hundreds;
-               if (hundreds < diff)
-               {
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 11 100s--> mi=" + mi.Name + "++++>>>" + mi.Coin.ToString() + " + " + c100.ToString() + " minus food=" + diff.ToString());
-                  mi.Coin += (hundreds * 100);
-                  mi.Food -= hundreds;
-                  return true;
-               }
-               else
-               {
-                  c100 = (mi.Food * 100);
-                  Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): 12 100s--> mi=" + mi.Name + "++++>>>" + mi.Coin.ToString() + " + " + c100.ToString() + " minus all food=" + mi.Food.ToString());
-                  mi.Food = 0;
-                  mi.Coin += c100; // mi removes all food and gets a portion of the remaining coins
-                  hundreds -= mi.Food;
-               }
-            }
-         }
+         remainingCoins = remainder + 100 * hundreds;
+         if( 0 < remainingCoins )
+            this.Caches.Add(this.myPrince.Territory, remainingCoins);
          return true;
       }
       public bool AddCoinsAuto()
