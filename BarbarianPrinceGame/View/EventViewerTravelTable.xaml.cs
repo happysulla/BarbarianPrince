@@ -969,9 +969,9 @@ namespace BarbarianPrince
          //----------------------------------------
          if (Utilities.NO_RESULT < myGridRows[i].myResult)
          {
-            string answer = "yes";
-            if (myGridRows[i].myResult < 4)
-               answer = "no";
+            string answer = "no";
+            if (3 < myGridRows[i].myResult)
+               answer = "yes";
             Label label = new Label() { FontFamily = myFontFam2, FontSize = 24, HorizontalAlignment = System.Windows.HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Content = answer };
             myGridTravelTable.Children.Add(label);
             Grid.SetRow(label, rowNum);
@@ -1160,7 +1160,7 @@ namespace BarbarianPrince
                myState = EnumR204.TC_DESERTION_SHOW;
                int i = myRollResultRowNum - STARTING_ASSIGNED_ROW;
                myGridRows[i].myResult = dieRoll;
-               if (4 < dieRoll)
+               if (3 < dieRoll)
                {
                   IMapItem guide = myGridRows[i].myAssignable;
                   myGameInstance.RemoveAbandonerInParty(guide);
