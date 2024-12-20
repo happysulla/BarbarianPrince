@@ -71,6 +71,7 @@ namespace BarbarianPrince
       LE_VIEW_MIM_CLEAR,
       LE_VIEW_SHOW_LOADS,
       LE_VIEW_SHOW_HUNT,
+      LE_VIEW_MAP_THUMBNAIL,
       LE_END_ENUM
    }
 
@@ -174,6 +175,7 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_VIEW_MIM_CLEAR);
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_LOADS);
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_HUNT);
+         //Logger.SetOn(LogEnum.LE_VIEW_MAP_THUMBNAIL);
          return true;
       }
       static public void SetOn(LogEnum logLevel)

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BarbarianPrince"
         mc:Ignorable="d"
         Title="Options Dialog" FontSize="20" Height="640" Width="1060" WindowStartupLocation="CenterScreen">
-   <ScrollViewer Name="myScollViewerInside" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
+   <ScrollViewer Name="myScrollViewerInside" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
       <Grid x:Name="myGrid">
          <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

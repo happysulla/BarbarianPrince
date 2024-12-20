@@ -343,7 +343,7 @@ namespace BarbarianPrince
                if (false == UpdateCanvas(gi, action))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvas() returned error ");
                mySplashScreen.Close();
-               myScollViewerInside.UpdateLayout();
+               myScrollViewerInside.UpdateLayout();
                UpdateScrollbarThumbnails(gi.Prince.Territory);  // GameAction.RemoveSplashScreen
                break;
             case GameAction.UpdateGameOptions:
@@ -369,6 +369,7 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "UpdateCanvas(): UpdateCanvasPath() returned false");
                if (false == UpdateCanvas(gi, action))
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvas() returned error ");
+               myCanvas.UpdateLayout();
                break;
             case GameAction.ShowPartyPath:
                if (true == myMainMenuViewer.IsPathShown)
@@ -754,8 +755,8 @@ namespace BarbarianPrince
          //-------------------------------------------
          Settings.Default.ZoomCanvas = Utilities.ZoomCanvas;
          //-------------------------------------------
-         Settings.Default.ScrollViewerHeight = myScollViewerInside.Height;
-         Settings.Default.ScrollViewerWidth = myScollViewerInside.Width;
+         Settings.Default.ScrollViewerHeight = myScrollViewerInside.Height;
+         Settings.Default.ScrollViewerWidth = myScrollViewerInside.Width;
          //-------------------------------------------
          Settings.Default.GameDirectoryName = GameLoadMgr.theGamesDirectory;
          //-------------------------------------------
@@ -2343,6 +2344,13 @@ namespace BarbarianPrince
       }
       private void UpdateScrollbarThumbnails(ITerritory t)
       {
+         StringBuilder sb = new StringBuilder();
+         sb.Append("UpdateScrollbarThumbnails():");
+         sb.Append(" Z=");
+         sb.Append(Utilities.ZoomCanvas.ToString());
+         //--------------------------------------------------------------------
+         sb.Append(" pSH=");
+         sb.Append(myPreviousScrollHeight.ToString("XX.X"));
          double percentHeight = (t.CenterPoint.Y / myCanvas.ActualHeight);
          double percentToScroll = 0.0;
          if (percentHeight < 0.25)
@@ -2351,14 +2359,24 @@ namespace BarbarianPrince
             percentToScroll = 1.0;
          else
             percentToScroll = percentHeight / 0.5 - 0.5;
-         double scrollHeight = myScollViewerInside.ScrollableHeight;
+         double scrollHeight = myScrollViewerInside.ScrollableHeight;
          if (0.0 == scrollHeight)
             scrollHeight = myPreviousScrollHeight;
          else
-            myPreviousScrollHeight = myScollViewerInside.ScrollableHeight;
-         double amountToScroll = percentToScroll * scrollHeight;
-         myScollViewerInside.ScrollToVerticalOffset(amountToScroll);
+            myPreviousScrollHeight = myScrollViewerInside.ScrollableHeight;
+         double amountToScrollV = percentToScroll * scrollHeight;
+         myScrollViewerInside.ScrollToVerticalOffset(amountToScrollV);
+         sb.Append(" %s=");
+         sb.Append(percentToScroll.ToString());
+         sb.Append(" aH=");
+         sb.Append(myCanvas.ActualHeight.ToString());
+         sb.Append(" sH=");
+         sb.Append(myScrollViewerInside.ScrollableHeight.ToString("XX.X"));
+         sb.Append(" pSH=");
+         sb.Append(myPreviousScrollHeight.ToString("XX.X"));
          //--------------------------------------------------------------------
+         sb.Append(" !!!!!! pSW=");
+         sb.Append(myPreviousScrollWidth.ToString("XX.X"));
          double percentWidth = (t.CenterPoint.X / myCanvas.ActualWidth);
          if (percentWidth < 0.25)
             percentToScroll = 0.0;
@@ -2366,13 +2384,23 @@ namespace BarbarianPrince
             percentToScroll = 1.0;
          else
             percentToScroll = percentWidth / 0.5 - 0.5;
-         double scrollWidth = myScollViewerInside.ScrollableWidth;
+         double scrollWidth = myScrollViewerInside.ScrollableWidth;
          if (0.0 == scrollWidth)
             scrollWidth = myPreviousScrollWidth;
          else
-            myPreviousScrollWidth = myScollViewerInside.ScrollableWidth;
-         amountToScroll = percentToScroll * scrollWidth;
-         myScollViewerInside.ScrollToHorizontalOffset(amountToScroll);
+            myPreviousScrollWidth = myScrollViewerInside.ScrollableWidth;
+         double amountToScrollH = percentToScroll * scrollWidth;
+         myScrollViewerInside.ScrollToHorizontalOffset(amountToScrollH);
+         sb.Append(" %s=");
+         sb.Append(percentToScroll.ToString());
+         sb.Append(" aW=");
+         sb.Append(myCanvas.ActualWidth.ToString());
+         sb.Append(" sW=");
+         sb.Append(myScrollViewerInside.ScrollableWidth.ToString("XX.X"));
+         sb.Append(" pSW=");
+         sb.Append(myPreviousScrollWidth.ToString("XX.X"));
+         //--------------------------------------------------------------------
+         Logger.Log(LogEnum.LE_VIEW_MAP_THUMBNAIL, sb.ToString());
       }
       private bool UpdateMapItemRectangle(IGameInstance gi)
       {
@@ -3452,11 +3480,11 @@ namespace BarbarianPrince
          if (0 < mapPanelHeight) // Need to resize to take up panel content not taken by menu and status bar
          {
             myDockPanelInside.Height = mapPanelHeight;
-            myScollViewerInside.Height = mapPanelHeight;
+            myScrollViewerInside.Height = mapPanelHeight;
          }
          double mapPanelWidth = myDockPanelTop.ActualWidth - myDockPanelControls.ActualWidth - System.Windows.SystemParameters.VerticalScrollBarWidth;
          if (0 < mapPanelWidth) // need to resize so that scrollbar takes up panel not allocated to Control's DockPanel, i.e. where app controls are shown
-            myScollViewerInside.Width = mapPanelWidth;
+            myScrollViewerInside.Width = mapPanelWidth;
       }
       private void SizeChangedGameViewerWindow(object sender, SizeChangedEventArgs e)
       {
@@ -3464,11 +3492,11 @@ namespace BarbarianPrince
          if (0 < mapPanelHeight) // Need to resize to take up panel content not taken by menu and status bar
          {
             myDockPanelInside.Height = mapPanelHeight;
-            myScollViewerInside.Height = mapPanelHeight;
+            myScrollViewerInside.Height = mapPanelHeight;
          }
          double mapPanelWidth = myDockPanelTop.ActualWidth - myDockPanelControls.ActualWidth - System.Windows.SystemParameters.VerticalScrollBarWidth;
          if (0 < mapPanelWidth) // need to resize so that scrollbar takes up panel not allocated to Control's DockPanel, i.e. where app controls are shown
-            myScollViewerInside.Width = mapPanelWidth;
+            myScrollViewerInside.Width = mapPanelWidth;
       }
       private void ClosedGameViewerWindow(object sender, EventArgs e)
       {
@@ -3495,9 +3523,9 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "SetWindowPlacement() returned false");
             }
             if (0.0 != Settings.Default.ScrollViewerHeight)
-               myScollViewerInside.Height = Settings.Default.ScrollViewerHeight;
+               myScrollViewerInside.Height = Settings.Default.ScrollViewerHeight;
             if (0.0 != Settings.Default.ScrollViewerWidth)
-               myScollViewerInside.Width = Settings.Default.ScrollViewerWidth;
+               myScrollViewerInside.Width = Settings.Default.ScrollViewerWidth;
          }
          catch (Exception ex)
          {

@@ -804,8 +804,8 @@ namespace BarbarianPrince
             }
             if (0 == adjNotCrossingRiverNames.Count)
             {
-               Logger.Log(LogEnum.LE_ERROR, "EncounterEscape(): no adjacent territories w/o crossing river");
-               return false;
+               foreach (string territoryName in t.Adjacents) // pick random territory regardless of river
+                  adjNotCrossingRiverNames.Add(territoryName);
             }
          }
          //---------------------------------------------
@@ -838,7 +838,7 @@ namespace BarbarianPrince
          gi.Prince.MovementUsed = gi.Prince.Movement; // no more travel or today
          if (0 == adjacentTerritory.Rafts.Count) // if there are no raft hexes, destroy the raft
             gi.RaftStatePrevUndo = gi.RaftState = RaftEnum.RE_NO_RAFT; // EncounterEscape()
-                                                                       // !!!!!!Must call EncounterEnd() in the calling routine if this is end of encounter b/c of EncounterEscapeFly and EncounterEscapeMounted take user to different screen to end encounter
+         // !!!!!!Must call EncounterEnd() in the calling routine if this is end of encounter b/c of EncounterEscapeFly and EncounterEscapeMounted take user to different screen to end encounter
          return true;
       }
       protected bool EncounterFollow(IGameInstance gi, ref GameAction action)

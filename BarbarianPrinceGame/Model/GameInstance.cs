@@ -817,7 +817,7 @@ namespace BarbarianPrince
          }
          int remainingCoins = (int)Math.Ceiling((decimal)coins / (decimal)looterShare); // looters get their share and it disappears forever
          LooterCoin += (coins - remainingCoins);
-         Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): ls=" + looterShare.ToString() + " rc=" + remainingCoins.ToString());
+         Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): looter share=" + looterShare.ToString() + " rc=" + remainingCoins.ToString());
          //---------------------------------
          int fickleShare = 1;
          if (true == isCoinsShared) // need to give equal share for each looter
@@ -834,7 +834,7 @@ namespace BarbarianPrince
          int afterLooterCoins = remainingCoins;
          remainingCoins = (int)Math.Ceiling((decimal)afterLooterCoins / (decimal)fickleShare); // fickle get equal share as Prince
          this.FickleCoin += (afterLooterCoins - remainingCoins);
-         Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): fs=" + fickleShare.ToString()+ " rc=" + remainingCoins.ToString());
+         Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): fickle share=" + fickleShare.ToString()+ " rc=" + remainingCoins.ToString());
          //---------------------------------
          IMapItems sortedMapItems = PartyMembers.SortOnCoin();
          sortedMapItems.Reverse();
@@ -857,12 +857,12 @@ namespace BarbarianPrince
                int miCoin1 = mi.Coin;
                mi.Coin += diffToGetTo100;
                Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): add to poorest first to reach 100 " + mi.Name + "++++>>>" + miCoin1.ToString() + " + " + diffToGetTo100.ToString() + " = " + mi.Coin.ToString() + " rc=" + remainingCoins.ToString());
-
             }
          }
          //--------------------------------- 
          int remainder = remainingCoins % 100; // First try to get remainder removed
          int hundreds = (int)((remainingCoins - remainder)/100.0);
+         Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): remainder=" + remainder.ToString() + " hundreds=" + hundreds.ToString() + " rc=" + remainingCoins.ToString());
          foreach (IMapItem mi in sortedMapItems) // take care of remainder first
          {
             if ((true == mi.IsUnconscious) || (true == mi.IsKilled) || (true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")))
@@ -886,10 +886,13 @@ namespace BarbarianPrince
                remainder = 0;
             }
          }
-         if ((0 == hundreds) || (0 == remainingCoins) ) // at this point, only left with 100s unless unable to store remainder
+         if(0 == remainingCoins) // at this point, only left with 100s unless unable to store remainder
+         {
+            Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): returning b/c remainder=0 hundreds=0");
             return true;
+         }
          //--------------------------------- 
-         if( 0 == remainder )
+         if((0 == remainder) && (0 < hundreds) )
          {
             int princeFreeLoad = Prince.GetFreeLoadWithoutModify(); // AddCoins() - Add to prince if prince free load over zero
             if ((0 < princeFreeLoad) && (false == Prince.IsUnconscious) && (false == Prince.IsKilled))
@@ -978,6 +981,7 @@ namespace BarbarianPrince
          remainingCoins = remainder + 100 * hundreds;
          if( 0 < remainingCoins )
             this.Caches.Add(this.myPrince.Territory, remainingCoins);
+         Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): remainder=" + remainder.ToString() + " hundreds=" + hundreds.ToString());
          return true;
       }
       public bool AddCoinsAuto()
