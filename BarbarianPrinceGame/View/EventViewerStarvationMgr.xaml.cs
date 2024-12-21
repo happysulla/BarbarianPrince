@@ -1900,9 +1900,7 @@ namespace BarbarianPrince
                case 6: possession = SpecialEnum.ShieldOfLight; break;
                default: Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): dieRoll=" + dieRoll.ToString()); break;
             }
-            if (SpecialEnum.None == possession)
-               Logger.Log(LogEnum.LE_ERROR, "ShowDieResults(): possession=SpecialEnum.None");
-            else
+            if (SpecialEnum.None != possession) // anything but Pegasus
                myGameInstance.AddSpecialItem(possession);
          }
          else

@@ -1437,8 +1437,6 @@ namespace BarbarianPrince
                pegasuses.Add(mount);
             else if (true == mount.Name.Contains("Horse"))
                horses.Add(mount);
-            else
-               Logger.Log(LogEnum.LE_ERROR, "TransferMounts(): Invalid state m.Name=" + mount.Name);
          }
          mounts.Clear();
          //---------------------------------------
