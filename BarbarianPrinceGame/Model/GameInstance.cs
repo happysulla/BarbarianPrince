@@ -66,6 +66,7 @@ namespace BarbarianPrince
       public IMapItem Prince { set => myPrince = value; get => myPrince; }
       public IMapItem ActiveMember { set; get; } = null;
       public int WitAndWile { get; set; } = 0;
+      public int WitAndWileInitial { get; set; } = 0;
       public int Days { get; set; } = 0;
       //----------------------------------------------
       public bool IsGridActive { set; get; } = false;

@@ -15,6 +15,7 @@ namespace BarbarianPrince
       IMapItem Prince { set; get; }
       IMapItem ActiveMember { set; get; } // active member is one that springs the trap
       int WitAndWile { set; get; }
+      int WitAndWileInitial { get; set; }
       int Days { set; get; }
       //----------------------------------------------
       bool IsGridActive { set; get; } // True if there is some EventViewer manager active

@@ -715,7 +715,7 @@ namespace BarbarianPrince
                GameEngine.theFeatsInGame.myIsRandomGameWin = true;
             else if (4 == gi.Options.GetGameIndex())
                GameEngine.theFeatsInGame.myIsFunGameWin = true;
-            if (2 == gi.WitAndWile)
+            if (2 == gi.WitAndWileInitial)
                GameEngine.theFeatsInGame.myIsLowWitWin = true;
             Logger.Log(LogEnum.LE_SERIALIZE_FEATS, "PerformEndCheck(): 1-feats=" + GameEngine.theFeatsInGame.ToString());
          }
@@ -1570,6 +1570,7 @@ namespace BarbarianPrince
                   gi.WitAndWile = 2; // cannot be less than two
                else
                   gi.WitAndWile = dieRoll;
+               gi.WitAndWileInitial = gi.WitAndWile; // GameStateSetup.PerformAction(SetupRollWitsWiles)
                Logger.Log(LogEnum.LE_WIT_AND_WILES_INIT, "GameStateSetup.PerformAction(SetupRollWitsWiles): dr=" + dieRoll.ToString() + " ww=" + gi.WitAndWile.ToString());
                gi.EventDisplayed = gi.EventActive = "e000d"; // next screen to show
                break;
@@ -1581,6 +1582,7 @@ namespace BarbarianPrince
                      gi.WitAndWile = 2;
                   else if (6 < gi.WitAndWile)
                      gi.WitAndWile = 6;
+                  gi.WitAndWileInitial = gi.WitAndWile; // GameStateSetup.PerformAction(SetupManualWitsWiles)
                   Logger.Log(LogEnum.LE_WIT_AND_WILES_INIT, "GameStateSetup.PerformAction(SetupManualWitsWiles): dr=" + dieRoll.ToString() + " ww=" + gi.WitAndWile.ToString());
                }
                gi.DieRollAction = GameAction.DieRollActionNone;
@@ -1721,6 +1723,7 @@ namespace BarbarianPrince
          gi.WitAndWile = dr;
          if (1 == gi.WitAndWile) // cannot start with one 
             gi.WitAndWile = 2;
+         gi.WitAndWileInitial = gi.WitAndWile; // PerformAutoSetup()
          Logger.Log(LogEnum.LE_WIT_AND_WILES_INIT, "PerformAutoSetup(): dr=" + dr.ToString() + " ww=" + gi.WitAndWile.ToString());
          dr = Utilities.RandomGenerator.Next(6);
          ++dr;
@@ -4613,7 +4616,7 @@ namespace BarbarianPrince
                   GameEngine.theFeatsInGame.myIsRandomGameWin = true;
                else if (4 == gi.Options.GetGameIndex())
                   GameEngine.theFeatsInGame.myIsFunGameWin = true;
-               if (2 == gi.WitAndWile)
+               if (2 == gi.WitAndWileInitial)
                   GameEngine.theFeatsInGame.myIsLowWitWin = true;
                gi.EventDisplayed = gi.EventActive = "e501";
                gi.DieRollAction = GameAction.DieRollActionNone;
