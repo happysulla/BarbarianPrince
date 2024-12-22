@@ -1117,7 +1117,8 @@ namespace BarbarianPrince
             ITerritory previousTerritory = GetPreviousHex(gi);
             if (null == previousTerritory)
             {
-               Logger.Log(LogEnum.LE_ERROR, "SetSubstitutionEvent(): previousTerritory=null for t=" + gi.Prince.Territory.Name);
+               if( 0 < gi.Days ) // on first day, might occur
+                  Logger.Log(LogEnum.LE_ERROR, "SetSubstitutionEvent(): previousTerritory=null for t=" + gi.Prince.Territory.Name);
                previousTerritory = gi.Prince.Territory;
             }
             if (gi.NewHex.Name != previousTerritory.Name)

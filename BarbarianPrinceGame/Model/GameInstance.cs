@@ -1467,6 +1467,7 @@ namespace BarbarianPrince
                   continue;
                partyMember.AddMount(pegasus);
                isMountAssigned = true;
+               break;
             }
             if (false == isMountAssigned)
                firstConsciousMapItem.AddMount(pegasus);
@@ -1481,6 +1482,7 @@ namespace BarbarianPrince
                   continue;
                partyMember.AddMount(horse);
                isMountAssigned = true;
+               break;
             }
             if( false == isMountAssigned)
                firstConsciousMapItem.AddMount(horse);
@@ -2318,7 +2320,7 @@ namespace BarbarianPrince
             StringBuilder sb = new StringBuilder();
             sb.Append("RemoveAbandonerInParty(): TransferMounts() returned false for  mi=");
             sb.Append(mi.Name);
-            sb.Append("mounts=");
+            sb.Append(" mounts=");
             foreach (IMapItem mount in mi.Mounts)
             {
                sb.Append(mount.Name);

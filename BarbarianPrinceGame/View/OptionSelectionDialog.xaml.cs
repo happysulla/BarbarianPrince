@@ -1842,26 +1842,9 @@ namespace BarbarianPrince
             case 3: option = myOptions.Find("RandomLeft"); break;
             case 4: option = myOptions.Find("RandomRight"); break;
             case 5: option = myOptions.Find("RandomBottom"); break;
-            //case 6: option = myOptions.Find("0109"); break;
-            //case 7: option = myOptions.Find("0206"); break;
-            //case 8: option = myOptions.Find("0711"); break;
-            //case 9: option = myOptions.Find("1212"); break;
-            //case 10: option = myOptions.Find("0323"); break;
-            //case 11: option = myOptions.Find("1923"); break;
-            //case 12: option = myOptions.Find("0418"); break;
-            //case 13: option = myOptions.Find("0722"); break;
-            //case 14: option = myOptions.Find("0409"); break;
-            //case 15: option = myOptions.Find("0406"); break;
-            //case 16: option = myOptions.Find("1611"); break;
-            //case 17: option = myOptions.Find("0411"); break;
-            //case 18: option = myOptions.Find("1507"); break;
-            //case 19: option = myOptions.Find("1905"); break;
-            //case 20: option = myOptions.Find("1723"); break;
             default: Logger.Log(LogEnum.LE_ERROR, "SelectRandomHexChoice: reached default choice=" + choice.ToString()); return;
          }
-         if (null == option)
-            Logger.Log(LogEnum.LE_ERROR, "SelectRandomHexChoice(): myOptions.Find() for choice=" + choice.ToString());
-         else
+         if (null != option)
             option.IsEnabled = !option.IsEnabled;
          option = myOptions.Find("AutoSetup");
          if (null == option)
