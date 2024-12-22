@@ -2207,13 +2207,6 @@ namespace BarbarianPrince
                      myCanvas.Children.Add(aPolygon);
                   }
                   break;
-               case GameAction.E130JailedOnTravels:
-                  if (false == MoveToNewHexWhenJailed(gi))
-                  {
-                     Logger.Log(LogEnum.LE_ERROR, "UpdateCanvas():  MoveToNewHexWhenJailed() returned false");
-                     return false;
-                  }
-                  break;
                case GameAction.TravelShowMovementEncounter:
                   if (0 < gi.MapItemMoves.Count)
                   {
@@ -2246,6 +2239,7 @@ namespace BarbarianPrince
                case GameAction.CampfireLodgingCheck:
                case GameAction.CampfireStarvationCheck: 
                case GameAction.TravelShowLost:
+               case GameAction.E130JailedOnTravels:
                   if (0 < gi.MapItemMoves.Count)
                   {
                      if (false == UpdateCanvasMovement(gi, action))
@@ -2990,46 +2984,6 @@ namespace BarbarianPrince
             tb.Inlines.Add(new Run("Prince Executions = " + stat.myNumOfPrinceAxeDeath.ToString()) { FontWeight = FontWeights.Bold });
          }
       }
-      private bool MoveToNewHexWhenJailed(IGameInstance gi)
-      {
-         ITerritory oldT = gi.Prince.Territory;
-         IStack oldStack = gi.Stacks.Find(oldT);
-         if (null == oldStack)
-         {
-            oldStack = myGameInstance.Stacks.Find(gi.Prince.Territory);
-            if (null == oldStack)
-               Logger.Log(LogEnum.LE_ERROR, "MoveToNewHexWhenJailed(): oldStack=null for t=" + oldT.ToString() + " bc Prince not found in any stacks");
-            else
-               Logger.Log(LogEnum.LE_ERROR, "MoveToNewHexWhenJailed(): oldStack=null for t=" + oldT.ToString() + " bc Prince in stack=" + oldStack.Territory.Name);
-            if (null == oldStack)
-            {
-               oldStack = new Stack(gi.Prince.Territory) as IStack;
-               myGameInstance.Stacks.Add(oldStack);
-            }
-            oldStack.MapItems.Add(gi.Prince);
-         }
-         if (null == gi.NewHex)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "MoveToNewHexWhenJailed(): gi.NewHex=null");
-            return false;
-         }
-         IStack newStack = myGameInstance.Stacks.Find(gi.NewHex);
-         if (null == newStack)
-         {
-            newStack = new Stack(gi.NewHex);
-            myGameInstance.Stacks.Add(newStack);
-         }
-         //-------------------------------------
-         foreach (IMapItem mi in myGameInstance.PartyMembers)
-         {
-            mi.Territory = gi.NewHex; // MoveToNewHexWhenJailed()
-            newStack.MapItems.Add(mi);
-            oldStack.MapItems.Remove(mi);
-         }
-         if (0 == oldStack.MapItems.Count)
-            myGameInstance.Stacks.Remove(oldStack);
-         return true;
-      }
       private bool MovePathAnimate(IMapItemMove mim)
       {
          if ("Prince" != mim.MapItem.Name) // only prince is moved on map
@@ -3321,35 +3275,13 @@ namespace BarbarianPrince
             return;
          }
          //-------------------------------------
-         ITerritory oldT = myGameInstance.Prince.Territory;
-         IStack oldStack = myGameInstance.Stacks.Find(oldT);
-         if (null == oldStack)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygonArchOfTravel(): oldStack=null for t=" + oldT.ToString());
-            oldStack = new Stack(myGameInstance.Prince.Territory) as IStack;
-            myGameInstance.Stacks.Add(oldStack);
-         }
          ITerritory newT = Territory.theTerritories.Find(Utilities.RemoveSpaces(clickedPolygon.Tag.ToString()));
          if (null == newT)
          {
             Logger.Log(LogEnum.LE_ERROR, "MouseDownPolygonArchOfTravel(): newT=null for " + clickedPolygon.Tag.ToString());
             return;
          }
-         IStack newStack = myGameInstance.Stacks.Find(newT);
-         if (null == newStack)
-         {
-            newStack = new Stack(newT);
-            myGameInstance.Stacks.Add(newStack);
-         }
-         //-------------------------------------
-         foreach (IMapItem mi in myGameInstance.PartyMembers)
-         {
-            mi.Territory = newT;
-            newStack.MapItems.Add(mi);
-            oldStack.MapItems.Remove(mi);
-         }
-         if (0 == oldStack.MapItems.Count)
-            myGameInstance.Stacks.Remove(oldStack);
+         myGameInstance.Prince.Territory = newT;
          //-------------------------------------
          GameAction outAction = GameAction.E045ArchOfTravelEnd;
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);

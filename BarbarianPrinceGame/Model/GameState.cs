@@ -1690,9 +1690,6 @@ namespace BarbarianPrince
          gi.NewHex = gi.Prince.Territory = gi.Prince.TerritoryStarting = starting;
          gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_START));
          this.AddVisitedLocation(gi); // SetStartingLocation()
-         IStack newStack = new Stack(starting) as IStack;
-         gi.Stacks.Add(newStack);
-         newStack.MapItems.Add(gi.Prince);
          int counterCount = 0;
          foreach (IMapItem mi in gi.PartyMembers)
          {
@@ -6599,9 +6596,9 @@ namespace BarbarianPrince
                case GameAction.E130JailedOnTravels:
                   switch (gi.DieResults["e130"][1])
                   {
-                     case 1: gi.NewHex = Territory.theTerritories.Find("1212"); break; // E130JailedOnTravels
-                     case 2: gi.NewHex = Territory.theTerritories.Find("0323"); break; // E130JailedOnTravels
-                     case 3: gi.NewHex = Territory.theTerritories.Find("1923"); break; // E130JailedOnTravels
+                     case 1: gi.NewHex = Territory.theTerritories.Find("1212"); break; // E130JailedOnTravels - Huldra
+                     case 2: gi.NewHex = Territory.theTerritories.Find("0323"); break; // E130JailedOnTravels - Dragot
+                     case 3: gi.NewHex = Territory.theTerritories.Find("1923"); break; // E130JailedOnTravels - Aeravir
                      case 4: gi.NewHex = FindClosestTemple(gi); break;                 // E130JailedOnTravels
                      case 5: case 6: gi.NewHex = FindClosestTown(gi); break;           // E130JailedOnTravels
                      default:
@@ -6616,8 +6613,18 @@ namespace BarbarianPrince
                   }
                   else
                   {
-                     ++gi.Days;  // advance the day by one day
+                     gi.Prince.TerritoryStarting = gi.Prince.Territory;
                      gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_JAIL));
+                     gi.MapItemMoves.Clear();
+                     Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateEncounter.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
+                     --gi.Prince.MovementUsed;
+                     if (false == AddMapItemMove(gi, gi.NewHex)) // move to same hex
+                     {
+                        returnStatus = " AddMapItemMove() returned false a=" + action.ToString();
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                     }
+                     gi.Prince.MovementUsed = gi.Prince.Movement; // stop movement
+                     ++gi.Days;  // advance the day by one day
                      if ((true == gi.IsExhausted) && ((true == gi.NewHex.IsOasis) || ("Desert" != gi.NewHex.Type))) // e120
                         gi.IsExhausted = false;
                   }
@@ -7265,7 +7272,7 @@ namespace BarbarianPrince
                            if ("e130" == gi.EventStart)
                            {
                               gi.EventDisplayed = gi.EventActive = "e130d";
-                              gi.IsArrestedByDrogat = true;   // Jailed on travels resutls in MarkedForDeath()
+                              gi.IsArrestedByDrogat = true;   // Jailed on travels results in MarkedForDeath()
                            }
                            else
                            {
