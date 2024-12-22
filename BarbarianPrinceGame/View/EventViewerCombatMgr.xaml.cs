@@ -437,6 +437,10 @@ namespace BarbarianPrince
                myIsEscapePossible = false;
                myIsKnightOnBridge = true;
                break;
+            case "e164":
+               if ((0 == myGameInstance.Prince.Mounts.Count) && (false == myGameInstance.Prince.IsRiding) && (false == myGameInstance.Prince.IsFlying))
+                  myIsEscapePossible = false; // If Prince has no mounts, cannot escape
+               break;
             default: break; // do nothing
          }
          //--------------------------------------------------
@@ -4901,6 +4905,8 @@ namespace BarbarianPrince
                IMapItems adbandonedMembers = new MapItems();
                foreach(IMapItem partyMember in myGameInstance.PartyMembers)
                {
+                  if (true == partyMember.Name.Contains("Prince")) // Prince cannot abandon party
+                     continue;
                   if ( (false == partyMember.IsFlying) && (false == partyMember.IsRiding) )
                      adbandonedMembers.Add(partyMember);
                }
