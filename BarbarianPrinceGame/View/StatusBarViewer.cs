@@ -33,26 +33,24 @@ namespace BarbarianPrince
       public void UpdateView(ref IGameInstance gi, GameAction action)
       {
          if (GameAction.UpdateNewGame == action)
-         {
             myGameInstance = gi;
-            if (false == myIsCoinShown) // If autostart option is selected, show the party's coin and Wits and Wiles images
-            {
-               Option option = gi.Options.Find("AutoSetup");
-               if (null != option)
-               {
-                  if (true == option.IsEnabled)
-                  {
-                     myIsCoinShown = true;
-                     myIsWitAndWilesShown = true;
-                  }
-               }
-            }
-         }
          if (GameAction.UpdateLoadingGame == action)
          {
             myGameInstance = gi;
             myIsCoinShown = true;
             myIsWitAndWilesShown = true;
+         }
+         if (false == myIsCoinShown) // If autostart option is selected, show the party's coin and Wits and Wiles images
+         {
+            Option option = gi.Options.Find("AutoSetup");
+            if (null != option)
+            {
+               if (true == option.IsEnabled)
+               {
+                  myIsCoinShown = true;
+                  myIsWitAndWilesShown = true;
+               }
+            }
          }
          //-------------------------------------------------------
          if ((null != myTargetCursor) && (GameAction.UpdateStatusBar == action)) // increase/decrease size of cursor when zoom in or out

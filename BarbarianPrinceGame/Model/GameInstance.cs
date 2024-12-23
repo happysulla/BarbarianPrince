@@ -1170,7 +1170,7 @@ namespace BarbarianPrince
          if (count < 0)
             Logger.Log(LogEnum.LE_ERROR, "ReduceCoins(): 2 - invalid state count<0 coins=" + coins.ToString());
          if (0 != coins)
-            Logger.Log(LogEnum.LE_ERROR, "ReduceCoins(): not reduced to zero coins=" + coins.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "ReduceCoins(): unable to reduced to zero - left over coins=" + coins.ToString());
       }
       public int GetNonSpecialMountCount(bool isHorseOnly = false)
       {
