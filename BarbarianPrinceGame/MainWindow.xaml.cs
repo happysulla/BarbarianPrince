@@ -95,7 +95,7 @@ namespace BarbarianPrince
                   File.Copy(docs1Src, docs1Dest);
                string docs2Dest = docsDir + @"BP2-rulesbook_singleA4.pdf";
                if (false == File.Exists(docs2Dest))
-                  File.Copy(docs1Src, docs2Dest);
+                  File.Copy(docs2Src, docs2Dest);
             }
             catch (Exception e)
             {
