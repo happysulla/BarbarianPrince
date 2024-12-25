@@ -420,28 +420,38 @@ namespace BarbarianPrince
          }
          if (starting.myIsBanditKiller != this.myIsBanditKiller)
          {
+            string msg = "Killed " + this.myNumBanditKill + " bandits";
+            this.myNumBanditKill++; // give one for free so game feat does not show up again
             starting.myIsBanditKiller = this.myIsBanditKiller;
-            return "Killed " + this.myNumBanditKill + " bandits";
+            return msg;
          }
          if (starting.myIsOrcKiller != this.myIsOrcKiller)
          {
+            string msg = "Killed " + this.myNumOrcKill + " orcs";
+            this.myNumOrcKill++; // give one for free so game feat does not show up again
             starting.myIsOrcKiller = this.myIsOrcKiller;
-            return "Killed " + this.myNumOrcKill + " orcs";
+            return msg;
          }
          if (starting.myIsGoblinKiller != this.myIsGoblinKiller)
          {
+            string msg = "Killed " + this.myNumGoblinKill + " goblins";
+            this.myNumGoblinKill++; // give one for free so game feat does not show up again
             starting.myIsGoblinKiller = this.myIsGoblinKiller;
-            return "Killed " + this.myNumGoblinKill + " goblins";
+            return msg;
          }
          if (starting.myIsWolfKiller != this.myIsWolfKiller)
          {
+            string msg = "Killed " + this.myNumWolfKill + " wolves";
+            this.myNumWolfKill++; // give one for free so game feat does not show up again
             starting.myIsWolfKiller = this.myIsWolfKiller;
-            return "Killed " + this.myNumWolfKill + " wolves";
+            return msg;
          }
          if (starting.myIsNightsInJail != this.myIsNightsInJail)
          {
+            string msg = "Spend " + this.myNumNightsInJail + " in jail";
             starting.myIsNightsInJail = this.myIsNightsInJail;
-            return "Spend " + this.myNumNightsInJail + " in jail";
+            this.myNumNightsInJail++; // give one for free so game feat does not show up again
+            return msg;
          }
          //--------------------------------------
          if (starting.myIsVisitAllTowns != this.myIsVisitAllTowns)
