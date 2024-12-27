@@ -6,11 +6,11 @@ namespace BarbarianPrince
    [Serializable]
    public class MapPoint : IMapPoint
    {
-      private double myX = 0.0; public double X { get => myX; set => myX = value; }
-      private double myY = 0.0; public double Y { get => myY; set => myY = value; }
+      private Double myX = 0.0; public Double X { get => myX; set => myX = value; }
+      private Double myY = 0.0; public Double Y { get => myY; set => myY = value; }
       private Point myCenterPoint = new Point(); public Point CenterPoint { get => myCenterPoint; set => myCenterPoint = value; }
       public MapPoint() { }
-      public MapPoint(double x, double y) { myX = x; myY = y; }
+      public MapPoint(Double x, Double y) { myX = x; myY = y; }
       public override String ToString()
       {
          StringBuilder sb = new StringBuilder("(");

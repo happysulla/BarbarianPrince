@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -2077,34 +2078,17 @@ namespace BarbarianPrince
          if (GamePhase.UnitTest == gi.GamePhase)
             return true;
          //-------------------------------------------------------
-         // Add newly added party members to stack
-         foreach (IMapItem partyMember in myGameInstance.PartyMembers)
-         {
-            if ("offboard" == partyMember.TerritoryStarting.Name)
-               continue;
-            if ("Prince" != partyMember.Name) // only show prince
-               continue;
-            IStack stack = myGameInstance.Stacks.Find(partyMember);
-            if (null == stack)
-            {
-               stack = myGameInstance.Stacks.Find(partyMember.Territory);
-               if (null == stack)
-               {
-                  stack = new Stack(partyMember.Territory) as IStack;
-                  myGameInstance.Stacks.Add(stack);
-               }
-               stack.MapItems.Add(partyMember);
-            }
-         }
-         //-------------------------------------------------------
          Button b = myButtonMapItems.Find(Utilities.RemoveSpaces(gi.Prince.Name));
          if (null != b)
          {
             b.BeginAnimation(Canvas.LeftProperty, null); // end animation offset
             b.BeginAnimation(Canvas.TopProperty, null);  // end animation offset
-            gi.Prince.SetLocation(0);
-            Canvas.SetLeft(b, gi.Prince.Location.X);
-            Canvas.SetTop(b, gi.Prince.Location.Y);
+            ITerritory t = gi.Prince.Territory;
+            Double x = t.CenterPoint.X - Utilities.theMapItemOffset;
+            Double y = t.CenterPoint.Y - Utilities.theMapItemOffset;
+            gi.Prince.Location = new MapPoint(x, y);
+            Canvas.SetLeft(b, x);
+            Canvas.SetTop(b, y);
             Canvas.SetZIndex(b, 0);
          }
          else

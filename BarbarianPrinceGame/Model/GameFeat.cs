@@ -528,7 +528,7 @@ namespace BarbarianPrince
          sb.Append("{ ");
          sb.Append("wOrg=");
          sb.Append(myIsOriginalGameWin.ToString());
-         sb.Append("wWW=");
+         sb.Append(",wWW=");
          sb.Append(myIsLowWitWin.ToString());
          sb.Append(", w500=");
          sb.Append(myIs500GoldWin.ToString());

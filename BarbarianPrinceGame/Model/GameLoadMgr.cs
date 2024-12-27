@@ -12,17 +12,6 @@ namespace BarbarianPrince
       public static string theGamesDirectory = "";
       public static bool theIsCheckFileExist = false;
       //--------------------------------------------------
-      public static string AssemblyDirectory
-      {
-         get
-         {
-            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
-            UriBuilder uri = new UriBuilder(codeBase);
-            string path = Uri.UnescapeDataString(uri.Path);
-            return System.IO.Path.GetDirectoryName(path);
-         }
-      }
-      //--------------------------------------------------
       public static IGameInstance OpenGame()
       {
          FileStream fileStream = null;
@@ -109,7 +98,7 @@ namespace BarbarianPrince
                fileStream.Close();
                theGamesDirectory = Path.GetDirectoryName(dlg.FileName); // save off the directory user chosen
                theGamesDirectory += "\\";
-               Directory.SetCurrentDirectory(AssemblyDirectory);
+               Directory.SetCurrentDirectory(MainWindow.theAssemblyDirectory);
                return gi;
             }
          }
@@ -119,7 +108,7 @@ namespace BarbarianPrince
             if (null != fileStream)
                fileStream.Close();
          }
-         Directory.SetCurrentDirectory(AssemblyDirectory);
+         Directory.SetCurrentDirectory(MainWindow.theAssemblyDirectory);
          return null;
       }
       //--------------------------------------------------

@@ -200,7 +200,6 @@ namespace BarbarianPrince
       ITerritories ForbiddenHires { get; }
       //----------------------------------------------
       Dictionary<string, int[]> DieResults { get; }
-      IStacks Stacks { set; get; }
       List<IUnitTest> UnitTests { get; }
       //----------------------------------------------
       bool IsInTown(ITerritory t);

@@ -2,6 +2,8 @@
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Navigation;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
@@ -1378,7 +1380,6 @@ namespace BarbarianPrince
          else
             Utilities.MaxDays = 70;
          //---------------------------------------------------------
-         gi.Stacks.Clear();
          if ((true == gi.IsJailed) || (true == gi.IsDungeon) || (true == gi.IsEnslaved))
          {
             gi.GamePhase = GamePhase.Campfire;
@@ -1510,6 +1511,22 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateNewGame:
             case GameAction.RemoveSplashScreen:
+               StringBuilder sb = new StringBuilder();
+               sb.Append(" GameVersion=");
+               Version version = Assembly.GetExecutingAssembly().GetName().Version;
+               sb.Append(version.ToString());
+               sb.Append(" OsVersion=");
+               sb.Append(System.Environment.OSVersion.Version.Build.ToString());
+               sb.Append(" OS=");
+               sb.Append(RuntimeInformation.OSDescription.ToString());
+               sb.Append(" OS=");
+               sb.Append(RuntimeInformation.OSArchitecture.ToString());
+               sb.Append(" netVersion=");
+               sb.Append(Environment.Version.ToString());
+               sb.Append(" AppDir=");
+               sb.Append(MainWindow.theAssemblyDirectory);
+               Logger.Log(LogEnum.LE_GAME_INIT_VERSION, sb.ToString());
+               //-------------------------------------------------
                theIsGameSetup = false;
                gi.Statistic.Clear();         // Clear any current statitics
                gi.Statistic.myNumGames = 1;  // Set played games to 1

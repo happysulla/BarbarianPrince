@@ -38,9 +38,8 @@ namespace BarbarianPrince
       public static int MaxDays { set; get; } = 70; // 10 weeks
       //--------------------------------------------
       public static Double ZoomCanvas { get; set; } = 1.0;
-      public static Double theMapItemOffset = 20;
-      public static Double theMapItemSize = 40;  // size of a MapItem black
-      public static int theStackSize = 1000;
+      public static Double theMapItemOffset = 20.0;
+      public static Double theMapItemSize = 40.0;  // size of a MapItem
       public static string[] theNorthOfTragothHexes = new string[21] { "0101", "0201", "0301", "0302", "0401", "0501", "0502", "0601", "0701", "0801", "0901", "1001", "1101", "1201", "1301", "1501", "1601", "1701", "1801", "1901", "2001" };
       //--------------------------------------------
       static private int theRandomIndex = 0;

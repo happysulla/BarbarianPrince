@@ -283,7 +283,6 @@ namespace BarbarianPrince
       private ITerritories myForbiddenHires = new Territories();
       public ITerritories ForbiddenHires { get => myForbiddenHires; }
       //---------------------------------------------------------------
-      public IStacks Stacks { get; set; } = new Stacks();
       [NonSerialized] private List<IUnitTest> myUnitTests = new List<IUnitTest>();
       public List<IUnitTest> UnitTests { get => myUnitTests; }
       //---------------------------------------------------------------

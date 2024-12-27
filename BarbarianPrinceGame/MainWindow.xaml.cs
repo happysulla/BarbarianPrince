@@ -33,6 +33,7 @@ namespace BarbarianPrince
    //-----------------------------------------------------------------------------------
    public partial class MainWindow : Window
    {
+      public static string theAssemblyDirectory = "";
       private IGameEngine myGameEngine = null;
       private GameViewerWindow myGameViewerWindow = null;
       public MainWindow()
@@ -44,9 +45,9 @@ namespace BarbarianPrince
             string codeBase = Assembly.GetExecutingAssembly().CodeBase;
             UriBuilder uri = new UriBuilder(codeBase);
             string path = Uri.UnescapeDataString(uri.Path);
-            string assemblyDir = System.IO.Path.GetDirectoryName(path);
-            MapImage.theImageDirectory = assemblyDir + @"\images\";
-            ConfigFileReader.theConfigDirectory = assemblyDir + @"\config\";
+            theAssemblyDirectory = System.IO.Path.GetDirectoryName(path);
+            MapImage.theImageDirectory = theAssemblyDirectory + @"\images\";
+            ConfigFileReader.theConfigDirectory = theAssemblyDirectory + @"\config\";
             string appDataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             Logger.theLogDirectory = appDataDir + @"\BarbarianPrince\Logs\";
             GameLoadMgr.theGamesDirectory = appDataDir + @"\BarbarianPrince\Games\";
@@ -84,8 +85,8 @@ namespace BarbarianPrince
                string docs1Src = parentDir.FullName + @"\Docs\BP2-eventsbook_singleA4.pdf";
                string docs2Src = parentDir.FullName + @"\Docs\BP2-rulesbook_singleA4.pdf";
 #else
-               string docs1Src = assemblyDir + @"\Docs\BP2-eventsbook_singleA4.pdf";
-               string docs2Src = assemblyDir + @"\Docs\BP2-rulesbook_singleA4.pdf";
+               string docs1Src = theAssemblyDirectory + @"\Docs\BP2-eventsbook_singleA4.pdf";
+               string docs2Src = theAssemblyDirectory + @"\Docs\BP2-rulesbook_singleA4.pdf";
 #endif
                string docsDir = appDataDir + @"\BarbarianPrince\Docs\";
                if (false == Directory.Exists(docsDir))

@@ -30,7 +30,7 @@
     <ProductName>Barbarian Prince</ProductName>
     <PublisherName>Wargaming Inc</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>56</ApplicationRevision>
+    <ApplicationRevision>57</ApplicationRevision>
     <ApplicationVersion>2.3.19.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -300,7 +300,6 @@
     <Compile Include="View\BannerDialog.xaml.cs">
       <DependentUpon>BannerDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\IStack.cs" />
     <Compile Include="MainWindow.xaml.cs" />
     <Compile Include="Interfaces\IIUnitTest.cs" />
     <Compile Include="UnitTests\01GameViewerCreateUnitTest.cs" />
@@ -359,7 +358,6 @@
     <Compile Include="Model\Utilities.cs" />
     <Compile Include="Model\MapItemMove.cs" />
     <Compile Include="Model\MapPath.cs" />
-    <Compile Include="Model\Stack.cs" />
     <Compile Include="Model\GameInstance.cs" />
     <Compile Include="Model\MapItem.cs" />
     <Compile Include="Model\Territory.cs" />
