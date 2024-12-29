@@ -83,6 +83,7 @@ namespace BarbarianPrince
          myIsRandomHexGameWin = false;
          myIsRandomGameWin = false;
          myIsFunGameWin = false;
+         //-------------------------------------
          myIsLowWitWin = false;
          myIs500GoldWin = false;
          myIsNobleAllyWin = false;
@@ -109,6 +110,7 @@ namespace BarbarianPrince
          myIsRescueHeir = false;
          myIsSneakAttack = false;
          myIsStealGems = false;
+         myIsLadyAeravirAccused = false;
          //-------------------------------------
          myIsDragonKiller = false;
          myIsNightsInJail = false;
@@ -170,7 +172,7 @@ namespace BarbarianPrince
          starting.myIsRescueHeir = this.myIsRescueHeir;
          starting.myIsSneakAttack = this.myIsSneakAttack;
          starting.myIsStealGems = this.myIsStealGems;
-         starting.myIsPurchaseFoulbane = this.myIsPurchaseFoulbane;
+         starting.myIsLadyAeravirAccused = this.myIsLadyAeravirAccused;
          //-------------------------------------
          starting.myIsDragonKiller = this.myIsDragonKiller;
          starting.myIsBanditKiller = this.myIsBanditKiller;
@@ -188,9 +190,8 @@ namespace BarbarianPrince
          starting.myIsVisitAllCastles = this.myIsVisitAllCastles;
          starting.myIsVisitAllTemples = this.myIsVisitAllTemples;
          starting.myIsVisitAllRuins = this.myIsVisitAllRuins;
-         starting.myIsVisitAllOasis = this.myIsVisitAllOasis;;
-         starting.myIsPurchaseChaga = this.myIsPurchaseChaga;
-         foreach(string s in this.myVisitedTowns)
+         starting.myIsVisitAllOasis = this.myIsVisitAllOasis;
+         foreach (string s in this.myVisitedTowns)
             starting.myVisitedTowns.Add(s);
          foreach (string s in this.myVisitedTemples)
             starting.myVisitedTemples.Add(s);
@@ -200,6 +201,9 @@ namespace BarbarianPrince
             starting.myVisitedRuins.Add(s);
          foreach (string s in this.myVisitedOasises)
             starting.myVisitedOasises.Add(s);
+         //-------------------------------------
+         starting.myIsPurchaseChaga = this.myIsPurchaseChaga;
+         starting.myIsPurchaseFoulbane = this.myIsPurchaseFoulbane;
          return starting;
       }
       public bool IsEqual(GameFeat starting)
@@ -214,6 +218,7 @@ namespace BarbarianPrince
             return false;
          if (this.myIsFunGameWin != starting.myIsFunGameWin)
             return false;
+         //--------------------------------------
          if (this.myIsLowWitWin != starting.myIsLowWitWin)
             return false;
          if (this.myIs500GoldWin != starting.myIs500GoldWin)
@@ -253,6 +258,19 @@ namespace BarbarianPrince
          if (this.myIsTrueLoveAdded != starting.myIsTrueLoveAdded)
             return false;
          //--------------------------------------
+         if (this.myIsResistenceRingUsed != starting.myIsResistenceRingUsed)
+            return false;
+         if (this.myIsHydraTeethUsed != starting.myIsHydraTeethUsed)
+            return false;
+         if (this.myIsRescueHeir != starting.myIsRescueHeir)
+            return false;
+         if (this.myIsSneakAttack != starting.myIsSneakAttack)
+            return false;
+         if (this.myIsStealGems != starting.myIsStealGems)
+            return false;
+         if (this.myIsLadyAeravirAccused != starting.myIsLadyAeravirAccused)
+            return false;
+         //--------------------------------------
          if (this.myIsDragonKiller != starting.myIsDragonKiller)
             return false;
          if (this.myIsBanditKiller != starting.myIsBanditKiller)
@@ -277,16 +295,6 @@ namespace BarbarianPrince
          if (this.myIsVisitAllOasis != starting.myIsVisitAllOasis)
             return false;
          //--------------------------------------
-         if (this.myIsResistenceRingUsed != starting.myIsResistenceRingUsed)
-            return false;
-         if (this.myIsHydraTeethUsed != starting.myIsHydraTeethUsed)
-            return false;
-         if (this.myIsRescueHeir != starting.myIsRescueHeir)
-            return false;
-         if (this.myIsSneakAttack != starting.myIsSneakAttack)
-            return false;
-         if (this.myIsStealGems != starting.myIsStealGems)
-            return false;
          if (this.myIsPurchaseFoulbane != starting.myIsPurchaseFoulbane)
             return false;
          if (this.myIsPurchaseChaga != starting.myIsPurchaseChaga)
@@ -320,6 +328,7 @@ namespace BarbarianPrince
             starting.myIsFunGameWin = this.myIsFunGameWin;
             return "Win the fun options game";
          }
+         //--------------------------------------
          if (starting.myIsLowWitWin != this.myIsLowWitWin)
          {
             starting.myIsLowWitWin = this.myIsLowWitWin;
@@ -413,6 +422,37 @@ namespace BarbarianPrince
             return "You found your true love";
          }
          //--------------------------------------
+         if (starting.myIsResistenceRingUsed != this.myIsResistenceRingUsed)
+         {
+            starting.myIsResistenceRingUsed = this.myIsResistenceRingUsed;
+            return "Use Resistence Ring in battle";
+         }
+         if (starting.myIsHydraTeethUsed != this.myIsHydraTeethUsed)
+         {
+            starting.myIsHydraTeethUsed = this.myIsHydraTeethUsed;
+            return "Used Hydra Teeth in battle";
+         }
+         if (starting.myIsRescueHeir != this.myIsRescueHeir)
+         {
+            starting.myIsRescueHeir = this.myIsRescueHeir;
+            return "Rescued true hier from hill tribe";
+         }
+         if (starting.myIsSneakAttack != this.myIsSneakAttack)
+         {
+            starting.myIsSneakAttack = this.myIsSneakAttack;
+            return "Sneak attack on Count Dragot";
+         }
+         if (starting.myIsStealGems != this.myIsStealGems)
+         {
+            starting.myIsStealGems = this.myIsStealGems;
+            return "Steal Count Dragot's jewels";
+         }
+         if (starting.myIsLadyAeravirAccused != this.myIsLadyAeravirAccused)
+         {
+            starting.myIsLadyAeravirAccused = this.myIsLadyAeravirAccused;
+            return "Accuse Lady Aeravir of promiscuous behavior"; // e145
+         }
+         //--------------------------------------
          if (starting.myIsDragonKiller != this.myIsDragonKiller)
          {
             starting.myIsDragonKiller = this.myIsDragonKiller;
@@ -480,36 +520,6 @@ namespace BarbarianPrince
             return "Visited all oasis";
          }
          //--------------------------------------
-         if (starting.myIsResistenceRingUsed != this.myIsResistenceRingUsed)
-         {
-            starting.myIsResistenceRingUsed = this.myIsResistenceRingUsed;
-            return "Use Resistence Ring in battle";
-         }
-         if (starting.myIsHydraTeethUsed != this.myIsHydraTeethUsed)
-         {
-            starting.myIsHydraTeethUsed = this.myIsHydraTeethUsed;
-            return "Used Hydra teeth in battle";
-         }
-         if (starting.myIsRescueHeir != this.myIsRescueHeir)
-         {
-            starting.myIsRescueHeir = this.myIsRescueHeir;
-            return "Rescued true hier from hill tribe";
-         }
-         if (starting.myIsSneakAttack != this.myIsSneakAttack)
-         {
-            starting.myIsSneakAttack = this.myIsSneakAttack;
-            return "Sneak attack on Count Dragot";
-         }
-         if (starting.myIsStealGems != this.myIsStealGems)
-         {
-            starting.myIsStealGems = this.myIsStealGems;
-            return "Steal Count Dragot's jewels";
-         }
-         if (starting.myIsLadyAeravirAccused != this.myIsLadyAeravirAccused)
-         {
-            starting.myIsLadyAeravirAccused = this.myIsLadyAeravirAccused;
-            return "Accuse Lady Aeravir of promiscuous behavior"; // e145
-         }
          if (starting.myIsPurchaseFoulbane != this.myIsPurchaseFoulbane)
          {
             starting.myIsPurchaseFoulbane = this.myIsPurchaseFoulbane;

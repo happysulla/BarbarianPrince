@@ -215,6 +215,7 @@ namespace BarbarianPrince
             mi.Endurance = Math.Max(1, mi.Endurance - 1);
             mi.IsResurrected = true;
          }
+         gi.ResurrectedMembers.Clear();
          if (false == SetPlagueStateCheck(gi, ref action))
          {
             Logger.Log(LogEnum.LE_ERROR, "SetResurrectionStateCheck(): SetPlagueStateCheck() returned false");
@@ -841,6 +842,7 @@ namespace BarbarianPrince
          if (0 == adjacentTerritory.Rafts.Count) // if there are no raft hexes, destroy the raft
             gi.RaftStatePrevUndo = gi.RaftState = RaftEnum.RE_NO_RAFT; // EncounterEscape()
          // !!!!!!Must call EncounterEnd() in the calling routine if this is end of encounter b/c of EncounterEscapeFly and EncounterEscapeMounted take user to different screen to end encounter
+         Logger.Log(LogEnum.LE_ENCOUNTER_ESCAPE, "EncounterEscape(): prince move=" + gi.MapItemMoves[0].ToString());
          return true;
       }
       protected bool EncounterFollow(IGameInstance gi, ref GameAction action)
@@ -2546,7 +2548,8 @@ namespace BarbarianPrince
             //gi.LetterOfRecommendations.Add(lt3);
             //gi.ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt3);
             //---------------------
-            //ITerritory arch1 = Territory.theTerritories.Find("0418");
+            //gi.IsArchTravelKnown = true;
+            //ITerritory arch1 = Territory.theTerritories.Find("0418");  //
             //gi.Arches.Add(arch1); // AddStartingTestingOptions()
             //ITerritory arch2 = Territory.theTerritories.Find("0517");
             //gi.Arches.Add(arch2); // AddStartingTestingOptions()
@@ -4009,6 +4012,7 @@ namespace BarbarianPrince
                   returnStatus = "SetSubstitutionEvent() returned false";
                   Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
                }
+               //------------------------
                if (true == gi.IsAirborne)
                {
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR));
@@ -5460,18 +5464,21 @@ namespace BarbarianPrince
                   gi.MapItemMoves.Clear();
                   MapItemMove mimArchTravel = new MapItemMove(Territory.theTerritories, gi.Prince, princeTerritory);   // Travel to same hex is no lost check
                   if ((0 == mimArchTravel.BestPath.Territories.Count) || (null == mimArchTravel.NewTerritory))
+                  {
                      returnStatus = "Unable to Find Path to mim=" + mimArchTravel.ToString();
-                  gi.MapItemMoves.Add(mimArchTravel);
-                  Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateEncounter.PerformAction(E045ArchOfTravelEnd): oT =" + princeTerritory.Name + " nT=" + mimArchTravel.NewTerritory.Name);
-                  Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateEncounter.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
-                  gi.Prince.MovementUsed = gi.Prince.Movement;
+                  }
+                  else
+                  {
+                     gi.MapItemMoves.Add(mimArchTravel);
+                     Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateEncounter.PerformAction(E045ArchOfTravelEnd): oT =" + princeTerritory.Name + " nT=" + mimArchTravel.NewTerritory.Name);
+                  }
                   gi.NewHex = princeTerritory; // GameStateEncounter.PerformAction(E045ArchOfTravelEnd)
                   gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL)); // GameStateEncounter.PerformAction(E045ArchOfTravelEnd)
-                  this.AddVisitedLocation(gi); // GameStateEncounter.PerformAction(E045ArchOfTravelEnd)
-                  if ((true == gi.IsExhausted) && ((true == gi.NewHex.IsOasis) || ("Desert" != gi.NewHex.Type))) // e120
-                     gi.IsExhausted = false;
-                  if (false == gi.Arches.Contains(gi.NewHex))
-                     gi.Arches.Add(gi.NewHex); // E045ArchOfTravelEnd
+                  //----------------------------------------------
+                  if (true == gi.IsPartyRiding())
+                     gi.Prince.Movement = 3;
+                  else
+                     gi.Prince.Movement = 2;
                   break;
                case GameAction.E045ArchOfTravelEndEncounter:
                   action = GameAction.UpdateEventViewerDisplay;
@@ -8542,7 +8549,9 @@ namespace BarbarianPrince
                      gi.EventStart = gi.EventDisplayed = gi.EventActive = "e021";
                      gi.DieRollAction = GameAction.EncounterStart;
                      break; //
-                  default: Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): Reached default ae=" + gi.EventActive); return false;
+                  default: 
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): Reached default ae=" + gi.EventActive + " dr=" + dieRoll.ToString()); 
+                     return false;
                }
                break;
             case "e023":
@@ -8940,7 +8949,7 @@ namespace BarbarianPrince
                            gi.EventDisplayed = gi.EventActive = "e045a";
                         break;
                      case 5: case 6: gi.EventDisplayed = gi.EventActive = "e028"; break;                                      // cave tombs
-                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): Reached default ae=" + gi.EventActive); return false;
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): Reached default ae=" + gi.EventActive + " dr=" + gi.DieResults[key][0].ToString()); return false;
                   }
                }
                break;
@@ -9180,7 +9189,7 @@ namespace BarbarianPrince
                            return false;
                         }
                         break;
-                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): Reached default ae=" + gi.EventActive); return false;
+                     default: Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): Reached default ae=" + gi.EventActive + " dr=" + gi.DieResults[key][0].ToString()); return false;
                   }
                }
                break;
@@ -9525,7 +9534,7 @@ namespace BarbarianPrince
                   gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                break;
-            default: Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): Reached default ae=" + gi.EventActive); return false;
+            default: Logger.Log(LogEnum.LE_ERROR, "EncounterStart(): !!!!! Reached default ae=" + gi.EventActive); return false;
          }
          return true;
       }
@@ -16894,21 +16903,27 @@ namespace BarbarianPrince
                gi.DieRollAction = GameAction.EncounterRoll;
                break;
             case GamePhase.SearchTreasure:
+               bool isSearchHexAvailable = false;
                if (true == gi.SecretClues.Contains(princeTerritory))
                {
                   gi.EventDisplayed = gi.EventActive = "e147a";
+                  isSearchHexAvailable = true;
                }
                else if ( (true == gi.WizardAdviceLocations.Contains(princeTerritory)) || (true == gi.PixieAdviceLocations.Contains(princeTerritory)) )
                {
                   gi.EventDisplayed = gi.EventActive = "e026";
+                  isSearchHexAvailable = true;
                }
-               else
+               else // if escaped during encounter and no longer in the hex with treasure
                {
-                  Logger.Log(LogEnum.LE_ERROR, "EncounterEnd(): invalid state princeTerritory=" + princeTerritory.Name + " gi.SunriseChoice=" + gi.SunriseChoice.ToString());
-                  return false;
+                  Logger.Log(LogEnum.LE_ENCOUNTER_ESCAPE, "EncounterEnd(): prince=" + princeTerritory.Name + " and unable to search treasure when " + gi.SunriseChoice.ToString());
+                  isEndOfDay = true;
                }
-               gi.SunriseChoice = gi.GamePhase = GamePhase.Encounter;
-               gi.DieRollAction = GameAction.EncounterRoll;
+               if( true == isSearchHexAvailable )
+               {
+                  gi.SunriseChoice = gi.GamePhase = GamePhase.Encounter;
+                  gi.DieRollAction = GameAction.EncounterRoll;
+               }
                break;
             default:
                Logger.Log(LogEnum.LE_ERROR, "EncounterEnd(): reached default gi.SunriseChoice=" + gi.SunriseChoice.ToString());

@@ -4803,11 +4803,17 @@ namespace BarbarianPrince
       }
       public bool ShowResultsTravelThroughArch(bool isLost, bool isEncounter, bool isRiverEncounter)
       {
+         myGameInstance.GamePhase = GamePhase.Travel;
          GameAction outAction = GameAction.Error;
          if (true == isEncounter)
-            outAction = GameAction.EncounterStart;
+         {
+            ++myGameInstance.Statistic.myNumEncounters;
+            outAction = GameAction.TravelShowMovementEncounter;
+         }
          else
-            outAction = GameAction.EncounterEnd;
+         {
+            outAction = GameAction.TravelShowMovement;
+         }
          StringBuilder sb11 = new StringBuilder("     ######ShowResultsTravelThroughArch() :");
          sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
          sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);

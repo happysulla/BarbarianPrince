@@ -205,20 +205,13 @@ namespace BarbarianPrince
          myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas); // Constructor - revert to save zoom
          StatusBarViewer sbv = new StatusBarViewer(myStatusBar, ge, gi, myCanvas);
          //---------------------------------------------------------------
-         if (false == String.IsNullOrEmpty(Settings.Default.GameTypeOriginal))
-            myGameEngine.Statistics[0] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeOriginal);
-         if (false == String.IsNullOrEmpty(Settings.Default.GameTypeRandParty))
-            myGameEngine.Statistics[1] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeRandParty);
-         if (false == String.IsNullOrEmpty(Settings.Default.GameTypeRandHex))
-            myGameEngine.Statistics[2] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeRandHex);
-         if (false == String.IsNullOrEmpty(Settings.Default.GameTypeRand))
-            myGameEngine.Statistics[3] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeRand);
-         if (false == String.IsNullOrEmpty(Settings.Default.GameTypeFun))
-            myGameEngine.Statistics[4] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeFun);
-         if (false == String.IsNullOrEmpty(Settings.Default.GameTypeCustom))
-            myGameEngine.Statistics[5] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeCustom);
-         if (false == String.IsNullOrEmpty(Settings.Default.GameTypeTotal))
-            myGameEngine.Statistics[6] = Utilities.Deserialize<GameStat>(Settings.Default.GameTypeTotal);
+         myGameEngine.Statistics[0] = DeserializeGameStat(0);
+         myGameEngine.Statistics[1] = DeserializeGameStat(1);
+         myGameEngine.Statistics[2] = DeserializeGameStat(2);
+         myGameEngine.Statistics[3] = DeserializeGameStat(3);
+         myGameEngine.Statistics[4] = DeserializeGameStat(4);
+         myGameEngine.Statistics[5] = DeserializeGameStat(5);
+         myGameEngine.Statistics[6] = DeserializeGameStat(6);
          //---------------------------------------------------------------
          SetDisplayIconForUninstall();
          //---------------------------------------------------------------
@@ -707,6 +700,37 @@ namespace BarbarianPrince
          }
          return gameFeat;
       }
+      private GameStat DeserializeGameStat(int index)
+      {
+         GameStat gameStat = new GameStat();
+         string filename = GameFeat.theGameFeatDirectory + "stat" + index.ToString() + ".xml";
+         if (false == String.IsNullOrEmpty(filename))
+         {
+            try // XML serializer does not work for Interfaces
+            {
+               XmlSerializer serializer = new XmlSerializer(typeof(GameStat));
+               FileStream fileStream = new FileStream(filename, FileMode.Open);
+               gameStat = (GameStat)serializer.Deserialize(fileStream);
+            }
+            catch (DirectoryNotFoundException dirException)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "DeserializeGameStats(): s=" + filename + "\ndirException=" + dirException.ToString());
+            }
+            catch (FileNotFoundException fileException)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "DeserializeGameStats(): s=" + filename + "\nfileException=" + fileException.ToString());
+            }
+            catch (IOException ioException)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "DeserializeGameStats(): s=" + filename + "\nioException=" + ioException.ToString());
+            }
+            catch (Exception ex)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "DeserializeGameStats(): s=" + filename + "\nex=" + ex.ToString());
+            }
+         }
+         return gameStat;
+      }
       //---------------------------------------
       private void SetDisplayIconForUninstall()
       {
@@ -764,16 +788,36 @@ namespace BarbarianPrince
          string sOptions = Utilities.Serialize<Options>(myGameInstance.Options);
          Settings.Default.GameOptions = sOptions;
          //-------------------------------------------
-         Settings.Default.GameTypeOriginal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[0]);
-         Settings.Default.GameTypeRandParty = Utilities.Serialize<GameStat>(myGameEngine.Statistics[1]);
-         Settings.Default.GameTypeRandHex = Utilities.Serialize<GameStat>(myGameEngine.Statistics[2]);
-         Settings.Default.GameTypeRand = Utilities.Serialize<GameStat>(myGameEngine.Statistics[3]);
-         Settings.Default.GameTypeFun = Utilities.Serialize<GameStat>(myGameEngine.Statistics[4]);
-         Settings.Default.GameTypeCustom = Utilities.Serialize<GameStat>(myGameEngine.Statistics[5]);
-         Settings.Default.GameTypeTotal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[6]);
+         XmlSerializer serializer = new XmlSerializer(typeof(GameStat));
+         TextWriter writer = new StreamWriter(GameFeat.theGameFeatDirectory + "stat0.xml");
+         serializer.Serialize(writer, myGameEngine.Statistics[0]);
          //-------------------------------------------
-         XmlSerializer serializer = new XmlSerializer(typeof(GameFeat));
-         TextWriter writer = new StreamWriter(GameFeat.theGameFeatDirectory + "feats.xml");
+         serializer = new XmlSerializer(typeof(GameStat));
+         writer = new StreamWriter(GameFeat.theGameFeatDirectory + "stat1.xml");
+         serializer.Serialize(writer, myGameEngine.Statistics[1]);
+         //-------------------------------------------
+         serializer = new XmlSerializer(typeof(GameStat));
+         writer = new StreamWriter(GameFeat.theGameFeatDirectory + "stat2.xml");
+         serializer.Serialize(writer, myGameEngine.Statistics[2]);
+         //-------------------------------------------
+         serializer = new XmlSerializer(typeof(GameStat));
+         writer = new StreamWriter(GameFeat.theGameFeatDirectory + "stat3.xml");
+         serializer.Serialize(writer, myGameEngine.Statistics[3]);
+         //-------------------------------------------
+         serializer = new XmlSerializer(typeof(GameStat));
+         writer = new StreamWriter(GameFeat.theGameFeatDirectory + "stat4.xml");
+         serializer.Serialize(writer, myGameEngine.Statistics[4]);
+         //-------------------------------------------
+         serializer = new XmlSerializer(typeof(GameStat));
+         writer = new StreamWriter(GameFeat.theGameFeatDirectory + "stat5.xml");
+         serializer.Serialize(writer, myGameEngine.Statistics[5]);
+         //-------------------------------------------
+         serializer = new XmlSerializer(typeof(GameStat));
+         writer = new StreamWriter(GameFeat.theGameFeatDirectory + "stat6.xml");
+         serializer.Serialize(writer, myGameEngine.Statistics[6]);
+         //-------------------------------------------
+         serializer = new XmlSerializer(typeof(GameFeat));
+         writer = new StreamWriter(GameFeat.theGameFeatDirectory + "feats.xml");
          serializer.Serialize(writer, GameEngine.theFeatsInGame);
          Logger.Log(LogEnum.LE_SERIALIZE_FEATS, "SaveDefaultsToSettings(): \n feats=" + GameEngine.theFeatsInGame.ToString());
          //-------------------------------------------
@@ -2608,20 +2652,12 @@ namespace BarbarianPrince
          int index = gi.Options.GetGameIndex();
          string gametype = gi.Options.GetGameName(index);
          bool isMultipleGameTypesPlayed = UpdateCanvasShowStatsAdds(index, gi.Statistic);
-         Settings.Default.GameTypeOriginal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[0]);
-         Settings.Default.GameTypeRandParty = Utilities.Serialize<GameStat>(myGameEngine.Statistics[1]);
-         Settings.Default.GameTypeRandHex = Utilities.Serialize<GameStat>(myGameEngine.Statistics[2]);
-         Settings.Default.GameTypeRand = Utilities.Serialize<GameStat>(myGameEngine.Statistics[3]);
-         Settings.Default.GameTypeFun = Utilities.Serialize<GameStat>(myGameEngine.Statistics[4]);
-         Settings.Default.GameTypeCustom = Utilities.Serialize<GameStat>(myGameEngine.Statistics[5]);
-         Settings.Default.GameTypeTotal = Utilities.Serialize<GameStat>(myGameEngine.Statistics[6]);
-         Settings.Default.theGameFeat = Utilities.Serialize<GameFeat>(GameEngine.theFeatsInGame);
-         //-------------------------------------------
-         Settings.Default.Save();
          //-------------------------------
          myTextBoxMarquee.Inlines.Clear();
          myTextBoxMarquee.Inlines.Add(new Run("Current Game Statistics:") { FontWeight = FontWeights.Bold, FontStyle = FontStyles.Italic, TextDecorations = TextDecorations.Underline });
          UpdateCanvasShowStatsText(myTextBoxMarquee, gi.Statistic);
+         //-------------------------------
+         SaveDefaultsToSettings();
          //-------------------------------
          if ( 1 < myGameEngine.Statistics[index].myNumGames)
          {

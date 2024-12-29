@@ -33,6 +33,7 @@ namespace BarbarianPrince
       LE_COMBAT_THREAD,
       LE_COMBAT_TROLL_HEAL,
       LE_COMBAT_WIZARD,
+      LE_ENCOUNTER_ESCAPE,
       LE_RESET_ROLL_STATE,
       LE_GET_COIN,
       LE_BRIBE,
@@ -150,6 +151,7 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_COMBAT_RESULT);
          //Logger.SetOn(LogEnum.LE_COMBAT_TROLL_HEAL);
          //Logger.SetOn(LogEnum.LE_COMBAT_WIZARD);
+         Logger.SetOn(LogEnum.LE_ENCOUNTER_ESCAPE);
          //Logger.SetOn(LogEnum.LE_MAPITEM_WOUND);
          //Logger.SetOn(LogEnum.LE_MAPITEM_POISION);
          Logger.SetOn(LogEnum.LE_END_ENCOUNTER);

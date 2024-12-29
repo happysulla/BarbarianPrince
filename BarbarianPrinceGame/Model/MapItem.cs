@@ -70,7 +70,7 @@ namespace BarbarianPrince
       public bool IsExposedToUser { get; set; } = false;
       //--------------------------------------------------
       public int Endurance { get; set; } = 0;
-      public int Movement { get; set; } = 4;
+      public int Movement { get; set; } = 1;
       public int Combat { get; set; } = 0;
       public int Wound { get; set; } = 0;
       public int Poison { get; set; } = 0;
