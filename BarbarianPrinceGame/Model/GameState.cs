@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
@@ -1405,6 +1406,14 @@ namespace BarbarianPrince
             }
             gi.Prince.MovementUsed = gi.Prince.Movement; // no more movement when reverting to daybreak
          }
+         ITerritory st = Territory.theTerritories.Find(gi.Prince.TerritoryStarting.Name);
+         gi.Prince.TerritoryStarting = st;
+         ITerritory t = Territory.theTerritories.Find(gi.Prince.Territory.Name);
+         gi.Prince.Territory = t;
+         Double x = t.CenterPoint.X - (gi.Prince.Zoom * Utilities.theMapItemOffset);
+         Double y = t.CenterPoint.Y - (gi.Prince.Zoom * Utilities.theMapItemOffset);
+         Logger.Log(LogEnum.LE_VIEW_MAPITEM_LOCATION, "LoadGame(): prince=(" + x.ToString("0.0") + "," + y.ToString("0.0") + ") t.center=(" + gi.Prince.Territory.CenterPoint.X.ToString("0.0") + "," + gi.Prince.Territory.CenterPoint.Y.ToString("0.0") + ")"); ;
+
          return true;
       }
       protected void UndoCommand(ref IGameInstance gi, ref GameAction action)
@@ -1513,21 +1522,9 @@ namespace BarbarianPrince
                break;
             case GameAction.UpdateNewGame:
             case GameAction.RemoveSplashScreen:
-               StringBuilder sb = new StringBuilder();
-               sb.Append(" GameVersion=");
-               Version version = Assembly.GetExecutingAssembly().GetName().Version;
-               sb.Append(version.ToString());
-               sb.Append(" OsVersion=");
-               sb.Append(System.Environment.OSVersion.Version.Build.ToString());
-               sb.Append(" OS=");
-               sb.Append(RuntimeInformation.OSDescription.ToString());
-               sb.Append(" OS=");
-               sb.Append(RuntimeInformation.OSArchitecture.ToString());
-               sb.Append(" netVersion=");
-               sb.Append(Environment.Version.ToString());
-               sb.Append(" AppDir=");
-               sb.Append(MainWindow.theAssemblyDirectory);
-               Logger.Log(LogEnum.LE_GAME_INIT_VERSION, sb.ToString());
+               int diagInfoLevel = (int)LogEnum.LE_GAME_INIT_VERSION;
+               if (true == Logger.theLogLevel[diagInfoLevel])
+                  PrintDiagnosticInfoToLog();
                //-------------------------------------------------
                theIsGameSetup = false;
                gi.Statistic.Clear();         // Clear any current statitics
@@ -2577,6 +2574,33 @@ namespace BarbarianPrince
             //GameEngine.theFeatsInGame.myIsPurchaseFoulbane = true;
             //GameEngine.theFeatsInGame.myIsRescueHeir = true;
          }
+      }
+      private void PrintDiagnosticInfoToLog()
+      {
+         StringBuilder sb = new StringBuilder();
+         sb.Append("\n\tGameVersion=");
+         Version version = Assembly.GetExecutingAssembly().GetName().Version;
+         sb.Append(version.ToString());
+         sb.Append("\n\tOsVersion=");
+         sb.Append(System.Environment.OSVersion.Version.Build.ToString());
+         sb.Append("\n\tOS Desc=");
+         sb.Append(RuntimeInformation.OSDescription.ToString());
+         sb.Append("\n\tOS Arch=");
+         sb.Append(RuntimeInformation.OSArchitecture.ToString());
+         sb.Append("\n\tProcessorArch=");
+         sb.Append(RuntimeInformation.ProcessArchitecture.ToString());
+         sb.Append("\n\tnetVersion=");
+         sb.Append(Environment.Version.ToString());
+         uint dpiX = 0;
+         uint dpiY = 0;
+         ScreenExtensions.GetDpi(System.Windows.Forms.Screen.PrimaryScreen, ScreenExtensions.DpiType.Effective, out dpiX, out dpiY);
+         sb.Append("\n\tDPI=(");
+         sb.Append(dpiX.ToString());
+         sb.Append(",");
+         sb.Append(dpiY.ToString());
+         sb.Append(")\n\tAppDir=");
+         sb.Append(MainWindow.theAssemblyDirectory);
+         Logger.Log(LogEnum.LE_GAME_INIT_VERSION, sb.ToString());
       }
    }
    //-----------------------------------------------------

@@ -565,15 +565,17 @@ namespace BarbarianPrince
             return false;
          }
          System.Windows.Controls.Button b = new Button { ContextMenu = myContextMenuButton, Name = Utilities.RemoveSpaces(mi.Name), Width = mi.Zoom * Utilities.theMapItemSize, Height = mi.Zoom * Utilities.theMapItemSize, BorderThickness = new Thickness(0), Background = new SolidColorBrush(Colors.Transparent), Foreground = new SolidColorBrush(Colors.Transparent) };
-         Canvas.SetLeft(b, territory.CenterPoint.X - mi.Zoom * Utilities.theMapItemOffset + (counterCount * Utilities.STACK));
-         Canvas.SetTop(b, territory.CenterPoint.Y - mi.Zoom * Utilities.theMapItemOffset + (counterCount * Utilities.STACK));
          MapItem.SetButtonContent(b, mi, false, false, false, false); // This sets the image as the button's content
          myButtonMapItems.Add(b);
          myCanvas.Children.Add(b);
-         Canvas.SetZIndex(b, counterCount);
          b.Click += ClickButtonMapItem;
          b.MouseEnter += MouseEnterMapItem;
          b.MouseLeave += MouseLeaveMapItem;
+         Double x = territory.CenterPoint.X - (mi.Zoom * Utilities.theMapItemOffset);
+         Double y = territory.CenterPoint.Y - (mi.Zoom * Utilities.theMapItemOffset);
+         Canvas.SetLeft(b, x);
+         Canvas.SetTop(b, y);
+         Logger.Log(LogEnum.LE_VIEW_MAPITEM_LOCATION, "CreateButtonMapItem(): prince=(" + x.ToString("0.0") + "," + y.ToString("0.0") + ") t.center=(" + territory.CenterPoint.X.ToString("0.0") + "," + territory.CenterPoint.Y.ToString("0.0") + ")"); ;
          return true;
       }
       private bool CreateButtonDailyAction()
@@ -2128,12 +2130,14 @@ namespace BarbarianPrince
             b.BeginAnimation(Canvas.LeftProperty, null); // end animation offset
             b.BeginAnimation(Canvas.TopProperty, null);  // end animation offset
             ITerritory t = gi.Prince.Territory;
-            Double x = t.CenterPoint.X - Utilities.theMapItemOffset;
-            Double y = t.CenterPoint.Y - Utilities.theMapItemOffset;
-            gi.Prince.Location = new MapPoint(x, y);
+            Double x = t.CenterPoint.X - (gi.Prince.Zoom * Utilities.theMapItemOffset);
+            Double y = t.CenterPoint.Y - (gi.Prince.Zoom * Utilities.theMapItemOffset);
+            Logger.Log(LogEnum.LE_VIEW_MAPITEM_LOCATION, "UpdateCanvas(): prince=(" + x.ToString("0.0") + "," + y.ToString("0.0") + ") t.center=(" + t.CenterPoint.X.ToString("0.0") + "," + t.CenterPoint.Y.ToString("0.0") + ")"); ;
+            gi.Prince.Location.X = x;
+            gi.Prince.Location.Y = y;
             Canvas.SetLeft(b, x);
             Canvas.SetTop(b, y);
-            Canvas.SetZIndex(b, 0);
+            Canvas.SetZIndex(b, 9999);
          }
          else
          {
@@ -2423,32 +2427,6 @@ namespace BarbarianPrince
          sb.Append(myPreviousScrollWidth.ToString("XX.X"));
          //--------------------------------------------------------------------
          Logger.Log(LogEnum.LE_VIEW_MAP_THUMBNAIL, sb.ToString());
-      }
-      private bool UpdateMapItemRectangle(IGameInstance gi)
-      {
-         if (0 == myGameInstance.Prince.MovementUsed) // if this is the first movement, do not show rectangle
-            return true;
-         if (null == myRectangleSelected)
-         {
-            Console.WriteLine("UpdateMapItemRectangle(): myRectangleSelection=null");
-            return false;
-         }
-         //------------------------------------------------------
-         Button b = myButtonMapItems.Find(gi.Prince.Name); // Put a rectangle around the prince when selected to move
-         if (null == b)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "UpdateMapItemRectangle(): unable to find button for prince");
-            return false;
-         }
-         double x = Canvas.GetLeft(b) - 1;
-         double y = Canvas.GetTop(b) - 1;
-         Canvas.SetZIndex(b, 999);
-         myRectangleSelected.BeginAnimation(Canvas.LeftProperty, null);
-         myRectangleSelected.BeginAnimation(Canvas.TopProperty, null);
-         Canvas.SetLeft(myRectangleSelected, x);
-         Canvas.SetTop(myRectangleSelected, y);
-         myRectangleSelected.Visibility = Visibility.Visible;
-         return true;
       }
       private bool UpdateCanvasHexTravelToShowPolygons(IGameInstance gi)
       {
@@ -3037,6 +3015,8 @@ namespace BarbarianPrince
                aPathFigure.Segments.Add(lineSegment);
             }
             // Add the last line segment
+            ITerritory nt = Territory.theTerritories.Find(mim.NewTerritory.Name);
+            mim.NewTerritory = nt;
             double xEnd = mim.NewTerritory.CenterPoint.X - Utilities.theMapItemOffset;
             double yEnd = mim.NewTerritory.CenterPoint.Y - Utilities.theMapItemOffset;
             if ((Math.Abs(xEnd - xStart) < 2) && (Math.Abs(yEnd - yStart) < 2)) // if already at final location, skip animation or get runtime exception

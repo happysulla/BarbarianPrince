@@ -57,6 +57,7 @@ namespace BarbarianPrince
       LE_MAPITEM_POISION,
       LE_SERIALIZE_FEATS,
       LE_VIEW_APPEND_EVENT,
+      LE_VIEW_MAPITEM_LOCATION,
       LE_VIEW_SHOW_PARTY_DIALOG,
       LE_VIEW_DICE_MOVING,
       LE_VIEW_DICE_RESULT,
@@ -159,7 +160,8 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_STARVATION_STATE_CHANGE);
          Logger.SetOn(LogEnum.LE_SERIALIZE_FEATS);
          //Logger.SetOn(LogEnum.LE_RETURN_TO_START);
-         //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_WINDOW);
+         Logger.SetOn(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER);
+         Logger.SetOn(LogEnum.LE_VIEW_MAPITEM_LOCATION);
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_PARTY_DIALOG);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_MENU);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_STATUS_BAR);
@@ -171,7 +173,6 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_VIEW_DICE_RESULT);
          //Logger.SetOn(LogEnum.LE_VIEW_RESET_BATTLE_GRID);
          //Logger.SetOn(LogEnum.LE_VIEW_DEC_COUNT_GRID);
-         Logger.SetOn(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_DAILY_ACTIONS);
          //Logger.SetOn(LogEnum.LE_VIEW_TRAVEL_CHECK);
          //Logger.SetOn(LogEnum.LE_VIEW_MIM);
