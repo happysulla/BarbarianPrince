@@ -25,7 +25,8 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using WpfAnimatedGif;
 using Button = System.Windows.Controls.Button;
-using MenuItem = System.Windows.Controls.MenuItem;
+using // TODO MenuItem is no longer supported. Use ToolStripMenuItem instead. For more details see https://docs.microsoft.com/en-us/dotnet/core/compatibility/winforms#removed-controls
+MenuItem = System.Windows.Controls.MenuItem;
 using Point = System.Windows.Point;
 
 namespace BarbarianPrince
@@ -3468,7 +3469,8 @@ namespace BarbarianPrince
       protected override void OnClosing(CancelEventArgs e) //  // WARNING - Not fired when Application.SessionEnding is fired
       {
          base.OnClosing(e);
-         if (false == GameLoadMgr.SaveGameToFile(myGameInstance))
+         GameLoadMgr loadMgr = new GameLoadMgr();
+         if (false == loadMgr.SaveGameToFile(myGameInstance))
             Logger.Log(LogEnum.LE_ERROR, "OnClosing(): SaveGameToFile() returned false");
       }
       //-------------CONTROLLER HELPER FUNCTIONS---------------------------------

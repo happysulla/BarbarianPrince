@@ -58,7 +58,6 @@ namespace BarbarianPrince
          }
       }
       //--------------------------------------------
-      // Utilities Functions
       public static void InitializeRandomNumGenerators()
       {
          theRandoms[0] = new Random(); // default seed is System time 

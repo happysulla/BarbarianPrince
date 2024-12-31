@@ -42,7 +42,8 @@ namespace BarbarianPrince
          try
          {
             //--------------------------------------------
-            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+            Assembly assem = Assembly.GetExecutingAssembly();
+            string codeBase = assem.Location;
             UriBuilder uri = new UriBuilder(codeBase);
             string path = Uri.UnescapeDataString(uri.Path);
             theAssemblyDirectory = System.IO.Path.GetDirectoryName(path);

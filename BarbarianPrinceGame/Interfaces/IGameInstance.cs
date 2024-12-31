@@ -36,7 +36,6 @@ namespace BarbarianPrince
       int FickleCoin { set; get; }
       int LooterCoin { set; get; }
       //----------------------------------------------
-      List<string> Events { set; get; }
       String EndGameReason { set; get; }
       //----------------------------------------------
       bool IsUndoCommandAvailable { set; get; } // Allow user to back up if selected wrong daily action or travel hex

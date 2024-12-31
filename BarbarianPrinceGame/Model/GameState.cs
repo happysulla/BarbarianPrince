@@ -578,7 +578,8 @@ namespace BarbarianPrince
                gi.EventDisplayed = gi.EventActive = "e203"; // next screen to show
             }
          }
-         if (false == GameLoadMgr.SaveGameToFile(gi))
+         GameLoadMgr loadMgr = new GameLoadMgr();
+         if (false == loadMgr.SaveGameToFile(gi))
          {
             Logger.Log(LogEnum.LE_ERROR, "MenuItemSave_Click(): SaveGameToMemory() returned false");
             return false;

@@ -18,11 +18,8 @@ namespace BarbarianPrince
    public class GameInstance : IGameInstance
    {
       [NonSerialized] static public Logger Logger = new Logger();
-      public bool IsTalkRoll { get; set; } = false;
-      public Options Options { get; set; } = new Options();
-      public GameStat Statistic { get; set; } = new GameStat();
-      //------------------------------------------------
       public bool CtorError { get; } = false;
+      public bool IsGridActive { set; get; } = false;
       public GameInstance() // Constructor - set log levels
       {
          if( false == Logger.SetInitial()) // tsetup logger
@@ -62,14 +59,24 @@ namespace BarbarianPrince
          this.Options = newGameOptions;
       }
       //----------------------------------------------
+      public Options Options { get; set; } = new Options();
+      public GameStat Statistic { get; set; } = new GameStat();
+      //---------------------------------------------------------------
+      public IMapItems PartyMembers { get; set; } = new MapItems();
+      public IMapItems AtRiskMounts { get; set; } = new MapItems(); // e095 - if traveling -- at risk mounts die if travel taken for next action
+      public IMapItems LostTrueLoves { set; get; } = new MapItems(); // true love might be separated from Prince and seek reunion
+      //---------------------------------------------------------------
+      public IMapItems LostPartyMembers { get; set; } = new MapItems(); // return lost party members at end of day - lost if fight spectre
+      public IMapItems EncounteredMembers { get; set; } = new MapItems();
+      public IMapItems EncounteredMinstrels { get; set; } = new MapItems(); // at end of day, minstrels might want to join party
+      public IMapItems ResurrectedMembers { set; get; } = new MapItems(); // at end of day, resurrected members return to party
+       //------------------------------------------------
+      public IMapItem ActiveMember { set; get; } = null; // e039 - track which party member opens treasure chest to place possession in SpecialKeeps
       private IMapItem myPrince = null;
       public IMapItem Prince { set => myPrince = value; get => myPrince; }
-      public IMapItem ActiveMember { set; get; } = null;
       public int WitAndWile { get; set; } = 0;
       public int WitAndWileInitial { get; set; } = 0;
       public int Days { get; set; } = 0;
-      //----------------------------------------------
-      public bool IsGridActive { set; get; } = false;
       //----------------------------------------------
       public string EventActive { get; set; } = "e000";
       public string EventDisplayed { set; get; } = "e000";
@@ -83,25 +90,7 @@ namespace BarbarianPrince
       public GamePhase GamePhase { get; set; } = GamePhase.GameSetup;
       public GamePhase SunriseChoice { set; get; } = GamePhase.StartGame;
       public GameAction DieRollAction { get; set; } = GameAction.DieRollActionNone;
-      //----------------------------------------------
-      public ITerritory TargetHex { set; get; } = null;
       public ITerritory NewHex { set; get; } = null;
-      //----------------------------------------------
-      public List<int> CapturedWealthCodes { set; get; } = new List<int>();
-      public PegasusTreasureEnum PegasusTreasure { set; get; } = PegasusTreasureEnum.Mount;
-      public int FickleCoin { set; get; } = 0;
-      public int LooterCoin { get; set; } = 0;
-      //----------------------------------------------
-      public List<string> Events { set; get; } = new List<string>();
-      public String EndGameReason { set; get; } = "";
-      //----------------------------------------------
-      public bool IsPartyRested { set; get; } = false;
-      public bool IsAirborne { set; get; } = false;
-      public bool IsAirborneEnd { set; get; } = false;
-      public bool IsShortHop { set; get; } = false;
-      public bool IsMountsFed { set; get; } = false;
-      public bool IsMountsStabled { set; get; } = false;
-      public int Bribe { set; get; } = 0;
       //----------------------------------------------
       public bool IsGuardEncounteredThisTurn { set; get; } = false;
       public string DwarvenChoice { set; get; } = "";
@@ -173,8 +162,6 @@ namespace BarbarianPrince
       public bool IsCavalryEscort { set; get; } = false;  // e151
       public bool IsNobleAlly { set; get; } = false;  // e152
       public int SeneschalRollModifier { set; get; } = 0;
-      private IForbiddenAudiences myForbiddenAudiences = new ForbiddenAudiences();
-      public IForbiddenAudiences ForbiddenAudiences { get => myForbiddenAudiences; } // e153
       public int DaughterRollModifier { set; get; } = 0;
       public int DayOfLastOffering { set; get; } = Utilities.FOREVER;
       public int PriestModifier { set; get; } = 0;
@@ -200,8 +187,6 @@ namespace BarbarianPrince
       public bool IsOfferingModifier { set; get; } = false; // e212 - add +1 due to spending 10 gold
       public bool IsOmenModifier { set; get; } = false;  // e212f
       public bool IsInfluenceModifier { set; get; } = false; // e212l
-      private ICaches myCaches = new Caches();
-      public ICaches Caches { get => myCaches; }
       public bool IsAssassination { set; get; } = false;
       public bool IsDayEnd { set; get; } = false;
       //---------------------------------------------------------------
@@ -213,19 +198,16 @@ namespace BarbarianPrince
       public bool IsSecretCountDrogat { set; get; } = false;    // e146 
       public bool IsFoulBaneUsedThisTurn { set; get; } = false; // e146 FoulBane purchased in Duffyd Temple - 1gp per serving
       //---------------------------------------------------------------
-      public IMapItems PartyMembers { get; set; } = new MapItems();
-      public IMapItems LostPartyMembers { get; set; } = new MapItems();
-      public IMapItems LostTrueLoves { set; get; } = new MapItems();
-      public IMapItems EncounteredMembers { get; set; } = new MapItems();
-      public IMapItems EncounteredMinstrels { get; set; } = new MapItems();
-      public IMapItems AtRiskMounts { get; set; } = new MapItems();
-      public IMapItems ResurrectedMembers { set; get; } = new MapItems();
-      //---------------------------------------------------------------
       public IMapItemMoves MapItemMoves { get; set; } = new MapItemMoves();
       public IMapItemMove PreviousMapItemMove { get; set; } = new MapItemMove();
+      //---------------------------------------------------------------
       private List<EnteredHex> myEnteredHexes = new List<EnteredHex>();
       public List<EnteredHex> EnteredHexes { get => myEnteredHexes; }
       //---------------------------------------------------------------
+      private IForbiddenAudiences myForbiddenAudiences = new ForbiddenAudiences();
+      public IForbiddenAudiences ForbiddenAudiences { get => myForbiddenAudiences; } // e153
+      private ICaches myCaches = new Caches();
+      public ICaches Caches { get => myCaches; }
       private ITerritories myDwarfAdviceLocations = new Territories();
       public ITerritories DwarfAdviceLocations { get => myDwarfAdviceLocations; }
       private ITerritories myWizardAdviceLocations = new Territories();
@@ -282,6 +264,22 @@ namespace BarbarianPrince
       public ITerritories AbandonedTemples { get => myAbandonedTemples; }
       private ITerritories myForbiddenHires = new Territories();
       public ITerritories ForbiddenHires { get => myForbiddenHires; }
+      //----------------------------------------------
+      public List<int> CapturedWealthCodes { set; get; } = new List<int>();
+      public PegasusTreasureEnum PegasusTreasure { set; get; } = PegasusTreasureEnum.Mount;
+      public int FickleCoin { set; get; } = 0;
+      public int LooterCoin { get; set; } = 0;
+      //----------------------------------------------
+      public ITerritory TargetHex { set; get; } = null;
+      public String EndGameReason { set; get; } = "";
+      public bool IsPartyRested { set; get; } = false;
+      public bool IsAirborne { set; get; } = false;
+      public bool IsAirborneEnd { set; get; } = false;
+      public bool IsShortHop { set; get; } = false;
+      public bool IsMountsFed { set; get; } = false;
+      public bool IsMountsStabled { set; get; } = false;
+      public int Bribe { set; get; } = 0;
+      public bool IsTalkRoll { get; set; } = false; // In EventViewer, used to setup up CharmGift image mechanics for showing three buttons
       //---------------------------------------------------------------
       [NonSerialized] private List<IUnitTest> myUnitTests = new List<IUnitTest>();
       public List<IUnitTest> UnitTests { get => myUnitTests; }

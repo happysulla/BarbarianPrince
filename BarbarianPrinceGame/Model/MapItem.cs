@@ -81,16 +81,6 @@ namespace BarbarianPrince
       public int StarveDayNumOld { get; set; } = 0;
       public int MovementUsed { get; set; } = 0;
       //--------------------------------------------------
-      public IMapItem Rider { get; set; } = null;
-      public IMapItems Mounts { get; set; } = new MapItems();
-      public IMapItems LeftOnGroundMounts { get; set; } = new MapItems();
-      public Dictionary<IMapItem, int> CarriedMembers { get; set; } = new Dictionary<IMapItem, int>();
-      //--------------------------------------------------
-      public ITerritory Territory { get; set; } = null;
-      public ITerritory TerritoryStarting { get; set; } = null;
-      public ITerritories GuideTerritories { get; set; } = new Territories();
-      public IMapPoint Location { get; set; } = new MapPoint(0.0, 0.0);
-      //--------------------------------------------------
       public bool IsGuide { get; set; } = false;
       public bool IsKilled { get; set; } = false;
       public bool IsUnconscious { get; set; } = false;
@@ -120,8 +110,21 @@ namespace BarbarianPrince
       public bool IsLooter { set; get; } = false;
       public bool IsTownCastleTempleLeave { set; get; } = false;
       //--------------------------------------------------
-      public bool IsMoved { get; set; } = false;
-      private bool myIsFlipped = false;
+      public IMapItem Rider { get; set; } = null;
+      public IMapItems Mounts { get; set; } = new MapItems();
+      public IMapItems LeftOnGroundMounts { get; set; } = new MapItems(); // used to undo Air Travel user selection and recover left on ground mounts
+      public Dictionary<IMapItem, int> CarriedMembers { get; set; } = new Dictionary<IMapItem, int>(); // only relevant during transport to determine which party memberrs are left behind
+      //--------------------------------------------------
+      public ITerritory Territory { get; set; } = null;
+      public ITerritory TerritoryStarting { get; set; } = null;
+      public ITerritories GuideTerritories { get; set; } = new Territories();
+      //--------------------------------------------------
+      public List<SpecialEnum> SpecialKeeps { get => mySpecialKeeps; } // Special possessions that cannot be shared
+      private List<SpecialEnum> mySpecialKeeps = new List<SpecialEnum>();
+      public List<SpecialEnum> SpecialShares { get => mySpecialShares; } // Special possessions that can be given away
+      private List<SpecialEnum> mySpecialShares = new List<SpecialEnum>();
+      //--------------------------------------------------
+      public IMapPoint Location { get; set; } = new MapPoint(0.0, 0.0);
       public bool IsAnimated
       {
          set
@@ -145,11 +148,6 @@ namespace BarbarianPrince
             return mii.IsAnimated;
          }
       }
-      //----------------------------------------------------------------------------
-      public List<SpecialEnum> SpecialKeeps { get => mySpecialKeeps; } // Special possessions that cannot be shared
-      public List<SpecialEnum> SpecialShares { get => mySpecialShares; } // Special possessions that can be given away
-      private List<SpecialEnum> mySpecialKeeps = new List<SpecialEnum>();
-      private List<SpecialEnum> mySpecialShares = new List<SpecialEnum>();
       //----------------------------------------------------------------------------
       public MapItem() { }
       public MapItem(string aName, double zoom, bool isHidden, bool isAnimated, string topImageName)
@@ -1407,7 +1405,6 @@ namespace BarbarianPrince
          IsKilled = false;
          IsUnconscious = false;
          IsRunAway = false;
-         IsMoved = false;
          if (false == this.IsFlyer())
          {
             IsFlying = false;
@@ -1442,7 +1439,6 @@ namespace BarbarianPrince
       public void ResetPartial()
       {
          IsRunAway = false;
-         IsMoved = false;
          if (false == this.IsFlyer())
          {
             IsFlying = false;
@@ -1469,26 +1465,6 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "ResetPartial(): 1-cannot find item=" + item.ToString());
          }
          specialItems.Clear();
-      }
-      public void Flip()
-      {
-         if (false == myIsFlipped)
-         {
-            myIsFlipped = true;
-            string temp = TopImageName;
-            TopImageName = BottomImageName;
-            BottomImageName = temp;
-         }
-      }
-      public void Unflip()
-      {
-         if (true == myIsFlipped)
-         {
-            myIsFlipped = false;
-            string temp = TopImageName;
-            TopImageName = BottomImageName;
-            BottomImageName = temp;
-         }
       }
       public override String ToString()
       {

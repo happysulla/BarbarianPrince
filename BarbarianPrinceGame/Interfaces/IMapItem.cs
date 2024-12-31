@@ -108,8 +108,6 @@ namespace BarbarianPrince
       bool IsFlyingMountCarrier();
       void Reset();
       void ResetPartial();
-      void Flip();
-      void Unflip();
    }
    public interface IMapItems : System.Collections.IEnumerable
    {
