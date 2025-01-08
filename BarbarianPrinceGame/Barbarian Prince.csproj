@@ -25,7 +25,6 @@
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWindowsForms>True</UseWindowsForms>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
@@ -67,17 +66,23 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
     <Nullable>disable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Title>Barbarian Prince Solo Game</Title>
+    <Description>Solo dungeon crawler game</Description>
+    <RepositoryUrl>https://github.com/happysulla/BarbarianPrince</RepositoryUrl>
+    <AssemblyVersion>03.00.19</AssemblyVersion>
+    <FileVersion>03.00.19</FileVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <Optimize>False</Optimize>
-  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" />
   <ItemGroup>
     <Resource Include="BarbarianPrince.ico" />
     <Content Include="Docs\BP2-eventsbook_singleA4.pdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Docs\BP2-rulesbook_singleA4.pdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
@@ -1548,5 +1553,18 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" />
     <PackageReference Include="WpfAnimatedGif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 </Project>

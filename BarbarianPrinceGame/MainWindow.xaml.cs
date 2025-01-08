@@ -82,9 +82,8 @@ namespace BarbarianPrince
             try // copy user documentation to folder where user data is kept
             {
 #if DEBUG
-               System.IO.DirectoryInfo parentDir = Directory.GetParent(theAssemblyDirectory);
-               string docs1Src = parentDir.FullName + @"\Docs\BP2-eventsbook_singleA4.pdf";
-               string docs2Src = parentDir.FullName + @"\Docs\BP2-rulesbook_singleA4.pdf";
+               string docs1Src = theAssemblyDirectory + @"\Docs\BP2-eventsbook_singleA4.pdf";
+               string docs2Src = theAssemblyDirectory + @"\Docs\BP2-rulesbook_singleA4.pdf";
 #else
                string docs1Src = theAssemblyDirectory + @"\Docs\BP2-eventsbook_singleA4.pdf";
                string docs2Src = theAssemblyDirectory + @"\Docs\BP2-rulesbook_singleA4.pdf";

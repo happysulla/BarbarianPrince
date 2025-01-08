@@ -17,7 +17,6 @@ namespace BarbarianPrince
       public ITerritory ForbiddenTerritory { get; set; } = null;
       public ITerritory TargetTerritory { get; set; } = null;
       public IMapItem Assistant { get; set; } = null;
-      public bool IsOfferingMade { get; set; } = false;
       public int Day { get; set; } = -1; // long number of days indicates forever
       public ForbiddenAudience(ITerritory forbidden)
       {
@@ -104,12 +103,6 @@ namespace BarbarianPrince
          }
          return false;
       }
-      public void AddClothesConstraint(ITerritory forbidden)
-      {
-         IForbiddenAudience fa = new ForbiddenAudience(forbidden);
-         fa.Constraint = AudienceConstraintEnum.CLOTHES;
-         myList.Add(fa);
-      }
       public void AddPurifyConstaint(ITerritory forbidden)
       {
          IForbiddenAudience fa = new ForbiddenAudience(forbidden);
@@ -136,15 +129,20 @@ namespace BarbarianPrince
          fa.Constraint = AudienceConstraintEnum.LETTER_GIVEN;
          myList.Add(fa);
       }
-      public void AddMonsterKillConstraint(ITerritory forbidden)
+      public void AddAssistantConstraint(ITerritory forbidden, IMapItem assistant)
       {
-         IForbiddenAudience fa = new ForbiddenAudience(forbidden);
-         fa.Constraint = AudienceConstraintEnum.MONSTER_KILL;
+         IForbiddenAudience fa = new ForbiddenAudience(forbidden, assistant);
          myList.Add(fa);
       }
       public void AddTimeConstraint(ITerritory forbidden, int day)
       {
          IForbiddenAudience fa = new ForbiddenAudience(forbidden, day);
+         myList.Add(fa);
+      }
+      public void AddClothesConstraint(ITerritory forbidden)
+      {
+         IForbiddenAudience fa = new ForbiddenAudience(forbidden);
+         fa.Constraint = AudienceConstraintEnum.CLOTHES;
          myList.Add(fa);
       }
       public void AddReligiousConstraint(ITerritory forbidden)
@@ -153,9 +151,10 @@ namespace BarbarianPrince
          fa.Constraint = AudienceConstraintEnum.RELIGION;
          myList.Add(fa);
       }
-      public void AddAssistantConstraint(ITerritory forbidden, IMapItem assistant)
+      public void AddMonsterKillConstraint(ITerritory forbidden)
       {
-         IForbiddenAudience fa = new ForbiddenAudience(forbidden, assistant);
+         IForbiddenAudience fa = new ForbiddenAudience(forbidden);
+         fa.Constraint = AudienceConstraintEnum.MONSTER_KILL;
          myList.Add(fa);
       }
       //-------------------------------------------------------------
@@ -179,19 +178,6 @@ namespace BarbarianPrince
          }
          Logger.Log(LogEnum.LE_ERROR, "UpdateLetterLocation(): Unknown t=" + letterTerritory.Name);
          return false;
-      }
-      public void UpdateOfferingLocation(ITerritory offeringTerritory) // TODO Offering made causes constraint to be finished.
-      {
-         foreach (IForbiddenAudience fa in myList)
-         {
-            if (null == fa.ForbiddenTerritory)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "UpdateOfferingLocation(): fa.ForbiddenTerritory=null");
-               continue;
-            }
-            if ((fa.Constraint == AudienceConstraintEnum.OFFERING) && (fa.ForbiddenTerritory.Name == offeringTerritory.Name))
-               fa.IsOfferingMade = true;
-         }
       }
       //-------------------------------------------------------------
       public bool IsClothesConstraint()

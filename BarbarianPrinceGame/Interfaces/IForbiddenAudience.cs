@@ -25,7 +25,6 @@ namespace BarbarianPrince
       ITerritory ForbiddenTerritory { get; set; }
       ITerritory TargetTerritory { get; set; }
       IMapItem Assistant { get; set; }
-      bool IsOfferingMade { get; set; }   
       int Day { get; set; }
    }
    //------------------------------------------------------------------------
@@ -54,7 +53,6 @@ namespace BarbarianPrince
       //----------------------------------------------
       bool Contains(IGameInstance gi);
       bool UpdateLetterLocation(ITerritory letterTerritory);
-      void UpdateOfferingLocation(ITerritory offeringTerritory);
       //----------------------------------------------
       bool IsClothesConstraint();
       bool IsReligiousConstraint(ITerritory t);

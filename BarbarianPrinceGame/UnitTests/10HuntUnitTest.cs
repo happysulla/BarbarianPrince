@@ -70,12 +70,12 @@ namespace BarbarianPrince
             //-------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem mi =  new MapItem (miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
+            IMapItem mi =  new MapItem (miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
             partyMembers.Add(mi);
             //-------------------------------
             string giantName = "Giant" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem giant= new MapItem(giantName, 1.0, false, false, false, "c61Giant", "c61Giant", t, 8, 9, 10);
+            IMapItem giant= new MapItem(giantName, 1.0,  false, false,"c61Giant", "c61Giant", t, 8, 9, 10);
             giant.StarveDayNum = 2;
             gi.AddCompanion(giant);
             //-------------------------------
@@ -89,7 +89,7 @@ namespace BarbarianPrince
             //-------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++; 
-            IMapItem mi= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
+            IMapItem mi= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
             mi.Coin = 5;
             partyMembers.Add(mi);
             //-------------------------------
@@ -114,7 +114,7 @@ namespace BarbarianPrince
             //-------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem mi= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
+            IMapItem mi= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
             mi.Coin = 5;
             partyMembers.Add(mi);
             //-------------------------------
@@ -129,7 +129,7 @@ namespace BarbarianPrince
             //-------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem mi= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
+            IMapItem mi= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
             mi.Coin = 5;
             partyMembers.Add(mi);
             //-------------------------------
@@ -145,7 +145,7 @@ namespace BarbarianPrince
             //-------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem mi= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
+            IMapItem mi= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
             mi.Coin = 0;
             partyMembers.Add(mi);
             //-------------------------------
@@ -157,7 +157,7 @@ namespace BarbarianPrince
             prince.Territory = t;
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem mi= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
+            IMapItem mi= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
             partyMembers.Add(mi);
             myEventViewer.UpdateView(ref gi, GameAction.Hunt);
          }
@@ -173,12 +173,12 @@ namespace BarbarianPrince
             //-------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem mi= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
+            IMapItem mi= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", prince.Territory, 6, 5, 12);
             mi.IsGuide = true;
             mi.GuideTerritories.Add(t);
             partyMembers.Add(mi);
             //-------------------------------
-            mi= new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", prince.Territory, 3, 1, 5);
+            mi= new MapItem(miName, 1.0,  false, false,"c13Witch", "c13Witch", prince.Territory, 3, 1, 5);
             mi.IsGuide = true;
             ITerritory t1 = Territory.theTerritories.Find("1011");// act in guide long ways away mans this is not a guide for this hex
             if (null == t1)
@@ -246,21 +246,21 @@ namespace BarbarianPrince
          {
             string name = "Horse" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            MapItem horse= new MapItem(name, 1.0, false, false, false, "MHorse", "MHorse", mi.Territory, 0, 0, 0);
+            MapItem horse= new MapItem(name, 1.0,  false, false,"MHorse", "MHorse", mi.Territory, 0, 0, 0);
             mi.Mounts.Add(horse);
          }
          if (1 < numMounts)
          {
             string name = "Pegasus" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            MapItem horse= new MapItem(name, 1.0, false, false, false, "MPegasus", "MPegasus", mi.Territory, 0, 0, 0);
+            MapItem horse= new MapItem(name, 1.0,  false, false,"MPegasus", "MPegasus", mi.Territory, 0, 0, 0);
             mi.Mounts.Add(horse);
          }
          if (2 < numMounts)
          {
             string name = "Unicorn" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            MapItem horse= new MapItem(name, 1.0, false, false, false, "MUnicorn", "MUnicorn", mi.Territory, 0, 0, 0);
+            MapItem horse= new MapItem(name, 1.0,  false, false,"MUnicorn", "MUnicorn", mi.Territory, 0, 0, 0);
             mi.Mounts.Add(horse);
          }
       }

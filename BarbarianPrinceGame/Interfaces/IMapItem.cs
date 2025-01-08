@@ -24,16 +24,19 @@ namespace BarbarianPrince
       string TopImageName { get; set; }
       string BottomImageName { get; set; }
       string OverlayImageName { get; set; }
+      double Zoom { get; set; }
+      //----------------------------------------
       List<BloodSpot> WoundSpots { get; }
       List<BloodSpot> PoisonSpots { get; }
-      double Zoom { get; set; }
-      bool IsHidden { get; set; }
       bool IsExposedToUser { get; set; } // some dialogs require clicking on mount to rotate it. This variable tracks if user has seen this item yet.
       bool IsAnimated { get; set; }
       IMapPoint Location { get; set; }
-      //----------------------------------------
-      bool IsRunAway { get; set; }      // caused by nerve gas in combat
+      bool IsRunAway { get; set; }      // caused by nerve gas in combat - mapitem will depart party
       bool IsShowFireball { get; set; } // e023 - wizard attack
+      bool IsDisappear { get; set; } // r343 - disappear
+      bool IsPoisonApplied { get; set; } // e185
+      bool IsShieldApplied { get; set; } // e193
+      //----------------------------------------
       bool IsSecretGatewayToDarknessKnown { set; get; }  // e046  
       bool IsFugitive { set; get; }  // e048 
       bool IsPlayedMusic { get; set; } // e049 - minstrel plays music on request one time
@@ -42,9 +45,7 @@ namespace BarbarianPrince
       bool IsExhausted { get; set; }  // e120 - member exhausted until rested
       bool IsSunStroke { get; set; } // e121 - member must be carried
       bool IsPlagued { get; set; }  // e133 - kill plagued members
-      bool IsPoisonApplied { get; set; } // e185
       bool IsResurrected { set; get; } // e192 - Resurrection Necklace used to revive character
-      bool IsShieldApplied { get; set; } // e193
       int PlagueDustWound { get; set; } // r227 - trap with plague dust
       bool IsTrueLove { set; get; } //e228
       bool IsFickle { set; get; }  // e331
@@ -54,7 +55,6 @@ namespace BarbarianPrince
       bool IsAlly { set; get; } //e334
       bool IsLooter { set; get; }  // e340
       bool IsTownCastleTempleLeave { set; get; } // e341
-      bool IsDisappear { get; set; } // r343 - disappear
       //----------------------------------------
       bool IsGuide { get; set; }
       bool IsRiding { get; set; }

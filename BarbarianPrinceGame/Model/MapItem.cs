@@ -66,8 +66,12 @@ namespace BarbarianPrince
       public List<BloodSpot> myPoisonSpots = new List<BloodSpot>();
       public List<BloodSpot> PoisonSpots { get => myPoisonSpots; }
       public double Zoom { get; set; } = 1.0;
-      public bool IsHidden { get; set; } = false;
       public bool IsExposedToUser { get; set; } = false;
+      public bool IsRunAway { get; set; } = false; // indicates that mapitem disappears after a nerve gas attack
+      public bool IsDisappear { get; set; } = false; // indicates that spectre causes mapitem to disappear -- i.e. turn all white
+      public bool IsShowFireball { get; set; } = false; // show fireball over mapitem image due to wizard attack
+      public bool IsShieldApplied { get; set; } = false;
+      public bool IsPoisonApplied { get; set; } = false;
       //--------------------------------------------------
       public int Endurance { get; set; } = 0;
       public int Movement { get; set; } = 1;
@@ -84,7 +88,6 @@ namespace BarbarianPrince
       public bool IsGuide { get; set; } = false;
       public bool IsKilled { get; set; } = false;
       public bool IsUnconscious { get; set; } = false;
-      public bool IsRunAway { get; set; } = false;
       public bool IsExhausted { get; set; } = false;
       public bool IsSunStroke { get; set; } = false;
       public bool IsPlagued { get; set; } = false;
@@ -92,15 +95,11 @@ namespace BarbarianPrince
       public bool IsPlayedMusic { get; set; } = false;
       public bool IsCatchCold { get; set; } = false;
       public bool IsMountSick { get; set; } = false;
-      public bool IsShowFireball { get; set; } = false;
-      public bool IsDisappear { get; set; } = false;
       public bool IsRiding { get; set; } = false;
       public bool IsFlying { get; set; } = false;
       public bool IsSecretGatewayToDarknessKnown { set; get; } = false;
       public bool IsFugitive { set; get; } = false;
-      public bool IsPoisonApplied { get; set; } = false;
       public bool IsResurrected { get; set; } = false;
-      public bool IsShieldApplied { get; set; } = false;
       public bool IsTrueLove { set; get; } = false;
       public bool IsFickle { set; get; } = false;
       public int GroupNum { set; get; } = 0;
@@ -150,13 +149,12 @@ namespace BarbarianPrince
       }
       //----------------------------------------------------------------------------
       public MapItem() { }
-      public MapItem(string aName, double zoom, bool isHidden, bool isAnimated, string topImageName)
+      public MapItem(string aName, double zoom, bool isAnimated, string topImageName)
       {
          try
          {
             this.Name = aName;
             this.Zoom = zoom;
-            this.IsHidden = isHidden;
             this.Location = null;
             this.TopImageName = topImageName;
             this.BottomImageName = null;
@@ -197,7 +195,6 @@ namespace BarbarianPrince
          this.BottomImageName = mi.BottomImageName;
          this.OverlayImageName = mi.OverlayImageName;
          this.Zoom = mi.Zoom;
-         this.IsHidden = mi.IsHidden;
          this.IsAnimated = mi.IsAnimated;
          this.Location = mi.Location;
          //--------------------------------------------------
@@ -240,12 +237,11 @@ namespace BarbarianPrince
       {
          this.Name = name;
       }
-      public MapItem(string aName, double zoom, bool isHidden, bool isAnimated, bool isGuide, string topImageName, string bottomImageName, IMapPoint aStartingPoint)
+      public MapItem(string aName, double zoom, bool isAnimated, bool isGuide, string topImageName, string bottomImageName, IMapPoint aStartingPoint)
       {
 
          this.Name = aName;
          this.Zoom = zoom;
-         this.IsHidden = isHidden;
          this.Location = aStartingPoint;
          this.TopImageName = topImageName;
          this.BottomImageName = bottomImageName;
@@ -273,14 +269,14 @@ namespace BarbarianPrince
             return;
          }
       }
-      public MapItem(string aName, double zoom, bool isHidden, bool isAnimated, bool isGuide, string topImageName, string bottomImageName, MapPoint aStartingPoint, ITerritory territory) :
-        this(aName, zoom, isHidden, isAnimated, isGuide, topImageName, bottomImageName, aStartingPoint)
+      public MapItem(string aName, double zoom, bool isAnimated, bool isGuide, string topImageName, string bottomImageName, MapPoint aStartingPoint, ITerritory territory) :
+        this(aName, zoom, isAnimated, isGuide, topImageName, bottomImageName, aStartingPoint)
       {
          Territory = territory;
          TerritoryStarting = territory;
       }
-      public MapItem(string aName, double zoom, bool isHidden, bool isAnimated, bool isGuide, string topImageName, string bottomImageName, ITerritory territory, int endurance, int combat, int wealthCode) :
-         this(aName, zoom, isHidden, isAnimated, isGuide, topImageName, bottomImageName, territory.CenterPoint)
+      public MapItem(string aName, double zoom, bool isAnimated, bool isGuide, string topImageName, string bottomImageName, ITerritory territory, int endurance, int combat, int wealthCode) :
+         this(aName, zoom, isAnimated, isGuide, topImageName, bottomImageName, territory.CenterPoint)
       {
          Territory = territory;
          TerritoryStarting = territory;
@@ -328,7 +324,7 @@ namespace BarbarianPrince
          {
             string mountName = "Pegasus" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            MapItem pegasus = new MapItem(mountName, 1.0, false, false, false, "MPegasus", "MPegasus", this.Territory, 0, 0, 0);
+            MapItem pegasus = new MapItem(mountName, 1.0, false, false, "MPegasus", "MPegasus", this.Territory, 0, 0, 0);
             Logger.Log(LogEnum.LE_MOUNT_CHANGE, "AddNewMount(): add=" + mountName + " for mi=" + Name);
             this.Mounts.Add(pegasus);
             if (false == this.Name.Contains("Giant"))  // mounts cannot carry giants
@@ -341,7 +337,7 @@ namespace BarbarianPrince
          {
             string mountName = "Horse" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            MapItem horse = new MapItem(mountName, 1.0, false, false, false, "MHorse", "MHorse", this.Territory, 0, 0, 0);
+            MapItem horse = new MapItem(mountName, 1.0, false, false, "MHorse", "MHorse", this.Territory, 0, 0, 0);
             Logger.Log(LogEnum.LE_MOUNT_CHANGE, "AddNewMount(): add=" + mountName + " for mi=" + Name);
             this.Mounts.Add(horse);
             if (false == this.Name.Contains("Giant"))  // mounts cannot carry giants

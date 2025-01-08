@@ -327,13 +327,13 @@ namespace BarbarianPrince
          //----------------------------------------
          if (0 < myPartyMountCount)
          {
-            IMapItem horse= new MapItem("Horse", 1.0, false, false, false, "MHorse", "MHorse", myTerritory, 0, 0, 0);
+            IMapItem horse= new MapItem("Horse", 1.0,  false, false,"MHorse", "MHorse", myTerritory, 0, 0, 0);
             Button h = CreateButton(horse, false, false, true);
             myCursors[horse.Name] = Utilities.ConvertToCursor(h, hotPoint);
-            IMapItem pegasus= new MapItem("Pegasus", 1.0, false, false, false, "MPegasus", "MPegasus", myTerritory, 0, 0, 0);
+            IMapItem pegasus= new MapItem("Pegasus", 1.0,  false, false,"MPegasus", "MPegasus", myTerritory, 0, 0, 0);
             Button p = CreateButton(pegasus, false, false, true);
             myCursors[pegasus.Name] = Utilities.ConvertToCursor(p, hotPoint);
-            IMapItem unicorn= new MapItem("Unicorn", 1.0, false, false, false, "MUnicorn", "MUnicorn", myTerritory, 0, 0, 0);
+            IMapItem unicorn= new MapItem("Unicorn", 1.0,  false, false,"MUnicorn", "MUnicorn", myTerritory, 0, 0, 0);
             Button u = CreateButton(unicorn, false, false, true);
             myCursors[unicorn.Name] = Utilities.ConvertToCursor(u, hotPoint);
          }

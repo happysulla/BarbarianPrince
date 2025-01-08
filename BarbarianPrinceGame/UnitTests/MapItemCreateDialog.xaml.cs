@@ -12,7 +12,6 @@ namespace BarbarianPrince
         public String Endurance { get; set; } = "";
         public String Combat { get; set; } = "";
         public String Coin { get; set; } = "";
-        public bool IsHidden { get; set; } = false;
         public bool IsAnimated { get; set; } = false;
         public bool IsGuide { get; set; } = false;
         public MapItemCreateDialog()
@@ -29,7 +28,6 @@ namespace BarbarianPrince
             Endurance = myTextBoxEndurance.Text;
             Combat = myTextBoxCombat.Text;
             Coin = myTextBoxCoin.Text;
-            IsHidden = (bool)myCheckBoxHidden.IsChecked;
             IsAnimated = (bool)myCheckBoxAnimated.IsChecked;
             IsGuide = (bool)myCheckBoxGuide.IsChecked;
             this.DialogResult = true;

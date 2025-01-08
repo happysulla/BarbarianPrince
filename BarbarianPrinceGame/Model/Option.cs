@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using System.Text;
 using System.Xml.Serialization;
+using static System.Windows.Forms.Design.AxImporter;
 
 namespace BarbarianPrince
 {
@@ -16,6 +18,58 @@ namespace BarbarianPrince
       {
          Name = name;
          IsEnabled = isEnabled;
+      }
+      public static void LogGameType(String caller, Options options)
+      {
+         if (true == Logger.theLogLevel[(int)LogEnum.LE_GAME_INIT])
+         {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(caller + "(): >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            //-------------------------
+            string name = "OriginalGame";
+            sb.Append(" " + name + "=");
+            Option option = options.Find(name);
+            if (null == option)
+               option = new Option(name, false);
+            sb.Append(option.IsEnabled.ToString());
+            //-------------------------
+            name = "RandomPartyGame";
+            sb.Append(" " + name + "=");
+            option = options.Find(name);
+            if (null == option)
+               option = new Option(name, false);
+            sb.Append(option.IsEnabled.ToString());
+            //-------------------------
+            name = "RandomHexGame";
+            sb.Append(" " + name + "=");
+            option = options.Find(name);
+            if (null == option)
+               option = new Option(name, false);
+            sb.Append(option.IsEnabled.ToString());
+            //-------------------------
+            name = "RandomGame";
+            sb.Append(" " + name + "=");
+            option = options.Find(name);
+            if (null == option)
+               option = new Option(name, false);
+            sb.Append(option.IsEnabled.ToString());
+            //-------------------------
+            name = "MaxFunGame";
+            sb.Append(" " + name + "=");
+            option = options.Find(name);
+            if (null == option)
+               option = new Option(name, false);
+            sb.Append(option.IsEnabled.ToString());
+            //-------------------------
+            name = "CustomGame";
+            sb.Append(" " + name + "=");
+            option = options.Find(name);
+            if (null == option)
+               option = new Option(name, false);
+            sb.Append(option.IsEnabled.ToString());
+            //-------------------------
+            Logger.Log(LogEnum.LE_GAME_INIT, sb.ToString());
+         }
       }
    }
    [XmlInclude(typeof(Option))]
@@ -157,6 +211,8 @@ namespace BarbarianPrince
          Clear();
          foreach (string s in theDefaults)
             this.Add(new Option(s, false));
+         Option option = Find("OriginalGame");
+         option.IsEnabled = true;
       }
       public void SelectFunGameOptions()
       {
@@ -166,6 +222,31 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=MaxFunGame");
          else
             option.IsEnabled = true;
+         option = this.Find("OriginalGame");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=OriginalGame");
+         else
+            option.IsEnabled = false;
+         option = this.Find("RandomPartyGame");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=RandomPartyGame");
+         else
+            option.IsEnabled = false;
+         option = this.Find("RandomHexGame");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=RandomHexGame");
+         else
+            option.IsEnabled = false;
+         option = this.Find("RandomGame");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=RandomGame");
+         else
+            option.IsEnabled = false;
+         option = this.Find("CustomGame");
+         if (null == option)
+            Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=CustomGame");
+         else
+            option.IsEnabled = false;
          option = this.Find("AutoWealthRollForUnderFive");
          if (null == option)
             Logger.Log(LogEnum.LE_ERROR, "SelectFunGameOptions(): this.Find() for option=AutoWealthRollForUnderFive");

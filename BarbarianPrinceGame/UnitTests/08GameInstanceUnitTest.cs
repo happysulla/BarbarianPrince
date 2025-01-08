@@ -71,22 +71,22 @@ namespace BarbarianPrince
          //------------------------------------------
          string magicianName = "Magician" + Utilities.MapItemNum.ToString();
          ++Utilities.MapItemNum;
-         IMapItem magician= new MapItem(magicianName, 1.0, false, false, false, "c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
+         IMapItem magician= new MapItem(magicianName, 1.0, false, false, "c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
          gi.AddCompanion(magician);
          //------------------------------------------
          string dwarfName = "Dwarf" + Utilities.MapItemNum.ToString();
          ++Utilities.MapItemNum;
-         IMapItem dwarf= new MapItem(dwarfName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+         IMapItem dwarf= new MapItem(dwarfName, 1.0, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
          gi.AddCompanion(dwarf);
          //------------------------------------------
          string miName2 = "Runaway" + Utilities.MapItemNum.ToString();
          ++Utilities.MapItemNum;
-         IMapItem runaway= new MapItem(miName2, 1.0, false, false, false, "c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 2, 0);
+         IMapItem runaway= new MapItem(miName2, 1.0, false, false, "c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 2, 0);
          gi.AddCompanion(runaway);
          //------------------------------------------
          string mercenaryName = "Mercenary" + Utilities.MapItemNum.ToString();
          ++Utilities.MapItemNum;
-         IMapItem mercenary= new MapItem(mercenaryName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 5, 5, 0);
+         IMapItem mercenary= new MapItem(mercenaryName, 1.0, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 5, 5, 0);
          mercenary.Food = 5;
          mercenary.Coin = 98;
          //mercenary.AddNewMount();  // riding
@@ -95,12 +95,12 @@ namespace BarbarianPrince
          //------------------------------------------
          string porterName2 = "PorterSlave" + Utilities.MapItemNum.ToString();
          ++Utilities.MapItemNum;
-         IMapItem porter2= new MapItem(porterName2, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
+         IMapItem porter2= new MapItem(porterName2, 1.0, false, false, "c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
          gi.AddCompanion(porter2);
          //------------------------------------------
          string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
          ++Utilities.MapItemNum;
-         IMapItem eagle= new MapItem(eagleName, 1.0, false, false, false, "c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
+         IMapItem eagle= new MapItem(eagleName, 1.0, false, false, "c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
          eagle.IsFlying = true;
          gi.AddCompanion(eagle);
          //------------------------------------------
@@ -122,7 +122,7 @@ namespace BarbarianPrince
             //------------------------------------------
             string magicianName = "Magician" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem magician= new MapItem(magicianName, 1.0, false, false, false, "c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
+            IMapItem magician= new MapItem(magicianName, 1.0,  false, false,"c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
             gi.AddCompanion(magician);
             //------------------------------------------
             IMapItems mounts = new MapItems();
@@ -130,11 +130,11 @@ namespace BarbarianPrince
                gi.AddNewMountToParty();
             string name = "Horse" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            MapItem horse= new MapItem(name, 1.0, false, false, false, "MHorse", "MHorse", gi.Prince.Territory, 0, 0, 0);
+            MapItem horse= new MapItem(name, 1.0,  false, false,"MHorse", "MHorse", gi.Prince.Territory, 0, 0, 0);
             gi.Prince.AddMount(horse);
             for (int i = 0; i < 2; i++)
                gi.AddNewMountToParty();
-            MapItem horse1= new MapItem(name, 1.0, false, false, false, "MHorse", "MHorse", gi.Prince.Territory, 0, 0, 0);
+            MapItem horse1= new MapItem(name, 1.0,  false, false,"MHorse", "MHorse", gi.Prince.Territory, 0, 0, 0);
             magician.AddMount(horse1);
             if( false == gi.IsDuplicateMount() )
             {
@@ -186,17 +186,17 @@ namespace BarbarianPrince
             //------------------------------------------
             string magicianName = "Magician" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem magician= new MapItem(magicianName, 1.0, false, false, false, "c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
+            IMapItem magician= new MapItem(magicianName, 1.0, false, false, "c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
             gi.AddCompanion(magician);
             //------------------------------------------
             string dwarfName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem dwarf= new MapItem(dwarfName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            IMapItem dwarf= new MapItem(dwarfName, 1.0, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
             gi.AddCompanion(dwarf);
             //------------------------------------------
             string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem eagle= new MapItem(eagleName, 1.0, false, false, false, "c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
+            IMapItem eagle= new MapItem(eagleName, 1.0, false, false, "c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
             eagle.IsFlying = true;
             gi.AddCompanion(eagle);
             IMapItems mounts = new MapItems();
@@ -204,14 +204,14 @@ namespace BarbarianPrince
             {
                string name = "Horse" + Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               MapItem horse= new MapItem(name, 1.0, false, false, false, "MHorse", "MHorse", gi.Prince.Territory, 0, 0, 0);
+               MapItem horse= new MapItem(name, 1.0, false, false, "MHorse", "MHorse", gi.Prince.Territory, 0, 0, 0);
                mounts.Add(horse);
             }
             for (int i = 0; i < 2; i++)
             {
                string name = "Pegasus" + Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               MapItem pegasus = new MapItem(name, 1.0, false, false, false, "MPegasus", "MPegasus", gi.Prince.Territory, 0, 0, 0);
+               MapItem pegasus = new MapItem(name, 1.0, false, false, "MPegasus", "MPegasus", gi.Prince.Territory, 0, 0, 0);
                mounts.Add(pegasus);
             }
             gi.TransferMounts(mounts);
@@ -225,22 +225,22 @@ namespace BarbarianPrince
             //------------------------------------------
             string magicianName = "Magician" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem magician= new MapItem(magicianName, 1.0, false, false, false, "c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
+            IMapItem magician= new MapItem(magicianName, 1.0, false, false, "c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
             gi.AddCompanion(magician);
             //------------------------------------------
             string dwarfName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem dwarf= new MapItem(dwarfName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            IMapItem dwarf= new MapItem(dwarfName, 1.0, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
             gi.AddCompanion(dwarf);
             //------------------------------------------
             string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem eagle= new MapItem(eagleName, 1.0, false, false, false, "c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
+            IMapItem eagle= new MapItem(eagleName, 1.0, false, false, "c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
             eagle.IsFlying = true;
             gi.AddCompanion(eagle);
             string griffonName = "Griffon" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem griffon= new MapItem(griffonName, 1.0, false, false, false, "c63Griffon", "c63Griffon", gi.Prince.Territory, 3, 4, 1);
+            IMapItem griffon= new MapItem(griffonName, 1.0, false, false, "c63Griffon", "c63Griffon", gi.Prince.Territory, 3, 4, 1);
             griffon.IsFlying = true;
             gi.AddCompanion(griffon);
             IMapItems mounts = new MapItems();
@@ -248,14 +248,14 @@ namespace BarbarianPrince
             {
                string name = "Horse" + Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               MapItem horse= new MapItem(name, 1.0, false, false, false, "MHorse", "MHorse", gi.Prince.Territory, 0, 0, 0);
+               MapItem horse= new MapItem(name, 1.0, false, false, "MHorse", "MHorse", gi.Prince.Territory, 0, 0, 0);
                mounts.Add(horse);
             }
             for (int i = 0; i < 1; i++)
             {
                string name = "Pegasus" + Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               MapItem pegasus= new MapItem(name, 1.0, false, false, false, "MPegasus", "MPegasus", gi.Prince.Territory, 0, 0, 0);
+               MapItem pegasus= new MapItem(name, 1.0, false, false, "MPegasus", "MPegasus", gi.Prince.Territory, 0, 0, 0);
                mounts.Add(pegasus);
             }
             mounts.Add(griffon);
@@ -271,17 +271,17 @@ namespace BarbarianPrince
             //------------------------------------------
             string magicianName = "Magician" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem magician= new MapItem(magicianName, 1.0, false, false, false, "c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
+            IMapItem magician= new MapItem(magicianName, 1.0, false, false, "c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
             gi.AddCompanion(magician);
             //------------------------------------------
             string dwarfName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem dwarf= new MapItem(dwarfName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            IMapItem dwarf= new MapItem(dwarfName, 1.0, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
             gi.AddCompanion(dwarf);
             //------------------------------------------
             string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem eagle= new MapItem(eagleName, 1.0, false, false, false, "c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
+            IMapItem eagle= new MapItem(eagleName, 1.0, false, false,"c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
             eagle.IsFlying = true;
             gi.AddCompanion(eagle);
             //------------------------------------------
@@ -290,14 +290,14 @@ namespace BarbarianPrince
             {
                string name = "Horse" + Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               MapItem horse= new MapItem(name, 1.0, false, false, false, "MHorse", "MHorse", gi.Prince.Territory, 0, 0, 0);
+               MapItem horse= new MapItem(name, 1.0,  false, false,"MHorse", "MHorse", gi.Prince.Territory, 0, 0, 0);
                mounts.Add(horse);
             }
             for (int i = 0; i < 2; i++)
             {
                string name = "Pegasus" + Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               MapItem pegasus= new MapItem(name, 1.0, false, false, false, "MPegasus", "MPegasus", gi.Prince.Territory, 0, 0, 0);
+               MapItem pegasus= new MapItem(name, 1.0,  false, false,"MPegasus", "MPegasus", gi.Prince.Territory, 0, 0, 0);
                mounts.Add(pegasus);
             }
             gi.TransferMounts(mounts);
@@ -310,17 +310,17 @@ namespace BarbarianPrince
             //------------------------------------------
             string magicianName = "Magician" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem magician= new MapItem(magicianName, 1.0, false, false, false, "c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
+            IMapItem magician= new MapItem(magicianName, 1.0,  false, false,"c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
             gi.AddCompanion(magician);
             //------------------------------------------
             string dwarfName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem dwarf= new MapItem(dwarfName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            IMapItem dwarf= new MapItem(dwarfName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
             gi.AddCompanion(dwarf);
             //------------------------------------------
             string trueLoveName = "TrueLove" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem trueLove= new MapItem(trueLoveName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
+            IMapItem trueLove= new MapItem(trueLoveName, 1.0,  false, false,"c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
             gi.AddCompanion(trueLove);
             myDialog.UpdateGridRows(gi);
          }
@@ -331,17 +331,17 @@ namespace BarbarianPrince
             //------------------------------------------
             string magicianName = "Magician" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem magician= new MapItem(magicianName, 1.0, false, false, false, "c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
+            IMapItem magician= new MapItem(magicianName, 1.0,  false, false,"c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
             gi.AddCompanion(magician);
             //------------------------------------------
             string dwarfName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem dwarf= new MapItem(dwarfName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            IMapItem dwarf= new MapItem(dwarfName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
             gi.AddCompanion(dwarf);
             //------------------------------------------
             string trueLoveName = "TrueLove" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem trueLove= new MapItem(trueLoveName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
+            IMapItem trueLove= new MapItem(trueLoveName, 1.0,  false, false,"c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
             gi.AddCompanion(trueLove);
             gi.RemoveAbandonedInParty(trueLove);
             myDialog.UpdateGridRows(gi);
@@ -353,26 +353,26 @@ namespace BarbarianPrince
             //------------------------------------------
             string magicianName = "Magician" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem magician= new MapItem(magicianName, 1.0, false, false, false, "c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
+            IMapItem magician= new MapItem(magicianName, 1.0,  false, false,"c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
             gi.AddCompanion(magician);
             //------------------------------------------
             string dwarfName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem dwarf= new MapItem(dwarfName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            IMapItem dwarf= new MapItem(dwarfName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
             gi.AddCompanion(dwarf);
             //------------------------------------------
             string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem eagle= new MapItem(eagleName, 1.0, false, false, false, "c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
+            IMapItem eagle= new MapItem(eagleName, 1.0,  false, false,"c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
             eagle.IsFlying = true;
             gi.AddCompanion(eagle);
             string trueLoveName = "TrueLove" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem trueLove= new MapItem(trueLoveName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
+            IMapItem trueLove= new MapItem(trueLoveName, 1.0,  false, false,"c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
             gi.AddCompanion(trueLove);
             trueLoveName = "TrueLove" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            trueLove= new MapItem(trueLoveName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
+            trueLove= new MapItem(trueLoveName, 1.0,  false, false,"c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
             gi.AddCompanion(trueLove);
             gi.RemoveAbandonedInParty(trueLove);
             myDialog.UpdateGridRows(gi);
@@ -563,22 +563,22 @@ namespace BarbarianPrince
             //------------------------------------------
             string magicianName = "Magician" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem magician= new MapItem(magicianName, 1.0, false, false, false, "c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
+            IMapItem magician= new MapItem(magicianName, 1.0,  false, false,"c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
             gi.AddCompanion(magician);
             //------------------------------------------
             string dwarfName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem dwarf= new MapItem(dwarfName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            IMapItem dwarf= new MapItem(dwarfName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
             gi.AddCompanion(dwarf);
             //------------------------------------------
             string miName2 = "Runaway" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem runaway= new MapItem(miName2, 1.0, false, false, false, "c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 2, 0);
+            IMapItem runaway= new MapItem(miName2, 1.0,  false, false,"c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 2, 0);
             gi.AddCompanion(runaway);
             //------------------------------------------
             string mercenaryName = "Mercenary" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem mercenary= new MapItem(mercenaryName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 5, 5, 0);
+            IMapItem mercenary= new MapItem(mercenaryName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 5, 5, 0);
             mercenary.Food = 5;
             mercenary.Coin = 98;
             //mercenary.AddNewMount();  // riding
@@ -587,7 +587,7 @@ namespace BarbarianPrince
             //------------------------------------------
             string porterName2 = "PorterSlave" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem porter2= new MapItem(porterName2, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
+            IMapItem porter2= new MapItem(porterName2, 1.0,  false, false,"c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
             gi.AddCompanion(porter2);
             //------------------------------------------
             foreach (IMapItem mi in gi.PartyMembers) // set one to unconscious
@@ -614,22 +614,22 @@ namespace BarbarianPrince
             //------------------------------------------
             string magicianName = "Magician" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem magician= new MapItem(magicianName, 1.0, false, false, false, "c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
+            IMapItem magician= new MapItem(magicianName, 1.0,  false, false,"c16Magician", "c16Magician", gi.Prince.Territory, 5, 5, 0);
             gi.AddCompanion(magician);
             //------------------------------------------
             string dwarfName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem dwarf= new MapItem(dwarfName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            IMapItem dwarf= new MapItem(dwarfName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
             gi.AddCompanion(dwarf);
             //------------------------------------------
             string miName2 = "Runaway" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem runaway= new MapItem(miName2, 1.0, false, false, false, "c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 2, 0);
+            IMapItem runaway= new MapItem(miName2, 1.0,  false, false,"c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 2, 0);
             gi.AddCompanion(runaway);
             //------------------------------------------
             string mercenaryName = "Mercenary" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem mercenary= new MapItem(mercenaryName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 5, 5, 0);
+            IMapItem mercenary= new MapItem(mercenaryName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 5, 5, 0);
             mercenary.Food = 5;
             mercenary.Coin = 98;
             //mercenary.AddNewMount();  // riding
@@ -638,7 +638,7 @@ namespace BarbarianPrince
             //------------------------------------------
             string porterName2 = "PorterSlave" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem porter2= new MapItem(porterName2, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
+            IMapItem porter2= new MapItem(porterName2, 1.0,  false, false,"c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
             gi.AddCompanion(porter2);
             //------------------------------------------
          }

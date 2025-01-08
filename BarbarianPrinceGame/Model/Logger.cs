@@ -198,7 +198,7 @@ namespace BarbarianPrince
          if (true == theLogLevel[(int)logLevel])
          {
             theMutex.WaitOne();
-            Console.WriteLine("{0} {1}", logLevel.ToString(), description);
+            System.Diagnostics.Debug.WriteLine("{0} {1}", logLevel.ToString(), description);
             if (false == theIsLogFileCreated)
             {
                theMutex.ReleaseMutex();

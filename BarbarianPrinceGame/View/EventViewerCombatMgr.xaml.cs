@@ -5418,9 +5418,9 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "ShowProtectorResults(): returned option=null");
             string miName = "ProtectorBoss" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem protectorBoss= new MapItem(miName, 1.0, false, false, false, "C38ProtectorBoss", "C38ProtectorBoss", myGameInstance.Prince.Territory, 5, 5, 25);
+            IMapItem protectorBoss= new MapItem(miName, 1.0,  false, false,"C38ProtectorBoss", "C38ProtectorBoss", myGameInstance.Prince.Territory, 5, 5, 25);
             if (true == isEasyMonstersOption.IsEnabled)
-               protectorBoss= new MapItem(miName, 1.0, false, false, false, "C38ProtectorBoss", "C38ProtectorBoss", myGameInstance.Prince.Territory, 1, 1, 25);
+               protectorBoss= new MapItem(miName, 1.0,  false, false,"C38ProtectorBoss", "C38ProtectorBoss", myGameInstance.Prince.Territory, 1, 1, 25);
             myGameInstance.EncounteredMembers.Add(protectorBoss);
             int numOfMembersInCrew = 4;
             if (true == isEasyMonstersOption.IsEnabled)
@@ -5429,9 +5429,9 @@ namespace BarbarianPrince
             {
                miName = "Protector" + Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               IMapItem protectorMan= new MapItem(miName, 1.0, false, false, false, "C39Protector", "C39Protector", myGameInstance.Prince.Territory, 5, 5, 4);
+               IMapItem protectorMan= new MapItem(miName, 1.0,  false, false,"C39Protector", "C39Protector", myGameInstance.Prince.Territory, 5, 5, 4);
                if (true == isEasyMonstersOption.IsEnabled)
-                  protectorMan= new MapItem(miName, 1.0, false, false, false, "C39Protector", "C39Protector", myGameInstance.Prince.Territory, 1, 1, 4);
+                  protectorMan= new MapItem(miName, 1.0,  false, false,"C39Protector", "C39Protector", myGameInstance.Prince.Territory, 1, 1, 4);
                myGameInstance.EncounteredMembers.Add(protectorMan);
             }
          }
@@ -5890,7 +5890,7 @@ namespace BarbarianPrince
                               for (int k = 0; k < myGameInstance.HydraTeethCount; ++k)
                               {
                                  string nameUndead = "Undead" + k.ToString();
-                                 IMapItem undeadWarrior= new MapItem(nameUndead, 1.0, false, false, false, "c32UndeadWarrior", "c32UndeadWarrior", myGameInstance.Prince.Territory, 4, 5, 0);
+                                 IMapItem undeadWarrior = new MapItem(nameUndead, 1.0,  false, false,"c32UndeadWarrior", "c32UndeadWarrior", myGameInstance.Prince.Territory, 4, 5, 0);
                                  myGameInstance.PartyMembers.Add(undeadWarrior);
                               }
                               myGameInstance.HydraTeethCount = 0;

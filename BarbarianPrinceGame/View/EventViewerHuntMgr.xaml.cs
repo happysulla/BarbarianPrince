@@ -264,7 +264,7 @@ namespace BarbarianPrince
          myCoinCurrent = myCoinOriginal;
          myFoodCurrent = myFoodOriginal;
          //--------------------------------------------------
-         IMapItem mount= new MapItem ("HorseTemp", 1.0, false, false, false, "MHorse", "MHorse", myCurrentTerritory, 0, 0, 0);
+         IMapItem mount= new MapItem ("HorseTemp", 1.0, false, false, "MHorse", "MHorse", myCurrentTerritory, 0, 0, 0);
          if (false == myIsTownCastleTemple)
          {
             myCoinNeededForParty = 0;

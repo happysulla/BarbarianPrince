@@ -274,7 +274,7 @@ namespace BarbarianPrince
          IMapItems partyMembers = gi.PartyMembers;
          string miName = "Dwarf" + Utilities.MapItemNum;
          Utilities.MapItemNum++;
-         IMapItem guide= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);;
+         IMapItem guide= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);;
          ITerritory t2 = Territory.theTerritories.Find(territoryName);
          if (null == t2)
             Logger.Log(LogEnum.LE_ERROR, "AddGuide(): t2=null");
@@ -286,20 +286,20 @@ namespace BarbarianPrince
          IMapItems partyMembers = gi.PartyMembers;
          string miName = "Dwarf" + Utilities.MapItemNum.ToString();
          Utilities.MapItemNum++;
-         IMapItem guide1= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12); ;
+         IMapItem guide1= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12); ;
          ITerritory t2 = Territory.theTerritories.Find("0313");
          guide1.GuideTerritories.Add(t2);
          partyMembers.Add(guide1);
          //---------------------------------------
          miName = "RunAway" + Utilities.MapItemNum.ToString();
          Utilities.MapItemNum++;
-         IMapItem guide2= new MapItem(miName, 1.0, false, false, false, "c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 4, 0);
+         IMapItem guide2= new MapItem(miName, 1.0,  false, false,"c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 4, 0);
          guide2.GuideTerritories.Add(t2);
          partyMembers.Add(guide2);
          //---------------------------------------
          miName = "Mercenary" + Utilities.MapItemNum.ToString();
          Utilities.MapItemNum++;
-         IMapItem guide3= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+         IMapItem guide3= new MapItem(miName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
          guide3.GuideTerritories.Add(t2);
          partyMembers.Add(guide3);
          //---------------------------------------

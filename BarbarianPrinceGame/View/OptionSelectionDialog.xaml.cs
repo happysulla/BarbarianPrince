@@ -102,6 +102,7 @@ namespace BarbarianPrince
          bool isRandomHexConfig = false;
          bool isCustomHexConfig = false;
          bool isFunOption = true;
+         ResetGameType();
          //++++++++++++++++++++++++++++++++++++++++++++++++
          // Auto Rolls
          string name = "AutoSetup";
@@ -1331,6 +1332,7 @@ namespace BarbarianPrince
             myRadioButtonCustom.IsChecked = false;
          }
          //++++++++++++++++++++++++++++++++++++++++++++++++
+         Option.LogGameType("UpdateDisplay", options);
          return true;
       }
       private void ResetGameType()
@@ -2056,6 +2058,7 @@ namespace BarbarianPrince
       private void ButtonOk_Click(object sender, RoutedEventArgs e)
       {
          DialogResult = true;
+         Option.LogGameType("OptionSelectionDialog.ButtonOk_Click()", this.myOptions);
       }
       private void ButtonCancel_Click(object sender, RoutedEventArgs e)
       {
@@ -2064,7 +2067,6 @@ namespace BarbarianPrince
       private void StackPanelSummary_Click(object sender, RoutedEventArgs e)
       {
          RadioButton rb = (RadioButton)sender;
-         ResetGameType();
          ResetPrince();
          ResetParty();
          ResetPartyMembers();

@@ -30,22 +30,36 @@ namespace BarbarianPrince
    [Serializable]
    public class EnteredHex
    {
-      private static int theId = 0;
+      public static int theId = 0;
+      public bool CtorError { get; } = false;
       public string Identifer { get; set; } = "";
       public int Day { get; set; } = 0;
-      public int JailDay { get; set; } = 0;
       public String HexName { get; set; } = "";
-      public List<String> EventNames { get; set; } = new List<String>();
-      public List<String> EventDescriptions { get; set; } = new List<String>();
-      public List<String> Party = new List<String>();  
-      public List<String> Kills = new List<String>();
       public bool IsEncounter { get; set; } = false;
       public int Position { get; set; } = 0;
-      public String PreviousHex { get; set; } = "";
       public ColorActionEnum ColorAction { get; set; } = ColorActionEnum.CAE_LOST;
+      public List<String> EventNames { get; set; } = new List<String>();
+      public List<String> Party = new List<String>();
       //------------------------------------------------------------------------------------------------
+      public EnteredHex(string identifier, int day, string hexName, bool isEncounter, int position, ColorActionEnum action, List<String> eventNames, List<String> partyNames)
+      {
+         Identifer = identifier;
+         Day = day;
+         HexName = hexName;
+         IsEncounter = isEncounter;
+         Position = position;
+         ColorAction = action;
+         EventNames = eventNames;
+         Party = partyNames;
+      }
       public EnteredHex(IGameInstance gi, ColorActionEnum colorAction)
       {
+         if( null == gi.NewHex )
+         {
+            Logger.Log(LogEnum.LE_ERROR, "EnteredHex(): gi.NewHex=null");
+            CtorError = true;
+            return;
+         }
          ++theId;
          Identifer = "Hex#" + theId.ToString();
          Day = gi.Days + 1;

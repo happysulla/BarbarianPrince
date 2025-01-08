@@ -1501,7 +1501,7 @@ namespace BarbarianPrince
          {
             b.IsEnabled = false;
          }
-         else if ((false == myGameInstance.IsTalkActive) && ("Talk " == content)) // Evade option not available when IsEvadeActive set to false
+         else if ((false == myGameInstance.IsElfTalkActive) && ("Talk " == content)) // Evade option not available when IsEvadeActive set to false
          {
             b.IsEnabled = false;
          }
@@ -2424,7 +2424,7 @@ namespace BarbarianPrince
                   myTextBlock.Inlines.Add(new Run("Subtract one for Elf in party."));
                }
                //----------------------------------------------
-               if ((false == myGameInstance.IsTalkActive) && (Utilities.NO_RESULT < myGameInstance.DieResults[key][0]))
+               if ((false == myGameInstance.IsElfTalkActive) && (Utilities.NO_RESULT < myGameInstance.DieResults[key][0]))
                {
                   myTextBlock.Inlines.Add(new LineBreak());
                   myTextBlock.Inlines.Add(new LineBreak());

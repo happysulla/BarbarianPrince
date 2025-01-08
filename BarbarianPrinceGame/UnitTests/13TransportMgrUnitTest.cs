@@ -94,7 +94,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             string mercenaryName = "Mercenary" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem mercenary= new MapItem(mercenaryName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 5, 5, 0);
+            IMapItem mercenary= new MapItem(mercenaryName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 5, 5, 0);
             mercenary.Food = 10;
             mercenary.Coin = 5;
             mercenary.IsSunStroke = true;
@@ -102,7 +102,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             string dwarfName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem dwarf= new MapItem(dwarfName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            IMapItem dwarf= new MapItem(dwarfName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
             dwarf.Food = 4;
             dwarf.Coin = 301;
             //dwarf.IsRiding = true;  
@@ -111,7 +111,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             string monkName = "Monk" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem monk= new MapItem(monkName, 1.0, false, false, false, "c19Monk", "c19Monk", gi.Prince.Territory, 5, 5, 0);
+            IMapItem monk= new MapItem(monkName, 1.0,  false, false,"c19Monk", "c19Monk", gi.Prince.Territory, 5, 5, 0);
             monk.Food = 5;
             gi.AddCompanion(monk);
             //----------------------------------------------------------------
@@ -124,7 +124,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem dwarf= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            IMapItem dwarf= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
             dwarf.IsUnconscious = true;
             dwarf.Wound = dwarf.Endurance - 1;
             dwarf.Food = 0;
@@ -133,7 +133,7 @@ namespace BarbarianPrince
             //---------------------------------------------------------------
             string griffonName = "Griffon" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem griffon= new MapItem(griffonName, 1.0, false, false, false, "c63Griffon", "c63Griffon", gi.Prince.Territory, 3, 4, 1);
+            IMapItem griffon= new MapItem(griffonName, 1.0,  false, false,"c63Griffon", "c63Griffon", gi.Prince.Territory, 3, 4, 1);
             griffon.IsFlying = true;
             griffon.IsRiding = true;
             gi.AddCompanion(griffon);
@@ -177,7 +177,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem dwarf= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            IMapItem dwarf= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
             dwarf.IsUnconscious = true;
             dwarf.Wound = dwarf.Endurance - 1;
             dwarf.Food = 0;
@@ -192,7 +192,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem dwarf= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            IMapItem dwarf= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
             dwarf.IsUnconscious = true;
             dwarf.Wound = dwarf.Endurance - 1;
             dwarf.Food = 0;
@@ -207,7 +207,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem dwarf= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            IMapItem dwarf= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
             dwarf.IsUnconscious = true;
             dwarf.Wound = dwarf.Endurance - 1;
             dwarf.Food = 0;
@@ -223,7 +223,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             string griffonName = "Griffon" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem griffon= new MapItem(griffonName, 1.0, false, false, false, "c63Griffon", "c63Griffon", gi.Prince.Territory, 3, 4, 1);
+            IMapItem griffon= new MapItem(griffonName, 1.0,  false, false,"c63Griffon", "c63Griffon", gi.Prince.Territory, 3, 4, 1);
             griffon.IsFlying = true;
             gi.AddCompanion(griffon);
             //----------------------------------------------------------------
@@ -237,7 +237,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             string griffonName = "Griffon" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem griffon= new MapItem(griffonName, 1.0, false, false, false, "c63Griffon", "c63Griffon", gi.Prince.Territory, 3, 4, 1);
+            IMapItem griffon= new MapItem(griffonName, 1.0,  false, false,"c63Griffon", "c63Griffon", gi.Prince.Territory, 3, 4, 1);
             griffon.IsFlying = true;
             gi.AddCompanion(griffon);
             //----------------------------------------------------------------
@@ -249,7 +249,7 @@ namespace BarbarianPrince
             {
                string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               IMapItem eagle= new MapItem(eagleName, 1.0, false, false, false, "c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
+               IMapItem eagle= new MapItem(eagleName, 1.0,  false, false,"c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
                eagle.IsFlying = true;
                gi.AddCompanion(eagle);
             }
@@ -262,7 +262,7 @@ namespace BarbarianPrince
             {
                string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               IMapItem eagle= new MapItem(eagleName, 1.0, false, false, false, "c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
+               IMapItem eagle= new MapItem(eagleName, 1.0,  false, false,"c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
                eagle.IsFlying = true;
                gi.AddCompanion(eagle);
             }
@@ -276,7 +276,7 @@ namespace BarbarianPrince
             {
                string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               IMapItem eagle= new MapItem(eagleName, 1.0, false, false, false, "c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
+               IMapItem eagle= new MapItem(eagleName, 1.0,  false, false,"c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
                eagle.IsFlying = true;
                gi.AddCompanion(eagle);
             }
@@ -289,7 +289,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem dwarf= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            IMapItem dwarf= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
             dwarf.IsUnconscious = true;
             dwarf.Wound = dwarf.Endurance - 1;
             dwarf.Food = 0;
@@ -306,7 +306,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem dwarf= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            IMapItem dwarf= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
             dwarf.IsUnconscious = true;
             dwarf.Wound = dwarf.Endurance - 1;
             dwarf.Food = 0;
@@ -317,7 +317,7 @@ namespace BarbarianPrince
             {
                string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               IMapItem eagle= new MapItem(eagleName, 1.0, false, false, false, "c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
+               IMapItem eagle= new MapItem(eagleName, 1.0,  false, false,"c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
                eagle.IsFlying = true;
                gi.AddCompanion(eagle);
             }
@@ -330,7 +330,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem dwarf= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            IMapItem dwarf= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
             dwarf.IsUnconscious = true;
             dwarf.Wound = dwarf.Endurance - 1;
             dwarf.Food = 0;
@@ -341,7 +341,7 @@ namespace BarbarianPrince
             {
                string griffonName = "Griffon" + Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               IMapItem griffon= new MapItem(griffonName, 1.0, false, false, false, "c63Griffon", "c63Griffon", gi.Prince.Territory, 3, 4, 1);
+               IMapItem griffon= new MapItem(griffonName, 1.0,  false, false,"c63Griffon", "c63Griffon", gi.Prince.Territory, 3, 4, 1);
                griffon.IsFlying = true;
                gi.AddCompanion(griffon);
             }
@@ -354,7 +354,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem dwarf= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            IMapItem dwarf= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
             dwarf.IsUnconscious = true;
             dwarf.Wound = dwarf.Endurance - 1;
             dwarf.Food = 0;
@@ -363,7 +363,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             miName = "Witch" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem witch= new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            IMapItem witch= new MapItem(miName, 1.0,  false, false,"c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
             witch.IsUnconscious = true;
             witch.Wound = witch.Endurance - 1;
             witch.Food = 0;
@@ -372,7 +372,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             miName = "Runaway" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem runaway= new MapItem(miName, 1.0, false, false, false, "c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 4, 0);
+            IMapItem runaway= new MapItem(miName, 1.0,  false, false,"c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 4, 0);
             runaway.IsUnconscious = true;
             runaway.Wound = witch.Endurance - 1;
             runaway.Food = 0;
@@ -383,7 +383,7 @@ namespace BarbarianPrince
             {
                string eagleName = "Eagle" + Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               IMapItem eagle= new MapItem(eagleName, 1.0, false, false, false, "c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
+               IMapItem eagle= new MapItem(eagleName, 1.0,  false, false,"c62Eagle", "c62Eagle", gi.Prince.Territory, 3, 4, 1);
                eagle.IsFlying = true;
                gi.AddCompanion(eagle);
             }
@@ -397,7 +397,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem dwarf= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            IMapItem dwarf= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
             dwarf.IsUnconscious = true;
             dwarf.Wound = dwarf.Endurance - 1;
             dwarf.Food = 0;
@@ -406,7 +406,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             miName = "Witch" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem witch= new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            IMapItem witch= new MapItem(miName, 1.0,  false, false,"c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
             witch.IsUnconscious = true;
             witch.Wound = witch.Endurance - 1;
             witch.Food = 0;
@@ -415,7 +415,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             miName = "Runaway" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem runaway= new MapItem(miName, 1.0, false, false, false, "c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 4, 0);
+            IMapItem runaway= new MapItem(miName, 1.0,  false, false,"c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 4, 0);
             runaway.IsUnconscious = true;
             runaway.Wound = witch.Endurance - 1;
             runaway.Food = 0;
@@ -432,7 +432,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem dwarf= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            IMapItem dwarf= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
             dwarf.IsUnconscious = true;
             dwarf.Wound = dwarf.Endurance - 1;
             dwarf.Food = 0;
@@ -441,7 +441,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             miName = "Witch" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem witch= new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            IMapItem witch= new MapItem(miName, 1.0,  false, false,"c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
             witch.IsUnconscious = true;
             witch.Wound = witch.Endurance - 1;
             witch.Food = 0;
@@ -450,7 +450,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             miName = "Runaway" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem runaway= new MapItem(miName, 1.0, false, false, false, "c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 4, 0);
+            IMapItem runaway= new MapItem(miName, 1.0,  false, false,"c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 4, 0);
             runaway.IsUnconscious = true;
             runaway.Wound = witch.Endurance - 1;
             runaway.Food = 0;
@@ -467,7 +467,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem dwarf= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
+            IMapItem dwarf= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 5, 5, 0);
             dwarf.IsUnconscious = true;
             dwarf.Wound = dwarf.Endurance - 1;
             dwarf.Food = 0;
@@ -476,7 +476,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             miName = "Witch" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem witch= new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            IMapItem witch= new MapItem(miName, 1.0,  false, false,"c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
             witch.IsUnconscious = true;
             witch.Wound = witch.Endurance - 1;
             witch.Food = 0;
@@ -485,7 +485,7 @@ namespace BarbarianPrince
             //----------------------------------------------------------------
             miName = "Runaway" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem runaway= new MapItem(miName, 1.0, false, false, false, "c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 4, 0);
+            IMapItem runaway= new MapItem(miName, 1.0,  false, false,"c09Runaway", "c09Runaway", gi.Prince.Territory, 4, 4, 0);
             runaway.IsUnconscious = true;
             runaway.Wound = witch.Endurance - 1;
             runaway.Food = 0;
@@ -593,21 +593,21 @@ namespace BarbarianPrince
          IMapItems partyMembers = gi.PartyMembers;
          string miName = "Mercenary" + Utilities.MapItemNum.ToString();
          Utilities.MapItemNum++;
-         IMapItem companion= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+         IMapItem companion= new MapItem(miName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
          companion.Food = 2;
          companion.Coin = 2;
          partyMembers.Add(companion);
          //---------------------------------------
          miName = "Porter" + Utilities.MapItemNum;
          Utilities.MapItemNum++;
-         IMapItem companion2= new MapItem(miName, 1.0, false, false, false, "c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
+         IMapItem companion2= new MapItem(miName, 1.0,  false, false,"c11Porter", "c11Porter", gi.Prince.Territory, 0, 0, 0);
          companion2.Food = 3;
          companion2.Coin = 3;
          partyMembers.Add(companion2);
          //---------------------------------------
          miName = "Wizard" + Utilities.MapItemNum;
          Utilities.MapItemNum++;
-         IMapItem companion3= new MapItem(miName, 1.0, false, false, false, "c12Wizard", "c12Wizard", gi.Prince.Territory, 4, 4, 60);
+         IMapItem companion3= new MapItem(miName, 1.0,  false, false,"c12Wizard", "c12Wizard", gi.Prince.Territory, 4, 4, 60);
          companion3.Reset();
          companion3.Food = 4;
          companion3.Coin = 4;
@@ -623,21 +623,21 @@ namespace BarbarianPrince
          {
             string name = "Horse" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            MapItem horse= new MapItem(name, 1.0, false, false, false, "MHorse", "MHorse", prince.Territory, 0, 0, 0);
+            MapItem horse= new MapItem(name, 1.0,  false, false,"MHorse", "MHorse", prince.Territory, 0, 0, 0);
             prince.Mounts.Add(horse);
          }
          if (1 < numMounts)
          {
             string name = "Pegasus" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            MapItem horse= new MapItem(name, 1.0, false, false, false, "MPegasus", "MPegasus", prince.Territory, 0, 0, 0);
+            MapItem horse= new MapItem(name, 1.0,  false, false,"MPegasus", "MPegasus", prince.Territory, 0, 0, 0);
             prince.Mounts.Add(horse);
          }
          if (2 < numMounts)
          {
             string name = "Unicorn" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            MapItem horse= new MapItem(name, 1.0, false, false, false, "MUnicorn", "MUnicorn", prince.Territory, 0, 0, 0);
+            MapItem horse= new MapItem(name, 1.0,  false, false,"MUnicorn", "MUnicorn", prince.Territory, 0, 0, 0);
             prince.Mounts.Add(horse);
          }
       }

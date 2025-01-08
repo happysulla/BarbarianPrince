@@ -103,17 +103,17 @@ namespace BarbarianPrince
             //---------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion1= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
+            IMapItem companion1= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
             gi.PartyMembers.Add(companion1);
             //---------------------
             miName = "Mercenary" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion2= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            IMapItem companion2= new MapItem(miName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             gi.PartyMembers.Add(companion2);
             //---------------------
             string blackKnightName = "BlackNight" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem blackKnight= new MapItem(blackKnightName, 1.0, false, false, false, "c80BlackKnight", "c80BlackKnight", gi.Prince.Territory, 8, 8, 30);
+            IMapItem blackKnight= new MapItem(blackKnightName, 1.0,  false, false,"c80BlackKnight", "c80BlackKnight", gi.Prince.Territory, 8, 8, 30);
             gi.EncounteredMembers.Add(blackKnight);
             gi.EventDisplayed = gi.EventActive = "e307";
             //---------------------
@@ -128,13 +128,13 @@ namespace BarbarianPrince
             //---------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion1= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
+            IMapItem companion1= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
             companion1.AddSpecialItemToShare(SpecialEnum.ResistanceRing);
             gi.PartyMembers.Add(companion1);
             //---------------------
             miName = "Mercenary" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion2= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            IMapItem companion2= new MapItem(miName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             gi.PartyMembers.Add(companion2);
             //---------------------
             gi.AddNewMountToParty();
@@ -148,7 +148,7 @@ namespace BarbarianPrince
             {
                string miName1 = "Wolf" + Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               IMapItem wolf= new MapItem(miName1, 1.0, false, false, false, "c71Wolf", "c71Wolf", gi.Prince.Territory, 3, 3, 0);
+               IMapItem wolf= new MapItem(miName1, 1.0,  false, false,"c71Wolf", "c71Wolf", gi.Prince.Territory, 3, 3, 0);
                gi.EncounteredMembers.Add(wolf);
             }
             myEventViewer.UpdateView(ref gi, GameAction.EncounterCombat);
@@ -162,20 +162,20 @@ namespace BarbarianPrince
             //---------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion1= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
+            IMapItem companion1= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
             companion1.AddSpecialItemToKeep(SpecialEnum.ResistanceRing);
             gi.PartyMembers.Add(companion1);
             //---------------------
             miName = "Mercenary" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion2= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            IMapItem companion2= new MapItem(miName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             gi.PartyMembers.Add(companion2);
             //---------------------
             gi.IsElfWitAndWileActive = true;
             gi.EncounteredMembers.Clear();
             string halflingLeaderName = "HalflingWarrior" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem halflingLeader= new MapItem(halflingLeaderName, 1.0, false, false, false, "c70HalflingLead", "c70HalflingLead", gi.Prince.Territory, 10, 3, 4);
+            IMapItem halflingLeader= new MapItem(halflingLeaderName, 1.0,  false, false,"c70HalflingLead", "c70HalflingLead", gi.Prince.Territory, 10, 3, 4);
             gi.EncounteredMembers.Add(halflingLeader);
             //---------------------
             myEventViewer.UpdateView(ref gi, GameAction.EncounterCombat);
@@ -191,20 +191,20 @@ namespace BarbarianPrince
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion1= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
+            IMapItem companion1= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
             companion1.AddSpecialItemToKeep(SpecialEnum.ResistanceRing);
             gi.PartyMembers.Add(companion1);
             //------------------------------------------------------
             miName = "Mercenary" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion2= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            IMapItem companion2= new MapItem(miName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             gi.PartyMembers.Add(companion2);
             //------------------------------------------------------
             gi.IsElfWitAndWileActive = true;
             gi.EncounteredMembers.Clear();
             string elfLeaderName = "ElfWarrior" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem elfLeader= new MapItem(elfLeaderName, 1.0, false, false, false, "c69ElfLead", "c69ElfLead", gi.Prince.Territory, 7, 6, 21);
+            IMapItem elfLeader= new MapItem(elfLeaderName, 1.0,  false, false,"c69ElfLead", "c69ElfLead", gi.Prince.Territory, 7, 6, 21);
             elfLeader.AddSpecialItemToShare(SpecialEnum.NerveGasBomb);
             gi.EncounteredMembers.Add(elfLeader);
             //------------------------------------------------------
@@ -222,24 +222,24 @@ namespace BarbarianPrince
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion1= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
+            IMapItem companion1= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
             companion1.AddSpecialItemToKeep(SpecialEnum.ResistanceRing);
             gi.PartyMembers.Add(companion1);
             //------------------------------------------------------
             miName = "Mercenary" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion2= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            IMapItem companion2= new MapItem(miName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             gi.PartyMembers.Add(companion2);
             //------------------------------------------------------
             miName = "Wizard" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem character= new MapItem(miName, 1.0, false, false, false, "c12Wizard", "c12Wizard", gi.Prince.Territory, 1, 1, 60);
+            IMapItem character= new MapItem(miName, 1.0,  false, false,"c12Wizard", "c12Wizard", gi.Prince.Territory, 1, 1, 60);
             //encountered1.SetWounds(1, 0);
             gi.EncounteredMembers.Add(character);
             //------------------------------------------------------
             miName = "Mercenary" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            character= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            character= new MapItem(miName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             gi.EncounteredMembers.Add(character);
             //------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.EncounterCombat);
@@ -255,48 +255,48 @@ namespace BarbarianPrince
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion1= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
+            IMapItem companion1= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
             companion1.AddSpecialItemToKeep(SpecialEnum.PoisonDrug);
             gi.PartyMembers.Add(companion1);
             //------------------------------------------------------
             string porterName = "PorterSlave" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem porter= new MapItem(porterName, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
+            IMapItem porter= new MapItem(porterName, 1.0,  false, false,"c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
             myGameInstance.AddCompanion(porter);
             //------------------------------------------------------
             porterName = "PorterSlave" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            porter= new MapItem(porterName, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
+            porter= new MapItem(porterName, 1.0,  false, false,"c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
             myGameInstance.AddCompanion(porter);
             //------------------------------------------------------
             string trueLoveName = "TrueLove" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem trueLove= new MapItem(trueLoveName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
+            IMapItem trueLove= new MapItem(trueLoveName, 1.0,  false, false,"c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
             myGameInstance.AddCompanion(trueLove);
             //------------------------------------------------------
             trueLoveName = "TrueLove" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            trueLove= new MapItem(trueLoveName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
+            trueLove= new MapItem(trueLoveName, 1.0,  false, false,"c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
             myGameInstance.AddCompanion(trueLove);
             //------------------------------------------------------
             string minstrelName = "Minstrel" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem minstrel= new MapItem(minstrelName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", gi.Prince.Territory, 0, 0, 0);
+            IMapItem minstrel= new MapItem(minstrelName, 1.0,  false, false,"c60Minstrel", "c60Minstrel", gi.Prince.Territory, 0, 0, 0);
             myGameInstance.AddCompanion(minstrel);
             //------------------------------------------------------
             miName = "Wizard" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem encountered1= new MapItem(miName, 1.0, false, false, false, "c12Wizard", "c12Wizard", gi.Prince.Territory, 1, 1, 60);
+            IMapItem encountered1= new MapItem(miName, 1.0,  false, false,"c12Wizard", "c12Wizard", gi.Prince.Territory, 1, 1, 60);
             gi.EncounteredMembers.Add(encountered1);
             //------------------------------------------------------
             miName = "Mercenary" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem encountered3= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            IMapItem encountered3= new MapItem(miName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             gi.EncounteredMembers.Add(encountered3);
             //------------------------------------------------------
             miName = "Runaway" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem encountered4= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            IMapItem encountered4= new MapItem(miName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             gi.EncounteredMembers.Add(encountered4);
             //------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.EncounterCombat);
@@ -309,42 +309,42 @@ namespace BarbarianPrince
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion1= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
+            IMapItem companion1= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
             gi.PartyMembers.Add(companion1);
             //------------------------------------------------------
             miName = "Mercenary" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion2= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            IMapItem companion2= new MapItem(miName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             gi.PartyMembers.Add(companion2);
             //------------------------------------------------------
             string porterName = "PorterSlave" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem porter= new MapItem(porterName, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
+            IMapItem porter= new MapItem(porterName, 1.0,  false, false,"c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
             myGameInstance.AddCompanion(porter);
             //------------------------------------------------------
             porterName = "PorterSlave" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            porter= new MapItem(porterName, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
+            porter= new MapItem(porterName, 1.0,  false, false,"c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
             myGameInstance.AddCompanion(porter);
             //------------------------------------------------------
             string trueLoveName = "TrueLove" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem trueLove= new MapItem(trueLoveName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
+            IMapItem trueLove= new MapItem(trueLoveName, 1.0,  false, false,"c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
             myGameInstance.AddCompanion(trueLove);
             //------------------------------------------------------
             trueLoveName = "TrueLove" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            trueLove= new MapItem(trueLoveName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
+            trueLove= new MapItem(trueLoveName, 1.0,  false, false,"c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
             myGameInstance.AddCompanion(trueLove);
             //------------------------------------------------------
             miName = "HuntingCat" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem huntingCat= new MapItem(miName, 1.0, false, false, false, "c59HuntingCat", "c59HuntingCat", gi.Prince.Territory, 3, 6, 0);
+            IMapItem huntingCat= new MapItem(miName, 1.0,  false, false,"c59HuntingCat", "c59HuntingCat", gi.Prince.Territory, 3, 6, 0);
             gi.EncounteredMembers.Add(huntingCat);
             //------------------------------------------------------
             string minstrelName = "Minstrel" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem minstrel= new MapItem(minstrelName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", gi.Prince.Territory, 0, 0, 0);
+            IMapItem minstrel= new MapItem(minstrelName, 1.0,  false, false,"c60Minstrel", "c60Minstrel", gi.Prince.Territory, 0, 0, 0);
             myGameInstance.AddCompanion(minstrel);
             //------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.EncounterCombat);
@@ -357,52 +357,52 @@ namespace BarbarianPrince
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion1= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
+            IMapItem companion1= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
             gi.PartyMembers.Add(companion1);
             //------------------------------------------------------
             miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            companion1 = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
+            companion1 = new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
             gi.PartyMembers.Add(companion1);
             //------------------------------------------------------
             miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            companion1 = new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
+            companion1 = new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
             gi.PartyMembers.Add(companion1);
             //------------------------------------------------------
             miName = "Mercenary" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion2= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            IMapItem companion2= new MapItem(miName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             gi.PartyMembers.Add(companion2);
             //------------------------------------------------------
             string porterName = "PorterSlave" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem porter = new MapItem(porterName, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
+            IMapItem porter = new MapItem(porterName, 1.0,  false, false,"c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
             myGameInstance.AddCompanion(porter);
             //------------------------------------------------------
             porterName = "PorterSlave" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            porter = new MapItem(porterName, 1.0, false, false, false, "c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
+            porter = new MapItem(porterName, 1.0,  false, false,"c42SlavePorter", "c42SlavePorter", gi.Prince.Territory, 0, 0, 0);
             myGameInstance.AddCompanion(porter);
             //------------------------------------------------------
             string trueLoveName = "TrueLove" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem trueLove = new MapItem(trueLoveName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
+            IMapItem trueLove = new MapItem(trueLoveName, 1.0,  false, false,"c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
             myGameInstance.AddCompanion(trueLove);
             //------------------------------------------------------
             trueLoveName = "TrueLove" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            trueLove = new MapItem(trueLoveName, 1.0, false, false, false, "c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
+            trueLove = new MapItem(trueLoveName, 1.0,  false, false,"c44TrueLove", "c44TrueLove", gi.Prince.Territory, 0, 0, 0);
             myGameInstance.AddCompanion(trueLove);
             //------------------------------------------------------
             string minstrelName = "Minstrel" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem minstrel = new MapItem(minstrelName, 1.0, false, false, false, "c60Minstrel", "c60Minstrel", gi.Prince.Territory, 0, 0, 0);
+            IMapItem minstrel = new MapItem(minstrelName, 1.0,  false, false,"c60Minstrel", "c60Minstrel", gi.Prince.Territory, 0, 0, 0);
             myGameInstance.AddCompanion(minstrel);
             //------------------------------------------------------
             miName = "Boar" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem boar = new MapItem(miName, 1.0, false, false, false, "c58Boar", "c58Boar", gi.Prince.Territory, 5, 8, 0);
+            IMapItem boar = new MapItem(miName, 1.0,  false, false,"c58Boar", "c58Boar", gi.Prince.Territory, 5, 8, 0);
             gi.EncounteredMembers.Add(boar);
             //------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.EncounterCombat);
@@ -415,14 +415,14 @@ namespace BarbarianPrince
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion1= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
+            IMapItem companion1= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
             gi.PartyMembers.Add(companion1);
             //------------------------------------------------------
             for (int i = 0; i < 4; ++i)
             {
                miName = "Spider" + Utilities.MapItemNum.ToString();
                ++Utilities.MapItemNum;
-               IMapItem spider= new MapItem(miName, 1.0, false, false, false, "c54Spider", "c54Spider", gi.Prince.Territory, 1, 1, 0);
+               IMapItem spider= new MapItem(miName, 1.0,  false, false,"c54Spider", "c54Spider", gi.Prince.Territory, 1, 1, 0);
                gi.EncounteredMembers.Add(spider);
             }
             //------------------------------------------------------
@@ -435,29 +435,29 @@ namespace BarbarianPrince
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion1= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
+            IMapItem companion1= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
             gi.PartyMembers.Add(companion1);
             //------------------------------------------------------
             gi.IsCavalryEscort = true;
             string cavalryName = "Cavalry" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem cavalry= new MapItem(cavalryName, 1.0, false, false, false, "Cavalry", "Cavalry", gi.Prince.Territory, 0, 0, 0);
+            IMapItem cavalry= new MapItem(cavalryName, 1.0,  false, false,"Cavalry", "Cavalry", gi.Prince.Territory, 0, 0, 0);
             cavalry.IsGuide = true;
             gi.AddCompanion(cavalry);
             //------------------------------------------------------
             string farmerName = "Farmer" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem farmer= new MapItem(farmerName, 1.0, false, false, false, "c17Farmer", "c17Farmer", gi.Prince.Territory, 1, 1, 2);
+            IMapItem farmer= new MapItem(farmerName, 1.0,  false, false,"c17Farmer", "c17Farmer", gi.Prince.Territory, 1, 1, 2);
             gi.EncounteredMembers.Add(farmer);
             //------------------------------------------------------
             miName = "Dragon" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem encountered2= new MapItem(miName, 1.0, false, false, false, "c33Dragon", "c33Dragon", gi.Prince.Territory, 11, 10, 0);
+            IMapItem encountered2= new MapItem(miName, 1.0,  false, false,"c33Dragon", "c33Dragon", gi.Prince.Territory, 11, 10, 0);
             gi.EncounteredMembers.Add(encountered2);
             //------------------------------------------------------;
             miName = "Witch" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem encountered3= new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            IMapItem encountered3= new MapItem(miName, 1.0,  false, false,"c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
             gi.EncounteredMembers.Add(encountered3);
             //------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.EncounterCombat);
@@ -474,7 +474,7 @@ namespace BarbarianPrince
             //-----------------------------------------
             string farmerName = "Farmer" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem farmer= new MapItem(farmerName, 1.0, false, false, false, "c17Farmer", "c17Farmer", gi.Prince.Territory, 1, 1, 2);
+            IMapItem farmer= new MapItem(farmerName, 1.0,  false, false,"c17Farmer", "c17Farmer", gi.Prince.Territory, 1, 1, 2);
             gi.EncounteredMembers.Add(farmer);
             //-----------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.EncounterCombat);
@@ -493,7 +493,7 @@ namespace BarbarianPrince
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion1= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
+            IMapItem companion1= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
             gi.PartyMembers.Add(companion1);
             //------------------------------------------------------
             IMapItem mirror= new MapItem(gi.Prince);
@@ -519,17 +519,17 @@ namespace BarbarianPrince
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion1= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
+            IMapItem companion1= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
             gi.PartyMembers.Add(companion1);
             //------------------------------------------------------
             miName = "Dragon" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem encountered2= new MapItem(miName, 1.0, false, false, false, "c33Dragon", "c33Dragon", gi.Prince.Territory, 11, 10, 0);
+            IMapItem encountered2= new MapItem(miName, 1.0,  false, false,"c33Dragon", "c33Dragon", gi.Prince.Territory, 11, 10, 0);
             gi.EncounteredMembers.Add(encountered2);
             //------------------------------------------------------;
             miName = "Witch" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem encountered3= new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            IMapItem encountered3= new MapItem(miName, 1.0,  false, false,"c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
             gi.EncounteredMembers.Add(encountered3);
             //------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.EncounterCombat);
@@ -545,7 +545,7 @@ namespace BarbarianPrince
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion1= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
+            IMapItem companion1= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
             companion1.AddSpecialItemToKeep(SpecialEnum.NerveGasBomb);
             companion1.AddSpecialItemToKeep(SpecialEnum.MagicSword);
             companion1.AddSpecialItemToKeep(SpecialEnum.PoisonDrug);
@@ -554,12 +554,12 @@ namespace BarbarianPrince
             //------------------------------------------------------
             miName = "Wizard" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem encountered2= new MapItem(miName, 1.0, false, false, false, "c12Wizard", "c12Wizard", gi.Prince.Territory, 4, 4, 60);
+            IMapItem encountered2= new MapItem(miName, 1.0,  false, false,"c12Wizard", "c12Wizard", gi.Prince.Territory, 4, 4, 60);
             gi.EncounteredMembers.Add(encountered2);
             //------------------------------------------------------
             miName = "Mercenary" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem encountered3= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            IMapItem encountered3= new MapItem(miName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             gi.EncounteredMembers.Add(encountered3);
             //------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.EncounterCombat);
@@ -573,17 +573,17 @@ namespace BarbarianPrince
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion1= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
+            IMapItem companion1= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
             gi.PartyMembers.Add(companion1);
             //------------------------------------------------------
             miName = "Wizard" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem encountered2= new MapItem(miName, 1.0, false, false, false, "c12Wizard", "c12Wizard", gi.Prince.Territory, 4, 4, 60);
+            IMapItem encountered2= new MapItem(miName, 1.0,  false, false,"c12Wizard", "c12Wizard", gi.Prince.Territory, 4, 4, 60);
             gi.EncounteredMembers.Add(encountered2);
             //------------------------------------------------------
             miName = "Mercenary" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem encountered3= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            IMapItem encountered3= new MapItem(miName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             gi.EncounteredMembers.Add(encountered3);
             //------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.EncounterCombat);
@@ -596,29 +596,29 @@ namespace BarbarianPrince
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion1= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
+            IMapItem companion1= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
             companion1.IsFickle = true;
             gi.PartyMembers.Add(companion1);
             //------------------------------------------------------;
             miName = "Witch" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem companion2= new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            IMapItem companion2= new MapItem(miName, 1.0,  false, false,"c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
             gi.PartyMembers.Add(companion2);
             //------------------------------------------------------
             miName = "Mercenary" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion4= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            IMapItem companion4= new MapItem(miName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             companion4.IsFickle = true;
             gi.PartyMembers.Add(companion4);
             //------------------------------------------------------
             miName = "Monk" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem companion5= new MapItem(miName, 1.0, false, false, false, "c19Monk", "c19Monk", gi.Prince.Territory, 5, 4, 4);
+            IMapItem companion5= new MapItem(miName, 1.0,  false, false,"c19Monk", "c19Monk", gi.Prince.Territory, 5, 4, 4);
             gi.PartyMembers.Add(companion5);
             //------------------------------------------------------
             miName = "Spectre" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem encountered2= new MapItem(miName, 1.0, false, false, false, "c25Spectre", "c25Spectre", gi.Prince.Territory, 3, 7, 0);
+            IMapItem encountered2= new MapItem(miName, 1.0,  false, false,"c25Spectre", "c25Spectre", gi.Prince.Territory, 3, 7, 0);
             gi.EncounteredMembers.Add(encountered2);
             //------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.EncounterCombat);
@@ -630,23 +630,23 @@ namespace BarbarianPrince
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion1= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
+            IMapItem companion1= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
             companion1.IsFickle = true;
             gi.PartyMembers.Add(companion1);
             //------------------------------------------------------
             miName = "Runaway" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem encountered1= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            IMapItem encountered1= new MapItem(miName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             gi.EncounteredMembers.Add(encountered1);
             //------------------------------------------------------
             miName = "Wizard" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem encountered2= new MapItem(miName, 1.0, false, false, false, "c12Wizard", "c12Wizard", gi.Prince.Territory, 4, 4, 60);
+            IMapItem encountered2= new MapItem(miName, 1.0,  false, false,"c12Wizard", "c12Wizard", gi.Prince.Territory, 4, 4, 60);
             gi.EncounteredMembers.Add(encountered2);
             //------------------------------------------------------
             miName = "Mercenary" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem encountered3= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            IMapItem encountered3= new MapItem(miName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             gi.PartyMembers.Add(encountered3);
             //------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.EncounterCombat);
@@ -658,17 +658,17 @@ namespace BarbarianPrince
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion1= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
+            IMapItem companion1= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
             gi.PartyMembers.Add(companion1);
             //------------------------------------------------------
             miName = "Witch" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem encountered1= new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            IMapItem encountered1= new MapItem(miName, 1.0,  false, false,"c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
             gi.EncounteredMembers.Add(encountered1);
             //------------------------------------------------------
             miName = "Wizard" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem encountered2= new MapItem(miName, 1.0, false, false, false, "c12Wizard", "c12Wizard", gi.Prince.Territory, 4, 4, 60);
+            IMapItem encountered2= new MapItem(miName, 1.0,  false, false,"c12Wizard", "c12Wizard", gi.Prince.Territory, 4, 4, 60);
             gi.EncounteredMembers.Add(encountered2);
             //------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.EncounterCombat);
@@ -680,22 +680,22 @@ namespace BarbarianPrince
             //------------------------------------------------------
             string miName = "Dwarf" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion1= new MapItem(miName, 1.0, false, false, false, "c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
+            IMapItem companion1= new MapItem(miName, 1.0,  false, false,"c08Dwarf", "c08Dwarf", gi.Prince.Territory, 6, 5, 12);
             gi.PartyMembers.Add(companion1);
             //------------------------------------------------------
             miName = "Mercenary" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem companion2= new MapItem(miName, 1.0, false, false, false, "c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
+            IMapItem companion2= new MapItem(miName, 1.0,  false, false,"c10Mercenary", "c10Mercenary", gi.Prince.Territory, 4, 5, 4);
             gi.PartyMembers.Add(companion2);
             //------------------------------------------------------
             miName = "Witch" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            IMapItem encountered1= new MapItem(miName, 1.0, false, false, false, "c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
+            IMapItem encountered1= new MapItem(miName, 1.0,  false, false,"c13Witch", "c13Witch", gi.Prince.Territory, 3, 1, 5);
             gi.EncounteredMembers.Add(encountered1);
             //------------------------------------------------------
             miName = "Wizard" + Utilities.MapItemNum.ToString();
             Utilities.MapItemNum++;
-            IMapItem encountered2= new MapItem(miName, 1.0, false, false, false, "c12Wizard", "c12Wizard", gi.Prince.Territory, 4, 4, 60);
+            IMapItem encountered2= new MapItem(miName, 1.0,  false, false,"c12Wizard", "c12Wizard", gi.Prince.Territory, 4, 4, 60);
             gi.EncounteredMembers.Add(encountered2);
             //------------------------------------------------------
             myEventViewer.UpdateView(ref gi, GameAction.EncounterCombat);
@@ -816,7 +816,7 @@ namespace BarbarianPrince
          {
             string name = "Horse" + Utilities.MapItemNum.ToString();
             ++Utilities.MapItemNum;
-            MapItem horse= new MapItem(name, 1.0, false, false, false, "MHorse", "MHorse", encountered.Territory, 0, 0, 0);
+            MapItem horse= new MapItem(name, 1.0,  false, false,"MHorse", "MHorse", encountered.Territory, 0, 0, 0);
             encountered.Mounts.Add(horse);
          }
       }

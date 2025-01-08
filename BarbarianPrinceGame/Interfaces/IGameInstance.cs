@@ -80,7 +80,7 @@ namespace BarbarianPrince
       bool IsTempleGuardEncounteredThisHex { set; get; } // e066b - Temple Guard encountered in this hex
       bool IsWoundedWarriorRest { set; get; } // e069 - Rest in hex to heal warrior
       int NumMembersBeingFollowed { set; get; } // e072 - Can continue to follow until get to end
-      bool IsTalkActive { set; get; } // e072 - If choose not to follow, then cannot talk on e071
+      bool IsElfTalkActive { set; get; } // e072 - If choose not to follow, then cannot talk on e071
       bool IsWolvesAttack { set; get; } // e074 - Wolves attack at campfire
       bool IsTrainHorse { set; get; } // e077 - Need to train horses the next day
       bool IsBadGoing { set; get; } // e078 - Difficult terrain continues into next day
@@ -110,7 +110,6 @@ namespace BarbarianPrince
       bool IsArrestedByDrogat { set; get; } // e130 arrested by Count Drogat
       int HydraTeethCount { set; get; }   //e141
       int ChagaDrugCount { set; get; }    // e143 Chaga Drug purchased in town - 2gp per serving
-      bool IsHuldraHeirFight { set; get; } // e144b
       bool IsHuldraHeirKilled { set; get; } // e144e
       bool IsLadyAeravirRerollActive { set; get; } // e145 Event=e160 and reroll is active
       bool IsFoulBaneUsedThisTurn { set; get; } // e146 - FoulBane used to roll again
@@ -120,7 +119,6 @@ namespace BarbarianPrince
       IForbiddenAudiences ForbiddenAudiences { get; } // e153
       int DaughterRollModifier { set; get; }   //e154
       int DayOfLastOffering { set; get; } // e155c
-      int PriestModifier { set; get; } // e155d
       bool IsPartyFed { set; get; } // e156 & hunt manager
       bool IsPartyLodged { set; get; } // e156
       bool IsPartyContinuouslyLodged { set; get; } // e160d
@@ -165,7 +163,6 @@ namespace BarbarianPrince
       IMapItems AtRiskMounts { set; get; } // e095 - at risk mounts are killed if decide to travel
       IMapItems ResurrectedMembers { set; get; } // e192 - dead member resurrect at end of day
       //----------------------------------------------
-      IMapItemMove PreviousMapItemMove { set; get; }
       IMapItemMoves MapItemMoves { set; get; }
       List<EnteredHex> EnteredHexes { get; }
       //----------------------------------------------

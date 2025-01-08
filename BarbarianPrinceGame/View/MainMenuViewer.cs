@@ -202,10 +202,15 @@ namespace BarbarianPrince
       //------------------------------CONTROLLER-------------------------------
       public void MenuItemNew_Click(object sender, RoutedEventArgs e)
       {
-         if (null == NewGameOptions)
+         if (null == this.NewGameOptions)
+         {
             myGameInstance = new GameInstance();
+         }
          else
+         {
             myGameInstance = new GameInstance(this.NewGameOptions);
+            Option.LogGameType("MenuItemNew_Click()", this.NewGameOptions);
+         }
          if (true == myGameInstance.CtorError)
          {
             Logger.Log(LogEnum.LE_ERROR, "MenuItemNew_Click(): myGameInstance.CtorError = true");
@@ -254,6 +259,7 @@ namespace BarbarianPrince
          if (true == dialog.ShowDialog())
          {
             this.NewGameOptions = dialog.NewOptions;
+            Option.LogGameType("MenuItemFileOptions_Click()", this.NewGameOptions);
             GameAction action = GameAction.UpdateGameOptions;
             myGameEngine.PerformAction(ref myGameInstance, ref action);
          }

@@ -195,6 +195,7 @@ namespace BarbarianPrince
          Options options = DeserializeOptions(Settings.Default.GameOptions);
          myMainMenuViewer.NewGameOptions = options;
          gi.Options = options; // use the new game options for setting up the first game
+         Option.LogGameType("GameViewerWindow", gi.Options);
          //---------------------------------------------------------------
          GameEngine.theFeatsInGame = DeserializeGameFeat();
          GameEngine.theFeatsInGameStarting = GameEngine.theFeatsInGame.Clone(); // need to know difference between starting feats and feats that happen in this game
@@ -684,13 +685,13 @@ namespace BarbarianPrince
                FileStream fileStream = new FileStream(filename, FileMode.Open);
                gameFeat = (GameFeat)serializer.Deserialize(fileStream);
             }
+            catch (System.IO.FileNotFoundException fileNotFoundEx)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "DeserializeGameFeat(): s=" + filename + "\nfileException=" + fileNotFoundEx.ToString());
+            }
             catch (DirectoryNotFoundException dirException)
             {
                Logger.Log(LogEnum.LE_ERROR, "DeserializeGameFeat(): s=" + filename + "\ndirException=" + dirException.ToString());
-            }
-            catch (FileNotFoundException fileException)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "DeserializeGameFeat(): s=" + filename + "\nfileException=" + fileException.ToString());
             }
             catch (IOException ioException)
             {
@@ -715,13 +716,13 @@ namespace BarbarianPrince
                FileStream fileStream = new FileStream(filename, FileMode.Open);
                gameStat = (GameStat)serializer.Deserialize(fileStream);
             }
+            catch (System.IO.FileNotFoundException fileNotFoundEx)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "DeserializeGameFeat(): s=" + filename + "\nfileException=" + fileNotFoundEx.ToString());
+            }
             catch (DirectoryNotFoundException dirException)
             {
                Logger.Log(LogEnum.LE_ERROR, "DeserializeGameStats(): s=" + filename + "\ndirException=" + dirException.ToString());
-            }
-            catch (FileNotFoundException fileException)
-            {
-               Logger.Log(LogEnum.LE_ERROR, "DeserializeGameStats(): s=" + filename + "\nfileException=" + fileException.ToString());
             }
             catch (IOException ioException)
             {

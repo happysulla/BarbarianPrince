@@ -47,18 +47,18 @@ namespace BarbarianPrince
          }
          //------------------------------------------------------------------------------------
          ITerritory territory = Territory.theTerritories.Find("0101");
-         myPrince= new MapItem("Prince", 1.0, false, false, false, "c07Prince", "c07Prince", territory, 9, 8, 0);
+         myPrince= new MapItem("Prince", 1.0, false, false, "c07Prince", "c07Prince", territory, 9, 8, 0);
          PartyMembers.Add(myPrince);
       }
       public GameInstance(Options newGameOptions) // Constructor - set log levels
       {
          //------------------------------------------------------------------------------------
          ITerritory territory = Territory.theTerritories.Find("0101");
-         myPrince= new MapItem("Prince", 1.0, false, false, false, "c07Prince", "c07Prince", territory, 9, 8, 0);
+         myPrince= new MapItem("Prince", 1.0, false, false, "c07Prince", "c07Prince", territory, 9, 8, 0);
          PartyMembers.Add(myPrince);
          this.Options = newGameOptions;
       }
-      //----------------------------------------------
+      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Serializable state
       public Options Options { get; set; } = new Options();
       public GameStat Statistic { get; set; } = new GameStat();
       //---------------------------------------------------------------
@@ -66,84 +66,38 @@ namespace BarbarianPrince
       public IMapItems AtRiskMounts { get; set; } = new MapItems(); // e095 - if traveling -- at risk mounts die if travel taken for next action
       public IMapItems LostTrueLoves { set; get; } = new MapItems(); // true love might be separated from Prince and seek reunion
       //---------------------------------------------------------------
-      public IMapItems LostPartyMembers { get; set; } = new MapItems(); // return lost party members at end of day - lost if fight spectre
-      public IMapItems EncounteredMembers { get; set; } = new MapItems();
-      public IMapItems EncounteredMinstrels { get; set; } = new MapItems(); // at end of day, minstrels might want to join party
-      public IMapItems ResurrectedMembers { set; get; } = new MapItems(); // at end of day, resurrected members return to party
-       //------------------------------------------------
-      public IMapItem ActiveMember { set; get; } = null; // e039 - track which party member opens treasure chest to place possession in SpecialKeeps
-      private IMapItem myPrince = null;
-      public IMapItem Prince { set => myPrince = value; get => myPrince; }
       public int WitAndWile { get; set; } = 0;
       public int WitAndWileInitial { get; set; } = 0;
       public int Days { get; set; } = 0;
-      //----------------------------------------------
+      //---------------------------------------------- 
       public string EventActive { get; set; } = "e000";
       public string EventDisplayed { set; get; } = "e000";
       public string EventStart { set; get; } = "e000";
-      //----------------------------------------------
+      //---------------------------------------------- 
       public int GameTurn { get; set; } = 0;
-      public bool IsNewDayChoiceMade { set; get; } = false;
-      public bool IsUndoCommandAvailable { set; get; } = false;
-      public List<string> UndoHeal { get; } = new List<string>(); // track mi names when undo command happens in structure
-      public List<string> UndoExhaust { get; } = new List<string>(); // track mi names when undo command happens in structure
-      public GamePhase GamePhase { get; set; } = GamePhase.GameSetup;
-      public GamePhase SunriseChoice { set; get; } = GamePhase.StartGame;
-      public GameAction DieRollAction { get; set; } = GameAction.DieRollActionNone;
-      public ITerritory NewHex { set; get; } = null;
-      //----------------------------------------------
-      public bool IsGuardEncounteredThisTurn { set; get; } = false;
-      public string DwarvenChoice { set; get; } = "";
-      public bool IsDwarvenBandSizeSet { set; get; } = false;
-      public bool IsDwarfWarriorJoiningParty { set; get; } = false;
-      public string ElvenChoice { set; get; } = "";
-      public bool IsElfWitAndWileActive { set; get; } = false;
-      public bool IsElvenBandSizeSet { set; get; } = false;
-      public bool IsPartyDisgusted { set; get; } = false;
-      public int PurchasedFood { set; get; } = 0;
-      public bool IsFarmerLodging { set; get; } = false;
-      public bool IsReaverClanFight { set; get; } = false;
-      public bool IsReaverClanTrade { set; get; } = false;
-      public bool IsMagicianProvideGift { set; get; } = false;
-      public bool IsHuntedToday { set; get; } = false;
+      //---------------------------------------------- 
       public bool IsMarkOfCain { set; get; } = false;
-      public int PurchasedMount { set; get; } = 0;
-      public int MonkPleadModifier { set; get; } = 0;
-      public bool IsWizardJoiningParty { set; get; } = false;
       public bool IsEnslaved { set; get; } = false;
       public bool IsSpellBound { set; get; } = false;
       public int WanderingDayCount { set; get; } = 1;
-      public bool IsAlcoveOfSendingAudience { set; get; } = false;
       public bool IsBlessed { set; get; } = false;
       public bool IsArchTravelKnown { set; get; } = false;
-      public int GuardianCount { set; get; } = 0;
       public bool IsMerchantWithParty { set; get; } = false;
-      public bool IsMinstrelPlaying { set; get; } = false;
       public bool IsJailed { set; get; } = false;
       public bool IsDungeon { set; get; } = false;
       public int NightsInDungeon { set; get; } = 0;
-      public bool IsTempleGuardModifer { set; get; } = false;
-      public bool IsTempleGuardEncounteredThisHex { set; get; } = false;
       public bool IsWoundedWarriorRest { set; get; } = false;
       public int NumMembersBeingFollowed { set; get; } = 0;
-      public bool IsTalkActive { set; get; } = true;
-      public bool IsWolvesAttack { set; get; } = false;
-      public bool IsBearAttack { set; get; } = false;
       public bool IsHighPass { set; get; } = false;
       public string EventAfterRedistribute { set; get; } = "";
       public bool IsImpassable { set; get; } = false;
       public bool IsFlood { set; get; } = false;
       public bool IsFloodContinue { set; get; } = false;
-      public bool IsPoisonPlant { set; get; } = false;
-      public bool IsMountsAtRisk { set; get; } = false;
       public bool IsMountsSick { set; get; } = false;
       public bool IsFalconFed { set; get; } = false;
-      public List<String> AirSpiritLocations { get; set; } = null;
       public bool IsEagleHunt { set; get; } = false;
       public bool IsExhausted { set; get; } = false;
       public RaftEnum RaftState { set; get; } = RaftEnum.RE_NO_RAFT; // e122 - Party can be rafting for the day
-      public RaftEnum RaftStatePrevUndo { set; get; } = RaftEnum.RE_NO_RAFT;
-      public bool IsRaftDestroyed { set; get; } = false;
       public bool IsWoundedBlackKnightRest { set; get; } = false;
       public bool IsTrainHorse { set; get; } = false;
       public bool IsBadGoing { set; get; } = false;
@@ -151,44 +105,15 @@ namespace BarbarianPrince
       public bool IsHeavyRainNextDay { set; get; } = false;
       public bool IsHeavyRainContinue { set; get; } = false;
       public bool IsHeavyRainDismount { set; get; } = false;
-      public bool IsEvadeActive { set; get; } = true;
-      public int PurchasedPotionCure { set; get; } = 0;
-      public int PurchasedPotionHeal { set; get; } = 0;
-      public bool IsArrestedByDrogat { set; get; } = false;
       public int HydraTeethCount { set; get; } = 0;
-      public bool IsHuldraHeirFight { set; get; } = false; // e144b
       public bool IsHuldraHeirKilled { set; get; } = false; // e144e
-      public bool IsLadyAeravirRerollActive { set; get; } = false;
-      public bool IsCavalryEscort { set; get; } = false;  // e151
-      public bool IsNobleAlly { set; get; } = false;  // e152
-      public int SeneschalRollModifier { set; get; } = 0;
-      public int DaughterRollModifier { set; get; } = 0;
       public int DayOfLastOffering { set; get; } = Utilities.FOREVER;
-      public int PriestModifier { set; get; } = 0;
-      public bool IsPartyFed { set; get; } = false;
-      public bool IsPartyLodged { set; get; } = false;
       public bool IsPartyContinuouslyLodged { set; get; } = false;
       public bool IsTrueLoveHeartBroken { set; get; } = false;
       public bool IsMustLeaveHex { set; get; } = false;
       public int NumMonsterKill { set; get; } = 0;
-      public int PurchasedSlavePorter { set; get; } = 0;
-      public int PurchasedSlaveWarrior { set; get; } = 0;
-      public int PurchasedSlaveGirl { set; get; } = 0;
-      public int SlaveGirlIndex { set; get; } = 0;
-      public bool IsSlaveGirlActive { set; get; } = false;
-      public bool IsGiftCharmActive { set; get; } = false;
-      public bool IsPegasusSkip { set; get; } = false;
-      public bool IsCharismaTalismanActive { set; get; } = false;
-      public bool IsSeekNewModifier { set; get; } = false;
-      public int PurchasedHenchman { set; get; } = 0;// e210f - Amount  of henchmen hired  
-      public int PurchasedPorter { set; get; } = 0; // e210i - Amount  of porter purchases  
-      public int PurchasedGuide { set; get; } = 0; // e210i - Amount  of local guides purchases  
-      public bool IsMagicUserDismissed { set; get; } = false;
-      public bool IsOfferingModifier { set; get; } = false; // e212 - add +1 due to spending 10 gold
       public bool IsOmenModifier { set; get; } = false;  // e212f
       public bool IsInfluenceModifier { set; get; } = false; // e212l
-      public bool IsAssassination { set; get; } = false;
-      public bool IsDayEnd { set; get; } = false;
       //---------------------------------------------------------------
       public bool IsSecretTempleKnown { set; get; } = false;    // e143 
       public int ChagaDrugCount { set; get; } = 0;              // e143 Chaga Drug purchased in town - 2gp per serving
@@ -196,18 +121,7 @@ namespace BarbarianPrince
       public bool IsSecretBaronHuldra { set; get; } = false;    // e144 
       public bool IsSecretLadyAeravir { set; get; } = false;    // e145 
       public bool IsSecretCountDrogat { set; get; } = false;    // e146 
-      public bool IsFoulBaneUsedThisTurn { set; get; } = false; // e146 FoulBane purchased in Duffyd Temple - 1gp per serving
       //---------------------------------------------------------------
-      public IMapItemMoves MapItemMoves { get; set; } = new MapItemMoves();
-      public IMapItemMove PreviousMapItemMove { get; set; } = new MapItemMove();
-      //---------------------------------------------------------------
-      private List<EnteredHex> myEnteredHexes = new List<EnteredHex>();
-      public List<EnteredHex> EnteredHexes { get => myEnteredHexes; }
-      //---------------------------------------------------------------
-      private IForbiddenAudiences myForbiddenAudiences = new ForbiddenAudiences();
-      public IForbiddenAudiences ForbiddenAudiences { get => myForbiddenAudiences; } // e153
-      private ICaches myCaches = new Caches();
-      public ICaches Caches { get => myCaches; }
       private ITerritories myDwarfAdviceLocations = new Territories();
       public ITerritories DwarfAdviceLocations { get => myDwarfAdviceLocations; }
       private ITerritories myWizardAdviceLocations = new Territories();
@@ -264,12 +178,91 @@ namespace BarbarianPrince
       public ITerritories AbandonedTemples { get => myAbandonedTemples; }
       private ITerritories myForbiddenHires = new Territories();
       public ITerritories ForbiddenHires { get => myForbiddenHires; }
-      //----------------------------------------------
+      //---------------------------------------------------------------
+      private List<EnteredHex> myEnteredHexes = new List<EnteredHex>();
+      public List<EnteredHex> EnteredHexes { get => myEnteredHexes; }
+      //---------------------------------------------------------------
+      private IForbiddenAudiences myForbiddenAudiences = new ForbiddenAudiences();
+      public IForbiddenAudiences ForbiddenAudiences { get => myForbiddenAudiences; } // e153
+      //---------------------------------------------------------------
+      private ICaches myCaches = new Caches();
+      public ICaches Caches { get => myCaches; }
+      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Unserializable state
+      public IMapItem ActiveMember { set; get; } = null; // e039 - track which party member opens treasure chest to place possession in SpecialKeeps
+      private IMapItem myPrince = null;
+      public IMapItem Prince { set => myPrince = value; get => myPrince; }
+      //------------------------------------------------
+      public GamePhase GamePhase { get; set; } = GamePhase.GameSetup;
+      public ITerritory NewHex { set; get; } = null;
+      public GamePhase SunriseChoice { set; get; } = GamePhase.StartGame;
+      public GameAction DieRollAction { get; set; } = GameAction.DieRollActionNone;
+      //------------------------------------------------
+      public IMapItems LostPartyMembers { get; set; } = new MapItems(); // return lost party members at end of day - lost if fight spectre
+      public IMapItems EncounteredMembers { get; set; } = new MapItems();
+      public IMapItems EncounteredMinstrels { get; set; } = new MapItems(); // at end of day, minstrels might want to join party
+      public IMapItems ResurrectedMembers { set; get; } = new MapItems(); // at end of day, resurrected members return to party
+      //------------------------------------------------
+      public bool IsGuardEncounteredThisTurn { set; get; } = false;
+      public string DwarvenChoice { set; get; } = "";
+      public bool IsDwarvenBandSizeSet { set; get; } = false;
+      public bool IsDwarfWarriorJoiningParty { set; get; } = false;
+      public string ElvenChoice { set; get; } = "";
+      public bool IsElfWitAndWileActive { set; get; } = false;
+      public bool IsElvenBandSizeSet { set; get; } = false;
+      public bool IsPartyDisgusted { set; get; } = false;
+      public int PurchasedFood { set; get; } = 0;
+      public bool IsFarmerLodging { set; get; } = false;
+      public bool IsReaverClanFight { set; get; } = false;
+      public bool IsReaverClanTrade { set; get; } = false;
+      public bool IsMagicianProvideGift { set; get; } = false;
+      public bool IsHuntedToday { set; get; } = false;
+      public int PurchasedMount { set; get; } = 0;
+      public int MonkPleadModifier { set; get; } = 0;
+      public bool IsWizardJoiningParty { set; get; } = false;
+      public bool IsAlcoveOfSendingAudience { set; get; } = false;
+      public int GuardianCount { set; get; } = 0;
+      public bool IsMinstrelPlaying { set; get; } = false;
+      public bool IsTempleGuardModifer { set; get; } = false;
+      public bool IsTempleGuardEncounteredThisHex { set; get; } = false;
+      public bool IsElfTalkActive { set; get; } = true; // e071 - choose to engage instead of follow
+      public bool IsWolvesAttack { set; get; } = false;
+      public bool IsBearAttack { set; get; } = false;
+      public bool IsPoisonPlant { set; get; } = false;
+      public List<String> AirSpiritLocations { get; set; } = null;
+      public int PurchasedPotionCure { set; get; } = 0;
+      public int PurchasedPotionHeal { set; get; } = 0;
+      public bool IsMountsAtRisk { set; get; } = false;
+      public RaftEnum RaftStatePrevUndo { set; get; } = RaftEnum.RE_NO_RAFT;
+      public bool IsRaftDestroyed { set; get; } = false;
+      public bool IsEvadeActive { set; get; } = true;
+      public bool IsArrestedByDrogat { set; get; } = false;
+      public bool IsLadyAeravirRerollActive { set; get; } = false;
+      public bool IsCavalryEscort { set; get; } = false;  // e151
+      public bool IsNobleAlly { set; get; } = false;  // e152
+      public int SeneschalRollModifier { set; get; } = 0;
+      public int DaughterRollModifier { set; get; } = 0;
+      public bool IsPartyFed { set; get; } = false;
+      public bool IsPartyLodged { set; get; } = false;
+      public int PurchasedSlavePorter { set; get; } = 0;
+      public int PurchasedSlaveWarrior { set; get; } = 0;
+      public int PurchasedSlaveGirl { set; get; } = 0;
+      public int SlaveGirlIndex { set; get; } = 0;
+      public bool IsSlaveGirlActive { set; get; } = false;
+      public bool IsGiftCharmActive { set; get; } = false;
+      public bool IsPegasusSkip { set; get; } = false;
+      public bool IsCharismaTalismanActive { set; get; } = false;
+      public bool IsSeekNewModifier { set; get; } = false;
+      public int PurchasedHenchman { set; get; } = 0;// e210f - Amount  of henchmen hired  
+      public int PurchasedPorter { set; get; } = 0; // e210i - Amount  of porter purchases  
+      public int PurchasedGuide { set; get; } = 0; // e210i - Amount  of local guides purchases  
+      public bool IsMagicUserDismissed { set; get; } = false;
+      public bool IsOfferingModifier { set; get; } = false; // e212 - add +1 due to spending 10 gold
+      public bool IsAssassination { set; get; } = false;
+      public bool IsDayEnd { set; get; } = false;
+      public bool IsFoulBaneUsedThisTurn { set; get; } = false; // e146 FoulBane purchased in Duffyd Temple - 1gp per serving
       public List<int> CapturedWealthCodes { set; get; } = new List<int>();
       public PegasusTreasureEnum PegasusTreasure { set; get; } = PegasusTreasureEnum.Mount;
-      public int FickleCoin { set; get; } = 0;
-      public int LooterCoin { get; set; } = 0;
-      //----------------------------------------------
+      public IMapItemMoves MapItemMoves { get; set; } = new MapItemMoves();
       public ITerritory TargetHex { set; get; } = null;
       public String EndGameReason { set; get; } = "";
       public bool IsPartyRested { set; get; } = false;
@@ -280,6 +273,13 @@ namespace BarbarianPrince
       public bool IsMountsStabled { set; get; } = false;
       public int Bribe { set; get; } = 0;
       public bool IsTalkRoll { get; set; } = false; // In EventViewer, used to setup up CharmGift image mechanics for showing three buttons
+      public int FickleCoin { set; get; } = 0;
+      public int LooterCoin { get; set; } = 0;
+      //----------------------------------------------
+      public bool IsNewDayChoiceMade { set; get; } = false; // set to true in ResetDayAfterChoice() - Reset many GameInstance attributes when phase=GaemStateSunshineChoice
+      public bool IsUndoCommandAvailable { set; get; } = false;
+      public List<string> UndoHeal { get; } = new List<string>(); // track mi names when undo command happens in structure
+      public List<string> UndoExhaust { get; } = new List<string>(); // track mi names when undo command happens in structure
       //---------------------------------------------------------------
       [NonSerialized] private List<IUnitTest> myUnitTests = new List<IUnitTest>();
       public List<IUnitTest> UnitTests { get => myUnitTests; }
