@@ -62,7 +62,7 @@ namespace BarbarianPrince
             Uri iconUri = new Uri(iconFilename, UriKind.Absolute);
             this.Icon = BitmapFrame.Create(iconUri); 
             //--------------------------------------------
-            IGameInstance gi = new GameInstance();
+            IGameInstance gi = new GameInstance(true);
             if (true == gi.CtorError)
             {
                Application.Current.Shutdown();

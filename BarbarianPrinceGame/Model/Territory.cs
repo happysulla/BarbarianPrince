@@ -142,7 +142,7 @@ namespace BarbarianPrince
          }
          catch (Exception e)
          {
-            Console.WriteLine("MyTerritoryExtensions.Find(list, nameAndSector): nameAndSector={0} causes e.Message={1}", name, e.Message);
+            System.Diagnostics.Debug.WriteLine("MyTerritoryExtensions.Find(list, nameAndSector): nameAndSector={0} causes e.Message={1}", name, e.Message);
          }
          return null;
       }

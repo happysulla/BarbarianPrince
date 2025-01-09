@@ -180,7 +180,7 @@ namespace BarbarianPrince
          }
          catch (Exception e)
          {
-            Console.WriteLine("TerritoryUnitTest.Command() exeption={0}", e.Message);
+            System.Diagnostics.Debug.WriteLine("TerritoryUnitTest.Command() exeption={0}", e.Message);
             return false;
          }
          // Remove any existing UI elements from the Canvas
@@ -243,7 +243,7 @@ namespace BarbarianPrince
          } // try
          catch (Exception e)
          {
-            Console.WriteLine("ReadTerritoriesXml(): Exception:  e.Message={0} while reading reader.Name={1}", e.Message, reader.Name);
+            System.Diagnostics.Debug.WriteLine("ReadTerritoriesXml(): Exception:  e.Message={0} while reading reader.Name={1}", e.Message, reader.Name);
          }
          finally
          {
@@ -267,13 +267,13 @@ namespace BarbarianPrince
                   minDistance = distance;
                   selectedMp.X = mp1.X;
                   selectedMp.Y = mp1.Y;
-                  Console.WriteLine("\t\t==> {0} from {1} with d={2}", selectedMp.ToString(), t.Name, distance);
+                  System.Diagnostics.Debug.WriteLine("\t\t==> {0} from {1} with d={2}", selectedMp.ToString(), t.Name, distance);
                   myPoints.Add(selectedMp);
                   return true;
                }
             }
          }  // end foreach()
-         Console.WriteLine("\t\t++>{0}", selectedMp.ToString()); // An territory point was not found.  Add the mouse click point as a new point.
+         System.Diagnostics.Debug.WriteLine("\t\t++>{0}", selectedMp.ToString()); // An territory point was not found.  Add the mouse click point as a new point.
          myPoints.Add(selectedMp);
          return true;
       }

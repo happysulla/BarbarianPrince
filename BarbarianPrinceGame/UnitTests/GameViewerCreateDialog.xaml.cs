@@ -236,7 +236,7 @@ namespace BarbarianPrince
             sb.Append(amountToScroll.ToString("####.#"));
          sb.Append(" out of ");
          sb.Append(myScrollViewer.ScrollableHeight.ToString("####.#"));
-         Console.WriteLine(sb.ToString());
+         System.Diagnostics.Debug.WriteLine(sb.ToString());
 
          double percentWidthB = (p.X / myCanvas.ActualWidth);
          double percentWidth = percentWidthB;

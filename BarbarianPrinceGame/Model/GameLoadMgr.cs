@@ -74,7 +74,7 @@ namespace BarbarianPrince
          catch (Exception ex)
          {
             Logger.Log(LogEnum.LE_ERROR, "SaveGameToFile(): path=" + theGamesDirectory + " e =" + ex.ToString());
-            Console.WriteLine(ex.ToString());
+            System.Diagnostics.Debug.WriteLine(ex.ToString());
             return false;
          }
       }
@@ -1499,6 +1499,7 @@ namespace BarbarianPrince
       }
       private bool ReadXmlOptions(XmlReader reader, Options options)
       {
+         options.Clear();
          reader.Read();
          if (false == reader.IsStartElement())
          {
@@ -1550,6 +1551,7 @@ namespace BarbarianPrince
       }
       private bool ReadXmlGameStat(XmlReader reader, GameStat statistic)
       {
+         statistic.Clear();
          reader.Read();
          if (false == reader.IsStartElement())
          {
@@ -2086,6 +2088,7 @@ namespace BarbarianPrince
       }
       private bool ReadXmlGamePartyMembers(XmlReader reader, IGameInstance gi)
       {
+         gi.PartyMembers.Clear(); // clear out all party members
          reader.Read();
          if (reader.IsStartElement())
          {
@@ -3470,8 +3473,8 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "ReadXmlEnteredHexes(): Count=null");
                return false;
             }
-            int count = Int32.Parse(sCount);
-            for (int i = 0; i < count; ++i)
+            int countEnterHex = Int32.Parse(sCount);
+            for (int i = 0; i < countEnterHex; ++i)
             {
                string? sIdentifier = null;
                int day = 0;
@@ -3627,8 +3630,8 @@ namespace BarbarianPrince
                      Logger.Log(LogEnum.LE_ERROR, "ReadXmlEnteredHexes(): GetAttribute(sCount) returned null");
                      return false;
                   }
-                  position = Int32.Parse(sCount);
-                  for(int k=0; k<count; ++k )
+                  int countEventName = Int32.Parse(sCount);
+                  for(int k=0; k< countEventName; ++k )
                   {
                      reader.Read();
                      if (reader.Name != "EventName")
@@ -3644,7 +3647,7 @@ namespace BarbarianPrince
                      }
                      eventNames.Add(sEventName);
                   }
-                  if (0 < count)
+                  if (0 < countEventName)
                      reader.Read(); // get past </EventNames> tag
                }
                //--------------------------------------
@@ -3662,8 +3665,8 @@ namespace BarbarianPrince
                      Logger.Log(LogEnum.LE_ERROR, "ReadXmlEnteredHexes(): GetAttribute(sCount) returned null");
                      return false;
                   }
-                  count = Int32.Parse(sCount);
-                  for (int k = 0; k < count; ++k)
+                  int countPartyName = Int32.Parse(sCount);
+                  for (int k = 0; k < countPartyName; ++k)
                   {
                      reader.Read();
                      if (reader.Name != "PartyName")
@@ -3679,7 +3682,7 @@ namespace BarbarianPrince
                      }
                      partyNames.Add(sPartyName);
                   }
-                  if( 0 < count )
+                  if( 0 < countPartyName)
                      reader.Read(); // get past </PartyNames> tag
                }
                //--------------------------------------
@@ -3687,7 +3690,7 @@ namespace BarbarianPrince
                enteredHexes.Add(enteredHex);
                reader.Read(); // get past </EnteredHex> tag
             }
-            if (0 < count)
+            if (0 < countEnterHex)
                reader.Read(); // get past </EnteredHexes> tag
          }
          return true;

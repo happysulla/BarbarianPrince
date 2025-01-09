@@ -218,7 +218,7 @@ namespace BarbarianPrince
             }
             catch (Exception e)
             {
-                Console.WriteLine("DiceRollerUnitTest.Cleanup() exeption={0}", e.Message);
+                System.Diagnostics.Debug.WriteLine("DiceRollerUnitTest.Cleanup() exeption={0}", e.Message);
                 return false;
             }
             //-----------------------------------------------------------------------

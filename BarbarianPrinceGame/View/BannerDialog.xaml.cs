@@ -111,7 +111,7 @@ namespace BarbarianPrince
          sb.Append(") this.left=(");
          sb.Append(this.Left.ToString());
          sb.Append(")");
-         Console.WriteLine(sb.ToString());
+         System.Diagnostics.Debug.WriteLine(sb.ToString());
 #endif
          //---------------------
          myIsDragging = true;
@@ -169,7 +169,7 @@ namespace BarbarianPrince
             sb.Append(") dpiX(");
             sb.Append(dpiX.ToString());
             sb.Append(")");
-            Console.WriteLine(sb.ToString());
+            System.Diagnostics.Debug.WriteLine(sb.ToString());
          }
          else if (myPreviousMonitor != currentMonitor)
          {
@@ -202,7 +202,7 @@ namespace BarbarianPrince
             sb.Append(") dpiX(");
             sb.Append(dpiX.ToString());
             sb.Append(")");
-            Console.WriteLine(sb.ToString());
+            System.Diagnostics.Debug.WriteLine(sb.ToString());
          }
          else
          {
@@ -233,7 +233,7 @@ namespace BarbarianPrince
             sb.Append(") dpiX(");
             sb.Append(dpiX.ToString());
             sb.Append(")");
-            Console.WriteLine(sb.ToString());
+            System.Diagnostics.Debug.WriteLine(sb.ToString());
             sb.Append(this.Left.ToString());
          }
          this.Left = (currentScreenPt.X - myOffsetInBannerWindow.X) / currentMatrix.M11;

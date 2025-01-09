@@ -166,7 +166,7 @@ namespace BarbarianPrince
          }
          catch (Exception e)
          {
-            Console.WriteLine("TerritoryUnitTest.Command() exeption={0}", e.Message);
+            System.Diagnostics.Debug.WriteLine("TerritoryUnitTest.Command() exeption={0}", e.Message);
             return false;
          }
          ++gi.GameTurn;
@@ -209,11 +209,11 @@ namespace BarbarianPrince
                      minDistance = distance;
                      selectedMp.X = mp1.X;
                      selectedMp.Y = mp1.Y;
-                     Console.WriteLine("\t\t==> {0} from {1} with d={2}", selectedMp.ToString(), adjacentTerritory.Name, distance);
+                     System.Diagnostics.Debug.WriteLine("\t\t==> {0} from {1} with d={2}", selectedMp.ToString(), adjacentTerritory.Name, distance);
                   }
                }
             }  // end foreach()
-            Console.WriteLine("\t\t++>{0} to {1}", selectedMp.ToString(), myAnchorTerritory.Name); // An adjacent point was not found.  Add the mouse click point as a new point.
+            System.Diagnostics.Debug.WriteLine("\t\t++>{0} to {1}", selectedMp.ToString(), myAnchorTerritory.Name); // An adjacent point was not found.  Add the mouse click point as a new point.
             myPoints.Add(selectedMp);
          }
          return true;
@@ -328,7 +328,7 @@ namespace BarbarianPrince
       {
          System.Windows.Point canvasPoint = e.GetPosition(myCanvas);
          IMapPoint mp = new MapPoint(canvasPoint.X, canvasPoint.Y);
-         Console.WriteLine("MouseDownEllipse.MouseDown(): {0}", mp.ToString());
+         System.Diagnostics.Debug.WriteLine("MouseDownEllipse.MouseDown(): {0}", mp.ToString());
          ITerritory matchingTerritory = null; // Find the corresponding Territory
          Ellipse mousedEllipse = (Ellipse)sender;
          foreach (ITerritory t in Territory.theTerritories)
@@ -387,7 +387,7 @@ namespace BarbarianPrince
       {
          System.Windows.Point canvasPoint = e.GetPosition(myCanvas);
          IMapPoint mp = new MapPoint(canvasPoint.X, canvasPoint.Y);
-         Console.WriteLine("TerritoryRegionUnitTest.MouseDownPolygon(): {0}", mp.ToString());
+         System.Diagnostics.Debug.WriteLine("TerritoryRegionUnitTest.MouseDownPolygon(): {0}", mp.ToString());
          if (null == myAnchorTerritory)
          {
             // This function removes an existing polygon when it is clicked if no achor territory exists

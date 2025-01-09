@@ -631,7 +631,7 @@ namespace BarbarianPrince
          } // try
          catch (Exception e)
          {
-            Console.WriteLine("CreateRiversFromXml(): Cannot Read from Rivers.xml file:\ne.Message={0} while reading reader.Name={1}", e.Message, reader.Name);
+            System.Diagnostics.Debug.WriteLine("CreateRiversFromXml(): Cannot Read from Rivers.xml file:\ne.Message={0} while reading reader.Name={1}", e.Message, reader.Name);
          }
          finally
          {
@@ -1279,7 +1279,7 @@ namespace BarbarianPrince
          }
          catch (Exception e)
          {
-            Console.WriteLine("UpdateCanvasRiver(): unknown river=" + river + " EXCEPTION THROWN e={0}", e.ToString());
+            System.Diagnostics.Debug.WriteLine("UpdateCanvasRiver(): unknown river=" + river + " EXCEPTION THROWN e={0}", e.ToString());
          }
       }
       private bool UpdateCanvasPath(IGameInstance gi)
@@ -2323,7 +2323,7 @@ namespace BarbarianPrince
          }
          catch (Exception e)
          {
-            Console.WriteLine("UpdateCanvas() - EXCEPTION THROWN a=" + action.ToString() + "\ne={0}", e.ToString());
+            System.Diagnostics.Debug.WriteLine("UpdateCanvas() - EXCEPTION THROWN a=" + action.ToString() + "\ne={0}", e.ToString());
             return false;
          }
          return true;
@@ -2350,7 +2350,7 @@ namespace BarbarianPrince
          }
          catch (Exception e)
          {
-            Console.WriteLine("UpdateCanvasMovement() - EXCEPTION THROWN e={0}", e.ToString());
+            System.Diagnostics.Debug.WriteLine("UpdateCanvasMovement() - EXCEPTION THROWN e={0}", e.ToString());
             return false;
          }
          return true;
@@ -3043,7 +3043,7 @@ namespace BarbarianPrince
             b.BeginAnimation(Canvas.TopProperty, yAnimiation);
             if (null == myRectangleSelected)
             {
-               Console.WriteLine("MovePathAnimate() myRectangleSelection=null");
+               System.Diagnostics.Debug.WriteLine("MovePathAnimate() myRectangleSelection=null");
                return false;
             }
             myRectangleSelected.RenderTransform = new TranslateTransform();
@@ -3055,7 +3055,7 @@ namespace BarbarianPrince
          {
             b.BeginAnimation(Canvas.LeftProperty, null); // end animation offset
             b.BeginAnimation(Canvas.TopProperty, null);  // end animation offset
-            Console.WriteLine("MovePathAnimate() - EXCEPTION THROWN e={0}", e.ToString());
+            System.Diagnostics.Debug.WriteLine("MovePathAnimate() - EXCEPTION THROWN e={0}", e.ToString());
             return false;
          }
       }

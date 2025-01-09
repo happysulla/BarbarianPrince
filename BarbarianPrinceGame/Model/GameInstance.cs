@@ -20,34 +20,37 @@ namespace BarbarianPrince
       [NonSerialized] static public Logger Logger = new Logger();
       public bool CtorError { get; } = false;
       public bool IsGridActive { set; get; } = false;
-      public GameInstance() // Constructor - set log levels
+      public GameInstance(bool isFirstTime=false) // Constructor - set log levels
       {
-         if( false == Logger.SetInitial()) // tsetup logger
+         if( true == isFirstTime )
          {
-            Logger.Log(LogEnum.LE_ERROR, "GameInstance(): SetInitial() returned false");
-            CtorError = true;
-            return;
-         }
-         try
-         {
-            // Create the territories and the regions marking the territories.
-            // Keep a list of Territories used in the game.  All the information 
-            // of Territories is static and does not change.
-            Territory.theTerritories = ReadTerritoriesXml();
-            if (null == Territory.theTerritories)
+            if (false == Logger.SetInitial()) // tsetup logger
             {
-               Logger.Log(LogEnum.LE_ERROR, "GameInstance(): ReadTerritoriesXml() returned null");
+               Logger.Log(LogEnum.LE_ERROR, "GameInstance(): SetInitial() returned false");
                CtorError = true;
                return;
             }
-         }
-         catch (Exception e)
-         {
-            MessageBox.Show("Exception in GameEngine() e=" + e.ToString());
+            try
+            {
+               // Create the territories and the regions marking the territories.
+               // Keep a list of Territories used in the game.  All the information 
+               // of Territories is static and does not change.
+               Territory.theTerritories = ReadTerritoriesXml();
+               if (null == Territory.theTerritories)
+               {
+                  Logger.Log(LogEnum.LE_ERROR, "GameInstance(): ReadTerritoriesXml() returned null");
+                  CtorError = true;
+                  return;
+               }
+            }
+            catch (Exception e)
+            {
+               MessageBox.Show("Exception in GameEngine() e=" + e.ToString());
+            }
          }
          //------------------------------------------------------------------------------------
          ITerritory territory = Territory.theTerritories.Find("0101");
-         myPrince= new MapItem("Prince", 1.0, false, false, "c07Prince", "c07Prince", territory, 9, 8, 0);
+         myPrince = new MapItem("Prince", 1.0, false, false, "c07Prince", "c07Prince", territory, 9, 8, 0);
          PartyMembers.Add(myPrince);
       }
       public GameInstance(Options newGameOptions) // Constructor - set log levels
@@ -2481,7 +2484,7 @@ namespace BarbarianPrince
          } // try
          catch (Exception e)
          {
-            Console.WriteLine("ReadTerritoriesXml(): Exception:  e.Message={0} while reading reader.Name={1}", e.Message, reader.Name);
+            System.Diagnostics.Debug.WriteLine("ReadTerritoriesXml(): Exception:  e.Message={0} while reading reader.Name={1}", e.Message, reader.Name);
             return territories;
          }
          finally

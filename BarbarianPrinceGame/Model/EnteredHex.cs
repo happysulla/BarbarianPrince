@@ -36,7 +36,7 @@ namespace BarbarianPrince
       public int Day { get; set; } = 0;
       public String HexName { get; set; } = "";
       public bool IsEncounter { get; set; } = false;
-      public int Position { get; set; } = 0;
+      public int Position { get; set; } = 0;         // postion in the hex - if 1+ elispes exist in same hex, they are offset by position
       public ColorActionEnum ColorAction { get; set; } = ColorActionEnum.CAE_LOST;
       public List<String> EventNames { get; set; } = new List<String>();
       public List<String> Party = new List<String>();

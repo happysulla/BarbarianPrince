@@ -93,7 +93,7 @@ namespace BarbarianPrince
             System.IO.File.Delete(filename);  // delete old file
             if (false == NextTest(ref gi)) // automatically move next test
             {
-               Console.WriteLine("TerritoryCreateUnitTest.Command(): NextTest() returned false");
+               System.Diagnostics.Debug.WriteLine("TerritoryCreateUnitTest.Command(): NextTest() returned false");
                return false;
             }
          }
@@ -113,7 +113,7 @@ namespace BarbarianPrince
          {
             if (false == ShowRoads(Territory.theTerritories))
             {
-               Console.WriteLine("TerritoryCreateUnitTest.Command(): ShowRoads() returned false");
+               System.Diagnostics.Debug.WriteLine("TerritoryCreateUnitTest.Command(): ShowRoads() returned false");
                return false;
             }
          }
@@ -121,7 +121,7 @@ namespace BarbarianPrince
          {
             if (false == ShowRivers(Territory.theTerritories))
             {
-               Console.WriteLine("TerritoryCreateUnitTest.Command(): ShowRivers() returned false");
+               System.Diagnostics.Debug.WriteLine("TerritoryCreateUnitTest.Command(): ShowRivers() returned false");
                return false;
             }
          }
@@ -129,7 +129,7 @@ namespace BarbarianPrince
          {
             if (false == ShowAdjacents(Territory.theTerritories))
             {
-               Console.WriteLine("TerritoryCreateUnitTest.Command(): ShowAdjacents() returned false");
+               System.Diagnostics.Debug.WriteLine("TerritoryCreateUnitTest.Command(): ShowAdjacents() returned false");
                return false;
             }
          }
@@ -137,7 +137,7 @@ namespace BarbarianPrince
          {
             if (false == ShowRaftTerritories(Territory.theTerritories))
             {
-               Console.WriteLine("TerritoryCreateUnitTest.Command(): ShowRaftTerritories() returned false");
+               System.Diagnostics.Debug.WriteLine("TerritoryCreateUnitTest.Command(): ShowRaftTerritories() returned false");
                return false;
             }
             myIndexRaft++;
@@ -148,7 +148,7 @@ namespace BarbarianPrince
          {
             if (false == ShowDownRiverTerritory(Territory.theTerritories))
             {
-               Console.WriteLine("TerritoryCreateUnitTest.Command(): ShowDownRiverTerritory() returned false");
+               System.Diagnostics.Debug.WriteLine("TerritoryCreateUnitTest.Command(): ShowDownRiverTerritory() returned false");
                return false;
             }
             myIndexDownRiver++;
@@ -159,7 +159,7 @@ namespace BarbarianPrince
          {
             if (false == Cleanup(ref gi))
             {
-               Console.WriteLine("TerritoryCreateUnitTest.Command(): Cleanup() returned false");
+               System.Diagnostics.Debug.WriteLine("TerritoryCreateUnitTest.Command(): Cleanup() returned false");
                return false;
             }
          }
@@ -298,7 +298,7 @@ namespace BarbarianPrince
          {
             if (false == Cleanup(ref gi))
             {
-               Console.WriteLine("TerritoryCreateUnitTest.Command(): Cleanup() returned false");
+               System.Diagnostics.Debug.WriteLine("TerritoryCreateUnitTest.Command(): Cleanup() returned false");
                return false;
             }
          }
@@ -369,7 +369,7 @@ namespace BarbarianPrince
          }
          catch (Exception e)
          {
-            Console.WriteLine("Cleanup(): exeption={0}", e.Message);
+            System.Diagnostics.Debug.WriteLine("Cleanup(): exeption={0}", e.Message);
             return false;
          }
          //--------------------------------------------------
@@ -1053,7 +1053,7 @@ namespace BarbarianPrince
          } // try
          catch (Exception e)
          {
-            Console.WriteLine("ReadTerritoriesXml(): Exception:  e.Message={0} while reading reader.Name={1}", e.Message, reader.Name);
+            System.Diagnostics.Debug.WriteLine("ReadTerritoriesXml(): Exception:  e.Message={0} while reading reader.Name={1}", e.Message, reader.Name);
          }
          finally
          {
@@ -1123,7 +1123,7 @@ namespace BarbarianPrince
          }
          catch (Exception e)
          {
-            Console.WriteLine("UpdateCanvasRiver(): unknown river=" + river + " EXCEPTION THROWN e={0}", e.ToString());
+            System.Diagnostics.Debug.WriteLine("UpdateCanvasRiver(): unknown river=" + river + " EXCEPTION THROWN e={0}", e.ToString());
          }
       }
       //--------------------------------------------------------------------
@@ -1150,7 +1150,7 @@ namespace BarbarianPrince
       void MouseDownSetCenterPoint(object sender, MouseButtonEventArgs e)
       {
          System.Windows.Point p = e.GetPosition(myCanvas);
-         Console.WriteLine("TerritoryUnitTest.MouseDown(): {0}", p.ToString());
+         System.Diagnostics.Debug.WriteLine("TerritoryUnitTest.MouseDown(): {0}", p.ToString());
          foreach (UIElement ui in myCanvas.Children)
          {
             if (ui is Ellipse)
@@ -1212,7 +1212,7 @@ namespace BarbarianPrince
       void MouseLeftButtonDownVerifyTerritory(object sender, MouseButtonEventArgs e)
       {
          System.Windows.Point p = e.GetPosition(myCanvas);
-         Console.WriteLine("TerritoryCreateUnitTest.MouseLeftButtonDownVerifyTerritory(): {0}", p.ToString());
+         System.Diagnostics.Debug.WriteLine("TerritoryCreateUnitTest.MouseLeftButtonDownVerifyTerritory(): {0}", p.ToString());
          ITerritory selectedTerritory = null;
          foreach (UIElement ui in myCanvas.Children)
          {
@@ -1300,7 +1300,7 @@ namespace BarbarianPrince
                      IEnumerable<string> results = from s in myAnchorTerritory.Roads where s == selectedTerritory.ToString() select s;
                      if (0 == results.Count())
                      {
-                        Console.WriteLine("Adding {0} ", selectedTerritory.ToString());
+                        System.Diagnostics.Debug.WriteLine("Adding {0} ", selectedTerritory.ToString());
                         myAnchorTerritory.Roads.Add(selectedTerritory.ToString()); // add to the anchor territory's roads list
                      }
                   }
@@ -1310,7 +1310,7 @@ namespace BarbarianPrince
                      // to the roads list for the anchor territtory. Clear the data so another anchor territory can be selected.
                      StringBuilder sb = new StringBuilder("Saving"); sb.Append(selectedEllipse.Tag.ToString()); sb.Append(" "); sb.Append(myAnchorTerritory.ToString());
                      sb.Append(" "); sb.Append(selectedTerritory.ToString()); sb.Append(" ");
-                     Console.WriteLine("Saving {0} ", selectedTerritory.ToString());
+                     System.Diagnostics.Debug.WriteLine("Saving {0} ", selectedTerritory.ToString());
                      MessageBox.Show(sb.ToString());
                      myAnchorTerritory = null;
                      foreach (UIElement ui1 in myCanvas.Children)
@@ -1380,7 +1380,7 @@ namespace BarbarianPrince
                      IEnumerable<string> results = from s in myAnchorTerritory.Rivers where s == selectedTerritory.ToString() select s;
                      if (0 == results.Count())
                      {
-                        Console.WriteLine("Adding {0} ", selectedTerritory.ToString());
+                        System.Diagnostics.Debug.WriteLine("Adding {0} ", selectedTerritory.ToString());
                         myAnchorTerritory.Rivers.Add(selectedTerritory.ToString()); // add to the anchor territory's Rivers list
                      }
                   }
@@ -1390,7 +1390,7 @@ namespace BarbarianPrince
                      // to the Rivers list for the anchor territtory. Clear the data so another anchor territory can be selected.
                      StringBuilder sb = new StringBuilder("Saving"); sb.Append(selectedEllipse.Tag.ToString()); sb.Append(" "); sb.Append(myAnchorTerritory.ToString());
                      sb.Append(" "); sb.Append(selectedTerritory.ToString()); sb.Append(" ");
-                     Console.WriteLine("Saving {0} ", selectedTerritory.ToString());
+                     System.Diagnostics.Debug.WriteLine("Saving {0} ", selectedTerritory.ToString());
                      MessageBox.Show(sb.ToString());
                      myAnchorTerritory = null;
                      foreach (UIElement ui1 in myCanvas.Children)
@@ -1451,7 +1451,7 @@ namespace BarbarianPrince
                      sb.Append(" ");
                      sb.Append(selectedTerritory.ToString());
                      sb.Append(" ");
-                     Console.WriteLine("Anchoring {0} ", selectedTerritory.ToString());
+                     System.Diagnostics.Debug.WriteLine("Anchoring {0} ", selectedTerritory.ToString());
                      MessageBox.Show(sb.ToString());
                      myAnchorTerritory = selectedTerritory;
                      myAnchorTerritory.Adjacents.Clear();
@@ -1466,7 +1466,7 @@ namespace BarbarianPrince
                      IEnumerable<string> results = from s in myAnchorTerritory.Adjacents where s == selectedTerritory.ToString() select s;
                      if (0 == results.Count())
                      {
-                        Console.WriteLine("Adding {0} ", selectedTerritory.ToString());
+                        System.Diagnostics.Debug.WriteLine("Adding {0} ", selectedTerritory.ToString());
                         myAnchorTerritory.Adjacents.Add(selectedTerritory.ToString());
                      }
                   }
@@ -1476,7 +1476,7 @@ namespace BarbarianPrince
                      // to the adjacents ellipse. Clear the data so another one can be selected.
                      StringBuilder sb = new StringBuilder("Saving"); sb.Append(selectedEllipse.Tag.ToString()); sb.Append(" "); sb.Append(myAnchorTerritory.ToString());
                      sb.Append(" "); sb.Append(selectedTerritory.ToString()); sb.Append(" ");
-                     Console.WriteLine("Saving {0} ", selectedTerritory.ToString());
+                     System.Diagnostics.Debug.WriteLine("Saving {0} ", selectedTerritory.ToString());
                      MessageBox.Show(sb.ToString());
                      myAnchorTerritory = null;
 
@@ -1538,7 +1538,7 @@ namespace BarbarianPrince
                      sb.Append(" ");
                      sb.Append(selectedTerritory.ToString());
                      sb.Append(" ");
-                     Console.WriteLine("Anchoring {0} ", selectedTerritory.ToString());
+                     System.Diagnostics.Debug.WriteLine("Anchoring {0} ", selectedTerritory.ToString());
                      MessageBox.Show(sb.ToString());
                      myAnchorTerritory = selectedTerritory;
                      myAnchorTerritory.Rafts.Clear();
@@ -1555,7 +1555,7 @@ namespace BarbarianPrince
                      IEnumerable<string> results = from s in myAnchorTerritory.Rafts where s == selectedTerritory.ToString() select s;
                      if (0 == results.Count())
                      {
-                        Console.WriteLine("Adding {0} ", selectedTerritory.ToString());
+                        System.Diagnostics.Debug.WriteLine("Adding {0} ", selectedTerritory.ToString());
                         myAnchorTerritory.Rafts.Add(selectedTerritory.ToString());
                      }
                   }
@@ -1572,7 +1572,7 @@ namespace BarbarianPrince
                      sb.Append(" ");
                      sb.Append(selectedTerritory.ToString());
                      sb.Append(" ");
-                     Console.WriteLine("Saving {0} ", selectedTerritory.ToString());
+                     System.Diagnostics.Debug.WriteLine("Saving {0} ", selectedTerritory.ToString());
                      MessageBox.Show(sb.ToString());
                      myAnchorTerritory = null;
                      foreach (UIElement ui1 in myCanvas.Children)

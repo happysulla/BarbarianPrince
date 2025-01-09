@@ -101,19 +101,19 @@ namespace BarbarianPrince
          }
          catch (DirectoryNotFoundException dirException)
          {
-            Console.WriteLine("SetInitial(): create file\n" + dirException.ToString());
+            System.Diagnostics.Debug.WriteLine("SetInitial(): create file\n" + dirException.ToString());
          }
          catch (FileNotFoundException fileException)
          {
-            Console.WriteLine("SetInitial(): create file\n" + fileException.ToString());
+            System.Diagnostics.Debug.WriteLine("SetInitial(): create file\n" + fileException.ToString());
          }
          catch (IOException ioException)
          {
-            Console.WriteLine("SetInitial(): create file\n" + ioException.ToString());
+            System.Diagnostics.Debug.WriteLine("SetInitial(): create file\n" + ioException.ToString());
          }
          catch (Exception ex)
          {
-            Console.WriteLine("SetInitial(): create file\n" + ex.ToString());
+            System.Diagnostics.Debug.WriteLine("SetInitial(): create file\n" + ex.ToString());
          }
          //---------------------------------------------------------------------
          Logger.SetOn(LogEnum.LE_ERROR);
@@ -204,31 +204,43 @@ namespace BarbarianPrince
                theMutex.ReleaseMutex();
                return;
             }
-            try
+            int count = 100;
+            while(0 < --count)
             {
-               FileInfo file = new FileInfo(theFileName);
-               if (true == File.Exists(theFileName))
+               try
                {
-                  StreamWriter swriter = File.AppendText(theFileName);
-                  swriter.Write(logLevel.ToString());
-                  swriter.Write(" ");
-                  swriter.Write(description);
-                  swriter.Write("\n");
-                  swriter.Close();
+                  FileInfo file = new FileInfo(theFileName);
+                  if (true == File.Exists(theFileName))
+                  {
+                     StreamWriter swriter = File.AppendText(theFileName);
+                     swriter.Write(logLevel.ToString());
+                     swriter.Write(" ");
+                     swriter.Write(description);
+                     swriter.Write("\n");
+                     swriter.Close();
+                  }
+                  theMutex.ReleaseMutex();
+                  return;
                }
-            }
-            catch (FileNotFoundException fileException)
-            {
-               Console.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + fileException.ToString());
-            }
-            catch (IOException ioException)
-            {
-               Console.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + ioException.ToString());
-            }
-            catch (Exception ex)
-            {
-               Console.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + ex.ToString());
-            }
+               catch (FileNotFoundException fileException)
+               {
+                  System.Diagnostics.Debug.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + fileException.ToString());
+                  theMutex.ReleaseMutex();
+                  return;
+               }
+               catch (IOException ioException)
+               {
+                  //System.Diagnostics.Debug.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + ioException.ToString());
+               }
+               catch (Exception ex)
+               {
+                  System.Diagnostics.Debug.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + ex.ToString());
+                  theMutex.ReleaseMutex();
+                  return;
+               }
+            } // end for
+            if( 0 == count )
+               System.Diagnostics.Debug.WriteLine("Log(): UNALBE TO WRITE - File locked by another read") ;
             theMutex.ReleaseMutex();
          }
       }

@@ -246,7 +246,7 @@ namespace BarbarianPrince
          } // try
          catch (Exception e)
          {
-            Console.WriteLine("Territory.CreateTerritories(): Exception:  e.Message={0} while reading reader.Name={1}", e.Message, reader.Name);
+            System.Diagnostics.Debug.WriteLine("Territory.CreateTerritories(): Exception:  e.Message={0} while reading reader.Name={1}", e.Message, reader.Name);
             return false;
          }
          finally
@@ -538,7 +538,7 @@ namespace BarbarianPrince
          {
             b.BeginAnimation(Canvas.LeftProperty, null); // end animation offset
             b.BeginAnimation(Canvas.TopProperty, null);  // end animation offset
-            Console.WriteLine("DiceAnimate() - EXCEPTION THROWN e={0}", e.ToString());
+            System.Diagnostics.Debug.WriteLine("DiceAnimate() - EXCEPTION THROWN e={0}", e.ToString());
             return false;
          }
       }

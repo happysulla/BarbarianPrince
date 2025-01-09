@@ -108,14 +108,14 @@ namespace BarbarianPrince
             bool isEndTerritoryReached = false;
             for (int i = 1; i < moveFactor; ++i)
             {
-               //Console.WriteLine("---------------->>MF={0}<<-------------------------", i.ToString());
+               //System.Diagnostics.Debug.WriteLine("---------------->>MF={0}<<-------------------------", i.ToString());
                // Perform no more movement if end territory is reached by one of the paths.
                if (true == isEndTerritoryReached)
                   break;
                // Iterate through the IMapPath objects trying to find the lowest metric score for each adjacent territory.
                foreach (IMapPath path in paths)
                {
-                  //Console.WriteLine("==> Adding to {0} ", path.ToString());
+                  //System.Diagnostics.Debug.WriteLine("==> Adding to {0} ", path.ToString());
                   if (path.Metric == Double.MaxValue)
                      continue;
                   // Set a threshold for the lowest metric score.
@@ -131,13 +131,13 @@ namespace BarbarianPrince
                   ITerritory adj1 = path.Territories[path.Territories.Count - 1];
                   foreach (String alternative in adj1.Adjacents)
                   {
-                     //Console.WriteLine("     ==> Trying {0}", alternative);
+                     //System.Diagnostics.Debug.WriteLine("     ==> Trying {0}", alternative);
                      ITerritory adj2 = territories.Find(alternative);
                      // If the end territory is reached, no need to continue
                      // looking at alternates.
                      if (adj2.Name == endT.Name)
                      {
-                        //Console.WriteLine("     ==> ==>Reached End Territory {0} for PATH={1}", adj2.ToString(), path.ToString());
+                        //System.Diagnostics.Debug.WriteLine("     ==> ==>Reached End Territory {0} for PATH={1}", adj2.ToString(), path.ToString());
                         // Calculate the metric between this adjacent territory and
                         // the end territory.  If it results in a lower path metric,
                         // set it at the low water mark.
@@ -154,7 +154,7 @@ namespace BarbarianPrince
                      // Exclude alternative paths that fold back to start territory
                      if (adj2.Name == startT.Name)
                      {
-                        //Console.WriteLine("     ==> ==>{0} is start territory", adj2.ToString());
+                        //System.Diagnostics.Debug.WriteLine("     ==> ==>{0} is start territory", adj2.ToString());
                         continue;
                      }
                      // Exclude alternative paths that fold back to other adjacent territories
@@ -169,7 +169,7 @@ namespace BarbarianPrince
                      }
                      if (true == isMatchFound)
                      {
-                        //Console.WriteLine("     ==> ==> {0} is already adjacent {1}", adj2.ToString(), path.ToString());
+                        //System.Diagnostics.Debug.WriteLine("     ==> ==> {0} is already adjacent {1}", adj2.ToString(), path.ToString());
                         continue;
                      }
                      // Exclude alternative paths that fold back on themselves, i.e.
@@ -179,7 +179,7 @@ namespace BarbarianPrince
                                                         select territory;
                      if (0 < results1.Count())
                      {
-                        //Console.WriteLine("     ==> ==> {0} is already in {1}", adj2.ToString(), path.ToString());
+                        //System.Diagnostics.Debug.WriteLine("     ==> ==> {0} is already in {1}", adj2.ToString(), path.ToString());
                         continue;
                      }
                      // Calculate the metric between this adjacent territory and
@@ -197,7 +197,7 @@ namespace BarbarianPrince
                     // If not, then this map path needs to be deleted.
                   if (Double.MaxValue == lowestMetricScore)
                   {
-                     //Console.WriteLine("     ==> Skipping {0} at Max Value", path.ToString());
+                     //System.Diagnostics.Debug.WriteLine("     ==> Skipping {0} at Max Value", path.ToString());
                      path.Metric = Double.MaxValue;
                      continue;
                   }
@@ -205,7 +205,7 @@ namespace BarbarianPrince
                   {
                      path.Territories.Add(lowestTerritory);
                      path.Metric = lowestMetricScore;
-                     //Console.WriteLine("     ==> Appending to {0}", path.ToString());
+                     //System.Diagnostics.Debug.WriteLine("     ==> Appending to {0}", path.ToString());
                   }
                } // end foreach (IMapPath path in paths)
             } // end for (int i = 0; i < moveFactor; ++i)
@@ -221,7 +221,7 @@ namespace BarbarianPrince
          IMapPath bestPath = paths[0];
          foreach (IMapPath path in paths)
          {
-            //Console.WriteLine("{0}.) {1}", i1.ToString(), path.ToString());
+            //System.Diagnostics.Debug.WriteLine("{0}.) {1}", i1.ToString(), path.ToString());
             if (path.Metric < bestPath.Metric)
                bestPath = path;
             ++i1;
