@@ -149,11 +149,8 @@ namespace BarbarianPrince
       private readonly string[] myButtonDailyContents = new string[MAX_DAILY_ACTIONS] { "Travel", "Rest", "News", "Hire", "Audience", "Offering", "Search Ruins", "Search Cache", "Search Clue", "Arch Travel", "Follow", "Rafting", "Air Travel", "Steal Gems", "Rescue", "Attack" };
       //---------------------------------------------------------------------
       private ContextMenu myContextMenuButton = new ContextMenu();
-      private readonly ContextMenu myContextMenuCanvas = new ContextMenu();
       private readonly DoubleCollection myDashArray = new DoubleCollection();
-      private int myBrushIndex = 0;
       private readonly List<Brush> myBrushes = new List<Brush>();
-      private readonly List<Rectangle> myRectangles = new List<Rectangle>();
       private readonly List<Polygon> myPolygons = new List<Polygon>();
       private ITerritory myTerritorySelected = null;
       private bool myIsTravelThroughGateActive = false;  // e045

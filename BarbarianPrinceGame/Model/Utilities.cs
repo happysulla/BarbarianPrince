@@ -10,6 +10,7 @@ using System.Xml.Serialization;
 using System.Xml;
 using System.Collections;
 using System.Net.NetworkInformation;
+using System.Reflection;
 namespace BarbarianPrince
 {
    public class Utilities
@@ -204,6 +205,23 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "Deserialize(): s=" + s_xml + " T=" + type.ToString() + "\nex=" + ex.ToString());
             return default(T);
          }
+      }
+      //-------------------------------------------------------------------------------
+      public static DateTime GetLinkerTime(Assembly assembly, TimeZoneInfo target = null)
+      {
+         string filePath = assembly.Location;
+         const int c_PeHeaderOffset = 60;
+         const int c_LinkerTimestampOffset = 8;
+         var buffer = new byte[2048];
+         using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            stream.ReadExactly(buffer);
+         var offset = BitConverter.ToInt32(buffer, c_PeHeaderOffset);
+         int secondsSince1970 = BitConverter.ToInt32(buffer, offset + c_LinkerTimestampOffset);
+         var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+         var linkTimeUtc = epoch.AddSeconds(secondsSince1970);
+         var tz = target ?? TimeZoneInfo.Local;
+         var localTime = TimeZoneInfo.ConvertTimeFromUtc(linkTimeUtc, tz);
+         return localTime;
       }
    }
 }

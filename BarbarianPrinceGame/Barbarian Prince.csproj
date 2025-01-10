@@ -73,6 +73,7 @@
     <RepositoryUrl>https://github.com/happysulla/BarbarianPrince</RepositoryUrl>
     <AssemblyVersion>03.00.19</AssemblyVersion>
     <FileVersion>03.00.19</FileVersion>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" />
@@ -1549,6 +1550,12 @@
       <Progid>Prince</Progid>
       <DefaultIcon>images\BarbarianPrince.ico</DefaultIcon>
     </FileAssociation>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" />

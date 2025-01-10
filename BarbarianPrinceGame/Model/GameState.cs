@@ -1516,10 +1516,19 @@ namespace BarbarianPrince
          string returnStatus = "OK";
          switch (action)
          {
+            case GameAction.ShowInventory:
+            case GameAction.ShowGameFeats:
+            case GameAction.ShowAllRivers:
+            case GameAction.ShowRuleListing:
+            case GameAction.ShowCharacterDescription:
+            case GameAction.ShowEventListing:
+            case GameAction.ShowPartyPath:
+            case GameAction.ShowReportErrorDialog:
+            case GameAction.ShowAboutDialog:
+            case GameAction.UpdateEventViewerDisplay:
+               break;
             case GameAction.UpdateEventViewerActive: // Only change active event
                gi.EventDisplayed = gi.EventActive; // next screen to show
-               break;
-            case GameAction.UpdateEventViewerDisplay: // Only change active event
                break;
             case GameAction.UpdateNewGame:
             case GameAction.RemoveSplashScreen:
@@ -2450,169 +2459,169 @@ namespace BarbarianPrince
             //gi.Prince.Coin = 501;
             //gi.Prince.Food = 9;
             //---------------------
-            gi.AddSpecialItem(SpecialEnum.GiftOfCharm);
-            gi.AddSpecialItem(SpecialEnum.ResistanceTalisman);
-            gi.AddSpecialItem(SpecialEnum.CharismaTalisman);
-            gi.AddSpecialItem(SpecialEnum.DragonEye);
-            gi.AddSpecialItem(SpecialEnum.RocBeak);
-            gi.AddSpecialItem(SpecialEnum.GriffonClaws);
-            gi.Prince.AddSpecialItemToShare(SpecialEnum.Foulbane);
-            gi.AddSpecialItem(SpecialEnum.HealingPoition);
-            gi.AddSpecialItem(SpecialEnum.CurePoisonVial);
-            gi.AddSpecialItem(SpecialEnum.EnduranceSash);
-            gi.AddSpecialItem(SpecialEnum.PoisonDrug);
-            gi.AddSpecialItem(SpecialEnum.MagicSword);
-            gi.AddSpecialItem(SpecialEnum.AntiPoisonAmulet);
-            gi.AddSpecialItem(SpecialEnum.PegasusMountTalisman);
-            gi.AddSpecialItem(SpecialEnum.NerveGasBomb);
-            gi.AddSpecialItem(SpecialEnum.ResistanceRing);
-            gi.AddSpecialItem(SpecialEnum.ResurrectionNecklace);
-            gi.AddSpecialItem(SpecialEnum.ShieldOfLight);
-            gi.AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
-            gi.Prince.AddSpecialItemToShare(SpecialEnum.MagicBox);
-            gi.Prince.AddSpecialItemToShare(SpecialEnum.HydraTeeth);
-            //---------------------
-            gi.HydraTeethCount = 5;
-            gi.Prince.AddSpecialItemToShare(SpecialEnum.StaffOfCommand);
-            ITerritory visited = Territory.theTerritories.Find("0109");
-            gi.VisitedLocations.Add(visited);
-            ITerritory escapeLocation = Territory.theTerritories.Find("0605");
-            gi.EscapedLocations.Add(escapeLocation);
-            ITerritory cacheHex = Territory.theTerritories.Find("0504");
-            gi.Caches.Add(cacheHex, 66);
-            cacheHex = Territory.theTerritories.Find("0505");
-            gi.Caches.Add(cacheHex, 333);
-            gi.Caches.Add(cacheHex, 100);
-            gi.Caches.Add(cacheHex, 500);
-            gi.Caches.Add(cacheHex, 33);
-            //---------------------
-            ITerritory secretClueHex = Territory.theTerritories.Find("0507");
-            gi.SecretClues.Add(secretClueHex);
-            ITerritory secretClueHex2 = Territory.theTerritories.Find("0406");
-            gi.SecretClues.Add(secretClueHex2);
-            ////---------------------
-            ITerritory hiddenTemple = Territory.theTerritories.Find("0605");
-            gi.HiddenTemples.Add(hiddenTemple);
-            ITerritory hiddenRuin = Territory.theTerritories.Find("0606");
-            gi.HiddenRuins.Add(hiddenRuin);
-            ////---------------------
-            ITerritory elfTown = Territory.theTerritories.Find("0607");
-            gi.ElfTowns.Add(elfTown);
-            ITerritory eagleLair = Territory.theTerritories.Find("1507");
-            gi.EagleLairs.Add(eagleLair);
-            ITerritory dwarvenMine = Territory.theTerritories.Find("0408");
-            gi.DwarvenMines.Add(dwarvenMine);
-            ITerritory dwarfAdviceHex = Territory.theTerritories.Find("0319");
-            gi.DwarfAdviceLocations.Add(dwarfAdviceHex);
-            ITerritory halflingTown = Territory.theTerritories.Find("0303");
-            gi.HalflingTowns.Add(halflingTown);
-            ITerritory elfCastle = Territory.theTerritories.Find("0608");
-            gi.ElfCastles.Add(elfCastle);
-            ////---------------------
-            ITerritory wizardTower = Territory.theTerritories.Find("0404");  //mountain
-            gi.WizardTowers.Add(wizardTower);
-            ITerritory wizardAdviceHex = Territory.theTerritories.Find("1005");
-            gi.WizardAdviceLocations.Add(wizardAdviceHex);
-            ITerritory wizardAdviceHex2 = Territory.theTerritories.Find("0406");
-            gi.WizardAdviceLocations.Add(wizardAdviceHex2);
-            //---------------------
-            ITerritory pixieAdviceHex = Territory.theTerritories.Find("0406");
-            gi.PixieAdviceLocations.Add(pixieAdviceHex);
-            //---------------------
-            ITerritory t11 = Territory.theTerritories.Find("0306"); // e114 - verify that eagle hunt can happen in structure
-            gi.HiddenTemples.Add(t11);
-            t11 = Territory.theTerritories.Find("0307"); // e114 - verify that eagle hunt can happen in structure
-            gi.HiddenTemples.Add(t11);
-            t11 = Territory.theTerritories.Find("1507"); // e114 - verify that eagle hunt can happen in structure
-            gi.HiddenTemples.Add(t11);
-            t11 = Territory.theTerritories.Find("0405"); // e114 - verify that eagle hunt can happen in structure
-            gi.HiddenTemples.Add(t11);
-            t11 = Territory.theTerritories.Find("0406"); // e114 - verify that eagle hunt can happen in structure
-            gi.HiddenTemples.Add(t11);
-            t11 = Territory.theTerritories.Find("0506"); // e114 - verify that eagle hunt can happen in structure
-            gi.HiddenTemples.Add(t11);
-            t11 = Territory.theTerritories.Find("0507"); // e114 - verify that eagle hunt can happen in structure
-            gi.HiddenTemples.Add(t11);
-            gi.Purifications.Add(t11);
-            //---------------------
-            ITerritory forbiddenHex = Territory.theTerritories.Find("0705");
-            gi.ForbiddenHexes.Add(forbiddenHex);
-            //---------------------
-            ITerritory purificationHex = Territory.theTerritories.Find("1805");
-            gi.ForbiddenAudiences.AddPurifyConstaint(purificationHex);
-            //---------------------
-            ITerritory forbiddenAudienceOffering= Territory.theTerritories.Find("1021");
-            gi.ForbiddenAudiences.AddOfferingConstaint(forbiddenAudienceOffering, Utilities.FOREVER);
-            //---------------------
-            ITerritory forbiddenAudience = Territory.theTerritories.Find("0101");
-            ITerritory lt1 = Territory.theTerritories.Find("0109");
-            ITerritory lt2 = Territory.theTerritories.Find("0711");
-            ITerritory lt3 = Territory.theTerritories.Find("1212");
-            gi.LetterOfRecommendations.Add(lt1);
-            gi.LetterOfRecommendations.Add(lt1);
-            gi.ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt1);
-            gi.LetterOfRecommendations.Add(lt2);
-            gi.ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt2);
-            gi.LetterOfRecommendations.Add(lt3);
-            gi.ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt3);
-            //---------------------
-            ITerritory forbiddenAudienceAssistant = Territory.theTerritories.Find("0216");
-            IMapItem trustedAssistant = CreateCharacter(gi, "TrustedAssistant");
-            gi.AddCompanion(trustedAssistant);
-            gi.ForbiddenAudiences.AddAssistantConstraint(forbiddenAudienceAssistant, trustedAssistant);
-            ITerritory lt4 = Territory.theTerritories.Find("1212");
-            gi.ForbiddenAudiences.UpdateLetterLocation(lt4); // need to assign target territory after construction
-            //---------------------
-            ITerritory forbiddenAudienceTime = Territory.theTerritories.Find("0323");
-            gi.ForbiddenAudiences.AddTimeConstraint(forbiddenAudienceTime, 10);
-            //---------------------
-            ITerritory forbiddenAudienceClothes= Territory.theTerritories.Find("0109");
-            gi.ForbiddenAudiences.AddClothesConstraint(forbiddenAudienceClothes);
-            //---------------------
-            ITerritory forbiddenAudienceReligion = Territory.theTerritories.Find("1004");
-            gi.ForbiddenAudiences.AddReligiousConstraint(forbiddenAudienceReligion);
-            //---------------------
-            ITerritory forbiddenAudienceKills = Territory.theTerritories.Find("0323");
-            gi.ForbiddenAudiences.AddMonsterKillConstraint(forbiddenAudienceKills);
-            //---------------------
-            gi.IsArchTravelKnown = true;
-            ITerritory arch1 = Territory.theTerritories.Find("0418");  //
-            gi.Arches.Add(arch1); // AddStartingTestingOptions()
-            ITerritory arch2 = Territory.theTerritories.Find("0517");
-            gi.Arches.Add(arch2); // AddStartingTestingOptions()
-            //---------------------
-            gi.DayOfLastOffering = gi.Days - 4;
-            gi.IsSecretTempleKnown = true;
-            gi.ChagaDrugCount = 2;
-            gi.IsMarkOfCain = true; // e018
-            gi.NumMonsterKill = 5; // e161e - kill 5 monsters
-            //---------------------
-            gi.IsSecretBaronHuldra = true; // e144
-            gi.IsSecretLadyAeravir = true; // e145
-            gi.IsSecretCountDrogat = true; // e146
-            IMapItem trueHeir = CreateCharacter(gi, "WarriorBoy");
-            gi.AddCompanion(trueHeir);
-            //---------------------
-            foreach (IMapItem mi11 in gi.PartyMembers)
-               mi11.AddSpecialItemToKeep(SpecialEnum.ResurrectionNecklace);
-            //---------------------
-            IMapItem mi111 = this.CreateCharacter(gi, "Porter");
-            mi111.PlagueDustWound = 2;
-            gi.AddCompanion(mi111);
-            //---------------------
-            GameEngine.theFeatsInGame.myIsEagleAdded = true;
-            GameEngine.theFeatsInGame.myIsPurchaseFoulbane = true;
-            GameEngine.theFeatsInGame.myIsRescueHeir = true;
-            //---------------------
-            foreach (IMapItem partyMember in gi.PartyMembers)
-            {
-               foreach (IMapItem mount in partyMember.Mounts)
-               {
-                  if ((true == mount.Name.Contains("Griffon")) || (true == mount.Name.Contains("Harpy")))
-                     continue;
-                  gi.AtRiskMounts.Add(mount);
-               }
-            }
+         //   gi.AddSpecialItem(SpecialEnum.GiftOfCharm);
+         //   gi.AddSpecialItem(SpecialEnum.ResistanceTalisman);
+         //   gi.AddSpecialItem(SpecialEnum.CharismaTalisman);
+         //   gi.AddSpecialItem(SpecialEnum.DragonEye);
+         //   gi.AddSpecialItem(SpecialEnum.RocBeak);
+         //   gi.AddSpecialItem(SpecialEnum.GriffonClaws);
+         //   gi.Prince.AddSpecialItemToShare(SpecialEnum.Foulbane);
+         //   gi.AddSpecialItem(SpecialEnum.HealingPoition);
+         //   gi.AddSpecialItem(SpecialEnum.CurePoisonVial);
+         //   gi.AddSpecialItem(SpecialEnum.EnduranceSash);
+         //   gi.AddSpecialItem(SpecialEnum.PoisonDrug);
+         //   gi.AddSpecialItem(SpecialEnum.MagicSword);
+         //   gi.AddSpecialItem(SpecialEnum.AntiPoisonAmulet);
+         //   gi.AddSpecialItem(SpecialEnum.PegasusMountTalisman);
+         //   gi.AddSpecialItem(SpecialEnum.NerveGasBomb);
+         //   gi.AddSpecialItem(SpecialEnum.ResistanceRing);
+         //   gi.AddSpecialItem(SpecialEnum.ResurrectionNecklace);
+         //   gi.AddSpecialItem(SpecialEnum.ShieldOfLight);
+         //   gi.AddSpecialItem(SpecialEnum.RoyalHelmOfNorthlands);
+         //   gi.Prince.AddSpecialItemToShare(SpecialEnum.MagicBox);
+         //   gi.Prince.AddSpecialItemToShare(SpecialEnum.HydraTeeth);
+         //   //---------------------
+         //   gi.HydraTeethCount = 5;
+         //   gi.Prince.AddSpecialItemToShare(SpecialEnum.StaffOfCommand);
+         //   ITerritory visited = Territory.theTerritories.Find("0109");
+         //   gi.VisitedLocations.Add(visited);
+         //   ITerritory escapeLocation = Territory.theTerritories.Find("0605");
+         //   gi.EscapedLocations.Add(escapeLocation);
+         //   ITerritory cacheHex = Territory.theTerritories.Find("0504");
+         //   gi.Caches.Add(cacheHex, 66);
+         //   cacheHex = Territory.theTerritories.Find("0505");
+         //   gi.Caches.Add(cacheHex, 333);
+         //   gi.Caches.Add(cacheHex, 100);
+         //   gi.Caches.Add(cacheHex, 500);
+         //   gi.Caches.Add(cacheHex, 33);
+         //   //---------------------
+         //   ITerritory secretClueHex = Territory.theTerritories.Find("0507");
+         //   gi.SecretClues.Add(secretClueHex);
+         //   ITerritory secretClueHex2 = Territory.theTerritories.Find("0406");
+         //   gi.SecretClues.Add(secretClueHex2);
+         //   ////---------------------
+         //   ITerritory hiddenTemple = Territory.theTerritories.Find("0605");
+         //   gi.HiddenTemples.Add(hiddenTemple);
+         //   ITerritory hiddenRuin = Territory.theTerritories.Find("0606");
+         //   gi.HiddenRuins.Add(hiddenRuin);
+         //   ////---------------------
+         //   ITerritory elfTown = Territory.theTerritories.Find("0607");
+         //   gi.ElfTowns.Add(elfTown);
+         //   ITerritory eagleLair = Territory.theTerritories.Find("1507");
+         //   gi.EagleLairs.Add(eagleLair);
+         //   ITerritory dwarvenMine = Territory.theTerritories.Find("0408");
+         //   gi.DwarvenMines.Add(dwarvenMine);
+         //   ITerritory dwarfAdviceHex = Territory.theTerritories.Find("0319");
+         //   gi.DwarfAdviceLocations.Add(dwarfAdviceHex);
+         //   ITerritory halflingTown = Territory.theTerritories.Find("0303");
+         //   gi.HalflingTowns.Add(halflingTown);
+         //   ITerritory elfCastle = Territory.theTerritories.Find("0608");
+         //   gi.ElfCastles.Add(elfCastle);
+         //   ////---------------------
+         //   ITerritory wizardTower = Territory.theTerritories.Find("0404");  //mountain
+         //   gi.WizardTowers.Add(wizardTower);
+         //   ITerritory wizardAdviceHex = Territory.theTerritories.Find("1005");
+         //   gi.WizardAdviceLocations.Add(wizardAdviceHex);
+         //   ITerritory wizardAdviceHex2 = Territory.theTerritories.Find("0406");
+         //   gi.WizardAdviceLocations.Add(wizardAdviceHex2);
+         //   //---------------------
+         //   ITerritory pixieAdviceHex = Territory.theTerritories.Find("0406");
+         //   gi.PixieAdviceLocations.Add(pixieAdviceHex);
+         //   //---------------------
+         //   ITerritory t11 = Territory.theTerritories.Find("0306"); // e114 - verify that eagle hunt can happen in structure
+         //   gi.HiddenTemples.Add(t11);
+         //   t11 = Territory.theTerritories.Find("0307"); // e114 - verify that eagle hunt can happen in structure
+         //   gi.HiddenTemples.Add(t11);
+         //   t11 = Territory.theTerritories.Find("1507"); // e114 - verify that eagle hunt can happen in structure
+         //   gi.HiddenTemples.Add(t11);
+         //   t11 = Territory.theTerritories.Find("0405"); // e114 - verify that eagle hunt can happen in structure
+         //   gi.HiddenTemples.Add(t11);
+         //   t11 = Territory.theTerritories.Find("0406"); // e114 - verify that eagle hunt can happen in structure
+         //   gi.HiddenTemples.Add(t11);
+         //   t11 = Territory.theTerritories.Find("0506"); // e114 - verify that eagle hunt can happen in structure
+         //   gi.HiddenTemples.Add(t11);
+         //   t11 = Territory.theTerritories.Find("0507"); // e114 - verify that eagle hunt can happen in structure
+         //   gi.HiddenTemples.Add(t11);
+         //   gi.Purifications.Add(t11);
+         //   //---------------------
+         //   ITerritory forbiddenHex = Territory.theTerritories.Find("0705");
+         //   gi.ForbiddenHexes.Add(forbiddenHex);
+         //   //---------------------
+         //   ITerritory purificationHex = Territory.theTerritories.Find("1805");
+         //   gi.ForbiddenAudiences.AddPurifyConstaint(purificationHex);
+         //   //---------------------
+         //   ITerritory forbiddenAudienceOffering= Territory.theTerritories.Find("1021");
+         //   gi.ForbiddenAudiences.AddOfferingConstaint(forbiddenAudienceOffering, Utilities.FOREVER);
+         //   //---------------------
+         //   ITerritory forbiddenAudience = Territory.theTerritories.Find("0101");
+         //   ITerritory lt1 = Territory.theTerritories.Find("0109");
+         //   ITerritory lt2 = Territory.theTerritories.Find("0711");
+         //   ITerritory lt3 = Territory.theTerritories.Find("1212");
+         //   gi.LetterOfRecommendations.Add(lt1);
+         //   gi.LetterOfRecommendations.Add(lt1);
+         //   gi.ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt1);
+         //   gi.LetterOfRecommendations.Add(lt2);
+         //   gi.ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt2);
+         //   gi.LetterOfRecommendations.Add(lt3);
+         //   gi.ForbiddenAudiences.AddLetterConstraint(forbiddenAudience, lt3);
+         //   //---------------------
+         //   ITerritory forbiddenAudienceAssistant = Territory.theTerritories.Find("0216");
+         //   IMapItem trustedAssistant = CreateCharacter(gi, "TrustedAssistant");
+         //   gi.AddCompanion(trustedAssistant);
+         //   gi.ForbiddenAudiences.AddAssistantConstraint(forbiddenAudienceAssistant, trustedAssistant);
+         //   ITerritory lt4 = Territory.theTerritories.Find("1212");
+         //   gi.ForbiddenAudiences.UpdateLetterLocation(lt4); // need to assign target territory after construction
+         //   //---------------------
+         //   ITerritory forbiddenAudienceTime = Territory.theTerritories.Find("0323");
+         //   gi.ForbiddenAudiences.AddTimeConstraint(forbiddenAudienceTime, 10);
+         //   //---------------------
+         //   ITerritory forbiddenAudienceClothes= Territory.theTerritories.Find("0109");
+         //   gi.ForbiddenAudiences.AddClothesConstraint(forbiddenAudienceClothes);
+         //   //---------------------
+         //   ITerritory forbiddenAudienceReligion = Territory.theTerritories.Find("1004");
+         //   gi.ForbiddenAudiences.AddReligiousConstraint(forbiddenAudienceReligion);
+         //   //---------------------
+         //   ITerritory forbiddenAudienceKills = Territory.theTerritories.Find("0323");
+         //   gi.ForbiddenAudiences.AddMonsterKillConstraint(forbiddenAudienceKills);
+         //   //---------------------
+         //   gi.IsArchTravelKnown = true;
+         //   ITerritory arch1 = Territory.theTerritories.Find("0418");  //
+         //   gi.Arches.Add(arch1); // AddStartingTestingOptions()
+         //   ITerritory arch2 = Territory.theTerritories.Find("0517");
+         //   gi.Arches.Add(arch2); // AddStartingTestingOptions()
+         //   //---------------------
+         //   gi.DayOfLastOffering = gi.Days - 4;
+         //   gi.IsSecretTempleKnown = true;
+         //   gi.ChagaDrugCount = 2;
+         //   gi.IsMarkOfCain = true; // e018
+         //   gi.NumMonsterKill = 5; // e161e - kill 5 monsters
+         //   //---------------------
+         //   gi.IsSecretBaronHuldra = true; // e144
+         //   gi.IsSecretLadyAeravir = true; // e145
+         //   gi.IsSecretCountDrogat = true; // e146
+         //   IMapItem trueHeir = CreateCharacter(gi, "WarriorBoy");
+         //   gi.AddCompanion(trueHeir);
+         //   //---------------------
+         //   foreach (IMapItem mi11 in gi.PartyMembers)
+         //      mi11.AddSpecialItemToKeep(SpecialEnum.ResurrectionNecklace);
+         //   //---------------------
+         //   IMapItem mi111 = this.CreateCharacter(gi, "Porter");
+         //   mi111.PlagueDustWound = 2;
+         //   gi.AddCompanion(mi111);
+         //   //---------------------
+         //   GameEngine.theFeatsInGame.myIsEagleAdded = true;
+         //   GameEngine.theFeatsInGame.myIsPurchaseFoulbane = true;
+         //   GameEngine.theFeatsInGame.myIsRescueHeir = true;
+         //   //---------------------
+         //   foreach (IMapItem partyMember in gi.PartyMembers)
+         //   {
+         //      foreach (IMapItem mount in partyMember.Mounts)
+         //      {
+         //         if ((true == mount.Name.Contains("Griffon")) || (true == mount.Name.Contains("Harpy")))
+         //            continue;
+         //         gi.AtRiskMounts.Add(mount);
+         //      }
+         //   }
          }
       }
       private void PrintDiagnosticInfoToLog()
