@@ -36,7 +36,16 @@ namespace BarbarianPrince
       //-------------------------------------------------------------------------------
       private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
       {
-         Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+         try
+         {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
+         }
+         catch (Exception ex)
+         {
+            MessageBox.Show(ex.Message);
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+         }
          e.Handled = true;
       }
       private void ButtonOk_Click(object sender, RoutedEventArgs e)

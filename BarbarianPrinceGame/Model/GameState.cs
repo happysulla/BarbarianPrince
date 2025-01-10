@@ -829,7 +829,16 @@ namespace BarbarianPrince
          }
          gi.Prince.TerritoryStarting = gi.Prince.Territory;
          gi.NewHex = adjacentTerritory;         // EncounterEscape()
-         gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_ESCAPE)); // EncounterEscape()
+         EnteredHex hex6 = new EnteredHex(gi, ColorActionEnum.CAE_ESCAPE);
+         if (true == hex6.CtorError)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "EncounterEscape(): EnteredHex() returned false for CAE_ESCAPE");
+            return false;
+         }
+         else
+         {
+            gi.EnteredHexes.Add(hex6);
+         }
          this.AddVisitedLocation(gi); // EncounterEscape()
          if (false == AddMapItemMove(gi, adjacentTerritory))
          {
@@ -885,7 +894,16 @@ namespace BarbarianPrince
          //---------------------------------------------
          gi.Prince.TerritoryStarting = gi.Prince.Territory;
          gi.NewHex = adjacentTerritory;         // EncounterFollow()
-         gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_FOLLOW)); // EncounterFollow()
+         EnteredHex hex6 = new EnteredHex(gi, ColorActionEnum.CAE_FOLLOW);
+         if (true == hex6.CtorError)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "EncounterFollow(): EnteredHex(EncounterFollow) returned false for CAE_FOLLOW");
+            return false;
+         }
+         else
+         {
+            gi.EnteredHexes.Add(hex6);
+         }
          this.AddVisitedLocation(gi); // EncounterFollow()
          if (false == AddMapItemMove(gi, adjacentTerritory))
          {
@@ -1724,7 +1742,15 @@ namespace BarbarianPrince
             return false;
          }
          gi.NewHex = gi.Prince.Territory = gi.Prince.TerritoryStarting = starting;
-         gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_START));
+         EnteredHex hex2 = new EnteredHex(gi, ColorActionEnum.CAE_START); // SetStartingLocation()
+         if (true == hex2.CtorError)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "EnteredHex(SetStartingLocation) returned false for CAE_START");
+         }
+         else
+         {
+            gi.EnteredHexes.Add(hex2);
+         }
          this.AddVisitedLocation(gi); // SetStartingLocation()
          gi.Prince.Territory = starting;  
          gi.Prince.TerritoryStarting = starting;
@@ -2640,13 +2666,9 @@ namespace BarbarianPrince
          sb.Append(RuntimeInformation.ProcessArchitecture.ToString());
          sb.Append("\n\tnetVersion=");
          sb.Append(Environment.Version.ToString());
-         uint dpiX = 0;
-         uint dpiY = 0;
-         ScreenExtensions.GetDpi(System.Windows.Forms.Screen.PrimaryScreen, ScreenExtensions.DpiType.Effective, out dpiX, out dpiY);
+         var dpi = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / System.Windows.SystemParameters.PrimaryScreenWidth;
          sb.Append("\n\tDPI=(");
-         sb.Append(dpiX.ToString());
-         sb.Append(",");
-         sb.Append(dpiY.ToString());
+         sb.Append(dpi.ToString());
          sb.Append(")\n\tAppDir=");
          sb.Append(MainWindow.theAssemblyDirectory);
          Logger.Log(LogEnum.LE_GAME_INIT_VERSION, sb.ToString());
@@ -2860,7 +2882,16 @@ namespace BarbarianPrince
                ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = GamePhase.SeekHire;
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_HIRE));
+               EnteredHex hex6 = new EnteredHex(gi, ColorActionEnum.CAE_HIRE);
+               if (true == hex6.CtorError)
+               {
+                  returnStatus = "EnteredHex(SeekHire) returned false for CAE_HIRE";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  gi.EnteredHexes.Add(hex6);
+               }
                gi.EventDisplayed = gi.EventActive = "e210"; // next screen to show
                gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterRoll;
@@ -2869,7 +2900,16 @@ namespace BarbarianPrince
                ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = GamePhase.SeekAudience;
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_AUDIENCE));
+               EnteredHex hex7 = new EnteredHex(gi, ColorActionEnum.CAE_AUDIENCE);
+               if (true == hex7.CtorError)
+               {
+                  returnStatus = " EnteredHex(SeekAudience) returned false for CAE_AUDIENCE";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  gi.EnteredHexes.Add(hex7);
+               }
                if (true == gi.IsInTown(princeTerritory))
                {
                   gi.EventDisplayed = gi.EventActive = "e211a";
@@ -2918,7 +2958,16 @@ namespace BarbarianPrince
                ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = GamePhase.SeekOffering;
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_OFFERING));
+               EnteredHex hex61 = new EnteredHex(gi, ColorActionEnum.CAE_OFFERING); // SeekOffering()
+               if (true == hex61.CtorError)
+               {
+                  returnStatus = "EnteredHex(SeekOffering) returned false for CAE_OFFERING";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSunriseChoice.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  gi.EnteredHexes.Add(hex61);
+               }
                gi.ReduceCoins("SeekOffering", 1); // must spend one gold to make offering
                gi.EventStart = gi.EventDisplayed = gi.EventActive = "e212";
                if (0 < gi.ChagaDrugCount)
@@ -2931,7 +2980,16 @@ namespace BarbarianPrince
                ResetDayForNonTravelChoice(gi, action);
                gi.NumMembersBeingFollowed = 0;
                gi.SunriseChoice = GamePhase.SearchRuins;
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_SEARCH_RUINS));
+               EnteredHex hex3 = new EnteredHex(gi, ColorActionEnum.CAE_SEARCH_RUINS); // SearchRuins()
+               if (true == hex3.CtorError)
+               {
+                  returnStatus = "EnteredHex(SearchRuins) returned false for CAE_SEARCH_RUINS";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSeekNews.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  gi.EnteredHexes.Add(hex3);
+               }
                if (true == gi.RuinsUnstable.Contains(princeTerritory)) // once a ruins is discovered to be unstable, it is always unstable
                {
                   gi.EventDisplayed = gi.EventActive = "e134";
@@ -3593,7 +3651,16 @@ namespace BarbarianPrince
          gi.RaftStatePrevUndo = gi.RaftState = RaftEnum.RE_NO_RAFT; // PerformJailBreak()
          gi.IsAirborne = false;
          EnteredHex hex = new EnteredHex(gi, ColorActionEnum.CAE_JAIL);
-         hex.IsEncounter = true;
+         if (true == hex.CtorError)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "PerformJailBreak(): EnteredHex(SeekAudience) returned false for CAE_JAIL");
+            return false;
+         }
+         else
+         {
+            hex.IsEncounter = true;
+            gi.EnteredHexes.Add(hex);
+         }
          ++gi.Statistic.myDaysInJailorDungeon;
          switch (gi.EventActive)
          {
@@ -3771,7 +3838,16 @@ namespace BarbarianPrince
                gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterStart;
                gi.NewHex = gi.Prince.Territory;
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_REST));
+               EnteredHex hex5 = new EnteredHex(gi, ColorActionEnum.CAE_REST); // RestHealingEncounter()
+               if (true == hex5.CtorError)
+               {
+                  returnStatus = "EnteredHex(RestHealingEncounter) returned false for CAE_REST";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSearch.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  gi.EnteredHexes.Add(hex5);
+               }
                Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateRest.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
                gi.Prince.MovementUsed = gi.Prince.Movement; // End of the day
                if (false == SetSubstitutionEvent(gi, princeTerritory))           // GameStateRest.PerformAction()      - RestHealingEncounter
@@ -3782,7 +3858,16 @@ namespace BarbarianPrince
                break;
             case GameAction.RestHealing:
                gi.NewHex = gi.Prince.Territory;
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_REST));
+               EnteredHex hex6 = new EnteredHex(gi, ColorActionEnum.CAE_REST); // RestHealing()
+               if (true == hex6.CtorError)
+               {
+                  returnStatus = "EnteredHex(RestHealing) returned false for CAE_REST";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateRest.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  gi.EnteredHexes.Add(hex6);
+               }
                foreach (IMapItem mi in gi.PartyMembers)
                {
                   if( 0 < mi.Wound )
@@ -3928,7 +4013,16 @@ namespace BarbarianPrince
                else
                {
                   gi.NewHex = gi.Prince.Territory;
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_LOST)); // GameStateTravel.PerformAction(TravelShowLost)
+                  EnteredHex hex6 = new EnteredHex(gi, ColorActionEnum.CAE_LOST);
+                  if (true == hex6.CtorError)
+                  {
+                     returnStatus = "EnteredHex(TravelShowLost) returned false for CAE_LOST";
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+                  }
+                  else
+                  {
+                     gi.EnteredHexes.Add(hex6);
+                  }
                   Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateTravel.PerformAction(): gi.MapItemMoves.Clear() a=TravelShowLost");
                   gi.MapItemMoves.Clear();
                   --gi.Prince.MovementUsed;
@@ -3964,7 +4058,16 @@ namespace BarbarianPrince
                   if (RiverCrossEnum.TC_CROSS_YES_SHOWN != gi.MapItemMoves[0].RiverCross)
                   {
                      gi.NewHex = gi.Prince.Territory;
-                     gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_LOST)); // GameStateTravel.PerformAction(TravelShowLostEncounter)
+                     EnteredHex hex6 = new EnteredHex(gi, ColorActionEnum.CAE_LOST); 
+                     if (true == hex6.CtorError)
+                     {
+                        returnStatus = "EnteredHex(TravelShowLostEncounter) returned false for CAE_LOST";
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+                     }
+                     else
+                     {
+                        gi.EnteredHexes.Add(hex6);
+                     }
                      Logger.Log(LogEnum.LE_VIEW_MIM_CLEAR, "GameStateTravel.PerformAction(): gi.MapItemMoves.Clear() a=TravelShowLostEncounter");
                      gi.MapItemMoves.Clear();
                      --gi.Prince.MovementUsed;
@@ -4045,11 +4148,29 @@ namespace BarbarianPrince
                }
                if (true == gi.IsAirborne)
                {
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR)); // TravelShowMovement 
+                  EnteredHex hex = new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR);
+                  if (true == hex.CtorError)
+                  {
+                     returnStatus = "EnteredHex(E126RaftInCurrentEnd) returned false for CAE_TRAVEL_AIR";
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+                  }
+                  else
+                  {
+                     gi.EnteredHexes.Add(hex); // TravelShowMovement()
+                  }
                }
                else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
                {
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT)); // TravelShowMovement()
+                  EnteredHex hex = new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT);
+                  if (true == hex.CtorError)
+                  {
+                     returnStatus = "EnteredHex(TravelShowMovement) returned false for CAE_TRAVEL_RAFT";
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+                  }
+                  else
+                  {
+                     gi.EnteredHexes.Add(hex); // TravelShowMovementEncounter()
+                  }
                   this.AddVisitedLocation(gi);  // GameStateTravel.PerformAction(TravelShowMovement) - RaftEnum.RE_RAFT_CHOSEN 
                }
                else if (RaftEnum.RE_RAFT_ENDS_TODAY == gi.RaftState) // TravelShowMovement()
@@ -4059,7 +4180,18 @@ namespace BarbarianPrince
                else
                {
                   if (false == gi.IsAirborneEnd)
-                     gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL)); // TravelShowMovement 
+                  {
+                     EnteredHex hex2 = new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL); // TravelShowMovement 
+                     if (true == hex2.CtorError)
+                     {
+                        returnStatus = "EnteredHex(TravelShowMovement) returned false for CAE_TRAVEL";
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+                     }
+                     else
+                     {
+                        gi.EnteredHexes.Add(hex2); // TravelShowMovementEncounter
+                     }
+                  }
                   this.AddVisitedLocation(gi);  // GameStateTravel.PerformAction(TravelShowMovement)  
                }
                break;
@@ -4087,28 +4219,61 @@ namespace BarbarianPrince
                //------------------------
                if (true == gi.IsAirborne)
                {
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR));
+                  EnteredHex hex = new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR); 
+                  if (true == hex.CtorError)
+                  {
+                     returnStatus = "EnteredHex(gi.IsAirborne) returned false for CAE_TRAVEL_AIR";
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+                  }
+                  else
+                  {
+                     gi.EnteredHexes.Add(hex); // TravelShowMovement()
+                  }
                }
                else if (RaftEnum.RE_RAFT_CHOSEN == gi.RaftState)
                {
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT)); // TravelShowMovementEncounter()
+                  EnteredHex hex = new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_RAFT);
+                  if( true == hex.CtorError)
+                  {
+                     returnStatus = "EnteredHex(TravelShowMovementEncounter) returned false for CAE_TRAVEL_RAFT";
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+                  }
+                  else
+                  {
+                     gi.EnteredHexes.Add(hex); // TravelShowMovementEncounter()
+                  }
                   this.AddVisitedLocation(gi);  // GameStateTravel.PerformAction()   - TravelShowMovementEncounter - RE_RAFT_CHOSEN
                }
                else if (RaftEnum.RE_RAFT_ENDS_TODAY == gi.RaftState)
                {
-                  EnteredHex enteredHex = gi.EnteredHexes.Last();
-                  enteredHex.EventNames.Add(gi.EventActive);
+                  if( 0 < gi.EnteredHexes.Count)
+                  {
+                     EnteredHex enteredHex = gi.EnteredHexes.Last();
+                     enteredHex.EventNames.Add(gi.EventActive);
+                  }
                }
                else
                {
                   if (false == gi.IsAirborneEnd)
                   {
-                     gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL));
+                     EnteredHex hex2 = new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL); // GameStateEncounter.PerformAction(E045ArchOfTravelEnd)
+                     if (true == hex2.CtorError)
+                     {
+                        returnStatus = "EnteredHex(TravelShowMovementEncounter) returned false for CAE_TRAVEL";
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+                     }
+                     else
+                     {
+                        gi.EnteredHexes.Add(hex2);
+                     }
                   }
                   else
                   {
-                     EnteredHex enteredHex = gi.EnteredHexes.Last();
-                     enteredHex.EventNames.Add(gi.EventActive);
+                     if (0 < gi.EnteredHexes.Count)
+                     {
+                        EnteredHex enteredHex = gi.EnteredHexes.Last();
+                        enteredHex.EventNames.Add(gi.EventActive);
+                     }
                      this.AddVisitedLocation(gi);  // GameStateTravel.PerformAction()   - TravelShowMovementEncounter
                   }
                }
@@ -4288,7 +4453,16 @@ namespace BarbarianPrince
                gi.SunriseChoice = GamePhase.SeekNews;
                gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterRoll;
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_SEEK_NEWS));
+               EnteredHex hex2 = new EnteredHex(gi, ColorActionEnum.CAE_SEEK_NEWS); // SeekNewsNoPay()
+               if (true == hex2.CtorError)
+               {
+                  returnStatus = "EnteredHex(SeekNewsNoPay) returned false for CAE_SEEK_NEWS";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSeekNews.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  gi.EnteredHexes.Add(hex2);
+               }
                break;
             case GameAction.SeekNewsWithPay:
                gi.IsSeekNewModifier = true;
@@ -4297,7 +4471,16 @@ namespace BarbarianPrince
                gi.SunriseChoice = GamePhase.SeekNews;
                gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterRoll;
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_SEEK_NEWS));
+               EnteredHex hex3 = new EnteredHex(gi, ColorActionEnum.CAE_SEEK_NEWS); // SeekNewsWithPay()
+               if (true == hex3.CtorError)
+               {
+                  returnStatus = "EnteredHex(SeekNewsWithPay) returned false for CAE_SEEK_NEWS";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSeekNews.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  gi.EnteredHexes.Add(hex3);
+               }
                break;
             default:
                returnStatus = "Reached Default ERROR";
@@ -4380,7 +4563,16 @@ namespace BarbarianPrince
                gi.SunriseChoice = GamePhase.SeekHire;
                gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterRoll;
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_HIRE));
+               EnteredHex hex6 = new EnteredHex(gi, ColorActionEnum.CAE_HIRE);
+               if (true == hex6.CtorError)
+               {
+                  returnStatus = "EnteredHex(SeekHire) returned false for CAE_HIRE";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSeekHire.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  gi.EnteredHexes.Add(hex6);
+               }
                break;
             default:
                returnStatus = "Reached Default ERROR";
@@ -4608,7 +4800,16 @@ namespace BarbarianPrince
             case GameAction.SearchEncounter:
                gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterStart;
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_SEARCH));
+               EnteredHex hex3 = new EnteredHex(gi, ColorActionEnum.CAE_SEARCH); // SearchRuins()
+               if (true == hex3.CtorError)
+               {
+                  returnStatus = "EnteredHex(SearchEncounter) returned false for CAE_SEARCH";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSearch.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  gi.EnteredHexes.Add(hex3);
+               }
                Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateSearch.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
                gi.Prince.MovementUsed = gi.Prince.Movement; // End of the day
                if (false == SetSubstitutionEvent(gi, princeTerritory))           // GameStateSearch.PerformAction() - SearchEncounter
@@ -4620,14 +4821,32 @@ namespace BarbarianPrince
             case GameAction.SearchCache:
                gi.SunriseChoice = gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterRoll;
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_SEARCH));
+               EnteredHex hex4 = new EnteredHex(gi, ColorActionEnum.CAE_SEARCH); // SearchCache()
+               if (true == hex4.CtorError)
+               {
+                  returnStatus = "EnteredHex(SearchCache) returned false for CAE_SEARCH";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSearch.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  gi.EnteredHexes.Add(hex4);
+               }
                Logger.Log(LogEnum.LE_NEXT_ACTION, ":GameStateSearch.PerformAction(): SearchCache action");
                gi.EventActive = gi.EventDisplayed = "e214";
                break;
             case GameAction.SearchTreasure:
                gi.SunriseChoice = gi.GamePhase = GamePhase.Encounter;
                gi.DieRollAction = GameAction.EncounterRoll;
-               gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_SEARCH));
+               EnteredHex hex5 = new EnteredHex(gi, ColorActionEnum.CAE_SEARCH); // SearchTreasure()
+               if (true == hex5.CtorError)
+               {
+                  returnStatus = "EnteredHex(SearchTreasure) returned false for CAE_SEARCH";
+                  Logger.Log(LogEnum.LE_ERROR, "GameStateSearch.PerformAction(): " + returnStatus);
+               }
+               else
+               {
+                  gi.EnteredHexes.Add(hex5);
+               }
                if (true == gi.SecretClues.Contains(princeTerritory))
                   gi.EventDisplayed = gi.EventActive = "e147a";
                else if ((true == gi.WizardAdviceLocations.Contains(princeTerritory)) || (true == gi.PixieAdviceLocations.Contains(princeTerritory)) )
@@ -5545,7 +5764,16 @@ namespace BarbarianPrince
                      Logger.Log(LogEnum.LE_VIEW_MIM_ADD, "GameStateEncounter.PerformAction(E045ArchOfTravelEnd): oT =" + princeTerritory.Name + " nT=" + mimArchTravel.NewTerritory.Name);
                   }
                   gi.NewHex = princeTerritory; // GameStateEncounter.PerformAction(E045ArchOfTravelEnd)
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL)); // GameStateEncounter.PerformAction(E045ArchOfTravelEnd)
+                  EnteredHex hex2 = new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL); // GameStateEncounter.PerformAction(E045ArchOfTravelEnd)
+                  if (true == hex2.CtorError)
+                  {
+                     returnStatus = "EnteredHex(TravelShowMovement) returned false for CAE_TRAVEL";
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+                  }
+                  else
+                  {
+                     gi.EnteredHexes.Add(hex2);
+                  }
                   //----------------------------------------------
                   if (true == gi.IsPartyRiding())
                      gi.Prince.Movement = 3;
@@ -6204,8 +6432,18 @@ namespace BarbarianPrince
                      --gi.Prince.MovementUsed;
                      gi.Prince.TerritoryStarting = gi.Prince.Territory;
                      gi.NewHex = previousTerritory;
-                     gi.EnteredHexes.RemoveAt(gi.EnteredHexes.Count - 1); // remove last entry 
-                     gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR));
+                     if( 0 < gi.EnteredHexes.Count )
+                        gi.EnteredHexes.RemoveAt(gi.EnteredHexes.Count - 1); // remove last entry 
+                     EnteredHex hex11 = new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR);
+                     if (true == hex11.CtorError)
+                     {
+                        returnStatus = "EnteredHex(E103BadHeadWinds) returned false for CAE_TRAVEL_AIR";
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+                     }
+                     else
+                     {
+                        gi.EnteredHexes.Add(hex11); // E103BadHeadWinds()
+                     }
                      if (false == AddMapItemMove(gi, previousTerritory))
                      {
                         returnStatus = " AddMapItemMove() return false";
@@ -6281,7 +6519,16 @@ namespace BarbarianPrince
                   gi.Prince.MovementUsed = 0; // must have movement left to be blown off course
                   gi.Prince.TerritoryStarting = gi.NewHex;
                   gi.NewHex = blowToTerritory;
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR));
+                  EnteredHex hex1 = new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR);
+                  if (true == hex1.CtorError)
+                  {
+                     returnStatus = "EnteredHex(E105ViolentWeather) returned false for CAE_TRAVEL_AIR";
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+                  }
+                  else
+                  {
+                     gi.EnteredHexes.Add(hex1); // E105ViolentWeather
+                  }
                   if (false == AddMapItemMove(gi, blowToTerritory))
                   {
                      returnStatus = " AddMapItemMove() return false";
@@ -6345,7 +6592,16 @@ namespace BarbarianPrince
                   }
                   gi.Prince.TerritoryStarting = gi.NewHex;
                   gi.NewHex = adjacentTerritory;
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR));
+                  EnteredHex hex22 = new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR);
+                  if (true == hex22.CtorError)
+                  {
+                     returnStatus = "EnteredHex(E106OvercastLost) returned false for CAE_TRAVEL_AIR";
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
+                  else
+                  {
+                     gi.EnteredHexes.Add(hex22); // E106OvercastLost
+                  }
                   if (false == AddMapItemMove(gi, adjacentTerritory))
                   {
                      returnStatus = " AddMapItemMove() return false";
@@ -6422,7 +6678,16 @@ namespace BarbarianPrince
                case GameAction.E110AirSpiritTravelEnd:
                   gi.DieResults["e110c"][0] = Utilities.NO_RESULT; // setup if event occurs again in same day
                   gi.AirSpiritLocations = null;
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR)); // NexHex changed to proper hex in GameViewerWindow->MouseDownPolygonTravel()
+                  EnteredHex hex = new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR); // NexHex changed to proper hex in GameViewerWindow->MouseDownPolygonTravel()
+                  if (true == hex.CtorError)
+                  {
+                     returnStatus = "EnteredHex(E126RaftInCurrentEnd) returned false for CAE_TRAVEL_AIR";
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
+                  }
+                  else
+                  {
+                     gi.EnteredHexes.Add(hex); // TravelShowMovement()
+                  }
                   if (gi.Prince.MovementUsed < gi.Prince.Movement)
                   {
                      if (false == EncounterEnd(gi, ref action))
@@ -6583,7 +6848,16 @@ namespace BarbarianPrince
                   }
                   gi.Prince.TerritoryStarting = gi.Prince.Territory;
                   gi.NewHex = downRiverT1;
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_DOWNRIVER));  // E126RaftInCurrentEnd
+                  EnteredHex hex12 = new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_DOWNRIVER);
+                  if (true == hex12.CtorError)
+                  {
+                     returnStatus = "EnteredHex(E126RaftInCurrentEnd) returned false for CAE_TRAVEL_DOWNRIVER";
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+                  }
+                  else
+                  {
+                     gi.EnteredHexes.Add(hex12); // E126RaftInCurrentEnd()
+                  }
                   if (false == AddMapItemMove(gi, downRiverT1))
                   {
                      returnStatus = " AddMapItemMove() returned false";
@@ -6610,7 +6884,16 @@ namespace BarbarianPrince
                   }
                   gi.Prince.TerritoryStarting = gi.Prince.Territory;
                   gi.NewHex = downRiverT; //GameStateEncounter.PerformAction(E126RaftInCurrentRedistribute)
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_DOWNRIVER)); // E126RaftInCurrentRedistribute
+                  EnteredHex hex31 = new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_DOWNRIVER);
+                  if (true == hex31.CtorError)
+                  {
+                     returnStatus = "EnteredHex(E126RaftInCurrentRedistribute) returned false for CAE_TRAVEL_DOWNRIVER";
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+                  }
+                  else
+                  {
+                     gi.EnteredHexes.Add(hex31); // E126RaftInCurrentRedistribute()
+                  }
                   if (false == AddMapItemMove(gi, downRiverT))
                   {
                      returnStatus = " AddMapItemMove() returned false";
@@ -6711,7 +6994,16 @@ namespace BarbarianPrince
                   else
                   {
                      gi.Prince.TerritoryStarting = gi.Prince.Territory;
-                     gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_JAIL));
+                     EnteredHex hex6 = new EnteredHex(gi, ColorActionEnum.CAE_JAIL);
+                     if (true == hex6.CtorError)
+                     {
+                        returnStatus = "EnteredHex(E130JailedOnTravels) returned false for CAE_JAIL";
+                        Logger.Log(LogEnum.LE_ERROR, "GameStateTravel.PerformAction(): " + returnStatus);
+                     }
+                     else
+                     {
+                        gi.EnteredHexes.Add(hex6);
+                     }
                      gi.MapItemMoves.Clear();
                      Logger.Log(LogEnum.LE_MOVE_COUNT, "GameStateEncounter.PerformAction(): MovementUsed=Movement for a=" + action.ToString());
                      --gi.Prince.MovementUsed;
@@ -13503,7 +13795,16 @@ namespace BarbarianPrince
                   gi.Prince.MovementUsed = 0; // must have movement left to be blown off course
                   gi.Prince.TerritoryStarting = gi.NewHex;
                   gi.NewHex = blowToTerritory;
-                  gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR));
+                  EnteredHex hex2 = new EnteredHex(gi, ColorActionEnum.CAE_TRAVEL_AIR);
+                  if (true == hex2.CtorError)
+                  {
+                     Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EnteredHex(E106OvercastLost) returned false for CAE_TRAVEL_AIR for a=" + action.ToString());
+                     return false;
+                  }
+                  else
+                  {
+                     gi.EnteredHexes.Add(hex2); // E106OvercastLost
+                  }
                   this.AddVisitedLocation(gi); // EncounterRoll() - air spirit - fail - blown off course
                   if (false == AddMapItemMove(gi, blowToTerritory))
                   {
@@ -17278,7 +17579,16 @@ namespace BarbarianPrince
             return false;
          }
          gi.NewHex = minT;
-         gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_JAIL));
+         EnteredHex hex6 = new EnteredHex(gi, ColorActionEnum.CAE_JAIL);
+         if (true == hex6.CtorError)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "MoveToClosestGoblinKeep(): EnteredHex(E130JailedOnTravels) returned false for CAE_JAIL");
+            return false;
+         }
+         else
+         {
+            gi.EnteredHexes.Add(hex6);
+         }
          if (false == AddMapItemMove(gi, minT))
          {
             Logger.Log(LogEnum.LE_ERROR, "MoveToClosestGoblinKeep(): AddMapItemMove() returned error for t=" + minT.Name);

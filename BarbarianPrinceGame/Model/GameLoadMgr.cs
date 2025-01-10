@@ -2301,6 +2301,7 @@ namespace BarbarianPrince
                }
                //--------------------------------------
                reader.Read();
+               int wound = 0;
                if (true == reader.IsStartElement())
                {
                   if (reader.Name != "Wound")
@@ -2314,10 +2315,11 @@ namespace BarbarianPrince
                      Logger.Log(LogEnum.LE_ERROR, "ReadXmlGamePartyMembers(): GetAttribute(Wound) returned null");
                      return false;
                   }
-                  mapItem.Wound = Int32.Parse(sWound);
+                  wound = Int32.Parse(sWound);
                }
                //--------------------------------------
                reader.Read();
+               int poison = 0;
                if (true == reader.IsStartElement())
                {
                   if (reader.Name != "Poison")
@@ -2331,8 +2333,9 @@ namespace BarbarianPrince
                      Logger.Log(LogEnum.LE_ERROR, "ReadXmlGamePartyMembers(): GetAttribute(Poison) returned null");
                      return false;
                   }
-                  mapItem.Poison = Int32.Parse(sPoison);
+                  poison = Int32.Parse(sPoison);
                }
+               mapItem.SetWounds(wound, poison);
                //--------------------------------------
                reader.Read();
                if (true == reader.IsStartElement())
