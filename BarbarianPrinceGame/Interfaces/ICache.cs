@@ -7,7 +7,7 @@ namespace BarbarianPrince
 {
    public interface ICache
    {
-      ITerritory TargetTerritory { get; set; }
+      ITerritory CacheTerritory { get; set; }
       int Coin { get; set; }
    }
    public interface ICaches : System.Collections.IEnumerable

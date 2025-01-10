@@ -129,9 +129,10 @@ namespace BarbarianPrince
          fa.Constraint = AudienceConstraintEnum.LETTER_GIVEN;
          myList.Add(fa);
       }
-      public void AddAssistantConstraint(ITerritory forbidden, IMapItem assistant)
+      public void AddAssistantConstraint(ITerritory forbidden, IMapItem assistant, ITerritory target = null)
       {
          IForbiddenAudience fa = new ForbiddenAudience(forbidden, assistant);
+         fa.TargetTerritory = target;
          myList.Add(fa);
       }
       public void AddTimeConstraint(ITerritory forbidden, int day)

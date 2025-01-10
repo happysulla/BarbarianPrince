@@ -204,44 +204,39 @@ namespace BarbarianPrince
                theMutex.ReleaseMutex();
                return;
             }
-            int count = 100;
-            while(0 < --count)
+            try
             {
-               try
+               FileInfo file = new FileInfo(theFileName);
+               if (true == File.Exists(theFileName))
                {
-                  FileInfo file = new FileInfo(theFileName);
-                  if (true == File.Exists(theFileName))
-                  {
-                     StreamWriter swriter = File.AppendText(theFileName);
-                     swriter.Write(logLevel.ToString());
-                     swriter.Write(" ");
-                     swriter.Write(description);
-                     swriter.Write("\n");
-                     swriter.Close();
-                  }
-                  theMutex.ReleaseMutex();
-                  return;
+                  StreamWriter swriter = File.AppendText(theFileName);
+                  swriter.Write(logLevel.ToString());
+                  swriter.Write(" ");
+                  swriter.Write(description);
+                  swriter.Write("\n");
+                  swriter.Close();
                }
-               catch (FileNotFoundException fileException)
-               {
-                  System.Diagnostics.Debug.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + fileException.ToString());
-                  theMutex.ReleaseMutex();
-                  return;
-               }
-               catch (IOException ioException)
-               {
-                  //System.Diagnostics.Debug.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + ioException.ToString());
-               }
-               catch (Exception ex)
-               {
-                  System.Diagnostics.Debug.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + ex.ToString());
-                  theMutex.ReleaseMutex();
-                  return;
-               }
-            } // end for
-            if( 0 == count )
-               System.Diagnostics.Debug.WriteLine("Log(): UNALBE TO WRITE - File locked by another read") ;
-            theMutex.ReleaseMutex();
+               theMutex.ReleaseMutex();
+               return;
+            }
+            catch (FileNotFoundException fileException)
+            {
+               System.Diagnostics.Debug.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + fileException.ToString());
+               theMutex.ReleaseMutex();
+               return;
+            }
+            catch (IOException ioException)
+            {
+               System.Diagnostics.Debug.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + ioException.ToString());
+               theMutex.ReleaseMutex();
+               return;
+            }
+            catch (Exception ex)
+            {
+               System.Diagnostics.Debug.WriteLine("Log(): ll=" + logLevel.ToString() + "desc=" + description + "\n" + ex.ToString());
+               theMutex.ReleaseMutex();
+               return;
+            }
          }
       }
    }

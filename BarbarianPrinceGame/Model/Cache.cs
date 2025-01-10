@@ -9,11 +9,11 @@ namespace BarbarianPrince
    [Serializable]
    public class Cache : ICache
    {
-      public ITerritory TargetTerritory { get; set; } = null;
+      public ITerritory CacheTerritory { get; set; } = null;
       public int Coin { get; set; } = 0;
       public Cache(ITerritory territory, int coin)
       {
-         TargetTerritory = territory;
+         CacheTerritory = territory;
          Coin = coin;
       }
    }
@@ -76,7 +76,7 @@ namespace BarbarianPrince
          foreach (Object o in myList)
          {
             ICache c = (ICache)o;
-            if (tName == c.TargetTerritory.Name)
+            if (tName == c.CacheTerritory.Name)
                return c;
          }
          return null;

@@ -21,14 +21,19 @@ namespace BarbarianPrince
       //--------------------------------------------------
       public GameLoadMgr() { }
       //--------------------------------------------------
-      public IGameInstance OpenGame()
+      public IGameInstance? OpenGame()
       {
          try
          {
             if (false == Directory.Exists(theGamesDirectory)) // create directory if does not exists
                Directory.CreateDirectory(theGamesDirectory);
             string filename = theGamesDirectory + "Checkpoint.bpg";
-            IGameInstance gi = ReadXml(filename);
+            IGameInstance? gi = ReadXml(filename);
+            if( null == gi )
+            {
+               Logger.Log(LogEnum.LE_ERROR, "OpenGame(): ReadXml() returned null for " + filename);
+               return null;
+            }
             Logger.Log(LogEnum.LE_GAME_INIT, "OpenGame(): gi=" + gi.ToString());
             return gi;
          }
@@ -100,11 +105,18 @@ namespace BarbarianPrince
             dlg.Filter = "Barbarin Prince Games|*.bpg";
             if (true == dlg.ShowDialog())
             {
-               IGameInstance gi = ReadXml(dlg.FileName);
+               IGameInstance? gi = ReadXml(dlg.FileName);
+               if (null == gi)
+               {
+                  Directory.SetCurrentDirectory(MainWindow.theAssemblyDirectory);
+                  Logger.Log(LogEnum.LE_ERROR, "OpenGame(): ReadXml(=) returned null for " + dlg.FileName);
+                  return null;
+               }
                Logger.Log(LogEnum.LE_GAME_INIT, "OpenGameFromFile(): gi=" + gi.ToString());
                string? gamePath = Path.GetDirectoryName(dlg.FileName); // save off the directory user chosen
                if( null == gamePath)
                {
+                  Directory.SetCurrentDirectory(MainWindow.theAssemblyDirectory);
                   Logger.Log(LogEnum.LE_ERROR, "OpenGameFromFile(): Path.GetDirectoryName() returned null for fn=" + dlg.FileName);
                   return null;
                }
@@ -204,7 +216,24 @@ namespace BarbarianPrince
          return sb.ToString();
       }
       //--------------------------------------------------
-      private IGameInstance ReadXml(string filename)
+      private int GetMajorVersion()
+      {
+         Assembly assembly = Assembly.GetExecutingAssembly();
+         if (null == assembly)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): Assembly.GetExecutingAssembly()=null");
+            return -1;
+         }
+         Version? versionRunning = assembly.GetName().Version;
+         if (null == versionRunning)
+         {
+            Logger.Log(LogEnum.LE_ERROR, "CreateXml():  assembly.GetName().Version=null");
+            return -1;
+         }
+         return versionRunning.Major;  
+      }
+      //--------------------------------------------------
+      private IGameInstance? ReadXml(string filename)
       {
          IGameInstance gi = new GameInstance();
          IMapItems mapItems1 = new MapItems();
@@ -220,7 +249,7 @@ namespace BarbarianPrince
                if (reader.Name != "GameInstance")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): first node is not GameInstance");
-                  return gi;
+                  return null;
                }
             }
             //----------------------------------------------
@@ -230,15 +259,21 @@ namespace BarbarianPrince
                if (reader.Name != "Version")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
-                  string? version = reader.GetAttribute("value");
-                  if (null == version)
+                  string? sVersion = reader.GetAttribute("value");
+                  if (null == sVersion)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): version=null");
-                     return gi;
+                     return null;
+                  }
+                  int version = Int32.Parse(sVersion);
+                  if ( version != GetMajorVersion() )
+                  {
+                     MessageBox.Show("Unable to open due to version mismatch. File v" + version + " does not match running v" + GetMajorVersion() + ".");
+                     return null;
                   }
                }
             }
@@ -246,19 +281,19 @@ namespace BarbarianPrince
             if( false == ReadXmlOptions(reader, gi.Options))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlOptions() returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlGameStat(reader, gi.Statistic))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlGameStat() returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlGamePartyMembers(reader, gi))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlGamePartyMembers() returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             reader.Read();
@@ -267,7 +302,7 @@ namespace BarbarianPrince
                if (reader.Name != "WitAndWile")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -275,7 +310,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(WitAndWile)=null");
-                     return gi;
+                     return null;
                   }
                   gi.WitAndWile = Int32.Parse(sAttribute);
                }
@@ -287,7 +322,7 @@ namespace BarbarianPrince
                if (reader.Name != "WitAndWileInitial")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -295,7 +330,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(WitAndWileInitial)=null");
-                     return gi;
+                     return null;
                   }
                   gi.WitAndWileInitial = Int32.Parse(sAttribute);
                }
@@ -307,7 +342,7 @@ namespace BarbarianPrince
                if (reader.Name != "Days")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -315,7 +350,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(Days)=null");
-                     return gi;
+                     return null;
                   }
                   gi.Days = Int32.Parse(sAttribute);
                }
@@ -327,7 +362,7 @@ namespace BarbarianPrince
                if (reader.Name != "EventActive")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -335,7 +370,7 @@ namespace BarbarianPrince
                   if (null == gi.EventActive)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(EventActive)=null");
-                     return gi;
+                     return null;
                   }
                }
             }
@@ -346,7 +381,7 @@ namespace BarbarianPrince
                if (reader.Name != "EventDisplayed")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -354,7 +389,7 @@ namespace BarbarianPrince
                   if (null == gi.EventActive)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(EventDisplayed)=null");
-                     return gi;
+                     return null;
                   }
                }
             }
@@ -365,7 +400,7 @@ namespace BarbarianPrince
                if (reader.Name != "EventStart")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -373,7 +408,7 @@ namespace BarbarianPrince
                   if (null == gi.EventStart)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(EventStart)=null");
-                     return gi;
+                     return null;
                   }
                }
             }
@@ -384,7 +419,7 @@ namespace BarbarianPrince
                if (reader.Name != "GameTurn")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -392,7 +427,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(GameTurn)=null");
-                     return gi;
+                     return null;
                   }
                   gi.GameTurn = Int32.Parse(sAttribute);
                }
@@ -404,7 +439,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsMarkOfCain")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -412,7 +447,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsMarkOfCain)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsMarkOfCain = Boolean.Parse(sAttribute);
                }
@@ -424,7 +459,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsEnslaved")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -432,7 +467,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsEnslaved)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsEnslaved = Boolean.Parse(sAttribute);
                }
@@ -444,7 +479,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsSpellBound")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -452,7 +487,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsSpellBound)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsSpellBound = Boolean.Parse(sAttribute);
                }
@@ -464,7 +499,7 @@ namespace BarbarianPrince
                if (reader.Name != "WanderingDayCount")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -472,7 +507,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(WanderingDayCount)=null");
-                     return gi;
+                     return null;
                   }
                   gi.WanderingDayCount = Int32.Parse(sAttribute);
                }
@@ -484,7 +519,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsBlessed")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -492,7 +527,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsBlessed)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsBlessed = Boolean.Parse(sAttribute);
                }
@@ -504,7 +539,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsArchTravelKnown")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -512,7 +547,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsArchTravelKnown)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsArchTravelKnown = Boolean.Parse(sAttribute);
                }
@@ -524,7 +559,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsMerchantWithParty")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -532,7 +567,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsMerchantWithParty)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsMerchantWithParty = Boolean.Parse(sAttribute);
                }
@@ -544,7 +579,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsJailed")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -552,7 +587,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsJailed)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsJailed = Boolean.Parse(sAttribute);
                }
@@ -564,7 +599,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsDungeon")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -572,7 +607,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsDungeon)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsDungeon = Boolean.Parse(sAttribute);
                }
@@ -584,7 +619,7 @@ namespace BarbarianPrince
                if (reader.Name != "NightsInDungeon")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -592,7 +627,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(NightsInDungeon)=null");
-                     return gi;
+                     return null;
                   }
                   gi.NightsInDungeon = Int32.Parse(sAttribute);
                }
@@ -604,7 +639,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsWoundedWarriorRest")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -612,7 +647,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsWoundedWarriorRest)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsWoundedWarriorRest = Boolean.Parse(sAttribute);
                }
@@ -624,7 +659,7 @@ namespace BarbarianPrince
                if (reader.Name != "NumMembersBeingFollowed")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -632,7 +667,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(NumMembersBeingFollowed)=null");
-                     return gi;
+                     return null;
                   }
                   gi.NumMembersBeingFollowed = Int32.Parse(sAttribute);
                }
@@ -644,7 +679,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsHighPass")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -652,7 +687,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsHighPass)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsHighPass = Boolean.Parse(sAttribute);
                }
@@ -664,7 +699,7 @@ namespace BarbarianPrince
                if (reader.Name != "EventAfterRedistribute")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -672,7 +707,7 @@ namespace BarbarianPrince
                   if (null == gi.EventAfterRedistribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(EventAfterRedistribute)=null");
-                     return gi;
+                     return null;
                   }
                }
             }
@@ -683,7 +718,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsImpassable")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -691,7 +726,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsImpassable)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsImpassable = Boolean.Parse(sAttribute);
                }
@@ -703,7 +738,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsFlood")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -711,7 +746,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsFlood)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsFlood = Boolean.Parse(sAttribute);
                }
@@ -723,7 +758,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsFloodContinue")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -731,7 +766,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsFloodContinue)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsFloodContinue = Boolean.Parse(sAttribute);
                }
@@ -743,7 +778,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsMountsSick")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -751,7 +786,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsMountsSick)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsMountsSick = Boolean.Parse(sAttribute);
                }
@@ -763,7 +798,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsFalconFed")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -771,7 +806,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsFalconFed)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsFalconFed = Boolean.Parse(sAttribute);
                }
@@ -783,7 +818,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsEagleHunt")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -791,7 +826,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsEagleHunt)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsEagleHunt = Boolean.Parse(sAttribute);
                }
@@ -803,7 +838,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsExhausted")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -811,7 +846,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsExhausted)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsExhausted = Boolean.Parse(sAttribute);
                }
@@ -823,7 +858,7 @@ namespace BarbarianPrince
                if (reader.Name != "RaftState")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -831,7 +866,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(RaftState)=null");
-                     return gi;
+                     return null;
                   }
                   switch(sAttribute)
                   {
@@ -841,7 +876,7 @@ namespace BarbarianPrince
                      case "RE_RAFT_ENDS_TODAY": gi.RaftState = RaftEnum.RE_RAFT_ENDS_TODAY; break;
                      default:
                         Logger.Log(LogEnum.LE_ERROR, "ReadXml(): reached default rs=" + sAttribute);
-                        return gi;
+                        return null;
                   }
                }
             }
@@ -852,7 +887,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsWoundedBlackKnightRest")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -860,7 +895,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsWoundedBlackKnightRest)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsWoundedBlackKnightRest = Boolean.Parse(sAttribute);
                }
@@ -872,7 +907,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsTrainHorse")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -880,7 +915,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsTrainHorse)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsTrainHorse = Boolean.Parse(sAttribute);
                }
@@ -892,7 +927,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsBadGoing")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -900,7 +935,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsBadGoing)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsBadGoing = Boolean.Parse(sAttribute);
                }
@@ -912,7 +947,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsHeavyRain")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -920,7 +955,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsHeavyRain)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsHeavyRain = Boolean.Parse(sAttribute);
                }
@@ -932,7 +967,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsHeavyRainNextDay")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -940,7 +975,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsHeavyRainNextDay)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsHeavyRainNextDay = Boolean.Parse(sAttribute);
                }
@@ -952,7 +987,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsHeavyRainContinue")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -960,7 +995,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsHeavyRainContinue)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsHeavyRainContinue = Boolean.Parse(sAttribute);
                }
@@ -972,7 +1007,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsHeavyRainDismount")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -980,7 +1015,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsHeavyRainDismount)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsHeavyRainDismount = Boolean.Parse(sAttribute);
                }
@@ -992,7 +1027,7 @@ namespace BarbarianPrince
                if (reader.Name != "HydraTeethCount")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -1000,7 +1035,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(HydraTeethCount)=null");
-                     return gi;
+                     return null;
                   }
                   gi.HydraTeethCount = Int32.Parse(sAttribute);
                }
@@ -1012,7 +1047,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsHuldraHeirKilled")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -1020,7 +1055,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsHuldraHeirKilled)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsHuldraHeirKilled = Boolean.Parse(sAttribute);
                }
@@ -1032,7 +1067,7 @@ namespace BarbarianPrince
                if (reader.Name != "DayOfLastOffering")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -1040,7 +1075,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(DayOfLastOffering)=null");
-                     return gi;
+                     return null;
                   }
                   gi.DayOfLastOffering = Int32.Parse(sAttribute);
                }
@@ -1052,7 +1087,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsPartyContinuouslyLodged")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -1060,7 +1095,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsPartyContinuouslyLodged)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsPartyContinuouslyLodged = Boolean.Parse(sAttribute);
                }
@@ -1072,7 +1107,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsTrueLoveHeartBroken")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -1080,7 +1115,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsTrueLoveHeartBroken)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsTrueLoveHeartBroken = Boolean.Parse(sAttribute);
                }
@@ -1092,7 +1127,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsMustLeaveHex")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -1100,7 +1135,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsMustLeaveHex)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsMustLeaveHex = Boolean.Parse(sAttribute);
                }
@@ -1112,7 +1147,7 @@ namespace BarbarianPrince
                if (reader.Name != "NumMonsterKill")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -1120,7 +1155,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(NumMonsterKill)=null");
-                     return gi;
+                     return null;
                   }
                   gi.NumMonsterKill = Int32.Parse(sAttribute);
                }
@@ -1132,7 +1167,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsOmenModifier")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -1140,7 +1175,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsOmenModifier)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsOmenModifier = Boolean.Parse(sAttribute);
                }
@@ -1152,7 +1187,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsInfluenceModifier")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -1160,7 +1195,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsInfluenceModifier)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsInfluenceModifier = Boolean.Parse(sAttribute);
                }
@@ -1172,7 +1207,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsSecretTempleKnown")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -1180,7 +1215,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsSecretTempleKnown)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsSecretTempleKnown = Boolean.Parse(sAttribute);
                }
@@ -1192,7 +1227,7 @@ namespace BarbarianPrince
                if (reader.Name != "ChagaDrugCount")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -1200,7 +1235,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(ChagaDrugCount)=null");
-                     return gi;
+                     return null;
                   }
                   gi.ChagaDrugCount = Int32.Parse(sAttribute);
                }
@@ -1212,7 +1247,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsChagaDrugProvided")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -1220,7 +1255,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsChagaDrugProvided)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsChagaDrugProvided = Boolean.Parse(sAttribute);
                }
@@ -1232,7 +1267,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsSecretBaronHuldra")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -1240,7 +1275,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsSecretBaronHuldra)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsSecretBaronHuldra = Boolean.Parse(sAttribute);
                }
@@ -1252,7 +1287,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsSecretLadyAeravir")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -1260,7 +1295,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsSecretLadyAeravir)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsSecretLadyAeravir = Boolean.Parse(sAttribute);
                }
@@ -1272,7 +1307,7 @@ namespace BarbarianPrince
                if (reader.Name != "IsSecretCountDrogat")
                {
                   Logger.Log(LogEnum.LE_ERROR, "ReadXml(): node=" + reader.Name);
-                  return gi;
+                  return null;
                }
                else
                {
@@ -1280,7 +1315,7 @@ namespace BarbarianPrince
                   if (null == sAttribute)
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ReadXml(): GetAttribute(IsSecretCountDrogat)=null");
-                     return gi;
+                     return null;
                   }
                   gi.IsSecretCountDrogat = Boolean.Parse(sAttribute);
                }
@@ -1289,207 +1324,207 @@ namespace BarbarianPrince
             if (false == ReadXmlAtRiskMounts(reader, gi))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlAtRiskMounts() returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlLostTrueLoves(reader, gi))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlLostTrueLoves() returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlForbiddenAudiences(reader, gi))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlForbiddenAudiences() returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlCaches(reader, gi.Caches))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlCaches() returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.DwarfAdviceLocations, "DwarfAdviceLocations"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(DwarfAdviceLocations) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.WizardAdviceLocations, "WizardAdviceLocations"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(WizardAdviceLocations) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.Arches, "Arches"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(Arches) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.VisitedLocations, "VisitedLocations"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(VisitedLocations) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.EscapedLocations, "EscapedLocations"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(EscapedLocations) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.GoblinKeeps, "GoblinKeeps"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(GoblinKeeps) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.DwarvenMines, "DwarvenMines"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(DwarvenMines) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.OrcTowers, "OrcTowers"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(OrcTowers) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.WizardTowers, "WizardTowers"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(WizardTowers) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.PixieAdviceLocations, "PixieAdviceLocations"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(PixieAdviceLocations) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.HalflingTowns, "HalflingTowns"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(HalflingTowns) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.RuinsUnstable, "RuinsUnstable"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(RuinsUnstable) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.HiddenRuins, "HiddenRuins"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(HiddenRuins) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.HiddenTowns, "HiddenTowns"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(HiddenTowns) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.HiddenTemples, "HiddenTemples"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(HiddenTemples) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.KilledLocations, "KilledLocations"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(KilledLocations) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.EagleLairs, "EagleLairs"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(EagleLairs) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.SecretClues, "SecretClues"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(SecretClues) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.LetterOfRecommendations, "LetterOfRecommendations"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(LetterOfRecommendations) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.Purifications, "Purifications"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(Purifications) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.ElfTowns, "ElfTowns"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(ElfTowns) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.ElfCastles, "ElfCastles"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(ElfCastles) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.FeelAtHomes, "FeelAtHomes"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(FeelAtHomes) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.SecretRites, "SecretRites"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(SecretRites) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.CheapLodgings, "CheapLodgings"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(CheapLodgings) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.ForbiddenHexes, "ForbiddenHexes"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(ForbiddenHexes) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.AbandonedTemples, "AbandonedTemples"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(AbandonedTemples) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlTerritories(reader, gi.ForbiddenHires, "ForbiddenHires"))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlTerritories(ForbiddenHires) returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             if (false == ReadXmlEnteredHexes(reader, gi.EnteredHexes))
             {
                Logger.Log(LogEnum.LE_ERROR, "ReadXml(): ReadXmlEnteredHexes() returned false");
-               return gi;
+               return null;
             }
             //----------------------------------------------
             return gi;
          } // try
          catch (Exception e)
          {
-            Logger.Log(LogEnum.LE_ERROR, "ReadTerritoriesXml(): Exception:\n" + e.ToString());
-            return gi;
+            Logger.Log(LogEnum.LE_ERROR, "ReadXml():\n" + e.ToString());
+            return null;
          }
          finally
          {
@@ -3298,7 +3333,7 @@ namespace BarbarianPrince
                         gi.ForbiddenAudiences.AddLetterConstraint(tForbidden, tTarget);
                         break;
                      case "ASSISTANT_OR_LETTER":
-                        gi.ForbiddenAudiences.AddAssistantConstraint(tForbidden, assistant);
+                        gi.ForbiddenAudiences.AddAssistantConstraint(tForbidden, assistant, tTarget);
                         break;
                      case "DAY":
                         gi.ForbiddenAudiences.AddTimeConstraint(tForbidden, days);
@@ -3718,19 +3753,13 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "CreateXml(): aXmlDocument.DocumentElement.LastChild=null");
             return null;
          }
-         Assembly assembly = Assembly.GetExecutingAssembly();
-         if( null == assembly )
+         int majorVersion = GetMajorVersion();
+         if (majorVersion < 0 )
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): Assembly.GetExecutingAssembly()=null");
+            Logger.Log(LogEnum.LE_ERROR, "CreateXml():  0 > majorVersion=" + majorVersion.ToString());
             return null;
          }
-         Version? version = assembly.GetName().Version;
-         if (null == version)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml():  assembly.GetName().Version=null");
-            return null;
-         }
-         versionElem.SetAttribute("value", version.ToString());
+         versionElem.SetAttribute("value", majorVersion.ToString());
          XmlNode? versionNode = root.AppendChild(versionElem);
          if (null == versionNode)
          {
@@ -6126,6 +6155,11 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(ForbiddenTerritory) returned null");
                return false;
             }
+            if (null == audience.ForbiddenTerritory)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "CreateXml(): audience.ForbiddenTerritory=null");
+               return false;
+            }
             elem.SetAttribute("value", audience.ForbiddenTerritory.Name);
             node = audienceNode.AppendChild(elem);
             if (null == node)
@@ -6140,10 +6174,12 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(TargetTerritory) returned null");
                return false;
             }
-            if( null == audience.TargetTerritory )
-               elem.SetAttribute("value", "null");
-            else
-               elem.SetAttribute("value", audience.TargetTerritory.Name);
+            if (null == audience.TargetTerritory)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "CreateXml(): audience.TargetTerritory=null for " + audience.ForbiddenTerritory.Name);
+               return false;
+            }
+            elem.SetAttribute("value", audience.TargetTerritory.Name);
             node = audienceNode.AppendChild(elem);
             if (null == node)
             {
@@ -6227,7 +6263,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(TargetTerritory) returned null");
                return false;
             }
-            elem.SetAttribute("value", cache.TargetTerritory.Name);
+            elem.SetAttribute("value", cache.CacheTerritory.Name);
             XmlNode? node = cacheNode.AppendChild(elem);
             if (null == node)
             {

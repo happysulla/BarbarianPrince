@@ -117,7 +117,11 @@ namespace BarbarianPrince
          {
             ITerritory t = (ITerritory)o;
             sb.Append(t.Name);
-            sb.Append(" ");
+            sb.Append("=(");
+            sb.Append(t.CenterPoint.X.ToString("000"));
+            sb.Append(",");
+            sb.Append(t.CenterPoint.Y.ToString("000"));
+            sb.Append(") ");
          }
          sb.Append("]");
          return sb.ToString();

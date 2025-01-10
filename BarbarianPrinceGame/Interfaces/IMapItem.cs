@@ -30,7 +30,6 @@ namespace BarbarianPrince
       List<BloodSpot> PoisonSpots { get; }
       bool IsExposedToUser { get; set; } // some dialogs require clicking on mount to rotate it. This variable tracks if user has seen this item yet.
       bool IsAnimated { get; set; }
-      IMapPoint Location { get; set; }
       bool IsRunAway { get; set; }      // caused by nerve gas in combat - mapitem will depart party
       bool IsShowFireball { get; set; } // e023 - wizard attack
       bool IsDisappear { get; set; } // r343 - disappear
@@ -81,7 +80,6 @@ namespace BarbarianPrince
       ITerritory TerritoryStarting { get; set; }
       ITerritories GuideTerritories { get; set; }
       //----------------------------------------
-      void SetLocation(int counterCount);
       bool AddNewMount(MountEnum mt = MountEnum.Horse);
       bool AddMount(IMapItem mount);
       void SetMountState(IMapItem mount);

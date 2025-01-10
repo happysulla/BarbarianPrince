@@ -1414,7 +1414,7 @@ namespace BarbarianPrince
          gi.Prince.Territory = t;
          Double x = t.CenterPoint.X - (gi.Prince.Zoom * Utilities.theMapItemOffset);
          Double y = t.CenterPoint.Y - (gi.Prince.Zoom * Utilities.theMapItemOffset);
-         Logger.Log(LogEnum.LE_VIEW_MAPITEM_LOCATION, "LoadGame(): prince=(" + x.ToString("0.0") + "," + y.ToString("0.0") + ") t.center=(" + gi.Prince.Territory.CenterPoint.X.ToString("0.0") + "," + gi.Prince.Territory.CenterPoint.Y.ToString("0.0") + ")"); ;
+         Logger.Log(LogEnum.LE_VIEW_MAPITEM_LOCATION, "LoadGame(): prince=(" + x.ToString("0.0") + "," + y.ToString("0.0") + ") t=" + t.Name + "=(" + gi.Prince.Territory.CenterPoint.X.ToString("0.0") + "," + gi.Prince.Territory.CenterPoint.Y.ToString("0.0") + ")"); ;
          return true;
       }
       protected void UndoCommand(ref IGameInstance gi, ref GameAction action)
@@ -1526,6 +1526,7 @@ namespace BarbarianPrince
                int diagInfoLevel = (int)LogEnum.LE_GAME_INIT_VERSION;
                if (true == Logger.theLogLevel[diagInfoLevel])
                   PrintDiagnosticInfoToLog();
+               // Logger.Log(LogEnum.LE_VIEW_MAPITEM_LOCATION, "PerformAction(RemoveSplashScreen): territories=" + Territory.theTerritories.ToString());
                //-------------------------------------------------
                theIsGameSetup = false;
                gi.Statistic.Clear();         // Clear any current statitics
@@ -1716,13 +1717,14 @@ namespace BarbarianPrince
          gi.NewHex = gi.Prince.Territory = gi.Prince.TerritoryStarting = starting;
          gi.EnteredHexes.Add(new EnteredHex(gi, ColorActionEnum.CAE_START));
          this.AddVisitedLocation(gi); // SetStartingLocation()
-         int counterCount = 0;
+         gi.Prince.Territory = starting;  
+         gi.Prince.TerritoryStarting = starting;
          foreach (IMapItem mi in gi.PartyMembers)
          {
-            mi.SetLocation(counterCount);
             mi.TerritoryStarting = starting;
             mi.Territory = starting;
-            ++counterCount;
+            Double x = starting.CenterPoint.X - (gi.Prince.Zoom * Utilities.theMapItemOffset);
+            Double y = starting.CenterPoint.Y - (gi.Prince.Zoom * Utilities.theMapItemOffset);
          }
          return true;
       }
@@ -2531,6 +2533,7 @@ namespace BarbarianPrince
             gi.HiddenTemples.Add(t11);
             t11 = Territory.theTerritories.Find("0507"); // e114 - verify that eagle hunt can happen in structure
             gi.HiddenTemples.Add(t11);
+            gi.Purifications.Add(t11);
             //---------------------
             ITerritory forbiddenHex = Territory.theTerritories.Find("0705");
             gi.ForbiddenHexes.Add(forbiddenHex);
@@ -2600,6 +2603,16 @@ namespace BarbarianPrince
             GameEngine.theFeatsInGame.myIsEagleAdded = true;
             GameEngine.theFeatsInGame.myIsPurchaseFoulbane = true;
             GameEngine.theFeatsInGame.myIsRescueHeir = true;
+            //---------------------
+            foreach (IMapItem partyMember in gi.PartyMembers)
+            {
+               foreach (IMapItem mount in partyMember.Mounts)
+               {
+                  if ((true == mount.Name.Contains("Griffon")) || (true == mount.Name.Contains("Harpy")))
+                     continue;
+                  gi.AtRiskMounts.Add(mount);
+               }
+            }
          }
       }
       private void PrintDiagnosticInfoToLog()

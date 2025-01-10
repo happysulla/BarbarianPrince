@@ -123,7 +123,6 @@ namespace BarbarianPrince
       public List<SpecialEnum> SpecialShares { get => mySpecialShares; } // Special possessions that can be given away
       private List<SpecialEnum> mySpecialShares = new List<SpecialEnum>();
       //--------------------------------------------------
-      public IMapPoint Location { get; set; } = new MapPoint(0.0, 0.0);
       public bool IsAnimated
       {
          set
@@ -155,7 +154,6 @@ namespace BarbarianPrince
          {
             this.Name = aName;
             this.Zoom = zoom;
-            this.Location = null;
             this.TopImageName = topImageName;
             this.BottomImageName = null;
             this.Territory = null;
@@ -196,7 +194,6 @@ namespace BarbarianPrince
          this.OverlayImageName = mi.OverlayImageName;
          this.Zoom = mi.Zoom;
          this.IsAnimated = mi.IsAnimated;
-         this.Location = mi.Location;
          //--------------------------------------------------
          this.StarveDayNum = mi.StarveDayNum;
          this.StarveDayNumOld = mi.StarveDayNumOld;
@@ -237,12 +234,11 @@ namespace BarbarianPrince
       {
          this.Name = name;
       }
-      public MapItem(string aName, double zoom, bool isAnimated, bool isGuide, string topImageName, string bottomImageName, IMapPoint aStartingPoint)
+      public MapItem(string aName, double zoom, bool isAnimated, bool isGuide, string topImageName, string bottomImageName)
       {
 
          this.Name = aName;
          this.Zoom = zoom;
-         this.Location = aStartingPoint;
          this.TopImageName = topImageName;
          this.BottomImageName = bottomImageName;
          this.Territory = null;
@@ -269,14 +265,14 @@ namespace BarbarianPrince
             return;
          }
       }
-      public MapItem(string aName, double zoom, bool isAnimated, bool isGuide, string topImageName, string bottomImageName, MapPoint aStartingPoint, ITerritory territory) :
-        this(aName, zoom, isAnimated, isGuide, topImageName, bottomImageName, aStartingPoint)
+      public MapItem(string aName, double zoom, bool isAnimated, bool isGuide, string topImageName, string bottomImageName, ITerritory territory) :
+        this(aName, zoom, isAnimated, isGuide, topImageName, bottomImageName)
       {
          Territory = territory;
          TerritoryStarting = territory;
       }
       public MapItem(string aName, double zoom, bool isAnimated, bool isGuide, string topImageName, string bottomImageName, ITerritory territory, int endurance, int combat, int wealthCode) :
-         this(aName, zoom, isAnimated, isGuide, topImageName, bottomImageName, territory.CenterPoint)
+         this(aName, zoom, isAnimated, isGuide, topImageName, bottomImageName)
       {
          Territory = territory;
          TerritoryStarting = territory;
@@ -308,10 +304,6 @@ namespace BarbarianPrince
          else if (true == this.Name.Contains("Witch"))
             return true;
          return false;
-      }
-      public void SetLocation(int counterCount)
-      {
-         this.Location = new MapPoint(this.Territory.CenterPoint.X - Utilities.theMapItemOffset + (counterCount * Utilities.STACK), this.Territory.CenterPoint.Y - Utilities.theMapItemOffset + (counterCount * Utilities.STACK));
       }
       public bool AddNewMount(MountEnum mt = MountEnum.Horse)
       {

@@ -155,8 +155,6 @@ namespace BarbarianPrince
       private readonly List<Brush> myBrushes = new List<Brush>();
       private readonly List<Rectangle> myRectangles = new List<Rectangle>();
       private readonly List<Polygon> myPolygons = new List<Polygon>();
-      private Rectangle myRectangleMoving = null;               // Not used - Rectangle that is moving with button
-      private Rectangle myRectangleSelected = new Rectangle(); // Player has manually selected this button
       private ITerritory myTerritorySelected = null;
       private bool myIsTravelThroughGateActive = false;  // e045
       private Storyboard myStoryboard = new Storyboard();    // Show Statistics Marquee at end of game 
@@ -392,6 +390,8 @@ namespace BarbarianPrince
                   foreach (UIElement ui1 in elements)
                      myCanvas.Children.Remove(ui1);
                }
+               if (false == UpdateCanvas(gi, action))
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): UpdateCanvas() returned error ");
                break;
             case GameAction.ShowDienstalBranch:
                UpdateCanvasRiver("Dienstal Branch");
@@ -577,7 +577,7 @@ namespace BarbarianPrince
          Double y = territory.CenterPoint.Y - (mi.Zoom * Utilities.theMapItemOffset);
          Canvas.SetLeft(b, x);
          Canvas.SetTop(b, y);
-         Logger.Log(LogEnum.LE_VIEW_MAPITEM_LOCATION, "CreateButtonMapItem(): prince=(" + x.ToString("0.0") + "," + y.ToString("0.0") + ") t.center=(" + territory.CenterPoint.X.ToString("0.0") + "," + territory.CenterPoint.Y.ToString("0.0") + ")"); ;
+         Logger.Log(LogEnum.LE_VIEW_MAPITEM_LOCATION, "CreateButtonMapItem(): prince=(" + x.ToString("0.0") + "," + y.ToString("0.0") + ") t=" + territory.Name + "=(" + territory.CenterPoint.X.ToString("0.0") + "," + territory.CenterPoint.Y.ToString("0.0") + ")"); ;
          return true;
       }
       private bool CreateButtonDailyAction()
@@ -2116,7 +2116,7 @@ namespace BarbarianPrince
          //-------------------------------------------------------
          foreach (ICache c in gi.Caches)
          {
-            ITerritory t = c.TargetTerritory;
+            ITerritory t = c.CacheTerritory;
             Image img1 = new Image { Source = MapItem.theMapImages.GetBitmapImage("Cache"), Width = Utilities.theMapItemOffset, Height = Utilities.theMapItemOffset };
             Canvas.SetLeft(img1, t.CenterPoint.X - Utilities.theMapItemOffset / 2);
             Canvas.SetTop(img1, t.CenterPoint.Y);
@@ -2134,9 +2134,7 @@ namespace BarbarianPrince
             ITerritory t = gi.Prince.Territory;
             Double x = t.CenterPoint.X - (gi.Prince.Zoom * Utilities.theMapItemOffset);
             Double y = t.CenterPoint.Y - (gi.Prince.Zoom * Utilities.theMapItemOffset);
-            Logger.Log(LogEnum.LE_VIEW_MAPITEM_LOCATION, "UpdateCanvas(): prince=(" + x.ToString("0.0") + "," + y.ToString("0.0") + ") t.center=(" + t.CenterPoint.X.ToString("0.0") + "," + t.CenterPoint.Y.ToString("0.0") + ")"); ;
-            gi.Prince.Location.X = x;
-            gi.Prince.Location.Y = y;
+            Logger.Log(LogEnum.LE_VIEW_MAPITEM_LOCATION, "UpdateCanvas(): prince=(" + x.ToString("0.0") + "," + y.ToString("0.0") + ") t=" + t.Name + "=(" + t.CenterPoint.X.ToString("0.0") + "," + t.CenterPoint.Y.ToString("0.0") + ")"); ;
             Canvas.SetLeft(b, x);
             Canvas.SetTop(b, y);
             Canvas.SetZIndex(b, 9999);
@@ -2202,7 +2200,6 @@ namespace BarbarianPrince
                      p.MouseDown -= MouseDownPolygonTravel;
                   myPolygons.Clear();
                   myTerritorySelected = null;
-                  myRectangleSelected.Visibility = Visibility.Hidden;
                   break;
                case GameAction.E045ArchOfTravel:
                   UpdateTimeTrack(gi);
@@ -2250,7 +2247,6 @@ namespace BarbarianPrince
                         return false;
                      }
                   }
-                  myRectangleSelected.Visibility = Visibility.Hidden;
                   break;
                case GameAction.E035IdiotStartDay:
                case GameAction.E035IdiotContinue:
@@ -2282,7 +2278,6 @@ namespace BarbarianPrince
                         return false;
                      }
                   }
-                  myRectangleSelected.Visibility = Visibility.Hidden;
                   break;
                //-------------------------------------------
                case GameAction.E079HeavyRainsContinueTravel:
@@ -2304,10 +2299,6 @@ namespace BarbarianPrince
                         Logger.Log(LogEnum.LE_ERROR, "UpdateCanvas():  UpdateCanvasHexTravelToShowPolygons() returned false");
                         return false;
                      }
-                  }
-                  else
-                  {
-                     myRectangleSelected.Visibility = Visibility.Hidden;
                   }
                   break;
                case GameAction.E110AirSpiritTravel:
@@ -3003,8 +2994,8 @@ namespace BarbarianPrince
          try
          {
             Canvas.SetZIndex(b, 100); // Move the button to the top of the Canvas
-            double xStart = mim.MapItem.Location.X;
-            double yStart = mim.MapItem.Location.Y;
+            double xStart = mim.MapItem.Territory.CenterPoint.X - Utilities.theMapItemOffset;
+            double yStart = mim.MapItem.Territory.CenterPoint.Y - Utilities.theMapItemOffset;
             PathFigure aPathFigure = new PathFigure() { StartPoint = new System.Windows.Point(xStart, yStart) };
             int lastItemIndex = mim.BestPath.Territories.Count - 1;
             for (int i = 0; i < lastItemIndex; i++) // add intermediate movement points - not really used in Barbarian Prince as only move one hex at a time
@@ -3041,14 +3032,6 @@ namespace BarbarianPrince
             b.RenderTransform = new TranslateTransform();
             b.BeginAnimation(Canvas.LeftProperty, xAnimiation);
             b.BeginAnimation(Canvas.TopProperty, yAnimiation);
-            if (null == myRectangleSelected)
-            {
-               System.Diagnostics.Debug.WriteLine("MovePathAnimate() myRectangleSelection=null");
-               return false;
-            }
-            myRectangleSelected.RenderTransform = new TranslateTransform();
-            myRectangleSelected.BeginAnimation(Canvas.LeftProperty, xAnimiation);
-            myRectangleSelected.BeginAnimation(Canvas.TopProperty, yAnimiation);
             return true;
          }
          catch (Exception e)
@@ -3058,53 +3041,6 @@ namespace BarbarianPrince
             System.Diagnostics.Debug.WriteLine("MovePathAnimate() - EXCEPTION THROWN e={0}", e.ToString());
             return false;
          }
-      }
-      private bool MovePathDisplay(IMapItemMove mim, int mapItemCount)
-      {
-         if (null == mim.NewTerritory)
-         {
-            Logger.Log(LogEnum.LE_ERROR, "MovePathDisplay(): mim.NewTerritory=null");
-            return false;
-         }
-         //-----------------------------------------
-         PointCollection aPointCollection = new PointCollection();
-         double offset = 0.0;
-         if (0 < mapItemCount)
-         {
-            if (0 == mapItemCount % 2)
-               offset = mapItemCount - 1;
-            else
-               offset = -mapItemCount;
-         }
-         offset *= 3.0;
-         double xPostion = mim.OldTerritory.CenterPoint.X + offset;
-         double yPostion = mim.OldTerritory.CenterPoint.Y + offset;
-         System.Windows.Point newPoint = new System.Windows.Point(xPostion, yPostion);
-         aPointCollection.Add(newPoint);
-         foreach (ITerritory t in mim.BestPath.Territories)
-         {
-            xPostion = t.CenterPoint.X + offset;
-            yPostion = t.CenterPoint.Y + offset;
-            newPoint = new System.Windows.Point(xPostion, yPostion);
-            aPointCollection.Add(newPoint);
-         }
-         //-----------------------------------------
-         Polyline aPolyline = new Polyline();
-         aPolyline.Stroke = myBrushes[myBrushIndex];
-         aPolyline.StrokeThickness = 3;
-         aPolyline.StrokeEndLineCap = PenLineCap.Triangle;
-         aPolyline.Points = aPointCollection;
-         aPolyline.StrokeDashArray = myDashArray;
-         myCanvas.Children.Add(aPolyline);
-         //-----------------------------------------
-         myRectangleMoving = myRectangles[myBrushIndex];
-         if (myRectangles.Count <= ++myBrushIndex)
-            myBrushIndex = 0;
-         Canvas.SetLeft(myRectangleMoving, mim.MapItem.Location.X);
-         Canvas.SetTop(myRectangleMoving, mim.MapItem.Location.Y);
-         Canvas.SetZIndex(myRectangleMoving, 1000);
-         myRectangleMoving.Visibility = Visibility.Visible;
-         return true;
       }
       //-------------CONTROLLER FUNCTIONS---------------------------------
       private void ClickButtonDailyAction(object sender, RoutedEventArgs e)
