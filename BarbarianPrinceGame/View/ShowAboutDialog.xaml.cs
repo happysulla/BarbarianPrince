@@ -38,13 +38,11 @@ namespace BarbarianPrince
       {
          try
          {
-            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
-            e.Handled = true;
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri){ UseShellExecute = true } );
          }
          catch (Exception ex)
          {
-            MessageBox.Show(ex.Message);
-            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            Logger.Log(LogEnum.LE_ERROR, "Hyperlink_RequestNavigate(): failed e.URI=" + e.Uri.ToString() + "\n" + ex.ToString());
          }
          e.Handled = true;
       }

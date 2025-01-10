@@ -4274,8 +4274,8 @@ namespace BarbarianPrince
                         EnteredHex enteredHex = gi.EnteredHexes.Last();
                         enteredHex.EventNames.Add(gi.EventActive);
                      }
-                     this.AddVisitedLocation(gi);  // GameStateTravel.PerformAction()   - TravelShowMovementEncounter
                   }
+                  this.AddVisitedLocation(gi);  // GameStateTravel.PerformAction()   - TravelShowMovementEncounter
                }
                break;
             case GameAction.TravelEndMovement: // Prince clicked when still movement left ends movement phase
