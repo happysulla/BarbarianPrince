@@ -1544,6 +1544,7 @@ namespace BarbarianPrince
             case GameAction.ShowReportErrorDialog:
             case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
+            case GameAction.UpdateGameOptions:
                break;
             case GameAction.UpdateEventViewerActive: // Only change active event
                gi.EventDisplayed = gi.EventActive; // next screen to show
@@ -2707,6 +2708,7 @@ namespace BarbarianPrince
             case GameAction.ShowReportErrorDialog:
             case GameAction.ShowAboutDialog:
             case GameAction.UpdateEventViewerDisplay:
+            case GameAction.UpdateGameOptions:
                break;
             case GameAction.UpdateEventViewerActive:
                gi.EventDisplayed = gi.EventActive;
@@ -2716,8 +2718,6 @@ namespace BarbarianPrince
                break;
             case GameAction.EndGameClose:
                gi.GamePhase = GamePhase.EndGame;
-               break;
-            case GameAction.UpdateGameOptions:
                break;
             case GameAction.UpdateLoadingGame:
                if (false == LoadGame(ref gi, ref action))

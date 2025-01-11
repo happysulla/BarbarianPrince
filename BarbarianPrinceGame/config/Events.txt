@@ -2596,7 +2596,7 @@ e101a	"<Bold>e101a Talk to Harpy</Bold>
 <LineBreak/><LineBreak/>
  <InlineUIContainer><Button Content='r342' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Inquiry<LineBreak/>
  <InlineUIContainer><Button Content='r329' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Pass<LineBreak/>
- <InlineUIContainer><Button Content='r340' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 aand 4 - Looter<LineBreak/>
+ <InlineUIContainer><Button Content='r340' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 and 4 - Looter<LineBreak/>
  <InlineUIContainer><Button Content='r308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Surprised<LineBreak/>
  <InlineUIContainer><Button Content='r310' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 6 Surprised
 <LineBreak/><LineBreak/>Roll die:

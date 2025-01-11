@@ -2265,6 +2265,7 @@ namespace BarbarianPrince
                IMapItem mapItem = new MapItem(miName, 1.0, false, false, topMapImage, topMapImage, territory, endurance, combat, wealthCode);
                if (true == miName.Contains("Prince"))
                   gi.Prince = mapItem;
+               gi.NewHex = gi.Prince.Territory;
                //=========================================================================
                reader.Read();
                if (true == reader.IsStartElement())
