@@ -71,8 +71,7 @@
     <Title>Barbarian Prince Solo Game</Title>
     <Description>Solo dungeon crawler game</Description>
     <RepositoryUrl>https://github.com/happysulla/BarbarianPrince</RepositoryUrl>
-    <AssemblyVersion>03.00.19</AssemblyVersion>
-    <FileVersion>03.00.19</FileVersion>
+    <AssemblyVersion>03.01.20</AssemblyVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
