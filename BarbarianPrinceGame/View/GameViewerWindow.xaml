@@ -106,7 +106,7 @@
             </StackPanel>
             <Separator Name="mySeparator4" DockPanel.Dock="Top" Height="5"/>
             <ScrollViewer Name="myScrollViewerTextBlock" MaxWidth="617" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0" Background="#FFB9EA9E">
-               <TextBlock Name="myTextBlockDisplay" MinWidth="590" MaxWidth="590" FontFamily="Georgia" FontSize="24" TextWrapping="WrapWithOverflow" IsHyphenationEnabled="true" LineStackingStrategy="BlockLineHeight" Margin="0,0,0,0"  Background="#FFB9EA9E" Height="654" Width="610">
+               <TextBlock Name="myTextBlockDisplay" MinWidth="590" MaxWidth="590" FontFamily="Georgia" FontSize="24" TextWrapping="WrapWithOverflow" IsHyphenationEnabled="true" LineStackingStrategy="BlockLineHeight" Margin="0,0,0,0"  Background="#FFB9EA9E">
                </TextBlock>
             </ScrollViewer>
          </DockPanel>

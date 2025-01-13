@@ -12976,7 +12976,6 @@ namespace BarbarianPrince
             case "e059": // dwarven mines
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                   gi.EnteredHexes.Last().EventNames.Add(key);
                   if (gi.WitAndWile <= gi.DieResults[key][0])
                   {
@@ -12991,6 +12990,7 @@ namespace BarbarianPrince
                         return false;
                      }
                   }
+                  gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                else
                {
