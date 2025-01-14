@@ -1204,8 +1204,9 @@ e038	"<Bold>e038 Cache under Stone</Bold>
  3 - <InlineUIContainer><Button Content='e182' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  4 - <InlineUIContainer><Button Content='e185' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
  5 - <InlineUIContainer><Button Content='e187' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
- 6 - <InlineUIContainer><Button Content='e190' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer><LineBreak/>
-<LineBreak/><InlineUIContainer><Image Name='E038EncounterRoll' Source='../images/Stone.gif' Height='320'  Width='600'> </Image></InlineUIContainer> "
+ 6 - <InlineUIContainer><Button Content='e190' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
+<LineBreak/>
+        <InlineUIContainer><Image Name='E038EncounterRoll' Source='../images/Stone.gif' Height='280'  Width='525'> </Image></InlineUIContainer> "
 e039	"<Bold>e039 Small Treasure Chest</Bold>
 <LineBreak/><LineBreak/>You find a locked chest. You know the lock may be booby trapped.
 <LineBreak/><LineBreak/><InlineUIContainer><Image Name='TreasureChest'  Source='../images/Chest.gif' Height='75'  Width='75'> </Image></InlineUIContainer> Click the chest to open.

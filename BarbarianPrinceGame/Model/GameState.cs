@@ -9268,6 +9268,7 @@ namespace BarbarianPrince
                }
                break;
             case "e059": // dwarven mines
+               gi.DieResults[key][0] = dieRoll;
                if (null == gi.DwarvenMines.Find(princeTerritory.Name))
                   gi.DwarvenMines.Add(princeTerritory);
                gi.DieRollAction = GameAction.EncounterRoll;
@@ -12990,7 +12991,7 @@ namespace BarbarianPrince
                         return false;
                      }
                   }
-                  gi.DieResults[key][0] = Utilities.NO_RESULT;
+                                    gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
                else
                {

@@ -161,7 +161,7 @@ namespace BarbarianPrince
          Logger.SetOn(LogEnum.LE_SERIALIZE_FEATS);
          //Logger.SetOn(LogEnum.LE_RETURN_TO_START);
          Logger.SetOn(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER);
-         Logger.SetOn(LogEnum.LE_VIEW_MAPITEM_LOCATION);
+         //Logger.SetOn(LogEnum.LE_VIEW_MAPITEM_LOCATION);
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_PARTY_DIALOG);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_MENU);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_STATUS_BAR);
@@ -174,7 +174,7 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_VIEW_RESET_BATTLE_GRID);
          //Logger.SetOn(LogEnum.LE_VIEW_DEC_COUNT_GRID);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_DAILY_ACTIONS);
-         //Logger.SetOn(LogEnum.LE_VIEW_TRAVEL_CHECK);
+         Logger.SetOn(LogEnum.LE_VIEW_TRAVEL_CHECK);
          //Logger.SetOn(LogEnum.LE_VIEW_MIM);
          //Logger.SetOn(LogEnum.LE_VIEW_MIM_ADD);
          //Logger.SetOn(LogEnum.LE_VIEW_MIM_CLEAR);
