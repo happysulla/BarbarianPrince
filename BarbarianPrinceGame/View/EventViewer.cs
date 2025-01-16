@@ -653,7 +653,7 @@ namespace BarbarianPrince
          try
          {
             StringBuilder sb = new StringBuilder();
-            sb.Append(@"<TextBlock xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Name='myTextBlockDisplay' xml:space='preserve' Width='600' Background='#17000000' FontFamily='Georgia' FontSize='18' TextWrapping='WrapWithOverflow' IsHyphenationEnabled='true' LineStackingStrategy='BlockLineHeight' Margin='3,0,3,0'>");
+            sb.Append(@"<TextBlock xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' Name='myTextBlockDisplay' xml:space='preserve' Width='600' Background='#FFB9EA9E' FontFamily='Georgia' FontSize='18' TextWrapping='WrapWithOverflow' IsHyphenationEnabled='true' LineStackingStrategy='BlockLineHeight' Margin='0,0,0,0'>");
             sb.Append(myRulesMgr.Events[key]);
             sb.Append(@"</TextBlock>");
             StringReader sr = new StringReader(sb.ToString());
