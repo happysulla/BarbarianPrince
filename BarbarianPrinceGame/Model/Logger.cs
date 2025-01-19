@@ -59,6 +59,7 @@ namespace BarbarianPrince
       LE_VIEW_APPEND_EVENT,
       LE_VIEW_MAPITEM_LOCATION,
       LE_VIEW_SHOW_PARTY_DIALOG,
+      LE_VIEW_SHOW_OPTIONS,
       LE_VIEW_DICE_MOVING,
       LE_VIEW_DICE_RESULT,
       LE_VIEW_DIALOG_PARTY,
@@ -163,6 +164,7 @@ namespace BarbarianPrince
          Logger.SetOn(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER);
          //Logger.SetOn(LogEnum.LE_VIEW_MAPITEM_LOCATION);
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_PARTY_DIALOG);
+         //Logger.SetOn(LogEnum.LE_VIEW_SHOW_OPTIONS);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_MENU);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_STATUS_BAR);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_ACTION_PANEL);

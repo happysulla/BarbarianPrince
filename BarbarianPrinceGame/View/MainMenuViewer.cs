@@ -3,6 +3,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using static System.Windows.Forms.Design.AxImporter;
 
 namespace BarbarianPrince
 {
@@ -208,6 +209,8 @@ namespace BarbarianPrince
          }
          else
          {
+            Option.LogGameType("MenuItemNew_Click()", this.NewGameOptions);
+            Logger.Log(LogEnum.LE_VIEW_SHOW_OPTIONS, "MenuItemNew_Click(): " + this.NewGameOptions.ToString());
             myGameInstance = new GameInstance(this.NewGameOptions);
             Option.LogGameType("MenuItemNew_Click()", this.NewGameOptions);
          }
@@ -260,14 +263,209 @@ namespace BarbarianPrince
          {
             this.NewGameOptions = dialog.NewOptions;
             Option.LogGameType("MenuItemFileOptions_Click()", this.NewGameOptions);
+            Logger.Log(LogEnum.LE_VIEW_SHOW_OPTIONS, "MenuItemFileOptions_Click(): " + this.NewGameOptions.ToString());
+            MenuItemFileOptions_ClickSetEventOptionsToMatch(this.NewGameOptions, myGameInstance.Options);
+            Logger.Log(LogEnum.LE_VIEW_SHOW_OPTIONS, "MenuItemFileOptions_Click(): " + myGameInstance.Options.ToString()); // see waht is copied over to current game
             GameAction action = GameAction.UpdateGameOptions;
             myGameEngine.PerformAction(ref myGameInstance, ref action);
          }
-         //if (GameOptionType.GO_ORIGINAL != existingType) // from original game, can go to any other game type
-         //{
-         //   if (GameOptionType.GO_CUSTOM != dialog.NewGameOptionType) // can only drop to custom for existing game type
-         //      this.NewGameOptionType = existingType; // Set Game Type to existing game type
-         //}
+      }
+      private void MenuItemFileOptions_ClickSetEventOptionsToMatch(Options newOptions, Options currentOptions)
+      {
+         string name = "NoLostRoll";
+         Option currentOption = currentOptions.Find(name);
+         if (null == currentOption)
+         {
+            currentOption = new Option(name, false);
+            currentOptions.Add(currentOption);
+         }
+         Option newOption = newOptions.Find(name);
+         if (null == newOption)
+         {
+            newOption = new Option(name, false);
+            newOptions.Add(newOption);
+         }
+         currentOption.IsEnabled = newOption.IsEnabled;
+         //-----------------------------------------
+         name = "ForceNoLostEvent";
+         currentOption = currentOptions.Find(name);
+         if (null == currentOption)
+         {
+            currentOption = new Option(name, false);
+            currentOptions.Add(currentOption);
+         }
+         newOption = newOptions.Find(name);
+         if (null == newOption)
+         {
+            newOption = new Option(name, false);
+            newOptions.Add(newOption);
+         }
+         currentOption.IsEnabled = newOption.IsEnabled;
+         //-----------------------------------------
+         name = "ForceLostEvent";
+         currentOption = currentOptions.Find(name);
+         if (null == currentOption)
+         {
+            currentOption = new Option(name, false);
+            currentOptions.Add(currentOption);
+         }
+         newOption = newOptions.Find(name);
+         if (null == newOption)
+         {
+            newOption = new Option(name, false);
+            newOptions.Add(newOption);
+         }
+         currentOption.IsEnabled = newOption.IsEnabled;
+         //-----------------------------------------
+         name = "ForceNoEvent";
+         currentOption = currentOptions.Find(name);
+         if (null == currentOption)
+         {
+            currentOption = new Option(name, false);
+            currentOptions.Add(currentOption);
+         }
+         newOption = newOptions.Find(name);
+         if (null == newOption)
+         {
+            newOption = new Option(name, false);
+            newOptions.Add(newOption);
+         }
+         currentOption.IsEnabled = newOption.IsEnabled;
+         //-----------------------------------------
+         name = "ForceEvent";
+         currentOption = currentOptions.Find(name);
+         if (null == currentOption)
+         {
+            currentOption = new Option(name, false);
+            currentOptions.Add(currentOption);
+         }
+         newOption = newOptions.Find(name);
+         if (null == newOption)
+         {
+            newOption = new Option(name, false);
+            newOptions.Add(newOption);
+         }
+         currentOption.IsEnabled = newOption.IsEnabled;
+         //-----------------------------------------
+         name = "ForceNoRoadEvent";
+         currentOption = currentOptions.Find(name);
+         if (null == currentOption)
+         {
+            currentOption = new Option(name, false);
+            currentOptions.Add(currentOption);
+         }
+         newOption = newOptions.Find(name);
+         if (null == newOption)
+         {
+            newOption = new Option(name, false);
+            newOptions.Add(newOption);
+         }
+         currentOption.IsEnabled = newOption.IsEnabled;
+         //-----------------------------------------
+         name = "ForceNoAirEvent";
+         currentOption = currentOptions.Find(name);
+         if (null == currentOption)
+         {
+            currentOption = new Option(name, false);
+            currentOptions.Add(currentOption);
+         }
+         newOption = newOptions.Find(name);
+         if (null == newOption)
+         {
+            newOption = new Option(name, false);
+            newOptions.Add(newOption);
+         }
+         currentOption.IsEnabled = newOption.IsEnabled;
+         //-----------------------------------------
+         name = "ForceAirEvent";
+         currentOption = currentOptions.Find(name);
+         if (null == currentOption)
+         {
+            currentOption = new Option(name, false);
+            currentOptions.Add(currentOption);
+         }
+         newOption = newOptions.Find(name);
+         if (null == newOption)
+         {
+            newOption = new Option(name, false);
+            newOptions.Add(newOption);
+         }
+         currentOption.IsEnabled = newOption.IsEnabled;
+         //-----------------------------------------
+         name = "ForceNoCrossEvent";
+         currentOption = currentOptions.Find(name);
+         if (null == currentOption)
+         {
+            currentOption = new Option(name, false);
+            currentOptions.Add(currentOption);
+         }
+         newOption = newOptions.Find(name);
+         if (null == newOption)
+         {
+            newOption = new Option(name, false);
+            newOptions.Add(newOption);
+         }
+         currentOption.IsEnabled = newOption.IsEnabled;
+         //-----------------------------------------
+         name = "ForceCrossEvent";
+         currentOption = currentOptions.Find(name);
+         if (null == currentOption)
+         {
+            currentOption = new Option(name, false);
+            currentOptions.Add(currentOption);
+         }
+         newOption = newOptions.Find(name);
+         if (null == newOption)
+         {
+            newOption = new Option(name, false);
+            newOptions.Add(newOption);
+         }
+         currentOption.IsEnabled = newOption.IsEnabled;
+         //-----------------------------------------
+         name = "ForceLostAfterCrossEvent";
+         currentOption = currentOptions.Find(name);
+         if (null == currentOption)
+         {
+            currentOption = new Option(name, false);
+            currentOptions.Add(currentOption);
+         }
+         newOption = newOptions.Find(name);
+         if (null == newOption)
+         {
+            newOption = new Option(name, false);
+            newOptions.Add(newOption);
+         }
+         currentOption.IsEnabled = newOption.IsEnabled;
+         //-----------------------------------------
+         name = "ForceNoRaftEvent";
+         currentOption = currentOptions.Find(name);
+         if (null == currentOption)
+         {
+            currentOption = new Option(name, false);
+            currentOptions.Add(currentOption);
+         }
+         newOption = newOptions.Find(name);
+         if (null == newOption)
+         {
+            newOption = new Option(name, false);
+            newOptions.Add(newOption);
+         }
+         currentOption.IsEnabled = newOption.IsEnabled;
+         //-----------------------------------------
+         name = "ForceRaftEvent";
+         currentOption = currentOptions.Find(name);
+         if (null == currentOption)
+         {
+            currentOption = new Option(name, false);
+            currentOptions.Add(currentOption);
+         }
+         newOption = newOptions.Find(name);
+         if (null == newOption)
+         {
+            newOption = new Option(name, false);
+            newOptions.Add(newOption);
+         }
+         currentOption.IsEnabled = newOption.IsEnabled;
       }
       public void MenuItemEditUndo_Click(object sender, RoutedEventArgs e)
       {

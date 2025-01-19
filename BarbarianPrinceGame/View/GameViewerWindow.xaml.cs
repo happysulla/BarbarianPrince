@@ -344,7 +344,6 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): gi.Options.Find(ExtendEndTime)");
                else
                   CreateButtonTimeTrack(gi);
-               SaveDefaultsToSettings(); // UpdateView() - UpdateGameOptions
                break;
             case GameAction.ShowAllRivers:
                UpdateCanvasRiver("Dienstal Branch", false);

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BarbarianPrince"
         mc:Ignorable="d"
-        Title="Options Dialog" FontSize="20" Height="640" Width="1060" WindowStartupLocation="CenterScreen">
+        Title="Options Dialog" FontSize="20" Height="640" Width="1160" WindowStartupLocation="CenterScreen">
    <ScrollViewer Name="myScrollViewerInside" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
       <Grid x:Name="myGrid">
          <Grid.RowDefinitions>
@@ -126,8 +126,10 @@
                </StackPanel>
             </GroupBox>
          </StackPanel>
-         <GroupBox x:Name="myGroupBoxDebug" Grid.Row="2" Grid.Column="4" Header="Event Settings" FontSize="14"  Margin="10,0,10,0" >
+         <GroupBox x:Name="myGroupBoxDebug" Grid.Row="2" Grid.Column="4" Header="Event Settings" FontSize="14"  Margin="10,0,10,0"  Width="220">
             <StackPanel Name="myStackPanelDebug" Orientation="Vertical" VerticalAlignment="Top" Margin="5,5,5,5" >
+               <TextBlock x:Name="myTextBlockNote" IsEnabled="False" TextWrapping="WrapWithOverflow" LineStackingStrategy="BlockLineHeight"  HorizontalAlignment="Left" VerticalAlignment="Top" >Note: Applies immediately to current game.</TextBlock>
+               <Separator/>
                <CheckBox x:Name="myCheckBoxNoLostRoll"  Content="No Lost Rolls" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelEvent_Click"/>
                <CheckBox x:Name="myCheckBoxNoLostEvent" Content="No Lost Events" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelEvent_Click"/>
                <CheckBox x:Name="myCheckBoxNoEvent" Content="No Travel Events" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelEvent_Click"/>

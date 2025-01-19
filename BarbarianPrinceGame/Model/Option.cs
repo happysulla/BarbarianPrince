@@ -21,7 +21,7 @@ namespace BarbarianPrince
       }
       public static void LogGameType(String caller, Options options)
       {
-         if (true == Logger.theLogLevel[(int)LogEnum.LE_GAME_INIT])
+         if (true == Logger.theLogLevel[(int)LogEnum.LE_VIEW_SHOW_OPTIONS])
          {
             StringBuilder sb = new StringBuilder();
             sb.Append(caller + "(): >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
@@ -68,8 +68,15 @@ namespace BarbarianPrince
                option = new Option(name, false);
             sb.Append(option.IsEnabled.ToString());
             //-------------------------
-            Logger.Log(LogEnum.LE_GAME_INIT, sb.ToString());
+            Logger.Log(LogEnum.LE_VIEW_SHOW_OPTIONS, sb.ToString());
          }
+      }
+      public override String ToString()
+      {
+         StringBuilder sb = new StringBuilder(Name);
+         sb.Append("=");
+         sb.Append(IsEnabled.ToString());
+         return sb.ToString();
       }
    }
    [XmlInclude(typeof(Option))]
@@ -375,6 +382,21 @@ namespace BarbarianPrince
                break;
          }
          return gameType;
+      }
+      public override String ToString()
+      {
+         StringBuilder sb = new StringBuilder("[");
+         int i = 0;
+         foreach (Option option in this)
+         {
+            sb.Append("(");
+            sb.Append(i++.ToString());
+            sb.Append("->");
+            sb.Append(option.ToString());
+            sb.Append(")");
+         }
+         sb.Append("]");
+         return sb.ToString();
       }
    }
 }

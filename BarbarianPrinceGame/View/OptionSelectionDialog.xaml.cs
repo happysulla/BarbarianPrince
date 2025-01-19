@@ -26,6 +26,7 @@ namespace BarbarianPrince
       private bool myIsRandomGame = false;
       public OptionSelectionDialog(Options options)
       {
+         Logger.Log(LogEnum.LE_VIEW_SHOW_OPTIONS, "OptionSelectionDialog(): "  + options.ToString());
          InitializeComponent();
          myOptions = options.Clone(); // make copy b/c do not want to change unless OK button selected by user
          myRadioButtonOriginal.ToolTip = "Play the game as God Intended. Be prepared to lose often.";
@@ -2399,6 +2400,10 @@ namespace BarbarianPrince
             Logger.Log(LogEnum.LE_ERROR, "StackPanelEvent_Click(): myOptions.Find() for name=" + cb.Name);
          else
             option.IsEnabled = !option.IsEnabled;
+         option = myOptions.Find("AutoSetup");
+         if (null == option)
+            option = new Option("AutoSetup", false);
+         option.IsEnabled = true;
          if (false == UpdateDisplay(myOptions))
             Logger.Log(LogEnum.LE_ERROR, "StackPanelEvent_Click(): UpdateDisplay() returned false for name=" + cb.Name);
       }
