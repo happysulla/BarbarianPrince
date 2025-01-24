@@ -107,7 +107,8 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[3])
          {
-            myXColumn = 0.0; // When set to zero, it indicates that use existing value instead of value from previous entry
+            myXColumn = 0.0; // When set to zero, it indicates that use existing value instead of value from previous entry 
+            // Want the same X value as specified in the last dialog. This lines up dots.
          }
          else if (CommandName == myCommandNames[4]) // Show Roads
          {

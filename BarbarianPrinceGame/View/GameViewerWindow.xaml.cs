@@ -250,8 +250,8 @@ namespace BarbarianPrince
          //---------------------------------------------------------------
          myEventViewer = new EventViewer(myGameEngine, myGameInstance, myCanvas, myScrollViewerTextBlock, myStackPanelEndurance, Territory.theTerritories, myDieRoller);
          CanvasImageViewer civ = new CanvasImageViewer(myCanvas);
-         CreateRiversFromXml();
          //---------------------------------------------------------------
+         CreateRiversFromXml();
          CreateButtonTimeTrack(gi);
          CreateButtonFoodSupply();
          CreateButtonEndurance();

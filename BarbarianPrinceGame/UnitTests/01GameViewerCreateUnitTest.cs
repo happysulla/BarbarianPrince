@@ -184,7 +184,7 @@ namespace BarbarianPrince
       private void CreateMarquee(Canvas canvas)
       {
          List<UIElement> elements = new List<UIElement>();
-         foreach (UIElement ui in myCanvas.Children)
+         foreach (UIElement ui in canvas.Children)
          {
             if (ui is Polygon polygon)
                elements.Add(ui);
@@ -198,18 +198,18 @@ namespace BarbarianPrince
                elements.Add(ui);
          }
          foreach (UIElement ui1 in elements)
-            myCanvas.Children.Remove(ui1);
+            canvas.Children.Remove(ui1);
          //-------------------------------
          TextBlock tbMarquee = new TextBlock() { Foreground = Brushes.Blue, FontFamily = myFontFam, FontSize = 24};
          tbMarquee.Inlines.Add(new Run("Current Game Statistics:") { FontWeight = FontWeights.Bold, FontStyle = FontStyles.Italic, TextDecorations = TextDecorations.Underline });
          tbMarquee.Inlines.Add(new LineBreak());
          tbMarquee.Inlines.Add(new Run("Time in Jail = 30 days"));
-         myCanvas.ClipToBounds = true;
-         myCanvas.Children.Add(tbMarquee);
+         canvas.ClipToBounds = true;
+         canvas.Children.Add(tbMarquee);
          //-------------------------------
          DoubleAnimation doubleAnimation = new DoubleAnimation();
          doubleAnimation.From = -tbMarquee.ActualHeight;
-         doubleAnimation.To = myCanvas.ActualHeight;
+         doubleAnimation.To = canvas.ActualHeight;
          doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
          doubleAnimation.Duration = new Duration(TimeSpan.FromSeconds(myScrollingTime));
          tbMarquee.BeginAnimation(Canvas.BottomProperty, doubleAnimation);

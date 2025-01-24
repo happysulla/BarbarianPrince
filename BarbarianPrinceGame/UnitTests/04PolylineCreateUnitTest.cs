@@ -78,13 +78,12 @@ namespace BarbarianPrince
          }
          //------------------------------------
          this.myGameInstance = gi;
-
-         myCanvas.MouseDown += MouseDownCanvas;
       }
       public bool Command(ref IGameInstance gi) // Performs function based on CommandName string
       {
          if (CommandName == myCommandNames[0])
          {
+            myCanvas.MouseDown += MouseDownCanvas;
             CreateEllipses();
             ReadRiversXml();
             CreateTriangles();

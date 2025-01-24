@@ -5702,12 +5702,17 @@ namespace BarbarianPrince
                   if (0 < myAssignables.Count)
                      halfling = myAssignables[0];
                }
-               if( null != halfling)
+               if( null != halfling )
                {
-                  if ((false == halfling.IsKilled) && (false == halfling.IsUnconscious)) // if not dead or unconscious, halfling tries to escape
+                  if ((false == halfling.IsKilled) && (false == halfling.IsUnconscious)) // if not dead adn not unconscious, halfling tries to escape
                   {
                      Logger.Log(LogEnum.LE_COMBAT_STATE, "Grid_MouseDown(): " + myState.ToString() + "-->ROLL_FOR_HALFLING");
                      myState = CombatEnum.ROLL_FOR_HALFLING;
+                  }
+                  else
+                  {
+                     Logger.Log(LogEnum.LE_COMBAT_STATE, "Grid_MouseDown(): " + myState.ToString() + "-->NEXT_ROUND");
+                     myState = CombatEnum.NEXT_ROUND;
                   }
                }
             }
