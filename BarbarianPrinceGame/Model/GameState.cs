@@ -2669,7 +2669,7 @@ namespace BarbarianPrince
          sb.Append(Environment.Version.ToString());
          var dpi = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / System.Windows.SystemParameters.PrimaryScreenWidth;
          sb.Append("\n\tDPI=(");
-         sb.Append(dpi.ToString());
+         sb.Append(dpi.ToString("000.0"));
          sb.Append(")\n\tAppDir=");
          sb.Append(MainWindow.theAssemblyDirectory);
          Logger.Log(LogEnum.LE_GAME_INIT_VERSION, sb.ToString());
