@@ -3336,6 +3336,9 @@ namespace BarbarianPrince
                      case "LETTER":
                         gi.ForbiddenAudiences.AddLetterConstraint(tForbidden, tTarget);
                         break;
+                     case "LETTER_GIVEN":
+                        gi.ForbiddenAudiences.AddLetterGivenConstraint(tForbidden);
+                        break;
                      case "ASSISTANT_OR_LETTER":
                         gi.ForbiddenAudiences.AddAssistantConstraint(tForbidden, assistant, tTarget);
                         break;

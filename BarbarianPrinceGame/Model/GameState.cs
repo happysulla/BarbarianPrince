@@ -7388,7 +7388,7 @@ namespace BarbarianPrince
                            }
                         }
                         break;
-                     case 4:                                                                           // letter of recommendation nearest castle
+                     case 4:                                                                           // letter of recommendation given to nearest castle
                         gi.EventDisplayed = gi.EventActive = "e157";
                         ITerritory closetCastle0 = FindClosestCastle(gi);
                         if (null == closetCastle0)
@@ -7402,7 +7402,7 @@ namespace BarbarianPrince
                         ITerritory t156 = FindClosestTown(gi);
                         gi.ForbiddenAudiences.AddTimeConstraint(t156, gi.Days + 6);
                         break;
-                     case 5:                                                                             // letter of recommendation nearest castle
+                     case 5:                                                                             // letter of recommendation given to nearest castle
                         gi.EventDisplayed = gi.EventActive = "e157";
                         if (false == gi.AddCoins("GameStateEncounter(E156MayorAudienceApplyResults)", 50))
                         {
@@ -7688,7 +7688,8 @@ namespace BarbarianPrince
                         }
                         break;
                      case 3:
-                        gi.ForbiddenAudiences.AddLetterGivenConstraint(t161); // must have letter given for this territory to hold audience  // flippant advice
+                        if( false == gi.LetterOfRecommendations.Contains(t161) )  // only add if do not have a letter of recommendation for this site
+                           gi.ForbiddenAudiences.AddLetterGivenConstraint(t161);  // must have letter given for this territory to hold audience  // flippant advice
                         if (true == gi.IsAlcoveOfSendingAudience)
                         {
                            gi.EventDisplayed = gi.EventActive = "e042b";
@@ -16188,9 +16189,9 @@ namespace BarbarianPrince
                   else
                   {
                      gi.IsEvadeActive = false;
-                     gi.EventDisplayed = gi.EventActive = gi.EventStart;
+                     gi.EventDisplayed = gi.EventActive = gi.EventStart; // return back to previous selection but cannot evade
                      action = GameAction.UpdateEventViewerActive;
-                     gi.DieRollAction = GameAction.DieRollActionNone;
+                     gi.DieRollAction = GameAction.EncounterRoll;
                   }
                   gi.DieResults[key][0] = Utilities.NO_RESULT;
                }
