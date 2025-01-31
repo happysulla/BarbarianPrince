@@ -558,6 +558,16 @@ namespace BarbarianPrince
          sb.Append(myIsAirTravel.ToString());
          sb.Append(", tRaft=");
          sb.Append(myIsRaftTravel.ToString());
+         sb.Append(", tMinstel=");
+         sb.Append(myIsMinstelAdded.ToString());
+         sb.Append(", tMinstel=");
+         sb.Append(myIsEagleAdded.ToString());
+         sb.Append(", tEagle=");
+         sb.Append(myIsFalconAdded.ToString());
+         sb.Append(", tFalcon=");
+         sb.Append(myIsMerchantAdded.ToString());
+         sb.Append(", tTrueLove=");
+         sb.Append(myIsTrueLoveAdded.ToString());
          sb.Append(", tArch=");
          sb.Append(myIsArchTravel.ToString());
          sb.Append(", kDragon=");

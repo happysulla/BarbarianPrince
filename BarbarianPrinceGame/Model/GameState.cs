@@ -6630,7 +6630,7 @@ namespace BarbarianPrince
                   falcon.IsFlying = true;
                   falcon.IsGuide = true;
                   falcon.GuideTerritories = Territory.theTerritories;
-                  gi.PartyMembers.Add(falcon);
+                  gi.AddCompanion(falcon);
                   gi.ReduceFoods(1);
                   if (false == EncounterEnd(gi, ref action))
                   {
