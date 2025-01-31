@@ -4459,7 +4459,7 @@ e212n	"<Bold>e212n Staff of Command</Bold>
 <LineBreak/><LineBreak/>If you bring this possession to any hex north of the
  <InlineUIContainer><Button Content='Tragoth River' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
 , you will command instant obedience throughout the Norhlands, regain your throne, and win the game! 
-<LineBreak/><LineBreak/>In the meantime, you are given a pair of warrior monks who have combat skill 5 and endurance 6. The monks have mounts and join your parrty to help with your journey northward. Click image to continue.
+<LineBreak/><LineBreak/>In the meantime, you are given a pair of warrior monks who have combat skill 5 and endurance 6. The monks have mounts and join your party to help with your journey northward. Click image to continue.
 <LineBreak/><LineBreak/>
                                   <InlineUIContainer><Image Source='../images/Staff.gif' Name='EncounterEnd' Height='300' Width='150'></Image></InlineUIContainer>"
 e213	"<Bold>e213 Rafting the Rivers</Bold> <InlineUIContainer><Button Content='r213' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>

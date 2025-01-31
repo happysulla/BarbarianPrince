@@ -1534,7 +1534,7 @@ namespace BarbarianPrince
             else if (true == mi.IsFickle)
             {
                double s2 = 1.2 * Utilities.theMapItemOffset;
-               Image coinBar = new Image() { Height = s2, Width = s2, Source = MapItem.theMapImages.GetBitmapImage("CoinBar") };
+               Image coinBar = new Image() { Height = s2, Width = s2, Source = theCoinBar };
                c.Children.Add(coinBar);
                Canvas.SetLeft(coinBar, Utilities.ZOOM * Utilities.theMapItemOffset - 0.5 * s2);
                Canvas.SetTop(coinBar, 1.1 * Utilities.ZOOM * Utilities.theMapItemOffset);

@@ -35,7 +35,7 @@
          <TextBox Grid.Row="0" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Margin="0,5,0,0" Text="All Monks/Priests recognize the mark, and do not join your party." />
          <TextBox Grid.Row="1" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="A magic box that needs to be opened by a magician, wizard, or witch."/>
          <TextBox Grid.Row="2" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="A Gift of Charm that allows multiple rolls when talking encounter occurs."/>
-         <TextBox Grid.Row="3" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Hirelings that need to be paid end of each day."/>
+         <TextBox Grid.Row="3" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Fickle Mark: Member shares equally in treasure but leaves on other member's death."/>
          <TextBox Grid.Row="4" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Audience action is not allowed in this hex."/>
          <TextBox Grid.Row="5" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Hire action is not allowed in this hex."/>
          <TextBox Grid.Row="6" Grid.Column="1" Height="50" Width="180" TextWrapping="Wrap" IsEnabled="False"  Text="Looter Mark. Stays in party if shares equally in treasure finds."/>
