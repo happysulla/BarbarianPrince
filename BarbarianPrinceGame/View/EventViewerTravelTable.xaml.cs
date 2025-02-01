@@ -1203,7 +1203,7 @@ namespace BarbarianPrince
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL_REFERENCE-->" + myState.ToString() + " dr=" + dieRoll.ToString());
                break;
             case EnumR204.TC_EVENT_ROLL_EVENT:
-               //dieRoll = 5; // <cgs> TEST
+               //dieRoll = 6; // <cgs> TEST
                myRollEvent = dieRoll; // column number in traveling event reference - event row
                myState = EnumR204.TC_EVENT_SHOW_RESULTS;
                Logger.Log(LogEnum.LE_VIEW_TRAVEL_CHECK, "ShowDieResults(): state=TC_EVENT_ROLL_EVENT-->" + myState.ToString() + " dr=" + dieRoll.ToString());

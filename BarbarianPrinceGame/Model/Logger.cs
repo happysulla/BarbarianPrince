@@ -152,7 +152,7 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_COMBAT_STATE_ROUTE);
          //Logger.SetOn(LogEnum.LE_COMBAT_RESULT);
          //Logger.SetOn(LogEnum.LE_COMBAT_TROLL_HEAL);
-         //Logger.SetOn(LogEnum.LE_COMBAT_WIZARD);
+         Logger.SetOn(LogEnum.LE_COMBAT_WIZARD);
          Logger.SetOn(LogEnum.LE_ENCOUNTER_ESCAPE);
          //Logger.SetOn(LogEnum.LE_MAPITEM_WOUND);
          //Logger.SetOn(LogEnum.LE_MAPITEM_POISION);

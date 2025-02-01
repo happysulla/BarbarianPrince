@@ -5321,6 +5321,7 @@ namespace BarbarianPrince
             myWizardFireballRoundNum = myRoundNum;
             if (4 < dieRoll)
             {
+               Logger.Log(LogEnum.LE_COMBAT_WIZARD, "ShowWizardStrikeResult(4<dieroll): " + myState.ToString() + "-->WIZARD_STRIKE_SHOW");
                Logger.Log(LogEnum.LE_COMBAT_STATE, "ShowWizardStrikeResult(): " + myState.ToString() + "-->WIZARD_STRIKE_SHOW");
                myState = CombatEnum.WIZARD_STRIKE_SHOW;
                if (0 < myEncounteredWizard.Wound || 0 < myEncounteredWizard.Poison) // if fireball is used and wizard is wounded, he escapes
@@ -5344,7 +5345,8 @@ namespace BarbarianPrince
                   defender = myGridRows[j].myAssignable;
                defender.IsShowFireball = true; // used to show fireball on counter in IMapItem.ShowButtonContent()
             }
-            myFireballDamage = dieRoll; 
+            myFireballDamage = dieRoll;
+            Logger.Log(LogEnum.LE_COMBAT_WIZARD, "ShowWizardStrikeResult(): WIZARD_STRIKE_SHOW - entering ApplyWizardFireballAttack()");
             Logger.Log(LogEnum.LE_COMBAT_RESULT, "ShowWizardStrikeResult(): WIZARD_STRIKE_SHOW - entering ApplyWizardFireballAttack()");
             if (false == ApplyWizardFireballAttack())
             {

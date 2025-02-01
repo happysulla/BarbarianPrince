@@ -953,7 +953,7 @@ e023c	"<Bold>e023c Fight Wizard</Bold>
 <LineBreak/><LineBreak/> Roll one die: 
 <InlineUIContainer><Image Source='../images/dieRoll.gif' Name='DieRoll' Height='21'  Width='21' > </Image></InlineUIContainer>
 <LineBreak/><LineBreak/>
- <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Surprise<LineBreak/>
+ <InlineUIContainer><Button Content='e305' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 1 Attack<LineBreak/>
  <InlineUIContainer><Button Content='e306' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 2 Attacked <LineBreak/>
  <InlineUIContainer><Button Content='e024' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 3 and 4 - Wizard Attack<LineBreak/>
  <InlineUIContainer><Button Content='e308' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer> - 5 Surprised<LineBreak/>

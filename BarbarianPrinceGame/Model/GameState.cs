@@ -11878,7 +11878,7 @@ namespace BarbarianPrince
                   action = GameAction.UpdateEventViewerActive;
                   switch (gi.DieResults[key][0]) // Based on the die roll, implement the attack case
                   {
-                     case 1: gi.EventDisplayed = gi.EventActive = "e305"; break;
+                     case 1: gi.EventDisplayed = gi.EventActive = "e305"; break; 
                      case 2: gi.EventDisplayed = gi.EventActive = "e306"; break;
                      case 3:
                      case 4:
