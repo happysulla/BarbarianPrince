@@ -2525,7 +2525,8 @@ namespace BarbarianPrince
          //   gi.AddSpecialItem(SpecialEnum.EnduranceSash);
          //   gi.AddSpecialItem(SpecialEnum.PoisonDrug);
          //   gi.AddSpecialItem(SpecialEnum.MagicSword);
-         //   gi.AddSpecialItem(SpecialEnum.AntiPoisonAmulet);
+            //gi.AddSpecialItem(SpecialEnum.AntiPoisonAmulet);
+            //gi.Prince.IsAntipoisonAmuletUsed = true;
          //   gi.AddSpecialItem(SpecialEnum.PegasusMountTalisman);
          //   gi.AddSpecialItem(SpecialEnum.NerveGasBomb);
          //   gi.AddSpecialItem(SpecialEnum.ResistanceRing);

@@ -17,6 +17,7 @@ namespace BarbarianPrince
    {
       public delegate bool EndE187Callback();
       private const int STARTING_ASSIGNED_ROW = 6;
+      private const int NO_ROLL_REQUIRED = 10;
       //---------------------------------------------
       public struct GridRow
       {
@@ -133,6 +134,8 @@ namespace BarbarianPrince
             myGridRows[i] = new GridRow(mi);
             if (true == mi.IsSpecialItemHeld(SpecialEnum.AntiPoisonAmulet))
                isAmuletHeld = true;
+            else
+               myGridRows[i].myDieRoll = NO_ROLL_REQUIRED;
             ++i;
          }
          if (false == isAmuletHeld)
@@ -257,7 +260,7 @@ namespace BarbarianPrince
          {
             int rowNum = i + STARTING_ASSIGNED_ROW;
             IMapItem mi = myGridRows[i].myMapItem;
-            if (false == mi.IsAntipoisonAmuletUsed)
+            if (NO_ROLL_REQUIRED == myGridRows[i].myDieRoll)
                continue;
             //--------------------------------
             if (Utilities.NO_RESULT == myGridRows[i].myDieRoll)
@@ -333,9 +336,9 @@ namespace BarbarianPrince
          mi.IsAntipoisonAmuletUsed = false;
          //------------------------------
          myState = E187Enum.SHOW_RESULTS;
-         foreach( GridRow row in myGridRows )
+         for(int j=0; j < myMaxRowCount; j++) 
          {
-            IMapItem mapItem = row.myMapItem;
+            IMapItem mapItem = myGridRows[j].myMapItem;
             if (true == mapItem.IsAntipoisonAmuletUsed)
             {
                myState = E187Enum.CHECK_DESTRUCTION;
