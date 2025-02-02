@@ -138,6 +138,8 @@ namespace BarbarianPrince
       CampfirePlagueDustEnd,
       CampfireTalismanDestroy,
       CampfireTalismanDestroyEnd,
+      CampfireAntipoisionAmuletDestroy,
+      CampfireAntipoisionAmuletDestroyEnd,
       CampfireMountDieCheck,       // e096 mounts may die if sick
       CampfireMountDieCheckEnd,
       CampfireFalconCheck,         // e107 falcon may leave if not fed or on dr=6

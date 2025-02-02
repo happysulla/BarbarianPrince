@@ -540,6 +540,14 @@ namespace BarbarianPrince
                   Logger.Log(LogEnum.LE_ERROR, "UpdateView(): CheckTalismanDestruction() returned false");
                break;
             //-------------------------------------
+            case GameAction.CampfireAntipoisionAmuletDestroy:
+               EventViewerE187Mgr aE187MgrViewer = new EventViewerE187Mgr(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);
+               if (true == aE187MgrViewer.CtorError)
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): aE189MgrViewer.CtorError=true");
+               else if (false == aE187MgrViewer.CheckAntipoisonAmuletDestruction(ShowAntipoisonAmuletDestroy))
+                  Logger.Log(LogEnum.LE_ERROR, "UpdateView(): CheckAntipoisonAmuletDestruction() returned false");
+               break;
+            //-------------------------------------
             case GameAction.CampfireMountDieCheck:
                EventViewerE096MountsDieMgr aE096MountsDieMgr = new EventViewerE096MountsDieMgr(myGameInstance, myCanvas, myScrollViewerTextBlock, myRulesMgr, myDieRoller);
                if (true == aE096MountsDieMgr.CtorError)
@@ -5302,6 +5310,18 @@ namespace BarbarianPrince
          Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
          myGameEngine.PerformAction(ref myGameInstance, ref outAction);
          myGameInstance.IsGridActive = false;  // ShowCharismaTalismanDestroy() - Can show active event button in status bar
+         return true;
+      }
+      public bool ShowAntipoisonAmuletDestroy()
+      {
+         GameAction outAction = GameAction.CampfireAntipoisionAmuletDestroyEnd;
+         StringBuilder sb11 = new StringBuilder("     ######ShowAntipoisonAmuletDestroy() :");
+         sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
+         sb11.Append(" a="); sb11.Append(outAction.ToString());
+         Logger.Log(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER, sb11.ToString());
+         myGameEngine.PerformAction(ref myGameInstance, ref outAction);
+         myGameInstance.IsGridActive = false;  // CampfireAntipoisionAmuletDestroyEnd() - Can show active event button in status bar
          return true;
       }
       public bool ShowPrisonBreakResults()

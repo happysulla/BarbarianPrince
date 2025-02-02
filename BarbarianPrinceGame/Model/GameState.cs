@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -265,9 +266,35 @@ namespace BarbarianPrince
          }
          else
          {
+            if (false == SetAntiposionAmuletCheckState(gi, ref action))
+            {
+               Logger.Log(LogEnum.LE_ERROR, "SetTalismanCheckState(): SetAntiposionAmuletCheckState() returned false");
+               return false;
+            }
+         }
+         return true;
+      }
+      protected bool SetAntiposionAmuletCheckState(IGameInstance gi, ref GameAction action)
+      {
+         bool isAntipoisonAmulateUsed = false;
+         foreach(IMapItem mi in gi.PartyMembers)
+         {
+            isAntipoisonAmulateUsed = true;
+            break;
+         }
+         if (true == isAntipoisonAmulateUsed)
+         {
+            gi.IsGridActive = true;
+            gi.GamePhase = GamePhase.Campfire;
+            action = GameAction.CampfireAntipoisionAmuletDestroy;
+            gi.DieRollAction = GameAction.DieRollActionNone;
+            return true;
+         }
+         else
+         {
             if (false == SetMountDieCheckState(gi, ref action))
             {
-               Logger.Log(LogEnum.LE_ERROR, "SetTalismanCheckState(): SetMountDieCheckState() returned false");
+               Logger.Log(LogEnum.LE_ERROR, "SetAntiposionAmuletCheckState(): SetMountDieCheckState() returned false");
                return false;
             }
          }
@@ -3430,6 +3457,13 @@ namespace BarbarianPrince
                   }
                   break;
                case GameAction.CampfireTalismanDestroyEnd:
+                  if (false == SetAntiposionAmuletCheckState(gi, ref action))
+                  {
+                     returnStatus = "SetAntiposionAmuletCheckState() return false";
+                     Logger.Log(LogEnum.LE_ERROR, "GameStateCampfire.PerformAction(): " + returnStatus);
+                  }
+                  break;
+               case GameAction.CampfireAntipoisionAmuletDestroyEnd:
                   if (false == SetMountDieCheckState(gi, ref action))
                   {
                      returnStatus = "SetMountDieCheckState() return false";

@@ -108,6 +108,7 @@ namespace BarbarianPrince
       public bool IsAlly { set; get; } = false;
       public bool IsLooter { set; get; } = false;
       public bool IsTownCastleTempleLeave { set; get; } = false;
+      public bool IsAntipoisonAmuletUsed { set; get; } = false;
       //--------------------------------------------------
       public IMapItem Rider { get; set; } = null;
       public IMapItems Mounts { get; set; } = new MapItems();
@@ -466,6 +467,11 @@ namespace BarbarianPrince
       }
       public void SetWounds(int wound, int poison)
       {
+         if (true == this.IsSpecialItemHeld(SpecialEnum.AntiPoisonAmulet)) // if antipoison amulet held, cannot suffer poison wounds
+         {
+            poison = 0;
+            IsAntipoisonAmuletUsed = true;
+         }
          if ((0 == wound) && (0 == poison))
             return;
          //------------------------------------------------

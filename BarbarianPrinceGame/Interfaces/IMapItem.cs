@@ -54,6 +54,7 @@ namespace BarbarianPrince
       bool IsAlly { set; get; } //e334
       bool IsLooter { set; get; }  // e340
       bool IsTownCastleTempleLeave { set; get; } // e341
+      bool IsAntipoisonAmuletUsed { set; get; }
       //----------------------------------------
       bool IsGuide { get; set; }
       bool IsRiding { get; set; }
