@@ -939,7 +939,7 @@ namespace BarbarianPrince
                   cost = (int)Math.Ceiling((double)cost * 0.5);
                if ("  +  " == content)
                {
-                  if ((0 < coinCount) && ("FoodPlus" == b.Name))
+                  if ((0 < coinCount) && ("FoodPlus" == b.Name) && (0 < gi.GetTotalFreeLoad()))
                      b.IsEnabled = true;
                   if ((cost <= coinCount) && ("MountPlus" == b.Name))
                      b.IsEnabled = true;
