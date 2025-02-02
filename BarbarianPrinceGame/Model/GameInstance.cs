@@ -695,6 +695,23 @@ namespace BarbarianPrince
             return;
          }
       }
+      public int GetTotalFreeLoad()
+      {
+         int totalFreeLoad = 0;
+         foreach (IMapItem mi in PartyMembers)
+         {
+            if ((true == mi.IsUnconscious) || (true == mi.IsKilled) || (true == mi.Name.Contains("Eagle")) || (true == mi.Name.Contains("Falcon")))
+               continue;
+            int freeLoad = mi.GetFreeLoad();
+            if (freeLoad < 0)
+            {
+               Logger.Log(LogEnum.LE_ERROR, "GetTotalFreeLoad(): GetFreeLoad() returned fl=" + freeLoad.ToString());
+               return -1;
+            }
+            totalFreeLoad += freeLoad;
+         }
+         return totalFreeLoad;
+      }
       public int GetFoods()
       {
          int foods = 0;

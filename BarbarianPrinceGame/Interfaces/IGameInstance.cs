@@ -205,6 +205,7 @@ namespace BarbarianPrince
       bool IsInTownOrCastle(ITerritory t);
       bool IsInStructure(ITerritory t);
       //----------------------------------------------
+      int GetTotalFreeLoad();
       int GetFoods();
       bool AddFoods(int foodStore,bool isHunt= false); // if is hunt, all food is added. In Transport Manager, it is winnowed down to what can be carried.
       void ReduceFoods(int foodStore);

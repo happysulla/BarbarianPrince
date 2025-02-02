@@ -918,7 +918,7 @@ namespace BarbarianPrince
             case "e011a":
             case "e012a":
                b.IsEnabled = false;
-               if (("  +  " == content) && (1 < gi.GetCoins()))
+               if ( ("  +  " == content) && (1 < gi.GetCoins()) && (0 < gi.GetTotalFreeLoad()) )
                   b.IsEnabled = true;
                if (("  -  " == content) && (0 < gi.PurchasedFood))
                   b.IsEnabled = true;

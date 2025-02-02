@@ -279,8 +279,11 @@ namespace BarbarianPrince
          bool isAntipoisonAmulateUsed = false;
          foreach(IMapItem mi in gi.PartyMembers)
          {
-            isAntipoisonAmulateUsed = true;
-            break;
+            if(true == mi.IsAntipoisonAmuletUsed )
+            {
+               isAntipoisonAmulateUsed = true;
+               break;
+            }
          }
          if (true == isAntipoisonAmulateUsed)
          {
@@ -288,7 +291,6 @@ namespace BarbarianPrince
             gi.GamePhase = GamePhase.Campfire;
             action = GameAction.CampfireAntipoisionAmuletDestroy;
             gi.DieRollAction = GameAction.DieRollActionNone;
-            return true;
          }
          else
          {
