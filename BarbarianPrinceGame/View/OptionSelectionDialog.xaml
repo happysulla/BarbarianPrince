@@ -62,8 +62,8 @@
                <CheckBox x:Name="myCheckBoxElf" Content="Elf" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
                <CheckBox x:Name="myCheckBoxElfWarrior" Content="Elf Warrior" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
                <CheckBox x:Name="myCheckBoxFalcon" Content="Falcon" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
-               <CheckBox x:Name="myCheckBoxGriffon" Content="Griffon" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
-               <CheckBox x:Name="myCheckBoxHarpy" Content="Harpy" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
+               <CheckBox x:Name="myCheckBoxGriffon" Content="Griffon + Mercenary" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
+               <CheckBox x:Name="myCheckBoxHarpy" Content="Harpy + Monk" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
                <CheckBox x:Name="myCheckBoxMagician" Content="Magician" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
                <CheckBox x:Name="myCheckBoxMercenary" Content="Mercenary" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>
                <CheckBox x:Name="myCheckBoxMerchant" Content="Merchant" Margin="5,0,5,0" Padding="4,-4,0,0" Click="StackPanelPartyMember_Click"/>

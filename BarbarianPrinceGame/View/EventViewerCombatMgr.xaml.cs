@@ -196,8 +196,8 @@ namespace BarbarianPrince
       private CombatEnum myState = CombatEnum.ASSIGN;
       private CombatEnum myPreviousCombatState = CombatEnum.NONE;
       private IMapItem myMapItemDragged = null;
-      private IMapItems myAssignables = null;
-      private IMapItems myUnassignables = null;
+      private IMapItems myAssignables = null;    // either gi.PartyMembers or gi.EncounteredMembers  
+      private IMapItems myUnassignables = null;  // opposite of myAssignables
       private IMapItems myNonCombatants = new MapItems(); // e014b - hired reavers do not fight
       private IMapItems myEncounteredSlaveGirls = new MapItems(); // slave girls can be traded for negotiations - get returned if enter combat and win battle
       private bool myIsPartyMembersAssignable = false;
@@ -4207,8 +4207,15 @@ namespace BarbarianPrince
          bool isPartyMemberDied = false;  // e331 - fickle party members leave if anybody dies
          IMapItems results1 = new MapItems();
          IMapItems results2 = new MapItems();
+         int numTrueLovesBefore = 0;
+         //++++++++++++++++++ myAssignables=PartyMembers +++++++++++++++++++++++++++++++
          if (true == myIsPartyMembersAssignable)
          {
+            foreach (IMapItem member in myAssignables)
+            {
+               if (true == member.Name.Contains("TrueLove"))
+                  ++numTrueLovesBefore;
+            }
             foreach (IMapItem mi in myAssignables)
             {
                if (true == mi.IsKilled)
@@ -4217,6 +4224,37 @@ namespace BarbarianPrince
                   results1.Add(mi);
                   //---------------------------------
                   ++myGameInstance.Statistic.myNumOfPartyKilled;
+                  //---------------------------------
+                  if (true == mi.Name.Contains("ElfWarrior")) // RemoveCasualties(ElfWarrior)
+                  {
+                     --myGameInstance.WitAndWile;
+                     Logger.Log(LogEnum.LE_WIT_AND_WILES, "RemoveCasualties(ElfWarrior): --ww=" + myGameInstance.WitAndWile.ToString());
+                  }
+                  //--------------------------------
+                  if (true == mi.Name.Contains("WarriorBoy"))
+                     myGameInstance.IsHuldraHeirKilled = true;
+                  //--------------------------------
+                  if (true == mi.Name.Contains("Minstel"))
+                     myGameInstance.IsMinstrelPlaying = false;
+                  //---------------------------------
+                  if (true == mi.IsFlyingMountCarrier())
+                  {
+                     if (null != mi.Rider)
+                        mi.Rider.Mounts.Remove(mi);
+                     mi.Rider.IsFlying = false;
+                     mi.Rider.IsRiding = false;
+                     mi.Rider = null;
+                  }
+                  if (0 < mi.Mounts.Count)
+                  {
+                     IMapItem mount = mi.Mounts[0];
+                     if (true == mount.IsFlyingMountCarrier())
+                     {
+                        if (null != mi.Rider)
+                           mi.Mounts.Remove(mount);
+                        mount.Rider = null;
+                     }
+                  }
                   //---------------------------------
                   if ( (true == mi.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace)) && (false == mi.Name.Contains("Prince")) )
                   {
@@ -4290,8 +4328,14 @@ namespace BarbarianPrince
                }
             }
          }
+         //++++++++++++++++++ myUnassignables=PartyMembers +++++++++++++++++++++++++++++++
          else
          {
+            foreach (IMapItem member in myUnassignables)
+            {
+               if (true == member.Name.Contains("TrueLove"))
+                  ++numTrueLovesBefore;
+            }
             foreach (IMapItem mi in myUnassignables) // party members are unassignable
             {
                if (true == mi.IsKilled)
@@ -4300,6 +4344,37 @@ namespace BarbarianPrince
                   results2.Add(mi);
                   //---------------------------------
                   ++myGameInstance.Statistic.myNumOfPartyKilled;
+                  //--------------------------------
+                  if (true == mi.Name.Contains("ElfWarrior")) // RemoveAbandonerInParty(ElfWarrior)
+                  {
+                     --myGameInstance.WitAndWile;
+                     Logger.Log(LogEnum.LE_WIT_AND_WILES, "RemoveCasualties(ElfWarrior): --ww=" + myGameInstance.WitAndWile.ToString());
+                  }
+                  //--------------------------------
+                  if (true == mi.Name.Contains("WarriorBoy"))
+                     myGameInstance.IsHuldraHeirKilled = true;
+                  //--------------------------------
+                  if (true == mi.Name.Contains("Minstel"))
+                     myGameInstance.IsMinstrelPlaying = false;
+                  //---------------------------------
+                  if (true == mi.IsFlyingMountCarrier())
+                  {
+                     if (null != mi.Rider)
+                        mi.Rider.Mounts.Remove(mi);
+                     mi.Rider.IsFlying = false;
+                     mi.Rider.IsRiding = false;
+                     mi.Rider = null;
+                  }
+                  if (0 < mi.Mounts.Count)
+                  {
+                     IMapItem mount = mi.Mounts[0];
+                     if (true == mount.IsFlyingMountCarrier())
+                     {
+                        if (null != mi.Rider)
+                           mi.Mounts.Remove(mount);
+                        mount.Rider = null;
+                     }
+                  }
                   //---------------------------------
                   if ( (true == mi.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace)) && (false == mi.Name.Contains("Prince")) )
                   {
@@ -4432,6 +4507,40 @@ namespace BarbarianPrince
             myAssignables.Remove(mi);
          foreach (IMapItem mi in results2)
             myUnassignables.Remove(mi);
+         //---------------------------------
+         int numTrueLovesAfter = 0;
+         myGameInstance.IsMerchantWithParty = false; // remove the effects of merchant unless one still exists
+         if (true == myIsPartyMembersAssignable)
+         {
+            foreach (IMapItem member in myAssignables)
+            {
+               if (true == member.Name.Contains("TrueLove"))
+                  ++numTrueLovesAfter;
+               if (true == member.Name.Contains("Merchant"))
+                  myGameInstance.IsMerchantWithParty = true;
+            }
+         }
+         else
+         {
+            foreach (IMapItem member in myUnassignables)
+            {
+               if (true == member.Name.Contains("TrueLove"))
+                  ++numTrueLovesAfter;
+               if (true == member.Name.Contains("Merchant"))
+                  myGameInstance.IsMerchantWithParty = true;
+            }
+         }
+         if ((1 == numTrueLovesAfter) && (1 < numTrueLovesBefore))      // If the number of True Loves is one and there was no triangle, increase wit and wiles
+         {
+            ++myGameInstance.WitAndWile;
+            Logger.Log(LogEnum.LE_WIT_AND_WILES, "RemoveCasualties(): numTrueLovesAfter=1 numTrueLovesBefore=" + numTrueLovesAfter.ToString() + " ++new=" + myGameInstance.WitAndWile.ToString());
+
+         }
+         else if ((1 != numTrueLovesAfter) && (1 == numTrueLovesBefore)) // If the number of True Loves changed from one, decrease wit and wiles
+         {
+            --myGameInstance.WitAndWile;
+            Logger.Log(LogEnum.LE_WIT_AND_WILES, "RemoveCasualties(): numTrueLovesBefore=1 numTrueLovesAfter=" + numTrueLovesAfter.ToString() + " --new=" + myGameInstance.WitAndWile.ToString());
+         }
          return true;
       }
       private bool SetWounds(int i, int dieRoll)

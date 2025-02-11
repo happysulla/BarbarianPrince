@@ -13,7 +13,7 @@ namespace BarbarianPrince
       LE_ERROR,
       LE_GAME_INIT,
       LE_GAME_INIT_VERSION,
-      LE_WIT_AND_WILES_INIT,
+      LE_WIT_AND_WILES,
       LE_USER_ACTION,
       LE_NEXT_ACTION,
       LE_UNDO_COMMAND,
@@ -120,7 +120,7 @@ namespace BarbarianPrince
          Logger.SetOn(LogEnum.LE_ERROR);
          //Logger.SetOn(LogEnum.LE_GAME_INIT);
          Logger.SetOn(LogEnum.LE_GAME_INIT_VERSION); 
-         //Logger.SetOn(LogEnum.LE_WIT_AND_WILES_INIT);
+         Logger.SetOn(LogEnum.LE_WIT_AND_WILES);
          Logger.SetOn(LogEnum.LE_USER_ACTION);
          Logger.SetOn(LogEnum.LE_NEXT_ACTION);
          //Logger.SetOn(LogEnum.LE_UNDO_COMMAND);

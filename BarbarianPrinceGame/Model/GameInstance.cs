@@ -355,13 +355,13 @@ namespace BarbarianPrince
             {
                int witandwile = this.WitAndWile;
                --this.WitAndWile;
-               Logger.Log(LogEnum.LE_WIT_AND_WILES_INIT, "AddCompanion(): numTrueLoves=2 original=" + witandwile.ToString() + " ww=" + this.WitAndWile.ToString());
+               Logger.Log(LogEnum.LE_WIT_AND_WILES, "AddCompanion(): numTrueLoves=2 original=" + witandwile.ToString() + " ww=" + this.WitAndWile.ToString());
             }
             else if (1 == numTrueLoves)  // add effects of true love
             {
                int witandwile = this.WitAndWile;
                ++this.WitAndWile;
-               Logger.Log(LogEnum.LE_WIT_AND_WILES_INIT, "AddCompanion(): numTrueLoves=1 original=" + witandwile.ToString() + " ww=" + this.WitAndWile.ToString());
+               Logger.Log(LogEnum.LE_WIT_AND_WILES, "AddCompanion(): numTrueLoves=1 original=" + witandwile.ToString() + " ww=" + this.WitAndWile.ToString());
             }
          }
          if( (0 < this.Arches.Count) && (true == IsMagicInParty()) ) // if there is magician, witch, or wizard added to party, adn arches exist, the secret becomes known 
@@ -380,7 +380,7 @@ namespace BarbarianPrince
          {
             int witandwile = this.WitAndWile;
             ++this.WitAndWile;
-            Logger.Log(LogEnum.LE_WIT_AND_WILES_INIT, "AddCompanion(): ElfWarrior original=" + witandwile.ToString() + " ww=" + this.WitAndWile.ToString());
+            Logger.Log(LogEnum.LE_WIT_AND_WILES, "AddCompanion(ElfWarrior): ElfWarrior original=" + witandwile.ToString() + " ww=" + this.WitAndWile.ToString());
          }
          //--------------------------------
          if ((true == companion.Name.Contains("Minstrel")) && (1 < Days) )
@@ -1920,8 +1920,11 @@ namespace BarbarianPrince
             if (true == member.IsKilled)
             {
                isMemberKilled = true;
-               if (true == member.Name.Contains("ElfWarrior"))
+               if (true == member.Name.Contains("ElfWarrior")) //ProcessIncapacitedPartyMembers(ElfWarrior)
+               {
                   --this.WitAndWile;
+                  Logger.Log(LogEnum.LE_WIT_AND_WILES, "ProcessIncapacitedPartyMembers(ElfWarrior): --ww=" + this.WitAndWile.ToString());
+               }
                if (true == member.Name.Contains("WarriorBoy"))
                   IsHuldraHeirKilled = true;
                if (true == member.Name.Contains("Minstel"))
@@ -2059,9 +2062,16 @@ namespace BarbarianPrince
                IsMerchantWithParty = true;
          }
          if ((1 == numTrueLovesAfter) && (1 < numTrueLovesBefore))      // If the number of True Loves is one and there was no triangle, increase wit and wiles
+         {
             ++this.WitAndWile;
+            Logger.Log(LogEnum.LE_WIT_AND_WILES, "ProcessIncapacitedPartyMembers(): numTrueLovesAfter=1 numTrueLovesBefore=" + numTrueLovesAfter.ToString() + " ++new=" + this.WitAndWile.ToString() );
+
+         }
          else if ((1 != numTrueLovesAfter) && (1 == numTrueLovesBefore)) // If the number of True Loves changed from one, decrease wit and wiles
+         {
             --this.WitAndWile;
+            Logger.Log(LogEnum.LE_WIT_AND_WILES, "ProcessIncapacitedPartyMembers(): numTrueLovesBefore=1 numTrueLovesAfter=" + numTrueLovesAfter.ToString() + " --new=" + this.WitAndWile.ToString() );
+         }
       }
       public bool RemoveVictimInParty(IMapItem victim)
       {
@@ -2079,8 +2089,11 @@ namespace BarbarianPrince
                ++numTrueLovesBefore;
          }
          //---------------------------------------------
-         if (true == victim.Name.Contains("ElfWarrior"))
+         if (true == victim.Name.Contains("ElfWarrior")) // RemoveVictimInParty(ElfWarrior)
+         {
             --this.WitAndWile;
+            Logger.Log(LogEnum.LE_WIT_AND_WILES, "RemoveVictimInParty(ElfWarrior): --ww=" + this.WitAndWile.ToString());
+         }
          //---------------------------------------------
          if (true == victim.Name.Contains("WarriorBoy"))
             IsHuldraHeirKilled = true;
@@ -2158,9 +2171,16 @@ namespace BarbarianPrince
                IsMerchantWithParty = true;
          }
          if ((1 == numTrueLovesAfter) && (1 < numTrueLovesBefore))      // If the number of True Loves is one and there was no triangle, increase wit and wiles
+         {
             ++this.WitAndWile;
+            Logger.Log(LogEnum.LE_WIT_AND_WILES, "RemoveVictimInParty(): numTrueLovesAfter=1 numTrueLovesBefore=" + numTrueLovesAfter.ToString() + " ++new=" + this.WitAndWile.ToString() );
+
+         }
          else if ((1 != numTrueLovesAfter) && (1 == numTrueLovesBefore)) // If the number of True Loves changed from one, decrease wit and wiles
+         {
             --this.WitAndWile;
+            Logger.Log(LogEnum.LE_WIT_AND_WILES, "RemoveVictimInParty(): numTrueLovesBefore=1 numTrueLovesAfter=" + numTrueLovesAfter.ToString() + " --new=" + this.WitAndWile.ToString() );
+         }
          //--------------------------------
          if (true == victim.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace))
          {
@@ -2254,8 +2274,6 @@ namespace BarbarianPrince
             if (true == mi.Name.Contains("TrueLove"))
                ++numTrueLovesBefore;
          }
-         if (1 == numTrueLovesBefore)  // remove effects of true love if only had one true love
-            --this.WitAndWile;
          //--------------------------------
          IsMerchantWithParty = false; // remove effects of having a merchant
          IsMinstrelPlaying = false;
@@ -2263,14 +2281,34 @@ namespace BarbarianPrince
          int count = partyMembers.Count;
          foreach (IMapItem mi in partyMembers)
          {
-            if (true == mi.Name.Contains("ElfWarrior"))
+            if (true == mi.Name.Contains("ElfWarrior")) // RemoveLeaderlessInParty(ElfWarrior)
+            {
                --this.WitAndWile;
+               Logger.Log(LogEnum.LE_WIT_AND_WILES, "RemoveLeaderlessInParty(ElfWarrior): --ww=" + this.WitAndWile.ToString());
+            }
             if (true == mi.Name.Contains("WarriorBoy"))
                IsHuldraHeirKilled = true;
             if (true == mi.Name.Contains("TrueLove"))
                LostTrueLoves.Add(mi);
             Logger.Log(LogEnum.LE_REMOVE_KIA, "RemoveLeaderlessInParty(): ================" + mi.Name + "=KIA c=" + mi.Coin.ToString() + " f=" + mi.Food.ToString() + "=========================");
             PartyMembers.Remove(mi);
+         }
+         int numTrueLovesAfter = 0;
+         foreach (IMapItem member in PartyMembers)
+         {
+            if (true == member.Name.Contains("TrueLove"))
+               ++numTrueLovesAfter;
+         }
+         if ((1 == numTrueLovesAfter) && (1 < numTrueLovesBefore))      // If the number of True Loves is one and there was no triangle, increase wit and wiles
+         {
+            ++this.WitAndWile;
+            Logger.Log(LogEnum.LE_WIT_AND_WILES, "RemoveLeaderlessInParty(): numTrueLovesAfter=1 numTrueLovesBefore=" + numTrueLovesAfter.ToString() + " ++new=" + this.WitAndWile.ToString());
+
+         }
+         else if ((1 != numTrueLovesAfter) && (1 == numTrueLovesBefore)) // If the number of True Loves changed from one, decrease wit and wiles
+         {
+            --this.WitAndWile;
+            Logger.Log(LogEnum.LE_WIT_AND_WILES, "RemoveLeaderlessInParty(): numTrueLovesBefore=1 numTrueLovesAfter=" + numTrueLovesAfter.ToString() + " --new=" + this.WitAndWile.ToString());
          }
          return count;
       } // Party leaves Prince assuming he is dead
@@ -2289,10 +2327,17 @@ namespace BarbarianPrince
          {
             if (false == isTrueLoveRemoved) // true love may find a way to return if this is false
                LostTrueLoves.Add(mi);
-            if (2 == numTrueLoves)       // add the effects of true love - going to one true love
+            if (2 == numTrueLoves)      // If the number of True Loves is one and there was no triangle, increase wit and wiles
+            {
                ++this.WitAndWile;
-            else if (1 == numTrueLoves)  // remove effects of true love  - going to no true love
+               Logger.Log(LogEnum.LE_WIT_AND_WILES, "RemoveVictimInParty(): numTrueLoves=2" + " ++new=" + this.WitAndWile.ToString() );
+
+            }
+            else if (1 == numTrueLoves) // If the number of True Loves changed from one, decrease wit and wiles
+            {
                --this.WitAndWile;
+               Logger.Log(LogEnum.LE_WIT_AND_WILES, "RemoveVictimInParty(): numTrueLoves=1" + numTrueLoves.ToString() + " --new=" + this.WitAndWile.ToString() );
+            }
          }
          //--------------------------------
          if ( true == mi.IsFlyingMountCarrier() )
@@ -2312,8 +2357,11 @@ namespace BarbarianPrince
             }
          }
          //--------------------------------
-         if (true == mi.Name.Contains("ElfWarrior"))
+         if (true == mi.Name.Contains("ElfWarrior")) // RemoveAbandonerInParty(ElfWarrior)
+         {
             --this.WitAndWile;
+            Logger.Log(LogEnum.LE_WIT_AND_WILES, "RemoveAbandonerInParty(ElfWarrior): --ww=" + this.WitAndWile.ToString());
+         }
          //--------------------------------
          if (true == mi.Name.Contains("WarriorBoy"))
             IsHuldraHeirKilled = true;
@@ -2371,10 +2419,17 @@ namespace BarbarianPrince
          {
             if (false == isTrueLoveRemoved) // true love may find a way to return if this is false
                LostTrueLoves.Add(mi);
-            if (2 == numTrueLoves)       // add the effects of true love - going to one true love
+            if (2 == numTrueLoves)      // If the number of True Loves is one and there was no triangle, increase wit and wiles
+            {
                ++this.WitAndWile;
-            else if (1 == numTrueLoves)  // remove effects of true love  - going to no true love
+               Logger.Log(LogEnum.LE_WIT_AND_WILES, "RemoveAbandonedInParty(): numTrueLoves=2" + " ++new=" + this.WitAndWile.ToString());
+
+            }
+            else if (1 == numTrueLoves) // If the number of True Loves changed from one, decrease wit and wiles
+            {
                --this.WitAndWile;
+               Logger.Log(LogEnum.LE_WIT_AND_WILES, "RemoveAbandonedInParty(): numTrueLoves=1" + numTrueLoves.ToString() + " --new=" + this.WitAndWile.ToString());
+            }
          }
          //--------------------------------
          if ( true == mi.IsFlyingMountCarrier() )
@@ -2394,8 +2449,11 @@ namespace BarbarianPrince
             }
          }
          //--------------------------------
-         if (true == mi.Name.Contains("ElfWarrior"))
+         if (true == mi.Name.Contains("ElfWarrior")) // RemoveAbandonedInParty(ElfWarrior)
+         {
             --this.WitAndWile;
+            Logger.Log(LogEnum.LE_WIT_AND_WILES, "RemoveAbandonedInParty(ElfWarrior): --ww=" + this.WitAndWile.ToString());
+         }
          //--------------------------------
          if (true == mi.Name.Contains("WarriorBoy"))
             IsHuldraHeirKilled = true;
