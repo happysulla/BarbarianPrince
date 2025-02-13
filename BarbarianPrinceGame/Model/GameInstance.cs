@@ -2200,6 +2200,8 @@ namespace BarbarianPrince
             if (null != mi.Rider) // mi = griffon/harpy
             {
                mi.Rider.Mounts.Remove(mi);  // Griffon/Harpy Rider removes griffon/harpy as mount
+               mi.Rider.IsFlying = false;
+               mi.Rider.IsRiding = false;
                mi.Rider = null;            
             }
             mi.CarriedMembers.Clear();
@@ -2343,7 +2345,11 @@ namespace BarbarianPrince
          if ( true == mi.IsFlyingMountCarrier() )
          {
             if( null != mi.Rider )
+            {
                mi.Rider.Mounts.Remove(mi);
+               mi.Rider.IsFlying = false;
+               mi.Rider.IsRiding = false;
+            }
             mi.Rider = null;
          }
          if( 0 < mi.Mounts.Count )
@@ -2351,10 +2357,10 @@ namespace BarbarianPrince
             IMapItem mount = mi.Mounts[0];
             if( true == mount.IsFlyingMountCarrier() )
             {
-               if (null != mi.Rider)
+               if (null != mount.Rider)
                   mi.Mounts.Remove(mount);
-               mount.Rider = null;
             }
+            mount.Rider = null;
          }
          //--------------------------------
          if (true == mi.Name.Contains("ElfWarrior")) // RemoveAbandonerInParty(ElfWarrior)
@@ -2435,7 +2441,11 @@ namespace BarbarianPrince
          if ( true == mi.IsFlyingMountCarrier() )
          {
             if (null != mi.Rider)
+            {
                mi.Rider.Mounts.Remove(mi);
+               mi.Rider.IsFlying = false;
+               mi.Rider.IsRiding = false;
+            }
             mi.Rider = null;
          }
          if (0 < mi.Mounts.Count)

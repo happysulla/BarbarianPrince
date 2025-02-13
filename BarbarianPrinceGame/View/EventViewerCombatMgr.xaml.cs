@@ -4240,20 +4240,18 @@ namespace BarbarianPrince
                   if (true == mi.IsFlyingMountCarrier())
                   {
                      if (null != mi.Rider)
+                     {
                         mi.Rider.Mounts.Remove(mi);
-                     mi.Rider.IsFlying = false;
-                     mi.Rider.IsRiding = false;
+                        mi.Rider.IsFlying = false;
+                        mi.Rider.IsRiding = false;
+                     }
                      mi.Rider = null;
                   }
                   if (0 < mi.Mounts.Count)
                   {
                      IMapItem mount = mi.Mounts[0];
                      if (true == mount.IsFlyingMountCarrier())
-                     {
-                        if (null != mi.Rider)
-                           mi.Mounts.Remove(mount);
                         mount.Rider = null;
-                     }
                   }
                   //---------------------------------
                   if ( (true == mi.IsSpecialItemHeld(SpecialEnum.ResurrectionNecklace)) && (false == mi.Name.Contains("Prince")) )
