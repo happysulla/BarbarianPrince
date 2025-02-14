@@ -27,6 +27,14 @@ namespace BarbarianPrince
       public OptionSelectionDialog(Options options)
       {
          Logger.Log(LogEnum.LE_VIEW_SHOW_OPTIONS, "OptionSelectionDialog(): "  + options.ToString());
+         string name = "RandomGame";
+         Option option = options.Find(name);
+         if (null == option)
+         {
+            option = new Option(name, false);
+            myOptions.Add(option);
+         }
+         myIsRandomGame = option.IsEnabled; // If the game started out random, keep it random until user makes button click
          InitializeComponent();
          myOptions = options.Clone(); // make copy b/c do not want to change unless OK button selected by user
          myRadioButtonOriginal.ToolTip = "Play the game as God Intended. Be prepared to lose often.";

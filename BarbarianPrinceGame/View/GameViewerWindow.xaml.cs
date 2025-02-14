@@ -855,7 +855,7 @@ namespace BarbarianPrince
                   option = new Option(name, false);
                if (true == option.IsEnabled)
                {
-                  sb.Append(" All Random Options Game - ");
+                  sb.Append("Random Options Game");
                }
                else
                {
@@ -865,7 +865,7 @@ namespace BarbarianPrince
                      option = new Option(name, false);
                   if (true == option.IsEnabled)
                   {
-                     sb.Append("Random Starting Hex Game - ");
+                     sb.Append("Random Starting Hex Game");
                   }
                   else
                   {
