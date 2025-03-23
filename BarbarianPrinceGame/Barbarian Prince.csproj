@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows10.0.18362.0</TargetFramework>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <OutputType>WinExe</OutputType>
     <RootNamespace>BarbarianPrince</RootNamespace>
     <AssemblyName>BarbarianPrince</AssemblyName>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -71,8 +70,9 @@
     <Title>Barbarian Prince Solo Game</Title>
     <Description>Solo dungeon crawler game</Description>
     <RepositoryUrl>https://github.com/happysulla/BarbarianPrince</RepositoryUrl>
-    <AssemblyVersion>03.04.23</AssemblyVersion>
+    <AssemblyVersion>03.05.25</AssemblyVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <OutputType>WinExe</OutputType>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" />

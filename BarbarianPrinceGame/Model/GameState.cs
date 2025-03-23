@@ -1583,7 +1583,6 @@ namespace BarbarianPrince
                int diagInfoLevel = (int)LogEnum.LE_GAME_INIT_VERSION;
                if (true == Logger.theLogLevel[diagInfoLevel])
                   PrintDiagnosticInfoToLog();
-               // Logger.Log(LogEnum.LE_VIEW_MAPITEM_LOCATION, "PerformAction(RemoveSplashScreen): territories=" + Territory.theTerritories.ToString());
                //-------------------------------------------------
                theIsGameSetup = false;
                gi.Statistic.Clear();         // Clear any current statitics

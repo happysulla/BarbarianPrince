@@ -627,7 +627,7 @@ namespace BarbarianPrince
          } // try
          catch (Exception e)
          {
-            System.Diagnostics.Debug.WriteLine("CreateRiversFromXml(): Cannot Read from Rivers.xml file:\ne.Message={0} while reading reader.Name={1}", e.Message, reader.Name);
+            Logger.Log(LogEnum.LE_ERROR, "CreateRiversFromXml(): Cannot Read from Rivers.xml file: while reading reader.Name=" + reader.Name + "\ne.Message=" + e.Message);
          }
          finally
          {
@@ -1275,7 +1275,7 @@ namespace BarbarianPrince
          }
          catch (Exception e)
          {
-            System.Diagnostics.Debug.WriteLine("UpdateCanvasRiver(): unknown river=" + river + " EXCEPTION THROWN e={0}", e.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "UpdateCanvasRiver(): unknown river=" + river + "\nEXCEPTION THROWN e={0}" + e.ToString());
          }
       }
       private bool UpdateCanvasPath(IGameInstance gi)
@@ -2310,7 +2310,7 @@ namespace BarbarianPrince
          }
          catch (Exception e)
          {
-            System.Diagnostics.Debug.WriteLine("UpdateCanvas() - EXCEPTION THROWN a=" + action.ToString() + "\ne={0}", e.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "UpdateCanvas() - EXCEPTION THROWN a=" + action.ToString() + "\ne={0}" + e.ToString());
             return false;
          }
          return true;
@@ -2337,7 +2337,7 @@ namespace BarbarianPrince
          }
          catch (Exception e)
          {
-            System.Diagnostics.Debug.WriteLine("UpdateCanvasMovement() - EXCEPTION THROWN e={0}", e.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "UpdateCanvasMain(): EXCEPTION THROWN a=" + action.ToString() + "\ne=" + e.ToString());
             return false;
          }
          return true;
@@ -3034,7 +3034,7 @@ namespace BarbarianPrince
          {
             b.BeginAnimation(Canvas.LeftProperty, null); // end animation offset
             b.BeginAnimation(Canvas.TopProperty, null);  // end animation offset
-            System.Diagnostics.Debug.WriteLine("MovePathAnimate() - EXCEPTION THROWN e={0}", e.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "MovePathAnimate(): EXCEPTION THROWN \n={0}" + e.ToString());
             return false;
          }
       }
