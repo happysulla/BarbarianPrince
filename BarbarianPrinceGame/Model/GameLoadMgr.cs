@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using System.Threading;
 using System.Xml.Linq;
 using Microsoft.Win32;
 using static System.Windows.Forms.Design.AxImporter;
@@ -28,8 +30,11 @@ namespace BarbarianPrince
             if (false == Directory.Exists(theGamesDirectory)) // create directory if does not exists
                Directory.CreateDirectory(theGamesDirectory);
             string filename = theGamesDirectory + "Checkpoint.bpg";
+            CultureInfo culture1 = CultureInfo.CurrentCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             IGameInstance? gi = ReadXml(filename);
-            if( null == gi )
+            System.Threading.Thread.CurrentThread.CurrentCulture = culture1;
+            if ( null == gi )
             {
                Logger.Log(LogEnum.LE_ERROR, "OpenGame(): ReadXml() returned null for " + filename);
                return null;
@@ -59,7 +64,10 @@ namespace BarbarianPrince
          try
          {
             string filename = theGamesDirectory + "Checkpoint.bpg";
+            CultureInfo culture1 = CultureInfo.CurrentCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             XmlDocument? aXmlDocument = CreateXml(gi); // create a new XML document 
+            System.Threading.Thread.CurrentThread.CurrentCulture = culture1;
             if (null == aXmlDocument)
             {
                Logger.Log(LogEnum.LE_ERROR, "SaveGameToFile(): CreateXml() returned null for path=" + theGamesDirectory);
@@ -105,7 +113,10 @@ namespace BarbarianPrince
             dlg.Filter = "Barbarin Prince Games|*.bpg";
             if (true == dlg.ShowDialog())
             {
+               CultureInfo culture1 = CultureInfo.CurrentCulture;
+               System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
                IGameInstance? gi = ReadXml(dlg.FileName);
+               System.Threading.Thread.CurrentThread.CurrentCulture = culture1;
                if (null == gi)
                {
                   Directory.SetCurrentDirectory(MainWindow.theAssemblyDirectory);
@@ -155,8 +166,11 @@ namespace BarbarianPrince
             dlg.RestoreDirectory = true;
             if (true == dlg.ShowDialog())
             {
+               CultureInfo culture1 = CultureInfo.CurrentCulture;
+               System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
                XmlDocument? aXmlDocument = CreateXml(gi); // create a new XML document 
-               if( null == aXmlDocument)
+               System.Threading.Thread.CurrentThread.CurrentCulture = culture1;
+               if ( null == aXmlDocument)
                {
                   Logger.Log(LogEnum.LE_ERROR, "SaveGameAsToFile(): CreateXml() returned null for path=" + theGamesDirectory );
                   return false;
@@ -4752,6 +4766,7 @@ namespace BarbarianPrince
             return null;
          }
          return aXmlDocument;
+
       }
       private bool CreateXmlGameOptions(XmlDocument aXmlDocument, Options options)
       {

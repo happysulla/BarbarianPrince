@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -198,7 +199,11 @@ namespace BarbarianPrince
          if (false == String.IsNullOrEmpty(Settings.Default.GameDirectoryName))
             GameLoadMgr.theGamesDirectory = Settings.Default.GameDirectoryName; // remember the game directory name
          //---------------------------------------------------------------
+         CultureInfo culture1 = CultureInfo.CurrentCulture;
+         System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture; // for saving doubles with decimal instead of comma for German users
          Utilities.ZoomCanvas = Settings.Default.ZoomCanvas;
+         System.Threading.Thread.CurrentThread.CurrentCulture = culture1;
+
          myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas); // Constructor - revert to save zoom
          StatusBarViewer sbv = new StatusBarViewer(myStatusBar, ge, gi, myCanvas);
          //---------------------------------------------------------------
@@ -589,6 +594,8 @@ namespace BarbarianPrince
       }
       private void CreateRiversFromXml()
       {
+         CultureInfo culture1 = CultureInfo.CurrentCulture;
+         System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture; // for saving doubles with decimal instead of comma for German users
          XmlTextReader reader = null;
          PointCollection points = null;
          string name = null;
@@ -634,10 +641,13 @@ namespace BarbarianPrince
             if (reader != null)
                reader.Close();
          }
+         System.Threading.Thread.CurrentThread.CurrentCulture = culture1;
       }
       //---------------------------------------
       private Options DeserializeOptions(String s_xml)
       {
+         CultureInfo culture1 = CultureInfo.CurrentCulture;
+         System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture; // for saving doubles with decimal instead of comma for German users
          Options options = new Options();
          if (false == String.IsNullOrEmpty(s_xml))
          {
@@ -667,6 +677,7 @@ namespace BarbarianPrince
          }
          if (0 == options.Count)
             options.SetOriginalGameOptions();
+         System.Threading.Thread.CurrentThread.CurrentCulture = culture1;
          return options;
       }
       private GameFeat DeserializeGameFeat()
@@ -768,7 +779,10 @@ namespace BarbarianPrince
       }
       private void SaveDefaultsToSettings(bool isWindowPlacementSaved = true)
       {
-         if( true == isWindowPlacementSaved)
+         CultureInfo culture1 = CultureInfo.CurrentCulture;
+         System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture; // for saving doubles with decimal instead of comma for German users
+         //-------------------------------------------
+         if ( true == isWindowPlacementSaved)
          {
             WindowPlacement wp; // Persist window placement details to application settings
             var hwnd = new WindowInteropHelper(this).Handle;
@@ -822,6 +836,7 @@ namespace BarbarianPrince
          Logger.Log(LogEnum.LE_SERIALIZE_FEATS, "SaveDefaultsToSettings(): \n feats=" + GameEngine.theFeatsInGame.ToString());
          //-------------------------------------------
          Settings.Default.Save();
+         System.Threading.Thread.CurrentThread.CurrentCulture = culture1;
       }
       //---------------------------------------
       private string UpdateTitle(Options options)

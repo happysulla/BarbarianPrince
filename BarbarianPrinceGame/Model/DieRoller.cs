@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -194,6 +195,8 @@ namespace BarbarianPrince
       //-----------------------------------------------------------
       private bool ReadDiceXml(Canvas c)
       {
+         CultureInfo culture1 = CultureInfo.CurrentCulture;
+         System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
          IMapItems mapItems = new MapItems();
          XmlTextReader reader = null;
          try
@@ -242,6 +245,7 @@ namespace BarbarianPrince
                   } // end if
                } // end if
             } // end while
+            System.Threading.Thread.CurrentThread.CurrentCulture = culture1;
             return true;
          } // try
          catch (Exception e)
@@ -253,6 +257,7 @@ namespace BarbarianPrince
          {
             if (reader != null)
                reader.Close();
+            System.Threading.Thread.CurrentThread.CurrentCulture = culture1;
          }
       }
       private int RollStationaryDie(IMapPoint mp, int randomNum)

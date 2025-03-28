@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,7 +36,10 @@ namespace BarbarianPrince
                // Create the territories and the regions marking the territories.
                // Keep a list of Territories used in the game.  All the information 
                // of Territories is static and does not change.
+               CultureInfo culture1 = CultureInfo.CurrentCulture;
+               System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
                Territory.theTerritories = ReadTerritoriesXml();
+               System.Threading.Thread.CurrentThread.CurrentCulture = culture1;
                if (null == Territory.theTerritories)
                {
                   Logger.Log(LogEnum.LE_ERROR, "GameInstance(): ReadTerritoriesXml() returned null");
