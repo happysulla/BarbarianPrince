@@ -2,6 +2,7 @@
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -2696,6 +2697,8 @@ namespace BarbarianPrince
          sb.Append(RuntimeInformation.ProcessArchitecture.ToString());
          sb.Append("\n\tnetVersion=");
          sb.Append(Environment.Version.ToString());
+         sb.Append("\n\tCultureInfo=");
+         sb.Append(CultureInfo.CurrentCulture.ToString());
          var dpi = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / System.Windows.SystemParameters.PrimaryScreenWidth;
          sb.Append("\n\tDPI=(");
          sb.Append(dpi.ToString("000.0"));

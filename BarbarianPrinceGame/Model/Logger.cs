@@ -162,7 +162,7 @@ namespace BarbarianPrince
          Logger.SetOn(LogEnum.LE_SERIALIZE_FEATS);
          //Logger.SetOn(LogEnum.LE_RETURN_TO_START);
          Logger.SetOn(LogEnum.LE_VIEW_UPDATE_EVENTVIEWER);
-         Logger.SetOn(LogEnum.LE_VIEW_MAPITEM_LOCATION);
+         //Logger.SetOn(LogEnum.LE_VIEW_MAPITEM_LOCATION);
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_PARTY_DIALOG);
          Logger.SetOn(LogEnum.LE_VIEW_SHOW_OPTIONS);
          //Logger.SetOn(LogEnum.LE_VIEW_UPDATE_MENU);
