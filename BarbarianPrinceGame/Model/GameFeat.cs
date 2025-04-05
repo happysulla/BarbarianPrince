@@ -538,6 +538,14 @@ namespace BarbarianPrince
          sb.Append("{ ");
          sb.Append("wOrg=");
          sb.Append(myIsOriginalGameWin.ToString());
+         sb.Append(", wParty=");
+         sb.Append(myIsRandomPartyGameWin.ToString());
+         sb.Append(", wHex=");
+         sb.Append(myIsRandomHexGameWin.ToString());
+         sb.Append(", wRandom=");
+         sb.Append(myIsRandomGameWin.ToString());
+         sb.Append(", wFun=");
+         sb.Append(myIsFunGameWin.ToString());
          sb.Append(", wWW=");
          sb.Append(myIsLowWitWin.ToString());
          sb.Append(", w500=");

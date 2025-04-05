@@ -215,7 +215,7 @@ namespace BarbarianPrince
          myGameEngine.Statistics[5] = DeserializeGameStat(5);
          myGameEngine.Statistics[6] = DeserializeGameStat(6);
          //---------------------------------------------------------------
-         SetDisplayIconForUninstall();
+         SetDisplayIconForUninstall(); // This is specialized code to add to Windows Registry the icon for uninstall
          //---------------------------------------------------------------
          Utilities.theBrushBlood.Color = Color.FromArgb(0xFF, 0xA4, 0x07, 0x07);
          Utilities.theBrushRegion.Color = Color.FromArgb(0x7F, 0x11, 0x09, 0xBB); // nearly transparent but slightly colored
