@@ -2506,7 +2506,7 @@ namespace BarbarianPrince
          if( false == theIsGameSetup) //This function can be run twice if user selects fun option
          {
             theIsGameSetup = true;
-            gi.Prince.Territory = Territory.theTerritories.Find("1212"); // <cgs> TEST
+            //gi.Prince.Territory = Territory.theTerritories.Find("1212"); // <cgs> TEST
             //gi.Days = 40;
             //gi.Prince.SetWounds(6, 0); // 
             //gi.Prince.PlagueDustWound = 1; 
@@ -15577,7 +15577,6 @@ namespace BarbarianPrince
                      gi.IsMagicUserDismissed = false;
                   }
                   //--------------------------------
-                  dieRoll = 13; // <cgs> TEST
                   gi.DieResults[key][0] = dieRoll;
                }
                break;
