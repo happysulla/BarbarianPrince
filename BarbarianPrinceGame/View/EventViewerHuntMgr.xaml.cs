@@ -423,7 +423,7 @@ namespace BarbarianPrince
          {
             myGameInstance.ProcessIncapacitedPartyMembers("Hunter's Death");
             int diffFood = myFoodCurrent - myFoodOriginal;  // allocate new food to party members
-            myGameInstance.AddFoods(diffFood, true);
+            myGameInstance.AddFoods(diffFood, "", true);
             int diffCoin = myCoinOriginal - myCoinCurrent;  // decrease coin from party members evenly
             myGameInstance.ReduceCoins("EventViewerHuntMgr.UpdateEndState", diffCoin);
             myGameInstance.Prince.OverlayImageName = "";

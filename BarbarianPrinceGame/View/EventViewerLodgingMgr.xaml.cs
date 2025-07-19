@@ -406,7 +406,7 @@ namespace BarbarianPrince
                myGameInstance.AddCoins("EventViewerLodgingMgr", diffCoin);
             }
             //--------------------------------------------
-            myGameInstance.AddFoods(myFoodPurchasedAtFarm);
+            myGameInstance.AddFoods(myFoodPurchasedAtFarm, "EventViewerLodgingMgr.UpdateEndState()");
             for (int i = 0; i < myHorsePurchasedAtFarm; ++i)
             {
                if (false == myGameInstance.AddNewMountToParty())

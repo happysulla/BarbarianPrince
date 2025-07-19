@@ -1194,15 +1194,51 @@ namespace BarbarianPrince
             }
          }
          loadCanCarry += personCarry;
-         //------------------------------------------
+         //===================================================
          int coinLoads = 0;
+         int remainder = this.Coin % 100;
+         int hundreds = this.Coin - remainder;
+         coinLoads = hundreds / 100;
+         if (0 < remainder)
+            ++coinLoads;
+         int carriedLoad = 0;
+         foreach(IMapItem carried in this.CarriedMembers.Keys)
+            carriedLoad += this.CarriedMembers[carried];
+         if( 0 < carriedLoad)
+         {
+            if ((true == this.IsRiding) && (loadCanCarry < carriedLoad))
+            {
+               if (false == this.IsFlyingMountCarrier()) // if this is true, must not have a rider
+               {
+                  this.IsRiding = false;
+                  loadCanCarry += Utilities.PersonBurden;
+               }
+            }
+            if (loadCanCarry < carriedLoad)
+            {
+               int totalLoad = this.Food + coinLoads + carriedLoad;
+               Logger.Log(LogEnum.LE_ERROR, "GetFreeLoad(): 1-Invalid state mi=" + this.Name + " r?=" + isPreviouslyRiding.ToString() + "-->" + this.IsRiding.ToString() + " #m=" + Mounts.Count.ToString() + " ==> (mc=" + mountCarry.ToString() + ")+(pc=" + personCarry.ToString() + ")=(lcc=" + loadCanCarry.ToString() + ") ==> (carried=" + carriedLoad.ToString() + ")+(cl=" + coinLoads.ToString() + ")+(f=" + this.Food.ToString() + ") = " + totalLoad.ToString());
+               while(loadCanCarry < carriedLoad)
+               {
+                  foreach (IMapItem carried in this.CarriedMembers.Keys)
+                  {
+                     carriedLoad -= this.CarriedMembers[carried];
+                     this.CarriedMembers.Remove(carried);
+                  }
+               }
+            }
+            loadCanCarry -= carriedLoad;
+            if(loadCanCarry <= 0)
+            {
+               this.Coin = 0;
+               this.Food = 0;
+               return 0; // no free load left
+            }
+         }
+         //------------------------------------------
          if (0 < this.Coin)
          {
-            int remainder = this.Coin % 100;
-            int hundreds = this.Coin - remainder;
-            coinLoads = hundreds / 100;
-            if (0 < remainder)
-               ++coinLoads;
+
             if ((true == this.IsRiding) && (loadCanCarry < coinLoads))
             {
                if (false == this.IsFlyingMountCarrier()) // if this is true, must not have a rider
@@ -1213,18 +1249,20 @@ namespace BarbarianPrince
             }
             if (loadCanCarry < coinLoads)
             {
-               int totalLoad = this.Food + coinLoads;
-               Logger.Log(LogEnum.LE_ERROR, "GetFreeLoad(): 1-Invalid state mi=" + this.Name + " r?=" + isPreviouslyRiding.ToString() + "-->" + this.IsRiding.ToString() + " #m=" + Mounts.Count.ToString() + " ==> (mc=" + mountCarry.ToString() + ")+(pc=" + personCarry.ToString() + ")=(lcc=" + loadCanCarry.ToString() + ") ==> (cl=" + coinLoads.ToString() + ")+(f=" + this.Food.ToString() + ") = " + totalLoad.ToString());
+               int totalLoad = this.Food + coinLoads + carriedLoad;
+               Logger.Log(LogEnum.LE_ERROR, "GetFreeLoad(): 2-Invalid state mi=" + this.Name + " r?=" + isPreviouslyRiding.ToString() + "-->" + this.IsRiding.ToString() + " #m=" + Mounts.Count.ToString() + " ==> (mc=" + mountCarry.ToString() + ")+(pc=" + personCarry.ToString() + ")=(lcc=" + loadCanCarry.ToString() + ") ==> (carried=" + carriedLoad.ToString() + ")+(cl=" + coinLoads.ToString() + ")+(f=" + this.Food.ToString() + ") = " + totalLoad.ToString());
                coinLoads = loadCanCarry;
                this.Coin = remainder + (loadCanCarry - 1) * 100;
                this.Food = 0;
                loadCanCarry = 0;
+               return 0; // no free load left
             }
             else
             {
                loadCanCarry -= coinLoads;
             }
          }
+         //------------------------------------------
          if ((true == this.IsRiding) && (loadCanCarry < this.Food))
          {
             if (false == this.IsFlyingMountCarrier()) // if this is true, must not have a rider
@@ -1233,11 +1271,14 @@ namespace BarbarianPrince
                loadCanCarry += Utilities.PersonBurden;
             }
          }
+         //------------------------------------------
          if (loadCanCarry < this.Food)
          {
-            Logger.Log(LogEnum.LE_ERROR, "GetFreeLoad(): 2-Invalid state mi=" + this.Name + " r?=" + isPreviouslyRiding.ToString() + "-->" + this.IsRiding.ToString() + " #m=" + Mounts.Count.ToString() + " --> (mc=" + mountCarry.ToString() + ")+(pc=" + personCarry.ToString() + ")-(cl=" + coinLoads.ToString() + ") = (lcc=" + loadCanCarry.ToString() + ") and f=" + this.Food.ToString());
+            int totalLoad = this.Food + coinLoads + carriedLoad;
+            Logger.Log(LogEnum.LE_ERROR, "GetFreeLoad(): 3-Invalid state mi=" + this.Name + " r?=" + isPreviouslyRiding.ToString() + "-->" + this.IsRiding.ToString() + " #m=" + Mounts.Count.ToString() + " ==> (mc=" + mountCarry.ToString() + ")+(pc=" + personCarry.ToString() + ")=(lcc=" + loadCanCarry.ToString() + ") ==> (carried=" + carriedLoad.ToString() + ")+(cl=" + coinLoads.ToString() + ")+(f=" + this.Food.ToString() + ") = " + totalLoad.ToString());
             this.Food = loadCanCarry;
             loadCanCarry = 0;
+            return 0; // no free load left
          }
          else
          {
@@ -1294,6 +1335,12 @@ namespace BarbarianPrince
                loadCanCarry += personCarry;
             }
          }
+         //===========================================
+         int carriedLoad = 0;
+         foreach (IMapItem carried in this.CarriedMembers.Keys)
+            carriedLoad += this.CarriedMembers[carried];
+         if (0 < carriedLoad)
+            loadCanCarry -= carriedLoad;
          //------------------------------------------
          int coinLoads = 0;
          if (0 < this.Coin)
@@ -1305,9 +1352,10 @@ namespace BarbarianPrince
                ++coinLoads;
             loadCanCarry -= coinLoads;
          }
+         //------------------------------------------
          loadCanCarry -= this.Food;
          if (loadCanCarry < 0)
-            Logger.Log(LogEnum.LE_FREE_LOAD, "GetFreeLoadWithoutModify(): name=" + this.Name + " lc=" + loadCanCarry.ToString() + " fl=" + Food.ToString() + " cl=" + coinLoads.ToString() + "(coins=" + this.Coin.ToString() + ") ml=" + mountCarry.ToString() + " kia?=" + this.IsKilled + " uncons?=" + this.IsUnconscious);
+            Logger.Log(LogEnum.LE_FREE_LOAD, "GetFreeLoadWithoutModify(): name=" + this.Name + " lc=" + loadCanCarry.ToString() + " carried=" + carriedLoad.ToString()  + " fl=" + Food.ToString() + " cl=" + coinLoads.ToString() + "(coins=" + this.Coin.ToString() + ") ml=" + mountCarry.ToString() + " kia?=" + this.IsKilled + " uncons?=" + this.IsUnconscious);
          return loadCanCarry;
       }   // get free load - dismount if load does not support - but do not mount 
       public int GetFlyLoad()
@@ -1924,11 +1972,11 @@ namespace BarbarianPrince
             bool isMapItemInserted = false;
             if ((false == mi1.IsUnconscious) && (false == mi1.IsKilled) && (false == mi1.Name.Contains("Eagle")) && (false == mi1.Name.Contains("Falcon")) )
             {
-               int freeLoad1 = mi1.GetFreeLoadWithoutModify();
+               int freeLoad1 = mi1.GetFreeLoadWithoutModify(); // SortOnFreeLoad() - checking against this one
                int index = 0;
                foreach (IMapItem mi2 in sortedMapItems)
                {
-                  int freeLoad2 = mi2.GetFreeLoadWithoutModify();
+                  int freeLoad2 = mi2.GetFreeLoadWithoutModify();  // SortOnFreeLoad() - sorted list
                   if (freeLoad2 < freeLoad1)
                   {
                      sortedMapItems.Insert(index, mi1); // insert mi1 in front of mi2 if free load greater

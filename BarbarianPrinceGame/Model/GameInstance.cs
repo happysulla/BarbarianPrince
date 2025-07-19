@@ -723,7 +723,7 @@ namespace BarbarianPrince
             foods += mi.Food;
          return foods;
       }
-      public bool AddFoods(int foodStore, bool isHunt=false)
+      public bool AddFoods(int foodStore, string caller, bool isHunt=false)
       {
          if (foodStore < 0)
          {
@@ -732,6 +732,18 @@ namespace BarbarianPrince
          }
          if (0 == foodStore)
             return true;
+         Logger.Log(LogEnum.LE_ADD_FOOD, "AddFoods(): " + caller + ": ++++++++++++++++++" + foodStore.ToString() + "++++++++++++++++++++++++++++++++++++++++++++");
+         StringBuilder sb = new StringBuilder("AddFoods(): starting=");
+         foreach (IMapItem mi in PartyMembers)
+         {
+            sb.Append("\n     mi.Name=");
+            sb.Append(mi.Name);
+            sb.Append(" c=");
+            sb.Append(mi.Coin.ToString());
+            sb.Append(" f=");
+            sb.Append(mi.Food.ToString());
+         }
+         Logger.Log(LogEnum.LE_ADD_FOOD, sb.ToString());
          int count = 1000;
          IMapItems sortedMapItems = PartyMembers.SortOnFreeLoad(); 
          while (0 < --count)
@@ -816,7 +828,7 @@ namespace BarbarianPrince
          if (0 == coins)
             return true;
          Logger.Log(LogEnum.LE_ADD_COIN, "AddCoins(): " + caller + ": ++++++++++++++++++" + coins.ToString() + "++++++++++++++++++++++++++++++++++++++++++++");
-         StringBuilder sb = new StringBuilder("AddCoins():");
+         StringBuilder sb = new StringBuilder("AddCoins(): starting=");
          foreach ( IMapItem mi in PartyMembers)
          {
             sb.Append("\n     mi.Name=");
@@ -1990,7 +2002,7 @@ namespace BarbarianPrince
                   }
                   AddSpecialItems(mi.SpecialKeeps);  // ProcessIncapacitedPartyMembers() - IsKilled
                   AddSpecialItems(mi.SpecialShares); // ProcessIncapacitedPartyMembers() - IsKilled
-                  if (false == AddFoods(mi.Food))
+                  if (false == AddFoods(mi.Food, "ProcessIncapacitedPartyMembers(IsKilled)"))
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ProcessIncapacitedPartyMembers(): AddFoods() returned false");
                      return;
@@ -2036,7 +2048,7 @@ namespace BarbarianPrince
                      Logger.Log(LogEnum.LE_ERROR, sb.ToString());
                   }
                   AddSpecialItems(mi.SpecialShares); // ProcessIncapacitedPartyMembers() - IsUnconscious
-                  if (false == AddFoods(mi.Food))
+                  if (false == AddFoods(mi.Food, "ProcessIncapacitedPartyMembers(IsUnconscious)"))
                   {
                      Logger.Log(LogEnum.LE_ERROR, "ProcessIncapacitedPartyMembers(): AddFoods() returned false");
                      return;
@@ -2154,7 +2166,7 @@ namespace BarbarianPrince
             }
             Logger.Log(LogEnum.LE_ERROR, sb.ToString());
          }
-         if (false == AddFoods(victim.Food)) // all other food, coin, mounts transfer to other party members
+         if (false == AddFoods(victim.Food, "RemoveVictimInParty()")) // all other food, coin, mounts transfer to other party members
          {
             Logger.Log(LogEnum.LE_ERROR, "RemoveVictimInParty(): AddFoods() returned false");
             return false;
@@ -2403,7 +2415,7 @@ namespace BarbarianPrince
             }
             Logger.Log(LogEnum.LE_ERROR, sb.ToString());
          }
-         if (false == AddFoods(mi.Food))
+         if (false == AddFoods(mi.Food, "RemoveAbandonerInParty()"))
          {
             Logger.Log(LogEnum.LE_ERROR, "RemoveAbandonerInParty(): AddFoods() returned false");
             return;
@@ -2484,6 +2496,27 @@ namespace BarbarianPrince
             if (true == member.Name.Contains("Merchant"))
                IsMerchantWithParty = true;
          }
+      }
+      public void RemoveCarriersInParty(IMapItem carried)
+      {
+         if (null == carried)
+            return;
+         //--------------------------------------------------
+         IMapItems carriers = new MapItems();
+         foreach (IMapItem mi in PartyMembers)
+         {
+            foreach (IMapItem guy in mi.CarriedMembers.Keys)
+            {
+               if (guy.Name == carried.Name)
+               {
+                  carriers.Add(carried);
+                  break;
+               }
+            }
+         }
+         //--------------------------------------------------
+         foreach (IMapItem mi in carriers)
+            mi.CarriedMembers.Remove(carried);
       }
       //---------------------------------------------------------------
       public ITerritories ReadTerritoriesXml()

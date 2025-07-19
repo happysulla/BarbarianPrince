@@ -2833,6 +2833,7 @@ namespace BarbarianPrince
                         else
                            gi.Statistic.myNumOfPartyHeal++;
                         mi.HealWounds(1, 0); // RestEncounterCheck - InStructure()=true - Resting cures one wound
+                        gi.RemoveCarriersInParty(mi);
                         gi.UndoHeal.Add(mi.Name);
                      }
                      if( true == mi.IsExhausted)
@@ -3917,6 +3918,7 @@ namespace BarbarianPrince
                         gi.Statistic.myNumOfPartyHeal++;
                   }
                   mi.HealWounds(1, 0);  // RestHealing 
+                  gi.RemoveCarriersInParty(mi);
                   mi.IsExhausted = false;
                }
                if (false == SetHuntState(gi, ref action)) // Resting in same hex
@@ -5482,7 +5484,7 @@ namespace BarbarianPrince
                         int food = 4;
                         if (true == gi.IsMerchantWithParty)
                            food = (int)Math.Ceiling((double)food * 2);
-                        if (false == gi.AddFoods(food))
+                        if (false == gi.AddFoods(food, "GameStateEncounter.PerformAction(e011a)"))
                         {
                            returnStatus = "AddFoods() returned false for adding 1";
                            Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
@@ -5495,7 +5497,7 @@ namespace BarbarianPrince
                         int food = 2;
                         if (true == gi.IsMerchantWithParty)
                            food = (int)Math.Ceiling((double)food * 2);
-                        if (false == gi.AddFoods(food))
+                        if (false == gi.AddFoods(food, "GameStateEncounter.PerformAction(e012a)"))
                         {
                            returnStatus = "AddFoods() returned false for adding 1";
                            Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
@@ -5508,7 +5510,7 @@ namespace BarbarianPrince
                         int food = 2;
                         if (true == gi.IsMerchantWithParty)
                            food = (int)Math.Ceiling((double)food * 2);
-                        if (false == gi.AddFoods(food))
+                        if (false == gi.AddFoods(food, "GameStateEncounter.PerformAction(e015b|e128c)"))
                         {
                            returnStatus = "AddFoods() returned false for adding 2";
                            Logger.Log(LogEnum.LE_ERROR, "GameStateEncounter.PerformAction(): " + returnStatus);
@@ -11374,7 +11376,7 @@ namespace BarbarianPrince
             case "e011c": // Steal Farmers Food
                gi.EnteredHexes.Last().EventNames.Add(key);
                int foodToAdd = dieRoll * 4;
-               if (false == gi.AddFoods(foodToAdd))
+               if (false == gi.AddFoods(foodToAdd, "EncounterRoll(e011c)"))
                {
                   Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddFoods() returned false for food=" + foodToAdd.ToString() + " ae=" + action.ToString() + " dr=" + dieRoll.ToString());
                   return false;
@@ -11388,7 +11390,7 @@ namespace BarbarianPrince
             case "e013d": // Steal Rich Farmers Food
                gi.EnteredHexes.Last().EventNames.Add(key);
                int foodToAdd1 = dieRoll * 6;
-               if (false == gi.AddFoods(foodToAdd1))
+               if (false == gi.AddFoods(foodToAdd1, "EncounterRoll(e013d)"))
                {
                   Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): AddFoods() returned false for food=" + foodToAdd1.ToString() + "ae=" + action.ToString() + " dr=" + dieRoll.ToString());
                   return false;
@@ -13410,7 +13412,7 @@ namespace BarbarianPrince
                gi.EnteredHexes.Last().EventNames.Add(key);
                if (Utilities.NO_RESULT < gi.DieResults[key][0])
                {
-                  if (false == gi.AddFoods(gi.DieResults[key][0]))
+                  if (false == gi.AddFoods(gi.DieResults[key][0], "EncounterRoll(e083a)"))
                   {
                      Logger.Log(LogEnum.LE_ERROR, "EncounterRoll(): EncounterEnd() return false for ae=" + gi.EventActive);
                      return false;
@@ -14788,18 +14790,19 @@ namespace BarbarianPrince
                      gi.IsPartyLodged = true;
                      gi.IsMountsStabled = true;
                      //-----------------------------------------------
-                     foreach (IMapItem e160Mi in gi.PartyMembers)   // heal all wounds
+                     foreach (IMapItem partymember in gi.PartyMembers)   // heal all wounds
                      {
-                        e160Mi.PlagueDustWound = 0; // assume that healers cure any plague dust
-                        int wound = e160Mi.Wound;
-                        int poision = e160Mi.Poison;
-                        e160Mi.HealWounds(wound, poision); // e160f - Lady A cures all wounds - nominal path
-                        if (0 == e160Mi.Mounts.Count)  // add mount if do not have one
-                           e160Mi.AddNewMount();
-                        if (true == e160Mi.Name.Contains("Prince"))
+                        partymember.PlagueDustWound = 0; // assume that healers cure any plague dust
+                        int wound = partymember.Wound;
+                        int poision = partymember.Poison;
+                        partymember.HealWounds(wound, poision); // e160f - Lady A cures all wounds - nominal path
+                        gi.RemoveCarriersInParty(partymember);
+                        if (0 == partymember.Mounts.Count)  // add mount if do not have one
+                           partymember.AddNewMount();
+                        if (true == partymember.Name.Contains("Prince"))
                            gi.Statistic.myNumOfPrinceHeal += (wound + poision);
                         else
-                           gi.Statistic.myNumOfPartyHeal += (wound + poision); 
+                           gi.Statistic.myNumOfPartyHeal += (wound + poision);
                      }
                      //-----------------------------------------------
                      if (false == gi.AddNewMountToParty()) // add a spare pack horse
@@ -14826,6 +14829,7 @@ namespace BarbarianPrince
                      int wound = gi.Prince.Wound;
                      int poision = gi.Prince.Poison;
                      gi.Prince.HealWounds(wound, poision); // e160f - Lady A cures all wounds - Alcove path
+                     gi.RemoveCarriersInParty(gi.Prince);
                      gi.EventDisplayed = gi.EventActive = "e042b";
                      gi.Statistic.myNumOfPrinceHeal += (wound + poision);
                   }
@@ -17270,6 +17274,7 @@ namespace BarbarianPrince
                            gi.Statistic.myNumOfPartyHeal++;
                      }
                      mi.HealWounds(1, 0); // EncounterEnd() - Resting heals one wound
+                     gi.RemoveCarriersInParty(mi);
                      mi.IsExhausted = false;
                   }
                }

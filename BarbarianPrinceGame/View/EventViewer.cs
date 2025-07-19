@@ -4942,6 +4942,7 @@ namespace BarbarianPrince
          }
          StringBuilder sb11 = new StringBuilder("     ######ShowResultsCombat() :");
          sb11.Append(" p="); sb11.Append(myGameInstance.GamePhase.ToString());
+         sb11.Append(" as="); sb11.Append(myGameInstance.EventStart);
          sb11.Append(" ae="); sb11.Append(myGameInstance.EventActive);
          sb11.Append(" a="); sb11.Append(outAction.ToString());
          sb11.Append(" n?="); sb11.Append(isNecklass.ToString());

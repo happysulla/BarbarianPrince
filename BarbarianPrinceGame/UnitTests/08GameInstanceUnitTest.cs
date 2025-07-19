@@ -379,7 +379,7 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[8]) // Add Foods 
          {
-            gi.AddFoods(11);
+            gi.AddFoods(11, "GameInstanceUnitTest");
             myDialog.UpdateGridRows(gi);
          }
          else if (CommandName == myCommandNames[9]) // Reduce Foods
@@ -404,7 +404,7 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[13])
          {
-            gi.AddFoods(3);
+            gi.AddFoods(3, "GameInstanceUnitTest");
             myDialog.UpdateGridRows(gi);
          }
          else if (CommandName == myCommandNames[14])
@@ -443,7 +443,7 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[18])
          {
-            gi.AddFoods(12);
+            gi.AddFoods(12, "GameInstanceUnitTest");
             myDialog.UpdateGridRows(gi);
          }
          else if (CommandName == myCommandNames[19])
@@ -453,7 +453,7 @@ namespace BarbarianPrince
          }
          else if (CommandName == myCommandNames[20])
          {
-            gi.AddFoods(12);
+            gi.AddFoods(12, "GameInstanceUnitTest");
             gi.AddCoins("GameInstanceUnitTest", 733);
             myDialog.UpdateGridRows(gi);
          }

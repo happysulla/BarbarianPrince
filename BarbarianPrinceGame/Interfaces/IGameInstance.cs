@@ -207,7 +207,7 @@ namespace BarbarianPrince
       //----------------------------------------------
       int GetTotalFreeLoad();
       int GetFoods();
-      bool AddFoods(int foodStore,bool isHunt= false); // if is hunt, all food is added. In Transport Manager, it is winnowed down to what can be carried.
+      bool AddFoods(int foodStore,string caller, bool isHunt= false); // if is hunt, all food is added. In Transport Manager, it is winnowed down to what can be carried.
       void ReduceFoods(int foodStore);
       int GetCoins();
       bool AddCoins(string caller, int coins, bool isLooterShareIncluded = true);
@@ -252,5 +252,6 @@ namespace BarbarianPrince
       void RemoveAbandonedInParty(IMapItem mi, bool isTrueLoveRemoved = false); // no food/coin/possessons given
       bool RemoveBelongingsInParty(bool isMountsRemoved=true);
       int RemoveLeaderlessInParty();
+      void RemoveCarriersInParty(IMapItem carried);
    }
 }

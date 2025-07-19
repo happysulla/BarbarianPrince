@@ -1052,7 +1052,7 @@ namespace BarbarianPrince
             foreach (IMapItem mi in gi.PartyMembers)
                mi.Food = 0;
             int totalFood = k100*100 + k10*10 + k1;
-            myGameInstance.AddFoods(totalFood);
+            myGameInstance.AddFoods(totalFood, "UpdateFoodSupply()");
          }
       }
       private void UpdatePrinceEnduranceStatus(IGameInstance gi)

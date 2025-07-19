@@ -136,7 +136,7 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_BRIBE);
          //Logger.SetOn(LogEnum.LE_ADD_WEALTH_CODE);
          Logger.SetOn(LogEnum.LE_FREE_LOAD);
-         //Logger.SetOn(LogEnum.LE_ADD_FOOD);
+         Logger.SetOn(LogEnum.LE_ADD_FOOD);
          Logger.SetOn(LogEnum.LE_ADD_COIN);
          //Logger.SetOn(LogEnum.LE_REDUCE_COIN);
          //Logger.SetOn(LogEnum.LE_MANAGE_CACHE);
@@ -180,7 +180,7 @@ namespace BarbarianPrince
          //Logger.SetOn(LogEnum.LE_VIEW_MIM);
          //Logger.SetOn(LogEnum.LE_VIEW_MIM_ADD);
          //Logger.SetOn(LogEnum.LE_VIEW_MIM_CLEAR);
-         //Logger.SetOn(LogEnum.LE_VIEW_SHOW_LOADS);
+         Logger.SetOn(LogEnum.LE_VIEW_SHOW_LOADS);
          //Logger.SetOn(LogEnum.LE_VIEW_SHOW_HUNT);
          //Logger.SetOn(LogEnum.LE_VIEW_MAP_THUMBNAIL);
          return true;

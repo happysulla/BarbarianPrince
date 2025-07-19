@@ -2176,6 +2176,7 @@ namespace BarbarianPrince
                            else
                               myGameInstance.Statistic.myNumOfPartyHeal += mi.Wound;
                            mi.HealWounds(mi.Wound, 0); // healing potion at night
+                           myGameInstance.RemoveCarriersInParty(mi);
                         }
                         else
                         {
@@ -2190,6 +2191,7 @@ namespace BarbarianPrince
                            else
                               myGameInstance.Statistic.myNumOfPartyHeal += mi.Poison;
                            mi.HealWounds(0, mi.Poison); // poison cure at night
+                           myGameInstance.RemoveCarriersInParty(mi);
                         }
                         else
                         {
@@ -2204,6 +2206,7 @@ namespace BarbarianPrince
                            else
                               myGameInstance.Statistic.myNumOfPartyHeal += mi.Wound;
                            mi.HealWounds(mi.Wound, 0); // healing potion at night
+                           myGameInstance.RemoveCarriersInParty(mi);
                         }
                         else
                         {
@@ -2218,6 +2221,7 @@ namespace BarbarianPrince
                            else
                               myGameInstance.Statistic.myNumOfPartyHeal += mi.Poison;
                            mi.HealWounds(0, mi.Poison); // poison cure at night
+                           myGameInstance.RemoveCarriersInParty(mi);
                         }
                         else
                         {
