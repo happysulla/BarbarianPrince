@@ -2738,7 +2738,7 @@ Each can attempt to stop the demon by rolling one die.
                               <InlineUIContainer><Image Name='StormDemonRepel' Source='../images/StormDemon.gif' Height='300' Width='300'></Image></InlineUIContainer>"
 e112	"<Bold>e112 Meet Eagle Clan</Bold>
 <LineBreak/><LineBreak/>While high in the air, you encounter eagles in flight. Roll one die for the number of eagles. Die Roll=<InlineUIContainer><Image Source='../images/dieRoll.gif' Name='DieRoll' Height='21' Width='21' > </Image></InlineUIContainer>
-<LineBreak/><LineBreak/>If your party has a character type other than humans/elves, or mount type other than Pegasus; you must select evade or fight options. Wizards, witches, magicians, priests, and monks are presumed human unless specified as some other race when first encountered. 
+<LineBreak/><LineBreak/>If your party has a character type other than humans/elves, or mount type other than Pegasus; you must select evade or fight options. Wizards, witches, magicians, priests, and monks are presumed human unless specified as some other race when first encountered. Also, need to be able to fly to select the Fly button.
 <LineBreak/><LineBreak/>Each has combat skill 4, endurance 3, and wealth 1. Your options are listed below. Your options are:
 <LineBreak/><LineBreak/>
 <InlineUIContainer><Button FontFamily='Courier New'  FontSize='12'  Content=' Fly ' Name='e112a'></Button></InlineUIContainer>   ->  

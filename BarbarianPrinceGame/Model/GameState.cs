@@ -153,7 +153,16 @@ namespace BarbarianPrince
          bool isStructure = gi.IsInStructure(t);
          bool isHunting = (false == isStructure) && (("Countryside" == t.Type) || ("Hills" == t.Type) || ("Forest" == t.Type) || ("Farmland" == t.Type) || ("Swamp" == t.Type)) || (true == gi.IsEagleHunt); // no hunting in mountain or desert w/o eagle
          bool isBuyingFood = ((true == isStructure) && (0 < gi.GetCoins()));
-         if (((true == isBuyingFood) || (true == isHunting)) && (false == gi.IsJailed) && (false == gi.IsEnslaved) && (false == gi.IsGuardEncounteredThisTurn) && (false == gi.IsHuntedToday) && (false == gi.IsPoisonPlant))
+         bool isSomebodyAbleToHunt = false;
+         foreach(IMapItem partymember in gi.PartyMembers)
+         {
+            if( (false == partymember.IsUnconscious) && (false == partymember.IsSunStroke))
+            {
+               isSomebodyAbleToHunt = true;
+               break;
+            }
+         }
+         if (((true == isBuyingFood) || (true == isSomebodyAbleToHunt) && (true == isHunting)) && (false == gi.IsJailed) && (false == gi.IsEnslaved) && (false == gi.IsGuardEncounteredThisTurn) && (false == gi.IsHuntedToday) && (false == gi.IsPoisonPlant))
          {
             action = GameAction.Hunt;
             gi.GamePhase = GamePhase.Hunt;
@@ -2508,7 +2517,7 @@ namespace BarbarianPrince
             theIsGameSetup = true;
             //gi.Prince.Territory = Territory.theTerritories.Find("1212"); // <cgs> TEST
             //gi.Days = 40;
-            //gi.Prince.SetWounds(6, 0); // 
+            gi.Prince.SetWounds(8, 0); // 
             //gi.Prince.PlagueDustWound = 1; 
             //gi.Prince.IsResurrected = true;
             //gi.AddUnitTestTiredMount(myPrince);

@@ -1072,7 +1072,7 @@ namespace BarbarianPrince
                      b.IsEnabled = false;
                   return true;
                }
-               else // follow button only enabled if no horses and no non-human/elf party members
+               else // fly button only enabled if no horses and no non-human/elf party members
                {
                   bool isNonHumanElfInParty = false;
                   bool isNonPegasusMount = false;

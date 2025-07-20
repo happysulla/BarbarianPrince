@@ -354,20 +354,26 @@ namespace BarbarianPrince
          {
             // Start with Prince on first row
             Logger.Log(LogEnum.LE_VIEW_SHOW_HUNT, "PerformHunt(): 3-myMaxRowCount=" + myMaxRowCount.ToString());
-            myGridRows[0].myAssignable = myGameInstance.Prince;
-            myGridRows[0].myAssignmentCount = GetAssignedCount();
-            myMapItems.Remove(myGameInstance.Prince);
-            if ((7 < myGameInstance.Prince.Food) || (true == myIsFarmland))// if prince is by himself - force user to select hunt checkbox
+            bool isPrinceUnconscious = ((false == myGameInstance.Prince.IsUnconscious) || (false == myGameInstance.Prince.IsSunStroke));
+            if ( false == isPrinceUnconscious )
+            {
+               myGridRows[0].myAssignable = myGameInstance.Prince; // assign prince as first person in grid row unless he is unconscious
+               myGridRows[0].myAssignmentCount = GetAssignedCount();
+               myMapItems.Remove(myGameInstance.Prince);
+            }
+            if ((7 < myGameInstance.Prince.Food) || (true == myIsFarmland)) // if prince food less than 8 or populated hunting, start with checkbox unchecked.
                myIsHeaderCheckBoxChecked = false;
             else
                myIsHeaderCheckBoxChecked = true;
             //--------------------------------------------------
             if ((true == myGameInstance.IsPartyRested) && (HuntEnum.LE_HUNT == myState))// if party is rested, assign all mapitems to grid rows for hunting
             {
-               int k = 1;
+               int k = 0;
+               if (false == isPrinceUnconscious)
+                  k = 1;
                foreach (IMapItem mi in myGameInstance.PartyMembers)
                {
-                  if (true == mi.Name.Contains("Prince")) // dont add prince twice
+                  if ( (true == mi.Name.Contains("Prince")) && (false == isPrinceUnconscious)) // dont add prince twice if he is already added
                      continue;
                   myGridRows[k].myAssignable = mi;
                   myGridRows[k].myAssignmentCount = GetAssignedCount();
@@ -608,7 +614,7 @@ namespace BarbarianPrince
                      myStackPanelAssignable.Children.Add(r0);
                      foreach (IMapItem mi in myMapItems) // Add a button for each assignable that has not reached max
                      {
-                        if (true == mi.IsUnconscious) // unconscious people cannot hunt
+                        if ( (true == mi.IsUnconscious) || (true==mi.IsSunStroke) )  // unconscious people cannot hunt
                            continue;
                         bool isRectangleBorderAdded = false;
                         if (null != myMapItemDragged && mi.Name == myMapItemDragged.Name) // If dragging a map item, show rectangle around that MapItem
@@ -836,7 +842,7 @@ namespace BarbarianPrince
          {
             int rowNum = i + STARTING_ASSIGNED_ROW;
             IMapItem hunter = myGridRows[i].myAssignable;
-            if (null == hunter)// Add either Rectangle or Button for Assignable column
+            if (null == hunter) // Add either Rectangle or Button for Assignable column
             {
                if (HuntEnum.LE_SHOW_RESULTS != myState) // do not add rectangles if showing final results
                {

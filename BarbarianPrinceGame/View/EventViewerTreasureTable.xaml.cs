@@ -49,11 +49,7 @@ namespace BarbarianPrince
       private int myRollCoin = Utilities.NO_RESULT;
       private int myRollItem = Utilities.NO_RESULT;
       //---------------------------------------------
-      private Dictionary<string, string[]> myReferences = null;
-      private Dictionary<string, string[]> myEvents = null;
-      //---------------------------------------------
       private readonly DoubleCollection myDashArray = new DoubleCollection();
-      private readonly SolidColorBrush mySolidColorBrushBlack = new SolidColorBrush() { Color = Colors.Black };
       private readonly FontFamily myFontFam1 = new FontFamily("Courier New");
       private readonly FontFamily myFontFam2 = new FontFamily("Tahoma");
       //-----------------------------------------------------------------------------------------
@@ -104,70 +100,6 @@ namespace BarbarianPrince
          myDashArray.Add(4);  // used for dotted lines
          myDashArray.Add(2);  // used for dotted lines
          myGrid.MouseDown += Grid_MouseDown;
-         //--------------------------------------------------
-         myReferences = new Dictionary<string, string[]>();
-         myReferences["Farmland"] = new String[6] { "e009", "r231", "r232", "r233", "r234", "r235" };
-         myReferences["Countryside"] = new String[6] { "r232", "r236", "r237", "r238", "r239", "r240" };
-         myReferences["Forest"] = new String[6] { "r232", "r241", "r242", "r243", "r244", "r240" };
-         myReferences["Hills"] = new String[6] { "r232", "r245", "r246", "r247", "r248", "r249" };
-         myReferences["Mountains"] = new String[6] { "r232", "r250", "r251", "r252", "r253", "r248" };
-         myReferences["Swamp"] = new String[6] { "r232", "r254", "r255", "r256", "r257", "r258" };
-         myReferences["Desert"] = new String[6] { "r259", "r260", "r261", "r262", "r263", "r264" };
-         myReferences["Cross River"] = new String[6] { "r232", "r265", "r266", "r267", "r268", "r269" };
-         myReferences["On Road"] = new String[6] { "r270", "r271", "r272", "r273", "r274", "r275" };
-         myReferences["Airborne"] = new String[6] { "r276", "r277", "r278", "r279", "r280", "r281" };
-         myReferences["Rafting"] = new String[6] { "r230", "r230", "r230", "r230", "r230", "r230" };
-         myEvents = new Dictionary<string, string[]>();
-         myEvents["r231"] = new String[6] { "e018", "e018", "e022", "e022", "e023", "e130" };
-         myEvents["r232"] = new String[6] { "e003", "e004", "e005", "e006", "e007", "e008" };
-         myEvents["r233"] = new String[6] { "e128", "e128", "e128", "e128", "e129", "e017" };
-         myEvents["r234"] = new String[6] { "e049", "e048", "e032", "e081", "e050", "e050" };
-         myEvents["r235"] = new String[6] { "e078", "e078", "e079", "e079", "e009", "e009" };
-         myEvents["r236"] = new String[6] { "e009", "e009", "e050", "e018", "e022", "e023" };
-         myEvents["r237"] = new String[6] { "e052", "e055", "e057", "e051", "e034", "e072" };
-         myEvents["r238"] = new String[6] { "e077", "e075", "e075", "e075", "e076", "e081" };
-         myEvents["r239"] = new String[6] { "e044", "e046", "e067", "e064", "e068", "e069" };
-         myEvents["r240"] = new String[6] { "e078", "e078", "e078", "e078", "e079", "e079" };
-         myEvents["r241"] = new String[6] { "e074", "e074", "e073", "e009", "e051", "e128" };
-         myEvents["r242"] = new String[6] { "e072", "e072", "e052", "e082", "e080", "e080" };
-         myEvents["r243"] = new String[6] { "e083", "e083", "e084", "e084", "e076", "e075" };
-         myEvents["r244"] = new String[6] { "e165", "e166", "e065", "e064", "e087", "e087" };
-         myEvents["r245"] = new String[6] { "e098", "e112", "e023", "e051", "e068", "e022" };
-         myEvents["r246"] = new String[6] { "e028", "e028", "e058", "e070", "e055", "e056" };
-         myEvents["r247"] = new String[6] { "e076", "e076", "e076", "e075", "e128", "e128" };
-         myEvents["r248"] = new String[6] { "e118", "e052", "e059", "e067", "e066", "e064" };
-         myEvents["r249"] = new String[6] { "e078", "e078", "e078", "e085", "e079", "e079" };
-         myEvents["r250"] = new String[6] { "e099", "e100", "e023", "e068", "e101", "e112" };
-         myEvents["r251"] = new String[6] { "e028", "e028", "e058", "e055", "e052", "e054" };
-         myEvents["r252"] = new String[6] { "e078", "e078", "e079", "e079", "e088", "e065" };
-         myEvents["r253"] = new String[6] { "e085", "e085", "e086", "e086", "e086", "e095" };
-         myEvents["r254"] = new String[6] { "e022", "e009", "e073", "e051", "e051", "e074" };
-         myEvents["r255"] = new String[6] { "e034", "e082", "e164", "e052", "e057", "e098" };
-         myEvents["r256"] = new String[6] { "e091", "e091", "e094", "e094", "e092", "e092" };
-         myEvents["r257"] = new String[6] { "e089", "e089", "e089", "e090", "e064", "e093" };
-         myEvents["r258"] = new String[6] { "e078", "e078", "e078", "e095", "e095", "e097" };
-         myEvents["r259"] = new String[6] { "e022", "e129", "e128", "e051", "e023", "e068" };
-         myEvents["r260"] = new String[6] { "e028", "e082", "e055", "e003", "e004", "e028" };
-         myEvents["r261"] = new String[6] { "e005", "e120", "e120", "e120", "e067", "e066" };
-         myEvents["r262"] = new String[6] { "e034", "e164", "e164", "e091", "e091", "e120" };
-         myEvents["r263"] = new String[6] { "e064", "e064", "e121", "e121", "e121", "e093" };
-         myEvents["r264"] = new String[6] { "e078", "e078", "e078", "e078", "e096", "e096" };
-         myEvents["r265"] = new String[6] { "e122", "e122", "e122", "e009", "e051", "e074" };
-         myEvents["r266"] = new String[6] { "e123", "e123", "e057", "e057", "e052", "e055" };
-         myEvents["r267"] = new String[6] { "e094", "e094", "e091", "e091", "e075", "e084" };
-         myEvents["r268"] = new String[6] { "e083", "e076", "e077", "e124", "e124", "e124" };
-         myEvents["r269"] = new String[6] { "e122", "e122", "e122", "e125", "e126", "e127" };
-         myEvents["r270"] = new String[6] { "e018", "e022", "e023", "e073", "e009", "e009" };
-         myEvents["r271"] = new String[6] { "e050", "e051", "e051", "e051", "e003", "e003" };
-         myEvents["r272"] = new String[6] { "e004", "e004", "e005", "e006", "e006", "e008" };
-         myEvents["r273"] = new String[6] { "e007", "e007", "e057", "e130", "e128", "e128" };
-         myEvents["r274"] = new String[6] { "e049", "e048", "e081", "e128", "e129", "e129" };
-         myEvents["r275"] = new String[6] { "e078", "e078", "e079", "e079", "e128", "e129" };
-         myEvents["r276"] = new String[6] { "e102", "e102", "e103", "e103", "e104", "e104" };
-         myEvents["r277"] = new String[6] { "e112", "e112", "e112", "e112", "e108", "e108" };
-         myEvents["r278"] = new String[6] { "e106", "e106", "e105", "e105", "e079", "e079" };
-         myEvents["r279"] = new String[6] { "e107", "e109", "e077", "e101", "e110", "e111" };
-         myEvents["r280"] = new String[6] { "e099", "e098", "e100", "e101", "e064", "e065" };
       }
       public bool GetTreasure(EndTreasureTableCallback callback, int wealthCode, IMapItem mi, PegasusTreasureEnum pegasusType)
       {

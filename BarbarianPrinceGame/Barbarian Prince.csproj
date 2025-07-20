@@ -70,7 +70,7 @@
     <Title>Barbarian Prince Solo Game</Title>
     <Description>Solo dungeon crawler game</Description>
     <RepositoryUrl>https://github.com/happysulla/BarbarianPrince</RepositoryUrl>
-    <AssemblyVersion>03.07.27</AssemblyVersion>
+    <AssemblyVersion>03.08.28</AssemblyVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <OutputType>WinExe</OutputType>
   </PropertyGroup>
