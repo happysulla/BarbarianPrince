@@ -2517,7 +2517,7 @@ namespace BarbarianPrince
             theIsGameSetup = true;
             //gi.Prince.Territory = Territory.theTerritories.Find("1212"); // <cgs> TEST
             //gi.Days = 40;
-            gi.Prince.SetWounds(8, 0); // 
+            //gi.Prince.SetWounds(8, 0); // 
             //gi.Prince.PlagueDustWound = 1; 
             //gi.Prince.IsResurrected = true;
             //gi.AddUnitTestTiredMount(myPrince);
