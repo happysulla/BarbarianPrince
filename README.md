@@ -14,3 +14,18 @@ NOTE: This game is a digital version of the boardgame from 1981. It replicates t
 
 If a developer, I have placed design documentation in the Document folder that explains architecture. It is written in C# using WPF. If you download and compile, you will need to obtain the NuGet package: WpfAnimiatedGif per the design documentation.
 
+The game targets Microsoft Windows OS with win-x64 targeted runtime, and the 10.0.18362+ targeted framework (i.e. Windows 10 Home 2019+). I used the ClickOnce deployment [u]with a self-signed certificate[/u]  which causes Microsoft Defender to flag it as unknown. Getting a yearly Certificate Authority (CA) certificate is too costly to avoid this problem.
+
+TO INSTALL:
+1.) If you have already installed, you may need to first uninstall the application using the Windows Control Panel. 
+2.) To download, goto following website:   https://github.com/happysulla/BarbarianPrince.git
+3.) Select the Latest Release from the right side of the web page.
+4.) Download the [b]BarbarianPrinceWindowsSetup.zip[/b] file by clicking on the file name. It should download a ~190MB file. 
+5.) Unzip and select setup.exe. Double click the [b]setup.exe[/b] file.
+6.) If you get Microsoft Defender blue dialog, select "More Info" and "Run Anyways" button.
+
+INSTRUCTIONS FOR PLAY TESTING:
+1.)  If the game hangs, you may be able to recover by selecting "Edit | Revert to Daybreak" menu. This menu option is only available after the first turn.
+2.) If you discover an error, save a copy of the latest log file. The log files are automatically saved to the "<user>\AppData\Roaming\BarbarianPrince\Logs" directory with the latest time tag representing the last game played.
+3.) Attempt to save the game file using the "File | Save As..." menu. The files are stored in  "<user>\AppData\Roaming\BarbarianPrince\Games" directory.
+4.) Send description of problem, screen shot, log file, and game file in email.
