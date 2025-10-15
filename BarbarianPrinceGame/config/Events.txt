@@ -4195,7 +4195,7 @@ e210a	"<Bold>e210a Freeman Available</Bold>
 <LineBreak/><LineBreak/>A freeman joins your party at no cost (except food and lodging). He has a combat skill 3 and endurance 4. Choose image to click.
 <LineBreak/><LineBreak/>Click to not allow him to join:
 <LineBreak/><LineBreak/><InlineUIContainer><Image Name='EncounterEnd' Source='../images/FoodDeny.gif' Height='100'  Width='100'> </Image></InlineUIContainer> 
-<LineBreak/><LineBreak/>Click to not allow him to join:
+<LineBreak/><LineBreak/>Click to allow him to join:
 <LineBreak/><LineBreak/><InlineUIContainer><Image Name='HireFreeman' Source='../images/Food.gif' Height='100'  Width='100'> </Image></InlineUIContainer> "
 e210b	"<Bold>e210b Lancer Available</Bold>
 <LineBreak/><LineBreak/>A lancer with a horse can be hired for 3 gold per day. He  has a combat skill of 5 and endurance of 5. Click one of images to continue.
