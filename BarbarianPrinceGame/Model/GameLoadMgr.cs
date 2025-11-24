@@ -64,10 +64,10 @@ namespace BarbarianPrince
          try
          {
             string filename = theGamesDirectory + "Checkpoint.bpg";
-            CultureInfo culture1 = CultureInfo.CurrentCulture;
+            CultureInfo currentCulture = CultureInfo.CurrentCulture;
             System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             XmlDocument? aXmlDocument = CreateXml(gi); // create a new XML document 
-            System.Threading.Thread.CurrentThread.CurrentCulture = culture1;
+            System.Threading.Thread.CurrentThread.CurrentCulture = currentCulture;
             if (null == aXmlDocument)
             {
                Logger.Log(LogEnum.LE_ERROR, "SaveGameToFile(): CreateXml() returned null for path=" + theGamesDirectory);
@@ -113,10 +113,10 @@ namespace BarbarianPrince
             dlg.Filter = "Barbarin Prince Games|*.bpg";
             if (true == dlg.ShowDialog())
             {
-               CultureInfo culture1 = CultureInfo.CurrentCulture;
+               CultureInfo currentCulture = CultureInfo.CurrentCulture;
                System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
                IGameInstance? gi = ReadXml(dlg.FileName);
-               System.Threading.Thread.CurrentThread.CurrentCulture = culture1;
+               System.Threading.Thread.CurrentThread.CurrentCulture = currentCulture;
                if (null == gi)
                {
                   Directory.SetCurrentDirectory(MainWindow.theAssemblyDirectory);
@@ -3758,779 +3758,779 @@ namespace BarbarianPrince
          aXmlDocument.LoadXml("<GameInstance></GameInstance>");
          if (null == aXmlDocument.DocumentElement)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): aXmlDocument.DocumentElement=null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): aXmlDocument.DocumentElement=null");
             return null;
          }
          XmlNode? root = aXmlDocument.DocumentElement;
          if (null == root)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): root is null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): root is null");
             return null;
          }
          //------------------------------------------
          XmlElement? versionElem = aXmlDocument.CreateElement("Version"); 
          if( null == versionElem )
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): aXmlDocument.DocumentElement.LastChild=null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): aXmlDocument.DocumentElement.LastChild=null");
             return null;
          }
          int majorVersion = GetMajorVersion();
          if (majorVersion < 0 )
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml():  0 > majorVersion=" + majorVersion.ToString());
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml():  0 > majorVersion=" + majorVersion.ToString());
             return null;
          }
          versionElem.SetAttribute("value", majorVersion.ToString());
          XmlNode? versionNode = root.AppendChild(versionElem);
          if (null == versionNode)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(versionNode) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(versionNode) returned null");
             return null;
          }
          //------------------------------------------
-         if ( false == CreateXmlGameOptions(aXmlDocument, gi.Options))
+         if ( false == Create_XmlGameOptions(aXmlDocument, gi.Options))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlOptions() returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlOptions() returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlGameStat(aXmlDocument, gi.Statistic))
+         if (false == Create_XmlGameStat(aXmlDocument, gi.Statistic))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlGameStat() returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlGameStat() returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlPartyMembers(aXmlDocument, gi.PartyMembers))
+         if (false == Create_XmlPartyMembers(aXmlDocument, gi.PartyMembers))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlGameStat() returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlGameStat() returned false");
             return null;
          }
          //------------------------------------------
          XmlElement? elem = aXmlDocument.CreateElement("WitAndWile");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(WitAndWile) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(WitAndWile) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.WitAndWile.ToString());
          XmlNode? node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(WitAndWile) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(WitAndWile) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("WitAndWileInitial");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(WitAndWileInitial) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(WitAndWileInitial) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.WitAndWileInitial.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(WitAndWile) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(WitAndWile) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("Days");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(Days) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(Days) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.Days.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(Days) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(Days) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("EventActive");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(EventActive) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(EventActive) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.EventActive);
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(EventActive) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(EventActive) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("EventDisplayed");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(EventDisplayed) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(EventDisplayed) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.EventDisplayed);
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(EventDisplayed) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(EventDisplayed) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("EventStart");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(EventStart) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(EventStart) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.EventStart);
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(EventStart) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(EventStart) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("GameTurn");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(GameTurn) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(GameTurn) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.GameTurn.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(GameTurn) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(GameTurn) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsMarkOfCain");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsMarkOfCain) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsMarkOfCain) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsMarkOfCain.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsMarkOfCain) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsMarkOfCain) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsEnslaved");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsEnslaved) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsEnslaved) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsEnslaved.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsEnslaved) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsEnslaved) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsSpellBound");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsSpellBound) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsSpellBound) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsSpellBound.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsSpellBound) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsSpellBound) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("WanderingDayCount");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(WanderingDayCount) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(WanderingDayCount) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.WanderingDayCount.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(WanderingDayCount) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(WanderingDayCount) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsBlessed");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsBlessed) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsBlessed) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsBlessed.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsBlessed) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsBlessed) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsArchTravelKnown");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsArchTravelKnown) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsArchTravelKnown) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsArchTravelKnown.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsArchTravelKnown) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsArchTravelKnown) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsMerchantWithParty");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsMerchantWithParty) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsMerchantWithParty) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsMerchantWithParty.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsMerchantWithParty) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsMerchantWithParty) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsJailed");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsJailed) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsJailed) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsJailed.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsJailed) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsJailed) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsDungeon");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsDungeon) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsDungeon) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsDungeon.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsDungeon) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsDungeon) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("NightsInDungeon");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(NightsInDungeon) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(NightsInDungeon) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.NightsInDungeon.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(NightsInDungeon) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(NightsInDungeon) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsWoundedWarriorRest");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsWoundedWarriorRest) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsWoundedWarriorRest) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsWoundedWarriorRest.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsWoundedWarriorRest) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsWoundedWarriorRest) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("NumMembersBeingFollowed");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(NumMembersBeingFollowed) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(NumMembersBeingFollowed) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.NumMembersBeingFollowed.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(NumMembersBeingFollowed) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(NumMembersBeingFollowed) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsHighPass");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsHighPass) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsHighPass) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsHighPass.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsHighPass) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsHighPass) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("EventAfterRedistribute");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(EventAfterRedistribute) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(EventAfterRedistribute) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.EventAfterRedistribute);
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(EventAfterRedistribute) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(EventAfterRedistribute) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsImpassable");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsImpassable) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsImpassable) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsImpassable.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsImpassable) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsImpassable) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsFlood");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsFlood) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsFlood) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsFlood.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsFlood) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsFlood) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsFloodContinue");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsFloodContinue) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsFloodContinue) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsFloodContinue.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsFloodContinue) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsFloodContinue) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsMountsSick");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsMountsSick) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsMountsSick) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsMountsSick.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsMountsSick) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsMountsSick) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsFalconFed");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsFalconFed) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsFalconFed) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsFalconFed.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsFalconFed) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsFalconFed) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsEagleHunt");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsEagleHunt) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsEagleHunt) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsEagleHunt.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsEagleHunt) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsEagleHunt) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsExhausted");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsExhausted) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsExhausted) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsExhausted.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsExhausted) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsExhausted) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("RaftState");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(RaftState) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(RaftState) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.RaftState.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(RaftState) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(RaftState) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsWoundedBlackKnightRest");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsWoundedBlackKnightRest) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsWoundedBlackKnightRest) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsWoundedBlackKnightRest.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsWoundedBlackKnightRest) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsWoundedBlackKnightRest) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsTrainHorse");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsTrainHorse) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsTrainHorse) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsTrainHorse.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsTrainHorse) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsTrainHorse) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsBadGoing");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsBadGoing) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsBadGoing) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsBadGoing.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsBadGoing) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsBadGoing) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsHeavyRain");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsHeavyRain) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsHeavyRain) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsHeavyRain.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsHeavyRain) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsHeavyRain) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsHeavyRainNextDay");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsHeavyRainNextDay) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsHeavyRainNextDay) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsHeavyRainNextDay.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsHeavyRainNextDay) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsHeavyRainNextDay) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsHeavyRainContinue");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsHeavyRainContinue) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsHeavyRainContinue) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsHeavyRainContinue.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsHeavyRainContinue) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsHeavyRainContinue) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsHeavyRainDismount");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsHeavyRainDismount) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsHeavyRainDismount) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsHeavyRainDismount.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsHeavyRainDismount) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsHeavyRainDismount) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("HydraTeethCount");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(HydraTeethCount) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(HydraTeethCount) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.HydraTeethCount.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(HydraTeethCount) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(HydraTeethCount) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsHuldraHeirKilled");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsHuldraHeirKilled) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsHuldraHeirKilled) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsHuldraHeirKilled.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsHuldraHeirKilled) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsHuldraHeirKilled) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("DayOfLastOffering");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(DayOfLastOffering) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(DayOfLastOffering) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.DayOfLastOffering.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(DayOfLastOffering) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(DayOfLastOffering) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsPartyContinuouslyLodged");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsPartyContinuouslyLodged) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsPartyContinuouslyLodged) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsPartyContinuouslyLodged.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsPartyContinuouslyLodged) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsPartyContinuouslyLodged) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsTrueLoveHeartBroken");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsTrueLoveHeartBroken) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsTrueLoveHeartBroken) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsTrueLoveHeartBroken.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsTrueLoveHeartBroken) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsTrueLoveHeartBroken) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsMustLeaveHex");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsMustLeaveHex) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsMustLeaveHex) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsMustLeaveHex.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsMustLeaveHex) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsMustLeaveHex) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("NumMonsterKill");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(NumMonsterKill) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(NumMonsterKill) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.NumMonsterKill.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(NumMonsterKill) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(NumMonsterKill) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsOmenModifier");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsOmenModifier) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsOmenModifier) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsOmenModifier.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsOmenModifier) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsOmenModifier) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsInfluenceModifier");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsInfluenceModifier) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsInfluenceModifier) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsInfluenceModifier.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsInfluenceModifier) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsInfluenceModifier) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsSecretTempleKnown");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsSecretTempleKnown) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsSecretTempleKnown) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsSecretTempleKnown.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsSecretTempleKnown) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsSecretTempleKnown) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("ChagaDrugCount");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(ChagaDrugCount) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(ChagaDrugCount) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.ChagaDrugCount.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(ChagaDrugCount) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(ChagaDrugCount) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsChagaDrugProvided");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsChagaDrugProvided) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsChagaDrugProvided) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsChagaDrugProvided.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsChagaDrugProvided) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsChagaDrugProvided) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsSecretBaronHuldra");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsSecretBaronHuldra) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsSecretBaronHuldra) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsSecretBaronHuldra.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsSecretBaronHuldra) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsSecretBaronHuldra) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsSecretLadyAeravir");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsSecretLadyAeravir) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsSecretLadyAeravir) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsSecretLadyAeravir.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsSecretLadyAeravir) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsSecretLadyAeravir) returned null");
             return null;
          }
          //------------------------------------------
          elem = aXmlDocument.CreateElement("IsSecretCountDrogat");
          if (null == elem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(IsSecretCountDrogat) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(IsSecretCountDrogat) returned null");
             return null;
          }
          elem.SetAttribute("value", gi.IsSecretCountDrogat.ToString());
          node = root.AppendChild(elem);
          if (null == node)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(IsSecretCountDrogat) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(IsSecretCountDrogat) returned null");
             return null;
          }
          //------------------------------------------
          XmlElement? atRiskMountsElem = aXmlDocument.CreateElement("AtRiskMounts");
          if (null == atRiskMountsElem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(AtRiskMounts) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(AtRiskMounts) returned null");
             return null;
          }
          atRiskMountsElem.SetAttribute("count", gi.AtRiskMounts.Count.ToString());
          XmlNode? atRiskMountsNode = root.AppendChild(atRiskMountsElem);
          if (null == atRiskMountsNode)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(atRiskMountsNode) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(atRiskMountsNode) returned null");
             return null;
          }
          foreach (IMapItem mi in gi.AtRiskMounts)
@@ -4538,14 +4538,14 @@ namespace BarbarianPrince
             XmlElement? atRiskMountElem = aXmlDocument.CreateElement("MapItem");
             if (null == atRiskMountElem)
             {
-               Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(atRiskMountElem) returned null");
+               Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(atRiskMountElem) returned null");
                return null;
             }
             versionElem.SetAttribute("value", mi.Name.ToString());
             XmlNode? atRiskMountNode = atRiskMountsNode.AppendChild(atRiskMountElem);
             if (null == atRiskMountNode)
             {
-               Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(atRiskMountNode) returned null");
+               Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(atRiskMountNode) returned null");
                return null;
             }
          }
@@ -4553,14 +4553,14 @@ namespace BarbarianPrince
          XmlElement? lostTrueLovesElem = aXmlDocument.CreateElement("LostTrueLoves");
          if (null == lostTrueLovesElem)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(LostTrueLoves) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(LostTrueLoves) returned null");
             return null;
          }
          lostTrueLovesElem.SetAttribute("count", gi.LostTrueLoves.Count.ToString());
          XmlNode? lostTrueLovesNode = root.AppendChild(lostTrueLovesElem);
          if (null == lostTrueLovesNode)
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(lostTrueLovesNode) returned null");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(lostTrueLovesNode) returned null");
             return null;
          }
          foreach (IMapItem mi in gi.LostTrueLoves)
@@ -4568,201 +4568,201 @@ namespace BarbarianPrince
             XmlElement? lostTrueLoveElem = aXmlDocument.CreateElement("MapItem");
             if (null == lostTrueLoveElem)
             {
-               Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateElement(lostTrueLoveElem) returned null");
+               Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): CreateElement(lostTrueLoveElem) returned null");
                return null;
             }
             versionElem.SetAttribute("value", mi.Name.ToString());
             XmlNode? lostTrueLoveNode = lostTrueLovesNode.AppendChild(lostTrueLoveElem);
             if (null == lostTrueLoveNode)
             {
-               Logger.Log(LogEnum.LE_ERROR, "CreateXml(): AppendChild(lostTrueLoveNode) returned null");
+               Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): AppendChild(lostTrueLoveNode) returned null");
                return null;
             }
          }
          //------------------------------------------
-         if (false == CreateXmlForbiddenAudiences(aXmlDocument, gi.ForbiddenAudiences))
+         if (false == Create_XmlForbiddenAudiences(aXmlDocument, gi.ForbiddenAudiences))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlForbiddenAudiences() returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlForbiddenAudiences() returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlCaches(aXmlDocument, gi.Caches))
+         if (false == Create_XmlCaches(aXmlDocument, gi.Caches))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlCaches() returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlCaches() returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "DwarfAdviceLocations", gi.DwarfAdviceLocations))
+         if (false == Create_XmlTerritories(aXmlDocument, "DwarfAdviceLocations", gi.DwarfAdviceLocations))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(DwarfAdviceLocations) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(DwarfAdviceLocations) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "WizardAdviceLocations", gi.WizardAdviceLocations))
+         if (false == Create_XmlTerritories(aXmlDocument, "WizardAdviceLocations", gi.WizardAdviceLocations))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(WizardAdviceLocations) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(WizardAdviceLocations) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "Arches", gi.Arches))
+         if (false == Create_XmlTerritories(aXmlDocument, "Arches", gi.Arches))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(Arches) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(Arches) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "VisitedLocations", gi.VisitedLocations))
+         if (false == Create_XmlTerritories(aXmlDocument, "VisitedLocations", gi.VisitedLocations))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(VisitedLocations) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(VisitedLocations) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "EscapedLocations", gi.EscapedLocations))
+         if (false == Create_XmlTerritories(aXmlDocument, "EscapedLocations", gi.EscapedLocations))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(EscapedLocations) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(EscapedLocations) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "GoblinKeeps", gi.GoblinKeeps))
+         if (false == Create_XmlTerritories(aXmlDocument, "GoblinKeeps", gi.GoblinKeeps))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(GoblinKeeps) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(GoblinKeeps) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "DwarvenMines", gi.DwarvenMines))
+         if (false == Create_XmlTerritories(aXmlDocument, "DwarvenMines", gi.DwarvenMines))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(DwarvenMines) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(DwarvenMines) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "OrcTowers", gi.OrcTowers))
+         if (false == Create_XmlTerritories(aXmlDocument, "OrcTowers", gi.OrcTowers))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(OrcTowers) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(OrcTowers) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "WizardTowers", gi.WizardTowers))
+         if (false == Create_XmlTerritories(aXmlDocument, "WizardTowers", gi.WizardTowers))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(WizardTowers) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(WizardTowers) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "PixieAdviceLocations", gi.PixieAdviceLocations))
+         if (false == Create_XmlTerritories(aXmlDocument, "PixieAdviceLocations", gi.PixieAdviceLocations))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(PixieAdviceLocations) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(PixieAdviceLocations) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "HalflingTowns", gi.HalflingTowns))
+         if (false == Create_XmlTerritories(aXmlDocument, "HalflingTowns", gi.HalflingTowns))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(HalflingTowns) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(HalflingTowns) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "RuinsUnstable", gi.RuinsUnstable))
+         if (false == Create_XmlTerritories(aXmlDocument, "RuinsUnstable", gi.RuinsUnstable))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(RuinsUnstable) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(RuinsUnstable) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "HiddenRuins", gi.HiddenRuins))
+         if (false == Create_XmlTerritories(aXmlDocument, "HiddenRuins", gi.HiddenRuins))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(HiddenRuins) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(HiddenRuins) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "HiddenTowns", gi.HiddenTowns))
+         if (false == Create_XmlTerritories(aXmlDocument, "HiddenTowns", gi.HiddenTowns))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(HiddenTowns) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(HiddenTowns) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "HiddenTemples", gi.HiddenTemples))
+         if (false == Create_XmlTerritories(aXmlDocument, "HiddenTemples", gi.HiddenTemples))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(HiddenTemples) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(HiddenTemples) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "KilledLocations", gi.KilledLocations))
+         if (false == Create_XmlTerritories(aXmlDocument, "KilledLocations", gi.KilledLocations))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(KilledLocations) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(KilledLocations) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "EagleLairs", gi.EagleLairs))
+         if (false == Create_XmlTerritories(aXmlDocument, "EagleLairs", gi.EagleLairs))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(EagleLairs) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(EagleLairs) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "SecretClues", gi.SecretClues))
+         if (false == Create_XmlTerritories(aXmlDocument, "SecretClues", gi.SecretClues))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(SecretClues) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(SecretClues) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "LetterOfRecommendations", gi.LetterOfRecommendations))
+         if (false == Create_XmlTerritories(aXmlDocument, "LetterOfRecommendations", gi.LetterOfRecommendations))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(LetterOfRecommendations) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(LetterOfRecommendations) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "Purifications", gi.Purifications))
+         if (false == Create_XmlTerritories(aXmlDocument, "Purifications", gi.Purifications))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(Purifications) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(Purifications) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "ElfTowns", gi.ElfTowns))
+         if (false == Create_XmlTerritories(aXmlDocument, "ElfTowns", gi.ElfTowns))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(ElfTowns) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(ElfTowns) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "ElfCastles", gi.ElfCastles))
+         if (false == Create_XmlTerritories(aXmlDocument, "ElfCastles", gi.ElfCastles))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(ElfCastles) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(ElfCastles) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "FeelAtHomes", gi.FeelAtHomes))
+         if (false == Create_XmlTerritories(aXmlDocument, "FeelAtHomes", gi.FeelAtHomes))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(FeelAtHomes) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(FeelAtHomes) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "SecretRites", gi.SecretRites))
+         if (false == Create_XmlTerritories(aXmlDocument, "SecretRites", gi.SecretRites))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(SecretRites) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(SecretRites) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "CheapLodgings", gi.CheapLodgings))
+         if (false == Create_XmlTerritories(aXmlDocument, "CheapLodgings", gi.CheapLodgings))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(CheapLodgings) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(CheapLodgings) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "ForbiddenHexes", gi.ForbiddenHexes))
+         if (false == Create_XmlTerritories(aXmlDocument, "ForbiddenHexes", gi.ForbiddenHexes))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(ForbiddenHexes) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(ForbiddenHexes) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "AbandonedTemples", gi.AbandonedTemples))
+         if (false == Create_XmlTerritories(aXmlDocument, "AbandonedTemples", gi.AbandonedTemples))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(AbandonedTemples) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(AbandonedTemples) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlTerritories(aXmlDocument, "ForbiddenHires", gi.ForbiddenHires))
+         if (false == Create_XmlTerritories(aXmlDocument, "ForbiddenHires", gi.ForbiddenHires))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlTerritories(ForbiddenHires) returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(ForbiddenHires) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == CreateXmlEnteredHexes(aXmlDocument, gi.EnteredHexes))
+         if (false == Create_XmlEnteredHexes(aXmlDocument, gi.EnteredHexes))
          {
-            Logger.Log(LogEnum.LE_ERROR, "CreateXml(): CreateXmlEnteredHexes() returned false");
+            Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlEnteredHexes() returned false");
             return null;
          }
          return aXmlDocument;

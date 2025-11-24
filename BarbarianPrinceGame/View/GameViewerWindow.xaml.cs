@@ -201,9 +201,9 @@ namespace BarbarianPrince
          //---------------------------------------------------------------
          CultureInfo culture1 = CultureInfo.CurrentCulture;
          System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture; // for saving doubles with decimal instead of comma for German users
-         Utilities.ZoomCanvas = Settings.Default.ZoomCanvas;
          System.Threading.Thread.CurrentThread.CurrentCulture = culture1;
-
+         //---------------------------------------------------------------
+         Utilities.ZoomCanvas = Settings.Default.ZoomCanvas;
          myCanvas.LayoutTransform = new ScaleTransform(Utilities.ZoomCanvas, Utilities.ZoomCanvas); // Constructor - revert to save zoom
          StatusBarViewer sbv = new StatusBarViewer(myStatusBar, ge, gi, myCanvas);
          //---------------------------------------------------------------
@@ -3414,7 +3414,7 @@ namespace BarbarianPrince
          }
          return;
       }
-      protected override void OnClosing(CancelEventArgs e) //  // WARNING - Not fired when Application.SessionEnding is fired
+      protected override void OnClosing(CancelEventArgs e)  // WARNING - Not fired when Application.SessionEnding is fired
       {
          base.OnClosing(e);
          GameLoadMgr loadMgr = new GameLoadMgr();

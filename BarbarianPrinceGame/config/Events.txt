@@ -2099,7 +2099,7 @@ e073a	"<Bold>e073a Hostile Witch</Bold>
 <LineBreak/><LineBreak/>Your party must escape
  <InlineUIContainer><Button Content='r218' FontFamily='Courier New'  FontSize='12'></Button></InlineUIContainer>
  immediately. Roll one die for each character in your party including yourself. 
-<LineBreak/><LineBreak/>If a six occurs, the character is turned into a frog and is lost. If you are turned into a frog; any frog, lover, magician, wizard, or friendly witch surviving in your party can turn you back.
+<LineBreak/><LineBreak/>If a six occurs, the character is turned into a frog and is lost. If you are turned into a frog; any lover, magician, wizard, or friendly witch surviving in your party can turn you back.
 <LineBreak/><LineBreak/>Otherwise, you remain a frog for years and lose the game. Click image to continue.
 <LineBreak/> <LineBreak/>
                            <InlineUIContainer><Image Name='Witch' Source='../images/Witch.gif' Height='300' Width='240'></Image></InlineUIContainer>"
