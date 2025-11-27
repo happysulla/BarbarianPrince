@@ -3788,19 +3788,19 @@ namespace BarbarianPrince
             return null;
          }
          //------------------------------------------
-         if ( false == Create_XmlGameOptions(aXmlDocument, gi.Options))
+         if ( false == CreateXmlGameOptions(aXmlDocument, gi.Options))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlOptions() returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlGameStat(aXmlDocument, gi.Statistic))
+         if (false == CreateXmlGameStat(aXmlDocument, gi.Statistic))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlGameStat() returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlPartyMembers(aXmlDocument, gi.PartyMembers))
+         if (false == CreateXmlPartyMembers(aXmlDocument, gi.PartyMembers))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlGameStat() returned false");
             return null;
@@ -4580,187 +4580,187 @@ namespace BarbarianPrince
             }
          }
          //------------------------------------------
-         if (false == Create_XmlForbiddenAudiences(aXmlDocument, gi.ForbiddenAudiences))
+         if (false == CreateXmlForbiddenAudiences(aXmlDocument, gi.ForbiddenAudiences))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlForbiddenAudiences() returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlCaches(aXmlDocument, gi.Caches))
+         if (false == CreateXmlCaches(aXmlDocument, gi.Caches))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlCaches() returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "DwarfAdviceLocations", gi.DwarfAdviceLocations))
+         if (false == CreateXmlTerritories(aXmlDocument, "DwarfAdviceLocations", gi.DwarfAdviceLocations))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(DwarfAdviceLocations) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "WizardAdviceLocations", gi.WizardAdviceLocations))
+         if (false == CreateXmlTerritories(aXmlDocument, "WizardAdviceLocations", gi.WizardAdviceLocations))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(WizardAdviceLocations) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "Arches", gi.Arches))
+         if (false == CreateXmlTerritories(aXmlDocument, "Arches", gi.Arches))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(Arches) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "VisitedLocations", gi.VisitedLocations))
+         if (false == CreateXmlTerritories(aXmlDocument, "VisitedLocations", gi.VisitedLocations))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(VisitedLocations) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "EscapedLocations", gi.EscapedLocations))
+         if (false == CreateXmlTerritories(aXmlDocument, "EscapedLocations", gi.EscapedLocations))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(EscapedLocations) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "GoblinKeeps", gi.GoblinKeeps))
+         if (false == CreateXmlTerritories(aXmlDocument, "GoblinKeeps", gi.GoblinKeeps))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(GoblinKeeps) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "DwarvenMines", gi.DwarvenMines))
+         if (false == CreateXmlTerritories(aXmlDocument, "DwarvenMines", gi.DwarvenMines))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(DwarvenMines) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "OrcTowers", gi.OrcTowers))
+         if (false == CreateXmlTerritories(aXmlDocument, "OrcTowers", gi.OrcTowers))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(OrcTowers) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "WizardTowers", gi.WizardTowers))
+         if (false == CreateXmlTerritories(aXmlDocument, "WizardTowers", gi.WizardTowers))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(WizardTowers) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "PixieAdviceLocations", gi.PixieAdviceLocations))
+         if (false == CreateXmlTerritories(aXmlDocument, "PixieAdviceLocations", gi.PixieAdviceLocations))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(PixieAdviceLocations) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "HalflingTowns", gi.HalflingTowns))
+         if (false == CreateXmlTerritories(aXmlDocument, "HalflingTowns", gi.HalflingTowns))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(HalflingTowns) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "RuinsUnstable", gi.RuinsUnstable))
+         if (false == CreateXmlTerritories(aXmlDocument, "RuinsUnstable", gi.RuinsUnstable))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(RuinsUnstable) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "HiddenRuins", gi.HiddenRuins))
+         if (false == CreateXmlTerritories(aXmlDocument, "HiddenRuins", gi.HiddenRuins))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(HiddenRuins) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "HiddenTowns", gi.HiddenTowns))
+         if (false == CreateXmlTerritories(aXmlDocument, "HiddenTowns", gi.HiddenTowns))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(HiddenTowns) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "HiddenTemples", gi.HiddenTemples))
+         if (false == CreateXmlTerritories(aXmlDocument, "HiddenTemples", gi.HiddenTemples))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(HiddenTemples) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "KilledLocations", gi.KilledLocations))
+         if (false == CreateXmlTerritories(aXmlDocument, "KilledLocations", gi.KilledLocations))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(KilledLocations) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "EagleLairs", gi.EagleLairs))
+         if (false == CreateXmlTerritories(aXmlDocument, "EagleLairs", gi.EagleLairs))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(EagleLairs) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "SecretClues", gi.SecretClues))
+         if (false == CreateXmlTerritories(aXmlDocument, "SecretClues", gi.SecretClues))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(SecretClues) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "LetterOfRecommendations", gi.LetterOfRecommendations))
+         if (false == CreateXmlTerritories(aXmlDocument, "LetterOfRecommendations", gi.LetterOfRecommendations))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(LetterOfRecommendations) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "Purifications", gi.Purifications))
+         if (false == CreateXmlTerritories(aXmlDocument, "Purifications", gi.Purifications))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(Purifications) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "ElfTowns", gi.ElfTowns))
+         if (false == CreateXmlTerritories(aXmlDocument, "ElfTowns", gi.ElfTowns))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(ElfTowns) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "ElfCastles", gi.ElfCastles))
+         if (false == CreateXmlTerritories(aXmlDocument, "ElfCastles", gi.ElfCastles))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(ElfCastles) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "FeelAtHomes", gi.FeelAtHomes))
+         if (false == CreateXmlTerritories(aXmlDocument, "FeelAtHomes", gi.FeelAtHomes))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(FeelAtHomes) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "SecretRites", gi.SecretRites))
+         if (false == CreateXmlTerritories(aXmlDocument, "SecretRites", gi.SecretRites))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(SecretRites) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "CheapLodgings", gi.CheapLodgings))
+         if (false == CreateXmlTerritories(aXmlDocument, "CheapLodgings", gi.CheapLodgings))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(CheapLodgings) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "ForbiddenHexes", gi.ForbiddenHexes))
+         if (false == CreateXmlTerritories(aXmlDocument, "ForbiddenHexes", gi.ForbiddenHexes))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(ForbiddenHexes) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "AbandonedTemples", gi.AbandonedTemples))
+         if (false == CreateXmlTerritories(aXmlDocument, "AbandonedTemples", gi.AbandonedTemples))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(AbandonedTemples) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlTerritories(aXmlDocument, "ForbiddenHires", gi.ForbiddenHires))
+         if (false == CreateXmlTerritories(aXmlDocument, "ForbiddenHires", gi.ForbiddenHires))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlTerritories(ForbiddenHires) returned false");
             return null;
          }
          //------------------------------------------
-         if (false == Create_XmlEnteredHexes(aXmlDocument, gi.EnteredHexes))
+         if (false == CreateXmlEnteredHexes(aXmlDocument, gi.EnteredHexes))
          {
             Logger.Log(LogEnum.LE_ERROR, "Create_Xml(): Create_XmlEnteredHexes() returned false");
             return null;
