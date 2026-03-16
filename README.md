@@ -17,7 +17,7 @@ If a developer, I have placed design documentation in the Document folder that e
 The game targets Microsoft Windows OS with win-x64 targeted runtime, and the 10.0.18362+ targeted framework (i.e. Windows 10 Home 2019+). I used the ClickOnce deployment [u]with a self-signed certificate[/u]  which causes Microsoft Defender to flag it as unknown. Getting a yearly Certificate Authority (CA) certificate is too costly to avoid this problem.
 
 
-TO INSTALL:
+TO INSTALL:  
 1.) For Future: If you have already installed, you may need to first uninstall the application using the Windows Control Panel.  
 2.) To download, goto the following website: https://github.com/happysulla/BarbarianPrince.git.  
 3.) Select the Latest Release button from the right-side middle of the web page.  
@@ -29,7 +29,7 @@ TO INSTALL:
 9.) **Setup.exe** installs it as a ClickOnce windows application. It can be removed using the standard Window's Control Panel.  
 10.) You can remove the **BarbarianPrinceWindowsSetup.zip** file and zip location after installing.  
 
-REPORT ERROR:
+REPORT ERROR:  
 1.)  If the game hangs, you may be able to recover by selecting **Edit | Revert to Daybreak** menu. This menu option is only available after the first turn.  
 2.) If you discover an error, save a copy of the latest log file. The log files are automatically saved in the **C:\Users\username\AppData\Roaming\BarbarianPrince\Logs** directory with latest time tag representing the last game played. username is the login name. AppData is a hidden directory that must be unhidden to view.  
 3.) Attempt to save the game state using the **File | Save As...** menu. Files are saved by default in **C:\Users\username\AppData\Roaming\BarbarianPrince\Games** directory.  
